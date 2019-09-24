@@ -11,13 +11,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const LOADER = ( ( module, $, window, document ) => {
+	if ( window.LOADER === null ) return false;
+	
 	
 	
 	

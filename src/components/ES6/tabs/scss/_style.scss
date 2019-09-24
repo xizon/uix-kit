@@ -38,7 +38,7 @@
 				top: 0;
 				display: block;
 				content: '';
-				background: $primary-text-color1;
+				background: $primary-text-color;
 				height: 100%;
 				width: $maker-w;
 				z-index: 1;
@@ -205,7 +205,7 @@
 					}
 
 					&.is-active > a {
-						background: $primary-text-color1;
+						background: $primary-text-color;
 						color: #fff;
 					}
 

@@ -1,0 +1,147 @@
+/* ======================================================
+    <!-- Form  ( Material Design Theme )-->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+@import '_variable-and-mixin.scss';
+
+/*
+ * 1. Controls
+ * 4. Custom Select
+*/
+
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+@mixin create-line-rtl() {
+    .uix-controls__basic-bar,
+	.uix-controls__bar {
+		left: auto;
+        right: 0;
+	}
+}
+
+
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+
+    //Create Line Effect on Click
+    @include create-line-rtl();
+
+}
+
+/* Create Line Effect on Click */
+.uix-controls.uix-controls--line {
+
+
+	label {
+		left: auto !important;
+		right: - 0.25rem !important;
+
+		&.is-active {
+			transform-origin: right top;
+			transform: translateX(1.75rem) scale(.875);
+
+		}
+
+
+	}
+
+	/*-- Form With Icon --*/
+	&.is-iconic {
+        
+
+		label {
+            left: auto !important;
+			right: #{$control-padding-side + $control-icon-placeholder} !important;
+
+			&.is-active {
+				transform: translateX(4.09375rem) scale(.875);
+			}
+		}
+
+
+        
+        
+		&.is-reversed {
+            
+            
+ 			input:not([type="checkbox"]):not([type="radio"]) {
+				padding-right: 0 !important;
+
+			}
+
+			textarea,
+			button:not(.uix-btn),
+			select {
+				padding-right: 0 !important;
+			}
+ 
+            
+
+			label {
+                left: auto !important;
+				right: -0.25rem !important;
+
+				&.is-active {
+					transform: translateX(1.75rem) scale(.875);
+				}
+			}
+		}
+
+
+	}
+
+
+	/*-- Select --*/
+	&.uix-controls__normal-select {
+
+	
+		select {
+			padding-right: 0 !important;
+            padding-left: #{$control-padding-side + 1} !important; 
+		}
+
+
+	}
+
+    
+
+}
+
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+
+.uix-controls__select-wrapper {
+
+	&.uix-controls--line.is-disabled {
+
+		/* Mask used to prohibit selection */
+		&::before {
+			left: auto;
+            right: 0;
+
+		}
+
+	}
+
+
+	.uix-controls--line  {
+		.uix-controls__select-trigger {
+			padding-right: 0;
+
+		}
+
+       
+	}
+
+
+}
+
+
+

@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
+	if ( window.FLOATING_SIDE_EL === null ) return false;
+	
 	
 	
     module.FLOATING_SIDE_EL               = module.FLOATING_SIDE_EL || {};

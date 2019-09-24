@@ -10,7 +10,7 @@
 
 $bar-size       : 100px;
 $bar-line-size  : 8px;
-$bar-bg         : $primary-text-color1;
+$bar-bg         : $primary-text-color;
 $bar-track-bg   : rgba(236,236,236,1.00);
 $bar-fill-color : $highlight-color1;
 $bar-speed      : 0.8s;
@@ -34,7 +34,7 @@ $bar-speed      : 0.8s;
 
 
 	.uix-progressbar__title {
-		color: $primary-text-color1;
+		color: $primary-text-color;
 		padding-top: 1rem;
 	}
 
@@ -91,7 +91,7 @@ $bar-speed      : 0.8s;
 	&.is-transparent {
 
 		.uix-progressbar__track {
-			color: $primary-text-color1;
+			color: $primary-text-color;
 			background: none;
 		}
 	}
@@ -160,7 +160,7 @@ $bar-speed      : 0.8s;
 	width: calc(100% - 2rem);
 
 	.uix-progressbar__title {
-		color: $primary-text-color1;
+		color: $primary-text-color;
 	}
 
 	.uix-progressbar__bar {
@@ -189,7 +189,7 @@ $bar-speed      : 0.8s;
 			height: 100%;
 			width: 0;
 			background-color: $bar-fill-color;
-			color: $primary-text-color1;
+			color: $primary-text-color;
 		}
 
 	}

@@ -42,9 +42,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixRenderNormalRadio from '@uixkit/core/form/js/fn/normal-radio';
 import UixRenderDatePicker from '@uixkit/core/form/js/fn/datapicker';
@@ -59,14 +57,20 @@ import UixRenderCustomRadioCheckbox from '@uixkit/core/form/js/fn/radio-and-chec
 import UixRenderCustomSelect from '@uixkit/core/form/js/fn/select';
 
 
-import '../scss/_style.scss';
+import '../scss/_basic.scss';
+import '../scss/_layout.scss';
+import '../scss/_theme_material.scss';
+import '../scss/_3rd_party_plugins.scss';
+
 
 
 export const FORM = ( ( module, $, window, document ) => {
+	if ( window.FORM === null ) return false;
+	
 	
 	
     module.FORM               = module.FORM || {};
-    module.FORM.version       = '0.1.4';
+    module.FORM.version       = '0.1.75';
     module.FORM.documentReady = function( $ ) {
 
 		
@@ -103,7 +107,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */ 
 		//Search Submit Event in WordPress
-		$( '.uix-search-box__submit' ).on( 'click', function() {
+		$( '.uix-search-box__submit' ).off( 'click' ).on( 'click', function() {
 			$( this ).closest( 'form' ).submit();
 		});
 		
@@ -158,7 +162,7 @@ export const FORM = ( ( module, $, window, document ) => {
 
 
 			//Prevent duplicate function assigned
-			$addButton.off( 'click' ).on( 'click', function( e ) {
+			$addButton.off( 'click' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );
@@ -168,8 +172,7 @@ export const FORM = ( ( module, $, window, document ) => {
 			//Remove per item
 
 			//Prevent duplicate function assigned
-			$( removeButton ).off( 'click' );
-			$( document ).on( 'click', removeButton, function( e ) {
+			$( document ).off( 'click.FORM_DYNAMIC_FIELDS' ).on( 'click.FORM_DYNAMIC_FIELDS', removeButton, function( e ) {
 				e.preventDefault();
 				
 					
@@ -201,7 +204,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 Click Event of Custom Input Number 
 		 ---------------------------
 		 */ 	
-		$( document ).on( 'click', '.uix-controls__number__btn--add', function( e ) {
+		$( document ).off( 'click.FORM_NUMBER_BTN_ADD' ).on( 'click.FORM_NUMBER_BTN_ADD', '.uix-controls__number__btn--add', function( e ) {
 
 			var step           = parseFloat( $( this ).data( 'step' ) ),
 				decimals       = $( this ).data( 'decimals' ),
@@ -212,7 +215,7 @@ export const FORM = ( ( module, $, window, document ) => {
 			
 			if ( typeof step === typeof undefined || isNaN( step ) ) step = 1;
 			if ( typeof decimals === typeof undefined ) decimals = 0;
-			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) >= max ) {
+			if ( typeof max != typeof undefined && parseFloat( numberInputVal + step ) > max ) {
 				step = 0;
 			}
 
@@ -223,7 +226,7 @@ export const FORM = ( ( module, $, window, document ) => {
 			$numberInput.val( numberInputVal.toFixed( decimals ) );
 		});
 
-		$( document ).on( 'click', '.uix-controls__number__btn--remove', function( e ) {
+		$( document ).off( 'click.FORM_NUMBER_BTN_REMOVE' ).on( 'click.FORM_NUMBER_BTN_REMOVE', '.uix-controls__number__btn--remove', function( e ) {
 
 			var step           = $( this ).data( 'step' ),
 				decimals       = $( this ).data( 'decimals' ),
@@ -253,7 +256,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		var multiSel     = '.uix-controls__multi-sel',
 			multiSelItem = multiSel + ' > span';
 
-		$( document ).on( 'click', multiSelItem, function( e ) {
+		$( document ).off( 'click.FORM_MULTI_SEL' ).on( 'click.FORM_MULTI_SEL', multiSelItem, function( e ) {
 			e.preventDefault();
 
 			var $selector     = $( this ).parent(),
@@ -345,7 +348,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		hideAllSingleSelItems( $( singleSel ) );
 
 
-		$( document ).on( 'click', singleSelItem, function( e ) {
+		$( document ).off( 'click.FORM_SINGLE_SEL' ).on( 'click.FORM_SINGLE_SEL', singleSelItem, function( e ) {
 			e.preventDefault();
 
 			var $selector     = $( this ).parent(),
@@ -432,7 +435,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		hideAllNormalRadioItems( $( normalRadio ) );
 
 
-		$( document ).on( 'click', normalRadioItem, function( e ) {
+		$( document ).off( 'click.FORM_NORMAL_RADIO' ).on( 'click.FORM_NORMAL_RADIO', normalRadioItem, function( e ) {
 			e.preventDefault();
 
 			var $selector     = $( this ).parent(),

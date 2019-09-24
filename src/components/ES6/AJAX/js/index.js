@@ -11,20 +11,21 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 import '../scss/_style.scss';
 
 
 export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
+	if ( window.AJAX_PAGE_LOADER === null ) return false;
+	
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.0.8';
+    module.AJAX_PAGE_LOADER.version       = '0.1.0';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -108,7 +109,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 * Call AJAX on click event for "single pages links"
 		 *
 		 */
-		$( document ).on( 'click', AJAXPageLinks, function( e ) {
+		$( document ).off( 'click.AJAX_PAGE_LOADER' ).on( 'click.AJAX_PAGE_LOADER', AJAXPageLinks, function( e ) {
 			
 			//Prevents third-party plug-ins from triggering
 			if ( $( this ).data( 'mobile-running' ) ) {
@@ -298,15 +299,6 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					dataType : 'html',
 					data     : {
 						action  : 'load_singlepages_ajax_content'
-					},	
-					success  : function( response ) {
-						
-						//A function to be called if the request succeeds
-						ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );
-
-					},
-					error: function(){
-						window.location.href = url;
 					},
 					beforeSend: function() {
 
@@ -321,14 +313,16 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 							}
 						});
 
-
-
 					}
-				}).fail( function( jqXHR, textStatus ) {
-					if( textStatus === 'timeout' ) {
-						window.location.href = url;
-					}
-				});		
+                })
+                .done( function (response) { 
+                    //A function to be called if the request succeeds
+                    ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );  
+                })
+                .fail( function (jqXHR, textStatus, errorThrown) { 
+					window.location.href = url;
+                });
+           	
 				
 				
 			}
@@ -449,7 +443,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
 
 						// Apply some asynchronism scripts
-						UixApplyAsyncScripts();
+						$( document ).UixApplyAsyncScripts();
 						
 						
 					}

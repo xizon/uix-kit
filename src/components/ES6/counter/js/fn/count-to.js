@@ -16,6 +16,7 @@
  *************************************
  */
 (function ($) {
+    'use strict';
 	$.fn.UixCountTo = function (options) {
 		options = options || {};
 		

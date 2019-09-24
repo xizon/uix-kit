@@ -12,18 +12,18 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const VIDEOS = ( ( module, $, window, document ) => {
+	if ( window.VIDEOS === null ) return false;
+	
 	
 	
 	
 	module.VIDEOS               = module.VIDEOS || {};
-    module.VIDEOS.version       = '0.0.9';
+    module.VIDEOS.version       = '0.1.2';
 	module.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -260,9 +260,9 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 					vogv = '<source src="'+videoSrcOgv+'" type="video/ogv">';
 				}
 				
-				v += '<div class="uix-modal-box is-fullscreen is-video" id="'+videoContainerMid+'">';
-				v += '<a href="javascript:void(0)" class="uix-modal-box__close"></a>';
-				v += '<div class="uix-modal-box__content">';
+				v += '<div class="uix-modal-box is-fullscreen is-video" tabindex="-1" role="dialog" aria-hidden="true" id="'+videoContainerMid+'">';
+				v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
+				v += '<div class="uix-modal-box__content" role="document">';
 				v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 				
 				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
@@ -293,7 +293,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 		
 		
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
-		$( document ).on( 'click', modalDialogTrigger, function() {
+		$( document ).off( 'click.VIDEOS' ).on( 'click.VIDEOS', modalDialogTrigger, function() {
 
 			var vid          = $( this ).data( 'modal-id' ) + '--videopush',
 				$ifm         = false,
@@ -504,7 +504,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			
 			
 			/* ---------  Close the modal  */
-			$( document ).on( 'click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
+			$( document ).off( 'click.VIDEOS_CLOSE' ).on( 'click.VIDEOS_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function() {
 
 				myPlayer.ready(function() {
 					this.pause();

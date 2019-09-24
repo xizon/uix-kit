@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,17 +20,19 @@ import '../scss/_style.scss';
 
 
 export const SVG_MAP_CHINA = ( ( module, $, window, document ) => {
+	if ( window.SVG_MAP_CHINA === null ) return false;
+	
 	
 	
     module.SVG_MAP_CHINA               = module.SVG_MAP_CHINA || {};
-    module.SVG_MAP_CHINA.version       = '0.0.1';
+    module.SVG_MAP_CHINA.version       = '0.0.2';
     module.SVG_MAP_CHINA.documentReady = function( $ ) {
 
 
 		
 		var $svgEl = $( '.uix-svgmap--china' );
 		
-		$( document ).on( 'click', '.uix-svgmap--china__trigger a', function( e ) {
+		$( document ).off( 'click.SVG_MAP_CHINA' ).on( 'click.SVG_MAP_CHINA', '.uix-svgmap--china__trigger a', function( e ) {
 			
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();
@@ -65,7 +65,8 @@ export const SVG_MAP_CHINA = ( ( module, $, window, document ) => {
 		
 		
 		//Restore all elements
-		$( 'body' ).on( 'click', function( e ) {
+        //Do not add off() to this
+		$( document.body ).on( 'click', function( e ) {
 			svgMapRestore(2);
 		});
 

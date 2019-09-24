@@ -23,10 +23,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 import '../scss/_basic.scss';
@@ -34,10 +33,12 @@ import '../scss/_split.scss';
 
 
 export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
+	if ( window.POST_LIST_AJAX === null ) return false;
+	
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.0.8';
+    module.POST_LIST_AJAX.version       = '0.1.1';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -50,7 +51,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				trigger          = $this.data( 'ajax-list-trigger' ),
 				infinitescroll   = $this.data( 'ajax-list-infinitescroll' ),
 				jsonFile         = $this.data( 'ajax-list-json' ),
-				addition         = $this.data( 'ajax-list-addition' ),
+				render           = $this.data( 'ajax-list-render' ),
 				template7ID      = $this.data( 'ajax-list-temp-id' ),
 				pushContainer    = $this.data( 'ajax-list-push-container-class' ),
 				triggerActive    = $this.data( 'ajax-list-trigger-active-class' ),
@@ -98,8 +99,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				infinitescroll = false;
 			}	
 			
-			if( typeof addition === typeof undefined ) {
-				addition = true;
+			if( typeof render === typeof undefined ) {
+				render = 'before';
 			}			
 			
 			
@@ -158,6 +159,24 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 			if ( jsonFile != '' && template7ID != '' ) {
 				
 				
+				
+				//Default output of the first page
+				if ( curPage == 2 ) {
+
+					//Perform dynamic loading
+					if ( customPostData != '' ) {
+						defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": 1, '+customPostData+' }' );
+					} else {
+						defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": 1 }' );
+					}
+
+
+					ajaxLoadInit( $this, defaultPostData, $( trigger ), curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
+				}
+				
+				
+				
+				
 				if ( infinitescroll ) {
 					/* 
 					 ---------------------------
@@ -204,7 +223,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								}
 
 
-								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+								ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 
 
 							
@@ -246,7 +265,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( nextTrigger ).on( 'click', function( e ) {
+						$( nextTrigger ).off( 'click' ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -275,7 +294,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 							
 							return false;
 
@@ -289,7 +308,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						$( prevTrigger ).addClass( 'is-hide' );
 						
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( prevTrigger ).on( 'click', function( e ) {
+						$( prevTrigger ).off( 'click' ).on( 'click', function( e ) {
 
 							e.preventDefault();
 
@@ -318,7 +337,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 
 							
 							return false;
@@ -367,7 +386,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 								defaultPostData = JSON.parse( '{ "'+pageParmStr.totalPage+'": '+totalPage+', "'+pageParmStr.displayPerPage+'": '+perShow+', "'+pageParmStr.currentPage+'": '+curPage+' }' );
 							}
 
-							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo );
+							ajaxLoadInit( $this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo );
 
 							
 							return false;
@@ -400,12 +419,12 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 		 * @param  {String} triggerActive   - The class name of trigger button actived.
 		 * @param  {String} pushContainer   - This container is used to display the loaded dynamic data.
 		 * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
-		 * @param  {Boolean} addition       - Do or not append to the original content.
+		 * @param  {String} render          - Rendering mode of display information. ==> before | html | append
 		 * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
 		 * @return {Void}
 		 */
 		
-		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo ) {
+		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo ) {
 
 			var $divRoot         = ajaxWrapper,
 				template         = document.getElementById( template7ID ).innerHTML,
@@ -432,90 +451,93 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				url      : jsonFile, //Be careful about the format of the JSON file
 				method   : method,
 				data     : defaultPostData,
-				dataType : 'json',
-				success  : function (data) { 
-					
-					
-					//If the data is empty
-					if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
-						returnEmptyInfo();
-					}
-					
-					
-					//Check if a key exists inside a json object
-					if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
-						
-						
-						//Data overflow may occur when the total number of pages is not posted
-						try {
-
-							var thisData      = data,
-								html          = compiledTemplate( thisData ),
-								curHtml       = $divRoot.find( pushContainer ).html(),
-								result        = null,
-								htmlEl        = null;
+				dataType : 'json'
+            })
+            .done( function (data) { 
+                //If the data is empty
+                if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
+                    returnEmptyInfo();
+                }
 
 
-							
-							
-							//--------- Do or not append to the original content
-							if ( addition ) {
-								result = curHtml + html;
-								htmlEl = $( result );
-								$divRoot.find( pushContainer ).before( htmlEl );
-							} else {
-								result = html;
-								htmlEl = $( result );
-								$divRoot.find( pushContainer ).html( htmlEl );
-							}
-							
-							
-							//--------- Apply some asynchronism scripts
-							UixApplyAsyncScripts({
-								scrollReveal : true,
-								ajaxPostList : false
-							});
+                //Check if a key exists inside a json object
+                if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
 
 
-							//--------- Remove this button
-							$button.removeClass( triggerActive );	
-	
-							//--------- Hidden button when the page total number is set and does not equal -1 or 9999
-							if ( 
-								curPage == totalPage && 
-								totalPage != 9999 && 
-								totalPage != -1 &&
-								totalPage != 1
-							) {
-								returnEmptyInfo();
-								
-							}		
-							
-							if ( curPage == 1 ) {
-								returnEmptyInfo();
-								
-							}			
-							
+                    //Data overflow may occur when the total number of pages is not posted
+                    try {
 
-						} catch ( err ) {
-							console.log( err.message );
-							returnDataError();
-							
-						}
-						
+                        var thisData      = data,
+                            html          = compiledTemplate( thisData ),
+                            curHtml       = $divRoot.find( pushContainer ).html(),
+                            result        = null,
+                            htmlEl        = null;
 
-						
-					} else {
-						//if not array
-						returnEmptyInfo();
-					}
 
-				 },
-				 error : function( XMLHttpRequest, textStatus, errorThrown ) {
-					 returnEmptyInfo();
-					 
-				 }
-			});
+
+
+                        //--------- Do or not append to the original content
+                        if ( render == 'before' ) {
+                            result = curHtml + html;
+                            htmlEl = $( result );
+                            $divRoot.find( pushContainer ).before( htmlEl );	
+                        }
+
+                        if ( render == 'html' ) {
+                            result = html;
+                            htmlEl = $( result );
+                            $divRoot.find( pushContainer ).html( htmlEl );
+                        }		
+
+                        if ( render == 'append' ) {
+                            $divRoot.find( pushContainer ).append( html );
+
+                        }	
+
+
+
+                        //--------- Apply some asynchronism scripts
+                        $( document ).UixApplyAsyncScripts({
+                            ajaxPostList : false
+                        });
+
+
+                        //--------- Remove this button
+                        $button.removeClass( triggerActive );	
+
+                        //--------- Hidden button when the page total number is set and does not equal -1 or 9999
+                        if ( 
+                            curPage == totalPage && 
+                            totalPage != 9999 && 
+                            totalPage != -1 &&
+                            totalPage != 1
+                        ) {
+                            returnEmptyInfo();
+
+                        }		
+
+                        if ( curPage == 1 ) {
+                            returnEmptyInfo();
+
+                        }			
+
+
+                    } catch ( err ) {
+                        console.log( err.message );
+                        returnDataError();
+
+                    }
+
+
+
+                } else {
+                    //if not array
+                    returnEmptyInfo();
+                }
+            })
+            .fail( function (jqXHR, textStatus, errorThrown) { 
+                returnEmptyInfo();
+            });
 
 		}
 

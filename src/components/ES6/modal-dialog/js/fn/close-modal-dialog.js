@@ -5,6 +5,7 @@
  * @return {Void}
  */	
 ( function ( $ ) {
+    'use strict';
     $.fn.UixCloseModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
@@ -31,6 +32,10 @@
 			
 			// Unlocks the page
 			$.scrollLock( false );
+			
+			
+			//Prevent automatic close from affecting new fire effects
+			clearTimeout( window.setCloseModalDialog );
 			
 			
 		});

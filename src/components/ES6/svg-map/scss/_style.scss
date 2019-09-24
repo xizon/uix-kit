@@ -40,7 +40,7 @@
 
 	text {
 		font-size: 3px;
-		fill: $primary-text-color1;
+		fill: $primary-text-color;
 		display: none;
 		@include transition-default();
 		text-anchor: middle;
@@ -99,7 +99,7 @@
 
 	text {
 		font-size: 7px;
-		fill: $primary-text-color1;
+		fill: $primary-text-color;
 		display: none;
 		@include transition-default();
 		text-anchor: middle;

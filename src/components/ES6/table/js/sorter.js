@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import sortElements from '@uixkit/core/table/js/fn/sort-elements';
 
@@ -22,10 +20,12 @@ import '../scss/_style.scss';
 
 
 export const TABLE_SORTER = ( ( module, $, window, document ) => {
+	if ( window.TABLE_SORTER === null ) return false;
+	
 	
 	
     module.TABLE_SORTER               = module.TABLE_SORTER || {};
-    module.TABLE_SORTER.version       = '0.0.2';
+    module.TABLE_SORTER.version       = '0.0.3';
     module.TABLE_SORTER.documentReady = function( $ ) {
 
 		
@@ -44,7 +44,7 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 					thType  = $th.data( 'sort-type' ),
 					inverse = false;
 
-				$th.on( 'click', function() {
+				$th.off( 'click' ).on( 'click', function() {
 
 					$sortTable.find( 'tbody td' ).filter( function() {
 

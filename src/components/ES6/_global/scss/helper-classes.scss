@@ -20,6 +20,7 @@
  * 15. Element Hidden Style
  * 16. Border Radius
  * 17. Align Wide and Full Classes For Elements
+ * 18. HTML Disclosure Summary element 
 */
 
 
@@ -524,4 +525,25 @@ img.uix-alignfull,
 }
 
 
-
+/* 
+ ---------------------------
+ 18. HTML Disclosure Summary element 
+ ---------------------------
+ */ 
+details.uix-details-reset {
+    &:not([open]) > *:not(summary){
+        display: none !important;
+    }
+    
+    > summary {
+        cursor:pointer;
+        list-style:none;
+        &::before{
+            display:none;
+        }
+        &::-webkit-details-marker{
+            display:none;
+        }  
+    }
+   
+}

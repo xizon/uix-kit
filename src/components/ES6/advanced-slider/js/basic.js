@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,11 +20,13 @@ import '../scss/_basic.scss';
 
 
 export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
+	if ( window.ADVANCED_SLIDER === null ) return false;
+	
 	
 	
 
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.1.1';
+    module.ADVANCED_SLIDER.version       = '0.1.3';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -281,7 +281,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
 
-			$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+			$( dataControlsPagination ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'is-active' ) ) {
@@ -317,7 +317,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			}
 
 
-			_prev.on( 'click', function( e ) {
+			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev' );
@@ -327,7 +327,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			});
 
-			_next.on( 'click', function( e ) {
+			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next' );

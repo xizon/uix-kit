@@ -11,9 +11,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -21,6 +19,8 @@ import '../scss/_style.scss';
 
 
 export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
+	if ( window.THREE_BACKGROUND === null ) return false;
+	
 	
 	
     module.THREE_BACKGROUND               = module.THREE_BACKGROUND || {};

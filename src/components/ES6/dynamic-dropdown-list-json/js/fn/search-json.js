@@ -9,6 +9,7 @@
  * @return {Function}                        - Return a callback function.
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixSearchJsonStr = function( options ) {
  
         // This is the easiest way to have default options.
@@ -28,62 +29,57 @@
 			$.ajax({
 				url      : settings.jsonFile,
 				method   : settings.method,
-				dataType : 'json',
-				success  : function ( data ) { 
+				dataType : 'json'
+            })
+            .done( function (data) { 
+                var newArr = [];
 
-					var newArr = [];
-					
-					//Convert JSON to an array
-					var formatFromServer = function formatFromServer( data ) {
-						var formatData = {};
+                //Convert JSON to an array
+                var formatFromServer = function formatFromServer( data ) {
+                    var formatData = {};
 
-						for ( var item in data ) {
-							if ( $( document ).UixIsJsonObj( { string:  data[item] } ) ) {
-								formatFromServer( data[item], formatData );
-							} else {
-								formatData[item] = data[item];
-							}
-						}
+                    for ( var item in data ) {
+                        if ( $( document ).UixIsJsonObj( { string:  data[item] } ) ) {
+                            formatFromServer( data[item], formatData );
+                        } else {
+                            formatData[item] = data[item];
+                        }
+                    }
 
-						for ( var item2 in formatData ) {
-							//console.log( formatData[ item2 ] );
-							newArr.push( formatData[ item2 ] );
-						}
-
-
-
-						return formatData;
-					};
-
-					formatFromServer( data );
-
-
-					//search JSON key that contains specific string
-					for ( var p = 0; p < newArr.length; p++ ) {
-						
-						for ( var n = 0; n < newArr[p].list.length; n++ ) {
-							
-							if ( Object.prototype.toString.call( newArr[p].list[n][settings.key] ) =='[object Array]' ) {
-								
-								// API: Callback
-								settings.callback( newArr[p].list[n][settings.key] );
-
-							}
-
-
-						}
-
-
-					}
+                    for ( var item2 in formatData ) {
+                        //console.log( formatData[ item2 ] );
+                        newArr.push( formatData[ item2 ] );
+                    }
 
 
 
-				 },
-				 error  : function() {
+                    return formatData;
+                };
+
+                formatFromServer( data );
 
 
-				 }
-			});
+                //search JSON key that contains specific string
+                for ( var p = 0; p < newArr.length; p++ ) {
+
+                    for ( var n = 0; n < newArr[p].list.length; n++ ) {
+
+                        if ( Object.prototype.toString.call( newArr[p].list[n][settings.key] ) =='[object Array]' ) {
+
+                            // API: Callback
+                            settings.callback( newArr[p].list[n][settings.key] );
+
+                        }
+
+
+                    }
+
+
+                }
+            })
+            .fail( function (jqXHR, textStatus, errorThrown) { 
+                console.log( "Request failed: " + textStatus );
+            });
 
 			
 		});

@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,15 +20,17 @@ import '../scss/_style.scss';
 
 
 export const DROPDOWN_MENU2 = ( ( module, $, window, document ) => {
+	if ( window.DROPDOWN_MENU2 === null ) return false;
+	
 	
 	
     module.DROPDOWN_MENU2               = module.DROPDOWN_MENU2 || {};
-    module.DROPDOWN_MENU2.version       = '0.0.4';
+    module.DROPDOWN_MENU2.version       = '0.0.5';
     module.DROPDOWN_MENU2.documentReady = function( $ ) {
 
 		var $verticalMenuLi = $( '.uix-vertical-menu li' );
 		
-		$verticalMenuLi.find( '> a' ).on( 'click', function( e ) {
+		$verticalMenuLi.find( '> a' ).off( 'click' ).on( 'click', function( e ) {
 			
 			var $sub = $( this ).next( 'ul' );
 			

@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=kWmBN0U4OQx7Hqf0Hgf9"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=HHe04omX2uTIym5BFmhq"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=kWmBN0U4OQx7Hqf0Hgf9" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=HHe04omX2uTIym5BFmhq" />
 	<![endif]-->
 
 
@@ -65,7 +65,6 @@
 	<meta name="description" content="A free web kits for fast web design and development, compatible with Bootstrap v4.">
 	<meta name="generator" content="Uix Kit" />  
 	<meta name="author" content="UIUX Lab"> 
-	<link rel="canonical" href="https://uiux.cc" />
 	<!-- SEO  end -->
 
 
@@ -186,6 +185,7 @@
 														<li><a href="social-meida-icons.html">Social Media Icons</a></li>
 														<li><a href="form.html">Form Elements</a></li>
 														<li><a href="form2.html">Form Elements 2</a></li>
+                                                        <li><a href="form-layout.html">Form Layout</a></li>
 														<li><a href="form-progress.html">Form Progress</a></li>
 														<li><a href="counter.html">Counter</a></li>
 														<li><a href="progress-bar.html">Progress Bar</a></li>
@@ -336,14 +336,13 @@
 														<li><a href="3D-pages.html">3D Pages</a></li>
 														<li><a href="3D-particle-effect.html">3D Particle Effect</a></li>
 														<li><a href="3D-sphere-three.html">3D Sphere Rotation</a></li>
-														<li><a href="3D-obj-anim-interaction.html">3D Object Anim Interaction</a><span class="uix-bubble">new</span></li>
+														<li><a href="3D-obj-anim-interaction.html">3D Object Anim Interaction</a></li>
 														<li><a href="3D-image-transition.html">3D Image Transition (threejs)</a></li>
 														<li><a href="3D-mouse-interaction.html">3D Mouse Interaction (threejs)</a></li>
 														<li><a href="3D-mouse-interaction2.html">3D Mouse Interaction2 (threejs)</a></li>
 														<li><a href="3D-model.html">3D Model</a></li>			
-															
-															
-														
+														<li><a href="3D-filmic-effects.html">3D Filmic Effects</a><span class="uix-bubble">new</span></li>			
+                                                        
 														
 													</ul>
 													<!-- .sub-menu  end -->
@@ -481,10 +480,28 @@
 
 						<div class="uix-gallery" data-show-type="masonry" data-filter-id="">
 
+							
+							<!-- 
+								Note: Recommended to enter the total number of attribute "data-ajax-list-page-total".
+
+								* @param  {String} data-ajax-list-json                    - JSON file path to docking data.
+								* @param  {String} data-ajax-list-method                  - The type of request to make, which can be either "POST" or "GET".
+								* @param  {String} data-ajax-list-render                  - Rendering mode of display information. ==> before | html | append
+								* @param  {String} data-ajax-list-temp-id                 - HTML template ID
+								* @param  {Object} data-ajax-list-page-parm-str           - Data to be sent to the server which is custom JSON fields.
+								* @param  {Number} data-ajax-list-page-now                - The current page to load.
+								* @param  {Number} data-ajax-list-page-per                - The amount to load each time.
+								* @param  {Number} data-ajax-list-page-total              - The total page to load.
+								* @param  {Object} data-ajax-list-trigger                 - Trigger ajax loaded button object.
+								* @param  {String} data-ajax-list-trigger-active-class    - The class name of trigger button actived.
+								* @param  {String} data-ajax-list-push-container-class    - This container is used to display the loaded dynamic data.
+								* @param  {Boolean} data-ajax-list-infinitescroll         - Returns information of ajax asynchronous callback when the content is empty.    
+								* @param  {String} data-ajax-list-field-{str}             - Customize the fields to be transferred to the server.
+                             -->
 							<div class="uix-gallery__tiles"
 								 data-ajax-list-json="assets/json/content-posts.php" 
 								 data-ajax-list-method="POST" 
-								 data-ajax-list-addition="true" 
+								 data-ajax-list-render="before" 
 								 data-ajax-list-temp-id="list-topic-ajax-template-1" 
 								 data-ajax-list-page-parm-str='{"totalPage":"total","currentPage":"page","displayPerPage":"per"}' 
 								 data-ajax-list-page-now="1" 
@@ -629,12 +646,12 @@
 
 
 										<!-- Item  -->
-										<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='[]'>
+										<article class="uix-core-grid__col-4 uix-gallery__item {{js "@index % 2 === 0 ? 'even' : 'odd'"}}" data-groups='[]'>
 
 
 											<div>
 												<a href="#" class="uix-gallery__image" >
-													<div class="uix-gallery__image-cover">
+													<div class="uix-gallery__image-cover {{js "this.img === '' ? 'none' : ''"}}">
 														<img src="{{img}}" alt="" />
 													</div>
 												</a>
@@ -760,7 +777,7 @@
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
     <script src="assets/js/min/video.min.js?ver=7.5.3"></script> 
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
-    <script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+    <script src="assets/js/min/template7.min.js?ver=1.4.2"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
     <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
     <script src="assets/js/min/three.min.js?ver=r102"></script>
@@ -774,14 +791,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.6.3",
+		var REVISION     = "3.8.6",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=kWmBN0U4OQx7Hqf0Hgf9"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=HHe04omX2uTIym5BFmhq"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

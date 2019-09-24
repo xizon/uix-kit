@@ -1,5 +1,112 @@
 # Changelog
 
+#### = 3.8.6 (September 17, 2019) =
+
+* New: Added a hyperlink style to Button. 
+* New: Added RTL style of Button component.
+* Tweak: Change the file name of parallax "parallax.js" to "UixParallax.js".
+
+
+#### = 3.8.5 (September 13, 2019) =
+
+* Tweak: Added left and right separate layout with Flex for form.
+* New: Add a new module "Form Layout".
+
+
+#### = 3.8.3 (September 12, 2019) =
+
+* Tweak: Remove the canonical URLs (HTML link tags with the attribute rel=canonical) from HTML files.
+
+
+
+#### = 3.8.2 (August 27, 2019) =
+
+* New: Added hook of instance for threejs modules.
+* New: Add a new module "3D Filmic Effects".
+* Tweak: Improve the stability of the webpack configuration.
+
+
+#### = 3.8.1 (August 21, 2019) =
+
+* New: Add Helper Class `uix-details-reset`
+* Tweak: Modified the HTML structure of the dropdown menu module.
+* Tweak: Upgraded interactive demo of 3D modules.
+
+
+#### = 3.8.0 (August 15, 2019) =
+
+* Tweak: Upgrade dependencies for webpack.
+* Tweak: Improve the stability of the webpack configuration.
+
+
+
+#### = 3.7.5 (August 8, 2019) =
+
+* Tweak: (webpack) Provides a way to customize how progress is reported during a compilation.
+* Tweak: Improve the form components styles. 
+* Tweak: Increase the variable `$control-padding-side`, `$control-padding-height` and `$control-icon-placeholder` to custom the field margins in the form.
+* Tweak: Improve stability of scaffolding.
+
+
+
+#### = 3.7.3 (July 31, 2019) =
+
+* Tweak: Optimized AJAX request callback method.
+
+
+#### = 3.7.2 (July 29, 2019) =
+
+* Tweak: Prevents the click event from being called repeatedly when an asynchronous event fires.
+
+
+#### = 3.7.1 (July 24, 2019) =
+
+* Fix: Fixed a bug for AJAX load posts.
+* Fix: Fixed a bug of click events firing multiple times with AJAX request.
+
+
+
+#### = 3.7.0 (July 21, 2019) =
+
+* Tweak: Custom functions introduce JavaScript's strict mode, for ease of use when leaving the development mode.
+* Fix: Fixed a bug for Dynamic Drop Down List from JSON.
+
+
+
+#### = 3.6.9 (July 18, 2019) =
+
+* Fix: Fixed a form bug of Input Number Field.
+
+
+
+#### = 3.6.8 (July 15, 2019) =
+
+* Tweak: Security: Upgrade dependencies for webpack.
+
+
+
+#### = 3.6.7 (July 9, 2019) =
+
+* Tweak: Optimized template engine functions for AJAX load posts.
+* Tweak: Upgraded template7 to 1.4.2.
+
+
+#### = 3.6.6 (June 20, 2019) =
+
+* New: Added role attribute for Tabs and Accordion modules from HTML to improve semantic.
+* Tweak: Optimized the closing trigger of the Modal Dialog module.
+
+
+#### = 3.6.5 (June 17, 2019) =
+
+* Fix: Fix a bug of Modal Dialog that prevent automatic close from affecting new fire effects.
+
+
+#### = 3.6.4 (June 16, 2019) =
+
+* New: Module function can be destroyed using `window.MODULE_NAME = null;`.
+* New: Add a filter function `UixModuleFilter` to operate the module group. Users can add a new module without modifying the uix-kit core JavaScript.
+
 
 #### = 3.6.3 (June 14, 2019) =
 

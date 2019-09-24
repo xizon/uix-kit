@@ -11,9 +11,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -21,6 +19,8 @@ import '../scss/_style.scss';
 
 
 export const PERIODICAL_SCROLL = ( ( module, $, window, document ) => {
+	if ( window.PERIODICAL_SCROLL === null ) return false;
+	
 	
 	
     module.PERIODICAL_SCROLL               = module.PERIODICAL_SCROLL || {};

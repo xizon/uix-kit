@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixCountTo from '@uixkit/core/counter/js/fn/count-to';
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const COUNTER = ( ( module, $, window, document ) => {
+	if ( window.COUNTER === null ) return false;
+	
 	
 	
     module.COUNTER               = module.COUNTER || {};

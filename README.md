@@ -1,11 +1,11 @@
 <p align="center">
   <a href="https://github.com/xizon/uix-kit">
-	  <img src="https://uiux.cc/uix-kit/assets/images/logo-colorful.png"  alt="Uix Kit"  width="180" >
+	  <img src="https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/logo-colorful.png"  alt="Uix Kit"  width="180" >
   </a>
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.6.3&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.8.6&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -23,6 +23,12 @@ It can be used separately, or merge components and grid systems using bootstrap.
 
 ---
 
+- [English Documentation](README.md)
+- [中文版说明文档](README_CN.md)
+
+---
+
+
 ## Demo
 
 [https://xizon.github.io/uix-kit/examples/](https://xizon.github.io/uix-kit/examples/)
@@ -36,7 +42,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 ## Table of Contents
 
 
-* [Getting Started](#getting-started)
+* [Getting Started with Videos](#getting-started-with-videos)
 * [Description](#description)
 * [Installation And Test](#installation-and-test)
 * [How To Use？](#how-to-use)
@@ -48,12 +54,10 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 
-## Getting Started
+## Getting Started with Videos
 
+[https://www.youtube.com/watch?v=aRDY9Cr-1-E](https://www.youtube.com/watch?v=aRDY9Cr-1-E)
 
-<p align = "left">
-	<a href="https://www.youtube.com/watch?v=aRDY9Cr-1-E"><img src="https://uiux.cc/uix-kit/_screenshots/video-cover.jpg" width="400"></a>
-</p>
 
 
 
@@ -78,6 +82,10 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 ## Installation And Test
+
+![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-1.gif)
+
+![quick overview 2](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-2.gif)
 
 You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./examples/*.html`.
 
@@ -109,7 +117,7 @@ $ sudo npm install --only=dev --unsafe-perm --production
 ```
 
 
-**Step 4.** Run the following code to enter development mode. The converted ES5 files will be created.
+**Step 4.** When you’re ready to deploy to production, create a minified bundle with:
 
 ```sh
 $ npm run build
@@ -243,44 +251,44 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 ```sh
 
 uix-kit/
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── webpack.config.js
+├── README.md   --------------------------- # Main Documentation
+├── CHANGELOG.md   ------------------------ # Changelog
+├── CONTRIBUTING.md   --------------------- # External resource references
+├── LICENSE     --------------------------- # License
+├── webpack.config.js  -------------------- # Webpack scaffold configuration file
+├── package.json  ------------------------- # Project configuration file (site info can be modified here)
 ├── package-lock.json
-├── package.json
 ├── dist/
 │   ├── css/
-│   │   ├── uix-kit.css
+│   │   ├── uix-kit.css  ------------------ # Main css file
 │   │   ├── uix-kit.css.map
-│   │   ├── uix-kit.min.css
+│   │   ├── uix-kit.min.css  -------------- # Main css file which is used for production
 │   │   ├── uix-kit.min.css.map
-│   │   ├── uix-kit-rtl.css
+│   │   ├── uix-kit-rtl.css   ------------- # Main RTL css file
 │   │   ├── uix-kit-rtl.css.map
-│   │   ├── uix-kit-rtl.min.css
+│   │   ├── uix-kit-rtl.min.css   --------- # Main RTL css file which is used for production
 │   │   └── uix-kit-rtl.min.css.map
 │   └── js/
-│   │   ├── uix-kit.js
+│   │   ├── uix-kit.js   ------------------ # Main js file
 │   │   ├── uix-kit.js.map
-│   │   ├── uix-kit.min.js
+│   │   ├── uix-kit.min.js  --------------- # Main js file which is used for production
 │   │   ├── uix-kit.min.js.map
 │   │   ├── uix-kit-rtl.js
 │   │   ├── uix-kit-rtl.js.map
 │   │   ├── uix-kit-rtl.min.js
 │   │   └── uix-kit-rtl.min.js.map
-├── misc/
-│   ├── screenshots/
-│   └── grid/
+├── misc/                
+│   ├── screenshots/  --------------------- # Screenshots
+│   └── grid/ ----------------------------- # PSD grid system
 ├── src/
-│   ├── index.js
-│   ├── index-rtl.js
 │   ├── components/
-│   │   ├── ES5/  => Third-party plugins adopt pure file merger and do not import and export
-│   │   └── ES6/  => Core modules
-├── examples/
-│   ├── *.html
-│   ├── assets/
+│   │   ├── ES5/  ------------------------- # Third-party plugins adopt pure file merger and do not import and export
+│   │   ├── ES6/_global ------------------- # Generic modules
+│   │   ├── ES6/_main  -------------------- # Customization site file directory (for secondary or new website development)
+│   │   └── ES6/*  ------------------------ # Core functional modules
+├── examples/                                
+│   ├── *.html  --------------------------- # HTML templates
+│   └── assets/  -------------------------- # Static resource directory
 │   │       ├── css/
 │   │       ├── fonts/
 │   │       ├── images/
@@ -290,6 +298,7 @@ uix-kit/
 │   │       └── js/
 └──
 ```
+
 
 
 ### 3\. PSD Grid Templates

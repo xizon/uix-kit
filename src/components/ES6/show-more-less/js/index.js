@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,10 +20,12 @@ import '../scss/_style.scss';
 
 
 export const SHOW_MORELESS = ( ( module, $, window, document ) => {
+	if ( window.SHOW_MORELESS === null ) return false;
+	
 	
 	
     module.SHOW_MORELESS               = module.SHOW_MORELESS || {};
-    module.SHOW_MORELESS.version       = '0.0.2';
+    module.SHOW_MORELESS.version       = '0.0.3';
     module.SHOW_MORELESS.documentReady = function( $ ) {
 
 	
@@ -37,7 +37,7 @@ export const SHOW_MORELESS = ( ( module, $, window, document ) => {
 
 
 			
-			$btn.on( 'click', function( e ) {
+			$btn.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				var expanded      = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;

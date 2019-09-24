@@ -13,9 +13,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -23,6 +21,8 @@ import '../scss/_style.scss';
 
 
 export const POST_LIST_SPLIT_FULLWIDTH = ( ( module, $, window, document ) => {
+	if ( window.POST_LIST_SPLIT_FULLWIDTH === null ) return false;
+	
 	
 	
 

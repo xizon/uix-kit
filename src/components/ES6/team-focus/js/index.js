@@ -11,9 +11,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -21,10 +19,12 @@ import '../scss/_style.scss';
 
 
 export const TEAM_FOCUS = ( ( module, $, window, document ) => {
+	if ( window.TEAM_FOCUS === null ) return false;
+	
 	
 	
     module.TEAM_FOCUS               = module.TEAM_FOCUS || {};
-    module.TEAM_FOCUS.version       = '0.0.2';
+    module.TEAM_FOCUS.version       = '0.0.3';
     module.TEAM_FOCUS.documentReady = function( $ ) {
 
 		var teamFocusContent = '.uix-team-focus',
@@ -94,7 +94,7 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 
 			
 			//Display the target item
-			$( document ).on( 'click', el, function( e ) {
+			$( document ).off( 'click.TEAM_FOCUS' ).on( 'click.TEAM_FOCUS', el, function( e ) {
 				e.preventDefault();
 
 				var $cur        = $( this ),
@@ -172,7 +172,7 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 
 			
 			//Close the focus item
-			$( document ).on( 'click', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function( e ) {
+			$( document ).off( 'click.TEAM_FOCUS_CLOSE' ).on( 'click.TEAM_FOCUS_CLOSE', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function( e ) {
 				e.preventDefault();
 				
 				//Remove the mask

@@ -8,6 +8,7 @@
  * @return {Void}
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixRenderCustomRadioCheckbox = function( options ) {
  
         // This is the easiest way to have default options.

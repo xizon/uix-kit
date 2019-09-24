@@ -10,6 +10,7 @@
  * @return {Void}
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixRenderCustomSelect = function( options ) {
  
         // This is the easiest way to have default options.
@@ -39,7 +40,7 @@
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
 					template  = '<div class="' + classes + ' js-uix-new">';
-					template += '<span class="uix-controls__select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><span class="uix-controls__bar"></span>';
+					template += '<span class="uix-controls__select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>';
 					template += '<div class="uix-controls__select__option-container">';
 
 					$this.find( 'select option' ).each( function( index ) {
@@ -72,7 +73,7 @@
 			});
 
 			//Show/Hide Selector
-			$( document ).on( 'click', settings.trigger, function( e ) {
+			$( document ).off( 'click.FORM_CUSTOM_SELECT' ).on( 'click.FORM_CUSTOM_SELECT', settings.trigger, function( e ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
@@ -82,7 +83,7 @@
 
 			});
 
-			
+			//Do not add off() to this
 			$( document.body ).on( 'click', function( e ) {
 				
 				if ( 
@@ -109,8 +110,7 @@
 
 			//Change Event Here
 			//Prevents the triggering of multiple change events
-			$( document ).off( 'click.FORM_SELECT' );
-			$( document ).on( 'click.FORM_SELECT', settings.item, function( e ) {
+			$( document ).off( 'click.FORM_CUSTOM_SELECT_ITEM' ).on( 'click.FORM_CUSTOM_SELECT_ITEM', settings.item, function( e ) {
 				e.preventDefault();
 
 				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),

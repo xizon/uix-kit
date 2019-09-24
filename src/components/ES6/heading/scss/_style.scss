@@ -37,7 +37,7 @@
 			position: absolute;
 			top: 50%;
 			height: 1px;
-			background: $primary-text-color1;
+			background: $primary-text-color;
 			width: 99999px;
 		}
 
@@ -186,7 +186,7 @@
  */
 .uix-heading--fill {
 	user-select: none;
-	color: $primary-text-color1;  /* Fallback: assume this color ON TOP of image */
+	color: $primary-text-color;  /* Fallback: assume this color ON TOP of image */
 	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) no-repeat;
 	background-size: cover;
 

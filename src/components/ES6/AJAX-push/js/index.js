@@ -12,17 +12,17 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
-
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
 
 export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
+	if ( window.AJAX_PUSH_CONTENT === null ) return false;
+	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.0.7';
+    module.AJAX_PUSH_CONTENT.version       = '0.0.9';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 		
@@ -37,7 +37,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		
 		
 		//Click event
-		$( document ).on( 'click', '[data-ajax-push-content]', function( event ) {
+		$( document ).off( 'click.AJAX_PUSH_CONTENT' ).on( 'click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function( event ) {
 			
 			event.preventDefault();
 			
@@ -165,17 +165,6 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 				dataType : 'html',
 				data     : {
 					action  : 'load_singlepages_ajax_content'
-				},	
-				success  : function( response ) {
-					
-					//A function to be called if the request succeeds
-					var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
-					
-					ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
-
-				},
-				error: function(){
-					window.location.href = url;
 				},
 				beforeSend: function() {
 
@@ -205,11 +194,17 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
 
 				}
-			}).fail( function( jqXHR, textStatus ) {
-				if( textStatus === 'timeout' ) {
-					window.location.href = url;
-				}
-			});		
+            })
+            .done( function (response) { 
+                //A function to be called if the request succeeds
+                var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+
+                ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+
+            })
+            .fail( function (jqXHR, textStatus, errorThrown) { 
+                window.location.href = url;
+            });
 
 	
 			
@@ -244,7 +239,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 						
 						
 						// Apply some asynchronism scripts
-						UixApplyAsyncScripts();
+						$( document ).UixApplyAsyncScripts();
 
 						
 						

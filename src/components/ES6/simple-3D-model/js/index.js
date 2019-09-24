@@ -19,18 +19,18 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const THREE_MODEL = ( ( module, $, window, document ) => {
+	if ( window.THREE_MODEL === null ) return false;
+	
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};
-    module.THREE_MODEL.version       = '0.0.2';
+    module.THREE_MODEL.version       = '0.0.3';
     module.THREE_MODEL.documentReady = function( $ ) {
 
 		
@@ -38,6 +38,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 		if ( $( '#3D-model-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
+        var sceneSubjects = []; // Import objects and animations dynamically
 		var MainStage = function() {
 
 			var $window                   = $( window ),
@@ -143,7 +144,14 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 						if ( child instanceof THREE.Mesh ) {
 
-							child.material.map = texture;
+                            child.material = new THREE.MeshPhongMaterial( {
+                                                color: 0x2194CE,
+                                                wireframe: false,
+                                                map: texture,
+                                                side: THREE.DoubleSide
+
+                                            } );
+                            
 
 						}
 
@@ -204,8 +212,28 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 				controls.update();
 
 
-				renderer.render( scene, camera );
+                //push objects
+                /*
+                @Usage: 
 
+                    function CustomObj( scene ) {
+
+                        var elements = new THREE...;
+                        scene.add( elements );
+
+                        this.update = function( time ) {
+                            elements.rotation.y = time*0.003;
+                        }
+                    }       
+
+                    sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+                */
+                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                    sceneSubjects[i].update( clock.getElapsedTime()*1 );  
+                }
+
+                //render the scene to display our scene through the camera's eye.
+				renderer.render( scene, camera );
 
 
 
@@ -280,11 +308,13 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 			// 
 			//-------------------------------------	
 			return {
-				init      : init,
-				render    : render,
-				getScene  : function () { return scene; },
-				getCamera : function () { return camera; } 
+				init                : init,
+				render              : render,
+				getRendererCanvasID : function () { return rendererCanvasID; },
+				getScene            : function () { return scene; },
+				getCamera           : function () { return camera; } 
 			};
+
 
 
 		}();

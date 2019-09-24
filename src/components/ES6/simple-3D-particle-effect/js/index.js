@@ -19,24 +19,24 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const THREE_PARTICLE = ( ( module, $, window, document ) => {
+	if ( window.THREE_PARTICLE === null ) return false;
+	
 	
 	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};
-    module.THREE_PARTICLE.version       = '0.0.3';
+    module.THREE_PARTICLE.version       = '0.0.4';
     module.THREE_PARTICLE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		
+		var sceneSubjects = []; // Import objects and animations dynamically
 		var MainStage = function() {
 
 
@@ -284,6 +284,27 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 				particleRotation.rotation.y -= 0.0040;
 
 
+                //push objects
+                /*
+                @Usage: 
+
+                    function CustomObj( scene ) {
+
+                        var elements = new THREE...;
+                        scene.add( elements );
+
+                        this.update = function( time ) {
+                            elements.rotation.y = time*0.003;
+                        }
+                    }       
+
+                    sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+                */
+                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                    sceneSubjects[i].update( clock.getElapsedTime()*1 );  
+                }
+
+                //render the scene to display our scene through the camera's eye.
 				renderer.render( scene, camera );
 
 			}
@@ -373,11 +394,13 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 			// 
 			//-------------------------------------	
 			return {
-				init      : init,
-				render    : render,
-				getScene  : function () { return scene; },
-				getCamera : function () { return camera; } 
+				init                : init,
+				render              : render,
+				getRendererCanvasID : function () { return rendererCanvasID; },
+				getScene            : function () { return scene; },
+				getCamera           : function () { return camera; } 
 			};
+
 
 
 		}();

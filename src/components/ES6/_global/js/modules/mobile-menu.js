@@ -12,13 +12,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const MOBILE_MENU = ( ( module, $, window, document ) => {
+	if ( window.MOBILE_MENU === null ) return false;
+	
 	
 	
 	

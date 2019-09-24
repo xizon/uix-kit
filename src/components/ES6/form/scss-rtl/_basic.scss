@@ -2,6 +2,8 @@
     <!-- Form -->
 /* ====================================================== */
 @import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+@import '_variable-and-mixin.scss';
+
 
 /*
  * 1. Controls
@@ -13,7 +15,6 @@
  * 7. Multiple Selector
  * 8. Single Selector
  * 9. Search of Widget
- * 11. Date Picker ( 3rd Party Plugin )
 */
 
 $control-sub-color: #dce4e8;
@@ -41,34 +42,6 @@ $control-sub-color: #dce4e8;
 	&.uix-controls__side {
 		margin-left: auto;
 		margin-right: .2rem;
-	}
-
-
-
-
-	//Create Line Effect on Click
-	.uix-controls__bar {
-		left: auto;
-		right: -2px;
-
-
-		&::before {
-			left: auto;
-			right: 51%;
-		}
-		&::after {
-			right: auto;
-			left: 49%;
-		}
-	}
-
-
-	&.is-fullwidth {
-		.uix-controls__bar {
-			right: -6px;
-
-		}
-
 	}
 
 
@@ -103,13 +76,7 @@ $control-sub-color: #dce4e8;
 	label {
 		left: auto;
 		right: 0.875rem;
-
-
-		&.is-active {
-			transform-origin: right top;
-
-		}
-
+        transform-origin: right top;
 
 	}
 
@@ -153,7 +120,7 @@ $control-sub-color: #dce4e8;
 	&.is-iconic {
 		label {
 		    left: auto;
-			right: 3rem;
+			right: #{$control-padding-side + $control-icon-placeholder};
 		}
 
 		i {
@@ -162,14 +129,14 @@ $control-sub-color: #dce4e8;
 
 			&::after {
 				left: auto;
-				right: 1.4rem;
+				right: 1.2rem;
 			}
 
 		}
 
 		input:not([type="checkbox"]):not([type="radio"]) {
 			padding-left: auto;
-			padding-right: calc(3.5rem - 0.546875rem);
+			padding-right: #{$control-padding-side + $control-icon-placeholder};
 
 
 		}
@@ -178,7 +145,7 @@ $control-sub-color: #dce4e8;
 		button:not(.uix-btn),
 		select {
 			padding-left: auto;
-			padding-right: calc(3.5rem - 0.546875rem);
+			padding-right: #{$control-padding-side + $control-icon-placeholder};
 		}
 
 
@@ -187,7 +154,7 @@ $control-sub-color: #dce4e8;
 
 			label {
 				left: auto;
-				right: 0.546875rem;
+				right: $control-padding-side;
 
 			}
 
@@ -196,7 +163,7 @@ $control-sub-color: #dce4e8;
 				right: auto;
 
 				&::after {
-					left: 1.4rem;
+					left: 1.2rem;
 					right: auto;
 				}
 
@@ -204,16 +171,16 @@ $control-sub-color: #dce4e8;
 
 
 			input:not([type="checkbox"]):not([type="radio"]) {
-				padding-right: 0.546875rem;
-				padding-left: calc(3.5rem - 0.546875rem);
+				padding-right: $control-padding-side;
+                padding-left: #{$control-padding-side + $control-icon-placeholder};
 
 			}
 
 			textarea,
 			button:not(.uix-btn),
 			select {
-				padding-right: 0.546875rem;
-				padding-left: calc(3.5rem - 0.546875rem);
+				padding-right: $control-padding-side;
+                padding-left: #{$control-padding-side + $control-icon-placeholder};
 			}
 
 		}
@@ -228,73 +195,6 @@ $control-sub-color: #dce4e8;
 	.req-icon {
 		right: auto;
 		left: 0.721875rem;
-	}
-
-
-
-}
-
-
-
-/* Create Line Effect on Click */
-.uix-controls.uix-controls--line {
-
-
-	label {
-		left: auto!important;
-		right: -0.75rem !important;
-
-		&.is-active {
-			transform-origin: right top;
-			transform: translateX(1.75rem) scale(.875);
-
-		}
-
-
-	}
-
-
-	/*-- Form With Icon --*/
-	&.is-iconic {
-		label {
-			left: auto!important;
-			right: 2.375rem !important;
-
-			&.is-active {
-				transform: translateX(4.09375rem) scale(.875);
-			}
-		}
-
-		&.is-reversed {
-
-			label {
-				left: auto!important;
-				right: -0.75rem !important;
-
-				&.is-active {
-					transform: translateX(1.75rem) scale(.875);
-				}
-			}
-		}
-
-
-	}
-
-
-	/*-- Select --*/
-	&.uix-controls__normal-select {
-
-		.uix-controls__arrow {
-			right: auto!important;
-			left: 0 !important;
-		}
-
-		select {
-			padding-left: auto !important;
-			padding-right: 0 !important;
-		}
-
-
 	}
 
 
@@ -398,7 +298,7 @@ $control-sub-color: #dce4e8;
 
 		input {
 			padding-left: auto;
-			padding-right: 3rem;
+			padding-right: #{$control-padding-side + $control-icon-placeholder};
 
 		}
 
@@ -409,7 +309,7 @@ $control-sub-color: #dce4e8;
 
 			&::after {
 				left: auto;
-				right: 1.4rem;
+				right: 1.2rem;
 			}
 
 		}
@@ -418,7 +318,7 @@ $control-sub-color: #dce4e8;
 		&.is-reversed {
 			input {
 				padding-left: auto;
-				padding-right: calc(3rem - 0.546875rem);
+				padding-right: calc(3rem - #{$control-padding-side});
 
 			}
 
@@ -429,7 +329,7 @@ $control-sub-color: #dce4e8;
 
 				&::after {
 					right: auto;
-					left: 1.4rem;
+					left: 1.2rem;
 				}
 
 			}
@@ -473,21 +373,9 @@ $control-sub-color: #dce4e8;
 
 	}
 
-	&.uix-controls--line.is-disabled {
-
-
-		/* Mask used to prohibit selection */
-		&::before {
-			left: auto;
-			right: 0;
-
-		}
-
-	}
-
 
 	.uix-controls__select-trigger {
-		padding: 0.546875rem 1.5rem 0.546875rem 2.5rem;
+		padding: #{$control-padding-height} $control-padding-side $control-padding-height #{$control-padding-side+1.5};
 
 		&::after {
 			@include select-arrow-rtl( -.275rem, 1rem );
@@ -495,42 +383,6 @@ $control-sub-color: #dce4e8;
 
 
 	}
-
-
-
-	.uix-controls--line  {
-
-
-		//Create Line Effect on Click
-		.uix-controls__bar {
-			left: auto;
-			right: -0.25rem;
-			transform: translateX(-2px);
-
-
-			&::before {
-				left: auto;
-				right: 51%;
-			}
-			&::after {
-				right: auto;
-				left: 49%;
-			}
-
-		}
-
-
-
-		&.is-fullwidth {
-			.uix-controls__bar {
-				left: auto;
-				right: -0.685rem;
-			}
-
-		}
-
-	}
-
 
 
 
@@ -655,7 +507,7 @@ $control-sub-color: #dce4e8;
 
 
 	.uix-controls__checkbox-trigger {
-		margin: 0.546875rem 0 0.546875rem .5rem;
+		margin: #{$control-padding-height} 0 #{$control-padding-height} .5rem;
 
 		&::before,
 		&::after {
@@ -700,7 +552,7 @@ $control-sub-color: #dce4e8;
 
 	float: right;
 
-	> span:not(.uix-controls__bar) {
+	> span {
 		margin-right: auto;
 		margin-left: 1rem;
 
@@ -712,21 +564,6 @@ $control-sub-color: #dce4e8;
 
 	}
 
-
-	/* Create Line Effect on Click */
-	&.uix-controls--line {
-
-		> span:not(.uix-controls__bar) {
-
-			.uix-controls__bar {
-				right: 0 !important;
-			}
-
-
-		}
-
-
-	}
 
 }
 
@@ -743,25 +580,9 @@ $control-sub-color: #dce4e8;
 
 	float: right;
 
-	> span:not(.uix-controls__bar) {
+	> span {
 		margin-right: auto;
 		margin-left: 1rem;
-
-	}
-
-	/* Create Line Effect on Click */
-	&.uix-controls--line {
-
-
-		> span:not(.uix-controls__bar) {
-
-			.uix-controls__bar {
-				right: 0 !important;
-			}
-
-
-		}
-
 
 	}
 
@@ -784,13 +605,3 @@ $control-sub-color: #dce4e8;
 
 }
 
-
-/*
- ---------------------------
- 11. Date Picker ( 3rd Party Plugin )
- ---------------------------
- */
-.uix-controls__date::after {
-	right: auto;
-	left: 1rem;
-}

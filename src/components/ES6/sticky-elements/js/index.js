@@ -13,9 +13,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -23,6 +21,8 @@ import '../scss/_style.scss';
 
 
 export const STICKY_EL = ( ( module, $, window, document ) => {
+	if ( window.STICKY_EL === null ) return false;
+	
 	
     module.STICKY_EL               = module.STICKY_EL || {};
     module.STICKY_EL.version       = '0.0.5';

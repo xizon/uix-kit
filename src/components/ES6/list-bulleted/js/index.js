@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,6 +20,8 @@ import '../scss/_style.scss';
 
 
 export const BULLETED_LIST = ( ( module, $, window, document ) => {
+	if ( window.BULLETED_LIST === null ) return false;
+	
 	
 	
     module.BULLETED_LIST               = module.BULLETED_LIST || {};

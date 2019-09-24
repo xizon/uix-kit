@@ -13,16 +13,16 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
-import UixParallax from '@uixkit/core/_global/js/fn/parallax';
+import UixParallax from '@uixkit/core/_global/js/fn/UixParallax';
 
 import '../scss/_style.scss';
 
 
 export const PARALLAX = ( ( module, $, window, document ) => {
+	if ( window.PARALLAX === null ) return false;
+	
 	
 	
 	

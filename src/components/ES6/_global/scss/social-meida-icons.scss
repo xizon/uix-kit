@@ -14,18 +14,18 @@
  */ 
 .uix-social-btn {
     position: relative;
-    border: 2px solid $primary-text-color1;
+    border: 2px solid $primary-text-color;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     z-index: 1;
-    color: $primary-text-color1;
+    color: $primary-text-color;
 	padding: 0;
 	margin: 0;
 	
 	&.is-fill-white {
 		background: #fff;
-		color: $primary-text-color1;
+		color: $primary-text-color;
 	}
 	
 	&.uix-social-btn--no-border {
@@ -104,7 +104,7 @@
 		display: block;
 		left: 0;
 		top: 0;
-		background-color: $primary-text-color1;
+		background-color: $primary-text-color;
 		visibility: hidden;
 		opacity: 0;
 		transform: scale(0.5, 0.5);
@@ -135,7 +135,7 @@
 		&:hover {
 			
 			i {
-				color: $primary-text-color1;
+				color: $primary-text-color;
 			}
 			
 			

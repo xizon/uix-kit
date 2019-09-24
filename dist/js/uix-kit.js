@@ -2,11 +2,11 @@
  * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
- * ## Version             :  3.6.3
+ * ## Project URL         :  https://uiux.cc
+ * ## Version             :  3.8.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 14, 2019
- * ## Created by          :  UIUX Lab (https://uiux.cc)
- * ## Contact Us          :  uiuxlab@gmail.com
+ * ## Last Update         :  September 17, 2019
+ * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
  */
@@ -18,6 +18,710 @@
 window.$ = window.jQuery;
 
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	function hotDisposeChunk(chunkId) {
+/******/ 		delete installedChunks[chunkId];
+/******/ 	}
+/******/ 	var parentHotUpdateCallback = window["webpackHotUpdate"];
+/******/ 	window["webpackHotUpdate"] = // eslint-disable-next-line no-unused-vars
+/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) {
+/******/ 		hotAddUpdateChunk(chunkId, moreModules);
+/******/ 		if (parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
+/******/ 	} ;
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotDownloadUpdateChunk(chunkId) {
+/******/ 		var script = document.createElement("script");
+/******/ 		script.charset = "utf-8";
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
+/******/ 		if (null) script.crossOrigin = null;
+/******/ 		document.head.appendChild(script);
+/******/ 	}
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotDownloadManifest(requestTimeout) {
+/******/ 		requestTimeout = requestTimeout || 10000;
+/******/ 		return new Promise(function(resolve, reject) {
+/******/ 			if (typeof XMLHttpRequest === "undefined") {
+/******/ 				return reject(new Error("No browser support"));
+/******/ 			}
+/******/ 			try {
+/******/ 				var request = new XMLHttpRequest();
+/******/ 				var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
+/******/ 				request.open("GET", requestPath, true);
+/******/ 				request.timeout = requestTimeout;
+/******/ 				request.send(null);
+/******/ 			} catch (err) {
+/******/ 				return reject(err);
+/******/ 			}
+/******/ 			request.onreadystatechange = function() {
+/******/ 				if (request.readyState !== 4) return;
+/******/ 				if (request.status === 0) {
+/******/ 					// timeout
+/******/ 					reject(
+/******/ 						new Error("Manifest request to " + requestPath + " timed out.")
+/******/ 					);
+/******/ 				} else if (request.status === 404) {
+/******/ 					// no update available
+/******/ 					resolve();
+/******/ 				} else if (request.status !== 200 && request.status !== 304) {
+/******/ 					// other failure
+/******/ 					reject(new Error("Manifest request to " + requestPath + " failed."));
+/******/ 				} else {
+/******/ 					// success
+/******/ 					try {
+/******/ 						var update = JSON.parse(request.responseText);
+/******/ 					} catch (e) {
+/******/ 						reject(e);
+/******/ 						return;
+/******/ 					}
+/******/ 					resolve(update);
+/******/ 				}
+/******/ 			};
+/******/ 		});
+/******/ 	}
+/******/
+/******/ 	var hotApplyOnUpdate = true;
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	var hotCurrentHash = "5ce3ec14c73252fdcf40";
+/******/ 	var hotRequestTimeout = 10000;
+/******/ 	var hotCurrentModuleData = {};
+/******/ 	var hotCurrentChildModule;
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	var hotCurrentParents = [];
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	var hotCurrentParentsTemp = [];
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotCreateRequire(moduleId) {
+/******/ 		var me = installedModules[moduleId];
+/******/ 		if (!me) return __webpack_require__;
+/******/ 		var fn = function(request) {
+/******/ 			if (me.hot.active) {
+/******/ 				if (installedModules[request]) {
+/******/ 					if (installedModules[request].parents.indexOf(moduleId) === -1) {
+/******/ 						installedModules[request].parents.push(moduleId);
+/******/ 					}
+/******/ 				} else {
+/******/ 					hotCurrentParents = [moduleId];
+/******/ 					hotCurrentChildModule = request;
+/******/ 				}
+/******/ 				if (me.children.indexOf(request) === -1) {
+/******/ 					me.children.push(request);
+/******/ 				}
+/******/ 			} else {
+/******/ 				console.warn(
+/******/ 					"[HMR] unexpected require(" +
+/******/ 						request +
+/******/ 						") from disposed module " +
+/******/ 						moduleId
+/******/ 				);
+/******/ 				hotCurrentParents = [];
+/******/ 			}
+/******/ 			return __webpack_require__(request);
+/******/ 		};
+/******/ 		var ObjectFactory = function ObjectFactory(name) {
+/******/ 			return {
+/******/ 				configurable: true,
+/******/ 				enumerable: true,
+/******/ 				get: function() {
+/******/ 					return __webpack_require__[name];
+/******/ 				},
+/******/ 				set: function(value) {
+/******/ 					__webpack_require__[name] = value;
+/******/ 				}
+/******/ 			};
+/******/ 		};
+/******/ 		for (var name in __webpack_require__) {
+/******/ 			if (
+/******/ 				Object.prototype.hasOwnProperty.call(__webpack_require__, name) &&
+/******/ 				name !== "e" &&
+/******/ 				name !== "t"
+/******/ 			) {
+/******/ 				Object.defineProperty(fn, name, ObjectFactory(name));
+/******/ 			}
+/******/ 		}
+/******/ 		fn.e = function(chunkId) {
+/******/ 			if (hotStatus === "ready") hotSetStatus("prepare");
+/******/ 			hotChunksLoading++;
+/******/ 			return __webpack_require__.e(chunkId).then(finishChunkLoading, function(err) {
+/******/ 				finishChunkLoading();
+/******/ 				throw err;
+/******/ 			});
+/******/
+/******/ 			function finishChunkLoading() {
+/******/ 				hotChunksLoading--;
+/******/ 				if (hotStatus === "prepare") {
+/******/ 					if (!hotWaitingFilesMap[chunkId]) {
+/******/ 						hotEnsureUpdateChunk(chunkId);
+/******/ 					}
+/******/ 					if (hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 						hotUpdateDownloaded();
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 		fn.t = function(value, mode) {
+/******/ 			if (mode & 1) value = fn(value);
+/******/ 			return __webpack_require__.t(value, mode & ~1);
+/******/ 		};
+/******/ 		return fn;
+/******/ 	}
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotCreateModule(moduleId) {
+/******/ 		var hot = {
+/******/ 			// private stuff
+/******/ 			_acceptedDependencies: {},
+/******/ 			_declinedDependencies: {},
+/******/ 			_selfAccepted: false,
+/******/ 			_selfDeclined: false,
+/******/ 			_disposeHandlers: [],
+/******/ 			_main: hotCurrentChildModule !== moduleId,
+/******/
+/******/ 			// Module API
+/******/ 			active: true,
+/******/ 			accept: function(dep, callback) {
+/******/ 				if (dep === undefined) hot._selfAccepted = true;
+/******/ 				else if (typeof dep === "function") hot._selfAccepted = dep;
+/******/ 				else if (typeof dep === "object")
+/******/ 					for (var i = 0; i < dep.length; i++)
+/******/ 						hot._acceptedDependencies[dep[i]] = callback || function() {};
+/******/ 				else hot._acceptedDependencies[dep] = callback || function() {};
+/******/ 			},
+/******/ 			decline: function(dep) {
+/******/ 				if (dep === undefined) hot._selfDeclined = true;
+/******/ 				else if (typeof dep === "object")
+/******/ 					for (var i = 0; i < dep.length; i++)
+/******/ 						hot._declinedDependencies[dep[i]] = true;
+/******/ 				else hot._declinedDependencies[dep] = true;
+/******/ 			},
+/******/ 			dispose: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			addDisposeHandler: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			removeDisposeHandler: function(callback) {
+/******/ 				var idx = hot._disposeHandlers.indexOf(callback);
+/******/ 				if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 			},
+/******/
+/******/ 			// Management API
+/******/ 			check: hotCheck,
+/******/ 			apply: hotApply,
+/******/ 			status: function(l) {
+/******/ 				if (!l) return hotStatus;
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			addStatusHandler: function(l) {
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			removeStatusHandler: function(l) {
+/******/ 				var idx = hotStatusHandlers.indexOf(l);
+/******/ 				if (idx >= 0) hotStatusHandlers.splice(idx, 1);
+/******/ 			},
+/******/
+/******/ 			//inherit from previous dispose call
+/******/ 			data: hotCurrentModuleData[moduleId]
+/******/ 		};
+/******/ 		hotCurrentChildModule = undefined;
+/******/ 		return hot;
+/******/ 	}
+/******/
+/******/ 	var hotStatusHandlers = [];
+/******/ 	var hotStatus = "idle";
+/******/
+/******/ 	function hotSetStatus(newStatus) {
+/******/ 		hotStatus = newStatus;
+/******/ 		for (var i = 0; i < hotStatusHandlers.length; i++)
+/******/ 			hotStatusHandlers[i].call(null, newStatus);
+/******/ 	}
+/******/
+/******/ 	// while downloading
+/******/ 	var hotWaitingFiles = 0;
+/******/ 	var hotChunksLoading = 0;
+/******/ 	var hotWaitingFilesMap = {};
+/******/ 	var hotRequestedFilesMap = {};
+/******/ 	var hotAvailableFilesMap = {};
+/******/ 	var hotDeferred;
+/******/
+/******/ 	// The update info
+/******/ 	var hotUpdate, hotUpdateNewHash;
+/******/
+/******/ 	function toModuleId(id) {
+/******/ 		var isNumber = +id + "" === id;
+/******/ 		return isNumber ? +id : id;
+/******/ 	}
+/******/
+/******/ 	function hotCheck(apply) {
+/******/ 		if (hotStatus !== "idle") {
+/******/ 			throw new Error("check() is only allowed in idle status");
+/******/ 		}
+/******/ 		hotApplyOnUpdate = apply;
+/******/ 		hotSetStatus("check");
+/******/ 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
+/******/ 			if (!update) {
+/******/ 				hotSetStatus("idle");
+/******/ 				return null;
+/******/ 			}
+/******/ 			hotRequestedFilesMap = {};
+/******/ 			hotWaitingFilesMap = {};
+/******/ 			hotAvailableFilesMap = update.c;
+/******/ 			hotUpdateNewHash = update.h;
+/******/
+/******/ 			hotSetStatus("prepare");
+/******/ 			var promise = new Promise(function(resolve, reject) {
+/******/ 				hotDeferred = {
+/******/ 					resolve: resolve,
+/******/ 					reject: reject
+/******/ 				};
+/******/ 			});
+/******/ 			hotUpdate = {};
+/******/ 			var chunkId = 0;
+/******/ 			// eslint-disable-next-line no-lone-blocks
+/******/ 			{
+/******/ 				/*globals chunkId */
+/******/ 				hotEnsureUpdateChunk(chunkId);
+/******/ 			}
+/******/ 			if (
+/******/ 				hotStatus === "prepare" &&
+/******/ 				hotChunksLoading === 0 &&
+/******/ 				hotWaitingFiles === 0
+/******/ 			) {
+/******/ 				hotUpdateDownloaded();
+/******/ 			}
+/******/ 			return promise;
+/******/ 		});
+/******/ 	}
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotAddUpdateChunk(chunkId, moreModules) {
+/******/ 		if (!hotAvailableFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
+/******/ 			return;
+/******/ 		hotRequestedFilesMap[chunkId] = false;
+/******/ 		for (var moduleId in moreModules) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				hotUpdate[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if (--hotWaitingFiles === 0 && hotChunksLoading === 0) {
+/******/ 			hotUpdateDownloaded();
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotEnsureUpdateChunk(chunkId) {
+/******/ 		if (!hotAvailableFilesMap[chunkId]) {
+/******/ 			hotWaitingFilesMap[chunkId] = true;
+/******/ 		} else {
+/******/ 			hotRequestedFilesMap[chunkId] = true;
+/******/ 			hotWaitingFiles++;
+/******/ 			hotDownloadUpdateChunk(chunkId);
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotUpdateDownloaded() {
+/******/ 		hotSetStatus("ready");
+/******/ 		var deferred = hotDeferred;
+/******/ 		hotDeferred = null;
+/******/ 		if (!deferred) return;
+/******/ 		if (hotApplyOnUpdate) {
+/******/ 			// Wrap deferred object in Promise to mark it as a well-handled Promise to
+/******/ 			// avoid triggering uncaught exception warning in Chrome.
+/******/ 			// See https://bugs.chromium.org/p/chromium/issues/detail?id=465666
+/******/ 			Promise.resolve()
+/******/ 				.then(function() {
+/******/ 					return hotApply(hotApplyOnUpdate);
+/******/ 				})
+/******/ 				.then(
+/******/ 					function(result) {
+/******/ 						deferred.resolve(result);
+/******/ 					},
+/******/ 					function(err) {
+/******/ 						deferred.reject(err);
+/******/ 					}
+/******/ 				);
+/******/ 		} else {
+/******/ 			var outdatedModules = [];
+/******/ 			for (var id in hotUpdate) {
+/******/ 				if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 					outdatedModules.push(toModuleId(id));
+/******/ 				}
+/******/ 			}
+/******/ 			deferred.resolve(outdatedModules);
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotApply(options) {
+/******/ 		if (hotStatus !== "ready")
+/******/ 			throw new Error("apply() is only allowed in ready status");
+/******/ 		options = options || {};
+/******/
+/******/ 		var cb;
+/******/ 		var i;
+/******/ 		var j;
+/******/ 		var module;
+/******/ 		var moduleId;
+/******/
+/******/ 		function getAffectedStuff(updateModuleId) {
+/******/ 			var outdatedModules = [updateModuleId];
+/******/ 			var outdatedDependencies = {};
+/******/
+/******/ 			var queue = outdatedModules.map(function(id) {
+/******/ 				return {
+/******/ 					chain: [id],
+/******/ 					id: id
+/******/ 				};
+/******/ 			});
+/******/ 			while (queue.length > 0) {
+/******/ 				var queueItem = queue.pop();
+/******/ 				var moduleId = queueItem.id;
+/******/ 				var chain = queueItem.chain;
+/******/ 				module = installedModules[moduleId];
+/******/ 				if (!module || module.hot._selfAccepted) continue;
+/******/ 				if (module.hot._selfDeclined) {
+/******/ 					return {
+/******/ 						type: "self-declined",
+/******/ 						chain: chain,
+/******/ 						moduleId: moduleId
+/******/ 					};
+/******/ 				}
+/******/ 				if (module.hot._main) {
+/******/ 					return {
+/******/ 						type: "unaccepted",
+/******/ 						chain: chain,
+/******/ 						moduleId: moduleId
+/******/ 					};
+/******/ 				}
+/******/ 				for (var i = 0; i < module.parents.length; i++) {
+/******/ 					var parentId = module.parents[i];
+/******/ 					var parent = installedModules[parentId];
+/******/ 					if (!parent) continue;
+/******/ 					if (parent.hot._declinedDependencies[moduleId]) {
+/******/ 						return {
+/******/ 							type: "declined",
+/******/ 							chain: chain.concat([parentId]),
+/******/ 							moduleId: moduleId,
+/******/ 							parentId: parentId
+/******/ 						};
+/******/ 					}
+/******/ 					if (outdatedModules.indexOf(parentId) !== -1) continue;
+/******/ 					if (parent.hot._acceptedDependencies[moduleId]) {
+/******/ 						if (!outdatedDependencies[parentId])
+/******/ 							outdatedDependencies[parentId] = [];
+/******/ 						addAllToSet(outdatedDependencies[parentId], [moduleId]);
+/******/ 						continue;
+/******/ 					}
+/******/ 					delete outdatedDependencies[parentId];
+/******/ 					outdatedModules.push(parentId);
+/******/ 					queue.push({
+/******/ 						chain: chain.concat([parentId]),
+/******/ 						id: parentId
+/******/ 					});
+/******/ 				}
+/******/ 			}
+/******/
+/******/ 			return {
+/******/ 				type: "accepted",
+/******/ 				moduleId: updateModuleId,
+/******/ 				outdatedModules: outdatedModules,
+/******/ 				outdatedDependencies: outdatedDependencies
+/******/ 			};
+/******/ 		}
+/******/
+/******/ 		function addAllToSet(a, b) {
+/******/ 			for (var i = 0; i < b.length; i++) {
+/******/ 				var item = b[i];
+/******/ 				if (a.indexOf(item) === -1) a.push(item);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// at begin all updates modules are outdated
+/******/ 		// the "outdated" status can propagate to parents if they don't accept the children
+/******/ 		var outdatedDependencies = {};
+/******/ 		var outdatedModules = [];
+/******/ 		var appliedUpdate = {};
+/******/
+/******/ 		var warnUnexpectedRequire = function warnUnexpectedRequire() {
+/******/ 			console.warn(
+/******/ 				"[HMR] unexpected require(" + result.moduleId + ") to disposed module"
+/******/ 			);
+/******/ 		};
+/******/
+/******/ 		for (var id in hotUpdate) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 				moduleId = toModuleId(id);
+/******/ 				/** @type {TODO} */
+/******/ 				var result;
+/******/ 				if (hotUpdate[id]) {
+/******/ 					result = getAffectedStuff(moduleId);
+/******/ 				} else {
+/******/ 					result = {
+/******/ 						type: "disposed",
+/******/ 						moduleId: id
+/******/ 					};
+/******/ 				}
+/******/ 				/** @type {Error|false} */
+/******/ 				var abortError = false;
+/******/ 				var doApply = false;
+/******/ 				var doDispose = false;
+/******/ 				var chainInfo = "";
+/******/ 				if (result.chain) {
+/******/ 					chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
+/******/ 				}
+/******/ 				switch (result.type) {
+/******/ 					case "self-declined":
+/******/ 						if (options.onDeclined) options.onDeclined(result);
+/******/ 						if (!options.ignoreDeclined)
+/******/ 							abortError = new Error(
+/******/ 								"Aborted because of self decline: " +
+/******/ 									result.moduleId +
+/******/ 									chainInfo
+/******/ 							);
+/******/ 						break;
+/******/ 					case "declined":
+/******/ 						if (options.onDeclined) options.onDeclined(result);
+/******/ 						if (!options.ignoreDeclined)
+/******/ 							abortError = new Error(
+/******/ 								"Aborted because of declined dependency: " +
+/******/ 									result.moduleId +
+/******/ 									" in " +
+/******/ 									result.parentId +
+/******/ 									chainInfo
+/******/ 							);
+/******/ 						break;
+/******/ 					case "unaccepted":
+/******/ 						if (options.onUnaccepted) options.onUnaccepted(result);
+/******/ 						if (!options.ignoreUnaccepted)
+/******/ 							abortError = new Error(
+/******/ 								"Aborted because " + moduleId + " is not accepted" + chainInfo
+/******/ 							);
+/******/ 						break;
+/******/ 					case "accepted":
+/******/ 						if (options.onAccepted) options.onAccepted(result);
+/******/ 						doApply = true;
+/******/ 						break;
+/******/ 					case "disposed":
+/******/ 						if (options.onDisposed) options.onDisposed(result);
+/******/ 						doDispose = true;
+/******/ 						break;
+/******/ 					default:
+/******/ 						throw new Error("Unexception type " + result.type);
+/******/ 				}
+/******/ 				if (abortError) {
+/******/ 					hotSetStatus("abort");
+/******/ 					return Promise.reject(abortError);
+/******/ 				}
+/******/ 				if (doApply) {
+/******/ 					appliedUpdate[moduleId] = hotUpdate[moduleId];
+/******/ 					addAllToSet(outdatedModules, result.outdatedModules);
+/******/ 					for (moduleId in result.outdatedDependencies) {
+/******/ 						if (
+/******/ 							Object.prototype.hasOwnProperty.call(
+/******/ 								result.outdatedDependencies,
+/******/ 								moduleId
+/******/ 							)
+/******/ 						) {
+/******/ 							if (!outdatedDependencies[moduleId])
+/******/ 								outdatedDependencies[moduleId] = [];
+/******/ 							addAllToSet(
+/******/ 								outdatedDependencies[moduleId],
+/******/ 								result.outdatedDependencies[moduleId]
+/******/ 							);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 				if (doDispose) {
+/******/ 					addAllToSet(outdatedModules, [result.moduleId]);
+/******/ 					appliedUpdate[moduleId] = warnUnexpectedRequire;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Store self accepted outdated modules to require them later by the module system
+/******/ 		var outdatedSelfAcceptedModules = [];
+/******/ 		for (i = 0; i < outdatedModules.length; i++) {
+/******/ 			moduleId = outdatedModules[i];
+/******/ 			if (
+/******/ 				installedModules[moduleId] &&
+/******/ 				installedModules[moduleId].hot._selfAccepted &&
+/******/ 				// removed self-accepted modules should not be required
+/******/ 				appliedUpdate[moduleId] !== warnUnexpectedRequire
+/******/ 			) {
+/******/ 				outdatedSelfAcceptedModules.push({
+/******/ 					module: moduleId,
+/******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
+/******/ 				});
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Now in "dispose" phase
+/******/ 		hotSetStatus("dispose");
+/******/ 		Object.keys(hotAvailableFilesMap).forEach(function(chunkId) {
+/******/ 			if (hotAvailableFilesMap[chunkId] === false) {
+/******/ 				hotDisposeChunk(chunkId);
+/******/ 			}
+/******/ 		});
+/******/
+/******/ 		var idx;
+/******/ 		var queue = outdatedModules.slice();
+/******/ 		while (queue.length > 0) {
+/******/ 			moduleId = queue.pop();
+/******/ 			module = installedModules[moduleId];
+/******/ 			if (!module) continue;
+/******/
+/******/ 			var data = {};
+/******/
+/******/ 			// Call dispose handlers
+/******/ 			var disposeHandlers = module.hot._disposeHandlers;
+/******/ 			for (j = 0; j < disposeHandlers.length; j++) {
+/******/ 				cb = disposeHandlers[j];
+/******/ 				cb(data);
+/******/ 			}
+/******/ 			hotCurrentModuleData[moduleId] = data;
+/******/
+/******/ 			// disable module (this disables requires from this module)
+/******/ 			module.hot.active = false;
+/******/
+/******/ 			// remove module from cache
+/******/ 			delete installedModules[moduleId];
+/******/
+/******/ 			// when disposing there is no need to call dispose handler
+/******/ 			delete outdatedDependencies[moduleId];
+/******/
+/******/ 			// remove "parents" references from all children
+/******/ 			for (j = 0; j < module.children.length; j++) {
+/******/ 				var child = installedModules[module.children[j]];
+/******/ 				if (!child) continue;
+/******/ 				idx = child.parents.indexOf(moduleId);
+/******/ 				if (idx >= 0) {
+/******/ 					child.parents.splice(idx, 1);
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// remove outdated dependency from module children
+/******/ 		var dependency;
+/******/ 		var moduleOutdatedDependencies;
+/******/ 		for (moduleId in outdatedDependencies) {
+/******/ 			if (
+/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
+/******/ 			) {
+/******/ 				module = installedModules[moduleId];
+/******/ 				if (module) {
+/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 					for (j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 						dependency = moduleOutdatedDependencies[j];
+/******/ 						idx = module.children.indexOf(dependency);
+/******/ 						if (idx >= 0) module.children.splice(idx, 1);
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Now in "apply" phase
+/******/ 		hotSetStatus("apply");
+/******/
+/******/ 		hotCurrentHash = hotUpdateNewHash;
+/******/
+/******/ 		// insert new code
+/******/ 		for (moduleId in appliedUpdate) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
+/******/ 				modules[moduleId] = appliedUpdate[moduleId];
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// call accept handlers
+/******/ 		var error = null;
+/******/ 		for (moduleId in outdatedDependencies) {
+/******/ 			if (
+/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
+/******/ 			) {
+/******/ 				module = installedModules[moduleId];
+/******/ 				if (module) {
+/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 					var callbacks = [];
+/******/ 					for (i = 0; i < moduleOutdatedDependencies.length; i++) {
+/******/ 						dependency = moduleOutdatedDependencies[i];
+/******/ 						cb = module.hot._acceptedDependencies[dependency];
+/******/ 						if (cb) {
+/******/ 							if (callbacks.indexOf(cb) !== -1) continue;
+/******/ 							callbacks.push(cb);
+/******/ 						}
+/******/ 					}
+/******/ 					for (i = 0; i < callbacks.length; i++) {
+/******/ 						cb = callbacks[i];
+/******/ 						try {
+/******/ 							cb(moduleOutdatedDependencies);
+/******/ 						} catch (err) {
+/******/ 							if (options.onErrored) {
+/******/ 								options.onErrored({
+/******/ 									type: "accept-errored",
+/******/ 									moduleId: moduleId,
+/******/ 									dependencyId: moduleOutdatedDependencies[i],
+/******/ 									error: err
+/******/ 								});
+/******/ 							}
+/******/ 							if (!options.ignoreErrored) {
+/******/ 								if (!error) error = err;
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Load self accepted modules
+/******/ 		for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {
+/******/ 			var item = outdatedSelfAcceptedModules[i];
+/******/ 			moduleId = item.module;
+/******/ 			hotCurrentParents = [moduleId];
+/******/ 			try {
+/******/ 				__webpack_require__(moduleId);
+/******/ 			} catch (err) {
+/******/ 				if (typeof item.errorHandler === "function") {
+/******/ 					try {
+/******/ 						item.errorHandler(err);
+/******/ 					} catch (err2) {
+/******/ 						if (options.onErrored) {
+/******/ 							options.onErrored({
+/******/ 								type: "self-accept-error-handler-errored",
+/******/ 								moduleId: moduleId,
+/******/ 								error: err2,
+/******/ 								originalError: err
+/******/ 							});
+/******/ 						}
+/******/ 						if (!options.ignoreErrored) {
+/******/ 							if (!error) error = err2;
+/******/ 						}
+/******/ 						if (!error) error = err;
+/******/ 					}
+/******/ 				} else {
+/******/ 					if (options.onErrored) {
+/******/ 						options.onErrored({
+/******/ 							type: "self-accept-errored",
+/******/ 							moduleId: moduleId,
+/******/ 							error: err
+/******/ 						});
+/******/ 					}
+/******/ 					if (!options.ignoreErrored) {
+/******/ 						if (!error) error = err;
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// handle errors in accept handlers and self accepted module load
+/******/ 		if (error) {
+/******/ 			hotSetStatus("fail");
+/******/ 			return Promise.reject(error);
+/******/ 		}
+/******/
+/******/ 		hotSetStatus("idle");
+/******/ 		return new Promise(function(resolve) {
+/******/ 			resolve(outdatedModules);
+/******/ 		});
+/******/ 	}
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -32,11 +736,14 @@ window.$ = window.jQuery;
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
-/******/ 			exports: {}
+/******/ 			exports: {},
+/******/ 			hot: hotCreateModule(moduleId),
+/******/ 			parents: (hotCurrentParentsTemp = hotCurrentParents, hotCurrentParents = [], hotCurrentParentsTemp),
+/******/ 			children: []
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, hotCreateRequire(moduleId));
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -98,9 +805,12 @@ window.$ = window.jQuery;
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// __webpack_hash__
+/******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
+/******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 123);
+/******/ 	return hotCreateRequire(129)(__webpack_require__.s = 129);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -197,6 +907,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomSelect = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -218,7 +930,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
         if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
           template = '<div class="' + classes + ' js-uix-new">';
-          template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><span class="uix-controls__bar"></span>';
+          template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>';
           template += '<div class="uix-controls__select__option-container">';
           $this.find('select option').each(function (index) {
             var selected = '';
@@ -243,12 +955,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
       }); //Show/Hide Selector
 
-      $(document).on('click', settings.trigger, function (e) {
+      $(document).off('click.FORM_CUSTOM_SELECT').on('click.FORM_CUSTOM_SELECT', settings.trigger, function (e) {
         e.preventDefault();
         var $selectWrapper = $(this).closest(settings.targetWrapper),
             $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new');
         $selectCurWrapper.addClass('is-opened');
-      });
+      }); //Do not add off() to this
+
       $(document.body).on('click', function (e) {
         if (e.target.className != '' && _typeof(e.target.className) != ( true ? "undefined" : undefined) && Object.prototype.toString.call(e.target.className) != '[object SVGAnimatedString]') {
           if (e.target.className.indexOf('uix-controls__select__option') < 0) {
@@ -262,8 +975,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }); //Change Event Here
       //Prevents the triggering of multiple change events
 
-      $(document).off('click.FORM_SELECT');
-      $(document).on('click.FORM_SELECT', settings.item, function (e) {
+      $(document).off('click.FORM_CUSTOM_SELECT_ITEM').on('click.FORM_CUSTOM_SELECT_ITEM', settings.item, function (e) {
         e.preventDefault();
         var $selectWrapper = $(this).closest(settings.targetWrapper),
             $selectCurWrapper = $selectWrapper.find(settings.selector + '.js-uix-new'),
@@ -397,6 +1109,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *************************************
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixCountTo = function (options) {
     options = options || {};
     return $(this).each(function () {
@@ -519,6 +1233,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Function}                        - Return a callback function.
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixSearchJsonStr = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -533,43 +1249,43 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       $.ajax({
         url: settings.jsonFile,
         method: settings.method,
-        dataType: 'json',
-        success: function success(data) {
-          var newArr = []; //Convert JSON to an array
+        dataType: 'json'
+      }).done(function (data) {
+        var newArr = []; //Convert JSON to an array
 
-          var formatFromServer = function formatFromServer(data) {
-            var formatData = {};
+        var formatFromServer = function formatFromServer(data) {
+          var formatData = {};
 
-            for (var item in data) {
-              if ($(document).UixIsJsonObj({
-                string: data[item]
-              })) {
-                formatFromServer(data[item], formatData);
-              } else {
-                formatData[item] = data[item];
-              }
-            }
-
-            for (var item2 in formatData) {
-              //console.log( formatData[ item2 ] );
-              newArr.push(formatData[item2]);
-            }
-
-            return formatData;
-          };
-
-          formatFromServer(data); //search JSON key that contains specific string
-
-          for (var p = 0; p < newArr.length; p++) {
-            for (var n = 0; n < newArr[p].list.length; n++) {
-              if (Object.prototype.toString.call(newArr[p].list[n][settings.key]) == '[object Array]') {
-                // API: Callback
-                settings.callback(newArr[p].list[n][settings.key]);
-              }
+          for (var item in data) {
+            if ($(document).UixIsJsonObj({
+              string: data[item]
+            })) {
+              formatFromServer(data[item], formatData);
+            } else {
+              formatData[item] = data[item];
             }
           }
-        },
-        error: function error() {}
+
+          for (var item2 in formatData) {
+            //console.log( formatData[ item2 ] );
+            newArr.push(formatData[item2]);
+          }
+
+          return formatData;
+        };
+
+        formatFromServer(data); //search JSON key that contains specific string
+
+        for (var p = 0; p < newArr.length; p++) {
+          for (var n = 0; n < newArr[p].list.length; n++) {
+            if (Object.prototype.toString.call(newArr[p].list[n][settings.key]) == '[object Array]') {
+              // API: Callback
+              settings.callback(newArr[p].list[n][settings.key]);
+            }
+          }
+        }
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Request failed: " + textStatus);
       });
     });
   };
@@ -587,6 +1303,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Boolean}                         - Return a boolean.
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixIsJsonObj = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -646,6 +1364,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixFormProgressToNext = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -783,6 +1503,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderNormalRadio = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -827,6 +1549,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderDatePicker = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -902,6 +1626,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderControlsHover = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -947,6 +1673,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomSingleSel = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -987,6 +1715,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomMultiSel = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1019,6 +1749,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomFileDropzone = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1090,6 +1822,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomFile = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1100,7 +1834,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var $fileInput = $(this).find('input[type="file"]'),
             $fileBtn = $(this).find('.uix-controls__file-trigger'),
             $filePath = $(this).next('.uix-controls__file-return');
-        $fileBtn.on('click', function () {
+        $fileBtn.off('click').on('click', function () {
           $fileInput.focusin();
         });
         $fileInput.on('change', function () {
@@ -1122,6 +1856,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderControlsDisable = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1146,6 +1882,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderControlsLineEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1158,17 +1896,17 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var dataExist = $(this).data('exist');
 
         if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
-          $('<span class="uix-controls__bar"></span>').insertAfter($(this).find('label')); //Multiple Selector or Single Selector
+          $('<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>').insertAfter($(this).find('label')); //Multiple Selector or Single Selector
 
           if ($(this).hasClass('uix-controls__multi-sel') || $(this).hasClass('uix-controls__single-sel')) {
             $(this).find('> span').each(function () {
-              $(this).prepend('<span class="uix-controls__bar"></span>');
+              $(this).prepend('<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>');
             });
           } //Custom Input Number
 
 
           if ($(this).hasClass('uix-controls__number')) {
-            $(this).prepend('<span class="uix-controls__bar"></span>');
+            $(this).prepend('<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>');
           } //Prevent the form from being initialized again
 
 
@@ -1194,6 +1932,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixRenderCustomRadioCheckbox = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1327,6 +2067,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
@@ -1345,6 +2103,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixFireModalDialog = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1424,8 +2184,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           $obj.addClass('is-active'); //auto close
 
           if (closeTime && !isNaN(closeTime)) {
-            setTimeout(function () {
-              $(document).UixCloseModalDialog();
+            window.setCloseModalDialog = setTimeout(function () {
+              $(document).closeModalDialog();
             }, closeTime);
           }
         }
@@ -1445,7 +2205,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /*
@@ -1454,6 +2214,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixCloseModalDialog = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1471,28 +2233,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       });
       $(settings.target).find('.uix-modal-box__content').removeClass('js-uix-no-fullscreen'); // Unlocks the page
 
-      $.scrollLock(false);
+      $.scrollLock(false); //Prevent automatic close from affecting new fire effects
+
+      clearTimeout(window.setCloseModalDialog);
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 49 */
@@ -1556,6 +2302,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 /* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -1614,19 +2378,19 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1638,6 +2402,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
+  'use strict';
+
   $.fn.UixTextEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -1747,24 +2513,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 66 */
@@ -1977,9 +2725,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 101 */,
-/* 102 */,
-/* 103 */,
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 104 */,
 /* 105 */,
 /* 106 */,
@@ -1999,7 +2762,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 120 */,
 /* 121 */,
 /* 122 */,
-/* 123 */
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2009,7 +2778,7 @@ __webpack_require__.r(__webpack_exports__);
 /*
  * Third-party plugins for website
  *    
- * !!! Third-party plugins adopts pure merge and does not import and export.
+ * !!! Third-party plugins adopt pure file merger and do not import and export
  * !!! Please do not modify variable "UIXKIT_3RD_PARTY_PLUGINS_IMPORT" name
  */
 var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
@@ -2018,15 +2787,14 @@ var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
   "./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js", //Website ==> miscellaneous
   "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", "./src/components/ES5/_plugins-Miscellaneous/js/highlight.js", //GSAP plugins
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js plugins
-  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js"]
+  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js", //Extra filter -- film
+  "./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/FilmPass.js"]
 };
 
 // EXTERNAL MODULE: ./src/components/ES6/_global/scss/_style.scss
 var _style = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/index.js
-var _this = undefined;
-
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /**
@@ -2108,14 +2876,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     71.3D Mouse Interaction with three.js
     72.3D Shatter Slider
     73.3D Explosive Particle Slider
-    74.Responsive Table
-    75.Table Sorter
-    76.Tabs
-    77.Team Focus
-    78.Text effect
-    79.Timeline
-    80.Vertical Menu
-    81.WordPress Core Scripts
+    74.3D Filmic Effects
+    75.Responsive Table
+    76.Table Sorter
+    77.Tabs
+    78.Team Focus
+    79.Text effect
+    80.Timeline
+    81.Vertical Menu
+    82.WordPress Core Scripts
 
 
 */
@@ -2128,6 +2897,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /*
  * Global variables from front pages
+ *
+ * @private
  */
 
 var //If the file is in the root directory, you can leave it empty.
@@ -2147,6 +2918,8 @@ if (typeof APP_ROOTPATH === 'undefined') {
 }
 /*
  * Determine whether it is a special browser
+ *
+ * @private
  */
 
 
@@ -2162,9 +2935,9 @@ var browser = {
 };
 /*
  * Core scripts for current site
- * @global
  *
- * //Used for all modules from ./src/components/ES6/[__]/js
+ * @private
+ * @description Used for all modules from ./src/components/ES6/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
  * @requires ./examples/assets/js/min/jquery.waypoints.min.js
@@ -2172,8 +2945,6 @@ var browser = {
  */
 
 var UixModuleInstance = function ($, window, document) {
-  'use strict';
-
   var _APP = {},
       components = {
     documentReady: [],
@@ -2226,6 +2997,8 @@ var UixModuleInstance = function ($, window, document) {
 /*
  * Create GUID / UUID
  *
+ * @private
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @return {String}                        - The globally-unique identifiers.
  */
 
@@ -2269,6 +3042,8 @@ var UixGUID = UixGUID || function () {
 /*
  * Evaluating a string as a mathematical expression in JavaScript
  *
+ * @private
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @return {String}            - New calculation result.
  */
 
@@ -2326,6 +3101,8 @@ var UixMath = UixMath || function () {
 /*
  * Get the CSS property
  *
+ * @private
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Object} el     - Target object, using class name or ID to locate.
  * @return {String|JSON}   - The value of property.
  */
@@ -2372,9 +3149,129 @@ var UixCssProperty = UixCssProperty || function () {
     };
   }, t;
 }();
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixModuleFilter.js
+function UixModuleFilter_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
+
+/*
+ * Method of deleting or adding a module
+ *
+ * @global
+ * @description This function can be used separately in HTML pages or custom JavaScript.
+ * @param  {Boolean|String} destroy       - If it is a string, it means destroying this module from UixModuleInstance
+ * @param  {JSON} add                     - New module data.
+ * @param  {String} add.moduleName        - The name of the module (the default is all uppercase).
+ * @param  {Boolean} add.pageLoaded       - Window loading module method. If true or 1, the module will execute after the page is loaded.
+ * @param  {Number} add.version           - The new module version number.
+ * @param  {Function} add.callback        - The new module script of function.
+ * @return {Void}      
+ *
+ * @Usage:
+ * !!! The code is to be inserted in front of the uix-kit core script.
+	
+	
+<script>
+window.MAIN = null;
+( function( $ ) {
+"use strict";
+    $( document ).ready( function() {
+		$( document ).UixModuleFilter( { 
+		   'destroy' : 'MAIN',
+		   'add'     : {
+							moduleName    : 'YOUR_MODULE_NAME',
+							pageLoaded    : true,
+							version       : '0.0.1',
+							callback      : function() {
+								//the module will execute after the page is loaded.
+
+							}
+						}
+		} );
+    } );
+} ) ( jQuery );
+</script>
+
+ *
+ * 
+ */
+
+
+(function ($) {
+  'use strict';
+
+  $.fn.UixModuleFilter = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      destroy: false,
+      add: {
+        moduleName: 'OLD_MODULE_NAME',
+        pageLoaded: false,
+        version: '0.0.1',
+        callback: function callback() {}
+      }
+    }, options);
+    this.each(function () {
+      //remove a module
+      //-------------------------------------	
+      if (settings.destroy && Object.prototype.toString.call(settings.destroy) == '[object String]') {
+        var moduleName = settings.destroy;
+
+        if (UixModuleFilter_typeof(UixModuleInstance[moduleName]) != ( true ? "undefined" : undefined)) {
+          delete UixModuleInstance[moduleName];
+        }
+      } //add or replace a module
+      //-------------------------------------	
+
+
+      if (settings.add && Object.prototype.toString.call(settings.add) == '[object Object]' && settings.add.hasOwnProperty('pageLoaded')) {
+        var moduleName = settings.add.moduleName; //delete the old module if exist
+
+        if (UixModuleFilter_typeof(UixModuleInstance[moduleName]) != ( true ? "undefined" : undefined)) {
+          console.log('The module already exists, please destroy the old module or change the new module name.');
+        } else {
+          //loading mode "documentReady"
+          if (!settings.add.pageLoaded || settings.add.pageLoaded == 0) {
+            var _moduleName = function (module, $, window, document) {
+              module[moduleName] = module[moduleName] || {};
+              module[moduleName].version = settings.add.version;
+
+              module[moduleName].documentReady = function ($) {
+                settings.add.callback();
+              };
+
+              module.components.documentReady.push(module[moduleName].documentReady);
+              return _moduleName;
+            }(UixModuleInstance, jQuery, window, document);
+
+            UixModuleInstance[moduleName].documentReady($);
+          } //loading mode "pageLoaded"
+
+
+          if (settings.add.pageLoaded || settings.add.pageLoaded == 1) {
+            var _moduleName = function (module, $, window, document) {
+              module[moduleName] = module[moduleName] || {};
+              module[moduleName].version = settings.add.version;
+
+              module[moduleName].pageLoaded = function () {
+                settings.add.callback();
+              };
+
+              module.components.pageLoaded.push(module[moduleName].pageLoaded);
+              return _moduleName;
+            }(UixModuleInstance, jQuery, window, document);
+
+            UixModuleInstance[moduleName].pageLoaded();
+          }
+        }
+      }
+    });
+  };
+})(jQuery);
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixApplyAsyncScripts.js
 /*
  * Apply some asynchronism scripts
  *
+ * @global
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean} scrollReveal          - Run script of module "Scroll Reveal". a page commonly used to
  *                                           load asynchronous information
  * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to
@@ -2382,171 +3279,223 @@ var UixCssProperty = UixCssProperty || function () {
  * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
  * @return {Void}
+ *
+ * @Usage:
+    
+	
+<script>
+( function( $ ) {
+"use strict";
+    $( document ).ready( function() {
+		$( document ).UixApplyAsyncScripts({
+			scrollReveal    : true,
+			ajaxPostList    : true,
+			ajaxDDList      : true,
+			counterAnim     : true,
+			lightBox        : true 
+		});
+    } );
+} ) ( jQuery );
+</script>
+
+ 
+
+ *
+ * 
  */
 
-var UixApplyAsyncScripts = function UixApplyAsyncScripts(options) {
-  'use strict'; // This is the easiest way to have default options.
 
-  var settings = $.extend({
-    scrollReveal: true,
-    // @from ./src/components/ES6/scroll-reveal
-    ajaxPostList: true,
-    // @from ./src/components/ES6/list-posts
-    ajaxDDList: true,
-    // @from ./src/components/ES6/dynamic-dropdown-list-json
-    counterAnim: true,
-    // @from ./src/components/ES6/counter
-    lightBox: true // @from ./src/components/ES6/lightbox
+(function ($) {
+  'use strict';
 
-  }, options); //----
+  $.fn.UixApplyAsyncScripts = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      scrollReveal: true,
+      // @from ./src/components/ES6/scroll-reveal
+      ajaxPostList: true,
+      // @from ./src/components/ES6/list-posts
+      ajaxDDList: true,
+      // @from ./src/components/ES6/dynamic-dropdown-list-json
+      counterAnim: true,
+      // @from ./src/components/ES6/counter
+      lightBox: true // @from ./src/components/ES6/lightbox
 
-  if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.pageLoaded(); //Theme Scripts
+    }, options);
+    this.each(function () {
+      //----
+      if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.pageLoaded(); //Theme Scripts
 
-  if (UixModuleInstance.COMMON_HEIGHT) UixModuleInstance.COMMON_HEIGHT.pageLoaded(); //Common Height
+      if (UixModuleInstance.COMMON_HEIGHT) UixModuleInstance.COMMON_HEIGHT.pageLoaded(); //Common Height
 
-  if (UixModuleInstance.ADVANCED_SLIDER) UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
+      if (UixModuleInstance.ADVANCED_SLIDER) UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 
-  if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
+      if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
 
-  if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+      if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
 
-  if (UixModuleInstance.STICKY_EL) UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
+      if (UixModuleInstance.STICKY_EL) UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 
-  if (UixModuleInstance.TEXT_EFFECT) UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
+      if (UixModuleInstance.TEXT_EFFECT) UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
 
-  if (UixModuleInstance.TIMELINE) UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
-  //----
+      if (UixModuleInstance.TIMELINE) UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
+      //----
 
-  if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.documentReady($); //Theme Scripts
+      if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.documentReady($); //Theme Scripts
 
-  if (UixModuleInstance.TABLE) UixModuleInstance.TABLE.documentReady($); //Responsive Table
+      if (UixModuleInstance.TABLE) UixModuleInstance.TABLE.documentReady($); //Responsive Table
 
-  if (UixModuleInstance.TABLE_SORTER) UixModuleInstance.TABLE_SORTER.documentReady($); //Table Sorter
+      if (UixModuleInstance.TABLE_SORTER) UixModuleInstance.TABLE_SORTER.documentReady($); //Table Sorter
 
-  if (UixModuleInstance.MODAL_DIALOG) UixModuleInstance.MODAL_DIALOG.documentReady($); //Modal Dialog
+      if (UixModuleInstance.MODAL_DIALOG) UixModuleInstance.MODAL_DIALOG.documentReady($); //Modal Dialog
 
-  if (UixModuleInstance.PARALLAX) UixModuleInstance.PARALLAX.documentReady($); //Parallax
+      if (UixModuleInstance.PARALLAX) UixModuleInstance.PARALLAX.documentReady($); //Parallax
 
-  if (UixModuleInstance.VIDEOS) UixModuleInstance.VIDEOS.documentReady($); //Videos
+      if (UixModuleInstance.VIDEOS) UixModuleInstance.VIDEOS.documentReady($); //Videos
 
-  if (UixModuleInstance.BODY_AND_HEADER) UixModuleInstance.BODY_AND_HEADER.documentReady($); //Header Area
+      if (UixModuleInstance.BODY_AND_HEADER) UixModuleInstance.BODY_AND_HEADER.documentReady($); //Header Area
 
-  if (UixModuleInstance.SET_BG) UixModuleInstance.SET_BG.documentReady($); //Specify a background image
+      if (UixModuleInstance.SET_BG) UixModuleInstance.SET_BG.documentReady($); //Specify a background image
 
-  if (UixModuleInstance.GET_CUSTOM_ATTRS) UixModuleInstance.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
+      if (UixModuleInstance.GET_CUSTOM_ATTRS) UixModuleInstance.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 
-  if (UixModuleInstance.PAGINATION) UixModuleInstance.PAGINATION.documentReady($); //Pagination
+      if (UixModuleInstance.PAGINATION) UixModuleInstance.PAGINATION.documentReady($); //Pagination
 
-  if (UixModuleInstance.FORM) UixModuleInstance.FORM.documentReady($); //Form
+      if (UixModuleInstance.FORM) UixModuleInstance.FORM.documentReady($); //Form
 
-  if (UixModuleInstance.FLEXSLIDER) UixModuleInstance.FLEXSLIDER.documentReady($); //Flexslider
+      if (UixModuleInstance.FLEXSLIDER) UixModuleInstance.FLEXSLIDER.documentReady($); //Flexslider
 
-  if (UixModuleInstance.RETINA) UixModuleInstance.RETINA.documentReady($); //Retina Graphics for Website
+      if (UixModuleInstance.RETINA) UixModuleInstance.RETINA.documentReady($); //Retina Graphics for Website
 
-  if (UixModuleInstance.SHOW_MORELESS) UixModuleInstance.SHOW_MORELESS.documentReady($); //Show More Less
+      if (UixModuleInstance.SHOW_MORELESS) UixModuleInstance.SHOW_MORELESS.documentReady($); //Show More Less
 
-  if (UixModuleInstance.DROPDOWN_MENU) UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
+      if (UixModuleInstance.DROPDOWN_MENU) UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 
-  if (UixModuleInstance.DROPDOWN_MENU2) UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
+      if (UixModuleInstance.DROPDOWN_MENU2) UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 
-  if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
+      if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
 
-  if (UixModuleInstance.ADVANCED_CONTENT_SLIDER) UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+      if (UixModuleInstance.ADVANCED_CONTENT_SLIDER) UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
 
-  if (UixModuleInstance.GALLERY) UixModuleInstance.GALLERY.documentReady($); //Gallery
+      if (UixModuleInstance.GALLERY) UixModuleInstance.GALLERY.documentReady($); //Gallery
 
-  if (UixModuleInstance.IMAGE_SHAPES) UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
+      if (UixModuleInstance.IMAGE_SHAPES) UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
 
-  if (UixModuleInstance.PERIODICAL_SCROLL) UixModuleInstance.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
+      if (UixModuleInstance.PERIODICAL_SCROLL) UixModuleInstance.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
 
-  if (UixModuleInstance.PRICING) UixModuleInstance.PRICING.documentReady($); //Pricing
+      if (UixModuleInstance.PRICING) UixModuleInstance.PRICING.documentReady($); //Pricing
 
-  if (UixModuleInstance.PROGRESS_BAR) UixModuleInstance.PROGRESS_BAR.documentReady($); //Progress Bar
+      if (UixModuleInstance.PROGRESS_BAR) UixModuleInstance.PROGRESS_BAR.documentReady($); //Progress Bar
 
-  if (UixModuleInstance.PROGRESS_LINE) UixModuleInstance.PROGRESS_LINE.documentReady($); //Progress Line
+      if (UixModuleInstance.PROGRESS_LINE) UixModuleInstance.PROGRESS_LINE.documentReady($); //Progress Line
 
-  if (UixModuleInstance.ROTATING_EL) UixModuleInstance.ROTATING_EL.documentReady($); //Rotating Elements
+      if (UixModuleInstance.ROTATING_EL) UixModuleInstance.ROTATING_EL.documentReady($); //Rotating Elements
 
-  if (UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK) UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+      if (UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK) UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
 
-  if (UixModuleInstance.TABS) UixModuleInstance.TABS.documentReady($); //Tabs
+      if (UixModuleInstance.TABS) UixModuleInstance.TABS.documentReady($); //Tabs
 
-  if (UixModuleInstance.TEAM_FOCUS) UixModuleInstance.TEAM_FOCUS.documentReady($); //Team Focus
+      if (UixModuleInstance.TEAM_FOCUS) UixModuleInstance.TEAM_FOCUS.documentReady($); //Team Focus
 
-  if (UixModuleInstance.LAVA_LAMP_STYLE_MENU) UixModuleInstance.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
+      if (UixModuleInstance.LAVA_LAMP_STYLE_MENU) UixModuleInstance.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu
 
-  if (UixModuleInstance.CIRCLE_LAYOUT) UixModuleInstance.CIRCLE_LAYOUT.documentReady($); //Circle Layout
+      if (UixModuleInstance.CIRCLE_LAYOUT) UixModuleInstance.CIRCLE_LAYOUT.documentReady($); //Circle Layout
 
-  if (UixModuleInstance.MULTI_ITEMS_CAROUSEL) UixModuleInstance.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
+      if (UixModuleInstance.MULTI_ITEMS_CAROUSEL) UixModuleInstance.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
 
-  if (UixModuleInstance.THREE_BACKGROUND) UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
+      if (UixModuleInstance.THREE_BACKGROUND) UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
 
-  if (UixModuleInstance.THREE_CAROUSEL) UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
-  //---- Prevent overlay clicks on asynchronous requests
-  //---- Commonly used for AJAX modules that are clicked by button
-  //Scroll Reveal
+      if (UixModuleInstance.THREE_CAROUSEL) UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
+      //---- Prevent overlay clicks on asynchronous requests
+      //---- Commonly used for AJAX modules that are clicked by button
+      //Scroll Reveal
 
-  if (settings.scrollReveal) {
-    if (UixModuleInstance.SCROLL_REVEAL) UixModuleInstance.SCROLL_REVEAL.documentReady($);
-  } //Posts List With Ajax
-
-
-  if (settings.ajaxPostList) {
-    if (UixModuleInstance.POST_LIST_AJAX) UixModuleInstance.POST_LIST_AJAX.documentReady($);
-  } //Dynamic Drop Down List from JSON
-
-
-  if (settings.ajaxDDList) {
-    if (UixModuleInstance.DYNAMIC_DD_LIST) UixModuleInstance.DYNAMIC_DD_LIST.documentReady($);
-  } //Counter
+      if (settings.scrollReveal) {
+        if (UixModuleInstance.SCROLL_REVEAL) UixModuleInstance.SCROLL_REVEAL.documentReady($);
+      } //Posts List With Ajax
 
 
-  if (settings.counterAnim) {
-    if (UixModuleInstance.COUNTER) UixModuleInstance.COUNTER.documentReady($);
-  } //Custom Lightbox
+      if (settings.ajaxPostList) {
+        if (UixModuleInstance.POST_LIST_AJAX) UixModuleInstance.POST_LIST_AJAX.documentReady($);
+      } //Dynamic Drop Down List from JSON
 
 
-  if (settings.lightBox) {
-    if (UixModuleInstance.LIGHTBOX) UixModuleInstance.LIGHTBOX.pageLoaded();
-  } //----Uix Shortcodes (WordPress Plugin)
+      if (settings.ajaxDDList) {
+        if (UixModuleInstance.DYNAMIC_DD_LIST) UixModuleInstance.DYNAMIC_DD_LIST.documentReady($);
+      } //Counter
 
 
-  if ($.isFunction($.uix_sc_init)) {
-    $.uix_sc_init();
-  }
-};
+      if (settings.counterAnim) {
+        if (UixModuleInstance.COUNTER) UixModuleInstance.COUNTER.documentReady($);
+      } //Custom Lightbox
+
+
+      if (settings.lightBox) {
+        if (UixModuleInstance.LIGHTBOX) UixModuleInstance.LIGHTBOX.pageLoaded();
+      } //----Uix Shortcodes (WordPress Plugin)
+
+
+      if ($.isFunction($.uix_sc_init)) {
+        $.uix_sc_init();
+      }
+    });
+  };
+})(jQuery);
+// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixApplyAsyncAllScripts.js
 /*
  * Apply all the asynchronism scripts
  *
+ * @global
+ * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean} runAll          - Run all module scripts.
  * @return {Void}
+ *
+ * @Usage:
+    
+<script>
+( function( $ ) {
+"use strict";
+    $( document ).ready( function() {
+		$( document ).UixApplyAsyncAllScripts();
+    } );
+} ) ( jQuery );
+</script>
+	
+
+ *
+ * 
  */
 
-var UixApplyAsyncAllScripts = function UixApplyAsyncAllScripts(options) {
-  'use strict'; // This is the easiest way to have default options.
 
-  var settings = $.extend({
-    runAll: true
-  }, options);
-  var $this = $(_this);
-  var scipts_pageLoaded = UixModuleInstance.components.pageLoaded,
-      scipts_documentReady = UixModuleInstance.components.documentReady;
+(function ($) {
+  'use strict';
 
-  if (settings.runAll) {
-    for (var i = 0; i < scipts_pageLoaded.length; i++) {
-      scipts_pageLoaded[i]();
-    }
+  $.fn.UixApplyAsyncAllScripts = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      runAll: true
+    }, options);
+    this.each(function () {
+      var scipts_pageLoaded = UixModuleInstance.components.pageLoaded,
+          scipts_documentReady = UixModuleInstance.components.documentReady;
 
-    for (var j = 0; j < scipts_documentReady.length; j++) {
-      scipts_documentReady[j]($);
-    }
-  } //Uix Shortcodes
+      if (settings.runAll) {
+        for (var i = 0; i < scipts_pageLoaded.length; i++) {
+          scipts_pageLoaded[i]();
+        }
+
+        for (var j = 0; j < scipts_documentReady.length; j++) {
+          scipts_documentReady[j]($);
+        }
+      } //Uix Shortcodes
 
 
-  if ($.isFunction($.uix_sc_init)) {
-    $.uix_sc_init();
-  }
-};
+      if ($.isFunction($.uix_sc_init)) {
+        $.uix_sc_init();
+      }
+    });
+  };
+})(jQuery);
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/body-and-header.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2557,6 +3506,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var BODY_AND_HEADER = function (module, $, window, document) {
+  if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
   module.BODY_AND_HEADER.version = '0.0.3';
 
@@ -2629,6 +3579,7 @@ function common_height_classCallCheck(instance, Constructor) { if (!(instance in
  */
 
 var COMMON_HEIGHT = function (module, $, window, document) {
+  if (window.COMMON_HEIGHT === null) return false;
   module.COMMON_HEIGHT = module.COMMON_HEIGHT || {};
   module.COMMON_HEIGHT.version = '0.0.1';
 
@@ -2708,6 +3659,7 @@ function custom_data_attrs_classCallCheck(instance, Constructor) { if (!(instanc
  */
 
 var GET_CUSTOM_ATTRS = function (module, $, window, document) {
+  if (window.GET_CUSTOM_ATTRS === null) return false;
   module.GET_CUSTOM_ATTRS = module.GET_CUSTOM_ATTRS || {};
   module.GET_CUSTOM_ATTRS.version = '0.0.1';
 
@@ -2743,6 +3695,7 @@ function loader_classCallCheck(instance, Constructor) { if (!(instance instanceo
  */
 
 var LOADER = function (module, $, window, document) {
+  if (window.LOADER === null) return false;
   module.LOADER = module.LOADER || {};
   module.LOADER.version = '0.0.2';
 
@@ -2804,6 +3757,7 @@ function mega_menu_classCallCheck(instance, Constructor) { if (!(instance instan
  */
 
 var MEGA_MENU = function (module, $, window, document) {
+  if (window.MEGA_MENU === null) return false;
   module.MEGA_MENU = module.MEGA_MENU || {};
   module.MEGA_MENU.version = '0.0.3';
 
@@ -2942,6 +3896,7 @@ function mobile_menu_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
  */
 
 var MOBILE_MENU = function (module, $, window, document) {
+  if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
   module.MOBILE_MENU.version = '0.0.4';
 
@@ -3092,6 +4047,7 @@ function navigation_typeof(obj) { if (typeof Symbol === "function" && typeof Sym
  */
 
 var NAVIGATION = function (module, $, window, document) {
+  if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
   module.NAVIGATION.version = '0.0.4';
 
@@ -3171,8 +4127,8 @@ var NAVIGATION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/_global/js/fn/parallax.js
-var parallax = __webpack_require__(0);
+// EXTERNAL MODULE: ./src/components/ES6/_global/js/fn/UixParallax.js
+var UixParallax = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/set-background.js
 function set_background_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3187,6 +4143,7 @@ function set_background_typeof(obj) { if (typeof Symbol === "function" && typeof
 
 
 var SET_BG = function (module, $, window, document) {
+  if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
   module.SET_BG.version = '0.0.3';
 
@@ -3299,8 +4256,9 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
  */
 
 var VIDEOS = function (module, $, window, document) {
+  if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
-  module.VIDEOS.version = '0.0.9';
+  module.VIDEOS.version = '0.1.2';
 
   module.VIDEOS.documentReady = function ($) {
     var $window = $(window),
@@ -3488,9 +4446,9 @@ var VIDEOS = function (module, $, window, document) {
           vogv = '<source src="' + videoSrcOgv + '" type="video/ogv">';
         }
 
-        v += '<div class="uix-modal-box is-fullscreen is-video" id="' + videoContainerMid + '">';
-        v += '<a href="javascript:void(0)" class="uix-modal-box__close"></a>';
-        v += '<div class="uix-modal-box__content">';
+        v += '<div class="uix-modal-box is-fullscreen is-video" tabindex="-1" role="dialog" aria-hidden="true" id="' + videoContainerMid + '">';
+        v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
+        v += '<div class="uix-modal-box__content" role="document">';
         v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 
         if ($this.find('[data-video-iframe]').length > 0 && videoSrcIfm != '') {
@@ -3513,7 +4471,7 @@ var VIDEOS = function (module, $, window, document) {
       }
     }); //Check out: http://docs.videojs.com/tutorial-player-workflows.html
 
-    $(document).on('click', modalDialogTrigger, function () {
+    $(document).off('click.VIDEOS').on('click.VIDEOS', modalDialogTrigger, function () {
       var vid = $(this).data('modal-id') + '--videopush',
           $ifm = false,
           newMaxW = windowWidth - 80,
@@ -3669,7 +4627,7 @@ var VIDEOS = function (module, $, window, document) {
       /* ---------  Close the modal  */
 
 
-      $(document).on('click', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function () {
+      $(document).off('click.VIDEOS_CLOSE').on('click.VIDEOS_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
         myPlayer.ready(function () {
           this.pause();
         });
@@ -3698,23 +4656,24 @@ function js_classCallCheck(instance, Constructor) { if (!(instance instanceof Co
 
 
 var MAIN = function (module, $, window, document) {
+  if (window.MAIN === null) return false;
   module.MAIN = module.MAIN || {};
   module.MAIN.version = '0.0.1';
 
   module.MAIN.documentReady = function ($) {
     /* 
-     ====================================================
-     *  Function Title Here
-     ====================================================
+     ---------------------------
+     Function Here
+     ---------------------------
      */
     //your code here...
   };
 
   module.MAIN.pageLoaded = function () {
     /* 
-     ====================================================
-     *  Function Title Here
-     ====================================================
+     ---------------------------
+     Function Here
+     ---------------------------
      */
     //your code here...
   };
@@ -3743,8 +4702,9 @@ function js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iter
 
 
 var ACCORDION_BG = function (module, $, window, document) {
+  if (window.ACCORDION_BG === null) return false;
   module.ACCORDION_BG = module.ACCORDION_BG || {};
-  module.ACCORDION_BG.version = '0.0.5';
+  module.ACCORDION_BG.version = '0.0.6';
 
   module.ACCORDION_BG.documentReady = function ($) {
     var $window = $(window),
@@ -3803,7 +4763,7 @@ var ACCORDION_BG = function (module, $, window, document) {
       }
 
       if (js_typeof(closeBtn) != ( true ? "undefined" : undefined) && closeBtn != false && closeBtn != '') {
-        $(closeBtn).on('click', function (e) {
+        $(closeBtn).off('click').on('click', function (e) {
           e.preventDefault();
           itemInit();
         });
@@ -3859,8 +4819,9 @@ function accordion_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 
 
 var ACCORDION = function (module, $, window, document) {
+  if (window.ACCORDION === null) return false;
   module.ACCORDION = module.ACCORDION || {};
-  module.ACCORDION.version = '0.0.2';
+  module.ACCORDION.version = '0.0.3';
 
   module.ACCORDION.documentReady = function ($) {
     $('.uix-accordion').each(function () {
@@ -3895,7 +4856,7 @@ var ACCORDION = function (module, $, window, document) {
         openItem($li.first().find('dd'));
       }
 
-      $li.on(aEvent, function (e) {
+      $li.off(aEvent).on(aEvent, function (e) {
         //Prevents further propagation of the current event in the capturing and bubbling phases.
         e.stopPropagation(); //Its value is not a boolean but a string
 
@@ -3954,8 +4915,9 @@ function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "functio
 
 
 var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
+  if (window.ADVANCED_CONTENT_SLIDER === null) return false;
   module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
-  module.ADVANCED_CONTENT_SLIDER.version = '0.0.3';
+  module.ADVANCED_CONTENT_SLIDER.version = '0.0.4';
 
   module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
     var $window = $(window),
@@ -4029,7 +4991,7 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
           $(dataControlsPagination).find('li').first().addClass('is-active');
         }
 
-        $(dataControlsPagination).find('li a').on('click', function (e) {
+        $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
           e.preventDefault();
 
           if (!$(this).hasClass('is-active')) {
@@ -4047,14 +5009,14 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
 
         _prev.addClass('is-disabled');
 
-        _prev.on('click', function (e) {
+        _prev.off('click').on('click', function (e) {
           e.preventDefault();
           sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
 
           clearInterval($this[0].animatedSlides);
         });
 
-        _next.on('click', function (e) {
+        _next.off('click').on('click', function (e) {
           e.preventDefault();
           sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
 
@@ -4229,8 +5191,9 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 
 
 var ADVANCED_SLIDER = function (module, $, window, document) {
+  if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.1';
+  module.ADVANCED_SLIDER.version = '0.1.3';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -4407,7 +5370,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
       _dot += '</ul>';
       if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').on('click', function (e) {
+      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
         e.preventDefault();
 
         if (!$(this).hasClass('is-active')) {
@@ -4435,14 +5398,14 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         _prev.addClass('is-disabled');
       }
 
-      _prev.on('click', function (e) {
+      _prev.off('click').on('click', function (e) {
         e.preventDefault();
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev'); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
 
-      _next.on('click', function (e) {
+      _next.off('click').on('click', function (e) {
         e.preventDefault();
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next'); //Pause the auto play event
 
@@ -4757,7 +5720,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
             if (promise !== undefined) {
               promise.then(function () {// Autoplay started!
-              }).catch(function (error) {
+              })["catch"](function (error) {
                 // Autoplay was prevented.
                 $('#' + coverPlayBtnID).show();
                 $('#' + coverPlayBtnID + ' .uix-video__cover__playbtn').show();
@@ -4802,7 +5765,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
               if (promise !== undefined) {
                 promise.then(function () {// Autoplay started!
-                }).catch(function (error) {
+                })["catch"](function (error) {
                   // Autoplay was prevented.
                   $('#' + coverPlayBtnID).show();
                   $('#' + coverPlayBtnID + ' .uix-video__cover__playbtn').show();
@@ -4864,8 +5827,9 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
+  if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.1.8';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.0';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -5136,7 +6100,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         });
         stage__filter = new PIXI.Container();
         container__items = new PIXI.Container();
-        displacementSprite = dataFilterTexture.indexOf('.mp4') >= 0 ? new PIXI.Sprite(PIXI.Texture.fromVideo(dataFilterTexture)) : new PIXI.Sprite.fromImage(dataFilterTexture);
+        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(dataFilterTexture) ? new PIXI.Sprite(PIXI.Texture.fromVideo(dataFilterTexture)) : new PIXI.Sprite.fromImage(dataFilterTexture);
         displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite); //----------------------------------------------------------------------------------
         //--------------------------------- Brightness Effect -------------------------------	
         //----------------------------------------------------------------------------------
@@ -5573,7 +6537,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
       _dot += '</ul>';
       if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').on('click', function (e) {
+      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
         e.preventDefault();
 
         if (!$(this).hasClass('is-active')) {
@@ -5604,7 +6568,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         _prev.addClass('is-disabled');
       }
 
-      _prev.on('click', function (e) {
+      _prev.off('click').on('click', function (e) {
         e.preventDefault(); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
@@ -5614,7 +6578,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         clearInterval($this[0].animatedSlides);
       });
 
-      _next.on('click', function (e) {
+      _next.off('click').on('click', function (e) {
         e.preventDefault(); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
@@ -6558,7 +7522,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if (promise !== undefined) {
               promise.then(function () {// Autoplay started!
-              }).catch(function (error) {
+              })["catch"](function (error) {
                 // Autoplay was prevented.
                 $('#' + coverPlayBtnID).show();
                 $('#' + coverPlayBtnID + ' .uix-video__cover__playbtn').show();
@@ -6603,7 +7567,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
               if (promise !== undefined) {
                 promise.then(function () {// Autoplay started!
-                }).catch(function (error) {
+                })["catch"](function (error) {
                   // Autoplay was prevented.
                   $('#' + coverPlayBtnID).show();
                   $('#' + coverPlayBtnID + ' .uix-video__cover__playbtn').show();
@@ -6653,9 +7617,11 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
  *************************************
  */
 
+
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
+  if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.0.7';
+  module.AJAX_PUSH_CONTENT.version = '0.0.9';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     /* Need to set it as a global variable for history */
@@ -6667,7 +7633,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     },
         thisPageTitle = document.title; //Click event
 
-    $(document).on('click', '[data-ajax-push-content]', function (event) {
+    $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function (event) {
       event.preventDefault();
       var $this = $(this),
           curURL = $this.attr('href'),
@@ -6754,14 +7720,6 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         data: {
           action: 'load_singlepages_ajax_content'
         },
-        success: function success(response) {
-          //A function to be called if the request succeeds
-          var pushContent = !target ? '' : $(response).find(target).html();
-          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
-        },
-        error: function error() {
-          window.location.href = url;
-        },
         beforeSend: function beforeSend() {
           TweenMax.to(container.find('.ajax-content-loader'), 0.3, {
             css: {
@@ -6782,10 +7740,12 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             });
           });
         }
-      }).fail(function (jqXHR, textStatus) {
-        if (textStatus === 'timeout') {
-          window.location.href = url;
-        }
+      }).done(function (response) {
+        //A function to be called if the request succeeds
+        var pushContent = !target ? '' : $(response).find(target).html();
+        ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = url;
       });
     }
     /*
@@ -6812,7 +7772,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
 
           container.html(content).promise().done(function () {
             // Apply some asynchronism scripts
-            UixApplyAsyncScripts(); //Change the page title
+            $(document).UixApplyAsyncScripts(); //Change the page title
 
             if (title) {
               document.title = title;
@@ -6853,9 +7813,11 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
  */
 
 
+
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
+  if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.0.8';
+  module.AJAX_PAGE_LOADER.version = '0.1.0';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
@@ -6925,7 +7887,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
      *
      */
 
-    $(document).on('click', AJAXPageLinks, function (e) {
+    $(document).off('click.AJAX_PAGE_LOADER').on('click.AJAX_PAGE_LOADER', AJAXPageLinks, function (e) {
       //Prevents third-party plug-ins from triggering
       if ($(this).data('mobile-running')) {
         return;
@@ -7065,13 +8027,6 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           data: {
             action: 'load_singlepages_ajax_content'
           },
-          success: function success(response) {
-            //A function to be called if the request succeeds
-            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
-          },
-          error: function error() {
-            window.location.href = url;
-          },
           beforeSend: function beforeSend() {
             TweenMax.set('.uix-ajax-load__loader', {
               css: {
@@ -7084,10 +8039,11 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
               }
             });
           }
-        }).fail(function (jqXHR, textStatus) {
-          if (textStatus === 'timeout') {
-            window.location.href = url;
-          }
+        }).done(function (response) {
+          //A function to be called if the request succeeds
+          ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+          window.location.href = url;
         });
       }
     }
@@ -7164,7 +8120,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             //Remove duplicate elements
             $originalItem.first().remove(); // Apply some asynchronism scripts
 
-            UixApplyAsyncScripts();
+            $(document).UixApplyAsyncScripts();
           }
         });
       });
@@ -7254,8 +8210,9 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 
 
 var BACK_TO_TOP = function (module, $, window, document) {
+  if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.3';
+  module.BACK_TO_TOP.version = '0.0.4';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window),
@@ -7277,7 +8234,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
         }
       }); //-------- Click event of back button
 
-      $el.on('click', function (e) {
+      $el.off('click').on('click', function (e) {
         e.preventDefault();
         TweenMax.to(window, 0.5, {
           scrollTo: {
@@ -7315,6 +8272,7 @@ function circle_layout_js_typeof(obj) { if (typeof Symbol === "function" && type
 
 
 var CIRCLE_LAYOUT = function (module, $, window, document) {
+  if (window.CIRCLE_LAYOUT === null) return false;
   module.CIRCLE_LAYOUT = module.CIRCLE_LAYOUT || {};
   module.CIRCLE_LAYOUT.version = '0.0.1';
 
@@ -7406,6 +8364,7 @@ function counter_js_classCallCheck(instance, Constructor) { if (!(instance insta
 
 
 var COUNTER = function (module, $, window, document) {
+  if (window.COUNTER === null) return false;
   module.COUNTER = module.COUNTER || {};
   module.COUNTER.version = '0.0.2';
 
@@ -7444,25 +8403,26 @@ function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && type
 
 
 var DROPDOWN_MENU = function (module, $, window, document) {
+  if (window.DROPDOWN_MENU === null) return false;
   module.DROPDOWN_MENU = module.DROPDOWN_MENU || {};
-  module.DROPDOWN_MENU.version = '0.0.2';
+  module.DROPDOWN_MENU.version = '0.0.5';
 
   module.DROPDOWN_MENU.documentReady = function ($) {
     //Create a trigger of Dropdown Menu on Click
     //Use $( document ) to support other click events for ajax
-    $(document).on('click', '.uix-dropdown-menu > label', function (e) {
+    $(document).off('click.DROPDOWN_MENU').on('click.DROPDOWN_MENU', '.uix-dropdown-menu > summary', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var $this = $(this).parent('.uix-dropdown-menu');
       $this.toggleClass('is-opened');
     });
-    $(document).on('click', '.uix-dropdown-menu li a', function (e) {
+    $(document).off('click.DROPDOWN_MENU_LINK').on('click.DROPDOWN_MENU_LINK', '.uix-dropdown-menu li a', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var $this = $(this).closest('.uix-dropdown-menu');
 
       if ($this.hasClass('is-opened')) {
-        $this.removeClass('is-opened');
+        $this.removeAttr('open').removeClass('is-opened');
       }
 
       if (dropdown_menu_js_typeof($(this).data('value')) != ( true ? "undefined" : undefined) && $(this).data('value') != '') {
@@ -7470,14 +8430,15 @@ var DROPDOWN_MENU = function (module, $, window, document) {
       }
 
       if (dropdown_menu_js_typeof($(this).data('display-text')) != ( true ? "undefined" : undefined) && $(this).data('display-text') != '') {
-        $this.find('> label > span').html($(this).data('display-text'));
+        $this.find('> summary > span').html($(this).data('display-text'));
       }
     }); //Close the target
+    //Do not add off() to this
 
-    $('body').on('click', function (e) {
+    $(document.body).on('click', function (e) {
       //Apply click method to outer div but not inner div
       if (!$(e.target.offsetParent).hasClass('uix-dropdown-menu')) {
-        $('.uix-dropdown-menu').removeClass('is-opened');
+        $('.uix-dropdown-menu').removeAttr('open').removeClass('is-opened');
       }
     });
   };
@@ -7503,12 +8464,13 @@ function dropdown_menu2_js_classCallCheck(instance, Constructor) { if (!(instanc
 
 
 var DROPDOWN_MENU2 = function (module, $, window, document) {
+  if (window.DROPDOWN_MENU2 === null) return false;
   module.DROPDOWN_MENU2 = module.DROPDOWN_MENU2 || {};
-  module.DROPDOWN_MENU2.version = '0.0.4';
+  module.DROPDOWN_MENU2.version = '0.0.5';
 
   module.DROPDOWN_MENU2.documentReady = function ($) {
     var $verticalMenuLi = $('.uix-vertical-menu li');
-    $verticalMenuLi.find('> a').on('click', function (e) {
+    $verticalMenuLi.find('> a').off('click').on('click', function (e) {
       var $sub = $(this).next('ul');
 
       if ($sub.length > 0) {
@@ -7589,8 +8551,9 @@ function dynamic_dropdown_list_json_js_typeof(obj) { if (typeof Symbol === "func
 
 
 var DYNAMIC_DD_LIST = function (module, $, window, document) {
+  if (window.DYNAMIC_DD_LIST === null) return false;
   module.DYNAMIC_DD_LIST = module.DYNAMIC_DD_LIST || {};
-  module.DYNAMIC_DD_LIST.version = '0.0.5';
+  module.DYNAMIC_DD_LIST.version = '0.0.7';
 
   module.DYNAMIC_DD_LIST.documentReady = function ($) {
     $('[data-ajax-dynamic-dd-json]').each(function () {
@@ -7629,173 +8592,175 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
             url: jsonFile,
             method: method,
             data: toData,
-            dataType: 'json',
-            success: function success(data) {
-              var _level1 = [],
-                  _level2 = [],
-                  _level3 = [],
-                  _level1IDs = [],
-                  _level2IDs = [],
-                  _level3IDs = [];
+            dataType: 'json'
+          }).done(function (data) {
+            var _level1 = [],
+                _level2 = [],
+                _level3 = [],
+                _level1IDs = [],
+                _level2IDs = [],
+                _level3IDs = [];
 
-              for (var m = 0; m < data.length; m++) {
-                _level1.push(data[m].name);
+            for (var m = 0; m < data.length; m++) {
+              _level1.push(data[m].name);
 
-                _level1IDs.push(data[m].id);
+              _level1IDs.push(data[m].id);
 
-                var level2_List;
+              var level2_List;
 
+              if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
+                //============ China cities dropdown list demo
+                //================================================
+                level2_List = data[m].city;
+              } else {
+                //============ Sort object then subsort further demo
+                //================================================
+                level2_List = data[m].list;
+              }
+
+              var _curLevel2Items = [],
+                  _curLevel3Items = [],
+                  _curLevel2IDs = [],
+                  _curLevel3IDs = [];
+
+              for (var i = 0; i < level2_List.length; i++) {
                 if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
                   //============ China cities dropdown list demo
                   //================================================
-                  level2_List = data[m].city;
+                  var city = level2_List[i].name,
+                      area = level2_List[i].area,
+                      areaIDs = level2_List[i].areaid,
+                      ids = level2_List[i].id;
+
+                  _curLevel2Items.push(city);
+
+                  _curLevel2IDs.push(ids);
+
+                  var _tempLevel3Items = [],
+                      _tempLevel3IDs = [];
+
+                  if (dynamic_dropdown_list_json_js_typeof(area) != ( true ? "undefined" : undefined)) {
+                    for (var k = 0; k < area.length; k++) {
+                      _tempLevel3Items.push(area[k]);
+                    }
+                  }
+
+                  if (dynamic_dropdown_list_json_js_typeof(areaIDs) != ( true ? "undefined" : undefined)) {
+                    for (var p = 0; p < areaIDs.length; p++) {
+                      _tempLevel3IDs.push(areaIDs[p]);
+                    }
+                  }
+
+                  _curLevel3Items.push(_tempLevel3Items);
+
+                  _curLevel3IDs.push(_tempLevel3IDs);
                 } else {
                   //============ Sort object then subsort further demo
                   //================================================
-                  level2_List = data[m].list;
+                  var sort1 = level2_List[i].name,
+                      sortID = level2_List[i].id;
+
+                  _curLevel2Items.push(sort1);
+
+                  _curLevel2IDs.push(sortID);
                 }
-
-                var _curLevel2Items = [],
-                    _curLevel3Items = [],
-                    _curLevel2IDs = [],
-                    _curLevel3IDs = [];
-
-                for (var i = 0; i < level2_List.length; i++) {
-                  if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
-                    //============ China cities dropdown list demo
-                    //================================================
-                    var city = level2_List[i].name,
-                        area = level2_List[i].area,
-                        areaIDs = level2_List[i].areaid,
-                        ids = level2_List[i].id;
-
-                    _curLevel2Items.push(city);
-
-                    _curLevel2IDs.push(ids);
-
-                    var _tempLevel3Items = [],
-                        _tempLevel3IDs = [];
-
-                    if (dynamic_dropdown_list_json_js_typeof(area) != ( true ? "undefined" : undefined)) {
-                      for (var k = 0; k < area.length; k++) {
-                        _tempLevel3Items.push(area[k]);
-                      }
-                    }
-
-                    if (dynamic_dropdown_list_json_js_typeof(areaIDs) != ( true ? "undefined" : undefined)) {
-                      for (var p = 0; p < areaIDs.length; p++) {
-                        _tempLevel3IDs.push(areaIDs[p]);
-                      }
-                    }
-
-                    _curLevel3Items.push(_tempLevel3Items);
-
-                    _curLevel3IDs.push(_tempLevel3IDs);
-                  } else {
-                    //============ Sort object then subsort further demo
-                    //================================================
-                    var sort1 = level2_List[i].name,
-                        sortID = level2_List[i].id;
-
-                    _curLevel2Items.push(sort1);
-
-                    _curLevel2IDs.push(sortID);
-                  }
-                } // end for
-
-
-                _level2.push(_curLevel2Items);
-
-                _level3.push(_curLevel3Items);
-
-                _level2IDs.push(_curLevel2IDs);
-
-                _level3IDs.push(_curLevel3IDs);
               } // end for
 
 
-              function initSelectControls() {
-                var allLevel1Items = _level1,
-                    allLevel2Items = _level2,
-                    allLevel3Items = _level3,
-                    allLevel1IDs = _level1IDs,
-                    allLevel2IDs = _level2IDs,
-                    allLevel3IDs = _level3IDs,
-                    $level1El = $this,
-                    $level2El = $(associated),
-                    $level3El = $(associated2),
-                    level1EmptyOption = '<option value="">' + emptyTxt1 + '</option>',
-                    level2EmptyOption = '<option value="">' + emptyTxt2 + '</option>',
-                    level3EmptyOption = '<option value="">' + emptyTxt3 + '</option>',
-                    defaultLevel1Val = $this.val(),
-                    defaultLevel2Val = $level2El.val(),
-                    defaultLevel3Val = $level3El.val(),
-                    isCustomSelLevel1 = $level1El.closest('.uix-controls').hasClass('uix-controls__select'),
-                    isCustomSelLevel2 = $level2El.closest('.uix-controls').hasClass('uix-controls__select'),
-                    isCustomSelLevel3 = $level3El.closest('.uix-controls').hasClass('uix-controls__select'),
-                    $level1Wrapper = isCustomSelLevel1 ? $level1El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level1El.closest('.uix-controls'),
-                    $level2Wrapper = isCustomSelLevel2 ? $level2El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level2El.closest('.uix-controls'),
-                    $level3Wrapper = isCustomSelLevel3 ? $level3El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level3El.closest('.uix-controls'); //									console.log( allLevel1Items );
-                //									console.log( allLevel2Items );
-                //									console.log( allLevel3Items );
-                //									console.log( allLevel1IDs );
-                //									console.log( allLevel2IDs );
-                //									console.log( allLevel3IDs );								
-                //Clear all the drop-down list
+              _level2.push(_curLevel2Items);
 
-                $level1El.empty();
-                $level2El.empty();
-                $level3El.empty(); //Hide or display controls
+              _level3.push(_curLevel3Items);
 
-                if (autoExpand) $level2Wrapper.hide();
-                if (autoExpand) $level3Wrapper.hide(); //---------- Initialize the level 1
+              _level2IDs.push(_curLevel2IDs);
 
-                if (defaultLevel1Val != '' && defaultLevel1Val != null) {
-                  //Hide or display controls
-                  if (autoExpand) $level2Wrapper.show();
+              _level3IDs.push(_curLevel3IDs);
+            } // end for
+
+
+            function initSelectControls() {
+              var allLevel1Items = _level1,
+                  allLevel2Items = _level2,
+                  allLevel3Items = _level3,
+                  allLevel1IDs = _level1IDs,
+                  allLevel2IDs = _level2IDs,
+                  allLevel3IDs = _level3IDs,
+                  $level1El = $this,
+                  $level2El = $(associated),
+                  $level3El = $(associated2),
+                  level1EmptyOption = '<option value="">' + emptyTxt1 + '</option>',
+                  level2EmptyOption = '<option value="">' + emptyTxt2 + '</option>',
+                  level3EmptyOption = '<option value="">' + emptyTxt3 + '</option>',
+                  defaultLevel1Val = $this.val(),
+                  defaultLevel2Val = $level2El.val(),
+                  defaultLevel3Val = $level3El.val(),
+                  isCustomSelLevel1 = $level1El.closest('.uix-controls').hasClass('uix-controls__select'),
+                  isCustomSelLevel2 = $level2El.closest('.uix-controls').hasClass('uix-controls__select'),
+                  isCustomSelLevel3 = $level3El.closest('.uix-controls').hasClass('uix-controls__select'),
+                  $level1Wrapper = isCustomSelLevel1 ? $level1El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level1El.closest('.uix-controls'),
+                  $level2Wrapper = isCustomSelLevel2 ? $level2El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level2El.closest('.uix-controls'),
+                  $level3Wrapper = isCustomSelLevel3 ? $level3El.closest('.uix-controls').parent('.uix-controls__select-wrapper') : $level3El.closest('.uix-controls'); //									console.log( allLevel1Items );
+              //									console.log( allLevel2Items );
+              //									console.log( allLevel3Items );
+              //									console.log( allLevel1IDs );
+              //									console.log( allLevel2IDs );
+              //									console.log( allLevel3IDs );								
+              //Clear all the drop-down list
+
+              $level1El.empty();
+              $level2El.empty();
+              $level3El.empty(); //Hide or display controls
+
+              if (autoExpand) $level2Wrapper.hide();
+              if (autoExpand) $level3Wrapper.hide(); //---------- Initialize the level 1
+
+              if (defaultLevel1Val != '' && defaultLevel1Val != null) {
+                //Hide or display controls
+                if (autoExpand) $level2Wrapper.show();
+              }
+
+              $level1El.append(level1EmptyOption);
+
+              for (var i = 0; i < allLevel1Items.length; i++) {
+                var _v = allLevel1Items[i],
+                    _id = allLevel1IDs[i];
+
+                if (defaultLevel1Val == _v) {
+                  $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                } else {
+                  $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                 }
+              } //---------- Initialize the level 2
 
-                $level1El.append(level1EmptyOption);
 
-                for (var i = 0; i < allLevel1Items.length; i++) {
-                  var _v = allLevel1Items[i],
-                      _id = allLevel1IDs[i];
+              var curLevel1Index = $level1El.find('option:selected').data('index');
 
-                  if (defaultLevel1Val == _v) {
-                    $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+              if (defaultLevel2Val != '' && defaultLevel2Val != null) {
+                //Hide or display controls
+                if (autoExpand) $level3Wrapper.show();
+              }
+
+              $level2El.append(level2EmptyOption);
+
+              if (dynamic_dropdown_list_json_js_typeof(curLevel1Index) != ( true ? "undefined" : undefined)) {
+                for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
+                  var _v = allLevel2Items[curLevel1Index - 1][i],
+                      _id = allLevel2IDs[curLevel1Index - 1][i];
+
+                  if (defaultLevel2Val == _v) {
+                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
                   } else {
-                    $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                   }
-                } //---------- Initialize the level 2
-
-
-                var curLevel1Index = $level1El.find('option:selected').data('index');
-
-                if (defaultLevel2Val != '' && defaultLevel2Val != null) {
-                  //Hide or display controls
-                  if (autoExpand) $level3Wrapper.show();
                 }
-
-                $level2El.append(level2EmptyOption);
-
-                if (dynamic_dropdown_list_json_js_typeof(curLevel1Index) != ( true ? "undefined" : undefined)) {
-                  for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
-                    var _v = allLevel2Items[curLevel1Index - 1][i],
-                        _id = allLevel2IDs[curLevel1Index - 1][i];
-
-                    if (defaultLevel2Val == _v) {
-                      $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
-                    } else {
-                      $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
-                    }
-                  }
-                } //---------- Initialization level 3
+              } //---------- Initialization level 3
 
 
-                var curLevel2Index = $level2El.find('option:selected').data('index');
-                $level3El.append(level3EmptyOption);
+              var curLevel2Index = $level2El.find('option:selected').data('index');
+              $level3El.append(level3EmptyOption);
 
-                if (dynamic_dropdown_list_json_js_typeof(curLevel2Index) != ( true ? "undefined" : undefined)) {
+              if (dynamic_dropdown_list_json_js_typeof(curLevel2Index) != ( true ? "undefined" : undefined)) {
+                //If the data exists, you need to determine if the array is empty.
+                if (allLevel3Items[curLevel1Index - 1].length > 0) {
                   for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
                     var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
                         _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
@@ -7806,80 +8771,81 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                       $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                     }
                   }
-                } //---------- Render the custom select
+                }
+              } //---------- Render the custom select
+
+
+              $(document).UixRenderCustomSelect();
+              $level1El.attr('selected', 'selected').change();
+              $level2El.attr('selected', 'selected').change();
+              $level3El.attr('selected', 'selected').change(); //---------- Change event level 1
+
+              $level1El.on('change.DYNAMIC_DD_LIST', function () {
+                //Clear all the level 2 and level 3 items in the drop-down list
+                $level2El.empty();
+                $level3El.empty(); //Add a option with a value of 0
+
+                $level2El.append(level2EmptyOption);
+                $level3El.append(level3EmptyOption); //Hide or display controls
+
+                if (autoExpand) $level2Wrapper.show(); //Set the current subscript of the selected option and assign
+
+                var level1Index = $(this).find('option:selected').data('index');
+                var level2Items = allLevel2Items[level1Index - 1];
+                var level2IDs = allLevel2IDs[level1Index - 1];
+
+                if (dynamic_dropdown_list_json_js_typeof(level2Items) != ( true ? "undefined" : undefined)) {
+                  for (var i = 0; i < level2Items.length; i++) {
+                    var _v = level2Items[i],
+                        _id = level2IDs[i];
+                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                  }
+                } else {
+                  //Hide or display controls
+                  if (autoExpand) $level2Wrapper.hide();
+                } //Render the custom select
 
 
                 $(document).UixRenderCustomSelect();
-                $level1El.attr('selected', 'selected').change();
                 $level2El.attr('selected', 'selected').change();
-                $level3El.attr('selected', 'selected').change(); //---------- Change event level 1
+              }); //---------- Change event level 2
 
-                $level1El.on('change.DYNAMIC_DD_LIST', function () {
-                  //Clear all the level 2 and level 3 items in the drop-down list
-                  $level2El.empty();
-                  $level3El.empty(); //Add a option with a value of 0
+              $level2El.on('change.DYNAMIC_DD_LIST', function () {
+                //Clear all the level 3 items in the drop-down list
+                $level3El.empty(); //Add a option with a value of 0
 
-                  $level2El.append(level2EmptyOption);
-                  $level3El.append(level3EmptyOption); //Hide or display controls
+                $level3El.append(level3EmptyOption); //Hide or display controls
 
-                  if (autoExpand) $level2Wrapper.show(); //Set the current subscript of the selected option and assign
+                if (autoExpand) $level3Wrapper.show(); //Get the subscript corresponding to the level 1 and level 2 at this time
 
-                  var level1Index = $(this).find('option:selected').data('index');
-                  var level2Items = allLevel2Items[level1Index - 1];
-                  var level2IDs = allLevel2IDs[level1Index - 1];
+                var level1Index = $level1El.find('option:selected').data('index');
+                var level2Index = $(this).find('option:selected').data('index');
 
-                  if (dynamic_dropdown_list_json_js_typeof(level2Items) != ( true ? "undefined" : undefined)) {
-                    for (var i = 0; i < level2Items.length; i++) {
-                      var _v = level2Items[i],
-                          _id = level2IDs[i];
-                      $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                if (dynamic_dropdown_list_json_js_typeof(level1Index) != ( true ? "undefined" : undefined) && dynamic_dropdown_list_json_js_typeof(level2Index) != ( true ? "undefined" : undefined)) {
+                  var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+                  var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
+
+                  if (dynamic_dropdown_list_json_js_typeof(level3Items) != ( true ? "undefined" : undefined)) {
+                    for (var i = 0; i < level3Items.length; i++) {
+                      var _v = level3Items[i],
+                          _id = level3IDs[i];
+                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                     }
-                  } else {
-                    //Hide or display controls
-                    if (autoExpand) $level2Wrapper.hide();
-                  } //Render the custom select
+                  }
+                } else {
+                  //Hide or display controls
+                  if (autoExpand) $level3Wrapper.hide();
+                } //Render the custom select
 
 
-                  $(document).UixRenderCustomSelect();
-                  $level2El.attr('selected', 'selected').change();
-                }); //---------- Change event level 2
+                $(document).UixRenderCustomSelect();
+                $level3El.attr('selected', 'selected').change();
+              });
+            }
 
-                $level2El.on('change.DYNAMIC_DD_LIST', function () {
-                  //Clear all the level 3 items in the drop-down list
-                  $level3El.empty(); //Add a option with a value of 0
-
-                  $level3El.append(level3EmptyOption); //Hide or display controls
-
-                  if (autoExpand) $level3Wrapper.show(); //Get the subscript corresponding to the level 1 and level 2 at this time
-
-                  var level1Index = $level1El.find('option:selected').data('index');
-                  var level2Index = $(this).find('option:selected').data('index');
-
-                  if (dynamic_dropdown_list_json_js_typeof(level1Index) != ( true ? "undefined" : undefined) && dynamic_dropdown_list_json_js_typeof(level2Index) != ( true ? "undefined" : undefined)) {
-                    var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
-                    var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
-
-                    if (dynamic_dropdown_list_json_js_typeof(level3Items) != ( true ? "undefined" : undefined)) {
-                      for (var i = 0; i < level3Items.length; i++) {
-                        var _v = level3Items[i],
-                            _id = level3IDs[i];
-                        $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
-                      }
-                    }
-                  } else {
-                    //Hide or display controls
-                    if (autoExpand) $level3Wrapper.hide();
-                  } //Render the custom select
-
-
-                  $(document).UixRenderCustomSelect();
-                  $level3El.attr('selected', 'selected').change();
-                });
-              }
-
-              initSelectControls();
-            },
-            error: function error() {}
+            initSelectControls();
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log("Request failed: " + textStatus);
           }); //Prevent the form from being initialized again
 
           $this.data('exist', 1);
@@ -7919,8 +8885,9 @@ function flexslider_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 
 
 var FLEXSLIDER = function (module, $, window, document) {
+  if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
-  module.FLEXSLIDER.version = '0.1.6';
+  module.FLEXSLIDER.version = '0.1.7';
 
   module.FLEXSLIDER.documentReady = function ($) {
     var $window = $(window),
@@ -8029,7 +8996,7 @@ var FLEXSLIDER = function (module, $, window, document) {
             $plink.attr('href', 'javascript:void(0);');
             if (flexslider_js_typeof(pimg) != ( true ? "undefined" : undefined)) $plinkPrev.attr('data-goto', prevIndex).find('> span').html('<img src="' + pimg + '" alt="">');
             if (flexslider_js_typeof(nimg) != ( true ? "undefined" : undefined)) $plinkNext.attr('data-goto', nextIndex).find('> span').html('<img src="' + nimg + '" alt="">');
-            $plink.on('click', function (e) {
+            $plink.off('click').off('click').on('click', function (e) {
               e.preventDefault();
               thisSlider.flexslider(parseInt($(this).attr('data-goto')));
             });
@@ -8281,7 +9248,7 @@ var FLEXSLIDER = function (module, $, window, document) {
 
             if (promise !== undefined) {
               promise.then(function () {// Autoplay started!
-              }).catch(function (error) {
+              })["catch"](function (error) {
                 // Autoplay was prevented.
                 $('#' + coverPlayBtnID).show();
                 $('#' + coverPlayBtnID + ' .uix-video__cover__playbtn').show();
@@ -8326,7 +9293,7 @@ var FLEXSLIDER = function (module, $, window, document) {
 
               if (promise !== undefined) {
                 promise.then(function () {// Autoplay started!
-                }).catch(function (error) {
+                })["catch"](function (error) {
                   // Autoplay was prevented.
                   $('#' + coverPlayBtnID).show();
                   $('#' + coverPlayBtnID + ' .uix-video__cover__playbtn').show();
@@ -8460,7 +9427,7 @@ var FLEXSLIDER = function (module, $, window, document) {
 
 
     function initslidesWithNavThumb(slider, navThumbClass) {
-      $('.uix-flexslider__thumbs' + navThumbClass + ' > ul > li').on('click', function () {
+      $('.uix-flexslider__thumbs' + navThumbClass + ' > ul > li').off('click').on('click', function () {
         $('.uix-flexslider__thumbs' + navThumbClass + ' > ul > li').removeClass('is-active');
         $(this).addClass('is-active');
         slider.flexslider($(this).index());
@@ -8702,6 +9669,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 
 
 var FLOATING_SIDE_EL = function (module, $, window, document) {
+  if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
   module.FLOATING_SIDE_EL.version = '0.0.1';
 
@@ -8790,8 +9758,9 @@ function form_progress_js_typeof(obj) { if (typeof Symbol === "function" && type
 
 
 var FORM_PROGRESS = function (module, $, window, document) {
+  if (window.FORM_PROGRESS === null) return false;
   module.FORM_PROGRESS = module.FORM_PROGRESS || {};
-  module.FORM_PROGRESS.version = '0.0.2';
+  module.FORM_PROGRESS.version = '0.0.3';
 
   module.FORM_PROGRESS.pageLoaded = function () {
     var $progressBar = $('.uix-form-progress progress'),
@@ -8820,7 +9789,7 @@ var FORM_PROGRESS = function (module, $, window, document) {
       $formTarget.addClass('is-active');
     }, parseFloat(dur) * 1000); // Show next form on continue click
 
-    $(document).on('click', '.uix-form-progress__target .go-step:not(.disable)', function (e) {
+    $(document).off('click.FORM_PROGRESS').on('click.FORM_PROGRESS', '.uix-form-progress__target .go-step:not(.disable)', function (e) {
       e.preventDefault();
       var $sections = $(this).parents('.uix-form-progress__target__step');
       $(document).UixFormProgressToNext({
@@ -8839,7 +9808,7 @@ var FORM_PROGRESS = function (module, $, window, document) {
       });
     }); // Reset form on reset button click
 
-    $(document).on('click', '.uix-form-progress__target .go-reset', function (e) {
+    $(document).off('click.FORM_PROGRESS_RESET').on('click.FORM_PROGRESS_RESET', '.uix-form-progress__target .go-reset', function (e) {
       e.preventDefault();
       formReset();
     });
@@ -8896,8 +9865,17 @@ var controls_line = __webpack_require__(32);
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/radio-and-checkbox.js
 var radio_and_checkbox = __webpack_require__(33);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/scss/_style.scss
-var form_scss_style = __webpack_require__(34);
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_basic.scss
+var scss_basic = __webpack_require__(34);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_layout.scss
+var _layout = __webpack_require__(35);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_theme_material.scss
+var _theme_material = __webpack_require__(36);
+
+// EXTERNAL MODULE: ./src/components/ES6/form/scss/_3rd_party_plugins.scss
+var _3rd_party_plugins = __webpack_require__(37);
 
 // CONCATENATED MODULE: ./src/components/ES6/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8950,9 +9928,13 @@ function form_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 
+
+
+
 var FORM = function (module, $, window, document) {
+  if (window.FORM === null) return false;
   module.FORM = module.FORM || {};
-  module.FORM.version = '0.1.4';
+  module.FORM.version = '0.1.75';
 
   module.FORM.documentReady = function ($) {
     /*
@@ -8994,7 +9976,7 @@ var FORM = function (module, $, window, document) {
      */
     //Search Submit Event in WordPress
 
-    $('.uix-search-box__submit').on('click', function () {
+    $('.uix-search-box__submit').off('click').on('click', function () {
       $(this).closest('form').submit();
     });
     /* 
@@ -9038,15 +10020,14 @@ var FORM = function (module, $, window, document) {
 
       addOne($this.find('.uix-controls__dynamic-fields__tmpl').html()); //Prevent duplicate function assigned
 
-      $addButton.off('click').on('click', function (e) {
+      $addButton.off('click').off('click').on('click', function (e) {
         e.preventDefault();
         addOne($this.find('.uix-controls__dynamic-fields__tmpl').html());
         return false;
       }); //Remove per item
       //Prevent duplicate function assigned
 
-      $(removeButton).off('click');
-      $(document).on('click', removeButton, function (e) {
+      $(document).off('click.FORM_DYNAMIC_FIELDS').on('click.FORM_DYNAMIC_FIELDS', removeButton, function (e) {
         e.preventDefault(); //display add button
 
         $addButton.show();
@@ -9068,7 +10049,7 @@ var FORM = function (module, $, window, document) {
      ---------------------------
      */
 
-    $(document).on('click', '.uix-controls__number__btn--add', function (e) {
+    $(document).off('click.FORM_NUMBER_BTN_ADD').on('click.FORM_NUMBER_BTN_ADD', '.uix-controls__number__btn--add', function (e) {
       var step = parseFloat($(this).data('step')),
           decimals = $(this).data('decimals'),
           $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
@@ -9077,14 +10058,14 @@ var FORM = function (module, $, window, document) {
       if (form_js_typeof(step) === ( true ? "undefined" : undefined) || isNaN(step)) step = 1;
       if (form_js_typeof(decimals) === ( true ? "undefined" : undefined)) decimals = 0;
 
-      if (form_js_typeof(max) != ( true ? "undefined" : undefined) && parseFloat(numberInputVal + step) >= max) {
+      if (form_js_typeof(max) != ( true ? "undefined" : undefined) && parseFloat(numberInputVal + step) > max) {
         step = 0;
       }
 
       numberInputVal = parseFloat(numberInputVal + step);
       $numberInput.val(numberInputVal.toFixed(decimals));
     });
-    $(document).on('click', '.uix-controls__number__btn--remove', function (e) {
+    $(document).off('click.FORM_NUMBER_BTN_REMOVE').on('click.FORM_NUMBER_BTN_REMOVE', '.uix-controls__number__btn--remove', function (e) {
       var step = $(this).data('step'),
           decimals = $(this).data('decimals'),
           $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
@@ -9108,7 +10089,7 @@ var FORM = function (module, $, window, document) {
 
     var multiSel = '.uix-controls__multi-sel',
         multiSelItem = multiSel + ' > span';
-    $(document).on('click', multiSelItem, function (e) {
+    $(document).off('click.FORM_MULTI_SEL').on('click.FORM_MULTI_SEL', multiSelItem, function (e) {
       e.preventDefault();
       var $selector = $(this).parent(),
           $option = $(this),
@@ -9173,7 +10154,7 @@ var FORM = function (module, $, window, document) {
     };
 
     hideAllSingleSelItems($(singleSel));
-    $(document).on('click', singleSelItem, function (e) {
+    $(document).off('click.FORM_SINGLE_SEL').on('click.FORM_SINGLE_SEL', singleSelItem, function (e) {
       e.preventDefault();
       var $selector = $(this).parent(),
           $option = $(this),
@@ -9235,7 +10216,7 @@ var FORM = function (module, $, window, document) {
     };
 
     hideAllNormalRadioItems($(normalRadio));
-    $(document).on('click', normalRadioItem, function (e) {
+    $(document).off('click.FORM_NORMAL_RADIO').on('click.FORM_NORMAL_RADIO', normalRadioItem, function (e) {
       e.preventDefault();
       var $selector = $(this).parent(),
           $option = $(this),
@@ -9285,7 +10266,7 @@ var FORM = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/gallery/scss/_style.scss
-var gallery_scss_style = __webpack_require__(35);
+var gallery_scss_style = __webpack_require__(38);
 
 // CONCATENATED MODULE: ./src/components/ES6/gallery/js/index.js
 function gallery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9304,8 +10285,9 @@ function gallery_js_classCallCheck(instance, Constructor) { if (!(instance insta
 
 
 var GALLERY = function (module, $, window, document) {
+  if (window.GALLERY === null) return false;
   module.GALLERY = module.GALLERY || {};
-  module.GALLERY.version = '0.0.3';
+  module.GALLERY.version = '0.0.4';
 
   module.GALLERY.documentReady = function ($) {
     $('.uix-gallery').each(function () {
@@ -9381,7 +10363,7 @@ var GALLERY = function (module, $, window, document) {
          */
 
         if (galleryType.indexOf('filter') >= 0) {
-          $filterOptions.find('li > a').on('click', function () {
+          $filterOptions.find('li > a').off('click').on('click', function () {
             var $this = $(this),
                 activeClass = 'current-cat',
                 isActive = $this.parent().hasClass(activeClass),
@@ -9427,6 +10409,7 @@ function hover_delay_interaction_js_classCallCheck(instance, Constructor) { if (
  */
 
 var HOVER_DELAY_INTERACTION = function (module, $, window, document) {
+  if (window.HOVER_DELAY_INTERACTION === null) return false;
   module.HOVER_DELAY_INTERACTION = module.HOVER_DELAY_INTERACTION || {};
   module.HOVER_DELAY_INTERACTION.version = '0.0.1';
 
@@ -9463,7 +10446,7 @@ var HOVER_DELAY_INTERACTION = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/image-shapes/scss/_style.scss
-var image_shapes_scss_style = __webpack_require__(36);
+var image_shapes_scss_style = __webpack_require__(39);
 
 // CONCATENATED MODULE: ./src/components/ES6/image-shapes/js/index.js
 function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9476,6 +10459,7 @@ function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance 
 
 
 var IMAGE_SHAPES = function (module, $, window, document) {
+  if (window.IMAGE_SHAPES === null) return false;
   module.IMAGE_SHAPES = module.IMAGE_SHAPES || {};
   module.IMAGE_SHAPES.version = '0.0.1';
 
@@ -9557,7 +10541,7 @@ var IMAGE_SHAPES = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lava-lamp-style-menu/scss/_style.scss
-var lava_lamp_style_menu_scss_style = __webpack_require__(37);
+var lava_lamp_style_menu_scss_style = __webpack_require__(40);
 
 // CONCATENATED MODULE: ./src/components/ES6/lava-lamp-style-menu/js/index.js
 function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9570,6 +10554,7 @@ function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(i
 
 
 var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
+  if (window.LAVA_LAMP_STYLE_MENU === null) return false;
   module.LAVA_LAMP_STYLE_MENU = module.LAVA_LAMP_STYLE_MENU || {};
   module.LAVA_LAMP_STYLE_MENU.version = '0.0.1';
 
@@ -9623,7 +10608,7 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lightbox/scss/_style.scss
-var lightbox_scss_style = __webpack_require__(38);
+var lightbox_scss_style = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./src/components/ES6/lightbox/js/index.js
 function lightbox_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9643,9 +10628,11 @@ function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
  */
 
 
+
 var LIGHTBOX = function (module, $, window, document) {
+  if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.4';
+  module.LIGHTBOX.version = '0.1.6';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -9679,7 +10666,7 @@ var LIGHTBOX = function (module, $, window, document) {
         lightboxClose(backURL);
       }
     });
-    $(document).on('click', triggerEl, function () {
+    $(document).off('click.LIGHTBOX_TRIGGER').on('click.LIGHTBOX_TRIGGER', triggerEl, function () {
       var $this = $(this),
           dataPhoto = $this.data('lb-src'),
           dataHtmlID = $this.data('lb-html'),
@@ -9921,29 +10908,23 @@ var LIGHTBOX = function (module, $, window, document) {
             url: ajaxURL,
             method: ajaxConfig.method,
             dataType: 'html',
-            success: function success(response) {
-              $htmlAjaxContainer.html($(response).find(dataAjax.target).html()).promise().done(function () {
-                $content.html($('#' + dataHtmlID).html()).promise().done(function () {
-                  // Apply some asynchronism scripts
-                  UixApplyAsyncScripts({
-                    lightBox: false,
-                    ajaxPostList: false
-                  }); // show the content container
-
-                  showLightboxContent(); // Content pushing completed
-
-                  htmlContentLoaded();
-                });
-              });
-            },
-            error: function error() {
-              window.location.href = ajaxURL;
-            },
             beforeSend: function beforeSend() {}
-          }).fail(function (jqXHR, textStatus) {
-            if (textStatus === 'timeout') {
-              window.location.href = ajaxURL;
-            }
+          }).done(function (response) {
+            $htmlAjaxContainer.html($(response).find(dataAjax.target).html()).promise().done(function () {
+              $content.html($('#' + dataHtmlID).html()).promise().done(function () {
+                // Apply some asynchronism scripts
+                $(document).UixApplyAsyncScripts({
+                  lightBox: false,
+                  ajaxPostList: false
+                }); // show the content container
+
+                showLightboxContent(); // Content pushing completed
+
+                htmlContentLoaded();
+              });
+            });
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            window.location.href = ajaxURL;
           });
         } else {
           // show the content container
@@ -9960,13 +10941,13 @@ var LIGHTBOX = function (module, $, window, document) {
     /* end click event for triggerEl */
     //Close the lightbox
 
-    $(document).on('click', closeEl + ',' + maskEl, function () {
+    $(document).off('click.LIGHTBOX_CLOSE').on('click.LIGHTBOX_CLOSE', closeEl + ',' + maskEl, function () {
       lightboxClose(docURL);
     });
-    $(document).on('click', '.uix-lightbox__thumb-container li', function () {
+    $(document).off('click.LIGHTBOX_THUMB').on('click.LIGHTBOX_THUMB', '.uix-lightbox__thumb-container li', function () {
       lightboxThumbSwitch($(this).index(), $(this));
     });
-    $(document).on('click', '.uix-lightbox__photo-sets-container > a', function () {
+    $(document).off('click.LIGHTBOX_PHOTO_SETS').on('click.LIGHTBOX_PHOTO_SETS', '.uix-lightbox__photo-sets-container > a', function () {
       var $largePhoto = $(this).closest('.uix-lightbox__html').find('.uix-lightbox__photo-container.uix-lightbox__photo-sets-container'),
           $thumb = $(this).closest('.uix-lightbox__html').find('.uix-lightbox__thumb-container li'),
           total = $thumb.length,
@@ -9986,7 +10967,7 @@ var LIGHTBOX = function (module, $, window, document) {
     }); //Close/Open enlarge image
 
     if (window.innerWidth > 768) {
-      $(document).on('click', '.uix-lightbox__original__link', function (e) {
+      $(document).off('click.LIGHTBOX_ORGINAL_LINK').on('click.LIGHTBOX_ORGINAL_LINK', '.uix-lightbox__original__link', function (e) {
         $('.uix-lightbox__original__target#' + $(this).data('target-id')).addClass('is-active');
 
         if ($(this).closest('.uix-lightbox__container.js-uix-no-fixed').length > 0) {
@@ -9997,7 +10978,7 @@ var LIGHTBOX = function (module, $, window, document) {
         $('html').css('overflow-y', 'hidden');
         $(largeImgCloseEl).addClass('is-active');
       });
-      $(document).on('click', largeImgCloseEl, function (e) {
+      $(document).off('click.LIGHTBOX_LARGE_IMG_CLOSE').on('click.LIGHTBOX_LARGE_IMG_CLOSE', largeImgCloseEl, function (e) {
         $('.uix-lightbox__original__target').removeClass('is-active');
         $('.uix-lightbox__container.js-uix-no-fixed, .uix-lightbox__original__target--imgfull').removeClass('no-fixed-imgEnlarged'); //---
 
@@ -10109,7 +11090,7 @@ var LIGHTBOX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-bulleted/scss/_style.scss
-var list_bulleted_scss_style = __webpack_require__(39);
+var list_bulleted_scss_style = __webpack_require__(42);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-bulleted/js/index.js
 function list_bulleted_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10122,6 +11103,7 @@ function list_bulleted_js_classCallCheck(instance, Constructor) { if (!(instance
 
 
 var BULLETED_LIST = function (module, $, window, document) {
+  if (window.BULLETED_LIST === null) return false;
   module.BULLETED_LIST = module.BULLETED_LIST || {};
   module.BULLETED_LIST.version = '0.0.1';
 
@@ -10141,10 +11123,10 @@ var BULLETED_LIST = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_basic.scss
-var scss_basic = __webpack_require__(40);
+var list_posts_scss_basic = __webpack_require__(43);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_split.scss
-var _split = __webpack_require__(41);
+var _split = __webpack_require__(44);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-posts/js/index.js
 function list_posts_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10167,9 +11149,11 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 
 
 
+
 var POST_LIST_AJAX = function (module, $, window, document) {
+  if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.0.8';
+  module.POST_LIST_AJAX.version = '0.1.1';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -10182,7 +11166,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
           trigger = $this.data('ajax-list-trigger'),
           infinitescroll = $this.data('ajax-list-infinitescroll'),
           jsonFile = $this.data('ajax-list-json'),
-          addition = $this.data('ajax-list-addition'),
+          render = $this.data('ajax-list-render'),
           template7ID = $this.data('ajax-list-temp-id'),
           pushContainer = $this.data('ajax-list-push-container-class'),
           triggerActive = $this.data('ajax-list-trigger-active-class'),
@@ -10222,8 +11206,8 @@ var POST_LIST_AJAX = function (module, $, window, document) {
         infinitescroll = false;
       }
 
-      if (list_posts_js_typeof(addition) === ( true ? "undefined" : undefined)) {
-        addition = true;
+      if (list_posts_js_typeof(render) === ( true ? "undefined" : undefined)) {
+        render = 'before';
       }
 
       if (list_posts_js_typeof(jsonFile) === ( true ? "undefined" : undefined)) {
@@ -10268,6 +11252,18 @@ var POST_LIST_AJAX = function (module, $, window, document) {
       customPostData = customPostData.replace(/,\s*$/, ''); //Parse the JSON data
 
       if (jsonFile != '' && template7ID != '') {
+        //Default output of the first page
+        if (curPage == 2) {
+          //Perform dynamic loading
+          if (customPostData != '') {
+            defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": 1, ' + customPostData + ' }');
+          } else {
+            defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": 1 }');
+          }
+
+          ajaxLoadInit($this, defaultPostData, $(trigger), curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
+        }
+
         if (infinitescroll) {
           /* 
            ---------------------------
@@ -10302,7 +11298,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
             }
           });
         } else {
@@ -10332,7 +11328,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             } //Avoid using $( document ) to cause an asynchronous load without counting from 1
 
 
-            $(nextTrigger).on('click', function (e) {
+            $(nextTrigger).off('click').on('click', function (e) {
               e.preventDefault();
               var $button = $(this),
                   curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
@@ -10352,14 +11348,14 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
               return false;
             }); //----------------- Previous Button ----------------
             //Hide the prev button 
 
             $(prevTrigger).addClass('is-hide'); //Avoid using $( document ) to cause an asynchronous load without counting from 1
 
-            $(prevTrigger).on('click', function (e) {
+            $(prevTrigger).off('click').on('click', function (e) {
               e.preventDefault();
               var $button = $(this),
                   curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
@@ -10379,7 +11375,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
               return false;
             });
           } else {
@@ -10408,7 +11404,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
                 defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
               return false;
             });
           }
@@ -10430,12 +11426,12 @@ var POST_LIST_AJAX = function (module, $, window, document) {
      * @param  {String} triggerActive   - The class name of trigger button actived.
      * @param  {String} pushContainer   - This container is used to display the loaded dynamic data.
      * @param  {String} method          - The type of request to make, which can be either "POST" or "GET".
-     * @param  {Boolean} addition       - Do or not append to the original content.
+     * @param  {String} render          - Rendering mode of display information. ==> before | html | append
      * @param  {String} noneInfo        - Returns information of ajax asynchronous callback when the content is empty.
      * @return {Void}
      */
 
-    function ajaxLoadInit(ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, addition, noneInfo) {
+    function ajaxLoadInit(ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo) {
       var $divRoot = ajaxWrapper,
           template = document.getElementById(template7ID).innerHTML,
           compiledTemplate = Template7.compile(template),
@@ -10456,60 +11452,63 @@ var POST_LIST_AJAX = function (module, $, window, document) {
         //Be careful about the format of the JSON file
         method: method,
         data: defaultPostData,
-        dataType: 'json',
-        success: function success(data) {
-          //If the data is empty
-          if (data && (data == null || Object.prototype.toString.call(data.items) == '[object String]')) {
-            returnEmptyInfo();
-          } //Check if a key exists inside a json object
+        dataType: 'json'
+      }).done(function (data) {
+        //If the data is empty
+        if (data && (data == null || Object.prototype.toString.call(data.items) == '[object String]')) {
+          returnEmptyInfo();
+        } //Check if a key exists inside a json object
 
 
-          if (data && data.hasOwnProperty('items') && Object.prototype.toString.call(data.items) == '[object Array]') {
-            //Data overflow may occur when the total number of pages is not posted
-            try {
-              var thisData = data,
-                  html = compiledTemplate(thisData),
-                  curHtml = $divRoot.find(pushContainer).html(),
-                  result = null,
-                  htmlEl = null; //--------- Do or not append to the original content
+        if (data && data.hasOwnProperty('items') && Object.prototype.toString.call(data.items) == '[object Array]') {
+          //Data overflow may occur when the total number of pages is not posted
+          try {
+            var thisData = data,
+                html = compiledTemplate(thisData),
+                curHtml = $divRoot.find(pushContainer).html(),
+                result = null,
+                htmlEl = null; //--------- Do or not append to the original content
 
-              if (addition) {
-                result = curHtml + html;
-                htmlEl = $(result);
-                $divRoot.find(pushContainer).before(htmlEl);
-              } else {
-                result = html;
-                htmlEl = $(result);
-                $divRoot.find(pushContainer).html(htmlEl);
-              } //--------- Apply some asynchronism scripts
-
-
-              UixApplyAsyncScripts({
-                scrollReveal: true,
-                ajaxPostList: false
-              }); //--------- Remove this button
-
-              $button.removeClass(triggerActive); //--------- Hidden button when the page total number is set and does not equal -1 or 9999
-
-              if (curPage == totalPage && totalPage != 9999 && totalPage != -1 && totalPage != 1) {
-                returnEmptyInfo();
-              }
-
-              if (curPage == 1) {
-                returnEmptyInfo();
-              }
-            } catch (err) {
-              console.log(err.message);
-              returnDataError();
+            if (render == 'before') {
+              result = curHtml + html;
+              htmlEl = $(result);
+              $divRoot.find(pushContainer).before(htmlEl);
             }
-          } else {
-            //if not array
-            returnEmptyInfo();
+
+            if (render == 'html') {
+              result = html;
+              htmlEl = $(result);
+              $divRoot.find(pushContainer).html(htmlEl);
+            }
+
+            if (render == 'append') {
+              $divRoot.find(pushContainer).append(html);
+            } //--------- Apply some asynchronism scripts
+
+
+            $(document).UixApplyAsyncScripts({
+              ajaxPostList: false
+            }); //--------- Remove this button
+
+            $button.removeClass(triggerActive); //--------- Hidden button when the page total number is set and does not equal -1 or 9999
+
+            if (curPage == totalPage && totalPage != 9999 && totalPage != -1 && totalPage != 1) {
+              returnEmptyInfo();
+            }
+
+            if (curPage == 1) {
+              returnEmptyInfo();
+            }
+          } catch (err) {
+            console.log(err.message);
+            returnDataError();
           }
-        },
-        error: function error(XMLHttpRequest, textStatus, errorThrown) {
+        } else {
+          //if not array
           returnEmptyInfo();
         }
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        returnEmptyInfo();
       });
     }
   };
@@ -10522,7 +11521,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-split-imagery/scss/_style.scss
-var list_split_imagery_scss_style = __webpack_require__(42);
+var list_split_imagery_scss_style = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-split-imagery/js/index.js
 function list_split_imagery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10535,6 +11534,7 @@ function list_split_imagery_js_classCallCheck(instance, Constructor) { if (!(ins
 
 
 var POST_LIST_SPLIT_FULLWIDTH = function (module, $, window, document) {
+  if (window.POST_LIST_SPLIT_FULLWIDTH === null) return false;
   module.POST_LIST_SPLIT_FULLWIDTH = module.POST_LIST_SPLIT_FULLWIDTH || {};
   module.POST_LIST_SPLIT_FULLWIDTH.version = '0.0.2';
 
@@ -10576,7 +11576,7 @@ var POST_LIST_SPLIT_FULLWIDTH = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/login-templates/scss/_style.scss
-var login_templates_scss_style = __webpack_require__(43);
+var login_templates_scss_style = __webpack_require__(46);
 
 // CONCATENATED MODULE: ./src/components/ES6/login-templates/js/index.js
 function login_templates_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10589,13 +11589,14 @@ function login_templates_js_classCallCheck(instance, Constructor) { if (!(instan
 
 
 var LOGIN_UI = function (module, $, window, document) {
+  if (window.LOGIN_UI === null) return false;
   module.LOGIN_UI = module.LOGIN_UI || {};
-  module.LOGIN_UI.version = '0.0.1';
+  module.LOGIN_UI.version = '0.0.2';
 
   module.LOGIN_UI.documentReady = function ($) {
     var $loginToggle = $('.uix-special-login__toggle'),
         $loginForms = $('.uix-special-login__form');
-    $loginToggle.data('switched', true).on('click', function (e) {
+    $loginToggle.data('switched', true).off('click').on('click', function (e) {
       e.preventDefault();
       var $form1 = $loginForms.eq(0),
           $form2 = $loginForms.eq(1);
@@ -10640,13 +11641,13 @@ var LOGIN_UI = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/fire-modal-dialog.js
-var fire_modal_dialog = __webpack_require__(44);
+var fire_modal_dialog = __webpack_require__(47);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/close-modal-dialog.js
-var close_modal_dialog = __webpack_require__(45);
+var close_modal_dialog = __webpack_require__(48);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/scss/_style.scss
-var modal_dialog_scss_style = __webpack_require__(46);
+var modal_dialog_scss_style = __webpack_require__(49);
 
 // CONCATENATED MODULE: ./src/components/ES6/modal-dialog/js/index.js
 function modal_dialog_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10669,8 +11670,9 @@ function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 
 
 var MODAL_DIALOG = function (module, $, window, document) {
+  if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.0.9';
+  module.MODAL_DIALOG.version = '0.1.2';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -10689,7 +11691,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
       $('body').prepend('<div class="uix-modal-mask"></div>');
     }
 
-    $(document).on('click.MODAL_DIALOG', '[data-modal-id]', function () {
+    $(document).off('click.MODAL_DIALOG').on('click.MODAL_DIALOG', '[data-modal-id]', function () {
       var dataH = $(this).data('modal-height'),
           dataW = $(this).data('modal-width'),
           lightbox = $(this).data('modal-lightbox'),
@@ -10728,7 +11730,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
       });
       return false;
     });
-    $(document).on('click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function () {
+    $(document).off('click.MODAL_DIALOG_CLOSE').on('click.MODAL_DIALOG_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function () {
       //btn
       if ($(this).hasClass('uix-modal-box__close')) {
         $(this).parent().removeClass('is-active');
@@ -10756,6 +11758,7 @@ function mousewheel_interaction_js_classCallCheck(instance, Constructor) { if (!
  */
 
 var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
+  if (window.MOUSEWHEEL_INTERACTION === null) return false;
   module.MOUSEWHEEL_INTERACTION = module.MOUSEWHEEL_INTERACTION || {};
   module.MOUSEWHEEL_INTERACTION.version = '0.0.2';
 
@@ -10862,7 +11865,7 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/multi-items-carousel/scss/_style.scss
-var multi_items_carousel_scss_style = __webpack_require__(47);
+var multi_items_carousel_scss_style = __webpack_require__(50);
 
 // CONCATENATED MODULE: ./src/components/ES6/multi-items-carousel/js/index.js
 function multi_items_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10883,8 +11886,9 @@ function multi_items_carousel_js_typeof(obj) { if (typeof Symbol === "function" 
 
 
 var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
+  if (window.MULTI_ITEMS_CAROUSEL === null) return false;
   module.MULTI_ITEMS_CAROUSEL = module.MULTI_ITEMS_CAROUSEL || {};
-  module.MULTI_ITEMS_CAROUSEL.version = '0.0.3';
+  module.MULTI_ITEMS_CAROUSEL.version = '0.0.4';
 
   module.MULTI_ITEMS_CAROUSEL.documentReady = function ($) {
     $('.uix-multi-carousel').each(function () {
@@ -10996,7 +12000,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        */
 
 
-      $(carouselNext).on('click', $carouselWrapper, function (e) {
+      $(carouselNext).off('click').on('click', $carouselWrapper, function (e) {
         e.preventDefault();
         var $btn = $(this),
             $curWrapper = $(e.data[0]),
@@ -11021,7 +12025,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        ---------------------------
        */
 
-      $(carouselPrev).on('click', $carouselWrapper, function (e) {
+      $(carouselPrev).off('click').on('click', $carouselWrapper, function (e) {
         e.preventDefault();
         var $btn = $(this),
             $curWrapper = $(e.data[0]),
@@ -11171,9 +12175,11 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document); //
 //export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
+//	if ( window.MULTI_ITEMS_CAROUSEL === null ) return false;
+//	
 //	
 //    module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-//	module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
+//	  module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
 //    module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 //
 //		$( '.uix-multi-carousel' ).each( function()  {
@@ -11312,7 +12318,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			 Move left/up
 //			 ---------------------------
 //			 */ 
-//			$( carouselNext ).on( 'click', $carouselWrapper, function( e ) {
+//			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 //				e.preventDefault();
 //				
 //				
@@ -11335,7 +12341,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			 Move right/down
 //			 ---------------------------
 //			 */ 
-//			$( carouselPrev ).on( 'click', $carouselWrapper, function( e ) {
+//			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 //				e.preventDefault();
 //
 //				
@@ -11673,6 +12679,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
  */
 
 var ONEPAGE = function (module, $, window, document) {
+  if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
   module.ONEPAGE.version = '0.0.4';
 
@@ -12011,6 +13018,7 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
  */
 
 var ONEPAGE2 = function (module, $, window, document) {
+  if (window.ONEPAGE2 === null) return false;
   module.ONEPAGE2 = module.ONEPAGE2 || {};
   module.ONEPAGE2.version = '0.0.4';
 
@@ -12346,7 +13354,7 @@ var ONEPAGE2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/parallax/scss/_style.scss
-var parallax_scss_style = __webpack_require__(48);
+var parallax_scss_style = __webpack_require__(51);
 
 // CONCATENATED MODULE: ./src/components/ES6/parallax/js/index.js
 function parallax_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12362,6 +13370,7 @@ function parallax_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 
 
 var PARALLAX = function (module, $, window, document) {
+  if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
   module.PARALLAX.version = '0.0.5';
 
@@ -12531,7 +13540,7 @@ var PARALLAX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/periodical-scroll/scss/_style.scss
-var periodical_scroll_scss_style = __webpack_require__(49);
+var periodical_scroll_scss_style = __webpack_require__(52);
 
 // CONCATENATED MODULE: ./src/components/ES6/periodical-scroll/js/index.js
 function periodical_scroll_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12546,6 +13555,7 @@ function periodical_scroll_js_typeof(obj) { if (typeof Symbol === "function" && 
 
 
 var PERIODICAL_SCROLL = function (module, $, window, document) {
+  if (window.PERIODICAL_SCROLL === null) return false;
   module.PERIODICAL_SCROLL = module.PERIODICAL_SCROLL || {};
   module.PERIODICAL_SCROLL.version = '0.0.2';
 
@@ -12603,7 +13613,7 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/pricing/scss/_style.scss
-var pricing_scss_style = __webpack_require__(50);
+var pricing_scss_style = __webpack_require__(53);
 
 // CONCATENATED MODULE: ./src/components/ES6/pricing/js/index.js
 function pricing_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12616,6 +13626,7 @@ function pricing_js_classCallCheck(instance, Constructor) { if (!(instance insta
 
 
 var PRICING = function (module, $, window, document) {
+  if (window.PRICING === null) return false;
   module.PRICING = module.PRICING || {};
   module.PRICING.version = '0.0.2';
 
@@ -12689,7 +13700,7 @@ var PRICING = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/progress-bar/scss/_style.scss
-var progress_bar_scss_style = __webpack_require__(51);
+var progress_bar_scss_style = __webpack_require__(54);
 
 // CONCATENATED MODULE: ./src/components/ES6/progress-bar/js/index.js
 function progress_bar_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12704,6 +13715,7 @@ function progress_bar_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 
 
 var PROGRESS_BAR = function (module, $, window, document) {
+  if (window.PROGRESS_BAR === null) return false;
   module.PROGRESS_BAR = module.PROGRESS_BAR || {};
   module.PROGRESS_BAR.version = '0.0.4';
 
@@ -12750,7 +13762,7 @@ var PROGRESS_BAR = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/progress-line/scss/_style.scss
-var progress_line_scss_style = __webpack_require__(52);
+var progress_line_scss_style = __webpack_require__(55);
 
 // CONCATENATED MODULE: ./src/components/ES6/progress-line/js/index.js
 function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12763,6 +13775,7 @@ function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance
 
 
 var PROGRESS_LINE = function (module, $, window, document) {
+  if (window.PROGRESS_LINE === null) return false;
   module.PROGRESS_LINE = module.PROGRESS_LINE || {};
   module.PROGRESS_LINE.version = '0.0.2';
 
@@ -12829,6 +13842,7 @@ function retina_js_classCallCheck(instance, Constructor) { if (!(instance instan
  */
 
 var RETINA = function (module, $, window, document) {
+  if (window.RETINA === null) return false;
   module.RETINA = module.RETINA || {};
   module.RETINA.version = '0.0.1';
 
@@ -12871,8 +13885,9 @@ function rotating_elements_js_typeof(obj) { if (typeof Symbol === "function" && 
  */
 
 var ROTATING_EL = function (module, $, window, document) {
+  if (window.ROTATING_EL === null) return false;
   module.ROTATING_EL = module.ROTATING_EL || {};
-  module.ROTATING_EL.version = '0.0.1';
+  module.ROTATING_EL.version = '0.0.2';
 
   module.ROTATING_EL.documentReady = function ($) {
     $('[data-pointer-to-deg]').each(function () {
@@ -12914,7 +13929,7 @@ var ROTATING_EL = function (module, $, window, document) {
           });
         }
 
-        $this.on('click', function (e) {
+        $this.off('click').on('click', function (e) {
           e.preventDefault();
           pointer.style.transform = 'rotate(' + config.deg + 'deg)';
         });
@@ -12941,6 +13956,7 @@ function scroll_reveal_js_typeof(obj) { if (typeof Symbol === "function" && type
  */
 
 var SCROLL_REVEAL = function (module, $, window, document) {
+  if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
   module.SCROLL_REVEAL.version = '0.1.0';
 
@@ -13082,6 +14098,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
  */
 
 var SCROLLSPY_ANIM = function (module, $, window, document) {
+  if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
   module.SCROLLSPY_ANIM.version = '0.0.1';
 
@@ -13195,7 +14212,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/show-more-less/scss/_style.scss
-var show_more_less_scss_style = __webpack_require__(53);
+var show_more_less_scss_style = __webpack_require__(56);
 
 // CONCATENATED MODULE: ./src/components/ES6/show-more-less/js/index.js
 function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13208,8 +14225,9 @@ function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instanc
 
 
 var SHOW_MORELESS = function (module, $, window, document) {
+  if (window.SHOW_MORELESS === null) return false;
   module.SHOW_MORELESS = module.SHOW_MORELESS || {};
-  module.SHOW_MORELESS.version = '0.0.2';
+  module.SHOW_MORELESS.version = '0.0.3';
 
   module.SHOW_MORELESS.documentReady = function ($) {
     $('.uix-more-btn__link').each(function () {
@@ -13217,7 +14235,7 @@ var SHOW_MORELESS = function (module, $, window, document) {
           $con = $btn.parent().prev('.uix-more-btn'),
           $btnTxt = $btn.find('> span'),
           defaultHeight = $con.height();
-      $btn.on('click', function (e) {
+      $btn.off('click').on('click', function (e) {
         e.preventDefault();
         var expanded = $(this).attr('aria-expanded') == 'true' ? false : true;
 
@@ -13268,6 +14286,7 @@ function skew_on_scroll_js_classCallCheck(instance, Constructor) { if (!(instanc
  */
 
 var SKEW_ON_SCROLL = function (module, $, window, document) {
+  if (window.SKEW_ON_SCROLL === null) return false;
   module.SKEW_ON_SCROLL = module.SKEW_ON_SCROLL || {};
   module.SKEW_ON_SCROLL.version = '0.0.1';
 
@@ -13308,13 +14327,15 @@ function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) {
  */
 
 var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
+  if (window.SMOOTH_SCROLLING_ANCHORLINK === null) return false;
   module.SMOOTH_SCROLLING_ANCHORLINK = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.5';
+  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.6';
 
   module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('body').hasClass('onepage')) return false;
     var browserURL = window.location.href; //Prevent anchor behaviour
+    //Do not add off() to this
 
     $('a').on('click', function (e) {
       if ($(this).data('smooth-scrolling') != false) {
@@ -13355,10 +14376,11 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
         });
       }
     } //Hyperlink click event
+    //Do not add off() to this
 
 
     $('a[href*="#"]').on('click', function (e) {
-      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && $(this).attr('href') != '#') {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && $(this).attr('href') != '#' & $(this).attr('href').indexOf('#?') < 0) {
         // Figure out element to scroll to
         var target = $(this.hash);
         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']'); // Does a scroll target exist?
@@ -13401,7 +14423,7 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/sticky-elements/scss/_style.scss
-var sticky_elements_scss_style = __webpack_require__(54);
+var sticky_elements_scss_style = __webpack_require__(57);
 
 // CONCATENATED MODULE: ./src/components/ES6/sticky-elements/js/index.js
 function sticky_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13416,6 +14438,7 @@ function sticky_elements_js_typeof(obj) { if (typeof Symbol === "function" && ty
 
 
 var STICKY_EL = function (module, $, window, document) {
+  if (window.STICKY_EL === null) return false;
   module.STICKY_EL = module.STICKY_EL || {};
   module.STICKY_EL.version = '0.0.5';
 
@@ -13539,12 +14562,13 @@ function china_classCallCheck(instance, Constructor) { if (!(instance instanceof
 
 
 var SVG_MAP_CHINA = function (module, $, window, document) {
+  if (window.SVG_MAP_CHINA === null) return false;
   module.SVG_MAP_CHINA = module.SVG_MAP_CHINA || {};
-  module.SVG_MAP_CHINA.version = '0.0.1';
+  module.SVG_MAP_CHINA.version = '0.0.2';
 
   module.SVG_MAP_CHINA.documentReady = function ($) {
     var $svgEl = $('.uix-svgmap--china');
-    $(document).on('click', '.uix-svgmap--china__trigger a', function (e) {
+    $(document).off('click.SVG_MAP_CHINA').on('click.SVG_MAP_CHINA', '.uix-svgmap--china__trigger a', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var goName = $(this).data('title'),
@@ -13563,8 +14587,9 @@ var SVG_MAP_CHINA = function (module, $, window, document) {
 
       svgMapActive(svgNameIndex, goText);
     }); //Restore all elements
+    //Do not add off() to this
 
-    $('body').on('click', function (e) {
+    $(document.body).on('click', function (e) {
       svgMapRestore(2);
     });
 
@@ -13631,12 +14656,13 @@ function world_classCallCheck(instance, Constructor) { if (!(instance instanceof
 
 
 var SVG_MAP_WORLD = function (module, $, window, document) {
+  if (window.SVG_MAP_WORLD === null) return false;
   module.SVG_MAP_WORLD = module.SVG_MAP_WORLD || {};
-  module.SVG_MAP_WORLD.version = '0.0.1';
+  module.SVG_MAP_WORLD.version = '0.0.2';
 
   module.SVG_MAP_WORLD.documentReady = function ($) {
     var $svgEl = $('.uix-svgmap--world');
-    $(document).on('click', '.uix-svgmap--world__trigger a', function (e) {
+    $(document).off('click.SVG_MAP_WORLD').on('click.SVG_MAP_WORLD', '.uix-svgmap--world__trigger a', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var goName = $(this).data('title'),
@@ -13655,8 +14681,9 @@ var SVG_MAP_WORLD = function (module, $, window, document) {
 
       svgMapActive(svgNameIndex, goText);
     }); //Restore all elements
+    //Do not add off() to this
 
-    $('body').on('click', function (e) {
+    $(document.body).on('click', function (e) {
       svgMapRestore(2);
     });
 
@@ -13726,12 +14753,14 @@ function simple_3D_background_three_js_classCallCheck(instance, Constructor) { i
  */
 
 var THREE_BACKGROUND_THREE = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND_THREE === null) return false;
   module.THREE_BACKGROUND_THREE = module.THREE_BACKGROUND_THREE || {};
-  module.THREE_BACKGROUND_THREE.version = '0.0.4';
+  module.THREE_BACKGROUND_THREE.version = '0.0.5';
 
   module.THREE_BACKGROUND_THREE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -13831,7 +14860,25 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
         var z = Math.cos(angle * 1.5) * 35;
         var y = 130 * height + 0;
         camera.position.set(x, y, z);
-        camera.lookAt(target);
+        camera.lookAt(target); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -13934,6 +14981,9 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -13971,12 +15021,14 @@ function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { 
  */
 
 var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND_THREE2 === null) return false;
   module.THREE_BACKGROUND_THREE2 = module.THREE_BACKGROUND_THREE2 || {};
-  module.THREE_BACKGROUND_THREE2.version = '0.0.2';
+  module.THREE_BACKGROUND_THREE2.version = '0.0.3';
 
   module.THREE_BACKGROUND_THREE2.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas2').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -14042,6 +15094,24 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
         renderer.setClearColor(0x000000);
         material.uniforms.time.value += delta * 5; //displacementSprite.rotation.y += delta * 0.5 * 1;
         //displacementSprite.rotation.x += delta * 0.5 * -1;
+        //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
 
         renderer.render(scene, camera);
       }
@@ -14083,6 +15153,9 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -14120,12 +15193,14 @@ function simple_3D_background_three3_js_classCallCheck(instance, Constructor) { 
  */
 
 var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND_THREE3 === null) return false;
   module.THREE_BACKGROUND_THREE3 = module.THREE_BACKGROUND_THREE3 || {};
-  module.THREE_BACKGROUND_THREE3.version = '0.0.1';
+  module.THREE_BACKGROUND_THREE3.version = '0.0.2';
 
   module.THREE_BACKGROUND_THREE3.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas3').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -14178,7 +15253,25 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
 
         renderer.setClearColor(0x000000);
         lerp(displacementSprite.rotation, 'x', sphereTarget.x);
-        lerp(displacementSprite.rotation, 'y', sphereTarget.y);
+        lerp(displacementSprite.rotation, 'y', sphereTarget.y); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -14213,6 +15306,9 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -14234,7 +15330,7 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-background/scss/_style.scss
-var simple_3D_background_scss_style = __webpack_require__(55);
+var simple_3D_background_scss_style = __webpack_require__(58);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-background/js/index.js
 function simple_3D_background_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14249,6 +15345,7 @@ function simple_3D_background_js_typeof(obj) { if (typeof Symbol === "function" 
 
 
 var THREE_BACKGROUND = function (module, $, window, document) {
+  if (window.THREE_BACKGROUND === null) return false;
   module.THREE_BACKGROUND = module.THREE_BACKGROUND || {};
   module.THREE_BACKGROUND.version = '0.0.2';
 
@@ -14399,7 +15496,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-carousel/scss/_style.scss
-var simple_3D_carousel_scss_style = __webpack_require__(56);
+var simple_3D_carousel_scss_style = __webpack_require__(59);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-carousel/js/index.js
 function simple_3D_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14420,6 +15517,7 @@ function simple_3D_carousel_js_typeof(obj) { if (typeof Symbol === "function" &&
 
 
 var THREE_CAROUSEL = function (module, $, window, document) {
+  if (window.THREE_CAROUSEL === null) return false;
   module.THREE_CAROUSEL = module.THREE_CAROUSEL || {};
   module.THREE_CAROUSEL.version = '0.0.1';
 
@@ -14632,12 +15730,14 @@ function simple_3D_gallery_js_typeof(obj) { if (typeof Symbol === "function" && 
  */
 
 var THREE_GALLERY = function (module, $, window, document) {
+  if (window.THREE_GALLERY === null) return false;
   module.THREE_GALLERY = module.THREE_GALLERY || {};
-  module.THREE_GALLERY.version = '0.0.3';
+  module.THREE_GALLERY.version = '0.0.4';
 
   module.THREE_GALLERY.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-gallery-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -14751,7 +15851,25 @@ var THREE_GALLERY = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -14825,6 +15943,9 @@ var THREE_GALLERY = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -14862,12 +15983,14 @@ function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { i
  */
 
 var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
+  if (window.THREE_IMAGE_TRANSITION === null) return false;
   module.THREE_IMAGE_TRANSITION = module.THREE_IMAGE_TRANSITION || {};
-  module.THREE_IMAGE_TRANSITION.version = '0.0.1';
+  module.THREE_IMAGE_TRANSITION.version = '0.0.2';
 
   module.THREE_IMAGE_TRANSITION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-imagetransition-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -14986,7 +16109,25 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
         //renderer.setClearColor( 0x000000 );	
         //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15015,6 +16156,9 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15054,12 +16198,14 @@ function simple_3D_model_js_typeof(obj) { if (typeof Symbol === "function" && ty
  */
 
 var THREE_MODEL = function (module, $, window, document) {
+  if (window.THREE_MODEL === null) return false;
   module.THREE_MODEL = module.THREE_MODEL || {};
-  module.THREE_MODEL.version = '0.0.2';
+  module.THREE_MODEL.version = '0.0.3';
 
   module.THREE_MODEL.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-model-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15142,7 +16288,12 @@ var THREE_MODEL = function (module, $, window, document) {
         loader.load(objURL, function (object) {
           object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-              child.material.map = texture;
+              child.material = new THREE.MeshPhongMaterial({
+                color: 0x2194CE,
+                wireframe: false,
+                map: texture,
+                side: THREE.DoubleSide
+              });
             }
           });
           object.scale.set(165, 165, 165);
@@ -15180,7 +16331,25 @@ var THREE_MODEL = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15240,6 +16409,9 @@ var THREE_MODEL = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15277,12 +16449,14 @@ function simple_3D_pages_js_classCallCheck(instance, Constructor) { if (!(instan
  */
 
 var THREE_PAGES = function (module, $, window, document) {
+  if (window.THREE_PAGES === null) return false;
   module.THREE_PAGES = module.THREE_PAGES || {};
-  module.THREE_PAGES.version = '0.0.1';
+  module.THREE_PAGES.version = '0.0.2';
 
   module.THREE_PAGES.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-renderer').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15356,7 +16530,25 @@ var THREE_PAGES = function (module, $, window, document) {
         requestAnimationFrame(render);
         var delta = clock.getDelta(); //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15371,6 +16563,9 @@ var THREE_PAGES = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15410,12 +16605,14 @@ function simple_3D_particle_effect_js_typeof(obj) { if (typeof Symbol === "funct
  */
 
 var THREE_PARTICLE = function (module, $, window, document) {
+  if (window.THREE_PARTICLE === null) return false;
   module.THREE_PARTICLE = module.THREE_PARTICLE || {};
-  module.THREE_PARTICLE.version = '0.0.3';
+  module.THREE_PARTICLE.version = '0.0.4';
 
   module.THREE_PARTICLE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-particle-effect-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15586,7 +16783,25 @@ var THREE_PARTICLE = function (module, $, window, document) {
         camera.lookAt(centerVector); //particle rotation
 
         particleRotation.rotation.x += 0.0000;
-        particleRotation.rotation.y -= 0.0040;
+        particleRotation.rotation.y -= 0.0040; //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15660,6 +16875,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15697,12 +16915,14 @@ function simple_3D_sphere_three_js_classCallCheck(instance, Constructor) { if (!
  */
 
 var THREE_SPHERE_THREE = function (module, $, window, document) {
+  if (window.THREE_SPHERE_THREE === null) return false;
   module.THREE_SPHERE_THREE = module.THREE_SPHERE_THREE || {};
-  module.THREE_SPHERE_THREE.version = '0.0.1';
+  module.THREE_SPHERE_THREE.version = '0.0.2';
 
   module.THREE_SPHERE_THREE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-sphere-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15778,7 +16998,25 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
         requestAnimationFrame(render);
         displacementSprite.rotation.z += 0.01; //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15793,6 +17031,9 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -15830,12 +17071,14 @@ function simple_3D_obj_anim_interaction_js_classCallCheck(instance, Constructor)
  */
 
 var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
+  if (window.THREE_OBJ_ANIM_INTERACTION === null) return false;
   module.THREE_OBJ_ANIM_INTERACTION = module.THREE_OBJ_ANIM_INTERACTION || {};
-  module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.2';
+  module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.3';
 
   module.THREE_OBJ_ANIM_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-object-buttonevent-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -15927,7 +17170,25 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
 
         targetObj.geometry.verticesNeedUpdate = true; //update camera and controls
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -15984,6 +17245,9 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16021,12 +17285,14 @@ function simple_3D_mouse_interaction_js_classCallCheck(instance, Constructor) { 
  */
 
 var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
+  if (window.THREE_MOUSE_INTERACTION === null) return false;
   module.THREE_MOUSE_INTERACTION = module.THREE_MOUSE_INTERACTION || {};
-  module.THREE_MOUSE_INTERACTION.version = '0.0.1';
+  module.THREE_MOUSE_INTERACTION.version = '0.0.2';
 
   module.THREE_MOUSE_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-mouseinteraction-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16123,7 +17389,25 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -16276,6 +17560,9 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16313,12 +17600,14 @@ function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) {
  */
 
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
+  if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
-  module.THREE_MOUSE_INTERACTION2.version = '0.0.1';
+  module.THREE_MOUSE_INTERACTION2.version = '0.0.2';
 
   module.THREE_MOUSE_INTERACTION2.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-mouseinteraction2-three-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16400,7 +17689,25 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
           if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex); //by setting current intersection object to "nothing"
 
           INTERSECTED = null;
-        }
+        } //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
 
         renderer.render(scene, camera);
       }
@@ -16615,6 +17922,9 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
       return {
         init: init,
         render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -16636,7 +17946,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-shatter-slider/scss/_style.scss
-var simple_3D_shatter_slider_scss_style = __webpack_require__(57);
+var simple_3D_shatter_slider_scss_style = __webpack_require__(60);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-shatter-slider/js/index.js
 function simple_3D_shatter_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16658,12 +17968,14 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 
 
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
+  if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.2';
+  module.THREE_SHATTER_SLIDER.version = '0.0.3';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('.uix-3d-slider--shatter').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -16971,7 +18283,9 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
                 for (var i = 0; i < fragment.length; i++) {
                   var pos = new THREE.Vector3();
-                  var final = Math.random();
+
+                  var _final = Math.random();
+
                   pos.x = Math.random();
                   pos.y = Math.random() * (50 * i);
                   pos.z = Math.random() * -300;
@@ -16988,7 +18302,25 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -17217,7 +18549,9 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
             for (var i = 0; i < fragment.length; i++) {
               var pos = new THREE.Vector3();
-              var final = Math.random();
+
+              var _final2 = Math.random();
+
               pos.x = Math.random();
               pos.y = Math.random() * (50 * i);
               pos.z = Math.random() * -300;
@@ -17241,8 +18575,11 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
       return {
         init: init,
-        wrapperInit: wrapperInit,
         render: render,
+        wrapperInit: wrapperInit,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -17265,7 +18602,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/scss/_style.scss
-var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(58);
+var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(61);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/js/index.js
 function simple_3D_explosive_particle_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17287,12 +18624,14 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 
 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
+  if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.2';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.3';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('.uix-3d-slider--expParticle').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
       var $window = $(window),
@@ -17575,7 +18914,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
       function render() {
         requestAnimationFrame(render);
-        var t = clock.getElapsedTime(); //To set a background color.
+        var elapsed = clock.getElapsedTime(); //To set a background color.
         //renderer.setClearColor( 0x000000 );	
         //Display the destination object
 
@@ -17621,7 +18960,25 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
         } //update camera and controls
 
 
-        controls.update();
+        controls.update(); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
         renderer.render(scene, camera);
       }
 
@@ -17851,8 +19208,11 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
       return {
         init: init,
-        wrapperInit: wrapperInit,
         render: render,
+        wrapperInit: wrapperInit,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
         getScene: function getScene() {
           return scene;
         },
@@ -17874,6 +19234,217 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-filmic-effects/js/index.js
+function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* 
+ *************************************
+ * <!-- 3D Filmic Effects -->
+ *************************************
+ */
+
+/**
+ * module.THREE_FILMIC_EFF
+ * 
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+var THREE_FILMIC_EFF = function (module, $, window, document) {
+  if (window.THREE_FILMIC_EFF === null) return false;
+  module.THREE_FILMIC_EFF = module.THREE_FILMIC_EFF || {};
+  module.THREE_FILMIC_EFF.version = '0.0.1';
+
+  module.THREE_FILMIC_EFF.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if ($('#3D-filmic-effects-canvas').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
+
+    var MainStage = function () {
+      var $window = $(window),
+          windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight,
+          rendererCanvasID = '3D-filmic-effects-canvas'; // Generate one plane geometries mesh to scene
+      //-------------------------------------	
+
+      var camera,
+          scene,
+          lights = [],
+          renderer,
+          clock = new THREE.Clock();
+      var intersectionPlane;
+      var composer, bloomPass, filmPass;
+
+      function init() {
+        //=================
+        //camera
+        camera = new THREE.PerspectiveCamera(60, windowWidth / windowHeight, 1, 10000);
+        camera.position.set(0, 0, 100);
+        camera.lookAt(new THREE.Vector3(0, 0, 0)); //=================
+        //Scene
+
+        scene = new THREE.Scene(); //=================
+        //Lights
+
+        lights[0] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[1] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[2] = new THREE.DirectionalLight(0xffffff);
+        lights[0].position.set(0, 200, 0);
+        lights[1].position.set(100, 200, 100);
+        lights[2].position.set(120, 200, 0);
+        lights[2].intensity = 0.6;
+        scene.add(lights[0]);
+        scene.add(lights[1]);
+        scene.add(lights[2]); //=================
+        //WebGL Renderer		
+
+        renderer = new THREE.WebGLRenderer({
+          canvas: document.getElementById(rendererCanvasID),
+          //canvas
+          alpha: true,
+          antialias: true
+        });
+        renderer.setSize(windowWidth, windowHeight);
+        renderer.shadowMap = true;
+        renderer.shadowMapSoft = true; //=================
+        //add bloom effect
+
+        bloomPass = new THREE.BloomPass(1, // strength
+        25, // kernel size
+        4, // sigma ?
+        256); //add film effect
+
+        filmPass = new THREE.FilmPass(0.35, // noise intensity
+        0.025, // scanline intensity
+        648, // scanline count
+        false); //-----
+
+        var renderPass = new THREE.RenderPass(scene, camera);
+        var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+        effectCopy.renderToScreen = true;
+        composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderPass);
+        composer.addPass(bloomPass);
+        composer.addPass(filmPass);
+        composer.addPass(effectCopy); //=================
+
+        var geo = new THREE.PlaneGeometry(100000, 100000);
+        var mat = new THREE.MeshNormalMaterial({
+          side: THREE.DoubleSide
+        });
+        intersectionPlane = new THREE.Mesh(geo, mat);
+        intersectionPlane.visible = false;
+        scene.add(intersectionPlane);
+        var hoverMaterial = new THREE.MeshNormalMaterial();
+        var neutralMaterial = new THREE.MeshLambertMaterial({
+          color: 0xffcccc
+        });
+        var selectedMaterial = new THREE.MeshBasicMaterial({
+          color: 0x55ff88
+        });
+        var geo = new THREE.IcosahedronGeometry(30, 1);
+        var mesh = new THREE.Mesh(geo, neutralMaterial);
+        mesh.position.x = 0;
+        mesh.position.y = 0;
+        mesh.position.z = 0;
+        scene.add(mesh); //=================
+        // Fires when the window changes
+
+        window.addEventListener('resize', onWindowResize, false);
+      }
+
+      function render() {
+        requestAnimationFrame(render); //To set a background color.
+
+        renderer.setClearColor(0x000000); //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene with filter
+
+
+        composer.render();
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      } // 
+      //-------------------------------------	
+
+
+      return {
+        init: init,
+        render: render,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
+        getScene: function getScene() {
+          return scene;
+        },
+        getCamera: function getCamera() {
+          return camera;
+        }
+      };
+    }(); // 
+
+
+    MainStage.init();
+    MainStage.render(); // Add stars to scene
+    //-------------------------------------	
+
+    var starScene = MainStage.getScene();
+    var starCamera = MainStage.getCamera();
+
+    function Stars(scene, terrainSize) {
+      var starsGeometry = new THREE.IcosahedronGeometry(terrainSize, 4); // geometry deformation
+
+      for (var i = 0; i < starsGeometry.vertices.length; i += 1) {
+        var scalar = 1 + Math.random() + Math.random();
+        starsGeometry.vertices[i].multiplyScalar(scalar);
+      }
+
+      var textureLoader = new THREE.TextureLoader();
+      textureLoader.setCrossOrigin("anonymous");
+      var texture = textureLoader.load('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QAAAACAAIUyQ49AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3AUUFhoiw1VdsQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAIQUlEQVR42u1baW/bRhB9u6Qkx1fiOFGcNCiaAGn//+9pG7RxTie1Y8u2TnL65a0xmcxSlCxbaWECCx6iyZ03b86lgbvtblvbJiKFiBTrnENcMwY9jjsA1rWVt0z54ADgXUcIQf7zADiCBXPc5XEBQDjS394KIOUNCx4ygmsTLAjERP0m5vgKkFUDUd6g4J7wHhgdAJsAppnHBgWIrBqI8hYE935L50n7mwDOtQlYk7CArAqI8gaE985zIBQ0g66JSFp4aQBDRCRcB4RyBcI3CW1/j4YVyQd0uIcStHYAsEBcsWFZEMoVaz2q82iuefcnBkQDgHWCtQJFzDVcx0mWS2hbGrQdG469vyk5Otx7mq7Ne615ZE2ijXm0BiCEICISAewwZE0c4aMR3u5hmFGoURpN63AoCojaMRMLQjKrKYBqlSZQ86E/8fjQCB/nnFszKc0Qh/I6DNaO5i0IDwnoOZXUuBVLmEAFYAZgjy87NQIXmREppL52nxGgAnCRAS7nUL3tCYBdKmkQQqhW4gNMShsAXAL4BOA5gN8AnAD4qgCwgFgTCer9hdrDsKDm31RzANiiaW5ybscAZiv1AU64uwTwkSD0AewDeGNAKBwAogGgQ0Z1jNevlb0HBYLdHlPwgiw64vNCJndYrBw2sd6OCwAfeNwD8Mo4NX1cGq/fUd7fnuvhPS+B+5Rm2AUwBvCZ9L+ao1dpLtsP0NrXNjqkOSQbf+UIUToC2uNew72l4z+e0Q9FCn+khMccX9HOBDKZXlR5fDoeKnMoAPzKa5/VxK0/0FEAAO5RkET7Stm/nu8ugA0CJjTFL4r20SZTTZliuYT27SgUCMkxBjqlXQDvjD/QjjBpOdKOKxPzrd0/pvCiIscXJycJJodY3ASU9uEI7yU6BTX4SYXYLoCXGcp3lG13yICciZS09/u8Ho3N58Lm1dxzviAuoX00mEOkNo4UhTsEwXOG3YwPsOHxgMKnUDmk5msn05zXj1jYBOZVetEZFZnwSGVmv1Bjuhm6p9piJQUbq+ZI5DM2eE2Y4R2rHCEquudKcLluHuA5Qc8cbKw/UxlaQSZ0yJJN0joBcKr+5lz1CUoCWjPhOqNAUYFQm/lIG+GzADTU+cgA4bGgUGHyhM7xIbW+w98eK1qfkxXHBOhSsWHG66NMUhUUENYMGqNBuUQegBZABOMc0/FTAnAAYJspbFQM2KSg50ywjgnCiYrxMVN2t5nvtavB0KLVZUFJtr5LAZ8TgC2CkLYdOrrPzCkmFP6dET73Ti8MXhuANq2ueaGyR8H69AX7dGyb5v09ldMnk3iXabCEOUpp7QiXaYlFE7p0KOuaNHaDdt8n/fsUfov32DWClPwMyYhUcgvtf0Y2pDHh/VPVpJl6LbPWDGDXpzRZms7Be0xaNlQ48xKdgvf1lfb3SPtOprRNawTbBOpE9QmGStiZGuk8mcyI905U7wLcVyIyBVCFEOrvAKD37yoH1TONjKBA6ahrIdPP013fxJiiYcFEFMg6W4yZDrH2OR2z0FITgEqlzmMCeiEi4xCClM7620hExvTA1psX1PwWX7KpihI9mUq1sOpMA3NuJa5aXloYfa5NYszQeUkhx/xdd5LlOmEwTSY9+CJDfX28RSpu0/ntA3hAlolhQZpYpeL/B/Yd3/N9U4f69lhrvZVDW1Qj9lrttLHS+ZQaOac9J/ucZhY89P1nZNulub923ikt59sOANJEMr34JsFrQ9EpNXdCQc5UojNR2qp4fsoa4oT3DciYqaF/3QKI7+bv9QTKBbUvplWtX+wBEKl1ofDvlSndY36QzGBAoQ8Z/08ISGrD/5kRvjYsqhsWTpbKAyTj5a32gxE+OdBtVbunxuUp4/y+mkPS/t8sp9+QNR2+52cAb1XXyGOBFyVk1QDAYYP2+pXqCO3RjpMD+0JKf1QO8R7vHwD4i/cccQz4+0M++wmjzgf1rjb0X6jA8apCu5wVzWJHNA2PfQqfkqRUzXVZE+ySGem4w3WFQ5pKKomT3aeMMp1fEKx0PlOA6P3VgmquJ9gWANsDtAsgpdr3KXxKnqq0UKFA2uDosiTuUeA3KuWtTLzf4LOTsCMAr9W5BUCa4n/rkrGBBcFZ+jogrZPwEzqzmWmI6q7wAYU7V9SWjEYLApZq/wmAP5yMr5X2F02E7Eqt7sSkju22KlxGqiMUTQsrqvx8zGfMjDZrR7Njan2L7wtstf2+TARoBQCXxT0wdBTo0+mJalhOFTvqzNJY4H2lSmm9pbHKsOErtf+Ez3upQGhF/WUZAMMCGOEvGe5mzgKFtzgaTCqby/gqhxGnBOGAz31Bc/ASt+sBQBYEh1r79OIVhf/HEd42MG2zQufvsxYJlh4DvjctkL5gwqQz2tW0xBxTeEThh5zIRSZpqk273LKgcgCoTSUomQwwhcBD+oVn9Amv234rtFA1qEB4QIc3IuUnjn2L4zhhogmc5gZMCV037HUWOGAWecDU+e1NNEWhmhoD2uEM336+EhTt7fpcMGmzNYEK/kdSkinArNO7ZILUFZGdEMJgpQDQD4gSHEbj3hpChP9lWdpsLe/l8k2fyX1zPz+LGYpIEJGYWl8rY0AIYWwAsQ0Tb3U296EkTBpbod2HknNLXVXSr9YHZHyC193x2tPiZJ8jFjyV+hYg96msZLS+nk9lTYiUhuwxt7wGRo8txYKmiu67Bs3aP5bWk8iwwUuk9HZBFjQ1UFcu+EoBmAOEzCm6Zsqhenn8N9d+6H+YyACBzHK1jQQwqznS5H9+aABykzaZpD4Z2mv/i3+amgeIAmZ0m0KvDYCGbYK77W6729ax/Qsf5ETUur8sQgAAAABJRU5ErkJggg==');
+      var starMaterial = new THREE.PointsMaterial({
+        map: texture,
+        color: "#fff",
+        size: 20,
+        blending: THREE.AdditiveBlending,
+        transparent: false
+      });
+      var stars = new THREE.Points(starsGeometry, starMaterial);
+      scene.add(stars);
+
+      this.update = function (time) {
+        stars.rotation.y = time * 0.13;
+      };
+    }
+
+    sceneSubjects.push(new Stars(starScene, 150));
+  };
+
+  module.components.documentReady.push(module.THREE_FILMIC_EFF.documentReady);
+  return function THREE_FILMIC_EFF() {
+    simple_3D_filmic_effects_js_classCallCheck(this, THREE_FILMIC_EFF);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/scss/_style.scss
 var table_scss_style = __webpack_require__(3);
 
@@ -17888,6 +19459,7 @@ function js_basic_classCallCheck(instance, Constructor) { if (!(instance instanc
 
 
 var TABLE = function (module, $, window, document) {
+  if (window.TABLE === null) return false;
   module.TABLE = module.TABLE || {};
   module.TABLE.version = '0.0.3';
 
@@ -17970,7 +19542,7 @@ var TABLE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(59);
+var sort_elements = __webpack_require__(62);
 
 // CONCATENATED MODULE: ./src/components/ES6/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17984,8 +19556,9 @@ function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceo
 
 
 var TABLE_SORTER = function (module, $, window, document) {
+  if (window.TABLE_SORTER === null) return false;
   module.TABLE_SORTER = module.TABLE_SORTER || {};
-  module.TABLE_SORTER.version = '0.0.2';
+  module.TABLE_SORTER.version = '0.0.3';
 
   module.TABLE_SORTER.documentReady = function ($) {
     $('.js-uix-table-sorter').each(function () {
@@ -18000,7 +19573,7 @@ var TABLE_SORTER = function (module, $, window, document) {
             thIndex = $th.index(),
             thType = $th.data('sort-type'),
             inverse = false;
-        $th.on('click', function () {
+        $th.off('click').on('click', function () {
           $sortTable.find('tbody td').filter(function () {
             return $(this).index() === thIndex;
           }).sortElements(function (a, b) {
@@ -18052,7 +19625,7 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(60);
+var tabs_scss_style = __webpack_require__(63);
 
 // CONCATENATED MODULE: ./src/components/ES6/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18067,8 +19640,9 @@ function tabs_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 
 
 var TABS = function (module, $, window, document) {
+  if (window.TABS === null) return false;
   module.TABS = module.TABS || {};
-  module.TABS.version = '0.1.3';
+  module.TABS.version = '0.1.4';
 
   module.TABS.documentReady = function ($) {
     $('.uix-tabs').each(function (id) {
@@ -18143,7 +19717,7 @@ var TABS = function (module, $, window, document) {
           transitionDelay += 0.15; //Click on the rotation effect
           //----------------------- begin ----------------------
 
-          el.on('click', function (e) {
+          el.off('click').on('click', function (e) {
             var increase = Math.PI * 2 / rotationDisplay,
                 n = $(this).index(),
                 endAngle = n % rotationDisplay * increase;
@@ -18179,7 +19753,7 @@ var TABS = function (module, $, window, document) {
       } // Tab Fade Effect
 
 
-      $this.on('click', '.uix-tabs__nav ul > li', function (e) {
+      $this.off('click').on('click', '.uix-tabs__nav ul > li', function (e) {
         var tabID = $(this).attr('data-tab'),
             index = parseFloat($(this).index() - 1);
         $this.find('.uix-tabs__nav ul > li').removeClass('is-active');
@@ -18228,7 +19802,7 @@ var TABS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(61);
+var team_focus_scss_style = __webpack_require__(64);
 
 // CONCATENATED MODULE: ./src/components/ES6/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18243,8 +19817,9 @@ function team_focus_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 
 
 var TEAM_FOCUS = function (module, $, window, document) {
+  if (window.TEAM_FOCUS === null) return false;
   module.TEAM_FOCUS = module.TEAM_FOCUS || {};
-  module.TEAM_FOCUS.version = '0.0.2';
+  module.TEAM_FOCUS.version = '0.0.3';
 
   module.TEAM_FOCUS.documentReady = function ($) {
     var teamFocusContent = '.uix-team-focus',
@@ -18299,7 +19874,7 @@ var TEAM_FOCUS = function (module, $, window, document) {
         });
       }); //Display the target item
 
-      $(document).on('click', el, function (e) {
+      $(document).off('click.TEAM_FOCUS').on('click.TEAM_FOCUS', el, function (e) {
         e.preventDefault();
         var $cur = $(this),
             $neighbor = $cur.siblings(),
@@ -18351,7 +19926,7 @@ var TEAM_FOCUS = function (module, $, window, document) {
         }
       }); //Close the focus item
 
-      $(document).on('click', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function (e) {
+      $(document).off('click.TEAM_FOCUS_CLOSE').on('click.TEAM_FOCUS_CLOSE', el + '.focus, ' + closeBtn + ', ' + targetInfo + ', ' + teamFocusMask, function (e) {
         e.preventDefault(); //Remove the mask
 
         $(teamFocusMask).hide();
@@ -18390,10 +19965,10 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(62);
+var text_anime = __webpack_require__(65);
 
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(63);
+var text_effect_scss_style = __webpack_require__(66);
 
 // CONCATENATED MODULE: ./src/components/ES6/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18421,6 +19996,7 @@ function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance i
 
 
 var TEXT_EFFECT = function (module, $, window, document) {
+  if (window.TEXT_EFFECT === null) return false;
   module.TEXT_EFFECT = module.TEXT_EFFECT || {};
   module.TEXT_EFFECT.version = '0.0.4';
 
@@ -18442,7 +20018,7 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(64);
+var timeline_scss_style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./src/components/ES6/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18457,8 +20033,9 @@ function timeline_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 
 
 var TIMELINE = function (module, $, window, document) {
+  if (window.TIMELINE === null) return false;
   module.TIMELINE = module.TIMELINE || {};
-  module.TIMELINE.version = '0.1.5';
+  module.TIMELINE.version = '0.1.6';
 
   module.TIMELINE.pageLoaded = function () {
     var $window = $(window),
@@ -18481,17 +20058,17 @@ var TIMELINE = function (module, $, window, document) {
           dateShowEle = '#timeline-number-show';
         }
 
-        $this.find('.uix-timeline__btn--prev').on('click', function (e) {
+        $this.find('.uix-timeline__btn--prev').off('click').on('click', function (e) {
           e.preventDefault();
           timelineUpdate($this, false, dateShowEle, true);
           return false;
         });
-        $this.find('.uix-timeline__btn--next').on('click', function (e) {
+        $this.find('.uix-timeline__btn--next').off('click').on('click', function (e) {
           e.preventDefault();
           timelineUpdate($this, false, dateShowEle, false);
           return false;
         });
-        $this.find('.uix-timeline__item .uix-timeline__item--img').on('click', function (e) {
+        $this.find('.uix-timeline__item .uix-timeline__item--img').off('click').on('click', function (e) {
           e.preventDefault();
           timelineUpdate($this, $(this).parent(), dateShowEle, false);
           return false;
@@ -18607,7 +20184,7 @@ var TIMELINE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(65);
+var vertical_menu_scss_style = __webpack_require__(68);
 
 // CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18620,6 +20197,7 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 
 
 var VERTICAL_MENU = function (module, $, window, document) {
+  if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
   module.VERTICAL_MENU.version = '0.0.1';
 
@@ -18755,10 +20333,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(66);
+var _wp_core = __webpack_require__(69);
 
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(67);
+var scss_3rd_party_plugins = __webpack_require__(70);
 
 // CONCATENATED MODULE: ./src/components/ES6/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18772,6 +20350,7 @@ function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance ins
 
 
 var WP_CORE = function (module, $, window, document) {
+  if (window.WP_CORE === null) return false;
   module.WP_CORE = module.WP_CORE || {};
   module.WP_CORE.version = '0.0.1';
 
@@ -18809,115 +20388,112 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(68);
+var badges_scss_style = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./src/components/ES6/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(69);
+var blended_grid_layout_scss_style = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./src/components/ES6/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(70);
+var breadcrumbs_scss_style = __webpack_require__(73);
 
 // EXTERNAL MODULE: ./src/components/ES6/button/scss/_style.scss
-var button_scss_style = __webpack_require__(71);
+var button_scss_style = __webpack_require__(74);
 
 // EXTERNAL MODULE: ./src/components/ES6/card/scss/_style.scss
-var card_scss_style = __webpack_require__(72);
+var card_scss_style = __webpack_require__(75);
 
 // EXTERNAL MODULE: ./src/components/ES6/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(73);
+var circle_text_scss_style = __webpack_require__(76);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(74);
+var content_placeholder_animated_scss_style = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./src/components/ES6/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(75);
+var dividing_line_scss_style = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./src/components/ES6/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(76);
+var dots_scss_style = __webpack_require__(79);
 
 // EXTERNAL MODULE: ./src/components/ES6/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(77);
+var dotted_line_scss_style = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./src/components/ES6/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(78);
+var equal_width_columns_scss_style = __webpack_require__(81);
 
 // EXTERNAL MODULE: ./src/components/ES6/features/scss/_style.scss
-var features_scss_style = __webpack_require__(79);
+var features_scss_style = __webpack_require__(82);
 
 // EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(80);
+var footer_templates_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(81);
+var heading_scss_style = __webpack_require__(84);
 
 // EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(82);
+var image_animation_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(83);
+var list_brands_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(84);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(85);
+var list_side_by_side_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(86);
+var list_side_by_side_img_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-split-content/scss/_style.scss
-var list_split_content_scss_style = __webpack_require__(87);
+var list_split_content_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(88);
+var mouse_animation_scroll_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(89);
+var overlay_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(90);
+var ribbon_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(91);
+var shape_animation_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(92);
+var _comments = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(93);
+var _editing = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(94);
+var striking_scss_style = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(95);
+var team_fullwidth_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(96);
+var team_grid_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(97);
+var testimonials_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(98);
+var tooltip_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(99);
+var vertical_separator_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(100);
+var wave_background_scss_style = __webpack_require__(103);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
- * Common website functions, Can be called separately in the HTML page
+ * Common website functions, Can be called separately in HTML pages or custom JavaScript.
  *    
  */
 
-window.UixGUID = UixGUID;
-window.UixMath = UixMath;
-window.UixCssProperty = UixCssProperty;
-window.UixApplyAsyncScripts = UixApplyAsyncScripts;
-window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
+
+
 /*
  * Import modules from components
  *    
@@ -18943,6 +20519,7 @@ window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
 /******/
 
 /* pages */
+
 
 
 
@@ -19060,7 +20637,7 @@ window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
 /*
  * Import third-party plugins from components of ES5
  * 
- * @description  Third-party plugins adopts pure merge and does not import and export.
+ * @description  Third-party plugins adopt pure file merger and do not import and export
  *        
  */
 
@@ -32555,6 +34132,108 @@ THREE.CopyShader = {
 
 /**
  * @author alteredq / http://alteredqualia.com/
+ *
+ * Convolution shader
+ * ported from o3d sample to WebGL / GLSL
+ * http://o3d.googlecode.com/svn/trunk/samples/convolution.html
+ */
+
+THREE.ConvolutionShader = {
+
+	defines: {
+
+		"KERNEL_SIZE_FLOAT": "25.0",
+		"KERNEL_SIZE_INT": "25"
+
+	},
+
+	uniforms: {
+
+		"tDiffuse": { value: null },
+		"uImageIncrement": { value: new THREE.Vector2( 0.001953125, 0.0 ) },
+		"cKernel": { value: [] }
+
+	},
+
+	vertexShader: [
+
+		"uniform vec2 uImageIncrement;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vUv = uv - ( ( KERNEL_SIZE_FLOAT - 1.0 ) / 2.0 ) * uImageIncrement;",
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+		"}"
+
+	].join( "\n" ),
+
+	fragmentShader: [
+
+		"uniform float cKernel[ KERNEL_SIZE_INT ];",
+
+		"uniform sampler2D tDiffuse;",
+		"uniform vec2 uImageIncrement;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vec2 imageCoord = vUv;",
+			"vec4 sum = vec4( 0.0, 0.0, 0.0, 0.0 );",
+
+			"for( int i = 0; i < KERNEL_SIZE_INT; i ++ ) {",
+
+				"sum += texture2D( tDiffuse, imageCoord ) * cKernel[ i ];",
+				"imageCoord += uImageIncrement;",
+
+			"}",
+
+			"gl_FragColor = sum;",
+
+		"}"
+
+
+	].join( "\n" ),
+
+	buildKernel: function ( sigma ) {
+
+		// We lop off the sqrt(2 * pi) * sigma term, since we're going to normalize anyway.
+
+		function gauss( x, sigma ) {
+
+			return Math.exp( - ( x * x ) / ( 2.0 * sigma * sigma ) );
+
+		}
+
+		var i, values, sum, halfWidth, kMaxKernelSize = 25, kernelSize = 2 * Math.ceil( sigma * 3.0 ) + 1;
+
+		if ( kernelSize > kMaxKernelSize ) kernelSize = kMaxKernelSize;
+		halfWidth = ( kernelSize - 1 ) * 0.5;
+
+		values = new Array( kernelSize );
+		sum = 0.0;
+		for ( i = 0; i < kernelSize; ++ i ) {
+
+			values[ i ] = gauss( i - halfWidth, sigma );
+			sum += values[ i ];
+
+		}
+
+		// normalize the kernel
+
+		for ( i = 0; i < kernelSize; ++ i ) values[ i ] /= sum;
+
+		return values;
+
+	}
+
+};
+
+/**
+ * @author alteredq / http://alteredqualia.com/
  */
 
 THREE.EffectComposer = function ( renderer, renderTarget ) {
@@ -32826,6 +34505,8 @@ THREE.Pass.FullScreenQuad = ( function () {
 
 THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
+	THREE.Pass.call( this );
+
 	strength = ( strength !== undefined ) ? strength : 1;
 	kernelSize = ( kernelSize !== undefined ) ? kernelSize : 25;
 	sigma = ( sigma !== undefined ) ? sigma : 4.0;
@@ -32833,10 +34514,12 @@ THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
 	// render targets
 
-	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
+	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat };
 
 	this.renderTargetX = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+	this.renderTargetX.texture.name = "BloomPass.x";
 	this.renderTargetY = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+	this.renderTargetY.texture.name = "BloomPass.y";
 
 	// copy material
 
@@ -32868,13 +34551,13 @@ THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
 	this.convolutionUniforms = THREE.UniformsUtils.clone( convolutionShader.uniforms );
 
-	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurx;
+	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
 	this.convolutionUniforms[ "cKernel" ].value = THREE.ConvolutionShader.buildKernel( sigma );
 
 	this.materialConvolution = new THREE.ShaderMaterial( {
 
 		uniforms: this.convolutionUniforms,
-		vertexShader:  convolutionShader.vertexShader,
+		vertexShader: convolutionShader.vertexShader,
 		fragmentShader: convolutionShader.fragmentShader,
 		defines: {
 			"KERNEL_SIZE_FLOAT": kernelSize.toFixed( 1 ),
@@ -32883,48 +34566,56 @@ THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
 
 	} );
 
-	this.enabled = true;
 	this.needsSwap = false;
-	this.clear = false;
+
+	this.fsQuad = new THREE.Pass.FullScreenQuad( null );
 
 };
 
-THREE.BloomPass.prototype = {
+THREE.BloomPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
 
-	render: function ( renderer, writeBuffer, readBuffer, delta, maskActive ) {
+	constructor: THREE.BloomPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
 
 		if ( maskActive ) renderer.context.disable( renderer.context.STENCIL_TEST );
 
 		// Render quad with blured scene into texture (convolution pass 1)
 
-		THREE.EffectComposer.quad.material = this.materialConvolution;
+		this.fsQuad.material = this.materialConvolution;
 
-		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer;
+		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer.texture;
 		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
 
-		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetX, true );
+		renderer.setRenderTarget( this.renderTargetX );
+		renderer.clear();
+		this.fsQuad.render( renderer );
 
 
 		// Render quad with blured scene into texture (convolution pass 2)
 
-		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX;
+		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX.texture;
 		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurY;
 
-		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetY, true );
+		renderer.setRenderTarget( this.renderTargetY );
+		renderer.clear();
+		this.fsQuad.render( renderer );
 
 		// Render original scene with superimposed blur to texture
 
-		THREE.EffectComposer.quad.material = this.materialCopy;
+		this.fsQuad.material = this.materialCopy;
 
-		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY;
+		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY.texture;
 
 		if ( maskActive ) renderer.context.enable( renderer.context.STENCIL_TEST );
 
-		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, readBuffer, this.clear );
+		renderer.setRenderTarget( readBuffer );
+		if ( this.clear ) renderer.clear();
+		this.fsQuad.render( renderer );
 
 	}
 
-};
+} );
 
 THREE.BloomPass.blurX = new THREE.Vector2( 0.001953125, 0.0 );
 THREE.BloomPass.blurY = new THREE.Vector2( 0.0, 0.001953125 );
@@ -35182,4 +36873,167 @@ else {
 }
 
 }).call(this);
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ *
+ * Film grain & scanlines shader
+ *
+ * - ported from HLSL to WebGL / GLSL
+ * http://www.truevision3d.com/forums/showcase/staticnoise_colorblackwhite_scanline_shaders-t18698.0.html
+ *
+ * Screen Space Static Postprocessor
+ *
+ * Produces an analogue noise overlay similar to a film grain / TV static
+ *
+ * Original implementation and noise algorithm
+ * Pat 'Hawthorne' Shearon
+ *
+ * Optimized scanlines + noise version with intensity scaling
+ * Georg 'Leviathan' Steinrohder
+ *
+ * This version is provided under a Creative Commons Attribution 3.0 License
+ * http://creativecommons.org/licenses/by/3.0/
+ */
+
+THREE.FilmShader = {
+
+	uniforms: {
+
+		"tDiffuse": { value: null },
+		"time": { value: 0.0 },
+		"nIntensity": { value: 0.5 },
+		"sIntensity": { value: 0.05 },
+		"sCount": { value: 4096 },
+		"grayscale": { value: 1 }
+
+	},
+
+	vertexShader: [
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vUv = uv;",
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+		"}"
+
+	].join( "\n" ),
+
+	fragmentShader: [
+
+		"#include <common>",
+
+		// control parameter
+		"uniform float time;",
+
+		"uniform bool grayscale;",
+
+		// noise effect intensity value (0 = no effect, 1 = full effect)
+		"uniform float nIntensity;",
+
+		// scanlines effect intensity value (0 = no effect, 1 = full effect)
+		"uniform float sIntensity;",
+
+		// scanlines effect count value (0 = no effect, 4096 = full effect)
+		"uniform float sCount;",
+
+		"uniform sampler2D tDiffuse;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			// sample the source
+			"vec4 cTextureScreen = texture2D( tDiffuse, vUv );",
+
+			// make some noise
+			"float dx = rand( vUv + time );",
+
+			// add noise
+			"vec3 cResult = cTextureScreen.rgb + cTextureScreen.rgb * clamp( 0.1 + dx, 0.0, 1.0 );",
+
+			// get us a sine and cosine
+			"vec2 sc = vec2( sin( vUv.y * sCount ), cos( vUv.y * sCount ) );",
+
+			// add scanlines
+			"cResult += cTextureScreen.rgb * vec3( sc.x, sc.y, sc.x ) * sIntensity;",
+
+			// interpolate between source and result by intensity
+			"cResult = cTextureScreen.rgb + clamp( nIntensity, 0.0,1.0 ) * ( cResult - cTextureScreen.rgb );",
+
+			// convert to grayscale if desired
+			"if( grayscale ) {",
+
+				"cResult = vec3( cResult.r * 0.3 + cResult.g * 0.59 + cResult.b * 0.11 );",
+
+			"}",
+
+			"gl_FragColor =  vec4( cResult, cTextureScreen.a );",
+
+		"}"
+
+	].join( "\n" )
+
+};
+
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.FilmPass = function ( noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale ) {
+
+	THREE.Pass.call( this );
+
+	if ( THREE.FilmShader === undefined )
+		console.error( "THREE.FilmPass relies on THREE.FilmShader" );
+
+	var shader = THREE.FilmShader;
+
+	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+	this.material = new THREE.ShaderMaterial( {
+
+		uniforms: this.uniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader
+
+	} );
+
+	if ( grayscale !== undefined )	this.uniforms.grayscale.value = grayscale;
+	if ( noiseIntensity !== undefined ) this.uniforms.nIntensity.value = noiseIntensity;
+	if ( scanlinesIntensity !== undefined ) this.uniforms.sIntensity.value = scanlinesIntensity;
+	if ( scanlinesCount !== undefined ) this.uniforms.sCount.value = scanlinesCount;
+
+	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
+
+};
+
+THREE.FilmPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+
+	constructor: THREE.FilmPass,
+
+	render: function ( renderer, writeBuffer, readBuffer, deltaTime /*, maskActive */ ) {
+
+		this.uniforms[ "tDiffuse" ].value = readBuffer.texture;
+		this.uniforms[ "time" ].value += deltaTime;
+
+		if ( this.renderToScreen ) {
+
+			renderer.setRenderTarget( null );
+			this.fsQuad.render( renderer );
+
+		} else {
+
+			renderer.setRenderTarget( writeBuffer );
+			if ( this.clear ) renderer.clear();
+			this.fsQuad.render( renderer );
+
+		}
+
+	}
+
+} );
 //# sourceMappingURL=uix-kit.concat.es5.3rd-party-plugins.js.map

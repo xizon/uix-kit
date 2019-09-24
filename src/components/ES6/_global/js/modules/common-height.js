@@ -19,13 +19,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
+	if ( window.COMMON_HEIGHT === null ) return false;
+	
 	
 	
 	

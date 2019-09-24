@@ -11,9 +11,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -21,6 +19,8 @@ import '../scss/_style.scss';
 
 
 export const PROGRESS_BAR = ( ( module, $, window, document ) => {
+	if ( window.PROGRESS_BAR === null ) return false;
+	
 	
 	
     module.PROGRESS_BAR               = module.PROGRESS_BAR || {};

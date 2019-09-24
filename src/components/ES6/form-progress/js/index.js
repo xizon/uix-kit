@@ -31,9 +31,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixFormProgressToNext from '@uixkit/core/form-progress/js/fn/form-progress-to-next';
 
@@ -41,9 +39,11 @@ import '../scss/_style.scss';
 
 
 export const FORM_PROGRESS = ( ( module, $, window, document ) => {
+	if ( window.FORM_PROGRESS === null ) return false;
+	
 	
     module.FORM_PROGRESS               = module.FORM_PROGRESS || {};
-    module.FORM_PROGRESS.version       = '0.0.2';
+    module.FORM_PROGRESS.version       = '0.0.3';
     module.FORM_PROGRESS.pageLoaded    = function() {
 
 		var $progressBar   = $( '.uix-form-progress progress' ),
@@ -78,7 +78,7 @@ export const FORM_PROGRESS = ( ( module, $, window, document ) => {
 		
 
 		// Show next form on continue click
-		$( document ).on( 'click', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
+		$( document ).off( 'click.FORM_PROGRESS' ).on( 'click.FORM_PROGRESS', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
 			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
 			$( document ).UixFormProgressToNext({ 
@@ -104,7 +104,7 @@ export const FORM_PROGRESS = ( ( module, $, window, document ) => {
 		
 
 		// Reset form on reset button click
-		$( document ).on( 'click', '.uix-form-progress__target .go-reset', function( e ) {
+		$( document ).off( 'click.FORM_PROGRESS_RESET' ).on( 'click.FORM_PROGRESS_RESET', '.uix-form-progress__target .go-reset', function( e ) {
 			e.preventDefault();
 			formReset();
 		});

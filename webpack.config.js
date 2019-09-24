@@ -16,8 +16,7 @@ const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const webpackDevMiddleware       = require('webpack-dev-middleware');
 const ConcatPlugin               = require('webpack-concat-plugin');
-const minify                     = require('@node-minify/core');
-const uglifyJS                   = require('@node-minify/uglify-js');
+const UglifyJS                   = require("uglify-js");
 const colors = {
     Reset: "\x1b[0m",
     Bright: "\x1b[1m",
@@ -74,17 +73,16 @@ let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = ( Object.prototype.toString.call( json.author ) == '[object Object]' ) ? json.author.name : json.author,
 	customWebsiteTitle       = json.projectName,
 	customWebsiteDesc        = json.description,
-	customWebsiteCanonical   = '<link rel="canonical" href="'+json.projectURL+'" />',
 	customWebsiteGenerator   = 'Uix Kit',
 	customWebsiteHash        = randomString({length: 20}),
 	customWebsiteComment     = `
 ## Project Name        :  ` + customWebsiteTitle + `
 ## Project Description :  ` + customWebsiteDesc + `
+## Project URL         :  ` + json.projectURL + `
 ## Version             :  ` + customWebsiteVersion + `
 ## Based on            :  Uix Kit (` + json.homepage + `)
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
-## Created by          :  ` + json.createdInfo + `
-## Contact Us          :  ` + json.email + `
+## Created by          :  ` + json.createdInfo + ( json.email != '' ? ' (' + json.email + ')' : '' ) + `
 ## Released under the ` + json.license + ` license.
 	`;
 
@@ -166,7 +164,7 @@ class ReplacePlaceholderForFile {
 			@Other method:
 			
 			try {  
-				var data = fs.readFileSync('file.html', 'utf8');
+				let data = fs.readFileSync('file.html', 'utf8');
 				console.log(data);    
 			} catch(e) {
 				console.log('Error:', e.stack);
@@ -182,7 +180,6 @@ class ReplacePlaceholderForFile {
 					if ( data.length > 0 && data.indexOf( '</html>' ) >= 0 ) {
 						data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
 									.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
-									.replace(/\@\@\{website_canonical\}/g, customWebsiteCanonical )
 									.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
 									.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
 									.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
@@ -484,6 +481,9 @@ const app = express();
 const instance = webpackDevMiddleware( compiler );
 app.use( instance );
 
+//Provides a way to customize how progress is reported during a compilation.
+new webpack.ProgressPlugin().apply(compiler);
+
 
 //Watch for Files Changes in Node.js
 require('log-timestamp');
@@ -571,10 +571,8 @@ server.listen( globs.port, "localhost", function (err, result) {
  * Step 1 => read pureMergeJSFile
  * Step 2 => read targetJSFile
  * Step 3 => write targetJSFile
- * Step 4 => append targetJSFile
- * Step 5 => copy targetJSFile
- * Step 6 => minify targetJSFile
- * Step 7 => read all core css and js files and build a table of contents (TOC)
+ * Step 4 => compress targetJSFile
+ * Step 5 => read all core css and js files and build a table of contents (TOC)
  *************************************
  */
 compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
@@ -591,201 +589,185 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		
 		let oldContent = '';
 		let pureMergeJSDependenciesFileData = '';
+        let buildingFileTotal = 5;
+        
+        
+        
 		
+		// Determine if the rtl file exists
+		//---------------------------------------------------------------------
+        if ( ! fs.existsSync( './'+globs.dist+'/css/uix-kit-rtl.css' ) ) {
+            buildingFileTotal = 4;
+        }
+        
 		// Step 1 => read pureMergeJSFile
 		//---------------------------------------------------------------------
 		if ( fs.existsSync( pureMergeJSFile ) ) {
 			
-			fs.readFile( pureMergeJSFile, function(err, data ){
+			fs.readFile( pureMergeJSFile, 'utf8', function(err, data ){
 
 				if (err) throw err;
 				
 				oldContent = data;
-				
+      
 				
 				//get pureMergeJSDependenciesFile content
 				if ( fs.existsSync( pureMergeJSDependenciesFile ) ) {
-					fs.readFile( pureMergeJSDependenciesFile, function( err, content ) {
+					fs.readFile( pureMergeJSDependenciesFile, 'utf8', function( err, content ) {
 						if ( ! err ) {
 							pureMergeJSDependenciesFileData = content;
+                            
+
+                            // Step 2 => read targetJSFile
+                            //---------------------------------------------------------------------
+                            //Prevent JS from adding code repeatedly
+                            //Check if the uix-kit.concat.es5.3rd-party-plugins.js file has been 
+                            //merged into the uix-kit.js file?
+                            fs.readFile( targetJSFile, 'utf8', function(err, data ){
+                                
+                                
+                                if (err) throw err;
+
+                                //Add string on top file with NodeJS
+                                //Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+
+                                let resultData;
+                                if ( data.indexOf( pureMergeJSDependenciesFileData ) >= 0 ) {
+                                    resultData = data;
+                                } else {
+                                    data = data.toString().split("\n");
+                                    let customWebsiteCommentArr = customWebsiteComment.toString().split("\n");
+
+                                    data.splice(customWebsiteCommentArr.length + 2, 0, pureMergeJSDependenciesFileData );
+                                    resultData = data.join("\n");	
+                                }
+
+                                                             
+
+                                if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
+
+                                    resultData = resultData + oldContent;
+                                    
+                                    let compressedresultData = UglifyJS.minify( resultData, { warnings: true } );
+                                    
+                                    
+                                    if ( typeof compressedresultData.code != typeof undefined && oldContent.length > 0 ) {
+                                        
+
+                                        // Step 3 => write targetJSFile
+                                        //---------------------------------------------------------------------
+                                        fs.writeFile( targetJSFile, resultData, 'utf8', function (err) {
+
+                                            if ( err ) {
+                                                console.log(colors.fg.Red, err, colors.Reset);
+                                                return;
+                                            }
+
+                                            //file written successfully	
+                                            console.log(colors.fg.Green, `${targetJSFile} created successfully! (1/${buildingFileTotal})`, colors.Reset);
+
+
+                                        });// fs.writeFile( targetJSFile ...
+                                        
+                                        
+                                        // Step 4 => compress targetJSFile
+                                        //---------------------------------------------------------------------	
+                                        fs.writeFile( targetJSMinFile, compressedresultData.code, 'utf8', function (err) {
+
+                                            if ( err ) {
+                                                console.log(colors.fg.Red, err, colors.Reset);
+                                                return;
+                                            }
+
+                                            //file written successfully	
+                                            console.log(colors.fg.Green, `${targetJSMinFile} created successfully! (2/${buildingFileTotal})`, colors.Reset);
+
+
+                                            // Step 5 => read all core css and js files and build a table of contents
+                                            //---------------------------------------------------------------------
+                                            // Build a table of contents (TOC)
+                                            let tocBuildedIndex = 3;
+                                            ['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+
+                                                if ( fs.existsSync( filepath ) ) {
+
+                                                    fs.readFile( filepath, 'utf8', function( err, content ) {
+
+                                                        if ( err ) throw err;
+
+                                                        let curCon  = content.toString(),
+                                                            newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+
+
+                                                        //is the matched group if found
+                                                        if ( newtext && newtext.length > 1 ) {  
+
+                                                            let curToc = '';
+
+                                                            for ( let p = 0; p < newtext.length; p++ ) {
+
+                                                                let curIndex = p + 1,
+                                                                    newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+
+                                                                if ( p > 0 ) {
+                                                                    curToc += '    ' + curIndex + '.' + newStr + '\n';
+                                                                } else {
+                                                                    curToc +=  curIndex + '.' + newStr + '\n';
+                                                                }
+
+                                                            }
+
+                                                            //Replace a string in a file with nodejs
+                                                            let resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+
+                                                            fs.writeFile( filepath, resultData, 'utf8', function (err) {
+
+                                                                if ( err ) {
+                                                                    console.log(colors.fg.Red, err, colors.Reset);
+                                                                    return;
+                                                                }
+                                                                //file written successfully	
+                                                                console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${buildingFileTotal})`, colors.Reset);
+
+                                                                tocBuildedIndex++;
+
+
+                                                            });
+
+
+                                                        }
+
+
+                                                    });// fs.readFile( filepath ...
+
+
+                                                }//endif fs.existsSync( filepath ) 
+
+
+                                            });	//.map( ( filepath )...
+
+
+
+                                        });// fs.writeFile( targetJSMinFile ...
+
+       
+                                    } else {
+                                        return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${compressedresultData.error} ]===File update failed! Please wait 10 seconds to rebuild.`, colors.Reset);
+                                    }
+                                    
+
+
+                                 }// endif data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' )
+
+                            }); //fs.readFile( targetJSFile ...
+
+  
+                            
 						}
 
 					});// fs.readFile( pureMergeJSDependenciesFile ...
 				}//endif fs.existsSync( pureMergeJSDependenciesFile ) 
 
-				
-
-				// Step 2 => read targetJSFile
-				//---------------------------------------------------------------------
-				//Prevent JS from adding code repeatedly
-				//Check if the uix-kit.concat.es5.3rd-party-plugins.js file has been 
-				//merged into the uix-kit.js file?
-				fs.readFile( targetJSFile, function(err, data ){
-
-					//Add string on top file with NodeJS
-					//Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
-					
-					var resultData;
-					if ( data.indexOf( pureMergeJSDependenciesFileData ) >= 0 ) {
-						resultData = data;
-					} else {
-						data = data.toString().split("\n");
-						var customWebsiteCommentArr = customWebsiteComment.toString().split("\n");
-
-						data.splice(customWebsiteCommentArr.length + 2, 0, pureMergeJSDependenciesFileData );
-						resultData = data.join("\n");	
-					}
-
-
-					// Step 3 => write targetJSFile
-					//---------------------------------------------------------------------
-					fs.writeFile( targetJSFile, resultData, 'utf8', function (err) {
-
-						if ( err ) {
-							console.log(colors.fg.Red, err, colors.Reset);
-							return;
-						}
-
-						// Step 4 => append targetJSFile
-						//---------------------------------------------------------------------
-						if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
-							
-							//file written successfully	
-							console.log(colors.fg.Green, `${targetJSFile} added common JavaScript on top successfully! (1/7)`, colors.Reset);
-
-
-							//Update the normal js file
-							fs.appendFile( targetJSFile, oldContent, 'utf8', function (err) {
-
-								if (err) {
-									return console.log(colors.fg.Red, err, colors.Reset);
-								}
-
-								console.log(colors.fg.Green, `${targetJSFile} written successfully! (2/7)`, colors.Reset);
-
-								
-								// Step 5 => copy targetJSFile
-								//---------------------------------------------------------------------					
-								fs.copyFile( targetJSFile, targetJSMinFile, function (err) {
-
-									if (err) {
-										return console.log(colors.fg.Red, err, colors.Reset);
-									}
-
-									console.log(colors.fg.Green, `${targetJSMinFile} copied successfully! (3/7)`, colors.Reset);
-
-									
-									
-									// Step 6 => minify targetJSFile
-									//---------------------------------------------------------------------	
-									//Update the compressed js file
-									minify({
-										compressor: uglifyJS,
-										input: targetJSMinFile,
-										output: targetJSMinFile,
-										callback: function(err, min) {
-
-											if ( err ) {
-												return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${err} ]=== Do not perform other operations after saving the <scss> or <js> file, please wait 10 seconds to rebuild.`, colors.Reset);
-
-											} else {
-												console.log(colors.fg.Green, `${targetJSMinFile} compressed successfully! (4/7)`, colors.Reset);
-											}
-
-
-											// Step 7 => read all core css and js files and build a table of contents
-											//---------------------------------------------------------------------
-											// Build a table of contents (TOC)
-											var tocBuildedIndex = 5;
-											['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
-
-												if ( fs.existsSync( filepath ) ) {
-
-													fs.readFile( filepath, function( err, content ) {
-
-														if ( err ) throw err;
-
-														let curCon  = content.toString(),
-															newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
-
-
-														//is the matched group if found
-														if ( newtext && newtext.length > 1 ) {  
-
-															let curToc = '';
-
-															for ( var p = 0; p < newtext.length; p++ ) {
-
-																let curIndex = p + 1,
-																	newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
-
-																if ( p > 0 ) {
-																	curToc += '    ' + curIndex + '.' + newStr + '\n';
-																} else {
-																	curToc +=  curIndex + '.' + newStr + '\n';
-																}
-
-															}
-
-															//Replace a string in a file with nodejs
-															var resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-															fs.writeFile( filepath, resultData, 'utf8', function (err) {
-
-																if ( err ) {
-																	console.log(colors.fg.Red, err, colors.Reset);
-																	return;
-																}
-																//file written successfully	
-																console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/7)`, colors.Reset);
-																
-																tocBuildedIndex++;
-
-
-															});
-
-
-														}
-
-
-													});// fs.readFile( filepath ...
-
-
-												}//endif fs.existsSync( filepath ) 
-
-
-											});	
-
-
-
-										}
-										
-										
-									});	// minify
-
-
-
-								});// fs.copyFile( targetJSFile ...
-
-
-
-								if (err) {
-									console.error(err);
-									return;
-								}
-
-							}); //fs.appendFile( targetJSFile ...
-
-
-						}// endif data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' )
-
-
-
-					});// fs.writeFile( targetJSFile ...
-
-
-
-				}); //fs.readFile( targetJSFile ...
 				
 
 			});// fs.readFile( pureMergeJSFile
@@ -794,7 +776,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		}// endif fs.existsSync( pureMergeJSFile )
 		
 	
-	}, 1500 );	
+	}, 1500 );
 	
 
 });

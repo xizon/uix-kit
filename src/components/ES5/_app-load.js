@@ -41,6 +41,7 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js",
 "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
 "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js",
+"./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js",
@@ -53,8 +54,11 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js",
-"./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js"
-	
+"./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js",
+    
+//Extra filter -- film
+"./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js",
+"./src/components/ES5/_plugins-THREE/js/postprocessing/FilmPass.js"
 	
 ]};
 

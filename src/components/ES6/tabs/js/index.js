@@ -12,9 +12,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -22,9 +20,11 @@ import '../scss/_style.scss';
 
 
 export const TABS = ( ( module, $, window, document ) => {
+	if ( window.TABS === null ) return false;
+	
 	
     module.TABS               = module.TABS || {};
-    module.TABS.version       = '0.1.3';
+    module.TABS.version       = '0.1.4';
     module.TABS.documentReady = function( $ ) {
 
 		$( '.uix-tabs' ).each( function( id ) {
@@ -122,7 +122,7 @@ export const TABS = ( ( module, $, window, document ) => {
 					
 					//Click on the rotation effect
 					//----------------------- begin ----------------------
-					el.on( 'click', function( e ) {
+					el.off( 'click' ).on( 'click', function( e ) {
 						
 						var increase   = Math.PI * 2 / rotationDisplay,
 							n          = $( this ).index(),
@@ -178,7 +178,7 @@ export const TABS = ( ( module, $, window, document ) => {
 			
 			
 			// Tab Fade Effect
-			$this.on( 'click', '.uix-tabs__nav ul > li', function( e ) {
+			$this.off( 'click' ).on( 'click', '.uix-tabs__nav ul > li', function( e ) {
 				
 				var tabID = $( this ).attr( 'data-tab' ),
 					index = parseFloat( $( this ).index() - 1 );

@@ -1,21 +1,11 @@
 /*
- * Common website functions, Can be called separately in the HTML page
+ * Common website functions, Can be called separately in HTML pages or custom JavaScript.
  *    
  */
-import {
-	UixGUID,
-	UixMath,
-	UixCssProperty,
-	UixApplyAsyncScripts,
-	UixApplyAsyncAllScripts
-} from '@uixkit/core/_global/js';
+import UixModuleFilter from '@uixkit/core/_global/js/fn/UixModuleFilter';
+import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
+import UixApplyAsyncAllScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncAllScripts';
 
-
-window.UixGUID = UixGUID;
-window.UixMath = UixMath;
-window.UixCssProperty = UixCssProperty;
-window.UixApplyAsyncScripts = UixApplyAsyncScripts;
-window.UixApplyAsyncAllScripts = UixApplyAsyncAllScripts;
 
 
 /*
@@ -102,6 +92,7 @@ import THREE_MOUSE_INTERACTION from '@uixkit/core/simple-3D-mouse-interaction/js
 import THREE_MOUSE_INTERACTION2 from '@uixkit/core/simple-3D-mouse-interaction2/js';
 import THREE_SHATTER_SLIDER from '@uixkit/core/simple-3D-shatter-slider/js';	
 import THREE_EXP_PARTICLE_SLIDER from '@uixkit/core/simple-3D-explosive-particle-slider/js';
+import THREE_FILMIC_EFF from '@uixkit/core/simple-3D-filmic-effects/js';
 import TABLE from '@uixkit/core/table/js/basic';
 import TABLE_SORTER from '@uixkit/core/table/js/sorter';	
 import TABS from '@uixkit/core/tabs/js';

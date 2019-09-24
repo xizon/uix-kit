@@ -6,6 +6,7 @@
  * @return {Void}
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixRenderCustomFile = function( options ) {
  
         // This is the easiest way to have default options.
@@ -21,7 +22,7 @@
 					$fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
 					$filePath   = $( this ).next( '.uix-controls__file-return' );
 
-				$fileBtn.on( 'click', function() {
+				$fileBtn.off( 'click' ).on( 'click', function() {
 					$fileInput.focusin();
 
 				});	

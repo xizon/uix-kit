@@ -20,9 +20,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
@@ -30,11 +28,13 @@ import '../scss/_special.scss';
 
 
 export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
+	if ( window.ADVANCED_SLIDER_FILTER === null ) return false;
+	
 	
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.1.8';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.0';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -430,7 +430,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 				stage__filter          = new PIXI.Container();
 				container__items       = new PIXI.Container();
-				displacementSprite    = ( dataFilterTexture.indexOf( '.mp4' ) >= 0 ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
+				displacementSprite    = ( /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test( dataFilterTexture ) ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
 				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
 
 				
@@ -1128,7 +1128,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
 
-			$( dataControlsPagination ).find( 'li a' ).on( 'click', function( e ) {
+			$( dataControlsPagination ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				if ( !$( this ).hasClass( 'is-active' ) ) {
@@ -1171,7 +1171,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 
-			_prev.on( 'click', function( e ) {
+			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				//Canvas Interactions
@@ -1185,7 +1185,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			});
 
-			_next.on( 'click', function( e ) {
+			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
 				//Canvas Interactions

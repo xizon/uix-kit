@@ -12,14 +12,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 
 export const RETINA = ( ( module, $, window, document ) => {
+	if ( window.RETINA === null ) return false;
+	
 	
     module.RETINA               = module.RETINA || {};
     module.RETINA.version       = '0.0.1';

@@ -21,9 +21,7 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixFireModalDialog from '@uixkit/core/modal-dialog/js/fn/fire-modal-dialog';
 import UixCloseModalDialog from '@uixkit/core/modal-dialog/js/fn/close-modal-dialog';
@@ -32,9 +30,11 @@ import '../scss/_style.scss';
 
 
 export const MODAL_DIALOG = ( ( module, $, window, document ) => {
+	if ( window.MODAL_DIALOG === null ) return false;
+	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.0.9';
+    module.MODAL_DIALOG.version       = '0.1.2';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		
@@ -58,7 +58,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 		}
 		
 	    
-		$( document ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
+		$( document ).off( 'click.MODAL_DIALOG' ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
 
 			var dataH         = $( this ).data( 'modal-height' ),
 				dataW         = $( this ).data( 'modal-width' ),
@@ -100,7 +100,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 		
 		});
 	
-		$( document ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box .uix-modal-box__close, .uix-modal-mask:not(.js-uix-disabled)', function() {
+		$( document ).off( 'click.MODAL_DIALOG_CLOSE' ).on( 'click.MODAL_DIALOG_CLOSE', '.uix-modal-box [data-modal-close-trigger], .uix-modal-mask:not(.js-uix-disabled)', function() {
 			
 			//btn
 			if ( $( this ).hasClass( 'uix-modal-box__close' ) ) {

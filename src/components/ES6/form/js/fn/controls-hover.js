@@ -6,6 +6,7 @@
  * @return {Void}
  */
 ( function ( $ ) {
+    'use strict';
     $.fn.UixRenderControlsHover = function( options ) {
  
         // This is the easiest way to have default options.

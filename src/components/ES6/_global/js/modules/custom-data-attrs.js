@@ -19,13 +19,13 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty,
-    UixApplyAsyncScripts,
-    UixApplyAsyncAllScripts
+    UixCssProperty
 } from '@uixkit/core/_global/js';
 
 
 export const GET_CUSTOM_ATTRS = ( ( module, $, window, document ) => {
+	if ( window.GET_CUSTOM_ATTRS === null ) return false;
+	
 	
 	
 	

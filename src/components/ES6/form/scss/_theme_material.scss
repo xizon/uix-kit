@@ -1,0 +1,468 @@
+/* ======================================================
+    <!-- Form  ( Material Design Theme )-->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+@import '_variable-and-mixin.scss';
+
+/*
+ * 1. Controls
+ * 4. Custom Select
+ * 6. Custom Input Number
+ * 7. Multiple Selector
+ * 8. Single Selector
+*/
+
+/*
+ ---------------------------
+ 1. Controls
+ ---------------------------
+ */
+@mixin create-line() {
+    .uix-controls__basic-bar,
+	.uix-controls__bar {
+		position: absolute;
+		height: 2px;
+		left: 0;
+		width: 0;
+		bottom: 0;
+        z-index: 1;
+		display: none;
+        transform: translateX(0);
+        background: $primary-text-color;
+        @include transition-default();
+        
+		&.is-active {
+            width: 100%;
+		}
+	}
+
+    
+    .uix-controls__basic-bar {
+        z-index: 0;
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: $control-sub-color;
+    }
+}
+
+
+/* Default Controls */
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) {
+
+    
+    //Create Line Effect on Click
+    @include create-line();
+
+
+	/*-- Form Status: Success --*/
+	&.is-success {
+		
+		.uix-controls__bar {
+			background: #4AB005;
+            width: 100%;
+		}
+
+	}
+
+	/*-- Form Status: Error --*/
+	&.is-error {
+		
+		.uix-controls__bar {
+			background: #f00;
+            width: 100%;   
+		}
+
+	}
+
+	/*-- Form Status: Disable --*/
+	&.is-disabled {
+		.uix-controls__bar {
+			background: #E1E1E1;
+            width: 100%;
+		}
+
+	}
+
+
+}
+
+
+/* Create Line Effect on Click */
+.uix-controls.uix-controls--line {
+
+
+	&.is-pill,
+	&.is-rounded {
+		input:not([type="checkbox"]):not([type="radio"]),
+		textarea,
+		button:not(.uix-btn),
+		select {
+			border-radius: 0 !important;
+		}
+
+        
+	}
+
+    
+	.uix-controls__bar {
+		display: block !important;
+	}
+
+    input:not([type="checkbox"]):not([type="radio"]) {
+        border-top-color: $control-focus-bordercolor2 !important;
+        border-left-color: $control-focus-bordercolor2 !important;
+        border-right-color: $control-focus-bordercolor2 !important;
+        border-bottom-color: transparent !important;
+
+    }
+
+
+    textarea,
+    button:not(.uix-btn),
+    select {
+        border-top-color: $control-focus-bordercolor2 !important;
+        border-left-color: $control-focus-bordercolor2 !important;
+        border-right-color: $control-focus-bordercolor2 !important;
+        border-bottom-color: transparent !important;
+
+    }
+
+    &:not(.is-iconic) {
+        input:not([type="checkbox"]):not([type="radio"]) {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: 100% !important;
+        }
+
+
+        textarea,
+        button:not(.uix-btn),
+        select {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: 100% !important;
+
+        }
+   
+    }
+
+
+	&.uix-controls__short-s {
+
+		input:not([type="checkbox"]):not([type="radio"]) {
+			width: 120px !important;
+		}
+
+
+	}
+
+	&.uix-controls__short-m {
+
+		input:not([type="checkbox"]):not([type="radio"]) {
+			width: 155px !important;
+		}
+
+
+	}
+
+
+	&.uix-controls__short-l {
+		input:not([type="checkbox"]):not([type="radio"]) {
+			width: 192px !important;
+		}
+
+	}
+
+    
+	&.is-fullwidth {
+		select {
+
+			&:focus {
+				border-bottom-color: transparent !important;
+			}
+
+		}
+
+	}
+
+
+
+	textarea {
+		&:focus {
+			border-color: $control-focus-bordercolor2 !important;
+		}
+
+	}
+
+
+	button:not(.uix-btn) {
+
+		&:focus {
+			border-color: $control-focus-bordercolor2 !important;
+		}
+
+	}
+
+
+	label {
+		left: -0.25rem !important;
+
+		&.is-active {
+			transform: translateX(-1.75rem) scale(.875);
+
+		}
+
+	}
+
+
+	/*-- Form With Icon --*/
+	&.is-iconic {
+        
+
+        
+		label {
+			left: #{$control-padding-side + $control-icon-placeholder} !important;
+
+			&.is-active {
+				transform: translateX(-4.09375rem) scale(.875);
+			}
+		}
+
+
+        
+        
+		&.is-reversed {
+            
+ 			input:not([type="checkbox"]):not([type="radio"]) {
+				padding-left: 0 !important;
+
+			}
+
+			textarea,
+			button:not(.uix-btn),
+			select {
+				padding-left: !important;
+			}
+
+			label {
+				left: -0.25rem !important;
+
+				&.is-active {
+					transform: translateX(-1.75rem) scale(.875);
+				}
+			}
+		}
+
+
+	}
+
+
+	/*-- Select --*/
+	&.uix-controls__normal-select {
+
+	
+		select {
+			padding-left: 0 !important;
+            padding-right: #{$control-padding-side + 1} !important; 
+		}
+
+
+	}
+
+
+
+
+	/*-- Form Status: Disable --*/
+	&.is-disabled {
+		input:not([type="checkbox"]):not([type="radio"]) {
+		    opacity: .7;
+
+		}
+		textarea,
+		button:not(.uix-btn),
+		select {
+		    opacity: .7;
+		}
+
+		label {
+			opacity: .5;
+		}
+
+
+	}
+
+}
+
+/*
+ ---------------------------
+ 4. Custom Select
+ ---------------------------
+ */
+
+.uix-controls__select-wrapper {
+
+	&.uix-controls--line.is-disabled {
+
+		opacity: .7;
+
+		/* Mask used to prohibit selection */
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			background: none;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			user-select: none;
+
+		}
+
+	}
+
+
+	.uix-controls--line  {
+		.uix-controls__select-trigger {
+			border-radius: 0;
+            padding-left: 0;
+			border-top-color: $control-focus-bordercolor2 !important;
+			border-left-color: $control-focus-bordercolor2 !important;
+			border-right-color: $control-focus-bordercolor2 !important;
+            border-bottom-color: transparent !important;
+
+		}
+
+        //Create Line Effect on Click
+        @include create-line();
+        .uix-controls__basic-bar,
+        .uix-controls__bar {
+            bottom: #{$control-padding-height*2};
+        }
+        
+	}
+
+    
+    
+	.uix-controls__select {
+		
+		&.is-opened {
+
+			.uix-controls__bar {
+                width: 100%;
+			}
+		}
+    }
+
+
+}
+
+
+
+/*
+ ---------------------------
+ 6. Custom Input Number
+ ---------------------------
+ */
+.uix-controls__number {
+
+	
+	&.uix-controls--line {
+
+		.uix-controls__number__btn {
+		    border: none;
+
+		}
+	}
+
+}
+
+
+
+
+
+/*
+ ---------------------------
+ 7. Multiple Selector
+ ---------------------------
+ */
+.uix-controls__multi-sel {
+
+
+	/* Create Line Effect on Click */
+	&.uix-controls--line {
+
+		> span {
+			border-top-color: transparent !important;
+			border-left-color: transparent !important;
+			border-right-color: transparent !important;
+			background: #fff !important;
+            border-bottom-color: transparent !important;
+
+
+			&.is-active {
+				color: $control-text-color !important;
+			}
+            
+            &:hover {
+                .uix-controls__bar {
+                    width: 100% !important;
+                    bottom: -1px !important;
+                }      
+            }
+		}
+        
+
+
+	}
+
+}
+
+
+
+
+/*
+ ---------------------------
+ 8. Single Selector
+ ---------------------------
+ */
+
+.uix-controls__single-sel {
+
+	/* Create Line Effect on Click */
+	&.uix-controls--line {
+
+
+		> span {
+			border-top-color: transparent !important;
+			border-left-color: transparent !important;
+			border-right-color: transparent !important;
+			background: #fff !important;
+            border-bottom-color: transparent !important;
+
+			&.is-active {
+				color: $control-text-color !important;   
+                
+                .uix-controls__basic-bar {
+                    background: $highlight-color1 !important;
+                }      
+                
+			}
+            
+			&:hover {
+                .uix-controls__bar {
+                    width: 100% !important;
+                    bottom: -1px !important;
+                }     
+                
+			} 
+            
+		}
+
+	}
+
+}
+
+
