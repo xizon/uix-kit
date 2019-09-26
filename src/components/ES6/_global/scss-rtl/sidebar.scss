@@ -1,48 +1,122 @@
 /* ====================================================== 
-   <!-- Sidebar -->                  
+   <!-- Sidebar  -->            
 /* ====================================================== */
 
+/*
+ * 1. Basic                             - Synchronize to WordPress's class name
+ * 2. Calendar Widget                   - Synchronize to WordPress's class name
+ * 3. Link List                         - Synchronize to WordPress's class name
+ * 4. Tag cloud from sidebar            - Synchronize to WordPress's class name
+ * 6. Post List with Featured Image
+*/
+
+
+/* 
+ ---------------------------
+ 1. Basic
+ ---------------------------
+ */ 
 .uix-sidebar__container {
 	padding-left: auto;
-	padding-right: 2.1875rem;
-}
-
-.widget_calendar {
+    padding-right: 2.1875rem;
 	
-	caption {
-        text-align: right;
-	}
-	#next {
-	    text-align: left;
+}
+
+@media all and (max-width: 768px) {
+	.uix-sidebar__container {
+		padding-right: 0;
 	}
 }
 
-.uix-sidebar__container .widget-title::after {
-	margin-left: auto;
-	margin-right: 0.4375rem;
+/* 
+ ---------------------------
+ 2. Calendar Widget
+ ---------------------------
+ */ 
+.calendar_wrap > table {
+	
+	tfoot {
+		#next {
+			text-align: left;
+		}
+	}
+	
 }
 
-.uix-sidebar__posts-img li {
-	.uix-sidebar__posts-img__thumb {
-		float: right;
-		margin-right: auto;
-		margin-left: 0.875rem;
+/* 
+ ---------------------------
+ 3. Link List
+ ---------------------------
+ */ 
+.widget_categories ul, 
+.widget_nav_menu ul, 
+.widget_pages ul {
+    margin-left: auto;
+    margin-right: 1.25rem;
+	
+	li {
+	
+		a {
+			
+			&::before {
+				margin-right: auto;
+                margin-left: 0.721875rem;
+			}
+			
+		}
+
+		> .cat-item-count {
+			right: auto;
+            left: 0;
+		}
+
+		
 	}
-	.uix-sidebar__posts-img__desc {
-		float: right;
+    
+}
+
+
+/* 
+ ---------------------------
+ 4. Tag cloud from sidebar
+ ---------------------------
+ */ 
+
+.tagcloud {
+	
+	
+	> a {
+	
+		&::after {
+			margin-left: auto;
+			margin-right: 0.546875rem;
+		}
+
 	}
 }
 
 
-/* With Uix Plugins */
-.uix-iso-grid-widget .uix-iso-grid-recent-item {
-	.uix-sidebar__posts-img__thumb {
-		float: right;
-		margin-right: auto;
-		margin-left: 0.875rem;
-		text-align: right;
-	}
-	.uix-sidebar__posts-img__desc {
-	    float: right;
+/* 
+ ---------------------------
+ 6. Post List with Featured Image
+ ---------------------------
+ */ 
+.uix-sidebar__posts-img {
+	
+
+	li {
+	
+		.uix-sidebar__posts-img__thumb {
+			float: right;
+			margin-right: auto;
+			margin-left: 0.875rem;
+			text-align: right;
+
+		}
+
+		.uix-sidebar__posts-img__desc {
+			float: right;
+		}
+
 	}
 }
