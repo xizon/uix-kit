@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 3.8.7 (September 28, 2019) =
+
+* New: Add a new module "Gallery Grid Layout".
+* Tweak: Upgraded config of parallax module.
+* Fix: Solved the problem of displaying extra scrollbar for Masonry With AJAX.
+
+
+
 #### = 3.8.6 (September 17, 2019) =
 
 * New: Added a hyperlink style to Button. 

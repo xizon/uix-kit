@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.6
+ * ## Version             :  3.8.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 17, 2019
+ * ## Last Update         :  September 28, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5ce3ec14c73252fdcf40";
+/******/ 	var hotCurrentHash = "878ed503239f9d8e4fca";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -810,7 +810,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(129)(__webpack_require__.s = 129);
+/******/ 	return hotCreateRequire(131)(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -821,8 +821,9 @@ window.$ = window.jQuery;
  *************************************
  * Parallax Effect
  *
- * @param  {Number} speed     - The speed of movement between elements.
- * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @param  {Number} speed       - The speed of movement between elements.
+ * @param  {String} transition  - Transition time can simulate easing effect.
+ * @param  {JSON} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
  * @return {Void}
  *
  *************************************
@@ -834,6 +835,7 @@ window.$ = window.jQuery;
     // This is the easiest way to have default options.
     var settings = $.extend({
       speed: 0.25,
+      transition: 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
       bg: {
         enable: true,
         xPos: '50%'
@@ -877,12 +879,18 @@ window.$ = window.jQuery;
         if (bgEff) {
           //background parallax
           TweenMax.set($this, {
-            backgroundPosition: bgXpos + ' ' + (0 - st * speed) + 'px'
+            css: {
+              'background-position': bgXpos + ' ' + (0 - st * speed) + 'px',
+              'transition': settings.transition
+            }
           });
         } else {
           //element parallax
           TweenMax.set($this, {
-            y: 0 - scrolled * speed
+            css: {
+              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * speed) + ')',
+              'transition': settings.transition
+            }
           });
         }
       }
@@ -2743,7 +2751,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 104 */,
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 105 */,
 /* 106 */,
 /* 107 */,
@@ -2768,7 +2781,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 126 */,
 /* 127 */,
 /* 128 */,
-/* 129 */
+/* 129 */,
+/* 130 */,
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4145,7 +4160,7 @@ function set_background_typeof(obj) { if (typeof Symbol === "function" && typeof
 var SET_BG = function (module, $, window, document) {
   if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
-  module.SET_BG.version = '0.0.3';
+  module.SET_BG.version = '0.0.4';
 
   module.SET_BG.documentReady = function ($) {
     var $window = $(window),
@@ -4192,10 +4207,12 @@ var SET_BG = function (module, $, window, document) {
               dataPos = config.position,
               dataSize = config.size,
               dataRepeat = config.repeat,
+              dataEasing = config.transition,
               dataParallax = config.parallax;
           if (set_background_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
           if (set_background_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
-          if (set_background_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat'; //Using parallax
+          if (set_background_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
+          if (set_background_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s'; //Using parallax
 
           if (dataParallax && set_background_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
             dataPos = dataPos.replace('top', '50%');
@@ -4225,6 +4242,7 @@ var SET_BG = function (module, $, window, document) {
             if (dataParallax && set_background_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
               $this.UixParallax({
                 'speed': dataParallax,
+                transition: dataEasing,
                 'bg': {
                   enable: true,
                   xPos: '50%'
@@ -13372,7 +13390,7 @@ function parallax_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var PARALLAX = function (module, $, window, document) {
   if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
-  module.PARALLAX.version = '0.0.5';
+  module.PARALLAX.version = '0.0.6';
 
   module.PARALLAX.documentReady = function ($) {
     var $window = $(window),
@@ -13402,15 +13420,21 @@ var PARALLAX = function (module, $, window, document) {
       /* Pure parallax scrolling effect without other embedded HTML elements */
       $('.uix-parallax--el').each(function () {
         var $this = $(this),
-            dataSpeed = $this.data('parallax');
+            dataSpeed = $this.data('speed'),
+            dataEasing = $this.data('transition');
 
         if (parallax_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
           dataSpeed = 0;
         }
 
+        if (parallax_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
+          dataEasing = 'none 0s ease 0s';
+        }
+
         $this.UixParallax({
           'speed': dataSpeed,
-          'bg': false
+          'bg': false,
+          transition: dataEasing
         });
       });
       /* Parallax scrolling effect with embedded HTML elements */
@@ -13421,8 +13445,10 @@ var PARALLAX = function (module, $, window, document) {
             dataImg = $curImg.attr('src'),
             dataSkew = $this.data('skew'),
             dataSpeed = $this.data('speed'),
+            dataEasing = $this.data('transition'),
             dataOverlay = $this.data('overlay-bg'),
             dataFullyVisible = $this.data('fully-visible'),
+            dataXPos = $this.data('xpos'),
             curImgH = null,
             curImgW = null,
             curSize = 'cover';
@@ -13434,6 +13460,14 @@ var PARALLAX = function (module, $, window, document) {
         if (parallax_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
           // If there is no data-xxx, save current source to it
           dataSpeed = 0;
+        }
+
+        if (parallax_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
+          dataEasing = 'none 0s ease 0s';
+        }
+
+        if (parallax_js_typeof(dataXPos) === ( true ? "undefined" : undefined)) {
+          dataXPos = '50%';
         }
 
         if (parallax_js_typeof(dataFullyVisible) === ( true ? "undefined" : undefined)) {
@@ -13499,12 +13533,12 @@ var PARALLAX = function (module, $, window, document) {
             if (Modernizr.cssanimations) {
               // supported
               $this.css({
-                'background': 'linear-gradient(' + dataOverlay + ', ' + dataOverlay + '), url(' + dataImg + ') 50% 0/' + curSize + ' no-repeat fixed'
+                'background': 'linear-gradient(' + dataOverlay + ', ' + dataOverlay + '), url(' + dataImg + ') ' + dataXPos + ' 0/' + curSize + ' no-repeat fixed'
               });
             } else {
               // not-supported
               $this.css({
-                'background': 'url(' + dataImg + ') 50% 0/' + curSize + ' no-repeat fixed'
+                'background': 'url(' + dataImg + ') ' + dataXPos + ' 0/' + curSize + ' no-repeat fixed'
               });
             }
           } //Apply tilt effect
@@ -13520,9 +13554,10 @@ var PARALLAX = function (module, $, window, document) {
 
           $this.UixParallax({
             'speed': dataSpeed,
+            transition: dataEasing,
             'bg': {
               enable: true,
-              xPos: '50%'
+              xPos: dataXPos
             }
           });
         };
@@ -20426,65 +20461,68 @@ var features_scss_style = __webpack_require__(82);
 // EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
 var footer_templates_scss_style = __webpack_require__(83);
 
+// EXTERNAL MODULE: ./src/components/ES6/gallery-grid-layout/scss/_style.scss
+var gallery_grid_layout_scss_style = __webpack_require__(84);
+
 // EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(84);
+var heading_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(85);
+var image_animation_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(86);
+var list_brands_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(87);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(88);
+var list_side_by_side_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(89);
+var list_side_by_side_img_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-split-content/scss/_style.scss
-var list_split_content_scss_style = __webpack_require__(90);
+var list_split_content_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(91);
+var mouse_animation_scroll_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(92);
+var overlay_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(93);
+var ribbon_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(94);
+var shape_animation_scss_style = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(95);
+var _comments = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(96);
+var _editing = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(97);
+var striking_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(98);
+var team_fullwidth_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(99);
+var team_grid_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(100);
+var testimonials_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(101);
+var tooltip_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(102);
+var vertical_separator_scss_style = __webpack_require__(103);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(103);
+var wave_background_scss_style = __webpack_require__(104);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
@@ -20599,6 +20637,7 @@ var wave_background_scss_style = __webpack_require__(103);
 /* pages */
 
 /* These modules do not contain JavaScript */
+
 
 
 

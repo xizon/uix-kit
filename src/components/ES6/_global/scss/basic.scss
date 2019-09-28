@@ -189,3 +189,20 @@ pre {
 
 }
 
+
+figure {
+    position: relative;
+    
+    figcaption {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        padding: 1.5rem 1rem 1rem;
+        color: #fff;
+        text-align: center;
+        font-size: 0.875rem;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent);   
+    }
+}

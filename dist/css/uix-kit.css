@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.6
+ * ## Version             :  3.8.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 17, 2019
+ * ## Last Update         :  September 28, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -99,26 +99,27 @@
     81.Equal-width Columns
     82.Features
     83.Footer Templates
-    84.Heading
-    85.Image Animation
-    86.Brands List
-    87.Maintain Aspect Ratio List
-    88.Side by Side List
-    89.Side by Side List With Photo
-    90.Fullwidth List of Split 2
-    91.Mouse Animation Scroll
-    92.Overlay
-    93.Ribbon
-    94.Shape Animation
-    95.Comments ( Synchronize to WordPress's class name )
-    96.Editing Component
-    97.Striking
-    98.Team Fullwidth (Style using the Side by Side List With Photo module)
-    99.Team Gird
-    100.Testimonials Carousel
-    101.ToolTip
-    102.Vertical Separator
-    103.Wave Background
+    84.Gallery Grid Layout
+    85.Heading
+    86.Image Animation
+    87.Brands List
+    88.Maintain Aspect Ratio List
+    89.Side by Side List
+    90.Side by Side List With Photo
+    91.Fullwidth List of Split 2
+    92.Mouse Animation Scroll
+    93.Overlay
+    94.Ribbon
+    95.Shape Animation
+    96.Comments ( Synchronize to WordPress's class name )
+    97.Editing Component
+    98.Striking
+    99.Team Fullwidth (Style using the Side by Side List With Photo module)
+    100.Team Gird
+    101.Testimonials Carousel
+    102.ToolTip
+    103.Vertical Separator
+    104.Wave Background
 
 
 */
@@ -279,6 +280,20 @@ pre {
     pre.uix-precode.uix-precode--nolebel code {
       margin: 0;
       border: none; }
+
+figure {
+  position: relative; }
+  figure figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    padding: 1.5rem 1rem 1rem;
+    color: #fff;
+    text-align: center;
+    font-size: 0.875rem;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent); }
 
 /* ====================================================== 
    <!-- Brand -->                         
@@ -2350,7 +2365,7 @@ details.uix-details-reset > summary {
 .widget_categories ul,
 .widget_nav_menu ul,
 .widget_pages ul {
-  margin-left: 0.875rem; }
+  margin-left: 1.25rem; }
   .widget_categories ul li,
   .widget_nav_menu ul li,
   .widget_pages ul li {
@@ -2392,6 +2407,11 @@ details.uix-details-reset > summary {
     .widget_nav_menu ul > li li,
     .widget_pages ul > li li {
       border-bottom: none; }
+
+.widget_categories ul.children li:last-child,
+.widget_nav_menu ul.children li:last-child,
+.widget_pages ul.children li:last-child {
+  border-bottom: none; }
 
 /* 
  ---------------------------
@@ -6604,68 +6624,72 @@ select:-webkit-autofill:focus {
 /* ======================================================
         <!-- Gallery -->
 /* ====================================================== */
-.uix-gallery > .uix-gallery__tiles {
-  overflow: auto;
-  /* Fix a bug for floating divs have 0 height */ }
-  .uix-gallery > .uix-gallery__tiles .uix-gallery__item {
-    transition: none;
-    position: relative;
-    text-align: left;
-    margin-bottom: 0;
-    /* Cover the bottom spacing of the grid system */ }
-    .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image {
-      width: 100%;
-      display: block;
-      overflow: hidden;
+.uix-gallery {
+  /* Masonry layout */ }
+  .uix-gallery > .uix-gallery__tiles {
+    overflow: auto;
+    /* Fix a bug for floating divs have 0 height */ }
+    .uix-gallery > .uix-gallery__tiles .uix-gallery__item {
+      transition: none;
       position: relative;
-      outline: 0;
-      background: #ddd;
-      border: 1px solid #E7E7E7; }
-      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover {
-        position: relative; }
-        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover img {
-          width: 100%; }
-        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover::before {
-          transition: all 0.3s ease;
-          background: rgba(255, 255, 255, 0);
-          display: block;
-          content: '';
-          top: 0;
-          left: 0;
-          position: absolute;
-          z-index: 2;
-          width: 100%;
-          height: 100%; }
-    .uix-gallery > .uix-gallery__tiles .uix-gallery__item h3 {
-      position: relative;
-      font-size: 1.125rem;
-      padding-top: 0.546875rem; }
-    .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__title {
-      opacity: 0.7;
-      margin-left: 0.875rem;
-      font-size: 0.625rem;
-      line-height: 1.625;
-      display: inline-block; }
-      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__title::before {
-        content: '|';
-        padding-right: 0.875rem; }
-    .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat {
-      font-size: 0.625rem;
-      line-height: 1.625;
-      display: inline-block;
-      position: absolute;
-      bottom: 0.8125rem;
-      right: 0;
-      background: #EC5E79;
-      border-radius: 25px;
-      padding: 0.0875rem 1.1375rem;
-      color: #fff; }
-      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat a {
+      text-align: left;
+      margin-bottom: 0;
+      /* Cover the bottom spacing of the grid system */ }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image {
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        position: relative;
+        outline: 0;
+        background: #ddd;
+        border: 1px solid #E7E7E7; }
+        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover {
+          position: relative; }
+          .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover img {
+            width: 100%; }
+          .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__image .uix-gallery__image-cover::before {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0);
+            display: block;
+            content: '';
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            height: 100%; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item h3 {
+        position: relative;
+        font-size: 1.125rem;
+        padding-top: 0.546875rem; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__title {
+        opacity: 0.7;
+        margin-left: 0.875rem;
+        font-size: 0.625rem;
+        line-height: 1.625;
+        display: inline-block; }
+        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__title::before {
+          content: '|';
+          padding-right: 0.875rem; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat {
+        font-size: 0.625rem;
+        line-height: 1.625;
+        display: inline-block;
+        position: absolute;
+        bottom: 0.8125rem;
+        right: 0;
+        background: #EC5E79;
+        border-radius: 25px;
+        padding: 0.0875rem 1.1375rem;
         color: #fff; }
-      .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat:hover {
-        background: #C56263; }
-    .uix-gallery > .uix-gallery__tiles .uix-gallery__item:hover .uix-gallery__image-cover::before {
-      background: rgba(255, 255, 255, 0.95); }
+        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat a {
+          color: #fff; }
+        .uix-gallery > .uix-gallery__tiles .uix-gallery__item .uix-gallery__cat:hover {
+          background: #C56263; }
+      .uix-gallery > .uix-gallery__tiles .uix-gallery__item:hover .uix-gallery__image-cover::before {
+        background: rgba(255, 255, 255, 0.95); }
+  .uix-gallery.masonry-container > .uix-gallery__tiles {
+    overflow: inherit; }
 
 /* Filter or Masonry */
 .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles,
@@ -12782,6 +12806,96 @@ ul.edd_purchase_receipt_files li {
       flex-wrap: wrap; }
     .uix-special-footer__container .uix-special-footer__menus > .uix-special-footer__menus__list {
       flex: 1 100%; } }
+
+/* ======================================================
+   <!-- Gallery Grid Layout -->
+/* ====================================================== */
+.uix-gallery-grid .uix-gallery-grid__tiles {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item {
+    margin: 0 15px 15px 0;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item figure {
+    margin: 0;
+    height: 100%; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item img {
+    display: block;
+    max-width: 100%;
+    height: auto; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item img {
+    width: 100%; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    padding: 40px 10px 9px;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent); }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item figcaption img {
+    display: inline; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.is-cropped .uix-gallery-grid__image a, .uix-gallery-grid .uix-gallery-grid__tiles.is-cropped .uix-gallery-grid__image img {
+    width: 100%; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.is-cropped .uix-gallery-grid__item a, .uix-gallery-grid .uix-gallery-grid__tiles.is-cropped .uix-gallery-grid__item img {
+    width: 100%; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item {
+    width: calc((100% - 15px) / 2); }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item:nth-of-type(even) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-1 .uix-gallery-grid__item {
+    width: 100%;
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item:last-child {
+    margin-right: 0; }
+
+@media all and (min-width: 769px) {
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-3 .uix-gallery-grid__item {
+    width: calc((100% - 15px * 2) / 3);
+    margin-right: 15px; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-4 .uix-gallery-grid__item {
+    width: calc((100% - 15px * 3) / 4);
+    margin-right: 15px; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-5 .uix-gallery-grid__item {
+    width: calc((100% - 15px * 4) / 5);
+    margin-right: 15px; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-6 .uix-gallery-grid__item {
+    width: calc((100% - 15px * 5) / 6);
+    margin-right: 15px; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-7 .uix-gallery-grid__item {
+    width: calc((100% - 15px * 6) / 7);
+    margin-right: 15px; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-8 .uix-gallery-grid__item {
+    width: calc((100% - 15px * 7) / 8);
+    margin-right: 15px; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-1 .uix-gallery-grid__item:nth-of-type(1n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-2 .uix-gallery-grid__item:nth-of-type(2n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-3 .uix-gallery-grid__item:nth-of-type(3n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-4 .uix-gallery-grid__item:nth-of-type(4n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-5 .uix-gallery-grid__item:nth-of-type(5n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-6 .uix-gallery-grid__item:nth-of-type(6n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-7 .uix-gallery-grid__item:nth-of-type(7n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles.uix-gallery-grid__col-8 .uix-gallery-grid__item:nth-of-type(8n) {
+    margin-right: 0; }
+  .uix-gallery-grid .uix-gallery-grid__tiles .uix-gallery-grid__item:last-child {
+    margin-right: 0; } }
 
 /* ======================================================
    <!-- Heading -->

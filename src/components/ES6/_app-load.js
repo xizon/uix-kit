@@ -121,6 +121,7 @@ import '@uixkit/core/dotted-line/scss/_style.scss';
 import '@uixkit/core/equal-width-columns/scss/_style.scss';
 import '@uixkit/core/features/scss/_style.scss';
 import '@uixkit/core/footer-templates/scss/_style.scss';
+import '@uixkit/core/gallery-grid-layout/scss/_style.scss';
 import '@uixkit/core/heading/scss/_style.scss';
 import '@uixkit/core/image-animation/scss/_style.scss';
 import '@uixkit/core/list-brands/scss/_style.scss';

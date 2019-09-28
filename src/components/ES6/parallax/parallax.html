@@ -60,7 +60,7 @@
 					<img class="uix-parallax__img" src="assets/images/demo/spiral-galaxy-1920x1080.jpg" alt="">
 
 					<div class="uix-v-align--absolute uix-t-c">
-						<h2 class="uix-parallax--el" data-parallax="-0.4">
+						<h2 class="uix-parallax--el" data-transition="all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s"  data-speed="-0.4">
 							Fulscreen + Parallax Element
 							<p class="uix-typo--h4">Has Overlay Background</p>
 						</h2>
@@ -104,14 +104,13 @@
 
 
 			<section class="uix-spacing--s">
-				<div class="uix-parallax" data-fully-visible="true" data-overlay-bg="false" data-skew="0" data-speed="0.3">
-					<img class="uix-parallax__img" src="assets/images/demo/spiral-galaxy-1920x600.jpg" alt="">
+				<div class="uix-height--30" style="overflow: hidden;">
+					<img class="uix-parallax--el" data-transition="all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s"  data-speed="-0.07" src="assets/images/demo/spiral-galaxy-1920x600.jpg" alt="">
 					<div class="uix-v-align--absolute uix-t-c">
 						<div class="row">
 							<div class="col-12">
 								<h2>
-									Small Image 1920 x 600
-									<p class="uix-typo--h4">The image is fully visible</p>
+									Parallax only works on inline image 1920 x 600
 								</h2>
 							</div>
 						</div>

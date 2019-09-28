@@ -23,7 +23,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	
 	
 	module.SET_BG               = module.SET_BG || {};
-    module.SET_BG.version       = '0.0.3';
+    module.SET_BG.version       = '0.0.4';
 	module.SET_BG.documentReady = function( $ ) {
 
 
@@ -82,19 +82,20 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						dataPos       = config.position,
 						dataSize      = config.size,
 						dataRepeat    = config.repeat,
+                        dataEasing    = config.transition,
 						dataParallax  = config.parallax;
 
 					if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
 					if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
 					if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+                    if ( typeof dataEasing === typeof undefined ) dataEasing = 'none 0s ease 0s';
 
 
 					//Using parallax
 					if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 						dataPos = dataPos.replace( 'top', '50%' );
 					}
-
-					
+               
 					
 					if ( typeof dataImg != typeof undefined && dataImg != '' ) {
 
@@ -125,7 +126,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						//Using parallax
 						if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 
-							$this.UixParallax( { 'speed': dataParallax, 'bg': { enable: true, xPos: '50%' } } );
+							$this.UixParallax( { 'speed': dataParallax, transition : dataEasing, 'bg': { enable: true, xPos: '50%' } } );
 						}
 
 

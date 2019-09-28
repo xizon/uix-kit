@@ -104,6 +104,12 @@
 
 	}
 
+    /* Masonry layout */
+    &.masonry-container {
+        > .uix-gallery__tiles {
+            overflow: inherit;
+        }
+    }
 
 }
 
