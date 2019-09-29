@@ -5,7 +5,7 @@
 
 
 .uix-overlay {
-	max-width: 100%;
+	width: 100%;
 	touch-action: none;
     padding: 1.5rem;
 	background: #f00;
@@ -48,3 +48,12 @@
 
 
 }
+
+
+/* With parallax */
+[class*='uix-parallax'] ~ .uix-overlay {
+    display: table !important;
+    height: 100% !important;
+}
+
+

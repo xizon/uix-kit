@@ -191,6 +191,8 @@
  8. Vertically or Horizontally Aligned Blocks
  ---------------------------
  */ 
+
+/*-- Using transform property --*/
 .uix-v-align--absolute,
 .uix-v-align--relative {
     position: absolute;
@@ -226,6 +228,7 @@
 	}
 }
 
+/*-- Using table --*/
 .uix-v-align--table {
 	display: table;
 	width: 100%;
@@ -413,41 +416,53 @@ img.uix-filter-hover--color,
 
 /* Don't use `width: 100%` because it is wrong if the parent has padding. */
 .uix-dir--top {
-	top: 0;
-	left: 0;
-	right: 0;
+	top: 0 !important;
+    bottom: auto !important;
+	left: 0 !important;
+	right: 0 !important;
 }
 .uix-dir--bottom {
-	bottom: 0;
-	left: 0;
-	right: 0;
+    top: auto !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
 }
 .uix-dir--left {
-	top: 0;
-	bottom: 0;
-	left: 0;
+	top: 0 !important;
+	bottom: 0 !important;
+	left: 0 !important;
+    right: auto !important;
 }
 .uix-dir--right {
-	top: 0;
-	bottom: 0;
-	right: 0;
+	top: 0 !important;
+	bottom: 0 !important;
+    left: auto !important;
+	right: 0 !important;
 }
 
 .uix-dir--top-left {
-	top: 0;
-	left: 0;
+	top: 0 !important;
+    bottom: auto !important;
+	left: 0 !important;
+    right: auto !important;
 }
 .uix-dir--top-right {
-	top: 0;
-	right: 0;
+	top: 0 !important;
+    bottom: auto !important;
+    left: auto !important;
+	right: 0 !important;
 }
 .uix-dir--bottom-left {
-	bottom: 0;
-	left: 0;
+    top: auto !important;
+	bottom: 0 !important;
+	left: 0 !important;
+    right: auto !important;
 }
 .uix-dir--bottom-right {
-	bottom: 0;
-	right: 0;
+    top: auto !important;
+	bottom: 0 !important;
+    left: auto !important;
+	right: 0 !important;
 }
 
 

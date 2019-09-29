@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.7
+ * ## Version             :  3.8.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 28, 2019
+ * ## Last Update         :  September 29, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -237,6 +237,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
  * 5. Element Floating
  * 6. Element Alignment
  * 12. Tip Bubble
+ * 14. Position
 */
 /* 
  ---------------------------
@@ -275,6 +276,36 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   .uix-bubble {
     right: auto;
     left: 1rem; } }
+
+/* 
+ ---------------------------
+ 14. Position
+ ---------------------------
+ */
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.uix-dir--left {
+  left: auto !important;
+  right: 0 !important; }
+
+.uix-dir--right {
+  left: 0 !important;
+  right: auto !important; }
+
+.uix-dir--top-left {
+  left: auto !important;
+  right: 0 !important; }
+
+.uix-dir--top-right {
+  left: 0 !important;
+  right: auto !important; }
+
+.uix-dir--bottom-left {
+  left: auto !important;
+  right: 0 !important; }
+
+.uix-dir--bottom-right {
+  left: 0 !important;
+  right: auto !important; }
 
 /* ====================================================== 
    <!-- Basic Layout Styles -->                                      

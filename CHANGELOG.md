@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 3.8.8 (September 28, 2019) =
+
+* New: Add some new demo for Vertical Centering module.
+* Fix: Solved the problem of displaying extra scrollbar for Gallery tiles.
+* Tweak: Optimized style of overlay.
+
+
+
+
 #### = 3.8.7 (September 28, 2019) =
 
 * New: Add a new module "Gallery Grid Layout".
