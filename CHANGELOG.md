@@ -1,11 +1,15 @@
 # Changelog
 
+#### = 3.9.0 (October 2, 2019) =
+
+* Fix: Solved a problem of video playback sequence in the Advanced Slider.
+
+
 #### = 3.8.8 (September 28, 2019) =
 
 * New: Add some new demo for Vertical Centering module.
 * Fix: Solved the problem of displaying extra scrollbar for Gallery tiles.
 * Tweak: Optimized style of overlay.
-
 
 
 

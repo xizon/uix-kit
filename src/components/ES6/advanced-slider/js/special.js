@@ -34,7 +34,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.0';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.1';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -510,6 +510,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						// Render updated scene
 						renderer.stage.addChild( curSprite );
 
+                        
+                        //Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
@@ -750,6 +752,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
+                        
+                        //Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
@@ -889,6 +893,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
+                        
+                        //Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
@@ -1034,6 +1040,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 						
+                        
+                        //Avoid error texture rendering errors ***!Important***
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});
+                        
 
 						container__items.addChild( curSprite );
 
@@ -2256,7 +2268,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 								// Paralax effect on current slide
 								TweenMax.to( curSpParallax, parallaxSpeed, { 
 									x      : 0, 
-									ease   : Power2.easeInOut 
+									ease   : Power2.easeInOut,
+                                    alpha  : 1 //Avoid error texture rendering errors ***!Important***
 								});
 
 								// Current Mask animation
@@ -2499,7 +2512,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
 							//Fix an error of Video auto play is not working in browser
-							//this.muted( true ); 
+							this.muted( true ); 
 
 							//Prevent autoplay error: Uncaught (in promise) DOMException
 							var promise = this.play();
@@ -2548,13 +2561,17 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						});
 
 
-
 						/* ---------  Pause the video when it is not current slider  */
 						if ( !play ) {
 							this.pause();
 							this.currentTime(0);
 
 						} else {
+                            
+                            //Unmute, because there is interaction, you can turn on the audio.
+                            this.muted( false );
+                            
+                            
 							if ( dataAuto ) {
 
 								this.currentTime(0);

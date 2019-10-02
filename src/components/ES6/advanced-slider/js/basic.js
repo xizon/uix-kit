@@ -26,7 +26,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.1.3';
+    module.ADVANCED_SLIDER.version       = '0.1.4';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -760,7 +760,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
 							//Fix an error of Video auto play is not working in browser
-							//this.muted( true ); 
+							this.muted( true ); 
 
 							//Prevent autoplay error: Uncaught (in promise) DOMException
 							var promise = this.play();
@@ -809,15 +809,20 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 						});
 
 
-
 						/* ---------  Pause the video when it is not current slider  */
 						if ( !play ) {
 							this.pause();
 							this.currentTime(0);
 
 						} else {
+                            
+                            //Unmute, because there is interaction, you can turn on the audio.
+                            this.muted( false );
+                            
+                            
+                            
 							if ( dataAuto ) {
-
+                                 
 								this.currentTime(0);
 
 								//Prevent autoplay error: Uncaught (in promise) DOMException

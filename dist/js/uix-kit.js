@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.8
+ * ## Version             :  3.9.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 29, 2019
+ * ## Last Update         :  October 2, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f1e2221470eaa79cfa0e";
+/******/ 	var hotCurrentHash = "2f1bf525983740eb4138";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5211,7 +5211,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.3';
+  module.ADVANCED_SLIDER.version = '0.1.4';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5732,8 +5732,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
           if (dataAuto) {
             //Fix an error of Video auto play is not working in browser
-            //this.muted( true ); 
-            //Prevent autoplay error: Uncaught (in promise) DOMException
+            this.muted(true); //Prevent autoplay error: Uncaught (in promise) DOMException
+
             var promise = this.play();
 
             if (promise !== undefined) {
@@ -5776,6 +5776,9 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             this.pause();
             this.currentTime(0);
           } else {
+            //Unmute, because there is interaction, you can turn on the audio.
+            this.muted(false);
+
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
@@ -5847,7 +5850,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.0';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.1';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6167,7 +6170,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             curSprite.width = $this.width();
             curSprite.height = $this.height(); // Render updated scene
 
-            renderer.stage.addChild(curSprite);
+            renderer.stage.addChild(curSprite); //Avoid error texture rendering errors ***!Important***
+
             TweenMax.set(curSprite, {
               alpha: 0
             });
@@ -6315,7 +6319,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             curSprite.width = $this.width();
             curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
+
             TweenMax.set(curSprite, {
               alpha: 0
             });
@@ -6403,7 +6408,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             curSprite.width = $this.width();
             curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
+
             TweenMax.set(curSprite, {
               alpha: 0
             });
@@ -6494,7 +6500,11 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             curSprite.width = $this.width();
             curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
+
+            TweenMax.set(curSprite, {
+              alpha: 0
+            });
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -7350,7 +7360,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               // Paralax effect on current slide
               TweenMax.to(curSpParallax, parallaxSpeed, {
                 x: 0,
-                ease: Power2.easeInOut
+                ease: Power2.easeInOut,
+                alpha: 1 //Avoid error texture rendering errors ***!Important***
+
               }); // Current Mask animation
 
               TweenMax.to(curSpParallax.mask, parallaxSpeed, {
@@ -7534,8 +7546,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
           if (dataAuto) {
             //Fix an error of Video auto play is not working in browser
-            //this.muted( true ); 
-            //Prevent autoplay error: Uncaught (in promise) DOMException
+            this.muted(true); //Prevent autoplay error: Uncaught (in promise) DOMException
+
             var promise = this.play();
 
             if (promise !== undefined) {
@@ -7578,6 +7590,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             this.pause();
             this.currentTime(0);
           } else {
+            //Unmute, because there is interaction, you can turn on the audio.
+            this.muted(false);
+
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
