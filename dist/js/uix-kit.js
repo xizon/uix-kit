@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.0
+ * ## Version             :  3.9.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 2, 2019
+ * ## Last Update         :  October 5, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "2f1bf525983740eb4138";
+/******/ 	var hotCurrentHash = "a36addb31a509523df84";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5850,7 +5850,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.1';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.2';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -7358,11 +7358,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             },
                 goNextItem = function goNextItem() {
               // Paralax effect on current slide
-              TweenMax.to(curSpParallax, parallaxSpeed, {
-                x: 0,
-                ease: Power2.easeInOut,
-                alpha: 1 //Avoid error texture rendering errors ***!Important***
-
+              TweenMax.set(curSpParallax, {
+                alpha: 1,
+                //Avoid error texture rendering errors ***!Important***
+                onComplete: function onComplete() {
+                  TweenMax.to(this.target, parallaxSpeed, {
+                    x: 0,
+                    ease: Power2.easeInOut
+                  });
+                }
               }); // Current Mask animation
 
               TweenMax.to(curSpParallax.mask, parallaxSpeed, {

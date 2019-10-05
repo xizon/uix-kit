@@ -31,10 +31,9 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	if ( window.ADVANCED_SLIDER_FILTER === null ) return false;
 	
 	
-	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.1';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.2';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -2266,11 +2265,17 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							goNextItem    = function() {
 								
 								// Paralax effect on current slide
-								TweenMax.to( curSpParallax, parallaxSpeed, { 
-									x      : 0, 
-									ease   : Power2.easeInOut,
-                                    alpha  : 1 //Avoid error texture rendering errors ***!Important***
+								TweenMax.set( curSpParallax, {
+                                    alpha  : 1, //Avoid error texture rendering errors ***!Important***
+									onComplete : function() {
+                                        TweenMax.to( this.target, parallaxSpeed, { 
+                                            x      : 0, 
+                                            ease   : Power2.easeInOut
+                                        });
+									} 
 								});
+                                
+
 
 								// Current Mask animation
 								TweenMax.to( curSpParallax.mask, parallaxSpeed, { 

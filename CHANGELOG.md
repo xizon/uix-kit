@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 3.9.1 (October 5, 2019) =
+
+* Fix: Solved a transparency transition problem of Advanced Slider.
+
+
 #### = 3.9.0 (October 2, 2019) =
 
 * Fix: Solved a problem of video playback sequence in the Advanced Slider.
