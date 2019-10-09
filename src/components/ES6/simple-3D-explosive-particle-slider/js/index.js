@@ -31,7 +31,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_EXP_PARTICLE_SLIDER               = module.THREE_EXP_PARTICLE_SLIDER || {};
-    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.3';
+    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.0.5';
     module.THREE_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		
@@ -102,241 +102,254 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 						$items                   = $this.find( '.uix-3d-slider--expParticle__item' ),
 						$first                   = $items.first(),
 						itemsTotal               = $items.length,
-						dataControlsPagination   = $this.data( 'controls-pagination' ),
-						dataControlsArrows       = $this.data( 'controls-arrows' ),
-						dataLoop                 = $this.data( 'loop' ),
-						dataFilterTexture        = $this.data( 'filter-texture' ),
-						dataDraggable            = $this.data( 'draggable' ),
-						dataDraggableCursor      = $this.data( 'draggable-cursor' );
+                        activated                = $this.data( 'activated' ); 
+				
+                    
+                    if ( typeof activated === typeof undefined || activated === 0 ) {
 
 
-					if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
-					if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
-					if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-					if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-					if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-					
-					
+                        //Get parameter configuration from the data-* attribute of HTML
+                        var	dataControlsPagination   = $this.data( 'controls-pagination' ),
+                            dataControlsArrows       = $this.data( 'controls-arrows' ),
+                            dataLoop                 = $this.data( 'loop' ),
+                            dataFilterTexture        = $this.data( 'filter-texture' ),
+                            dataDraggable            = $this.data( 'draggable' ),
+                            dataDraggableCursor      = $this.data( 'draggable-cursor' ),
+                            dataSpeed                = $this.data( 'speed' ),
+                            dataAuto                 = $this.data( 'auto' ),
+                            dataTiming               = $this.data( 'timing' ),
+                            dataCountTotal           = $this.data( 'count-total' ),
+                            dataCountCur             = $this.data( 'count-now' );
 
-					//Autoplay times
-					var playTimes;
-					//A function called "timer" once every second (like a digital watch).
-					$this[0].animatedSlides;
 
-					
+                        if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+                        if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+                        if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+                        if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                        if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+                        if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
+                        if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+                        if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+                        if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+                        if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';	
 
-					//If arrows does not exist on the page, it will be added by default, 
-					//and the drag and drop function will be activated.
-					if ( $( dataControlsArrows ).length == 0 ) {
-						$( 'body' ).prepend( '<div style="display:none;" class="uix-3d-slider--expParticle__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>' );
-					}
 
 
+                        //Autoplay times
+                        var playTimes;
+                        //A function called "timer" once every second (like a digital watch).
+                        $this[0].animatedSlides;
 
-					//Prevent bubbling
-					if ( itemsTotal == 1 ) {
-						$( dataControlsPagination ).hide();
-						$( dataControlsArrows ).hide();
-					}
 
-					
-					//Initialize the controlers classes
-					//-------------------------------------	
-					$( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'is-active' );
 
+                        //If arrows does not exist on the page, it will be added by default, 
+                        //and the drag and drop function will be activated.
+                        if ( $( dataControlsArrows ).length == 0 ) {
+                            $( 'body' ).prepend( '<div style="display:none;" class="uix-3d-slider--expParticle__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>' );
+                        }
 
-					
-					
-					//Initialize the wrapper width and height
-					//-------------------------------------	
-					$this.css( 'height', windowHeight + 'px' );
-					
 
-					//Load slides to canvas
-					//-------------------------------------	
-					if ( $( '#' + rendererCanvasID ).length == 0 ) {
-						$this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 
-					}
+                        //Prevent bubbling
+                        if ( itemsTotal == 1 ) {
+                            $( dataControlsPagination ).hide();
+                            $( dataControlsArrows ).hide();
+                        }
 
-					
-					//Get the animation speed
-					//-------------------------------------	
-					if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
-						animSpeed = $this.data( 'speed' );
-					}
 
+                        //Initialize the controlers classes
+                        //-------------------------------------	
+                        $( dataControlsPagination ).find( 'ul > li' ).first().addClass( 'is-active' );
 
-					//Initialize the first item container
-					//-------------------------------------		
-					$items.addClass( 'next' );
-					$first.addClass( 'is-active' );
 
 
 
-					//Get all images and videos
-					//-------------------------------------		
-					$items.each( function()  {
-						var _item = $( this );
-						
-						if ( _item.find( 'video' ).length > 0 ) {
+                        //Initialize the wrapper width and height
+                        //-------------------------------------	
+                        $this.css( 'height', windowHeight + 'px' );
 
-							//Returns the dimensions (intrinsic height and width ) of the video
-							var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
-								videoURL = _item.find( 'source:first' ).attr( 'src' );
 
-							if ( typeof videoURL != typeof undefined ) {
-								sources.push(
-									{
-										"url": videoURL,
-										"id": _item.find( 'video' ).attr( 'id' ),
-										"type": 'video'
-									}
-								);
-							}
+                        //Load slides to canvas
+                        //-------------------------------------	
+                        if ( $( '#' + rendererCanvasID ).length == 0 ) {
+                            $this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 
+                        }
 
 
+                        //Get the animation speed
+                        //-------------------------------------	
+                        if ( typeof dataSpeed != typeof undefined && dataSpeed != false ) {
+                            animSpeed = dataSpeed;
+                        }
 
-						} else {
 
-							var imgURL   = _item.find( 'img' ).attr( 'src' );
+                        //Initialize the first item container
+                        //-------------------------------------		
+                        $items.addClass( 'next' );
+                        $first.addClass( 'is-active' );
 
-							if ( typeof imgURL != typeof undefined ) {
 
-								sources.push(
-									{
-										"url": imgURL,
-										"id": 'img-' + UixGUID.create(),
-										"type": 'img'
-									}
-								);
-							}
 
+                        //Get all images and videos
+                        //-------------------------------------		
+                        $items.each( function()  {
+                            var _item = $( this );
 
-						}	
+                            if ( _item.find( 'video' ).length > 0 ) {
 
-					});
-					
-					
+                                //Returns the dimensions (intrinsic height and width ) of the video
+                                var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
+                                    videoURL = _item.find( 'source:first' ).attr( 'src' );
 
-					//Pagination dots 
-					//-------------------------------------	
-					var _dot       = '',
-						_dotActive = '';
-					_dot += '<ul>';
-					for ( var i = 0; i < itemsTotal; i++ ) {
+                                if ( typeof videoURL != typeof undefined ) {
+                                    sources.push(
+                                        {
+                                            "url": videoURL,
+                                            "id": _item.find( 'video' ).attr( 'id' ),
+                                            "type": 'video'
+                                        }
+                                    );
+                                }
 
-						_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
-						_dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
-					}
-					_dot += '</ul>';
 
-					if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
 
-					
-					//Fire the slider transtion with buttons
-					$( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
-						e.preventDefault();
+                            } else {
 
-						var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
-							slideNextId = $( this ).index();
+                                var imgURL   = _item.find( 'img' ).attr( 'src' );
 
+                                if ( typeof imgURL != typeof undefined ) {
 
-						//Determine the direction
-						var curDir = 'prev';
-						if ( $( this ).attr( 'data-index' ) > slideCurId ) {
-							curDir = 'next';
-						}
+                                    sources.push(
+                                        {
+                                            "url": imgURL,
+                                            "id": 'img-' + UixGUID.create(),
+                                            "type": 'img'
+                                        }
+                                    );
+                                }
 
 
-						//Transition Between Slides
-						sliderUpdates( slideCurId, slideNextId, curDir );
+                            }	
 
+                        });
 
-						//Pause the auto play event
-						clearInterval( $this[0].animatedSlides );	
 
 
-					});
+                        //Pagination dots 
+                        //-------------------------------------	
+                        var _dot       = '',
+                            _dotActive = '';
+                        _dot += '<ul>';
+                        for ( var i = 0; i < itemsTotal; i++ ) {
 
-					//Next/Prev buttons
-					//-------------------------------------		
-					var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ),
-						_next = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' );
+                            _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
-					$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+                            _dot += '<li '+_dotActive+' data-index="'+i+'"><a href="javascript:"></a></li>';
+                        }
+                        _dot += '</ul>';
 
-					$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
-					if ( !dataLoop ) {
-						_prev.addClass( 'is-disabled' );
-					}
+                        if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
 
 
-					_prev.on( 'click', function( e ) {
-						e.preventDefault();
+                        //Fire the slider transtion with buttons
+                        $( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
+                            e.preventDefault();
 
-						var slideCurId  = $items.filter( '.is-active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
-	
-						//Transition Between Slides
-						sliderUpdates( slideCurId, slideNextId, 'prev' );	
-						
-						
+                            var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
+                                slideNextId = $( this ).index();
 
 
-						//Pause the auto play event
-						clearInterval( $this[0].animatedSlides );
+                            //Determine the direction
+                            var curDir = 'prev';
+                            if ( $( this ).attr( 'data-index' ) > slideCurId ) {
+                                curDir = 'next';
+                            }
 
-					});
 
-					_next.on( 'click', function( e ) {
-						e.preventDefault();
+                            //Transition Between Slides
+                            sliderUpdates( slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );
 
-						var slideCurId  = $items.filter( '.is-active' ).index(),
-							slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
-	
-						//Transition Between Slides
-						sliderUpdates( slideCurId, slideNextId, 'next' );	
 
+                            //Pause the auto play event
+                            clearInterval( $this[0].animatedSlides );	
 
-						//Pause the auto play event
-						clearInterval( $this[0].animatedSlides );
 
+                        });
 
-					});
-					
+                        //Next/Prev buttons
+                        //-------------------------------------		
+                        var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ),
+                            _next = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' );
 
-					
-					//Autoplay Slider
-					//-------------------------------------		
-					var dataAuto                 = $this.data( 'auto' ),
-						dataTiming               = $this.data( 'timing' ),
-						dataLoop                 = $this.data( 'loop' );
+                        $( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
-					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
-					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+                        $( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
+                        if ( !dataLoop ) {
+                            _prev.addClass( 'is-disabled' );
+                        }
 
 
-					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+                        _prev.on( 'click', function( e ) {
+                            e.preventDefault();
 
-						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+                            var slideCurId  = $items.filter( '.is-active' ).index(),
+                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 
-						$this.on({
-							mouseenter: function() {
-								clearInterval( $this[0].animatedSlides );
-							},
-							mouseleave: function() {
-								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
-							}
-						});	
+                            //Transition Between Slides
+                            sliderUpdates( slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
 
-					}
 
 
+
+                            //Pause the auto play event
+                            clearInterval( $this[0].animatedSlides );
+
+                        });
+
+                        _next.on( 'click', function( e ) {
+                            e.preventDefault();
+
+                            var slideCurId  = $items.filter( '.is-active' ).index(),
+                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
+
+                            //Transition Between Slides
+                            sliderUpdates( slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
+
+
+                            //Pause the auto play event
+                            clearInterval( $this[0].animatedSlides );
+
+
+                        });
+
+
+
+                        //Autoplay Slider
+                        //-------------------------------------		
+                        if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+                            sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+
+                            $this.on({
+                                mouseenter: function() {
+                                    clearInterval( $this[0].animatedSlides );
+                                },
+                                mouseleave: function() {
+                                    sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+                                }
+                            });	
+
+                        }
+                        
+
+                        //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+                        $this.data( 'activated', 1 );
+
+                    }//endif activated
+                        
+                        
 				});// end each				
 			}
 
@@ -685,61 +698,61 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			}	
 			
 			
-			
-	
+             /*
+             * Trigger slider autoplay
+             *
+             * @param  {Function} playTimes            - Number of times.
+             * @param  {Number} timing                 - Autoplay interval.
+             * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+             * @param  {Object} slider                 - Selector of the slider .
+             * @param  {String} countTotalID           - Total number ID or class of counter.
+             * @param  {String} countCurID             - Current number ID or class of counter.
+             * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+             * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+             * @return {Void}                          - The constructor.
+             */
+            function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-			
-		 /*
-		 * Trigger slider autoplay
-		 *
-		 * @param  {Function} playTimes      - Number of times.
-		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @param  {Object} slider           - Selector of the slider .
-		 * @return {Void}                    - The constructor.
-		 */
-		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+                var items = slider.find( '.uix-3d-slider--expParticle__item' ),
+                    total = items.length;
 
-			var items = slider.find( '.uix-3d-slider--expParticle__item' ),
-				total = items.length;
-			
-			slider[0].animatedSlides = setInterval( function() {
+                slider[0].animatedSlides = setInterval( function() {
 
-					playTimes = parseFloat( items.filter( '.is-active' ).index() );
-					playTimes++;
-
-					
-					if ( !loop ) {
-						if ( playTimes < total && playTimes >= 0 ) {
-							
-							var slideCurId  = items.filter( '.is-active' ).index(),
-								slideNextId = playTimes;	
-
-							sliderUpdates( slideCurId, slideNextId, 'next' );
-						}
-					} else {
-						if ( playTimes == total ) playTimes = 0;
-						if ( playTimes < 0 ) playTimes = total-1;		
-
-						var slideCurId  = items.filter( '.is-active' ).index(),
-							slideNextId = playTimes;	
-
-						
-						//Prevent problems with styles when switching in positive order
-						if ( playTimes == 0 ) {
-							sliderUpdates( slideCurId, slideNextId, 'prev' );	
-						} else {
-							sliderUpdates( slideCurId, slideNextId, 'next' );
-						}
-
-					}
+                        playTimes = parseFloat( items.filter( '.is-active' ).index() );
+                        playTimes++;
 
 
+                        if ( !loop ) {
+                            if ( playTimes < total && playTimes >= 0 ) {
 
-				}, timing );	
-			}
+                                var slideCurId  = items.filter( '.is-active' ).index(),
+                                    slideNextId = playTimes;	
 
-			
+                                sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
+                            }
+                        } else {
+                            if ( playTimes == total ) playTimes = 0;
+                            if ( playTimes < 0 ) playTimes = total-1;		
+
+                            var slideCurId  = items.filter( '.is-active' ).index(),
+                                slideNextId = playTimes;	
+
+
+                            //Prevent problems with styles when switching in positive order
+                            if ( playTimes == 0 ) {
+                                sliderUpdates( slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );	
+                            } else {
+                                sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
+                            }
+
+                        }
+
+
+
+                    }, timing );	
+                }
+
+
 			
 			/*
 			 *  Transition Between Slides
@@ -747,31 +760,26 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			 * @param  {Number} slideCurId             - Index of current slider.
 			 * @param  {Number} slideNextId            - Index of next slider.
 			 * @param  {String} dir                    - Switching direction indicator.	 
+             * @param  {String} countTotalID           - Total number ID or class of counter.
+             * @param  {String} countCurID             - Current number ID or class of counter.
+             * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+             * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+             * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
 			 * @return {Void}
 			 */
-			function sliderUpdates( slideCurId, slideNextId, dir ) {
+			function sliderUpdates( slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 
 
 				var $items                   = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ),
-					total                    = $items.length,
-					dataCountTotal           = $sliderWrapper.data( 'count-total' ),
-					dataCountCur             = $sliderWrapper.data( 'count-now' ),
-					dataControlsPagination   = $sliderWrapper.data( 'controls-pagination' ),
-					dataControlsArrows       = $sliderWrapper.data( 'controls-arrows' ),	
-					dataLoop                 = $sliderWrapper.data( 'loop' );
+					total                    = $items.length;
 	
 			
-				
-				if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
-				if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-				if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
-				if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-				if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
-
+                
+	
 				//Prevent bubbling
 				if ( total == 1 ) {
-					$( dataControlsPagination ).hide();
-					$( dataControlsArrows ).hide();
+					$( paginationID ).hide();
+					$( arrowsID ).hide();
 					return false;
 				}
 
@@ -781,7 +789,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 					
 					//Transition Interception
 					//-------------------------------------
-					if ( dataLoop ) {
+					if ( loop ) {
 						if ( slideCurId > total - 1 ) slideCurId = 0;
 						if ( slideCurId < 0 ) slideCurId = total-1;	
 
@@ -830,20 +838,20 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 					//Add transition class to Controls Pagination
 					//-------------------------------------
-					$( dataControlsPagination ).find( 'ul > li' ).removeClass( 'is-active leave prev next' )
+					$( paginationID ).find( 'ul > li' ).removeClass( 'is-active leave prev next' )
 											   .addClass( dirIndicatorClass );
 
-					$( dataControlsPagination ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
-					$( dataControlsPagination ).find( 'ul > li' ).eq( slideNextId ).addClass( 'is-active' );
+					$( paginationID ).find( 'ul > li' ).eq( slideCurId ).addClass( 'leave' );
+					$( paginationID ).find( 'ul > li' ).eq( slideNextId ).addClass( 'is-active' );
 
 
 
 					//Add transition class to Arrows
 					//-------------------------------------		
-					if ( ! dataLoop ) {
-						$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
-						if ( slideNextId == total - 1 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'is-disabled' );
-						if ( slideNextId == 0 ) $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'is-disabled' );
+					if ( ! loop ) {
+						$( arrowsID ).find( 'a' ).removeClass( 'is-disabled' );
+						if ( slideNextId == total - 1 ) $( arrowsID ).find( '.uix-3d-slider--expParticle__arrows--next' ).addClass( 'is-disabled' );
+						if ( slideNextId == 0 ) $( arrowsID ).find( '.uix-3d-slider--expParticle__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 
@@ -851,8 +859,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 					//Display counter
 					//-------------------------------------
-					$( dataCountTotal ).text( total );
-					$( dataCountCur ).text( parseFloat( slideCurId ) + 1 );		
+					$( countTotalID ).text( total );
+					$( countCurID ).text( parseFloat( slideCurId ) + 1 );		
 
 
 

@@ -3,7 +3,7 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.2
+ * ## Version             :  3.9.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  October 9, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "61a62554b37610fae1b2";
+/******/ 	var hotCurrentHash = "cbe1eb3b3c2e8650849e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4935,13 +4935,13 @@ function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "functio
 var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_CONTENT_SLIDER === null) return false;
   module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
-  module.ADVANCED_CONTENT_SLIDER.version = '0.0.4';
+  module.ADVANCED_CONTENT_SLIDER.version = '0.0.6';
 
   module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
     var $window = $(window),
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight,
-        animDuration = 1200;
+        animSpeed = 1200;
     sliderInit();
     $window.on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -4966,139 +4966,157 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
             itemWidth = $this.width(),
             itemsTotal = $items.length,
             totalWidth = itemWidth * itemsTotal,
-            dataControlsPagination = $this.data('controls-pagination'),
-            dataControlsArrows = $this.data('controls-arrows'),
-            dataDraggable = $this.data('draggable'),
-            dataDraggableCursor = $this.data('draggable-cursor'),
-            dataControlsPaginationAuto = false; //Autoplay times
+            dataControlsPaginationAuto = false,
+            activated = $this.data('activated');
 
-        var playTimes; //A function called "timer" once every second (like a digital watch).
+        if (advanced_content_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Get parameter configuration from the data-* attribute of HTML
+          var dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop'),
+              dataSpeed = $this.data('speed');
+          if (advanced_content_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
+          if (advanced_content_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
+          if (advanced_content_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (advanced_content_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+          if (advanced_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (advanced_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (advanced_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
-        $this[0].animatedSlides;
-        if (advanced_content_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
-        if (advanced_content_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
-        if (advanced_content_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-        if (advanced_content_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
-        if ($(dataControlsPagination).html().length == 0) dataControlsPaginationAuto = true; //Initialize the width of each item
-        //-------------------------------------		
+          var playTimes; //A function called "timer" once every second (like a digital watch).
 
-        $first.addClass('is-active');
-        $items.css('width', itemWidth + 'px');
-        TweenMax.set($itemsWrapper, {
-          width: totalWidth,
-          onComplete: function onComplete() {
-            $this.css('height', 'auto');
-          }
-        }); //Pagination dots 
-        //-------------------------------------	
+          $this[0].animatedSlides; //Navigation ID for paging control of each slide is automatically numbered.
 
-        if (dataControlsPaginationAuto) {
-          var _dot = '',
-              _dotActive = '';
-          _dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+          if ($(dataControlsPagination).html().length == 0) dataControlsPaginationAuto = true; //Get the animation speed
+          //-------------------------------------	
 
-          for (var i = 0; i < itemsTotal; i++) {
-            _dotActive = i == 0 ? 'class="is-active"' : '';
-            _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
-          }
-
-          _dot += '</ul>';
-          if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-        } else {
-          $(dataControlsPagination).find('li').first().find('a').addClass('is-active');
-          $(dataControlsPagination).find('li').first().addClass('is-active');
-        }
-
-        $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
-          e.preventDefault();
-
-          if (!$(this).hasClass('is-active')) {
-            sliderUpdates($(this).attr('data-index'), $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }
-        }); //Next/Prev buttons
-        //-------------------------------------		
-
-        var _prev = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--prev'),
-            _next = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--next');
-
-        $(dataControlsArrows).find('a').attr('href', 'javascript:');
-
-        _prev.addClass('is-disabled');
-
-        _prev.off('click').on('click', function (e) {
-          e.preventDefault();
-          sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-          clearInterval($this[0].animatedSlides);
-        });
-
-        _next.off('click').on('click', function (e) {
-          e.preventDefault();
-          sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-          clearInterval($this[0].animatedSlides);
-        }); //Drag and Drop
-        //-------------------------------------	
+          if (advanced_content_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+            animSpeed = dataSpeed;
+          } //Initialize the width of each item
+          //-------------------------------------		
 
 
-        var $dragDropTrigger = $this,
-            hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
-
-        if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor);
-
-        if (!dataDraggable) {
-          hammerProps = {
-            inputClass: Hammer.TouchInput
-          };
-        } //Mouse event
-        //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-
-
-        var direction,
-            dragDropElement = $dragDropTrigger[0],
-            dragDropMC = new Hammer(dragDropElement, hammerProps);
-        dragDropMC.on('panright press panleft', function (ev) {
-          //Set the direction in here
-          direction = ev.type;
-        });
-        dragDropMC.on('panend', function (ev) {
-          //Use the direction in here
-          //You know the pan has ended
-          //and you know which action they were taking
-          if (direction == 'panleft') {
-            sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }
-
-          if (direction == 'panright') {
-            sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }
-        }); //Autoplay Slider
-        //-------------------------------------		
-
-        var dataAuto = $this.data('auto'),
-            dataTiming = $this.data('timing'),
-            dataLoop = $this.data('loop');
-        if (advanced_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-        if (advanced_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-        if (advanced_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
-        if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-          sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination);
-          $this.on({
-            mouseenter: function mouseenter() {
-              clearInterval($this[0].animatedSlides);
-            },
-            mouseleave: function mouseleave() {
-              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination);
+          $first.addClass('is-active');
+          $items.css('width', itemWidth + 'px');
+          TweenMax.set($itemsWrapper, {
+            width: totalWidth,
+            onComplete: function onComplete() {
+              $this.css('height', 'auto');
             }
+          }); //Pagination dots 
+          //-------------------------------------	
+
+          if (dataControlsPaginationAuto) {
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
+            }
+
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
+          } else {
+            $(dataControlsPagination).find('li').first().find('a').addClass('is-active');
+            $(dataControlsPagination).find('li').first().addClass('is-active');
+          }
+
+          $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
+            e.preventDefault();
+
+            if (!$(this).hasClass('is-active')) {
+              sliderUpdates($(this).attr('data-index'), $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }
+          }); //Next/Prev buttons
+          //-------------------------------------		
+
+          var _prev = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--prev'),
+              _next = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--next');
+
+          $(dataControlsArrows).find('a').attr('href', 'javascript:');
+
+          if (!dataLoop) {
+            _prev.addClass('is-disabled');
+          }
+
+          _prev.off('click').on('click', function (e) {
+            e.preventDefault();
+            sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+            clearInterval($this[0].animatedSlides);
           });
-        }
+
+          _next.off('click').on('click', function (e) {
+            e.preventDefault();
+            sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+            clearInterval($this[0].animatedSlides);
+          }); //Drag and Drop
+          //-------------------------------------	
+
+
+          var $dragDropTrigger = $this,
+              hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
+
+          if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor);
+
+          if (!dataDraggable) {
+            hammerProps = {
+              inputClass: Hammer.TouchInput
+            };
+          } //Mouse event
+          //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+
+
+          var direction,
+              dragDropElement = $dragDropTrigger[0],
+              dragDropMC = new Hammer(dragDropElement, hammerProps);
+          dragDropMC.on('panright press panleft', function (ev) {
+            //Set the direction in here
+            direction = ev.type;
+          });
+          dragDropMC.on('panend', function (ev) {
+            //Use the direction in here
+            //You know the pan has ended
+            //and you know which action they were taking
+            if (direction == 'panleft') {
+              sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }
+
+            if (direction == 'panright') {
+              sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }
+          }); //Autoplay Slider
+          //-------------------------------------		
+
+          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsPagination, dataControlsArrows);
+            $this.on({
+              mouseenter: function mouseenter() {
+                clearInterval($this[0].animatedSlides);
+              },
+              mouseleave: function mouseleave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsPagination, dataControlsArrows);
+              }
+            });
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated        
+
       });
     }
     /*
@@ -5106,15 +5124,15 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
      *
      * @param  {Function} playTimes      - Number of times.
      * @param  {Number} timing           - Autoplay interval.
-     * @param  {Boolean} loop            - Determine whether to loop through each item.
+     * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
      * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} arrows           - Controller name of prev/next buttons.
-     * @param  {String} pagination       - Controller name of pagination buttons.
+           * @param  {String} paginationID     - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
      * @return {Void}                    - The constructor.
      */
 
 
-    function sliderAutoPlay(playTimes, timing, loop, slider, arrows, pagination) {
+    function sliderAutoPlay(playTimes, timing, loop, slider, paginationID, arrowsID) {
       var items = slider.find('.uix-advanced-content-slider__item'),
           total = items.length;
       slider[0].animatedSlides = setInterval(function () {
@@ -5124,14 +5142,14 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
         if (!loop) {
           if (playTimes < total && playTimes >= 0) {
             var slideNextId = playTimes;
-            sliderUpdates(slideNextId, slider, arrows, pagination);
+            sliderUpdates(slideNextId, slider, paginationID, arrowsID, loop);
           }
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1;
           var slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
-          sliderUpdates(slideNextId, slider, arrows, pagination);
+          sliderUpdates(slideNextId, slider, paginationID, arrowsID, loop);
         }
       }, timing);
     }
@@ -5140,49 +5158,43 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
      *
      * @param  {Number} elementIndex     - Index of current slider.
      * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} arrows           - Controller name of prev/next buttons.
-     * @param  {String} pagination       - Controller name of pagination buttons.
+           * @param  {String} paginationID     - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
      * @return {Void}
      */
 
 
-    function sliderUpdates(elementIndex, slider, arrows, pagination) {
+    function sliderUpdates(elementIndex, slider, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-content-slider__item'),
           itemsTotal = $items.length,
-          $prev = $(arrows).find('.uix-advanced-content-slider__arrows--prev'),
-          $next = $(arrows).find('.uix-advanced-content-slider__arrows--next'),
-          $pagination = $(pagination).find('li a'); //Get the animation speed
+          $prev = $(arrowsID).find('.uix-advanced-content-slider__arrows--prev'),
+          $next = $(arrowsID).find('.uix-advanced-content-slider__arrows--next'),
+          $pagination = $(paginationID).find('li a');
+      $pagination.removeClass('is-active');
+      $pagination.parent().removeClass('is-active');
 
-      if (advanced_content_slider_js_typeof(slider.data('speed')) != ( true ? "undefined" : undefined) && slider.data('speed') != false) {
-        animDuration = slider.data('speed');
-      }
-
-      if (elementIndex <= itemsTotal - 1 && elementIndex >= 0) {
+      if (loop) {
+        if (elementIndex == itemsTotal) elementIndex = 0;
+        if (elementIndex < 0) elementIndex = itemsTotal - 1;
+      } else {
         if (elementIndex > parseFloat(itemsTotal - 1)) elementIndex = parseFloat(itemsTotal - 1);
         if (elementIndex < 0) elementIndex = 0;
         $next.removeClass('is-disabled');
         $prev.removeClass('is-disabled');
-        $pagination.removeClass('is-active');
-        $pagination.parent().removeClass('is-active');
-
-        if (elementIndex == itemsTotal - 1) {
-          $next.addClass('is-disabled');
-        }
-
-        if (elementIndex == 0) {
-          $prev.addClass('is-disabled');
-        }
-
-        $items.removeClass('is-active');
-        $items.eq(elementIndex).addClass('is-active');
-        $pagination.eq(elementIndex).addClass('is-active');
-        $pagination.eq(elementIndex).parent().addClass('is-active');
-        TweenMax.to(slider.children('.uix-advanced-content-slider__inner'), animDuration / 1000, {
-          x: '-' + slider.width() * elementIndex,
-          onComplete: function onComplete() {},
-          ease: Power3.easeOut
-        });
+        if (elementIndex == itemsTotal - 1) $next.addClass('is-disabled');
+        if (elementIndex == 0) $prev.addClass('is-disabled');
       }
+
+      $items.removeClass('is-active');
+      $items.eq(elementIndex).addClass('is-active');
+      $pagination.eq(elementIndex).addClass('is-active');
+      $pagination.eq(elementIndex).parent().addClass('is-active');
+      TweenMax.to(slider.children('.uix-advanced-content-slider__inner'), animSpeed / 1000, {
+        x: '-' + slider.width() * elementIndex,
+        onComplete: function onComplete() {},
+        ease: Power3.easeOut
+      });
     }
   };
 
@@ -5211,7 +5223,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.5';
+  module.ADVANCED_SLIDER.version = '0.1.6';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5245,7 +5257,26 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             activated = $this.data('activated');
 
         if (basic_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
-          //Autoplay times
+          //Get parameter configuration from the data-* attribute of HTML
+          var dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop'),
+              dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataCountTotal = $this.data('count-total'),
+              dataCountCur = $this.data('count-now');
+          if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+          if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
+          if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider__arrows';
+          if (basic_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (basic_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
+          if (basic_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+          if (basic_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay times
+
           var playTimes; //A function called "timer" once every second (like a digital watch).
 
           $this[0].animatedSlides;
@@ -5266,7 +5297,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
               nativeItemW = this.videoWidth;
               nativeItemH = this.videoHeight; //Initialize all the items to the stage
 
-              addItemsToStage($this, nativeItemW, nativeItemH);
+              addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur);
             }, false);
             video.src = videoURL;
           } else {
@@ -5280,7 +5311,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
                 nativeItemW = this.width;
                 nativeItemH = this.height; //Initialize all the items to the stage
 
-                addItemsToStage($this, nativeItemW, nativeItemH);
+                addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur);
               };
 
               img.src = imgURL;
@@ -5290,21 +5321,14 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
 
           if (!resize) {
-            var dataAuto = $this.data('auto'),
-                dataTiming = $this.data('timing'),
-                dataLoop = $this.data('loop');
-            if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-            if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-            if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
               $this.on({
                 mouseenter: function mouseenter() {
                   clearInterval($this[0].animatedSlides);
                 },
                 mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
                 }
               });
             }
@@ -5319,15 +5343,19 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
     * Trigger slider autoplay
     *
-    * @param  {Function} playTimes      - Number of times.
-    * @param  {Number} timing           - Autoplay interval.
-    * @param  {Boolean} loop            - Determine whether to loop through each item.
-    * @param  {Object} slider           - Selector of the slider .
-    * @return {Void}                    - The constructor.
+    * @param  {Function} playTimes            - Number of times.
+    * @param  {Number} timing                 - Autoplay interval.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @param  {Object} slider                 - Selector of the slider .
+     * @param  {String} countTotalID           - Total number ID or class of counter.
+     * @param  {String} countCurID             - Current number ID or class of counter.
+     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+     * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @return {Void}                          - The constructor.
     */
 
 
-    function sliderAutoPlay(playTimes, timing, loop, slider) {
+    function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
       var items = slider.find('.uix-advanced-slider__item'),
           total = items.length;
       slider[0].animatedSlides = setInterval(function () {
@@ -5335,49 +5363,46 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         playTimes++;
 
         if (!loop) {
-          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next');
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1;
-          sliderUpdates(playTimes, $sliderWrapper, 'next');
+          sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         }
       }, timing);
     }
     /*
     * Initialize all the items to the stage
     *
-    * @param  {Object} slider           - Current selector of each slider.
-    * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
-    * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+    * @param  {Object} slider                 - Current selector of each slider.
+    * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
+    * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
+     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+     * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+     * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+     * @param  {Boolean} draggable             - Allow drag and drop on the slider.
+     * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+     * @param  {String} countTotalID           - Total number ID or class of counter.
+     * @param  {String} countCurID             - Current number ID or class of counter.
     * @return {Void}
     */
 
 
-    function addItemsToStage(slider, nativeItemW, nativeItemH) {
+    function addItemsToStage(slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider__item'),
           $first = $items.first(),
-          itemsTotal = $items.length,
-          dataControlsPagination = $this.data('controls-pagination'),
-          dataControlsArrows = $this.data('controls-arrows'),
-          dataLoop = $this.data('loop'),
-          dataDraggable = $this.data('draggable'),
-          dataDraggableCursor = $this.data('draggable-cursor');
-      if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
-      if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider__arrows';
-      if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-      if (basic_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-      if (basic_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
-      if ($(dataControlsArrows).length == 0) {
-        $('body').prepend('<div style="display:none;" class="uix-advanced-slider__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>');
+      if ($(arrowsID).length == 0) {
+        $('body').prepend('<div style="display:none;" class="uix-advanced-slider__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>');
       } //Prevent bubbling
 
 
       if (itemsTotal == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
       } // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
@@ -5395,8 +5420,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       }
 
       _dot += '</ul>';
-      if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
+      if ($(paginationID).html() == '') $(paginationID).html(_dot);
+      $(paginationID).find('li a').off('click').on('click', function (e) {
         e.preventDefault();
 
         if (!$(this).hasClass('is-active')) {
@@ -5407,33 +5432,33 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             curDir = 'next';
           }
 
-          sliderUpdates($(this).attr('data-index'), $this, curDir); //Pause the auto play event
+          sliderUpdates($(this).attr('data-index'), $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
           clearInterval($this[0].animatedSlides);
         }
       }); //Next/Prev buttons
       //-------------------------------------		
 
-      var _prev = $(dataControlsArrows).find('.uix-advanced-slider__arrows--prev'),
-          _next = $(dataControlsArrows).find('.uix-advanced-slider__arrows--next');
+      var _prev = $(arrowsID).find('.uix-advanced-slider__arrows--prev'),
+          _next = $(arrowsID).find('.uix-advanced-slider__arrows--next');
 
-      $(dataControlsArrows).find('a').attr('href', 'javascript:');
-      $(dataControlsArrows).find('a').removeClass('is-disabled');
+      $(arrowsID).find('a').attr('href', 'javascript:');
+      $(arrowsID).find('a').removeClass('is-disabled');
 
-      if (!dataLoop) {
+      if (!loop) {
         _prev.addClass('is-disabled');
       }
 
       _prev.off('click').on('click', function (e) {
         e.preventDefault();
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev'); //Pause the auto play event
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
 
       _next.off('click').on('click', function (e) {
         e.preventDefault();
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next'); //Pause the auto play event
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       }); //Added touch method to mobile device and desktop
@@ -5442,7 +5467,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
       var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
 
-      if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor); //Mouse event
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
 
       $dragDropTrigger.on('mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function (e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -5453,7 +5478,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
           $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
           $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
         } else {
-          if (dataDraggable) {
+          if (draggable) {
             $(this).data('origin_mouse_x', parseInt(e.pageX));
             $(this).data('origin_mouse_y', parseInt(e.pageY));
           }
@@ -5488,7 +5513,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
               $dragDropTrigger.off('touchmove.ADVANCED_SLIDER');
             }
           } else {
-            if (dataDraggable) {
+            if (draggable) {
               //right
               if (e.pageX > origin_mouse_x) {
                 if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
@@ -5514,43 +5539,38 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
      * Transition Between Slides
      *
-     * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} dir              - Switching direction indicator.
+     * @param  {Number} elementIndex           - Index of current slider.
+     * @param  {Object} slider                 - Selector of the slider .
+     * @param  {String} dir                    - Switching direction indicator.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
      * @return {Void}
      */
 
 
-    function sliderUpdates(elementIndex, slider, dir) {
+    function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-slider__item'),
           $current = $items.eq(elementIndex),
-          total = $items.length,
-          dataCountTotal = slider.data('count-total'),
-          dataCountCur = slider.data('count-now'),
-          dataControlsPagination = slider.data('controls-pagination'),
-          dataControlsArrows = slider.data('controls-arrows'),
-          dataLoop = slider.data('loop');
-      if (basic_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-      if (basic_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-      if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
-      if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-slider__arrows';
-      if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+          total = $items.length; //Prevent bubbling
 
       if (total == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
         return false;
       } //Transition Interception
       //-------------------------------------
 
 
-      if (dataLoop) {
+      if (loop) {
         if (elementIndex == total) elementIndex = 0;
         if (elementIndex < 0) elementIndex = total - 1;
       } else {
-        $(dataControlsArrows).find('a').removeClass('is-disabled');
-        if (elementIndex == total - 1) $(dataControlsArrows).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
-        if (elementIndex == 0) $(dataControlsArrows).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
+        $(arrowsID).find('a').removeClass('is-disabled');
+        if (elementIndex == total - 1) $(arrowsID).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
+        if (elementIndex == 0) $(arrowsID).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
       } // To determine if it is a touch screen.
 
 
@@ -5558,15 +5578,15 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         if (elementIndex == total) elementIndex = total - 1;
         if (elementIndex < 0) elementIndex = 0; //Prevent bubbling
 
-        if (!dataLoop) {
+        if (!loop) {
           //first item
           if (elementIndex == 0) {
-            $(dataControlsArrows).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
           } //last item
 
 
           if (elementIndex == total - 1) {
-            $(dataControlsArrows).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
           }
         }
       } //Determine the direction and add class to switching direction indicator.
@@ -5576,9 +5596,9 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       if (dir == 'prev') dirIndicatorClass = 'prev';
       if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to Controls Pagination
 
-      $(dataControlsPagination).find('li a').removeClass('leave');
-      $(dataControlsPagination).find('li a.is-active').removeClass('is-active').addClass('leave');
-      $(dataControlsPagination).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
+      $(paginationID).find('li a').removeClass('leave');
+      $(paginationID).find('li a.is-active').removeClass('is-active').addClass('leave');
+      $(paginationID).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
 
       $items.removeClass('leave prev next');
       $items.addClass(dirIndicatorClass);
@@ -5586,8 +5606,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       $items.eq(elementIndex).addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
       //-------------------------------------
 
-      $(dataCountTotal).text(total);
-      $(dataCountCur).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
+      $(countTotalID).text(total);
+      $(countCurID).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
       normalSliderVideoInit($items, false);
@@ -5858,7 +5878,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.3';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.4';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -5907,14 +5927,36 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             activated = $this.data('activated');
 
         if (special_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
-          //Autoplay times
+          //Get parameter configuration from the data-* attribute of HTML
+          var dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop'),
+              dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataCountTotal = $this.data('count-total'),
+              dataCountCur = $this.data('count-now'),
+              dataSpeed = $this.data('speed'),
+              dataFilterTexture = $this.data('filter-texture');
+          if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+          if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+          if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+          if (special_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (special_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
+          if (special_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+          if (special_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
+          if (special_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; //Autoplay times
+
           var playTimes; //A function called "timer" once every second (like a digital watch).
 
           $this[0].animatedSlides; //Get the animation speed
           //-------------------------------------	
 
-          if (special_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-            animSpeed = $this.data('speed');
+          if (special_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+            animSpeed = dataSpeed;
           } //Display all images
           //-------------------------------------	
 
@@ -5948,7 +5990,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 nativeItemW = this.videoWidth;
                 nativeItemH = this.videoHeight; //Initialize all the items to the stage
 
-                addItemsToStage($this, nativeItemW, nativeItemH);
+                addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, dataFilterTexture);
               }, false);
               video.src = videoURL;
             }
@@ -5963,7 +6005,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 nativeItemW = this.width;
                 nativeItemH = this.height; //Initialize all the items to the stage
 
-                addItemsToStage($this, nativeItemW, nativeItemH);
+                addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, dataFilterTexture);
               };
 
               img.src = imgURL;
@@ -5973,21 +6015,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
           if (!resize) {
-            var dataAuto = $this.data('auto'),
-                dataTiming = $this.data('timing'),
-                dataLoop = $this.data('loop');
-            if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-            if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-            if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
               $this.on({
                 mouseenter: function mouseenter() {
                   clearInterval($this[0].animatedSlides);
                 },
                 mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
                 }
               });
             }
@@ -6002,15 +6037,19 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
     * Trigger slider autoplay
     *
-    * @param  {Function} playTimes      - Number of times.
-    * @param  {Number} timing           - Autoplay interval.
-    * @param  {Boolean} loop            - Determine whether to loop through each item.
-    * @param  {Object} slider           - Selector of the slider .
-    * @return {Void}                    - The constructor.
+    * @param  {Function} playTimes            - Number of times.
+    * @param  {Number} timing                 - Autoplay interval.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @param  {Object} slider                 - Selector of the slider .
+    * @param  {String} countTotalID           - Total number ID or class of counter.
+    * @param  {String} countCurID             - Current number ID or class of counter.
+    * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+    * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @return {Void}                          - The constructor.
     */
 
 
-    function sliderAutoPlay(playTimes, timing, loop, slider) {
+    function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
       var items = slider.find('.uix-advanced-slider-sp__item'),
           total = items.length;
       slider[0].animatedSlides = setInterval(function () {
@@ -6018,15 +6057,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         playTimes++;
 
         if (!loop) {
-          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next');
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1; //Prevent problems with styles when switching in positive order
 
           if (playTimes == 0) {
-            sliderUpdates(playTimes, $sliderWrapper, 'prev');
+            sliderUpdates(playTimes, $sliderWrapper, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
           } else {
-            sliderUpdates(playTimes, $sliderWrapper, 'next');
+            sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
           }
         }
       }, timing);
@@ -6034,40 +6073,36 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize all the items to the stage
      *
-     * @param  {Object} slider           - Current selector of each slider.
-     * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
-     * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+     * @param  {Object} slider                 - Current selector of each slider.
+     * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
+     * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+           * @param  {Boolean} draggable             - Allow drag and drop on the slider.
+           * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} filterTexture          - The texture used for the displacement map.
      * @return {Void}
      */
 
 
-    function addItemsToStage(slider, nativeItemW, nativeItemH) {
+    function addItemsToStage(slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID, filterTexture) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider-sp__item'),
           $first = $items.first(),
-          itemsTotal = $items.length,
-          dataControlsPagination = $this.data('controls-pagination'),
-          dataControlsArrows = $this.data('controls-arrows'),
-          dataLoop = $this.data('loop'),
-          dataFilterTexture = $this.data('filter-texture'),
-          dataDraggable = $this.data('draggable'),
-          dataDraggableCursor = $this.data('draggable-cursor');
-      if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-      if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-      if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-      if (special_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-      if (special_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-      if (special_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
-      if ($(dataControlsArrows).length == 0) {
-        $('body').prepend('<div style="display:none;" class="uix-advanced-slider-sp__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>');
+      if ($(arrowsID).length == 0) {
+        $('body').prepend('<div style="display:none;" class="uix-advanced-slider-sp__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>');
       } //Prevent bubbling
 
 
       if (itemsTotal == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
       }
 
       if (Modernizr.webgl) {
@@ -6137,7 +6172,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         });
         stage__filter = new PIXI.Container();
         container__items = new PIXI.Container();
-        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(dataFilterTexture) ? new PIXI.Sprite(PIXI.Texture.fromVideo(dataFilterTexture)) : new PIXI.Sprite.fromImage(dataFilterTexture);
+        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(filterTexture) ? new PIXI.Sprite(PIXI.Texture.fromVideo(filterTexture)) : new PIXI.Sprite.fromImage(filterTexture);
         displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite); //----------------------------------------------------------------------------------
         //--------------------------------- Brightness Effect -------------------------------	
         //----------------------------------------------------------------------------------
@@ -6580,8 +6615,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       }
 
       _dot += '</ul>';
-      if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
+      if ($(paginationID).html() == '') $(paginationID).html(_dot);
+      $(paginationID).find('li a').off('click').on('click', function (e) {
         e.preventDefault();
 
         if (!$(this).hasClass('is-active')) {
@@ -6595,20 +6630,20 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
           transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', curDir); //Update the current and previous/next items
 
-          sliderUpdates($(this).attr('data-index'), $this, curDir); //Pause the auto play event
+          sliderUpdates($(this).attr('data-index'), $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
           clearInterval($this[0].animatedSlides);
         }
       }); //Next/Prev buttons
       //-------------------------------------		
 
-      var _prev = $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--prev'),
-          _next = $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--next');
+      var _prev = $(arrowsID).find('.uix-advanced-slider-sp__arrows--prev'),
+          _next = $(arrowsID).find('.uix-advanced-slider-sp__arrows--next');
 
-      $(dataControlsArrows).find('a').attr('href', 'javascript:');
-      $(dataControlsArrows).find('a').removeClass('is-disabled');
+      $(arrowsID).find('a').attr('href', 'javascript:');
+      $(arrowsID).find('a').removeClass('is-disabled');
 
-      if (!dataLoop) {
+      if (!loop) {
         _prev.addClass('is-disabled');
       }
 
@@ -6617,7 +6652,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev'); //Pause the auto play event
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
@@ -6627,7 +6662,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next'); //Pause the auto play event
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       }); //Added touch method to mobile device and desktop
@@ -6636,7 +6671,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
       var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
 
-      if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor); //Mouse event
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
 
       $dragDropTrigger.on('mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function (e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -6647,7 +6682,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
           $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
         } else {
-          if (dataDraggable) {
+          if (draggable) {
             $(this).data('origin_mouse_x', parseInt(e.pageX));
             $(this).data('origin_mouse_y', parseInt(e.pageY));
           }
@@ -6682,7 +6717,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               $dragDropTrigger.off('touchmove.ADVANCED_SLIDER_FILTER');
             }
           } else {
-            if (dataDraggable) {
+            if (draggable) {
               //right
               if (e.pageX > origin_mouse_x) {
                 if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
@@ -6708,43 +6743,38 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Transition Between Slides
      *
-     * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} dir              - Switching direction indicator.
+     * @param  {Number} elementIndex           - Index of current slider.
+     * @param  {Object} slider                 - Selector of the slider .
+     * @param  {String} dir                    - Switching direction indicator.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
      * @return {Void}
      */
 
 
-    function sliderUpdates(elementIndex, slider, dir) {
+    function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-slider-sp__item'),
           $current = $items.eq(elementIndex),
-          total = $items.length,
-          dataCountTotal = slider.data('count-total'),
-          dataCountCur = slider.data('count-now'),
-          dataControlsPagination = slider.data('controls-pagination'),
-          dataControlsArrows = slider.data('controls-arrows'),
-          dataLoop = slider.data('loop');
-      if (special_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-      if (special_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-      if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-      if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-      if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+          total = $items.length; //Prevent bubbling
 
       if (total == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
         return false;
       } //Transition Interception
       //-------------------------------------
 
 
-      if (dataLoop) {
+      if (loop) {
         if (elementIndex == total) elementIndex = 0;
         if (elementIndex < 0) elementIndex = total - 1;
       } else {
-        $(dataControlsArrows).find('a').removeClass('is-disabled');
-        if (elementIndex == total - 1) $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
-        if (elementIndex == 0) $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
+        $(arrowsID).find('a').removeClass('is-disabled');
+        if (elementIndex == total - 1) $(arrowsID).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
+        if (elementIndex == 0) $(arrowsID).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
       } // To determine if it is a touch screen.
       //-------------------------------------
 
@@ -6753,15 +6783,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         if (elementIndex == total) elementIndex = total - 1;
         if (elementIndex < 0) elementIndex = 0; //Prevent bubbling
 
-        if (!dataLoop) {
+        if (!loop) {
           //first item
           if (elementIndex == 0) {
-            $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
           } //last item
 
 
           if (elementIndex == total - 1) {
-            $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
           }
         }
       } //Determine the direction and add class to switching direction indicator.
@@ -6773,9 +6803,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to Controls Pagination
       //-------------------------------------
 
-      $(dataControlsPagination).find('li a').removeClass('leave');
-      $(dataControlsPagination).find('li a.is-active').removeClass('is-active').addClass('leave');
-      $(dataControlsPagination).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
+      $(paginationID).find('li a').removeClass('leave');
+      $(paginationID).find('li a.is-active').removeClass('is-active').addClass('leave');
+      $(paginationID).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
       //-------------------------------------	
 
       $items.removeClass('leave prev next');
@@ -6784,8 +6814,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       $items.eq(elementIndex).addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
       //-------------------------------------
 
-      $(dataCountTotal).text(total);
-      $(dataCountCur).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
+      $(countTotalID).text(total);
+      $(countCurID).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
       if (!Modernizr.webgl) {
@@ -6814,7 +6844,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
       if (slider.hasClass('uix-advanced-slider-sp--eff-parallax')) {
-        if (dataLoop) {
+        if (loop) {
           if (elementIndex == 0) dir = 'prev';
         }
       }
@@ -18040,7 +18070,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.3';
+  module.THREE_SHATTER_SLIDER.version = '0.0.5';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18086,167 +18116,177 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
               $items = $this.find('.uix-3d-slider--shatter__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
-              dataControlsPagination = $this.data('controls-pagination'),
-              dataControlsArrows = $this.data('controls-arrows'),
-              dataLoop = $this.data('loop'),
-              dataFilterTexture = $this.data('filter-texture'),
-              dataDraggable = $this.data('draggable'),
-              dataDraggableCursor = $this.data('draggable-cursor');
-          if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
-          if (simple_3D_shatter_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
-          if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-          if (simple_3D_shatter_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-          if (simple_3D_shatter_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-          if (simple_3D_shatter_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //Autoplay times
+              activated = $this.data('activated');
 
-          var playTimes; //A function called "timer" once every second (like a digital watch).
+          if (simple_3D_shatter_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+            //Get parameter configuration from the data-* attribute of HTML
+            var dataControlsPagination = $this.data('controls-pagination'),
+                dataControlsArrows = $this.data('controls-arrows'),
+                dataLoop = $this.data('loop'),
+                dataFilterTexture = $this.data('filter-texture'),
+                dataDraggable = $this.data('draggable'),
+                dataDraggableCursor = $this.data('draggable-cursor'),
+                dataSpeed = $this.data('speed'),
+                dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataCountTotal = $this.data('count-total'),
+                dataCountCur = $this.data('count-now');
+            if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
+            if (simple_3D_shatter_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
+            if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_shatter_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            if (simple_3D_shatter_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+            if (simple_3D_shatter_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_shatter_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (simple_3D_shatter_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
-          $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
-          //and the drag and drop function will be activated.
+            var playTimes; //A function called "timer" once every second (like a digital watch).
 
-          if ($(dataControlsArrows).length == 0) {
-            $('body').prepend('<div style="display:none;" class="uix-3d-slider--shatter__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--shatter__arrows--prev"></a><a href="#" class="uix-3d-slider--shatter__arrows--next"></a></div>');
-          } //Prevent bubbling
+            $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
+            //and the drag and drop function will be activated.
 
-
-          if (itemsTotal == 1) {
-            $(dataControlsPagination).hide();
-            $(dataControlsArrows).hide();
-          } //Initialize the controlers classes
-          //-------------------------------------	
-
-
-          $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
-          //-------------------------------------	
-
-          $this.css('height', windowHeight + 'px'); //Load slides to canvas
-          //-------------------------------------	
-
-          if ($('#' + rendererCanvasID).length == 0) {
-            $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
-          } //Get the animation speed
-          //-------------------------------------	
+            if ($(dataControlsArrows).length == 0) {
+              $('body').prepend('<div style="display:none;" class="uix-3d-slider--shatter__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--shatter__arrows--prev"></a><a href="#" class="uix-3d-slider--shatter__arrows--next"></a></div>');
+            } //Prevent bubbling
 
 
-          if (simple_3D_shatter_slider_js_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-            animSpeed = $this.data('speed');
-          } //Initialize the first item container
-          //-------------------------------------		
+            if (itemsTotal == 1) {
+              $(dataControlsPagination).hide();
+              $(dataControlsArrows).hide();
+            } //Initialize the controlers classes
+            //-------------------------------------	
 
 
-          $items.addClass('next');
-          $first.addClass('is-active'); //Get all images and videos
-          //-------------------------------------		
+            $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
+            //-------------------------------------	
 
-          $items.each(function () {
-            var _item = $(this);
+            $this.css('height', windowHeight + 'px'); //Load slides to canvas
+            //-------------------------------------	
 
-            if (_item.find('video').length > 0) {
-              //Returns the dimensions (intrinsic height and width ) of the video
-              var video = document.getElementById(_item.find('video').attr('id')),
-                  videoURL = _item.find('source:first').attr('src');
+            if ($('#' + rendererCanvasID).length == 0) {
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+            } //Get the animation speed
+            //-------------------------------------	
 
-              if (simple_3D_shatter_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": videoURL,
-                  "id": _item.find('video').attr('id'),
-                  "type": 'video'
-                });
+
+            if (simple_3D_shatter_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+              animSpeed = dataSpeed;
+            } //Initialize the first item container
+            //-------------------------------------		
+
+
+            $items.addClass('next');
+            $first.addClass('is-active'); //Get all images and videos
+            //-------------------------------------		
+
+            $items.each(function () {
+              var _item = $(this);
+
+              if (_item.find('video').length > 0) {
+                //Returns the dimensions (intrinsic height and width ) of the video
+                var video = document.getElementById(_item.find('video').attr('id')),
+                    videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_shatter_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": videoURL,
+                    "id": _item.find('video').attr('id'),
+                    "type": 'video'
+                  });
+                }
+              } else {
+                var imgURL = _item.find('img').attr('src');
+
+                if (simple_3D_shatter_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": imgURL,
+                    "id": 'img-' + UixGUID.create(),
+                    "type": 'img'
+                  });
+                }
               }
-            } else {
-              var imgURL = _item.find('img').attr('src');
+            }); //Pagination dots 
+            //-------------------------------------	
 
-              if (simple_3D_shatter_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": imgURL,
-                  "id": 'img-' + UixGUID.create(),
-                  "type": 'img'
-                });
-              }
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul>';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
-          }); //Pagination dots 
-          //-------------------------------------	
 
-          var _dot = '',
-              _dotActive = '';
-          _dot += '<ul>';
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
 
-          for (var i = 0; i < itemsTotal; i++) {
-            _dotActive = i == 0 ? 'class="is-active"' : '';
-            _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
-          }
+            $(dataControlsPagination).find('ul > li').on('click', function (e) {
+              e.preventDefault();
+              var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
+                  slideNextId = $(this).index(); //Determine the direction
 
-          _dot += '</ul>';
-          if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
+              var curDir = 'prev';
 
-          $(dataControlsPagination).find('ul > li').on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
-                slideNextId = $(this).index(); //Determine the direction
-
-            var curDir = 'prev';
-
-            if ($(this).attr('data-index') > slideCurId) {
-              curDir = 'next';
-            } //Transition Between Slides
+              if ($(this).attr('data-index') > slideCurId) {
+                curDir = 'next';
+              } //Transition Between Slides
 
 
-            sliderUpdates(slideCurId, slideNextId, curDir); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          }); //Next/Prev buttons
-          //-------------------------------------		
+              clearInterval($this[0].animatedSlides);
+            }); //Next/Prev buttons
+            //-------------------------------------		
 
-          var _prev = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--prev'),
-              _next = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--next');
+            var _prev = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--prev'),
+                _next = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--next');
 
-          $(dataControlsArrows).find('a').attr('href', 'javascript:');
-          $(dataControlsArrows).find('a').removeClass('is-disabled');
+            $(dataControlsArrows).find('a').attr('href', 'javascript:');
+            $(dataControlsArrows).find('a').removeClass('is-disabled');
 
-          if (!dataLoop) {
-            _prev.addClass('is-disabled');
-          }
+            if (!dataLoop) {
+              _prev.addClass('is-disabled');
+            }
 
-          _prev.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
+            _prev.on('click', function (e) {
+              e.preventDefault();
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
-            sliderUpdates(slideCurId, slideNextId, 'prev'); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          });
-
-          _next.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
-
-            sliderUpdates(slideCurId, slideNextId, 'next'); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }); //Autoplay Slider
-          //-------------------------------------		
-
-
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
-          if (simple_3D_shatter_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (simple_3D_shatter_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
+              clearInterval($this[0].animatedSlides);
             });
-          }
+
+            _next.on('click', function (e) {
+              e.preventDefault();
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Autoplay Slider
+            //-------------------------------------		
+
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+            $this.data('activated', 1);
+          } //endif activated
+
         }); // end each				
       }
 
@@ -18457,15 +18497,19 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
       /*
       * Trigger slider autoplay
       *
-      * @param  {Function} playTimes      - Number of times.
-      * @param  {Number} timing           - Autoplay interval.
-      * @param  {Boolean} loop            - Determine whether to loop through each item.
-      * @param  {Object} slider           - Selector of the slider .
-      * @return {Void}                    - The constructor.
+            * @param  {Function} playTimes            - Number of times.
+            * @param  {Number} timing                 - Autoplay interval.
+            * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+            * @param  {Object} slider                 - Selector of the slider .
+            * @param  {String} countTotalID           - Total number ID or class of counter.
+            * @param  {String} countCurID             - Current number ID or class of counter.
+            * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+            * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+            * @return {Void}                          - The constructor.
       */
 
 
-      function sliderAutoPlay(playTimes, timing, loop, slider) {
+      function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
         var items = slider.find('.uix-3d-slider--shatter__item'),
             total = items.length;
         slider[0].animatedSlides = setInterval(function () {
@@ -18476,7 +18520,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             if (playTimes < total && playTimes >= 0) {
               var slideCurId = items.filter('.is-active').index(),
                   slideNextId = playTimes;
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           } else {
             if (playTimes == total) playTimes = 0;
@@ -18485,9 +18529,9 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
                 slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev');
+              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -18498,27 +18542,22 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
        * @param  {Number} slideCurId             - Index of current slider.
        * @param  {Number} slideNextId            - Index of next slider.
        * @param  {String} dir                    - Switching direction indicator.	 
+                * @param  {String} countTotalID           - Total number ID or class of counter.
+                * @param  {String} countCurID             - Current number ID or class of counter.
+                * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+                * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+                * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
        * @return {Void}
        */
 
 
-      function sliderUpdates(slideCurId, slideNextId, dir) {
+      function sliderUpdates(slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
         var $items = $sliderWrapper.find('.uix-3d-slider--shatter__item'),
-            total = $items.length,
-            dataCountTotal = $sliderWrapper.data('count-total'),
-            dataCountCur = $sliderWrapper.data('count-now'),
-            dataControlsPagination = $sliderWrapper.data('controls-pagination'),
-            dataControlsArrows = $sliderWrapper.data('controls-arrows'),
-            dataLoop = $sliderWrapper.data('loop');
-        if (simple_3D_shatter_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-        if (simple_3D_shatter_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-        if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
-        if (simple_3D_shatter_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
-        if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+            total = $items.length; //Prevent bubbling
 
         if (total == 1) {
-          $(dataControlsPagination).hide();
-          $(dataControlsArrows).hide();
+          $(paginationID).hide();
+          $(arrowsID).hide();
           return false;
         }
 
@@ -18526,7 +18565,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           isAnimating = true; //Transition Interception
           //-------------------------------------
 
-          if (dataLoop) {
+          if (loop) {
             if (slideCurId > total - 1) slideCurId = 0;
             if (slideCurId < 0) slideCurId = total - 1; //--
 
@@ -18557,21 +18596,21 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           $next.addClass('is-active'); //Add transition class to Controls Pagination
           //-------------------------------------
 
-          $(dataControlsPagination).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
-          $(dataControlsPagination).find('ul > li').eq(slideCurId).addClass('leave');
-          $(dataControlsPagination).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
+          $(paginationID).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $(paginationID).find('ul > li').eq(slideCurId).addClass('leave');
+          $(paginationID).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
           //-------------------------------------		
 
-          if (!dataLoop) {
-            $(dataControlsArrows).find('a').removeClass('is-disabled');
-            if (slideNextId == total - 1) $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--next').addClass('is-disabled');
-            if (slideNextId == 0) $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--prev').addClass('is-disabled');
+          if (!loop) {
+            $(arrowsID).find('a').removeClass('is-disabled');
+            if (slideNextId == total - 1) $(arrowsID).find('.uix-3d-slider--shatter__arrows--next').addClass('is-disabled');
+            if (slideNextId == 0) $(arrowsID).find('.uix-3d-slider--shatter__arrows--prev').addClass('is-disabled');
           } //Display counter
           //-------------------------------------
 
 
-          $(dataCountTotal).text(total);
-          $(dataCountCur).text(parseFloat(slideCurId) + 1); //Pause all videos
+          $(countTotalID).text(total);
+          $(countCurID).text(parseFloat(slideCurId) + 1); //Pause all videos
           //-------------------------------------
           // pause all videos
 
@@ -18696,7 +18735,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.3';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.5';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18747,167 +18786,178 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
               $items = $this.find('.uix-3d-slider--expParticle__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
-              dataControlsPagination = $this.data('controls-pagination'),
-              dataControlsArrows = $this.data('controls-arrows'),
-              dataLoop = $this.data('loop'),
-              dataFilterTexture = $this.data('filter-texture'),
-              dataDraggable = $this.data('draggable'),
-              dataDraggableCursor = $this.data('draggable-cursor');
-          if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
-          if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-          if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-          if (simple_3D_explosive_particle_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //Autoplay times
+              activated = $this.data('activated');
 
-          var playTimes; //A function called "timer" once every second (like a digital watch).
+          if (simple_3D_explosive_particle_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+            //Get parameter configuration from the data-* attribute of HTML
+            var dataControlsPagination = $this.data('controls-pagination'),
+                dataControlsArrows = $this.data('controls-arrows'),
+                dataLoop = $this.data('loop'),
+                dataFilterTexture = $this.data('filter-texture'),
+                dataDraggable = $this.data('draggable'),
+                dataDraggableCursor = $this.data('draggable-cursor'),
+                dataSpeed = $this.data('speed'),
+                dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataCountTotal = $this.data('count-total'),
+                dataCountCur = $this.data('count-now');
+            if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay times
 
-          $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
-          //and the drag and drop function will be activated.
+            var playTimes; //A function called "timer" once every second (like a digital watch).
 
-          if ($(dataControlsArrows).length == 0) {
-            $('body').prepend('<div style="display:none;" class="uix-3d-slider--expParticle__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>');
-          } //Prevent bubbling
+            $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
+            //and the drag and drop function will be activated.
 
-
-          if (itemsTotal == 1) {
-            $(dataControlsPagination).hide();
-            $(dataControlsArrows).hide();
-          } //Initialize the controlers classes
-          //-------------------------------------	
-
-
-          $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
-          //-------------------------------------	
-
-          $this.css('height', windowHeight + 'px'); //Load slides to canvas
-          //-------------------------------------	
-
-          if ($('#' + rendererCanvasID).length == 0) {
-            $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
-          } //Get the animation speed
-          //-------------------------------------	
+            if ($(dataControlsArrows).length == 0) {
+              $('body').prepend('<div style="display:none;" class="uix-3d-slider--expParticle__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>');
+            } //Prevent bubbling
 
 
-          if (simple_3D_explosive_particle_slider_js_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-            animSpeed = $this.data('speed');
-          } //Initialize the first item container
-          //-------------------------------------		
+            if (itemsTotal == 1) {
+              $(dataControlsPagination).hide();
+              $(dataControlsArrows).hide();
+            } //Initialize the controlers classes
+            //-------------------------------------	
 
 
-          $items.addClass('next');
-          $first.addClass('is-active'); //Get all images and videos
-          //-------------------------------------		
+            $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
+            //-------------------------------------	
 
-          $items.each(function () {
-            var _item = $(this);
+            $this.css('height', windowHeight + 'px'); //Load slides to canvas
+            //-------------------------------------	
 
-            if (_item.find('video').length > 0) {
-              //Returns the dimensions (intrinsic height and width ) of the video
-              var video = document.getElementById(_item.find('video').attr('id')),
-                  videoURL = _item.find('source:first').attr('src');
+            if ($('#' + rendererCanvasID).length == 0) {
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+            } //Get the animation speed
+            //-------------------------------------	
 
-              if (simple_3D_explosive_particle_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": videoURL,
-                  "id": _item.find('video').attr('id'),
-                  "type": 'video'
-                });
+
+            if (simple_3D_explosive_particle_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+              animSpeed = dataSpeed;
+            } //Initialize the first item container
+            //-------------------------------------		
+
+
+            $items.addClass('next');
+            $first.addClass('is-active'); //Get all images and videos
+            //-------------------------------------		
+
+            $items.each(function () {
+              var _item = $(this);
+
+              if (_item.find('video').length > 0) {
+                //Returns the dimensions (intrinsic height and width ) of the video
+                var video = document.getElementById(_item.find('video').attr('id')),
+                    videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_explosive_particle_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": videoURL,
+                    "id": _item.find('video').attr('id'),
+                    "type": 'video'
+                  });
+                }
+              } else {
+                var imgURL = _item.find('img').attr('src');
+
+                if (simple_3D_explosive_particle_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": imgURL,
+                    "id": 'img-' + UixGUID.create(),
+                    "type": 'img'
+                  });
+                }
               }
-            } else {
-              var imgURL = _item.find('img').attr('src');
+            }); //Pagination dots 
+            //-------------------------------------	
 
-              if (simple_3D_explosive_particle_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": imgURL,
-                  "id": 'img-' + UixGUID.create(),
-                  "type": 'img'
-                });
-              }
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul>';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
-          }); //Pagination dots 
-          //-------------------------------------	
 
-          var _dot = '',
-              _dotActive = '';
-          _dot += '<ul>';
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
 
-          for (var i = 0; i < itemsTotal; i++) {
-            _dotActive = i == 0 ? 'class="is-active"' : '';
-            _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
-          }
+            $(dataControlsPagination).find('ul > li').on('click', function (e) {
+              e.preventDefault();
+              var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
+                  slideNextId = $(this).index(); //Determine the direction
 
-          _dot += '</ul>';
-          if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
+              var curDir = 'prev';
 
-          $(dataControlsPagination).find('ul > li').on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
-                slideNextId = $(this).index(); //Determine the direction
-
-            var curDir = 'prev';
-
-            if ($(this).attr('data-index') > slideCurId) {
-              curDir = 'next';
-            } //Transition Between Slides
+              if ($(this).attr('data-index') > slideCurId) {
+                curDir = 'next';
+              } //Transition Between Slides
 
 
-            sliderUpdates(slideCurId, slideNextId, curDir); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          }); //Next/Prev buttons
-          //-------------------------------------		
+              clearInterval($this[0].animatedSlides);
+            }); //Next/Prev buttons
+            //-------------------------------------		
 
-          var _prev = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--prev'),
-              _next = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--next');
+            var _prev = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--prev'),
+                _next = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--next');
 
-          $(dataControlsArrows).find('a').attr('href', 'javascript:');
-          $(dataControlsArrows).find('a').removeClass('is-disabled');
+            $(dataControlsArrows).find('a').attr('href', 'javascript:');
+            $(dataControlsArrows).find('a').removeClass('is-disabled');
 
-          if (!dataLoop) {
-            _prev.addClass('is-disabled');
-          }
+            if (!dataLoop) {
+              _prev.addClass('is-disabled');
+            }
 
-          _prev.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
+            _prev.on('click', function (e) {
+              e.preventDefault();
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
-            sliderUpdates(slideCurId, slideNextId, 'prev'); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          });
-
-          _next.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
-
-            sliderUpdates(slideCurId, slideNextId, 'next'); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }); //Autoplay Slider
-          //-------------------------------------		
-
-
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
-          if (simple_3D_explosive_particle_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
+              clearInterval($this[0].animatedSlides);
             });
-          }
+
+            _next.on('click', function (e) {
+              e.preventDefault();
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Autoplay Slider
+            //-------------------------------------		
+
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+            $this.data('activated', 1);
+          } //endif activated
+
         }); // end each				
       }
 
@@ -19147,15 +19197,19 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
       /*
       * Trigger slider autoplay
       *
-      * @param  {Function} playTimes      - Number of times.
-      * @param  {Number} timing           - Autoplay interval.
-      * @param  {Boolean} loop            - Determine whether to loop through each item.
-      * @param  {Object} slider           - Selector of the slider .
-      * @return {Void}                    - The constructor.
+      * @param  {Function} playTimes            - Number of times.
+      * @param  {Number} timing                 - Autoplay interval.
+      * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+      * @param  {Object} slider                 - Selector of the slider .
+      * @param  {String} countTotalID           - Total number ID or class of counter.
+      * @param  {String} countCurID             - Current number ID or class of counter.
+      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+      * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+      * @return {Void}                          - The constructor.
       */
 
 
-      function sliderAutoPlay(playTimes, timing, loop, slider) {
+      function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
         var items = slider.find('.uix-3d-slider--expParticle__item'),
             total = items.length;
         slider[0].animatedSlides = setInterval(function () {
@@ -19166,7 +19220,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             if (playTimes < total && playTimes >= 0) {
               var slideCurId = items.filter('.is-active').index(),
                   slideNextId = playTimes;
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           } else {
             if (playTimes == total) playTimes = 0;
@@ -19175,9 +19229,9 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
                 slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev');
+              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -19188,27 +19242,22 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
        * @param  {Number} slideCurId             - Index of current slider.
        * @param  {Number} slideNextId            - Index of next slider.
        * @param  {String} dir                    - Switching direction indicator.	 
+                * @param  {String} countTotalID           - Total number ID or class of counter.
+                * @param  {String} countCurID             - Current number ID or class of counter.
+                * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+                * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+                * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
        * @return {Void}
        */
 
 
-      function sliderUpdates(slideCurId, slideNextId, dir) {
+      function sliderUpdates(slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
         var $items = $sliderWrapper.find('.uix-3d-slider--expParticle__item'),
-            total = $items.length,
-            dataCountTotal = $sliderWrapper.data('count-total'),
-            dataCountCur = $sliderWrapper.data('count-now'),
-            dataControlsPagination = $sliderWrapper.data('controls-pagination'),
-            dataControlsArrows = $sliderWrapper.data('controls-arrows'),
-            dataLoop = $sliderWrapper.data('loop');
-        if (simple_3D_explosive_particle_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+            total = $items.length; //Prevent bubbling
 
         if (total == 1) {
-          $(dataControlsPagination).hide();
-          $(dataControlsArrows).hide();
+          $(paginationID).hide();
+          $(arrowsID).hide();
           return false;
         }
 
@@ -19216,7 +19265,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           isAnimating = true; //Transition Interception
           //-------------------------------------
 
-          if (dataLoop) {
+          if (loop) {
             if (slideCurId > total - 1) slideCurId = 0;
             if (slideCurId < 0) slideCurId = total - 1; //--
 
@@ -19247,21 +19296,21 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           $next.addClass('is-active'); //Add transition class to Controls Pagination
           //-------------------------------------
 
-          $(dataControlsPagination).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
-          $(dataControlsPagination).find('ul > li').eq(slideCurId).addClass('leave');
-          $(dataControlsPagination).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
+          $(paginationID).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $(paginationID).find('ul > li').eq(slideCurId).addClass('leave');
+          $(paginationID).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
           //-------------------------------------		
 
-          if (!dataLoop) {
-            $(dataControlsArrows).find('a').removeClass('is-disabled');
-            if (slideNextId == total - 1) $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--next').addClass('is-disabled');
-            if (slideNextId == 0) $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--prev').addClass('is-disabled');
+          if (!loop) {
+            $(arrowsID).find('a').removeClass('is-disabled');
+            if (slideNextId == total - 1) $(arrowsID).find('.uix-3d-slider--expParticle__arrows--next').addClass('is-disabled');
+            if (slideNextId == 0) $(arrowsID).find('.uix-3d-slider--expParticle__arrows--prev').addClass('is-disabled');
           } //Display counter
           //-------------------------------------
 
 
-          $(dataCountTotal).text(total);
-          $(dataCountCur).text(parseFloat(slideCurId) + 1); //Fire the next object
+          $(countTotalID).text(total);
+          $(countCurID).text(parseFloat(slideCurId) + 1); //Fire the next object
           //-------------------------------------
 
           activeSlider = slideNextId; //Fire the current object

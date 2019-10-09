@@ -1,9 +1,10 @@
 # Changelog
 
 
-#### = 3.9.2 (October 9, 2019) =
+#### = 3.9.3 (October 9, 2019) =
 
 * Fix: Prevents front-end javascripts of Advanced Slider that are activated with AJAX to repeat loading.
+* Tweak: Unify the slider config parameters.
 
 
 #### = 3.9.1 (October 5, 2019) =
