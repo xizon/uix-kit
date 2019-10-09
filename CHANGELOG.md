@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 3.9.2 (October 9, 2019) =
+
+* Fix: Prevents front-end javascripts of Advanced Slider that are activated with AJAX to repeat loading.
+
+
 #### = 3.9.1 (October 5, 2019) =
 
 * Fix: Solved a transparency transition problem of Advanced Slider.

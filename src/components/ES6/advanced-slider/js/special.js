@@ -33,7 +33,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.2';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.3';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -94,137 +94,152 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 					$first                   = $items.first(),
 					nativeItemW,
-					nativeItemH;
+					nativeItemH,
+                    activated                = $this.data( 'activated' ); 
 				
 				
-				//Autoplay times
-				var playTimes;
-				//A function called "timer" once every second (like a digital watch).
-				$this[0].animatedSlides;
+                
+                if ( typeof activated === typeof undefined || activated === 0 ) {
+                    
+               
+                    //Autoplay times
+                    var playTimes;
+                    //A function called "timer" once every second (like a digital watch).
+                    $this[0].animatedSlides;
+
+
+                    //Get the animation speed
+                    //-------------------------------------	
+                    if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
+                        animSpeed = $this.data( 'speed' );
+                    }
+
+
+
+                    //Display all images
+                    //-------------------------------------	
+                    if ( !Modernizr.webgl ) {
+                        $this.find( 'img' ).css( 'visibility', 'visible' );
+                    }
+
+
+
+                    //Initialize the first item container
+                    //-------------------------------------		
+                    $items.addClass( 'next' );
+
+                    $first.addClass( 'is-active' );
+
+
+                    TweenMax.set( $items, {
+                        alpha      : 0,
+                        onComplete : function() {
+
+                            TweenMax.to( $first, animSpeed/1000, {
+                                alpha : 1,
+                                delay : animSpeed/1000
+                            });		
+                        }
+
+                    });			
+
+
+
+                    if ( $first.find( 'video' ).length > 0 ) {
+
+                        //Returns the dimensions (intrinsic height and width ) of the video
+                        var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
+                            videoURL = $first.find( 'source:first' ).attr( 'src' );
+
+                        if ( typeof videoURL != typeof undefined ) {
+                            video.addEventListener( 'loadedmetadata', function( e ) {
+                                $this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
+
+                                nativeItemW = this.videoWidth;
+                                nativeItemH = this.videoHeight;	
+
+                                //Initialize all the items to the stage
+                                addItemsToStage( $this, nativeItemW, nativeItemH );
+
+
+                            }, false);	
+
+                            video.src = videoURL;
+                        }
+
+
+
+
+                    } else {
+
+                        var imgURL   = $first.find( 'img' ).attr( 'src' );
+
+                        if ( typeof imgURL != typeof undefined ) {
+
+                            var img = new Image();
+
+                            img.onload = function() {
+                                $this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
+
+                                nativeItemW = this.width;
+                                nativeItemH = this.height;	
+
+                                //Initialize all the items to the stage
+                                addItemsToStage( $this, nativeItemW, nativeItemH );
+
+
+
+                            };
+
+                            img.src = imgURL;
+                        }
+
+
+                    }	
+
+
+
+
+                    //Autoplay Slider
+                    //-------------------------------------		
+                    if ( !resize ) {
+
+                        var dataAuto                 = $this.data( 'auto' ),
+                            dataTiming               = $this.data( 'timing' ),
+                            dataLoop                 = $this.data( 'loop' );
+
+                        if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+                        if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+                        if ( typeof dataLoop === typeof undefined ) dataLoop = false;
+
+
+                        if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+                            sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+
+                            $this.on({
+                                mouseenter: function() {
+                                    clearInterval( $this[0].animatedSlides );
+                                },
+                                mouseleave: function() {
+                                    sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
+                                }
+                            });	
+
+                        }
+
+
+                    }
+
+                    
+                    
+                    //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+                    $this.data( 'activated', 1 );
+                    
+                }//endif activated
+  
 				
 				
-				//Get the animation speed
-				//-------------------------------------	
-				if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
-					animSpeed = $this.data( 'speed' );
-				}
-				
-		
-			
-				//Display all images
-				//-------------------------------------	
-				if ( !Modernizr.webgl ) {
-				    $this.find( 'img' ).css( 'visibility', 'visible' );
-				}
-
-
-
-				//Initialize the first item container
-				//-------------------------------------		
-				$items.addClass( 'next' );
-				
-				$first.addClass( 'is-active' );
-				
-				
-				TweenMax.set( $items, {
-					alpha      : 0,
-					onComplete : function() {
-
-						TweenMax.to( $first, animSpeed/1000, {
-							alpha : 1,
-							delay : animSpeed/1000
-						});		
-					}
-					
-				});			
-
-				
-
-				if ( $first.find( 'video' ).length > 0 ) {
-
-					//Returns the dimensions (intrinsic height and width ) of the video
-					var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
-						videoURL = $first.find( 'source:first' ).attr( 'src' );
-					
-					if ( typeof videoURL != typeof undefined ) {
-						video.addEventListener( 'loadedmetadata', function( e ) {
-							$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
-
-							nativeItemW = this.videoWidth;
-							nativeItemH = this.videoHeight;	
-
-							//Initialize all the items to the stage
-							addItemsToStage( $this, nativeItemW, nativeItemH );
-
-
-						}, false);	
-
-						video.src = videoURL;
-					}
-
-
-
-
-				} else {
-
-					var imgURL   = $first.find( 'img' ).attr( 'src' );
-
-					if ( typeof imgURL != typeof undefined ) {
-						
-						var img = new Image();
-						
-						img.onload = function() {
-							$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
-
-							nativeItemW = this.width;
-							nativeItemH = this.height;	
-
-							//Initialize all the items to the stage
-							addItemsToStage( $this, nativeItemW, nativeItemH );
-							
-
-							
-						};
-
-						img.src = imgURL;
-					}
-
-
-				}	
-				
-				
-				
-
-				//Autoplay Slider
-				//-------------------------------------		
-				if ( !resize ) {
-
-					var dataAuto                 = $this.data( 'auto' ),
-						dataTiming               = $this.data( 'timing' ),
-						dataLoop                 = $this.data( 'loop' );
-
-					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
-					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
-
-
-					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
-
-						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
-
-						$this.on({
-							mouseenter: function() {
-								clearInterval( $this[0].animatedSlides );
-							},
-							mouseleave: function() {
-								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
-							}
-						});	
-
-					}
-
-
-				}
 
 				
 				

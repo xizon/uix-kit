@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.1
+ * ## Version             :  3.9.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 5, 2019
+ * ## Last Update         :  October 9, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a36addb31a509523df84";
+/******/ 	var hotCurrentHash = "61a62554b37610fae1b2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5211,7 +5211,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.4';
+  module.ADVANCED_SLIDER.version = '0.1.5';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5241,71 +5241,79 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             $items = $this.find('.uix-advanced-slider__item'),
             $first = $items.first(),
             nativeItemW,
-            nativeItemH; //Autoplay times
+            nativeItemH,
+            activated = $this.data('activated');
 
-        var playTimes; //A function called "timer" once every second (like a digital watch).
+        if (basic_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Autoplay times
+          var playTimes; //A function called "timer" once every second (like a digital watch).
 
-        $this[0].animatedSlides;
-        animDelay = UixCssProperty.getTransitionDuration($first[0]); //Initialize the first item container
-        //-------------------------------------		
+          $this[0].animatedSlides;
+          animDelay = UixCssProperty.getTransitionDuration($first[0]); //Initialize the first item container
+          //-------------------------------------		
 
-        $items.addClass('next');
-        setTimeout(function () {
-          $first.addClass('is-active');
-        }, animDelay);
+          $items.addClass('next');
+          setTimeout(function () {
+            $first.addClass('is-active');
+          }, animDelay);
 
-        if ($first.find('video').length > 0) {
-          //Returns the dimensions (intrinsic height and width ) of the video
-          var video = document.getElementById($first.find('video').attr('id')),
-              videoURL = $first.find('source:first').attr('src');
-          video.addEventListener('loadedmetadata', function (e) {
-            $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
-            nativeItemW = this.videoWidth;
-            nativeItemH = this.videoHeight; //Initialize all the items to the stage
-
-            addItemsToStage($this, nativeItemW, nativeItemH);
-          }, false);
-          video.src = videoURL;
-        } else {
-          var imgURL = $first.find('img').attr('src');
-
-          if (basic_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-            var img = new Image();
-
-            img.onload = function () {
-              $this.css('height', $this.width() * (this.height / this.width) + 'px');
-              nativeItemW = this.width;
-              nativeItemH = this.height; //Initialize all the items to the stage
+          if ($first.find('video').length > 0) {
+            //Returns the dimensions (intrinsic height and width ) of the video
+            var video = document.getElementById($first.find('video').attr('id')),
+                videoURL = $first.find('source:first').attr('src');
+            video.addEventListener('loadedmetadata', function (e) {
+              $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
+              nativeItemW = this.videoWidth;
+              nativeItemH = this.videoHeight; //Initialize all the items to the stage
 
               addItemsToStage($this, nativeItemW, nativeItemH);
-            };
+            }, false);
+            video.src = videoURL;
+          } else {
+            var imgURL = $first.find('img').attr('src');
 
-            img.src = imgURL;
-          }
-        } //Autoplay Slider
-        //-------------------------------------		
+            if (basic_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+              var img = new Image();
+
+              img.onload = function () {
+                $this.css('height', $this.width() * (this.height / this.width) + 'px');
+                nativeItemW = this.width;
+                nativeItemH = this.height; //Initialize all the items to the stage
+
+                addItemsToStage($this, nativeItemW, nativeItemH);
+              };
+
+              img.src = imgURL;
+            }
+          } //Autoplay Slider
+          //-------------------------------------		
 
 
-        if (!resize) {
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
-          if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+          if (!resize) {
+            var dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataLoop = $this.data('loop');
+            if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
 
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
-            });
-          }
-        }
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+                }
+              });
+            }
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated
+
       });
     }
     /*
@@ -5850,7 +5858,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.2';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.3';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -5895,92 +5903,100 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             $items = $this.find('.uix-advanced-slider-sp__item'),
             $first = $items.first(),
             nativeItemW,
-            nativeItemH; //Autoplay times
+            nativeItemH,
+            activated = $this.data('activated');
 
-        var playTimes; //A function called "timer" once every second (like a digital watch).
+        if (special_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Autoplay times
+          var playTimes; //A function called "timer" once every second (like a digital watch).
 
-        $this[0].animatedSlides; //Get the animation speed
-        //-------------------------------------	
+          $this[0].animatedSlides; //Get the animation speed
+          //-------------------------------------	
 
-        if (special_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-          animSpeed = $this.data('speed');
-        } //Display all images
-        //-------------------------------------	
-
-
-        if (!Modernizr.webgl) {
-          $this.find('img').css('visibility', 'visible');
-        } //Initialize the first item container
-        //-------------------------------------		
+          if (special_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
+            animSpeed = $this.data('speed');
+          } //Display all images
+          //-------------------------------------	
 
 
-        $items.addClass('next');
-        $first.addClass('is-active');
-        TweenMax.set($items, {
-          alpha: 0,
-          onComplete: function onComplete() {
-            TweenMax.to($first, animSpeed / 1000, {
-              alpha: 1,
-              delay: animSpeed / 1000
-            });
-          }
-        });
-
-        if ($first.find('video').length > 0) {
-          //Returns the dimensions (intrinsic height and width ) of the video
-          var video = document.getElementById($first.find('video').attr('id')),
-              videoURL = $first.find('source:first').attr('src');
-
-          if (special_typeof(videoURL) != ( true ? "undefined" : undefined)) {
-            video.addEventListener('loadedmetadata', function (e) {
-              $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
-              nativeItemW = this.videoWidth;
-              nativeItemH = this.videoHeight; //Initialize all the items to the stage
-
-              addItemsToStage($this, nativeItemW, nativeItemH);
-            }, false);
-            video.src = videoURL;
-          }
-        } else {
-          var imgURL = $first.find('img').attr('src');
-
-          if (special_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-            var img = new Image();
-
-            img.onload = function () {
-              $this.css('height', $this.width() * (this.height / this.width) + 'px');
-              nativeItemW = this.width;
-              nativeItemH = this.height; //Initialize all the items to the stage
-
-              addItemsToStage($this, nativeItemW, nativeItemH);
-            };
-
-            img.src = imgURL;
-          }
-        } //Autoplay Slider
-        //-------------------------------------		
+          if (!Modernizr.webgl) {
+            $this.find('img').css('visibility', 'visible');
+          } //Initialize the first item container
+          //-------------------------------------		
 
 
-        if (!resize) {
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
-          if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+          $items.addClass('next');
+          $first.addClass('is-active');
+          TweenMax.set($items, {
+            alpha: 0,
+            onComplete: function onComplete() {
+              TweenMax.to($first, animSpeed / 1000, {
+                alpha: 1,
+                delay: animSpeed / 1000
+              });
+            }
+          });
 
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
-            });
-          }
-        }
+          if ($first.find('video').length > 0) {
+            //Returns the dimensions (intrinsic height and width ) of the video
+            var video = document.getElementById($first.find('video').attr('id')),
+                videoURL = $first.find('source:first').attr('src');
+
+            if (special_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+              video.addEventListener('loadedmetadata', function (e) {
+                $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
+                nativeItemW = this.videoWidth;
+                nativeItemH = this.videoHeight; //Initialize all the items to the stage
+
+                addItemsToStage($this, nativeItemW, nativeItemH);
+              }, false);
+              video.src = videoURL;
+            }
+          } else {
+            var imgURL = $first.find('img').attr('src');
+
+            if (special_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+              var img = new Image();
+
+              img.onload = function () {
+                $this.css('height', $this.width() * (this.height / this.width) + 'px');
+                nativeItemW = this.width;
+                nativeItemH = this.height; //Initialize all the items to the stage
+
+                addItemsToStage($this, nativeItemW, nativeItemH);
+              };
+
+              img.src = imgURL;
+            }
+          } //Autoplay Slider
+          //-------------------------------------		
+
+
+          if (!resize) {
+            var dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataLoop = $this.data('loop');
+            if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
+                }
+              });
+            }
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated
+
       });
     }
     /*
