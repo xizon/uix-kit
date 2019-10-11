@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.3
+ * ## Version             :  3.9.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 9, 2019
+ * ## Last Update         :  October 11, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "cbe1eb3b3c2e8650849e";
+/******/ 	var hotCurrentHash = "8ba72cf552bda232769a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4935,7 +4935,7 @@ function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "functio
 var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_CONTENT_SLIDER === null) return false;
   module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
-  module.ADVANCED_CONTENT_SLIDER.version = '0.0.6';
+  module.ADVANCED_CONTENT_SLIDER.version = '0.0.7';
 
   module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
     var $window = $(window),
@@ -5007,7 +5007,11 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
             onComplete: function onComplete() {
               $this.css('height', 'auto');
             }
-          }); //Pagination dots 
+          }); //Add identifiers for the first and last items
+          //-------------------------------------		
+
+          $items.last().addClass('last');
+          $items.first().addClass('first'); //Pagination dots 
           //-------------------------------------	
 
           if (dataControlsPaginationAuto) {
@@ -5028,7 +5032,14 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
           }
 
           $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
-            e.preventDefault();
+            e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+            var $btn = $(this);
+            if ($btn.attr('aria-disabled') == 'true') return false;
+            $(dataControlsPagination).find('li a').attr('aria-disabled', 'true');
+            setTimeout(function () {
+              $(dataControlsPagination).find('li a').attr('aria-disabled', 'false');
+            }, animSpeed);
 
             if (!$(this).hasClass('is-active')) {
               sliderUpdates($(this).attr('data-index'), $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
@@ -5048,14 +5059,30 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
           }
 
           _prev.off('click').on('click', function (e) {
-            e.preventDefault();
+            e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+            if (_prev.attr('aria-disabled') == 'true') return false;
+
+            _prev.attr('aria-disabled', 'true');
+
+            setTimeout(function () {
+              _prev.attr('aria-disabled', 'false');
+            }, animSpeed);
             sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
             clearInterval($this[0].animatedSlides);
           });
 
           _next.off('click').on('click', function (e) {
-            e.preventDefault();
+            e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+            if (_next.attr('aria-disabled') == 'true') return false;
+
+            _next.attr('aria-disabled', 'true');
+
+            setTimeout(function () {
+              _next.attr('aria-disabled', 'false');
+            }, animSpeed);
             sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
             clearInterval($this[0].animatedSlides);
@@ -5223,7 +5250,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.6';
+  module.ADVANCED_SLIDER.version = '0.1.7';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5397,8 +5424,11 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
       if ($(arrowsID).length == 0) {
         $('body').prepend('<div style="display:none;" class="uix-advanced-slider__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>');
-      } //Prevent bubbling
+      } //Add identifiers for the first and last items
 
+
+      $items.last().addClass('last');
+      $items.first().addClass('first'); //Prevent bubbling
 
       if (itemsTotal == 1) {
         $(paginationID).hide();
@@ -5422,7 +5452,14 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       _dot += '</ul>';
       if ($(paginationID).html() == '') $(paginationID).html(_dot);
       $(paginationID).find('li a').off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        var $btn = $(this);
+        if ($btn.attr('aria-disabled') == 'true') return false;
+        $(paginationID).find('li a').attr('aria-disabled', 'true');
+        setTimeout(function () {
+          $(paginationID).find('li a').attr('aria-disabled', 'false');
+        }, animDelay);
 
         if (!$(this).hasClass('is-active')) {
           //Determine the direction
@@ -5450,14 +5487,30 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _prev.attr('aria-disabled', 'false');
+        }, animDelay);
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _next.attr('aria-disabled', 'false');
+        }, animDelay);
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
@@ -5614,33 +5667,34 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       normalSliderVideoInit($current, true); //Reset the default height of item
       //-------------------------------------	
 
-      itemDefaultInit($current);
+      itemDefaultInit(slider, $current);
     }
     /*
      * Initialize the default height of item
      *
-     * @param  {Object} slider           - Current selector of each slider.
+           * @param  {Object} slider                 - Selector of the slider .
+     * @param  {Object} currentLlement         - Current selector of each slider.
      * @return {Void}
      */
 
 
-    function itemDefaultInit(slider) {
-      if (slider.find('video').length > 0) {
+    function itemDefaultInit(slider, currentLlement) {
+      if (currentLlement.find('video').length > 0) {
         //Returns the dimensions (intrinsic height and width ) of the video
-        var video = document.getElementById(slider.find('video').attr('id')),
-            videoURL = slider.find('source:first').attr('src');
+        var video = document.getElementById(currentLlement.find('video').attr('id')),
+            videoURL = currentLlement.find('source:first').attr('src');
         video.addEventListener('loadedmetadata', function (e) {
-          $sliderWrapper.css('height', this.videoHeight * (slider.closest('.uix-advanced-slider__outline').width() / this.videoWidth) + 'px');
+          slider.css('height', this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth) + 'px');
         }, false);
         video.src = videoURL;
       } else {
-        var imgURL = slider.find('img').attr('src');
+        var imgURL = currentLlement.find('img').attr('src');
 
         if (basic_typeof(imgURL) != ( true ? "undefined" : undefined)) {
           var img = new Image();
 
           img.onload = function () {
-            $sliderWrapper.css('height', slider.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
+            slider.css('height', currentLlement.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
           };
 
           img.src = imgURL;
@@ -5878,7 +5932,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.4';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.5';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6097,8 +6151,11 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
       if ($(arrowsID).length == 0) {
         $('body').prepend('<div style="display:none;" class="uix-advanced-slider-sp__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>');
-      } //Prevent bubbling
+      } //Add identifiers for the first and last items
 
+
+      $items.last().addClass('last');
+      $items.first().addClass('first'); //Prevent bubbling
 
       if (itemsTotal == 1) {
         $(paginationID).hide();
@@ -6230,7 +6287,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6317,7 +6374,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6406,7 +6463,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6498,7 +6555,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6590,7 +6647,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //Canvas Interactions
@@ -6617,7 +6674,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       _dot += '</ul>';
       if ($(paginationID).html() == '') $(paginationID).html(_dot);
       $(paginationID).find('li a').off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        var $btn = $(this);
+        if ($btn.attr('aria-disabled') == 'true') return false;
+        $(paginationID).find('li a').attr('aria-disabled', 'true');
+        setTimeout(function () {
+          $(paginationID).find('li a').attr('aria-disabled', 'false');
+        }, animSpeed);
 
         if (!$(this).hasClass('is-active')) {
           //Determine the direction
@@ -6648,7 +6712,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault(); //Canvas Interactions
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _prev.attr('aria-disabled', 'false');
+        }, animSpeed); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
 
@@ -6658,7 +6730,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault(); //Canvas Interactions
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _next.attr('aria-disabled', 'false');
+        }, animSpeed); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
 
@@ -6826,7 +6906,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
       setTimeout(function () {
-        canvasDefaultInit($current);
+        canvasDefaultInit(slider, $current);
       }, animSpeed); //Canvas Interactions
       //-------------------------------------
       //-- Brightness Effect
@@ -6869,41 +6949,42 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize the default height of canvas
      *
-     * @param  {Object} slider           - Current selector of each slider.
+           * @param  {Object} slider                 - Selector of the slider .
+     * @param  {Object} currentLlement         - Current selector of each slider.
      * @return {Void}
      */
 
 
-    function canvasDefaultInit(slider) {
-      if (slider.find('video').length > 0) {
+    function canvasDefaultInit(slider, currentLlement) {
+      if (currentLlement.find('video').length > 0) {
         //Returns the dimensions (intrinsic height and width ) of the video
-        var video = document.getElementById(slider.find('video').attr('id')),
-            videoURL = slider.find('source:first').attr('src');
+        var video = document.getElementById(currentLlement.find('video').attr('id')),
+            videoURL = currentLlement.find('source:first').attr('src');
         video.addEventListener('loadedmetadata', function (e) {
           //At the same time change the height of the canvas and slider container
-          var h = this.videoHeight * (slider.closest('.uix-advanced-slider__outline').width() / this.videoWidth);
+          var h = this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth);
 
           if (Modernizr.webgl) {
             renderer.view.style.height = h + 'px';
           } //---
 
 
-          $sliderWrapper.css('height', h + 'px');
+          slider.css('height', h + 'px');
         }, false);
         video.src = videoURL;
       } else {
-        var imgURL = slider.find('img').attr('src');
+        var imgURL = currentLlement.find('img').attr('src');
 
         if (special_typeof(imgURL) != ( true ? "undefined" : undefined)) {
           var img = new Image();
 
           img.onload = function () {
             if (Modernizr.webgl) {
-              renderer.view.style.height = slider.find('img').height() + 'px';
+              renderer.view.style.height = currentLlement.find('img').height() + 'px';
             } //---
 
 
-            $sliderWrapper.css('height', slider.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
+            slider.css('height', currentLlement.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
           };
 
           img.src = imgURL;
@@ -18070,7 +18151,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.5';
+  module.THREE_SHATTER_SLIDER.version = '0.0.6';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18177,7 +18258,11 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
 
             $items.addClass('next');
-            $first.addClass('is-active'); //Get all images and videos
+            $first.addClass('is-active'); //Add identifiers for the first and last items
+            //-------------------------------------		
+
+            $items.last().addClass('last');
+            $items.first().addClass('first'); //Get all images and videos
             //-------------------------------------		
 
             $items.each(function () {
@@ -18221,8 +18306,15 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             _dot += '</ul>';
             if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
 
-            $(dataControlsPagination).find('ul > li').on('click', function (e) {
-              e.preventDefault();
+            $(dataControlsPagination).find('ul > li').off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              var $btn = $(this);
+              if ($btn.attr('aria-disabled') == 'true') return false;
+              $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
+              setTimeout(function () {
+                $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
+              }, animSpeed);
               var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
                   slideNextId = $(this).index(); //Determine the direction
 
@@ -18249,8 +18341,16 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
               _prev.addClass('is-disabled');
             }
 
-            _prev.on('click', function (e) {
-              e.preventDefault();
+            _prev.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_prev.attr('aria-disabled') == 'true') return false;
+
+              _prev.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _prev.attr('aria-disabled', 'false');
+              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
@@ -18259,8 +18359,16 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
               clearInterval($this[0].animatedSlides);
             });
 
-            _next.on('click', function (e) {
-              e.preventDefault();
+            _next.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_next.attr('aria-disabled') == 'true') return false;
+
+              _next.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _next.attr('aria-disabled', 'false');
+              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
 
@@ -18735,7 +18843,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.5';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.6';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18848,7 +18956,11 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
 
             $items.addClass('next');
-            $first.addClass('is-active'); //Get all images and videos
+            $first.addClass('is-active'); //Add identifiers for the first and last items
+            //-------------------------------------		
+
+            $items.last().addClass('last');
+            $items.first().addClass('first'); //Get all images and videos
             //-------------------------------------		
 
             $items.each(function () {
@@ -18892,8 +19004,15 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             _dot += '</ul>';
             if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
 
-            $(dataControlsPagination).find('ul > li').on('click', function (e) {
-              e.preventDefault();
+            $(dataControlsPagination).find('ul > li').off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              var $btn = $(this);
+              if ($btn.attr('aria-disabled') == 'true') return false;
+              $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
+              setTimeout(function () {
+                $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
+              }, animSpeed);
               var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
                   slideNextId = $(this).index(); //Determine the direction
 
@@ -18920,8 +19039,16 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
               _prev.addClass('is-disabled');
             }
 
-            _prev.on('click', function (e) {
-              e.preventDefault();
+            _prev.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_prev.attr('aria-disabled') == 'true') return false;
+
+              _prev.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _prev.attr('aria-disabled', 'false');
+              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
@@ -18930,8 +19057,16 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
               clearInterval($this[0].animatedSlides);
             });
 
-            _next.on('click', function (e) {
-              e.preventDefault();
+            _next.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_next.attr('aria-disabled') == 'true') return false;
+
+              _next.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _next.attr('aria-disabled', 'false');
+              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
 

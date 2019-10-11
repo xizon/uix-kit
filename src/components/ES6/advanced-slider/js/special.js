@@ -33,7 +33,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.4';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.5';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -350,6 +350,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider-sp__arrows '+arrowsID.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>' );
 			}
 			
+            
+            //Add identifiers for the first and last items
+            $items.last().addClass( 'last' );
+            $items.first().addClass( 'first' );
 			
         
 		    //Prevent bubbling
@@ -559,7 +563,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 					
@@ -702,7 +706,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 	
@@ -844,7 +848,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 
@@ -989,7 +993,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 
@@ -1136,7 +1140,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 
@@ -1177,6 +1181,16 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			$( paginationID ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
+                
+                //Prevent buttons' events from firing multiple times
+                var $btn = $( this );
+                if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
+                $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' );
+                }, animSpeed );
+
+                
 				if ( !$( this ).hasClass( 'is-active' ) ) {
 
 					
@@ -1219,6 +1233,14 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+                
+                //Prevent buttons' events from firing multiple times
+                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                _prev.attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    _prev.attr( 'aria-disabled', 'false' );
+                }, animSpeed ); 
+                
 
 				//Canvas Interactions
 				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
@@ -1233,6 +1255,14 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+                
+                
+                //Prevent buttons' events from firing multiple times
+                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                _next.attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    _next.attr( 'aria-disabled', 'false' );
+                }, animSpeed );
 
 				//Canvas Interactions
 				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
@@ -1478,7 +1508,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			//Reset the default height of canvas
 			//-------------------------------------	
 			setTimeout( function() {
-				canvasDefaultInit( $current );
+				canvasDefaultInit( slider, $current );
 			}, animSpeed );
 			
 			
@@ -1553,30 +1583,29 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize the default height of canvas
 		 *
-		 * @param  {Object} slider           - Current selector of each slider.
+         * @param  {Object} slider                 - Selector of the slider .
+		 * @param  {Object} currentLlement         - Current selector of each slider.
 		 * @return {Void}
 		 */
-        function canvasDefaultInit( slider ) {
+        function canvasDefaultInit( slider, currentLlement ) {
 			
-
-			
-			if ( slider.find( 'video' ).length > 0 ) {
+			if ( currentLlement.find( 'video' ).length > 0 ) {
 
 				//Returns the dimensions (intrinsic height and width ) of the video
-				var video    = document.getElementById( slider.find( 'video' ).attr( 'id' ) ),
-					videoURL = slider.find( 'source:first' ).attr( 'src' );
+				var video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) ),
+					videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
 					//At the same time change the height of the canvas and slider container
-					var h = this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth);
+					var h = this.videoHeight*(currentLlement.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth);
 					
 					if ( Modernizr.webgl ) {
 						renderer.view.style.height = h + 'px';
 					}
 					
 					//---
-					$sliderWrapper.css( 'height', h + 'px' );	
+					slider.css( 'height', h + 'px' );	
 
 				}, false);	
 
@@ -1585,7 +1614,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' );
+				var imgURL   = currentLlement.find( 'img' ).attr( 'src' );
 				
 				if ( typeof imgURL != typeof undefined ) {
 					
@@ -1594,10 +1623,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					img.onload = function() {
 
 						if ( Modernizr.webgl ) {
-							renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
+							renderer.view.style.height = currentLlement.find( 'img' ).height() + 'px';		
 						}
 						//---
-						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+						slider.css( 'height', currentLlement.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 					};
 
@@ -1607,7 +1636,6 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			}	
 			
-
 
 		}
 		

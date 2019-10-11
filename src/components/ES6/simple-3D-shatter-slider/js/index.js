@@ -31,7 +31,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SHATTER_SLIDER               = module.THREE_SHATTER_SLIDER || {};
-    module.THREE_SHATTER_SLIDER.version       = '0.0.5';
+    module.THREE_SHATTER_SLIDER.version       = '0.0.6';
     module.THREE_SHATTER_SLIDER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -178,6 +178,13 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                         $items.addClass( 'next' );
                         $first.addClass( 'is-active' );
 
+                        
+
+                        //Add identifiers for the first and last items
+                        //-------------------------------------		
+                        $items.last().addClass( 'last' );
+                        $items.first().addClass( 'first' );
+
 
 
                         //Get all images and videos
@@ -243,9 +250,20 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
                         //Fire the slider transtion with buttons
-                        $( dataControlsPagination ).find( 'ul > li' ).on( 'click', function( e ) {
+                        $( dataControlsPagination ).find( 'ul > li' ).off( 'click' ).on( 'click', function( e ) {
                             e.preventDefault();
 
+
+                            //Prevent buttons' events from firing multiple times
+                            var $btn = $( this );
+                            if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
+                            $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'true' );
+                            setTimeout( function() {
+                                $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'false' );
+                            }, animSpeed );
+
+                            
+                            
                             var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
                                 slideNextId = $( this ).index();
 
@@ -280,8 +298,16 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                         }
 
 
-                        _prev.on( 'click', function( e ) {
+                        _prev.off( 'click' ).on( 'click', function( e ) {
                             e.preventDefault();
+                            
+                            
+                            //Prevent buttons' events from firing multiple times
+                            if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                            _prev.attr( 'aria-disabled', 'true' );
+                            setTimeout( function() {
+                                _prev.attr( 'aria-disabled', 'false' );
+                            }, animSpeed );   
 
                             var slideCurId  = $items.filter( '.is-active' ).index(),
                                 slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
@@ -297,8 +323,16 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                         });
 
-                        _next.on( 'click', function( e ) {
+                        _next.off( 'click' ).on( 'click', function( e ) {
                             e.preventDefault();
+                            
+                            //Prevent buttons' events from firing multiple times
+                            if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                            _next.attr( 'aria-disabled', 'true' );
+                            setTimeout( function() {
+                                _next.attr( 'aria-disabled', 'false' );
+                            }, animSpeed ); 
+
 
                             var slideCurId  = $items.filter( '.is-active' ).index(),
                                 slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;

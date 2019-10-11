@@ -22,11 +22,9 @@ import '../scss/_basic.scss';
 export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	if ( window.ADVANCED_SLIDER === null ) return false;
 	
-	
-	
-
+    
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.1.6';
+    module.ADVANCED_SLIDER.version       = '0.1.7';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -35,6 +33,8 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			animDelay                 = 0,
 			$sliderWrapper            = $( '.uix-advanced-slider' );
 			
+        
+        
 			
 		sliderInit( false );
 		
@@ -273,8 +273,11 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider__arrows '+arrowsID.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>' );
 			}
 			
-			
-			
+
+            //Add identifiers for the first and last items
+            $items.last().addClass( 'last' );
+            $items.first().addClass( 'first' );
+
 			
 		    //Prevent bubbling
 			if ( itemsTotal == 1 ) {
@@ -308,6 +311,15 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			$( paginationID ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+                
+                //Prevent buttons' events from firing multiple times
+                var $btn = $( this );
+                if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
+                $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' );
+                }, animDelay );
+
 
 				if ( !$( this ).hasClass( 'is-active' ) ) {
 					
@@ -345,6 +357,13 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
+                //Prevent buttons' events from firing multiple times
+                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                _prev.attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    _prev.attr( 'aria-disabled', 'false' );
+                }, animDelay ); 
+                
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 
 				//Pause the auto play event
@@ -354,6 +373,13 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+                
+                //Prevent buttons' events from firing multiple times
+                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                _next.attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    _next.attr( 'aria-disabled', 'false' );
+                }, animDelay );
 
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 
@@ -582,7 +608,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			
 			//Reset the default height of item
 			//-------------------------------------	
-			itemDefaultInit( $current );		
+			itemDefaultInit( slider, $current );		
 			
 		
 			
@@ -592,20 +618,21 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize the default height of item
 		 *
-		 * @param  {Object} slider           - Current selector of each slider.
+         * @param  {Object} slider                 - Selector of the slider .
+		 * @param  {Object} currentLlement         - Current selector of each slider.
 		 * @return {Void}
 		 */
-        function itemDefaultInit( slider ) {
+        function itemDefaultInit( slider, currentLlement ) {
 			
-			if ( slider.find( 'video' ).length > 0 ) {
+			if ( currentLlement.find( 'video' ).length > 0 ) {
 
 				//Returns the dimensions (intrinsic height and width ) of the video
-				var video    = document.getElementById( slider.find( 'video' ).attr( 'id' ) ),
-					videoURL = slider.find( 'source:first' ).attr( 'src' );
+				var video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) ),
+					videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
-					$sliderWrapper.css( 'height', this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth) + 'px' );	
+					slider.css( 'height', this.videoHeight*(currentLlement.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth) + 'px' );	
 
 				}, false);	
 
@@ -614,7 +641,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' );
+				var imgURL   = currentLlement.find( 'img' ).attr( 'src' );
 				
 
 				if ( typeof imgURL != typeof undefined ) {
@@ -622,18 +649,14 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 					img.onload = function() {
 
-						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+						slider.css( 'height', currentLlement.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 					};
 
 					img.src = imgURL;	
 				}
 			
-
-
 			}	
-			
-
 
 		}
 		

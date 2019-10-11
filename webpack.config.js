@@ -647,12 +647,11 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
                                 if ( data.indexOf( 'sourceMappingURL='+globs.concatES5_JSFile+'.map' ) < 0 ) {
 
                                     resultData = resultData + oldContent;
-                                    
+
                                     let compressedresultData = UglifyJS.minify( resultData, { warnings: true } );
-                                    
-                                    
+
                                     if ( typeof compressedresultData.code != typeof undefined && oldContent.length > 0 ) {
-                                        
+
 
                                         // Step 3 => write targetJSFile
                                         //---------------------------------------------------------------------
@@ -667,93 +666,98 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
                                             console.log(colors.fg.Green, `${targetJSFile} created successfully! (1/${buildingFileTotal})`, colors.Reset);
 
 
-                                        });// fs.writeFile( targetJSFile ...
-                                        
-                                        
-                                        // Step 4 => compress targetJSFile
-                                        //---------------------------------------------------------------------	
-                                        fs.writeFile( targetJSMinFile, compressedresultData.code, 'utf8', function (err) {
 
-                                            if ( err ) {
-                                                console.log(colors.fg.Red, err, colors.Reset);
-                                                return;
-                                            }
+                                            // Step 4 => compress targetJSFile
+                                            //---------------------------------------------------------------------	
+                                            fs.writeFile( targetJSMinFile, compressedresultData.code, 'utf8', function (err) {
 
-                                            //file written successfully	
-                                            console.log(colors.fg.Green, `${targetJSMinFile} created successfully! (2/${buildingFileTotal})`, colors.Reset);
+                                                if ( err ) {
+                                                    console.log(colors.fg.Red, err, colors.Reset);
+                                                    return;
+                                                }
+
+                                                //file written successfully	
+                                                console.log(colors.fg.Green, `${targetJSMinFile} created successfully! (2/${buildingFileTotal})`, colors.Reset);
 
 
-                                            // Step 5 => read all core css and js files and build a table of contents
-                                            //---------------------------------------------------------------------
-                                            // Build a table of contents (TOC)
-                                            let tocBuildedIndex = 3;
-                                            ['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
+                                                // Step 5 => read all core css and js files and build a table of contents
+                                                //---------------------------------------------------------------------
+                                                // Build a table of contents (TOC)
+                                                let tocBuildedIndex = 3;
+                                                ['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ].map( ( filepath ) => {
 
-                                                if ( fs.existsSync( filepath ) ) {
+                                                    if ( fs.existsSync( filepath ) ) {
 
-                                                    fs.readFile( filepath, 'utf8', function( err, content ) {
+                                                        fs.readFile( filepath, 'utf8', function( err, content ) {
 
-                                                        if ( err ) throw err;
+                                                            if ( err ) throw err;
 
-                                                        let curCon  = content.toString(),
-                                                            newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+                                                            let curCon  = content.toString(),
+                                                                newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
 
-                                                        //is the matched group if found
-                                                        if ( newtext && newtext.length > 1 ) {  
+                                                            //is the matched group if found
+                                                            if ( newtext && newtext.length > 1 ) {  
 
-                                                            let curToc = '';
+                                                                let curToc = '';
 
-                                                            for ( let p = 0; p < newtext.length; p++ ) {
+                                                                for ( let p = 0; p < newtext.length; p++ ) {
 
-                                                                let curIndex = p + 1,
-                                                                    newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+                                                                    let curIndex = p + 1,
+                                                                        newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
 
-                                                                if ( p > 0 ) {
-                                                                    curToc += '    ' + curIndex + '.' + newStr + '\n';
-                                                                } else {
-                                                                    curToc +=  curIndex + '.' + newStr + '\n';
+                                                                    if ( p > 0 ) {
+                                                                        curToc += '    ' + curIndex + '.' + newStr + '\n';
+                                                                    } else {
+                                                                        curToc +=  curIndex + '.' + newStr + '\n';
+                                                                    }
+
                                                                 }
+
+                                                                //Replace a string in a file with nodejs
+                                                                let resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+
+                                                                fs.writeFile( filepath, resultData, 'utf8', function (err) {
+
+                                                                    if ( err ) {
+                                                                        console.log(colors.fg.Red, err, colors.Reset);
+                                                                        return;
+                                                                    }
+                                                                    //file written successfully	
+                                                                    console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${buildingFileTotal})`, colors.Reset);
+
+                                                                    tocBuildedIndex++;
+
+
+                                                                });
+
 
                                                             }
 
-                                                            //Replace a string in a file with nodejs
-                                                            let resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
 
-                                                            fs.writeFile( filepath, resultData, 'utf8', function (err) {
-
-                                                                if ( err ) {
-                                                                    console.log(colors.fg.Red, err, colors.Reset);
-                                                                    return;
-                                                                }
-                                                                //file written successfully	
-                                                                console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${buildingFileTotal})`, colors.Reset);
-
-                                                                tocBuildedIndex++;
+                                                        });// fs.readFile( filepath ...
 
 
-                                                            });
+                                                    }//endif fs.existsSync( filepath ) 
 
 
-                                                        }
-
-
-                                                    });// fs.readFile( filepath ...
-
-
-                                                }//endif fs.existsSync( filepath ) 
-
-
-                                            });	//.map( ( filepath )...
+                                                });	//.map( ( filepath )...
 
 
 
-                                        });// fs.writeFile( targetJSMinFile ...
+                                            });// fs.writeFile( targetJSMinFile ...
 
-       
+
+
+
+                                        });// fs.writeFile( targetJSFile ...
+
+
+
                                     } else {
                                         return console.log(colors.bg.Red, colors.fg.White, `===[ ERROR: ${compressedresultData.error} ]===File update failed! Please wait 10 seconds to rebuild.`, colors.Reset);
                                     }
+
                                     
 
 

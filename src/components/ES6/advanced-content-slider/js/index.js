@@ -31,7 +31,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.ADVANCED_CONTENT_SLIDER               = module.ADVANCED_CONTENT_SLIDER || {};
-    module.ADVANCED_CONTENT_SLIDER.version       = '0.0.6';
+    module.ADVANCED_CONTENT_SLIDER.version       = '0.0.7';
     module.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
 		var $window                   = $( window ),
@@ -130,6 +130,12 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                         }
                     } );	
+                    
+                    
+                    //Add identifiers for the first and last items
+                    //-------------------------------------		
+                    $items.last().addClass( 'last' );
+                    $items.first().addClass( 'first' );
 
 
                     //Pagination dots 
@@ -155,6 +161,15 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                     $( dataControlsPagination ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
                         e.preventDefault();
+                        
+                        //Prevent buttons' events from firing multiple times
+                        var $btn = $( this );
+                        if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
+                        $( dataControlsPagination ).find( 'li a' ).attr( 'aria-disabled', 'true' );
+                        setTimeout( function() {
+                            $( dataControlsPagination ).find( 'li a' ).attr( 'aria-disabled', 'false' );
+                        }, animSpeed );  
+
 
                         if ( !$( this ).hasClass( 'is-active' ) ) {
 
@@ -189,6 +204,14 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     _prev.off( 'click' ).on( 'click', function( e ) {
                         e.preventDefault();
 
+                        //Prevent buttons' events from firing multiple times
+                        if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                        _prev.attr( 'aria-disabled', 'true' );
+                        setTimeout( function() {
+                            _prev.attr( 'aria-disabled', 'false' );
+                        }, animSpeed );    
+
+                        
                         sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop );
 
                         //Pause the auto play event
@@ -200,6 +223,16 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     _next.off( 'click' ).on( 'click', function( e ) {
                         e.preventDefault();
 
+
+                        //Prevent buttons' events from firing multiple times
+                        if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                        _next.attr( 'aria-disabled', 'true' );
+                        setTimeout( function() {
+                            _next.attr( 'aria-disabled', 'false' );
+                        }, animSpeed ); 
+
+                        
+                        
                         sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop );
 
                         //Pause the auto play event

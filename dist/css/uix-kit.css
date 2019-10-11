@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.3
+ * ## Version             :  3.9.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 9, 2019
+ * ## Last Update         :  October 11, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -3644,6 +3644,8 @@ h6 {
           transition-delay: 0.6s; }
 
 /* Tests native CSS3 and HTML5 features are available */
+/*---- Effect: Scale ----*/
+/* --------------------------- */
 .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item {
   opacity: 0;
   transform: scale(0.8);
@@ -3667,6 +3669,51 @@ h6 {
       transform: translateX(0) scale(1); }
     .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-scale .uix-advanced-slider__inner .uix-advanced-slider__item.is-active.next {
       transform: translateX(0) scale(1); }
+
+/*---- Effect: Slide ----*/
+/* --------------------------- */
+.cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item {
+  opacity: 1;
+  z-index: 3; }
+  .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item:not(.leave):not(.is-active) {
+    transition: none;
+    z-index: 1; }
+  .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item.leave.prev {
+    animation: uix-cssAnim--slideLeftLeave 1.2s ease 1 forwards; }
+  .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item.leave.next {
+    animation: uix-cssAnim--slideRightLeave 1.2s ease 1 forwards; }
+  .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item.is-active {
+    transition-delay: 0s; }
+    .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item.is-active.prev {
+      animation: uix-cssAnim--slideRight 1.2s ease 1 forwards; }
+    .cssanimations .uix-advanced-slider.uix-advanced-slider--eff-slide .uix-advanced-slider__inner .uix-advanced-slider__item.is-active.next {
+      animation: uix-cssAnim--slideLeft 1.2s ease 1 forwards; }
+
+@keyframes uix-cssAnim--slideRightLeave {
+  0% {
+    transform: translateX(0); }
+  100% {
+    transform: translateX(100%); } }
+
+@keyframes uix-cssAnim--slideRight {
+  0% {
+    transform: translateX(100%);
+    z-index: 2; }
+  100% {
+    transform: translateX(0); } }
+
+@keyframes uix-cssAnim--slideLeftLeave {
+  0% {
+    transform: translateX(0); }
+  100% {
+    transform: translateX(-100%); } }
+
+@keyframes uix-cssAnim--slideLeft {
+  0% {
+    transform: translateX(-100%);
+    z-index: 2; }
+  100% {
+    transform: translateX(0); } }
 
 @media all and (max-width: 768px) {
   .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt h3 {

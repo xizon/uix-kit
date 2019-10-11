@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 3.9.4 (October 11, 2019) =
+
+* Fix:Fixed issue with initialization height for Advanced Slider.
+* Tweak: Prevent slider buttons' events from firing multiple times.
+* Tweak: Modified webpack.config.js.
+
+
+
 #### = 3.9.3 (October 9, 2019) =
 
 * Fix: Prevents front-end javascripts of Advanced Slider that are activated with AJAX to repeat loading.
