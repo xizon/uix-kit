@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.4
+ * ## Version             :  3.9.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 11, 2019
+ * ## Last Update         :  October 16, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8ba72cf552bda232769a";
+/******/ 	var hotCurrentHash = "bb74277b57039d8dcfcc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -810,7 +810,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(131)(__webpack_require__.s = 131);
+/******/ 	return hotCreateRequire(130)(__webpack_require__.s = 130);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2751,12 +2751,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
+/* 104 */,
 /* 105 */,
 /* 106 */,
 /* 107 */,
@@ -2782,8 +2777,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 127 */,
 /* 128 */,
 /* 129 */,
-/* 130 */,
-/* 131 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2853,7 +2847,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     33.Custom Lightbox
     34.Bulleted List
     35.Posts List With Ajax
-    36.Fullwidth List of Split
+    36.Full Width Column to Edge
     37.Login Templates
     38.Modal Dialog
     39.Mousewheel Interaction
@@ -2872,34 +2866,35 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     52.Show More Less
     53.Skew Based On Velocity of Scroll
     54.Smooth Scrolling When Clicking An Anchor Link
-    55.Sticky Elements
-    56.SVG Map (China)
-    57.SVG Map (World)
-    58.3D Background 1 with three.js
-    59.3D Background 2 with three.js
-    60.3D Background 3 with three.js
-    61.3D Background
-    62.3D Carousel
-    63.3D Gallery with three.js
-    64.3D Image Transition with three.js
-    65.3D Model
-    66.3D Pages
-    67.3D Particle Effect
-    68.3D Sphere Rotation
-    69.3D Object Anim When Click
-    70.3D Mouse Interaction with three.js
+    55.Smooth Scrolling Page
+    56.Sticky Elements
+    57.SVG Map (China)
+    58.SVG Map (World)
+    59.3D Background 1 with three.js
+    60.3D Background 2 with three.js
+    61.3D Background 3 with three.js
+    62.3D Background
+    63.3D Carousel
+    64.3D Gallery with three.js
+    65.3D Image Transition with three.js
+    66.3D Model
+    67.3D Pages
+    68.3D Particle Effect
+    69.3D Sphere Rotation
+    70.3D Object Anim When Click
     71.3D Mouse Interaction with three.js
-    72.3D Shatter Slider
-    73.3D Explosive Particle Slider
-    74.3D Filmic Effects
-    75.Responsive Table
-    76.Table Sorter
-    77.Tabs
-    78.Team Focus
-    79.Text effect
-    80.Timeline
-    81.Vertical Menu
-    82.WordPress Core Scripts
+    72.3D Mouse Interaction with three.js
+    73.3D Shatter Slider
+    74.3D Explosive Particle Slider
+    75.3D Filmic Effects
+    76.Responsive Table
+    77.Table Sorter
+    78.Tabs
+    79.Team Focus
+    80.Text effect
+    81.Timeline
+    82.Vertical Menu
+    83.WordPress Core Scripts
 
 
 */
@@ -3347,7 +3342,7 @@ window.MAIN = null;
 
       if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
 
-      if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+      if (UixModuleInstance.FULL_WIDTH_COLUMN_TO_EDGE) UixModuleInstance.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded(); //Full Width Column to Edge
 
       if (UixModuleInstance.STICKY_EL) UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 
@@ -3596,48 +3591,48 @@ function common_height_classCallCheck(instance, Constructor) { if (!(instance in
 var COMMON_HEIGHT = function (module, $, window, document) {
   if (window.COMMON_HEIGHT === null) return false;
   module.COMMON_HEIGHT = module.COMMON_HEIGHT || {};
-  module.COMMON_HEIGHT.version = '0.0.1';
+  module.COMMON_HEIGHT.version = '0.0.2';
 
   module.COMMON_HEIGHT.pageLoaded = function () {
-    $('.js-uix-common-height').each(function () {
-      var $this = $(this),
-          $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          element = $this,
-          selectors = '[class*=col-], [class*=uix-core-grid__col-]',
-          //Bootstrap grid system and Custom uix grid system
-      maxHeight = 0;
-      element.children(selectors).each(function () {
-        var element = $(this).children(); //Solve the problem that the image cannot be read accurately
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    commonHeightInit(windowWidth);
+    $window.on('resize', function () {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
 
-        element.find('img').each(function () {
-          var imgOuter = $(this).parent('a').css('display');
+        commonHeightInit(windowWidth);
+      }
+    });
 
-          if (imgOuter == 'inline') {
-            $(this).parent('a').css('display', 'inline-block');
+    function commonHeightInit(w) {
+      $('.js-uix-common-height').each(function () {
+        var $this = $(this),
+            element = $this,
+            selectors = '[class*=col-], [class*=uix-core-grid__col-]',
+            //Bootstrap grid system and Custom uix grid system
+        maxHeight = 0;
+        element.children(selectors).each(function () {
+          var element = $(this).children(); //Solve the problem that the image cannot be read accurately
+
+          element.find('img').each(function () {
+            var imgOuter = $(this).parent('a').css('display');
+
+            if (imgOuter == 'inline') {
+              $(this).parent('a').css('display', 'inline-block');
+            }
+          }); //Height condition judgment
+
+          if (element.hasClass('max-height')) {
+            maxHeight = element.outerHeight();
+          } else {
+            if (element.outerHeight() > maxHeight) maxHeight = element.outerHeight();
           }
-        }); //Height condition judgment
+        });
 
-        if (element.hasClass('max-height')) {
-          maxHeight = element.outerHeight();
-        } else {
-          if (element.outerHeight() > maxHeight) maxHeight = element.outerHeight();
-        }
-      }); //No on mobile devices
-
-      commonHeightInit(windowWidth);
-      $window.on('resize', function () {
-        // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-        if (window.innerWidth != windowWidth) {
-          // Update the window width for next time
-          windowWidth = window.innerWidth; // Do stuff here
-
-          commonHeightInit(windowWidth);
-        }
-      });
-
-      function commonHeightInit(w) {
         if (w > 768) {
           element.children(selectors).each(function () {
             $(this).css('height', maxHeight);
@@ -3647,8 +3642,8 @@ var COMMON_HEIGHT = function (module, $, window, document) {
             $(this).css('height', 'auto');
           });
         }
-      }
-    });
+      });
+    }
   };
 
   module.components.pageLoaded.push(module.COMMON_HEIGHT.pageLoaded);
@@ -11684,57 +11679,74 @@ var POST_LIST_AJAX = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/list-split-imagery/scss/_style.scss
-var list_split_imagery_scss_style = __webpack_require__(45);
+// EXTERNAL MODULE: ./src/components/ES6/fullwidth-column-to-edge/scss/_style.scss
+var fullwidth_column_to_edge_scss_style = __webpack_require__(45);
 
-// CONCATENATED MODULE: ./src/components/ES6/list-split-imagery/js/index.js
-function list_split_imagery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/components/ES6/fullwidth-column-to-edge/js/index.js
+function fullwidth_column_to_edge_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
- * <!-- Fullwidth List of Split -->
+ * <!-- Full Width Column to Edge -->
  *************************************
  */
 
 
-var POST_LIST_SPLIT_FULLWIDTH = function (module, $, window, document) {
-  if (window.POST_LIST_SPLIT_FULLWIDTH === null) return false;
-  module.POST_LIST_SPLIT_FULLWIDTH = module.POST_LIST_SPLIT_FULLWIDTH || {};
-  module.POST_LIST_SPLIT_FULLWIDTH.version = '0.0.2';
+var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
+  if (window.FULL_WIDTH_COLUMN_TO_EDGE === null) return false;
+  module.FULL_WIDTH_COLUMN_TO_EDGE = module.FULL_WIDTH_COLUMN_TO_EDGE || {};
+  module.FULL_WIDTH_COLUMN_TO_EDGE.version = '0.0.1';
 
-  module.POST_LIST_SPLIT_FULLWIDTH.pageLoaded = function () {
+  module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded = function () {
     var $window = $(window),
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
-    fullwidthListSplitInit(windowWidth);
+    fullwidthColumnToEdgeInit(windowWidth);
     $window.on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
         windowWidth = window.innerWidth; // Do stuff here
 
-        fullwidthListSplitInit(windowWidth);
+        fullwidthColumnToEdgeInit(windowWidth);
       }
     });
 
-    function fullwidthListSplitInit(w) {
-      $('.uix-list-split-imagery').each(function () {
-        var imgH = $(this).find('.uix-list-split-imagery__img img').height();
-
-        if (imgH > 0) {
-          $(this).find('.uix-list-split-imagery__info, .uix-list-split-imagery__img-container').css('height', imgH + 'px');
-        }
-
-        if (w <= 768) {
-          $(this).find('.uix-list-split-imagery__info, .uix-list-split-imagery__img-container').css('height', 'auto');
-        }
+    function fullwidthColumnToEdgeInit(w) {
+      $('.js-uix-fullwidth-column-to-edge--extend-right').each(function () {
+        fullwidthToDir($(this), 'right', w);
       });
+      $('.js-uix-fullwidth-column-to-edge--extend-left').each(function () {
+        fullwidthToDir($(this), 'left', w);
+      });
+    }
+
+    function fullwidthToDir(obj, dir, w) {
+      var dividerPosition = obj.offset();
+      var dividerWidth = $(window).width() - dividerPosition.left;
+      var bsGridGutter = 15;
+
+      if (w > 768) {
+        obj.css('width', dividerWidth + bsGridGutter);
+
+        if (dir == 'left') {
+          var _dis = -(dividerPosition.left + bsGridGutter * 2);
+
+          obj.css('margin-left', _dis + 'px');
+        }
+      } else {
+        obj.css('width', 'inherit');
+
+        if (dir == 'left') {
+          obj.css('margin-left', -bsGridGutter + 'px');
+        }
+      }
     }
   };
 
-  module.components.pageLoaded.push(module.POST_LIST_SPLIT_FULLWIDTH.pageLoaded);
-  return function POST_LIST_SPLIT_FULLWIDTH() {
-    list_split_imagery_js_classCallCheck(this, POST_LIST_SPLIT_FULLWIDTH);
+  module.components.pageLoaded.push(module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded);
+  return function FULL_WIDTH_COLUMN_TO_EDGE() {
+    fullwidth_column_to_edge_js_classCallCheck(this, FULL_WIDTH_COLUMN_TO_EDGE);
 
     this.module = module;
   };
@@ -14281,7 +14293,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.1';
+  module.SCROLLSPY_ANIM.version = '0.0.2';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -14289,12 +14301,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
     var $el = $('#scrollspy-animate-demo'),
         panelHeight = 0; //Prevent this module from loading in other pages
 
-    if ($el.length == 0) return false;
-    $(window).on('ready load resizeEnd', function () {
-      window.elHeight = $el.height();
-      window.windowHeight = window.innerHeight;
-      window.elOffsetTop = $el.offset().top - panelHeight;
-    }); //-------- Text Affect
+    if ($el.length == 0) return false; //-------- Text Affect
 
     if (Modernizr.webgl) {
       var $txtContainer = $el.find('.row canvas'),
@@ -14353,24 +14360,27 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
     }
 
     $(window).on('scroll ready load resize resizeEnd touchmove', function (event) {
+      var elHeight = $el.height(),
+          windowHeight = window.innerHeight,
+          elOffsetTop = $el.offset().top - panelHeight;
       var scrollTop = $(window).scrollTop(),
           translateTitle = scrollTop / 2,
           translateBackground = scrollTop / 3,
-          scale = scrollTop / window.elHeight,
+          scale = scrollTop / elHeight,
           backgroundScale = 1,
           // + scale / 10
       titleScale = 1 - scale * 0.1,
           titleOpacity = 1 - scale,
-          scrollProgress = (scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6); //-------- Animation
+          scrollProgress = (scrollTop - elOffsetTop) / (elHeight - windowHeight / 6); //-------- Animation
 
-      if (scrollTop < window.elHeight) {
+      if (scrollTop < elHeight) {
         $el.find('.row').css({
           'transition': 'none',
           'transform': 'translateY(' + translateTitle + 'px) scale(' + titleScale + ')',
           'opacity': titleOpacity
         });
         $('body').removeClass('js-uix-content-part').removeClass('js-uix-bottom-part');
-      } else if (scrollTop >= window.elHeight) {
+      } else if (scrollTop >= elHeight) {
         $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
       } //-------- Display progress
 
@@ -14379,7 +14389,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
 
       if (Modernizr.webgl) {
         TweenMax.set(filterSprite, {
-          x: window.windowHeight * scrollProgress
+          x: windowHeight * scrollProgress
         });
       }
     });
@@ -14599,6 +14609,95 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   module.components.documentReady.push(module.SMOOTH_SCROLLING_ANCHORLINK.documentReady);
   return function SMOOTH_SCROLLING_ANCHORLINK() {
     smooth_scrolling_anchor_link_js_classCallCheck(this, SMOOTH_SCROLLING_ANCHORLINK);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/smooth-scrolling-page/js/index.js
+function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* 
+ *************************************
+ * <!-- Smooth Scrolling Page -->
+ *************************************
+ */
+
+var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
+  if (window.SMOOTH_SCROLLING_PAGE === null) return false;
+  module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.1';
+
+  module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if (!$('body').hasClass('smooth-scrolling-page')) return false;
+    var html = document.documentElement,
+        body = document.body,
+        scroller = {
+      target: document.querySelector('#uix-scrollspy-area'),
+      ease: 0.05,
+      // <= scroll speed
+      endY: 0,
+      y: 0,
+      resizeRequest: 1,
+      scrollRequest: 0
+    },
+        requestId = null;
+    TweenMax.set(scroller.target, {
+      rotation: 0.01,
+      force3D: true
+    });
+    $(window).on('resize', function () {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
+
+        scroller.resizeRequest++;
+
+        if (!requestId) {
+          requestId = requestAnimationFrame(updateScroller);
+        }
+      }
+    });
+    $(window).on('scroll ready load resize resizeEnd touchmove', function () {
+      scroller.scrollRequest++;
+
+      if (!requestId) {
+        requestId = requestAnimationFrame(updateScroller);
+      }
+    });
+    updateScroller();
+
+    function updateScroller() {
+      var resized = scroller.resizeRequest > 0;
+
+      if (resized) {
+        var height = scroller.target.clientHeight;
+        body.style.height = height + "px";
+        scroller.resizeRequest = 0;
+      }
+
+      var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0;
+      scroller.endY = scrollY;
+      scroller.y += (scrollY - scroller.y) * scroller.ease;
+
+      if (Math.abs(scrollY - scroller.y) < 0.05 || resized) {
+        scroller.y = scrollY;
+        scroller.scrollRequest = 0;
+      }
+
+      TweenMax.set(scroller.target, {
+        y: -scroller.y
+      });
+      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null; //+++++++++++++++++++
+
+      console.log('scrollTop: ' + scroller.y);
+    }
+  };
+
+  module.components.documentReady.push(module.SMOOTH_SCROLLING_PAGE.documentReady);
+  return function SMOOTH_SCROLLING_PAGE() {
+    smooth_scrolling_page_js_classCallCheck(this, SMOOTH_SCROLLING_PAGE);
 
     this.module = module;
   };
@@ -20701,47 +20800,44 @@ var list_side_by_side_scss_style = __webpack_require__(89);
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
 var list_side_by_side_img_scss_style = __webpack_require__(90);
 
-// EXTERNAL MODULE: ./src/components/ES6/list-split-content/scss/_style.scss
-var list_split_content_scss_style = __webpack_require__(91);
-
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(92);
+var mouse_animation_scroll_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(93);
+var overlay_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(94);
+var ribbon_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(95);
+var shape_animation_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(96);
+var _comments = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(97);
+var _editing = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(98);
+var striking_scss_style = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(99);
+var team_fullwidth_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(100);
+var team_grid_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(101);
+var testimonials_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(102);
+var tooltip_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(103);
+var vertical_separator_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(104);
+var wave_background_scss_style = __webpack_require__(103);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
@@ -20849,6 +20945,7 @@ var wave_background_scss_style = __webpack_require__(104);
 
 
 
+
 /******/
 
 /******/
@@ -20856,7 +20953,6 @@ var wave_background_scss_style = __webpack_require__(104);
 /* pages */
 
 /* These modules do not contain JavaScript */
-
 
 
 

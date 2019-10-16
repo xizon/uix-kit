@@ -1,6 +1,17 @@
 # Changelog
 
 
+#### = 3.9.5 (October 16, 2019) =
+
+* New: Add a new module "Full Width Column to Edge".
+* New: Add a new module "Smooth Scrolling Page".
+* Tweak: Optimized Scrollspy Animate.
+* Tweak: Refactored the "Full Width Column to Edge" related code.
+* Tweak: Removed "Fullwidth List of Split" and "Fullwidth List of Split 2".
+* Fix: Fixed Common Height javascript when you change the window size.
+
+
+
 #### = 3.9.4 (October 11, 2019) =
 
 * Fix:Fixed issue with initialization height for Advanced Slider.

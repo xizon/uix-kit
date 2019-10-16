@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.1';
+    module.SCROLLSPY_ANIM.version       = '0.0.2';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -43,16 +43,6 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 
 		//Prevent this module from loading in other pages
 		if ( $el.length == 0 ) return false;
-		
-		
-		
-        $( window ).on( 'ready load resizeEnd', function() {
-			
-            window.elHeight = $el.height();
-            window.windowHeight = window.innerHeight;
-            window.elOffsetTop = $el.offset().top - panelHeight;
-			
-        });
 		
 		
 		//-------- Text Affect
@@ -137,19 +127,25 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 
         $( window ).on( 'scroll ready load resize resizeEnd touchmove', function( event ) {
 		
+            
+            var elHeight      = $el.height(),
+                windowHeight  = window.innerHeight,
+                elOffsetTop   = $el.offset().top - panelHeight; 
+            
+
             var scrollTop           = $( window ).scrollTop(),
 				translateTitle      = scrollTop / 2,
 				translateBackground = scrollTop / 3,
-				scale               = scrollTop / window.elHeight,
+				scale               = scrollTop / elHeight,
 				backgroundScale     = 1, // + scale / 10
 				titleScale          = 1 - scale * 0.1,
 				titleOpacity        = 1 - scale,
-				scrollProgress      = ((scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6));
+				scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
 
 			
 			
             //-------- Animation
-            if ( scrollTop < window.elHeight ) {
+            if ( scrollTop < elHeight ) {
      
                 $el.find( '.row' ).css({
                     'transition': 'none',
@@ -158,7 +154,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
                 });
 				
                 $( 'body' ).removeClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
-            } else if (scrollTop >= window.elHeight) {
+            } else if (scrollTop >= elHeight) {
                 $( 'body' ).addClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
 				
 				
@@ -170,7 +166,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 
 			if ( Modernizr.webgl ) {
 				TweenMax.set( filterSprite, {
-					x: window.windowHeight*scrollProgress
+					x: windowHeight*scrollProgress
 				});
 	
 			}

@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.4
+ * ## Version             :  3.9.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 11, 2019
+ * ## Last Update         :  October 16, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -62,7 +62,7 @@
     44.Bulleted List
     45.List of Posts
     46.List of Split Posts
-    47.Fullwidth List of Split
+    47.Full Width Column to Edge
     48.Login Templates
     49.Modal Dialog
     50.Multiple Items Carousel
@@ -106,20 +106,19 @@
     88.Maintain Aspect Ratio List
     89.Side by Side List
     90.Side by Side List With Photo
-    91.Fullwidth List of Split 2
-    92.Mouse Animation Scroll
-    93.Overlay
-    94.Ribbon
-    95.Shape Animation
-    96.Comments ( Synchronize to WordPress's class name )
-    97.Editing Component
-    98.Striking
-    99.Team Fullwidth (Style using the Side by Side List With Photo module)
-    100.Team Gird
-    101.Testimonials Carousel
-    102.ToolTip
-    103.Vertical Separator
-    104.Wave Background
+    91.Mouse Animation Scroll
+    92.Overlay
+    93.Ribbon
+    94.Shape Animation
+    95.Comments ( Synchronize to WordPress's class name )
+    96.Editing Component
+    97.Striking
+    98.Team Fullwidth (Style using the Side by Side List With Photo module)
+    99.Team Gird
+    100.Testimonials Carousel
+    101.ToolTip
+    102.Vertical Separator
+    103.Wave Background
 
 
 */
@@ -7391,60 +7390,22 @@ a.uix-lightbox__original__link {
         padding: 0; } }
 
 /* ======================================================
-    <!-- Fullwidth List of Split -->
+    <!-- Full Width Column to Edge -->
 /* ====================================================== */
-.uix-list-split-imagery {
-  position: relative;
-  /* Text Area */ }
-  .uix-list-split-imagery::after {
-    content: '';
-    display: block;
-    clear: both; }
-  .uix-list-split-imagery .uix-list-split-imagery__img {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0;
-    transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1); }
-  .uix-list-split-imagery .uix-list-split-imagery__img.is-loaded {
-    opacity: 1; }
-  .uix-list-split-imagery .uix-list-split-imagery__img-container {
-    user-select: none;
-    position: relative;
-    width: 50%;
-    float: left; }
-  .uix-list-split-imagery.is-reversed .uix-list-split-imagery__img-container {
-    float: right; }
-  .uix-list-split-imagery .uix-list-split-imagery__info {
-    word-wrap: break-word;
-    box-sizing: border-box;
-    width: 50%;
-    padding-left: 5vw;
-    padding-right: calc(7.840236686391% + 15px);
-    /* (1352-1140)/1352/2 * 100 */
-    float: left; }
-  .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
-    float: left;
-    padding-right: 5vw;
-    padding-left: calc(7.840236686391% + 15px); }
-
-/* New XL container for Bootstrap 4.x */
-@media all and (min-width: 1430px) {
-  .uix-list-split-imagery .uix-list-split-imagery__info {
-    padding-right: calc(5.189340813464% + 15px);
-    /* (1426-1278)/1426/2 * 100 */ }
-  .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
-    padding-right: auto;
-    padding-left: calc(5.189340813464% + 15px); } }
-
-@media all and (max-width: 768px) {
-  .uix-list-split-imagery .uix-list-split-imagery__img-container {
-    width: 100%; }
-  .uix-list-split-imagery .uix-list-split-imagery__info,
-  .uix-list-split-imagery.is-reversed .uix-list-split-imagery__info {
-    text-align: center;
-    width: 100%;
-    padding: 0 15px; } }
+.uix-fullwidth-column-to-edge--fixed-and-variable {
+  display: flex;
+  flex-wrap: wrap; }
+  .uix-fullwidth-column-to-edge--fixed-and-variable .uix-fullwidth-column-to-edge--fixed-and-variable__fixed {
+    flex-grow: 1;
+    flex-basis: 250px; }
+  .uix-fullwidth-column-to-edge--fixed-and-variable .uix-fullwidth-column-to-edge--fixed-and-variable__variable {
+    width: 325px;
+    /* 
+        Why so high? When the container is more than 500px wide (meaning) there's more than enough room for the 200px fixed and 300px variable columns, then flex grow kicks in to determine what proportion each column should get. The caveat is that the fixed column will never be less than 200px (when they're on the same row) and for whatever browser reason, this big number ensures the fixed column doesn't grow. To see what I mean, change to 100 and resize the screen. You'll see a small pixel movement of the fixed column.
+        */
+    flex-grow: 10000;
+    flex-basis: auto;
+    flex: 10000 auto auto; }
 
 /* ======================================================
    <!-- Login Templates -->
@@ -13338,43 +13299,6 @@ dl.uix-list-abreast {
       display: block;
       padding-left: 0;
       width: 100%; } }
-
-/* ======================================================
-    <!-- Fullwidth List of Split 2 -->
-/* ====================================================== */
-.uix-list-split-full {
-  position: relative; }
-  .uix-list-split-full::after {
-    content: '';
-    display: block;
-    clear: both; }
-  .uix-list-split-full .uix-list-split-full__left,
-  .uix-list-split-full .uix-list-split-full__right {
-    position: relative;
-    float: left;
-    min-height: 150px;
-    word-wrap: break-word;
-    box-sizing: border-box; }
-  .uix-list-split-full .uix-list-split-full__left > div {
-    max-width: 639px;
-    float: right;
-    margin-right: 100px; }
-  .uix-list-split-full .uix-list-split-full__right > div {
-    max-width: 639px;
-    float: left;
-    margin-left: 100px; }
-
-@media all and (max-width: 768px) {
-  .uix-list-split-full .uix-list-split-full__left,
-  .uix-list-split-full .uix-list-split-full__right {
-    width: 100%;
-    float: none;
-    min-height: inherit; }
-    .uix-list-split-full .uix-list-split-full__left > div,
-    .uix-list-split-full .uix-list-split-full__right > div {
-      margin: 0 15px;
-      float: none;
-      max-width: none; } }
 
 /* ======================================================
    <!-- Mouse Animation Scroll -->
