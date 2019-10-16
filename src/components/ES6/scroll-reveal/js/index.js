@@ -120,7 +120,7 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 		$scrollRevealElements.each( function()  {
 			
 			//Prevent asynchronous loading of repeated calls
-			var actived = $( this ).data( 'is-active' );
+			var actived = $( this ).data( 'activated' );
 			
 			if( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
@@ -140,7 +140,7 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 
 					
 					//Prevent asynchronous loading of repeated calls
-					var actived = $( this.element ).data( 'is-active' ),
+					var actived = $( this.element ).data( 'activated' ),
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 
@@ -149,7 +149,7 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 						//$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
 						tmAnim( $( this.element ), 'to' );
 
-						$( this.element ).data( 'is-active', 1 );
+						$( this.element ).data( 'activated', 1 );
 
 						
 					}
