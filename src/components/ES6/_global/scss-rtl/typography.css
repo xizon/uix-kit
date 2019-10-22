@@ -1,0 +1,14 @@
+/* ====================================================== 
+   <!-- Typography -->            
+/* ====================================================== */
+/*
+ * 6. Vertical Text
+*/
+/* 
+ ---------------------------
+ 6. Vertical Text
+ ---------------------------
+ */
+.uix-typo--vertical:not(.uix-typo--vertical-characters-line) {
+  writing-mode: vertical-lr;
+  transform: translateX(-0.5rem); }

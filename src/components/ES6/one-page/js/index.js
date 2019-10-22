@@ -29,7 +29,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE               = module.ONEPAGE || {};
-    module.ONEPAGE.version       = '0.0.4';
+    module.ONEPAGE.version       = '0.0.5';
     module.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -305,7 +305,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
 			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
 
-		$window.on( 'scroll touchmove', function() {
+		$window.on( 'scroll.ONEPAGE touchmove.ONEPAGE', function() {
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
 				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,

@@ -134,8 +134,8 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 				texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
 				texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
 
-				texture1.anisotropy = renderer.getMaxAnisotropy();
-				texture2.anisotropy = renderer.getMaxAnisotropy();
+				texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+				texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
 
 				var geometry = new THREE.PlaneBufferGeometry(

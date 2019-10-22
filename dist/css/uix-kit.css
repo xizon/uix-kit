@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.5
+ * ## Version             :  3.9.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 16, 2019
+ * ## Last Update         :  October 22, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,47 +78,48 @@
     60.3D Carousel
     61.3D Shatter Slider
     62.3D Explosive Particle Slider
-    63.Table
-    64.Tabs
-    65.Team Focus
-    66.Text effect
-    67.Timeline
-    68.Vertical Menu
-    69.WordPress Core ( Do not use prefix "uix-" )
-    70.3rd Party Plugins
-    71.Badges
-    72.Blended Grid Layout
-    73.Breadcrumbs
-    74.Button
-    75.Cards
-    76.Badges
-    77.Content Placeholder Animated
-    78.Dividing Line
-    79.Dots
-    80.Dotted Line
-    81.Equal-width Columns
-    82.Features
-    83.Footer Templates
-    84.Gallery Grid Layout
-    85.Heading
-    86.Image Animation
-    87.Brands List
-    88.Maintain Aspect Ratio List
-    89.Side by Side List
-    90.Side by Side List With Photo
-    91.Mouse Animation Scroll
-    92.Overlay
-    93.Ribbon
-    94.Shape Animation
-    95.Comments ( Synchronize to WordPress's class name )
-    96.Editing Component
-    97.Striking
-    98.Team Fullwidth (Style using the Side by Side List With Photo module)
-    99.Team Gird
-    100.Testimonials Carousel
-    101.ToolTip
-    102.Vertical Separator
-    103.Wave Background
+    63.3D Liquid Scrollspy Slider
+    64.Table
+    65.Tabs
+    66.Team Focus
+    67.Text effect
+    68.Timeline
+    69.Vertical Menu
+    70.WordPress Core ( Do not use prefix "uix-" )
+    71.3rd Party Plugins
+    72.Badges
+    73.Blended Grid Layout
+    74.Breadcrumbs
+    75.Button
+    76.Cards
+    77.Badges
+    78.Content Placeholder Animated
+    79.Dividing Line
+    80.Dots
+    81.Dotted Line
+    82.Equal-width Columns
+    83.Features
+    84.Footer Templates
+    85.Gallery Grid Layout
+    86.Heading
+    87.Image Animation
+    88.Brands List
+    89.Maintain Aspect Ratio List
+    90.Side by Side List
+    91.Side by Side List With Photo
+    92.Mouse Animation Scroll
+    93.Overlay
+    94.Ribbon
+    95.Shape Animation
+    96.Comments ( Synchronize to WordPress's class name )
+    97.Editing Component
+    98.Striking
+    99.Team Fullwidth (Style using the Side by Side List With Photo module)
+    100.Team Gird
+    101.Testimonials Carousel
+    102.ToolTip
+    103.Vertical Separator
+    104.Wave Background
 
 
 */
@@ -1921,14 +1922,29 @@ details.uix-details-reset > summary {
     width: auto;
     white-space: nowrap;
     display: none;
-    padding: 0; }
+    padding: 0;
+    /* add scrollbar to per column */
+    max-height: calc(100vh - 50px); }
     .uix-menu__container:not(.is-mobile) li.multi-column > ul li {
       width: 270px;
       /* Required, JS script needs to listen on it for calculation */
       overflow: hidden;
       display: inline-block;
       vertical-align: top;
-      padding-left: 0.75rem; }
+      padding-left: 0.75rem;
+      /* add scrollbar to per column */
+      max-height: calc(100vh - 50px - 100px);
+      overflow-y: auto; }
+      .uix-menu__container:not(.is-mobile) li.multi-column > ul li::-webkit-scrollbar-track {
+        border-radius: 0px;
+        background-color: #fff; }
+      .uix-menu__container:not(.is-mobile) li.multi-column > ul li::-webkit-scrollbar {
+        width: 3px;
+        background-color: #FAFAFA;
+        transform: scaleY(0.8); }
+      .uix-menu__container:not(.is-mobile) li.multi-column > ul li::-webkit-scrollbar-thumb {
+        border-radius: 0px;
+        background-color: #FAFAFA; }
       .uix-menu__container:not(.is-mobile) li.multi-column > ul li .uix-bubble {
         right: 1.2rem; }
       .uix-menu__container:not(.is-mobile) li.multi-column > ul li a:hover {
@@ -9402,6 +9418,138 @@ a.uix-lightbox__original__link {
   .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next {
     right: 15px; }
     .uix-3d-slider--expParticle__arrows .uix-3d-slider--expParticle__arrows--next.is-disabled {
+      visibility: hidden; }
+
+/* ======================================================
+   <!-- 3D Liquid Scrollspy Slider -->
+/* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots
+ * 3. Next/Prev buttons
+*/
+/*
+ ---------------------------
+ 1. Initialize the slider style
+ ---------------------------
+ */
+.uix-3d-slider--liquid-scrollspy__wrapper {
+  position: relative; }
+
+/* Prevent content overflow */
+.uix-3d-slider--liquid-scrollspy__wrapper,
+.uix-3d-slider--liquid-scrollspy__inner,
+.uix-3d-slider--liquid-scrollspy__canvas-container {
+  overflow: hidden; }
+
+.uix-3d-slider--liquid-scrollspy__canvas-container {
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 100%;
+  /* Required, It will make the canvas fill up */ }
+
+.uix-3d-slider--liquid-scrollspy {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  background-color: transparent; }
+  .uix-3d-slider--liquid-scrollspy canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; }
+  .uix-3d-slider--liquid-scrollspy .uix-3d-slider--liquid-scrollspy__inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    height: 100%;
+    /* Required */
+    display: none; }
+    .uix-3d-slider--liquid-scrollspy .uix-3d-slider--liquid-scrollspy__inner .uix-3d-slider--liquid-scrollspy__item {
+      width: 100%;
+      opacity: 0; }
+      .uix-3d-slider--liquid-scrollspy .uix-3d-slider--liquid-scrollspy__inner .uix-3d-slider--liquid-scrollspy__item img {
+        width: 100%;
+        visibility: hidden; }
+      .uix-3d-slider--liquid-scrollspy .uix-3d-slider--liquid-scrollspy__inner .uix-3d-slider--liquid-scrollspy__item video {
+        display: none; }
+      .uix-3d-slider--liquid-scrollspy .uix-3d-slider--liquid-scrollspy__inner .uix-3d-slider--liquid-scrollspy__item.leave {
+        opacity: 0; }
+      .uix-3d-slider--liquid-scrollspy .uix-3d-slider--liquid-scrollspy__inner .uix-3d-slider--liquid-scrollspy__item.is-active {
+        opacity: 1; }
+
+/*
+ ---------------------------
+ 2. Pagination dots
+ ---------------------------
+ */
+.uix-3d-slider--liquid-scrollspy__pagination {
+  position: relative;
+  transform: translateY(-40px);
+  z-index: 2; }
+  .uix-3d-slider--liquid-scrollspy__pagination ul {
+    list-style: none;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+    /*Fighting the Space Between Inline Block Elements*/
+    display: block;
+    width: 100%;
+    text-align: center;
+    /*require*/
+    position: relative;
+    transform: translateY(0.5rem); }
+    .uix-3d-slider--liquid-scrollspy__pagination ul li {
+      font-size: 1rem;
+      /*Fighting the Space Between Inline Block Elements*/
+      display: inline-block;
+      /*require*/
+      margin: 0 .2rem; }
+      .uix-3d-slider--liquid-scrollspy__pagination ul li a {
+        width: 12px;
+        height: 12px;
+        display: block;
+        box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
+        background: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        text-indent: -9999px;
+        border-radius: 20px; }
+      .uix-3d-slider--liquid-scrollspy__pagination ul li:hover a, .uix-3d-slider--liquid-scrollspy__pagination ul li.is-active a {
+        background: white;
+        width: 25px; }
+
+/*
+ ---------------------------
+ 3. Next/Prev buttons
+ ---------------------------
+ */
+.uix-3d-slider--liquid-scrollspy__arrows {
+  position: relative;
+  transform: translateY(-65px);
+  z-index: 3; }
+  .uix-3d-slider--liquid-scrollspy__arrows a {
+    box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transition: .3s ease-in-out;
+    line-height: 50px;
+    text-align: center;
+    background: #fff; }
+  .uix-3d-slider--liquid-scrollspy__arrows .uix-3d-slider--liquid-scrollspy__arrows--prev {
+    left: 15px; }
+    .uix-3d-slider--liquid-scrollspy__arrows .uix-3d-slider--liquid-scrollspy__arrows--prev.is-disabled {
+      visibility: hidden; }
+  .uix-3d-slider--liquid-scrollspy__arrows .uix-3d-slider--liquid-scrollspy__arrows--next {
+    right: 15px; }
+    .uix-3d-slider--liquid-scrollspy__arrows .uix-3d-slider--liquid-scrollspy__arrows--next.is-disabled {
       visibility: hidden; }
 
 /* ======================================================

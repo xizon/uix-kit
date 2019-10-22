@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.2';
+    module.SCROLLSPY_ANIM.version       = '0.0.3';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -44,6 +44,12 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		//Prevent this module from loading in other pages
 		if ( $el.length == 0 ) return false;
 		
+        
+        var $window      = $( window ),
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
+
+        
 		
 		//-------- Text Affect
 		if ( Modernizr.webgl ) {
@@ -125,15 +131,14 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		}
 
 
-        $( window ).on( 'scroll ready load resize resizeEnd touchmove', function( event ) {
+        $window.on( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function( event ) {
 		
             
             var elHeight      = $el.height(),
-                windowHeight  = window.innerHeight,
                 elOffsetTop   = $el.offset().top - panelHeight; 
             
 
-            var scrollTop           = $( window ).scrollTop(),
+            var scrollTop           = $( this ).scrollTop(),
 				translateTitle      = scrollTop / 2,
 				translateBackground = scrollTop / 3,
 				scale               = scrollTop / elHeight,

@@ -38,7 +38,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.1';
+    module.POST_LIST_AJAX.version       = '0.1.2';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -197,7 +197,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					
 				
 						
-					$( window ).on( 'scroll touchmove', function() {
+					$( window ).on( 'scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function() {
 						
 						var scrolled = $( window ).scrollTop();
 						

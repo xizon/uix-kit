@@ -41,7 +41,7 @@
 				'transition': 'none'
 			} );
 
-		    $( window ).on( 'scroll touchmove', function( e ){
+		    $( window ).on( 'scroll.UixParallax touchmove.UixParallax', function( e ){
 				scrollUpdate();
 			});
 			

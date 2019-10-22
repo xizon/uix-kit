@@ -161,7 +161,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                         //Load slides to canvas
                         //-------------------------------------	
                         if ( $( '#' + rendererCanvasID ).length == 0 ) {
-                            $this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+                            $this.prepend( '<div id="'+rendererOuterID+'" class="uix-3d-slider--shatter__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 
                         }
 
@@ -681,59 +681,59 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
 			
-		 /*
-		 * Trigger slider autoplay
-		 *
-         * @param  {Function} playTimes            - Number of times.
-         * @param  {Number} timing                 - Autoplay interval.
-         * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-         * @param  {Object} slider                 - Selector of the slider .
-         * @param  {String} countTotalID           - Total number ID or class of counter.
-         * @param  {String} countCurID             - Current number ID or class of counter.
-         * @param  {String} paginationID           - Navigation ID for paging control of each slide.
-         * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
-         * @return {Void}                          - The constructor.
-		 */
-		function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
+             /*
+             * Trigger slider autoplay
+             *
+             * @param  {Function} playTimes            - Number of times.
+             * @param  {Number} timing                 - Autoplay interval.
+             * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+             * @param  {Object} slider                 - Selector of the slider .
+             * @param  {String} countTotalID           - Total number ID or class of counter.
+             * @param  {String} countCurID             - Current number ID or class of counter.
+             * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+             * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+             * @return {Void}                          - The constructor.
+             */
+            function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-			var items = slider.find( '.uix-3d-slider--shatter__item' ),
-				total = items.length;
-			
-			slider[0].animatedSlides = setInterval( function() {
+                var items = slider.find( '.uix-3d-slider--shatter__item' ),
+                    total = items.length;
 
-					playTimes = parseFloat( items.filter( '.is-active' ).index() );
-					playTimes++;
+                slider[0].animatedSlides = setInterval( function() {
 
-					
-					if ( !loop ) {
-						if ( playTimes < total && playTimes >= 0 ) {
-							
-							var slideCurId  = items.filter( '.is-active' ).index(),
-								slideNextId = playTimes;	
-
-							sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
-						}
-					} else {
-						if ( playTimes == total ) playTimes = 0;
-						if ( playTimes < 0 ) playTimes = total-1;		
-
-						var slideCurId  = items.filter( '.is-active' ).index(),
-							slideNextId = playTimes;	
-
-						
-						//Prevent problems with styles when switching in positive order
-						if ( playTimes == 0 ) {
-							sliderUpdates( slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );	
-						} else {
-							sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
-						}
-
-					}
+                        playTimes = parseFloat( items.filter( '.is-active' ).index() );
+                        playTimes++;
 
 
+                        if ( !loop ) {
+                            if ( playTimes < total && playTimes >= 0 ) {
 
-				}, timing );	
-			}
+                                var slideCurId  = items.filter( '.is-active' ).index(),
+                                    slideNextId = playTimes;	
+
+                                sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
+                            }
+                        } else {
+                            if ( playTimes == total ) playTimes = 0;
+                            if ( playTimes < 0 ) playTimes = total-1;		
+
+                            var slideCurId  = items.filter( '.is-active' ).index(),
+                                slideNextId = playTimes;	
+
+
+                            //Prevent problems with styles when switching in positive order
+                            if ( playTimes == 0 ) {
+                                sliderUpdates( slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );	
+                            } else {
+                                sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
+                            }
+
+                        }
+
+
+
+                }, timing );	
+            }
 
 			
 			

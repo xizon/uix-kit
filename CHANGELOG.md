@@ -1,6 +1,17 @@
 # Changelog
 
 
+
+#### = 3.9.6 (October 17, 2019) =
+
+* Fix: Optimized the "Text Effect" that may be caused by duplicate properties.
+* Fix: Fixed script issue with equal heights for columns.
+* Fix: Add a viewport to display the visual area of the Smooth Scrolling Page.
+* Tweak: Modified the compilation delay time of the webpack configuration file. The more modules, the longer the time, the default 3500ms can guarantee the time-consuming compilation of 150 modules.
+* New: Add a new module "3D Liquid Scrollspy Slider".
+
+
+
 #### = 3.9.5 (October 16, 2019) =
 
 * New: Add a new module "Full Width Column to Edge".
@@ -9,6 +20,7 @@
 * Tweak: Refactored the "Full Width Column to Edge" related code.
 * Tweak: Removed "Fullwidth List of Split" and "Fullwidth List of Split 2".
 * Fix: Fixed Common Height javascript when you change the window size.
+
 
 
 

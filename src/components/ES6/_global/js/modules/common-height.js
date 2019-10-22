@@ -30,7 +30,7 @@ export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
 	
 	
 	module.COMMON_HEIGHT               = module.COMMON_HEIGHT || {};
-    module.COMMON_HEIGHT.version       = '0.0.2';
+    module.COMMON_HEIGHT.version       = '0.0.3';
 	module.COMMON_HEIGHT.pageLoaded = function() {
 
         
@@ -64,9 +64,10 @@ export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
                     maxHeight    = 0;
 
 
+                // Select and loop the elements you want to equalise
                 element.children( selectors ).each( function() {
-                    var element = $( this ).children();
-
+                    var element = $( this );
+                    
                     //Solve the problem that the image cannot be read accurately
                     element.find( 'img' ).each( function()  {
                         var imgOuter = $( this ).parent( 'a' ).css( 'display' );
@@ -75,16 +76,25 @@ export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
                         }
                     });
 
-
-                    //Height condition judgment
+                    
+                   
                     if( element.hasClass( 'max-height' ) ) {
+                        
+                        // if has max-height
                         maxHeight = element.outerHeight();
                     } else {
-                        if ( element.outerHeight() > maxHeight )
-                        maxHeight = element.outerHeight();
+                        // if this box is higher than the cached highest then store it
+                        if( element.height() > maxHeight ) {
+                            maxHeight = element.outerHeight(); 
+                        }  
                     }
+                    
+                    
                 });
-
+                
+                
+           
+                // Set the height of all those children to whichever was highest 
                 if ( w > 768 ) {
                     element.children( selectors ).each( function() {
                         $( this ).css( 'height', maxHeight );

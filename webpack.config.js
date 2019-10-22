@@ -219,6 +219,9 @@ class ReplacePlaceholderForFile {
  */
 const webpackConfig = {
 	devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false,
+    performance: {
+        hints: process.env.NODE_ENV === 'production' ? "warning" : false
+    },
     mode: 'production',
 	watch: true,
 	node: { fs: 'empty' },
@@ -582,7 +585,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		targetJSFile                 = './'+globs.dist+'/js/uix-kit.js',
 		targetJSMinFile              = './'+globs.dist+'/js/uix-kit.min.js';
 	
-	
+    
 	setTimeout ( () => {
 		
 		
@@ -780,7 +783,10 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		}// endif fs.existsSync( pureMergeJSFile )
 		
 	
-	}, 1500 );
+        
+    //The more modules, the longer the time, the default 3500ms 
+    //can guarantee the time-consuming compilation of 150 modules.
+	}, 3500 );
 	
 
 });

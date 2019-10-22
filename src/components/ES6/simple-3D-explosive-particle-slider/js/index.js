@@ -172,7 +172,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                         //Load slides to canvas
                         //-------------------------------------	
                         if ( $( '#' + rendererCanvasID ).length == 0 ) {
-                            $this.prepend( '<div id="'+rendererOuterID+'" class="uix-advanced-slider-sp__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
+                            $this.prepend( '<div id="'+rendererOuterID+'" class="uix-3d-slider--expParticle__canvas-container"><canvas id="'+rendererCanvasID+'"></canvas></div>' );
 
                         }
 
@@ -779,8 +779,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 
 
-                    }, timing );	
-                }
+                }, timing );	
+             }
 
 
 			

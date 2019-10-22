@@ -25,7 +25,7 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.VERTICAL_MENU               = module.VERTICAL_MENU || {};
-    module.VERTICAL_MENU.version       = '0.0.1';
+    module.VERTICAL_MENU.version       = '0.0.2';
     module.VERTICAL_MENU.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -159,7 +159,7 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 				marginTop : 0
 			});	
 
-			$window.on('scroll', function() {
+			$window.on( 'scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function() {
 
 				var curULHeight = $( 'ul.uix-menu' ).height(),
 					windowPos   = $window.scrollTop();

@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.5
+ * ## Version             :  3.9.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 16, 2019
+ * ## Last Update         :  October 22, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bb74277b57039d8dcfcc";
+/******/ 	var hotCurrentHash = "342108478b77dd7c2d7c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -810,7 +810,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(130)(__webpack_require__.s = 130);
+/******/ 	return hotCreateRequire(131)(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -856,7 +856,7 @@ window.$ = window.jQuery;
       $this.css({
         'transition': 'none'
       });
-      $(window).on('scroll touchmove', function (e) {
+      $(window).on('scroll.UixParallax touchmove.UixParallax', function (e) {
         scrollUpdate();
       }); //Initialize the position of the background
 
@@ -2328,6 +2328,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 /* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 63 */
 /***/ (function(module, exports) {
 
 /**
@@ -2386,12 +2392,6 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2399,6 +2399,12 @@ jQuery.fn.sortElements = function () {
 
 /***/ }),
 /* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2410,8 +2416,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
-  'use strict';
-
   $.fn.UixTextEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -2425,8 +2429,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
       if (_typeof(speed) === ( true ? "undefined" : undefined)) {
         speed = 1200;
-      }
+      } //The data-text-eff attribute must be unique, otherwise it will not execute correctly.
 
+
+      if ($(customControls).length > 1) return false;
       $(customControls).html($(customControls).text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>")); //--------------
 
       if (customControls.indexOf('fadeInRight') >= 0) {
@@ -2521,12 +2527,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 67 */
@@ -2751,7 +2751,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 104 */,
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 105 */,
 /* 106 */,
 /* 107 */,
@@ -2777,7 +2782,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 127 */,
 /* 128 */,
 /* 129 */,
-/* 130 */
+/* 130 */,
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2886,15 +2892,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     72.3D Mouse Interaction with three.js
     73.3D Shatter Slider
     74.3D Explosive Particle Slider
-    75.3D Filmic Effects
-    76.Responsive Table
-    77.Table Sorter
-    78.Tabs
-    79.Team Focus
-    80.Text effect
-    81.Timeline
-    82.Vertical Menu
-    83.WordPress Core Scripts
+    75.3D Liquid Scrollspy Slider
+    76.3D Filmic Effects
+    77.Responsive Table
+    78.Table Sorter
+    79.Tabs
+    80.Team Focus
+    81.Text effect
+    82.Timeline
+    83.Vertical Menu
+    84.WordPress Core Scripts
 
 
 */
@@ -3518,7 +3525,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var BODY_AND_HEADER = function (module, $, window, document) {
   if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
-  module.BODY_AND_HEADER.version = '0.0.3';
+  module.BODY_AND_HEADER.version = '0.0.4';
 
   module.BODY_AND_HEADER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -3553,7 +3560,7 @@ var BODY_AND_HEADER = function (module, $, window, document) {
 
 
     var $el = $('.uix-header__container, .uix-header__placeholder');
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = 220;
 
@@ -3591,7 +3598,7 @@ function common_height_classCallCheck(instance, Constructor) { if (!(instance in
 var COMMON_HEIGHT = function (module, $, window, document) {
   if (window.COMMON_HEIGHT === null) return false;
   module.COMMON_HEIGHT = module.COMMON_HEIGHT || {};
-  module.COMMON_HEIGHT.version = '0.0.2';
+  module.COMMON_HEIGHT.version = '0.0.3';
 
   module.COMMON_HEIGHT.pageLoaded = function () {
     var $window = $(window),
@@ -3614,9 +3621,10 @@ var COMMON_HEIGHT = function (module, $, window, document) {
             element = $this,
             selectors = '[class*=col-], [class*=uix-core-grid__col-]',
             //Bootstrap grid system and Custom uix grid system
-        maxHeight = 0;
+        maxHeight = 0; // Select and loop the elements you want to equalise
+
         element.children(selectors).each(function () {
-          var element = $(this).children(); //Solve the problem that the image cannot be read accurately
+          var element = $(this); //Solve the problem that the image cannot be read accurately
 
           element.find('img').each(function () {
             var imgOuter = $(this).parent('a').css('display');
@@ -3624,14 +3632,18 @@ var COMMON_HEIGHT = function (module, $, window, document) {
             if (imgOuter == 'inline') {
               $(this).parent('a').css('display', 'inline-block');
             }
-          }); //Height condition judgment
+          });
 
           if (element.hasClass('max-height')) {
+            // if has max-height
             maxHeight = element.outerHeight();
           } else {
-            if (element.outerHeight() > maxHeight) maxHeight = element.outerHeight();
+            // if this box is higher than the cached highest then store it
+            if (element.height() > maxHeight) {
+              maxHeight = element.outerHeight();
+            }
           }
-        });
+        }); // Set the height of all those children to whichever was highest 
 
         if (w > 768) {
           element.children(selectors).each(function () {
@@ -3908,7 +3920,7 @@ function mobile_menu_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var MOBILE_MENU = function (module, $, window, document) {
   if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
-  module.MOBILE_MENU.version = '0.0.4';
+  module.MOBILE_MENU.version = '0.0.5';
 
   module.MOBILE_MENU.documentReady = function ($) {
     var $window = $(window),
@@ -3917,7 +3929,7 @@ var MOBILE_MENU = function (module, $, window, document) {
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.admin-bar .uix-menu-mobile__toggle');
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.MOBILE_MENU touchmove.MOBILE_MENU', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = 46;
 
@@ -4059,7 +4071,7 @@ function navigation_typeof(obj) { if (typeof Symbol === "function" && typeof Sym
 var NAVIGATION = function (module, $, window, document) {
   if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
-  module.NAVIGATION.version = '0.0.4';
+  module.NAVIGATION.version = '0.0.5';
 
   module.NAVIGATION.documentReady = function ($) {
     var $window = $(window),
@@ -4118,7 +4130,7 @@ var NAVIGATION = function (module, $, window, document) {
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.uix-menu__container:not(.is-mobile)');
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.NAVIGATION touchmove.NAVIGATION', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = 220;
 
@@ -8371,7 +8383,7 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.4';
+  module.BACK_TO_TOP.version = '0.0.5';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window),
@@ -8382,7 +8394,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
       //-------- Sticky button of back to top 
       //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
       var $el = $('#uix-to-top');
-      $window.on('scroll touchmove', function () {
+      $window.on('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function () {
         var scrollTop = $(this).scrollTop(),
             spyTop = windowHeight / 2;
 
@@ -9830,7 +9842,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.1';
+  module.FLOATING_SIDE_EL.version = '0.0.2';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -9845,7 +9857,7 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
         marginTop: -floatingOffset.top + ($(window).height() - $floatingSideEl.height()) / 2
       }
     });
-    $(window).on('scroll touchmove', function () {
+    $(window).on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
       var sideBarHeight = $floatingSideEl.height(),
           scrollTop = $(window).scrollTop();
 
@@ -11312,7 +11324,7 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.1';
+  module.POST_LIST_AJAX.version = '0.1.2';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -11438,7 +11450,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             $button.addClass('is-hide');
           }
 
-          $(window).on('scroll touchmove', function () {
+          $(window).on('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function () {
             var scrolled = $(window).scrollTop();
 
             if (scrolled >= parseFloat($button.offset().top - $(window).height() / 1.5 - $button.outerHeight(true)) && !$button.hasClass(triggerActive)) {
@@ -12857,7 +12869,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.4';
+  module.ONEPAGE.version = '0.0.5';
 
   module.ONEPAGE.documentReady = function ($) {
     var $window = $(window),
@@ -13075,7 +13087,7 @@ var ONEPAGE = function (module, $, window, document) {
 
     var navMinTop = $sidefixedMenu.length > 0 ? $sidefixedMenu.offset().top : 0,
         navMaxTop = parseFloat($(document).height() - $('.uix-footer__container').height()) - windowHeight / 3;
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = parseFloat(scrollTop + topSectionSpacing),
           minTop = $('[data-highlight-section="true"]').first().offset().top,
@@ -14232,7 +14244,7 @@ var SCROLL_REVEAL = function (module, $, window, document) {
 
     $scrollRevealElements.each(function () {
       //Prevent asynchronous loading of repeated calls
-      var actived = $(this).data('is-active');
+      var actived = $(this).data('activated');
 
       if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined)) {
         tmAnim($(this), 'from');
@@ -14244,13 +14256,13 @@ var SCROLL_REVEAL = function (module, $, window, document) {
       var waypoints = $scrollRevealElements.waypoint({
         handler: function handler(direction) {
           //Prevent asynchronous loading of repeated calls
-          var actived = $(this.element).data('is-active'),
+          var actived = $(this.element).data('activated'),
               tmLoop = tmAnim($(this.element), 'loop');
 
           if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined) && tmLoop != 1) {
             //$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
             tmAnim($(this.element), 'to');
-            $(this.element).data('is-active', 1);
+            $(this.element).data('activated', 1);
           }
 
           if (tmLoop === 1) {
@@ -14293,7 +14305,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.2';
+  module.SCROLLSPY_ANIM.version = '0.0.3';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -14301,7 +14313,10 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
     var $el = $('#scrollspy-animate-demo'),
         panelHeight = 0; //Prevent this module from loading in other pages
 
-    if ($el.length == 0) return false; //-------- Text Affect
+    if ($el.length == 0) return false;
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight; //-------- Text Affect
 
     if (Modernizr.webgl) {
       var $txtContainer = $el.find('.row canvas'),
@@ -14359,11 +14374,10 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
       });
     }
 
-    $(window).on('scroll ready load resize resizeEnd touchmove', function (event) {
+    $window.on('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function (event) {
       var elHeight = $el.height(),
-          windowHeight = window.innerHeight,
           elOffsetTop = $el.offset().top - panelHeight;
-      var scrollTop = $(window).scrollTop(),
+      var scrollTop = $(this).scrollTop(),
           translateTitle = scrollTop / 2,
           translateBackground = scrollTop / 3,
           scale = scrollTop / elHeight,
@@ -14616,6 +14630,8 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/smooth-scrolling-page/js/index.js
 function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function smooth_scrolling_page_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { smooth_scrolling_page_js_typeof = function _typeof(obj) { return typeof obj; }; } else { smooth_scrolling_page_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return smooth_scrolling_page_js_typeof(obj); }
+
 /* 
  *************************************
  * <!-- Smooth Scrolling Page -->
@@ -14625,15 +14641,18 @@ function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.1';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.2';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if (!$('body').hasClass('smooth-scrolling-page')) return false;
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
     var html = document.documentElement,
         body = document.body,
         scroller = {
-      target: document.querySelector('#uix-scrollspy-area'),
+      target: '#uix-scrollspy-area',
       ease: 0.05,
       // <= scroll speed
       endY: 0,
@@ -14645,8 +14664,11 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
     TweenMax.set(scroller.target, {
       rotation: 0.01,
       force3D: true
-    });
-    $(window).on('resize', function () {
+    }); //Increase the viewport to display the visual area
+
+    var elTop = $(scroller.target).offset().top;
+    $(scroller.target).wrap('<div style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>').css('margin-top', elTop + 'px');
+    $(window).off('resize.SMOOTH_SCROLLING_PAGE').on('resize.SMOOTH_SCROLLING_PAGE', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -14659,7 +14681,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
         }
       }
     });
-    $(window).on('scroll ready load resize resizeEnd touchmove', function () {
+    $(window).off('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE').on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
       scroller.scrollRequest++;
 
       if (!requestId) {
@@ -14672,8 +14694,8 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       var resized = scroller.resizeRequest > 0;
 
       if (resized) {
-        var height = scroller.target.clientHeight;
-        body.style.height = height + "px";
+        var height = $(scroller.target).height();
+        body.style.height = parseFloat(height + elTop) + "px";
         scroller.resizeRequest = 0;
       }
 
@@ -14689,10 +14711,321 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       TweenMax.set(scroller.target, {
         y: -scroller.y
       });
-      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null; //+++++++++++++++++++
+      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
+      // Custom Functions
+      //+++++++++++++++++++++++++++++++++++++++++++++++++
 
-      console.log('scrollTop: ' + scroller.y);
-    }
+      var scrollTop = scroller.y,
+          topSpacing = window.innerWidth <= 768 ? 0 : $('.uix-header__container').outerHeight(true); //with margin 
+      //----------------------------------------------------------------------------------
+      //--------------------------------- Scrollspy Animate -------------------------------	
+      //----------------------------------------------------------------------------------   
+
+      var $targetEl = $('#uix-scrollspy-animate');
+
+      if ($targetEl.length > 0) {
+        var elHeight = $targetEl.height(),
+            elOffsetTop = $targetEl.offset().top - topSpacing;
+        var scale = scrollTop / elHeight,
+            elScale = 1 - scale * 0.1,
+            elOpacity = 1 - scale,
+            scrollProgress = (scrollTop - elOffsetTop) / (elHeight - windowHeight / 6); //
+
+        if (scrollTop < elHeight) {
+          $('body').removeClass('js-uix-content-part').removeClass('js-uix-bottom-part');
+        } else if (scrollTop >= elHeight) {
+          $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
+        } //
+
+
+        console.log('scrollProgress: ' + scrollProgress);
+      } //endif $targetEl
+      //----------------------------------------------------------------------------------
+      //--------------------------------- Scrollspy Animate -------------------------------	
+      //----------------------------------------------------------------------------------   
+
+      /*
+       * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":0.9,"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
+      */
+
+
+      var $scrollRevealElements = $('[data-scrollspy-anim]');
+
+      var tmAnim = function tmAnim(obj, type) {
+        var config = obj.data('scrollspy-anim');
+
+        if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined) || config == '' || config === false) {
+          config = {
+            "from": {
+              "opacity": 0,
+              "x": 70
+            },
+            "to": {
+              "opacity": 1,
+              "x": 0
+            },
+            "ease": "Power2.easeOut",
+            "duration": 0.8,
+            "delay": 0,
+            "infinite": false,
+            "viewport": 0.5 //A percentage of the viewport's height.
+
+          };
+        } //get attributes to tweenMax
+
+
+        var fromCSS = config.from,
+            toCSS = config.to,
+            myEase = config.ease,
+            myDuration = config.duration,
+            myDelay = config.delay,
+            infinite = config.infinite; //A percentage of the viewport's height.
+
+        var viewport = config.viewport;
+        if (type == 'viewport') return viewport;
+
+        if (Object.prototype.toString.call(fromCSS) == '[object String]') {
+          //Add class when element becomes visible
+          toCSS = toCSS.replace(/\./, '');
+          if (type == 'from') obj.removeClass(toCSS);
+          if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
+
+          if (type == 'to') obj.addClass(toCSS);
+        } else {
+          //Using TweenMax to create animations
+          if (type == 'from') {
+            TweenMax.set(obj, {
+              css: fromCSS
+            });
+          }
+
+          if (type == 'from-anim') {
+            TweenMax.to(obj, myDuration, {
+              css: fromCSS
+            });
+          } //Target animation
+
+
+          if (type == 'to') {
+            TweenMax.to(obj, myDuration, {
+              css: toCSS,
+              ease: myEase,
+              delay: myDelay
+            });
+          }
+        } //Reversing Scroll Animations for Loop  
+
+
+        if (type == 'loop') {
+          if (infinite) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      }; //end function tmAnim()
+
+
+      $scrollRevealElements.each(function () {
+        var $el = $(this),
+            viewport = tmAnim($el, 'viewport'); //Prevent asynchronous loading of repeated calls
+
+        var actived = $el.data('activated'),
+            tmLoop = tmAnim($el, 'loop');
+
+        if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+          tmAnim($el, 'from');
+        }
+
+        if (parseFloat(scrollTop + topSpacing) > parseFloat($el.offset().top - window.innerHeight * viewport)) {
+          if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+            tmAnim($el, 'to');
+            $el.data('activated', 1); //
+            //text effect
+            //------------------
+
+            if ($.isFunction($.fn.UixTextEff)) {
+              var _ids = $el.data('texteff-ids');
+
+              if (smooth_scrolling_page_js_typeof(_ids) !== ( true ? "undefined" : undefined)) {
+                _ids.forEach(function (element) {
+                  $(document).UixTextEff({
+                    selectors: '[data-text-eff="' + element + '"]'
+                  });
+                });
+              }
+            } //endif $.fn.UixTextEff
+            //
+            //other effect
+            //------------------
+
+          } //endif actived
+
+        } else {
+          if (smooth_scrolling_page_js_typeof(actived) !== ( true ? "undefined" : undefined) && tmLoop === 1) {
+            tmAnim($el, 'from-anim');
+            $el.removeData('activated');
+          } //endif actived
+
+        }
+      }); //end each
+      //----------------------------------------------------------------------------------
+      //----------------------- Specify a background image -------------------------------	
+      //----------------------------------------------------------------------------------          
+
+      /*
+       * Usage: <div class="..." data-scrollspy-bg='{"src":"assets/images/demo.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
+      */
+
+      $('[data-scrollspy-bg]').each(function () {
+        var $this = $(this),
+            config = $this.data('scrollspy-bg');
+
+        if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined)) {
+          config = {
+            "src": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            "position": "top left",
+            "size": "cover",
+            "repeat": "no-repeat",
+            "fill": false,
+            "parallax": 0
+          };
+        }
+
+        if (config) {
+          var dataImg = config.src,
+              dataPos = config.position,
+              dataSize = config.size,
+              dataRepeat = config.repeat,
+              dataEasing = config.transition,
+              dataParallax = config.parallax;
+          if (smooth_scrolling_page_js_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
+          if (smooth_scrolling_page_js_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
+          if (smooth_scrolling_page_js_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
+          if (smooth_scrolling_page_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s'; //Using parallax
+
+          if (dataParallax && smooth_scrolling_page_js_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
+            dataPos = dataPos.replace('top', '50%');
+          }
+
+          if (smooth_scrolling_page_js_typeof(dataImg) != ( true ? "undefined" : undefined) && dataImg != '') {
+            if (config.fill) {
+              //Show Image Under Text
+              if (Modernizr.cssanimations) {
+                $this.css({
+                  'background': 'url(' + dataImg + ') ' + dataRepeat + '',
+                  'background-size': dataSize,
+                  '-webkit-background-clip': 'text',
+                  '-webkit-text-fill-color': 'transparent'
+                });
+              }
+            } else {
+              $this.css({
+                'background-image': 'url(' + dataImg + ')',
+                'background-position': dataPos,
+                'background-size': dataSize,
+                'background-repeat': dataRepeat
+              });
+            } //Using parallax
+
+
+            if (dataParallax && smooth_scrolling_page_js_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
+              var bgEff = {
+                enable: true,
+                xPos: '50%'
+              },
+                  bgXpos = '50%',
+                  speed = -parseFloat(dataParallax); //Prohibit transition delay
+
+              $this.css({
+                'transition': 'none'
+              }); //Initialize the position of the background
+
+              if (bgEff) {
+                //background parallax
+                TweenMax.set($this, {
+                  backgroundPosition: bgXpos + ' ' + -$this.offset().top * speed + 'px'
+                });
+              } else {
+                //element parallax
+                TweenMax.set($this, {
+                  y: 0
+                });
+              } //endif bgEff
+
+
+              var scrolled = scrollTop,
+                  st = $this.offset().top - scrolled;
+
+              if (bgEff) {
+                //background parallax
+                TweenMax.set($this, {
+                  css: {
+                    'background-position': bgXpos + ' ' + (0 - st * speed) + 'px',
+                    'transition': dataEasing
+                  }
+                });
+              } else {
+                //element parallax
+                TweenMax.set($this, {
+                  css: {
+                    'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * speed) + ')',
+                    'transition': dataEasing
+                  }
+                });
+              } //endif bgEff
+
+            } //endif dataParallax
+
+          }
+        }
+      }); //end each 
+      //----------------------------------------------------------------------------------
+      //--------------------------------- Parallax --------------------------------------
+      //----------------------------------------------------------------------------------    
+
+      /*
+       * Usage: <div class="..." data-scrollspy-parallax='{"transition":"none 0s ease 0s","speed":0.2}'>
+      */
+
+      /* Pure parallax scrolling effect without other embedded HTML elements */
+
+      $('[data-scrollspy-parallax]').each(function () {
+        var $this = $(this),
+            dataSpeed = $this.data('scrollspy-parallax').speed,
+            dataEasing = $this.data('scrollspy-parallax').transition;
+
+        if (smooth_scrolling_page_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
+          dataSpeed = 0;
+        }
+
+        if (smooth_scrolling_page_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
+          dataEasing = 'none 0s ease 0s';
+        } //Prohibit transition delay
+
+
+        $this.css({
+          'transition': 'none'
+        }); //Initialize the position of the background
+        //element parallax
+
+        TweenMax.set($this, {
+          y: 0
+        });
+        var scrolled = scrollTop; //element parallax
+
+        TweenMax.set($this, {
+          css: {
+            'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * dataSpeed) + ')',
+            'transition': dataEasing
+          }
+        });
+      }); //end each   
+      //----------------------------------------------------------------------------------
+      //---------------------------------------------------------------------------------	
+      //----------------------------------------------------------------------------------  
+    } //end updateScroller()
+
   };
 
   module.components.documentReady.push(module.SMOOTH_SCROLLING_PAGE.documentReady);
@@ -16342,8 +16675,8 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
         disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
         texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
         texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
-        texture1.anisotropy = renderer.getMaxAnisotropy();
-        texture2.anisotropy = renderer.getMaxAnisotropy();
+        texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
         var geometry = new THREE.PlaneBufferGeometry(offsetWidth, offsetHeight, 1);
         filterMaterial = new THREE.ShaderMaterial({
           uniforms: {
@@ -18345,7 +18678,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             //-------------------------------------	
 
             if ($('#' + rendererCanvasID).length == 0) {
-              $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-3d-slider--shatter__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
             } //Get the animation speed
             //-------------------------------------	
 
@@ -18704,15 +19037,15 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
       /*
       * Trigger slider autoplay
       *
-            * @param  {Function} playTimes            - Number of times.
-            * @param  {Number} timing                 - Autoplay interval.
-            * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-            * @param  {Object} slider                 - Selector of the slider .
-            * @param  {String} countTotalID           - Total number ID or class of counter.
-            * @param  {String} countCurID             - Current number ID or class of counter.
-            * @param  {String} paginationID           - Navigation ID for paging control of each slide.
-            * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
-            * @return {Void}                          - The constructor.
+      * @param  {Function} playTimes            - Number of times.
+      * @param  {Number} timing                 - Autoplay interval.
+      * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+      * @param  {Object} slider                 - Selector of the slider .
+      * @param  {String} countTotalID           - Total number ID or class of counter.
+      * @param  {String} countCurID             - Current number ID or class of counter.
+      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+      * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+      * @return {Void}                          - The constructor.
       */
 
 
@@ -19043,7 +19376,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             //-------------------------------------	
 
             if ($('#' + rendererCanvasID).length == 0) {
-              $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-3d-slider--expParticle__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
             } //Get the animation speed
             //-------------------------------------	
 
@@ -19587,6 +19920,718 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// EXTERNAL MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/scss/_style.scss
+var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(62);
+
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/index.js
+function simple_3D_liquid_scrollspy_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_liquid_scrollspy_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_liquid_scrollspy_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_liquid_scrollspy_slider_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- 3D Liquid Scrollspy Slider -->
+ *************************************
+ */
+
+/**
+ * module.THREE_LIQUID_SCROLLSPY_SLIDER
+ * 
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
+  if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
+  module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.6';
+
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if ($('.uix-3d-slider--liquid-scrollspy').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
+
+    var MainStage = function () {
+      var $window = $(window),
+          windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var animSpeed = 1000,
+          $sliderWrapper = $('.uix-3d-slider--liquid-scrollspy'),
+          //Basic webGL renderers 
+      renderLoaderID = 'uix-3d-slider--liquid-scrollspy__loader',
+          rendererOuterID = 'uix-3d-slider--liquid-scrollspy__canvas-container',
+          rendererCanvasID = 'uix-3d-slider--liquid-scrollspy__canvas',
+          renderer; // Generate one plane geometries mesh to scene
+      //-------------------------------------	
+
+      var camera,
+          controls,
+          scene,
+          light,
+          renderer,
+          material,
+          displacementSprite,
+          theta = 0;
+      var offsetWidth = 1400,
+          //Set the display width of the objects
+      offsetHeight = 450,
+          //Set the display height of the objects
+      imgAspect = offsetHeight / offsetWidth;
+      var vertex = document.getElementById('vertexshader').textContent,
+          fragment = document.getElementById('fragmentshader').textContent,
+          dispImage;
+      var loader = new THREE.TextureLoader();
+      loader.crossOrigin = 'anonymous';
+      var textures;
+      var sources = [];
+      var isAnimating = false; //scroll spy
+
+      var scrollspyEnable, scrollspyConfigAutoAnim, scrollspyConfigItems, scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop; // constants
+
+      var activeSlider = 0;
+
+      function wrapperInit() {
+        $sliderWrapper.each(function () {
+          var $this = $(this),
+              $items = $this.find('.uix-3d-slider--liquid-scrollspy__item'),
+              $first = $items.first(),
+              itemsTotal = $items.length,
+              activated = $this.data('activated');
+
+          if (simple_3D_liquid_scrollspy_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+            //Get parameter configuration from the data-* attribute of HTML
+            var dataControlsPagination = $this.data('controls-pagination'),
+                dataControlsArrows = $this.data('controls-arrows'),
+                dataLoop = $this.data('loop'),
+                dataFilterTexture = $this.data('filter-texture'),
+                dataDraggable = $this.data('draggable'),
+                dataDraggableCursor = $this.data('draggable-cursor'),
+                dataSpeed = $this.data('speed'),
+                dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataCountTotal = $this.data('count-total'),
+                dataCountCur = $this.data('count-now'),
+                dataScrollspy = $this.data('scrollspy');
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--liquid-scrollspy__pagination';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--liquid-scrollspy__arrows';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataScrollspy) === ( true ? "undefined" : undefined)) dataScrollspy = false; //Load displacement image
+
+            dispImage = dataFilterTexture; //Autoplay times
+
+            var playTimes; //A function called "timer" once every second (like a digital watch).
+
+            $this[0].animatedSlides; //scroll spy config
+
+            scrollspyEnable = dataScrollspy;
+            scrollspyConfigAutoAnim = $this[0].animatedSlides;
+            scrollspyConfigItems = $items;
+            scrollspyConfigCountTotal = dataCountTotal;
+            scrollspyConfigCountCur = dataCountCur;
+            scrollspyConfigControlsPagination = dataControlsPagination;
+            scrollspyConfigControlsArrows = dataControlsArrows;
+            scrollspyConfigLoop = dataLoop; //If arrows does not exist on the page, it will be added by default, 
+            //and the drag and drop function will be activated.
+
+            if ($(dataControlsArrows).length == 0) {
+              $('body').prepend('<div style="display:none;" class="uix-3d-slider--liquid-scrollspy__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--liquid-scrollspy__arrows--prev"></a><a href="#" class="uix-3d-slider--liquid-scrollspy__arrows--next"></a></div>');
+            } //Prevent bubbling
+
+
+            if (itemsTotal == 1) {
+              $(dataControlsPagination).hide();
+              $(dataControlsArrows).hide();
+            } //Initialize the controlers classes
+            //-------------------------------------	
+
+
+            $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
+            //-------------------------------------	
+
+            $this.css('height', windowWidth * imgAspect + 'px'); //Load slides to canvas
+            //-------------------------------------	
+
+            if ($('#' + rendererCanvasID).length == 0) {
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-3d-slider--liquid-scrollspy__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+            } //Get the animation speed
+            //-------------------------------------	
+
+
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+              animSpeed = dataSpeed;
+            } //Initialize the first item container
+            //-------------------------------------		
+
+
+            $items.addClass('next');
+            $first.addClass('is-active'); //Add identifiers for the first and last items
+            //-------------------------------------		
+
+            $items.last().addClass('last');
+            $items.first().addClass('first'); //Get all images and videos
+            //-------------------------------------		
+
+            $items.each(function () {
+              var _item = $(this);
+
+              if (_item.find('video').length > 0) {
+                //Returns the dimensions (intrinsic height and width ) of the video
+                var video = document.getElementById(_item.find('video').attr('id')),
+                    videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": videoURL,
+                    "id": _item.find('video').attr('id'),
+                    "type": 'video'
+                  });
+                }
+              } else {
+                var imgURL = _item.find('img').attr('src');
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": imgURL,
+                    "id": 'img-' + UixGUID.create(),
+                    "type": 'img'
+                  });
+                }
+              }
+            }); //Pagination dots 
+            //-------------------------------------	
+
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul>';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
+            }
+
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
+
+            $(dataControlsPagination).find('ul > li').off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              var $btn = $(this);
+              if ($btn.attr('aria-disabled') == 'true') return false;
+              $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
+              setTimeout(function () {
+                $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
+                  slideNextId = $(this).index(); //Determine the direction
+
+              var curDir = 'prev';
+
+              if ($(this).attr('data-index') > slideCurId) {
+                curDir = 'next';
+              } //Transition Between Slides
+
+
+              sliderUpdates(slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Next/Prev buttons
+            //-------------------------------------		
+
+            var _prev = $(dataControlsArrows).find('.uix-3d-slider--liquid-scrollspy__arrows--prev'),
+                _next = $(dataControlsArrows).find('.uix-3d-slider--liquid-scrollspy__arrows--next');
+
+            $(dataControlsArrows).find('a').attr('href', 'javascript:');
+            $(dataControlsArrows).find('a').removeClass('is-disabled');
+
+            if (!dataLoop) {
+              _prev.addClass('is-disabled');
+            }
+
+            _prev.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_prev.attr('aria-disabled') == 'true') return false;
+
+              _prev.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _prev.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            });
+
+            _next.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_next.attr('aria-disabled') == 'true') return false;
+
+              _next.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _next.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Autoplay Slider
+            //-------------------------------------		
+
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+            $this.data('activated', 1);
+          } //endif activated
+
+        }); // end each				
+      }
+
+      function loadImages() {
+        var promises = [];
+
+        for (var i = 0; i < sources.length; i++) {
+          promises.push(new Promise(function (resolve, reject) {
+            var img = document.createElement("img");
+            img.crossOrigin = "anonymous";
+            img.src = sources[i].url;
+
+            img.onload = function (image) {
+              //loading
+              TweenMax.to("#" + renderLoaderID, 0.5, {
+                width: Math.round(100 * (i / sources.length)) + '%'
+              });
+              return resolve(image);
+            };
+          }).then(makeThreeTexture));
+        }
+
+        return Promise.all(promises);
+      }
+
+      function makeThreeTexture(image) {
+        var texture = loader.load(image.path[0].currentSrc);
+        return texture;
+      }
+
+      function texturesInit() {
+        //Must be placed behind the loadImages()
+        loadImages().then(function (images) {
+          //remove loading
+          TweenMax.to($("#" + renderLoaderID), 0.5, {
+            alpha: 0
+          });
+          init(images);
+          render();
+        });
+      }
+
+      function init(allTextures) {
+        textures = allTextures; //Core 3D stage begin
+        //-------------------------------------		
+        //camera
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000); // FlyCamera // FlyControls
+
+        camera.position.z = 1000; //Object 1 unit, equal to 1 pixel
+
+        camera.lookAt = new THREE.Vector3(0, 0, 0); // Fit plane to screen
+
+        var dist = 1000,
+            vFOV = THREE.Math.degToRad(camera.fov),
+            // convert vertical fov to radians
+        objHeight = 2 * Math.tan(vFOV / 2) * dist,
+            // visible height
+        objWidth = objHeight * camera.aspect; // visible width   
+        //Scene
+
+        scene = new THREE.Scene(); //HemisphereLight
+
+        scene.add(new THREE.AmbientLight(0x555555));
+        light = new THREE.SpotLight(0xffffff, 1.5);
+        light.position.set(0, 0, 2000);
+        scene.add(light); //WebGL Renderer	
+        // create a render and set the size
+
+        renderer = new THREE.WebGLRenderer({
+          canvas: document.getElementById(rendererCanvasID),
+          //canvas
+          alpha: true,
+          antialias: true
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(windowWidth, windowHeight); // Immediately use the texture for material creation
+        // Create a texture loader so we can load our image file
+
+        var texture1 = textures[0],
+            texture2 = textures[1],
+            intensity = 1,
+            disp = loader.load(dispImage);
+        disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
+        texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+        texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+        texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        var geometry = new THREE.PlaneBufferGeometry(objWidth, objHeight, 1);
+        $('#' + rendererCanvasID).css('height', windowWidth * imgAspect + 'px');
+        geometry.center();
+        material = new THREE.ShaderMaterial({
+          uniforms: {
+            effectFactor: {
+              type: "f",
+              value: intensity
+            },
+            dispFactor: {
+              type: "f",
+              value: 0.0
+            },
+            texture: {
+              type: "t",
+              value: texture1
+            },
+            texture2: {
+              type: "t",
+              value: texture2
+            },
+            disp: {
+              type: "t",
+              value: disp
+            }
+          },
+          vertexShader: vertex,
+          fragmentShader: fragment,
+          transparent: true,
+          opacity: 1.0
+        });
+        displacementSprite = new THREE.Mesh(geometry, material);
+        displacementSprite.position.set(0, 0, 0);
+        scene.add(displacementSprite); //				TweenMax.to( material.uniforms.dispFactor, 1.5, {
+        //					value: 1,
+        //					ease: Expo.easeOut
+        //				});	
+        //                
+        // Fires when the window changes
+
+        window.addEventListener('resize', onWindowResize, false); // Scrolling interaction with 3D scenes
+
+        window.addEventListener('wheel', onMouseWheel, false);
+      }
+
+      function render() {
+        requestAnimationFrame(render);
+        theta += 0.1; //To set a background color.
+        //renderer.setClearColor( 0x000000 );	
+        //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
+        renderer.render(scene, camera);
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function onMouseWheel(e) {
+        var scrollPos; //Gets a value that indicates the amount that the mouse wheel has changed.
+
+        var dir,
+            delta,
+            mobileDeltaY = null;
+        var touches = e.touches;
+
+        if (touches && touches.length) {
+          mobileDeltaY = startY - touches[0].pageY;
+          scrollPos = touches[0].pageY;
+        } else {
+          delta = Math.max(-1, Math.min(1, -e.deltaY));
+          scrollPos = e.deltaY;
+        }
+
+        if (mobileDeltaY != null) {
+          if (mobileDeltaY >= 50) {
+            //--- swipe up
+            dir = 'up';
+          }
+
+          if (mobileDeltaY <= -50) {
+            //--- swipe down
+            dir = 'down';
+          }
+        } else {
+          if (delta < 0) {
+            //scroll down
+            dir = 'down';
+          } else {
+            //scroll up
+            dir = 'up';
+          }
+        } //-----
+
+
+        if (scrollspyEnable) {
+          var slideCurId = scrollspyConfigItems.filter('.is-active').index(),
+              slideNextId;
+
+          if (dir == 'down') {
+            slideNextId = parseFloat(scrollspyConfigItems.filter('.is-active').index()) + 1; //Transition Between Slides
+
+            sliderUpdates(slideCurId, slideNextId, 'next', scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop); //Pause the auto play event
+
+            clearInterval(scrollspyConfigAutoAnim);
+          }
+
+          if (dir == 'up') {
+            slideNextId = parseFloat(scrollspyConfigItems.filter('.is-active').index()) - 1; //Transition Between Slides
+
+            sliderUpdates(slideCurId, slideNextId, 'prev', scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop); //Pause the auto play event
+
+            clearInterval(scrollspyConfigAutoAnim);
+          }
+        }
+      }
+      /*
+      * Trigger slider autoplay
+      *
+      * @param  {Function} playTimes            - Number of times.
+      * @param  {Number} timing                 - Autoplay interval.
+      * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+      * @param  {Object} slider                 - Selector of the slider .
+      * @param  {String} countTotalID           - Total number ID or class of counter.
+      * @param  {String} countCurID             - Current number ID or class of counter.
+      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+      * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+      * @return {Void}                          - The constructor.
+      */
+
+
+      function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
+        var items = slider.find('.uix-3d-slider--liquid-scrollspy__item'),
+            total = items.length;
+        slider[0].animatedSlides = setInterval(function () {
+          playTimes = parseFloat(items.filter('.is-active').index());
+          playTimes++;
+
+          if (!loop) {
+            if (playTimes < total && playTimes >= 0) {
+              var slideCurId = items.filter('.is-active').index(),
+                  slideNextId = playTimes;
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+            }
+          } else {
+            if (playTimes == total) playTimes = 0;
+            if (playTimes < 0) playTimes = total - 1;
+            var slideCurId = items.filter('.is-active').index(),
+                slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
+            if (playTimes == 0) {
+              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
+            } else {
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+            }
+          }
+        }, timing);
+      }
+      /*
+       *  Transition Between Slides
+       *
+       * @param  {Number} slideCurId             - Index of current slider.
+       * @param  {Number} slideNextId            - Index of next slider.
+       * @param  {String} dir                    - Switching direction indicator.	 
+                * @param  {String} countTotalID           - Total number ID or class of counter.
+                * @param  {String} countCurID             - Current number ID or class of counter.
+                * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+                * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+                * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+       * @return {Void}
+       */
+
+
+      function sliderUpdates(slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
+        var $items = $sliderWrapper.find('.uix-3d-slider--liquid-scrollspy__item'),
+            total = $items.length; //Prevent bubbling
+
+        if (total == 1) {
+          $(paginationID).hide();
+          $(arrowsID).hide();
+          return false;
+        }
+
+        if (!isAnimating) {
+          isAnimating = true; //Transition Interception
+          //-------------------------------------
+
+          if (loop) {
+            if (slideCurId > total - 1) slideCurId = 0;
+            if (slideCurId < 0) slideCurId = total - 1; //--
+
+            if (slideNextId < 0) slideNextId = total - 1;
+            if (slideNextId > total - 1) slideNextId = 0;
+          } else {
+            if (slideCurId > total - 1) slideCurId = total - 1;
+            if (slideCurId < 0) slideCurId = 0; //--
+
+            if (slideNextId < 0) slideNextId = 0;
+            if (slideNextId > total - 1) slideNextId = total - 1;
+          } //Get previous and next index of item
+          //-------------------------------------
+
+
+          var $current = $sliderWrapper.find('.uix-3d-slider--liquid-scrollspy__item').eq(slideCurId);
+          var $next = $sliderWrapper.find('.uix-3d-slider--liquid-scrollspy__item').eq(slideNextId);
+          console.log('Current: ' + slideCurId + ' | Next: ' + slideNextId); //Determine the direction and add class to switching direction indicator.
+          //-------------------------------------
+
+          var dirIndicatorClass = '';
+          if (dir == 'prev') dirIndicatorClass = 'prev';
+          if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to each item
+          //-------------------------------------	
+
+          $items.removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $current.addClass('leave');
+          $next.addClass('is-active'); //Add transition class to Controls Pagination
+          //-------------------------------------
+
+          $(paginationID).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $(paginationID).find('ul > li').eq(slideCurId).addClass('leave');
+          $(paginationID).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
+          //-------------------------------------		
+
+          if (!loop) {
+            $(arrowsID).find('a').removeClass('is-disabled');
+            if (slideNextId == total - 1) $(arrowsID).find('.uix-3d-slider--liquid-scrollspy__arrows--next').addClass('is-disabled');
+            if (slideNextId == 0) $(arrowsID).find('.uix-3d-slider--liquid-scrollspy__arrows--prev').addClass('is-disabled');
+          } //Display counter
+          //-------------------------------------
+
+
+          $(countTotalID).text(total);
+          $(countCurID).text(parseFloat(slideCurId) + 1); //Fire the next object
+          //-------------------------------------
+
+          activeSlider = slideNextId; //Update Texture
+
+          material.uniforms.texture.value = textures[Math.floor(slideCurId)];
+          material.uniforms.texture2.value = textures[Math.floor(slideNextId)]; //console.log( 'material.uniforms.texture: ' + material.uniforms.texture.value.image.currentSrc );
+          //console.log( 'material.uniforms.texture2: ' + material.uniforms.texture2.value.image.currentSrc );
+
+          TweenMax.to(material.uniforms.dispFactor, 1.5, {
+            value: 1,
+            ease: Expo.easeOut,
+            onComplete: function onComplete() {
+              //Update Texture
+              var tx1ID, tx2ID;
+
+              if (dir == 'prev') {
+                material.uniforms.texture.value = textures[Math.floor(slideCurId)];
+                material.uniforms.texture2.value = textures[Math.floor(slideNextId - 1)];
+
+                if (loop) {
+                  tx1ID = slideNextId;
+                  tx2ID = slideNextId - 1;
+                  if (slideNextId == 0) tx2ID = total - 1;
+                } else {}
+              }
+
+              if (dir == 'next') {
+                material.uniforms.texture.value = textures[Math.floor(slideCurId)];
+                material.uniforms.texture2.value = textures[Math.floor(slideNextId)];
+
+                if (loop) {
+                  tx1ID = slideNextId;
+                  tx2ID = slideNextId + 1;
+                  if (slideNextId == total - 1) tx2ID = 0;
+                } else {}
+              }
+
+              material.uniforms.texture.value = textures[Math.floor(tx1ID)];
+              material.uniforms.texture2.value = textures[Math.floor(tx2ID)]; //console.log( 'New material.uniforms.texture: ' + material.uniforms.texture.value.image.currentSrc );
+              //console.log( 'New material.uniforms.texture2: ' + material.uniforms.texture2.value.image.currentSrc ); 
+              //console.log( '--------------------' );
+
+              TweenMax.set(this.target, {
+                value: 0
+              }); //Reset the trigger
+              //-------------------------------------
+
+              isAnimating = false;
+            }
+          }); //Fire the current object
+          //-------------------------------------
+        } // end isAnimating
+
+      } // 
+      //-------------------------------------	
+
+
+      return {
+        wrapperInit: wrapperInit,
+        texturesInit: texturesInit,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
+        getScene: function getScene() {
+          return scene;
+        },
+        getCamera: function getCamera() {
+          return camera;
+        }
+      };
+    }();
+
+    MainStage.wrapperInit(); //step 1
+
+    MainStage.texturesInit(); // step 2
+  };
+
+  module.components.documentReady.push(module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady);
+  return function THREE_LIQUID_SCROLLSPY_SLIDER() {
+    simple_3D_liquid_scrollspy_slider_js_classCallCheck(this, THREE_LIQUID_SCROLLSPY_SLIDER);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-filmic-effects/js/index.js
 function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19895,7 +20940,7 @@ var TABLE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(62);
+var sort_elements = __webpack_require__(63);
 
 // CONCATENATED MODULE: ./src/components/ES6/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19978,7 +21023,7 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(63);
+var tabs_scss_style = __webpack_require__(64);
 
 // CONCATENATED MODULE: ./src/components/ES6/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20155,7 +21200,7 @@ var TABS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(64);
+var team_focus_scss_style = __webpack_require__(65);
 
 // CONCATENATED MODULE: ./src/components/ES6/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20318,10 +21363,10 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(65);
+var text_anime = __webpack_require__(66);
 
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(66);
+var text_effect_scss_style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./src/components/ES6/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20371,7 +21416,7 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(67);
+var timeline_scss_style = __webpack_require__(68);
 
 // CONCATENATED MODULE: ./src/components/ES6/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20537,7 +21582,7 @@ var TIMELINE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(68);
+var vertical_menu_scss_style = __webpack_require__(69);
 
 // CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20552,7 +21597,7 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 var VERTICAL_MENU = function (module, $, window, document) {
   if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
-  module.VERTICAL_MENU.version = '0.0.1';
+  module.VERTICAL_MENU.version = '0.0.2';
 
   module.VERTICAL_MENU.documentReady = function ($) {
     var $window = $(window),
@@ -20644,7 +21689,7 @@ var VERTICAL_MENU = function (module, $, window, document) {
         height: winHeight + 'px',
         marginTop: 0
       });
-      $window.on('scroll', function () {
+      $window.on('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function () {
         var curULHeight = $('ul.uix-menu').height(),
             windowPos = $window.scrollTop();
 
@@ -20686,10 +21731,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(69);
+var _wp_core = __webpack_require__(70);
 
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_3rd_party_plugins.scss
-var scss_3rd_party_plugins = __webpack_require__(70);
+var scss_3rd_party_plugins = __webpack_require__(71);
 
 // CONCATENATED MODULE: ./src/components/ES6/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20741,103 +21786,103 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(71);
+var badges_scss_style = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./src/components/ES6/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(72);
+var blended_grid_layout_scss_style = __webpack_require__(73);
 
 // EXTERNAL MODULE: ./src/components/ES6/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(73);
+var breadcrumbs_scss_style = __webpack_require__(74);
 
 // EXTERNAL MODULE: ./src/components/ES6/button/scss/_style.scss
-var button_scss_style = __webpack_require__(74);
+var button_scss_style = __webpack_require__(75);
 
 // EXTERNAL MODULE: ./src/components/ES6/card/scss/_style.scss
-var card_scss_style = __webpack_require__(75);
+var card_scss_style = __webpack_require__(76);
 
 // EXTERNAL MODULE: ./src/components/ES6/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(76);
+var circle_text_scss_style = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(77);
+var content_placeholder_animated_scss_style = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./src/components/ES6/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(78);
+var dividing_line_scss_style = __webpack_require__(79);
 
 // EXTERNAL MODULE: ./src/components/ES6/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(79);
+var dots_scss_style = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./src/components/ES6/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(80);
+var dotted_line_scss_style = __webpack_require__(81);
 
 // EXTERNAL MODULE: ./src/components/ES6/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(81);
+var equal_width_columns_scss_style = __webpack_require__(82);
 
 // EXTERNAL MODULE: ./src/components/ES6/features/scss/_style.scss
-var features_scss_style = __webpack_require__(82);
+var features_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(83);
+var footer_templates_scss_style = __webpack_require__(84);
 
 // EXTERNAL MODULE: ./src/components/ES6/gallery-grid-layout/scss/_style.scss
-var gallery_grid_layout_scss_style = __webpack_require__(84);
+var gallery_grid_layout_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(85);
+var heading_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(86);
+var image_animation_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(87);
+var list_brands_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(88);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(89);
+var list_side_by_side_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(90);
+var list_side_by_side_img_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(91);
+var mouse_animation_scroll_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(92);
+var overlay_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(93);
+var ribbon_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(94);
+var shape_animation_scss_style = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(95);
+var _comments = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(96);
+var _editing = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(97);
+var striking_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(98);
+var team_fullwidth_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(99);
+var team_grid_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(100);
+var testimonials_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(101);
+var tooltip_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(102);
+var vertical_separator_scss_style = __webpack_require__(103);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(103);
+var wave_background_scss_style = __webpack_require__(104);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
@@ -20872,6 +21917,7 @@ var wave_background_scss_style = __webpack_require__(103);
 /******/
 
 /* pages */
+
 
 
 
