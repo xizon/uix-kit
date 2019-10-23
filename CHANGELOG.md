@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 3.9.7 (October 23, 2019) =
+
+* Tweak: Optimized the scrolling animation of some modules.
+* Fix: Fixed autoplay issue for multiple Advanced Slider on the same page.
 
 
 #### = 3.9.6 (October 17, 2019) =

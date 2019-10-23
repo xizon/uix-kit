@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=nj4aaKqH8w1KxtKcs9lR"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=Ug9chfxwRAM5zQ8ByU1m"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=nj4aaKqH8w1KxtKcs9lR" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=Ug9chfxwRAM5zQ8ByU1m" />
 	<![endif]-->
 
 
@@ -481,7 +481,7 @@
 								<p>A free web kits for fast web design and development. Uix Kit can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold.</p>
 
 								<hr> 
-								<h3 class="pinline"><span>How To Use?</span></h3>
+								<h3><span>How To Use?</span></h3>
 								<p>You will need to have <a href="https://nodejs.org/" target="_blank">node</a> setup on your machine. That will output the built distributables to <code>./dist/*</code> and <code>./examples/*.html</code>.</p>
 								<p><strong>Step 1.</strong> Use NPM (Locate your current directory of project, and enter the following command.) or download the latest version from <a href="https://github.com/xizon/uix-kit">Github</a>. For nodejs you have to install some dependencies.</p>
 								<pre class="uix-precode"><label>$</label><code>sudo npm install uix-kit</code></pre>
@@ -499,16 +499,22 @@
 								<pre class="uix-precode"><label>$</label><code>npm run build</code></pre>
 
 								<p><strong>Step 5.</strong> When you have done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+                                
+                                
+                                <h3><span>Note:</span></h3>
 
 								<div>
-									<strong>If you get an error of <span class="uix-striking-msg uix-striking-msg--danger is-rounded uix-striking-msg--inline">ERROR: npm update check failed.</span> You could try to enter the following code: </strong>
+									<strong>a)&nbsp;</strong>If you get an error of <span class="uix-striking-msg uix-striking-msg--danger is-rounded uix-striking-msg--inline uix-spacing--no">ERROR: npm update check failed.</span> You could try to enter the following code: 
 								</div>
 								<pre class="uix-precode"><label>$</label><code>sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config</code></pre>
 
 								
+								<div>
+									<strong>b)&nbsp;</strong>You could custom modules of what to import in <code>src/components/ES6/_app-load.js</code> and <code>src/components/ES6/_app-load-rtl.js</code>. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the <code>webpack.config.js</code> according to the imported modules you want.
+								</div>     
 
 								<div>
-									<strong>You can update the Placeholders in Templates by modifying the Site Info configuration of <code>package.json</code>. Like this:</strong>
+									<strong>c)&nbsp;</strong>You can update the Placeholders in Templates by modifying the Site Info configuration of <code>package.json</code>. Like this:
 								</div>
 								<pre class="uix-precode"><label>JSON</label><code>{
   "author": "UIUX Lab",
@@ -522,6 +528,7 @@
   ...
 }</code></pre>
 
+                                
 
 
 							</div>
@@ -620,14 +627,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.9.6",
+		var REVISION     = "3.9.7",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=nj4aaKqH8w1KxtKcs9lR"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=Ug9chfxwRAM5zQ8ByU1m"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

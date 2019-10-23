@@ -33,7 +33,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.5';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.6';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -297,16 +297,16 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				
 			
 				if ( !loop ) {
-					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 				} else {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
 					
 					//Prevent problems with styles when switching in positive order
 					if ( playTimes == 0 ) {
-						sliderUpdates( playTimes, $sliderWrapper, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
+						sliderUpdates( playTimes, slider, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 					} else {
-						sliderUpdates( playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
+						sliderUpdates( playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 					}
 					
 				}
@@ -1921,12 +1921,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Add new ripple each time mouse
 						//-------------------------------------
-						$sliderWrapper[0].addEventListener("mousedown", function(e) {
+						slider[0].addEventListener("mousedown", function(e) {
 					  
 							TweenMax.to( displacementFilter.scale, 1, { x: "+=" + Math.sin( e.pageX ) * 100 + "", y: "+=" + Math.cos( e.pageY ) * 100 + ""  });   
 							rotateSpite();
 						});
-						$sliderWrapper[0].addEventListener("mouseup", function(e) {
+						slider[0].addEventListener("mouseup", function(e) {
 					
 							TweenMax.to( displacementFilter.scale, 1, { x: 0, y: 0 } );
 						});

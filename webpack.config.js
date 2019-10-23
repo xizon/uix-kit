@@ -784,9 +784,9 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 		
 	
         
-    //The more modules, the longer the time, the default 3500ms 
+    //The more modules, the longer the time, the default 5500ms 
     //can guarantee the time-consuming compilation of 150 modules.
-	}, 3500 );
+	}, 5500 );
 	
 
 });

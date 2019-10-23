@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.2';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.3';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -192,8 +192,17 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                     //A percentage of the viewport's height.
                     var viewport = config.viewport;
 
-                    if ( type == 'viewport' ) return viewport;
+                    if ( typeof viewport === typeof undefined ) viewport = 0.9;
+                    if ( typeof myEase === typeof undefined ) myEase = 'Power2.easeOut';
+                    if ( typeof myDelay === typeof undefined ) myDelay = 0;
+                    if ( typeof myDuration === typeof undefined ) myDuration = 0.4;
+                    if ( typeof infinite === typeof undefined ) infinite = false;
 
+
+                    //Return a value
+                    if ( type == 'viewport' ) return viewport;
+                    if ( type == 'delay' ) return myDelay;
+                    if ( type == 'loop' ) return ( infinite ) ? 1 : 0;
 
 
                     if( Object.prototype.toString.call( fromCSS ) == '[object String]' ) {
@@ -206,7 +215,14 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         if ( type == 'from-anim' ) obj.removeClass( toCSS );
 
                         //Target animation
-                        if ( type == 'to' ) obj.addClass( toCSS );
+                        if ( type == 'to' ) {
+
+                            setTimeout( function(){
+                                obj.addClass( toCSS );
+                            }, myDelay*1000 );
+
+                        }
+                            
 
 
                     } else {
@@ -241,17 +257,6 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
                     }
 
-                    //Reversing Scroll Animations for Loop  
-                    if ( type == 'loop' ) {
-
-                        if ( infinite ) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }	
-                    }
-
-
 
                 };//end function tmAnim()
 
@@ -266,6 +271,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                 var actived = $el.data( 'activated' ),
                     tmLoop  = tmAnim( $el, 'loop' );
 
+                
                 if( typeof actived === typeof undefined ) {
                     tmAnim( $el, 'from' );
 
@@ -279,7 +285,6 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         $el.data( 'activated', 1 );
                         
                         
-                        //
                         //text effect
                         //------------------
                         if ( $.isFunction( $.fn.UixTextEff ) ) {
@@ -294,11 +299,13 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
 
                         }//endif $.fn.UixTextEff
-                        
-                        
+
+
                         //
                         //other effect
                         //------------------
+                        
+                        
 
 
                     }//endif actived

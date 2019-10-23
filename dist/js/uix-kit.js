@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.6
+ * ## Version             :  3.9.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 22, 2019
+ * ## Last Update         :  October 23, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "342108478b77dd7c2d7c";
+/******/ 	var hotCurrentHash = "fbd9ea0655399ec55478";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5257,7 +5257,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.7';
+  module.ADVANCED_SLIDER.version = '0.1.8';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5397,11 +5397,11 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         playTimes++;
 
         if (!loop) {
-          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1;
-          sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+          sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         }
       }, timing);
     }
@@ -5939,7 +5939,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.5';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.6';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6118,15 +6118,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         playTimes++;
 
         if (!loop) {
-          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1; //Prevent problems with styles when switching in positive order
 
           if (playTimes == 0) {
-            sliderUpdates(playTimes, $sliderWrapper, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
+            sliderUpdates(playTimes, slider, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
           } else {
-            sliderUpdates(playTimes, $sliderWrapper, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+            sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
           }
         }
       }, timing);
@@ -7202,14 +7202,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             }, 'final'); //Add new ripple each time mouse
             //-------------------------------------
 
-            $sliderWrapper[0].addEventListener("mousedown", function (e) {
+            slider[0].addEventListener("mousedown", function (e) {
               TweenMax.to(displacementFilter.scale, 1, {
                 x: "+=" + Math.sin(e.pageX) * 100 + "",
                 y: "+=" + Math.cos(e.pageY) * 100 + ""
               });
               rotateSpite();
             });
-            $sliderWrapper[0].addEventListener("mouseup", function (e) {
+            slider[0].addEventListener("mouseup", function (e) {
               TweenMax.to(displacementFilter.scale, 1, {
                 x: 0,
                 y: 0
@@ -14163,7 +14163,7 @@ function scroll_reveal_js_typeof(obj) { if (typeof Symbol === "function" && type
 var SCROLL_REVEAL = function (module, $, window, document) {
   if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
-  module.SCROLL_REVEAL.version = '0.1.0';
+  module.SCROLL_REVEAL.version = '0.1.2';
 
   module.SCROLL_REVEAL.documentReady = function ($) {
     var viewport; //From JSON config in data attribute in HTML
@@ -14183,7 +14183,7 @@ var SCROLL_REVEAL = function (module, $, window, document) {
             "x": 0
           },
           "ease": "Power2.easeOut",
-          "duration": 0.8,
+          "duration": 0.4,
           "delay": 0,
           "infinite": false,
           "viewport": '100%' //A percentage of the viewport's height.
@@ -14200,6 +14200,15 @@ var SCROLL_REVEAL = function (module, $, window, document) {
           infinite = config.infinite; //A percentage of the viewport's height.
 
       viewport = config.viewport;
+      if (scroll_reveal_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = '100%';
+      if (scroll_reveal_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
+      if (scroll_reveal_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
+      if (scroll_reveal_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
+      if (scroll_reveal_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Return a value
+
+      if (type == 'viewport') return viewport;
+      if (type == 'delay') return myDelay;
+      if (type == 'loop') return infinite ? 1 : 0;
 
       if (Object.prototype.toString.call(fromCSS) == '[object String]') {
         //Add class when element becomes visible
@@ -14207,7 +14216,11 @@ var SCROLL_REVEAL = function (module, $, window, document) {
         if (type == 'from') obj.removeClass(toCSS);
         if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
 
-        if (type == 'to') obj.addClass(toCSS);
+        if (type == 'to') {
+          setTimeout(function () {
+            obj.addClass(toCSS);
+          }, myDelay * 1000);
+        }
       } else {
         //Using TweenMax to create animations
         if (type == 'from') {
@@ -14229,15 +14242,6 @@ var SCROLL_REVEAL = function (module, $, window, document) {
             ease: myEase,
             delay: myDelay
           });
-        }
-      } //Reversing Scroll Animations for Loop  
-
-
-      if (type == 'loop') {
-        if (infinite) {
-          return 1;
-        } else {
-          return 0;
         }
       }
     };
@@ -14641,7 +14645,7 @@ function smooth_scrolling_page_js_typeof(obj) { if (typeof Symbol === "function"
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.2';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.3';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -14782,7 +14786,15 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
             infinite = config.infinite; //A percentage of the viewport's height.
 
         var viewport = config.viewport;
+        if (smooth_scrolling_page_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = 0.9;
+        if (smooth_scrolling_page_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
+        if (smooth_scrolling_page_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
+        if (smooth_scrolling_page_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
+        if (smooth_scrolling_page_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Return a value
+
         if (type == 'viewport') return viewport;
+        if (type == 'delay') return myDelay;
+        if (type == 'loop') return infinite ? 1 : 0;
 
         if (Object.prototype.toString.call(fromCSS) == '[object String]') {
           //Add class when element becomes visible
@@ -14790,7 +14802,11 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
           if (type == 'from') obj.removeClass(toCSS);
           if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
 
-          if (type == 'to') obj.addClass(toCSS);
+          if (type == 'to') {
+            setTimeout(function () {
+              obj.addClass(toCSS);
+            }, myDelay * 1000);
+          }
         } else {
           //Using TweenMax to create animations
           if (type == 'from') {
@@ -14813,15 +14829,6 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
               delay: myDelay
             });
           }
-        } //Reversing Scroll Animations for Loop  
-
-
-        if (type == 'loop') {
-          if (infinite) {
-            return 1;
-          } else {
-            return 0;
-          }
         }
       }; //end function tmAnim()
 
@@ -14840,8 +14847,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
         if (parseFloat(scrollTop + topSpacing) > parseFloat($el.offset().top - window.innerHeight * viewport)) {
           if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
             tmAnim($el, 'to');
-            $el.data('activated', 1); //
-            //text effect
+            $el.data('activated', 1); //text effect
             //------------------
 
             if ($.isFunction($.fn.UixTextEff)) {
