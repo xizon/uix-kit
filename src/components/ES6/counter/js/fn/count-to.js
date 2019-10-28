@@ -3,6 +3,7 @@
  *************************************
  * Count To
  *
+ * @param  {Number} fixed              - formats a number using fixed-point notation.
  * @param  {Number} from                 - the number the element should start at
  * @param  {Number} number               - the number the element should end at
  * @param  {Number} duration             - how long it should take to count between the target numbers
@@ -16,7 +17,6 @@
  *************************************
  */
 (function ($) {
-    'use strict';
 	$.fn.UixCountTo = function (options) {
 		options = options || {};
 		
@@ -25,15 +25,20 @@
 			var settings = $.extend({}, $.fn.UixCountTo.defaults, {
 				from            : $( this ).data( 'counter-start' ),
 				to              : $( this ).data( 'counter-number' ),
+                fixed           : $( this ).data( 'counter-fixed' ),
 				speed           : $( this ).data( 'counter-duration' ),
 				refreshInterval : $( this ).data( 'counter-refresh-interval' ),
 				dilimiter       : $( this ).data( 'counter-dilimiter' ),
 				doubleDigits    : $( this ).data( 'counter-double-digits' )
 			}, options);
+            
+            
 			
 			// how many times to update the value, and how much to increment the value on each update
 			var loops = Math.ceil(settings.speed / settings.refreshInterval),
 				increment = (settings.to - settings.from) / loops;
+            
+       
 			
 			// references & variables that will change with each update
 			var self      = this,
@@ -76,7 +81,8 @@
 			}
 			
 			function render( value ) {
-				var formattedValue = Number( value ).toFixed();
+				var formattedValue = Number( value ).toFixed( settings.fixed );
+                
 				
 				if ( settings.dilimiter && formattedValue > 0 ) {
 					formattedValue = formattedValue.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
@@ -95,6 +101,7 @@
 	};
 	
 	$.fn.UixCountTo.defaults = {
+        fixed          : 0,           // formats a number using fixed-point notation.
 		from           : 0,            // the number the element should start at
 		number         : 0,            // the number the element should end at
 		duration       : 500,         // how long it should take to count between the target numbers

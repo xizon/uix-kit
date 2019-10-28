@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 3.9.8 (October 26, 2019) =
+
+* Tweak: Upgraded background animation and added its demo.
+* Tweak: Optimized style for some modules.
+
+
+
 #### = 3.9.7 (October 23, 2019) =
 
 * Tweak: Optimized the scrolling animation of some modules.

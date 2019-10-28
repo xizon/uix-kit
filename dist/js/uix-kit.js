@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.7
+ * ## Version             :  3.9.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 23, 2019
+ * ## Last Update         :  October 28, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "fbd9ea0655399ec55478";
+/******/ 	var hotCurrentHash = "ada18ad5d9364ada812a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1104,6 +1104,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *************************************
  * Count To
  *
+ * @param  {Number} fixed              - formats a number using fixed-point notation.
  * @param  {Number} from                 - the number the element should start at
  * @param  {Number} number               - the number the element should end at
  * @param  {Number} duration             - how long it should take to count between the target numbers
@@ -1117,8 +1118,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *************************************
  */
 (function ($) {
-  'use strict';
-
   $.fn.UixCountTo = function (options) {
     options = options || {};
     return $(this).each(function () {
@@ -1126,6 +1125,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       var settings = $.extend({}, $.fn.UixCountTo.defaults, {
         from: $(this).data('counter-start'),
         to: $(this).data('counter-number'),
+        fixed: $(this).data('counter-fixed'),
         speed: $(this).data('counter-duration'),
         refreshInterval: $(this).data('counter-refresh-interval'),
         dilimiter: $(this).data('counter-dilimiter'),
@@ -1172,7 +1172,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
 
       function render(value) {
-        var formattedValue = Number(value).toFixed();
+        var formattedValue = Number(value).toFixed(settings.fixed);
 
         if (settings.dilimiter && formattedValue > 0) {
           formattedValue = formattedValue.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
@@ -1190,6 +1190,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
 
   $.fn.UixCountTo.defaults = {
+    fixed: 0,
+    // formats a number using fixed-point notation.
     from: 0,
     // the number the element should start at
     number: 0,
@@ -2941,6 +2943,7 @@ if (typeof APP_ROOTPATH === 'undefined') {
 
 
 var browser = {
+  isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
   isAndroid: /(android)/i.test(navigator.userAgent),
   isPC: !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
   isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
@@ -4167,7 +4170,7 @@ function set_background_typeof(obj) { if (typeof Symbol === "function" && typeof
 var SET_BG = function (module, $, window, document) {
   if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
-  module.SET_BG.version = '0.0.4';
+  module.SET_BG.version = '0.0.5';
 
   module.SET_BG.documentReady = function ($) {
     var $window = $(window),
@@ -4205,7 +4208,9 @@ var SET_BG = function (module, $, window, document) {
             "size": "cover",
             "repeat": "no-repeat",
             "fill": false,
-            "parallax": 0
+            "parallax": 0,
+            "move": false // {"dir":"left","duration":"10s","easing":"linear","loop":true}
+
           };
         }
 
@@ -4215,15 +4220,67 @@ var SET_BG = function (module, $, window, document) {
               dataSize = config.size,
               dataRepeat = config.repeat,
               dataEasing = config.transition,
-              dataParallax = config.parallax;
+              dataParallax = config.parallax,
+              dataMove = config.move;
           if (set_background_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
           if (set_background_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
           if (set_background_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
-          if (set_background_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s'; //Using parallax
+          if (set_background_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s';
+          if (set_background_typeof(dataMove) === ( true ? "undefined" : undefined)) dataMove = false; //Using parallax
 
           if (dataParallax && set_background_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
             dataPos = dataPos.replace('top', '50%');
-          }
+          } //background animation
+
+
+          var moveAnim = 'none',
+              moveAnimLoop = 'infinite',
+              moveEasing = 'linear',
+              moveKeyframesTop = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
+              moveKeyframesBottom = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
+              moveKeyframesLeft = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
+              moveKeyframesRight = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
+
+          if (dataMove && Object.prototype.toString.call(dataMove) == '[object Object]') {
+            if (!dataMove.loop) moveAnimLoop = '1 forwards';
+            dataPos = '0 0';
+
+            switch (dataMove.dir) {
+              case 'top':
+                moveAnim = 'js-uix-cssanim--move-t ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+
+              case 'bottom':
+                moveAnim = 'js-uix-cssanim--move-b ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+
+              case 'left':
+                moveAnim = 'js-uix-cssanim--move-l ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+
+              case 'right':
+                moveAnim = 'js-uix-cssanim--move-r ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+            } //  CSS3 animation keyframe attributes inline
+
+
+            if ($('#js-uix-cssanim--move-t').length == 0) {
+              $('<style id="js-uix-cssanim--move-t">').text(moveKeyframesTop).appendTo('head');
+            }
+
+            if ($('#js-uix-cssanim--move-b').length == 0) {
+              $('<style id="js-uix-cssanim--move-b">').text(moveKeyframesBottom).appendTo('head');
+            }
+
+            if ($('#js-uix-cssanim--move-l').length == 0) {
+              $('<style id="js-uix-cssanim--move-l">').text(moveKeyframesLeft).appendTo('head');
+            }
+
+            if ($('#js-uix-cssanim--move-r').length == 0) {
+              $('<style id="js-uix-cssanim--move-r">').text(moveKeyframesRight).appendTo('head');
+            }
+          } //-----
+
 
           if (set_background_typeof(dataImg) != ( true ? "undefined" : undefined) && dataImg != '') {
             if (config.fill) {
@@ -4233,7 +4290,8 @@ var SET_BG = function (module, $, window, document) {
                   'background': 'url(' + dataImg + ') ' + dataRepeat + '',
                   'background-size': dataSize,
                   '-webkit-background-clip': 'text',
-                  '-webkit-text-fill-color': 'transparent'
+                  '-webkit-text-fill-color': 'transparent',
+                  'animation': moveAnim
                 });
               }
             } else {
@@ -4241,7 +4299,8 @@ var SET_BG = function (module, $, window, document) {
                 'background-image': 'url(' + dataImg + ')',
                 'background-position': dataPos,
                 'background-size': dataSize,
-                'background-repeat': dataRepeat
+                'background-repeat': dataRepeat,
+                'animation': moveAnim
               });
             } //Using parallax
 
@@ -14645,7 +14704,7 @@ function smooth_scrolling_page_js_typeof(obj) { if (typeof Symbol === "function"
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.3';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.4';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -14862,6 +14921,35 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
               }
             } //endif $.fn.UixTextEff
             //
+            //Counter
+
+
+            if ($.isFunction($.fn.UixCountTo)) {
+              var _counterIds = $el.data('counter-ids');
+
+              if (smooth_scrolling_page_js_typeof(_counterIds) !== ( true ? "undefined" : undefined)) {
+                _counterIds.forEach(function (element) {
+                  $(element).each(function () {
+                    $(this).UixCountTo();
+                  });
+                });
+              }
+            } //endif $.fn.UixCountTo
+            //
+            //Image transition
+
+
+            var _imgIds = $el.data('img-ids');
+
+            if (smooth_scrolling_page_js_typeof(_imgIds) !== ( true ? "undefined" : undefined)) {
+              _imgIds.forEach(function (element) {
+                $(element).each(function (index) {
+                  $(this).delay(120 * index).queue('fx', function () {
+                    $(this).addClass('is-active');
+                  });
+                });
+              });
+            } //
             //other effect
             //------------------
 

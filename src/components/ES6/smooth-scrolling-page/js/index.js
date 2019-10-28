@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.3';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.4';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -300,6 +300,42 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
                         }//endif $.fn.UixTextEff
 
+                        
+                        
+                        //
+                        //Counter
+                        if ( $.isFunction( $.fn.UixCountTo ) ) {
+
+                            var _counterIds = $el.data( 'counter-ids' );
+                            if ( typeof _counterIds !== typeof undefined ) {
+                                _counterIds.forEach( function( element ) {
+                                    $( element ).each( function()  {
+                                        $( this ).UixCountTo();
+                                    });
+                                });
+
+                            }
+
+                         }//endif $.fn.UixCountTo
+
+                        
+                        
+                        //
+                        //Image transition
+                        var _imgIds = $el.data( 'img-ids' );
+                        if ( typeof _imgIds !== typeof undefined ) {
+                            _imgIds.forEach( function( element ) {
+                                $( element ).each( function( index )  {
+                                    $( this ).delay( 120*index ).queue( 'fx', function() { 
+                                        $( this ).addClass( 'is-active' );
+                                    });
+                                });
+                            });
+
+                        } 
+                             
+                        
+                        
 
                         //
                         //other effect

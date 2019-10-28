@@ -2,7 +2,7 @@
 <html lang="en-US" dir="ltr">
 <head>
 	<meta charset="utf-8" />
-	<title>Ajax Page 2 - Content - Uix Kit</title>	
+	<title>Background Interaction - Uix Kit</title>	
 		<!-- Mobile Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -80,8 +80,7 @@
 </head>  
 
      
-  <body class="page uix-hidden-scrollbar">
-  
+  <body class="page">
   
   
           
@@ -121,7 +120,7 @@
     
         <!-- Header Area
         ============================================= -->      
-        <header class="uix-header__container uix-header__container--overlay">
+        <header class="uix-header__container">
             
              <div class="uix-header">
                  <div class="container">
@@ -424,94 +423,209 @@
              </div>
         
         </header>
-		
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+        
 		<main id="uix-maincontent">
 			
-			<!-- Section Navigation
-			============================================= --> 
-			<ol class="uix-menu-sidefixed"> 
-				<li><a href="ajax-content-page-1.html" data-ajax-page="true" data-index="0"><span>01</span><strong>Page 1</strong></a></li>
-				<li><a href="ajax-content-page-2.html" data-ajax-page="true" data-index="1"><span>02</span><strong>Page 2</strong></a></li>
-				<li><a href="ajax-content-page-3.html" data-ajax-page="true" data-index="2"><span>03</span><strong>Page 3</strong></a></li>
-				<li><a href="ajax-content-page-4.html" data-ajax-page="true" data-index="3"><span>04</span><strong>Page 4</strong></a></li>
-			</ol>
-
-			<!-- Page Container
-			============================================= --> 
-			<div class="uix-ajax-load__fullpage-container">
-
-				<div class="uix-ajax-load__loader"><span></span></div>
-
-				<section class="uix-height--100 is-mobile-still" style="background: #b5bdc8; background: linear-gradient(to bottom, #b5bdc8 0%,#28343b 100%);">
-
-					<!-- ajax container -->
-					<div class="ajax-container" data-ajax-method="POST" data-ajax-page-id="1">
-
-
-						<div class="js-uix-ajax-load__container">
-
-							<div class="uix-ajax-load__container">
-
-								<!-- Your Special Content Here
-								========================= -->
-
-								<div class="container uix-spacing--m">
-
-										<div class="row">
-											<div class="col-md-10 offset-md-1">
-
-
-													<div class="uix-entry__content uix-list uix-list--normal uix-table uix-table--bordered">
-
-														<h1>AJAX Content 2</h1>
-
-														<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-
-														<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-
-
-
-
-													</div>
-
-
-											</div>          
-
-
-										</div>
-										<!-- .row end -->       
-
-
-								</div>
-								<!-- .container end -->
-
-
-								<!-- ========================= -->
-
-
-							</div>
-							<!-- /.uix-ajax-load__container -->
-
-
-
+            
+            
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+                            <h3>Parallax Background</h3>
+                            <p>Use the <code>data-bg</code> attribute to set the background and parallax effect.</p>
+							<hr>
+							
+							
 						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+		
 
 
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-top">
+                
+				<div class="uix-relative" data-bg='{"src":"assets/images/demo/spiral-galaxy-1920x1080.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0.3}' style="height: 450px;">
+
+					<div class="uix-v-align--absolute uix-t-c">
+						<div class="row">
+							<div class="col-12">
+                                <h2>height: 450px</h2>
+							</div>
+						</div>
+						<!-- .row end -->
 					</div>
 
-				</section> 
 
 
-			</div>
-			<!-- /.uix-ajax-load__fullpage-container --> 	
+				</div>	
+			</section>   
 
 
-		
+
+            
+          
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+                            <h3>
+                                Background Text
+                            </h3>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+			
+			
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-t-c">
+                
+				<h1 class="uix-relative" data-bg='{"src":"assets/images/demo/cool-slider-1.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":true,"parallax":-0.3}' style="height: 150px;">
+                   Background-Clip Text 
+                </h1>	
+                
+			</section>   
+     
+            
+            
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+                            <h3>
+                                Movement Animation
+                            </h3>
+                            <p>Continuous position movement in different directions.</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+			
+			
+
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s">
+                
+				<div class="uix-relative" data-bg='{"src":"assets/images/demo/templates.jpg","size":"auto","repeat":"repeat","move":{"dir":"left","speed":"350","easing":"linear","loop":true}}' style="height: 450px;">
+
+                    <div class="uix-overlay uix-overlay--black uix-overlay--cover">
+                        <div class="uix-v-align--table">
+                            <div>
+                                <h2 class="uix-typo--color-white uix-t-c">height: 450px (Move infinitely to the left)</h2>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+				</div>	
+			</section>   
+            
+            
+			<section class="uix-spacing--s">
+                
+				<div class="uix-relative" data-bg='{"src":"assets/images/demo/templates.jpg","size":"auto","repeat":"repeat","move":{"dir":"right","speed":"350","easing":"linear","loop":true}}' style="height: 450px;">
+
+                    <div class="uix-overlay uix-overlay--black uix-overlay--cover">
+                        <div class="uix-v-align--table">
+                            <div>
+                                <h2 class="uix-typo--color-white uix-t-c">height: 450px (Move infinitely to the right)</h2>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+				</div>	
+			</section>   
+            
+            
+            
+			<section class="uix-spacing--s">
+                
+				<div class="uix-relative" data-bg='{"src":"assets/images/demo/templates.jpg","size":"auto","repeat":"repeat","move":{"dir":"top","speed":"350","easing":"linear","loop":true}}' style="height: 450px;">
+
+					<div class="uix-v-align--absolute uix-t-c">
+						<div class="row">
+							<div class="col-12">
+                                <h2 style="box-shadow: 0 5px 15px 0 rgba(0,0,0,.07), 0 15px 35px 0 rgba(50,50,93,.1); background: #fff; padding: 3rem; display: inline-block;">height: 450px (Move infinitely to the top)</h2>
+							</div>
+						</div>
+						<!-- .row end -->
+					</div>
+
+
+
+				</div>	
+			</section>   
+            
+            
+			<section class="uix-spacing--s">
+                
+				<div class="uix-relative" data-bg='{"src":"assets/images/demo/templates.jpg","size":"auto","repeat":"repeat","move":{"dir":"bottom","speed":"350","easing":"linear","loop":true}}' style="height: 450px;">
+
+					<div class="uix-v-align--absolute uix-t-c">
+						<div class="row">
+							<div class="col-12">
+                                <h2 style="box-shadow: 0 5px 15px 0 rgba(0,0,0,.07), 0 15px 35px 0 rgba(50,50,93,.1); background: #fff; padding: 3rem; display: inline-block;">height: 450px (Move infinitely to the bottom)</h2>
+							</div>
+						</div>
+						<!-- .row end -->
+					</div>
+
+
+
+				</div>	
+			</section>   
+                 
 			
 		</main>
-    
 
-		
+  
+			
+        
+
+            
                 <!-- Footer
         ============================================= -->    
         <footer class="uix-footer__container">
@@ -617,11 +731,4 @@
   </body>
 </html>
 
-
-
-  
-  
-   
-
-   
 

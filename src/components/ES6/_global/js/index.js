@@ -52,6 +52,7 @@ if ( typeof APP_ROOTPATH === 'undefined' ) {
  * @private
  */
 export const browser = {
+    isMobile  : /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
 	isAndroid : /(android)/i.test(navigator.userAgent),
 	isPC      : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
 	isSafari  : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */

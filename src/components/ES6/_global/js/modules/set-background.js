@@ -23,7 +23,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	
 	
 	module.SET_BG               = module.SET_BG || {};
-    module.SET_BG.version       = '0.0.4';
+    module.SET_BG.version       = '0.0.5';
 	module.SET_BG.documentReady = function( $ ) {
 
 
@@ -72,7 +72,8 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						"size"     : "cover",
 						"repeat"   : "no-repeat",
 						"fill"     : false,
-						"parallax" : 0
+						"parallax" : 0,
+                        "move"     : false  // {"dir":"left","duration":"10s","easing":"linear","loop":true}
 					};
 				}
 
@@ -83,12 +84,14 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						dataSize      = config.size,
 						dataRepeat    = config.repeat,
                         dataEasing    = config.transition,
-						dataParallax  = config.parallax;
+						dataParallax  = config.parallax,
+                        dataMove      = config.move;
 
 					if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
 					if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
 					if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
                     if ( typeof dataEasing === typeof undefined ) dataEasing = 'none 0s ease 0s';
+                    if ( typeof dataMove === typeof undefined ) dataMove = false;
 
 
 					//Using parallax
@@ -96,7 +99,68 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						dataPos = dataPos.replace( 'top', '50%' );
 					}
                
+                    
+                    //background animation
+                    var moveAnim             = 'none',
+                        moveAnimLoop         = 'infinite',
+                        moveEasing           = 'linear',
+                        moveKeyframesTop     = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
+                        moveKeyframesBottom  = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
+                        moveKeyframesLeft    = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
+                        moveKeyframesRight   = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
+
+
+                    if ( dataMove && Object.prototype.toString.call( dataMove )=='[object Object]' ) {
+
+                        if ( ! dataMove.loop ) moveAnimLoop = '1 forwards';
+
+                        dataPos = '0 0';
+
+
+                        switch (dataMove.dir) {
+                            case 'top':
+                                moveAnim = 'js-uix-cssanim--move-t '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;
+                                break;
+                            case 'bottom':
+                                moveAnim = 'js-uix-cssanim--move-b '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;        
+                                break;
+                            case 'left':
+                                moveAnim = 'js-uix-cssanim--move-l '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;    
+                                break;
+                            case 'right':
+                                moveAnim = 'js-uix-cssanim--move-r '+parseInt(dataMove.speed)+'s '+moveEasing+' '+ moveAnimLoop;            
+                                break;
+                        }
+
+
+                        //  CSS3 animation keyframe attributes inline
+                        if ( $( '#js-uix-cssanim--move-t' ).length == 0 ) {
+                            $( '<style id="js-uix-cssanim--move-t">' )
+                                .text( moveKeyframesTop )
+                                .appendTo( 'head' );   
+                        }
+                        if ( $( '#js-uix-cssanim--move-b' ).length == 0 ) {
+                            $( '<style id="js-uix-cssanim--move-b">' )
+                                .text( moveKeyframesBottom )
+                                .appendTo( 'head' );   
+                        }
+                        if ( $( '#js-uix-cssanim--move-l' ).length == 0 ) {
+                            $( '<style id="js-uix-cssanim--move-l">' )
+                                .text( moveKeyframesLeft )
+                                .appendTo( 'head' );   
+                        }
+                        if ( $( '#js-uix-cssanim--move-r' ).length == 0 ) {
+                            $( '<style id="js-uix-cssanim--move-r">' )
+                                .text( moveKeyframesRight )
+                                .appendTo( 'head' );   
+                        }          
+
+
+                    }
+
 					
+                    
+                    //-----
 					if ( typeof dataImg != typeof undefined && dataImg != '' ) {
 
 						if ( config.fill ) {
@@ -107,19 +171,26 @@ export const SET_BG = ( ( module, $, window, document ) => {
 									'background-size'          : dataSize,
 									'-webkit-background-clip'  : 'text',
 									'-webkit-text-fill-color'  : 'transparent',
+                                    'animation'                : moveAnim
 								} );	
 
 							}
 
 
 						} else {
-
+                            
 							$this.css( {
 								'background-image'    : 'url('+dataImg+')',
 								'background-position' : dataPos,
 								'background-size'     : dataSize,
-								'background-repeat'   : dataRepeat
+								'background-repeat'   : dataRepeat,
+                                'animation'           : moveAnim
 							} );	
+                            
+                            
+                            
+
+                            
 						}
 
 
