@@ -22,15 +22,19 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.0.9';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.0';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
+        
+        //all images from pages
+        var sources = []; 
+        
 		
 		/* Need to set it as a global variable for history */
 		var ajaxConfig   = {
 					"container" :"#my-ajax-demo-push-container",
 					"target"    :"#my-ajax-demo-target-container",
-					"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+					"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading <em id=\"app-loading\" data-txt=\"{progress}%\"></em>...</span></div>",
 					"method"    :"POST"
 				},
 			thisPageTitle = document.title;
@@ -168,6 +172,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 				},
 				beforeSend: function() {
 
+
 					TweenMax.to( container.find( '.ajax-content-loader' ), 0.3, {
 						css: {
 							opacity    : 1
@@ -179,7 +184,10 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function() {
 
 						
-						
+                        //loading text from HTML
+                        $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, 0) );
+
+						//
 						TweenMax.set( container.find( '.ajax-content-loader' ), {
 							css         : {
 								'display' : 'block'
@@ -198,8 +206,79 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
             .done( function (response) { 
                 //A function to be called if the request succeeds
                 var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+                
+                
+                //Display loading image when AJAX call is in progress
+                $( response ).find( 'img' ).each(function() {
+                    sources.push(
+                        {
+                            "url": this.src,
+                            "id": 'img-' + UixGUID.create(),
+                            "type": 'img'
+                        }
+                    );
+                }); 
 
-                ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+
+                //Execute after all images have loaded
+                var per;
+                var perInit = 1;
+                if ( sources.length == 0 ) {
+                    per = 100;
+                    
+                    //loading text from HTML
+                    $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+                }
+                
+                var loadImages = function() {
+                    var promises = [];
+
+                    for (var i = 0; i < sources.length; i++) {
+                        promises.push(new Promise(function(resolve, reject) {
+                            var img = document.createElement("img");
+                            img.crossOrigin = "anonymous";
+                            img.src = sources[i].url;
+
+                            img.onload = function(image) {
+                                return resolve( image ) ;
+                            };
+                        }).then( textureLoaded ));
+                    }
+
+                    return Promise.all(promises);
+                };
+                
+                
+                var textureLoaded = function(image) {
+                    var imgSrc = image.path[0].currentSrc;
+                    
+
+                    //loading
+                    per = parseInt( 100 * ( perInit / sources.length ) );
+
+                    console.log( 'progress: ' + per + '%' );
+
+                    if ( isNaN( per ) ) per = 100;  
+                    
+                    //loading text from HTML
+                    $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+
+                    var texture = null;
+                    
+                    perInit++;
+                    return per;
+                };
+
+
+                //images loaded
+                //Must be placed behind the loadImages()
+                loadImages().then( function( images ) {
+                    ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+                });
+  
+                
+
+                
 
             })
             .fail( function (jqXHR, textStatus, errorThrown) { 

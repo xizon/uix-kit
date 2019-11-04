@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.9.8
+ * ## Version             :  3.9.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 28, 2019
+ * ## Last Update         :  November 4, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ada18ad5d9364ada812a";
+/******/ 	var hotCurrentHash = "e81efbedfdf74fa50d1e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -7851,14 +7851,17 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.0.9';
+  module.AJAX_PUSH_CONTENT.version = '0.1.0';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
+    //all images from pages
+    var sources = [];
     /* Need to set it as a global variable for history */
+
     var ajaxConfig = {
       "container": "#my-ajax-demo-push-container",
       "target": "#my-ajax-demo-target-container",
-      "loading": "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+      "loading": "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading <em id=\"app-loading\" data-txt=\"{progress}%\"></em>...</span></div>",
       "method": "POST"
     },
         thisPageTitle = document.title; //Click event
@@ -7958,6 +7961,9 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             ease: Power2.easeOut
           });
           container.html('<div class="ajax-content-loader">' + loading + '</div>').promise().done(function () {
+            //loading text from HTML
+            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, 0)); //
+
             TweenMax.set(container.find('.ajax-content-loader'), {
               css: {
                 'display': 'block'
@@ -7972,8 +7978,61 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         }
       }).done(function (response) {
         //A function to be called if the request succeeds
-        var pushContent = !target ? '' : $(response).find(target).html();
-        ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+        var pushContent = !target ? '' : $(response).find(target).html(); //Display loading image when AJAX call is in progress
+
+        $(response).find('img').each(function () {
+          sources.push({
+            "url": this.src,
+            "id": 'img-' + UixGUID.create(),
+            "type": 'img'
+          });
+        }); //Execute after all images have loaded
+
+        var per;
+        var perInit = 1;
+
+        if (sources.length == 0) {
+          per = 100; //loading text from HTML
+
+          $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+        }
+
+        var loadImages = function loadImages() {
+          var promises = [];
+
+          for (var i = 0; i < sources.length; i++) {
+            promises.push(new Promise(function (resolve, reject) {
+              var img = document.createElement("img");
+              img.crossOrigin = "anonymous";
+              img.src = sources[i].url;
+
+              img.onload = function (image) {
+                return resolve(image);
+              };
+            }).then(textureLoaded));
+          }
+
+          return Promise.all(promises);
+        };
+
+        var textureLoaded = function textureLoaded(image) {
+          var imgSrc = image.path[0].currentSrc; //loading
+
+          per = parseInt(100 * (perInit / sources.length));
+          console.log('progress: ' + per + '%');
+          if (isNaN(per)) per = 100; //loading text from HTML
+
+          $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+          var texture = null;
+          perInit++;
+          return per;
+        }; //images loaded
+        //Must be placed behind the loadImages()
+
+
+        loadImages().then(function (images) {
+          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+        });
       }).fail(function (jqXHR, textStatus, errorThrown) {
         window.location.href = url;
       });
@@ -8047,12 +8106,14 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.0';
+  module.AJAX_PAGE_LOADER.version = '0.1.1';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
         windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight; //Determine the direction of a jQuery scroll event
+        windowHeight = window.innerHeight; //all images from pages
+
+    var sources = []; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
     var lastAnimation = 0,
@@ -8258,6 +8319,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             action: 'load_singlepages_ajax_content'
           },
           beforeSend: function beforeSend() {
+            //loading text from HTML
+            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, 0)); //
+
             TweenMax.set('.uix-ajax-load__loader', {
               css: {
                 'display': 'block'
@@ -8271,7 +8335,60 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           }
         }).done(function (response) {
           //A function to be called if the request succeeds
-          ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+          //Display loading image when AJAX call is in progress
+          $(response).find('img').each(function () {
+            sources.push({
+              "url": this.src,
+              "id": 'img-' + UixGUID.create(),
+              "type": 'img'
+            });
+          }); //Execute after all images have loaded
+
+          var per;
+          var perInit = 1;
+
+          if (sources.length == 0) {
+            per = 100; //loading text from HTML
+
+            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+          }
+
+          var loadImages = function loadImages() {
+            var promises = [];
+
+            for (var i = 0; i < sources.length; i++) {
+              promises.push(new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.crossOrigin = "anonymous";
+                img.src = sources[i].url;
+
+                img.onload = function (image) {
+                  return resolve(image);
+                };
+              }).then(textureLoaded));
+            }
+
+            return Promise.all(promises);
+          };
+
+          var textureLoaded = function textureLoaded(image) {
+            var imgSrc = image.path[0].currentSrc; //loading
+
+            per = parseInt(100 * (perInit / sources.length));
+            console.log('progress: ' + per + '%');
+            if (isNaN(per)) per = 100; //loading text from HTML
+
+            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+            var texture = null;
+            perInit++;
+            return per;
+          }; //images loaded
+          //Must be placed behind the loadImages()
+
+
+          loadImages().then(function (images) {
+            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+          });
         }).fail(function (jqXHR, textStatus, errorThrown) {
           window.location.href = url;
         });

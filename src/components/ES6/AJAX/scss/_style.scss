@@ -36,6 +36,15 @@
 	z-index: 99999;
 	display: none;
 	opacity: 0;
+    text-align: center;
+    
+    > em {
+        position: absolute;
+        top: calc(50% - 10px);
+        margin-left: -15px;
+        font-size: 0.75rem;
+        
+    }
 
 
 	> span {

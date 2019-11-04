@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 3.9.9 (November 4, 2019) =
+
+* Tweak: Increase the preloading progress of images when using AJAX requests to load new pages.
+
 
 #### = 3.9.8 (October 26, 2019) =
 
