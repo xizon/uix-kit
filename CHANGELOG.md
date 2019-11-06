@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 4.0.0 (November 6, 2019) =
+
+* Tweak: When the module is added or removed, the webpack scaffold resolution time will increase or decrease.
+
+
 #### = 3.9.9 (November 4, 2019) =
 
 * Tweak: Increase the preloading progress of images when using AJAX requests to load new pages.
