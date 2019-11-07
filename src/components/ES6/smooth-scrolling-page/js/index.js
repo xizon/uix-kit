@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.4';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.5';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -149,15 +149,44 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
 
                 //
+                //-------------------------------------	
                 console.log( 'scrollProgress: ' + scrollProgress );
+                
+                
+                
+                // Transparency changes when scrolling
+                //-------------------------------------	
+                TweenMax.set( '#app-demo-element1',  {
+                    alpha: elOpacity
+                }); 
+
+                
+                // Triggered when scrolling to an element position
+                //-------------------------------------	
+                if ( $( '#app-demo-element2' ).length > 0 ) {
+                    if ( parseFloat( scrollTop + windowHeight ) > $( '#app-demo-element2' ).offset().top ) {
+
+                        var elStart    = parseInt( $( '#app-btn1' ).offset().top - scrollTop - windowHeight ),// > 0
+                            elProgress = Math.abs( elStart / windowHeight );
+
+                        TweenMax.set( '#app-demo-element2', {
+                            x: elProgress * 150
+                        });         
+                    }
+     
+                }// endif $( '#app-demo-element2' ).length
+
+                    
+                
+                
 
             }//endif $targetEl
 
             
             
             //----------------------------------------------------------------------------------
-            //--------------------------------- Scrollspy Animate -------------------------------	
-            //----------------------------------------------------------------------------------   
+            //--------------------------------- Scroll Reveal  -------------------------------	
+            //----------------------------------------------------------------------------------  
             /*
              * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":0.9,"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
             */    
