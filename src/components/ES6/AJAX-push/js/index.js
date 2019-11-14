@@ -22,12 +22,15 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.0';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.1';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
         
         //all images from pages
         var sources = []; 
+        
+        //Added timer to prevent page loading errors for a long time
+        var timeClockInit; 
         
 		
 		/* Need to set it as a global variable for history */
@@ -209,6 +212,12 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 
                 
                 //Display loading image when AJAX call is in progress
+                
+                
+                //Remove existing images
+                sources = [];
+
+                //Push all images from page
                 $( response ).find( 'img' ).each(function() {
                     sources.push(
                         {
@@ -269,12 +278,36 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                     return per;
                 };
 
+                
+                var func = function() {
+                    ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+                };
+
 
                 //images loaded
                 //Must be placed behind the loadImages()
                 loadImages().then( function( images ) {
-                    ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+                    clearInterval( timeClockInit );
+                    func();
                 });
+                
+                
+            
+                //Calculating page load time
+                var timeLimit = 10,
+                    timeStart = new Date().getTime();
+
+                timeClockInit = setInterval( function() {
+
+                    //Converting milliseconds to minutes and seconds
+                    var _time = (new Date().getTime() - timeStart) / 1000;
+
+                    if ( _time >= timeLimit ) {
+                        console.log( 'Page load timeout!' );
+                        clearInterval( timeClockInit );
+                        func();
+                    }    
+                }, 500 );
   
                 
 

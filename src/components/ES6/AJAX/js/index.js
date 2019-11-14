@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.1';
+    module.AJAX_PAGE_LOADER.version       = '0.1.2';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -36,6 +36,8 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
         //all images from pages
         var sources = []; 
 
+        //Added timer to prevent page loading errors for a long time
+        var timeClockInit;   
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
@@ -329,6 +331,11 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     
                     //A function to be called if the request succeeds
                     //Display loading image when AJAX call is in progress
+                    
+                    //Remove existing images
+                    sources = [];
+
+                    //Push all images from page
                     $( response ).find( 'img' ).each(function() {
                         sources.push(
                             {
@@ -390,13 +397,37 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     };
 
 
+                    var func = function() {
+                        ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() ); 
+                    };
+
+
                     //images loaded
                     //Must be placed behind the loadImages()
                     loadImages().then( function( images ) {
-                       ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );  
+                        clearInterval( timeClockInit );
+                        func();
                     });
-        
-                    
+
+
+
+                    //Calculating page load time
+                    var timeLimit = 10,
+                        timeStart = new Date().getTime();
+
+                    timeClockInit = setInterval( function() {
+
+                        //Converting milliseconds to minutes and seconds
+                        var _time = (new Date().getTime() - timeStart) / 1000;
+
+                        if ( _time >= timeLimit ) {
+                            console.log( 'Page load timeout!' );
+                            clearInterval( timeClockInit );
+                            func();
+                        }    
+                    }, 500 );
+
+                  
                     
                 })
                 .fail( function (jqXHR, textStatus, errorThrown) { 
