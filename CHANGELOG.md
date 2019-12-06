@@ -4,6 +4,8 @@
 #### = 4.0.1 (December 6, 2019) =
 
 * Tweak: Upgraded three.js to the latest version of r110.
+* Tweak: Upgrade serialize-javascript to version 2.1.1.
+
 
 
 #### = 4.0.0 (November 6, 2019) =
