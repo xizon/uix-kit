@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.0
+ * ## Version             :  4.0.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 6, 2019
+ * ## Last Update         :  December 6, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "dc0011e77845d195c010";
+/******/ 	var hotCurrentHash = "83e42360b3ef7a9887c5";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -7851,11 +7851,13 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.0';
+  module.AJAX_PUSH_CONTENT.version = '0.1.1';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     //all images from pages
-    var sources = [];
+    var sources = []; //Added timer to prevent page loading errors for a long time
+
+    var timeClockInit;
     /* Need to set it as a global variable for history */
 
     var ajaxConfig = {
@@ -7979,6 +7981,9 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
       }).done(function (response) {
         //A function to be called if the request succeeds
         var pushContent = !target ? '' : $(response).find(target).html(); //Display loading image when AJAX call is in progress
+        //Remove existing images
+
+        sources = []; //Push all images from page
 
         $(response).find('img').each(function () {
           sources.push({
@@ -8026,13 +8031,31 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           var texture = null;
           perInit++;
           return per;
+        };
+
+        var func = function func() {
+          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
         }; //images loaded
         //Must be placed behind the loadImages()
 
 
         loadImages().then(function (images) {
-          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
-        });
+          clearInterval(timeClockInit);
+          func();
+        }); //Calculating page load time
+
+        var timeLimit = 10,
+            timeStart = new Date().getTime();
+        timeClockInit = setInterval(function () {
+          //Converting milliseconds to minutes and seconds
+          var _time = (new Date().getTime() - timeStart) / 1000;
+
+          if (_time >= timeLimit) {
+            console.log('Page load timeout!');
+            clearInterval(timeClockInit);
+            func();
+          }
+        }, 500);
       }).fail(function (jqXHR, textStatus, errorThrown) {
         window.location.href = url;
       });
@@ -8106,14 +8129,16 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.1';
+  module.AJAX_PAGE_LOADER.version = '0.1.2';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //all images from pages
 
-    var sources = []; //Determine the direction of a jQuery scroll event
+    var sources = []; //Added timer to prevent page loading errors for a long time
+
+    var timeClockInit; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
     var lastAnimation = 0,
@@ -8336,6 +8361,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         }).done(function (response) {
           //A function to be called if the request succeeds
           //Display loading image when AJAX call is in progress
+          //Remove existing images
+          sources = []; //Push all images from page
+
           $(response).find('img').each(function () {
             sources.push({
               "url": this.src,
@@ -8382,13 +8410,31 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             var texture = null;
             perInit++;
             return per;
+          };
+
+          var func = function func() {
+            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
           }; //images loaded
           //Must be placed behind the loadImages()
 
 
           loadImages().then(function (images) {
-            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
-          });
+            clearInterval(timeClockInit);
+            func();
+          }); //Calculating page load time
+
+          var timeLimit = 10,
+              timeStart = new Date().getTime();
+          timeClockInit = setInterval(function () {
+            //Converting milliseconds to minutes and seconds
+            var _time = (new Date().getTime() - timeStart) / 1000;
+
+            if (_time >= timeLimit) {
+              console.log('Page load timeout!');
+              clearInterval(timeClockInit);
+              func();
+            }
+          }, 500);
         }).fail(function (jqXHR, textStatus, errorThrown) {
           window.location.href = url;
         });
@@ -14821,7 +14867,7 @@ function smooth_scrolling_page_js_typeof(obj) { if (typeof Symbol === "function"
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.4';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.5';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -14916,13 +14962,32 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
         } else if (scrollTop >= elHeight) {
           $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
         } //
+        //-------------------------------------	
 
 
-        console.log('scrollProgress: ' + scrollProgress);
+        console.log('scrollProgress: ' + scrollProgress); // Transparency changes when scrolling
+        //-------------------------------------	
+
+        TweenMax.set('#app-demo-element1', {
+          alpha: elOpacity
+        }); // Triggered when scrolling to an element position
+        //-------------------------------------	
+
+        if ($('#app-demo-element2').length > 0) {
+          if (parseFloat(scrollTop + windowHeight) > $('#app-demo-element2').offset().top) {
+            var elStart = parseInt($('#app-btn1').offset().top - scrollTop - windowHeight),
+                // > 0
+            elProgress = Math.abs(elStart / windowHeight);
+            TweenMax.set('#app-demo-element2', {
+              x: elProgress * 150
+            });
+          }
+        } // endif $( '#app-demo-element2' ).length
+
       } //endif $targetEl
       //----------------------------------------------------------------------------------
-      //--------------------------------- Scrollspy Animate -------------------------------	
-      //----------------------------------------------------------------------------------   
+      //--------------------------------- Scroll Reveal  -------------------------------	
+      //----------------------------------------------------------------------------------  
 
       /*
        * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":0.9,"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
@@ -33451,7 +33516,7 @@ THREE.GLTFLoader = ( function () {
 			if ( !threeAttributeName ) continue;
 			if ( threeAttributeName in geometry.attributes ) continue;
 
-			geometry.addAttribute( threeAttributeName, bufferAttribute );
+			geometry.setAttribute( threeAttributeName, bufferAttribute );
 
 		}
 
@@ -33577,7 +33642,7 @@ THREE.GLTFLoader = ( function () {
 					geometry.name = baseGeometry.name;
 					geometry.userData = baseGeometry.userData;
 
-					for ( var key in baseGeometry.attributes ) geometry.addAttribute( key, baseGeometry.attributes[ key ] );
+					for ( var key in baseGeometry.attributes ) geometry.setAttribute( key, baseGeometry.attributes[ key ] );
 					for ( var key in baseGeometry.morphAttributes ) geometry.morphAttributes[ key ] = baseGeometry.morphAttributes[ key ];
 
 					var indices = [];
@@ -33840,7 +33905,7 @@ THREE.GLTFLoader = ( function () {
 						if ( material.aoMap && geometry.attributes.uv2 === undefined && geometry.attributes.uv !== undefined ) {
 
 							console.log( 'THREE.GLTFLoader: Duplicating UVs to support aoMap.' );
-							geometry.addAttribute( 'uv2', new THREE.BufferAttribute( geometry.attributes.uv.array, 2 ) );
+							geometry.setAttribute( 'uv2', new THREE.BufferAttribute( geometry.attributes.uv.array, 2 ) );
 
 						}
 
@@ -35549,11 +35614,11 @@ THREE.OBJLoader = ( function () {
 
 				var buffergeometry = new THREE.BufferGeometry();
 
-				buffergeometry.addAttribute( 'position', new THREE.Float32BufferAttribute( geometry.vertices, 3 ) );
+				buffergeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( geometry.vertices, 3 ) );
 
 				if ( geometry.normals.length > 0 ) {
 
-					buffergeometry.addAttribute( 'normal', new THREE.Float32BufferAttribute( geometry.normals, 3 ) );
+					buffergeometry.setAttribute( 'normal', new THREE.Float32BufferAttribute( geometry.normals, 3 ) );
 
 				} else {
 
@@ -35564,13 +35629,13 @@ THREE.OBJLoader = ( function () {
 				if ( geometry.colors.length > 0 ) {
 
 					hasVertexColors = true;
-					buffergeometry.addAttribute( 'color', new THREE.Float32BufferAttribute( geometry.colors, 3 ) );
+					buffergeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( geometry.colors, 3 ) );
 
 				}
 
 				if ( geometry.uvs.length > 0 ) {
 
-					buffergeometry.addAttribute( 'uv', new THREE.Float32BufferAttribute( geometry.uvs, 2 ) );
+					buffergeometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( geometry.uvs, 2 ) );
 
 				}
 
@@ -38170,13 +38235,13 @@ MeshLine.prototype.process = function() {
 		this.attributes.index.needsUpdate = true;
     }
 
-	this.geometry.addAttribute( 'position', this.attributes.position );
-	this.geometry.addAttribute( 'previous', this.attributes.previous );
-	this.geometry.addAttribute( 'next', this.attributes.next );
-	this.geometry.addAttribute( 'side', this.attributes.side );
-	this.geometry.addAttribute( 'width', this.attributes.width );
-	this.geometry.addAttribute( 'uv', this.attributes.uv );
-	this.geometry.addAttribute( 'counters', this.attributes.counters );
+	this.geometry.setAttribute( 'position', this.attributes.position );
+	this.geometry.setAttribute( 'previous', this.attributes.previous );
+	this.geometry.setAttribute( 'next', this.attributes.next );
+	this.geometry.setAttribute( 'side', this.attributes.side );
+	this.geometry.setAttribute( 'width', this.attributes.width );
+	this.geometry.setAttribute( 'uv', this.attributes.uv );
+	this.geometry.setAttribute( 'counters', this.attributes.counters );
 
 	this.geometry.setIndex( this.attributes.index );
 

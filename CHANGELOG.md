@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 4.0.1 (December 6, 2019) =
+
+* Tweak: Upgraded three.js to the latest version of r110.
+
+
 #### = 4.0.0 (November 6, 2019) =
 
 * Tweak: When the module is added or removed, the webpack scaffold resolution time will increase or decrease.
