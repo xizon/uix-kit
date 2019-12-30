@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 4.0.2 (December 29, 2019) =
+
+* Tweak: Change the viewport property of Smooth Scrolling Page to percent.
+* Tweak: Optimized click event of trigger for One Page module.
+
+
 #### = 4.0.1 (December 6, 2019) =
 
 * Tweak: Upgraded three.js to the latest version of r110.

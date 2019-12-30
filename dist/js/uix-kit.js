@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.1
+ * ## Version             :  4.0.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 6, 2019
+ * ## Last Update         :  December 30, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "83e42360b3ef7a9887c5";
+/******/ 	var hotCurrentHash = "9eaa543f7f8813cf0e31";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3426,6 +3426,8 @@ window.MAIN = null;
       if (UixModuleInstance.THREE_BACKGROUND) UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
 
       if (UixModuleInstance.THREE_CAROUSEL) UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
+
+      if (UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER) UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady($); //3D Liquid Scrollspy Slider
       //---- Prevent overlay clicks on asynchronous requests
       //---- Commonly used for AJAX modules that are clicked by button
       //Scroll Reveal
@@ -13091,7 +13093,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.5';
+  module.ONEPAGE.version = '0.0.6';
 
   module.ONEPAGE.documentReady = function ($) {
     var $window = $(window),
@@ -13107,7 +13109,9 @@ var ONEPAGE = function (module, $, window, document) {
     $sectionsContainer = $('.uix-normal-load__onepage-container'),
         $sections = $sectionsContainer.find('[data-highlight-section]'),
         sectionTotal = $sections.length,
-        topSectionSpacing = 0,
+
+    /* topSpacing         = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ), //with margin */
+    topSpacing = 0,
         $primaryMenu = $('.uix-menu'),
         $sidefixedMenu = $('.uix-menu-sidefixed'); //Prevent this module from loading in other pages
 
@@ -13218,7 +13222,7 @@ var ONEPAGE = function (module, $, window, document) {
         if ($next.length > 0) {
           TweenMax.to(window, animationTime / 1000, {
             scrollTo: {
-              y: $next.offset().top - topSectionSpacing,
+              y: $next.offset().top - topSpacing,
               autoKill: false
             },
             ease: Power2.easeOut,
@@ -13300,7 +13304,7 @@ var ONEPAGE = function (module, $, window, document) {
 
 
     function goPageSection(menuObj) {
-      menuObj.find('li > a').on('click', function (e) {
+      menuObj.find('li > a').off('click.ONEPAGE').on('click.ONEPAGE', function (e) {
         e.preventDefault();
         if ($(this).parent().hasClass('is-active')) return false;
         moveTo($sectionsContainer, false, $(this).parent('li').index() + 1);
@@ -13311,7 +13315,7 @@ var ONEPAGE = function (module, $, window, document) {
         navMaxTop = parseFloat($(document).height() - $('.uix-footer__container').height()) - windowHeight / 3;
     $window.on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
       var scrollTop = $(this).scrollTop(),
-          spyTop = parseFloat(scrollTop + topSectionSpacing),
+          spyTop = parseFloat(scrollTop + topSpacing),
           minTop = $('[data-highlight-section="true"]').first().offset().top,
           maxTop = $('[data-highlight-section="true"]').last().offset().top + $('[data-highlight-section="true"]').last().height();
       $('[data-highlight-section="true"]').each(function () {
@@ -13430,7 +13434,7 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
 var ONEPAGE2 = function (module, $, window, document) {
   if (window.ONEPAGE2 === null) return false;
   module.ONEPAGE2 = module.ONEPAGE2 || {};
-  module.ONEPAGE2.version = '0.0.4';
+  module.ONEPAGE2.version = '0.0.5';
 
   module.ONEPAGE2.documentReady = function ($) {
     var $window = $(window),
@@ -13446,7 +13450,6 @@ var ONEPAGE2 = function (module, $, window, document) {
     $sectionsContainer = $('.uix-normal-load__onepage-container2'),
         $sections = $sectionsContainer.find('[data-highlight-section]'),
         sectionTotal = $sections.length,
-        topSectionSpacing = 0,
         $primaryMenu = $('.uix-menu'),
         $sidefixedMenu = $('.uix-menu-sidefixed'); //Prevent this module from loading in other pages
 
@@ -13680,7 +13683,7 @@ var ONEPAGE2 = function (module, $, window, document) {
 
 
     function goPageSection(menuObj) {
-      menuObj.find('li > a').on('click', function (e) {
+      menuObj.find('li > a').off('click.ONEPAGE2').on('click.ONEPAGE2', function (e) {
         e.preventDefault();
         if ($(this).parent().hasClass('is-active')) return false;
         var dir = 'down';
@@ -14867,7 +14870,7 @@ function smooth_scrolling_page_js_typeof(obj) { if (typeof Symbol === "function"
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.5';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.6';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -14935,7 +14938,10 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       }
 
       TweenMax.set(scroller.target, {
-        y: -scroller.y
+        y: -scroller.y,
+        onComplete: function onComplete() {//-----Spy scrollTop and elements of page
+          //your code here...
+        }
       });
       requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
       // Custom Functions
@@ -14990,7 +14996,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       //----------------------------------------------------------------------------------  
 
       /*
-       * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":0.9,"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
+       * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":"90%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
       */
 
 
@@ -15013,7 +15019,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
             "duration": 0.8,
             "delay": 0,
             "infinite": false,
-            "viewport": 0.5 //A percentage of the viewport's height.
+            "viewport": '90%' //A percentage of the viewport's height.
 
           };
         } //get attributes to tweenMax
@@ -15027,11 +15033,13 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
             infinite = config.infinite; //A percentage of the viewport's height.
 
         var viewport = config.viewport;
-        if (smooth_scrolling_page_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = 0.9;
+        if (smooth_scrolling_page_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = '90%';
         if (smooth_scrolling_page_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
         if (smooth_scrolling_page_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
         if (smooth_scrolling_page_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
-        if (smooth_scrolling_page_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Return a value
+        if (smooth_scrolling_page_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Conversion between percentage and decimal
+
+        viewport = parseFloat(viewport) / 100.0; //Return a value
 
         if (type == 'viewport') return viewport;
         if (type == 'delay') return myDelay;

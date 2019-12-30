@@ -30,7 +30,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE2               = module.ONEPAGE2 || {};
-    module.ONEPAGE2.version       = '0.0.4';
+    module.ONEPAGE2.version       = '0.0.5';
     module.ONEPAGE2.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -46,7 +46,6 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 			$sectionsContainer = $( '.uix-normal-load__onepage-container2' ),
 			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
 			$primaryMenu       = $( '.uix-menu' ),
 			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
@@ -358,7 +357,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
         function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
+			menuObj.find( 'li > a' ).off( 'click.ONEPAGE2' ).on( 'click.ONEPAGE2', function(e) {
 				e.preventDefault();
 				
 				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;

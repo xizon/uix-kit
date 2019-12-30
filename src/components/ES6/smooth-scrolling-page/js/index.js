@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.5';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.6';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -109,7 +109,16 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             }
 
             TweenMax.set(scroller.target, {
-                y: -scroller.y
+                y: -scroller.y,
+                onComplete: function() {
+                        
+                    //-----Spy scrollTop and elements of page
+                    
+                    //your code here...
+                    
+                    
+                    
+                }
             });
 
 
@@ -188,7 +197,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             //--------------------------------- Scroll Reveal  -------------------------------	
             //----------------------------------------------------------------------------------  
             /*
-             * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":0.9,"from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
+             * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":"90%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
             */    
             
             var $scrollRevealElements = $( '[data-scrollspy-anim]' );
@@ -205,7 +214,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                             "duration" : 0.8,
                             "delay"    : 0,
                             "infinite" : false,
-                            "viewport" : 0.5 //A percentage of the viewport's height.
+                            "viewport" : '90%' //A percentage of the viewport's height.
                         };
                     }
 
@@ -221,13 +230,18 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                     //A percentage of the viewport's height.
                     var viewport = config.viewport;
 
-                    if ( typeof viewport === typeof undefined ) viewport = 0.9;
+                    if ( typeof viewport === typeof undefined ) viewport = '90%';
                     if ( typeof myEase === typeof undefined ) myEase = 'Power2.easeOut';
                     if ( typeof myDelay === typeof undefined ) myDelay = 0;
                     if ( typeof myDuration === typeof undefined ) myDuration = 0.4;
                     if ( typeof infinite === typeof undefined ) infinite = false;
 
 
+                    //Conversion between percentage and decimal
+                    viewport = parseFloat( viewport ) / 100.0;
+
+
+                
                     //Return a value
                     if ( type == 'viewport' ) return viewport;
                     if ( type == 'delay' ) return myDelay;

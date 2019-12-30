@@ -29,7 +29,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE               = module.ONEPAGE || {};
-    module.ONEPAGE.version       = '0.0.5';
+    module.ONEPAGE.version       = '0.0.6';
     module.ONEPAGE.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -45,7 +45,8 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 			$sectionsContainer = $( '.uix-normal-load__onepage-container' ),
 			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
+            /* topSpacing         = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ), //with margin */
+			topSpacing         = 0,
 			$primaryMenu       = $( '.uix-menu' ),
 			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
@@ -186,7 +187,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 				if ( $next.length > 0 ) {
 					TweenMax.to( window, animationTime/1000, {
 						scrollTo: {
-							y: $next.offset().top - topSectionSpacing,
+							y: $next.offset().top - topSpacing,
 							autoKill : false
 						},
 						ease: Power2.easeOut,
@@ -289,11 +290,10 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
         function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
+			menuObj.find( 'li > a' ).off( 'click.ONEPAGE' ).on( 'click.ONEPAGE', function(e) {
 				e.preventDefault();
 				
 				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;
-				
 				
 				moveTo( $sectionsContainer, false, $( this ).parent( 'li' ).index() + 1 );
 			});	
@@ -307,7 +307,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 
 		$window.on( 'scroll.ONEPAGE touchmove.ONEPAGE', function() {
 			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSectionSpacing ),
+				spyTop    = parseFloat( scrollTop + topSpacing ),
 				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
 				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
 

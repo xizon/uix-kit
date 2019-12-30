@@ -100,6 +100,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.MULTI_ITEMS_CAROUSEL )         UixModuleInstance.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
 			if ( UixModuleInstance.THREE_BACKGROUND )             UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
 			if ( UixModuleInstance.THREE_CAROUSEL )               UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
+            if ( UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER ) UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady($); //3D Liquid Scrollspy Slider
 
 
 			//---- Prevent overlay clicks on asynchronous requests
