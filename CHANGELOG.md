@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 4.0.3 (December 30, 2019) =
+
+* Tweak: Upgraded Promise objects' load event for threejs.
+* Tweak: Upgraded Muuri to 0.8.0.
+
+
 
 #### = 4.0.2 (December 29, 2019) =
 

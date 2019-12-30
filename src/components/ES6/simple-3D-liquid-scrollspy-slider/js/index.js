@@ -32,7 +32,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 	
 	
     module.THREE_LIQUID_SCROLLSPY_SLIDER               = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.6';
+    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.7';
     module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function( $ ) {
 
 	
@@ -73,8 +73,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 				theta        = 0;
 
             
-			var offsetWidth   = 1400, //Set the display width of the objects
-				offsetHeight  = 450, //Set the display height of the objects
+			var offsetWidth   = 1920, //Set the display width of the objects
+				offsetHeight  = 1080, //Set the display height of the objects
                 imgAspect     = offsetHeight / offsetWidth;
             
             
@@ -429,32 +429,110 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                 var promises = [];
 
                 for (var i = 0; i < sources.length; i++) {
-                    promises.push(new Promise(function(resolve, reject) {
-                        var img = document.createElement("img");
-                        img.crossOrigin = "anonymous";
-                        img.src = sources[i].url;
+                    
+                    if ( sources[i].type == 'img' ) {
+	
+                        ///////////
+                        // IMAGE //
+                        ///////////   
+                        
+                        promises.push( 
+                            
+                            new Promise(function(resolve, reject) {
+                            
+                                var img = document.createElement("img");
+                                img.crossOrigin = "anonymous";
+                                img.src = sources[i].url;
 
-                        img.onload = function(image) {
+                                img.onload = function(image) {
 
-                            //loading
-                            TweenMax.to( "#" + renderLoaderID, 0.5, {
-                                width    : Math.round(100 * ( i / sources.length ) ) + '%'
-                            });
+                                    //loading
+                                    TweenMax.to( "#" + renderLoaderID, 0.5, {
+                                        width    : Math.round(100 * ( i / sources.length ) ) + '%'
+                                    });
 
 
-                            return resolve( image ) ;
-                        };
-                    }).then( makeThreeTexture ));
+                                    return resolve( image.path[0].currentSrc );
+                                };  
+
+                            }).then( makeThreeTexture )
+                        );
+     
+                        
+
+                    } else {
+
+                        
+	
+                        ///////////
+                        // VIDEO //
+                        ///////////    
+                        
+                        promises.push( 
+                            new Promise( function(resolve, reject) {
+
+                                //loading
+                                TweenMax.to( "#" + renderLoaderID, 0.5, {
+                                    width    : Math.round(100 * ( i / sources.length ) ) + '%'
+                                });    
+
+                                $( '#' + sources[i].id ).one( 'loadedmetadata', resolve );
+
+                                return resolve( sources[i].url);
+                                
+
+                            }).then( makeThreeTexture )
+                        );
+                            
+     
+
+                    }                   
+                    
                 }
+                
+
 
                 return Promise.all(promises);
             }
 
             
+            
 
-            function makeThreeTexture(image) {
+            function makeThreeTexture( url ) {
+                
+                var texture;
+                
+                if ( /[\/.](gif|jpg|jpeg|png)$/i.test( url ) ) {
+                    
+                    ///////////
+                    // IMAGE //
+                    ///////////   
+                    
+                   texture = loader.load( url );
+                    
+                } else {
+                    
+                    ///////////
+                    // VIDEO //
+                    ///////////   
+                    
+                    var video = document.createElement( 'video' );
+                    video.src = url;
+                    
+                    texture = new THREE.VideoTexture( video );
+                    texture.minFilter = THREE.LinearFilter;
+                    texture.magFilter = THREE.LinearFilter;
+                    texture.format = THREE.RGBFormat;
 
-                var texture = loader.load( image.path[0].currentSrc );
+                    // pause the video
+                    texture.image.autoplay = true;
+                    texture.image.loop = true;
+                    texture.image.currentTime = 0;
+                    texture.image.muted = true;
+                    texture.image.play();
+  
+                }
+
                 return texture;
             }
 

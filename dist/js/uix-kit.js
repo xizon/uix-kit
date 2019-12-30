@@ -3,7 +3,7 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.2
+ * ## Version             :  4.0.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  December 30, 2019
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9eaa543f7f8813cf0e31";
+/******/ 	var hotCurrentHash = "00dae740d1f26664242c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -20229,7 +20229,7 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { if (typeof Symbol ==
 var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
   module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.6';
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.7';
 
   module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -20257,9 +20257,9 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
           material,
           displacementSprite,
           theta = 0;
-      var offsetWidth = 1400,
+      var offsetWidth = 1920,
           //Set the display width of the objects
-      offsetHeight = 450,
+      offsetHeight = 1080,
           //Set the display height of the objects
       imgAspect = offsetHeight / offsetWidth;
       var vertex = document.getElementById('vertexshader').textContent,
@@ -20499,26 +20499,67 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
         var promises = [];
 
         for (var i = 0; i < sources.length; i++) {
-          promises.push(new Promise(function (resolve, reject) {
-            var img = document.createElement("img");
-            img.crossOrigin = "anonymous";
-            img.src = sources[i].url;
+          if (sources[i].type == 'img') {
+            ///////////
+            // IMAGE //
+            ///////////   
+            promises.push(new Promise(function (resolve, reject) {
+              var img = document.createElement("img");
+              img.crossOrigin = "anonymous";
+              img.src = sources[i].url;
 
-            img.onload = function (image) {
+              img.onload = function (image) {
+                //loading
+                TweenMax.to("#" + renderLoaderID, 0.5, {
+                  width: Math.round(100 * (i / sources.length)) + '%'
+                });
+                return resolve(image.path[0].currentSrc);
+              };
+            }).then(makeThreeTexture));
+          } else {
+            ///////////
+            // VIDEO //
+            ///////////    
+            promises.push(new Promise(function (resolve, reject) {
               //loading
               TweenMax.to("#" + renderLoaderID, 0.5, {
                 width: Math.round(100 * (i / sources.length)) + '%'
               });
-              return resolve(image);
-            };
-          }).then(makeThreeTexture));
+              $('#' + sources[i].id).one('loadedmetadata', resolve);
+              return resolve(sources[i].url);
+            }).then(makeThreeTexture));
+          }
         }
 
         return Promise.all(promises);
       }
 
-      function makeThreeTexture(image) {
-        var texture = loader.load(image.path[0].currentSrc);
+      function makeThreeTexture(url) {
+        var texture;
+
+        if (/[\/.](gif|jpg|jpeg|png)$/i.test(url)) {
+          ///////////
+          // IMAGE //
+          ///////////   
+          texture = loader.load(url);
+        } else {
+          ///////////
+          // VIDEO //
+          ///////////   
+          var video = document.createElement('video');
+          video.src = url;
+          texture = new THREE.VideoTexture(video);
+          texture.minFilter = THREE.LinearFilter;
+          texture.magFilter = THREE.LinearFilter;
+          texture.format = THREE.RGBFormat; // pause the video
+
+          texture.image.autoplay = true;
+          texture.image.loop = true;
+          texture.image.currentTime = 0;
+          texture.image.muted = true;
+          texture.image.play();
+        }
+
         return texture;
       }
 
