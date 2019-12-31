@@ -6,5 +6,7 @@ node_js:
   - 12
 
 script: 
+ - npm cache verify
+ - npm cache clean --force
  - npm install --dev
  - npm view build
