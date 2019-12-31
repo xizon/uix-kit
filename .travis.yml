@@ -1,14 +1,11 @@
 language: node_js
 
 node_js:
-  - 8
+
   - 10
-  - 11
-  - 12
 
 script: 
  - npm cache verify
  - npm cache clean --force
- - npm config set package-lock false
  - npm install --dev
  - npm view build
