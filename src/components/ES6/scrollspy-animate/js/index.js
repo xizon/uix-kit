@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.3';
+    module.SCROLLSPY_ANIM.version       = '0.0.4';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -60,18 +60,21 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 				text             = $txtContainer.data( 'txt' ).split( '' ),
 				tHeight          = 45,
 				tWidth           = 25,
-				renderer         = new PIXI.Application( tWidth*(text.length+2), tHeight*2, {
+				renderer         = new PIXI.Application({
+                    width        : tWidth*(text.length+2),
+                    height       : tHeight*2,
 					antialias    : true,
 					transparent  : true,
 					resolution   : 1,
 					autoResize   : 1,
-					view         : document.getElementById( 'scrollspy-animate-demo--txt' )
+                    view         : document.getElementById( 'scrollspy-animate-demo--txt' )
 				});
 			
+            
 			
 
 			var stage        = new PIXI.Container(),
-				filterSprite = PIXI.Sprite.fromImage( $txtContainer.data( 'filter-texture' ) );
+				filterSprite = PIXI.Sprite.from( $txtContainer.data( 'filter-texture' ) );
 			
 			filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 			var filter = new PIXI.filters.DisplacementFilter( filterSprite );
@@ -104,7 +107,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 			curSprite.anchor.set( 0 );
 			curSprite.scale.set( 1 );
 
-		
+            
 
 			filterSprite.anchor.set( 0 );
 			filterSprite.scale.set( 0.3 );  
@@ -116,7 +119,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 			renderer.stage.filters = [filter];
 
 			
-			var ticker       = new PIXI.ticker.Ticker();
+			var ticker       = new PIXI.Ticker();
 			ticker.autoStart = true;
 			ticker.add( function( delta ) {
 

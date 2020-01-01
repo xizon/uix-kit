@@ -33,7 +33,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.6';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.7';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -62,6 +62,9 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			container__items,
 			displacementSprite,
 			displacementFilter;
+        
+        
+
 		
 		sliderInit( false );
 		
@@ -342,7 +345,6 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				itemsTotal               = $items.length;
 	
 			
-				
 			
 			//If arrows does not exist on the page, it will be added by default, 
 			//and the drag and drop function will be activated.
@@ -445,30 +447,34 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 					}	
 					
-				});
-				
+				});//$this.find( '.uix-advanced-slider-sp__item' ).each
 				
 
 				//Basic webGL renderers 
 				//-------------------------------------
-				renderer              = new PIXI.Application( $this.width(), $this.height(), {
-														//backgroundColor : 0x000000, 
-					                                    antialias       : true,
-					                                    transparent     : true,
-														autoResize      : true, 
-														view            : document.getElementById( rendererCanvasID )
-													});
+				renderer              = new PIXI.Application({
+                                            width           : $this.width(),
+                                            height          : $this.height(),
+                                            transparent     : true,
+                                            antialias       : true,
+                                            autoResize      : true,
+                                            view            : document.getElementById( rendererCanvasID )
+                                        });
+                
+				renderer__filter       = new PIXI.autoDetectRenderer({
+                                            width           : $this.width(),
+                                            height          : $this.height(),
+                                            transparent     : true,
+                                            view            : document.getElementById( rendererCanvasID__filter )
+                                        });
+                
 
-				renderer__filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
-														//backgroundColor : 0x000000, 
-														transparent     : true,
-														view            : document.getElementById( rendererCanvasID__filter )
-													});
 
-
+                //
+                //
 				stage__filter          = new PIXI.Container();
 				container__items       = new PIXI.Container();
-				displacementSprite    = ( /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test( filterTexture ) ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( filterTexture ) ) : new PIXI.Sprite.fromImage( filterTexture );
+				displacementSprite    = ( /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test( filterTexture ) ) ? new PIXI.Sprite( PIXI.Texture.from( filterTexture ) ) : new PIXI.Sprite.from( filterTexture );
 				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
 
 				
@@ -492,12 +498,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							// create a video texture from a path
 							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+								texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							
 							videoSource.autoplay = false;
 							videoSource.pause();
@@ -525,7 +531,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -541,20 +547,26 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
-
-
-						// Render updated scene
-						renderer.stage.addChild( curSprite );
-
                         
-                        //Avoid error texture rendering errors ***!Important***
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
+
+						//Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
 
+                        
+                        
+						//Render updated scene
+						//-------------------------------------   
+						renderer.stage.addChild( curSprite );
 
+                        
 
 					});
 
@@ -597,12 +609,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							// create a video texture from a path
 							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+								texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -629,7 +641,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -645,15 +657,23 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
 
-						container__items.addChild( curSprite );
+                        
+						//Render updated scene
+						//-------------------------------------   
+                        container__items.addChild( curSprite );
 
 
 						//Add child container to the main container 
@@ -687,9 +707,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						stage__filter.addChild( displacementSprite );
 
 
+
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 
@@ -738,12 +759,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							// create a video texture from a path
 							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+								texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -769,7 +790,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -783,8 +804,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
@@ -796,7 +822,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							alpha : 0
 						});	
 
-
+						//Render updated scene
+						//-------------------------------------   
 						container__items.addChild( curSprite );
 
 
@@ -831,7 +858,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 							
@@ -877,12 +904,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							// create a video texture from a path
 							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+								texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -909,7 +936,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -924,8 +951,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
@@ -937,7 +969,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							alpha : 0
 						});	
 
-
+						//Render updated scene
+						//-------------------------------------   
 						container__items.addChild( curSprite );
 
 
@@ -972,7 +1005,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 							
@@ -1024,12 +1057,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							// create a video texture from a path
 							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+								texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -1056,7 +1089,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -1071,8 +1104,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                         // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
@@ -1084,7 +1122,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							alpha : 0
 						});
                         
-
+						//Render updated scene
+						//-------------------------------------   
 						container__items.addChild( curSprite );
 
 
@@ -1122,7 +1161,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 
@@ -1726,7 +1765,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 									//pause all videos
 									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
+										var videoSource = obj.texture.baseTexture.resource.source;
 
 										// play the video
 										videoSource.currentTime = 0;
@@ -1741,7 +1780,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 								//play current video
 								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
+									var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 									// play the video
 									videoSource2.currentTime = 0;
@@ -1856,7 +1895,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 								
 								//pause all videos
 								if ( obj._texture.baseTexture.imageType == null ) {
-									var videoSource = obj.texture.baseTexture.source;
+									var videoSource = obj.texture.baseTexture.resource.source;
 
 
 									// play the video
@@ -1871,7 +1910,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							//play current video
 							if ( curSp._texture.baseTexture.imageType == null ) {
-								var videoSource2 = curSp.texture.baseTexture.source;
+								var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 								// play the video
 								videoSource2.currentTime = 0;
@@ -1999,7 +2038,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 									//pause all videos
 									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
+										var videoSource = obj.texture.baseTexture.resource.source;
 
 										// play the video
 										videoSource.currentTime = 0;
@@ -2014,7 +2053,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 								//play current video
 								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
+									var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 									// play the video
 									videoSource2.currentTime = 0;
@@ -2140,7 +2179,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 									//pause all videos
 									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
+										var videoSource = obj.texture.baseTexture.resource.source;
 
 										// play the video
 										videoSource.currentTime = 0;
@@ -2155,7 +2194,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 								//play current video
 								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
+									var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 									// play the video
 									videoSource2.currentTime = 0;
@@ -2273,7 +2312,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 								
 								//pause all videos
 								if ( obj._texture.baseTexture.imageType == null ) {
-									var videoSource = obj.texture.baseTexture.source;
+									var videoSource = obj.texture.baseTexture.resource.source;
 
 
 									// play the video
@@ -2288,7 +2327,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							//play current video
 							if ( curSpParallax._texture.baseTexture.imageType == null ) {
-								var videoSource2 = curSpParallax.texture.baseTexture.source;
+								var videoSource2 = curSpParallax.texture.baseTexture.resource.source;
 
 								// play the video
 								videoSource2.currentTime = 0;
@@ -2699,6 +2738,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		
     };
 
+    
+    
+    
+    
     module.components.pageLoaded.push( module.ADVANCED_SLIDER_FILTER.pageLoaded );
 	
 

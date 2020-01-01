@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.3
+ * ## Version             :  4.0.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 30, 2019
+ * ## Last Update         :  January 1, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "00dae740d1f26664242c";
+/******/ 	var hotCurrentHash = "0e46ec522d785b565dd7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -6000,7 +6000,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.6';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.7';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6280,24 +6280,29 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             imgCur.src = imgURL;
           }
-        }); //Basic webGL renderers 
+        }); //$this.find( '.uix-advanced-slider-sp__item' ).each
+        //Basic webGL renderers 
         //-------------------------------------
 
-        renderer = new PIXI.Application($this.width(), $this.height(), {
-          //backgroundColor : 0x000000, 
-          antialias: true,
+        renderer = new PIXI.Application({
+          width: $this.width(),
+          height: $this.height(),
           transparent: true,
+          antialias: true,
           autoResize: true,
           view: document.getElementById(rendererCanvasID)
         });
-        renderer__filter = new PIXI.autoDetectRenderer($this.width(), $this.height(), {
-          //backgroundColor : 0x000000, 
+        renderer__filter = new PIXI.autoDetectRenderer({
+          width: $this.width(),
+          height: $this.height(),
           transparent: true,
           view: document.getElementById(rendererCanvasID__filter)
-        });
+        }); //
+        //
+
         stage__filter = new PIXI.Container();
         container__items = new PIXI.Container();
-        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(filterTexture) ? new PIXI.Sprite(PIXI.Texture.fromVideo(filterTexture)) : new PIXI.Sprite.fromImage(filterTexture);
+        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(filterTexture) ? new PIXI.Sprite(PIXI.Texture.from(filterTexture)) : new PIXI.Sprite.from(filterTexture);
         displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite); //----------------------------------------------------------------------------------
         //--------------------------------- Brightness Effect -------------------------------	
         //----------------------------------------------------------------------------------
@@ -6313,10 +6318,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
               var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+                  texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6332,7 +6337,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6341,16 +6346,20 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); // Render updated scene
 
-            renderer.stage.addChild(curSprite); //Avoid error texture rendering errors ***!Important***
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Avoid error texture rendering errors ***!Important***
 
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
+            renderer.stage.addChild(curSprite);
           }); //Initialize the default height of canvas
           //-------------------------------------	
 
@@ -6375,10 +6384,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
               var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+                  texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6394,7 +6403,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6403,12 +6412,17 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
+
+            curSprite.scale.set(canvasRatio); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6432,7 +6446,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             stage__filter.addChild(displacementSprite); //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               // Render updated scene
@@ -6462,10 +6476,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
               var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+                  texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6481,7 +6495,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6490,16 +6504,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
+
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
 
             curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
 
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6521,7 +6540,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             stage__filter.addChild(displacementSprite); //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               // Render updated scene
@@ -6551,10 +6570,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
               var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+                  texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6570,7 +6589,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6579,16 +6598,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
+
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
 
             curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
 
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6610,7 +6634,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             stage__filter.addChild(displacementSprite); //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               //Need the displacementSprite.texture.baseTexture.wrapMode is "PIXI.WRAP_MODES.REPEAT"
@@ -6643,10 +6667,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
               var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+                  texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6662,7 +6686,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6671,16 +6695,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
+
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
 
             curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
 
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6705,7 +6734,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               // Render updated scene
@@ -7121,7 +7150,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   }); //pause all videos
 
                   if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.source; // play the video
+                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7132,7 +7161,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
                 if (curSp._texture.baseTexture.imageType == null) {
-                  var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                  var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                   videoSource2.currentTime = 0;
                   videoSource2.autoplay = true;
@@ -7203,7 +7232,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 var obj = container__items.children[k]; //pause all videos
 
                 if (obj._texture.baseTexture.imageType == null) {
-                  var videoSource = obj.texture.baseTexture.source; // play the video
+                  var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                   videoSource.currentTime = 0;
                   videoSource.autoplay = false;
@@ -7214,7 +7243,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
               if (curSp._texture.baseTexture.imageType == null) {
-                var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                 videoSource2.currentTime = 0;
                 videoSource2.autoplay = true;
@@ -7317,7 +7346,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   }); //pause all videos
 
                   if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.source; // play the video
+                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7328,7 +7357,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
                 if (curSp._texture.baseTexture.imageType == null) {
-                  var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                  var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                   videoSource2.currentTime = 0;
                   videoSource2.autoplay = true;
@@ -7423,7 +7452,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   }); //pause all videos
 
                   if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.source; // play the video
+                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7434,7 +7463,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
                 if (curSp._texture.baseTexture.imageType == null) {
-                  var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                  var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                   videoSource2.currentTime = 0;
                   videoSource2.autoplay = true;
@@ -7516,7 +7545,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 var obj = container__items.children[m]; //pause all videos
 
                 if (obj._texture.baseTexture.imageType == null) {
-                  var videoSource = obj.texture.baseTexture.source; // play the video
+                  var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                   videoSource.currentTime = 0;
                   videoSource.autoplay = false;
@@ -7527,7 +7556,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
               if (curSpParallax._texture.baseTexture.imageType == null) {
-                var videoSource2 = curSpParallax.texture.baseTexture.source; // play the video
+                var videoSource2 = curSpParallax.texture.baseTexture.resource.source; // play the video
 
                 videoSource2.currentTime = 0;
                 videoSource2.autoplay = true;
@@ -14534,7 +14563,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.3';
+  module.SCROLLSPY_ANIM.version = '0.0.4';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -14554,7 +14583,9 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
           text = $txtContainer.data('txt').split(''),
           tHeight = 45,
           tWidth = 25,
-          renderer = new PIXI.Application(tWidth * (text.length + 2), tHeight * 2, {
+          renderer = new PIXI.Application({
+        width: tWidth * (text.length + 2),
+        height: tHeight * 2,
         antialias: true,
         transparent: true,
         resolution: 1,
@@ -14562,7 +14593,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
         view: document.getElementById('scrollspy-animate-demo--txt')
       });
       var stage = new PIXI.Container(),
-          filterSprite = PIXI.Sprite.fromImage($txtContainer.data('filter-texture'));
+          filterSprite = PIXI.Sprite.from($txtContainer.data('filter-texture'));
       filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
       var filter = new PIXI.filters.DisplacementFilter(filterSprite);
       var txtStyle = new PIXI.TextStyle({
@@ -14594,7 +14625,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
       renderer.stage.filterArea = renderer.screen;
       renderer.stage.addChild(curSprite, filterSprite);
       renderer.stage.filters = [filter];
-      var ticker = new PIXI.ticker.Ticker();
+      var ticker = new PIXI.Ticker();
       ticker.autoStart = true;
       ticker.add(function (delta) {
         filterSprite.y += 0.2 * delta; // Render updated scene

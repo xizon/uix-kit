@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 4.0.5 (December 30, 2019) =
+
+* Tweak: Upgraded PIXI to 5.2.0.
+* Tweak: Solved the display problem of Advanced Slider under PIXI 5.
+
+
+
 #### = 4.0.3 (December 30, 2019) =
 
 * Tweak: Upgraded Promise objects' load event for threejs.
