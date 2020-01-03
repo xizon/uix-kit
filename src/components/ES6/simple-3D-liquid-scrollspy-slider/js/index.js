@@ -32,7 +32,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 	
 	
     module.THREE_LIQUID_SCROLLSPY_SLIDER               = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.7';
+    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.8';
     module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function( $ ) {
 
 	
@@ -242,6 +242,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                                 //Returns the dimensions (intrinsic height and width ) of the video
                                 var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
                                     videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                if ( typeof videoURL === typeof undefined ) videoURL = _item.attr( 'src' ); 
 
                                 if ( typeof videoURL != typeof undefined ) {
                                     sources.push(
@@ -451,8 +452,12 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                                         width    : Math.round(100 * ( i / sources.length ) ) + '%'
                                     });
 
-
-                                    return resolve( image.path[0].currentSrc );
+                                      //Compatible with safari and firefox
+                                      if ( typeof image.path === typeof undefined ) {
+                                          return resolve(image.target.currentSrc);
+                                      } else {
+                                          return resolve(image.path[0].currentSrc);
+                                      }
                                 };  
 
                             }).then( makeThreeTexture )

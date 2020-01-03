@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 4.0.6 (January 3, 2020) =
+
+* New: Added progress of loading video.
+* Tweak: Modify loading display animation.
+* Fix: Fixed compatibility issue of Promise method on Safari and Firefox.
+
+
+
 #### = 4.0.5 (December 30, 2019) =
 
 * Tweak: Upgraded PIXI to 5.2.0.

@@ -7,6 +7,20 @@
 	transform: translate(10px,-10px);
 }
 
+.uix-loader-progress__line {
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 4px;
+	position: fixed;
+	background-color: #fff;
+	-webkit-touch-callout: none;
+	user-select: none;
+    pointer-events: none;
+	z-index: 99999;
+    box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.3);
+}
+
 .uix-loader,
 .uix-loader-progress {
 	bottom: 0;
@@ -17,6 +31,7 @@
 	background-color: transparent;
 	-webkit-touch-callout: none;
 	user-select: none;
+    pointer-events: none;
 	/* Likely future */
 	display: flex;
 	align-items: center;

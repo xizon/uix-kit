@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.5
+ * ## Version             :  4.0.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 1, 2020
+ * ## Last Update         :  January 3, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0e46ec522d785b565dd7";
+/******/ 	var hotCurrentHash = "09a3177b078f8f481610";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3715,6 +3715,8 @@ var GET_CUSTOM_ATTRS = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/loader.js
 function loader_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function loader_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { loader_typeof = function _typeof(obj) { return typeof obj; }; } else { loader_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return loader_typeof(obj); }
+
 /* 
  *************************************
  * <!-- Loader -->
@@ -3724,7 +3726,7 @@ function loader_classCallCheck(instance, Constructor) { if (!(instance instanceo
 var LOADER = function (module, $, window, document) {
   if (window.LOADER === null) return false;
   module.LOADER = module.LOADER || {};
-  module.LOADER.version = '0.0.2';
+  module.LOADER.version = '0.0.3';
 
   module.LOADER.documentReady = function ($) {
     // Disable devices scaling
@@ -3745,26 +3747,104 @@ var LOADER = function (module, $, window, document) {
       lastTouchEnd = now;
     }, false); // Loader Process
     //-------------------------------------	
+    // Detect if video.load is successful or not 
+
+    var videos = [];
+    var videosTotal = 0;
+    var videosLoaded = 0;
+    $('.uix-video__slider > video').each(function () {
+      videos.push($(this));
+    });
+    videosTotal = videos.length;
+    console.log('videosTotal: ' + videosTotal + ', videosLoaded: ' + videosLoaded); // Loading progress event
+
+    var loadedPercent = 0;
+    var imgTotal = 0;
+
+    var loadingAnim = function loadingAnim(per) {
+      $('.uix-loader-progress > span').text($('.uix-loader-progress').data('txt').replace(/\{progress\}/g, per));
+      TweenMax.to('.uix-loader-progress__line', 0.3, {
+        width: per / 100.0 * window.innerWidth
+      });
+    };
 
     $('body').waitForImages().progress(function (loaded, count, success) {
-      var per = parseInt(loaded / (count - 1) * 100);
+      imgTotal = count;
+      var per = parseInt(loaded / (count - (1 - videosTotal)) * 100);
 
       if ($('img').length <= 1) {
         per = 100;
       }
 
       if (isNaN(per)) per = 100;
-      $('.uix-loader-progress span').text(per + '%');
+      loadedPercent = per; //loading animation
+
+      loadingAnim(per);
     }).done(function () {
       //Event after loading is complete
-      // Remove loader
-      TweenMax.to('.uix-loader, .uix-loader-progress', 0.5, {
-        css: {
-          opacity: 0,
-          display: 'none'
-        }
-      });
+      // Main scene
+      console.log('loadedPercent: ' + loadedPercent + ', imageTotal: ' + imgTotal);
+      mainObjLoader(loadedPercent, imgTotal);
     });
+    /*
+     * Main Object Loader
+     *
+     * @param  {Number} loadedPercent  - The percentage value after the page loads the image.
+     * @param  {Number} imgTotal       - The total number of imags.
+     * @return {Void}
+     */
+
+    function mainObjLoader(loadedPercent, imgTotal) {
+      var remainedPercentComplete = 0;
+
+      var loadedFun = function loadedFun() {
+        //loading animation
+        loadingAnim(100); // Remove loader
+
+        TweenMax.to('.uix-loader, .uix-loader-progress, .uix-loader-progress__line', 0.5, {
+          css: {
+            opacity: 0,
+            display: 'none'
+          }
+        }); //page animation when elements loaded
+        //...
+      }; //
+
+
+      if (loadedPercent < 100) {
+        videos.forEach(function (element) {
+          var _src = element.find('source:first').attr('src');
+
+          if (loader_typeof(_src) === ( true ? "undefined" : undefined)) _src = element.attr('src');
+          var video = document.getElementById(element.attr('id')),
+              videoURL = _src;
+          video.addEventListener('loadedmetadata', function (e) {
+            //Video has started loading successfully
+            videosLoaded++; //get remained percent
+
+            remainedPercentComplete = (1 - videosLoaded / videosTotal) * (100 - loadedPercent); //current percent
+
+            var currentPercent = loadedPercent + (100 - loadedPercent - remainedPercentComplete); //loading animation
+
+            loadingAnim(currentPercent); // All videos loaded
+
+            if (currentPercent == 100) {
+              loadedFun();
+            } //debug
+
+
+            console.log('remainedPercentComplete: ' + remainedPercentComplete + ', currentPercent: ' + currentPercent);
+            console.log('videosTotal: ' + videosTotal + ', videosLoaded: ' + videosLoaded);
+          }, false);
+          video.src = videoURL;
+        });
+      } else {
+        // All videos loaded
+        if (remainedPercentComplete == 0) {
+          loadedFun();
+        }
+      }
+    }
   };
 
   module.components.documentReady.push(module.LOADER.documentReady);
@@ -5318,7 +5398,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.8';
+  module.ADVANCED_SLIDER.version = '0.1.9';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5387,6 +5467,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             //Returns the dimensions (intrinsic height and width ) of the video
             var video = document.getElementById($first.find('video').attr('id')),
                 videoURL = $first.find('source:first').attr('src');
+            if (basic_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $first.attr('src');
             video.addEventListener('loadedmetadata', function (e) {
               $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
               nativeItemW = this.videoWidth;
@@ -5751,6 +5832,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         //Returns the dimensions (intrinsic height and width ) of the video
         var video = document.getElementById(currentLlement.find('video').attr('id')),
             videoURL = currentLlement.find('source:first').attr('src');
+        if (basic_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = currentLlement.attr('src');
         video.addEventListener('loadedmetadata', function (e) {
           slider.css('height', this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth) + 'px');
         }, false);
@@ -6000,7 +6082,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.7';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.8';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6105,6 +6187,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             //Returns the dimensions (intrinsic height and width ) of the video
             var video = document.getElementById($first.find('video').attr('id')),
                 videoURL = $first.find('source:first').attr('src');
+            if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $first.attr('src');
 
             if (special_typeof(videoURL) != ( true ? "undefined" : undefined)) {
               video.addEventListener('loadedmetadata', function (e) {
@@ -6317,8 +6400,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.from(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
               var videoSource = texture.baseTexture.resource.source;
@@ -6383,8 +6467,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.from(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
               var videoSource = texture.baseTexture.resource.source;
@@ -6475,8 +6560,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.from(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
               var videoSource = texture.baseTexture.resource.source;
@@ -6569,8 +6655,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.from(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
               var videoSource = texture.baseTexture.resource.source;
@@ -6666,8 +6753,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.from(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
               var videoSource = texture.baseTexture.resource.source;
@@ -7057,6 +7145,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         //Returns the dimensions (intrinsic height and width ) of the video
         var video = document.getElementById(currentLlement.find('video').attr('id')),
             videoURL = currentLlement.find('source:first').attr('src');
+        if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = currentLlement.attr('src');
         video.addEventListener('loadedmetadata', function (e) {
           //At the same time change the height of the canvas and slider container
           var h = this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth);
@@ -7882,7 +7971,7 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.1';
+  module.AJAX_PUSH_CONTENT.version = '0.1.2';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     //all images from pages
@@ -7897,7 +7986,12 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
       "loading": "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading <em id=\"app-loading\" data-txt=\"{progress}%\"></em>...</span></div>",
       "method": "POST"
     },
-        thisPageTitle = document.title; //Click event
+        thisPageTitle = document.title; //loading animation
+
+    var loadingAnim = function loadingAnim(per) {
+      $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+    }; //Click event
+
 
     $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function (event) {
       event.preventDefault();
@@ -7994,8 +8088,8 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             ease: Power2.easeOut
           });
           container.html('<div class="ajax-content-loader">' + loading + '</div>').promise().done(function () {
-            //loading text from HTML
-            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, 0)); //
+            //loading animation
+            loadingAnim(0); //loader effect from AJAX request
 
             TweenMax.set(container.find('.ajax-content-loader'), {
               css: {
@@ -8022,43 +8116,71 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             "id": 'img-' + UixGUID.create(),
             "type": 'img'
           });
+        }); //Push all videos from page
+
+        $(response).find('.uix-video__slider > video').each(function () {
+          var _src = $(this).find('source:first').attr('src');
+
+          if (AJAX_push_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
+          sources.push({
+            "url": _src,
+            "id": 'video-' + UixGUID.create(),
+            "type": 'video'
+          });
         }); //Execute after all images have loaded
 
         var per;
         var perInit = 1;
 
         if (sources.length == 0) {
-          per = 100; //loading text from HTML
+          per = 100; //loading animation
 
-          $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+          loadingAnim(per);
         }
 
         var loadImages = function loadImages() {
           var promises = [];
 
           for (var i = 0; i < sources.length; i++) {
-            promises.push(new Promise(function (resolve, reject) {
-              var img = document.createElement("img");
-              img.crossOrigin = "anonymous";
-              img.src = sources[i].url;
+            if (sources[i].type == 'img') {
+              ///////////
+              // IMAGE //
+              ///////////   
+              promises.push(new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.crossOrigin = "anonymous";
+                img.src = sources[i].url;
 
-              img.onload = function (image) {
-                return resolve(image);
-              };
-            }).then(textureLoaded));
+                img.onload = function (image) {
+                  //Compatible with safari and firefox
+                  if (AJAX_push_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                    return resolve(image.target.currentSrc);
+                  } else {
+                    return resolve(image.path[0].currentSrc);
+                  }
+                };
+              }).then(textureLoaded));
+            } else {
+              ///////////
+              // VIDEO //
+              ///////////    
+              promises.push(new Promise(function (resolve, reject) {
+                $('#' + sources[i].id).one('loadedmetadata', resolve);
+                return resolve(sources[i].url);
+              }).then(textureLoaded));
+            }
           }
 
           return Promise.all(promises);
         };
 
-        var textureLoaded = function textureLoaded(image) {
-          var imgSrc = image.path[0].currentSrc; //loading
-
+        var textureLoaded = function textureLoaded(url) {
+          //loading
           per = parseInt(100 * (perInit / sources.length));
           console.log('progress: ' + per + '%');
-          if (isNaN(per)) per = 100; //loading text from HTML
+          if (isNaN(per)) per = 100; //loading animation
 
-          $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+          loadingAnim(per);
           var texture = null;
           perInit++;
           return per;
@@ -8076,7 +8198,12 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         }); //Calculating page load time
 
         var timeLimit = 10,
-            timeStart = new Date().getTime();
+            timeStart = new Date().getTime(); //Prevent duplicate runs when returning to this page
+
+        if (timeClockInit) {
+          clearInterval(timeClockInit);
+        }
+
         timeClockInit = setInterval(function () {
           //Converting milliseconds to minutes and seconds
           var _time = (new Date().getTime() - timeStart) / 1000;
@@ -8160,7 +8287,7 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.2';
+  module.AJAX_PAGE_LOADER.version = '0.1.3';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
@@ -8183,7 +8310,12 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         total = $navs.length,
         $sectionsContainer = $('.uix-ajax-load__fullpage-container'),
         ajaxContainer = '.ajax-container',
-        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); //Prevent this module from loading in other pages
+        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); //loading animation
+
+    var loadingAnim = function loadingAnim(per) {
+      $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+    }; //Prevent this module from loading in other pages
+
 
     if ($sectionsContainer.length == 0) return false;
     /* 
@@ -8375,8 +8507,8 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             action: 'load_singlepages_ajax_content'
           },
           beforeSend: function beforeSend() {
-            //loading text from HTML
-            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, 0)); //
+            //loading animation
+            loadingAnim(0); //loader effect from AJAX request
 
             TweenMax.set('.uix-ajax-load__loader', {
               css: {
@@ -8401,43 +8533,71 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
               "id": 'img-' + UixGUID.create(),
               "type": 'img'
             });
+          }); //Push all videos from page
+
+          $(response).find('.uix-video__slider > video').each(function () {
+            var _src = $(this).find('source:first').attr('src');
+
+            if (AJAX_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
+            sources.push({
+              "url": _src,
+              "id": 'video-' + UixGUID.create(),
+              "type": 'video'
+            });
           }); //Execute after all images have loaded
 
           var per;
           var perInit = 1;
 
           if (sources.length == 0) {
-            per = 100; //loading text from HTML
+            per = 100; //loading animation
 
-            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+            loadingAnim(per);
           }
 
           var loadImages = function loadImages() {
             var promises = [];
 
             for (var i = 0; i < sources.length; i++) {
-              promises.push(new Promise(function (resolve, reject) {
-                var img = document.createElement("img");
-                img.crossOrigin = "anonymous";
-                img.src = sources[i].url;
+              if (sources[i].type == 'img') {
+                ///////////
+                // IMAGE //
+                ///////////   
+                promises.push(new Promise(function (resolve, reject) {
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = sources[i].url;
 
-                img.onload = function (image) {
-                  return resolve(image);
-                };
-              }).then(textureLoaded));
+                  img.onload = function (image) {
+                    //Compatible with safari and firefox
+                    if (AJAX_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                      return resolve(image.target.currentSrc);
+                    } else {
+                      return resolve(image.path[0].currentSrc);
+                    }
+                  };
+                }).then(textureLoaded));
+              } else {
+                ///////////
+                // VIDEO //
+                ///////////    
+                promises.push(new Promise(function (resolve, reject) {
+                  $('#' + sources[i].id).one('loadedmetadata', resolve);
+                  return resolve(sources[i].url);
+                }).then(textureLoaded));
+              }
             }
 
             return Promise.all(promises);
           };
 
-          var textureLoaded = function textureLoaded(image) {
-            var imgSrc = image.path[0].currentSrc; //loading
-
+          var textureLoaded = function textureLoaded(url) {
+            //loading
             per = parseInt(100 * (perInit / sources.length));
             console.log('progress: ' + per + '%');
-            if (isNaN(per)) per = 100; //loading text from HTML
+            if (isNaN(per)) per = 100; //loading animation
 
-            $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+            loadingAnim(per);
             var texture = null;
             perInit++;
             return per;
@@ -8455,7 +8615,12 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           }); //Calculating page load time
 
           var timeLimit = 10,
-              timeStart = new Date().getTime();
+              timeStart = new Date().getTime(); //Prevent duplicate runs when returning to this page
+
+          if (timeClockInit) {
+            clearInterval(timeClockInit);
+          }
+
           timeClockInit = setInterval(function () {
             //Converting milliseconds to minutes and seconds
             var _time = (new Date().getTime() - timeStart) / 1000;
@@ -18898,7 +19063,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.6';
+  module.THREE_SHATTER_SLIDER.version = '0.0.7';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -19019,6 +19184,8 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
                 //Returns the dimensions (intrinsic height and width ) of the video
                 var video = document.getElementById(_item.find('video').attr('id')),
                     videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_shatter_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
 
                 if (simple_3D_shatter_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
                   sources.push({
@@ -19590,7 +19757,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.6';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.7';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -19717,6 +19884,8 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
                 //Returns the dimensions (intrinsic height and width ) of the video
                 var video = document.getElementById(_item.find('video').attr('id')),
                     videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_explosive_particle_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
 
                 if (simple_3D_explosive_particle_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
                   sources.push({
@@ -20260,7 +20429,7 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { if (typeof Symbol ==
 var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
   module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.7';
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.8';
 
   module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -20400,6 +20569,8 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
                 //Returns the dimensions (intrinsic height and width ) of the video
                 var video = document.getElementById(_item.find('video').attr('id')),
                     videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
 
                 if (simple_3D_liquid_scrollspy_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
                   sources.push({
@@ -20543,8 +20714,13 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
                 //loading
                 TweenMax.to("#" + renderLoaderID, 0.5, {
                   width: Math.round(100 * (i / sources.length)) + '%'
-                });
-                return resolve(image.path[0].currentSrc);
+                }); //Compatible with safari and firefox
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                  return resolve(image.target.currentSrc);
+                } else {
+                  return resolve(image.path[0].currentSrc);
+                }
               };
             }).then(makeThreeTexture));
           } else {

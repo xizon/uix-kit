@@ -30,10 +30,9 @@ import '../scss/_special.scss';
 export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	if ( window.ADVANCED_SLIDER_FILTER === null ) return false;
 	
-	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.7';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.8';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -182,6 +181,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
                         //Returns the dimensions (intrinsic height and width ) of the video
                         var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
                             videoURL = $first.find( 'source:first' ).attr( 'src' );
+                        if ( typeof videoURL === typeof undefined ) videoURL = $first.attr( 'src' ); 
 
                         if ( typeof videoURL != typeof undefined ) {
                             video.addEventListener( 'loadedmetadata', function( e ) {
@@ -497,8 +497,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.from( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
@@ -608,8 +610,11 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.from( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
+                            
 
 							curSprite = new PIXI.Sprite( texture );
 
@@ -758,8 +763,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.from( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
@@ -903,8 +910,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.from( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
@@ -1056,8 +1065,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.from( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
@@ -1633,6 +1644,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				//Returns the dimensions (intrinsic height and width ) of the video
 				var video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) ),
 					videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
+                
+                if ( typeof videoURL === typeof undefined ) videoURL = currentLlement.attr( 'src' ); 
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 

@@ -24,7 +24,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.1.8';
+    module.ADVANCED_SLIDER.version       = '0.1.9';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		var $window                   = $( window ),
@@ -124,6 +124,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                         //Returns the dimensions (intrinsic height and width ) of the video
                         var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
                             videoURL = $first.find( 'source:first' ).attr( 'src' );
+                        if ( typeof videoURL === typeof undefined ) videoURL = $first.attr( 'src' ); 
 
                         video.addEventListener( 'loadedmetadata', function( e ) {
                             $this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
@@ -629,6 +630,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				//Returns the dimensions (intrinsic height and width ) of the video
 				var video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) ),
 					videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
+                if ( typeof videoURL === typeof undefined ) videoURL = currentLlement.attr( 'src' ); 
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 

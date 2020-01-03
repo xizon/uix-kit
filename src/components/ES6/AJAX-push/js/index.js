@@ -22,7 +22,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.1';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.2';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
         
@@ -31,7 +31,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
         
         //Added timer to prevent page loading errors for a long time
         var timeClockInit; 
-        
+
 		
 		/* Need to set it as a global variable for history */
 		var ajaxConfig   = {
@@ -42,6 +42,14 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 				},
 			thisPageTitle = document.title;
 		
+        
+        
+        //loading animation
+        var loadingAnim = function( per ) {
+			$( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per ) );
+        }; 
+        
+        
 		
 		//Click event
 		$( document ).off( 'click.AJAX_PUSH_CONTENT' ).on( 'click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function( event ) {
@@ -186,11 +194,10 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
 					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function() {
 
-						
-                        //loading text from HTML
-                        $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, 0) );
-
-						//
+                        //loading animation
+                        loadingAnim( 0 );
+                        
+						//loader effect from AJAX request
 						TweenMax.set( container.find( '.ajax-content-loader' ), {
 							css         : {
 								'display' : 'block'
@@ -227,6 +234,22 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                         }
                     );
                 }); 
+                
+                
+               //Push all videos from page
+                $( response ).find( '.uix-video__slider > video' ).each(function() {
+
+                    var _src = $( this ).find( 'source:first' ).attr( 'src' );
+                    if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
+
+                    sources.push(
+                        {
+                            "url": _src,
+                            "id": 'video-' + UixGUID.create(),
+                            "type": 'video'
+                        }
+                    );
+                });  
 
 
                 //Execute after all images have loaded
@@ -235,33 +258,77 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 if ( sources.length == 0 ) {
                     per = 100;
                     
-                    //loading text from HTML
-                    $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+                    //loading animation
+                    loadingAnim( per );
                 }
+                
+                
                 
                 var loadImages = function() {
                     var promises = [];
 
                     for (var i = 0; i < sources.length; i++) {
-                        promises.push(new Promise(function(resolve, reject) {
-                            var img = document.createElement("img");
-                            img.crossOrigin = "anonymous";
-                            img.src = sources[i].url;
 
-                            img.onload = function(image) {
-                                return resolve( image ) ;
-                            };
-                        }).then( textureLoaded ));
+                        if ( sources[i].type == 'img' ) {
+
+                            ///////////
+                            // IMAGE //
+                            ///////////   
+
+                            promises.push( 
+
+                                new Promise(function(resolve, reject) {
+
+                                    var img = document.createElement("img");
+                                    img.crossOrigin = "anonymous";
+                                    img.src = sources[i].url;
+
+                                    img.onload = function(image) {
+                                      //Compatible with safari and firefox
+                                      if ( typeof image.path === typeof undefined ) {
+                                          return resolve(image.target.currentSrc);
+                                      } else {
+                                          return resolve(image.path[0].currentSrc);
+                                      }
+                                    };  
+
+                                }).then( textureLoaded )
+                            );
+
+
+
+                        } else {
+
+
+
+                            ///////////
+                            // VIDEO //
+                            ///////////    
+
+                            promises.push( 
+                                new Promise( function(resolve, reject) {
+                                    
+                                    $( '#' + sources[i].id ).one( 'loadedmetadata', resolve );
+
+                                    return resolve( sources[i].url);
+
+
+                                }).then( textureLoaded )
+                            );
+
+
+
+                        }                   
+
                     }
+
+
 
                     return Promise.all(promises);
                 };
-                
-                
-                var textureLoaded = function(image) {
-                    var imgSrc = image.path[0].currentSrc;
-                    
 
+
+                var textureLoaded = function( url ) {
                     //loading
                     per = parseInt( 100 * ( perInit / sources.length ) );
 
@@ -269,15 +336,16 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
                     if ( isNaN( per ) ) per = 100;  
                     
-                    //loading text from HTML
-                    $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+                    //loading animation
+                    loadingAnim( per );
 
                     var texture = null;
                     
                     perInit++;
-                    return per;
+                    return per;   
                 };
-
+  
+                
                 
                 var func = function() {
                     ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
@@ -297,6 +365,12 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 var timeLimit = 10,
                     timeStart = new Date().getTime();
 
+
+                //Prevent duplicate runs when returning to this page
+                if ( timeClockInit ) {
+                    clearInterval( timeClockInit );
+                } 
+                
                 timeClockInit = setInterval( function() {
 
                     //Converting milliseconds to minutes and seconds

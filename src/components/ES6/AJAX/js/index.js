@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.2';
+    module.AJAX_PAGE_LOADER.version       = '0.1.3';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -53,6 +53,12 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
 		
 		
+        //loading animation
+        var loadingAnim = function( per ) {
+			$( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per ) );
+        }; 
+        
+        
 		//Prevent this module from loading in other pages
 		if ( $sectionsContainer.length == 0 ) return false;
 		
@@ -308,12 +314,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					},
 					beforeSend: function() {
 
-                        
-                        //loading text from HTML
-                        $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, 0) );
+                        //loading animation
+                        loadingAnim( 0 );
 
-
-                        //
+                        //loader effect from AJAX request
 						TweenMax.set( '.uix-ajax-load__loader', {
 							css         : {
 								'display' : 'block'
@@ -345,6 +349,22 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                             }
                         );
                     }); 
+                    
+                    
+                    //Push all videos from page
+                    $( response ).find( '.uix-video__slider > video' ).each(function() {
+
+                        var _src = $( this ).find( 'source:first' ).attr( 'src' );
+                        if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
+
+                        sources.push(
+                            {
+                                "url": _src,
+                                "id": 'video-' + UixGUID.create(),
+                                "type": 'video'
+                            }
+                        );
+                    });    
 
 
                     //Execute after all images have loaded
@@ -353,33 +373,79 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     if ( sources.length == 0 ) {
                         per = 100;
 
-                        //loading text from HTML
-                        $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+                        //loading animation
+                        loadingAnim( per );
+                        
+                        
                     }
-
+                    
+                    
                     var loadImages = function() {
                         var promises = [];
 
                         for (var i = 0; i < sources.length; i++) {
-                            promises.push(new Promise(function(resolve, reject) {
-                                var img = document.createElement("img");
-                                img.crossOrigin = "anonymous";
-                                img.src = sources[i].url;
 
-                                img.onload = function(image) {
-                                    return resolve( image ) ;
-                                };
-                            }).then( textureLoaded ));
+                            if ( sources[i].type == 'img' ) {
+
+                                ///////////
+                                // IMAGE //
+                                ///////////   
+
+                                promises.push( 
+
+                                    new Promise(function(resolve, reject) {
+
+                                        var img = document.createElement("img");
+                                        img.crossOrigin = "anonymous";
+                                        img.src = sources[i].url;
+
+                                        img.onload = function(image) {
+                                          //Compatible with safari and firefox
+                                          if ( typeof image.path === typeof undefined ) {
+                                              return resolve(image.target.currentSrc);
+                                          } else {
+                                              return resolve(image.path[0].currentSrc);
+                                          }
+                                        };  
+
+                                    }).then( textureLoaded )
+                                );
+
+
+
+                            } else {
+
+
+
+                                ///////////
+                                // VIDEO //
+                                ///////////    
+
+                                promises.push( 
+                                    new Promise( function(resolve, reject) {
+
+                                        $( '#' + sources[i].id ).one( 'loadedmetadata', resolve );
+
+                                        return resolve( sources[i].url);
+
+
+                                    }).then( textureLoaded )
+                                );
+
+
+
+                            }                   
+
                         }
+
+
 
                         return Promise.all(promises);
                     };
 
 
-                    var textureLoaded = function(image) {
-                        var imgSrc = image.path[0].currentSrc;
-
-
+                    var textureLoaded = function( url ) {
+                      
                         //loading
                         per = parseInt( 100 * ( perInit / sources.length ) );
 
@@ -387,15 +453,17 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
                         if ( isNaN( per ) ) per = 100;  
 
-                        //loading text from HTML
-                        $( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+                        //loading animation
+                        loadingAnim( per ); 
 
                         var texture = null;
 
                         perInit++;
-                        return per;
+                        return per;   
+                        
                     };
-
+  
+                    
 
                     var func = function() {
                         ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() ); 
@@ -414,6 +482,12 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     //Calculating page load time
                     var timeLimit = 10,
                         timeStart = new Date().getTime();
+
+                    //Prevent duplicate runs when returning to this page
+                    if ( timeClockInit ) {
+                        clearInterval( timeClockInit );
+                    } 
+
 
                     timeClockInit = setInterval( function() {
 

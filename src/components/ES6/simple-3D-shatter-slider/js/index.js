@@ -31,7 +31,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SHATTER_SLIDER               = module.THREE_SHATTER_SLIDER || {};
-    module.THREE_SHATTER_SLIDER.version       = '0.0.6';
+    module.THREE_SHATTER_SLIDER.version       = '0.0.7';
     module.THREE_SHATTER_SLIDER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -197,6 +197,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                                 //Returns the dimensions (intrinsic height and width ) of the video
                                 var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
                                     videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                if ( typeof videoURL === typeof undefined ) videoURL = _item.attr( 'src' ); 
 
                                 if ( typeof videoURL != typeof undefined ) {
                                     sources.push(
