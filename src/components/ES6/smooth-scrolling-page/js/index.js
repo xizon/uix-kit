@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.6';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.7';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -55,10 +55,14 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
         //Increase the viewport to display the visual area
         var elTop = $( scroller.target ).offset().top;
-        $( scroller.target )
-            .wrap( '<div style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>' )
-            .css( 'margin-top', elTop + 'px' );
+        var initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
 
+        if ( ! $( 'body' ).hasClass( initSmoothScrollingPageWrapper ) ) {
+            $( 'body' ).addClass( initSmoothScrollingPageWrapper );
+            $( scroller.target )
+                .wrap( '<div id="uix-scrollspy-area__wrapper" style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>' )
+                .css( 'margin-top', elTop + 'px' );   
+        }
 
 
 

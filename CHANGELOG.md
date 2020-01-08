@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+#### = 4.0.7 (January 7, 2020) =
+
+* Fix: Fixed duplicate dynamic addition of wrapping layers for Smooth Scrolling Page.
+
+
+
 #### = 4.0.6 (January 3, 2020) =
 
 * New: Added progress of loading video.
