@@ -2,6 +2,12 @@
 
 
 
+#### = 4.0.8 (January 13, 2020) =
+
+* Fix: Fixed a possible error when the value of the Dropdown Menu module is a pure number.
+
+
+
 #### = 4.0.7 (January 7, 2020) =
 
 * Fix: Fixed duplicate dynamic addition of wrapping layers for Smooth Scrolling Page.

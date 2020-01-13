@@ -25,7 +25,7 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.DROPDOWN_MENU               = module.DROPDOWN_MENU || {};
-    module.DROPDOWN_MENU.version       = '0.0.5';
+    module.DROPDOWN_MENU.version       = '0.0.6';
     module.DROPDOWN_MENU.documentReady = function( $ ) {
 
 		//Create a trigger of Dropdown Menu on Click
@@ -53,8 +53,8 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 				$this.removeAttr( 'open' ).removeClass( 'is-opened' );
 			}
 			
-			if ( typeof $( this ).data( 'value' ) != typeof undefined && $( this ).data( 'value' ) != '' ) {
-				$this.find( 'input[type="hidden"]' ).val( $( this ).data( 'value' ) );
+			if ( typeof $( this ).attr( 'data-value' ) != typeof undefined && $( this ).attr( 'data-value' ) != '' ) {
+				$this.find( 'input[type="hidden"]' ).val( $( this ).attr( 'data-value' ) );
 			}
 			if ( typeof $( this ).data( 'display-text' ) != typeof undefined && $( this ).data( 'display-text' ) != '' ) {
 				$this.find( '> summary > span' ).html( $( this ).data( 'display-text' ) );
