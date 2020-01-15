@@ -281,7 +281,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		 * @param  {Function} playTimes            - Number of times.
 		 * @param  {Number} timing                 - Autoplay interval.
 		 * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-		 * @param  {Object} slider                 - Selector of the slider .
+		 * @param  {Element} slider                 - Selector of the slider .
          * @param  {String} countTotalID           - Total number ID or class of counter.
          * @param  {String} countCurID             - Current number ID or class of counter.
          * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -324,7 +324,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize all the items to the stage
 		 *
-		 * @param  {Object} slider                 - Current selector of each slider.
+		 * @param  {Element} slider                 - Current selector of each slider.
 		 * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
 		 * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
          * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -1454,7 +1454,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		 * Transition Between Slides
 		 *
 		 * @param  {Number} elementIndex           - Index of current slider.
-		 * @param  {Object} slider                 - Selector of the slider .
+		 * @param  {Element} slider                 - Selector of the slider .
 		 * @param  {String} dir                    - Switching direction indicator.
          * @param  {String} countTotalID           - Total number ID or class of counter.
          * @param  {String} countCurID             - Current number ID or class of counter.
@@ -1633,8 +1633,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize the default height of canvas
 		 *
-         * @param  {Object} slider                 - Selector of the slider .
-		 * @param  {Object} currentLlement         - Current selector of each slider.
+         * @param  {Element} slider                 - Selector of the slider .
+		 * @param  {Element} currentLlement         - Current selector of each slider.
 		 * @return {Void}
 		 */
         function canvasDefaultInit( slider, currentLlement ) {
@@ -1699,7 +1699,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		 *
 		 * @param  {Number} elementIndex           - Index of current slider.
 		 * @param  {Number} prevElementIndex       - Index of previous slider.
-		 * @param  {Object} slider                 - Selector of the slider.
+		 * @param  {Element} slider                 - Selector of the slider.
 		 * @param  {String} goType                 - The type of entry and exit between two items.  
 		                                             Optional values: in, out
 		 * @param  {String} dir                    - Switching direction indicator.	 
@@ -2491,7 +2491,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
 		 * @param  {Boolean} play            - Forced to trigger pause or play events.
 		 * @return {Void}
 		 */

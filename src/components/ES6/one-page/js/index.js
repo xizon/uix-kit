@@ -120,7 +120,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {Void}
 		 */
@@ -150,7 +150,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {Object} el           - The container of each sections.
+		 * @param  {Element} el           - The container of each sections.
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} hashID       - ID of custom hashchange event.
 		 * @return {Void}
@@ -257,8 +257,8 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		/*
 		 * Get link by section or article id
 		 *
-		 * @param  {String|Object} el    - The current selector or selector ID
-		 * @param  {Object} menuObj       - Returns the menu element within the document.
+		 * @param  {String|Element} el    - The current selector or selector ID
+		 * @param  {Element} menuObj       - Returns the menu element within the document.
 		 * @param  {Boolean} echoIndex    - Whether to return the current index.
 		 * @return {Object}               - A new selector.
 		 */
@@ -275,8 +275,8 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		/*
 		 * Get all links by section or article
 		 *
-		 * @param  {Object} menuObj     - Returns the menu element within the document.
-		 * @return {Object}             - A new selector.
+		 * @param  {Element} menuObj     - Returns the menu element within the document.
+		 * @return {Element}             - A new selector.
 		 */
         function getAllNavigation( menuObj ) {
             return menuObj.find( 'li' );
@@ -286,7 +286,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		/*
 		 * Smooth scroll to content
 		 *
-		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @param  {Element} menuObj     - Returns the menu element within the document.
 		 * @return {Void}
 		 */
         function goPageSection( menuObj ) {

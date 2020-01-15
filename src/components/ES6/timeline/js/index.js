@@ -125,8 +125,8 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 		/*
 		 * Method that updates items of timeline
 		 *
-		 * @param  {Object} obj                  - Wrapper of timeline.
-		 * @param  {Object} iscur                - The current item.
+		 * @param  {Element} obj                  - Wrapper of timeline.
+		 * @param  {?Element} iscur                - The current item.
 		 * @param  {String} showEle              - Element ID or class name that push the current text.
 		 * @param  {Boolean} prev                - Whether to slide forward.
 		 * @return {Void}

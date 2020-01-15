@@ -154,12 +154,12 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {Object} container       - The target container to which the content will be added.
+		 * @param  {Element} container       - The target container to which the content will be added.
 		 * @param  {String|Boolean} target  - The instance ID or class name returned from the callback data. If it is "false", the push content is empty.
 		 * @param  {String} loading         - Content of loading area.
 		 * @param  {String} url             - The target URL via AJAX. 
 		 * @param  {String} method          - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-		 * @param  {Object|Boolean} btn     - Current trigger button. Avoid button events if "false".
+		 * @param  {?Element|Boolean} btn     - Current trigger button. Avoid button events if "false".
 		 * @return {Void}
 		 */
 		function pushAction( container, target, loading, url, method, btn ) {
@@ -404,7 +404,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		 * @param  {String} container    - The target container to which the content will be added.
 		 * @param  {String} content      - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
-		 * @param  {Object} btn          - Current trigger button.
+		 * @param  {?Element} btn          - Current trigger button.
 		 * @return {Void}
 		 */
 		function ajaxSucceeds( container, content, title, btn ) {

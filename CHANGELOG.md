@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 4.0.9 (January 15, 2020) =
+
+* Tweak: Optimized @param in comments.
+* Tweak: Added activation style for Dropdown Menu.
+
+
 
 #### = 4.0.8 (January 13, 2020) =
 

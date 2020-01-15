@@ -5,7 +5,7 @@
  * @global
  * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean|String} destroy       - If it is a string, it means destroying this module from UixModuleInstance
- * @param  {JSON} add                     - New module data.
+ * @param  {Object} add                     - New module data via JSON.
  * @param  {String} add.moduleName        - The name of the module (the default is all uppercase).
  * @param  {Boolean} add.pageLoaded       - Window loading module method. If true or 1, the module will execute after the page is loaded.
  * @param  {Number} add.version           - The new module version number.

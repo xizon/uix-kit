@@ -5,7 +5,7 @@
  *
  * @param  {Number} speed       - The speed of movement between elements.
  * @param  {String} transition  - Transition time can simulate easing effect.
- * @param  {JSON} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @param  {Object} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
  * @return {Void}
  *
  *************************************

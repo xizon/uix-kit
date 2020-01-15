@@ -328,7 +328,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 		 * @param  {Function} playTimes      - Number of times.
 		 * @param  {Number} timing           - Autoplay interval.
 		 * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
-		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {Element} slider           - Selector of the slider .
          * @param  {String} paginationID     - Navigation ID for paging control of each slide.
          * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
 		 * @return {Void}                    - The constructor.
@@ -375,7 +375,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 		 * Transition Between Slides
 		 *
 		 * @param  {Number} elementIndex     - Index of current slider.
-		 * @param  {Object} slider           - Selector of the slider .
+		 * @param  {Element} slider           - Selector of the slider .
          * @param  {String} paginationID     - Navigation ID for paging control of each slide.
          * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
          * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.

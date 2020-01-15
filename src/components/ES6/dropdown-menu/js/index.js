@@ -25,9 +25,25 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.DROPDOWN_MENU               = module.DROPDOWN_MENU || {};
-    module.DROPDOWN_MENU.version       = '0.0.6';
+    module.DROPDOWN_MENU.version       = '0.0.7';
     module.DROPDOWN_MENU.documentReady = function( $ ) {
-
+        
+        
+        
+        //Initialize option status
+        $( '.uix-dropdown-menu' ).each( function()  {
+            var v = $( this ).find( 'input[type="hidden"]' ).val(),
+                selectedIndex = $( this ).find( 'ul > li > a[data-value="'+v+'"]' ).parent().index(),
+                $li = $( this ).find( 'ul > li' );
+          
+            $li.removeClass( 'is-active' ); 
+            $li.eq( selectedIndex ).addClass( 'is-active' );    
+            $( this ).find( '> summary > span' ).html( $li.eq( selectedIndex ).find( '> a' ).data( 'display-text' ) );
+            
+            
+        });
+        
+        
 		//Create a trigger of Dropdown Menu on Click
 		//Use $( document ) to support other click events for ajax
 		$( document ).off( 'click.DROPDOWN_MENU' ).on( 'click.DROPDOWN_MENU', '.uix-dropdown-menu > summary', function( e ) {
@@ -52,6 +68,8 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 			if ( $this.hasClass( 'is-opened' ) ) {
 				$this.removeAttr( 'open' ).removeClass( 'is-opened' );
 			}
+            
+
 			
 			if ( typeof $( this ).attr( 'data-value' ) != typeof undefined && $( this ).attr( 'data-value' ) != '' ) {
 				$this.find( 'input[type="hidden"]' ).val( $( this ).attr( 'data-value' ) );
@@ -60,6 +78,10 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 				$this.find( '> summary > span' ).html( $( this ).data( 'display-text' ) );
 			}
 			
+            // update active status
+            $this.find( 'li' ).removeClass( 'is-active' );
+            $( this ).parent().addClass( 'is-active' ); 
+
 			
 			
 

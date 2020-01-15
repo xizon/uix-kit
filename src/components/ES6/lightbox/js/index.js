@@ -550,7 +550,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		 * Click thumbnail to show large photo
 		 *
 		 * @param  {Number} index           - The target index of large photo.
-		 * @param  {Object} obj             - Target large image <li>.
+		 * @param  {Element} obj             - Target large image <li>.
 		 * @return {Void}
 		 */
 		function lightboxThumbSwitch( index, obj ) {

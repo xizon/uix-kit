@@ -408,9 +408,9 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 		/*
 		 * Ajax with JSON data
 		 *
-		 * @param  {Object} ajaxWrapper     - The outermost container of list.
+		 * @param  {Element} ajaxWrapper     - The outermost container of list.
 		 * @param  {Object} defaultPostData - Data to be sent to the server which is custom JSON fields.
-		 * @param  {Object} trigger         - Trigger ajax loaded button object.
+		 * @param  {String} trigger         - Trigger ajax loaded button object.
 		 * @param  {Number} curPage         - The current page to load.
 		 * @param  {Number} perShow         - The amount to load each time.
 		 * @param  {Number} totalPage       - The total page to load.

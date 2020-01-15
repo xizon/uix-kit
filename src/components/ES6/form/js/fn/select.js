@@ -6,7 +6,7 @@
  * @param  {String} targetWrapper        - Wrapper of the selector.
  * @param  {String} trigger              - Trigger of the selector.
  * @param  {String} itemsWrapper         - Selector's options container.
- * @param  {Object} item                 - Each option of the selector.
+ * @param  {Element} item                 - Each option of the selector.
  * @return {Void}
  */
 ( function ( $ ) {

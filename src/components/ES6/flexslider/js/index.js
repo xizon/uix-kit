@@ -60,8 +60,8 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		/*
 		 * Return an event from callback function to each slider.
 		 *
-		 * @param  {Object} thisSlider             - The current slider.
-		 * @param  {Object} sliderWrapper          - The current slider wrapper.
+		 * @param  {Element} thisSlider             - The current slider.
+		 * @param  {Element} sliderWrapper          - The current slider wrapper.
 		 * @param  {String} fireState              - State of fire asynchronously.
 		 * @return {Number}                        - Index of current slider .
 		 */
@@ -366,7 +366,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
 		 * @param  {Boolean} play            - Forced to trigger pause or play events.
 		 * @return {Void}
 		 */
@@ -641,7 +641,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		/*
 		 * Make slider image draggable 
 		 *
-		 * @param  {Object} $obj             - The current FlexSlider setup using custom selector.
+		 * @param  {Element} $obj             - The current FlexSlider setup using custom selector.
 		 * @return {Void}
 		 */
         function slidesExDraggable( $obj ) {
@@ -710,7 +710,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		/*
 		 *  Scroll The Slider With Mousewheel
 		 *
-		 * @param  {Object} $obj            - The current FlexSlider setup using custom selector.
+		 * @param  {Element} $obj            - The current FlexSlider setup using custom selector.
 		 * @return {Void}
 		 */
         function slidesExMousewheel( $obj ) {
@@ -760,7 +760,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		/*
 		 * Slider With Thumbnail ControlNav Pattern
 		 *
-		 * @param  {Object} slider           - The current slider.
+		 * @param  {Element} slider           - The current slider.
 		 * @param  {String} navThumbClass    - Class name of thumbnail controlNav.
 		 * @return {Void}
 		 */
@@ -784,7 +784,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		* they will only update if the main flexslider updates. 
 		 *
 		 * @param  {Number} slideNumber          - The current slider index.
-		 * @param  {Object} childrenSlidesObj    - Target slider.
+		 * @param  {Element} childrenSlidesObj    - Target slider.
 		 * @param  {Boolean} loop                - Gives the slider a seamless infinite loop.
 		 * @param  {Number} speed                - Set the speed of animations, in milliseconds.
 		 * @param  {Number} timing               - Set the speed of the slideshow cycling, in milliseconds.

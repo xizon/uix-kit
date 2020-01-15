@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.6
+ * ## Version             :  4.0.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 3, 2020
+ * ## Last Update         :  January 15, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "09a3177b078f8f481610";
+/******/ 	var hotCurrentHash = "2f872b20991f62a5c759";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -823,7 +823,7 @@ window.$ = window.jQuery;
  *
  * @param  {Number} speed       - The speed of movement between elements.
  * @param  {String} transition  - Transition time can simulate easing effect.
- * @param  {JSON} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @param  {Object} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
  * @return {Void}
  *
  *************************************
@@ -911,7 +911,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @param  {String} targetWrapper        - Wrapper of the selector.
  * @param  {String} trigger              - Trigger of the selector.
  * @param  {String} itemsWrapper         - Selector's options container.
- * @param  {Object} item                 - Each option of the selector.
+ * @param  {Element} item                 - Each option of the selector.
  * @return {Void}
  */
 (function ($) {
@@ -1361,8 +1361,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /*
  * Shows the next form.
  *
- * @param  {Object} selector        - Each target forms selector.
- * @param  {Object} formTarget      - Wrapper of target forms selector.
+ * @param  {Element} selector        - Each target forms selector.
+ * @param  {Element} formTarget      - Wrapper of target forms selector.
  * @param  {String} indicator       - Indicator of timeline.
  * @param  {Number} index           - Default index for initialization.
  * 									  0 => step one, 
@@ -2106,7 +2106,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
 										   This attribute "data-modal-height" may not exist. Such as: 200px
  * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
- * @param  {Object|Boolean} btn          - Link or button that fires an event.
+ * @param  {?Element|Boolean} btn          - Link or button that fires an event.
  * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
  * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
  * @param  {Boolean} closeOnlyBtn        - Disable mask to close the window.
@@ -3123,8 +3123,8 @@ var UixMath = UixMath || function () {
  *
  * @private
  * @description This function can be used separately in HTML pages or custom JavaScript.
- * @param  {Object} el     - Target object, using class name or ID to locate.
- * @return {String|JSON}   - The value of property.
+ * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
+ * @return {String|Object}   - The value of property.
  */
 
 var UixCssProperty = UixCssProperty || function () {
@@ -3178,7 +3178,7 @@ function UixModuleFilter_typeof(obj) { if (typeof Symbol === "function" && typeo
  * @global
  * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean|String} destroy       - If it is a string, it means destroying this module from UixModuleInstance
- * @param  {JSON} add                     - New module data.
+ * @param  {Object} add                     - New module data via JSON.
  * @param  {String} add.moduleName        - The name of the module (the default is all uppercase).
  * @param  {Boolean} add.pageLoaded       - Window loading module method. If true or 1, the module will execute after the page is loaded.
  * @param  {Number} add.version           - The new module version number.
@@ -5300,7 +5300,7 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
      * @param  {Function} playTimes      - Number of times.
      * @param  {Number} timing           - Autoplay interval.
      * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
-     * @param  {Object} slider           - Selector of the slider .
+     * @param  {Element} slider           - Selector of the slider .
            * @param  {String} paginationID     - Navigation ID for paging control of each slide.
            * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
      * @return {Void}                    - The constructor.
@@ -5332,7 +5332,7 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
      * Transition Between Slides
      *
      * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Object} slider           - Selector of the slider .
+     * @param  {Element} slider           - Selector of the slider .
            * @param  {String} paginationID     - Navigation ID for paging control of each slide.
            * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
            * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
@@ -5522,7 +5522,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     * @param  {Function} playTimes            - Number of times.
     * @param  {Number} timing                 - Autoplay interval.
     * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-    * @param  {Object} slider                 - Selector of the slider .
+    * @param  {Element} slider                 - Selector of the slider .
      * @param  {String} countTotalID           - Total number ID or class of counter.
      * @param  {String} countCurID             - Current number ID or class of counter.
      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -5550,7 +5550,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
     * Initialize all the items to the stage
     *
-    * @param  {Object} slider                 - Current selector of each slider.
+    * @param  {Element} slider                 - Current selector of each slider.
     * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
     * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -5742,7 +5742,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
      * Transition Between Slides
      *
      * @param  {Number} elementIndex           - Index of current slider.
-     * @param  {Object} slider                 - Selector of the slider .
+     * @param  {Element} slider                 - Selector of the slider .
      * @param  {String} dir                    - Switching direction indicator.
            * @param  {String} countTotalID           - Total number ID or class of counter.
            * @param  {String} countCurID             - Current number ID or class of counter.
@@ -5821,8 +5821,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
      * Initialize the default height of item
      *
-           * @param  {Object} slider                 - Selector of the slider .
-     * @param  {Object} currentLlement         - Current selector of each slider.
+           * @param  {Element} slider                 - Selector of the slider .
+     * @param  {Element} currentLlement         - Current selector of each slider.
      * @return {Void}
      */
 
@@ -5854,7 +5854,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
      * Initialize embedded local video.
      *
-     * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+     * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
      * @param  {Boolean} play            - Forced to trigger pause or play events.
      * @return {Void}
      */
@@ -6245,7 +6245,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     * @param  {Function} playTimes            - Number of times.
     * @param  {Number} timing                 - Autoplay interval.
     * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-    * @param  {Object} slider                 - Selector of the slider .
+    * @param  {Element} slider                 - Selector of the slider .
     * @param  {String} countTotalID           - Total number ID or class of counter.
     * @param  {String} countCurID             - Current number ID or class of counter.
     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -6278,7 +6278,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize all the items to the stage
      *
-     * @param  {Object} slider                 - Current selector of each slider.
+     * @param  {Element} slider                 - Current selector of each slider.
      * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
      * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
            * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -7009,7 +7009,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
      * Transition Between Slides
      *
      * @param  {Number} elementIndex           - Index of current slider.
-     * @param  {Object} slider                 - Selector of the slider .
+     * @param  {Element} slider                 - Selector of the slider .
      * @param  {String} dir                    - Switching direction indicator.
            * @param  {String} countTotalID           - Total number ID or class of counter.
            * @param  {String} countCurID             - Current number ID or class of counter.
@@ -7134,8 +7134,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize the default height of canvas
      *
-           * @param  {Object} slider                 - Selector of the slider .
-     * @param  {Object} currentLlement         - Current selector of each slider.
+           * @param  {Element} slider                 - Selector of the slider .
+     * @param  {Element} currentLlement         - Current selector of each slider.
      * @return {Void}
      */
 
@@ -7183,7 +7183,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
      *
      * @param  {Number} elementIndex           - Index of current slider.
      * @param  {Number} prevElementIndex       - Index of previous slider.
-     * @param  {Object} slider                 - Selector of the slider.
+     * @param  {Element} slider                 - Selector of the slider.
      * @param  {String} goType                 - The type of entry and exit between two items.  
                                                  Optional values: in, out
      * @param  {String} dir                    - Switching direction indicator.	 
@@ -7753,7 +7753,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize embedded local video.
      *
-     * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+     * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
      * @param  {Boolean} play            - Forced to trigger pause or play events.
      * @return {Void}
      */
@@ -8056,12 +8056,12 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} container       - The target container to which the content will be added.
+     * @param  {Element} container       - The target container to which the content will be added.
      * @param  {String|Boolean} target  - The instance ID or class name returned from the callback data. If it is "false", the push content is empty.
      * @param  {String} loading         - Content of loading area.
      * @param  {String} url             - The target URL via AJAX. 
      * @param  {String} method          - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-     * @param  {Object|Boolean} btn     - Current trigger button. Avoid button events if "false".
+     * @param  {?Element|Boolean} btn     - Current trigger button. Avoid button events if "false".
      * @return {Void}
      */
 
@@ -8224,7 +8224,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
      * @param  {String} container    - The target container to which the content will be added.
      * @param  {String} content      - The data returned from the server
      * @param  {String} title        - The title of a requested page.
-     * @param  {Object} btn          - Current trigger button.
+     * @param  {?Element} btn          - Current trigger button.
      * @return {Void}
      */
 
@@ -8421,7 +8421,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -8446,7 +8446,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} container    - The instance returned from the request succeeds 
+     * @param  {Element} container    - The instance returned from the request succeeds 
      * @param  {String} url          - The target URL via AJAX.
      * @param  {String} dir          - Rolling direction indicator.
      * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
@@ -8640,7 +8640,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
      * A function to be called if the request succeeds
      *
      * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
-     * @param  {Object} container - The instance returned from the request succeeds
+     * @param  {Element} container - The instance returned from the request succeeds
      * @param  {String} content   - The data returned from the server
      * @param  {String} title        - The title of a requested page.
      * @return {Void}
@@ -8994,11 +8994,20 @@ function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && type
 var DROPDOWN_MENU = function (module, $, window, document) {
   if (window.DROPDOWN_MENU === null) return false;
   module.DROPDOWN_MENU = module.DROPDOWN_MENU || {};
-  module.DROPDOWN_MENU.version = '0.0.5';
+  module.DROPDOWN_MENU.version = '0.0.7';
 
   module.DROPDOWN_MENU.documentReady = function ($) {
-    //Create a trigger of Dropdown Menu on Click
+    //Initialize option status
+    $('.uix-dropdown-menu').each(function () {
+      var v = $(this).find('input[type="hidden"]').val(),
+          selectedIndex = $(this).find('ul > li > a[data-value="' + v + '"]').parent().index(),
+          $li = $(this).find('ul > li');
+      $li.removeClass('is-active');
+      $li.eq(selectedIndex).addClass('is-active');
+      $(this).find('> summary > span').html($li.eq(selectedIndex).find('> a').data('display-text'));
+    }); //Create a trigger of Dropdown Menu on Click
     //Use $( document ) to support other click events for ajax
+
     $(document).off('click.DROPDOWN_MENU').on('click.DROPDOWN_MENU', '.uix-dropdown-menu > summary', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
@@ -9014,13 +9023,17 @@ var DROPDOWN_MENU = function (module, $, window, document) {
         $this.removeAttr('open').removeClass('is-opened');
       }
 
-      if (dropdown_menu_js_typeof($(this).data('value')) != ( true ? "undefined" : undefined) && $(this).data('value') != '') {
-        $this.find('input[type="hidden"]').val($(this).data('value'));
+      if (dropdown_menu_js_typeof($(this).attr('data-value')) != ( true ? "undefined" : undefined) && $(this).attr('data-value') != '') {
+        $this.find('input[type="hidden"]').val($(this).attr('data-value'));
       }
 
       if (dropdown_menu_js_typeof($(this).data('display-text')) != ( true ? "undefined" : undefined) && $(this).data('display-text') != '') {
         $this.find('> summary > span').html($(this).data('display-text'));
-      }
+      } // update active status
+
+
+      $this.find('li').removeClass('is-active');
+      $(this).parent().addClass('is-active');
     }); //Close the target
     //Do not add off() to this
 
@@ -9498,8 +9511,8 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Return an event from callback function to each slider.
      *
-     * @param  {Object} thisSlider             - The current slider.
-     * @param  {Object} sliderWrapper          - The current slider wrapper.
+     * @param  {Element} thisSlider             - The current slider.
+     * @param  {Element} sliderWrapper          - The current slider wrapper.
      * @param  {String} fireState              - State of fire asynchronously.
      * @return {Number}                        - Index of current slider .
      */
@@ -9721,7 +9734,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Initialize embedded local video.
      *
-     * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+     * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
      * @param  {Boolean} play            - Forced to trigger pause or play events.
      * @return {Void}
      */
@@ -9915,7 +9928,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Make slider image draggable 
      *
-     * @param  {Object} $obj             - The current FlexSlider setup using custom selector.
+     * @param  {Element} $obj             - The current FlexSlider setup using custom selector.
      * @return {Void}
      */
 
@@ -9972,7 +9985,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      *  Scroll The Slider With Mousewheel
      *
-     * @param  {Object} $obj            - The current FlexSlider setup using custom selector.
+     * @param  {Element} $obj            - The current FlexSlider setup using custom selector.
      * @return {Void}
      */
 
@@ -10009,7 +10022,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Slider With Thumbnail ControlNav Pattern
      *
-     * @param  {Object} slider           - The current slider.
+     * @param  {Element} slider           - The current slider.
      * @param  {String} navThumbClass    - Class name of thumbnail controlNav.
      * @return {Void}
      */
@@ -10028,7 +10041,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     * they will only update if the main flexslider updates. 
      *
      * @param  {Number} slideNumber          - The current slider index.
-     * @param  {Object} childrenSlidesObj    - Target slider.
+     * @param  {Element} childrenSlidesObj    - Target slider.
      * @param  {Boolean} loop                - Gives the slider a seamless infinite loop.
      * @param  {Number} speed                - Set the speed of animations, in milliseconds.
      * @param  {Number} timing               - Set the speed of the slideshow cycling, in milliseconds.
@@ -10712,7 +10725,7 @@ var FORM = function (module, $, window, document) {
     /*
      * Initialize single switch
      *
-     * @param  {Object} obj                 - Radio controls. 
+     * @param  {Element} obj                 - Radio controls. 
      * @return {Void}
      */
 
@@ -10774,7 +10787,7 @@ var FORM = function (module, $, window, document) {
     /*
      * Initialize single switch
      *
-     * @param  {Object} obj                 - Radio controls. 
+     * @param  {Element} obj                 - Radio controls. 
      * @return {Void}
      */
 
@@ -11579,7 +11592,7 @@ var LIGHTBOX = function (module, $, window, document) {
      * Click thumbnail to show large photo
      *
      * @param  {Number} index           - The target index of large photo.
-     * @param  {Object} obj             - Target large image <li>.
+     * @param  {Element} obj             - Target large image <li>.
      * @return {Void}
      */
 
@@ -12004,9 +12017,9 @@ var POST_LIST_AJAX = function (module, $, window, document) {
     /*
      * Ajax with JSON data
      *
-     * @param  {Object} ajaxWrapper     - The outermost container of list.
+     * @param  {Element} ajaxWrapper     - The outermost container of list.
      * @param  {Object} defaultPostData - Data to be sent to the server which is custom JSON fields.
-     * @param  {Object} trigger         - Trigger ajax loaded button object.
+     * @param  {String} trigger         - Trigger ajax loaded button object.
      * @param  {Number} curPage         - The current page to load.
      * @param  {Number} perShow         - The amount to load each time.
      * @param  {Number} totalPage       - The total page to load.
@@ -12437,7 +12450,7 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -12709,8 +12722,8 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       /*
        * Transition Between Items
        *
-       * @param  {Object} wrapper         - Wrapper of carousel.
-       * @param  {Object} curBtn          - The button that currently triggers the move.
+       * @param  {Element} wrapper         - Wrapper of carousel.
+       * @param  {?Element} curBtn          - The button that currently triggers the move.
        * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
        * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
        * @param  {Number} steps           - The number of steps per move.
@@ -12972,9 +12985,9 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			/*
 //			 * Transition between items next (left/up)
 //			 *
-//			 * @param  {Object} wrapper         - Wrapper of carousel.
-//			 * @param  {Object} items           - Items of carousel.
-//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {Element} wrapper         - Wrapper of carousel.
+//			 * @param  {Element} items           - Items of carousel.
+//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 //			 * @return {Void}
@@ -13111,9 +13124,9 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			/*
 //			 * Transition between items previously (right/down)
 //			 *
-//			 * @param  {Object} wrapper         - Wrapper of carousel.
-//			 * @param  {Object} items           - Items of carousel.
-//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {Element} wrapper         - Wrapper of carousel.
+//			 * @param  {Element} items           - Items of carousel.
+//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 //			 * @return {Void}
@@ -13359,7 +13372,7 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -13385,7 +13398,7 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} el           - The container of each sections.
+     * @param  {Element} el           - The container of each sections.
      * @param  {String} dir          - Rolling direction indicator.
      * @param  {Number} hashID       - ID of custom hashchange event.
      * @return {Void}
@@ -13464,8 +13477,8 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Get link by section or article id
      *
-     * @param  {String|Object} el    - The current selector or selector ID
-     * @param  {Object} menuObj       - Returns the menu element within the document.
+     * @param  {String|Element} el    - The current selector or selector ID
+     * @param  {Element} menuObj       - Returns the menu element within the document.
      * @param  {Boolean} echoIndex    - Whether to return the current index.
      * @return {Object}               - A new selector.
      */
@@ -13481,8 +13494,8 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Get all links by section or article
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
-     * @return {Object}             - A new selector.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
+     * @return {Element}             - A new selector.
      */
 
 
@@ -13492,7 +13505,7 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Smooth scroll to content
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
      * @return {Void}
      */
 
@@ -13734,7 +13747,7 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -13760,7 +13773,7 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} el           - The container of each sections.
+     * @param  {Element} el           - The container of each sections.
      * @param  {String} dir          - Rolling direction indicator.
      * @param  {Number} hashID       - ID of custom hashchange event.
      * @return {Void}
@@ -13860,8 +13873,8 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Get all links by section or article
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
-     * @return {Object}             - A new selector.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
+     * @return {Element}             - A new selector.
      */
 
 
@@ -13871,7 +13884,7 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Smooth scroll to content
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
      * @return {Void}
      */
 
@@ -15066,7 +15079,7 @@ function smooth_scrolling_page_js_typeof(obj) { if (typeof Symbol === "function"
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.6';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.7';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -15092,7 +15105,13 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
     }); //Increase the viewport to display the visual area
 
     var elTop = $(scroller.target).offset().top;
-    $(scroller.target).wrap('<div style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>').css('margin-top', elTop + 'px');
+    var initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
+
+    if (!$('body').hasClass(initSmoothScrollingPageWrapper)) {
+      $('body').addClass(initSmoothScrollingPageWrapper);
+      $(scroller.target).wrap('<div id="uix-scrollspy-area__wrapper" style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>').css('margin-top', elTop + 'px');
+    }
+
     $(window).off('resize.SMOOTH_SCROLLING_PAGE').on('resize.SMOOTH_SCROLLING_PAGE', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
@@ -16463,7 +16482,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
      * Sets an animation for each element
      *
      * @param  {Number} base           - Base offset value.
-     * @param  {Object} obj            - An HTML element.
+     * @param  {String} obj            - An HTML element.
      * @param  {Boolean} reset         - Reset block on mouse leave
      * @return {Void}
      */
@@ -16526,7 +16545,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
      *
      * @param  {Number} base           - Base offset value.
      * @param  {Number} multiple       - The power of target number.
-     * @param  {Object} obj            - An HTML element.
+     * @param  {String} obj            - An HTML element.
      * @param  {Boolean} reset         - Reset block on mouse leave
      * @return {Void}
      */
@@ -16981,7 +17000,7 @@ var THREE_GALLERY = function (module, $, window, document) {
       /*
        * Load Image
        *
-       * @param  {Object} imgLoader       - A loader for loading all images from array.
+       * @param  {Element} imgLoader       - A loader for loading all images from array.
        * @param  {String} src             - URL of image.
        * @param  {Number} index           - Index of image.
        * @param  {Number} w               - The width of an image, in pixels. 
@@ -16989,7 +17008,7 @@ var THREE_GALLERY = function (module, $, window, document) {
        * @param  {Number} total           - Total number of preload images.
        * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
        * @param  {Number} radius          - Radius length of the sphere (circumference).
-       * @param  {Object} loading         - Progress bar display control.
+       * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
 
@@ -17949,8 +17968,8 @@ var THREE_PARTICLE = function (module, $, window, document) {
       /*
        * Get Image Data when Draw Image To Canvas
        *
-       * @param  {Object} image         - Overridden with a record type holding data, width and height.
-       * @return {JSON}                 - The image data.
+       * @param  {!Element} image         - Overridden with a record type holding data, width and height.
+       * @return {Object}                 - The image data via JSON.
        */
 
 
@@ -19464,12 +19483,12 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
       /*
        * Load Source
        *
-       * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+       * @param  {Three.MeshBasicMaterial.map} texture         - Returns a new texture object which can directly be used for material creation.
        * @param  {Number} index           - Index of image or video.
        * @param  {Number} w               - The width of an image or video, in pixels. 
        * @param  {Number} h               - The height of an image or video, in pixels. 
        * @param  {Number} total           - Total number of preload images or video.
-       * @param  {Object} loading         - Progress bar display control.
+       * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
 
@@ -19522,7 +19541,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
       * @param  {Function} playTimes            - Number of times.
       * @param  {Number} timing                 - Autoplay interval.
       * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-      * @param  {Object} slider                 - Selector of the slider .
+      * @param  {Element} slider                 - Selector of the slider .
       * @param  {String} countTotalID           - Total number ID or class of counter.
       * @param  {String} countCurID             - Current number ID or class of counter.
       * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -20161,12 +20180,12 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
       /*
        * Load Source
        *
-       * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+       * @param  {Three.MeshBasicMaterial.map} texture         - Returns a new texture object which can directly be used for material creation.
        * @param  {Number} index           - Index of image or video.
        * @param  {Number} w               - The width of an image or video, in pixels. 
        * @param  {Number} h               - The height of an image or video, in pixels. 
        * @param  {Number} total           - Total number of preload images or video.
-       * @param  {Object} loading         - Progress bar display control.
+       * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
 
@@ -20251,7 +20270,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
       * @param  {Function} playTimes            - Number of times.
       * @param  {Number} timing                 - Autoplay interval.
       * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-      * @param  {Object} slider                 - Selector of the slider .
+      * @param  {Element} slider                 - Selector of the slider .
       * @param  {String} countTotalID           - Total number ID or class of counter.
       * @param  {String} countCurID             - Current number ID or class of counter.
       * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -20969,7 +20988,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
       * @param  {Function} playTimes            - Number of times.
       * @param  {Number} timing                 - Autoplay interval.
       * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-      * @param  {Object} slider                 - Selector of the slider .
+      * @param  {Element} slider                 - Selector of the slider .
       * @param  {String} countTotalID           - Total number ID or class of counter.
       * @param  {String} countCurID             - Current number ID or class of counter.
       * @param  {String} paginationID           - Navigation ID for paging control of each slide.
@@ -22041,8 +22060,8 @@ var TIMELINE = function (module, $, window, document) {
     /*
      * Method that updates items of timeline
      *
-     * @param  {Object} obj                  - Wrapper of timeline.
-     * @param  {Object} iscur                - The current item.
+     * @param  {Element} obj                  - Wrapper of timeline.
+     * @param  {?Element} iscur                - The current item.
      * @param  {String} showEle              - Element ID or class name that push the current text.
      * @param  {Boolean} prev                - Whether to slide forward.
      * @return {Void}

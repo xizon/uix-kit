@@ -2,8 +2,8 @@
 /*
  * Shows the next form.
  *
- * @param  {Object} selector        - Each target forms selector.
- * @param  {Object} formTarget      - Wrapper of target forms selector.
+ * @param  {Element} selector        - Each target forms selector.
+ * @param  {Element} formTarget      - Wrapper of target forms selector.
  * @param  {String} indicator       - Indicator of timeline.
  * @param  {Number} index           - Default index for initialization.
  * 									  0 => step one, 

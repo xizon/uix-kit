@@ -238,8 +238,8 @@ export const UixMath = UixMath || ( () => {
  *
  * @private
  * @description This function can be used separately in HTML pages or custom JavaScript.
- * @param  {Object} el     - Target object, using class name or ID to locate.
- * @return {String|JSON}   - The value of property.
+ * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
+ * @return {String|Object}   - The value of property.
  */
 export const UixCssProperty = UixCssProperty || ( () => {
     function t() { }

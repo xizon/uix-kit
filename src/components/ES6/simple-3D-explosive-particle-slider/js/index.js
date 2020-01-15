@@ -626,12 +626,12 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			/*
 			 * Load Source
 			 *
-			 * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+			 * @param  {Three.MeshBasicMaterial.map} texture         - Returns a new texture object which can directly be used for material creation.
 			 * @param  {Number} index           - Index of image or video.
 			 * @param  {Number} w               - The width of an image or video, in pixels. 
 			 * @param  {Number} h               - The height of an image or video, in pixels. 
 			 * @param  {Number} total           - Total number of preload images or video.
-			 * @param  {Object} loading         - Progress bar display control.
+			 * @param  {Element|String} loading         - Progress bar display control.
 			 * @return {Void}
 			 */
 			function loadSource( texture, index, w, h, total, loading ) {
@@ -735,7 +735,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
              * @param  {Function} playTimes            - Number of times.
              * @param  {Number} timing                 - Autoplay interval.
              * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-             * @param  {Object} slider                 - Selector of the slider .
+             * @param  {Element} slider                 - Selector of the slider .
              * @param  {String} countTotalID           - Total number ID or class of counter.
              * @param  {String} countCurID             - Current number ID or class of counter.
              * @param  {String} paginationID           - Navigation ID for paging control of each slide.

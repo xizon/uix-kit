@@ -374,8 +374,8 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 			/*
 			 * Get Image Data when Draw Image To Canvas
 			 *
-			 * @param  {Object} image         - Overridden with a record type holding data, width and height.
-			 * @return {JSON}                 - The image data.
+			 * @param  {!Element} image         - Overridden with a record type holding data, width and height.
+			 * @return {Object}                 - The image data via JSON.
 			 */
 			function getImageData( image ) {
 

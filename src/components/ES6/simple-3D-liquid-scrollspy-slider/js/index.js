@@ -823,7 +823,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
              * @param  {Function} playTimes            - Number of times.
              * @param  {Number} timing                 - Autoplay interval.
              * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
-             * @param  {Object} slider                 - Selector of the slider .
+             * @param  {Element} slider                 - Selector of the slider .
              * @param  {String} countTotalID           - Total number ID or class of counter.
              * @param  {String} countCurID             - Current number ID or class of counter.
              * @param  {String} paginationID           - Navigation ID for paging control of each slide.
