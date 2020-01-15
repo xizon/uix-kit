@@ -8,6 +8,6 @@ node_js:
 script: 
  - npm cache verify
  - npm cache clean --force
- - npm rebuild node-sass
+ - npm i -g npm
  - npm install --dev
  - npm view build
