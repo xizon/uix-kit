@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 4.1.0 (January 16, 2020) =
+
+* Fix: Fixed an issue where webpack might skip uncompressed CSS files packaging.
+
+
 
 #### = 4.0.9 (January 15, 2020) =
 
