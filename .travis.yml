@@ -1,11 +1,18 @@
+# For more information about the configurations used
+# in this file, please see the Travis CI documentation:
+# https://docs.travis-ci.com
 language: node_js
 
 node_js:
-
   - 10
+  
+before_install:
+  - npm install rimraf -g
+  - rimraf node_modules
+  - npm config set package-lock false
+  - npm cache clean --force
+
 
 script: 
- - npm cache verify
- - npm cache clean --force
  - npm install --dev
  - npm view build
