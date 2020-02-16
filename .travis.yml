@@ -6,6 +6,8 @@ language: node_js
 node_js:
   - 10
   
-before_install:
-  - npm install --no-package-lock
+install:
+  - npm install --only=dev --unsafe-perm --production
 
+script: 
+ - npm view build
