@@ -6,6 +6,8 @@ language: node_js
 node_js:
   - 10
   
-script: true
-# - npm install --dev
-# - npm view build
+# Use README.md command `npm install --only=dev --unsafe-perm --production`, don't use `npm ci`
+
+script:
+  - npm install --dev
+  - npm view build
