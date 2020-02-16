@@ -127,13 +127,13 @@
 &lt;a class=&quot;uix-lightbox__trigger&quot; href=&quot;#&quot; data-lb-html=&quot;#my-lightbox-html-2&quot; data-lb-fixed=&quot;false&quot;&gt;Click Me To Show HTML Code (Not Fixed)&lt;/a&gt;</code>
 </pre>		
 							
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class="uix-lightbox__content-container" id="my-lightbox-html-1"&gt;
-   &lt;div class="uix-lightbox__content"&gt;
-	    &lt;div&gt;
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-1"&gt;
+   &lt;div class="uix-lightbox__content" role="document"&gt;
+	    &lt;div role="note"&gt;
 			&lt;!-- ///////   content begin /////// --&gt;
 			...
 			&lt;!-- ///////   content end /////// --&gt;
-		&lt;/div&gt;&lt;!-- /div --&gt;
+		&lt;/div&gt;&lt;!-- /[role="note"] --&gt;
    &lt;/div&gt;&lt;!-- /.uix-lightbox__content --&gt;
 &lt;/div&gt;
 &lt;!-- /.uix-lightbox__content-container --&gt;</code>
@@ -167,9 +167,9 @@
 
 								<a class="uix-lightbox__trigger" href="#" data-lb-html="#my-lightbox-html-1"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code</a>
 
-							   <div class="uix-lightbox__content-container" id="my-lightbox-html-1">
-								   <div class="uix-lightbox__content">
-									   <div>
+							   <div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-1">
+								   <div class="uix-lightbox__content" role="document">
+									   <div role="note">
 
 											<!-- ///////   content begin /////// -->
 
@@ -184,7 +184,7 @@
 
 											<!-- ///////   content end /////// -->
 
-										</div><!-- /div -->
+										</div><!-- /[role="note"] -->
 								   </div><!-- /.uix-lightbox__content -->
 							   </div>
 							   <!-- /.uix-lightbox__content-container -->
@@ -201,9 +201,9 @@
 
 								<a class="uix-lightbox__trigger" href="#" data-lb-html="#my-lightbox-html-2" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code (Not Fixed)</a>
 
-							   <div class="uix-lightbox__content-container" id="my-lightbox-html-2">
-								   <div class="uix-lightbox__content">
-									   <div>
+							   <div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-2">
+								   <div class="uix-lightbox__content" role="document">
+									   <div role="note">
 
 											<!-- ///////   content begin /////// -->
 
@@ -218,7 +218,7 @@
 
 											<!-- ///////   content end /////// -->
 
-										</div><!-- /div -->
+										</div><!-- /[role="note"] -->
 								   </div><!-- /.uix-lightbox__content -->
 							   </div>
 							   <!-- /.uix-lightbox__content-container -->
@@ -253,9 +253,9 @@
 <pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;a class=&quot;uix-lightbox__trigger&quot; href=&quot;ajax-page.html&quot; data-lb-html=&quot;#my-lightbox-html-4&quot; data-lb-fixed=&quot;false&quot; data-lb-ajax='{&quot;target&quot;:&quot;#my-ajax-demo-target-button&quot;, &quot;method&quot;:&quot;POST&quot;}'&gt;Click Me To Add &lt;strong&gt;&quot;ajax-page.html&quot;&lt;/strong&gt; Elements&lt;/a&gt;</code>
 </pre>		
 							
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class="uix-lightbox__content-container" id="my-lightbox-html-4"&gt;
-   &lt;div class="uix-lightbox__content"&gt;
-	   &lt;div&gt;&lt;/div&gt;&lt;!-- /div --&gt;
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-4"&gt;
+   &lt;div class="uix-lightbox__content" role="document"&gt;
+	   &lt;div role="note"&gt;&lt;/div&gt;&lt;!-- /[role="note"] --&gt;
    &lt;/div&gt;&lt;!-- /.uix-lightbox__content --&gt;
 &lt;/div&gt;
 &lt;!-- /.uix-lightbox__content-container --&gt;</code>
@@ -288,9 +288,9 @@
 								    
 								<a class="uix-lightbox__trigger" href="button.html" data-lb-html="#my-lightbox-html-4" data-lb-fixed="false" data-lb-ajax='{"target":"#my-ajax-demo-target-button", "method":"POST"}'><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Add <strong>"button.html"</strong> Elements</a>
 
-							   <div class="uix-lightbox__content-container" id="my-lightbox-html-4">
-								   <div class="uix-lightbox__content">
-									   <div></div><!-- /div -->
+							   <div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-4">
+								   <div class="uix-lightbox__content" role="document">
+									   <div role="note"></div><!-- /[role="note"] -->
 								   </div><!-- /.uix-lightbox__content -->
 							   </div>
 							   <!-- /.uix-lightbox__content-container -->

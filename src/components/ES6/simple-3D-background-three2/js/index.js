@@ -23,6 +23,9 @@ import {
 } from '@uixkit/core/_global/js';
 
 
+import fragment from "./shader/fragment-custom.glsl";
+import vertex from "./shader/vertex-custom.glsl";
+
 
 export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 	if ( window.THREE_BACKGROUND_THREE2 === null ) return false;
@@ -30,7 +33,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND_THREE2               = module.THREE_BACKGROUND_THREE2 || {};
-    module.THREE_BACKGROUND_THREE2.version       = '0.0.3';
+    module.THREE_BACKGROUND_THREE2.version       = '0.0.4';
     module.THREE_BACKGROUND_THREE2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -57,9 +60,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 				clock = new THREE.Clock();
 
 
-			var mouseVector  = new THREE.Vector2(),
-				vertex       = document.getElementById( 'vertexshader' ).textContent,
-				fragment     = document.getElementById( 'fragmentshader' ).textContent;
+			var mouseVector  = new THREE.Vector2();
 
 			var mouseX = 0;
 			var mouseY = 0;

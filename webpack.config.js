@@ -279,6 +279,14 @@ const webpackConfig = {
 	},
     module: {
         rules: [
+            {
+                test: /\.(glsl|vs|fs|vert|frag)$/,
+                exclude: path.resolve( __dirname, 'node_modules' ),
+                use: [
+                    'raw-loader',
+                    'glslify-loader'
+                ]
+            },
 			{
 				test: /\.json$/,
 				use: 'json-loader'

@@ -22,9 +22,12 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.2';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.3';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
+
+        // trigger of AJAX request
+        var AJAXPageLinks = '[data-ajax-push-content]';
         
         //all images from pages
         var sources = []; 
@@ -43,6 +46,8 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 			thisPageTitle = document.title;
 		
         
+        // The progress of each page load, using global variables to accurately determine
+        var loadedProgress = 0;
         
         //loading animation
         var loadingAnim = function( per ) {
@@ -52,12 +57,14 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
         
 		
 		//Click event
-		$( document ).off( 'click.AJAX_PUSH_CONTENT' ).on( 'click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function( event ) {
+		$( document ).off( 'click.AJAX_PUSH_CONTENT' ).on( 'click.AJAX_PUSH_CONTENT', AJAXPageLinks, function( event ) {
 			
 			event.preventDefault();
 			
-			
-			
+            // The progress of each page load
+            loadedProgress = 0; 
+
+			//
 			var $this               = $( this ),
 			    curURL              = $this.attr( 'href' ),
 				config              = $this.data( 'ajax-push-content' );
@@ -110,7 +117,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 			var eleTarget = null,
 				goURL     = location.href;
 			
-			$( '[data-ajax-push-content]' ).each( function() {
+			$( AJAXPageLinks ).each( function() {
 				
 				//don't use $( this ).attr( 'href' )
 				
@@ -122,7 +129,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
 			
 			//Empty content that does not exist
-			$( '[data-ajax-push-content]' ).each( function() {
+			$( AJAXPageLinks ).each( function() {
 				var curConfig = $( this ).data( 'ajax-push-content' );
 				if ( typeof curConfig != typeof undefined ) {
 					pushAction( $( curConfig.container ), false, curConfig.loading, goURL, curConfig.method, false );
@@ -336,6 +343,9 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
                     if ( isNaN( per ) ) per = 100;  
                     
+                    // The progress of each page load
+                    loadedProgress = per; 
+
                     //loading animation
                     loadingAnim( per );
 
@@ -409,7 +419,9 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		 */
 		function ajaxSucceeds( container, content, title, btn ) {
 			
-		
+            //If the page resource is not loaded, then the following code is not executed
+            if ( loadedProgress < 100 ) return false;
+            
 			//Remove loader
 			TweenMax.to( container.find( '.ajax-content-loader' ), 0.5, {
 				alpha       : 0,

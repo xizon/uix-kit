@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 4.1.1 (February 16, 2020) =
+
+* Tweak: Optimized the loading method via AJAX request.
+* Tweak: Change the method of importing the shader.
+* Tweak: Optimized the button and HTML structure of the popup module.
+
+
 #### = 4.1.0 (January 16, 2020) =
 
 * Fix: Fixed an issue where webpack might skip uncompressed CSS files packaging.

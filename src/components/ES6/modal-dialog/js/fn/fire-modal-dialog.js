@@ -61,7 +61,7 @@
 
 
 					if ( linkBtn.data( 'video-win' ) ) {
-						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+						$obj.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
 					}
 
 				}
@@ -123,9 +123,9 @@
 					setTimeout( function() {
 
 						if ( !$obj.hasClass( 'is-video' ) ) {
-							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
+							$obj.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'scroll' );
 						} else {
-							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+							$obj.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
 						}
 
 					}, settings.speed );

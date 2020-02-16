@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.0.9
+ * ## Version             :  4.1.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 15, 2020
+ * ## Last Update         :  February 16, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "2f872b20991f62a5c759";
+/******/ 	var hotCurrentHash = "1ccb836b0a2a802e1c91";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2153,7 +2153,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           $obj.find('.uix-modal-box__content').addClass('js-uix-no-fullscreen');
 
           if (linkBtn.data('video-win')) {
-            $obj.find('.uix-modal-box__content > div').css('overflow-y', 'hidden');
+            $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
           }
         }
 
@@ -2203,9 +2203,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if ($obj.hasClass('is-fullscreen')) {
           setTimeout(function () {
             if (!$obj.hasClass('is-video')) {
-              $obj.find('.uix-modal-box__content > div').css('overflow-y', 'scroll');
+              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'scroll');
             } else {
-              $obj.find('.uix-modal-box__content > div').css('overflow-y', 'hidden');
+              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
             }
           }, settings.speed);
         }
@@ -4424,7 +4424,7 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
 var VIDEOS = function (module, $, window, document) {
   if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
-  module.VIDEOS.version = '0.1.2';
+  module.VIDEOS.version = '0.1.3';
 
   module.VIDEOS.documentReady = function ($) {
     var $window = $(window),
@@ -4612,8 +4612,8 @@ var VIDEOS = function (module, $, window, document) {
           vogv = '<source src="' + videoSrcOgv + '" type="video/ogv">';
         }
 
-        v += '<div class="uix-modal-box is-fullscreen is-video" tabindex="-1" role="dialog" aria-hidden="true" id="' + videoContainerMid + '">';
-        v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
+        v += '<div class="uix-modal-box is-fullscreen is-video" role="dialog" tabindex="-1" aria-hidden="true" id="' + videoContainerMid + '">';
+        v += '<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>';
         v += '<div class="uix-modal-box__content" role="document">';
         v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 
@@ -7971,10 +7971,12 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.2';
+  module.AJAX_PUSH_CONTENT.version = '0.1.3';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
-    //all images from pages
+    // trigger of AJAX request
+    var AJAXPageLinks = '[data-ajax-push-content]'; //all images from pages
+
     var sources = []; //Added timer to prevent page loading errors for a long time
 
     var timeClockInit;
@@ -7986,15 +7988,20 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
       "loading": "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading <em id=\"app-loading\" data-txt=\"{progress}%\"></em>...</span></div>",
       "method": "POST"
     },
-        thisPageTitle = document.title; //loading animation
+        thisPageTitle = document.title; // The progress of each page load, using global variables to accurately determine
+
+    var loadedProgress = 0; //loading animation
 
     var loadingAnim = function loadingAnim(per) {
       $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
     }; //Click event
 
 
-    $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function (event) {
-      event.preventDefault();
+    $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', AJAXPageLinks, function (event) {
+      event.preventDefault(); // The progress of each page load
+
+      loadedProgress = 0; //
+
       var $this = $(this),
           curURL = $this.attr('href'),
           config = $this.data('ajax-push-content');
@@ -8029,7 +8036,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     window.addEventListener('popstate', function (e) {
       var eleTarget = null,
           goURL = location.href;
-      $('[data-ajax-push-content]').each(function () {
+      $(AJAXPageLinks).each(function () {
         //don't use $( this ).attr( 'href' )
         if (this.href === location.href) {
           eleTarget = this;
@@ -8037,7 +8044,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         }
       }); //Empty content that does not exist
 
-      $('[data-ajax-push-content]').each(function () {
+      $(AJAXPageLinks).each(function () {
         var curConfig = $(this).data('ajax-push-content');
 
         if (AJAX_push_js_typeof(curConfig) != ( true ? "undefined" : undefined)) {
@@ -8178,7 +8185,9 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           //loading
           per = parseInt(100 * (perInit / sources.length));
           console.log('progress: ' + per + '%');
-          if (isNaN(per)) per = 100; //loading animation
+          if (isNaN(per)) per = 100; // The progress of each page load
+
+          loadedProgress = per; //loading animation
 
           loadingAnim(per);
           var texture = null;
@@ -8230,7 +8239,9 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
 
 
     function ajaxSucceeds(container, content, title, btn) {
-      //Remove loader
+      //If the page resource is not loaded, then the following code is not executed
+      if (loadedProgress < 100) return false; //Remove loader
+
       TweenMax.to(container.find('.ajax-content-loader'), 0.5, {
         alpha: 0,
         onComplete: function onComplete() {
@@ -8287,7 +8298,7 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.3';
+  module.AJAX_PAGE_LOADER.version = '0.1.4';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
@@ -8310,7 +8321,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         total = $navs.length,
         $sectionsContainer = $('.uix-ajax-load__fullpage-container'),
         ajaxContainer = '.ajax-container',
-        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); //loading animation
+        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); // The progress of each page load, using global variables to accurately determine
+
+    var loadedProgress = 0; //loading animation
 
     var loadingAnim = function loadingAnim(per) {
       $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
@@ -8372,7 +8385,10 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         return;
       }
 
-      e.preventDefault();
+      e.preventDefault(); // The progress of each page load
+
+      loadedProgress = 0; //
+
       var $this = $(this),
           curIndex = $this.attr('data-index'),
           curURL = $this.attr('href'); //The currently URL of link
@@ -8595,7 +8611,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             //loading
             per = parseInt(100 * (perInit / sources.length));
             console.log('progress: ' + per + '%');
-            if (isNaN(per)) per = 100; //loading animation
+            if (isNaN(per)) per = 100; // The progress of each page load
+
+            loadedProgress = per; //loading animation
 
             loadingAnim(per);
             var texture = null;
@@ -8648,6 +8666,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
 
     function ajaxSucceeds(dir, container, content, title) {
+      //If the page resource is not loaded, then the following code is not executed
+      if (loadedProgress < 100) return false; //
+
       var oldContent = container.html(); //Remove loader
 
       TweenMax.to('.uix-ajax-load__loader', 0.5, {
@@ -11234,11 +11255,11 @@ function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.6';
+  module.LIGHTBOX.version = '0.1.7';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
-      $('body').prepend('<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"></div>');
+      $('body').prepend('<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"><button type="button"></button></div>');
     }
 
     var innerEl = '.uix-lightbox__inner',
@@ -12291,7 +12312,7 @@ function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.2';
+  module.MODAL_DIALOG.version = '0.1.3';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -16116,6 +16137,10 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/shader/fragment-custom.glsl
+/* harmony default export */ var fragment_custom = ("#define GLSLIFY 1\nuniform float time;\n\nuniform sampler2D texture;\n\nvarying vec2 vUv;\n\nvoid main( void ) {\n\n    vec2 position = - 1.0 + 2.0 * vUv;\n\n    float a = atan( position.y, position.x );\n    float r = sqrt( dot( position, position ) );\n\n    vec2 uv;\n    uv.x = cos( a ) / r;\n    uv.y = sin( a ) / r;\n    uv /= 10.0;\n    uv += time * 0.05;\n\n    vec3 color = texture2D( texture, uv ).rgb;\n\n    gl_FragColor = vec4( color * r * 1.5, 1.0 );\n\n}");
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/shader/vertex-custom.glsl
+/* harmony default export */ var vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nvoid main()\n{\n    vUv = uv;\n    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n    gl_Position = projectionMatrix * mvPosition;\n}");
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/index.js
 function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -16132,10 +16157,12 @@ function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { 
  * @requires ./src/components/ES5/_plugins-THREE
  */
 
+
+
 var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE2 === null) return false;
   module.THREE_BACKGROUND_THREE2 = module.THREE_BACKGROUND_THREE2 || {};
-  module.THREE_BACKGROUND_THREE2.version = '0.0.3';
+  module.THREE_BACKGROUND_THREE2.version = '0.0.4';
 
   module.THREE_BACKGROUND_THREE2.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -16155,9 +16182,7 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
           material,
           displacementSprite,
           clock = new THREE.Clock();
-      var mouseVector = new THREE.Vector2(),
-          vertex = document.getElementById('vertexshader').textContent,
-          fragment = document.getElementById('fragmentshader').textContent;
+      var mouseVector = new THREE.Vector2();
       var mouseX = 0;
       var mouseY = 0;
 
@@ -16185,8 +16210,8 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
               value: new THREE.TextureLoader().load($('#' + rendererCanvasID).data('filter-texture'))
             }
           },
-          fragmentShader: fragment,
-          vertexShader: vertex
+          fragmentShader: fragment_custom,
+          vertexShader: vertex_custom
         }); //if use texture
 
         material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
@@ -17078,6 +17103,10 @@ var THREE_GALLERY = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/shader/fragment-custom.glsl
+/* harmony default export */ var shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/shader/vertex-custom.glsl
+/* harmony default export */ var shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/index.js
 function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -17094,10 +17123,12 @@ function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { i
  * @requires ./src/components/ES5/_plugins-THREE
  */
 
+
+
 var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
   if (window.THREE_IMAGE_TRANSITION === null) return false;
   module.THREE_IMAGE_TRANSITION = module.THREE_IMAGE_TRANSITION || {};
-  module.THREE_IMAGE_TRANSITION.version = '0.0.2';
+  module.THREE_IMAGE_TRANSITION.version = '0.0.3';
 
   module.THREE_IMAGE_TRANSITION.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -17118,9 +17149,7 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
           renderer,
           displacementSprite,
           theta = 0;
-      var vertex = document.getElementById('vertexshader').textContent,
-          fragment = document.getElementById('fragmentshader').textContent,
-          filterMaterial,
+      var filterMaterial,
           offsetWidth = $('#' + rendererCanvasID).parent().width(),
           offsetHeight = $('#' + rendererCanvasID).parent().width() * (550 / 1400);
 
@@ -17200,8 +17229,8 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
               value: disp
             }
           },
-          vertexShader: vertex,
-          fragmentShader: fragment,
+          vertexShader: shader_vertex_custom,
+          fragmentShader: shader_fragment_custom,
           transparent: true,
           opacity: 1.0
         });
@@ -20423,6 +20452,10 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/fragment-custom.glsl
+/* harmony default export */ var js_shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
+/* harmony default export */ var js_shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/scss/_style.scss
 var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(62);
 
@@ -20445,10 +20478,12 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { if (typeof Symbol ==
  */
 
 
+
+
 var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
   module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.8';
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.9';
 
   module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -20481,9 +20516,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
       offsetHeight = 1080,
           //Set the display height of the objects
       imgAspect = offsetHeight / offsetWidth;
-      var vertex = document.getElementById('vertexshader').textContent,
-          fragment = document.getElementById('fragmentshader').textContent,
-          dispImage;
+      var dispImage;
       var loader = new THREE.TextureLoader();
       loader.crossOrigin = 'anonymous';
       var textures;
@@ -20873,8 +20906,8 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
               value: disp
             }
           },
-          vertexShader: vertex,
-          fragmentShader: fragment,
+          vertexShader: js_shader_vertex_custom,
+          fragmentShader: js_shader_fragment_custom,
           transparent: true,
           opacity: 1.0
         });

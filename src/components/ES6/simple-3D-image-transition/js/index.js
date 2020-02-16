@@ -23,12 +23,15 @@ import {
 } from '@uixkit/core/_global/js';
 
 
+import fragment from "./shader/fragment-custom.glsl";
+import vertex from "./shader/vertex-custom.glsl";
+
 export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 	if ( window.THREE_IMAGE_TRANSITION === null ) return false;
 	
 	
     module.THREE_IMAGE_TRANSITION               = module.THREE_IMAGE_TRANSITION || {};
-    module.THREE_IMAGE_TRANSITION.version       = '0.0.2';
+    module.THREE_IMAGE_TRANSITION.version       = '0.0.3';
     module.THREE_IMAGE_TRANSITION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -56,9 +59,7 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 				theta        = 0;
 
 
-			var vertex       = document.getElementById( 'vertexshader' ).textContent,
-				fragment     = document.getElementById( 'fragmentshader' ).textContent,
-				filterMaterial,
+			var filterMaterial,
 				offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
 				offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
 

@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.3';
+    module.AJAX_PAGE_LOADER.version       = '0.1.4';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
@@ -52,6 +52,9 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			ajaxContainer       = '.ajax-container',
 			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
 		
+        
+        // The progress of each page load, using global variables to accurately determine
+        var loadedProgress = 0;
 		
         //loading animation
         var loadingAnim = function( per ) {
@@ -130,7 +133,11 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			
 			e.preventDefault();
 			
-			
+            
+            // The progress of each page load
+            loadedProgress = 0; 
+
+			//
 			var $this            = $( this ),
 				curIndex         = $this.attr( 'data-index' ),
 			    curURL           = $this.attr( 'href' ); 
@@ -452,6 +459,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                         console.log( 'progress: ' + per + '%' );
 
                         if ( isNaN( per ) ) per = 100;  
+                        
+                        // The progress of each page load
+                        loadedProgress = per;
+                        
 
                         //loading animation
                         loadingAnim( per ); 
@@ -528,7 +539,11 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function ajaxSucceeds( dir, container, content, title ) {
+            
+            //If the page resource is not loaded, then the following code is not executed
+            if ( loadedProgress < 100 ) return false;
 			
+            //
 			var oldContent = container.html();
 		
 			//Remove loader

@@ -79,14 +79,33 @@ $modal-box-radius: 8px;
 
 
 	.uix-modal-box__content {
-		padding: 1.5rem 1.625rem 1.5rem 1.5rem;
 		word-wrap: break-word;
 		height: 100%;
 
-		> div {
+        
+        > [class*="uix-modal-box__video-"], /* video content */
+        > .uix-modal-box__body /* normal content */
+        {
+            position: relative;
+            height: 100%;
+            padding: 1.5rem 1.625rem 1.5rem 1.5rem;
+        }
+        
+        /* content header */
+ 		> .uix-modal-box__head {
 			position: relative;
-			height: 100%;
-			overflow: hidden;
+            padding: 0 55px 0 1.5rem;
+		}
+
+        
+        /* content body */
+		> .uix-modal-box__body {
+            
+            > [role="note"] {
+                overflow: hidden;
+                height: 100%;
+            }
+
 		}
 
 		img {
@@ -108,23 +127,28 @@ $modal-box-radius: 8px;
 		position: absolute;
 		right: 12px;
 		top: 12px;
-		transform: rotate(45deg);
 		z-index: 1;
 		pointer-events: auto;
+        border: none;
+        outline: none;
+        cursor: pointer;
 
 		&::after {
 			font-family: 'Font Awesome 5 Free';
 			font-weight: 600;
-			content: "\f067";
+			content: "\f00d";
 			color: #fff;
 			font-size: 16px;
 			margin: 0;
-
 		}
 
 		&:hover {
 			background: #b50d14;
 		}
+        
+        &:focus {
+            outline: 3px auto -webkit-focus-ring-color;
+        }
 
 	}
 
@@ -170,8 +194,11 @@ $modal-box-radius: 8px;
 
 	&.is-active .uix-modal-box__content {
 
-		> div {
-			overflow-y: auto;
+		> .uix-modal-box__body {
+            > [role="note"] {
+                overflow-y: auto;
+            }
+			
 		}
 
 	}
@@ -205,7 +232,7 @@ $modal-box-radius: 8px;
 
 }
 
-@include customScrollbar( 'vertical', '.uix-modal-box__content > div' );
+@include customScrollbar( 'vertical', '.uix-modal-box__content > .uix-modal-box__body > [role="note"]' );
 
 
 

@@ -23,6 +23,8 @@ import {
 } from '@uixkit/core/_global/js';
 
 
+import fragment from "./shader/fragment-custom.glsl";
+import vertex from "./shader/vertex-custom.glsl";
 
 import '../scss/_style.scss';
 
@@ -32,7 +34,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 	
 	
     module.THREE_LIQUID_SCROLLSPY_SLIDER               = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.8';
+    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.9';
     module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function( $ ) {
 
 	
@@ -78,9 +80,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                 imgAspect     = offsetHeight / offsetWidth;
             
             
-			var vertex       = document.getElementById( 'vertexshader' ).textContent,
-				fragment     = document.getElementById( 'fragmentshader' ).textContent,
-                dispImage;
+			var dispImage;
 
             
 

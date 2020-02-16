@@ -23,7 +23,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 	
 	
 	module.VIDEOS               = module.VIDEOS || {};
-    module.VIDEOS.version       = '0.1.2';
+    module.VIDEOS.version       = '0.1.3';
 	module.VIDEOS.documentReady = function( $ ) {
 
 		var $window      = $( window ),
@@ -260,8 +260,8 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 					vogv = '<source src="'+videoSrcOgv+'" type="video/ogv">';
 				}
 				
-				v += '<div class="uix-modal-box is-fullscreen is-video" tabindex="-1" role="dialog" aria-hidden="true" id="'+videoContainerMid+'">';
-				v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
+				v += '<div class="uix-modal-box is-fullscreen is-video" role="dialog" tabindex="-1" aria-hidden="true" id="'+videoContainerMid+'">';
+				v += '<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>';
 				v += '<div class="uix-modal-box__content" role="document">';
 				v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 				
