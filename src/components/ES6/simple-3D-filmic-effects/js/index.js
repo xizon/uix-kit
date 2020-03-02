@@ -30,7 +30,7 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_FILMIC_EFF               = module.THREE_FILMIC_EFF || {};
-    module.THREE_FILMIC_EFF.version       = '0.0.1';
+    module.THREE_FILMIC_EFF.version       = '0.0.2';
     module.THREE_FILMIC_EFF.documentReady = function( $ ) {
 
 		
@@ -103,8 +103,8 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 										antialias: true 
 									} );
 				renderer.setSize( windowWidth, windowHeight );
-				renderer.shadowMap = true;
-				renderer.shadowMapSoft = true;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
                 //=================
                 //add bloom effect
