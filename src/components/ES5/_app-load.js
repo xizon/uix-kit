@@ -37,9 +37,6 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 //three.js plugins
 "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js",
 "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js",
-"./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js",
-"./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js",
-"./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
 "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js",
 "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js",
@@ -55,6 +52,11 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js",
 "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js",
+    
+    
+// loader
+"./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
+    
     
 //Extra filter -- film
 "./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js",

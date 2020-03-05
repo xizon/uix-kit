@@ -29,7 +29,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION2               = module.THREE_MOUSE_INTERACTION2 || {};
-    module.THREE_MOUSE_INTERACTION2.version       = '0.0.2';
+    module.THREE_MOUSE_INTERACTION2.version       = '0.0.3';
     module.THREE_MOUSE_INTERACTION2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -218,7 +218,13 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 				if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
 
-					var targetAtomPos = intersects[0].object.position;
+                    
+                    var _obj = intersects[0].object;
+                    
+					var targetAtomPos = _obj.position;
+                    
+					console.log(targetAtomPos); 
+                    
 
 					// targetAtomPos.tween.pause();
 					var destinationPos = targetAtomPos.clone();
@@ -226,15 +232,23 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 					// jump to new position
 					// y movement via scroller object
 					// x and z movement via TWEEN
-					scroller.targetPosition = intersects[0].object.position.y/10000;
-					var targetPos = { x: intersects[0].object.position.x, y:intersects[0].object.position.y, z:intersects[0].object.position.z+1100};
+					scroller.targetPosition = _obj.position.y/10000;
+					var targetPos = { x: _obj.position.x, y:_obj.position.y, z:_obj.position.z+1100};
 
 					TweenMax.to( targetPos, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
 					TweenMax.to( camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+1000,
 						onUpdate:function(){
 							camera.up.set(0,1,0);
 							camera.updateProjectionMatrix();
-						}
+						},
+                        onComplete: function() {
+                            
+                            // get object new coordinates
+                            var screenData = nestedObjectToScreenXYZAndWH( _obj, camera, renderer.domElement.width, renderer.domElement.height );
+                            console.log( `Current object coordinates: {x: ${screenData.position.x}, y: ${screenData.position.y}, z: ${screenData.position.z} }` ); 
+                            
+                        }
+                                                     
 					});
 
 				} else {
@@ -409,6 +423,111 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 			}
 
+            
+            
+          
+            /*
+             * Get Object Coordinate, Width and Height From Screen
+             * Note: No data may be acquired without delay !!
+             *
+			 * @param  {THREE.Mesh} obj                           - Mesh object.
+             * @param  {THREE.PerspectiveCamera} camera           - Mesh object.
+			 * @param  {Number} rendererWidth                     - Width of renderer.
+             * @param  {Number} rendererHeight                    - Height of renderer.
+             * @param  {String} type                              - Build type.
+             * @return {JSON}
+             */
+			/* @usage: 
+			   var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+			  */
+			function nestedObjectToScreenXYZAndWH( obj, camera, rendererWidth, rendererHeight ) {
+                
+                var vector = new THREE.Vector3();
+                vector.setFromMatrixPosition( obj.matrixWorld );
+                var widthHalf = rendererWidth/2;
+                var heightHalf = rendererHeight/2;
+                var aspect = rendererHeight/rendererWidth;
+                vector.project( camera );
+                vector.x = ( vector.x * widthHalf ) + widthHalf;
+                vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+                //compute bounding box after
+                var boxInfo =  new THREE.Box3().setFromObject( obj ).getSize( new THREE.Vector3() );
+
+                
+                //Change it to fit the width and height of the stage based on the current value
+                var ratioFixedNum = 7;
+                
+                //correction
+                return {
+                    position: vector,
+                    width: ( boxInfo.x * ratioFixedNum * aspect ).toFixed( 2 ),
+                    height: ( boxInfo.y * ratioFixedNum * aspect ).toFixed( 2 )
+                };  
+			}
+			
+			
+            
+           
+            
+            /*
+             * Generate random number between two numbers
+             *
+             * @return {Number}
+             */
+			function getRandomFloat(min, max) {
+				return Math.random() * (max - min) + min;
+			}
+
+            
+            /*
+             * Returns the degree from radian.
+             *
+             * @return {Number} rad - Value of radian.
+             * @return {Number}
+             * @usage: 
+             
+               angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+             */
+            
+            function getDegree( rad ) {
+                return rad / Math.PI * 180;
+            }
+
+            
+            /*
+             * Returns the radian degree .
+             *
+             * @return {Number} deg - Value of degree.
+             * @return {Number}
+             * @usage: 
+                
+                rad = Math.PI / 180 * 30 ;
+             */
+            function getRadian( deg ) {
+                return deg * Math.PI / 180;
+            }
+
+            
+            /*
+             * Convert three.js scene rotation to polar coordinates
+             *
+             * @return {Number} deg - Value of degree.
+             * @return {Number}
+             * @usage: 
+             
+                x = r * cos（θ）
+                y = r * sin（θ）  
+             */
+            function getPolarCoord(x, y, z) {
+                var nx = Math.cos(x) * Math.cos(y) * z,
+                    nz = Math.cos(x) * Math.sin(y) * z,
+                    ny = Math.sin(x) * z;
+                return new THREE.Vector3(nx, ny, nz);
+            }
+
+            
+            
 
 			// 
 			//-------------------------------------	

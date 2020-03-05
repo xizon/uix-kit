@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 4.1.2 (March 5, 2020) =
+
+* Tweak: Upgraded threejs to the latest version of r114.
+* Tweak: Upgraded animejs to the latest version of 3.1.
+* Tweak: Upgraded Mouse Interaction with three.js.
+
+
+
 
 #### = 4.1.1 (February 16, 2020) =
 
