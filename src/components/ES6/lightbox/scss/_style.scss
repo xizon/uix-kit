@@ -176,6 +176,7 @@ $lb-radius: 3px;
 					margin: 0;
 					padding: 0;
 					height: 100%;
+                    text-align: center;
 
 					li {
 						padding: 0;
@@ -185,7 +186,6 @@ $lb-radius: 3px;
 						left: 0;
 						width: 100%;
 						height: 100%;
-						width: 0;
 						@include transition-default();
 
 						img {
@@ -193,7 +193,7 @@ $lb-radius: 3px;
 						}
 
 						&.is-active {
-							width: auto;
+							
 						}
 
 						&:first-child {

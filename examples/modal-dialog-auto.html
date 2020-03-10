@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=L32HuHOx84NBR09eEcBZ"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=PyKvgPmgStd0Thd0UplM"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=L32HuHOx84NBR09eEcBZ" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=PyKvgPmgStd0Thd0UplM" />
 	<![endif]-->
 
 
@@ -437,22 +437,24 @@
 							<h3>Modal Dialog Automatically Open</h3>
 							<p>Trigger with a simple JavaScript</p>
 	
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class=&quot;uix-modal-box&quot; role=&quot;dialog&quot; tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot; id=&quot;modal-open-1&quot;&gt;
-&#x9;&lt;button type=&quot;button&quot; class=&quot;uix-modal-box__close&quot; data-modal-close-trigger=&quot;true&quot;&gt;&lt;/button&gt;
-&#x9;&lt;div class=&quot;uix-modal-box__content&quot; role=&quot;document&quot;&gt;
-        &lt;div class=&quot;uix-modal-box__head&quot;&gt;
-            &lt;!-- code here --&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;uix-modal-box__body&quot;&gt;
-            &lt;div role=&quot;note&quot;&gt;
-                &lt;!-- ////////  content  begin //////// --&gt;
-                &lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
-                &lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
-                &lt;!-- ////////  content  end //////// --&gt;
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;template id="modal-open-1"&gt;
+    &lt;div class=&quot;uix-modal-box&quot; role=&quot;dialog&quot; tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot;&gt;
+    &#x9;&lt;button type=&quot;button&quot; class=&quot;uix-modal-box__close&quot; data-modal-close-trigger=&quot;true&quot;&gt;&lt;/button&gt;
+    &#x9;&lt;div class=&quot;uix-modal-box__content&quot; role=&quot;document&quot;&gt;
+            &lt;div class=&quot;uix-modal-box__head&quot;&gt;
+                &lt;!-- code here --&gt;
             &lt;/div&gt;
-&#x9;&lt;/div&gt;
+            &lt;div class=&quot;uix-modal-box__body&quot;&gt;
+                &lt;div role=&quot;note&quot;&gt;
+                    &lt;!-- ////////  content  begin //////// --&gt;
+                    &lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
+                    &lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
+                    &lt;!-- ////////  content  end //////// --&gt;
+                &lt;/div&gt;
+    &#x9;&lt;/div&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-&lt;/div&gt;</code>
+&lt;/template&gt;</code>
 </pre>	
                             
 <pre class="uix-precode uix-t-l"><label>JS</label><code>$( document ).ready( function() {
@@ -485,25 +487,26 @@
 
 			<!-- Modals
 			============================================= --> 
-			<div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true" id="modal-open-1">
-				<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
-				<div class="uix-modal-box__content" role="document">
-                    <div class="uix-modal-box__head">
-                        <!-- code here -->
-                    </div>
-					<div class="uix-modal-box__body">
-                        <div role="note">
-                            <!-- ////////  content  begin //////// -->
-                            <h2>Holy Crap!!!</h2>
-                            <p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
-                            <!-- ////////  content  end //////// -->
+            <template id="modal-open-1">
+                <div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
+                    <div class="uix-modal-box__content" role="document">
+                        <div class="uix-modal-box__head">
+                            <!-- code here -->
                         </div>
-					</div>
+                        <div class="uix-modal-box__body">
+                            <div role="note">
+                                <!-- ////////  content  begin //////// -->
+                                <h2>Holy Crap!!!</h2>
+                                <p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
+                                <!-- ////////  content  end //////// -->
+                            </div>
+                        </div>
 
 
-				</div>
-			</div>
-			<!--  .uix-modal-box  end -->     
+                    </div>
+                </div>  
+            </template>
 			
 		</main>  
         
@@ -613,14 +616,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "4.1.2",
+		var REVISION     = "4.1.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=L32HuHOx84NBR09eEcBZ"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=PyKvgPmgStd0Thd0UplM"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

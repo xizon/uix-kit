@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 4.1.3 (March 10, 2020) =
+
+* New: Added style of loader progress to `<body>` tag.
+* Tweak: Modified the HTML tag of Modal Dialog and Lightbox to use `<template>` instead.
+* Fix: Fixed display issues in Modal Dialog video popup and browser development mode
+
+
+
 #### = 4.1.2 (March 5, 2020) =
 
 * Tweak: Upgraded threejs to the latest version of r114.

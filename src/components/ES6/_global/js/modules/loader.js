@@ -22,7 +22,7 @@ export const LOADER = ( ( module, $, window, document ) => {
 	
 	
 	module.LOADER               = module.LOADER || {};
-    module.LOADER.version       = '0.0.3';
+    module.LOADER.version       = '0.0.4';
 	module.LOADER.documentReady = function( $ ) {
 
 
@@ -77,14 +77,26 @@ export const LOADER = ( ( module, $, window, document ) => {
             
 			var per = parseInt( loaded/(count - (1-videosTotal) ) * 100 );
 			
+            //
 			if ( $( 'img' ).length <= 1 ) {
 				per = 100;
 			}
 			
+            //
 			if ( isNaN( per ) ) per = 100;
             
+            //
             loadedPercent = per;
-			
+
+
+            //animation classes for loader
+            for (var i = 1; i < 10; i++ ) {
+                if ( per < i*10 ) $( 'body' ).addClass( 'loaded' + i );
+            } 
+
+
+            
+            
             
             //loading animation
             loadingAnim( per );
@@ -117,6 +129,10 @@ export const LOADER = ( ( module, $, window, document ) => {
                 
                 //loading animation
                 loadingAnim( 100 );
+                
+                
+                //animation classes for loader
+                $( 'body' ).addClass( 'loaded10' );
                 
                 // Remove loader
                 TweenMax.to( '.uix-loader, .uix-loader-progress, .uix-loader-progress__line', 0.5, {
@@ -158,7 +174,6 @@ export const LOADER = ( ( module, $, window, document ) => {
                         //current percent
                         var currentPercent = loadedPercent + ( (100 - loadedPercent) - remainedPercentComplete );
                         
-                       
                         //loading animation
                         loadingAnim( currentPercent );
                         

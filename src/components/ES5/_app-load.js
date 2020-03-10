@@ -9,20 +9,22 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 
 //Dependencies
 //Must be placed in the first place
+//---------------------
 "./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js",
 	
 
 //Website ==> miscellaneous
+//---------------------
 "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js",
 "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js",
 "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js",
 "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js",	
 "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js",
-"./src/components/ES5/_plugins-Miscellaneous/js/highlight.js",
 	
 	
 	
 //GSAP plugins
+//---------------------
 "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js",
 "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js",
 "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js",
@@ -35,6 +37,7 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js",
 	
 //three.js plugins
+//---------------------
 "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js",
 "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js",
 "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js",
@@ -55,10 +58,12 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
     
     
 // loader
+//---------------------
 "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js",
     
     
 //Extra filter -- film
+//---------------------
 "./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js",
 "./src/components/ES5/_plugins-THREE/js/postprocessing/FilmPass.js"
 	

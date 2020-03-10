@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=L32HuHOx84NBR09eEcBZ"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=PyKvgPmgStd0Thd0UplM"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=L32HuHOx84NBR09eEcBZ" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=PyKvgPmgStd0Thd0UplM" />
 	<![endif]-->
 
 
@@ -510,16 +510,18 @@
 &lt;a class=&quot;uix-lightbox__trigger&quot; href=&quot;#&quot; data-lb-html=&quot;#my-lightbox-html-2&quot; data-lb-fixed=&quot;false&quot;&gt;Click Me To Show HTML Code (Not Fixed)&lt;/a&gt;</code>
 </pre>		
 							
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-1"&gt;
-   &lt;div class="uix-lightbox__content" role="document"&gt;
-	    &lt;div role="note"&gt;
-			&lt;!-- ///////   content begin /////// --&gt;
-			...
-			&lt;!-- ///////   content end /////// --&gt;
-		&lt;/div&gt;&lt;!-- /[role="note"] --&gt;
-   &lt;/div&gt;&lt;!-- /.uix-lightbox__content --&gt;
-&lt;/div&gt;
-&lt;!-- /.uix-lightbox__content-container --&gt;</code>
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;template id="my-lightbox-html-1"&gt;
+    &lt;div class="uix-lightbox__content-container" role="dialog" tabindex="-1" aria-hidden="true"&gt;
+       &lt;div class="uix-lightbox__content" role="document"&gt;
+            &lt;div role="note"&gt;
+                &lt;!-- ///////   content begin /////// --&gt;
+                ...
+                &lt;!-- ///////   content end /////// --&gt;
+            &lt;/div&gt;&lt;!-- /[role="note"] --&gt;
+       &lt;/div&gt;&lt;!-- /.uix-lightbox__content --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.uix-lightbox__content-container --&gt;
+&lt;/template&gt;</code>
 </pre>						
 							
 
@@ -550,27 +552,29 @@
 
 								<a class="uix-lightbox__trigger" href="#" data-lb-html="#my-lightbox-html-1"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code</a>
 
-							   <div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-1">
-								   <div class="uix-lightbox__content" role="document">
-									   <div role="note">
+                                <template id="my-lightbox-html-1">
+                                   <div class="uix-lightbox__content-container" role="dialog" tabindex="-1" aria-hidden="true">
+                                       <div class="uix-lightbox__content" role="document">
+                                           <div role="note">
 
-											<!-- ///////   content begin /////// -->
+                                                <!-- ///////   content begin /////// -->
 
-											<p>
-												<h5>Title 1</h5>
-											 </p>
-											<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <a href="#">This is link</a></p>
+                                                <p>
+                                                    <h5>Title 1</h5>
+                                                 </p>
+                                                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <a href="#">This is link</a></p>
 
-											<p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt</p>
+                                                <p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt</p>
 
 
 
-											<!-- ///////   content end /////// -->
+                                                <!-- ///////   content end /////// -->
 
-										</div><!-- /[role="note"] -->
-								   </div><!-- /.uix-lightbox__content -->
-							   </div>
-							   <!-- /.uix-lightbox__content-container -->
+                                            </div><!-- /[role="note"] -->
+                                       </div><!-- /.uix-lightbox__content -->
+                                   </div>
+                                </template>
+
 							
 							   <br>
 							
@@ -584,27 +588,30 @@
 
 								<a class="uix-lightbox__trigger" href="#" data-lb-html="#my-lightbox-html-2" data-lb-fixed="false"><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Show HTML Code (Not Fixed)</a>
 
-							   <div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-2">
-								   <div class="uix-lightbox__content" role="document">
-									   <div role="note">
+                            
+                                <template id="my-lightbox-html-2">
+                                   <div class="uix-lightbox__content-container" role="dialog" tabindex="-1" aria-hidden="true">
+                                       <div class="uix-lightbox__content" role="document">
+                                           <div role="note">
 
-											<!-- ///////   content begin /////// -->
+                                                <!-- ///////   content begin /////// -->
 
-											<p>
-												<h5>Title 2</h5>
-											 </p>
-											<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <a href="#">This is link</a></p>
+                                                <p>
+                                                    <h5>Title 2</h5>
+                                                 </p>
+                                                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <a href="#">This is link</a></p>
 
-											<p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt</p>
+                                                <p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Super/Duper/Long/NonBreaking/Path/Name/To/A/File/That/Is/Way/Deep/Down/In/Some/Mysterious/Remote/Desolate/Part/Of/The/Operating/System/To/A/File/That/Just/So/Happens/To/Be/Strangely/Named/Supercalifragilisticexpialidocious.txt</p>
 
 
 
-											<!-- ///////   content end /////// -->
+                                                <!-- ///////   content end /////// -->
 
-										</div><!-- /[role="note"] -->
-								   </div><!-- /.uix-lightbox__content -->
-							   </div>
-							   <!-- /.uix-lightbox__content-container -->
+                                            </div><!-- /[role="note"] -->
+                                       </div><!-- /.uix-lightbox__content -->
+                                   </div>
+                                </template>
+
 				
 				
 
@@ -636,12 +643,14 @@
 <pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;a class=&quot;uix-lightbox__trigger&quot; href=&quot;ajax-page.html&quot; data-lb-html=&quot;#my-lightbox-html-4&quot; data-lb-fixed=&quot;false&quot; data-lb-ajax='{&quot;target&quot;:&quot;#my-ajax-demo-target-button&quot;, &quot;method&quot;:&quot;POST&quot;}'&gt;Click Me To Add &lt;strong&gt;&quot;ajax-page.html&quot;&lt;/strong&gt; Elements&lt;/a&gt;</code>
 </pre>		
 							
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-4"&gt;
-   &lt;div class="uix-lightbox__content" role="document"&gt;
-	   &lt;div role="note"&gt;&lt;/div&gt;&lt;!-- /[role="note"] --&gt;
-   &lt;/div&gt;&lt;!-- /.uix-lightbox__content --&gt;
-&lt;/div&gt;
-&lt;!-- /.uix-lightbox__content-container --&gt;</code>
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;template id="my-lightbox-html-4"&gt;
+    &lt;div class="uix-lightbox__content-container" role="dialog" tabindex="-1" aria-hidden="true"&gt;
+       &lt;div class="uix-lightbox__content" role="document"&gt;
+           &lt;div role="note"&gt;&lt;/div&gt;&lt;!-- /[role="note"] --&gt;
+       &lt;/div&gt;&lt;!-- /.uix-lightbox__content --&gt;
+    &lt;/div&gt;
+    &lt;!-- /.uix-lightbox__content-container --&gt;
+&lt;/template&gt;</code>
 </pre>						
 							
 
@@ -671,12 +680,14 @@
 								    
 								<a class="uix-lightbox__trigger" href="button.html" data-lb-html="#my-lightbox-html-4" data-lb-fixed="false" data-lb-ajax='{"target":"#my-ajax-demo-target-button", "method":"POST"}'><i class="fa fa-search-plus" aria-hidden="true"></i> Click Me To Add <strong>"button.html"</strong> Elements</a>
 
-							   <div role="dialog" tabindex="-1" aria-hidden="true" class="uix-lightbox__content-container" id="my-lightbox-html-4">
-								   <div class="uix-lightbox__content" role="document">
-									   <div role="note"></div><!-- /[role="note"] -->
-								   </div><!-- /.uix-lightbox__content -->
-							   </div>
-							   <!-- /.uix-lightbox__content-container -->
+                                <template id="my-lightbox-html-4">
+                                   <div class="uix-lightbox__content-container" role="dialog" tabindex="-1" aria-hidden="true">
+                                       <div class="uix-lightbox__content" role="document">
+                                           <div role="note"></div><!-- /[role="note"] -->
+                                       </div><!-- /.uix-lightbox__content -->
+                                   </div>
+                                </template>
+
 
 
 							</div>
@@ -777,14 +788,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "4.1.2",
+		var REVISION     = "4.1.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=L32HuHOx84NBR09eEcBZ"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=PyKvgPmgStd0Thd0UplM"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

@@ -58,22 +58,24 @@
 <pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;a href=&quot;javascript:void(0)&quot; data-modal-id=&quot;modal-open-3&quot; data-modal-close-onlybtn=&quot;false&quot; data-modal-height=&quot;200px&quot; data-modal-width=&quot;300px&quot; data-modal-lightbox=&quot;true&quot; data-modal-close-time=&quot;false&quot;&gt;Normal&lt;/a&gt;</code>
 </pre>		
 
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class=&quot;uix-modal-box&quot; role=&quot;dialog&quot; tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot; id=&quot;modal-open-1&quot;&gt;
-&#x9;&lt;button type=&quot;button&quot; class=&quot;uix-modal-box__close&quot; data-modal-close-trigger=&quot;true&quot;&gt;&lt;/button&gt;
-&#x9;&lt;div class=&quot;uix-modal-box__content&quot; role=&quot;document&quot;&gt;
-        &lt;div class=&quot;uix-modal-box__head&quot;&gt;
-            &lt;!-- code here --&gt;
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;template id="modal-open-1"&gt;
+    &lt;div class=&quot;uix-modal-box&quot; role=&quot;dialog&quot; tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot;&gt;
+    &#x9;&lt;button type=&quot;button&quot; class=&quot;uix-modal-box__close&quot; data-modal-close-trigger=&quot;true&quot;&gt;&lt;/button&gt;
+    &#x9;&lt;div class=&quot;uix-modal-box__content&quot; role=&quot;document&quot;&gt;
+            &lt;div class=&quot;uix-modal-box__head&quot;&gt;
+                &lt;!-- code here --&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;uix-modal-box__body&quot;&gt;
+                &lt;div role=&quot;note&quot;&gt;
+                    &lt;!-- ////////  content  begin //////// --&gt;
+        &#x9;&#x9;&#x9;&#x9;&#x9;&lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
+        &#x9;&#x9;&#x9;&#x9;&#x9;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
+                    &lt;!-- ////////  content  end //////// --&gt;
+                &lt;/div&gt;      
+    &#x9;&lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;uix-modal-box__body&quot;&gt;
-            &lt;div role=&quot;note&quot;&gt;
-                &lt;!-- ////////  content  begin //////// --&gt;
-    &#x9;&#x9;&#x9;&#x9;&#x9;&lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
-    &#x9;&#x9;&#x9;&#x9;&#x9;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
-                &lt;!-- ////////  content  end //////// --&gt;
-            &lt;/div&gt;      
-&#x9;&lt;/div&gt;
     &lt;/div&gt;
-&lt;/div&gt;</code>
+&lt;/template&gt;</code>
 </pre>	
 					
 						
@@ -123,65 +125,71 @@
 
 			<!-- Modals
 			============================================= --> 
-			<div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true" id="modal-open-1">
-				<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
-				<div class="uix-modal-box__content" role="document">
-                    <div class="uix-modal-box__head">
-                        <!-- code here -->
-                    </div>
-					<div class="uix-modal-box__body">
-                        <div role="note">
-                            <!-- ////////  content  begin //////// -->
-                            <h2>Holy Crap!!!</h2>
-                            <p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
-                            <!-- ////////  content  end //////// -->
+            <template id="modal-open-1">
+                <div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
+                    <div class="uix-modal-box__content" role="document">
+                        <div class="uix-modal-box__head">
+                            <!-- code here -->
                         </div>
-					</div>
-
-
-				</div>
-			</div>
-			<!--  .uix-modal-box  end -->     
-
-
-			<div class="uix-modal-box is-fullscreen" role="dialog" tabindex="-1" aria-hidden="true" id="modal-open-2">
-				<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
-				<div class="uix-modal-box__content" role="document">
-                    <div class="uix-modal-box__head">
-                        <!-- code here -->
-                    </div>
-					<div class="uix-modal-box__body">
-                        <div role="note">
-                            <!-- ////////  content  begin //////// -->
-                            <h2>Holy Crap!!!</h2>
-                            <p>p.s. Sorry for calling you a dingus earlier.</p>
-                            <!-- ////////  content  end //////// -->   
+                        <div class="uix-modal-box__body">
+                            <div role="note">
+                                <!-- ////////  content  begin //////// -->
+                                <h2>Holy Crap!!!</h2>
+                                <p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
+                                <!-- ////////  content  end //////// -->
+                            </div>
                         </div>
-					</div>
 
-				</div>
-			</div>
-			<!--  .uix-modal-box  end -->     
 
-			<div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true" id="modal-open-3">
-				<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
-				<div class="uix-modal-box__content" role="document">
-                    <div class="uix-modal-box__head">
-                        <!-- code here -->
                     </div>
-					<div class="uix-modal-box__body">
-                        <div role="note">
-                            <!-- ////////  content  begin //////// -->
+                </div>  
+            </template>
 
-                            <h2>Holy Crap!!!</h2>
-                            <p>p.s. Sorry for calling you a dingus earlier.</p>
-                            <!-- ////////  content  end //////// -->
-                        </div>          
-					</div>   
 
-				</div>
-			</div>
-			<!--  .uix-modal-box  end -->     
+
+            <template id="modal-open-2">
+                <div class="uix-modal-box is-fullscreen" role="dialog" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
+                    <div class="uix-modal-box__content" role="document">
+                        <div class="uix-modal-box__head">
+                            <!-- code here -->
+                        </div>
+                        <div class="uix-modal-box__body">
+                            <div role="note">
+                                <!-- ////////  content  begin //////// -->
+                                <h2>Holy Crap!!!</h2>
+                                <p>p.s. Sorry for calling you a dingus earlier.</p>
+                                <!-- ////////  content  end //////// -->   
+                            </div>
+                        </div>
+
+                    </div>
+                </div>    
+            </template>
+            
+            
+
+            <template id="modal-open-3">
+                <div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
+                    <div class="uix-modal-box__content" role="document">
+                        <div class="uix-modal-box__head">
+                            <!-- code here -->
+                        </div>
+                        <div class="uix-modal-box__body">
+                            <div role="note">
+                                <!-- ////////  content  begin //////// -->
+
+                                <h2>Holy Crap!!!</h2>
+                                <p>p.s. Sorry for calling you a dingus earlier.</p>
+                                <!-- ////////  content  end //////// -->
+                            </div>          
+                        </div>   
+
+                    </div>
+                </div>
+            </template>
 
 		
 		

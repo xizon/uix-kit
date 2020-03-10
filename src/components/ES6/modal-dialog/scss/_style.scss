@@ -155,6 +155,7 @@ $modal-box-radius: 8px;
 	&.is-video {
 		background: none;
 		box-shadow: none;
+        opacity: 0;
 
 		.uix-modal-box__close::after {
 			font-size: 2rem !important;
@@ -177,6 +178,7 @@ $modal-box-radius: 8px;
 	/* Video */
 	&.is-fullscreen.is-video.is-active {
 	    pointer-events: none;
+        opacity: 1;
 
 		.uix-modal-box__video-container {
 			 > div.video-js,

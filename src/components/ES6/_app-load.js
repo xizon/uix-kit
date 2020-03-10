@@ -105,6 +105,7 @@ import VERTICAL_MENU from '@uixkit/core/vertical-menu/js';
 import WP_CORE from '@uixkit/core/wordpress/js';
 
 
+
 	
 /******/
 /******/
