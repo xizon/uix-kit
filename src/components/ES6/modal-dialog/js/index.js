@@ -34,12 +34,37 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.1.2';
+    module.MODAL_DIALOG.version       = '0.1.4';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		
 		//Delay Time when Full Screen Effect is fired.
 		var modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+        
+        
+        // To display the template tag content.
+        $( 'template' ).each( function()  {
+            
+            var _content = $( this ).html( function( index,html ) {
+                                        return html.replace(/[\r\n]/g, '' );
+                                    }).context.innerHTML,
+                _id = $( this ).attr( 'id' );
+            
+            //If it is dialog, clone the contents of the <template> into the body
+            if ( ! $( 'body' ).hasClass( _id ) && $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 ) {
+                
+                //reset id
+                $( this ).removeAttr( 'id' );
+                $( 'body' ).addClass( _id );
+                
+                //append content to body
+                $( _content.replace(/role=[\'\"]dialog[\'\"]/, 'role="dialog" id="'+_id+'"' ) ).appendTo( 'body' );
+                
+            }
+
+        });
+        
+        
 	
 		
 		/*
@@ -83,7 +108,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 				closeOnlyBtn = false;
 			}		
 
-			
+            
 			
 			$( document ).UixFireModalDialog( {
 				id           : $( this ).data( 'modal-id' ),

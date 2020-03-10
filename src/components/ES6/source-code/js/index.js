@@ -32,7 +32,7 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 	
 	
     module.SOURCE_CODE_VIEW               = module.SOURCE_CODE_VIEW || {};
-    module.SOURCE_CODE_VIEW.version       = '0.0.2';
+    module.SOURCE_CODE_VIEW.version       = '0.0.1';
     module.SOURCE_CODE_VIEW.documentReady = function( $ ) {
 
 		//Add view source code to body
@@ -40,7 +40,7 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 				
 
 		//View source button event
-		$( '#uix-view-source' ).off( 'click' ).on( 'click', function() {
+		$( '#uix-view-source' ).on( 'click', function() {
 			// Locks the page
 			$.scrollLock( true );
 			$( '#uix-source-code' ).show();
@@ -49,7 +49,7 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 			
 		});
 		
-		$( '#uix-source-code > #uix-source-code__close' ).off( 'click' ).on( 'click', function() {
+		$( '#uix-source-code > #uix-source-code__close' ).on( 'click', function() {
 			// Unlocks the page
 			$.scrollLock( false );
 			

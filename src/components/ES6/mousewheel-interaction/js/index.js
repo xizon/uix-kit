@@ -97,7 +97,7 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {Void}
 		 */

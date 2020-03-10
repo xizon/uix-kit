@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.1';
+    module.SCROLLSPY_ANIM.version       = '0.0.4';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -44,16 +44,12 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		//Prevent this module from loading in other pages
 		if ( $el.length == 0 ) return false;
 		
-		
-		
-        $( window ).on( 'ready load resizeEnd', function() {
-			
-            window.elHeight = $el.height();
-            window.windowHeight = window.innerHeight;
-            window.elOffsetTop = $el.offset().top - panelHeight;
-			
-        });
-		
+        
+        var $window      = $( window ),
+		    windowWidth  = window.innerWidth,
+		    windowHeight = window.innerHeight;
+
+        
 		
 		//-------- Text Affect
 		if ( Modernizr.webgl ) {
@@ -64,18 +60,21 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 				text             = $txtContainer.data( 'txt' ).split( '' ),
 				tHeight          = 45,
 				tWidth           = 25,
-				renderer         = new PIXI.Application( tWidth*(text.length+2), tHeight*2, {
+				renderer         = new PIXI.Application({
+                    width        : tWidth*(text.length+2),
+                    height       : tHeight*2,
 					antialias    : true,
 					transparent  : true,
 					resolution   : 1,
 					autoResize   : 1,
-					view         : document.getElementById( 'scrollspy-animate-demo--txt' )
+                    view         : document.getElementById( 'scrollspy-animate-demo--txt' )
 				});
 			
+            
 			
 
 			var stage        = new PIXI.Container(),
-				filterSprite = PIXI.Sprite.fromImage( $txtContainer.data( 'filter-texture' ) );
+				filterSprite = PIXI.Sprite.from( $txtContainer.data( 'filter-texture' ) );
 			
 			filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 			var filter = new PIXI.filters.DisplacementFilter( filterSprite );
@@ -108,7 +107,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 			curSprite.anchor.set( 0 );
 			curSprite.scale.set( 1 );
 
-		
+            
 
 			filterSprite.anchor.set( 0 );
 			filterSprite.scale.set( 0.3 );  
@@ -120,7 +119,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 			renderer.stage.filters = [filter];
 
 			
-			var ticker       = new PIXI.ticker.Ticker();
+			var ticker       = new PIXI.Ticker();
 			ticker.autoStart = true;
 			ticker.add( function( delta ) {
 
@@ -135,21 +134,26 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		}
 
 
-        $( window ).on( 'scroll ready load resize resizeEnd touchmove', function( event ) {
+        $window.on( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function( event ) {
 		
-            var scrollTop           = $( window ).scrollTop(),
+            
+            var elHeight      = $el.height(),
+                elOffsetTop   = $el.offset().top - panelHeight; 
+            
+
+            var scrollTop           = $( this ).scrollTop(),
 				translateTitle      = scrollTop / 2,
 				translateBackground = scrollTop / 3,
-				scale               = scrollTop / window.elHeight,
+				scale               = scrollTop / elHeight,
 				backgroundScale     = 1, // + scale / 10
 				titleScale          = 1 - scale * 0.1,
 				titleOpacity        = 1 - scale,
-				scrollProgress      = ((scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6));
+				scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
 
 			
 			
             //-------- Animation
-            if ( scrollTop < window.elHeight ) {
+            if ( scrollTop < elHeight ) {
      
                 $el.find( '.row' ).css({
                     'transition': 'none',
@@ -158,7 +162,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
                 });
 				
                 $( 'body' ).removeClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
-            } else if (scrollTop >= window.elHeight) {
+            } else if (scrollTop >= elHeight) {
                 $( 'body' ).addClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
 				
 				
@@ -170,7 +174,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 
 			if ( Modernizr.webgl ) {
 				TweenMax.set( filterSprite, {
-					x: window.windowHeight*scrollProgress
+					x: windowHeight*scrollProgress
 				});
 	
 			}

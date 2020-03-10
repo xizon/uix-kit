@@ -1,0 +1,33 @@
+/* ======================================================
+    <!-- Full Width Column to Edge -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+
+.uix-fullwidth-column-to-edge--fixed-and-variable {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    .uix-fullwidth-column-to-edge--fixed-and-variable__fixed {
+        flex-grow: 1;
+        flex-basis: 250px;
+    }
+    
+    .uix-fullwidth-column-to-edge--fixed-and-variable__variable {
+        // The point at which the variable column breaks the whole
+        // system down to two rows
+        width: 325px; 
+
+        /* 
+        Why so high? When the container is more than 500px wide (meaning) there's more than enough room for the 200px fixed and 300px variable columns, then flex grow kicks in to determine what proportion each column should get. The caveat is that the fixed column will never be less than 200px (when they're on the same row) and for whatever browser reason, this big number ensures the fixed column doesn't grow. To see what I mean, change to 100 and resize the screen. You'll see a small pixel movement of the fixed column.
+        */
+        flex-grow: 10000;
+        flex-basis: auto;
+
+        flex: 10000 auto auto;
+    }
+}
+
+

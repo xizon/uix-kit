@@ -25,7 +25,7 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 	
 	
     module.FLOATING_SIDE_EL               = module.FLOATING_SIDE_EL || {};
-    module.FLOATING_SIDE_EL.version       = '0.0.1';
+    module.FLOATING_SIDE_EL.version       = '0.0.2';
     module.FLOATING_SIDE_EL.documentReady = function( $ ) {
 
 
@@ -48,7 +48,7 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 		});	
 		
 
-		$( window ).on( 'scroll touchmove', function() {
+		$( window ).on( 'scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function() {
 			var sideBarHeight = $floatingSideEl.height(),
 				scrollTop     = $( window ).scrollTop();
 

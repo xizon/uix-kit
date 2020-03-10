@@ -1,0 +1,223 @@
+/* ======================================================
+   <!-- Gallery Grid Layout -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+@mixin galleryGridGenerate( $classname: '.uix-gallery-grid', $gap: 15px ) {
+	// @include galleryGridGenerate( '.uix-gallery-grid', 15px );
+
+    @if ( $classname != '' ) {
+
+        #{$classname} {
+            
+            .uix-gallery-grid__tiles {
+                display: flex;
+                flex-wrap: wrap;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+
+                .uix-gallery-grid__item {
+                    margin: 0 #{$gap} #{$gap} 0;
+                    display: flex;
+                    flex-grow: 1;
+                    flex-direction: column;
+                    justify-content: center;
+                    position: relative;
+                }
+
+                .uix-gallery-grid__item figure {
+                        margin: 0;
+                        height: 100%;
+                }
+
+                .uix-gallery-grid__item img {
+                    display: block;
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                .uix-gallery-grid__item img {
+                    width: 100%;
+                }
+
+                .uix-gallery-grid__item figcaption {
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    max-height: 100%;
+                    overflow: auto;
+                    padding: 40px 10px 9px;
+                    color: #fff;
+                    text-align: center;
+                    font-size: 13px;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent);
+                }
+
+                .uix-gallery-grid__item figcaption img {
+                    display: inline;
+                }
+
+                &.is-cropped {
+                    .uix-gallery-grid__image {
+                        a, img {
+                            width: 100%;
+                        }
+                    }
+
+                    .uix-gallery-grid__item {
+                        a, img {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .uix-gallery-grid__item {
+                    width: calc((100% - #{$gap}) / 2);
+                }
+
+                .uix-gallery-grid__item:nth-of-type(even) {
+                    margin-right: 0;
+                }
+
+                &.uix-gallery-grid__col-1 {
+                    .uix-gallery-grid__item {
+                        width: 100%;
+                        margin-right: 0;
+                    }
+                }
+
+                .uix-gallery-grid__item {
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+     
+                
+            }
+
+        }
+
+        @media all and (min-width: 769px) {
+            #{$classname} {
+                
+                .uix-gallery-grid__tiles {
+                    
+                    &.uix-gallery-grid__col-3 {
+                        .uix-gallery-grid__item {
+                            width: calc((100% - #{$gap} * 2) / 3);
+                            margin-right: #{$gap};
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-4 {
+                        .uix-gallery-grid__item {
+                            width: calc((100% - #{$gap} * 3) / 4);
+                            margin-right: #{$gap};
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-5 {
+                        .uix-gallery-grid__item {
+                            width: calc((100% - #{$gap} * 4) / 5);
+                            margin-right: #{$gap};
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-6 {
+                        .uix-gallery-grid__item {
+                            width: calc((100% - #{$gap} * 5) / 6);
+                            margin-right: #{$gap};
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-7 {
+                        .uix-gallery-grid__item {
+                            width: calc((100% - #{$gap} * 6) / 7);
+                            margin-right: #{$gap};
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-8 {
+                        .uix-gallery-grid__item {
+                            width: calc((100% - #{$gap} * 7) / 8);
+                            margin-right: #{$gap};
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-1 {
+                        .uix-gallery-grid__item:nth-of-type(1n) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-2 {
+                        .uix-gallery-grid__item:nth-of-type(2n) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-3 {
+                        .uix-gallery-grid__item:nth-of-type(3n) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-4 {
+                        .uix-gallery-grid__item:nth-of-type(4n) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-5 {
+                        .uix-gallery-grid__item:nth-of-type(5n) {
+                             margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-6 {
+                        .uix-gallery-grid__item:nth-of-type(6n) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-7 {
+                        .uix-gallery-grid__item:nth-of-type(7n) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.uix-gallery-grid__col-8 {
+                        .uix-gallery-grid__item:nth-of-type(8n) {
+                            margin-right: 0;
+                        }
+                    }
+                    
+                    .uix-gallery-grid__item {
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    } 
+ 
+                    
+                    
+                }
+                
+
+            }
+
+
+        } 
+
+
+	}
+
+}
+
+
+
+@include galleryGridGenerate( '.uix-gallery-grid', 15px );
+
+
+

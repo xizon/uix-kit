@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  3.8.6
+ * ## Version             :  4.1.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 17, 2019
+ * ## Last Update         :  March 10, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5ce3ec14c73252fdcf40";
+/******/ 	var hotCurrentHash = "24fc699aecebf4bdfff3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -280,7 +280,6 @@ window.$ = window.jQuery;
 /******/ 			var chunkId = 0;
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
-/******/ 				/*globals chunkId */
 /******/ 				hotEnsureUpdateChunk(chunkId);
 /******/ 			}
 /******/ 			if (
@@ -810,7 +809,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(129)(__webpack_require__.s = 129);
+/******/ 	return hotCreateRequire(131)(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -821,8 +820,9 @@ window.$ = window.jQuery;
  *************************************
  * Parallax Effect
  *
- * @param  {Number} speed     - The speed of movement between elements.
- * @param  {JSON} bg          - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @param  {Number} speed       - The speed of movement between elements.
+ * @param  {String} transition  - Transition time can simulate easing effect.
+ * @param  {Object} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
  * @return {Void}
  *
  *************************************
@@ -834,6 +834,7 @@ window.$ = window.jQuery;
     // This is the easiest way to have default options.
     var settings = $.extend({
       speed: 0.25,
+      transition: 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
       bg: {
         enable: true,
         xPos: '50%'
@@ -854,7 +855,7 @@ window.$ = window.jQuery;
       $this.css({
         'transition': 'none'
       });
-      $(window).on('scroll touchmove', function (e) {
+      $(window).on('scroll.UixParallax touchmove.UixParallax', function (e) {
         scrollUpdate();
       }); //Initialize the position of the background
 
@@ -877,12 +878,18 @@ window.$ = window.jQuery;
         if (bgEff) {
           //background parallax
           TweenMax.set($this, {
-            backgroundPosition: bgXpos + ' ' + (0 - st * speed) + 'px'
+            css: {
+              'background-position': bgXpos + ' ' + (0 - st * speed) + 'px',
+              'transition': settings.transition
+            }
           });
         } else {
           //element parallax
           TweenMax.set($this, {
-            y: 0 - scrolled * speed
+            css: {
+              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * speed) + ')',
+              'transition': settings.transition
+            }
           });
         }
       }
@@ -894,7 +901,7 @@ window.$ = window.jQuery;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Render Custom Select
@@ -903,7 +910,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @param  {String} targetWrapper        - Wrapper of the selector.
  * @param  {String} trigger              - Trigger of the selector.
  * @param  {String} itemsWrapper         - Selector's options container.
- * @param  {Object} item                 - Each option of the selector.
+ * @param  {Element} item                 - Each option of the selector.
  * @return {Void}
  */
 (function ($) {
@@ -1096,6 +1103,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *************************************
  * Count To
  *
+ * @param  {Number} fixed              - formats a number using fixed-point notation.
  * @param  {Number} from                 - the number the element should start at
  * @param  {Number} number               - the number the element should end at
  * @param  {Number} duration             - how long it should take to count between the target numbers
@@ -1109,8 +1117,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  *************************************
  */
 (function ($) {
-  'use strict';
-
   $.fn.UixCountTo = function (options) {
     options = options || {};
     return $(this).each(function () {
@@ -1118,6 +1124,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       var settings = $.extend({}, $.fn.UixCountTo.defaults, {
         from: $(this).data('counter-start'),
         to: $(this).data('counter-number'),
+        fixed: $(this).data('counter-fixed'),
         speed: $(this).data('counter-duration'),
         refreshInterval: $(this).data('counter-refresh-interval'),
         dilimiter: $(this).data('counter-dilimiter'),
@@ -1164,7 +1171,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
 
       function render(value) {
-        var formattedValue = Number(value).toFixed();
+        var formattedValue = Number(value).toFixed(settings.fixed);
 
         if (settings.dilimiter && formattedValue > 0) {
           formattedValue = formattedValue.toString().replace(/\B(?=(?:\d{3})+\b)/g, ',');
@@ -1182,6 +1189,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
 
   $.fn.UixCountTo.defaults = {
+    fixed: 0,
+    // formats a number using fixed-point notation.
     from: 0,
     // the number the element should start at
     number: 0,
@@ -1346,13 +1355,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Shows the next form.
  *
- * @param  {Object} selector        - Each target forms selector.
- * @param  {Object} formTarget      - Wrapper of target forms selector.
+ * @param  {Element} selector        - Each target forms selector.
+ * @param  {Element} formTarget      - Wrapper of target forms selector.
  * @param  {String} indicator       - Indicator of timeline.
  * @param  {Number} index           - Default index for initialization.
  * 									  0 => step one, 
@@ -1494,7 +1503,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Render Normal Radio Status
@@ -1540,7 +1549,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Render Date Picker
@@ -1664,7 +1673,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Render Single Selector Status
@@ -1873,7 +1882,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Create Line Effect on Click
@@ -1921,7 +1930,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Render Custom Radio, Checkbox and Toggle 
@@ -2085,7 +2094,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Fire Modal Dialog
@@ -2096,7 +2105,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
 										   This attribute "data-modal-height" may not exist. Such as: 200px
  * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
- * @param  {Object|Boolean} btn          - Link or button that fires an event.
+ * @param  {?Element|Boolean} btn          - Link or button that fires an event.
  * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
  * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
  * @param  {Boolean} closeOnlyBtn        - Disable mask to close the window.
@@ -2143,7 +2152,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           $obj.find('.uix-modal-box__content').addClass('js-uix-no-fullscreen');
 
           if (linkBtn.data('video-win')) {
-            $obj.find('.uix-modal-box__content > div').css('overflow-y', 'hidden');
+            $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
           }
         }
 
@@ -2193,9 +2202,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if ($obj.hasClass('is-fullscreen')) {
           setTimeout(function () {
             if (!$obj.hasClass('is-video')) {
-              $obj.find('.uix-modal-box__content > div').css('overflow-y', 'scroll');
+              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'scroll');
             } else {
-              $obj.find('.uix-modal-box__content > div').css('overflow-y', 'hidden');
+              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
             }
           }, settings.speed);
         }
@@ -2320,6 +2329,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 /* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 63 */
 /***/ (function(module, exports) {
 
 /**
@@ -2378,12 +2393,6 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2393,7 +2402,13 @@ jQuery.fn.sortElements = function () {
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
  * Text Animation
@@ -2402,8 +2417,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * @return {Void}
  */
 (function ($) {
-  'use strict';
-
   $.fn.UixTextEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
@@ -2417,8 +2430,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
       if (_typeof(speed) === ( true ? "undefined" : undefined)) {
         speed = 1200;
-      }
+      } //The data-text-eff attribute must be unique, otherwise it will not execute correctly.
 
+
+      if ($(customControls).length > 1) return false;
       $(customControls).html($(customControls).text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>")); //--------------
 
       if (customControls.indexOf('fadeInRight') >= 0) {
@@ -2513,12 +2528,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 67 */
@@ -2743,7 +2752,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 104 */,
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 105 */,
 /* 106 */,
 /* 107 */,
@@ -2768,7 +2782,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /* 126 */,
 /* 127 */,
 /* 128 */,
-/* 129 */
+/* 129 */,
+/* 130 */,
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2784,10 +2800,17 @@ __webpack_require__.r(__webpack_exports__);
 var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
   "files": [//Dependencies
   //Must be placed in the first place
+  //---------------------
   "./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js", //Website ==> miscellaneous
-  "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", "./src/components/ES5/_plugins-Miscellaneous/js/highlight.js", //GSAP plugins
+  //---------------------
+  "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", //GSAP plugins
+  //---------------------
   "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js plugins
-  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/loaders/GLTFLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/MTLLoader.js", "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js", //Extra filter -- film
+  //---------------------
+  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js", // loader
+  //---------------------
+  "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", //Extra filter -- film
+  //---------------------
   "./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/FilmPass.js"]
 };
 
@@ -2795,7 +2818,7 @@ var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
 var _style = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/index.js
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /**
 
@@ -2838,7 +2861,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     33.Custom Lightbox
     34.Bulleted List
     35.Posts List With Ajax
-    36.Fullwidth List of Split
+    36.Full Width Column to Edge
     37.Login Templates
     38.Modal Dialog
     39.Mousewheel Interaction
@@ -2857,34 +2880,36 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     52.Show More Less
     53.Skew Based On Velocity of Scroll
     54.Smooth Scrolling When Clicking An Anchor Link
-    55.Sticky Elements
-    56.SVG Map (China)
-    57.SVG Map (World)
-    58.3D Background 1 with three.js
-    59.3D Background 2 with three.js
-    60.3D Background 3 with three.js
-    61.3D Background
-    62.3D Carousel
-    63.3D Gallery with three.js
-    64.3D Image Transition with three.js
-    65.3D Model
-    66.3D Pages
-    67.3D Particle Effect
-    68.3D Sphere Rotation
-    69.3D Object Anim When Click
-    70.3D Mouse Interaction with three.js
+    55.Smooth Scrolling Page
+    56.Sticky Elements
+    57.SVG Map (China)
+    58.SVG Map (World)
+    59.3D Background 1 with three.js
+    60.3D Background 2 with three.js
+    61.3D Background 3 with three.js
+    62.3D Background
+    63.3D Carousel
+    64.3D Gallery with three.js
+    65.3D Image Transition with three.js
+    66.3D Model
+    67.3D Pages
+    68.3D Particle Effect
+    69.3D Sphere Rotation
+    70.3D Object Anim When Click
     71.3D Mouse Interaction with three.js
-    72.3D Shatter Slider
-    73.3D Explosive Particle Slider
-    74.3D Filmic Effects
-    75.Responsive Table
-    76.Table Sorter
-    77.Tabs
-    78.Team Focus
-    79.Text effect
-    80.Timeline
-    81.Vertical Menu
-    82.WordPress Core Scripts
+    72.3D Mouse Interaction with three.js
+    73.3D Shatter Slider
+    74.3D Explosive Particle Slider
+    75.3D Liquid Scrollspy Slider
+    76.3D Filmic Effects
+    77.Responsive Table
+    78.Table Sorter
+    79.Tabs
+    80.Team Focus
+    81.Text effect
+    82.Timeline
+    83.Vertical Menu
+    84.WordPress Core Scripts
 
 
 */
@@ -2924,6 +2949,7 @@ if (typeof APP_ROOTPATH === 'undefined') {
 
 
 var browser = {
+  isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
   isAndroid: /(android)/i.test(navigator.userAgent),
   isPC: !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
   isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
@@ -3103,8 +3129,8 @@ var UixMath = UixMath || function () {
  *
  * @private
  * @description This function can be used separately in HTML pages or custom JavaScript.
- * @param  {Object} el     - Target object, using class name or ID to locate.
- * @return {String|JSON}   - The value of property.
+ * @param  {!Element} el     - The Element for which to get the computed style. Using class name or ID to locate.
+ * @return {String|Object}   - The value of property.
  */
 
 var UixCssProperty = UixCssProperty || function () {
@@ -3150,7 +3176,7 @@ var UixCssProperty = UixCssProperty || function () {
   }, t;
 }();
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixModuleFilter.js
-function UixModuleFilter_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
+function UixModuleFilter_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
 
 /*
  * Method of deleting or adding a module
@@ -3158,7 +3184,7 @@ function UixModuleFilter_typeof(obj) { if (typeof Symbol === "function" && typeo
  * @global
  * @description This function can be used separately in HTML pages or custom JavaScript.
  * @param  {Boolean|String} destroy       - If it is a string, it means destroying this module from UixModuleInstance
- * @param  {JSON} add                     - New module data.
+ * @param  {Object} add                     - New module data via JSON.
  * @param  {String} add.moduleName        - The name of the module (the default is all uppercase).
  * @param  {Boolean} add.pageLoaded       - Window loading module method. If true or 1, the module will execute after the page is loaded.
  * @param  {Number} add.version           - The new module version number.
@@ -3332,7 +3358,7 @@ window.MAIN = null;
 
       if (UixModuleInstance.ADVANCED_SLIDER_FILTER) UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
 
-      if (UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH) UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+      if (UixModuleInstance.FULL_WIDTH_COLUMN_TO_EDGE) UixModuleInstance.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded(); //Full Width Column to Edge
 
       if (UixModuleInstance.STICKY_EL) UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 
@@ -3406,6 +3432,8 @@ window.MAIN = null;
       if (UixModuleInstance.THREE_BACKGROUND) UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
 
       if (UixModuleInstance.THREE_CAROUSEL) UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
+
+      if (UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER) UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady($); //3D Liquid Scrollspy Slider
       //---- Prevent overlay clicks on asynchronous requests
       //---- Commonly used for AJAX modules that are clicked by button
       //Scroll Reveal
@@ -3508,7 +3536,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var BODY_AND_HEADER = function (module, $, window, document) {
   if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
-  module.BODY_AND_HEADER.version = '0.0.3';
+  module.BODY_AND_HEADER.version = '0.0.4';
 
   module.BODY_AND_HEADER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -3543,7 +3571,7 @@ var BODY_AND_HEADER = function (module, $, window, document) {
 
 
     var $el = $('.uix-header__container, .uix-header__placeholder');
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = 220;
 
@@ -3581,48 +3609,53 @@ function common_height_classCallCheck(instance, Constructor) { if (!(instance in
 var COMMON_HEIGHT = function (module, $, window, document) {
   if (window.COMMON_HEIGHT === null) return false;
   module.COMMON_HEIGHT = module.COMMON_HEIGHT || {};
-  module.COMMON_HEIGHT.version = '0.0.1';
+  module.COMMON_HEIGHT.version = '0.0.3';
 
   module.COMMON_HEIGHT.pageLoaded = function () {
-    $('.js-uix-common-height').each(function () {
-      var $this = $(this),
-          $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          element = $this,
-          selectors = '[class*=col-], [class*=uix-core-grid__col-]',
-          //Bootstrap grid system and Custom uix grid system
-      maxHeight = 0;
-      element.children(selectors).each(function () {
-        var element = $(this).children(); //Solve the problem that the image cannot be read accurately
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    commonHeightInit(windowWidth);
+    $window.on('resize', function () {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
 
-        element.find('img').each(function () {
-          var imgOuter = $(this).parent('a').css('display');
+        commonHeightInit(windowWidth);
+      }
+    });
 
-          if (imgOuter == 'inline') {
-            $(this).parent('a').css('display', 'inline-block');
+    function commonHeightInit(w) {
+      $('.js-uix-common-height').each(function () {
+        var $this = $(this),
+            element = $this,
+            selectors = '[class*=col-], [class*=uix-core-grid__col-]',
+            //Bootstrap grid system and Custom uix grid system
+        maxHeight = 0; // Select and loop the elements you want to equalise
+
+        element.children(selectors).each(function () {
+          var element = $(this); //Solve the problem that the image cannot be read accurately
+
+          element.find('img').each(function () {
+            var imgOuter = $(this).parent('a').css('display');
+
+            if (imgOuter == 'inline') {
+              $(this).parent('a').css('display', 'inline-block');
+            }
+          });
+
+          if (element.hasClass('max-height')) {
+            // if has max-height
+            maxHeight = element.outerHeight();
+          } else {
+            // if this box is higher than the cached highest then store it
+            if (element.height() > maxHeight) {
+              maxHeight = element.outerHeight();
+            }
           }
-        }); //Height condition judgment
+        }); // Set the height of all those children to whichever was highest 
 
-        if (element.hasClass('max-height')) {
-          maxHeight = element.outerHeight();
-        } else {
-          if (element.outerHeight() > maxHeight) maxHeight = element.outerHeight();
-        }
-      }); //No on mobile devices
-
-      commonHeightInit(windowWidth);
-      $window.on('resize', function () {
-        // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-        if (window.innerWidth != windowWidth) {
-          // Update the window width for next time
-          windowWidth = window.innerWidth; // Do stuff here
-
-          commonHeightInit(windowWidth);
-        }
-      });
-
-      function commonHeightInit(w) {
         if (w > 768) {
           element.children(selectors).each(function () {
             $(this).css('height', maxHeight);
@@ -3632,8 +3665,8 @@ var COMMON_HEIGHT = function (module, $, window, document) {
             $(this).css('height', 'auto');
           });
         }
-      }
-    });
+      });
+    }
   };
 
   module.components.pageLoaded.push(module.COMMON_HEIGHT.pageLoaded);
@@ -3688,6 +3721,8 @@ var GET_CUSTOM_ATTRS = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/loader.js
 function loader_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function loader_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { loader_typeof = function _typeof(obj) { return typeof obj; }; } else { loader_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return loader_typeof(obj); }
+
 /* 
  *************************************
  * <!-- Loader -->
@@ -3697,7 +3732,7 @@ function loader_classCallCheck(instance, Constructor) { if (!(instance instanceo
 var LOADER = function (module, $, window, document) {
   if (window.LOADER === null) return false;
   module.LOADER = module.LOADER || {};
-  module.LOADER.version = '0.0.2';
+  module.LOADER.version = '0.0.4';
 
   module.LOADER.documentReady = function ($) {
     // Disable devices scaling
@@ -3718,26 +3753,113 @@ var LOADER = function (module, $, window, document) {
       lastTouchEnd = now;
     }, false); // Loader Process
     //-------------------------------------	
+    // Detect if video.load is successful or not 
+
+    var videos = [];
+    var videosTotal = 0;
+    var videosLoaded = 0;
+    $('.uix-video__slider > video').each(function () {
+      videos.push($(this));
+    });
+    videosTotal = videos.length;
+    console.log('videosTotal: ' + videosTotal + ', videosLoaded: ' + videosLoaded); // Loading progress event
+
+    var loadedPercent = 0;
+    var imgTotal = 0;
+
+    var loadingAnim = function loadingAnim(per) {
+      $('.uix-loader-progress > span').text($('.uix-loader-progress').data('txt').replace(/\{progress\}/g, per));
+      TweenMax.to('.uix-loader-progress__line', 0.3, {
+        width: per / 100.0 * window.innerWidth
+      });
+    };
 
     $('body').waitForImages().progress(function (loaded, count, success) {
-      var per = parseInt(loaded / (count - 1) * 100);
+      imgTotal = count;
+      var per = parseInt(loaded / (count - (1 - videosTotal)) * 100); //
 
       if ($('img').length <= 1) {
         per = 100;
-      }
+      } //
 
-      if (isNaN(per)) per = 100;
-      $('.uix-loader-progress span').text(per + '%');
+
+      if (isNaN(per)) per = 100; //
+
+      loadedPercent = per; //animation classes for loader
+
+      for (var i = 1; i < 10; i++) {
+        if (per < i * 10) $('body').addClass('loaded' + i);
+      } //loading animation
+
+
+      loadingAnim(per);
     }).done(function () {
       //Event after loading is complete
-      // Remove loader
-      TweenMax.to('.uix-loader, .uix-loader-progress', 0.5, {
-        css: {
-          opacity: 0,
-          display: 'none'
-        }
-      });
+      // Main scene
+      console.log('loadedPercent: ' + loadedPercent + ', imageTotal: ' + imgTotal);
+      mainObjLoader(loadedPercent, imgTotal);
     });
+    /*
+     * Main Object Loader
+     *
+     * @param  {Number} loadedPercent  - The percentage value after the page loads the image.
+     * @param  {Number} imgTotal       - The total number of imags.
+     * @return {Void}
+     */
+
+    function mainObjLoader(loadedPercent, imgTotal) {
+      var remainedPercentComplete = 0;
+
+      var loadedFun = function loadedFun() {
+        //loading animation
+        loadingAnim(100); //animation classes for loader
+
+        $('body').addClass('loaded10'); // Remove loader
+
+        TweenMax.to('.uix-loader, .uix-loader-progress, .uix-loader-progress__line', 0.5, {
+          css: {
+            opacity: 0,
+            display: 'none'
+          }
+        }); //page animation when elements loaded
+        //...
+      }; //
+
+
+      if (loadedPercent < 100) {
+        videos.forEach(function (element) {
+          var _src = element.find('source:first').attr('src');
+
+          if (loader_typeof(_src) === ( true ? "undefined" : undefined)) _src = element.attr('src');
+          var video = document.getElementById(element.attr('id')),
+              videoURL = _src;
+          video.addEventListener('loadedmetadata', function (e) {
+            //Video has started loading successfully
+            videosLoaded++; //get remained percent
+
+            remainedPercentComplete = (1 - videosLoaded / videosTotal) * (100 - loadedPercent); //current percent
+
+            var currentPercent = loadedPercent + (100 - loadedPercent - remainedPercentComplete); //loading animation
+
+            loadingAnim(currentPercent); // All videos loaded
+
+            if (currentPercent == 100) {
+              loadedFun();
+            } //debug
+
+
+            console.log('remainedPercentComplete: ' + remainedPercentComplete + ', currentPercent: ' + currentPercent);
+            console.log('videosTotal: ' + videosTotal + ', videosLoaded: ' + videosLoaded);
+          }, false);
+          video.src = videoURL;
+        });
+      } else {
+        // All videos loaded
+        if (remainedPercentComplete == 0) {
+          loadedFun();
+        }
+      }
+    }
   };
 
   module.components.documentReady.push(module.LOADER.documentReady);
@@ -3887,7 +4009,7 @@ var MEGA_MENU = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/mobile-menu.js
 function mobile_menu_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function mobile_menu_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { mobile_menu_typeof = function _typeof(obj) { return typeof obj; }; } else { mobile_menu_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return mobile_menu_typeof(obj); }
+function mobile_menu_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { mobile_menu_typeof = function _typeof(obj) { return typeof obj; }; } else { mobile_menu_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return mobile_menu_typeof(obj); }
 
 /* 
  *************************************
@@ -3898,7 +4020,7 @@ function mobile_menu_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var MOBILE_MENU = function (module, $, window, document) {
   if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
-  module.MOBILE_MENU.version = '0.0.4';
+  module.MOBILE_MENU.version = '0.0.5';
 
   module.MOBILE_MENU.documentReady = function ($) {
     var $window = $(window),
@@ -3907,7 +4029,7 @@ var MOBILE_MENU = function (module, $, window, document) {
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.admin-bar .uix-menu-mobile__toggle');
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.MOBILE_MENU touchmove.MOBILE_MENU', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = 46;
 
@@ -4038,7 +4160,7 @@ var MOBILE_MENU = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/navigation.js
 function navigation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function navigation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { navigation_typeof = function _typeof(obj) { return typeof obj; }; } else { navigation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return navigation_typeof(obj); }
+function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { navigation_typeof = function _typeof(obj) { return typeof obj; }; } else { navigation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return navigation_typeof(obj); }
 
 /* 
  *************************************
@@ -4049,7 +4171,7 @@ function navigation_typeof(obj) { if (typeof Symbol === "function" && typeof Sym
 var NAVIGATION = function (module, $, window, document) {
   if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
-  module.NAVIGATION.version = '0.0.4';
+  module.NAVIGATION.version = '0.0.5';
 
   module.NAVIGATION.documentReady = function ($) {
     var $window = $(window),
@@ -4108,7 +4230,7 @@ var NAVIGATION = function (module, $, window, document) {
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.uix-menu__container:not(.is-mobile)');
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.NAVIGATION touchmove.NAVIGATION', function () {
       var scrollTop = $(this).scrollTop(),
           spyTop = 220;
 
@@ -4133,7 +4255,7 @@ var UixParallax = __webpack_require__(0);
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/set-background.js
 function set_background_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function set_background_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { set_background_typeof = function _typeof(obj) { return typeof obj; }; } else { set_background_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return set_background_typeof(obj); }
+function set_background_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { set_background_typeof = function _typeof(obj) { return typeof obj; }; } else { set_background_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return set_background_typeof(obj); }
 
 /* 
  *************************************
@@ -4145,7 +4267,7 @@ function set_background_typeof(obj) { if (typeof Symbol === "function" && typeof
 var SET_BG = function (module, $, window, document) {
   if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
-  module.SET_BG.version = '0.0.3';
+  module.SET_BG.version = '0.0.5';
 
   module.SET_BG.documentReady = function ($) {
     var $window = $(window),
@@ -4183,7 +4305,9 @@ var SET_BG = function (module, $, window, document) {
             "size": "cover",
             "repeat": "no-repeat",
             "fill": false,
-            "parallax": 0
+            "parallax": 0,
+            "move": false // {"dir":"left","duration":"10s","easing":"linear","loop":true}
+
           };
         }
 
@@ -4192,14 +4316,68 @@ var SET_BG = function (module, $, window, document) {
               dataPos = config.position,
               dataSize = config.size,
               dataRepeat = config.repeat,
-              dataParallax = config.parallax;
+              dataEasing = config.transition,
+              dataParallax = config.parallax,
+              dataMove = config.move;
           if (set_background_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
           if (set_background_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
-          if (set_background_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat'; //Using parallax
+          if (set_background_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
+          if (set_background_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s';
+          if (set_background_typeof(dataMove) === ( true ? "undefined" : undefined)) dataMove = false; //Using parallax
 
           if (dataParallax && set_background_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
             dataPos = dataPos.replace('top', '50%');
-          }
+          } //background animation
+
+
+          var moveAnim = 'none',
+              moveAnimLoop = 'infinite',
+              moveEasing = 'linear',
+              moveKeyframesTop = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',
+              moveKeyframesBottom = '@keyframes js-uix-cssanim--move-b{from{background-position:0 0;}to{background-position:0 19999px;}',
+              moveKeyframesLeft = '@keyframes js-uix-cssanim--move-l{from{background-position:0 0;}to{background-position:-19999px 0;}',
+              moveKeyframesRight = '@keyframes js-uix-cssanim--move-r{from{background-position:0 0;}to{background-position:19999px 0;}';
+
+          if (dataMove && Object.prototype.toString.call(dataMove) == '[object Object]') {
+            if (!dataMove.loop) moveAnimLoop = '1 forwards';
+            dataPos = '0 0';
+
+            switch (dataMove.dir) {
+              case 'top':
+                moveAnim = 'js-uix-cssanim--move-t ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+
+              case 'bottom':
+                moveAnim = 'js-uix-cssanim--move-b ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+
+              case 'left':
+                moveAnim = 'js-uix-cssanim--move-l ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+
+              case 'right':
+                moveAnim = 'js-uix-cssanim--move-r ' + parseInt(dataMove.speed) + 's ' + moveEasing + ' ' + moveAnimLoop;
+                break;
+            } //  CSS3 animation keyframe attributes inline
+
+
+            if ($('#js-uix-cssanim--move-t').length == 0) {
+              $('<style id="js-uix-cssanim--move-t">').text(moveKeyframesTop).appendTo('head');
+            }
+
+            if ($('#js-uix-cssanim--move-b').length == 0) {
+              $('<style id="js-uix-cssanim--move-b">').text(moveKeyframesBottom).appendTo('head');
+            }
+
+            if ($('#js-uix-cssanim--move-l').length == 0) {
+              $('<style id="js-uix-cssanim--move-l">').text(moveKeyframesLeft).appendTo('head');
+            }
+
+            if ($('#js-uix-cssanim--move-r').length == 0) {
+              $('<style id="js-uix-cssanim--move-r">').text(moveKeyframesRight).appendTo('head');
+            }
+          } //-----
+
 
           if (set_background_typeof(dataImg) != ( true ? "undefined" : undefined) && dataImg != '') {
             if (config.fill) {
@@ -4209,7 +4387,8 @@ var SET_BG = function (module, $, window, document) {
                   'background': 'url(' + dataImg + ') ' + dataRepeat + '',
                   'background-size': dataSize,
                   '-webkit-background-clip': 'text',
-                  '-webkit-text-fill-color': 'transparent'
+                  '-webkit-text-fill-color': 'transparent',
+                  'animation': moveAnim
                 });
               }
             } else {
@@ -4217,7 +4396,8 @@ var SET_BG = function (module, $, window, document) {
                 'background-image': 'url(' + dataImg + ')',
                 'background-position': dataPos,
                 'background-size': dataSize,
-                'background-repeat': dataRepeat
+                'background-repeat': dataRepeat,
+                'animation': moveAnim
               });
             } //Using parallax
 
@@ -4225,6 +4405,7 @@ var SET_BG = function (module, $, window, document) {
             if (dataParallax && set_background_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
               $this.UixParallax({
                 'speed': dataParallax,
+                transition: dataEasing,
                 'bg': {
                   enable: true,
                   xPos: '50%'
@@ -4247,7 +4428,7 @@ var SET_BG = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/videos.js
 function videos_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { videos_typeof = function _typeof(obj) { return typeof obj; }; } else { videos_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return videos_typeof(obj); }
+function videos_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { videos_typeof = function _typeof(obj) { return typeof obj; }; } else { videos_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return videos_typeof(obj); }
 
 /* 
  *************************************
@@ -4258,7 +4439,7 @@ function videos_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.
 var VIDEOS = function (module, $, window, document) {
   if (window.VIDEOS === null) return false;
   module.VIDEOS = module.VIDEOS || {};
-  module.VIDEOS.version = '0.1.2';
+  module.VIDEOS.version = '0.1.3';
 
   module.VIDEOS.documentReady = function ($) {
     var $window = $(window),
@@ -4446,8 +4627,8 @@ var VIDEOS = function (module, $, window, document) {
           vogv = '<source src="' + videoSrcOgv + '" type="video/ogv">';
         }
 
-        v += '<div class="uix-modal-box is-fullscreen is-video" tabindex="-1" role="dialog" aria-hidden="true" id="' + videoContainerMid + '">';
-        v += '<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>';
+        v += '<div class="uix-modal-box is-fullscreen is-video" role="dialog" tabindex="-1" aria-hidden="true" id="' + videoContainerMid + '">';
+        v += '<button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>';
         v += '<div class="uix-modal-box__content" role="document">';
         v += '<div class="uix-modal-box__video-waiting"></div><div class="uix-modal-box__video-container" data-video-player-init="0">';
 
@@ -4692,7 +4873,7 @@ var accordion_img_scss_style = __webpack_require__(6);
 // CONCATENATED MODULE: ./src/components/ES6/accordion-img/js/index.js
 function accordion_img_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { js_typeof = function _typeof(obj) { return typeof obj; }; } else { js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return js_typeof(obj); }
+function js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { js_typeof = function _typeof(obj) { return typeof obj; }; } else { js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return js_typeof(obj); }
 
 /* 
  *************************************
@@ -4809,7 +4990,7 @@ var accordion_scss_style = __webpack_require__(7);
 // CONCATENATED MODULE: ./src/components/ES6/accordion/js/index.js
 function accordion_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function accordion_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { accordion_js_typeof = function _typeof(obj) { return typeof obj; }; } else { accordion_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return accordion_js_typeof(obj); }
+function accordion_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { accordion_js_typeof = function _typeof(obj) { return typeof obj; }; } else { accordion_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return accordion_js_typeof(obj); }
 
 /* 
  *************************************
@@ -4899,7 +5080,7 @@ var advanced_content_slider_scss_style = __webpack_require__(8);
 // CONCATENATED MODULE: ./src/components/ES6/advanced-content-slider/js/index.js
 function advanced_content_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { advanced_content_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { advanced_content_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return advanced_content_slider_js_typeof(obj); }
+function advanced_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { advanced_content_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { advanced_content_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return advanced_content_slider_js_typeof(obj); }
 
 /* 
  *************************************
@@ -4917,13 +5098,13 @@ function advanced_content_slider_js_typeof(obj) { if (typeof Symbol === "functio
 var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_CONTENT_SLIDER === null) return false;
   module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
-  module.ADVANCED_CONTENT_SLIDER.version = '0.0.4';
+  module.ADVANCED_CONTENT_SLIDER.version = '0.0.7';
 
   module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
     var $window = $(window),
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight,
-        animDuration = 1200;
+        animSpeed = 1200;
     sliderInit();
     $window.on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -4948,139 +5129,184 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
             itemWidth = $this.width(),
             itemsTotal = $items.length,
             totalWidth = itemWidth * itemsTotal,
-            dataControlsPagination = $this.data('controls-pagination'),
-            dataControlsArrows = $this.data('controls-arrows'),
-            dataDraggable = $this.data('draggable'),
-            dataDraggableCursor = $this.data('draggable-cursor'),
-            dataControlsPaginationAuto = false; //Autoplay times
+            dataControlsPaginationAuto = false,
+            activated = $this.data('activated');
 
-        var playTimes; //A function called "timer" once every second (like a digital watch).
+        if (advanced_content_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Get parameter configuration from the data-* attribute of HTML
+          var dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop'),
+              dataSpeed = $this.data('speed');
+          if (advanced_content_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
+          if (advanced_content_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
+          if (advanced_content_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (advanced_content_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+          if (advanced_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (advanced_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (advanced_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
-        $this[0].animatedSlides;
-        if (advanced_content_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
-        if (advanced_content_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
-        if (advanced_content_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-        if (advanced_content_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
-        if ($(dataControlsPagination).html().length == 0) dataControlsPaginationAuto = true; //Initialize the width of each item
-        //-------------------------------------		
+          var playTimes; //A function called "timer" once every second (like a digital watch).
 
-        $first.addClass('is-active');
-        $items.css('width', itemWidth + 'px');
-        TweenMax.set($itemsWrapper, {
-          width: totalWidth,
-          onComplete: function onComplete() {
-            $this.css('height', 'auto');
-          }
-        }); //Pagination dots 
-        //-------------------------------------	
+          $this[0].animatedSlides; //Navigation ID for paging control of each slide is automatically numbered.
 
-        if (dataControlsPaginationAuto) {
-          var _dot = '',
-              _dotActive = '';
-          _dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+          if ($(dataControlsPagination).html().length == 0) dataControlsPaginationAuto = true; //Get the animation speed
+          //-------------------------------------	
 
-          for (var i = 0; i < itemsTotal; i++) {
-            _dotActive = i == 0 ? 'class="is-active"' : '';
-            _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
-          }
-
-          _dot += '</ul>';
-          if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-        } else {
-          $(dataControlsPagination).find('li').first().find('a').addClass('is-active');
-          $(dataControlsPagination).find('li').first().addClass('is-active');
-        }
-
-        $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
-          e.preventDefault();
-
-          if (!$(this).hasClass('is-active')) {
-            sliderUpdates($(this).attr('data-index'), $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }
-        }); //Next/Prev buttons
-        //-------------------------------------		
-
-        var _prev = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--prev'),
-            _next = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--next');
-
-        $(dataControlsArrows).find('a').attr('href', 'javascript:');
-
-        _prev.addClass('is-disabled');
-
-        _prev.off('click').on('click', function (e) {
-          e.preventDefault();
-          sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-          clearInterval($this[0].animatedSlides);
-        });
-
-        _next.off('click').on('click', function (e) {
-          e.preventDefault();
-          sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-          clearInterval($this[0].animatedSlides);
-        }); //Drag and Drop
-        //-------------------------------------	
+          if (advanced_content_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+            animSpeed = dataSpeed;
+          } //Initialize the width of each item
+          //-------------------------------------		
 
 
-        var $dragDropTrigger = $this,
-            hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
-
-        if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor);
-
-        if (!dataDraggable) {
-          hammerProps = {
-            inputClass: Hammer.TouchInput
-          };
-        } //Mouse event
-        //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-
-
-        var direction,
-            dragDropElement = $dragDropTrigger[0],
-            dragDropMC = new Hammer(dragDropElement, hammerProps);
-        dragDropMC.on('panright press panleft', function (ev) {
-          //Set the direction in here
-          direction = ev.type;
-        });
-        dragDropMC.on('panend', function (ev) {
-          //Use the direction in here
-          //You know the pan has ended
-          //and you know which action they were taking
-          if (direction == 'panleft') {
-            sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }
-
-          if (direction == 'panright') {
-            sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsArrows, dataControlsPagination); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }
-        }); //Autoplay Slider
-        //-------------------------------------		
-
-        var dataAuto = $this.data('auto'),
-            dataTiming = $this.data('timing'),
-            dataLoop = $this.data('loop');
-        if (advanced_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-        if (advanced_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-        if (advanced_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
-        if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-          sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination);
-          $this.on({
-            mouseenter: function mouseenter() {
-              clearInterval($this[0].animatedSlides);
-            },
-            mouseleave: function mouseleave() {
-              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsArrows, dataControlsPagination);
+          $first.addClass('is-active');
+          $items.css('width', itemWidth + 'px');
+          TweenMax.set($itemsWrapper, {
+            width: totalWidth,
+            onComplete: function onComplete() {
+              $this.css('height', 'auto');
             }
+          }); //Add identifiers for the first and last items
+          //-------------------------------------		
+
+          $items.last().addClass('last');
+          $items.first().addClass('first'); //Pagination dots 
+          //-------------------------------------	
+
+          if (dataControlsPaginationAuto) {
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul class="uix-advanced-content-slider__pagination--default">';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
+            }
+
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
+          } else {
+            $(dataControlsPagination).find('li').first().find('a').addClass('is-active');
+            $(dataControlsPagination).find('li').first().addClass('is-active');
+          }
+
+          $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
+            e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+            var $btn = $(this);
+            if ($btn.attr('aria-disabled') == 'true') return false;
+            $(dataControlsPagination).find('li a').attr('aria-disabled', 'true');
+            setTimeout(function () {
+              $(dataControlsPagination).find('li a').attr('aria-disabled', 'false');
+            }, animSpeed);
+
+            if (!$(this).hasClass('is-active')) {
+              sliderUpdates($(this).attr('data-index'), $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }
+          }); //Next/Prev buttons
+          //-------------------------------------		
+
+          var _prev = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--prev'),
+              _next = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--next');
+
+          $(dataControlsArrows).find('a').attr('href', 'javascript:');
+
+          if (!dataLoop) {
+            _prev.addClass('is-disabled');
+          }
+
+          _prev.off('click').on('click', function (e) {
+            e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+            if (_prev.attr('aria-disabled') == 'true') return false;
+
+            _prev.attr('aria-disabled', 'true');
+
+            setTimeout(function () {
+              _prev.attr('aria-disabled', 'false');
+            }, animSpeed);
+            sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+            clearInterval($this[0].animatedSlides);
           });
-        }
+
+          _next.off('click').on('click', function (e) {
+            e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+            if (_next.attr('aria-disabled') == 'true') return false;
+
+            _next.attr('aria-disabled', 'true');
+
+            setTimeout(function () {
+              _next.attr('aria-disabled', 'false');
+            }, animSpeed);
+            sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+            clearInterval($this[0].animatedSlides);
+          }); //Drag and Drop
+          //-------------------------------------	
+
+
+          var $dragDropTrigger = $this,
+              hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
+
+          if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor);
+
+          if (!dataDraggable) {
+            hammerProps = {
+              inputClass: Hammer.TouchInput
+            };
+          } //Mouse event
+          //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+
+
+          var direction,
+              dragDropElement = $dragDropTrigger[0],
+              dragDropMC = new Hammer(dragDropElement, hammerProps);
+          dragDropMC.on('panright press panleft', function (ev) {
+            //Set the direction in here
+            direction = ev.type;
+          });
+          dragDropMC.on('panend', function (ev) {
+            //Use the direction in here
+            //You know the pan has ended
+            //and you know which action they were taking
+            if (direction == 'panleft') {
+              sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }
+
+            if (direction == 'panright') {
+              sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }
+          }); //Autoplay Slider
+          //-------------------------------------		
+
+          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsPagination, dataControlsArrows);
+            $this.on({
+              mouseenter: function mouseenter() {
+                clearInterval($this[0].animatedSlides);
+              },
+              mouseleave: function mouseleave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsPagination, dataControlsArrows);
+              }
+            });
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated        
+
       });
     }
     /*
@@ -5088,15 +5314,15 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
      *
      * @param  {Function} playTimes      - Number of times.
      * @param  {Number} timing           - Autoplay interval.
-     * @param  {Boolean} loop            - Determine whether to loop through each item.
-     * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} arrows           - Controller name of prev/next buttons.
-     * @param  {String} pagination       - Controller name of pagination buttons.
+     * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
+     * @param  {Element} slider           - Selector of the slider .
+           * @param  {String} paginationID     - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
      * @return {Void}                    - The constructor.
      */
 
 
-    function sliderAutoPlay(playTimes, timing, loop, slider, arrows, pagination) {
+    function sliderAutoPlay(playTimes, timing, loop, slider, paginationID, arrowsID) {
       var items = slider.find('.uix-advanced-content-slider__item'),
           total = items.length;
       slider[0].animatedSlides = setInterval(function () {
@@ -5106,14 +5332,14 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
         if (!loop) {
           if (playTimes < total && playTimes >= 0) {
             var slideNextId = playTimes;
-            sliderUpdates(slideNextId, slider, arrows, pagination);
+            sliderUpdates(slideNextId, slider, paginationID, arrowsID, loop);
           }
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1;
           var slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
-          sliderUpdates(slideNextId, slider, arrows, pagination);
+          sliderUpdates(slideNextId, slider, paginationID, arrowsID, loop);
         }
       }, timing);
     }
@@ -5121,50 +5347,44 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
      * Transition Between Slides
      *
      * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} arrows           - Controller name of prev/next buttons.
-     * @param  {String} pagination       - Controller name of pagination buttons.
+     * @param  {Element} slider           - Selector of the slider .
+           * @param  {String} paginationID     - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
      * @return {Void}
      */
 
 
-    function sliderUpdates(elementIndex, slider, arrows, pagination) {
+    function sliderUpdates(elementIndex, slider, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-content-slider__item'),
           itemsTotal = $items.length,
-          $prev = $(arrows).find('.uix-advanced-content-slider__arrows--prev'),
-          $next = $(arrows).find('.uix-advanced-content-slider__arrows--next'),
-          $pagination = $(pagination).find('li a'); //Get the animation speed
+          $prev = $(arrowsID).find('.uix-advanced-content-slider__arrows--prev'),
+          $next = $(arrowsID).find('.uix-advanced-content-slider__arrows--next'),
+          $pagination = $(paginationID).find('li a');
+      $pagination.removeClass('is-active');
+      $pagination.parent().removeClass('is-active');
 
-      if (advanced_content_slider_js_typeof(slider.data('speed')) != ( true ? "undefined" : undefined) && slider.data('speed') != false) {
-        animDuration = slider.data('speed');
-      }
-
-      if (elementIndex <= itemsTotal - 1 && elementIndex >= 0) {
+      if (loop) {
+        if (elementIndex == itemsTotal) elementIndex = 0;
+        if (elementIndex < 0) elementIndex = itemsTotal - 1;
+      } else {
         if (elementIndex > parseFloat(itemsTotal - 1)) elementIndex = parseFloat(itemsTotal - 1);
         if (elementIndex < 0) elementIndex = 0;
         $next.removeClass('is-disabled');
         $prev.removeClass('is-disabled');
-        $pagination.removeClass('is-active');
-        $pagination.parent().removeClass('is-active');
-
-        if (elementIndex == itemsTotal - 1) {
-          $next.addClass('is-disabled');
-        }
-
-        if (elementIndex == 0) {
-          $prev.addClass('is-disabled');
-        }
-
-        $items.removeClass('is-active');
-        $items.eq(elementIndex).addClass('is-active');
-        $pagination.eq(elementIndex).addClass('is-active');
-        $pagination.eq(elementIndex).parent().addClass('is-active');
-        TweenMax.to(slider.children('.uix-advanced-content-slider__inner'), animDuration / 1000, {
-          x: '-' + slider.width() * elementIndex,
-          onComplete: function onComplete() {},
-          ease: Power3.easeOut
-        });
+        if (elementIndex == itemsTotal - 1) $next.addClass('is-disabled');
+        if (elementIndex == 0) $prev.addClass('is-disabled');
       }
+
+      $items.removeClass('is-active');
+      $items.eq(elementIndex).addClass('is-active');
+      $pagination.eq(elementIndex).addClass('is-active');
+      $pagination.eq(elementIndex).parent().addClass('is-active');
+      TweenMax.to(slider.children('.uix-advanced-content-slider__inner'), animSpeed / 1000, {
+        x: '-' + slider.width() * elementIndex,
+        onComplete: function onComplete() {},
+        ease: Power3.easeOut
+      });
     }
   };
 
@@ -5181,7 +5401,7 @@ var _basic = __webpack_require__(9);
 // CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/basic.js
 function basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { basic_typeof = function _typeof(obj) { return typeof obj; }; } else { basic_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return basic_typeof(obj); }
+function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { basic_typeof = function _typeof(obj) { return typeof obj; }; } else { basic_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return basic_typeof(obj); }
 
 /* 
  *************************************
@@ -5193,7 +5413,7 @@ function basic_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.i
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.3';
+  module.ADVANCED_SLIDER.version = '0.1.9';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window),
@@ -5223,85 +5443,110 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             $items = $this.find('.uix-advanced-slider__item'),
             $first = $items.first(),
             nativeItemW,
-            nativeItemH; //Autoplay times
+            nativeItemH,
+            activated = $this.data('activated');
 
-        var playTimes; //A function called "timer" once every second (like a digital watch).
-
-        $this[0].animatedSlides;
-        animDelay = UixCssProperty.getTransitionDuration($first[0]); //Initialize the first item container
-        //-------------------------------------		
-
-        $items.addClass('next');
-        setTimeout(function () {
-          $first.addClass('is-active');
-        }, animDelay);
-
-        if ($first.find('video').length > 0) {
-          //Returns the dimensions (intrinsic height and width ) of the video
-          var video = document.getElementById($first.find('video').attr('id')),
-              videoURL = $first.find('source:first').attr('src');
-          video.addEventListener('loadedmetadata', function (e) {
-            $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
-            nativeItemW = this.videoWidth;
-            nativeItemH = this.videoHeight; //Initialize all the items to the stage
-
-            addItemsToStage($this, nativeItemW, nativeItemH);
-          }, false);
-          video.src = videoURL;
-        } else {
-          var imgURL = $first.find('img').attr('src');
-
-          if (basic_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-            var img = new Image();
-
-            img.onload = function () {
-              $this.css('height', $this.width() * (this.height / this.width) + 'px');
-              nativeItemW = this.width;
-              nativeItemH = this.height; //Initialize all the items to the stage
-
-              addItemsToStage($this, nativeItemW, nativeItemH);
-            };
-
-            img.src = imgURL;
-          }
-        } //Autoplay Slider
-        //-------------------------------------		
-
-
-        if (!resize) {
+        if (basic_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Get parameter configuration from the data-* attribute of HTML
           var dataAuto = $this.data('auto'),
               dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
+              dataLoop = $this.data('loop'),
+              dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataCountTotal = $this.data('count-total'),
+              dataCountCur = $this.data('count-now');
           if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
           if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
           if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+          if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
+          if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider__arrows';
+          if (basic_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (basic_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
+          if (basic_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+          if (basic_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay times
 
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
-            });
-          }
-        }
+          var playTimes; //A function called "timer" once every second (like a digital watch).
+
+          $this[0].animatedSlides;
+          animDelay = UixCssProperty.getTransitionDuration($first[0]); //Initialize the first item container
+          //-------------------------------------		
+
+          $items.addClass('next');
+          setTimeout(function () {
+            $first.addClass('is-active');
+          }, animDelay);
+
+          if ($first.find('video').length > 0) {
+            //Returns the dimensions (intrinsic height and width ) of the video
+            var video = document.getElementById($first.find('video').attr('id')),
+                videoURL = $first.find('source:first').attr('src');
+            if (basic_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $first.attr('src');
+            video.addEventListener('loadedmetadata', function (e) {
+              $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
+              nativeItemW = this.videoWidth;
+              nativeItemH = this.videoHeight; //Initialize all the items to the stage
+
+              addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur);
+            }, false);
+            video.src = videoURL;
+          } else {
+            var imgURL = $first.find('img').attr('src');
+
+            if (basic_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+              var img = new Image();
+
+              img.onload = function () {
+                $this.css('height', $this.width() * (this.height / this.width) + 'px');
+                nativeItemW = this.width;
+                nativeItemH = this.height; //Initialize all the items to the stage
+
+                addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur);
+              };
+
+              img.src = imgURL;
+            }
+          } //Autoplay Slider
+          //-------------------------------------		
+
+
+          if (!resize) {
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            }
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated
+
       });
     }
     /*
     * Trigger slider autoplay
     *
-    * @param  {Function} playTimes      - Number of times.
-    * @param  {Number} timing           - Autoplay interval.
-    * @param  {Boolean} loop            - Determine whether to loop through each item.
-    * @param  {Object} slider           - Selector of the slider .
-    * @return {Void}                    - The constructor.
+    * @param  {Function} playTimes            - Number of times.
+    * @param  {Number} timing                 - Autoplay interval.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @param  {Element} slider                 - Selector of the slider .
+     * @param  {String} countTotalID           - Total number ID or class of counter.
+     * @param  {String} countCurID             - Current number ID or class of counter.
+     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+     * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @return {Void}                          - The constructor.
     */
 
 
-    function sliderAutoPlay(playTimes, timing, loop, slider) {
+    function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
       var items = slider.find('.uix-advanced-slider__item'),
           total = items.length;
       slider[0].animatedSlides = setInterval(function () {
@@ -5309,49 +5554,49 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         playTimes++;
 
         if (!loop) {
-          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next');
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1;
-          sliderUpdates(playTimes, $sliderWrapper, 'next');
+          sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         }
       }, timing);
     }
     /*
     * Initialize all the items to the stage
     *
-    * @param  {Object} slider           - Current selector of each slider.
-    * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
-    * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+    * @param  {Element} slider                 - Current selector of each slider.
+    * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
+    * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
+     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+     * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+     * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+     * @param  {Boolean} draggable             - Allow drag and drop on the slider.
+     * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+     * @param  {String} countTotalID           - Total number ID or class of counter.
+     * @param  {String} countCurID             - Current number ID or class of counter.
     * @return {Void}
     */
 
 
-    function addItemsToStage(slider, nativeItemW, nativeItemH) {
+    function addItemsToStage(slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider__item'),
           $first = $items.first(),
-          itemsTotal = $items.length,
-          dataControlsPagination = $this.data('controls-pagination'),
-          dataControlsArrows = $this.data('controls-arrows'),
-          dataLoop = $this.data('loop'),
-          dataDraggable = $this.data('draggable'),
-          dataDraggableCursor = $this.data('draggable-cursor');
-      if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
-      if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider__arrows';
-      if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-      if (basic_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-      if (basic_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
-      if ($(dataControlsArrows).length == 0) {
-        $('body').prepend('<div style="display:none;" class="uix-advanced-slider__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>');
-      } //Prevent bubbling
+      if ($(arrowsID).length == 0) {
+        $('body').prepend('<div style="display:none;" class="uix-advanced-slider__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider__arrows--prev"></a><a href="#" class="uix-advanced-slider__arrows--next"></a></div>');
+      } //Add identifiers for the first and last items
 
+
+      $items.last().addClass('last');
+      $items.first().addClass('first'); //Prevent bubbling
 
       if (itemsTotal == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
       } // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
@@ -5369,9 +5614,16 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       }
 
       _dot += '</ul>';
-      if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
-        e.preventDefault();
+      if ($(paginationID).html() == '') $(paginationID).html(_dot);
+      $(paginationID).find('li a').off('click').on('click', function (e) {
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        var $btn = $(this);
+        if ($btn.attr('aria-disabled') == 'true') return false;
+        $(paginationID).find('li a').attr('aria-disabled', 'true');
+        setTimeout(function () {
+          $(paginationID).find('li a').attr('aria-disabled', 'false');
+        }, animDelay);
 
         if (!$(this).hasClass('is-active')) {
           //Determine the direction
@@ -5381,33 +5633,49 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             curDir = 'next';
           }
 
-          sliderUpdates($(this).attr('data-index'), $this, curDir); //Pause the auto play event
+          sliderUpdates($(this).attr('data-index'), $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
           clearInterval($this[0].animatedSlides);
         }
       }); //Next/Prev buttons
       //-------------------------------------		
 
-      var _prev = $(dataControlsArrows).find('.uix-advanced-slider__arrows--prev'),
-          _next = $(dataControlsArrows).find('.uix-advanced-slider__arrows--next');
+      var _prev = $(arrowsID).find('.uix-advanced-slider__arrows--prev'),
+          _next = $(arrowsID).find('.uix-advanced-slider__arrows--next');
 
-      $(dataControlsArrows).find('a').attr('href', 'javascript:');
-      $(dataControlsArrows).find('a').removeClass('is-disabled');
+      $(arrowsID).find('a').attr('href', 'javascript:');
+      $(arrowsID).find('a').removeClass('is-disabled');
 
-      if (!dataLoop) {
+      if (!loop) {
         _prev.addClass('is-disabled');
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault();
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev'); //Pause the auto play event
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _prev.attr('aria-disabled', 'false');
+        }, animDelay);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault();
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next'); //Pause the auto play event
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _next.attr('aria-disabled', 'false');
+        }, animDelay);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       }); //Added touch method to mobile device and desktop
@@ -5416,7 +5684,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
       var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
 
-      if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor); //Mouse event
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
 
       $dragDropTrigger.on('mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function (e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -5427,7 +5695,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
           $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
           $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
         } else {
-          if (dataDraggable) {
+          if (draggable) {
             $(this).data('origin_mouse_x', parseInt(e.pageX));
             $(this).data('origin_mouse_y', parseInt(e.pageY));
           }
@@ -5462,7 +5730,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
               $dragDropTrigger.off('touchmove.ADVANCED_SLIDER');
             }
           } else {
-            if (dataDraggable) {
+            if (draggable) {
               //right
               if (e.pageX > origin_mouse_x) {
                 if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
@@ -5488,43 +5756,38 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
      * Transition Between Slides
      *
-     * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} dir              - Switching direction indicator.
+     * @param  {Number} elementIndex           - Index of current slider.
+     * @param  {Element} slider                 - Selector of the slider .
+     * @param  {String} dir                    - Switching direction indicator.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
      * @return {Void}
      */
 
 
-    function sliderUpdates(elementIndex, slider, dir) {
+    function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-slider__item'),
           $current = $items.eq(elementIndex),
-          total = $items.length,
-          dataCountTotal = slider.data('count-total'),
-          dataCountCur = slider.data('count-now'),
-          dataControlsPagination = slider.data('controls-pagination'),
-          dataControlsArrows = slider.data('controls-arrows'),
-          dataLoop = slider.data('loop');
-      if (basic_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-      if (basic_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-      if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
-      if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-slider__arrows';
-      if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+          total = $items.length; //Prevent bubbling
 
       if (total == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
         return false;
       } //Transition Interception
       //-------------------------------------
 
 
-      if (dataLoop) {
+      if (loop) {
         if (elementIndex == total) elementIndex = 0;
         if (elementIndex < 0) elementIndex = total - 1;
       } else {
-        $(dataControlsArrows).find('a').removeClass('is-disabled');
-        if (elementIndex == total - 1) $(dataControlsArrows).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
-        if (elementIndex == 0) $(dataControlsArrows).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
+        $(arrowsID).find('a').removeClass('is-disabled');
+        if (elementIndex == total - 1) $(arrowsID).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
+        if (elementIndex == 0) $(arrowsID).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
       } // To determine if it is a touch screen.
 
 
@@ -5532,15 +5795,15 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         if (elementIndex == total) elementIndex = total - 1;
         if (elementIndex < 0) elementIndex = 0; //Prevent bubbling
 
-        if (!dataLoop) {
+        if (!loop) {
           //first item
           if (elementIndex == 0) {
-            $(dataControlsArrows).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider__arrows--prev').addClass('is-disabled');
           } //last item
 
 
           if (elementIndex == total - 1) {
-            $(dataControlsArrows).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
           }
         }
       } //Determine the direction and add class to switching direction indicator.
@@ -5550,9 +5813,9 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       if (dir == 'prev') dirIndicatorClass = 'prev';
       if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to Controls Pagination
 
-      $(dataControlsPagination).find('li a').removeClass('leave');
-      $(dataControlsPagination).find('li a.is-active').removeClass('is-active').addClass('leave');
-      $(dataControlsPagination).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
+      $(paginationID).find('li a').removeClass('leave');
+      $(paginationID).find('li a.is-active').removeClass('is-active').addClass('leave');
+      $(paginationID).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
 
       $items.removeClass('leave prev next');
       $items.addClass(dirIndicatorClass);
@@ -5560,41 +5823,43 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       $items.eq(elementIndex).addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
       //-------------------------------------
 
-      $(dataCountTotal).text(total);
-      $(dataCountCur).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
+      $(countTotalID).text(total);
+      $(countCurID).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
       normalSliderVideoInit($items, false);
       normalSliderVideoInit($current, true); //Reset the default height of item
       //-------------------------------------	
 
-      itemDefaultInit($current);
+      itemDefaultInit(slider, $current);
     }
     /*
      * Initialize the default height of item
      *
-     * @param  {Object} slider           - Current selector of each slider.
+           * @param  {Element} slider                 - Selector of the slider .
+     * @param  {Element} currentLlement         - Current selector of each slider.
      * @return {Void}
      */
 
 
-    function itemDefaultInit(slider) {
-      if (slider.find('video').length > 0) {
+    function itemDefaultInit(slider, currentLlement) {
+      if (currentLlement.find('video').length > 0) {
         //Returns the dimensions (intrinsic height and width ) of the video
-        var video = document.getElementById(slider.find('video').attr('id')),
-            videoURL = slider.find('source:first').attr('src');
+        var video = document.getElementById(currentLlement.find('video').attr('id')),
+            videoURL = currentLlement.find('source:first').attr('src');
+        if (basic_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = currentLlement.attr('src');
         video.addEventListener('loadedmetadata', function (e) {
-          $sliderWrapper.css('height', this.videoHeight * (slider.closest('.uix-advanced-slider__outline').width() / this.videoWidth) + 'px');
+          slider.css('height', this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth) + 'px');
         }, false);
         video.src = videoURL;
       } else {
-        var imgURL = slider.find('img').attr('src');
+        var imgURL = currentLlement.find('img').attr('src');
 
         if (basic_typeof(imgURL) != ( true ? "undefined" : undefined)) {
           var img = new Image();
 
           img.onload = function () {
-            $sliderWrapper.css('height', slider.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
+            slider.css('height', currentLlement.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
           };
 
           img.src = imgURL;
@@ -5604,7 +5869,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     /*
      * Initialize embedded local video.
      *
-     * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+     * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
      * @param  {Boolean} play            - Forced to trigger pause or play events.
      * @return {Void}
      */
@@ -5714,8 +5979,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
           if (dataAuto) {
             //Fix an error of Video auto play is not working in browser
-            //this.muted( true ); 
-            //Prevent autoplay error: Uncaught (in promise) DOMException
+            this.muted(true); //Prevent autoplay error: Uncaught (in promise) DOMException
+
             var promise = this.play();
 
             if (promise !== undefined) {
@@ -5758,6 +6023,9 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             this.pause();
             this.currentTime(0);
           } else {
+            //Unmute, because there is interaction, you can turn on the audio.
+            this.muted(false);
+
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
@@ -5810,7 +6078,7 @@ var _special = __webpack_require__(10);
 // CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/special.js
 function special_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { special_typeof = function _typeof(obj) { return typeof obj; }; } else { special_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return special_typeof(obj); }
+function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { special_typeof = function _typeof(obj) { return typeof obj; }; } else { special_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return special_typeof(obj); }
 
 /* 
  *************************************
@@ -5829,7 +6097,7 @@ function special_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.0';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.8';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -5874,106 +6142,134 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             $items = $this.find('.uix-advanced-slider-sp__item'),
             $first = $items.first(),
             nativeItemW,
-            nativeItemH; //Autoplay times
+            nativeItemH,
+            activated = $this.data('activated');
 
-        var playTimes; //A function called "timer" once every second (like a digital watch).
-
-        $this[0].animatedSlides; //Get the animation speed
-        //-------------------------------------	
-
-        if (special_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-          animSpeed = $this.data('speed');
-        } //Display all images
-        //-------------------------------------	
-
-
-        if (!Modernizr.webgl) {
-          $this.find('img').css('visibility', 'visible');
-        } //Initialize the first item container
-        //-------------------------------------		
-
-
-        $items.addClass('next');
-        $first.addClass('is-active');
-        TweenMax.set($items, {
-          alpha: 0,
-          onComplete: function onComplete() {
-            TweenMax.to($first, animSpeed / 1000, {
-              alpha: 1,
-              delay: animSpeed / 1000
-            });
-          }
-        });
-
-        if ($first.find('video').length > 0) {
-          //Returns the dimensions (intrinsic height and width ) of the video
-          var video = document.getElementById($first.find('video').attr('id')),
-              videoURL = $first.find('source:first').attr('src');
-
-          if (special_typeof(videoURL) != ( true ? "undefined" : undefined)) {
-            video.addEventListener('loadedmetadata', function (e) {
-              $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
-              nativeItemW = this.videoWidth;
-              nativeItemH = this.videoHeight; //Initialize all the items to the stage
-
-              addItemsToStage($this, nativeItemW, nativeItemH);
-            }, false);
-            video.src = videoURL;
-          }
-        } else {
-          var imgURL = $first.find('img').attr('src');
-
-          if (special_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-            var img = new Image();
-
-            img.onload = function () {
-              $this.css('height', $this.width() * (this.height / this.width) + 'px');
-              nativeItemW = this.width;
-              nativeItemH = this.height; //Initialize all the items to the stage
-
-              addItemsToStage($this, nativeItemW, nativeItemH);
-            };
-
-            img.src = imgURL;
-          }
-        } //Autoplay Slider
-        //-------------------------------------		
-
-
-        if (!resize) {
+        if (special_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Get parameter configuration from the data-* attribute of HTML
           var dataAuto = $this.data('auto'),
               dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
+              dataLoop = $this.data('loop'),
+              dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataCountTotal = $this.data('count-total'),
+              dataCountCur = $this.data('count-now'),
+              dataSpeed = $this.data('speed'),
+              dataFilterTexture = $this.data('filter-texture');
           if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
           if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
           if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+          if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+          if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+          if (special_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (special_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
+          if (special_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+          if (special_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
+          if (special_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; //Autoplay times
 
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
-            });
-          }
-        }
+          var playTimes; //A function called "timer" once every second (like a digital watch).
+
+          $this[0].animatedSlides; //Get the animation speed
+          //-------------------------------------	
+
+          if (special_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+            animSpeed = dataSpeed;
+          } //Display all images
+          //-------------------------------------	
+
+
+          if (!Modernizr.webgl) {
+            $this.find('img').css('visibility', 'visible');
+          } //Initialize the first item container
+          //-------------------------------------		
+
+
+          $items.addClass('next');
+          $first.addClass('is-active');
+          TweenMax.set($items, {
+            alpha: 0,
+            onComplete: function onComplete() {
+              TweenMax.to($first, animSpeed / 1000, {
+                alpha: 1,
+                delay: animSpeed / 1000
+              });
+            }
+          });
+
+          if ($first.find('video').length > 0) {
+            //Returns the dimensions (intrinsic height and width ) of the video
+            var video = document.getElementById($first.find('video').attr('id')),
+                videoURL = $first.find('source:first').attr('src');
+            if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $first.attr('src');
+
+            if (special_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+              video.addEventListener('loadedmetadata', function (e) {
+                $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
+                nativeItemW = this.videoWidth;
+                nativeItemH = this.videoHeight; //Initialize all the items to the stage
+
+                addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, dataFilterTexture);
+              }, false);
+              video.src = videoURL;
+            }
+          } else {
+            var imgURL = $first.find('img').attr('src');
+
+            if (special_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+              var img = new Image();
+
+              img.onload = function () {
+                $this.css('height', $this.width() * (this.height / this.width) + 'px');
+                nativeItemW = this.width;
+                nativeItemH = this.height; //Initialize all the items to the stage
+
+                addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, dataFilterTexture);
+              };
+
+              img.src = imgURL;
+            }
+          } //Autoplay Slider
+          //-------------------------------------		
+
+
+          if (!resize) {
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            }
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated
+
       });
     }
     /*
     * Trigger slider autoplay
     *
-    * @param  {Function} playTimes      - Number of times.
-    * @param  {Number} timing           - Autoplay interval.
-    * @param  {Boolean} loop            - Determine whether to loop through each item.
-    * @param  {Object} slider           - Selector of the slider .
-    * @return {Void}                    - The constructor.
+    * @param  {Function} playTimes            - Number of times.
+    * @param  {Number} timing                 - Autoplay interval.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @param  {Element} slider                 - Selector of the slider .
+    * @param  {String} countTotalID           - Total number ID or class of counter.
+    * @param  {String} countCurID             - Current number ID or class of counter.
+    * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+    * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @return {Void}                          - The constructor.
     */
 
 
-    function sliderAutoPlay(playTimes, timing, loop, slider) {
+    function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
       var items = slider.find('.uix-advanced-slider-sp__item'),
           total = items.length;
       slider[0].animatedSlides = setInterval(function () {
@@ -5981,15 +6277,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         playTimes++;
 
         if (!loop) {
-          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, $sliderWrapper, 'next');
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1; //Prevent problems with styles when switching in positive order
 
           if (playTimes == 0) {
-            sliderUpdates(playTimes, $sliderWrapper, 'prev');
+            sliderUpdates(playTimes, slider, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
           } else {
-            sliderUpdates(playTimes, $sliderWrapper, 'next');
+            sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
           }
         }
       }, timing);
@@ -5997,40 +6293,39 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize all the items to the stage
      *
-     * @param  {Object} slider           - Current selector of each slider.
-     * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
-     * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+     * @param  {Element} slider                 - Current selector of each slider.
+     * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
+     * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+           * @param  {Boolean} draggable             - Allow drag and drop on the slider.
+           * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} filterTexture          - The texture used for the displacement map.
      * @return {Void}
      */
 
 
-    function addItemsToStage(slider, nativeItemW, nativeItemH) {
+    function addItemsToStage(slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID, filterTexture) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider-sp__item'),
           $first = $items.first(),
-          itemsTotal = $items.length,
-          dataControlsPagination = $this.data('controls-pagination'),
-          dataControlsArrows = $this.data('controls-arrows'),
-          dataLoop = $this.data('loop'),
-          dataFilterTexture = $this.data('filter-texture'),
-          dataDraggable = $this.data('draggable'),
-          dataDraggableCursor = $this.data('draggable-cursor');
-      if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-      if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-      if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-      if (special_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-      if (special_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-      if (special_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
-      if ($(dataControlsArrows).length == 0) {
-        $('body').prepend('<div style="display:none;" class="uix-advanced-slider-sp__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>');
-      } //Prevent bubbling
+      if ($(arrowsID).length == 0) {
+        $('body').prepend('<div style="display:none;" class="uix-advanced-slider-sp__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>');
+      } //Add identifiers for the first and last items
 
+
+      $items.last().addClass('last');
+      $items.first().addClass('first'); //Prevent bubbling
 
       if (itemsTotal == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
       }
 
       if (Modernizr.webgl) {
@@ -6083,24 +6378,29 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             imgCur.src = imgURL;
           }
-        }); //Basic webGL renderers 
+        }); //$this.find( '.uix-advanced-slider-sp__item' ).each
+        //Basic webGL renderers 
         //-------------------------------------
 
-        renderer = new PIXI.Application($this.width(), $this.height(), {
-          //backgroundColor : 0x000000, 
-          antialias: true,
+        renderer = new PIXI.Application({
+          width: $this.width(),
+          height: $this.height(),
           transparent: true,
+          antialias: true,
           autoResize: true,
           view: document.getElementById(rendererCanvasID)
         });
-        renderer__filter = new PIXI.autoDetectRenderer($this.width(), $this.height(), {
-          //backgroundColor : 0x000000, 
+        renderer__filter = new PIXI.autoDetectRenderer({
+          width: $this.width(),
+          height: $this.height(),
           transparent: true,
           view: document.getElementById(rendererCanvasID__filter)
-        });
+        }); //
+        //
+
         stage__filter = new PIXI.Container();
         container__items = new PIXI.Container();
-        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(dataFilterTexture) ? new PIXI.Sprite(PIXI.Texture.fromVideo(dataFilterTexture)) : new PIXI.Sprite.fromImage(dataFilterTexture);
+        displacementSprite = /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test(filterTexture) ? new PIXI.Sprite(PIXI.Texture.from(filterTexture)) : new PIXI.Sprite.from(filterTexture);
         displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite); //----------------------------------------------------------------------------------
         //--------------------------------- Brightness Effect -------------------------------	
         //----------------------------------------------------------------------------------
@@ -6115,11 +6415,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6135,7 +6436,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6144,20 +6445,25 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); // Render updated scene
 
-            renderer.stage.addChild(curSprite);
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Avoid error texture rendering errors ***!Important***
+
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
+            renderer.stage.addChild(curSprite);
           }); //Initialize the default height of canvas
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6176,11 +6482,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6196,7 +6503,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6205,12 +6512,17 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
+
+            curSprite.scale.set(canvasRatio); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6234,7 +6546,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             stage__filter.addChild(displacementSprite); //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               // Render updated scene
@@ -6244,7 +6556,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6263,11 +6575,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6283,7 +6596,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6292,15 +6605,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
+
+            curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
+
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6322,7 +6641,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             stage__filter.addChild(displacementSprite); //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               // Render updated scene
@@ -6332,7 +6651,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6351,11 +6670,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6371,7 +6691,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6380,15 +6700,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
+
+            curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
+
             TweenMax.set(curSprite, {
               alpha: 0
-            });
+            }); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6410,7 +6736,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             stage__filter.addChild(displacementSprite); //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               //Need the displacementSprite.texture.baseTexture.wrapMode is "PIXI.WRAP_MODES.REPEAT"
@@ -6423,7 +6749,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //----------------------------------------------------------------------------------
@@ -6442,11 +6768,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
             if ($thisItem.find('video').length > 0) {
               // create a video texture from a path
-              var videoURL = $thisItem.find('source:first').attr('src'),
-                  texture = PIXI.Texture.fromVideo(videoURL);
+              var videoURL = $thisItem.find('source:first').attr('src');
+              if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
+              var texture = PIXI.Texture.from(videoURL);
               curSprite = new PIXI.Sprite(texture); // pause the video
 
-              var videoSource = texture.baseTexture.source;
+              var videoSource = texture.baseTexture.resource.source;
               videoSource.autoplay = false;
               videoSource.pause();
               videoSource.currentTime = 0;
@@ -6462,7 +6789,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             } else {
               var imgURL = $thisItem.find('img').attr('src'),
                   imgCur = new Image();
-              curSprite = new PIXI.Sprite.fromImage(imgURL);
+              curSprite = new PIXI.Sprite.from(imgURL);
 
               imgCur.onload = function () {
                 //At the same time change the height of the canvas
@@ -6471,12 +6798,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               };
 
               imgCur.src = imgURL;
-            }
+            } // center the sprite's anchor point
 
-            curSprite.width = $this.width();
-            curSprite.height = $this.height(); //Need to scale according to the screen
 
-            curSprite.scale.set(canvasRatio);
+            curSprite.anchor.set(0); // sprite size
+
+            curSprite.width = renderer.view.width;
+            curSprite.height = renderer.view.height; //Need to scale according to the screen
+
+            curSprite.scale.set(canvasRatio); //Avoid error texture rendering errors ***!Important***
+
+            TweenMax.set(curSprite, {
+              alpha: 0
+            }); //Render updated scene
+            //-------------------------------------   
+
             container__items.addChild(curSprite); //Add child container to the main container 
             //-------------------------------------
 
@@ -6501,7 +6837,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             //Animation Effects
             //-------------------------------------
 
-            var ticker = new PIXI.ticker.Ticker();
+            var ticker = new PIXI.Ticker();
             ticker.autoStart = true;
             ticker.add(function (delta) {
               // Render updated scene
@@ -6511,7 +6847,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           //-------------------------------------	
 
           setTimeout(function () {
-            canvasDefaultInit($first);
+            canvasDefaultInit($this, $first);
           }, animSpeed);
         } // end effect
         //Canvas Interactions
@@ -6536,9 +6872,16 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       }
 
       _dot += '</ul>';
-      if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-      $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
-        e.preventDefault();
+      if ($(paginationID).html() == '') $(paginationID).html(_dot);
+      $(paginationID).find('li a').off('click').on('click', function (e) {
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        var $btn = $(this);
+        if ($btn.attr('aria-disabled') == 'true') return false;
+        $(paginationID).find('li a').attr('aria-disabled', 'true');
+        setTimeout(function () {
+          $(paginationID).find('li a').attr('aria-disabled', 'false');
+        }, animSpeed);
 
         if (!$(this).hasClass('is-active')) {
           //Determine the direction
@@ -6551,39 +6894,55 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
           transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', curDir); //Update the current and previous/next items
 
-          sliderUpdates($(this).attr('data-index'), $this, curDir); //Pause the auto play event
+          sliderUpdates($(this).attr('data-index'), $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
           clearInterval($this[0].animatedSlides);
         }
       }); //Next/Prev buttons
       //-------------------------------------		
 
-      var _prev = $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--prev'),
-          _next = $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--next');
+      var _prev = $(arrowsID).find('.uix-advanced-slider-sp__arrows--prev'),
+          _next = $(arrowsID).find('.uix-advanced-slider-sp__arrows--next');
 
-      $(dataControlsArrows).find('a').attr('href', 'javascript:');
-      $(dataControlsArrows).find('a').removeClass('is-disabled');
+      $(arrowsID).find('a').attr('href', 'javascript:');
+      $(arrowsID).find('a').removeClass('is-disabled');
 
-      if (!dataLoop) {
+      if (!loop) {
         _prev.addClass('is-disabled');
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault(); //Canvas Interactions
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _prev.attr('aria-disabled', 'false');
+        }, animSpeed); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev'); //Pause the auto play event
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault(); //Canvas Interactions
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        setTimeout(function () {
+          _next.attr('aria-disabled', 'false');
+        }, animSpeed); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next'); //Pause the auto play event
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
       }); //Added touch method to mobile device and desktop
@@ -6592,7 +6951,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
       var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
 
-      if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor); //Mouse event
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
 
       $dragDropTrigger.on('mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function (e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -6603,7 +6962,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
           $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
         } else {
-          if (dataDraggable) {
+          if (draggable) {
             $(this).data('origin_mouse_x', parseInt(e.pageX));
             $(this).data('origin_mouse_y', parseInt(e.pageY));
           }
@@ -6638,7 +6997,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               $dragDropTrigger.off('touchmove.ADVANCED_SLIDER_FILTER');
             }
           } else {
-            if (dataDraggable) {
+            if (draggable) {
               //right
               if (e.pageX > origin_mouse_x) {
                 if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
@@ -6664,43 +7023,38 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Transition Between Slides
      *
-     * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Object} slider           - Selector of the slider .
-     * @param  {String} dir              - Switching direction indicator.
+     * @param  {Number} elementIndex           - Index of current slider.
+     * @param  {Element} slider                 - Selector of the slider .
+     * @param  {String} dir                    - Switching direction indicator.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
      * @return {Void}
      */
 
 
-    function sliderUpdates(elementIndex, slider, dir) {
+    function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-slider-sp__item'),
           $current = $items.eq(elementIndex),
-          total = $items.length,
-          dataCountTotal = slider.data('count-total'),
-          dataCountCur = slider.data('count-now'),
-          dataControlsPagination = slider.data('controls-pagination'),
-          dataControlsArrows = slider.data('controls-arrows'),
-          dataLoop = slider.data('loop');
-      if (special_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-      if (special_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-      if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-      if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-      if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+          total = $items.length; //Prevent bubbling
 
       if (total == 1) {
-        $(dataControlsPagination).hide();
-        $(dataControlsArrows).hide();
+        $(paginationID).hide();
+        $(arrowsID).hide();
         return false;
       } //Transition Interception
       //-------------------------------------
 
 
-      if (dataLoop) {
+      if (loop) {
         if (elementIndex == total) elementIndex = 0;
         if (elementIndex < 0) elementIndex = total - 1;
       } else {
-        $(dataControlsArrows).find('a').removeClass('is-disabled');
-        if (elementIndex == total - 1) $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
-        if (elementIndex == 0) $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
+        $(arrowsID).find('a').removeClass('is-disabled');
+        if (elementIndex == total - 1) $(arrowsID).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
+        if (elementIndex == 0) $(arrowsID).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
       } // To determine if it is a touch screen.
       //-------------------------------------
 
@@ -6709,15 +7063,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         if (elementIndex == total) elementIndex = total - 1;
         if (elementIndex < 0) elementIndex = 0; //Prevent bubbling
 
-        if (!dataLoop) {
+        if (!loop) {
           //first item
           if (elementIndex == 0) {
-            $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider-sp__arrows--prev').addClass('is-disabled');
           } //last item
 
 
           if (elementIndex == total - 1) {
-            $(dataControlsArrows).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
+            $(arrowsID).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
           }
         }
       } //Determine the direction and add class to switching direction indicator.
@@ -6729,9 +7083,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to Controls Pagination
       //-------------------------------------
 
-      $(dataControlsPagination).find('li a').removeClass('leave');
-      $(dataControlsPagination).find('li a.is-active').removeClass('is-active').addClass('leave');
-      $(dataControlsPagination).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
+      $(paginationID).find('li a').removeClass('leave');
+      $(paginationID).find('li a.is-active').removeClass('is-active').addClass('leave');
+      $(paginationID).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
       //-------------------------------------	
 
       $items.removeClass('leave prev next');
@@ -6740,8 +7094,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       $items.eq(elementIndex).addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
       //-------------------------------------
 
-      $(dataCountTotal).text(total);
-      $(dataCountCur).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
+      $(countTotalID).text(total);
+      $(countCurID).text(parseFloat(elementIndex) + 1); // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
       if (!Modernizr.webgl) {
@@ -6752,7 +7106,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
       setTimeout(function () {
-        canvasDefaultInit($current);
+        canvasDefaultInit(slider, $current);
       }, animSpeed); //Canvas Interactions
       //-------------------------------------
       //-- Brightness Effect
@@ -6770,7 +7124,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
       if (slider.hasClass('uix-advanced-slider-sp--eff-parallax')) {
-        if (dataLoop) {
+        if (loop) {
           if (elementIndex == 0) dir = 'prev';
         }
       }
@@ -6795,41 +7149,43 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize the default height of canvas
      *
-     * @param  {Object} slider           - Current selector of each slider.
+           * @param  {Element} slider                 - Selector of the slider .
+     * @param  {Element} currentLlement         - Current selector of each slider.
      * @return {Void}
      */
 
 
-    function canvasDefaultInit(slider) {
-      if (slider.find('video').length > 0) {
+    function canvasDefaultInit(slider, currentLlement) {
+      if (currentLlement.find('video').length > 0) {
         //Returns the dimensions (intrinsic height and width ) of the video
-        var video = document.getElementById(slider.find('video').attr('id')),
-            videoURL = slider.find('source:first').attr('src');
+        var video = document.getElementById(currentLlement.find('video').attr('id')),
+            videoURL = currentLlement.find('source:first').attr('src');
+        if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = currentLlement.attr('src');
         video.addEventListener('loadedmetadata', function (e) {
           //At the same time change the height of the canvas and slider container
-          var h = this.videoHeight * (slider.closest('.uix-advanced-slider__outline').width() / this.videoWidth);
+          var h = this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth);
 
           if (Modernizr.webgl) {
             renderer.view.style.height = h + 'px';
           } //---
 
 
-          $sliderWrapper.css('height', h + 'px');
+          slider.css('height', h + 'px');
         }, false);
         video.src = videoURL;
       } else {
-        var imgURL = slider.find('img').attr('src');
+        var imgURL = currentLlement.find('img').attr('src');
 
         if (special_typeof(imgURL) != ( true ? "undefined" : undefined)) {
           var img = new Image();
 
           img.onload = function () {
             if (Modernizr.webgl) {
-              renderer.view.style.height = slider.find('img').height() + 'px';
+              renderer.view.style.height = currentLlement.find('img').height() + 'px';
             } //---
 
 
-            $sliderWrapper.css('height', slider.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
+            slider.css('height', currentLlement.closest('.uix-advanced-slider__outline').width() * (this.height / this.width) + 'px');
           };
 
           img.src = imgURL;
@@ -6842,7 +7198,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
      *
      * @param  {Number} elementIndex           - Index of current slider.
      * @param  {Number} prevElementIndex       - Index of previous slider.
-     * @param  {Object} slider                 - Selector of the slider.
+     * @param  {Element} slider                 - Selector of the slider.
      * @param  {String} goType                 - The type of entry and exit between two items.  
                                                  Optional values: in, out
      * @param  {String} dir                    - Switching direction indicator.	 
@@ -6898,7 +7254,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   }); //pause all videos
 
                   if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.source; // play the video
+                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -6909,7 +7265,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
                 if (curSp._texture.baseTexture.imageType == null) {
-                  var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                  var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                   videoSource2.currentTime = 0;
                   videoSource2.autoplay = true;
@@ -6980,7 +7336,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 var obj = container__items.children[k]; //pause all videos
 
                 if (obj._texture.baseTexture.imageType == null) {
-                  var videoSource = obj.texture.baseTexture.source; // play the video
+                  var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                   videoSource.currentTime = 0;
                   videoSource.autoplay = false;
@@ -6991,7 +7347,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
               if (curSp._texture.baseTexture.imageType == null) {
-                var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                 videoSource2.currentTime = 0;
                 videoSource2.autoplay = true;
@@ -7040,14 +7396,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             }, 'final'); //Add new ripple each time mouse
             //-------------------------------------
 
-            $sliderWrapper[0].addEventListener("mousedown", function (e) {
+            slider[0].addEventListener("mousedown", function (e) {
               TweenMax.to(displacementFilter.scale, 1, {
                 x: "+=" + Math.sin(e.pageX) * 100 + "",
                 y: "+=" + Math.cos(e.pageY) * 100 + ""
               });
               rotateSpite();
             });
-            $sliderWrapper[0].addEventListener("mouseup", function (e) {
+            slider[0].addEventListener("mouseup", function (e) {
               TweenMax.to(displacementFilter.scale, 1, {
                 x: 0,
                 y: 0
@@ -7094,7 +7450,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   }); //pause all videos
 
                   if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.source; // play the video
+                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7105,7 +7461,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
                 if (curSp._texture.baseTexture.imageType == null) {
-                  var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                  var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                   videoSource2.currentTime = 0;
                   videoSource2.autoplay = true;
@@ -7200,7 +7556,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   }); //pause all videos
 
                   if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.source; // play the video
+                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7211,7 +7567,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
                 if (curSp._texture.baseTexture.imageType == null) {
-                  var videoSource2 = curSp.texture.baseTexture.source; // play the video
+                  var videoSource2 = curSp.texture.baseTexture.resource.source; // play the video
 
                   videoSource2.currentTime = 0;
                   videoSource2.autoplay = true;
@@ -7293,7 +7649,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 var obj = container__items.children[m]; //pause all videos
 
                 if (obj._texture.baseTexture.imageType == null) {
-                  var videoSource = obj.texture.baseTexture.source; // play the video
+                  var videoSource = obj.texture.baseTexture.resource.source; // play the video
 
                   videoSource.currentTime = 0;
                   videoSource.autoplay = false;
@@ -7304,7 +7660,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
               if (curSpParallax._texture.baseTexture.imageType == null) {
-                var videoSource2 = curSpParallax.texture.baseTexture.source; // play the video
+                var videoSource2 = curSpParallax.texture.baseTexture.resource.source; // play the video
 
                 videoSource2.currentTime = 0;
                 videoSource2.autoplay = true;
@@ -7330,9 +7686,15 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             },
                 goNextItem = function goNextItem() {
               // Paralax effect on current slide
-              TweenMax.to(curSpParallax, parallaxSpeed, {
-                x: 0,
-                ease: Power2.easeInOut
+              TweenMax.set(curSpParallax, {
+                alpha: 1,
+                //Avoid error texture rendering errors ***!Important***
+                onComplete: function onComplete() {
+                  TweenMax.to(this.target, parallaxSpeed, {
+                    x: 0,
+                    ease: Power2.easeInOut
+                  });
+                }
               }); // Current Mask animation
 
               TweenMax.to(curSpParallax.mask, parallaxSpeed, {
@@ -7406,7 +7768,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     /*
      * Initialize embedded local video.
      *
-     * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+     * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
      * @param  {Boolean} play            - Forced to trigger pause or play events.
      * @return {Void}
      */
@@ -7516,8 +7878,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
           if (dataAuto) {
             //Fix an error of Video auto play is not working in browser
-            //this.muted( true ); 
-            //Prevent autoplay error: Uncaught (in promise) DOMException
+            this.muted(true); //Prevent autoplay error: Uncaught (in promise) DOMException
+
             var promise = this.play();
 
             if (promise !== undefined) {
@@ -7560,6 +7922,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             this.pause();
             this.currentTime(0);
           } else {
+            //Unmute, because there is interaction, you can turn on the audio.
+            this.muted(false);
+
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
@@ -7609,7 +7974,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/AJAX-push/js/index.js
 function AJAX_push_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_push_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_push_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_push_js_typeof(obj); }
+function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_push_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_push_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_push_js_typeof(obj); }
 
 /* 
  *************************************
@@ -7621,20 +7986,37 @@ function AJAX_push_js_typeof(obj) { if (typeof Symbol === "function" && typeof S
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.0.9';
+  module.AJAX_PUSH_CONTENT.version = '0.1.3';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
+    // trigger of AJAX request
+    var AJAXPageLinks = '[data-ajax-push-content]'; //all images from pages
+
+    var sources = []; //Added timer to prevent page loading errors for a long time
+
+    var timeClockInit;
     /* Need to set it as a global variable for history */
+
     var ajaxConfig = {
       "container": "#my-ajax-demo-push-container",
       "target": "#my-ajax-demo-target-container",
-      "loading": "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading...</span></div>",
+      "loading": "<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading <em id=\"app-loading\" data-txt=\"{progress}%\"></em>...</span></div>",
       "method": "POST"
     },
-        thisPageTitle = document.title; //Click event
+        thisPageTitle = document.title; // The progress of each page load, using global variables to accurately determine
 
-    $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', '[data-ajax-push-content]', function (event) {
-      event.preventDefault();
+    var loadedProgress = 0; //loading animation
+
+    var loadingAnim = function loadingAnim(per) {
+      $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+    }; //Click event
+
+
+    $(document).off('click.AJAX_PUSH_CONTENT').on('click.AJAX_PUSH_CONTENT', AJAXPageLinks, function (event) {
+      event.preventDefault(); // The progress of each page load
+
+      loadedProgress = 0; //
+
       var $this = $(this),
           curURL = $this.attr('href'),
           config = $this.data('ajax-push-content');
@@ -7669,7 +8051,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     window.addEventListener('popstate', function (e) {
       var eleTarget = null,
           goURL = location.href;
-      $('[data-ajax-push-content]').each(function () {
+      $(AJAXPageLinks).each(function () {
         //don't use $( this ).attr( 'href' )
         if (this.href === location.href) {
           eleTarget = this;
@@ -7677,7 +8059,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         }
       }); //Empty content that does not exist
 
-      $('[data-ajax-push-content]').each(function () {
+      $(AJAXPageLinks).each(function () {
         var curConfig = $(this).data('ajax-push-content');
 
         if (AJAX_push_js_typeof(curConfig) != ( true ? "undefined" : undefined)) {
@@ -7696,12 +8078,12 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} container       - The target container to which the content will be added.
+     * @param  {Element} container       - The target container to which the content will be added.
      * @param  {String|Boolean} target  - The instance ID or class name returned from the callback data. If it is "false", the push content is empty.
      * @param  {String} loading         - Content of loading area.
      * @param  {String} url             - The target URL via AJAX. 
      * @param  {String} method          - The HTTP method to use for the request (e.g. "POST", "GET", "PUT")
-     * @param  {Object|Boolean} btn     - Current trigger button. Avoid button events if "false".
+     * @param  {?Element|Boolean} btn     - Current trigger button. Avoid button events if "false".
      * @return {Void}
      */
 
@@ -7728,6 +8110,9 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             ease: Power2.easeOut
           });
           container.html('<div class="ajax-content-loader">' + loading + '</div>').promise().done(function () {
+            //loading animation
+            loadingAnim(0); //loader effect from AJAX request
+
             TweenMax.set(container.find('.ajax-content-loader'), {
               css: {
                 'display': 'block'
@@ -7742,8 +8127,117 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         }
       }).done(function (response) {
         //A function to be called if the request succeeds
-        var pushContent = !target ? '' : $(response).find(target).html();
-        ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+        var pushContent = !target ? '' : $(response).find(target).html(); //Display loading image when AJAX call is in progress
+        //Remove existing images
+
+        sources = []; //Push all images from page
+
+        $(response).find('img').each(function () {
+          sources.push({
+            "url": this.src,
+            "id": 'img-' + UixGUID.create(),
+            "type": 'img'
+          });
+        }); //Push all videos from page
+
+        $(response).find('.uix-video__slider > video').each(function () {
+          var _src = $(this).find('source:first').attr('src');
+
+          if (AJAX_push_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
+          sources.push({
+            "url": _src,
+            "id": 'video-' + UixGUID.create(),
+            "type": 'video'
+          });
+        }); //Execute after all images have loaded
+
+        var per;
+        var perInit = 1;
+
+        if (sources.length == 0) {
+          per = 100; //loading animation
+
+          loadingAnim(per);
+        }
+
+        var loadImages = function loadImages() {
+          var promises = [];
+
+          for (var i = 0; i < sources.length; i++) {
+            if (sources[i].type == 'img') {
+              ///////////
+              // IMAGE //
+              ///////////   
+              promises.push(new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.crossOrigin = "anonymous";
+                img.src = sources[i].url;
+
+                img.onload = function (image) {
+                  //Compatible with safari and firefox
+                  if (AJAX_push_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                    return resolve(image.target.currentSrc);
+                  } else {
+                    return resolve(image.path[0].currentSrc);
+                  }
+                };
+              }).then(textureLoaded));
+            } else {
+              ///////////
+              // VIDEO //
+              ///////////    
+              promises.push(new Promise(function (resolve, reject) {
+                $('#' + sources[i].id).one('loadedmetadata', resolve);
+                return resolve(sources[i].url);
+              }).then(textureLoaded));
+            }
+          }
+
+          return Promise.all(promises);
+        };
+
+        var textureLoaded = function textureLoaded(url) {
+          //loading
+          per = parseInt(100 * (perInit / sources.length));
+          console.log('progress: ' + per + '%');
+          if (isNaN(per)) per = 100; // The progress of each page load
+
+          loadedProgress = per; //loading animation
+
+          loadingAnim(per);
+          var texture = null;
+          perInit++;
+          return per;
+        };
+
+        var func = function func() {
+          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+        }; //images loaded
+        //Must be placed behind the loadImages()
+
+
+        loadImages().then(function (images) {
+          clearInterval(timeClockInit);
+          func();
+        }); //Calculating page load time
+
+        var timeLimit = 10,
+            timeStart = new Date().getTime(); //Prevent duplicate runs when returning to this page
+
+        if (timeClockInit) {
+          clearInterval(timeClockInit);
+        }
+
+        timeClockInit = setInterval(function () {
+          //Converting milliseconds to minutes and seconds
+          var _time = (new Date().getTime() - timeStart) / 1000;
+
+          if (_time >= timeLimit) {
+            console.log('Page load timeout!');
+            clearInterval(timeClockInit);
+            func();
+          }
+        }, 500);
       }).fail(function (jqXHR, textStatus, errorThrown) {
         window.location.href = url;
       });
@@ -7754,13 +8248,15 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
      * @param  {String} container    - The target container to which the content will be added.
      * @param  {String} content      - The data returned from the server
      * @param  {String} title        - The title of a requested page.
-     * @param  {Object} btn          - Current trigger button.
+     * @param  {?Element} btn          - Current trigger button.
      * @return {Void}
      */
 
 
     function ajaxSucceeds(container, content, title, btn) {
-      //Remove loader
+      //If the page resource is not loaded, then the following code is not executed
+      if (loadedProgress < 100) return false; //Remove loader
+
       TweenMax.to(container.find('.ajax-content-loader'), 0.5, {
         alpha: 0,
         onComplete: function onComplete() {
@@ -7804,7 +8300,7 @@ var AJAX_scss_style = __webpack_require__(11);
 // CONCATENATED MODULE: ./src/components/ES6/AJAX/js/index.js
 function AJAX_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_js_typeof(obj); }
+function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_js_typeof(obj); }
 
 /* 
  *************************************
@@ -7817,12 +8313,16 @@ function AJAX_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.0';
+  module.AJAX_PAGE_LOADER.version = '0.1.4';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window),
         windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight; //Determine the direction of a jQuery scroll event
+        windowHeight = window.innerHeight; //all images from pages
+
+    var sources = []; //Added timer to prevent page loading errors for a long time
+
+    var timeClockInit; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
     var lastAnimation = 0,
@@ -7836,7 +8336,14 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         total = $navs.length,
         $sectionsContainer = $('.uix-ajax-load__fullpage-container'),
         ajaxContainer = '.ajax-container',
-        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); //Prevent this module from loading in other pages
+        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); // The progress of each page load, using global variables to accurately determine
+
+    var loadedProgress = 0; //loading animation
+
+    var loadingAnim = function loadingAnim(per) {
+      $('#app-loading').text($('#app-loading').data('txt').replace(/\{progress\}/g, per));
+    }; //Prevent this module from loading in other pages
+
 
     if ($sectionsContainer.length == 0) return false;
     /* 
@@ -7893,7 +8400,10 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         return;
       }
 
-      e.preventDefault();
+      e.preventDefault(); // The progress of each page load
+
+      loadedProgress = 0; //
+
       var $this = $(this),
           curIndex = $this.attr('data-index'),
           curURL = $this.attr('href'); //The currently URL of link
@@ -7942,7 +8452,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -7967,7 +8477,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} container    - The instance returned from the request succeeds 
+     * @param  {Element} container    - The instance returned from the request succeeds 
      * @param  {String} url          - The target URL via AJAX.
      * @param  {String} dir          - Rolling direction indicator.
      * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
@@ -8028,6 +8538,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             action: 'load_singlepages_ajax_content'
           },
           beforeSend: function beforeSend() {
+            //loading animation
+            loadingAnim(0); //loader effect from AJAX request
+
             TweenMax.set('.uix-ajax-load__loader', {
               css: {
                 'display': 'block'
@@ -8041,7 +8554,116 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           }
         }).done(function (response) {
           //A function to be called if the request succeeds
-          ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+          //Display loading image when AJAX call is in progress
+          //Remove existing images
+          sources = []; //Push all images from page
+
+          $(response).find('img').each(function () {
+            sources.push({
+              "url": this.src,
+              "id": 'img-' + UixGUID.create(),
+              "type": 'img'
+            });
+          }); //Push all videos from page
+
+          $(response).find('.uix-video__slider > video').each(function () {
+            var _src = $(this).find('source:first').attr('src');
+
+            if (AJAX_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
+            sources.push({
+              "url": _src,
+              "id": 'video-' + UixGUID.create(),
+              "type": 'video'
+            });
+          }); //Execute after all images have loaded
+
+          var per;
+          var perInit = 1;
+
+          if (sources.length == 0) {
+            per = 100; //loading animation
+
+            loadingAnim(per);
+          }
+
+          var loadImages = function loadImages() {
+            var promises = [];
+
+            for (var i = 0; i < sources.length; i++) {
+              if (sources[i].type == 'img') {
+                ///////////
+                // IMAGE //
+                ///////////   
+                promises.push(new Promise(function (resolve, reject) {
+                  var img = document.createElement("img");
+                  img.crossOrigin = "anonymous";
+                  img.src = sources[i].url;
+
+                  img.onload = function (image) {
+                    //Compatible with safari and firefox
+                    if (AJAX_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                      return resolve(image.target.currentSrc);
+                    } else {
+                      return resolve(image.path[0].currentSrc);
+                    }
+                  };
+                }).then(textureLoaded));
+              } else {
+                ///////////
+                // VIDEO //
+                ///////////    
+                promises.push(new Promise(function (resolve, reject) {
+                  $('#' + sources[i].id).one('loadedmetadata', resolve);
+                  return resolve(sources[i].url);
+                }).then(textureLoaded));
+              }
+            }
+
+            return Promise.all(promises);
+          };
+
+          var textureLoaded = function textureLoaded(url) {
+            //loading
+            per = parseInt(100 * (perInit / sources.length));
+            console.log('progress: ' + per + '%');
+            if (isNaN(per)) per = 100; // The progress of each page load
+
+            loadedProgress = per; //loading animation
+
+            loadingAnim(per);
+            var texture = null;
+            perInit++;
+            return per;
+          };
+
+          var func = function func() {
+            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+          }; //images loaded
+          //Must be placed behind the loadImages()
+
+
+          loadImages().then(function (images) {
+            clearInterval(timeClockInit);
+            func();
+          }); //Calculating page load time
+
+          var timeLimit = 10,
+              timeStart = new Date().getTime(); //Prevent duplicate runs when returning to this page
+
+          if (timeClockInit) {
+            clearInterval(timeClockInit);
+          }
+
+          timeClockInit = setInterval(function () {
+            //Converting milliseconds to minutes and seconds
+            var _time = (new Date().getTime() - timeStart) / 1000;
+
+            if (_time >= timeLimit) {
+              console.log('Page load timeout!');
+              clearInterval(timeClockInit);
+              func();
+            }
+          }, 500);
         }).fail(function (jqXHR, textStatus, errorThrown) {
           window.location.href = url;
         });
@@ -8051,7 +8673,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
      * A function to be called if the request succeeds
      *
      * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
-     * @param  {Object} container - The instance returned from the request succeeds
+     * @param  {Element} container - The instance returned from the request succeeds
      * @param  {String} content   - The data returned from the server
      * @param  {String} title        - The title of a requested page.
      * @return {Void}
@@ -8059,6 +8681,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
 
     function ajaxSucceeds(dir, container, content, title) {
+      //If the page resource is not loaded, then the following code is not executed
+      if (loadedProgress < 100) return false; //
+
       var oldContent = container.html(); //Remove loader
 
       TweenMax.to('.uix-ajax-load__loader', 0.5, {
@@ -8212,7 +8837,7 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.4';
+  module.BACK_TO_TOP.version = '0.0.5';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window),
@@ -8223,7 +8848,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
       //-------- Sticky button of back to top 
       //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
       var $el = $('#uix-to-top');
-      $window.on('scroll touchmove', function () {
+      $window.on('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function () {
         var scrollTop = $(this).scrollTop(),
             spyTop = windowHeight / 2;
 
@@ -8262,7 +8887,7 @@ var circle_layout_scss_style = __webpack_require__(13);
 // CONCATENATED MODULE: ./src/components/ES6/circle-layout/js/index.js
 function circle_layout_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function circle_layout_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { circle_layout_js_typeof = function _typeof(obj) { return typeof obj; }; } else { circle_layout_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return circle_layout_js_typeof(obj); }
+function circle_layout_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { circle_layout_js_typeof = function _typeof(obj) { return typeof obj; }; } else { circle_layout_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return circle_layout_js_typeof(obj); }
 
 /* 
  *************************************
@@ -8393,7 +9018,7 @@ var dropdown_menu_scss_style = __webpack_require__(16);
 // CONCATENATED MODULE: ./src/components/ES6/dropdown-menu/js/index.js
 function dropdown_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dropdown_menu_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dropdown_menu_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dropdown_menu_js_typeof(obj); }
+function dropdown_menu_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dropdown_menu_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dropdown_menu_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dropdown_menu_js_typeof(obj); }
 
 /* 
  *************************************
@@ -8405,11 +9030,20 @@ function dropdown_menu_js_typeof(obj) { if (typeof Symbol === "function" && type
 var DROPDOWN_MENU = function (module, $, window, document) {
   if (window.DROPDOWN_MENU === null) return false;
   module.DROPDOWN_MENU = module.DROPDOWN_MENU || {};
-  module.DROPDOWN_MENU.version = '0.0.5';
+  module.DROPDOWN_MENU.version = '0.0.7';
 
   module.DROPDOWN_MENU.documentReady = function ($) {
-    //Create a trigger of Dropdown Menu on Click
+    //Initialize option status
+    $('.uix-dropdown-menu').each(function () {
+      var v = $(this).find('input[type="hidden"]').val(),
+          selectedIndex = $(this).find('ul > li > a[data-value="' + v + '"]').parent().index(),
+          $li = $(this).find('ul > li');
+      $li.removeClass('is-active');
+      $li.eq(selectedIndex).addClass('is-active');
+      $(this).find('> summary > span').html($li.eq(selectedIndex).find('> a').data('display-text'));
+    }); //Create a trigger of Dropdown Menu on Click
     //Use $( document ) to support other click events for ajax
+
     $(document).off('click.DROPDOWN_MENU').on('click.DROPDOWN_MENU', '.uix-dropdown-menu > summary', function (e) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
@@ -8425,13 +9059,17 @@ var DROPDOWN_MENU = function (module, $, window, document) {
         $this.removeAttr('open').removeClass('is-opened');
       }
 
-      if (dropdown_menu_js_typeof($(this).data('value')) != ( true ? "undefined" : undefined) && $(this).data('value') != '') {
-        $this.find('input[type="hidden"]').val($(this).data('value'));
+      if (dropdown_menu_js_typeof($(this).attr('data-value')) != ( true ? "undefined" : undefined) && $(this).attr('data-value') != '') {
+        $this.find('input[type="hidden"]').val($(this).attr('data-value'));
       }
 
       if (dropdown_menu_js_typeof($(this).data('display-text')) != ( true ? "undefined" : undefined) && $(this).data('display-text') != '') {
         $this.find('> summary > span').html($(this).data('display-text'));
-      }
+      } // update active status
+
+
+      $this.find('li').removeClass('is-active');
+      $(this).parent().addClass('is-active');
     }); //Close the target
     //Do not add off() to this
 
@@ -8539,7 +9177,7 @@ var fn_select = __webpack_require__(1);
 // CONCATENATED MODULE: ./src/components/ES6/dynamic-dropdown-list-json/js/index.js
 function dynamic_dropdown_list_json_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function dynamic_dropdown_list_json_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dynamic_dropdown_list_json_js_typeof(obj); }
+function dynamic_dropdown_list_json_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dynamic_dropdown_list_json_js_typeof(obj); }
 
 /* 
  *************************************
@@ -8868,7 +9506,7 @@ var flexslider_scss_style = __webpack_require__(20);
 // CONCATENATED MODULE: ./src/components/ES6/flexslider/js/index.js
 function flexslider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function flexslider_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { flexslider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { flexslider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return flexslider_js_typeof(obj); }
+function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { flexslider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { flexslider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return flexslider_js_typeof(obj); }
 
 /* 
  *************************************
@@ -8909,8 +9547,8 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Return an event from callback function to each slider.
      *
-     * @param  {Object} thisSlider             - The current slider.
-     * @param  {Object} sliderWrapper          - The current slider wrapper.
+     * @param  {Element} thisSlider             - The current slider.
+     * @param  {Element} sliderWrapper          - The current slider wrapper.
      * @param  {String} fireState              - State of fire asynchronously.
      * @return {Number}                        - Index of current slider .
      */
@@ -9132,7 +9770,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Initialize embedded local video.
      *
-     * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+     * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
      * @param  {Boolean} play            - Forced to trigger pause or play events.
      * @return {Void}
      */
@@ -9326,7 +9964,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Make slider image draggable 
      *
-     * @param  {Object} $obj             - The current FlexSlider setup using custom selector.
+     * @param  {Element} $obj             - The current FlexSlider setup using custom selector.
      * @return {Void}
      */
 
@@ -9383,7 +10021,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      *  Scroll The Slider With Mousewheel
      *
-     * @param  {Object} $obj            - The current FlexSlider setup using custom selector.
+     * @param  {Element} $obj            - The current FlexSlider setup using custom selector.
      * @return {Void}
      */
 
@@ -9420,7 +10058,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     /*
      * Slider With Thumbnail ControlNav Pattern
      *
-     * @param  {Object} slider           - The current slider.
+     * @param  {Element} slider           - The current slider.
      * @param  {String} navThumbClass    - Class name of thumbnail controlNav.
      * @return {Void}
      */
@@ -9439,7 +10077,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     * they will only update if the main flexslider updates. 
      *
      * @param  {Number} slideNumber          - The current slider index.
-     * @param  {Object} childrenSlidesObj    - Target slider.
+     * @param  {Element} childrenSlidesObj    - Target slider.
      * @param  {Boolean} loop                - Gives the slider a seamless infinite loop.
      * @param  {Number} speed                - Set the speed of animations, in milliseconds.
      * @param  {Number} timing               - Set the speed of the slideshow cycling, in milliseconds.
@@ -9671,7 +10309,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.1';
+  module.FLOATING_SIDE_EL.version = '0.0.2';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -9686,7 +10324,7 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
         marginTop: -floatingOffset.top + ($(window).height() - $floatingSideEl.height()) / 2
       }
     });
-    $(window).on('scroll touchmove', function () {
+    $(window).on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
       var sideBarHeight = $floatingSideEl.height(),
           scrollTop = $(window).scrollTop();
 
@@ -9729,7 +10367,7 @@ var form_progress_scss_style = __webpack_require__(23);
 // CONCATENATED MODULE: ./src/components/ES6/form-progress/js/index.js
 function form_progress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function form_progress_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_progress_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_progress_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_progress_js_typeof(obj); }
+function form_progress_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_progress_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_progress_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_progress_js_typeof(obj); }
 
 /* 
  *************************************
@@ -9880,7 +10518,7 @@ var _3rd_party_plugins = __webpack_require__(37);
 // CONCATENATED MODULE: ./src/components/ES6/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function form_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_js_typeof(obj); }
+function form_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_js_typeof(obj); }
 
 /* 
  *************************************
@@ -10123,7 +10761,7 @@ var FORM = function (module, $, window, document) {
     /*
      * Initialize single switch
      *
-     * @param  {Object} obj                 - Radio controls. 
+     * @param  {Element} obj                 - Radio controls. 
      * @return {Void}
      */
 
@@ -10185,7 +10823,7 @@ var FORM = function (module, $, window, document) {
     /*
      * Initialize single switch
      *
-     * @param  {Object} obj                 - Radio controls. 
+     * @param  {Element} obj                 - Radio controls. 
      * @return {Void}
      */
 
@@ -10613,7 +11251,7 @@ var lightbox_scss_style = __webpack_require__(41);
 // CONCATENATED MODULE: ./src/components/ES6/lightbox/js/index.js
 function lightbox_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { lightbox_js_typeof = function _typeof(obj) { return typeof obj; }; } else { lightbox_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return lightbox_js_typeof(obj); }
+function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { lightbox_js_typeof = function _typeof(obj) { return typeof obj; }; } else { lightbox_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return lightbox_js_typeof(obj); }
 
 /* 
  *************************************
@@ -10632,13 +11270,29 @@ function lightbox_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.6';
+  module.LIGHTBOX.version = '0.1.8';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
-      $('body').prepend('<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"></div>');
-    }
+      $('body').prepend('<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"><button type="button"></button></div>');
+    } // To display the template tag content.
 
+
+    $('template').each(function () {
+      var _content = $(this).html(function (index, html) {
+        return html.replace(/[\r\n]/g, '');
+      }).context.innerHTML,
+          _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
+
+
+      if (!$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
+        //reset id
+        $(this).removeAttr('id');
+        $('body').addClass(_id); //append content to body
+
+        $(_content.replace(/role=[\'\"]dialog[\'\"]/, 'role="dialog" id="' + _id + '"')).appendTo('body');
+      }
+    });
     var innerEl = '.uix-lightbox__inner',
         wrapperEl = '.uix-lightbox__container',
         loaderEl = '.uix-lightbox__loading',
@@ -10745,8 +11399,9 @@ var LIGHTBOX = function (module, $, window, document) {
         });
       };
 
-      hideLightboxContent(); //-------- If it is photo
-      //-----------------------------
+      hideLightboxContent(); ////////////////////////
+      //////// PHOTOS ///////
+      ////////////////////////  
 
       if (lightbox_js_typeof(dataPhoto) != ( true ? "undefined" : undefined) && dataPhoto != '') {
         //show the lightbox
@@ -10864,8 +11519,9 @@ var LIGHTBOX = function (module, $, window, document) {
 
           $(innerEl).find('> .uix-lightbox__html').removeClass('js-uix-no-img');
         });
-      } //-------- If it is not photo
-      //-----------------------------
+      } ////////////////////////
+      //////// HTML /////////
+      ////////////////////////  
 
 
       if (lightbox_js_typeof(dataHtmlID) != ( true ? "undefined" : undefined) && dataHtmlID != '') {
@@ -10933,13 +11589,16 @@ var LIGHTBOX = function (module, $, window, document) {
             // Content pushing completed
             htmlContentLoaded();
           });
-        }
+        } //endif $( wrapperEl ).hasClass( 'js-uix-ajax' )
+
       }
 
       return false;
     });
     /* end click event for triggerEl */
-    //Close the lightbox
+    ////////////////////////
+    // Close the lightbox //
+    ////////////////////////   	
 
     $(document).off('click.LIGHTBOX_CLOSE').on('click.LIGHTBOX_CLOSE', closeEl + ',' + maskEl, function () {
       lightboxClose(docURL);
@@ -10964,7 +11623,9 @@ var LIGHTBOX = function (module, $, window, document) {
       if ($(this).hasClass('uix-lightbox__photo-sets__next')) {
         lightboxThumbSwitch(nextIndex, $thumb.eq(nextIndex));
       }
-    }); //Close/Open enlarge image
+    }); ////////////////////////////////
+    // Close/Open enlarge image //
+    ///////////////////////////////	
 
     if (window.innerWidth > 768) {
       $(document).off('click.LIGHTBOX_ORGINAL_LINK').on('click.LIGHTBOX_ORGINAL_LINK', '.uix-lightbox__original__link', function (e) {
@@ -10990,7 +11651,7 @@ var LIGHTBOX = function (module, $, window, document) {
      * Click thumbnail to show large photo
      *
      * @param  {Number} index           - The target index of large photo.
-     * @param  {Object} obj             - Target large image <li>.
+     * @param  {Element} obj             - Target large image <li>.
      * @return {Void}
      */
 
@@ -11014,43 +11675,67 @@ var LIGHTBOX = function (module, $, window, document) {
       };
 
       $thumb.removeClass('is-active');
-      obj.addClass('is-active');
-      $largePhoto.find('li').hide().removeClass('is-active');
-      $largePhoto.find('li').eq(index).addClass('is-active').show(400, function () {
-        //Reset the container height
-        var imgClick = new Image();
-        imgClick.src = $largePhoto.find('li').eq(index).find('img').attr('src');
+      obj.addClass('is-active'); //all items
 
-        imgClick.onload = function () {
-          //remove loading
-          $(loaderEl).addClass('is-loaded'); // show the content container
+      TweenMax.set($largePhoto.find('li'), {
+        css: {
+          'display': 'none',
+          'opacity': 0
+        },
+        onComplete: function onComplete() {
+          $(this.target).removeClass('is-active');
+        }
+      }); //current item
 
-          showLightboxContent();
-          var sw = window.innerWidth - 30,
-              ow = this.width,
-              oh = this.height,
-              ratioH = oh / ow,
-              w = ow > customWidth ? customWidth : ow,
-              h;
-          if (w > sw) w = sw;
-          h = w * ratioH; //Prevent height overflow
+      TweenMax.set($largePhoto.find('li').eq(index), {
+        css: {
+          'display': 'block',
+          'opacity': 0
+        },
+        onComplete: function onComplete() {
+          var _cur = this.target;
+          $(_cur).addClass('is-active'); //
+          //Reset the container height
 
-          if (h > window.innerHeight) h = window.innerHeight * 0.95;
-          $largePhoto.css({
-            'height': h + 'px'
-          }).find('img').css({
-            'height': h + 'px'
-          }); //If the image is larger than the current window, it will display at the top.
-          //Don't write variables outside
+          var imgClick = new Image();
+          imgClick.src = $largePhoto.find('li').eq(index).find('img').attr('src');
 
-          var $lbTarImg = $largePhoto.find('li').eq(index).find('.uix-lightbox__original__target');
+          imgClick.onload = function () {
+            //remove loading
+            $(loaderEl).addClass('is-loaded'); // show the content container
 
-          if (oh > window.innerHeight) {
-            $lbTarImg.addClass('uix-lightbox__original__target--imgfull');
-          } else {
-            $lbTarImg.removeClass('uix-lightbox__original__target--imgfull');
-          }
-        };
+            showLightboxContent();
+            var sw = window.innerWidth - 30,
+                ow = this.width,
+                oh = this.height,
+                ratioH = oh / ow,
+                w = ow > customWidth ? customWidth : ow,
+                h;
+            if (w > sw) w = sw;
+            h = w * ratioH; //Prevent height overflow
+
+            if (h > window.innerHeight) h = window.innerHeight * 0.95;
+            $largePhoto.css({
+              'height': h + 'px'
+            }).find('img').css({
+              'height': h + 'px'
+            }); //If the image is larger than the current window, it will display at the top.
+            //Don't write variables outside
+
+            var $lbTarImg = $largePhoto.find('li').eq(index).find('.uix-lightbox__original__target');
+
+            if (oh > window.innerHeight) {
+              $lbTarImg.addClass('uix-lightbox__original__target--imgfull');
+            } else {
+              $lbTarImg.removeClass('uix-lightbox__original__target--imgfull');
+            }
+
+            TweenMax.to(_cur, 0.5, {
+              alpha: 1
+            });
+          }; //imgClick.onload       
+
+        }
       });
     }
     /*
@@ -11131,7 +11816,7 @@ var _split = __webpack_require__(44);
 // CONCATENATED MODULE: ./src/components/ES6/list-posts/js/index.js
 function list_posts_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { list_posts_js_typeof = function _typeof(obj) { return typeof obj; }; } else { list_posts_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return list_posts_js_typeof(obj); }
+function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { list_posts_js_typeof = function _typeof(obj) { return typeof obj; }; } else { list_posts_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return list_posts_js_typeof(obj); }
 
 /* 
  *************************************
@@ -11153,7 +11838,7 @@ function list_posts_js_typeof(obj) { if (typeof Symbol === "function" && typeof 
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.1';
+  module.POST_LIST_AJAX.version = '0.1.2';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -11279,7 +11964,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             $button.addClass('is-hide');
           }
 
-          $(window).on('scroll touchmove', function () {
+          $(window).on('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function () {
             var scrolled = $(window).scrollTop();
 
             if (scrolled >= parseFloat($button.offset().top - $(window).height() / 1.5 - $button.outerHeight(true)) && !$button.hasClass(triggerActive)) {
@@ -11415,9 +12100,9 @@ var POST_LIST_AJAX = function (module, $, window, document) {
     /*
      * Ajax with JSON data
      *
-     * @param  {Object} ajaxWrapper     - The outermost container of list.
+     * @param  {Element} ajaxWrapper     - The outermost container of list.
      * @param  {Object} defaultPostData - Data to be sent to the server which is custom JSON fields.
-     * @param  {Object} trigger         - Trigger ajax loaded button object.
+     * @param  {String} trigger         - Trigger ajax loaded button object.
      * @param  {Number} curPage         - The current page to load.
      * @param  {Number} perShow         - The amount to load each time.
      * @param  {Number} totalPage       - The total page to load.
@@ -11520,57 +12205,74 @@ var POST_LIST_AJAX = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/list-split-imagery/scss/_style.scss
-var list_split_imagery_scss_style = __webpack_require__(45);
+// EXTERNAL MODULE: ./src/components/ES6/fullwidth-column-to-edge/scss/_style.scss
+var fullwidth_column_to_edge_scss_style = __webpack_require__(45);
 
-// CONCATENATED MODULE: ./src/components/ES6/list-split-imagery/js/index.js
-function list_split_imagery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/components/ES6/fullwidth-column-to-edge/js/index.js
+function fullwidth_column_to_edge_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
- * <!-- Fullwidth List of Split -->
+ * <!-- Full Width Column to Edge -->
  *************************************
  */
 
 
-var POST_LIST_SPLIT_FULLWIDTH = function (module, $, window, document) {
-  if (window.POST_LIST_SPLIT_FULLWIDTH === null) return false;
-  module.POST_LIST_SPLIT_FULLWIDTH = module.POST_LIST_SPLIT_FULLWIDTH || {};
-  module.POST_LIST_SPLIT_FULLWIDTH.version = '0.0.2';
+var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
+  if (window.FULL_WIDTH_COLUMN_TO_EDGE === null) return false;
+  module.FULL_WIDTH_COLUMN_TO_EDGE = module.FULL_WIDTH_COLUMN_TO_EDGE || {};
+  module.FULL_WIDTH_COLUMN_TO_EDGE.version = '0.0.1';
 
-  module.POST_LIST_SPLIT_FULLWIDTH.pageLoaded = function () {
+  module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded = function () {
     var $window = $(window),
         windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
-    fullwidthListSplitInit(windowWidth);
+    fullwidthColumnToEdgeInit(windowWidth);
     $window.on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
         windowWidth = window.innerWidth; // Do stuff here
 
-        fullwidthListSplitInit(windowWidth);
+        fullwidthColumnToEdgeInit(windowWidth);
       }
     });
 
-    function fullwidthListSplitInit(w) {
-      $('.uix-list-split-imagery').each(function () {
-        var imgH = $(this).find('.uix-list-split-imagery__img img').height();
-
-        if (imgH > 0) {
-          $(this).find('.uix-list-split-imagery__info, .uix-list-split-imagery__img-container').css('height', imgH + 'px');
-        }
-
-        if (w <= 768) {
-          $(this).find('.uix-list-split-imagery__info, .uix-list-split-imagery__img-container').css('height', 'auto');
-        }
+    function fullwidthColumnToEdgeInit(w) {
+      $('.js-uix-fullwidth-column-to-edge--extend-right').each(function () {
+        fullwidthToDir($(this), 'right', w);
       });
+      $('.js-uix-fullwidth-column-to-edge--extend-left').each(function () {
+        fullwidthToDir($(this), 'left', w);
+      });
+    }
+
+    function fullwidthToDir(obj, dir, w) {
+      var dividerPosition = obj.offset();
+      var dividerWidth = $(window).width() - dividerPosition.left;
+      var bsGridGutter = 15;
+
+      if (w > 768) {
+        obj.css('width', dividerWidth + bsGridGutter);
+
+        if (dir == 'left') {
+          var _dis = -(dividerPosition.left + bsGridGutter * 2);
+
+          obj.css('margin-left', _dis + 'px');
+        }
+      } else {
+        obj.css('width', 'inherit');
+
+        if (dir == 'left') {
+          obj.css('margin-left', -bsGridGutter + 'px');
+        }
+      }
     }
   };
 
-  module.components.pageLoaded.push(module.POST_LIST_SPLIT_FULLWIDTH.pageLoaded);
-  return function POST_LIST_SPLIT_FULLWIDTH() {
-    list_split_imagery_js_classCallCheck(this, POST_LIST_SPLIT_FULLWIDTH);
+  module.components.pageLoaded.push(module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded);
+  return function FULL_WIDTH_COLUMN_TO_EDGE() {
+    fullwidth_column_to_edge_js_classCallCheck(this, FULL_WIDTH_COLUMN_TO_EDGE);
 
     this.module = module;
   };
@@ -11652,7 +12354,7 @@ var modal_dialog_scss_style = __webpack_require__(49);
 // CONCATENATED MODULE: ./src/components/ES6/modal-dialog/js/index.js
 function modal_dialog_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { modal_dialog_js_typeof = function _typeof(obj) { return typeof obj; }; } else { modal_dialog_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return modal_dialog_js_typeof(obj); }
+function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { modal_dialog_js_typeof = function _typeof(obj) { return typeof obj; }; } else { modal_dialog_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return modal_dialog_js_typeof(obj); }
 
 /* 
  *************************************
@@ -11672,11 +12374,27 @@ function modal_dialog_js_typeof(obj) { if (typeof Symbol === "function" && typeo
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.2';
+  module.MODAL_DIALOG.version = '0.1.4';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
-    var modalSpeed = UixCssProperty.getTransitionDuration($('.uix-modal-box:first')[0]);
+    var modalSpeed = UixCssProperty.getTransitionDuration($('.uix-modal-box:first')[0]); // To display the template tag content.
+
+    $('template').each(function () {
+      var _content = $(this).html(function (index, html) {
+        return html.replace(/[\r\n]/g, '');
+      }).context.innerHTML,
+          _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
+
+
+      if (!$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
+        //reset id
+        $(this).removeAttr('id');
+        $('body').addClass(_id); //append content to body
+
+        $(_content.replace(/role=[\'\"]dialog[\'\"]/, 'role="dialog" id="' + _id + '"')).appendTo('body');
+      }
+    });
     /*
       * Unbind that one in a safe way that won't accidentally unbind other click handlers.
       * In order to trigger other custom Modal Dialog events.
@@ -11831,7 +12549,7 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -11870,7 +12588,7 @@ var multi_items_carousel_scss_style = __webpack_require__(50);
 // CONCATENATED MODULE: ./src/components/ES6/multi-items-carousel/js/index.js
 function multi_items_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function multi_items_carousel_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { multi_items_carousel_js_typeof = function _typeof(obj) { return typeof obj; }; } else { multi_items_carousel_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return multi_items_carousel_js_typeof(obj); }
+function multi_items_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { multi_items_carousel_js_typeof = function _typeof(obj) { return typeof obj; }; } else { multi_items_carousel_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return multi_items_carousel_js_typeof(obj); }
 
 /* 
  *************************************
@@ -12103,8 +12821,8 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       /*
        * Transition Between Items
        *
-       * @param  {Object} wrapper         - Wrapper of carousel.
-       * @param  {Object} curBtn          - The button that currently triggers the move.
+       * @param  {Element} wrapper         - Wrapper of carousel.
+       * @param  {?Element} curBtn          - The button that currently triggers the move.
        * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
        * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
        * @param  {Number} steps           - The number of steps per move.
@@ -12366,9 +13084,9 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			/*
 //			 * Transition between items next (left/up)
 //			 *
-//			 * @param  {Object} wrapper         - Wrapper of carousel.
-//			 * @param  {Object} items           - Items of carousel.
-//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {Element} wrapper         - Wrapper of carousel.
+//			 * @param  {Element} items           - Items of carousel.
+//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 //			 * @return {Void}
@@ -12505,9 +13223,9 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			/*
 //			 * Transition between items previously (right/down)
 //			 *
-//			 * @param  {Object} wrapper         - Wrapper of carousel.
-//			 * @param  {Object} items           - Items of carousel.
-//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {Element} wrapper         - Wrapper of carousel.
+//			 * @param  {Element} items           - Items of carousel.
+//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 //			 * @return {Void}
@@ -12681,7 +13399,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.4';
+  module.ONEPAGE.version = '0.0.6';
 
   module.ONEPAGE.documentReady = function ($) {
     var $window = $(window),
@@ -12697,7 +13415,9 @@ var ONEPAGE = function (module, $, window, document) {
     $sectionsContainer = $('.uix-normal-load__onepage-container'),
         $sections = $sectionsContainer.find('[data-highlight-section]'),
         sectionTotal = $sections.length,
-        topSectionSpacing = 0,
+
+    /* topSpacing         = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ), //with margin */
+    topSpacing = 0,
         $primaryMenu = $('.uix-menu'),
         $sidefixedMenu = $('.uix-menu-sidefixed'); //Prevent this module from loading in other pages
 
@@ -12751,7 +13471,7 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -12777,7 +13497,7 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} el           - The container of each sections.
+     * @param  {Element} el           - The container of each sections.
      * @param  {String} dir          - Rolling direction indicator.
      * @param  {Number} hashID       - ID of custom hashchange event.
      * @return {Void}
@@ -12808,7 +13528,7 @@ var ONEPAGE = function (module, $, window, document) {
         if ($next.length > 0) {
           TweenMax.to(window, animationTime / 1000, {
             scrollTo: {
-              y: $next.offset().top - topSectionSpacing,
+              y: $next.offset().top - topSpacing,
               autoKill: false
             },
             ease: Power2.easeOut,
@@ -12856,8 +13576,8 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Get link by section or article id
      *
-     * @param  {String|Object} el    - The current selector or selector ID
-     * @param  {Object} menuObj       - Returns the menu element within the document.
+     * @param  {String|Element} el    - The current selector or selector ID
+     * @param  {Element} menuObj       - Returns the menu element within the document.
      * @param  {Boolean} echoIndex    - Whether to return the current index.
      * @return {Object}               - A new selector.
      */
@@ -12873,8 +13593,8 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Get all links by section or article
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
-     * @return {Object}             - A new selector.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
+     * @return {Element}             - A new selector.
      */
 
 
@@ -12884,13 +13604,13 @@ var ONEPAGE = function (module, $, window, document) {
     /*
      * Smooth scroll to content
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
      * @return {Void}
      */
 
 
     function goPageSection(menuObj) {
-      menuObj.find('li > a').on('click', function (e) {
+      menuObj.find('li > a').off('click.ONEPAGE').on('click.ONEPAGE', function (e) {
         e.preventDefault();
         if ($(this).parent().hasClass('is-active')) return false;
         moveTo($sectionsContainer, false, $(this).parent('li').index() + 1);
@@ -12899,9 +13619,9 @@ var ONEPAGE = function (module, $, window, document) {
 
     var navMinTop = $sidefixedMenu.length > 0 ? $sidefixedMenu.offset().top : 0,
         navMaxTop = parseFloat($(document).height() - $('.uix-footer__container').height()) - windowHeight / 3;
-    $window.on('scroll touchmove', function () {
+    $window.on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
       var scrollTop = $(this).scrollTop(),
-          spyTop = parseFloat(scrollTop + topSectionSpacing),
+          spyTop = parseFloat(scrollTop + topSpacing),
           minTop = $('[data-highlight-section="true"]').first().offset().top,
           maxTop = $('[data-highlight-section="true"]').last().offset().top + $('[data-highlight-section="true"]').last().height();
       $('[data-highlight-section="true"]').each(function () {
@@ -13020,7 +13740,7 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
 var ONEPAGE2 = function (module, $, window, document) {
   if (window.ONEPAGE2 === null) return false;
   module.ONEPAGE2 = module.ONEPAGE2 || {};
-  module.ONEPAGE2.version = '0.0.4';
+  module.ONEPAGE2.version = '0.0.5';
 
   module.ONEPAGE2.documentReady = function ($) {
     var $window = $(window),
@@ -13036,7 +13756,6 @@ var ONEPAGE2 = function (module, $, window, document) {
     $sectionsContainer = $('.uix-normal-load__onepage-container2'),
         $sections = $sectionsContainer.find('[data-highlight-section]'),
         sectionTotal = $sections.length,
-        topSectionSpacing = 0,
         $primaryMenu = $('.uix-menu'),
         $sidefixedMenu = $('.uix-menu-sidefixed'); //Prevent this module from loading in other pages
 
@@ -13127,7 +13846,7 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Scroll initialize
      *
-     * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+     * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
      * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
      * @return {Void}
      */
@@ -13153,7 +13872,7 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Move Animation
      *
-     * @param  {Object} el           - The container of each sections.
+     * @param  {Element} el           - The container of each sections.
      * @param  {String} dir          - Rolling direction indicator.
      * @param  {Number} hashID       - ID of custom hashchange event.
      * @return {Void}
@@ -13253,8 +13972,8 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Get all links by section or article
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
-     * @return {Object}             - A new selector.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
+     * @return {Element}             - A new selector.
      */
 
 
@@ -13264,13 +13983,13 @@ var ONEPAGE2 = function (module, $, window, document) {
     /*
      * Smooth scroll to content
      *
-     * @param  {Object} menuObj     - Returns the menu element within the document.
+     * @param  {Element} menuObj     - Returns the menu element within the document.
      * @return {Void}
      */
 
 
     function goPageSection(menuObj) {
-      menuObj.find('li > a').on('click', function (e) {
+      menuObj.find('li > a').off('click.ONEPAGE2').on('click.ONEPAGE2', function (e) {
         e.preventDefault();
         if ($(this).parent().hasClass('is-active')) return false;
         var dir = 'down';
@@ -13359,7 +14078,7 @@ var parallax_scss_style = __webpack_require__(51);
 // CONCATENATED MODULE: ./src/components/ES6/parallax/js/index.js
 function parallax_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function parallax_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { parallax_js_typeof = function _typeof(obj) { return typeof obj; }; } else { parallax_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return parallax_js_typeof(obj); }
+function parallax_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { parallax_js_typeof = function _typeof(obj) { return typeof obj; }; } else { parallax_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return parallax_js_typeof(obj); }
 
 /* 
  *************************************
@@ -13372,7 +14091,7 @@ function parallax_js_typeof(obj) { if (typeof Symbol === "function" && typeof Sy
 var PARALLAX = function (module, $, window, document) {
   if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
-  module.PARALLAX.version = '0.0.5';
+  module.PARALLAX.version = '0.0.6';
 
   module.PARALLAX.documentReady = function ($) {
     var $window = $(window),
@@ -13402,15 +14121,21 @@ var PARALLAX = function (module, $, window, document) {
       /* Pure parallax scrolling effect without other embedded HTML elements */
       $('.uix-parallax--el').each(function () {
         var $this = $(this),
-            dataSpeed = $this.data('parallax');
+            dataSpeed = $this.data('speed'),
+            dataEasing = $this.data('transition');
 
         if (parallax_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
           dataSpeed = 0;
         }
 
+        if (parallax_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
+          dataEasing = 'none 0s ease 0s';
+        }
+
         $this.UixParallax({
           'speed': dataSpeed,
-          'bg': false
+          'bg': false,
+          transition: dataEasing
         });
       });
       /* Parallax scrolling effect with embedded HTML elements */
@@ -13421,8 +14146,10 @@ var PARALLAX = function (module, $, window, document) {
             dataImg = $curImg.attr('src'),
             dataSkew = $this.data('skew'),
             dataSpeed = $this.data('speed'),
+            dataEasing = $this.data('transition'),
             dataOverlay = $this.data('overlay-bg'),
             dataFullyVisible = $this.data('fully-visible'),
+            dataXPos = $this.data('xpos'),
             curImgH = null,
             curImgW = null,
             curSize = 'cover';
@@ -13434,6 +14161,14 @@ var PARALLAX = function (module, $, window, document) {
         if (parallax_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
           // If there is no data-xxx, save current source to it
           dataSpeed = 0;
+        }
+
+        if (parallax_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
+          dataEasing = 'none 0s ease 0s';
+        }
+
+        if (parallax_js_typeof(dataXPos) === ( true ? "undefined" : undefined)) {
+          dataXPos = '50%';
         }
 
         if (parallax_js_typeof(dataFullyVisible) === ( true ? "undefined" : undefined)) {
@@ -13499,12 +14234,12 @@ var PARALLAX = function (module, $, window, document) {
             if (Modernizr.cssanimations) {
               // supported
               $this.css({
-                'background': 'linear-gradient(' + dataOverlay + ', ' + dataOverlay + '), url(' + dataImg + ') 50% 0/' + curSize + ' no-repeat fixed'
+                'background': 'linear-gradient(' + dataOverlay + ', ' + dataOverlay + '), url(' + dataImg + ') ' + dataXPos + ' 0/' + curSize + ' no-repeat fixed'
               });
             } else {
               // not-supported
               $this.css({
-                'background': 'url(' + dataImg + ') 50% 0/' + curSize + ' no-repeat fixed'
+                'background': 'url(' + dataImg + ') ' + dataXPos + ' 0/' + curSize + ' no-repeat fixed'
               });
             }
           } //Apply tilt effect
@@ -13520,9 +14255,10 @@ var PARALLAX = function (module, $, window, document) {
 
           $this.UixParallax({
             'speed': dataSpeed,
+            transition: dataEasing,
             'bg': {
               enable: true,
-              xPos: '50%'
+              xPos: dataXPos
             }
           });
         };
@@ -13545,7 +14281,7 @@ var periodical_scroll_scss_style = __webpack_require__(52);
 // CONCATENATED MODULE: ./src/components/ES6/periodical-scroll/js/index.js
 function periodical_scroll_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function periodical_scroll_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { periodical_scroll_js_typeof = function _typeof(obj) { return typeof obj; }; } else { periodical_scroll_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return periodical_scroll_js_typeof(obj); }
+function periodical_scroll_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { periodical_scroll_js_typeof = function _typeof(obj) { return typeof obj; }; } else { periodical_scroll_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return periodical_scroll_js_typeof(obj); }
 
 /* 
  *************************************
@@ -13705,7 +14441,7 @@ var progress_bar_scss_style = __webpack_require__(54);
 // CONCATENATED MODULE: ./src/components/ES6/progress-bar/js/index.js
 function progress_bar_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function progress_bar_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { progress_bar_js_typeof = function _typeof(obj) { return typeof obj; }; } else { progress_bar_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return progress_bar_js_typeof(obj); }
+function progress_bar_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { progress_bar_js_typeof = function _typeof(obj) { return typeof obj; }; } else { progress_bar_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return progress_bar_js_typeof(obj); }
 
 /* 
  *************************************
@@ -13876,7 +14612,7 @@ var RETINA = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/rotating-elements/js/index.js
 function rotating_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function rotating_elements_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { rotating_elements_js_typeof = function _typeof(obj) { return typeof obj; }; } else { rotating_elements_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return rotating_elements_js_typeof(obj); }
+function rotating_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { rotating_elements_js_typeof = function _typeof(obj) { return typeof obj; }; } else { rotating_elements_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return rotating_elements_js_typeof(obj); }
 
 /* 
  *************************************
@@ -13947,7 +14683,7 @@ var ROTATING_EL = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/scroll-reveal/js/index.js
 function scroll_reveal_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function scroll_reveal_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { scroll_reveal_js_typeof = function _typeof(obj) { return typeof obj; }; } else { scroll_reveal_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return scroll_reveal_js_typeof(obj); }
+function scroll_reveal_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { scroll_reveal_js_typeof = function _typeof(obj) { return typeof obj; }; } else { scroll_reveal_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return scroll_reveal_js_typeof(obj); }
 
 /* 
  *************************************
@@ -13958,7 +14694,7 @@ function scroll_reveal_js_typeof(obj) { if (typeof Symbol === "function" && type
 var SCROLL_REVEAL = function (module, $, window, document) {
   if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
-  module.SCROLL_REVEAL.version = '0.1.0';
+  module.SCROLL_REVEAL.version = '0.1.2';
 
   module.SCROLL_REVEAL.documentReady = function ($) {
     var viewport; //From JSON config in data attribute in HTML
@@ -13978,7 +14714,7 @@ var SCROLL_REVEAL = function (module, $, window, document) {
             "x": 0
           },
           "ease": "Power2.easeOut",
-          "duration": 0.8,
+          "duration": 0.4,
           "delay": 0,
           "infinite": false,
           "viewport": '100%' //A percentage of the viewport's height.
@@ -13995,6 +14731,15 @@ var SCROLL_REVEAL = function (module, $, window, document) {
           infinite = config.infinite; //A percentage of the viewport's height.
 
       viewport = config.viewport;
+      if (scroll_reveal_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = '100%';
+      if (scroll_reveal_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
+      if (scroll_reveal_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
+      if (scroll_reveal_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
+      if (scroll_reveal_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Return a value
+
+      if (type == 'viewport') return viewport;
+      if (type == 'delay') return myDelay;
+      if (type == 'loop') return infinite ? 1 : 0;
 
       if (Object.prototype.toString.call(fromCSS) == '[object String]') {
         //Add class when element becomes visible
@@ -14002,7 +14747,11 @@ var SCROLL_REVEAL = function (module, $, window, document) {
         if (type == 'from') obj.removeClass(toCSS);
         if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
 
-        if (type == 'to') obj.addClass(toCSS);
+        if (type == 'to') {
+          setTimeout(function () {
+            obj.addClass(toCSS);
+          }, myDelay * 1000);
+        }
       } else {
         //Using TweenMax to create animations
         if (type == 'from') {
@@ -14025,21 +14774,12 @@ var SCROLL_REVEAL = function (module, $, window, document) {
             delay: myDelay
           });
         }
-      } //Reversing Scroll Animations for Loop  
-
-
-      if (type == 'loop') {
-        if (infinite) {
-          return 1;
-        } else {
-          return 0;
-        }
       }
     };
 
     $scrollRevealElements.each(function () {
       //Prevent asynchronous loading of repeated calls
-      var actived = $(this).data('is-active');
+      var actived = $(this).data('activated');
 
       if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined)) {
         tmAnim($(this), 'from');
@@ -14051,13 +14791,13 @@ var SCROLL_REVEAL = function (module, $, window, document) {
       var waypoints = $scrollRevealElements.waypoint({
         handler: function handler(direction) {
           //Prevent asynchronous loading of repeated calls
-          var actived = $(this.element).data('is-active'),
+          var actived = $(this.element).data('activated'),
               tmLoop = tmAnim($(this.element), 'loop');
 
           if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined) && tmLoop != 1) {
             //$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
             tmAnim($(this.element), 'to');
-            $(this.element).data('is-active', 1);
+            $(this.element).data('activated', 1);
           }
 
           if (tmLoop === 1) {
@@ -14100,7 +14840,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.1';
+  module.SCROLLSPY_ANIM.version = '0.0.4';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -14109,11 +14849,9 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
         panelHeight = 0; //Prevent this module from loading in other pages
 
     if ($el.length == 0) return false;
-    $(window).on('ready load resizeEnd', function () {
-      window.elHeight = $el.height();
-      window.windowHeight = window.innerHeight;
-      window.elOffsetTop = $el.offset().top - panelHeight;
-    }); //-------- Text Affect
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight; //-------- Text Affect
 
     if (Modernizr.webgl) {
       var $txtContainer = $el.find('.row canvas'),
@@ -14122,7 +14860,9 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
           text = $txtContainer.data('txt').split(''),
           tHeight = 45,
           tWidth = 25,
-          renderer = new PIXI.Application(tWidth * (text.length + 2), tHeight * 2, {
+          renderer = new PIXI.Application({
+        width: tWidth * (text.length + 2),
+        height: tHeight * 2,
         antialias: true,
         transparent: true,
         resolution: 1,
@@ -14130,7 +14870,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
         view: document.getElementById('scrollspy-animate-demo--txt')
       });
       var stage = new PIXI.Container(),
-          filterSprite = PIXI.Sprite.fromImage($txtContainer.data('filter-texture'));
+          filterSprite = PIXI.Sprite.from($txtContainer.data('filter-texture'));
       filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
       var filter = new PIXI.filters.DisplacementFilter(filterSprite);
       var txtStyle = new PIXI.TextStyle({
@@ -14162,7 +14902,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
       renderer.stage.filterArea = renderer.screen;
       renderer.stage.addChild(curSprite, filterSprite);
       renderer.stage.filters = [filter];
-      var ticker = new PIXI.ticker.Ticker();
+      var ticker = new PIXI.Ticker();
       ticker.autoStart = true;
       ticker.add(function (delta) {
         filterSprite.y += 0.2 * delta; // Render updated scene
@@ -14171,25 +14911,27 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
       });
     }
 
-    $(window).on('scroll ready load resize resizeEnd touchmove', function (event) {
-      var scrollTop = $(window).scrollTop(),
+    $window.on('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function (event) {
+      var elHeight = $el.height(),
+          elOffsetTop = $el.offset().top - panelHeight;
+      var scrollTop = $(this).scrollTop(),
           translateTitle = scrollTop / 2,
           translateBackground = scrollTop / 3,
-          scale = scrollTop / window.elHeight,
+          scale = scrollTop / elHeight,
           backgroundScale = 1,
           // + scale / 10
       titleScale = 1 - scale * 0.1,
           titleOpacity = 1 - scale,
-          scrollProgress = (scrollTop - window.elOffsetTop) / (window.elHeight - window.windowHeight / 6); //-------- Animation
+          scrollProgress = (scrollTop - elOffsetTop) / (elHeight - windowHeight / 6); //-------- Animation
 
-      if (scrollTop < window.elHeight) {
+      if (scrollTop < elHeight) {
         $el.find('.row').css({
           'transition': 'none',
           'transform': 'translateY(' + translateTitle + 'px) scale(' + titleScale + ')',
           'opacity': titleOpacity
         });
         $('body').removeClass('js-uix-content-part').removeClass('js-uix-bottom-part');
-      } else if (scrollTop >= window.elHeight) {
+      } else if (scrollTop >= elHeight) {
         $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
       } //-------- Display progress
 
@@ -14198,7 +14940,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
 
       if (Modernizr.webgl) {
         TweenMax.set(filterSprite, {
-          x: window.windowHeight * scrollProgress
+          x: windowHeight * scrollProgress
         });
       }
     });
@@ -14422,13 +15164,482 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/smooth-scrolling-page/js/index.js
+function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function smooth_scrolling_page_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { smooth_scrolling_page_js_typeof = function _typeof(obj) { return typeof obj; }; } else { smooth_scrolling_page_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return smooth_scrolling_page_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- Smooth Scrolling Page -->
+ *************************************
+ */
+
+var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
+  if (window.SMOOTH_SCROLLING_PAGE === null) return false;
+  module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.7';
+
+  module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if (!$('body').hasClass('smooth-scrolling-page')) return false;
+    var $window = $(window),
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var html = document.documentElement,
+        body = document.body,
+        scroller = {
+      target: '#uix-scrollspy-area',
+      ease: 0.05,
+      // <= scroll speed
+      endY: 0,
+      y: 0,
+      resizeRequest: 1,
+      scrollRequest: 0
+    },
+        requestId = null;
+    TweenMax.set(scroller.target, {
+      rotation: 0.01,
+      force3D: true
+    }); //Increase the viewport to display the visual area
+
+    var elTop = $(scroller.target).offset().top;
+    var initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
+
+    if (!$('body').hasClass(initSmoothScrollingPageWrapper)) {
+      $('body').addClass(initSmoothScrollingPageWrapper);
+      $(scroller.target).wrap('<div id="uix-scrollspy-area__wrapper" style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>').css('margin-top', elTop + 'px');
+    }
+
+    $(window).off('resize.SMOOTH_SCROLLING_PAGE').on('resize.SMOOTH_SCROLLING_PAGE', function () {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
+
+        scroller.resizeRequest++;
+
+        if (!requestId) {
+          requestId = requestAnimationFrame(updateScroller);
+        }
+      }
+    });
+    $(window).off('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE').on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
+      scroller.scrollRequest++;
+
+      if (!requestId) {
+        requestId = requestAnimationFrame(updateScroller);
+      }
+    });
+    updateScroller();
+
+    function updateScroller() {
+      var resized = scroller.resizeRequest > 0;
+
+      if (resized) {
+        var height = $(scroller.target).height();
+        body.style.height = parseFloat(height + elTop) + "px";
+        scroller.resizeRequest = 0;
+      }
+
+      var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0;
+      scroller.endY = scrollY;
+      scroller.y += (scrollY - scroller.y) * scroller.ease;
+
+      if (Math.abs(scrollY - scroller.y) < 0.05 || resized) {
+        scroller.y = scrollY;
+        scroller.scrollRequest = 0;
+      }
+
+      TweenMax.set(scroller.target, {
+        y: -scroller.y,
+        onComplete: function onComplete() {//-----Spy scrollTop and elements of page
+          //your code here...
+        }
+      });
+      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
+      // Custom Functions
+      //+++++++++++++++++++++++++++++++++++++++++++++++++
+
+      var scrollTop = scroller.y,
+          topSpacing = window.innerWidth <= 768 ? 0 : $('.uix-header__container').outerHeight(true); //with margin 
+      //----------------------------------------------------------------------------------
+      //--------------------------------- Scrollspy Animate -------------------------------	
+      //----------------------------------------------------------------------------------   
+
+      var $targetEl = $('#uix-scrollspy-animate');
+
+      if ($targetEl.length > 0) {
+        var elHeight = $targetEl.height(),
+            elOffsetTop = $targetEl.offset().top - topSpacing;
+        var scale = scrollTop / elHeight,
+            elScale = 1 - scale * 0.1,
+            elOpacity = 1 - scale,
+            scrollProgress = (scrollTop - elOffsetTop) / (elHeight - windowHeight / 6); //
+
+        if (scrollTop < elHeight) {
+          $('body').removeClass('js-uix-content-part').removeClass('js-uix-bottom-part');
+        } else if (scrollTop >= elHeight) {
+          $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
+        } //
+        //-------------------------------------	
+
+
+        console.log('scrollProgress: ' + scrollProgress); // Transparency changes when scrolling
+        //-------------------------------------	
+
+        TweenMax.set('#app-demo-element1', {
+          alpha: elOpacity
+        }); // Triggered when scrolling to an element position
+        //-------------------------------------	
+
+        if ($('#app-demo-element2').length > 0) {
+          if (parseFloat(scrollTop + windowHeight) > $('#app-demo-element2').offset().top) {
+            var elStart = parseInt($('#app-btn1').offset().top - scrollTop - windowHeight),
+                // > 0
+            elProgress = Math.abs(elStart / windowHeight);
+            TweenMax.set('#app-demo-element2', {
+              x: elProgress * 150
+            });
+          }
+        } // endif $( '#app-demo-element2' ).length
+
+      } //endif $targetEl
+      //----------------------------------------------------------------------------------
+      //--------------------------------- Scroll Reveal  -------------------------------	
+      //----------------------------------------------------------------------------------  
+
+      /*
+       * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":"90%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
+      */
+
+
+      var $scrollRevealElements = $('[data-scrollspy-anim]');
+
+      var tmAnim = function tmAnim(obj, type) {
+        var config = obj.data('scrollspy-anim');
+
+        if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined) || config == '' || config === false) {
+          config = {
+            "from": {
+              "opacity": 0,
+              "x": 70
+            },
+            "to": {
+              "opacity": 1,
+              "x": 0
+            },
+            "ease": "Power2.easeOut",
+            "duration": 0.8,
+            "delay": 0,
+            "infinite": false,
+            "viewport": '90%' //A percentage of the viewport's height.
+
+          };
+        } //get attributes to tweenMax
+
+
+        var fromCSS = config.from,
+            toCSS = config.to,
+            myEase = config.ease,
+            myDuration = config.duration,
+            myDelay = config.delay,
+            infinite = config.infinite; //A percentage of the viewport's height.
+
+        var viewport = config.viewport;
+        if (smooth_scrolling_page_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = '90%';
+        if (smooth_scrolling_page_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
+        if (smooth_scrolling_page_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
+        if (smooth_scrolling_page_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
+        if (smooth_scrolling_page_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Conversion between percentage and decimal
+
+        viewport = parseFloat(viewport) / 100.0; //Return a value
+
+        if (type == 'viewport') return viewport;
+        if (type == 'delay') return myDelay;
+        if (type == 'loop') return infinite ? 1 : 0;
+
+        if (Object.prototype.toString.call(fromCSS) == '[object String]') {
+          //Add class when element becomes visible
+          toCSS = toCSS.replace(/\./, '');
+          if (type == 'from') obj.removeClass(toCSS);
+          if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
+
+          if (type == 'to') {
+            setTimeout(function () {
+              obj.addClass(toCSS);
+            }, myDelay * 1000);
+          }
+        } else {
+          //Using TweenMax to create animations
+          if (type == 'from') {
+            TweenMax.set(obj, {
+              css: fromCSS
+            });
+          }
+
+          if (type == 'from-anim') {
+            TweenMax.to(obj, myDuration, {
+              css: fromCSS
+            });
+          } //Target animation
+
+
+          if (type == 'to') {
+            TweenMax.to(obj, myDuration, {
+              css: toCSS,
+              ease: myEase,
+              delay: myDelay
+            });
+          }
+        }
+      }; //end function tmAnim()
+
+
+      $scrollRevealElements.each(function () {
+        var $el = $(this),
+            viewport = tmAnim($el, 'viewport'); //Prevent asynchronous loading of repeated calls
+
+        var actived = $el.data('activated'),
+            tmLoop = tmAnim($el, 'loop');
+
+        if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+          tmAnim($el, 'from');
+        }
+
+        if (parseFloat(scrollTop + topSpacing) > parseFloat($el.offset().top - window.innerHeight * viewport)) {
+          if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+            tmAnim($el, 'to');
+            $el.data('activated', 1); //text effect
+            //------------------
+
+            if ($.isFunction($.fn.UixTextEff)) {
+              var _ids = $el.data('texteff-ids');
+
+              if (smooth_scrolling_page_js_typeof(_ids) !== ( true ? "undefined" : undefined)) {
+                _ids.forEach(function (element) {
+                  $(document).UixTextEff({
+                    selectors: '[data-text-eff="' + element + '"]'
+                  });
+                });
+              }
+            } //endif $.fn.UixTextEff
+            //
+            //Counter
+
+
+            if ($.isFunction($.fn.UixCountTo)) {
+              var _counterIds = $el.data('counter-ids');
+
+              if (smooth_scrolling_page_js_typeof(_counterIds) !== ( true ? "undefined" : undefined)) {
+                _counterIds.forEach(function (element) {
+                  $(element).each(function () {
+                    $(this).UixCountTo();
+                  });
+                });
+              }
+            } //endif $.fn.UixCountTo
+            //
+            //Image transition
+
+
+            var _imgIds = $el.data('img-ids');
+
+            if (smooth_scrolling_page_js_typeof(_imgIds) !== ( true ? "undefined" : undefined)) {
+              _imgIds.forEach(function (element) {
+                $(element).each(function (index) {
+                  $(this).delay(120 * index).queue('fx', function () {
+                    $(this).addClass('is-active');
+                  });
+                });
+              });
+            } //
+            //other effect
+            //------------------
+
+          } //endif actived
+
+        } else {
+          if (smooth_scrolling_page_js_typeof(actived) !== ( true ? "undefined" : undefined) && tmLoop === 1) {
+            tmAnim($el, 'from-anim');
+            $el.removeData('activated');
+          } //endif actived
+
+        }
+      }); //end each
+      //----------------------------------------------------------------------------------
+      //----------------------- Specify a background image -------------------------------	
+      //----------------------------------------------------------------------------------          
+
+      /*
+       * Usage: <div class="..." data-scrollspy-bg='{"src":"assets/images/demo.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
+      */
+
+      $('[data-scrollspy-bg]').each(function () {
+        var $this = $(this),
+            config = $this.data('scrollspy-bg');
+
+        if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined)) {
+          config = {
+            "src": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            "position": "top left",
+            "size": "cover",
+            "repeat": "no-repeat",
+            "fill": false,
+            "parallax": 0
+          };
+        }
+
+        if (config) {
+          var dataImg = config.src,
+              dataPos = config.position,
+              dataSize = config.size,
+              dataRepeat = config.repeat,
+              dataEasing = config.transition,
+              dataParallax = config.parallax;
+          if (smooth_scrolling_page_js_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
+          if (smooth_scrolling_page_js_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
+          if (smooth_scrolling_page_js_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
+          if (smooth_scrolling_page_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s'; //Using parallax
+
+          if (dataParallax && smooth_scrolling_page_js_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
+            dataPos = dataPos.replace('top', '50%');
+          }
+
+          if (smooth_scrolling_page_js_typeof(dataImg) != ( true ? "undefined" : undefined) && dataImg != '') {
+            if (config.fill) {
+              //Show Image Under Text
+              if (Modernizr.cssanimations) {
+                $this.css({
+                  'background': 'url(' + dataImg + ') ' + dataRepeat + '',
+                  'background-size': dataSize,
+                  '-webkit-background-clip': 'text',
+                  '-webkit-text-fill-color': 'transparent'
+                });
+              }
+            } else {
+              $this.css({
+                'background-image': 'url(' + dataImg + ')',
+                'background-position': dataPos,
+                'background-size': dataSize,
+                'background-repeat': dataRepeat
+              });
+            } //Using parallax
+
+
+            if (dataParallax && smooth_scrolling_page_js_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
+              var bgEff = {
+                enable: true,
+                xPos: '50%'
+              },
+                  bgXpos = '50%',
+                  speed = -parseFloat(dataParallax); //Prohibit transition delay
+
+              $this.css({
+                'transition': 'none'
+              }); //Initialize the position of the background
+
+              if (bgEff) {
+                //background parallax
+                TweenMax.set($this, {
+                  backgroundPosition: bgXpos + ' ' + -$this.offset().top * speed + 'px'
+                });
+              } else {
+                //element parallax
+                TweenMax.set($this, {
+                  y: 0
+                });
+              } //endif bgEff
+
+
+              var scrolled = scrollTop,
+                  st = $this.offset().top - scrolled;
+
+              if (bgEff) {
+                //background parallax
+                TweenMax.set($this, {
+                  css: {
+                    'background-position': bgXpos + ' ' + (0 - st * speed) + 'px',
+                    'transition': dataEasing
+                  }
+                });
+              } else {
+                //element parallax
+                TweenMax.set($this, {
+                  css: {
+                    'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * speed) + ')',
+                    'transition': dataEasing
+                  }
+                });
+              } //endif bgEff
+
+            } //endif dataParallax
+
+          }
+        }
+      }); //end each 
+      //----------------------------------------------------------------------------------
+      //--------------------------------- Parallax --------------------------------------
+      //----------------------------------------------------------------------------------    
+
+      /*
+       * Usage: <div class="..." data-scrollspy-parallax='{"transition":"none 0s ease 0s","speed":0.2}'>
+      */
+
+      /* Pure parallax scrolling effect without other embedded HTML elements */
+
+      $('[data-scrollspy-parallax]').each(function () {
+        var $this = $(this),
+            dataSpeed = $this.data('scrollspy-parallax').speed,
+            dataEasing = $this.data('scrollspy-parallax').transition;
+
+        if (smooth_scrolling_page_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
+          dataSpeed = 0;
+        }
+
+        if (smooth_scrolling_page_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
+          dataEasing = 'none 0s ease 0s';
+        } //Prohibit transition delay
+
+
+        $this.css({
+          'transition': 'none'
+        }); //Initialize the position of the background
+        //element parallax
+
+        TweenMax.set($this, {
+          y: 0
+        });
+        var scrolled = scrollTop; //element parallax
+
+        TweenMax.set($this, {
+          css: {
+            'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * dataSpeed) + ')',
+            'transition': dataEasing
+          }
+        });
+      }); //end each   
+      //----------------------------------------------------------------------------------
+      //---------------------------------------------------------------------------------	
+      //----------------------------------------------------------------------------------  
+    } //end updateScroller()
+
+  };
+
+  module.components.documentReady.push(module.SMOOTH_SCROLLING_PAGE.documentReady);
+  return function SMOOTH_SCROLLING_PAGE() {
+    smooth_scrolling_page_js_classCallCheck(this, SMOOTH_SCROLLING_PAGE);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/sticky-elements/scss/_style.scss
 var sticky_elements_scss_style = __webpack_require__(57);
 
 // CONCATENATED MODULE: ./src/components/ES6/sticky-elements/js/index.js
 function sticky_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function sticky_elements_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { sticky_elements_js_typeof = function _typeof(obj) { return typeof obj; }; } else { sticky_elements_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return sticky_elements_js_typeof(obj); }
+function sticky_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { sticky_elements_js_typeof = function _typeof(obj) { return typeof obj; }; } else { sticky_elements_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return sticky_elements_js_typeof(obj); }
 
 /* 
  *************************************
@@ -15004,6 +16215,10 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/shader/fragment-custom.glsl
+/* harmony default export */ var fragment_custom = ("#define GLSLIFY 1\nuniform float time;\n\nuniform sampler2D texture;\n\nvarying vec2 vUv;\n\nvoid main( void ) {\n\n    vec2 position = - 1.0 + 2.0 * vUv;\n\n    float a = atan( position.y, position.x );\n    float r = sqrt( dot( position, position ) );\n\n    vec2 uv;\n    uv.x = cos( a ) / r;\n    uv.y = sin( a ) / r;\n    uv /= 10.0;\n    uv += time * 0.05;\n\n    vec3 color = texture2D( texture, uv ).rgb;\n\n    gl_FragColor = vec4( color * r * 1.5, 1.0 );\n\n}");
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/shader/vertex-custom.glsl
+/* harmony default export */ var vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nvoid main()\n{\n    vUv = uv;\n    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n    gl_Position = projectionMatrix * mvPosition;\n}");
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/index.js
 function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15020,10 +16235,12 @@ function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { 
  * @requires ./src/components/ES5/_plugins-THREE
  */
 
+
+
 var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE2 === null) return false;
   module.THREE_BACKGROUND_THREE2 = module.THREE_BACKGROUND_THREE2 || {};
-  module.THREE_BACKGROUND_THREE2.version = '0.0.3';
+  module.THREE_BACKGROUND_THREE2.version = '0.0.4';
 
   module.THREE_BACKGROUND_THREE2.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -15043,9 +16260,7 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
           material,
           displacementSprite,
           clock = new THREE.Clock();
-      var mouseVector = new THREE.Vector2(),
-          vertex = document.getElementById('vertexshader').textContent,
-          fragment = document.getElementById('fragmentshader').textContent;
+      var mouseVector = new THREE.Vector2();
       var mouseX = 0;
       var mouseY = 0;
 
@@ -15073,8 +16288,8 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
               value: new THREE.TextureLoader().load($('#' + rendererCanvasID).data('filter-texture'))
             }
           },
-          fragmentShader: fragment,
-          vertexShader: vertex
+          fragmentShader: fragment_custom,
+          vertexShader: vertex_custom
         }); //if use texture
 
         material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
@@ -15335,7 +16550,7 @@ var simple_3D_background_scss_style = __webpack_require__(58);
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-background/js/index.js
 function simple_3D_background_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_background_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_background_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_background_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_background_js_typeof(obj); }
+function simple_3D_background_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_background_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_background_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_background_js_typeof(obj); }
 
 /* 
  *************************************
@@ -15370,7 +16585,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
      * Sets an animation for each element
      *
      * @param  {Number} base           - Base offset value.
-     * @param  {Object} obj            - An HTML element.
+     * @param  {String} obj            - An HTML element.
      * @param  {Boolean} reset         - Reset block on mouse leave
      * @return {Void}
      */
@@ -15433,7 +16648,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
      *
      * @param  {Number} base           - Base offset value.
      * @param  {Number} multiple       - The power of target number.
-     * @param  {Object} obj            - An HTML element.
+     * @param  {String} obj            - An HTML element.
      * @param  {Boolean} reset         - Reset block on mouse leave
      * @return {Void}
      */
@@ -15501,7 +16716,7 @@ var simple_3D_carousel_scss_style = __webpack_require__(59);
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-carousel/js/index.js
 function simple_3D_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_carousel_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_carousel_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_carousel_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_carousel_js_typeof(obj); }
+function simple_3D_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_carousel_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_carousel_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_carousel_js_typeof(obj); }
 
 /* 
  *************************************
@@ -15714,7 +16929,7 @@ var THREE_CAROUSEL = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-gallery/js/index.js
 function simple_3D_gallery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_gallery_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_gallery_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_gallery_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_gallery_js_typeof(obj); }
+function simple_3D_gallery_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_gallery_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_gallery_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_gallery_js_typeof(obj); }
 
 /* 
  *************************************
@@ -15888,7 +17103,7 @@ var THREE_GALLERY = function (module, $, window, document) {
       /*
        * Load Image
        *
-       * @param  {Object} imgLoader       - A loader for loading all images from array.
+       * @param  {Element} imgLoader       - A loader for loading all images from array.
        * @param  {String} src             - URL of image.
        * @param  {Number} index           - Index of image.
        * @param  {Number} w               - The width of an image, in pixels. 
@@ -15896,7 +17111,7 @@ var THREE_GALLERY = function (module, $, window, document) {
        * @param  {Number} total           - Total number of preload images.
        * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
        * @param  {Number} radius          - Radius length of the sphere (circumference).
-       * @param  {Object} loading         - Progress bar display control.
+       * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
 
@@ -15966,6 +17181,10 @@ var THREE_GALLERY = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/shader/fragment-custom.glsl
+/* harmony default export */ var shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/shader/vertex-custom.glsl
+/* harmony default export */ var shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/index.js
 function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15982,10 +17201,12 @@ function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { i
  * @requires ./src/components/ES5/_plugins-THREE
  */
 
+
+
 var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
   if (window.THREE_IMAGE_TRANSITION === null) return false;
   module.THREE_IMAGE_TRANSITION = module.THREE_IMAGE_TRANSITION || {};
-  module.THREE_IMAGE_TRANSITION.version = '0.0.2';
+  module.THREE_IMAGE_TRANSITION.version = '0.0.3';
 
   module.THREE_IMAGE_TRANSITION.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -16006,9 +17227,7 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
           renderer,
           displacementSprite,
           theta = 0;
-      var vertex = document.getElementById('vertexshader').textContent,
-          fragment = document.getElementById('fragmentshader').textContent,
-          filterMaterial,
+      var filterMaterial,
           offsetWidth = $('#' + rendererCanvasID).parent().width(),
           offsetHeight = $('#' + rendererCanvasID).parent().width() * (550 / 1400);
 
@@ -16062,8 +17281,8 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
         disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
         texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
         texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
-        texture1.anisotropy = renderer.getMaxAnisotropy();
-        texture2.anisotropy = renderer.getMaxAnisotropy();
+        texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
         var geometry = new THREE.PlaneBufferGeometry(offsetWidth, offsetHeight, 1);
         filterMaterial = new THREE.ShaderMaterial({
           uniforms: {
@@ -16088,8 +17307,8 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
               value: disp
             }
           },
-          vertexShader: vertex,
-          fragmentShader: fragment,
+          vertexShader: shader_vertex_custom,
+          fragmentShader: shader_fragment_custom,
           transparent: true,
           opacity: 1.0
         });
@@ -16182,7 +17401,7 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-model/js/index.js
 function simple_3D_model_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_model_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_model_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_model_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_model_js_typeof(obj); }
+function simple_3D_model_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_model_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_model_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_model_js_typeof(obj); }
 
 /* 
  *************************************
@@ -16589,7 +17808,7 @@ var THREE_PAGES = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-particle-effect/js/index.js
 function simple_3D_particle_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_particle_effect_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_particle_effect_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_particle_effect_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_particle_effect_js_typeof(obj); }
+function simple_3D_particle_effect_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_particle_effect_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_particle_effect_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_particle_effect_js_typeof(obj); }
 
 /* 
  *************************************
@@ -16856,8 +18075,8 @@ var THREE_PARTICLE = function (module, $, window, document) {
       /*
        * Get Image Data when Draw Image To Canvas
        *
-       * @param  {Object} image         - Overridden with a record type holding data, width and height.
-       * @return {JSON}                 - The image data.
+       * @param  {!Element} image         - Overridden with a record type holding data, width and height.
+       * @return {Object}                 - The image data via JSON.
        */
 
 
@@ -17287,7 +18506,7 @@ function simple_3D_mouse_interaction_js_classCallCheck(instance, Constructor) { 
 var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION === null) return false;
   module.THREE_MOUSE_INTERACTION = module.THREE_MOUSE_INTERACTION || {};
-  module.THREE_MOUSE_INTERACTION.version = '0.0.2';
+  module.THREE_MOUSE_INTERACTION.version = '0.0.3';
 
   module.THREE_MOUSE_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -17433,7 +18652,8 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         intersects = raycaster.intersectObjects(atoms); //intersects = raycaster.intersectObjects( scene.children );
 
         if (intersects.length > 0 && intersects[0].object.name.indexOf('nucleus') >= 0) {
-          console.log(intersects[0].object.name); //---Change object size
+          var _obj = intersects[0].object;
+          console.log(_obj.name); //---Change object size
           //				if ( typeof intersects[ 0 ] != typeof undefined ) {
           //					var obj = intersects[ 0 ].object;
           //
@@ -17450,7 +18670,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
           //				}
           //---Change object position
 
-          var targetAtomPos = intersects[0].object.position;
+          var targetAtomPos = _obj.position;
           console.log(targetAtomPos); // targetAtomPos.tween.pause();
 
           var destinationPos = targetAtomPos.clone();
@@ -17466,6 +18686,11 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
             onUpdate: function onUpdate() {
               camera.up.set(0, 1, 0);
               camera.updateProjectionMatrix();
+            },
+            onComplete: function onComplete() {
+              // get object new coordinates
+              var screenData = nestedObjectToScreenXYZAndWH(_obj, camera, renderer.domElement.width, renderer.domElement.height);
+              console.log("Current object coordinates: {x: ".concat(screenData.position.x, ", y: ").concat(screenData.position.y, ", z: ").concat(screenData.position.z, " }"));
             }
           });
         } else {
@@ -17553,6 +18778,99 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
           scene.add(displacementSprite);
           atoms.push(displacementSprite);
         }
+      }
+      /*
+       * Get Object Coordinate, Width and Height From Screen
+       * Note: No data may be acquired without delay !!
+       *
+      * @param  {THREE.Mesh} obj                           - Mesh object.
+       * @param  {THREE.PerspectiveCamera} camera           - Mesh object.
+      * @param  {Number} rendererWidth                     - Width of renderer.
+       * @param  {Number} rendererHeight                    - Height of renderer.
+       * @param  {String} type                              - Build type.
+       * @return {JSON}
+       */
+
+      /* @usage: 
+         var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+        */
+
+
+      function nestedObjectToScreenXYZAndWH(obj, camera, rendererWidth, rendererHeight) {
+        var vector = new THREE.Vector3();
+        vector.setFromMatrixPosition(obj.matrixWorld);
+        var widthHalf = rendererWidth / 2;
+        var heightHalf = rendererHeight / 2;
+        var aspect = rendererHeight / rendererWidth;
+        vector.project(camera);
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf; //compute bounding box after
+
+        var boxInfo = new THREE.Box3().setFromObject(obj).getSize(new THREE.Vector3()); //Change it to fit the width and height of the stage based on the current value
+
+        var ratioFixedNum = 7; //correction
+
+        return {
+          position: vector,
+          width: (boxInfo.x * ratioFixedNum * aspect).toFixed(2),
+          height: (boxInfo.y * ratioFixedNum * aspect).toFixed(2)
+        };
+      }
+      /*
+       * Generate random number between two numbers
+       *
+       * @return {Number}
+       */
+
+
+      function getRandomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      /*
+       * Returns the degree from radian.
+       *
+       * @return {Number} rad - Value of radian.
+       * @return {Number}
+       * @usage: 
+       
+         angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+       */
+
+
+      function getDegree(rad) {
+        return rad / Math.PI * 180;
+      }
+      /*
+       * Returns the radian degree .
+       *
+       * @return {Number} deg - Value of degree.
+       * @return {Number}
+       * @usage: 
+          
+          rad = Math.PI / 180 * 30 ;
+       */
+
+
+      function getRadian(deg) {
+        return deg * Math.PI / 180;
+      }
+      /*
+       * Convert three.js scene rotation to polar coordinates
+       *
+       * @return {Number} deg - Value of degree.
+       * @return {Number}
+       * @usage: 
+       
+          x = r * cos（θ）
+          y = r * sin（θ）  
+       */
+
+
+      function getPolarCoord(x, y, z) {
+        var nx = Math.cos(x) * Math.cos(y) * z,
+            nz = Math.cos(x) * Math.sin(y) * z,
+            ny = Math.sin(x) * z;
+        return new THREE.Vector3(nx, ny, nz);
       } // 
       //-------------------------------------	
 
@@ -17602,7 +18920,7 @@ function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) {
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
-  module.THREE_MOUSE_INTERACTION2.version = '0.0.2';
+  module.THREE_MOUSE_INTERACTION2.version = '0.0.3';
 
   module.THREE_MOUSE_INTERACTION2.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -17734,17 +19052,19 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         intersects = raycaster.intersectObjects(atoms); //intersects = raycaster.intersectObjects( scene.children );
 
         if (intersects.length > 0 && intersects[0].object.name.indexOf('nucleus') >= 0) {
-          var targetAtomPos = intersects[0].object.position; // targetAtomPos.tween.pause();
+          var _obj = intersects[0].object;
+          var targetAtomPos = _obj.position;
+          console.log(targetAtomPos); // targetAtomPos.tween.pause();
 
           var destinationPos = targetAtomPos.clone(); // jump to new position
           // y movement via scroller object
           // x and z movement via TWEEN
 
-          scroller.targetPosition = intersects[0].object.position.y / 10000;
+          scroller.targetPosition = _obj.position.y / 10000;
           var targetPos = {
-            x: intersects[0].object.position.x,
-            y: intersects[0].object.position.y,
-            z: intersects[0].object.position.z + 1100
+            x: _obj.position.x,
+            y: _obj.position.y,
+            z: _obj.position.z + 1100
           };
           TweenMax.to(targetPos, 2, {
             x: destinationPos.x,
@@ -17758,6 +19078,11 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
             onUpdate: function onUpdate() {
               camera.up.set(0, 1, 0);
               camera.updateProjectionMatrix();
+            },
+            onComplete: function onComplete() {
+              // get object new coordinates
+              var screenData = nestedObjectToScreenXYZAndWH(_obj, camera, renderer.domElement.width, renderer.domElement.height);
+              console.log("Current object coordinates: {x: ".concat(screenData.position.x, ", y: ").concat(screenData.position.y, ", z: ").concat(screenData.position.z, " }"));
             }
           });
         } else {
@@ -17915,6 +19240,99 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
 
           return this.scrollPosY;
         }.bind(this);
+      }
+      /*
+       * Get Object Coordinate, Width and Height From Screen
+       * Note: No data may be acquired without delay !!
+       *
+      * @param  {THREE.Mesh} obj                           - Mesh object.
+       * @param  {THREE.PerspectiveCamera} camera           - Mesh object.
+      * @param  {Number} rendererWidth                     - Width of renderer.
+       * @param  {Number} rendererHeight                    - Height of renderer.
+       * @param  {String} type                              - Build type.
+       * @return {JSON}
+       */
+
+      /* @usage: 
+         var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+        */
+
+
+      function nestedObjectToScreenXYZAndWH(obj, camera, rendererWidth, rendererHeight) {
+        var vector = new THREE.Vector3();
+        vector.setFromMatrixPosition(obj.matrixWorld);
+        var widthHalf = rendererWidth / 2;
+        var heightHalf = rendererHeight / 2;
+        var aspect = rendererHeight / rendererWidth;
+        vector.project(camera);
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf; //compute bounding box after
+
+        var boxInfo = new THREE.Box3().setFromObject(obj).getSize(new THREE.Vector3()); //Change it to fit the width and height of the stage based on the current value
+
+        var ratioFixedNum = 7; //correction
+
+        return {
+          position: vector,
+          width: (boxInfo.x * ratioFixedNum * aspect).toFixed(2),
+          height: (boxInfo.y * ratioFixedNum * aspect).toFixed(2)
+        };
+      }
+      /*
+       * Generate random number between two numbers
+       *
+       * @return {Number}
+       */
+
+
+      function getRandomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      /*
+       * Returns the degree from radian.
+       *
+       * @return {Number} rad - Value of radian.
+       * @return {Number}
+       * @usage: 
+       
+         angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+       */
+
+
+      function getDegree(rad) {
+        return rad / Math.PI * 180;
+      }
+      /*
+       * Returns the radian degree .
+       *
+       * @return {Number} deg - Value of degree.
+       * @return {Number}
+       * @usage: 
+          
+          rad = Math.PI / 180 * 30 ;
+       */
+
+
+      function getRadian(deg) {
+        return deg * Math.PI / 180;
+      }
+      /*
+       * Convert three.js scene rotation to polar coordinates
+       *
+       * @return {Number} deg - Value of degree.
+       * @return {Number}
+       * @usage: 
+       
+          x = r * cos（θ）
+          y = r * sin（θ）  
+       */
+
+
+      function getPolarCoord(x, y, z) {
+        var nx = Math.cos(x) * Math.cos(y) * z,
+            nz = Math.cos(x) * Math.sin(y) * z,
+            ny = Math.sin(x) * z;
+        return new THREE.Vector3(nx, ny, nz);
       } // 
       //-------------------------------------	
 
@@ -17951,7 +19369,7 @@ var simple_3D_shatter_slider_scss_style = __webpack_require__(60);
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-shatter-slider/js/index.js
 function simple_3D_shatter_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_shatter_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_shatter_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_shatter_slider_js_typeof(obj); }
+function simple_3D_shatter_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_shatter_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_shatter_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_shatter_slider_js_typeof(obj); }
 
 /* 
  *************************************
@@ -17970,7 +19388,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { if (typeof Symbol === "functi
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.3';
+  module.THREE_SHATTER_SLIDER.version = '0.0.7';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18016,167 +19434,206 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
               $items = $this.find('.uix-3d-slider--shatter__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
-              dataControlsPagination = $this.data('controls-pagination'),
-              dataControlsArrows = $this.data('controls-arrows'),
-              dataLoop = $this.data('loop'),
-              dataFilterTexture = $this.data('filter-texture'),
-              dataDraggable = $this.data('draggable'),
-              dataDraggableCursor = $this.data('draggable-cursor');
-          if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
-          if (simple_3D_shatter_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
-          if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-          if (simple_3D_shatter_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-          if (simple_3D_shatter_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-          if (simple_3D_shatter_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //Autoplay times
+              activated = $this.data('activated');
 
-          var playTimes; //A function called "timer" once every second (like a digital watch).
+          if (simple_3D_shatter_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+            //Get parameter configuration from the data-* attribute of HTML
+            var dataControlsPagination = $this.data('controls-pagination'),
+                dataControlsArrows = $this.data('controls-arrows'),
+                dataLoop = $this.data('loop'),
+                dataFilterTexture = $this.data('filter-texture'),
+                dataDraggable = $this.data('draggable'),
+                dataDraggableCursor = $this.data('draggable-cursor'),
+                dataSpeed = $this.data('speed'),
+                dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataCountTotal = $this.data('count-total'),
+                dataCountCur = $this.data('count-now');
+            if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
+            if (simple_3D_shatter_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
+            if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_shatter_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            if (simple_3D_shatter_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+            if (simple_3D_shatter_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_shatter_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (simple_3D_shatter_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
-          $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
-          //and the drag and drop function will be activated.
+            var playTimes; //A function called "timer" once every second (like a digital watch).
 
-          if ($(dataControlsArrows).length == 0) {
-            $('body').prepend('<div style="display:none;" class="uix-3d-slider--shatter__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--shatter__arrows--prev"></a><a href="#" class="uix-3d-slider--shatter__arrows--next"></a></div>');
-          } //Prevent bubbling
+            $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
+            //and the drag and drop function will be activated.
 
-
-          if (itemsTotal == 1) {
-            $(dataControlsPagination).hide();
-            $(dataControlsArrows).hide();
-          } //Initialize the controlers classes
-          //-------------------------------------	
-
-
-          $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
-          //-------------------------------------	
-
-          $this.css('height', windowHeight + 'px'); //Load slides to canvas
-          //-------------------------------------	
-
-          if ($('#' + rendererCanvasID).length == 0) {
-            $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
-          } //Get the animation speed
-          //-------------------------------------	
+            if ($(dataControlsArrows).length == 0) {
+              $('body').prepend('<div style="display:none;" class="uix-3d-slider--shatter__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--shatter__arrows--prev"></a><a href="#" class="uix-3d-slider--shatter__arrows--next"></a></div>');
+            } //Prevent bubbling
 
 
-          if (simple_3D_shatter_slider_js_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-            animSpeed = $this.data('speed');
-          } //Initialize the first item container
-          //-------------------------------------		
+            if (itemsTotal == 1) {
+              $(dataControlsPagination).hide();
+              $(dataControlsArrows).hide();
+            } //Initialize the controlers classes
+            //-------------------------------------	
 
 
-          $items.addClass('next');
-          $first.addClass('is-active'); //Get all images and videos
-          //-------------------------------------		
+            $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
+            //-------------------------------------	
 
-          $items.each(function () {
-            var _item = $(this);
+            $this.css('height', windowHeight + 'px'); //Load slides to canvas
+            //-------------------------------------	
 
-            if (_item.find('video').length > 0) {
-              //Returns the dimensions (intrinsic height and width ) of the video
-              var video = document.getElementById(_item.find('video').attr('id')),
-                  videoURL = _item.find('source:first').attr('src');
+            if ($('#' + rendererCanvasID).length == 0) {
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-3d-slider--shatter__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+            } //Get the animation speed
+            //-------------------------------------	
 
-              if (simple_3D_shatter_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": videoURL,
-                  "id": _item.find('video').attr('id'),
-                  "type": 'video'
-                });
+
+            if (simple_3D_shatter_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+              animSpeed = dataSpeed;
+            } //Initialize the first item container
+            //-------------------------------------		
+
+
+            $items.addClass('next');
+            $first.addClass('is-active'); //Add identifiers for the first and last items
+            //-------------------------------------		
+
+            $items.last().addClass('last');
+            $items.first().addClass('first'); //Get all images and videos
+            //-------------------------------------		
+
+            $items.each(function () {
+              var _item = $(this);
+
+              if (_item.find('video').length > 0) {
+                //Returns the dimensions (intrinsic height and width ) of the video
+                var video = document.getElementById(_item.find('video').attr('id')),
+                    videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_shatter_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
+
+                if (simple_3D_shatter_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": videoURL,
+                    "id": _item.find('video').attr('id'),
+                    "type": 'video'
+                  });
+                }
+              } else {
+                var imgURL = _item.find('img').attr('src');
+
+                if (simple_3D_shatter_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": imgURL,
+                    "id": 'img-' + UixGUID.create(),
+                    "type": 'img'
+                  });
+                }
               }
-            } else {
-              var imgURL = _item.find('img').attr('src');
+            }); //Pagination dots 
+            //-------------------------------------	
 
-              if (simple_3D_shatter_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": imgURL,
-                  "id": 'img-' + UixGUID.create(),
-                  "type": 'img'
-                });
-              }
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul>';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
-          }); //Pagination dots 
-          //-------------------------------------	
 
-          var _dot = '',
-              _dotActive = '';
-          _dot += '<ul>';
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
 
-          for (var i = 0; i < itemsTotal; i++) {
-            _dotActive = i == 0 ? 'class="is-active"' : '';
-            _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
-          }
+            $(dataControlsPagination).find('ul > li').off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-          _dot += '</ul>';
-          if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
+              var $btn = $(this);
+              if ($btn.attr('aria-disabled') == 'true') return false;
+              $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
+              setTimeout(function () {
+                $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
+                  slideNextId = $(this).index(); //Determine the direction
 
-          $(dataControlsPagination).find('ul > li').on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
-                slideNextId = $(this).index(); //Determine the direction
+              var curDir = 'prev';
 
-            var curDir = 'prev';
-
-            if ($(this).attr('data-index') > slideCurId) {
-              curDir = 'next';
-            } //Transition Between Slides
+              if ($(this).attr('data-index') > slideCurId) {
+                curDir = 'next';
+              } //Transition Between Slides
 
 
-            sliderUpdates(slideCurId, slideNextId, curDir); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          }); //Next/Prev buttons
-          //-------------------------------------		
+              clearInterval($this[0].animatedSlides);
+            }); //Next/Prev buttons
+            //-------------------------------------		
 
-          var _prev = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--prev'),
-              _next = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--next');
+            var _prev = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--prev'),
+                _next = $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--next');
 
-          $(dataControlsArrows).find('a').attr('href', 'javascript:');
-          $(dataControlsArrows).find('a').removeClass('is-disabled');
+            $(dataControlsArrows).find('a').attr('href', 'javascript:');
+            $(dataControlsArrows).find('a').removeClass('is-disabled');
 
-          if (!dataLoop) {
-            _prev.addClass('is-disabled');
-          }
+            if (!dataLoop) {
+              _prev.addClass('is-disabled');
+            }
 
-          _prev.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
+            _prev.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-            sliderUpdates(slideCurId, slideNextId, 'prev'); //Pause the auto play event
+              if (_prev.attr('aria-disabled') == 'true') return false;
 
-            clearInterval($this[0].animatedSlides);
-          });
+              _prev.attr('aria-disabled', 'true');
 
-          _next.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+              setTimeout(function () {
+                _prev.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
-            sliderUpdates(slideCurId, slideNextId, 'next'); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          }); //Autoplay Slider
-          //-------------------------------------		
-
-
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
-          if (simple_3D_shatter_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (simple_3D_shatter_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
+              clearInterval($this[0].animatedSlides);
             });
-          }
+
+            _next.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_next.attr('aria-disabled') == 'true') return false;
+
+              _next.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _next.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Autoplay Slider
+            //-------------------------------------		
+
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+            $this.data('activated', 1);
+          } //endif activated
+
         }); // end each				
       }
 
@@ -18332,12 +19789,12 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
       /*
        * Load Source
        *
-       * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+       * @param  {Three.MeshBasicMaterial.map} texture         - Returns a new texture object which can directly be used for material creation.
        * @param  {Number} index           - Index of image or video.
        * @param  {Number} w               - The width of an image or video, in pixels. 
        * @param  {Number} h               - The height of an image or video, in pixels. 
        * @param  {Number} total           - Total number of preload images or video.
-       * @param  {Object} loading         - Progress bar display control.
+       * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
 
@@ -18387,15 +19844,19 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
       /*
       * Trigger slider autoplay
       *
-      * @param  {Function} playTimes      - Number of times.
-      * @param  {Number} timing           - Autoplay interval.
-      * @param  {Boolean} loop            - Determine whether to loop through each item.
-      * @param  {Object} slider           - Selector of the slider .
-      * @return {Void}                    - The constructor.
+      * @param  {Function} playTimes            - Number of times.
+      * @param  {Number} timing                 - Autoplay interval.
+      * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+      * @param  {Element} slider                 - Selector of the slider .
+      * @param  {String} countTotalID           - Total number ID or class of counter.
+      * @param  {String} countCurID             - Current number ID or class of counter.
+      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+      * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+      * @return {Void}                          - The constructor.
       */
 
 
-      function sliderAutoPlay(playTimes, timing, loop, slider) {
+      function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
         var items = slider.find('.uix-3d-slider--shatter__item'),
             total = items.length;
         slider[0].animatedSlides = setInterval(function () {
@@ -18406,7 +19867,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             if (playTimes < total && playTimes >= 0) {
               var slideCurId = items.filter('.is-active').index(),
                   slideNextId = playTimes;
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           } else {
             if (playTimes == total) playTimes = 0;
@@ -18415,9 +19876,9 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
                 slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev');
+              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -18428,27 +19889,22 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
        * @param  {Number} slideCurId             - Index of current slider.
        * @param  {Number} slideNextId            - Index of next slider.
        * @param  {String} dir                    - Switching direction indicator.	 
+                * @param  {String} countTotalID           - Total number ID or class of counter.
+                * @param  {String} countCurID             - Current number ID or class of counter.
+                * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+                * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+                * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
        * @return {Void}
        */
 
 
-      function sliderUpdates(slideCurId, slideNextId, dir) {
+      function sliderUpdates(slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
         var $items = $sliderWrapper.find('.uix-3d-slider--shatter__item'),
-            total = $items.length,
-            dataCountTotal = $sliderWrapper.data('count-total'),
-            dataCountCur = $sliderWrapper.data('count-now'),
-            dataControlsPagination = $sliderWrapper.data('controls-pagination'),
-            dataControlsArrows = $sliderWrapper.data('controls-arrows'),
-            dataLoop = $sliderWrapper.data('loop');
-        if (simple_3D_shatter_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-        if (simple_3D_shatter_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-        if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
-        if (simple_3D_shatter_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-3d-slider--shatter__arrows';
-        if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+            total = $items.length; //Prevent bubbling
 
         if (total == 1) {
-          $(dataControlsPagination).hide();
-          $(dataControlsArrows).hide();
+          $(paginationID).hide();
+          $(arrowsID).hide();
           return false;
         }
 
@@ -18456,7 +19912,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           isAnimating = true; //Transition Interception
           //-------------------------------------
 
-          if (dataLoop) {
+          if (loop) {
             if (slideCurId > total - 1) slideCurId = 0;
             if (slideCurId < 0) slideCurId = total - 1; //--
 
@@ -18487,21 +19943,21 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           $next.addClass('is-active'); //Add transition class to Controls Pagination
           //-------------------------------------
 
-          $(dataControlsPagination).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
-          $(dataControlsPagination).find('ul > li').eq(slideCurId).addClass('leave');
-          $(dataControlsPagination).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
+          $(paginationID).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $(paginationID).find('ul > li').eq(slideCurId).addClass('leave');
+          $(paginationID).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
           //-------------------------------------		
 
-          if (!dataLoop) {
-            $(dataControlsArrows).find('a').removeClass('is-disabled');
-            if (slideNextId == total - 1) $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--next').addClass('is-disabled');
-            if (slideNextId == 0) $(dataControlsArrows).find('.uix-3d-slider--shatter__arrows--prev').addClass('is-disabled');
+          if (!loop) {
+            $(arrowsID).find('a').removeClass('is-disabled');
+            if (slideNextId == total - 1) $(arrowsID).find('.uix-3d-slider--shatter__arrows--next').addClass('is-disabled');
+            if (slideNextId == 0) $(arrowsID).find('.uix-3d-slider--shatter__arrows--prev').addClass('is-disabled');
           } //Display counter
           //-------------------------------------
 
 
-          $(dataCountTotal).text(total);
-          $(dataCountCur).text(parseFloat(slideCurId) + 1); //Pause all videos
+          $(countTotalID).text(total);
+          $(countCurID).text(parseFloat(slideCurId) + 1); //Pause all videos
           //-------------------------------------
           // pause all videos
 
@@ -18607,7 +20063,7 @@ var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(61);
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/js/index.js
 function simple_3D_explosive_particle_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_explosive_particle_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_explosive_particle_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_explosive_particle_slider_js_typeof(obj); }
+function simple_3D_explosive_particle_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_explosive_particle_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_explosive_particle_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_explosive_particle_slider_js_typeof(obj); }
 
 /* 
  *************************************
@@ -18626,7 +20082,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { if (typeof Symbol 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.3';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.7';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18677,167 +20133,207 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
               $items = $this.find('.uix-3d-slider--expParticle__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
-              dataControlsPagination = $this.data('controls-pagination'),
-              dataControlsArrows = $this.data('controls-arrows'),
-              dataLoop = $this.data('loop'),
-              dataFilterTexture = $this.data('filter-texture'),
-              dataDraggable = $this.data('draggable'),
-              dataDraggableCursor = $this.data('draggable-cursor');
-          if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
-          if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-          if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-          if (simple_3D_explosive_particle_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //Autoplay times
+              activated = $this.data('activated');
 
-          var playTimes; //A function called "timer" once every second (like a digital watch).
+          if (simple_3D_explosive_particle_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+            //Get parameter configuration from the data-* attribute of HTML
+            var dataControlsPagination = $this.data('controls-pagination'),
+                dataControlsArrows = $this.data('controls-arrows'),
+                dataLoop = $this.data('loop'),
+                dataFilterTexture = $this.data('filter-texture'),
+                dataDraggable = $this.data('draggable'),
+                dataDraggableCursor = $this.data('draggable-cursor'),
+                dataSpeed = $this.data('speed'),
+                dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataCountTotal = $this.data('count-total'),
+                dataCountCur = $this.data('count-now');
+            if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (simple_3D_explosive_particle_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay times
 
-          $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
-          //and the drag and drop function will be activated.
+            var playTimes; //A function called "timer" once every second (like a digital watch).
 
-          if ($(dataControlsArrows).length == 0) {
-            $('body').prepend('<div style="display:none;" class="uix-3d-slider--expParticle__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>');
-          } //Prevent bubbling
+            $this[0].animatedSlides; //If arrows does not exist on the page, it will be added by default, 
+            //and the drag and drop function will be activated.
 
-
-          if (itemsTotal == 1) {
-            $(dataControlsPagination).hide();
-            $(dataControlsArrows).hide();
-          } //Initialize the controlers classes
-          //-------------------------------------	
-
-
-          $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
-          //-------------------------------------	
-
-          $this.css('height', windowHeight + 'px'); //Load slides to canvas
-          //-------------------------------------	
-
-          if ($('#' + rendererCanvasID).length == 0) {
-            $this.prepend('<div id="' + rendererOuterID + '" class="uix-advanced-slider-sp__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
-          } //Get the animation speed
-          //-------------------------------------	
+            if ($(dataControlsArrows).length == 0) {
+              $('body').prepend('<div style="display:none;" class="uix-3d-slider--expParticle__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--expParticle__arrows--prev"></a><a href="#" class="uix-3d-slider--expParticle__arrows--next"></a></div>');
+            } //Prevent bubbling
 
 
-          if (simple_3D_explosive_particle_slider_js_typeof($this.data('speed')) != ( true ? "undefined" : undefined) && $this.data('speed') != false) {
-            animSpeed = $this.data('speed');
-          } //Initialize the first item container
-          //-------------------------------------		
+            if (itemsTotal == 1) {
+              $(dataControlsPagination).hide();
+              $(dataControlsArrows).hide();
+            } //Initialize the controlers classes
+            //-------------------------------------	
 
 
-          $items.addClass('next');
-          $first.addClass('is-active'); //Get all images and videos
-          //-------------------------------------		
+            $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
+            //-------------------------------------	
 
-          $items.each(function () {
-            var _item = $(this);
+            $this.css('height', windowHeight + 'px'); //Load slides to canvas
+            //-------------------------------------	
 
-            if (_item.find('video').length > 0) {
-              //Returns the dimensions (intrinsic height and width ) of the video
-              var video = document.getElementById(_item.find('video').attr('id')),
-                  videoURL = _item.find('source:first').attr('src');
+            if ($('#' + rendererCanvasID).length == 0) {
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-3d-slider--expParticle__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+            } //Get the animation speed
+            //-------------------------------------	
 
-              if (simple_3D_explosive_particle_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": videoURL,
-                  "id": _item.find('video').attr('id'),
-                  "type": 'video'
-                });
+
+            if (simple_3D_explosive_particle_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+              animSpeed = dataSpeed;
+            } //Initialize the first item container
+            //-------------------------------------		
+
+
+            $items.addClass('next');
+            $first.addClass('is-active'); //Add identifiers for the first and last items
+            //-------------------------------------		
+
+            $items.last().addClass('last');
+            $items.first().addClass('first'); //Get all images and videos
+            //-------------------------------------		
+
+            $items.each(function () {
+              var _item = $(this);
+
+              if (_item.find('video').length > 0) {
+                //Returns the dimensions (intrinsic height and width ) of the video
+                var video = document.getElementById(_item.find('video').attr('id')),
+                    videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_explosive_particle_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
+
+                if (simple_3D_explosive_particle_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": videoURL,
+                    "id": _item.find('video').attr('id'),
+                    "type": 'video'
+                  });
+                }
+              } else {
+                var imgURL = _item.find('img').attr('src');
+
+                if (simple_3D_explosive_particle_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": imgURL,
+                    "id": 'img-' + UixGUID.create(),
+                    "type": 'img'
+                  });
+                }
               }
-            } else {
-              var imgURL = _item.find('img').attr('src');
+            }); //Pagination dots 
+            //-------------------------------------	
 
-              if (simple_3D_explosive_particle_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
-                sources.push({
-                  "url": imgURL,
-                  "id": 'img-' + UixGUID.create(),
-                  "type": 'img'
-                });
-              }
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul>';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
-          }); //Pagination dots 
-          //-------------------------------------	
 
-          var _dot = '',
-              _dotActive = '';
-          _dot += '<ul>';
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
 
-          for (var i = 0; i < itemsTotal; i++) {
-            _dotActive = i == 0 ? 'class="is-active"' : '';
-            _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
-          }
+            $(dataControlsPagination).find('ul > li').off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-          _dot += '</ul>';
-          if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
+              var $btn = $(this);
+              if ($btn.attr('aria-disabled') == 'true') return false;
+              $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
+              setTimeout(function () {
+                $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
+                  slideNextId = $(this).index(); //Determine the direction
 
-          $(dataControlsPagination).find('ul > li').on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
-                slideNextId = $(this).index(); //Determine the direction
+              var curDir = 'prev';
 
-            var curDir = 'prev';
-
-            if ($(this).attr('data-index') > slideCurId) {
-              curDir = 'next';
-            } //Transition Between Slides
+              if ($(this).attr('data-index') > slideCurId) {
+                curDir = 'next';
+              } //Transition Between Slides
 
 
-            sliderUpdates(slideCurId, slideNextId, curDir); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          }); //Next/Prev buttons
-          //-------------------------------------		
+              clearInterval($this[0].animatedSlides);
+            }); //Next/Prev buttons
+            //-------------------------------------		
 
-          var _prev = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--prev'),
-              _next = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--next');
+            var _prev = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--prev'),
+                _next = $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--next');
 
-          $(dataControlsArrows).find('a').attr('href', 'javascript:');
-          $(dataControlsArrows).find('a').removeClass('is-disabled');
+            $(dataControlsArrows).find('a').attr('href', 'javascript:');
+            $(dataControlsArrows).find('a').removeClass('is-disabled');
 
-          if (!dataLoop) {
-            _prev.addClass('is-disabled');
-          }
+            if (!dataLoop) {
+              _prev.addClass('is-disabled');
+            }
 
-          _prev.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
+            _prev.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-            sliderUpdates(slideCurId, slideNextId, 'prev'); //Pause the auto play event
+              if (_prev.attr('aria-disabled') == 'true') return false;
 
-            clearInterval($this[0].animatedSlides);
-          });
+              _prev.attr('aria-disabled', 'true');
 
-          _next.on('click', function (e) {
-            e.preventDefault();
-            var slideCurId = $items.filter('.is-active').index(),
-                slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+              setTimeout(function () {
+                _prev.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
-            sliderUpdates(slideCurId, slideNextId, 'next'); //Pause the auto play event
+              sliderUpdates(slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
 
-            clearInterval($this[0].animatedSlides);
-          }); //Autoplay Slider
-          //-------------------------------------		
-
-
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop');
-          if (simple_3D_explosive_particle_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this);
-              }
+              clearInterval($this[0].animatedSlides);
             });
-          }
+
+            _next.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_next.attr('aria-disabled') == 'true') return false;
+
+              _next.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _next.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Autoplay Slider
+            //-------------------------------------		
+
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+            $this.data('activated', 1);
+          } //endif activated
+
         }); // end each				
       }
 
@@ -18990,12 +20486,12 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
       /*
        * Load Source
        *
-       * @param  {Object} texture         - Returns a new texture object which can directly be used for material creation.
+       * @param  {Three.MeshBasicMaterial.map} texture         - Returns a new texture object which can directly be used for material creation.
        * @param  {Number} index           - Index of image or video.
        * @param  {Number} w               - The width of an image or video, in pixels. 
        * @param  {Number} h               - The height of an image or video, in pixels. 
        * @param  {Number} total           - Total number of preload images or video.
-       * @param  {Object} loading         - Progress bar display control.
+       * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
 
@@ -19077,15 +20573,19 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
       /*
       * Trigger slider autoplay
       *
-      * @param  {Function} playTimes      - Number of times.
-      * @param  {Number} timing           - Autoplay interval.
-      * @param  {Boolean} loop            - Determine whether to loop through each item.
-      * @param  {Object} slider           - Selector of the slider .
-      * @return {Void}                    - The constructor.
+      * @param  {Function} playTimes            - Number of times.
+      * @param  {Number} timing                 - Autoplay interval.
+      * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+      * @param  {Element} slider                 - Selector of the slider .
+      * @param  {String} countTotalID           - Total number ID or class of counter.
+      * @param  {String} countCurID             - Current number ID or class of counter.
+      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+      * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+      * @return {Void}                          - The constructor.
       */
 
 
-      function sliderAutoPlay(playTimes, timing, loop, slider) {
+      function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
         var items = slider.find('.uix-3d-slider--expParticle__item'),
             total = items.length;
         slider[0].animatedSlides = setInterval(function () {
@@ -19096,7 +20596,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             if (playTimes < total && playTimes >= 0) {
               var slideCurId = items.filter('.is-active').index(),
                   slideNextId = playTimes;
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           } else {
             if (playTimes == total) playTimes = 0;
@@ -19105,9 +20605,9 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
                 slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev');
+              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next');
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -19118,27 +20618,22 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
        * @param  {Number} slideCurId             - Index of current slider.
        * @param  {Number} slideNextId            - Index of next slider.
        * @param  {String} dir                    - Switching direction indicator.	 
+                * @param  {String} countTotalID           - Total number ID or class of counter.
+                * @param  {String} countCurID             - Current number ID or class of counter.
+                * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+                * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+                * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
        * @return {Void}
        */
 
 
-      function sliderUpdates(slideCurId, slideNextId, dir) {
+      function sliderUpdates(slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
         var $items = $sliderWrapper.find('.uix-3d-slider--expParticle__item'),
-            total = $items.length,
-            dataCountTotal = $sliderWrapper.data('count-total'),
-            dataCountCur = $sliderWrapper.data('count-now'),
-            dataControlsPagination = $sliderWrapper.data('controls-pagination'),
-            dataControlsArrows = $sliderWrapper.data('controls-arrows'),
-            dataLoop = $sliderWrapper.data('loop');
-        if (simple_3D_explosive_particle_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-        if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Prevent bubbling
+            total = $items.length; //Prevent bubbling
 
         if (total == 1) {
-          $(dataControlsPagination).hide();
-          $(dataControlsArrows).hide();
+          $(paginationID).hide();
+          $(arrowsID).hide();
           return false;
         }
 
@@ -19146,7 +20641,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           isAnimating = true; //Transition Interception
           //-------------------------------------
 
-          if (dataLoop) {
+          if (loop) {
             if (slideCurId > total - 1) slideCurId = 0;
             if (slideCurId < 0) slideCurId = total - 1; //--
 
@@ -19177,21 +20672,21 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           $next.addClass('is-active'); //Add transition class to Controls Pagination
           //-------------------------------------
 
-          $(dataControlsPagination).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
-          $(dataControlsPagination).find('ul > li').eq(slideCurId).addClass('leave');
-          $(dataControlsPagination).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
+          $(paginationID).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $(paginationID).find('ul > li').eq(slideCurId).addClass('leave');
+          $(paginationID).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
           //-------------------------------------		
 
-          if (!dataLoop) {
-            $(dataControlsArrows).find('a').removeClass('is-disabled');
-            if (slideNextId == total - 1) $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--next').addClass('is-disabled');
-            if (slideNextId == 0) $(dataControlsArrows).find('.uix-3d-slider--expParticle__arrows--prev').addClass('is-disabled');
+          if (!loop) {
+            $(arrowsID).find('a').removeClass('is-disabled');
+            if (slideNextId == total - 1) $(arrowsID).find('.uix-3d-slider--expParticle__arrows--next').addClass('is-disabled');
+            if (slideNextId == 0) $(arrowsID).find('.uix-3d-slider--expParticle__arrows--prev').addClass('is-disabled');
           } //Display counter
           //-------------------------------------
 
 
-          $(dataCountTotal).text(total);
-          $(dataCountCur).text(parseFloat(slideCurId) + 1); //Fire the next object
+          $(countTotalID).text(total);
+          $(countCurID).text(parseFloat(slideCurId) + 1); //Fire the next object
           //-------------------------------------
 
           activeSlider = slideNextId; //Fire the current object
@@ -19234,6 +20729,770 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/fragment-custom.glsl
+/* harmony default export */ var js_shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
+/* harmony default export */ var js_shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
+// EXTERNAL MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/scss/_style.scss
+var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(62);
+
+// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/index.js
+function simple_3D_liquid_scrollspy_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_liquid_scrollspy_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_liquid_scrollspy_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_liquid_scrollspy_slider_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- 3D Liquid Scrollspy Slider -->
+ *************************************
+ */
+
+/**
+ * module.THREE_LIQUID_SCROLLSPY_SLIDER
+ * 
+ * @requires ./examples/assets/js/min/three.min.js
+ * @requires ./src/components/ES5/_plugins-THREE
+ */
+
+
+
+
+var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
+  if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
+  module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.9';
+
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if ($('.uix-3d-slider--liquid-scrollspy').length == 0 || !Modernizr.webgl) return false;
+    var sceneSubjects = []; // Import objects and animations dynamically
+
+    var MainStage = function () {
+      var $window = $(window),
+          windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var animSpeed = 1000,
+          $sliderWrapper = $('.uix-3d-slider--liquid-scrollspy'),
+          //Basic webGL renderers 
+      renderLoaderID = 'uix-3d-slider--liquid-scrollspy__loader',
+          rendererOuterID = 'uix-3d-slider--liquid-scrollspy__canvas-container',
+          rendererCanvasID = 'uix-3d-slider--liquid-scrollspy__canvas',
+          renderer; // Generate one plane geometries mesh to scene
+      //-------------------------------------	
+
+      var camera,
+          controls,
+          scene,
+          light,
+          renderer,
+          material,
+          displacementSprite,
+          theta = 0;
+      var offsetWidth = 1920,
+          //Set the display width of the objects
+      offsetHeight = 1080,
+          //Set the display height of the objects
+      imgAspect = offsetHeight / offsetWidth;
+      var dispImage;
+      var loader = new THREE.TextureLoader();
+      loader.crossOrigin = 'anonymous';
+      var textures;
+      var sources = [];
+      var isAnimating = false; //scroll spy
+
+      var scrollspyEnable, scrollspyConfigAutoAnim, scrollspyConfigItems, scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop; // constants
+
+      var activeSlider = 0;
+
+      function wrapperInit() {
+        $sliderWrapper.each(function () {
+          var $this = $(this),
+              $items = $this.find('.uix-3d-slider--liquid-scrollspy__item'),
+              $first = $items.first(),
+              itemsTotal = $items.length,
+              activated = $this.data('activated');
+
+          if (simple_3D_liquid_scrollspy_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+            //Get parameter configuration from the data-* attribute of HTML
+            var dataControlsPagination = $this.data('controls-pagination'),
+                dataControlsArrows = $this.data('controls-arrows'),
+                dataLoop = $this.data('loop'),
+                dataFilterTexture = $this.data('filter-texture'),
+                dataDraggable = $this.data('draggable'),
+                dataDraggableCursor = $this.data('draggable-cursor'),
+                dataSpeed = $this.data('speed'),
+                dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataCountTotal = $this.data('count-total'),
+                dataCountCur = $this.data('count-now'),
+                dataScrollspy = $this.data('scrollspy');
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--liquid-scrollspy__pagination';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--liquid-scrollspy__arrows';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataScrollspy) === ( true ? "undefined" : undefined)) dataScrollspy = false; //Load displacement image
+
+            dispImage = dataFilterTexture; //Autoplay times
+
+            var playTimes; //A function called "timer" once every second (like a digital watch).
+
+            $this[0].animatedSlides; //scroll spy config
+
+            scrollspyEnable = dataScrollspy;
+            scrollspyConfigAutoAnim = $this[0].animatedSlides;
+            scrollspyConfigItems = $items;
+            scrollspyConfigCountTotal = dataCountTotal;
+            scrollspyConfigCountCur = dataCountCur;
+            scrollspyConfigControlsPagination = dataControlsPagination;
+            scrollspyConfigControlsArrows = dataControlsArrows;
+            scrollspyConfigLoop = dataLoop; //If arrows does not exist on the page, it will be added by default, 
+            //and the drag and drop function will be activated.
+
+            if ($(dataControlsArrows).length == 0) {
+              $('body').prepend('<div style="display:none;" class="uix-3d-slider--liquid-scrollspy__arrows ' + dataControlsArrows.replace('#', '').replace('.', '') + '"><a href="#" class="uix-3d-slider--liquid-scrollspy__arrows--prev"></a><a href="#" class="uix-3d-slider--liquid-scrollspy__arrows--next"></a></div>');
+            } //Prevent bubbling
+
+
+            if (itemsTotal == 1) {
+              $(dataControlsPagination).hide();
+              $(dataControlsArrows).hide();
+            } //Initialize the controlers classes
+            //-------------------------------------	
+
+
+            $(dataControlsPagination).find('ul > li').first().addClass('is-active'); //Initialize the wrapper width and height
+            //-------------------------------------	
+
+            $this.css('height', windowWidth * imgAspect + 'px'); //Load slides to canvas
+            //-------------------------------------	
+
+            if ($('#' + rendererCanvasID).length == 0) {
+              $this.prepend('<div id="' + rendererOuterID + '" class="uix-3d-slider--liquid-scrollspy__canvas-container"><canvas id="' + rendererCanvasID + '"></canvas></div>');
+            } //Get the animation speed
+            //-------------------------------------	
+
+
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+              animSpeed = dataSpeed;
+            } //Initialize the first item container
+            //-------------------------------------		
+
+
+            $items.addClass('next');
+            $first.addClass('is-active'); //Add identifiers for the first and last items
+            //-------------------------------------		
+
+            $items.last().addClass('last');
+            $items.first().addClass('first'); //Get all images and videos
+            //-------------------------------------		
+
+            $items.each(function () {
+              var _item = $(this);
+
+              if (_item.find('video').length > 0) {
+                //Returns the dimensions (intrinsic height and width ) of the video
+                var video = document.getElementById(_item.find('video').attr('id')),
+                    videoURL = _item.find('source:first').attr('src');
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(videoURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": videoURL,
+                    "id": _item.find('video').attr('id'),
+                    "type": 'video'
+                  });
+                }
+              } else {
+                var imgURL = _item.find('img').attr('src');
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+                  sources.push({
+                    "url": imgURL,
+                    "id": 'img-' + UixGUID.create(),
+                    "type": 'img'
+                  });
+                }
+              }
+            }); //Pagination dots 
+            //-------------------------------------	
+
+            var _dot = '',
+                _dotActive = '';
+            _dot += '<ul>';
+
+            for (var i = 0; i < itemsTotal; i++) {
+              _dotActive = i == 0 ? 'class="is-active"' : '';
+              _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
+            }
+
+            _dot += '</ul>';
+            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot); //Fire the slider transtion with buttons
+
+            $(dataControlsPagination).find('ul > li').off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              var $btn = $(this);
+              if ($btn.attr('aria-disabled') == 'true') return false;
+              $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
+              setTimeout(function () {
+                $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
+                  slideNextId = $(this).index(); //Determine the direction
+
+              var curDir = 'prev';
+
+              if ($(this).attr('data-index') > slideCurId) {
+                curDir = 'next';
+              } //Transition Between Slides
+
+
+              sliderUpdates(slideCurId, slideNextId, curDir, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Next/Prev buttons
+            //-------------------------------------		
+
+            var _prev = $(dataControlsArrows).find('.uix-3d-slider--liquid-scrollspy__arrows--prev'),
+                _next = $(dataControlsArrows).find('.uix-3d-slider--liquid-scrollspy__arrows--next');
+
+            $(dataControlsArrows).find('a').attr('href', 'javascript:');
+            $(dataControlsArrows).find('a').removeClass('is-disabled');
+
+            if (!dataLoop) {
+              _prev.addClass('is-disabled');
+            }
+
+            _prev.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_prev.attr('aria-disabled') == 'true') return false;
+
+              _prev.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _prev.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            });
+
+            _next.off('click').on('click', function (e) {
+              e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+              if (_next.attr('aria-disabled') == 'true') return false;
+
+              _next.attr('aria-disabled', 'true');
+
+              setTimeout(function () {
+                _next.attr('aria-disabled', 'false');
+              }, animSpeed);
+              var slideCurId = $items.filter('.is-active').index(),
+                  slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
+
+              sliderUpdates(slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
+
+              clearInterval($this[0].animatedSlides);
+            }); //Autoplay Slider
+            //-------------------------------------		
+
+
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+            $this.data('activated', 1);
+          } //endif activated
+
+        }); // end each				
+      }
+
+      function loadImages() {
+        var promises = [];
+
+        for (var i = 0; i < sources.length; i++) {
+          if (sources[i].type == 'img') {
+            ///////////
+            // IMAGE //
+            ///////////   
+            promises.push(new Promise(function (resolve, reject) {
+              var img = document.createElement("img");
+              img.crossOrigin = "anonymous";
+              img.src = sources[i].url;
+
+              img.onload = function (image) {
+                //loading
+                TweenMax.to("#" + renderLoaderID, 0.5, {
+                  width: Math.round(100 * (i / sources.length)) + '%'
+                }); //Compatible with safari and firefox
+
+                if (simple_3D_liquid_scrollspy_slider_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                  return resolve(image.target.currentSrc);
+                } else {
+                  return resolve(image.path[0].currentSrc);
+                }
+              };
+            }).then(makeThreeTexture));
+          } else {
+            ///////////
+            // VIDEO //
+            ///////////    
+            promises.push(new Promise(function (resolve, reject) {
+              //loading
+              TweenMax.to("#" + renderLoaderID, 0.5, {
+                width: Math.round(100 * (i / sources.length)) + '%'
+              });
+              $('#' + sources[i].id).one('loadedmetadata', resolve);
+              return resolve(sources[i].url);
+            }).then(makeThreeTexture));
+          }
+        }
+
+        return Promise.all(promises);
+      }
+
+      function makeThreeTexture(url) {
+        var texture;
+
+        if (/[\/.](gif|jpg|jpeg|png)$/i.test(url)) {
+          ///////////
+          // IMAGE //
+          ///////////   
+          texture = loader.load(url);
+        } else {
+          ///////////
+          // VIDEO //
+          ///////////   
+          var video = document.createElement('video');
+          video.src = url;
+          texture = new THREE.VideoTexture(video);
+          texture.minFilter = THREE.LinearFilter;
+          texture.magFilter = THREE.LinearFilter;
+          texture.format = THREE.RGBFormat; // pause the video
+
+          texture.image.autoplay = true;
+          texture.image.loop = true;
+          texture.image.currentTime = 0;
+          texture.image.muted = true;
+          texture.image.play();
+        }
+
+        return texture;
+      }
+
+      function texturesInit() {
+        //Must be placed behind the loadImages()
+        loadImages().then(function (images) {
+          //remove loading
+          TweenMax.to($("#" + renderLoaderID), 0.5, {
+            alpha: 0
+          });
+          init(images);
+          render();
+        });
+      }
+
+      function init(allTextures) {
+        textures = allTextures; //Core 3D stage begin
+        //-------------------------------------		
+        //camera
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000); // FlyCamera // FlyControls
+
+        camera.position.z = 1000; //Object 1 unit, equal to 1 pixel
+
+        camera.lookAt = new THREE.Vector3(0, 0, 0); // Fit plane to screen
+
+        var dist = 1000,
+            vFOV = THREE.Math.degToRad(camera.fov),
+            // convert vertical fov to radians
+        objHeight = 2 * Math.tan(vFOV / 2) * dist,
+            // visible height
+        objWidth = objHeight * camera.aspect; // visible width   
+        //Scene
+
+        scene = new THREE.Scene(); //HemisphereLight
+
+        scene.add(new THREE.AmbientLight(0x555555));
+        light = new THREE.SpotLight(0xffffff, 1.5);
+        light.position.set(0, 0, 2000);
+        scene.add(light); //WebGL Renderer	
+        // create a render and set the size
+
+        renderer = new THREE.WebGLRenderer({
+          canvas: document.getElementById(rendererCanvasID),
+          //canvas
+          alpha: true,
+          antialias: true
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(windowWidth, windowHeight); // Immediately use the texture for material creation
+        // Create a texture loader so we can load our image file
+
+        var texture1 = textures[0],
+            texture2 = textures[1],
+            intensity = 1,
+            disp = loader.load(dispImage);
+        disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
+        texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
+        texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
+        texture1.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        var geometry = new THREE.PlaneBufferGeometry(objWidth, objHeight, 1);
+        $('#' + rendererCanvasID).css('height', windowWidth * imgAspect + 'px');
+        geometry.center();
+        material = new THREE.ShaderMaterial({
+          uniforms: {
+            effectFactor: {
+              type: "f",
+              value: intensity
+            },
+            dispFactor: {
+              type: "f",
+              value: 0.0
+            },
+            texture: {
+              type: "t",
+              value: texture1
+            },
+            texture2: {
+              type: "t",
+              value: texture2
+            },
+            disp: {
+              type: "t",
+              value: disp
+            }
+          },
+          vertexShader: js_shader_vertex_custom,
+          fragmentShader: js_shader_fragment_custom,
+          transparent: true,
+          opacity: 1.0
+        });
+        displacementSprite = new THREE.Mesh(geometry, material);
+        displacementSprite.position.set(0, 0, 0);
+        scene.add(displacementSprite); //				TweenMax.to( material.uniforms.dispFactor, 1.5, {
+        //					value: 1,
+        //					ease: Expo.easeOut
+        //				});	
+        //                
+        // Fires when the window changes
+
+        window.addEventListener('resize', onWindowResize, false); // Scrolling interaction with 3D scenes
+
+        window.addEventListener('wheel', onMouseWheel, false);
+      }
+
+      function render() {
+        requestAnimationFrame(render);
+        theta += 0.1; //To set a background color.
+        //renderer.setClearColor( 0x000000 );	
+        //push objects
+
+        /*
+        @Usage: 
+             function CustomObj( scene ) {
+                 var elements = new THREE...;
+                scene.add( elements );
+                 this.update = function( time ) {
+                    elements.rotation.y = time*0.003;
+                }
+            }       
+             sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
+        */
+
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        } //render the scene to display our scene through the camera's eye.
+
+
+        renderer.render(scene, camera);
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function onMouseWheel(e) {
+        var scrollPos; //Gets a value that indicates the amount that the mouse wheel has changed.
+
+        var dir,
+            delta,
+            mobileDeltaY = null;
+        var touches = e.touches;
+
+        if (touches && touches.length) {
+          mobileDeltaY = startY - touches[0].pageY;
+          scrollPos = touches[0].pageY;
+        } else {
+          delta = Math.max(-1, Math.min(1, -e.deltaY));
+          scrollPos = e.deltaY;
+        }
+
+        if (mobileDeltaY != null) {
+          if (mobileDeltaY >= 50) {
+            //--- swipe up
+            dir = 'up';
+          }
+
+          if (mobileDeltaY <= -50) {
+            //--- swipe down
+            dir = 'down';
+          }
+        } else {
+          if (delta < 0) {
+            //scroll down
+            dir = 'down';
+          } else {
+            //scroll up
+            dir = 'up';
+          }
+        } //-----
+
+
+        if (scrollspyEnable) {
+          var slideCurId = scrollspyConfigItems.filter('.is-active').index(),
+              slideNextId;
+
+          if (dir == 'down') {
+            slideNextId = parseFloat(scrollspyConfigItems.filter('.is-active').index()) + 1; //Transition Between Slides
+
+            sliderUpdates(slideCurId, slideNextId, 'next', scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop); //Pause the auto play event
+
+            clearInterval(scrollspyConfigAutoAnim);
+          }
+
+          if (dir == 'up') {
+            slideNextId = parseFloat(scrollspyConfigItems.filter('.is-active').index()) - 1; //Transition Between Slides
+
+            sliderUpdates(slideCurId, slideNextId, 'prev', scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop); //Pause the auto play event
+
+            clearInterval(scrollspyConfigAutoAnim);
+          }
+        }
+      }
+      /*
+      * Trigger slider autoplay
+      *
+      * @param  {Function} playTimes            - Number of times.
+      * @param  {Number} timing                 - Autoplay interval.
+      * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+      * @param  {Element} slider                 - Selector of the slider .
+      * @param  {String} countTotalID           - Total number ID or class of counter.
+      * @param  {String} countCurID             - Current number ID or class of counter.
+      * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+      * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+      * @return {Void}                          - The constructor.
+      */
+
+
+      function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
+        var items = slider.find('.uix-3d-slider--liquid-scrollspy__item'),
+            total = items.length;
+        slider[0].animatedSlides = setInterval(function () {
+          playTimes = parseFloat(items.filter('.is-active').index());
+          playTimes++;
+
+          if (!loop) {
+            if (playTimes < total && playTimes >= 0) {
+              var slideCurId = items.filter('.is-active').index(),
+                  slideNextId = playTimes;
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+            }
+          } else {
+            if (playTimes == total) playTimes = 0;
+            if (playTimes < 0) playTimes = total - 1;
+            var slideCurId = items.filter('.is-active').index(),
+                slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
+            if (playTimes == 0) {
+              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
+            } else {
+              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+            }
+          }
+        }, timing);
+      }
+      /*
+       *  Transition Between Slides
+       *
+       * @param  {Number} slideCurId             - Index of current slider.
+       * @param  {Number} slideNextId            - Index of next slider.
+       * @param  {String} dir                    - Switching direction indicator.	 
+                * @param  {String} countTotalID           - Total number ID or class of counter.
+                * @param  {String} countCurID             - Current number ID or class of counter.
+                * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+                * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+                * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+       * @return {Void}
+       */
+
+
+      function sliderUpdates(slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
+        var $items = $sliderWrapper.find('.uix-3d-slider--liquid-scrollspy__item'),
+            total = $items.length; //Prevent bubbling
+
+        if (total == 1) {
+          $(paginationID).hide();
+          $(arrowsID).hide();
+          return false;
+        }
+
+        if (!isAnimating) {
+          isAnimating = true; //Transition Interception
+          //-------------------------------------
+
+          if (loop) {
+            if (slideCurId > total - 1) slideCurId = 0;
+            if (slideCurId < 0) slideCurId = total - 1; //--
+
+            if (slideNextId < 0) slideNextId = total - 1;
+            if (slideNextId > total - 1) slideNextId = 0;
+          } else {
+            if (slideCurId > total - 1) slideCurId = total - 1;
+            if (slideCurId < 0) slideCurId = 0; //--
+
+            if (slideNextId < 0) slideNextId = 0;
+            if (slideNextId > total - 1) slideNextId = total - 1;
+          } //Get previous and next index of item
+          //-------------------------------------
+
+
+          var $current = $sliderWrapper.find('.uix-3d-slider--liquid-scrollspy__item').eq(slideCurId);
+          var $next = $sliderWrapper.find('.uix-3d-slider--liquid-scrollspy__item').eq(slideNextId);
+          console.log('Current: ' + slideCurId + ' | Next: ' + slideNextId); //Determine the direction and add class to switching direction indicator.
+          //-------------------------------------
+
+          var dirIndicatorClass = '';
+          if (dir == 'prev') dirIndicatorClass = 'prev';
+          if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to each item
+          //-------------------------------------	
+
+          $items.removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $current.addClass('leave');
+          $next.addClass('is-active'); //Add transition class to Controls Pagination
+          //-------------------------------------
+
+          $(paginationID).find('ul > li').removeClass('is-active leave prev next').addClass(dirIndicatorClass);
+          $(paginationID).find('ul > li').eq(slideCurId).addClass('leave');
+          $(paginationID).find('ul > li').eq(slideNextId).addClass('is-active'); //Add transition class to Arrows
+          //-------------------------------------		
+
+          if (!loop) {
+            $(arrowsID).find('a').removeClass('is-disabled');
+            if (slideNextId == total - 1) $(arrowsID).find('.uix-3d-slider--liquid-scrollspy__arrows--next').addClass('is-disabled');
+            if (slideNextId == 0) $(arrowsID).find('.uix-3d-slider--liquid-scrollspy__arrows--prev').addClass('is-disabled');
+          } //Display counter
+          //-------------------------------------
+
+
+          $(countTotalID).text(total);
+          $(countCurID).text(parseFloat(slideCurId) + 1); //Fire the next object
+          //-------------------------------------
+
+          activeSlider = slideNextId; //Update Texture
+
+          material.uniforms.texture.value = textures[Math.floor(slideCurId)];
+          material.uniforms.texture2.value = textures[Math.floor(slideNextId)]; //console.log( 'material.uniforms.texture: ' + material.uniforms.texture.value.image.currentSrc );
+          //console.log( 'material.uniforms.texture2: ' + material.uniforms.texture2.value.image.currentSrc );
+
+          TweenMax.to(material.uniforms.dispFactor, 1.5, {
+            value: 1,
+            ease: Expo.easeOut,
+            onComplete: function onComplete() {
+              //Update Texture
+              var tx1ID, tx2ID;
+
+              if (dir == 'prev') {
+                material.uniforms.texture.value = textures[Math.floor(slideCurId)];
+                material.uniforms.texture2.value = textures[Math.floor(slideNextId - 1)];
+
+                if (loop) {
+                  tx1ID = slideNextId;
+                  tx2ID = slideNextId - 1;
+                  if (slideNextId == 0) tx2ID = total - 1;
+                } else {}
+              }
+
+              if (dir == 'next') {
+                material.uniforms.texture.value = textures[Math.floor(slideCurId)];
+                material.uniforms.texture2.value = textures[Math.floor(slideNextId)];
+
+                if (loop) {
+                  tx1ID = slideNextId;
+                  tx2ID = slideNextId + 1;
+                  if (slideNextId == total - 1) tx2ID = 0;
+                } else {}
+              }
+
+              material.uniforms.texture.value = textures[Math.floor(tx1ID)];
+              material.uniforms.texture2.value = textures[Math.floor(tx2ID)]; //console.log( 'New material.uniforms.texture: ' + material.uniforms.texture.value.image.currentSrc );
+              //console.log( 'New material.uniforms.texture2: ' + material.uniforms.texture2.value.image.currentSrc ); 
+              //console.log( '--------------------' );
+
+              TweenMax.set(this.target, {
+                value: 0
+              }); //Reset the trigger
+              //-------------------------------------
+
+              isAnimating = false;
+            }
+          }); //Fire the current object
+          //-------------------------------------
+        } // end isAnimating
+
+      } // 
+      //-------------------------------------	
+
+
+      return {
+        wrapperInit: wrapperInit,
+        texturesInit: texturesInit,
+        getRendererCanvasID: function getRendererCanvasID() {
+          return rendererCanvasID;
+        },
+        getScene: function getScene() {
+          return scene;
+        },
+        getCamera: function getCamera() {
+          return camera;
+        }
+      };
+    }();
+
+    MainStage.wrapperInit(); //step 1
+
+    MainStage.texturesInit(); // step 2
+  };
+
+  module.components.documentReady.push(module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady);
+  return function THREE_LIQUID_SCROLLSPY_SLIDER() {
+    simple_3D_liquid_scrollspy_slider_js_classCallCheck(this, THREE_LIQUID_SCROLLSPY_SLIDER);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-filmic-effects/js/index.js
 function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19253,7 +21512,7 @@ function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if 
 var THREE_FILMIC_EFF = function (module, $, window, document) {
   if (window.THREE_FILMIC_EFF === null) return false;
   module.THREE_FILMIC_EFF = module.THREE_FILMIC_EFF || {};
-  module.THREE_FILMIC_EFF.version = '0.0.1';
+  module.THREE_FILMIC_EFF.version = '0.0.2';
 
   module.THREE_FILMIC_EFF.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -19305,8 +21564,8 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
           antialias: true
         });
         renderer.setSize(windowWidth, windowHeight);
-        renderer.shadowMap = true;
-        renderer.shadowMapSoft = true; //=================
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; //=================
         //add bloom effect
 
         bloomPass = new THREE.BloomPass(1, // strength
@@ -19542,7 +21801,7 @@ var TABLE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(62);
+var sort_elements = __webpack_require__(63);
 
 // CONCATENATED MODULE: ./src/components/ES6/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19625,12 +21884,12 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(63);
+var tabs_scss_style = __webpack_require__(64);
 
 // CONCATENATED MODULE: ./src/components/ES6/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function tabs_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { tabs_js_typeof = function _typeof(obj) { return typeof obj; }; } else { tabs_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return tabs_js_typeof(obj); }
+function tabs_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { tabs_js_typeof = function _typeof(obj) { return typeof obj; }; } else { tabs_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return tabs_js_typeof(obj); }
 
 /* 
  *************************************
@@ -19802,12 +22061,12 @@ var TABS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(64);
+var team_focus_scss_style = __webpack_require__(65);
 
 // CONCATENATED MODULE: ./src/components/ES6/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function team_focus_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { team_focus_js_typeof = function _typeof(obj) { return typeof obj; }; } else { team_focus_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return team_focus_js_typeof(obj); }
+function team_focus_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { team_focus_js_typeof = function _typeof(obj) { return typeof obj; }; } else { team_focus_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return team_focus_js_typeof(obj); }
 
 /* 
  *************************************
@@ -19965,10 +22224,10 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(65);
+var text_anime = __webpack_require__(66);
 
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(66);
+var text_effect_scss_style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./src/components/ES6/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20018,12 +22277,12 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(67);
+var timeline_scss_style = __webpack_require__(68);
 
 // CONCATENATED MODULE: ./src/components/ES6/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function timeline_js_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { timeline_js_typeof = function _typeof(obj) { return typeof obj; }; } else { timeline_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return timeline_js_typeof(obj); }
+function timeline_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { timeline_js_typeof = function _typeof(obj) { return typeof obj; }; } else { timeline_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return timeline_js_typeof(obj); }
 
 /* 
  *************************************
@@ -20111,8 +22370,8 @@ var TIMELINE = function (module, $, window, document) {
     /*
      * Method that updates items of timeline
      *
-     * @param  {Object} obj                  - Wrapper of timeline.
-     * @param  {Object} iscur                - The current item.
+     * @param  {Element} obj                  - Wrapper of timeline.
+     * @param  {?Element} iscur                - The current item.
      * @param  {String} showEle              - Element ID or class name that push the current text.
      * @param  {Boolean} prev                - Whether to slide forward.
      * @return {Void}
@@ -20184,7 +22443,7 @@ var TIMELINE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(68);
+var vertical_menu_scss_style = __webpack_require__(69);
 
 // CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20199,7 +22458,7 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 var VERTICAL_MENU = function (module, $, window, document) {
   if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
-  module.VERTICAL_MENU.version = '0.0.1';
+  module.VERTICAL_MENU.version = '0.0.2';
 
   module.VERTICAL_MENU.documentReady = function ($) {
     var $window = $(window),
@@ -20291,7 +22550,7 @@ var VERTICAL_MENU = function (module, $, window, document) {
         height: winHeight + 'px',
         marginTop: 0
       });
-      $window.on('scroll', function () {
+      $window.on('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function () {
         var curULHeight = $('ul.uix-menu').height(),
             windowPos = $window.scrollTop();
 
@@ -20333,10 +22592,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(69);
+var _wp_core = __webpack_require__(70);
 
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_3rd_party_plugins.scss
-var scss_3rd_party_plugins = __webpack_require__(70);
+var scss_3rd_party_plugins = __webpack_require__(71);
 
 // CONCATENATED MODULE: ./src/components/ES6/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20388,103 +22647,103 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(71);
+var badges_scss_style = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./src/components/ES6/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(72);
+var blended_grid_layout_scss_style = __webpack_require__(73);
 
 // EXTERNAL MODULE: ./src/components/ES6/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(73);
+var breadcrumbs_scss_style = __webpack_require__(74);
 
 // EXTERNAL MODULE: ./src/components/ES6/button/scss/_style.scss
-var button_scss_style = __webpack_require__(74);
+var button_scss_style = __webpack_require__(75);
 
 // EXTERNAL MODULE: ./src/components/ES6/card/scss/_style.scss
-var card_scss_style = __webpack_require__(75);
+var card_scss_style = __webpack_require__(76);
 
 // EXTERNAL MODULE: ./src/components/ES6/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(76);
+var circle_text_scss_style = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(77);
+var content_placeholder_animated_scss_style = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./src/components/ES6/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(78);
+var dividing_line_scss_style = __webpack_require__(79);
 
 // EXTERNAL MODULE: ./src/components/ES6/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(79);
+var dots_scss_style = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./src/components/ES6/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(80);
+var dotted_line_scss_style = __webpack_require__(81);
 
 // EXTERNAL MODULE: ./src/components/ES6/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(81);
+var equal_width_columns_scss_style = __webpack_require__(82);
 
 // EXTERNAL MODULE: ./src/components/ES6/features/scss/_style.scss
-var features_scss_style = __webpack_require__(82);
+var features_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(83);
+var footer_templates_scss_style = __webpack_require__(84);
+
+// EXTERNAL MODULE: ./src/components/ES6/gallery-grid-layout/scss/_style.scss
+var gallery_grid_layout_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(84);
+var heading_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(85);
+var image_animation_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(86);
+var list_brands_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(87);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(88);
+var list_side_by_side_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(89);
-
-// EXTERNAL MODULE: ./src/components/ES6/list-split-content/scss/_style.scss
-var list_split_content_scss_style = __webpack_require__(90);
+var list_side_by_side_img_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(91);
+var mouse_animation_scroll_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(92);
+var overlay_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(93);
+var ribbon_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(94);
+var shape_animation_scss_style = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(95);
+var _comments = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(96);
+var _editing = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(97);
+var striking_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(98);
+var team_fullwidth_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(99);
+var team_grid_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(100);
+var testimonials_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(101);
+var tooltip_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(102);
+var vertical_separator_scss_style = __webpack_require__(103);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(103);
+var wave_background_scss_style = __webpack_require__(104);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*
@@ -20519,6 +22778,8 @@ var wave_background_scss_style = __webpack_require__(103);
 /******/
 
 /* pages */
+
+
 
 
 
@@ -25075,919 +27336,6 @@ var datetimepickerFactory = function ($) {
     }
   };
 })(jQuery);
-/*! highlight.js v9.12.0 | BSD3 License | git.io/hljslicense */
-
-/* @https://github.com/highlightjs/highlight.js/blob/master/src/highlight.js */
-(function(factory) {
-
-  // Find the global object for export to both the browser and web workers.
-  var globalObject = typeof window === 'object' && window ||
-                     typeof self === 'object' && self;
-
-  // Setup highlight.js for different environments. First is Node.js or
-  // CommonJS.
-  if(typeof exports !== 'undefined') {
-    factory(exports);
-  } else if(globalObject) {
-    // Export hljs globally even when using AMD for cases when this script
-    // is loaded with others that may still expect a global hljs.
-    globalObject.hljs = factory({});
-
-    // Finally register the global hljs with AMD.
-    if(typeof define === 'function' && define.amd) {
-      define([], function() {
-        return globalObject.hljs;
-      });
-    }
-  }
-
-}(function(hljs) {
-  // Convenience variables for build-in objects
-  var ArrayProto = [],
-      objectKeys = Object.keys;
-
-  // Global internal variables used within the highlight.js library.
-  var languages = {},
-      aliases   = {};
-
-  // Regular expressions used throughout the highlight.js library.
-  var noHighlightRe    = /^(no-?highlight|plain|text)$/i,
-      languagePrefixRe = /\blang(?:uage)?-([\w-]+)\b/i,
-      fixMarkupRe      = /((^(<[^>]+>|\t|)+|(?:\n)))/gm;
-
-  var spanEndTag = '</span>';
-
-  // Global options used when within external APIs. This is modified when
-  // calling the `hljs.configure` function.
-  var options = {
-    classPrefix: 'hljs-',
-    tabReplace: null,
-    useBR: false,
-    languages: undefined
-  };
-
-
-  /* Utility functions */
-
-  function escape(value) {
-    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function tag(node) {
-    return node.nodeName.toLowerCase();
-  }
-
-  function testRe(re, lexeme) {
-    var match = re && re.exec(lexeme);
-    return match && match.index === 0;
-  }
-
-  function isNotHighlighted(language) {
-    return noHighlightRe.test(language);
-  }
-
-  function blockLanguage(block) {
-    var i, match, length, _class;
-    var classes = block.className + ' ';
-
-    classes += block.parentNode ? block.parentNode.className : '';
-
-    // language-* takes precedence over non-prefixed class names.
-    match = languagePrefixRe.exec(classes);
-    if (match) {
-      return getLanguage(match[1]) ? match[1] : 'no-highlight';
-    }
-
-    classes = classes.split(/\s+/);
-
-    for (i = 0, length = classes.length; i < length; i++) {
-      _class = classes[i];
-
-      if (isNotHighlighted(_class) || getLanguage(_class)) {
-        return _class;
-      }
-    }
-  }
-
-  function inherit(parent) {  // inherit(parent, override_obj, override_obj, ...)
-    var key;
-    var result = {};
-    var objects = Array.prototype.slice.call(arguments, 1);
-
-    for (key in parent)
-      result[key] = parent[key];
-    objects.forEach(function(obj) {
-      for (key in obj)
-        result[key] = obj[key];
-    });
-    return result;
-  }
-
-  /* Stream merging */
-
-  function nodeStream(node) {
-    var result = [];
-    (function _nodeStream(node, offset) {
-      for (var child = node.firstChild; child; child = child.nextSibling) {
-        if (child.nodeType === 3)
-          offset += child.nodeValue.length;
-        else if (child.nodeType === 1) {
-          result.push({
-            event: 'start',
-            offset: offset,
-            node: child
-          });
-          offset = _nodeStream(child, offset);
-          // Prevent void elements from having an end tag that would actually
-          // double them in the output. There are more void elements in HTML
-          // but we list only those realistically expected in code display.
-          if (!tag(child).match(/br|hr|img|input/)) {
-            result.push({
-              event: 'stop',
-              offset: offset,
-              node: child
-            });
-          }
-        }
-      }
-      return offset;
-    })(node, 0);
-    return result;
-  }
-
-  function mergeStreams(original, highlighted, value) {
-    var processed = 0;
-    var result = '';
-    var nodeStack = [];
-
-    function selectStream() {
-      if (!original.length || !highlighted.length) {
-        return original.length ? original : highlighted;
-      }
-      if (original[0].offset !== highlighted[0].offset) {
-        return (original[0].offset < highlighted[0].offset) ? original : highlighted;
-      }
-
-      /*
-      To avoid starting the stream just before it should stop the order is
-      ensured that original always starts first and closes last:
-      if (event1 == 'start' && event2 == 'start')
-        return original;
-      if (event1 == 'start' && event2 == 'stop')
-        return highlighted;
-      if (event1 == 'stop' && event2 == 'start')
-        return original;
-      if (event1 == 'stop' && event2 == 'stop')
-        return highlighted;
-      ... which is collapsed to:
-      */
-      return highlighted[0].event === 'start' ? original : highlighted;
-    }
-
-    function open(node) {
-      function attr_str(a) {return ' ' + a.nodeName + '="' + escape(a.value).replace('"', '&quot;') + '"';}
-      result += '<' + tag(node) + ArrayProto.map.call(node.attributes, attr_str).join('') + '>';
-    }
-
-    function close(node) {
-      result += '</' + tag(node) + '>';
-    }
-
-    function render(event) {
-      (event.event === 'start' ? open : close)(event.node);
-    }
-
-    while (original.length || highlighted.length) {
-      var stream = selectStream();
-      result += escape(value.substring(processed, stream[0].offset));
-      processed = stream[0].offset;
-      if (stream === original) {
-        /*
-        On any opening or closing tag of the original markup we first close
-        the entire highlighted node stack, then render the original tag along
-        with all the following original tags at the same offset and then
-        reopen all the tags on the highlighted stack.
-        */
-        nodeStack.reverse().forEach(close);
-        do {
-          render(stream.splice(0, 1)[0]);
-          stream = selectStream();
-        } while (stream === original && stream.length && stream[0].offset === processed);
-        nodeStack.reverse().forEach(open);
-      } else {
-        if (stream[0].event === 'start') {
-          nodeStack.push(stream[0].node);
-        } else {
-          nodeStack.pop();
-        }
-        render(stream.splice(0, 1)[0]);
-      }
-    }
-    return result + escape(value.substr(processed));
-  }
-
-  /* Initialization */
-
-  function expand_mode(mode) {
-    if (mode.variants && !mode.cached_variants) {
-      mode.cached_variants = mode.variants.map(function(variant) {
-        return inherit(mode, {variants: null}, variant);
-      });
-    }
-    return mode.cached_variants || (mode.endsWithParent && [inherit(mode)]) || [mode];
-  }
-
-  function compileLanguage(language) {
-
-    function reStr(re) {
-        return (re && re.source) || re;
-    }
-
-    function langRe(value, global) {
-      return new RegExp(
-        reStr(value),
-        'm' + (language.case_insensitive ? 'i' : '') + (global ? 'g' : '')
-      );
-    }
-
-    function compileMode(mode, parent) {
-      if (mode.compiled)
-        return;
-      mode.compiled = true;
-
-      mode.keywords = mode.keywords || mode.beginKeywords;
-      if (mode.keywords) {
-        var compiled_keywords = {};
-
-        var flatten = function(className, str) {
-          if (language.case_insensitive) {
-            str = str.toLowerCase();
-          }
-          str.split(' ').forEach(function(kw) {
-            var pair = kw.split('|');
-            compiled_keywords[pair[0]] = [className, pair[1] ? Number(pair[1]) : 1];
-          });
-        };
-
-        if (typeof mode.keywords === 'string') { // string
-          flatten('keyword', mode.keywords);
-        } else {
-          objectKeys(mode.keywords).forEach(function (className) {
-            flatten(className, mode.keywords[className]);
-          });
-        }
-        mode.keywords = compiled_keywords;
-      }
-      mode.lexemesRe = langRe(mode.lexemes || /\w+/, true);
-
-      if (parent) {
-        if (mode.beginKeywords) {
-          mode.begin = '\\b(' + mode.beginKeywords.split(' ').join('|') + ')\\b';
-        }
-        if (!mode.begin)
-          mode.begin = /\B|\b/;
-        mode.beginRe = langRe(mode.begin);
-        if (!mode.end && !mode.endsWithParent)
-          mode.end = /\B|\b/;
-        if (mode.end)
-          mode.endRe = langRe(mode.end);
-        mode.terminator_end = reStr(mode.end) || '';
-        if (mode.endsWithParent && parent.terminator_end)
-          mode.terminator_end += (mode.end ? '|' : '') + parent.terminator_end;
-      }
-      if (mode.illegal)
-        mode.illegalRe = langRe(mode.illegal);
-      if (mode.relevance == null)
-        mode.relevance = 1;
-      if (!mode.contains) {
-        mode.contains = [];
-      }
-      mode.contains = Array.prototype.concat.apply([], mode.contains.map(function(c) {
-        return expand_mode(c === 'self' ? mode : c);
-      }));
-      mode.contains.forEach(function(c) {compileMode(c, mode);});
-
-      if (mode.starts) {
-        compileMode(mode.starts, parent);
-      }
-
-      var terminators =
-        mode.contains.map(function(c) {
-          return c.beginKeywords ? '\\.?(' + c.begin + ')\\.?' : c.begin;
-        })
-        .concat([mode.terminator_end, mode.illegal])
-        .map(reStr)
-        .filter(Boolean);
-      mode.terminators = terminators.length ? langRe(terminators.join('|'), true) : {exec: function(/*s*/) {return null;}};
-    }
-
-    compileMode(language);
-  }
-
-  /*
-  Core highlighting function. Accepts a language name, or an alias, and a
-  string with the code to highlight. Returns an object with the following
-  properties:
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-  */
-  function highlight(name, value, ignore_illegals, continuation) {
-
-    function subMode(lexeme, mode) {
-      var i, length;
-
-      for (i = 0, length = mode.contains.length; i < length; i++) {
-        if (testRe(mode.contains[i].beginRe, lexeme)) {
-          return mode.contains[i];
-        }
-      }
-    }
-
-    function endOfMode(mode, lexeme) {
-      if (testRe(mode.endRe, lexeme)) {
-        while (mode.endsParent && mode.parent) {
-          mode = mode.parent;
-        }
-        return mode;
-      }
-      if (mode.endsWithParent) {
-        return endOfMode(mode.parent, lexeme);
-      }
-    }
-
-    function isIllegal(lexeme, mode) {
-      return !ignore_illegals && testRe(mode.illegalRe, lexeme);
-    }
-
-    function keywordMatch(mode, match) {
-      var match_str = language.case_insensitive ? match[0].toLowerCase() : match[0];
-      return mode.keywords.hasOwnProperty(match_str) && mode.keywords[match_str];
-    }
-
-    function buildSpan(classname, insideSpan, leaveOpen, noPrefix) {
-      var classPrefix = noPrefix ? '' : options.classPrefix,
-          openSpan    = '<span class="' + classPrefix,
-          closeSpan   = leaveOpen ? '' : spanEndTag;
-
-      openSpan += classname + '">';
-
-      return openSpan + insideSpan + closeSpan;
-    }
-
-    function processKeywords() {
-      var keyword_match, last_index, match, result;
-
-      if (!top.keywords)
-        return escape(mode_buffer);
-
-      result = '';
-      last_index = 0;
-      top.lexemesRe.lastIndex = 0;
-      match = top.lexemesRe.exec(mode_buffer);
-
-      while (match) {
-        result += escape(mode_buffer.substring(last_index, match.index));
-        keyword_match = keywordMatch(top, match);
-        if (keyword_match) {
-          relevance += keyword_match[1];
-          result += buildSpan(keyword_match[0], escape(match[0]));
-        } else {
-          result += escape(match[0]);
-        }
-        last_index = top.lexemesRe.lastIndex;
-        match = top.lexemesRe.exec(mode_buffer);
-      }
-      return result + escape(mode_buffer.substr(last_index));
-    }
-
-    function processSubLanguage() {
-      var explicit = typeof top.subLanguage === 'string';
-      if (explicit && !languages[top.subLanguage]) {
-        return escape(mode_buffer);
-      }
-
-      var result = explicit ?
-                   highlight(top.subLanguage, mode_buffer, true, continuations[top.subLanguage]) :
-                   highlightAuto(mode_buffer, top.subLanguage.length ? top.subLanguage : undefined);
-
-      // Counting embedded language score towards the host language may be disabled
-      // with zeroing the containing mode relevance. Usecase in point is Markdown that
-      // allows XML everywhere and makes every XML snippet to have a much larger Markdown
-      // score.
-      if (top.relevance > 0) {
-        relevance += result.relevance;
-      }
-      if (explicit) {
-        continuations[top.subLanguage] = result.top;
-      }
-      return buildSpan(result.language, result.value, false, true);
-    }
-
-    function processBuffer() {
-      result += (top.subLanguage != null ? processSubLanguage() : processKeywords());
-      mode_buffer = '';
-    }
-
-    function startNewMode(mode) {
-      result += mode.className? buildSpan(mode.className, '', true): '';
-      top = Object.create(mode, {parent: {value: top}});
-    }
-
-    function processLexeme(buffer, lexeme) {
-
-      mode_buffer += buffer;
-
-      if (lexeme == null) {
-        processBuffer();
-        return 0;
-      }
-
-      var new_mode = subMode(lexeme, top);
-      if (new_mode) {
-        if (new_mode.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (new_mode.excludeBegin) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (!new_mode.returnBegin && !new_mode.excludeBegin) {
-            mode_buffer = lexeme;
-          }
-        }
-        startNewMode(new_mode, lexeme);
-        return new_mode.returnBegin ? 0 : lexeme.length;
-      }
-
-      var end_mode = endOfMode(top, lexeme);
-      if (end_mode) {
-        var origin = top;
-        if (origin.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (!(origin.returnEnd || origin.excludeEnd)) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (origin.excludeEnd) {
-            mode_buffer = lexeme;
-          }
-        }
-        do {
-          if (top.className) {
-            result += spanEndTag;
-          }
-          if (!top.skip && !top.subLanguage) {
-            relevance += top.relevance;
-          }
-          top = top.parent;
-        } while (top !== end_mode.parent);
-        if (end_mode.starts) {
-          startNewMode(end_mode.starts, '');
-        }
-        return origin.returnEnd ? 0 : lexeme.length;
-      }
-
-      if (isIllegal(lexeme, top))
-        throw new Error('Illegal lexeme "' + lexeme + '" for mode "' + (top.className || '<unnamed>') + '"');
-
-      /*
-      Parser should not reach this point as all types of lexemes should be caught
-      earlier, but if it does due to some bug make sure it advances at least one
-      character forward to prevent infinite looping.
-      */
-      mode_buffer += lexeme;
-      return lexeme.length || 1;
-    }
-
-    var language = getLanguage(name);
-    if (!language) {
-      throw new Error('Unknown language: "' + name + '"');
-    }
-
-    compileLanguage(language);
-    var top = continuation || language;
-    var continuations = {}; // keep continuations for sub-languages
-    var result = '', current;
-    for(current = top; current !== language; current = current.parent) {
-      if (current.className) {
-        result = buildSpan(current.className, '', true) + result;
-      }
-    }
-    var mode_buffer = '';
-    var relevance = 0;
-    try {
-      var match, count, index = 0;
-      while (true) {
-        top.terminators.lastIndex = index;
-        match = top.terminators.exec(value);
-        if (!match)
-          break;
-        count = processLexeme(value.substring(index, match.index), match[0]);
-        index = match.index + count;
-      }
-      processLexeme(value.substr(index));
-      for(current = top; current.parent; current = current.parent) { // close dangling modes
-        if (current.className) {
-          result += spanEndTag;
-        }
-      }
-      return {
-        relevance: relevance,
-        value: result,
-        language: name,
-        top: top
-      };
-    } catch (e) {
-      if (e.message && e.message.indexOf('Illegal') !== -1) {
-        return {
-          relevance: 0,
-          value: escape(value)
-        };
-      } else {
-        throw e;
-      }
-    }
-  }
-
-  /*
-  Highlighting with language detection. Accepts a string with the code to
-  highlight. Returns an object with the following properties:
-  - language (detected language)
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-  - second_best (object with the same structure for second-best heuristically
-    detected language, may be absent)
-  */
-  function highlightAuto(text, languageSubset) {
-    languageSubset = languageSubset || options.languages || objectKeys(languages);
-    var result = {
-      relevance: 0,
-      value: escape(text)
-    };
-    var second_best = result;
-    languageSubset.filter(getLanguage).forEach(function(name) {
-      var current = highlight(name, text, false);
-      current.language = name;
-      if (current.relevance > second_best.relevance) {
-        second_best = current;
-      }
-      if (current.relevance > result.relevance) {
-        second_best = result;
-        result = current;
-      }
-    });
-    if (second_best.language) {
-      result.second_best = second_best;
-    }
-    return result;
-  }
-
-  /*
-  Post-processing of the highlighted markup:
-  - replace TABs with something more useful
-  - replace real line-breaks with '<br>' for non-pre containers
-  */
-  function fixMarkup(value) {
-    return !(options.tabReplace || options.useBR) ? value : value.replace(fixMarkupRe, function(match, p1) {
-          if (options.useBR && match === '\n') {
-            return '<br>';
-          } else if (options.tabReplace) {
-            return p1.replace(/\t/g, options.tabReplace);
-          }
-          return '';
-      });
-  }
-
-  function buildClassName(prevClassName, currentLang, resultLang) {
-    var language = currentLang ? aliases[currentLang] : resultLang,
-        result   = [prevClassName.trim()];
-
-    if (!prevClassName.match(/\bhljs\b/)) {
-      result.push('hljs');
-    }
-
-    if (prevClassName.indexOf(language) === -1) {
-      result.push(language);
-    }
-
-    return result.join(' ').trim();
-  }
-
-  /*
-  Applies highlighting to a DOM node containing code. Accepts a DOM node and
-  two optional parameters for fixMarkup.
-  */
-  function highlightBlock(block) {
-    var node, originalStream, result, resultNode, text;
-    var language = blockLanguage(block);
-
-    if (isNotHighlighted(language))
-        return;
-
-    if (options.useBR) {
-      node = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-      node.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ \/]*>/g, '\n');
-    } else {
-      node = block;
-    }
-    text = node.textContent;
-    result = language ? highlight(language, text, true) : highlightAuto(text);
-
-    originalStream = nodeStream(node);
-    if (originalStream.length) {
-      resultNode = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
-      resultNode.innerHTML = result.value;
-      result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
-    }
-    result.value = fixMarkup(result.value);
-
-    block.innerHTML = result.value;
-    block.className = buildClassName(block.className, language, result.language);
-    block.result = {
-      language: result.language,
-      re: result.relevance
-    };
-    if (result.second_best) {
-      block.second_best = {
-        language: result.second_best.language,
-        re: result.second_best.relevance
-      };
-    }
-  }
-
-  /*
-  Updates highlight.js global options with values passed in the form of an object.
-  */
-  function configure(user_options) {
-    options = inherit(options, user_options);
-  }
-
-  /*
-  Applies highlighting to all <pre><code>..</code></pre> blocks on a page.
-  */
-  function initHighlighting() {
-    if (initHighlighting.called)
-      return;
-    initHighlighting.called = true;
-
-    var blocks = document.querySelectorAll('pre code');
-    ArrayProto.forEach.call(blocks, highlightBlock);
-  }
-
-  /*
-  Attaches highlighting to the page load event.
-  */
-  function initHighlightingOnLoad() {
-    addEventListener('DOMContentLoaded', initHighlighting, false);
-    addEventListener('load', initHighlighting, false);
-  }
-
-  function registerLanguage(name, language) {
-    var lang = languages[name] = language(hljs);
-    if (lang.aliases) {
-      lang.aliases.forEach(function(alias) {aliases[alias] = name;});
-    }
-  }
-
-  function listLanguages() {
-    return objectKeys(languages);
-  }
-
-  function getLanguage(name) {
-    name = (name || '').toLowerCase();
-    return languages[name] || languages[aliases[name]];
-  }
-
-  /* Interface definition */
-
-  hljs.highlight = highlight;
-  hljs.highlightAuto = highlightAuto;
-  hljs.fixMarkup = fixMarkup;
-  hljs.highlightBlock = highlightBlock;
-  hljs.configure = configure;
-  hljs.initHighlighting = initHighlighting;
-  hljs.initHighlightingOnLoad = initHighlightingOnLoad;
-  hljs.registerLanguage = registerLanguage;
-  hljs.listLanguages = listLanguages;
-  hljs.getLanguage = getLanguage;
-  hljs.inherit = inherit;
-
-  // Common regexps
-  hljs.IDENT_RE = '[a-zA-Z]\\w*';
-  hljs.UNDERSCORE_IDENT_RE = '[a-zA-Z_]\\w*';
-  hljs.NUMBER_RE = '\\b\\d+(\\.\\d+)?';
-  hljs.C_NUMBER_RE = '(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)'; // 0x..., 0..., decimal, float
-  hljs.BINARY_NUMBER_RE = '\\b(0b[01]+)'; // 0b...
-  hljs.RE_STARTERS_RE = '!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~';
-
-  // Common modes
-  hljs.BACKSLASH_ESCAPE = {
-    begin: '\\\\[\\s\\S]', relevance: 0
-  };
-  hljs.APOS_STRING_MODE = {
-    className: 'string',
-    begin: '\'', end: '\'',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-  hljs.QUOTE_STRING_MODE = {
-    className: 'string',
-    begin: '"', end: '"',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-  hljs.PHRASAL_WORDS_MODE = {
-    begin: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
-  };
-  hljs.COMMENT = function (begin, end, inherits) {
-    var mode = hljs.inherit(
-      {
-        className: 'comment',
-        begin: begin, end: end,
-        contains: []
-      },
-      inherits || {}
-    );
-    mode.contains.push(hljs.PHRASAL_WORDS_MODE);
-    mode.contains.push({
-      className: 'doctag',
-      begin: '(?:TODO|FIXME|NOTE|BUG|XXX):',
-      relevance: 0
-    });
-    return mode;
-  };
-  hljs.C_LINE_COMMENT_MODE = hljs.COMMENT('//', '$');
-  hljs.C_BLOCK_COMMENT_MODE = hljs.COMMENT('/\\*', '\\*/');
-  hljs.HASH_COMMENT_MODE = hljs.COMMENT('#', '$');
-  hljs.NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.NUMBER_RE,
-    relevance: 0
-  };
-  hljs.C_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.C_NUMBER_RE,
-    relevance: 0
-  };
-  hljs.BINARY_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.BINARY_NUMBER_RE,
-    relevance: 0
-  };
-  hljs.CSS_NUMBER_MODE = {
-    className: 'number',
-    begin: hljs.NUMBER_RE + '(' +
-      '%|em|ex|ch|rem'  +
-      '|vw|vh|vmin|vmax' +
-      '|cm|mm|in|pt|pc|px' +
-      '|deg|grad|rad|turn' +
-      '|s|ms' +
-      '|Hz|kHz' +
-      '|dpi|dpcm|dppx' +
-      ')?',
-    relevance: 0
-  };
-  hljs.REGEXP_MODE = {
-    className: 'regexp',
-    begin: /\//, end: /\/[gimuy]*/,
-    illegal: /\n/,
-    contains: [
-      hljs.BACKSLASH_ESCAPE,
-      {
-        begin: /\[/, end: /\]/,
-        relevance: 0,
-        contains: [hljs.BACKSLASH_ESCAPE]
-      }
-    ]
-  };
-  hljs.TITLE_MODE = {
-    className: 'title',
-    begin: hljs.IDENT_RE,
-    relevance: 0
-  };
-  hljs.UNDERSCORE_TITLE_MODE = {
-    className: 'title',
-    begin: hljs.UNDERSCORE_IDENT_RE,
-    relevance: 0
-  };
-  hljs.METHOD_GUARD = {
-    // excludes method names from keyword processing
-    begin: '\\.\\s*' + hljs.UNDERSCORE_IDENT_RE,
-    relevance: 0
-  };
-
-  return hljs;
-}));
-
-
-/*
-Language: HTML, XML
-Category: common
-@https://github.com/highlightjs/highlight.js/blob/master/src/languages/xml.js
-*/
-
-hljs.registerLanguage("xml", function(hljs) {
-  var XML_IDENT_RE = '[A-Za-z0-9\\._:-]+';
-  var TAG_INTERNALS = {
-    endsWithParent: true,
-    illegal: /</,
-    relevance: 0,
-    contains: [
-      {
-        className: 'attr',
-        begin: XML_IDENT_RE,
-        relevance: 0
-      },
-      {
-        begin: /=\s*/,
-        relevance: 0,
-        contains: [
-          {
-            className: 'string',
-            endsParent: true,
-            variants: [
-              {begin: /"/, end: /"/},
-              {begin: /'/, end: /'/},
-              {begin: /[^\s"'=<>`]+/}
-            ]
-          }
-        ]
-      }
-    ]
-  };
-  return {
-    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist'],
-    case_insensitive: true,
-    contains: [
-      {
-        className: 'meta',
-        begin: '<!DOCTYPE', end: '>',
-        relevance: 10,
-        contains: [{begin: '\\[', end: '\\]'}]
-      },
-      hljs.COMMENT(
-        '<!--',
-        '-->',
-        {
-          relevance: 10
-        }
-      ),
-      {
-        begin: '<\\!\\[CDATA\\[', end: '\\]\\]>',
-        relevance: 10
-      },
-      {
-        className: 'meta',
-        begin: /<\?xml/, end: /\?>/, relevance: 10
-      },
-      {
-        begin: /<\?(php)?/, end: /\?>/,
-        subLanguage: 'php',
-        contains: [{begin: '/\\*', end: '\\*/', skip: true}]
-      },
-      {
-        className: 'tag',
-        /*
-        The lookahead pattern (?=...) ensures that 'begin' only matches
-        '<style' as a single word, followed by a whitespace or an
-        ending braket. The '$' is needed for the lexeme to be recognized
-        by hljs.subMode() that tests lexemes outside the stream.
-        */
-        begin: '<style(?=\\s|>|$)', end: '>',
-        keywords: {name: 'style'},
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: '</style>', returnEnd: true,
-          subLanguage: ['css', 'xml']
-        }
-      },
-      {
-        className: 'tag',
-        // See the comment in the <style tag about the lookahead pattern
-        begin: '<script(?=\\s|>|$)', end: '>',
-        keywords: {name: 'script'},
-        contains: [TAG_INTERNALS],
-        starts: {
-          end: '\<\/script\>', returnEnd: true,
-          subLanguage: ['actionscript', 'javascript', 'handlebars', 'xml']
-        }
-      },
-      {
-        className: 'tag',
-        begin: '</?', end: '/?>',
-        contains: [
-          {
-            className: 'name', begin: /[^\/><\s]+/, relevance: 0
-          },
-          TAG_INTERNALS
-        ]
-      }
-    ]
-  };
-});
-
-
 /*!
  * VERSION: 1.5.3
  * DATE: 2018-02-15
@@ -29566,4524 +30914,6 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 } );
 
 /**
- * @author Rich Tibbett / https://github.com/richtr
- * @author mrdoob / http://mrdoob.com/
- * @author Tony Parisi / http://www.tonyparisi.com/
- * @author Takahiro / https://github.com/takahirox
- * @author Don McCurdy / https://www.donmccurdy.com
- */
-
-THREE.GLTFLoader = ( function () {
-
-	function GLTFLoader( manager ) {
-
-		this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
-		this.dracoLoader = null;
-
-	}
-
-	GLTFLoader.prototype = {
-
-		constructor: GLTFLoader,
-
-		crossOrigin: 'Anonymous',
-
-		load: function ( url, onLoad, onProgress, onError ) {
-
-			var scope = this;
-
-			var path = this.path !== undefined ? this.path : THREE.LoaderUtils.extractUrlBase( url );
-
-			var loader = new THREE.FileLoader( scope.manager );
-
-			loader.setResponseType( 'arraybuffer' );
-
-			loader.load( url, function ( data ) {
-
-				try {
-
-					scope.parse( data, path, onLoad, onError );
-
-				} catch ( e ) {
-
-					if ( onError !== undefined ) {
-
-						onError( e );
-
-					} else {
-
-						throw e;
-
-					}
-
-				}
-
-			}, onProgress, onError );
-
-		},
-
-		setCrossOrigin: function ( value ) {
-
-			this.crossOrigin = value;
-			return this;
-
-		},
-
-		setPath: function ( value ) {
-
-			this.path = value;
-			return this;
-
-		},
-
-		setDRACOLoader: function ( dracoLoader ) {
-
-			this.dracoLoader = dracoLoader;
-			return this;
-
-		},
-
-		parse: function ( data, path, onLoad, onError ) {
-
-			var content;
-			var extensions = {};
-
-			if ( typeof data === 'string' ) {
-
-				content = data;
-
-			} else {
-
-				var magic = THREE.LoaderUtils.decodeText( new Uint8Array( data, 0, 4 ) );
-
-				if ( magic === BINARY_EXTENSION_HEADER_MAGIC ) {
-
-					try {
-
-						extensions[ EXTENSIONS.KHR_BINARY_GLTF ] = new GLTFBinaryExtension( data );
-
-					} catch ( error ) {
-
-						if ( onError ) onError( error );
-						return;
-
-					}
-
-					content = extensions[ EXTENSIONS.KHR_BINARY_GLTF ].content;
-
-				} else {
-
-					content = THREE.LoaderUtils.decodeText( new Uint8Array( data ) );
-
-				}
-
-			}
-
-			var json = JSON.parse( content );
-
-			if ( json.asset === undefined || json.asset.version[ 0 ] < 2 ) {
-
-				if ( onError ) onError( new Error( 'THREE.GLTFLoader: Unsupported asset. glTF versions >=2.0 are supported. Use LegacyGLTFLoader instead.' ) );
-				return;
-
-			}
-
-			if ( json.extensionsUsed ) {
-
-				for ( var i = 0; i < json.extensionsUsed.length; ++ i ) {
-
-					var extensionName = json.extensionsUsed[ i ];
-					var extensionsRequired = json.extensionsRequired || [];
-
-					switch ( extensionName ) {
-
-						case EXTENSIONS.KHR_LIGHTS:
-							extensions[ extensionName ] = new GLTFLightsExtension( json );
-							break;
-
-						case EXTENSIONS.KHR_MATERIALS_UNLIT:
-							extensions[ extensionName ] = new GLTFMaterialsUnlitExtension( json );
-							break;
-
-						case EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS:
-							extensions[ extensionName ] = new GLTFMaterialsPbrSpecularGlossinessExtension();
-							break;
-
-						case EXTENSIONS.KHR_DRACO_MESH_COMPRESSION:
-							extensions[ extensionName ] = new GLTFDracoMeshCompressionExtension( json, this.dracoLoader );
-							break;
-
-						case EXTENSIONS.MSFT_TEXTURE_DDS:
-							extensions[ EXTENSIONS.MSFT_TEXTURE_DDS ] = new GLTFTextureDDSExtension();
-							break;
-
-						default:
-
-							if ( extensionsRequired.indexOf( extensionName ) >= 0 ) {
-
-								console.warn( 'THREE.GLTFLoader: Unknown extension "' + extensionName + '".' );
-
-							}
-
-					}
-
-				}
-
-			}
-
-			var parser = new GLTFParser( json, extensions, {
-
-				path: path || this.path || '',
-				crossOrigin: this.crossOrigin,
-				manager: this.manager
-
-			} );
-
-			parser.parse( function ( scene, scenes, cameras, animations, json ) {
-
-				var glTF = {
-					scene: scene,
-					scenes: scenes,
-					cameras: cameras,
-					animations: animations,
-					asset: json.asset,
-					parser: parser,
-					userData: {}
-				};
-
-				addUnknownExtensionsToUserData( extensions, glTF, json );
-
-				onLoad( glTF );
-
-			}, onError );
-
-		}
-
-	};
-
-	/* GLTFREGISTRY */
-
-	function GLTFRegistry() {
-
-		var objects = {};
-
-		return	{
-
-			get: function ( key ) {
-
-				return objects[ key ];
-
-			},
-
-			add: function ( key, object ) {
-
-				objects[ key ] = object;
-
-			},
-
-			remove: function ( key ) {
-
-				delete objects[ key ];
-
-			},
-
-			removeAll: function () {
-
-				objects = {};
-
-			}
-
-		};
-
-	}
-
-	/*********************************/
-	/********** EXTENSIONS ***********/
-	/*********************************/
-
-	var EXTENSIONS = {
-		KHR_BINARY_GLTF: 'KHR_binary_glTF',
-		KHR_DRACO_MESH_COMPRESSION: 'KHR_draco_mesh_compression',
-		KHR_LIGHTS: 'KHR_lights',
-		KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS: 'KHR_materials_pbrSpecularGlossiness',
-		KHR_MATERIALS_UNLIT: 'KHR_materials_unlit',
-		MSFT_TEXTURE_DDS: 'MSFT_texture_dds'
-	};
-
-	/**
-	 * DDS Texture Extension
-	 *
-	 * Specification: 
-	 * https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/MSFT_texture_dds
-	 * 
-	 */
-	function GLTFTextureDDSExtension() {
-
-		if ( ! THREE.DDSLoader ) {
-
-			throw new Error( 'THREE.GLTFLoader: Attempting to load .dds texture without importing THREE.DDSLoader' );
-
-		}
-
-		this.name = EXTENSIONS.MSFT_TEXTURE_DDS;
-		this.ddsLoader = new THREE.DDSLoader();
-
-	}
-
-	/**
-	 * Lights Extension
-	 *
-	 * Specification: PENDING
-	 */
-	function GLTFLightsExtension( json ) {
-
-		this.name = EXTENSIONS.KHR_LIGHTS;
-
-		this.lights = {};
-
-		var extension = ( json.extensions && json.extensions[ EXTENSIONS.KHR_LIGHTS ] ) || {};
-		var lights = extension.lights || {};
-
-		for ( var lightId in lights ) {
-
-			var light = lights[ lightId ];
-			var lightNode;
-
-			var color = new THREE.Color().fromArray( light.color );
-
-			switch ( light.type ) {
-
-				case 'directional':
-					lightNode = new THREE.DirectionalLight( color );
-					lightNode.target.position.set( 0, 0, 1 );
-					lightNode.add( lightNode.target );
-					break;
-
-				case 'point':
-					lightNode = new THREE.PointLight( color );
-					break;
-
-				case 'spot':
-					lightNode = new THREE.SpotLight( color );
-					// Handle spotlight properties.
-					light.spot = light.spot || {};
-					light.spot.innerConeAngle = light.spot.innerConeAngle !== undefined ? light.spot.innerConeAngle : 0;
-					light.spot.outerConeAngle = light.spot.outerConeAngle !== undefined ? light.spot.outerConeAngle : Math.PI / 4.0;
-					lightNode.angle = light.spot.outerConeAngle;
-					lightNode.penumbra = 1.0 - light.spot.innerConeAngle / light.spot.outerConeAngle;
-					lightNode.target.position.set( 0, 0, 1 );
-					lightNode.add( lightNode.target );
-					break;
-
-				case 'ambient':
-					lightNode = new THREE.AmbientLight( color );
-					break;
-
-			}
-
-			if ( lightNode ) {
-
-				lightNode.decay = 2;
-
-				if ( light.intensity !== undefined ) {
-
-					lightNode.intensity = light.intensity;
-
-				}
-
-				lightNode.name = light.name || ( 'light_' + lightId );
-				this.lights[ lightId ] = lightNode;
-
-			}
-
-		}
-
-	}
-
-	/**
-	 * Unlit Materials Extension (pending)
-	 *
-	 * PR: https://github.com/KhronosGroup/glTF/pull/1163
-	 */
-	function GLTFMaterialsUnlitExtension( json ) {
-
-		this.name = EXTENSIONS.KHR_MATERIALS_UNLIT;
-
-	}
-
-	GLTFMaterialsUnlitExtension.prototype.getMaterialType = function ( material ) {
-
-		return THREE.MeshBasicMaterial;
-
-	};
-
-	GLTFMaterialsUnlitExtension.prototype.extendParams = function ( materialParams, material, parser ) {
-
-		var pending = [];
-
-		materialParams.color = new THREE.Color( 1.0, 1.0, 1.0 );
-		materialParams.opacity = 1.0;
-
-		var metallicRoughness = material.pbrMetallicRoughness;
-
-		if ( metallicRoughness ) {
-
-			if ( Array.isArray( metallicRoughness.baseColorFactor ) ) {
-
-				var array = metallicRoughness.baseColorFactor;
-
-				materialParams.color.fromArray( array );
-				materialParams.opacity = array[ 3 ];
-
-			}
-
-			if ( metallicRoughness.baseColorTexture !== undefined ) {
-
-				pending.push( parser.assignTexture( materialParams, 'map', metallicRoughness.baseColorTexture.index ) );
-
-			}
-
-		}
-
-		return Promise.all( pending );
-
-	};
-
-	/* BINARY EXTENSION */
-
-	var BINARY_EXTENSION_BUFFER_NAME = 'binary_glTF';
-	var BINARY_EXTENSION_HEADER_MAGIC = 'glTF';
-	var BINARY_EXTENSION_HEADER_LENGTH = 12;
-	var BINARY_EXTENSION_CHUNK_TYPES = { JSON: 0x4E4F534A, BIN: 0x004E4942 };
-
-	function GLTFBinaryExtension( data ) {
-
-		this.name = EXTENSIONS.KHR_BINARY_GLTF;
-		this.content = null;
-		this.body = null;
-
-		var headerView = new DataView( data, 0, BINARY_EXTENSION_HEADER_LENGTH );
-
-		this.header = {
-			magic: THREE.LoaderUtils.decodeText( new Uint8Array( data.slice( 0, 4 ) ) ),
-			version: headerView.getUint32( 4, true ),
-			length: headerView.getUint32( 8, true )
-		};
-
-		if ( this.header.magic !== BINARY_EXTENSION_HEADER_MAGIC ) {
-
-			throw new Error( 'THREE.GLTFLoader: Unsupported glTF-Binary header.' );
-
-		} else if ( this.header.version < 2.0 ) {
-
-			throw new Error( 'THREE.GLTFLoader: Legacy binary file detected. Use LegacyGLTFLoader instead.' );
-
-		}
-
-		var chunkView = new DataView( data, BINARY_EXTENSION_HEADER_LENGTH );
-		var chunkIndex = 0;
-
-		while ( chunkIndex < chunkView.byteLength ) {
-
-			var chunkLength = chunkView.getUint32( chunkIndex, true );
-			chunkIndex += 4;
-
-			var chunkType = chunkView.getUint32( chunkIndex, true );
-			chunkIndex += 4;
-
-			if ( chunkType === BINARY_EXTENSION_CHUNK_TYPES.JSON ) {
-
-				var contentArray = new Uint8Array( data, BINARY_EXTENSION_HEADER_LENGTH + chunkIndex, chunkLength );
-				this.content = THREE.LoaderUtils.decodeText( contentArray );
-
-			} else if ( chunkType === BINARY_EXTENSION_CHUNK_TYPES.BIN ) {
-
-				var byteOffset = BINARY_EXTENSION_HEADER_LENGTH + chunkIndex;
-				this.body = data.slice( byteOffset, byteOffset + chunkLength );
-
-			}
-
-			// Clients must ignore chunks with unknown types.
-
-			chunkIndex += chunkLength;
-
-		}
-
-		if ( this.content === null ) {
-
-			throw new Error( 'THREE.GLTFLoader: JSON content not found.' );
-
-		}
-
-	}
-
-	/**
-	 * DRACO Mesh Compression Extension
-	 *
-	 * Specification: https://github.com/KhronosGroup/glTF/pull/874
-	 */
-	function GLTFDracoMeshCompressionExtension ( json, dracoLoader ) {
-
-		if ( ! dracoLoader ) {
-
-			throw new Error( 'THREE.GLTFLoader: No DRACOLoader instance provided.' );
-
-		}
-
-		this.name = EXTENSIONS.KHR_DRACO_MESH_COMPRESSION;
-		this.json = json;
-		this.dracoLoader = dracoLoader;
-
-	}
-
-	GLTFDracoMeshCompressionExtension.prototype.decodePrimitive = function ( primitive, parser ) {
-
-		var json = this.json;
-		var dracoLoader = this.dracoLoader;
-		var bufferViewIndex = primitive.extensions[ this.name ].bufferView;
-		var gltfAttributeMap = primitive.extensions[ this.name ].attributes;
-		var threeAttributeMap = {};
-		var attributeNormalizedMap = {};
-		var attributeTypeMap = {};
-
-		for ( var attributeName in gltfAttributeMap ) {
-
-			if ( !( attributeName in ATTRIBUTES ) ) continue;
-
-			threeAttributeMap[ ATTRIBUTES[ attributeName ] ] = gltfAttributeMap[ attributeName ];
-
-		}
-
-		for ( attributeName in primitive.attributes ) {
-
-			if ( ATTRIBUTES[ attributeName ] !== undefined && gltfAttributeMap[ attributeName ] !== undefined ) {
-
-				var accessorDef = json.accessors[ primitive.attributes[ attributeName ] ];
-				var componentType = WEBGL_COMPONENT_TYPES[ accessorDef.componentType ];
-
-				attributeTypeMap[ ATTRIBUTES[ attributeName ] ]  = componentType;
-				attributeNormalizedMap[ ATTRIBUTES[ attributeName ] ] = accessorDef.normalized === true;
-
-			}
-
-		}
-
-		return parser.getDependency( 'bufferView', bufferViewIndex ).then( function ( bufferView ) {
-
-			return new Promise( function ( resolve ) {
-
-				dracoLoader.decodeDracoFile( bufferView, function ( geometry ) {
-
-					for ( var attributeName in geometry.attributes ) {
-
-						var attribute = geometry.attributes[ attributeName ];
-						var normalized = attributeNormalizedMap[ attributeName ];
-
-						if ( normalized !== undefined ) attribute.normalized = normalized;
-
-					}
-
-					resolve( geometry );
-
-				}, threeAttributeMap, attributeTypeMap );
-
-			} );
-
-		} );
-
-	};
-
-	/**
-	 * Specular-Glossiness Extension
-	 *
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness
-	 */
-	function GLTFMaterialsPbrSpecularGlossinessExtension() {
-
-		return {
-
-			name: EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS,
-
-			specularGlossinessParams: [
-				'color',
-				'map',
-				'lightMap',
-				'lightMapIntensity',
-				'aoMap',
-				'aoMapIntensity',
-				'emissive',
-				'emissiveIntensity',
-				'emissiveMap',
-				'bumpMap',
-				'bumpScale',
-				'normalMap',
-				'displacementMap',
-				'displacementScale',
-				'displacementBias',
-				'specularMap',
-				'specular',
-				'glossinessMap',
-				'glossiness',
-				'alphaMap',
-				'envMap',
-				'envMapIntensity',
-				'refractionRatio',
-			],
-
-			getMaterialType: function () {
-
-				return THREE.ShaderMaterial;
-
-			},
-
-			extendParams: function ( params, material, parser ) {
-
-				var pbrSpecularGlossiness = material.extensions[ this.name ];
-
-				var shader = THREE.ShaderLib[ 'standard' ];
-
-				var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-
-				var specularMapParsFragmentChunk = [
-					'#ifdef USE_SPECULARMAP',
-					'	uniform sampler2D specularMap;',
-					'#endif'
-				].join( '\n' );
-
-				var glossinessMapParsFragmentChunk = [
-					'#ifdef USE_GLOSSINESSMAP',
-					'	uniform sampler2D glossinessMap;',
-					'#endif'
-				].join( '\n' );
-
-				var specularMapFragmentChunk = [
-					'vec3 specularFactor = specular;',
-					'#ifdef USE_SPECULARMAP',
-					'	vec4 texelSpecular = texture2D( specularMap, vUv );',
-					'	texelSpecular = sRGBToLinear( texelSpecular );',
-					'	// reads channel RGB, compatible with a glTF Specular-Glossiness (RGBA) texture',
-					'	specularFactor *= texelSpecular.rgb;',
-					'#endif'
-				].join( '\n' );
-
-				var glossinessMapFragmentChunk = [
-					'float glossinessFactor = glossiness;',
-					'#ifdef USE_GLOSSINESSMAP',
-					'	vec4 texelGlossiness = texture2D( glossinessMap, vUv );',
-					'	// reads channel A, compatible with a glTF Specular-Glossiness (RGBA) texture',
-					'	glossinessFactor *= texelGlossiness.a;',
-					'#endif'
-				].join( '\n' );
-
-				var lightPhysicalFragmentChunk = [
-					'PhysicalMaterial material;',
-					'material.diffuseColor = diffuseColor.rgb;',
-					'material.specularRoughness = clamp( 1.0 - glossinessFactor, 0.04, 1.0 );',
-					'material.specularColor = specularFactor.rgb;',
-				].join( '\n' );
-
-				var fragmentShader = shader.fragmentShader
-					.replace( 'uniform float roughness;', 'uniform vec3 specular;' )
-					.replace( 'uniform float metalness;', 'uniform float glossiness;' )
-					.replace( '#include <roughnessmap_pars_fragment>', specularMapParsFragmentChunk )
-					.replace( '#include <metalnessmap_pars_fragment>', glossinessMapParsFragmentChunk )
-					.replace( '#include <roughnessmap_fragment>', specularMapFragmentChunk )
-					.replace( '#include <metalnessmap_fragment>', glossinessMapFragmentChunk )
-					.replace( '#include <lights_physical_fragment>', lightPhysicalFragmentChunk );
-
-				delete uniforms.roughness;
-				delete uniforms.metalness;
-				delete uniforms.roughnessMap;
-				delete uniforms.metalnessMap;
-
-				uniforms.specular = { value: new THREE.Color().setHex( 0x111111 ) };
-				uniforms.glossiness = { value: 0.5 };
-				uniforms.specularMap = { value: null };
-				uniforms.glossinessMap = { value: null };
-
-				params.vertexShader = shader.vertexShader;
-				params.fragmentShader = fragmentShader;
-				params.uniforms = uniforms;
-				params.defines = { 'STANDARD': '' };
-
-				params.color = new THREE.Color( 1.0, 1.0, 1.0 );
-				params.opacity = 1.0;
-
-				var pending = [];
-
-				if ( Array.isArray( pbrSpecularGlossiness.diffuseFactor ) ) {
-
-					var array = pbrSpecularGlossiness.diffuseFactor;
-
-					params.color.fromArray( array );
-					params.opacity = array[ 3 ];
-
-				}
-
-				if ( pbrSpecularGlossiness.diffuseTexture !== undefined ) {
-
-					pending.push( parser.assignTexture( params, 'map', pbrSpecularGlossiness.diffuseTexture.index ) );
-
-				}
-
-				params.emissive = new THREE.Color( 0.0, 0.0, 0.0 );
-				params.glossiness = pbrSpecularGlossiness.glossinessFactor !== undefined ? pbrSpecularGlossiness.glossinessFactor : 1.0;
-				params.specular = new THREE.Color( 1.0, 1.0, 1.0 );
-
-				if ( Array.isArray( pbrSpecularGlossiness.specularFactor ) ) {
-
-					params.specular.fromArray( pbrSpecularGlossiness.specularFactor );
-
-				}
-
-				if ( pbrSpecularGlossiness.specularGlossinessTexture !== undefined ) {
-
-					var specGlossIndex = pbrSpecularGlossiness.specularGlossinessTexture.index;
-					pending.push( parser.assignTexture( params, 'glossinessMap', specGlossIndex ) );
-					pending.push( parser.assignTexture( params, 'specularMap', specGlossIndex ) );
-
-				}
-
-				return Promise.all( pending );
-
-			},
-
-			createMaterial: function ( params ) {
-
-				// setup material properties based on MeshStandardMaterial for Specular-Glossiness
-
-				var material = new THREE.ShaderMaterial( {
-					defines: params.defines,
-					vertexShader: params.vertexShader,
-					fragmentShader: params.fragmentShader,
-					uniforms: params.uniforms,
-					fog: true,
-					lights: true,
-					opacity: params.opacity,
-					transparent: params.transparent
-				} );
-
-				material.isGLTFSpecularGlossinessMaterial = true;
-
-				material.color = params.color;
-
-				material.map = params.map === undefined ? null : params.map;
-
-				material.lightMap = null;
-				material.lightMapIntensity = 1.0;
-
-				material.aoMap = params.aoMap === undefined ? null : params.aoMap;
-				material.aoMapIntensity = 1.0;
-
-				material.emissive = params.emissive;
-				material.emissiveIntensity = 1.0;
-				material.emissiveMap = params.emissiveMap === undefined ? null : params.emissiveMap;
-
-				material.bumpMap = params.bumpMap === undefined ? null : params.bumpMap;
-				material.bumpScale = 1;
-
-				material.normalMap = params.normalMap === undefined ? null : params.normalMap;
-				if ( params.normalScale ) material.normalScale = params.normalScale;
-
-				material.displacementMap = null;
-				material.displacementScale = 1;
-				material.displacementBias = 0;
-
-				material.specularMap = params.specularMap === undefined ? null : params.specularMap;
-				material.specular = params.specular;
-
-				material.glossinessMap = params.glossinessMap === undefined ? null : params.glossinessMap;
-				material.glossiness = params.glossiness;
-
-				material.alphaMap = null;
-
-				material.envMap = params.envMap === undefined ? null : params.envMap;
-				material.envMapIntensity = 1.0;
-
-				material.refractionRatio = 0.98;
-
-				material.extensions.derivatives = true;
-
-				return material;
-
-			},
-
-			/**
-			 * Clones a GLTFSpecularGlossinessMaterial instance. The ShaderMaterial.copy() method can
-			 * copy only properties it knows about or inherits, and misses many properties that would
-			 * normally be defined by MeshStandardMaterial.
-			 *
-			 * This method allows GLTFSpecularGlossinessMaterials to be cloned in the process of
-			 * loading a glTF model, but cloning later (e.g. by the user) would require these changes
-			 * AND also updating `.onBeforeRender` on the parent mesh.
-			 *
-			 * @param  {THREE.ShaderMaterial} source
-			 * @return {THREE.ShaderMaterial}
-			 */
-			cloneMaterial: function ( source ) {
-
-				var target = source.clone();
-
-				target.isGLTFSpecularGlossinessMaterial = true;
-
-				var params = this.specularGlossinessParams;
-
-				for ( var i = 0, il = params.length; i < il; i ++ ) {
-
-					target[ params[ i ] ] = source[ params[ i ] ];
-
-				}
-
-				return target;
-
-			},
-
-			// Here's based on refreshUniformsCommon() and refreshUniformsStandard() in WebGLRenderer.
-			refreshUniforms: function ( renderer, scene, camera, geometry, material, group ) {
-
-				if ( material.isGLTFSpecularGlossinessMaterial !== true ) {
-
-					return;
-
-				}
-
-				var uniforms = material.uniforms;
-				var defines = material.defines;
-
-				uniforms.opacity.value = material.opacity;
-
-				uniforms.diffuse.value.copy( material.color );
-				uniforms.emissive.value.copy( material.emissive ).multiplyScalar( material.emissiveIntensity );
-
-				uniforms.map.value = material.map;
-				uniforms.specularMap.value = material.specularMap;
-				uniforms.alphaMap.value = material.alphaMap;
-
-				uniforms.lightMap.value = material.lightMap;
-				uniforms.lightMapIntensity.value = material.lightMapIntensity;
-
-				uniforms.aoMap.value = material.aoMap;
-				uniforms.aoMapIntensity.value = material.aoMapIntensity;
-
-				// uv repeat and offset setting priorities
-				// 1. color map
-				// 2. specular map
-				// 3. normal map
-				// 4. bump map
-				// 5. alpha map
-				// 6. emissive map
-
-				var uvScaleMap;
-
-				if ( material.map ) {
-
-					uvScaleMap = material.map;
-
-				} else if ( material.specularMap ) {
-
-					uvScaleMap = material.specularMap;
-
-				} else if ( material.displacementMap ) {
-
-					uvScaleMap = material.displacementMap;
-
-				} else if ( material.normalMap ) {
-
-					uvScaleMap = material.normalMap;
-
-				} else if ( material.bumpMap ) {
-
-					uvScaleMap = material.bumpMap;
-
-				} else if ( material.glossinessMap ) {
-
-					uvScaleMap = material.glossinessMap;
-
-				} else if ( material.alphaMap ) {
-
-					uvScaleMap = material.alphaMap;
-
-				} else if ( material.emissiveMap ) {
-
-					uvScaleMap = material.emissiveMap;
-
-				}
-
-				if ( uvScaleMap !== undefined ) {
-
-					// backwards compatibility
-					if ( uvScaleMap.isWebGLRenderTarget ) {
-
-						uvScaleMap = uvScaleMap.texture;
-
-					}
-
-					var offset;
-					var repeat;
-
-					if ( uvScaleMap.matrix !== undefined ) {
-
-						// > r88.
-
-						if ( uvScaleMap.matrixAutoUpdate === true ) {
-
-							offset = uvScaleMap.offset;
-							repeat = uvScaleMap.repeat;
-							var rotation = uvScaleMap.rotation;
-							var center = uvScaleMap.center;
-
-							uvScaleMap.matrix.setUvTransform( offset.x, offset.y, repeat.x, repeat.y, rotation, center.x, center.y );
-
-						}
-
-						uniforms.uvTransform.value.copy( uvScaleMap.matrix );
-
-					} else {
-
-						// <= r87. Remove when reasonable.
-
-						offset = uvScaleMap.offset;
-						repeat = uvScaleMap.repeat;
-
-						uniforms.offsetRepeat.value.set( offset.x, offset.y, repeat.x, repeat.y );
-
-					}
-
-				}
-
-				uniforms.envMap.value = material.envMap;
-				uniforms.envMapIntensity.value = material.envMapIntensity;
-				uniforms.flipEnvMap.value = ( material.envMap && material.envMap.isCubeTexture ) ? - 1 : 1;
-
-				uniforms.refractionRatio.value = material.refractionRatio;
-
-				uniforms.specular.value.copy( material.specular );
-				uniforms.glossiness.value = material.glossiness;
-
-				uniforms.glossinessMap.value = material.glossinessMap;
-
-				uniforms.emissiveMap.value = material.emissiveMap;
-				uniforms.bumpMap.value = material.bumpMap;
-				uniforms.normalMap.value = material.normalMap;
-
-				uniforms.displacementMap.value = material.displacementMap;
-				uniforms.displacementScale.value = material.displacementScale;
-				uniforms.displacementBias.value = material.displacementBias;
-
-				if ( uniforms.glossinessMap.value !== null && defines.USE_GLOSSINESSMAP === undefined ) {
-
-					defines.USE_GLOSSINESSMAP = '';
-					// set USE_ROUGHNESSMAP to enable vUv
-					defines.USE_ROUGHNESSMAP = '';
-
-				}
-
-				if ( uniforms.glossinessMap.value === null && defines.USE_GLOSSINESSMAP !== undefined ) {
-
-					delete defines.USE_GLOSSINESSMAP;
-					delete defines.USE_ROUGHNESSMAP;
-
-				}
-
-			}
-
-		};
-
-	}
-
-	/*********************************/
-	/********** INTERPOLATION ********/
-	/*********************************/
-
-	// Spline Interpolation
-	// Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#appendix-c-spline-interpolation
-	function GLTFCubicSplineInterpolant( parameterPositions, sampleValues, sampleSize, resultBuffer ) {
-
-		THREE.Interpolant.call( this, parameterPositions, sampleValues, sampleSize, resultBuffer );
-
-	};
-
-	GLTFCubicSplineInterpolant.prototype = Object.create( THREE.Interpolant.prototype );
-	GLTFCubicSplineInterpolant.prototype.constructor = GLTFCubicSplineInterpolant;
-
-	GLTFCubicSplineInterpolant.prototype.interpolate_ = function ( i1, t0, t, t1 ) {
-
-		var result = this.resultBuffer;
-		var values = this.sampleValues;
-		var stride = this.valueSize;
-
-		var stride2 = stride * 2;
-		var stride3 = stride * 3;
-
-		var td = t1 - t0;
-
-		var p = ( t - t0 ) / td;
-		var pp = p * p;
-		var ppp = pp * p;
-
-		var offset1 = i1 * stride3;
-		var offset0 = offset1 - stride3;
-
-		var s0 = 2 * ppp - 3 * pp + 1;
-		var s1 = ppp - 2 * pp + p;
-		var s2 = - 2 * ppp + 3 * pp;
-		var s3 = ppp - pp;
-
-		// Layout of keyframe output values for CUBICSPLINE animations:
-		//   [ inTangent_1, splineVertex_1, outTangent_1, inTangent_2, splineVertex_2, ... ]
-		for ( var i = 0; i !== stride; i ++ ) {
-
-			var p0 = values[ offset0 + i + stride ];        // splineVertex_k
-			var m0 = values[ offset0 + i + stride2 ] * td;  // outTangent_k * (t_k+1 - t_k)
-			var p1 = values[ offset1 + i + stride ];        // splineVertex_k+1
-			var m1 = values[ offset1 + i ] * td;            // inTangent_k+1 * (t_k+1 - t_k)
-
-			result[ i ] = s0 * p0 + s1 * m0 + s2 * p1 + s3 * m1;
-
-		}
-
-		return result;
-
-	};
-
-	/*********************************/
-	/********** INTERNALS ************/
-	/*********************************/
-
-	/* CONSTANTS */
-
-	var WEBGL_CONSTANTS = {
-		FLOAT: 5126,
-		//FLOAT_MAT2: 35674,
-		FLOAT_MAT3: 35675,
-		FLOAT_MAT4: 35676,
-		FLOAT_VEC2: 35664,
-		FLOAT_VEC3: 35665,
-		FLOAT_VEC4: 35666,
-		LINEAR: 9729,
-		REPEAT: 10497,
-		SAMPLER_2D: 35678,
-		POINTS: 0,
-		LINES: 1,
-		LINE_LOOP: 2,
-		LINE_STRIP: 3,
-		TRIANGLES: 4,
-		TRIANGLE_STRIP: 5,
-		TRIANGLE_FAN: 6,
-		UNSIGNED_BYTE: 5121,
-		UNSIGNED_SHORT: 5123
-	};
-
-	var WEBGL_TYPE = {
-		5126: Number,
-		//35674: THREE.Matrix2,
-		35675: THREE.Matrix3,
-		35676: THREE.Matrix4,
-		35664: THREE.Vector2,
-		35665: THREE.Vector3,
-		35666: THREE.Vector4,
-		35678: THREE.Texture
-	};
-
-	var WEBGL_COMPONENT_TYPES = {
-		5120: Int8Array,
-		5121: Uint8Array,
-		5122: Int16Array,
-		5123: Uint16Array,
-		5125: Uint32Array,
-		5126: Float32Array
-	};
-
-	var WEBGL_FILTERS = {
-		9728: THREE.NearestFilter,
-		9729: THREE.LinearFilter,
-		9984: THREE.NearestMipMapNearestFilter,
-		9985: THREE.LinearMipMapNearestFilter,
-		9986: THREE.NearestMipMapLinearFilter,
-		9987: THREE.LinearMipMapLinearFilter
-	};
-
-	var WEBGL_WRAPPINGS = {
-		33071: THREE.ClampToEdgeWrapping,
-		33648: THREE.MirroredRepeatWrapping,
-		10497: THREE.RepeatWrapping
-	};
-
-	var WEBGL_TEXTURE_FORMATS = {
-		6406: THREE.AlphaFormat,
-		6407: THREE.RGBFormat,
-		6408: THREE.RGBAFormat,
-		6409: THREE.LuminanceFormat,
-		6410: THREE.LuminanceAlphaFormat
-	};
-
-	var WEBGL_TEXTURE_DATATYPES = {
-		5121: THREE.UnsignedByteType,
-		32819: THREE.UnsignedShort4444Type,
-		32820: THREE.UnsignedShort5551Type,
-		33635: THREE.UnsignedShort565Type
-	};
-
-	var WEBGL_SIDES = {
-		1028: THREE.BackSide, // Culling front
-		1029: THREE.FrontSide // Culling back
-		//1032: THREE.NoSide   // Culling front and back, what to do?
-	};
-
-	var WEBGL_DEPTH_FUNCS = {
-		512: THREE.NeverDepth,
-		513: THREE.LessDepth,
-		514: THREE.EqualDepth,
-		515: THREE.LessEqualDepth,
-		516: THREE.GreaterEqualDepth,
-		517: THREE.NotEqualDepth,
-		518: THREE.GreaterEqualDepth,
-		519: THREE.AlwaysDepth
-	};
-
-	var WEBGL_BLEND_EQUATIONS = {
-		32774: THREE.AddEquation,
-		32778: THREE.SubtractEquation,
-		32779: THREE.ReverseSubtractEquation
-	};
-
-	var WEBGL_BLEND_FUNCS = {
-		0: THREE.ZeroFactor,
-		1: THREE.OneFactor,
-		768: THREE.SrcColorFactor,
-		769: THREE.OneMinusSrcColorFactor,
-		770: THREE.SrcAlphaFactor,
-		771: THREE.OneMinusSrcAlphaFactor,
-		772: THREE.DstAlphaFactor,
-		773: THREE.OneMinusDstAlphaFactor,
-		774: THREE.DstColorFactor,
-		775: THREE.OneMinusDstColorFactor,
-		776: THREE.SrcAlphaSaturateFactor
-		// The followings are not supported by Three.js yet
-		//32769: CONSTANT_COLOR,
-		//32770: ONE_MINUS_CONSTANT_COLOR,
-		//32771: CONSTANT_ALPHA,
-		//32772: ONE_MINUS_CONSTANT_COLOR
-	};
-
-	var WEBGL_TYPE_SIZES = {
-		'SCALAR': 1,
-		'VEC2': 2,
-		'VEC3': 3,
-		'VEC4': 4,
-		'MAT2': 4,
-		'MAT3': 9,
-		'MAT4': 16
-	};
-
-	var ATTRIBUTES = {
-		POSITION: 'position',
-		NORMAL: 'normal',
-		TEXCOORD_0: 'uv',
-		TEXCOORD0: 'uv', // deprecated
-		TEXCOORD: 'uv', // deprecated
-		TEXCOORD_1: 'uv2',
-		COLOR_0: 'color',
-		COLOR0: 'color', // deprecated
-		COLOR: 'color', // deprecated
-		WEIGHTS_0: 'skinWeight',
-		WEIGHT: 'skinWeight', // deprecated
-		JOINTS_0: 'skinIndex',
-		JOINT: 'skinIndex' // deprecated
-	}
-
-	var PATH_PROPERTIES = {
-		scale: 'scale',
-		translation: 'position',
-		rotation: 'quaternion',
-		weights: 'morphTargetInfluences'
-	};
-
-	var INTERPOLATION = {
-		CUBICSPLINE: THREE.InterpolateSmooth, // We use custom interpolation GLTFCubicSplineInterpolation for CUBICSPLINE.
-		                                      // KeyframeTrack.optimize() can't handle glTF Cubic Spline output values layout,
-		                                      // using THREE.InterpolateSmooth for KeyframeTrack instantiation to prevent optimization.
-		                                      // See KeyframeTrack.optimize() for the detail.
-		LINEAR: THREE.InterpolateLinear,
-		STEP: THREE.InterpolateDiscrete
-	};
-
-	var STATES_ENABLES = {
-		2884: 'CULL_FACE',
-		2929: 'DEPTH_TEST',
-		3042: 'BLEND',
-		3089: 'SCISSOR_TEST',
-		32823: 'POLYGON_OFFSET_FILL',
-		32926: 'SAMPLE_ALPHA_TO_COVERAGE'
-	};
-
-	var ALPHA_MODES = {
-		OPAQUE: 'OPAQUE',
-		MASK: 'MASK',
-		BLEND: 'BLEND'
-	};
-
-	/* UTILITY FUNCTIONS */
-
-	function resolveURL( url, path ) {
-
-		// Invalid URL
-		if ( typeof url !== 'string' || url === '' ) return '';
-
-		// Absolute URL http://,https://,//
-		if ( /^(https?:)?\/\//i.test( url ) ) return url;
-
-		// Data URI
-		if ( /^data:.*,.*$/i.test( url ) ) return url;
-
-		// Blob URL
-		if ( /^blob:.*$/i.test( url ) ) return url;
-
-		// Relative URL
-		return path + url;
-
-	}
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#default-material
-	 */
-	function createDefaultMaterial() {
-
-		return new THREE.MeshStandardMaterial( {
-			color: 0xFFFFFF,
-			emissive: 0x000000,
-			metalness: 1,
-			roughness: 1,
-			transparent: false,
-			depthTest: true,
-			side: THREE.FrontSide
-		} );
-
-	}
-
-	function addUnknownExtensionsToUserData( knownExtensions, object, objectDef ) {
-
-		// Add unknown glTF extensions to an object's userData.
-
-		for ( var name in objectDef.extensions ) {
-
-			if ( knownExtensions[ name ] === undefined ) {
-
-				object.userData.gltfExtensions = object.userData.gltfExtensions || {};
-				object.userData.gltfExtensions[ name ] = objectDef.extensions[ name ];
-
-			}
-
-		}
-
-	}
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#morph-targets
-	 *
-	 * @param {THREE.Geometry} geometry
-	 * @param {Array<GLTF.Target>} targets
-	 * @param {Array<THREE.BufferAttribute>} accessors
-	 */
-	function addMorphTargets( geometry, targets, accessors ) {
-
-		var hasMorphPosition = false;
-		var hasMorphNormal = false;
-
-		for ( var i = 0, il = targets.length; i < il; i ++ ) {
-
-			var target = targets[ i ];
-
-			if ( target.POSITION !== undefined ) hasMorphPosition = true;
-			if ( target.NORMAL !== undefined ) hasMorphNormal = true;
-
-			if ( hasMorphPosition && hasMorphNormal ) break;
-
-		}
-
-		if ( ! hasMorphPosition && ! hasMorphNormal ) return;
-
-		var morphPositions = [];
-		var morphNormals = [];
-
-		for ( var i = 0, il = targets.length; i < il; i ++ ) {
-
-			var target = targets[ i ];
-			var attributeName = 'morphTarget' + i;
-
-			if ( hasMorphPosition ) {
-
-				// Three.js morph position is absolute value. The formula is
-				//   basePosition
-				//     + weight0 * ( morphPosition0 - basePosition )
-				//     + weight1 * ( morphPosition1 - basePosition )
-				//     ...
-				// while the glTF one is relative
-				//   basePosition
-				//     + weight0 * glTFmorphPosition0
-				//     + weight1 * glTFmorphPosition1
-				//     ...
-				// then we need to convert from relative to absolute here.
-
-				if ( target.POSITION !== undefined ) {
-
-					// Cloning not to pollute original accessor
-					var positionAttribute = cloneBufferAttribute( accessors[ target.POSITION ] );
-					positionAttribute.name = attributeName;
-
-					var position = geometry.attributes.position;
-
-					for ( var j = 0, jl = positionAttribute.count; j < jl; j ++ ) {
-
-						positionAttribute.setXYZ(
-							j,
-							positionAttribute.getX( j ) + position.getX( j ),
-							positionAttribute.getY( j ) + position.getY( j ),
-							positionAttribute.getZ( j ) + position.getZ( j )
-						);
-
-					}
-
-				} else {
-
-					positionAttribute = geometry.attributes.position;
-
-				}
-
-				morphPositions.push( positionAttribute );
-
-			}
-
-			if ( hasMorphNormal ) {
-
-				// see target.POSITION's comment
-
-				var normalAttribute;
-
-				if ( target.NORMAL !== undefined ) {
-
-					var normalAttribute = cloneBufferAttribute( accessors[ target.NORMAL ] );
-					normalAttribute.name = attributeName;
-
-					var normal = geometry.attributes.normal;
-
-					for ( var j = 0, jl = normalAttribute.count; j < jl; j ++ ) {
-
-						normalAttribute.setXYZ(
-							j,
-							normalAttribute.getX( j ) + normal.getX( j ),
-							normalAttribute.getY( j ) + normal.getY( j ),
-							normalAttribute.getZ( j ) + normal.getZ( j )
-						);
-
-					}
-
-				} else {
-
-					normalAttribute = geometry.attributes.normal;
-
-				}
-
-				morphNormals.push( normalAttribute );
-
-			}
-
-		}
-
-		if ( hasMorphPosition ) geometry.morphAttributes.position = morphPositions;
-		if ( hasMorphNormal ) geometry.morphAttributes.normal = morphNormals;
-
-	}
-
-	/**
-	 * @param {THREE.Mesh} mesh
-	 * @param {GLTF.Mesh} meshDef
-	 */
-	function updateMorphTargets( mesh, meshDef ) {
-
-		mesh.updateMorphTargets();
-
-		if ( meshDef.weights !== undefined ) {
-
-			for ( var i = 0, il = meshDef.weights.length; i < il; i ++ ) {
-
-				mesh.morphTargetInfluences[ i ] = meshDef.weights[ i ];
-
-			}
-
-		}
-
-		// .extras has user-defined data, so check that .extras.targetNames is an array.
-		if ( meshDef.extras && Array.isArray( meshDef.extras.targetNames ) ) {
-
-			var targetNames = meshDef.extras.targetNames;
-
-			if ( mesh.morphTargetInfluences.length === targetNames.length ) {
-
-				mesh.morphTargetDictionary = {};
-
-				for ( var i = 0, il = targetNames.length; i < il; i ++ ) {
-
-					mesh.morphTargetDictionary[ targetNames[ i ] ] = i;
-
-				}
-
-			} else {
-
-				console.warn( 'THREE.GLTFLoader: Invalid extras.targetNames length. Ignoring names.' );
-
-			}
-
-		}
-
-	}
-
-	function isPrimitiveEqual( a, b ) {
-
-		if ( a.indices !== b.indices ) {
-
-			return false;
-
-		}
-
-		return isObjectEqual( a.attributes, b.attributes );
-
-	}
-
-	function isObjectEqual( a, b ) {
-
-		if ( Object.keys( a ).length !== Object.keys( b ).length ) return false;
-
-		for ( var key in a ) {
-
-			if ( a[ key ] !== b[ key ] ) return false;
-
-		}
-
-		return true;
-
-	}
-
-	function isArrayEqual( a, b ) {
-
-		if ( a.length !== b.length ) return false;
-
-		for ( var i = 0, il = a.length; i < il; i ++ ) {
-
-			if ( a[ i ] !== b[ i ] ) return false;
-
-		}
-
-		return true;
-
-	}
-
-	function getCachedGeometry( cache, newPrimitive ) {
-
-		for ( var i = 0, il = cache.length; i < il; i ++ ) {
-
-			var cached = cache[ i ];
-
-			if ( isPrimitiveEqual( cached.primitive, newPrimitive ) ) return cached.promise;
-
-		}
-
-		return null;
-
-	}
-
-	function getCachedCombinedGeometry( cache, geometries ) {
-
-		for ( var i = 0, il = cache.length; i < il; i ++ ) {
-
-			var cached = cache[ i ];
-
-			if ( isArrayEqual( geometries, cached.baseGeometries ) ) return cached.geometry;
-
-		}
-
-		return null;
-
-	}
-
-	function getCachedMultiPassGeometry( cache, geometry, primitives ) {
-
-		for ( var i = 0, il = cache.length; i < il; i ++ ) {
-
-			var cached = cache[ i ];
-
-			if ( geometry === cached.baseGeometry && isArrayEqual( primitives, cached.primitives ) ) return cached.geometry;
-
-		}
-
-		return null;
-
-	}
-
-	function cloneBufferAttribute( attribute ) {
-
-		if ( attribute.isInterleavedBufferAttribute ) {
-
-			var count = attribute.count;
-			var itemSize = attribute.itemSize;
-			var array = attribute.array.slice( 0, count * itemSize );
-
-			for ( var i = 0; i < count; ++ i ) {
-
-				array[ i ] = attribute.getX( i );
-				if ( itemSize >= 2 ) array[ i + 1 ] = attribute.getY( i );
-				if ( itemSize >= 3 ) array[ i + 2 ] = attribute.getZ( i );
-				if ( itemSize >= 4 ) array[ i + 3 ] = attribute.getW( i );
-
-			}
-
-			return new THREE.BufferAttribute( array, itemSize, attribute.normalized );
-
-		}
-
-		return attribute.clone();
-
-	}
-
-	/**
-	 * Checks if we can build a single Mesh with MultiMaterial from multiple primitives.
-	 * Returns true if all primitives use the same attributes/morphAttributes/mode
-	 * and also have index. Otherwise returns false.
-	 *
-	 * @param {Array<GLTF.Primitive>} primitives
-	 * @return {Boolean}
-	 */
-	function isMultiPassGeometry( primitives ) {
-
-		if ( primitives.length < 2 ) return false;
-
-		var primitive0 = primitives[ 0 ];
-		var targets0 = primitive0.targets || [];
-
-		if ( primitive0.indices === undefined ) return false;
-
-		for ( var i = 1, il = primitives.length; i < il; i ++ ) {
-
-			var primitive = primitives[ i ];
-
-			if ( primitive0.mode !== primitive.mode ) return false;
-			if ( primitive.indices === undefined ) return false;
-			if ( ! isObjectEqual( primitive0.attributes, primitive.attributes ) ) return false;
-
-			var targets = primitive.targets || [];
-
-			if ( targets0.length !== targets.length ) return false;
-
-			for ( var j = 0, jl = targets0.length; j < jl; j ++ ) {
-
-				if ( ! isObjectEqual( targets0[ j ], targets[ j ] ) ) return false;
-
-			}
-
-		}
-
-		return true;
-
-	}
-
-	/* GLTF PARSER */
-
-	function GLTFParser( json, extensions, options ) {
-
-		this.json = json || {};
-		this.extensions = extensions || {};
-		this.options = options || {};
-
-		// loader object cache
-		this.cache = new GLTFRegistry();
-
-		// BufferGeometry caching
-		this.primitiveCache = [];
-		this.multiplePrimitivesCache = [];
-		this.multiPassGeometryCache = []
-
-		this.textureLoader = new THREE.TextureLoader( this.options.manager );
-		this.textureLoader.setCrossOrigin( this.options.crossOrigin );
-
-		this.fileLoader = new THREE.FileLoader( this.options.manager );
-		this.fileLoader.setResponseType( 'arraybuffer' );
-
-	}
-
-	GLTFParser.prototype.parse = function ( onLoad, onError ) {
-
-		var json = this.json;
-
-		// Clear the loader cache
-		this.cache.removeAll();
-
-		// Mark the special nodes/meshes in json for efficient parse
-		this.markDefs();
-
-		// Fire the callback on complete
-		this.getMultiDependencies( [
-
-			'scene',
-			'animation',
-			'camera'
-
-		] ).then( function ( dependencies ) {
-
-			var scenes = dependencies.scenes || [];
-			var scene = scenes[ json.scene || 0 ];
-			var animations = dependencies.animations || [];
-			var cameras = dependencies.cameras || [];
-
-			onLoad( scene, scenes, cameras, animations, json );
-
-		} ).catch( onError );
-
-	};
-
-	/**
-	 * Marks the special nodes/meshes in json for efficient parse.
-	 */
-	GLTFParser.prototype.markDefs = function () {
-
-		var nodeDefs = this.json.nodes || [];
-		var skinDefs = this.json.skins || [];
-		var meshDefs = this.json.meshes || [];
-
-		var meshReferences = {};
-		var meshUses = {};
-
-		// Nothing in the node definition indicates whether it is a Bone or an
-		// Object3D. Use the skins' joint references to mark bones.
-		for ( var skinIndex = 0, skinLength = skinDefs.length; skinIndex < skinLength; skinIndex ++ ) {
-
-			var joints = skinDefs[ skinIndex ].joints;
-
-			for ( var i = 0, il = joints.length; i < il; i ++ ) {
-
-				nodeDefs[ joints[ i ] ].isBone = true;
-
-			}
-
-		}
-
-		// Meshes can (and should) be reused by multiple nodes in a glTF asset. To
-		// avoid having more than one THREE.Mesh with the same name, count
-		// references and rename instances below.
-		//
-		// Example: CesiumMilkTruck sample model reuses "Wheel" meshes.
-		for ( var nodeIndex = 0, nodeLength = nodeDefs.length; nodeIndex < nodeLength; nodeIndex ++ ) {
-
-			var nodeDef = nodeDefs[ nodeIndex ];
-
-			if ( nodeDef.mesh !== undefined ) {
-
-				if ( meshReferences[ nodeDef.mesh ] === undefined ) {
-
-					meshReferences[ nodeDef.mesh ] = meshUses[ nodeDef.mesh ] = 0;
-
-				}
-
-				meshReferences[ nodeDef.mesh ] ++;
-
-				// Nothing in the mesh definition indicates whether it is
-				// a SkinnedMesh or Mesh. Use the node's mesh reference
-				// to mark SkinnedMesh if node has skin.
-				if ( nodeDef.skin !== undefined ) {
-
-					meshDefs[ nodeDef.mesh ].isSkinnedMesh = true;
-
-				}
-
-			}
-
-		}
-
-		this.json.meshReferences = meshReferences;
-		this.json.meshUses = meshUses;
-
-	};
-
-	/**
-	 * Requests the specified dependency asynchronously, with caching.
-	 * @param {String} type
-	 * @param {Number} index
-	 * @return {Promise<Object>}
-	 */
-	GLTFParser.prototype.getDependency = function ( type, index ) {
-
-		var cacheKey = type + ':' + index;
-		var dependency = this.cache.get( cacheKey );
-
-		if ( ! dependency ) {
-
-			switch ( type ) {
-
-				case 'scene':
-					dependency = this.loadScene( index );
-					break;
-
-				case 'node':
-					dependency = this.loadNode( index );
-					break;
-
-				case 'mesh':
-					dependency = this.loadMesh( index );
-					break;
-
-				case 'accessor':
-					dependency = this.loadAccessor( index );
-					break;
-
-				case 'bufferView':
-					dependency = this.loadBufferView( index );
-					break;
-
-				case 'buffer':
-					dependency = this.loadBuffer( index );
-					break;
-
-				case 'material':
-					dependency = this.loadMaterial( index );
-					break;
-
-				case 'texture':
-					dependency = this.loadTexture( index );
-					break;
-
-				case 'skin':
-					dependency = this.loadSkin( index );
-					break;
-
-				case 'animation':
-					dependency = this.loadAnimation( index );
-					break;
-
-				case 'camera':
-					dependency = this.loadCamera( index );
-					break;
-
-				default:
-					throw new Error( 'Unknown type: ' + type );
-
-			}
-
-			this.cache.add( cacheKey, dependency );
-
-		}
-
-		return dependency;
-
-	};
-
-	/**
-	 * Requests all dependencies of the specified type asynchronously, with caching.
-	 * @param {String} type
-	 * @return {Promise<Array<Object>>}
-	 */
-	GLTFParser.prototype.getDependencies = function ( type ) {
-
-		var dependencies = this.cache.get( type );
-
-		if ( ! dependencies ) {
-
-			var parser = this;
-			var defs = this.json[ type + ( type === 'mesh' ? 'es' : 's' ) ] || [];
-
-			dependencies = Promise.all( defs.map( function ( def, index ) {
-
-				return parser.getDependency( type, index );
-
-			} ) );
-
-			this.cache.add( type, dependencies );
-
-		}
-
-		return dependencies;
-
-	};
-
-	/**
-	 * Requests all multiple dependencies of the specified types asynchronously, with caching.
-	 * @param {Array<string>} types
-	 * @return {Promise<Object<Array<Object>>>}
-	 */
-	GLTFParser.prototype.getMultiDependencies = function ( types ) {
-
-		var results = {};
-		var pendings = [];
-
-		for ( var i = 0, il = types.length; i < il; i ++ ) {
-
-			var type = types[ i ];
-			var value = this.getDependencies( type );
-
-			value = value.then( function ( key, value ) {
-
-				results[ key ] = value;
-
-			}.bind( this, type + ( type === 'mesh' ? 'es' : 's' ) ) );
-
-			pendings.push( value );
-
-		}
-
-		return Promise.all( pendings ).then( function () {
-
-			return results;
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
-	 * @param {Number} bufferIndex
-	 * @return {Promise<ArrayBuffer>}
-	 */
-	GLTFParser.prototype.loadBuffer = function ( bufferIndex ) {
-
-		var bufferDef = this.json.buffers[ bufferIndex ];
-		var loader = this.fileLoader;
-
-		if ( bufferDef.type && bufferDef.type !== 'arraybuffer' ) {
-
-			throw new Error( 'THREE.GLTFLoader: ' + bufferDef.type + ' buffer type is not supported.' );
-
-		}
-
-		// If present, GLB container is required to be the first buffer.
-		if ( bufferDef.uri === undefined && bufferIndex === 0 ) {
-
-			return Promise.resolve( this.extensions[ EXTENSIONS.KHR_BINARY_GLTF ].body );
-
-		}
-
-		var options = this.options;
-
-		return new Promise( function ( resolve, reject ) {
-
-			loader.load( resolveURL( bufferDef.uri, options.path ), resolve, undefined, function () {
-
-				reject( new Error( 'THREE.GLTFLoader: Failed to load buffer "' + bufferDef.uri + '".' ) );
-
-			} );
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#buffers-and-buffer-views
-	 * @param {Number} bufferViewIndex
-	 * @return {Promise<ArrayBuffer>}
-	 */
-	GLTFParser.prototype.loadBufferView = function ( bufferViewIndex ) {
-
-		var bufferViewDef = this.json.bufferViews[ bufferViewIndex ];
-
-		return this.getDependency( 'buffer', bufferViewDef.buffer ).then( function ( buffer ) {
-
-			var byteLength = bufferViewDef.byteLength || 0;
-			var byteOffset = bufferViewDef.byteOffset || 0;
-			return buffer.slice( byteOffset, byteOffset + byteLength );
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#accessors
-	 * @param {Number} accessorIndex
-	 * @return {Promise<THREE.BufferAttribute|THREE.InterleavedBufferAttribute>}
-	 */
-	GLTFParser.prototype.loadAccessor = function ( accessorIndex ) {
-
-		var parser = this;
-		var json = this.json;
-
-		var accessorDef = this.json.accessors[ accessorIndex ];
-
-		if ( accessorDef.bufferView === undefined && accessorDef.sparse === undefined ) {
-
-			// Ignore empty accessors, which may be used to declare runtime
-			// information about attributes coming from another source (e.g. Draco
-			// compression extension).
-			return null;
-
-		}
-
-		var pendingBufferViews = [];
-
-		if ( accessorDef.bufferView !== undefined ) {
-
-			pendingBufferViews.push( this.getDependency( 'bufferView', accessorDef.bufferView ) );
-
-		} else {
-
-			pendingBufferViews.push( null );
-
-		}
-
-		if ( accessorDef.sparse !== undefined ) {
-
-			pendingBufferViews.push( this.getDependency( 'bufferView', accessorDef.sparse.indices.bufferView ) );
-			pendingBufferViews.push( this.getDependency( 'bufferView', accessorDef.sparse.values.bufferView ) );
-
-		}
-
-		return Promise.all( pendingBufferViews ).then( function ( bufferViews ) {
-
-			var bufferView = bufferViews[ 0 ];
-
-			var itemSize = WEBGL_TYPE_SIZES[ accessorDef.type ];
-			var TypedArray = WEBGL_COMPONENT_TYPES[ accessorDef.componentType ];
-
-			// For VEC3: itemSize is 3, elementBytes is 4, itemBytes is 12.
-			var elementBytes = TypedArray.BYTES_PER_ELEMENT;
-			var itemBytes = elementBytes * itemSize;
-			var byteOffset = accessorDef.byteOffset || 0;
-			var byteStride = json.bufferViews[ accessorDef.bufferView ].byteStride;
-			var normalized = accessorDef.normalized === true;
-			var array, bufferAttribute;
-
-			// The buffer is not interleaved if the stride is the item size in bytes.
-			if ( byteStride && byteStride !== itemBytes ) {
-
-				var ibCacheKey = 'InterleavedBuffer:' + accessorDef.bufferView + ':' + accessorDef.componentType;
-				var ib = parser.cache.get( ibCacheKey );
-
-				if ( ! ib ) {
-
-					// Use the full buffer if it's interleaved.
-					array = new TypedArray( bufferView );
-
-					// Integer parameters to IB/IBA are in array elements, not bytes.
-					ib = new THREE.InterleavedBuffer( array, byteStride / elementBytes );
-
-					parser.cache.add( ibCacheKey, ib );
-
-				}
-
-				bufferAttribute = new THREE.InterleavedBufferAttribute( ib, itemSize, byteOffset / elementBytes, normalized );
-
-			} else {
-
-				if ( bufferView === null ) {
-
-					array = new TypedArray( accessorDef.count * itemSize );
-
-				} else {
-
-					array = new TypedArray( bufferView, byteOffset, accessorDef.count * itemSize );
-
-				}
-
-				bufferAttribute = new THREE.BufferAttribute( array, itemSize, normalized );
-
-			}
-
-			// https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#sparse-accessors
-			if ( accessorDef.sparse !== undefined ) {
-
-				var itemSizeIndices = WEBGL_TYPE_SIZES.SCALAR;
-				var TypedArrayIndices = WEBGL_COMPONENT_TYPES[ accessorDef.sparse.indices.componentType ];
-
-				var byteOffsetIndices = accessorDef.sparse.indices.byteOffset || 0;
-				var byteOffsetValues = accessorDef.sparse.values.byteOffset || 0;
-
-				var sparseIndices = new TypedArrayIndices( bufferViews[ 1 ], byteOffsetIndices, accessorDef.sparse.count * itemSizeIndices );
-				var sparseValues = new TypedArray( bufferViews[ 2 ], byteOffsetValues, accessorDef.sparse.count * itemSize );
-
-				if ( bufferView !== null ) {
-
-					// Avoid modifying the original ArrayBuffer, if the bufferView wasn't initialized with zeroes.
-					bufferAttribute.setArray( bufferAttribute.array.slice() );
-
-				}
-
-				for ( var i = 0, il = sparseIndices.length; i < il; i ++ ) {
-
-					var index = sparseIndices[ i ];
-
-					bufferAttribute.setX( index, sparseValues[ i * itemSize ] );
-					if ( itemSize >= 2 ) bufferAttribute.setY( index, sparseValues[ i * itemSize + 1 ] );
-					if ( itemSize >= 3 ) bufferAttribute.setZ( index, sparseValues[ i * itemSize + 2 ] );
-					if ( itemSize >= 4 ) bufferAttribute.setW( index, sparseValues[ i * itemSize + 3 ] );
-					if ( itemSize >= 5 ) throw new Error( 'THREE.GLTFLoader: Unsupported itemSize in sparse BufferAttribute.' );
-
-				}
-
-			}
-
-			return bufferAttribute;
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#textures
-	 * @param {Number} textureIndex
-	 * @return {Promise<THREE.Texture>}
-	 */
-	GLTFParser.prototype.loadTexture = function ( textureIndex ) {
-
-		var parser = this;
-		var json = this.json;
-		var options = this.options;
-		var textureLoader = this.textureLoader;
-
-		var URL = window.URL || window.webkitURL;
-
-		var textureDef = json.textures[ textureIndex ];
-
-		var textureExtensions = textureDef.extensions || {};
-
-		var source;
-
-		if ( textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ] ) {
-
-			source = json.images[ textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ].source ];
-
-		} else {
-
-			source = json.images[ textureDef.source ];
-
-		}
-
-		var sourceURI = source.uri;
-		var isObjectURL = false;
-
-		if ( source.bufferView !== undefined ) {
-
-			// Load binary image data from bufferView, if provided.
-
-			sourceURI = parser.getDependency( 'bufferView', source.bufferView ).then( function ( bufferView ) {
-
-				isObjectURL = true;
-				var blob = new Blob( [ bufferView ], { type: source.mimeType } );
-				sourceURI = URL.createObjectURL( blob );
-				return sourceURI;
-
-			} );
-
-		}
-
-		return Promise.resolve( sourceURI ).then( function ( sourceURI ) {
-
-			// Load Texture resource.
-
-			var loader = THREE.Loader.Handlers.get( sourceURI );
-
-			if ( ! loader ) {
-
-				loader = textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ]
-					? parser.extensions[ EXTENSIONS.MSFT_TEXTURE_DDS ].ddsLoader
-					: textureLoader;
-
-			}
-
-			return new Promise( function ( resolve, reject ) {
-
-				loader.load( resolveURL( sourceURI, options.path ), resolve, undefined, reject );
-
-			} );
-
-		} ).then( function ( texture ) {
-
-			// Clean up resources and configure Texture.
-
-			if ( isObjectURL === true ) {
-
-				URL.revokeObjectURL( sourceURI );
-
-			}
-
-			texture.flipY = false;
-
-			if ( textureDef.name !== undefined ) texture.name = textureDef.name;
-
-			// .format of dds texture is set in DDSLoader
-			if ( ! textureExtensions[ EXTENSIONS.MSFT_TEXTURE_DDS ] ) {
-
-				texture.format = textureDef.format !== undefined ? WEBGL_TEXTURE_FORMATS[ textureDef.format ] : THREE.RGBAFormat;
-
-			}
-
-			if ( textureDef.internalFormat !== undefined && texture.format !== WEBGL_TEXTURE_FORMATS[ textureDef.internalFormat ] ) {
-
-				console.warn( 'THREE.GLTFLoader: Three.js does not support texture internalFormat which is different from texture format. ' +
-											'internalFormat will be forced to be the same value as format.' );
-
-			}
-
-			texture.type = textureDef.type !== undefined ? WEBGL_TEXTURE_DATATYPES[ textureDef.type ] : THREE.UnsignedByteType;
-
-			var samplers = json.samplers || {};
-			var sampler = samplers[ textureDef.sampler ] || {};
-
-			texture.magFilter = WEBGL_FILTERS[ sampler.magFilter ] || THREE.LinearFilter;
-			texture.minFilter = WEBGL_FILTERS[ sampler.minFilter ] || THREE.LinearMipMapLinearFilter;
-			texture.wrapS = WEBGL_WRAPPINGS[ sampler.wrapS ] || THREE.RepeatWrapping;
-			texture.wrapT = WEBGL_WRAPPINGS[ sampler.wrapT ] || THREE.RepeatWrapping;
-
-			return texture;
-
-		} );
-
-	};
-
-	/**
-	 * Asynchronously assigns a texture to the given material parameters.
-	 * @param {Object} materialParams
-	 * @param {String} textureName
-	 * @param {Number} textureIndex
-	 * @return {Promise}
-	 */
-	GLTFParser.prototype.assignTexture = function ( materialParams, textureName, textureIndex ) {
-
-		return this.getDependency( 'texture', textureIndex ).then( function ( texture ) {
-
-			materialParams[ textureName ] = texture;
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#materials
-	 * @param {Number} materialIndex
-	 * @return {Promise<THREE.Material>}
-	 */
-	GLTFParser.prototype.loadMaterial = function ( materialIndex ) {
-
-		var parser = this;
-		var json = this.json;
-		var extensions = this.extensions;
-		var materialDef = this.json.materials[ materialIndex ];
-
-		var materialType;
-		var materialParams = {};
-		var materialExtensions = materialDef.extensions || {};
-
-		var pending = [];
-
-		if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ] ) {
-
-			var sgExtension = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ];
-			materialType = sgExtension.getMaterialType( materialDef );
-			pending.push( sgExtension.extendParams( materialParams, materialDef, parser ) );
-
-		} else if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_UNLIT ] ) {
-
-			var kmuExtension = extensions[ EXTENSIONS.KHR_MATERIALS_UNLIT ];
-			materialType = kmuExtension.getMaterialType( materialDef );
-			pending.push( kmuExtension.extendParams( materialParams, materialDef, parser ) );
-
-		} else {
-
-			// Specification:
-			// https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#metallic-roughness-material
-
-			materialType = THREE.MeshStandardMaterial;
-
-			var metallicRoughness = materialDef.pbrMetallicRoughness || {};
-
-			materialParams.color = new THREE.Color( 1.0, 1.0, 1.0 );
-			materialParams.opacity = 1.0;
-
-			if ( Array.isArray( metallicRoughness.baseColorFactor ) ) {
-
-				var array = metallicRoughness.baseColorFactor;
-
-				materialParams.color.fromArray( array );
-				materialParams.opacity = array[ 3 ];
-
-			}
-
-			if ( metallicRoughness.baseColorTexture !== undefined ) {
-
-				pending.push( parser.assignTexture( materialParams, 'map', metallicRoughness.baseColorTexture.index ) );
-
-			}
-
-			materialParams.metalness = metallicRoughness.metallicFactor !== undefined ? metallicRoughness.metallicFactor : 1.0;
-			materialParams.roughness = metallicRoughness.roughnessFactor !== undefined ? metallicRoughness.roughnessFactor : 1.0;
-
-			if ( metallicRoughness.metallicRoughnessTexture !== undefined ) {
-
-				var textureIndex = metallicRoughness.metallicRoughnessTexture.index;
-				pending.push( parser.assignTexture( materialParams, 'metalnessMap', textureIndex ) );
-				pending.push( parser.assignTexture( materialParams, 'roughnessMap', textureIndex ) );
-
-			}
-
-		}
-
-		if ( materialDef.doubleSided === true ) {
-
-			materialParams.side = THREE.DoubleSide;
-
-		}
-
-		var alphaMode = materialDef.alphaMode || ALPHA_MODES.OPAQUE;
-
-		if ( alphaMode === ALPHA_MODES.BLEND ) {
-
-			materialParams.transparent = true;
-
-		} else {
-
-			materialParams.transparent = false;
-
-			if ( alphaMode === ALPHA_MODES.MASK ) {
-
-				materialParams.alphaTest = materialDef.alphaCutoff !== undefined ? materialDef.alphaCutoff : 0.5;
-
-			}
-
-		}
-
-		if ( materialDef.normalTexture !== undefined && materialType !== THREE.MeshBasicMaterial) {
-
-			pending.push( parser.assignTexture( materialParams, 'normalMap', materialDef.normalTexture.index ) );
-
-			materialParams.normalScale = new THREE.Vector2( 1, 1 );
-
-			if ( materialDef.normalTexture.scale !== undefined ) {
-
-				materialParams.normalScale.set( materialDef.normalTexture.scale, materialDef.normalTexture.scale );
-
-			}
-
-		}
-
-		if ( materialDef.occlusionTexture !== undefined && materialType !== THREE.MeshBasicMaterial) {
-
-			pending.push( parser.assignTexture( materialParams, 'aoMap', materialDef.occlusionTexture.index ) );
-
-			if ( materialDef.occlusionTexture.strength !== undefined ) {
-
-				materialParams.aoMapIntensity = materialDef.occlusionTexture.strength;
-
-			}
-
-		}
-
-		if ( materialDef.emissiveFactor !== undefined && materialType !== THREE.MeshBasicMaterial) {
-
-			materialParams.emissive = new THREE.Color().fromArray( materialDef.emissiveFactor );
-
-		}
-
-		if ( materialDef.emissiveTexture !== undefined && materialType !== THREE.MeshBasicMaterial) {
-
-			pending.push( parser.assignTexture( materialParams, 'emissiveMap', materialDef.emissiveTexture.index ) );
-
-		}
-
-		return Promise.all( pending ).then( function () {
-
-			var material;
-
-			if ( materialType === THREE.ShaderMaterial ) {
-
-				material = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ].createMaterial( materialParams );
-
-			} else {
-
-				material = new materialType( materialParams );
-
-			}
-
-			if ( materialDef.name !== undefined ) material.name = materialDef.name;
-
-			// Normal map textures use OpenGL conventions:
-			// https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#materialnormaltexture
-			if ( material.normalScale ) {
-
-				material.normalScale.y = - material.normalScale.y;
-
-			}
-
-			// baseColorTexture, emissiveTexture, and specularGlossinessTexture use sRGB encoding.
-			if ( material.map ) material.map.encoding = THREE.sRGBEncoding;
-			if ( material.emissiveMap ) material.emissiveMap.encoding = THREE.sRGBEncoding;
-			if ( material.specularMap ) material.specularMap.encoding = THREE.sRGBEncoding;
-
-			if ( materialDef.extras ) material.userData = materialDef.extras;
-
-			if ( materialDef.extensions ) addUnknownExtensionsToUserData( extensions, material, materialDef );
-
-			return material;
-
-		} );
-
-	};
-
-	/**
-	 * @param  {THREE.BufferGeometry} geometry
-	 * @param  {GLTF.Primitive} primitiveDef
-	 * @param  {Array<THREE.BufferAttribute>} accessors
-	 */
-	function addPrimitiveAttributes( geometry, primitiveDef, accessors ) {
-
-		var attributes = primitiveDef.attributes;
-
-		for ( var gltfAttributeName in attributes ) {
-
-			var threeAttributeName = ATTRIBUTES[ gltfAttributeName ];
-			var bufferAttribute = accessors[ attributes[ gltfAttributeName ] ];
-
-			// Skip attributes already provided by e.g. Draco extension.
-			if ( !threeAttributeName ) continue;
-			if ( threeAttributeName in geometry.attributes ) continue;
-
-			geometry.addAttribute( threeAttributeName, bufferAttribute );
-
-		}
-
-		if ( primitiveDef.indices !== undefined && ! geometry.index ) {
-
-			geometry.setIndex( accessors[ primitiveDef.indices ] );
-
-		}
-
-		if ( primitiveDef.targets !== undefined ) {
-
-			addMorphTargets( geometry, primitiveDef.targets, accessors );
-
-		}
-
-		if ( primitiveDef.extras !== undefined ) {
-
-			geometry.userData = primitiveDef.extras;
-
-		}
-
-	}
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#geometry
-	 *
-	 * Creates BufferGeometries from primitives.
-	 * If we can build a single BufferGeometry with .groups from multiple primitives, returns one BufferGeometry.
-	 * Otherwise, returns BufferGeometries without .groups as many as primitives.
-	 *
-	 * @param {Array<Object>} primitives
-	 * @return {Promise<Array<THREE.BufferGeometry>>}
-	 */
-	GLTFParser.prototype.loadGeometries = function ( primitives ) {
-
-		var parser = this;
-		var extensions = this.extensions;
-		var cache = this.primitiveCache;
-
-		var isMultiPass = isMultiPassGeometry( primitives );
-		var originalPrimitives;
-
-		if ( isMultiPass ) {
-
-			originalPrimitives = primitives; // save original primitives and use later
-
-			// We build a single BufferGeometry with .groups from multiple primitives
-			// because all primitives share the same attributes/morph/mode and have indices.
-
-			primitives = [ primitives[ 0 ] ];
-
-			// Sets .groups and combined indices to a geometry later in this method.
-
-		}
-
-		return this.getDependencies( 'accessor' ).then( function ( accessors ) {
-
-			var pending = [];
-
-			for ( var i = 0, il = primitives.length; i < il; i ++ ) {
-
-				var primitive = primitives[ i ];
-
-				// See if we've already created this geometry
-				var cached = getCachedGeometry( cache, primitive );
-
-				if ( cached ) {
-
-					// Use the cached geometry if it exists
-					pending.push( cached );
-
-				} else if ( primitive.extensions && primitive.extensions[ EXTENSIONS.KHR_DRACO_MESH_COMPRESSION ] ) {
-
-					// Use DRACO geometry if available
-					var geometryPromise = extensions[ EXTENSIONS.KHR_DRACO_MESH_COMPRESSION ]
-						.decodePrimitive( primitive, parser )
-						.then( function ( geometry ) {
-
-							addPrimitiveAttributes( geometry, primitive, accessors );
-
-							return geometry;
-
-						} );
-
-					cache.push( { primitive: primitive, promise: geometryPromise } );
-
-					pending.push( geometryPromise );
-
-				} else {
-
-					// Otherwise create a new geometry
-					var geometry = new THREE.BufferGeometry();
-
-					addPrimitiveAttributes( geometry, primitive, accessors );
-
-					var geometryPromise = Promise.resolve( geometry );
-
-					// Cache this geometry
-					cache.push( { primitive: primitive, promise: geometryPromise } );
-
-					pending.push( geometryPromise );
-
-				}
-
-			}
-
-			return Promise.all( pending ).then( function ( geometries ) {
-
-				if ( isMultiPass ) {
-
-					var baseGeometry = geometries[ 0 ];
-
-					// See if we've already created this combined geometry
-					var cache = parser.multiPassGeometryCache;
-					var cached = getCachedMultiPassGeometry( cache, baseGeometry, originalPrimitives );
-
-					if ( cached !== null ) return [ cached.geometry ];
-
-					// Cloning geometry because of index override.
-					// Attributes can be reused so cloning by myself here.
-					var geometry = new THREE.BufferGeometry();
-
-					geometry.name = baseGeometry.name;
-					geometry.userData = baseGeometry.userData;
-
-					for ( var key in baseGeometry.attributes ) geometry.addAttribute( key, baseGeometry.attributes[ key ] );
-					for ( var key in baseGeometry.morphAttributes ) geometry.morphAttributes[ key ] = baseGeometry.morphAttributes[ key ];
-
-					var indices = [];
-					var offset = 0;
-
-					for ( var i = 0, il = originalPrimitives.length; i < il; i ++ ) {
-
-						var accessor = accessors[ originalPrimitives[ i ].indices ];
-
-						for ( var j = 0, jl = accessor.count; j < jl; j ++ ) indices.push( accessor.array[ j ] );
-
-						geometry.addGroup( offset, accessor.count, i );
-
-						offset += accessor.count;
-
-					}
-
-					geometry.setIndex( indices );
-
-					cache.push( { geometry: geometry, baseGeometry: baseGeometry, primitives: originalPrimitives } );
-
-					return [ geometry ];
-
-				} else if ( geometries.length > 1 && THREE.BufferGeometryUtils !== undefined ) {
-
-					// Tries to merge geometries with BufferGeometryUtils if possible
-
-					for ( var i = 1, il = primitives.length; i < il; i ++ ) {
-
-						// can't merge if draw mode is different
-						if ( primitives[ 0 ].mode !== primitives[ i ].mode ) return geometries;
-
-					}
-
-					// See if we've already created this combined geometry
-					var cache = parser.multiplePrimitivesCache;
-					var cached = getCachedCombinedGeometry( cache, geometries );
-
-					if ( cached ) {
-
-						if ( cached.geometry !== null ) return [ cached.geometry ];
-
-					} else {
-
-						var geometry = THREE.BufferGeometryUtils.mergeBufferGeometries( geometries, true );
-
-						cache.push( { geometry: geometry, baseGeometries: geometries } );
-
-						if ( geometry !== null ) return [ geometry ];
-
-					}
-
-				}
-
-				return geometries;
-
-			} );
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#meshes
-	 * @param {Number} meshIndex
-	 * @return {Promise<THREE.Group|THREE.Mesh|THREE.SkinnedMesh>}
-	 */
-	GLTFParser.prototype.loadMesh = function ( meshIndex ) {
-
-		var scope = this;
-		var json = this.json;
-		var extensions = this.extensions;
-
-		var meshDef = this.json.meshes[ meshIndex ];
-
-		return this.getMultiDependencies( [
-
-			'accessor',
-			'material'
-
-		] ).then( function ( dependencies ) {
-
-			var primitives = meshDef.primitives;
-			var originalMaterials = [];
-
-			for ( var i = 0, il = primitives.length; i < il; i ++ ) {
-
-				originalMaterials[ i ] = primitives[ i ].material === undefined
-					? createDefaultMaterial()
-					: dependencies.materials[ primitives[ i ].material ];
-
-			}
-
-			return scope.loadGeometries( primitives ).then( function ( geometries ) {
-
-				var isMultiMaterial = geometries.length === 1 && geometries[ 0 ].groups.length > 0;
-
-				var meshes = [];
-
-				for ( var i = 0, il = geometries.length; i < il; i ++ ) {
-
-					var geometry = geometries[ i ];
-					var primitive = primitives[ i ];
-
-					// 1. create Mesh
-
-					var mesh;
-
-					var material = isMultiMaterial ? originalMaterials : originalMaterials[ i ]
-
-					if ( primitive.mode === WEBGL_CONSTANTS.TRIANGLES ||
-						primitive.mode === WEBGL_CONSTANTS.TRIANGLE_STRIP ||
-						primitive.mode === WEBGL_CONSTANTS.TRIANGLE_FAN ||
-						primitive.mode === undefined ) {
-
-						// .isSkinnedMesh isn't in glTF spec. See .markDefs()
-						mesh = meshDef.isSkinnedMesh === true
-							? new THREE.SkinnedMesh( geometry, material )
-							: new THREE.Mesh( geometry, material );
-
-						if ( primitive.mode === WEBGL_CONSTANTS.TRIANGLE_STRIP ) {
-
-							mesh.drawMode = THREE.TriangleStripDrawMode;
-
-						} else if ( primitive.mode === WEBGL_CONSTANTS.TRIANGLE_FAN ) {
-
-							mesh.drawMode = THREE.TriangleFanDrawMode;
-
-						}
-
-					} else if ( primitive.mode === WEBGL_CONSTANTS.LINES ) {
-
-						mesh = new THREE.LineSegments( geometry, material );
-
-					} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_STRIP ) {
-
-						mesh = new THREE.Line( geometry, material );
-
-					} else if ( primitive.mode === WEBGL_CONSTANTS.LINE_LOOP ) {
-
-						mesh = new THREE.LineLoop( geometry, material );
-
-					} else if ( primitive.mode === WEBGL_CONSTANTS.POINTS ) {
-
-						mesh = new THREE.Points( geometry, material );
-
-					} else {
-
-						throw new Error( 'THREE.GLTFLoader: Primitive mode unsupported: ' + primitive.mode );
-
-					}
-
-					if ( Object.keys( mesh.geometry.morphAttributes ).length > 0 ) {
-
-						updateMorphTargets( mesh, meshDef );
-
-					}
-
-					mesh.name = meshDef.name || ( 'mesh_' + meshIndex );
-
-					if ( geometries.length > 1 ) mesh.name += '_' + i;
-
-					if ( meshDef.extras !== undefined ) mesh.userData = meshDef.extras;
-
-					meshes.push( mesh );
-
-					// 2. update Material depending on Mesh and BufferGeometry
-
-					var materials = isMultiMaterial ? mesh.material : [ mesh.material ];
-
-					var useVertexColors = geometry.attributes.color !== undefined;
-					var useFlatShading = geometry.attributes.normal === undefined;
-					var useSkinning = mesh.isSkinnedMesh === true;
-					var useMorphTargets = Object.keys( geometry.morphAttributes ).length > 0;
-					var useMorphNormals = useMorphTargets && geometry.morphAttributes.normal !== undefined;
-
-					for ( var j = 0, jl = materials.length; j < jl; j ++ ) {
-
-						var material = materials[ j ];
-
-						if ( mesh.isPoints ) {
-
-							var cacheKey = 'PointsMaterial:' + material.uuid;
-
-							var pointsMaterial = scope.cache.get( cacheKey );
-
-							if ( ! pointsMaterial ) {
-
-								pointsMaterial = new THREE.PointsMaterial();
-								THREE.Material.prototype.copy.call( pointsMaterial, material );
-								pointsMaterial.color.copy( material.color );
-								pointsMaterial.map = material.map;
-								pointsMaterial.lights = false;  // PointsMaterial doesn't support lights yet
-
-								scope.cache.add( cacheKey, pointsMaterial );
-
-							}
-
-							material = pointsMaterial;
-
-						} else if ( mesh.isLine ) {
-
-							var cacheKey = 'LineBasicMaterial:' + material.uuid;
-
-							var lineMaterial = scope.cache.get( cacheKey );
-
-							if ( ! lineMaterial ) {
-
-								lineMaterial = new THREE.LineBasicMaterial();
-								THREE.Material.prototype.copy.call( lineMaterial, material );
-								lineMaterial.color.copy( material.color );
-								lineMaterial.lights = false;  // LineBasicMaterial doesn't support lights yet
-
-								scope.cache.add( cacheKey, lineMaterial );
-
-							}
-
-							material = lineMaterial;
-
-						}
-
-						// Clone the material if it will be modified
-						if ( useVertexColors || useFlatShading || useSkinning || useMorphTargets ) {
-
-							var cacheKey = 'ClonedMaterial:' + material.uuid + ':';
-
-							if ( material.isGLTFSpecularGlossinessMaterial ) cacheKey += 'specular-glossiness:';
-							if ( useSkinning ) cacheKey += 'skinning:';
-							if ( useVertexColors ) cacheKey += 'vertex-colors:';
-							if ( useFlatShading ) cacheKey += 'flat-shading:';
-							if ( useMorphTargets ) cacheKey += 'morph-targets:';
-							if ( useMorphNormals ) cacheKey += 'morph-normals:';
-
-							var cachedMaterial = scope.cache.get( cacheKey );
-
-							if ( ! cachedMaterial ) {
-
-								cachedMaterial = material.isGLTFSpecularGlossinessMaterial
-										? extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ].cloneMaterial( material )
-										: material.clone();
-
-								if ( useSkinning ) cachedMaterial.skinning = true;
-								if ( useVertexColors ) cachedMaterial.vertexColors = THREE.VertexColors;
-								if ( useFlatShading ) cachedMaterial.flatShading = true;
-								if ( useMorphTargets ) cachedMaterial.morphTargets = true;
-								if ( useMorphNormals ) cachedMaterial.morphNormals = true;
-
-								scope.cache.add( cacheKey, cachedMaterial );
-
-							}
-
-							material = cachedMaterial;
-
-						}
-
-						materials[ j ] = material;
-
-						// workarounds for mesh and geometry
-
-						if ( material.aoMap && geometry.attributes.uv2 === undefined && geometry.attributes.uv !== undefined ) {
-
-							console.log( 'THREE.GLTFLoader: Duplicating UVs to support aoMap.' );
-							geometry.addAttribute( 'uv2', new THREE.BufferAttribute( geometry.attributes.uv.array, 2 ) );
-
-						}
-
-						if ( material.isGLTFSpecularGlossinessMaterial ) {
-
-							// for GLTFSpecularGlossinessMaterial(ShaderMaterial) uniforms runtime update
-							mesh.onBeforeRender = extensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ].refreshUniforms;
-
-						}
-
-					}
-
-					mesh.material = isMultiMaterial ? materials : materials[ 0 ];
-
-				}
-
-				if ( meshes.length === 1 ) {
-
-					return meshes[ 0 ];
-
-				}
-
-				var group = new THREE.Group();
-
-				for ( var i = 0, il = meshes.length; i < il; i ++ ) {
-
-					group.add( meshes[ i ] );
-
-				}
-
-				return group;
-
-			} );
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#cameras
-	 * @param {Number} cameraIndex
-	 * @return {Promise<THREE.Camera>}
-	 */
-	GLTFParser.prototype.loadCamera = function ( cameraIndex ) {
-
-		var camera;
-		var cameraDef = this.json.cameras[ cameraIndex ];
-		var params = cameraDef[ cameraDef.type ];
-
-		if ( ! params ) {
-
-			console.warn( 'THREE.GLTFLoader: Missing camera parameters.' );
-			return;
-
-		}
-
-		if ( cameraDef.type === 'perspective' ) {
-
-			camera = new THREE.PerspectiveCamera( THREE.Math.radToDeg( params.yfov ), params.aspectRatio || 1, params.znear || 1, params.zfar || 2e6 );
-
-		} else if ( cameraDef.type === 'orthographic' ) {
-
-			camera = new THREE.OrthographicCamera( params.xmag / - 2, params.xmag / 2, params.ymag / 2, params.ymag / - 2, params.znear, params.zfar );
-
-		}
-
-		if ( cameraDef.name !== undefined ) camera.name = cameraDef.name;
-		if ( cameraDef.extras ) camera.userData = cameraDef.extras;
-
-		return Promise.resolve( camera );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#skins
-	 * @param {Number} skinIndex
-	 * @return {Promise<Object>}
-	 */
-	GLTFParser.prototype.loadSkin = function ( skinIndex ) {
-
-		var skinDef = this.json.skins[ skinIndex ];
-
-		var skinEntry = { joints: skinDef.joints };
-
-		if ( skinDef.inverseBindMatrices === undefined ) {
-
-			return Promise.resolve( skinEntry );
-
-		}
-
-		return this.getDependency( 'accessor', skinDef.inverseBindMatrices ).then( function ( accessor ) {
-
-			skinEntry.inverseBindMatrices = accessor;
-
-			return skinEntry;
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#animations
-	 * @param {Number} animationIndex
-	 * @return {Promise<THREE.AnimationClip>}
-	 */
-	GLTFParser.prototype.loadAnimation = function ( animationIndex ) {
-
-		var json = this.json;
-
-		var animationDef = this.json.animations[ animationIndex ];
-
-		return this.getMultiDependencies( [
-
-			'accessor',
-			'node'
-
-		] ).then( function ( dependencies ) {
-
-			var tracks = [];
-
-			for ( var i = 0, il = animationDef.channels.length; i < il; i ++ ) {
-
-				var channel = animationDef.channels[ i ];
-				var sampler = animationDef.samplers[ channel.sampler ];
-
-				if ( sampler ) {
-
-					var target = channel.target;
-					var name = target.node !== undefined ? target.node : target.id; // NOTE: target.id is deprecated.
-					var input = animationDef.parameters !== undefined ? animationDef.parameters[ sampler.input ] : sampler.input;
-					var output = animationDef.parameters !== undefined ? animationDef.parameters[ sampler.output ] : sampler.output;
-
-					var inputAccessor = dependencies.accessors[ input ];
-					var outputAccessor = dependencies.accessors[ output ];
-
-					var node = dependencies.nodes[ name ];
-
-					if ( node ) {
-
-						node.updateMatrix();
-						node.matrixAutoUpdate = true;
-
-						var TypedKeyframeTrack;
-
-						switch ( PATH_PROPERTIES[ target.path ] ) {
-
-							case PATH_PROPERTIES.weights:
-
-								TypedKeyframeTrack = THREE.NumberKeyframeTrack;
-								break;
-
-							case PATH_PROPERTIES.rotation:
-
-								TypedKeyframeTrack = THREE.QuaternionKeyframeTrack;
-								break;
-
-							case PATH_PROPERTIES.position:
-							case PATH_PROPERTIES.scale:
-							default:
-
-								TypedKeyframeTrack = THREE.VectorKeyframeTrack;
-								break;
-
-						}
-
-						var targetName = node.name ? node.name : node.uuid;
-
-						var interpolation = sampler.interpolation !== undefined ? INTERPOLATION[ sampler.interpolation ] : THREE.InterpolateLinear;
-
-						var targetNames = [];
-
-						if ( PATH_PROPERTIES[ target.path ] === PATH_PROPERTIES.weights ) {
-
-							// node can be THREE.Group here but
-							// PATH_PROPERTIES.weights(morphTargetInfluences) should be
-							// the property of a mesh object under group.
-
-							node.traverse( function ( object ) {
-
-								if ( object.isMesh === true && object.morphTargetInfluences ) {
-
-									targetNames.push( object.name ? object.name : object.uuid );
-
-								}
-
-							} );
-
-						} else {
-
-							targetNames.push( targetName );
-
-						}
-
-						// KeyframeTrack.optimize() will modify given 'times' and 'values'
-						// buffers before creating a truncated copy to keep. Because buffers may
-						// be reused by other tracks, make copies here.
-						for ( var j = 0, jl = targetNames.length; j < jl; j ++ ) {
-
-							var track = new TypedKeyframeTrack(
-								targetNames[ j ] + '.' + PATH_PROPERTIES[ target.path ],
-								THREE.AnimationUtils.arraySlice( inputAccessor.array, 0 ),
-								THREE.AnimationUtils.arraySlice( outputAccessor.array, 0 ),
-								interpolation
-							);
-
-							// Here is the trick to enable custom interpolation.
-							// Overrides .createInterpolant in a factory method which creates custom interpolation.
-							if ( sampler.interpolation === 'CUBICSPLINE' ) {
-
-								track.createInterpolant = function InterpolantFactoryMethodGLTFCubicSpline( result ) {
-
-									// A CUBICSPLINE keyframe in glTF has three output values for each input value,
-									// representing inTangent, splineVertex, and outTangent. As a result, track.getValueSize()
-									// must be divided by three to get the interpolant's sampleSize argument.
-
-									return new GLTFCubicSplineInterpolant( this.times, this.values, this.getValueSize() / 3, result );
-
-								};
-
-								// Workaround, provide an alternate way to know if the interpolant type is cubis spline to track.
-								// track.getInterpolation() doesn't return valid value for custom interpolant.
-								track.createInterpolant.isInterpolantFactoryMethodGLTFCubicSpline = true;
-
-							}
-
-							tracks.push( track );
-
-						}
-
-					}
-
-				}
-
-			}
-
-			var name = animationDef.name !== undefined ? animationDef.name : 'animation_' + animationIndex;
-
-			return new THREE.AnimationClip( name, undefined, tracks );
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#nodes-and-hierarchy
-	 * @param {Number} nodeIndex
-	 * @return {Promise<THREE.Object3D>}
-	 */
-	GLTFParser.prototype.loadNode = function ( nodeIndex ) {
-
-		var json = this.json;
-		var extensions = this.extensions;
-
-		var meshReferences = this.json.meshReferences;
-		var meshUses = this.json.meshUses;
-
-		var nodeDef = this.json.nodes[ nodeIndex ];
-
-		return this.getMultiDependencies( [
-
-			'mesh',
-			'skin',
-			'camera',
-			'light'
-
-		] ).then( function ( dependencies ) {
-
-			var node;
-
-			// .isBone isn't in glTF spec. See .markDefs
-			if ( nodeDef.isBone === true ) {
-
-				node = new THREE.Bone();
-
-			} else if ( nodeDef.mesh !== undefined ) {
-
-				var mesh = dependencies.meshes[ nodeDef.mesh ];
-
-				node = mesh.clone();
-
-				// for Specular-Glossiness
-				if ( mesh.isGroup === true ) {
-
-					for ( var i = 0, il = mesh.children.length; i < il; i ++ ) {
-
-						var child = mesh.children[ i ];
-
-						if ( child.material && child.material.isGLTFSpecularGlossinessMaterial === true ) {
-
-							node.children[ i ].onBeforeRender = child.onBeforeRender;
-
-						}
-
-					}
-
-				} else {
-
-					if ( mesh.material && mesh.material.isGLTFSpecularGlossinessMaterial === true ) {
-
-						node.onBeforeRender = mesh.onBeforeRender;
-
-					}
-
-				}
-
-				if ( meshReferences[ nodeDef.mesh ] > 1 ) {
-
-					node.name += '_instance_' + meshUses[ nodeDef.mesh ] ++;
-
-				}
-
-			} else if ( nodeDef.camera !== undefined ) {
-
-				node = dependencies.cameras[ nodeDef.camera ];
-
-			} else if ( nodeDef.extensions
-					 && nodeDef.extensions[ EXTENSIONS.KHR_LIGHTS ]
-					 && nodeDef.extensions[ EXTENSIONS.KHR_LIGHTS ].light !== undefined ) {
-
-				var lights = extensions[ EXTENSIONS.KHR_LIGHTS ].lights;
-				node = lights[ nodeDef.extensions[ EXTENSIONS.KHR_LIGHTS ].light ];
-
-			} else {
-
-				node = new THREE.Object3D();
-
-			}
-
-			if ( nodeDef.name !== undefined ) {
-
-				node.name = THREE.PropertyBinding.sanitizeNodeName( nodeDef.name );
-
-			}
-
-			if ( nodeDef.extras ) node.userData = nodeDef.extras;
-
-			if ( nodeDef.extensions ) addUnknownExtensionsToUserData( extensions, node, nodeDef );
-
-			if ( nodeDef.matrix !== undefined ) {
-
-				var matrix = new THREE.Matrix4();
-				matrix.fromArray( nodeDef.matrix );
-				node.applyMatrix( matrix );
-
-			} else {
-
-				if ( nodeDef.translation !== undefined ) {
-
-					node.position.fromArray( nodeDef.translation );
-
-				}
-
-				if ( nodeDef.rotation !== undefined ) {
-
-					node.quaternion.fromArray( nodeDef.rotation );
-
-				}
-
-				if ( nodeDef.scale !== undefined ) {
-
-					node.scale.fromArray( nodeDef.scale );
-
-				}
-
-			}
-
-			return node;
-
-		} );
-
-	};
-
-	/**
-	 * Specification: https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#scenes
-	 * @param {Number} sceneIndex
-	 * @return {Promise<THREE.Scene>}
-	 */
-	GLTFParser.prototype.loadScene = function () {
-
-		// scene node hierachy builder
-
-		function buildNodeHierachy( nodeId, parentObject, json, allNodes, skins ) {
-
-			var node = allNodes[ nodeId ];
-			var nodeDef = json.nodes[ nodeId ];
-
-			// build skeleton here as well
-
-			if ( nodeDef.skin !== undefined ) {
-
-				var meshes = node.isGroup === true ? node.children : [ node ];
-
-				for ( var i = 0, il = meshes.length; i < il; i ++ ) {
-
-					var mesh = meshes[ i ];
-					var skinEntry = skins[ nodeDef.skin ];
-
-					var bones = [];
-					var boneInverses = [];
-
-					for ( var j = 0, jl = skinEntry.joints.length; j < jl; j ++ ) {
-
-						var jointId = skinEntry.joints[ j ];
-						var jointNode = allNodes[ jointId ];
-
-						if ( jointNode ) {
-
-							bones.push( jointNode );
-
-							var mat = new THREE.Matrix4();
-
-							if ( skinEntry.inverseBindMatrices !== undefined ) {
-
-								mat.fromArray( skinEntry.inverseBindMatrices.array, j * 16 );
-
-							}
-
-							boneInverses.push( mat );
-
-						} else {
-
-							console.warn( 'THREE.GLTFLoader: Joint "%s" could not be found.', jointId );
-
-						}
-
-					}
-
-					mesh.bind( new THREE.Skeleton( bones, boneInverses ), mesh.matrixWorld );
-
-				}
-
-			}
-
-			// build node hierachy
-
-			parentObject.add( node );
-
-			if ( nodeDef.children ) {
-
-				var children = nodeDef.children;
-
-				for ( var i = 0, il = children.length; i < il; i ++ ) {
-
-					var child = children[ i ];
-					buildNodeHierachy( child, node, json, allNodes, skins );
-
-				}
-
-			}
-
-		}
-
-		return function loadScene( sceneIndex ) {
-
-			var json = this.json;
-			var extensions = this.extensions;
-			var sceneDef = this.json.scenes[ sceneIndex ];
-
-			return this.getMultiDependencies( [
-
-				'node',
-				'skin'
-
-			] ).then( function ( dependencies ) {
-
-				var scene = new THREE.Scene();
-				if ( sceneDef.name !== undefined ) scene.name = sceneDef.name;
-
-				if ( sceneDef.extras ) scene.userData = sceneDef.extras;
-
-				if ( sceneDef.extensions ) addUnknownExtensionsToUserData( extensions, scene, sceneDef );
-
-				var nodeIds = sceneDef.nodes || [];
-
-				for ( var i = 0, il = nodeIds.length; i < il; i ++ ) {
-
-					buildNodeHierachy( nodeIds[ i ], scene, json, dependencies.nodes, dependencies.skins );
-
-				}
-
-				// Ambient lighting, if present, is always attached to the scene root.
-				if ( sceneDef.extensions
-						 && sceneDef.extensions[ EXTENSIONS.KHR_LIGHTS ]
-						 && sceneDef.extensions[ EXTENSIONS.KHR_LIGHTS ].light !== undefined ) {
-
-					var lights = extensions[ EXTENSIONS.KHR_LIGHTS ].lights;
-					scene.add( lights[ sceneDef.extensions[ EXTENSIONS.KHR_LIGHTS ].light ] );
-
-				}
-
-				return scene;
-
-			} );
-
-		};
-
-	}();
-
-	return GLTFLoader;
-
-} )();
-/**
- * Loads a Wavefront .mtl file specifying materials
- *
- * @author angelxuanchang
- */
-
-THREE.MTLLoader = function ( manager ) {
-
-	this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
-
-};
-
-THREE.MTLLoader.prototype = {
-
-	constructor: THREE.MTLLoader,
-
-	/**
-	 * Loads and parses a MTL asset from a URL.
-	 *
-	 * @param {String} url - URL to the MTL file.
-	 * @param {Function} [onLoad] - Callback invoked with the loaded object.
-	 * @param {Function} [onProgress] - Callback for download progress.
-	 * @param {Function} [onError] - Callback for download errors.
-	 *
-	 * @see setPath setTexturePath
-	 *
-	 * @note In order for relative texture references to resolve correctly
-	 * you must call setPath and/or setTexturePath explicitly prior to load.
-	 */
-	load: function ( url, onLoad, onProgress, onError ) {
-
-		var scope = this;
-
-		var loader = new THREE.FileLoader( this.manager );
-		loader.setPath( this.path );
-		loader.load( url, function ( text ) {
-
-			onLoad( scope.parse( text ) );
-
-		}, onProgress, onError );
-
-	},
-
-	/**
-	 * Set base path for resolving references.
-	 * If set this path will be prepended to each loaded and found reference.
-	 *
-	 * @see setTexturePath
-	 * @param {String} path
-	 * @return {THREE.MTLLoader}
-	 *
-	 * @example
-	 *     mtlLoader.setPath( 'assets/obj/' );
-	 *     mtlLoader.load( 'my.mtl', ... );
-	 */
-	setPath: function ( path ) {
-
-		this.path = path;
-		return this;
-
-	},
-
-	/**
-	 * Set base path for resolving texture references.
-	 * If set this path will be prepended found texture reference.
-	 * If not set and setPath is, it will be used as texture base path.
-	 *
-	 * @see setPath
-	 * @param {String} path
-	 * @return {THREE.MTLLoader}
-	 *
-	 * @example
-	 *     mtlLoader.setPath( 'assets/obj/' );
-	 *     mtlLoader.setTexturePath( 'assets/textures/' );
-	 *     mtlLoader.load( 'my.mtl', ... );
-	 */
-	setTexturePath: function ( path ) {
-
-		this.texturePath = path;
-		return this;
-
-	},
-
-	setBaseUrl: function ( path ) {
-
-		console.warn( 'THREE.MTLLoader: .setBaseUrl() is deprecated. Use .setTexturePath( path ) for texture path or .setPath( path ) for general base path instead.' );
-
-		return this.setTexturePath( path );
-
-	},
-
-	setCrossOrigin: function ( value ) {
-
-		this.crossOrigin = value;
-		return this;
-
-	},
-
-	setMaterialOptions: function ( value ) {
-
-		this.materialOptions = value;
-		return this;
-
-	},
-
-	/**
-	 * Parses a MTL file.
-	 *
-	 * @param {String} text - Content of MTL file
-	 * @return {THREE.MTLLoader.MaterialCreator}
-	 *
-	 * @see setPath setTexturePath
-	 *
-	 * @note In order for relative texture references to resolve correctly
-	 * you must call setPath and/or setTexturePath explicitly prior to parse.
-	 */
-	parse: function ( text ) {
-
-		var lines = text.split( '\n' );
-		var info = {};
-		var delimiter_pattern = /\s+/;
-		var materialsInfo = {};
-
-		for ( var i = 0; i < lines.length; i ++ ) {
-
-			var line = lines[ i ];
-			line = line.trim();
-
-			if ( line.length === 0 || line.charAt( 0 ) === '#' ) {
-
-				// Blank line or comment ignore
-				continue;
-
-			}
-
-			var pos = line.indexOf( ' ' );
-
-			var key = ( pos >= 0 ) ? line.substring( 0, pos ) : line;
-			key = key.toLowerCase();
-
-			var value = ( pos >= 0 ) ? line.substring( pos + 1 ) : '';
-			value = value.trim();
-
-			if ( key === 'newmtl' ) {
-
-				// New material
-
-				info = { name: value };
-				materialsInfo[ value ] = info;
-
-			} else if ( info ) {
-
-				if ( key === 'ka' || key === 'kd' || key === 'ks' ) {
-
-					var ss = value.split( delimiter_pattern, 3 );
-					info[ key ] = [ parseFloat( ss[ 0 ] ), parseFloat( ss[ 1 ] ), parseFloat( ss[ 2 ] ) ];
-
-				} else {
-
-					info[ key ] = value;
-
-				}
-
-			}
-
-		}
-
-		var materialCreator = new THREE.MTLLoader.MaterialCreator( this.texturePath || this.path, this.materialOptions );
-		materialCreator.setCrossOrigin( this.crossOrigin );
-		materialCreator.setManager( this.manager );
-		materialCreator.setMaterials( materialsInfo );
-		return materialCreator;
-
-	}
-
-};
-
-/**
- * Create a new THREE-MTLLoader.MaterialCreator
- * @param baseUrl - Url relative to which textures are loaded
- * @param options - Set of options on how to construct the materials
- *                  side: Which side to apply the material
- *                        THREE.FrontSide (default), THREE.BackSide, THREE.DoubleSide
- *                  wrap: What type of wrapping to apply for textures
- *                        THREE.RepeatWrapping (default), THREE.ClampToEdgeWrapping, THREE.MirroredRepeatWrapping
- *                  normalizeRGB: RGBs need to be normalized to 0-1 from 0-255
- *                                Default: false, assumed to be already normalized
- *                  ignoreZeroRGBs: Ignore values of RGBs (Ka,Kd,Ks) that are all 0's
- *                                  Default: false
- * @constructor
- */
-
-THREE.MTLLoader.MaterialCreator = function ( baseUrl, options ) {
-
-	this.baseUrl = baseUrl || '';
-	this.options = options;
-	this.materialsInfo = {};
-	this.materials = {};
-	this.materialsArray = [];
-	this.nameLookup = {};
-
-	this.side = ( this.options && this.options.side ) ? this.options.side : THREE.FrontSide;
-	this.wrap = ( this.options && this.options.wrap ) ? this.options.wrap : THREE.RepeatWrapping;
-
-};
-
-THREE.MTLLoader.MaterialCreator.prototype = {
-
-	constructor: THREE.MTLLoader.MaterialCreator,
-
-	crossOrigin: 'Anonymous',
-
-	setCrossOrigin: function ( value ) {
-
-		this.crossOrigin = value;
-
-	},
-
-	setManager: function ( value ) {
-
-		this.manager = value;
-
-	},
-
-	setMaterials: function ( materialsInfo ) {
-
-		this.materialsInfo = this.convert( materialsInfo );
-		this.materials = {};
-		this.materialsArray = [];
-		this.nameLookup = {};
-
-	},
-
-	convert: function ( materialsInfo ) {
-
-		if ( ! this.options ) return materialsInfo;
-
-		var converted = {};
-
-		for ( var mn in materialsInfo ) {
-
-			// Convert materials info into normalized form based on options
-
-			var mat = materialsInfo[ mn ];
-
-			var covmat = {};
-
-			converted[ mn ] = covmat;
-
-			for ( var prop in mat ) {
-
-				var save = true;
-				var value = mat[ prop ];
-				var lprop = prop.toLowerCase();
-
-				switch ( lprop ) {
-
-					case 'kd':
-					case 'ka':
-					case 'ks':
-
-						// Diffuse color (color under white light) using RGB values
-
-						if ( this.options && this.options.normalizeRGB ) {
-
-							value = [ value[ 0 ] / 255, value[ 1 ] / 255, value[ 2 ] / 255 ];
-
-						}
-
-						if ( this.options && this.options.ignoreZeroRGBs ) {
-
-							if ( value[ 0 ] === 0 && value[ 1 ] === 0 && value[ 2 ] === 0 ) {
-
-								// ignore
-
-								save = false;
-
-							}
-
-						}
-
-						break;
-
-					default:
-
-						break;
-
-				}
-
-				if ( save ) {
-
-					covmat[ lprop ] = value;
-
-				}
-
-			}
-
-		}
-
-		return converted;
-
-	},
-
-	preload: function () {
-
-		for ( var mn in this.materialsInfo ) {
-
-			this.create( mn );
-
-		}
-
-	},
-
-	getIndex: function ( materialName ) {
-
-		return this.nameLookup[ materialName ];
-
-	},
-
-	getAsArray: function () {
-
-		var index = 0;
-
-		for ( var mn in this.materialsInfo ) {
-
-			this.materialsArray[ index ] = this.create( mn );
-			this.nameLookup[ mn ] = index;
-			index ++;
-
-		}
-
-		return this.materialsArray;
-
-	},
-
-	create: function ( materialName ) {
-
-		if ( this.materials[ materialName ] === undefined ) {
-
-			this.createMaterial_( materialName );
-
-		}
-
-		return this.materials[ materialName ];
-
-	},
-
-	createMaterial_: function ( materialName ) {
-
-		// Create material
-
-		var scope = this;
-		var mat = this.materialsInfo[ materialName ];
-		var params = {
-
-			name: materialName,
-			side: this.side
-
-		};
-
-		function resolveURL( baseUrl, url ) {
-
-			if ( typeof url !== 'string' || url === '' )
-				return '';
-
-			// Absolute URL
-			if ( /^https?:\/\//i.test( url ) ) return url;
-
-			return baseUrl + url;
-
-		}
-
-		function setMapForType( mapType, value ) {
-
-			if ( params[ mapType ] ) return; // Keep the first encountered texture
-
-			var texParams = scope.getTextureParams( value, params );
-			var map = scope.loadTexture( resolveURL( scope.baseUrl, texParams.url ) );
-
-			map.repeat.copy( texParams.scale );
-			map.offset.copy( texParams.offset );
-
-			map.wrapS = scope.wrap;
-			map.wrapT = scope.wrap;
-
-			params[ mapType ] = map;
-
-		}
-
-		for ( var prop in mat ) {
-
-			var value = mat[ prop ];
-			var n;
-
-			if ( value === '' ) continue;
-
-			switch ( prop.toLowerCase() ) {
-
-				// Ns is material specular exponent
-
-				case 'kd':
-
-					// Diffuse color (color under white light) using RGB values
-
-					params.color = new THREE.Color().fromArray( value );
-
-					break;
-
-				case 'ks':
-
-					// Specular color (color when light is reflected from shiny surface) using RGB values
-					params.specular = new THREE.Color().fromArray( value );
-
-					break;
-
-				case 'map_kd':
-
-					// Diffuse texture map
-
-					setMapForType( "map", value );
-
-					break;
-
-				case 'map_ks':
-
-					// Specular map
-
-					setMapForType( "specularMap", value );
-
-					break;
-
-				case 'norm':
-
-					setMapForType( "normalMap", value );
-
-					break;
-
-				case 'map_bump':
-				case 'bump':
-
-					// Bump texture map
-
-					setMapForType( "bumpMap", value );
-
-					break;
-
-				case 'ns':
-
-					// The specular exponent (defines the focus of the specular highlight)
-					// A high exponent results in a tight, concentrated highlight. Ns values normally range from 0 to 1000.
-
-					params.shininess = parseFloat( value );
-
-					break;
-
-				case 'd':
-					n = parseFloat( value );
-
-					if ( n < 1 ) {
-
-						params.opacity = n;
-						params.transparent = true;
-
-					}
-
-					break;
-
-				case 'tr':
-					n = parseFloat( value );
-
-					if ( this.options && this.options.invertTrProperty ) n = 1 - n;
-
-					if ( n > 0 ) {
-
-						params.opacity = 1 - n;
-						params.transparent = true;
-
-					}
-
-					break;
-
-				default:
-					break;
-
-			}
-
-		}
-
-		this.materials[ materialName ] = new THREE.MeshPhongMaterial( params );
-		return this.materials[ materialName ];
-
-	},
-
-	getTextureParams: function ( value, matParams ) {
-
-		var texParams = {
-
-			scale: new THREE.Vector2( 1, 1 ),
-			offset: new THREE.Vector2( 0, 0 )
-
-		 };
-
-		var items = value.split( /\s+/ );
-		var pos;
-
-		pos = items.indexOf( '-bm' );
-
-		if ( pos >= 0 ) {
-
-			matParams.bumpScale = parseFloat( items[ pos + 1 ] );
-			items.splice( pos, 2 );
-
-		}
-
-		pos = items.indexOf( '-s' );
-
-		if ( pos >= 0 ) {
-
-			texParams.scale.set( parseFloat( items[ pos + 1 ] ), parseFloat( items[ pos + 2 ] ) );
-			items.splice( pos, 4 ); // we expect 3 parameters here!
-
-		}
-
-		pos = items.indexOf( '-o' );
-
-		if ( pos >= 0 ) {
-
-			texParams.offset.set( parseFloat( items[ pos + 1 ] ), parseFloat( items[ pos + 2 ] ) );
-			items.splice( pos, 4 ); // we expect 3 parameters here!
-
-		}
-
-		texParams.url = items.join( ' ' ).trim();
-		return texParams;
-
-	},
-
-	loadTexture: function ( url, mapping, onLoad, onProgress, onError ) {
-
-		var texture;
-		var loader = THREE.Loader.Handlers.get( url );
-		var manager = ( this.manager !== undefined ) ? this.manager : THREE.DefaultLoadingManager;
-
-		if ( loader === null ) {
-
-			loader = new THREE.TextureLoader( manager );
-
-		}
-
-		if ( loader.setCrossOrigin ) loader.setCrossOrigin( this.crossOrigin );
-		texture = loader.load( url, onLoad, onProgress, onError );
-
-		if ( mapping !== undefined ) texture.mapping = mapping;
-
-		return texture;
-
-	}
-
-};
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
-THREE.OBJLoader = ( function () {
-
-	// o object_name | g group_name
-	var object_pattern = /^[og]\s*(.+)?/;
-	// mtllib file_reference
-	var material_library_pattern = /^mtllib /;
-	// usemtl material_name
-	var material_use_pattern = /^usemtl /;
-
-	function ParserState() {
-
-		var state = {
-			objects: [],
-			object: {},
-
-			vertices: [],
-			normals: [],
-			colors: [],
-			uvs: [],
-
-			materialLibraries: [],
-
-			startObject: function ( name, fromDeclaration ) {
-
-				// If the current object (initial from reset) is not from a g/o declaration in the parsed
-				// file. We need to use it for the first parsed g/o to keep things in sync.
-				if ( this.object && this.object.fromDeclaration === false ) {
-
-					this.object.name = name;
-					this.object.fromDeclaration = ( fromDeclaration !== false );
-					return;
-
-				}
-
-				var previousMaterial = ( this.object && typeof this.object.currentMaterial === 'function' ? this.object.currentMaterial() : undefined );
-
-				if ( this.object && typeof this.object._finalize === 'function' ) {
-
-					this.object._finalize( true );
-
-				}
-
-				this.object = {
-					name: name || '',
-					fromDeclaration: ( fromDeclaration !== false ),
-
-					geometry: {
-						vertices: [],
-						normals: [],
-						colors: [],
-						uvs: []
-					},
-					materials: [],
-					smooth: true,
-
-					startMaterial: function ( name, libraries ) {
-
-						var previous = this._finalize( false );
-
-						// New usemtl declaration overwrites an inherited material, except if faces were declared
-						// after the material, then it must be preserved for proper MultiMaterial continuation.
-						if ( previous && ( previous.inherited || previous.groupCount <= 0 ) ) {
-
-							this.materials.splice( previous.index, 1 );
-
-						}
-
-						var material = {
-							index: this.materials.length,
-							name: name || '',
-							mtllib: ( Array.isArray( libraries ) && libraries.length > 0 ? libraries[ libraries.length - 1 ] : '' ),
-							smooth: ( previous !== undefined ? previous.smooth : this.smooth ),
-							groupStart: ( previous !== undefined ? previous.groupEnd : 0 ),
-							groupEnd: - 1,
-							groupCount: - 1,
-							inherited: false,
-
-							clone: function ( index ) {
-
-								var cloned = {
-									index: ( typeof index === 'number' ? index : this.index ),
-									name: this.name,
-									mtllib: this.mtllib,
-									smooth: this.smooth,
-									groupStart: 0,
-									groupEnd: - 1,
-									groupCount: - 1,
-									inherited: false
-								};
-								cloned.clone = this.clone.bind( cloned );
-								return cloned;
-
-							}
-						};
-
-						this.materials.push( material );
-
-						return material;
-
-					},
-
-					currentMaterial: function () {
-
-						if ( this.materials.length > 0 ) {
-
-							return this.materials[ this.materials.length - 1 ];
-
-						}
-
-						return undefined;
-
-					},
-
-					_finalize: function ( end ) {
-
-						var lastMultiMaterial = this.currentMaterial();
-						if ( lastMultiMaterial && lastMultiMaterial.groupEnd === - 1 ) {
-
-							lastMultiMaterial.groupEnd = this.geometry.vertices.length / 3;
-							lastMultiMaterial.groupCount = lastMultiMaterial.groupEnd - lastMultiMaterial.groupStart;
-							lastMultiMaterial.inherited = false;
-
-						}
-
-						// Ignore objects tail materials if no face declarations followed them before a new o/g started.
-						if ( end && this.materials.length > 1 ) {
-
-							for ( var mi = this.materials.length - 1; mi >= 0; mi -- ) {
-
-								if ( this.materials[ mi ].groupCount <= 0 ) {
-
-									this.materials.splice( mi, 1 );
-
-								}
-
-							}
-
-						}
-
-						// Guarantee at least one empty material, this makes the creation later more straight forward.
-						if ( end && this.materials.length === 0 ) {
-
-							this.materials.push( {
-								name: '',
-								smooth: this.smooth
-							} );
-
-						}
-
-						return lastMultiMaterial;
-
-					}
-				};
-
-				// Inherit previous objects material.
-				// Spec tells us that a declared material must be set to all objects until a new material is declared.
-				// If a usemtl declaration is encountered while this new object is being parsed, it will
-				// overwrite the inherited material. Exception being that there was already face declarations
-				// to the inherited material, then it will be preserved for proper MultiMaterial continuation.
-
-				if ( previousMaterial && previousMaterial.name && typeof previousMaterial.clone === 'function' ) {
-
-					var declared = previousMaterial.clone( 0 );
-					declared.inherited = true;
-					this.object.materials.push( declared );
-
-				}
-
-				this.objects.push( this.object );
-
-			},
-
-			finalize: function () {
-
-				if ( this.object && typeof this.object._finalize === 'function' ) {
-
-					this.object._finalize( true );
-
-				}
-
-			},
-
-			parseVertexIndex: function ( value, len ) {
-
-				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
-
-			},
-
-			parseNormalIndex: function ( value, len ) {
-
-				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
-
-			},
-
-			parseUVIndex: function ( value, len ) {
-
-				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 2 ) * 2;
-
-			},
-
-			addVertex: function ( a, b, c ) {
-
-				var src = this.vertices;
-				var dst = this.object.geometry.vertices;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
-
-			},
-
-			addVertexPoint: function ( a ) {
-
-				var src = this.vertices;
-				var dst = this.object.geometry.vertices;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-
-			},
-
-			addVertexLine: function ( a ) {
-
-				var src = this.vertices;
-				var dst = this.object.geometry.vertices;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-
-			},
-
-			addNormal: function ( a, b, c ) {
-
-				var src = this.normals;
-				var dst = this.object.geometry.normals;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
-
-			},
-
-			addColor: function ( a, b, c ) {
-
-				var src = this.colors;
-				var dst = this.object.geometry.colors;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
-
-			},
-
-			addUV: function ( a, b, c ) {
-
-				var src = this.uvs;
-				var dst = this.object.geometry.uvs;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ] );
-
-			},
-
-			addUVLine: function ( a ) {
-
-				var src = this.uvs;
-				var dst = this.object.geometry.uvs;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ] );
-
-			},
-
-			addFace: function ( a, b, c, ua, ub, uc, na, nb, nc ) {
-
-				var vLen = this.vertices.length;
-
-				var ia = this.parseVertexIndex( a, vLen );
-				var ib = this.parseVertexIndex( b, vLen );
-				var ic = this.parseVertexIndex( c, vLen );
-
-				this.addVertex( ia, ib, ic );
-
-				if ( ua !== undefined && ua !== '' ) {
-
-					var uvLen = this.uvs.length;
-					ia = this.parseUVIndex( ua, uvLen );
-					ib = this.parseUVIndex( ub, uvLen );
-					ic = this.parseUVIndex( uc, uvLen );
-					this.addUV( ia, ib, ic );
-
-				}
-
-				if ( na !== undefined && na !== '' ) {
-
-					// Normals are many times the same. If so, skip function call and parseInt.
-					var nLen = this.normals.length;
-					ia = this.parseNormalIndex( na, nLen );
-
-					ib = na === nb ? ia : this.parseNormalIndex( nb, nLen );
-					ic = na === nc ? ia : this.parseNormalIndex( nc, nLen );
-
-					this.addNormal( ia, ib, ic );
-
-				}
-
-				if ( this.colors.length > 0 ) {
-
-					this.addColor( ia, ib, ic );
-
-				}
-
-			},
-
-			addPointGeometry: function ( vertices ) {
-
-				this.object.geometry.type = 'Points';
-
-				var vLen = this.vertices.length;
-
-				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
-
-					this.addVertexPoint( this.parseVertexIndex( vertices[ vi ], vLen ) );
-
-				}
-
-			},
-
-			addLineGeometry: function ( vertices, uvs ) {
-
-				this.object.geometry.type = 'Line';
-
-				var vLen = this.vertices.length;
-				var uvLen = this.uvs.length;
-
-				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
-
-					this.addVertexLine( this.parseVertexIndex( vertices[ vi ], vLen ) );
-
-				}
-
-				for ( var uvi = 0, l = uvs.length; uvi < l; uvi ++ ) {
-
-					this.addUVLine( this.parseUVIndex( uvs[ uvi ], uvLen ) );
-
-				}
-
-			}
-
-		};
-
-		state.startObject( '', false );
-
-		return state;
-
-	}
-
-	//
-
-	function OBJLoader( manager ) {
-
-		this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
-
-		this.materials = null;
-
-	}
-
-	OBJLoader.prototype = {
-
-		constructor: OBJLoader,
-
-		load: function ( url, onLoad, onProgress, onError ) {
-
-			var scope = this;
-
-			var loader = new THREE.FileLoader( scope.manager );
-			loader.setPath( this.path );
-			loader.load( url, function ( text ) {
-
-				onLoad( scope.parse( text ) );
-
-			}, onProgress, onError );
-
-		},
-
-		setPath: function ( value ) {
-
-			this.path = value;
-
-			return this;
-
-		},
-
-		setMaterials: function ( materials ) {
-
-			this.materials = materials;
-
-			return this;
-
-		},
-
-		parse: function ( text ) {
-
-			console.time( 'OBJLoader' );
-
-			var state = new ParserState();
-
-			if ( text.indexOf( '\r\n' ) !== - 1 ) {
-
-				// This is faster than String.split with regex that splits on both
-				text = text.replace( /\r\n/g, '\n' );
-
-			}
-
-			if ( text.indexOf( '\\\n' ) !== - 1 ) {
-
-				// join lines separated by a line continuation character (\)
-				text = text.replace( /\\\n/g, '' );
-
-			}
-
-			var lines = text.split( '\n' );
-			var line = '', lineFirstChar = '';
-			var lineLength = 0;
-			var result = [];
-
-			// Faster to just trim left side of the line. Use if available.
-			var trimLeft = ( typeof ''.trimLeft === 'function' );
-
-			for ( var i = 0, l = lines.length; i < l; i ++ ) {
-
-				line = lines[ i ];
-
-				line = trimLeft ? line.trimLeft() : line.trim();
-
-				lineLength = line.length;
-
-				if ( lineLength === 0 ) continue;
-
-				lineFirstChar = line.charAt( 0 );
-
-				// @todo invoke passed in handler if any
-				if ( lineFirstChar === '#' ) continue;
-
-				if ( lineFirstChar === 'v' ) {
-
-					var data = line.split( /\s+/ );
-
-					switch ( data[ 0 ] ) {
-
-						case 'v':
-							state.vertices.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] ),
-								parseFloat( data[ 3 ] )
-							);
-							if ( data.length === 8 ) {
-
-								state.colors.push(
-									parseFloat( data[ 4 ] ),
-									parseFloat( data[ 5 ] ),
-									parseFloat( data[ 6 ] )
-
-								);
-
-							}
-							break;
-						case 'vn':
-							state.normals.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] ),
-								parseFloat( data[ 3 ] )
-							);
-							break;
-						case 'vt':
-							state.uvs.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] )
-							);
-							break;
-
-					}
-
-				} else if ( lineFirstChar === 'f' ) {
-
-					var lineData = line.substr( 1 ).trim();
-					var vertexData = lineData.split( /\s+/ );
-					var faceVertices = [];
-
-					// Parse the face vertex data into an easy to work with format
-
-					for ( var j = 0, jl = vertexData.length; j < jl; j ++ ) {
-
-						var vertex = vertexData[ j ];
-
-						if ( vertex.length > 0 ) {
-
-							var vertexParts = vertex.split( '/' );
-							faceVertices.push( vertexParts );
-
-						}
-
-					}
-
-					// Draw an edge between the first vertex and all subsequent vertices to form an n-gon
-
-					var v1 = faceVertices[ 0 ];
-
-					for ( var j = 1, jl = faceVertices.length - 1; j < jl; j ++ ) {
-
-						var v2 = faceVertices[ j ];
-						var v3 = faceVertices[ j + 1 ];
-
-						state.addFace(
-							v1[ 0 ], v2[ 0 ], v3[ 0 ],
-							v1[ 1 ], v2[ 1 ], v3[ 1 ],
-							v1[ 2 ], v2[ 2 ], v3[ 2 ]
-						);
-
-					}
-
-				} else if ( lineFirstChar === 'l' ) {
-
-					var lineParts = line.substring( 1 ).trim().split( " " );
-					var lineVertices = [], lineUVs = [];
-
-					if ( line.indexOf( "/" ) === - 1 ) {
-
-						lineVertices = lineParts;
-
-					} else {
-
-						for ( var li = 0, llen = lineParts.length; li < llen; li ++ ) {
-
-							var parts = lineParts[ li ].split( "/" );
-
-							if ( parts[ 0 ] !== "" ) lineVertices.push( parts[ 0 ] );
-							if ( parts[ 1 ] !== "" ) lineUVs.push( parts[ 1 ] );
-
-						}
-
-					}
-					state.addLineGeometry( lineVertices, lineUVs );
-
-				} else if ( lineFirstChar === 'p' ) {
-
-					var lineData = line.substr( 1 ).trim();
-					var pointData = lineData.split( " " );
-
-					state.addPointGeometry( pointData );
-
-				} else if ( ( result = object_pattern.exec( line ) ) !== null ) {
-
-					// o object_name
-					// or
-					// g group_name
-
-					// WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
-					// var name = result[ 0 ].substr( 1 ).trim();
-					var name = ( " " + result[ 0 ].substr( 1 ).trim() ).substr( 1 );
-
-					state.startObject( name );
-
-				} else if ( material_use_pattern.test( line ) ) {
-
-					// material
-
-					state.object.startMaterial( line.substring( 7 ).trim(), state.materialLibraries );
-
-				} else if ( material_library_pattern.test( line ) ) {
-
-					// mtl file
-
-					state.materialLibraries.push( line.substring( 7 ).trim() );
-
-				} else if ( lineFirstChar === 's' ) {
-
-					result = line.split( ' ' );
-
-					// smooth shading
-
-					// @todo Handle files that have varying smooth values for a set of faces inside one geometry,
-					// but does not define a usemtl for each face set.
-					// This should be detected and a dummy material created (later MultiMaterial and geometry groups).
-					// This requires some care to not create extra material on each smooth value for "normal" obj files.
-					// where explicit usemtl defines geometry groups.
-					// Example asset: examples/models/obj/cerberus/Cerberus.obj
-
-					/*
-					 * http://paulbourke.net/dataformats/obj/
-					 * or
-					 * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
-					 *
-					 * From chapter "Grouping" Syntax explanation "s group_number":
-					 * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
-					 * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
-					 * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
-					 * than 0."
-					 */
-					if ( result.length > 1 ) {
-
-						var value = result[ 1 ].trim().toLowerCase();
-						state.object.smooth = ( value !== '0' && value !== 'off' );
-
-					} else {
-
-						// ZBrush can produce "s" lines #11707
-						state.object.smooth = true;
-
-					}
-					var material = state.object.currentMaterial();
-					if ( material ) material.smooth = state.object.smooth;
-
-				} else {
-
-					// Handle null terminated files without exception
-					if ( line === '\0' ) continue;
-
-					throw new Error( 'THREE.OBJLoader: Unexpected line: "' + line + '"' );
-
-				}
-
-			}
-
-			state.finalize();
-
-			var container = new THREE.Group();
-			container.materialLibraries = [].concat( state.materialLibraries );
-
-			for ( var i = 0, l = state.objects.length; i < l; i ++ ) {
-
-				var object = state.objects[ i ];
-				var geometry = object.geometry;
-				var materials = object.materials;
-				var isLine = ( geometry.type === 'Line' );
-				var isPoints = ( geometry.type === 'Points' );
-				var hasVertexColors = false;
-
-				// Skip o/g line declarations that did not follow with any faces
-				if ( geometry.vertices.length === 0 ) continue;
-
-				var buffergeometry = new THREE.BufferGeometry();
-
-				buffergeometry.addAttribute( 'position', new THREE.Float32BufferAttribute( geometry.vertices, 3 ) );
-
-				if ( geometry.normals.length > 0 ) {
-
-					buffergeometry.addAttribute( 'normal', new THREE.Float32BufferAttribute( geometry.normals, 3 ) );
-
-				} else {
-
-					buffergeometry.computeVertexNormals();
-
-				}
-
-				if ( geometry.colors.length > 0 ) {
-
-					hasVertexColors = true;
-					buffergeometry.addAttribute( 'color', new THREE.Float32BufferAttribute( geometry.colors, 3 ) );
-
-				}
-
-				if ( geometry.uvs.length > 0 ) {
-
-					buffergeometry.addAttribute( 'uv', new THREE.Float32BufferAttribute( geometry.uvs, 2 ) );
-
-				}
-
-				// Create materials
-
-				var createdMaterials = [];
-
-				for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
-
-					var sourceMaterial = materials[ mi ];
-					var material = undefined;
-
-					if ( this.materials !== null ) {
-
-						material = this.materials.create( sourceMaterial.name );
-
-						// mtl etc. loaders probably can't create line materials correctly, copy properties to a line material.
-						if ( isLine && material && ! ( material instanceof THREE.LineBasicMaterial ) ) {
-
-							var materialLine = new THREE.LineBasicMaterial();
-							materialLine.copy( material );
-							materialLine.lights = false; // TOFIX
-							material = materialLine;
-
-						} else if ( isPoints && material && ! ( material instanceof THREE.PointsMaterial ) ) {
-
-							var materialPoints = new THREE.PointsMaterial( { size: 10, sizeAttenuation: false } );
-							materialLine.copy( material );
-							material = materialPoints;
-
-						}
-
-					}
-
-					if ( ! material ) {
-
-						if ( isLine ) {
-
-							material = new THREE.LineBasicMaterial();
-
-						} else if ( isPoints ) {
-
-							material = new THREE.PointsMaterial( { size: 1, sizeAttenuation: false } );
-
-						} else {
-
-							material = new THREE.MeshPhongMaterial();
-
-						}
-
-						material.name = sourceMaterial.name;
-
-					}
-
-					material.flatShading = sourceMaterial.smooth ? false : true;
-					material.vertexColors = hasVertexColors ? THREE.VertexColors : THREE.NoColors;
-
-					createdMaterials.push( material );
-
-				}
-
-				// Create mesh
-
-				var mesh;
-
-				if ( createdMaterials.length > 1 ) {
-
-					for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
-
-						var sourceMaterial = materials[ mi ];
-						buffergeometry.addGroup( sourceMaterial.groupStart, sourceMaterial.groupCount, mi );
-
-					}
-
-					if ( isLine ) {
-
-						mesh = new THREE.LineSegments( buffergeometry, createdMaterials );
-
-					} else if ( isPoints ) {
-
-						mesh = new THREE.Points( buffergeometry, createdMaterials );
-
-					} else {
-
-						mesh = new THREE.Mesh( buffergeometry, createdMaterials );
-
-					}
-
-				} else {
-
-					if ( isLine ) {
-
-						mesh = new THREE.LineSegments( buffergeometry, createdMaterials[ 0 ] );
-
-					} else if ( isPoints ) {
-
-						mesh = new THREE.Points( buffergeometry, createdMaterials[ 0 ] );
-
-					} else {
-
-						mesh = new THREE.Mesh( buffergeometry, createdMaterials[ 0 ] );
-
-					}
-
-				}
-
-				mesh.name = object.name;
-
-				container.add( mesh );
-
-			}
-
-			console.timeEnd( 'OBJLoader' );
-
-			return container;
-
-		}
-
-	};
-
-	return OBJLoader;
-
-} )();
-/**
  * @author alteredq / http://alteredqualia.com/
  *
  * Full-screen textured quad shader
@@ -36559,13 +33389,13 @@ MeshLine.prototype.process = function() {
 		this.attributes.index.needsUpdate = true;
     }
 
-	this.geometry.addAttribute( 'position', this.attributes.position );
-	this.geometry.addAttribute( 'previous', this.attributes.previous );
-	this.geometry.addAttribute( 'next', this.attributes.next );
-	this.geometry.addAttribute( 'side', this.attributes.side );
-	this.geometry.addAttribute( 'width', this.attributes.width );
-	this.geometry.addAttribute( 'uv', this.attributes.uv );
-	this.geometry.addAttribute( 'counters', this.attributes.counters );
+	this.geometry.setAttribute( 'position', this.attributes.position );
+	this.geometry.setAttribute( 'previous', this.attributes.previous );
+	this.geometry.setAttribute( 'next', this.attributes.next );
+	this.geometry.setAttribute( 'side', this.attributes.side );
+	this.geometry.setAttribute( 'width', this.attributes.width );
+	this.geometry.setAttribute( 'uv', this.attributes.uv );
+	this.geometry.setAttribute( 'counters', this.attributes.counters );
 
 	this.geometry.setIndex( this.attributes.index );
 
@@ -36874,6 +33704,799 @@ else {
 
 }).call(this);
 
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+
+THREE.OBJLoader = ( function () {
+
+	// o object_name | g group_name
+	var object_pattern = /^[og]\s*(.+)?/;
+	// mtllib file_reference
+	var material_library_pattern = /^mtllib /;
+	// usemtl material_name
+	var material_use_pattern = /^usemtl /;
+
+	function ParserState() {
+
+		var state = {
+			objects: [],
+			object: {},
+
+			vertices: [],
+			normals: [],
+			colors: [],
+			uvs: [],
+
+			materialLibraries: [],
+
+			startObject: function ( name, fromDeclaration ) {
+
+				// If the current object (initial from reset) is not from a g/o declaration in the parsed
+				// file. We need to use it for the first parsed g/o to keep things in sync.
+				if ( this.object && this.object.fromDeclaration === false ) {
+
+					this.object.name = name;
+					this.object.fromDeclaration = ( fromDeclaration !== false );
+					return;
+
+				}
+
+				var previousMaterial = ( this.object && typeof this.object.currentMaterial === 'function' ? this.object.currentMaterial() : undefined );
+
+				if ( this.object && typeof this.object._finalize === 'function' ) {
+
+					this.object._finalize( true );
+
+				}
+
+				this.object = {
+					name: name || '',
+					fromDeclaration: ( fromDeclaration !== false ),
+
+					geometry: {
+						vertices: [],
+						normals: [],
+						colors: [],
+						uvs: []
+					},
+					materials: [],
+					smooth: true,
+
+					startMaterial: function ( name, libraries ) {
+
+						var previous = this._finalize( false );
+
+						// New usemtl declaration overwrites an inherited material, except if faces were declared
+						// after the material, then it must be preserved for proper MultiMaterial continuation.
+						if ( previous && ( previous.inherited || previous.groupCount <= 0 ) ) {
+
+							this.materials.splice( previous.index, 1 );
+
+						}
+
+						var material = {
+							index: this.materials.length,
+							name: name || '',
+							mtllib: ( Array.isArray( libraries ) && libraries.length > 0 ? libraries[ libraries.length - 1 ] : '' ),
+							smooth: ( previous !== undefined ? previous.smooth : this.smooth ),
+							groupStart: ( previous !== undefined ? previous.groupEnd : 0 ),
+							groupEnd: - 1,
+							groupCount: - 1,
+							inherited: false,
+
+							clone: function ( index ) {
+
+								var cloned = {
+									index: ( typeof index === 'number' ? index : this.index ),
+									name: this.name,
+									mtllib: this.mtllib,
+									smooth: this.smooth,
+									groupStart: 0,
+									groupEnd: - 1,
+									groupCount: - 1,
+									inherited: false
+								};
+								cloned.clone = this.clone.bind( cloned );
+								return cloned;
+
+							}
+						};
+
+						this.materials.push( material );
+
+						return material;
+
+					},
+
+					currentMaterial: function () {
+
+						if ( this.materials.length > 0 ) {
+
+							return this.materials[ this.materials.length - 1 ];
+
+						}
+
+						return undefined;
+
+					},
+
+					_finalize: function ( end ) {
+
+						var lastMultiMaterial = this.currentMaterial();
+						if ( lastMultiMaterial && lastMultiMaterial.groupEnd === - 1 ) {
+
+							lastMultiMaterial.groupEnd = this.geometry.vertices.length / 3;
+							lastMultiMaterial.groupCount = lastMultiMaterial.groupEnd - lastMultiMaterial.groupStart;
+							lastMultiMaterial.inherited = false;
+
+						}
+
+						// Ignore objects tail materials if no face declarations followed them before a new o/g started.
+						if ( end && this.materials.length > 1 ) {
+
+							for ( var mi = this.materials.length - 1; mi >= 0; mi -- ) {
+
+								if ( this.materials[ mi ].groupCount <= 0 ) {
+
+									this.materials.splice( mi, 1 );
+
+								}
+
+							}
+
+						}
+
+						// Guarantee at least one empty material, this makes the creation later more straight forward.
+						if ( end && this.materials.length === 0 ) {
+
+							this.materials.push( {
+								name: '',
+								smooth: this.smooth
+							} );
+
+						}
+
+						return lastMultiMaterial;
+
+					}
+				};
+
+				// Inherit previous objects material.
+				// Spec tells us that a declared material must be set to all objects until a new material is declared.
+				// If a usemtl declaration is encountered while this new object is being parsed, it will
+				// overwrite the inherited material. Exception being that there was already face declarations
+				// to the inherited material, then it will be preserved for proper MultiMaterial continuation.
+
+				if ( previousMaterial && previousMaterial.name && typeof previousMaterial.clone === 'function' ) {
+
+					var declared = previousMaterial.clone( 0 );
+					declared.inherited = true;
+					this.object.materials.push( declared );
+
+				}
+
+				this.objects.push( this.object );
+
+			},
+
+			finalize: function () {
+
+				if ( this.object && typeof this.object._finalize === 'function' ) {
+
+					this.object._finalize( true );
+
+				}
+
+			},
+
+			parseVertexIndex: function ( value, len ) {
+
+				var index = parseInt( value, 10 );
+				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
+
+			},
+
+			parseNormalIndex: function ( value, len ) {
+
+				var index = parseInt( value, 10 );
+				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
+
+			},
+
+			parseUVIndex: function ( value, len ) {
+
+				var index = parseInt( value, 10 );
+				return ( index >= 0 ? index - 1 : index + len / 2 ) * 2;
+
+			},
+
+			addVertex: function ( a, b, c ) {
+
+				var src = this.vertices;
+				var dst = this.object.geometry.vertices;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
+
+			},
+
+			addVertexPoint: function ( a ) {
+
+				var src = this.vertices;
+				var dst = this.object.geometry.vertices;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+
+			},
+
+			addVertexLine: function ( a ) {
+
+				var src = this.vertices;
+				var dst = this.object.geometry.vertices;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+
+			},
+
+			addNormal: function ( a, b, c ) {
+
+				var src = this.normals;
+				var dst = this.object.geometry.normals;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
+
+			},
+
+			addColor: function ( a, b, c ) {
+
+				var src = this.colors;
+				var dst = this.object.geometry.colors;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
+
+			},
+
+			addUV: function ( a, b, c ) {
+
+				var src = this.uvs;
+				var dst = this.object.geometry.uvs;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ] );
+				dst.push( src[ b + 0 ], src[ b + 1 ] );
+				dst.push( src[ c + 0 ], src[ c + 1 ] );
+
+			},
+
+			addUVLine: function ( a ) {
+
+				var src = this.uvs;
+				var dst = this.object.geometry.uvs;
+
+				dst.push( src[ a + 0 ], src[ a + 1 ] );
+
+			},
+
+			addFace: function ( a, b, c, ua, ub, uc, na, nb, nc ) {
+
+				var vLen = this.vertices.length;
+
+				var ia = this.parseVertexIndex( a, vLen );
+				var ib = this.parseVertexIndex( b, vLen );
+				var ic = this.parseVertexIndex( c, vLen );
+
+				this.addVertex( ia, ib, ic );
+
+				if ( ua !== undefined && ua !== '' ) {
+
+					var uvLen = this.uvs.length;
+					ia = this.parseUVIndex( ua, uvLen );
+					ib = this.parseUVIndex( ub, uvLen );
+					ic = this.parseUVIndex( uc, uvLen );
+					this.addUV( ia, ib, ic );
+
+				}
+
+				if ( na !== undefined && na !== '' ) {
+
+					// Normals are many times the same. If so, skip function call and parseInt.
+					var nLen = this.normals.length;
+					ia = this.parseNormalIndex( na, nLen );
+
+					ib = na === nb ? ia : this.parseNormalIndex( nb, nLen );
+					ic = na === nc ? ia : this.parseNormalIndex( nc, nLen );
+
+					this.addNormal( ia, ib, ic );
+
+				}
+
+				if ( this.colors.length > 0 ) {
+
+					this.addColor( ia, ib, ic );
+
+				}
+
+			},
+
+			addPointGeometry: function ( vertices ) {
+
+				this.object.geometry.type = 'Points';
+
+				var vLen = this.vertices.length;
+
+				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
+
+					this.addVertexPoint( this.parseVertexIndex( vertices[ vi ], vLen ) );
+
+				}
+
+			},
+
+			addLineGeometry: function ( vertices, uvs ) {
+
+				this.object.geometry.type = 'Line';
+
+				var vLen = this.vertices.length;
+				var uvLen = this.uvs.length;
+
+				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
+
+					this.addVertexLine( this.parseVertexIndex( vertices[ vi ], vLen ) );
+
+				}
+
+				for ( var uvi = 0, l = uvs.length; uvi < l; uvi ++ ) {
+
+					this.addUVLine( this.parseUVIndex( uvs[ uvi ], uvLen ) );
+
+				}
+
+			}
+
+		};
+
+		state.startObject( '', false );
+
+		return state;
+
+	}
+
+	//
+
+	function OBJLoader( manager ) {
+
+		this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
+
+		this.materials = null;
+
+	}
+
+	OBJLoader.prototype = {
+
+		constructor: OBJLoader,
+
+		load: function ( url, onLoad, onProgress, onError ) {
+
+			var scope = this;
+
+			var loader = new THREE.FileLoader( scope.manager );
+			loader.setPath( this.path );
+			loader.load( url, function ( text ) {
+
+				onLoad( scope.parse( text ) );
+
+			}, onProgress, onError );
+
+		},
+
+		setPath: function ( value ) {
+
+			this.path = value;
+
+			return this;
+
+		},
+
+		setMaterials: function ( materials ) {
+
+			this.materials = materials;
+
+			return this;
+
+		},
+
+		parse: function ( text ) {
+
+			console.time( 'OBJLoader' );
+
+			var state = new ParserState();
+
+			if ( text.indexOf( '\r\n' ) !== - 1 ) {
+
+				// This is faster than String.split with regex that splits on both
+				text = text.replace( /\r\n/g, '\n' );
+
+			}
+
+			if ( text.indexOf( '\\\n' ) !== - 1 ) {
+
+				// join lines separated by a line continuation character (\)
+				text = text.replace( /\\\n/g, '' );
+
+			}
+
+			var lines = text.split( '\n' );
+			var line = '', lineFirstChar = '';
+			var lineLength = 0;
+			var result = [];
+
+			// Faster to just trim left side of the line. Use if available.
+			var trimLeft = ( typeof ''.trimLeft === 'function' );
+
+			for ( var i = 0, l = lines.length; i < l; i ++ ) {
+
+				line = lines[ i ];
+
+				line = trimLeft ? line.trimLeft() : line.trim();
+
+				lineLength = line.length;
+
+				if ( lineLength === 0 ) continue;
+
+				lineFirstChar = line.charAt( 0 );
+
+				// @todo invoke passed in handler if any
+				if ( lineFirstChar === '#' ) continue;
+
+				if ( lineFirstChar === 'v' ) {
+
+					var data = line.split( /\s+/ );
+
+					switch ( data[ 0 ] ) {
+
+						case 'v':
+							state.vertices.push(
+								parseFloat( data[ 1 ] ),
+								parseFloat( data[ 2 ] ),
+								parseFloat( data[ 3 ] )
+							);
+							if ( data.length === 8 ) {
+
+								state.colors.push(
+									parseFloat( data[ 4 ] ),
+									parseFloat( data[ 5 ] ),
+									parseFloat( data[ 6 ] )
+
+								);
+
+							}
+							break;
+						case 'vn':
+							state.normals.push(
+								parseFloat( data[ 1 ] ),
+								parseFloat( data[ 2 ] ),
+								parseFloat( data[ 3 ] )
+							);
+							break;
+						case 'vt':
+							state.uvs.push(
+								parseFloat( data[ 1 ] ),
+								parseFloat( data[ 2 ] )
+							);
+							break;
+
+					}
+
+				} else if ( lineFirstChar === 'f' ) {
+
+					var lineData = line.substr( 1 ).trim();
+					var vertexData = lineData.split( /\s+/ );
+					var faceVertices = [];
+
+					// Parse the face vertex data into an easy to work with format
+
+					for ( var j = 0, jl = vertexData.length; j < jl; j ++ ) {
+
+						var vertex = vertexData[ j ];
+
+						if ( vertex.length > 0 ) {
+
+							var vertexParts = vertex.split( '/' );
+							faceVertices.push( vertexParts );
+
+						}
+
+					}
+
+					// Draw an edge between the first vertex and all subsequent vertices to form an n-gon
+
+					var v1 = faceVertices[ 0 ];
+
+					for ( var j = 1, jl = faceVertices.length - 1; j < jl; j ++ ) {
+
+						var v2 = faceVertices[ j ];
+						var v3 = faceVertices[ j + 1 ];
+
+						state.addFace(
+							v1[ 0 ], v2[ 0 ], v3[ 0 ],
+							v1[ 1 ], v2[ 1 ], v3[ 1 ],
+							v1[ 2 ], v2[ 2 ], v3[ 2 ]
+						);
+
+					}
+
+				} else if ( lineFirstChar === 'l' ) {
+
+					var lineParts = line.substring( 1 ).trim().split( " " );
+					var lineVertices = [], lineUVs = [];
+
+					if ( line.indexOf( "/" ) === - 1 ) {
+
+						lineVertices = lineParts;
+
+					} else {
+
+						for ( var li = 0, llen = lineParts.length; li < llen; li ++ ) {
+
+							var parts = lineParts[ li ].split( "/" );
+
+							if ( parts[ 0 ] !== "" ) lineVertices.push( parts[ 0 ] );
+							if ( parts[ 1 ] !== "" ) lineUVs.push( parts[ 1 ] );
+
+						}
+
+					}
+					state.addLineGeometry( lineVertices, lineUVs );
+
+				} else if ( lineFirstChar === 'p' ) {
+
+					var lineData = line.substr( 1 ).trim();
+					var pointData = lineData.split( " " );
+
+					state.addPointGeometry( pointData );
+
+				} else if ( ( result = object_pattern.exec( line ) ) !== null ) {
+
+					// o object_name
+					// or
+					// g group_name
+
+					// WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
+					// var name = result[ 0 ].substr( 1 ).trim();
+					var name = ( " " + result[ 0 ].substr( 1 ).trim() ).substr( 1 );
+
+					state.startObject( name );
+
+				} else if ( material_use_pattern.test( line ) ) {
+
+					// material
+
+					state.object.startMaterial( line.substring( 7 ).trim(), state.materialLibraries );
+
+				} else if ( material_library_pattern.test( line ) ) {
+
+					// mtl file
+
+					state.materialLibraries.push( line.substring( 7 ).trim() );
+
+				} else if ( lineFirstChar === 's' ) {
+
+					result = line.split( ' ' );
+
+					// smooth shading
+
+					// @todo Handle files that have varying smooth values for a set of faces inside one geometry,
+					// but does not define a usemtl for each face set.
+					// This should be detected and a dummy material created (later MultiMaterial and geometry groups).
+					// This requires some care to not create extra material on each smooth value for "normal" obj files.
+					// where explicit usemtl defines geometry groups.
+					// Example asset: examples/models/obj/cerberus/Cerberus.obj
+
+					/*
+					 * http://paulbourke.net/dataformats/obj/
+					 * or
+					 * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
+					 *
+					 * From chapter "Grouping" Syntax explanation "s group_number":
+					 * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
+					 * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
+					 * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
+					 * than 0."
+					 */
+					if ( result.length > 1 ) {
+
+						var value = result[ 1 ].trim().toLowerCase();
+						state.object.smooth = ( value !== '0' && value !== 'off' );
+
+					} else {
+
+						// ZBrush can produce "s" lines #11707
+						state.object.smooth = true;
+
+					}
+					var material = state.object.currentMaterial();
+					if ( material ) material.smooth = state.object.smooth;
+
+				} else {
+
+					// Handle null terminated files without exception
+					if ( line === '\0' ) continue;
+
+					throw new Error( 'THREE.OBJLoader: Unexpected line: "' + line + '"' );
+
+				}
+
+			}
+
+			state.finalize();
+
+			var container = new THREE.Group();
+			container.materialLibraries = [].concat( state.materialLibraries );
+
+			for ( var i = 0, l = state.objects.length; i < l; i ++ ) {
+
+				var object = state.objects[ i ];
+				var geometry = object.geometry;
+				var materials = object.materials;
+				var isLine = ( geometry.type === 'Line' );
+				var isPoints = ( geometry.type === 'Points' );
+				var hasVertexColors = false;
+
+				// Skip o/g line declarations that did not follow with any faces
+				if ( geometry.vertices.length === 0 ) continue;
+
+				var buffergeometry = new THREE.BufferGeometry();
+
+				buffergeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( geometry.vertices, 3 ) );
+
+				if ( geometry.normals.length > 0 ) {
+
+					buffergeometry.setAttribute( 'normal', new THREE.Float32BufferAttribute( geometry.normals, 3 ) );
+
+				} else {
+
+					buffergeometry.computeVertexNormals();
+
+				}
+
+				if ( geometry.colors.length > 0 ) {
+
+					hasVertexColors = true;
+					buffergeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( geometry.colors, 3 ) );
+
+				}
+
+				if ( geometry.uvs.length > 0 ) {
+
+					buffergeometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( geometry.uvs, 2 ) );
+
+				}
+
+				// Create materials
+
+				var createdMaterials = [];
+
+				for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
+
+					var sourceMaterial = materials[ mi ];
+					var material = undefined;
+
+					if ( this.materials !== null ) {
+
+						material = this.materials.create( sourceMaterial.name );
+
+						// mtl etc. loaders probably can't create line materials correctly, copy properties to a line material.
+						if ( isLine && material && ! ( material instanceof THREE.LineBasicMaterial ) ) {
+
+							var materialLine = new THREE.LineBasicMaterial();
+							materialLine.copy( material );
+							materialLine.lights = false; // TOFIX
+							material = materialLine;
+
+						} else if ( isPoints && material && ! ( material instanceof THREE.PointsMaterial ) ) {
+
+							var materialPoints = new THREE.PointsMaterial( { size: 10, sizeAttenuation: false } );
+							materialLine.copy( material );
+							material = materialPoints;
+
+						}
+
+					}
+
+					if ( ! material ) {
+
+						if ( isLine ) {
+
+							material = new THREE.LineBasicMaterial();
+
+						} else if ( isPoints ) {
+
+							material = new THREE.PointsMaterial( { size: 1, sizeAttenuation: false } );
+
+						} else {
+
+							material = new THREE.MeshPhongMaterial();
+
+						}
+
+						material.name = sourceMaterial.name;
+
+					}
+
+					material.flatShading = sourceMaterial.smooth ? false : true;
+					material.vertexColors = hasVertexColors ? THREE.VertexColors : THREE.NoColors;
+
+					createdMaterials.push( material );
+
+				}
+
+				// Create mesh
+
+				var mesh;
+
+				if ( createdMaterials.length > 1 ) {
+
+					for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
+
+						var sourceMaterial = materials[ mi ];
+						buffergeometry.addGroup( sourceMaterial.groupStart, sourceMaterial.groupCount, mi );
+
+					}
+
+					if ( isLine ) {
+
+						mesh = new THREE.LineSegments( buffergeometry, createdMaterials );
+
+					} else if ( isPoints ) {
+
+						mesh = new THREE.Points( buffergeometry, createdMaterials );
+
+					} else {
+
+						mesh = new THREE.Mesh( buffergeometry, createdMaterials );
+
+					}
+
+				} else {
+
+					if ( isLine ) {
+
+						mesh = new THREE.LineSegments( buffergeometry, createdMaterials[ 0 ] );
+
+					} else if ( isPoints ) {
+
+						mesh = new THREE.Points( buffergeometry, createdMaterials[ 0 ] );
+
+					} else {
+
+						mesh = new THREE.Mesh( buffergeometry, createdMaterials[ 0 ] );
+
+					}
+
+				}
+
+				mesh.name = object.name;
+
+				container.add( mesh );
+
+			}
+
+			console.timeEnd( 'OBJLoader' );
+
+			return container;
+
+		}
+
+	};
+
+	return OBJLoader;
+
+} )();
 /**
  * @author alteredq / http://alteredqualia.com/
  *

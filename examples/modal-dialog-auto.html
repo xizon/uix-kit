@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=HHe04omX2uTIym5BFmhq"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=PyKvgPmgStd0Thd0UplM"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=HHe04omX2uTIym5BFmhq" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=PyKvgPmgStd0Thd0UplM" />
 	<![endif]-->
 
 
@@ -95,7 +95,8 @@
 			<path d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"></path>
         </svg>
     </div>
-    <div class="uix-loader-progress"><span>0%</span></div>
+    <div class="uix-loader-progress" data-txt="{progress}%"><span>0%</span></div>
+    <div class="uix-loader-progress__line"></div>
     <!-- .uix-loader end -->
     
 
@@ -127,7 +128,7 @@
                                                 <div class="uix-brand">
                             <a href="index.html"><img src="assets/images/logo.png" alt="Uix Kit"></a>                       
                         </div>
-                        <!-- .logo end -->
+                        <!-- .uix-brand end -->
                         
                         
                         
@@ -150,6 +151,7 @@
 														<li><a href="uix-grid.html">Uix Grid</a></li>
 														<li><a href="bootstrap-grid.html">Bootstrap Grid</a></li>
 														<li><a href="blended-grid-layout.html">Blended Grid</a></li>
+                                                        <li><a href="gallery-grid-layout.html">Gallery Grid</a></li>
 														<li><a href="spacing.html">Spacing</a></li>
 														<li><a href="material-container.html">Material Container</a></li>
 														<li><a href="striking.html">Striking</a></li>
@@ -160,6 +162,7 @@
 														<li><a href="heading.html">Heading</a></li>
 														<li><a href="dividing-line.html">Dividing Line</a></li>
 														<li><a href="responsive-images.html">Responsive Images</a></li>
+                                                        <li><a href="background-interaction.html">Background</a></li>
 														<li><a href="parallax.html">Parallax</a></li>
 														<li><a href="parallax2.html">Parallax 2</a></li>
 														<li><a href="vertical-centering.html">Vertical Centering</a></li>
@@ -230,8 +233,9 @@
 														<li><a href="advanced-slider-liquid3.html">Advanced Slider Liquid 3</a></li>
 														<li><a href="advanced-slider-parallax.html">Advanced Slider Parallax</a></li>
 														<li><a href="advanced-content-slider.html">Advanced Content Slider</a></li>
-														<li><a href="3D-explosive-particle-slider.html">3D Explosive Particle Slider</a><span class="uix-bubble">new</span></li>
-														<li><a href="3D-shatter-slider.html">3D Shatter Slider</a><span class="uix-bubble">new</span></li>
+														<li><a href="3D-explosive-particle-slider.html">3D Explosive Particle Slider</a></li>
+														<li><a href="3D-shatter-slider.html">3D Shatter Slider</a></li>
+                                                        <li><a href="3D-liquid-scrollspy-slider.html">3D Liquid Scrollspy Slider</a><span class="uix-bubble">new</span></li>
 															
 														
 														
@@ -247,8 +251,7 @@
 														
 														<li><a href="content-placeholder-animated.html">Content Placeholder Animated</a></li>
 														<li><a href="list-posts.html">Posts List</a></li>
-														<li><a href="list-split-imagery.html">Fullwidth List of Split</a></li>
-														<li><a href="list-split-content.html">Fullwidth List of Split 2</a></li>
+														<li><a href="fullwidth-column-to-edge.html">Full Width Column to Edge</a><span class="uix-bubble">new</span></li>
 														<li><a href="list-side-by-side.html">Side by Side List</a></li>
 														<li><a href="list-side-by-side-img.html">Side by Side List With Photo</a></li>
 														<li><a href="list-bulleted.html">Bulleted List</a></li>
@@ -303,6 +306,7 @@
 														<li><a href="scrollspy-animate.html">Scrollspy Animate</a><span class="uix-bubble">new</span></li>
 														<li><a href="skew-on-scroll.html">Skew on Scroll</a><span class="uix-bubble">new</span></li>
 														<li><a href="text-effect.html">Text Effect</a><span class="uix-bubble">new</span></li>
+                                                        <li><a href="smooth-scrolling-page.html">Smooth Scrolling Page</a><span class="uix-bubble">new</span></li>
 														<li><a href="list-posts-with-ajax.html">Ajax Load Posts</a></li>
 														<li><a href="list-posts-with-ajax2.html">Ajax Load Posts 2</a></li>
 														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
@@ -312,8 +316,8 @@
 														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
 														<li><a href="one-page.html">Full Page/One Page</a></li>
 														<li><a href="one-page2.html">Full Page/One Page 2</a></li>
-														<li><a href="ajax-page-loader.html">Ajax Page Loader</a><span class="uix-bubble">new</span></li>
-														<li><a href="ajax-push-content.html">Ajax Push Content</a><span class="uix-bubble">new</span></li>
+														<li><a href="ajax-page-loader.html">Ajax Page Loader</a></li>
+														<li><a href="ajax-push-content.html">Ajax Push Content</a></li>
 														<li><a href="3D-background.html">3D Background</a></li>
 														<li><a href="3D-background-three.html">3D Background 1 (threejs)</a></li>
 														<li><a href="3D-background-three2.html">3D Background 2 (threejs)</a></li>
@@ -433,19 +437,24 @@
 							<h3>Modal Dialog Automatically Open</h3>
 							<p>Trigger with a simple JavaScript</p>
 	
-<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;div class=&quot;uix-modal-box&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; id=&quot;modal-open-1&quot;&gt;
-	&lt;a href=&quot;javascript:void(0)&quot; class=&quot;uix-modal-box__close&quot; data-modal-close-trigger=&quot;true&quot;&gt;&lt;/a&gt;
-	&lt;div class=&quot;uix-modal-box__content&quot; role=&quot;document&quot;&gt;
-		&lt;div&gt;
-			&lt;!-- ////////  content  begin //////// --&gt;
-&#x9;&#x9;&#x9;&#x9;&#x9;&lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
-&#x9;&#x9;&#x9;&#x9;&#x9;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
-			&lt;!-- ////////  content  end //////// --&gt;
-&#x9;&#x9;&#x9;&#x9;&lt;/div&gt;
-
-
-	&lt;/div&gt;
-&lt;/div&gt;</code>
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>&lt;template id="modal-open-1"&gt;
+    &lt;div class=&quot;uix-modal-box&quot; role=&quot;dialog&quot; tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot;&gt;
+    &#x9;&lt;button type=&quot;button&quot; class=&quot;uix-modal-box__close&quot; data-modal-close-trigger=&quot;true&quot;&gt;&lt;/button&gt;
+    &#x9;&lt;div class=&quot;uix-modal-box__content&quot; role=&quot;document&quot;&gt;
+            &lt;div class=&quot;uix-modal-box__head&quot;&gt;
+                &lt;!-- code here --&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;uix-modal-box__body&quot;&gt;
+                &lt;div role=&quot;note&quot;&gt;
+                    &lt;!-- ////////  content  begin //////// --&gt;
+                    &lt;h2&gt;Holy Crap!!!&lt;/h2&gt;
+                    &lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;&lt;p&gt;p.s. Sorry for calling you a dingus earlier.&lt;/p&gt;
+                    &lt;!-- ////////  content  end //////// --&gt;
+                &lt;/div&gt;
+    &#x9;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</code>
 </pre>	
                             
 <pre class="uix-precode uix-t-l"><label>JS</label><code>$( document ).ready( function() {
@@ -478,20 +487,26 @@
 
 			<!-- Modals
 			============================================= --> 
-			<div class="uix-modal-box" tabindex="-1" role="dialog" aria-hidden="true" id="modal-open-1">
-				<a href="javascript:void(0)" class="uix-modal-box__close" data-modal-close-trigger="true"></a>
-				<div class="uix-modal-box__content" role="document">
-					<div>
-						<!-- ////////  content  begin //////// -->
-						<h2>Holy Crap!!!</h2>
-						<p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
-						<!-- ////////  content  end //////// -->
-					</div>
+            <template id="modal-open-1">
+                <div class="uix-modal-box" role="dialog" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="uix-modal-box__close" data-modal-close-trigger="true"></button>
+                    <div class="uix-modal-box__content" role="document">
+                        <div class="uix-modal-box__head">
+                            <!-- code here -->
+                        </div>
+                        <div class="uix-modal-box__body">
+                            <div role="note">
+                                <!-- ////////  content  begin //////// -->
+                                <h2>Holy Crap!!!</h2>
+                                <p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p><p>p.s. Sorry for calling you a dingus earlier.</p>
+                                <!-- ////////  content  end //////// -->
+                            </div>
+                        </div>
 
 
-				</div>
-			</div>
-			<!--  .uix-modal-box  end -->     
+                    </div>
+                </div>  
+            </template>
 			
 		</main>  
         
@@ -589,11 +604,11 @@
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.4.2"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
-    <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
-    <script src="assets/js/min/three.min.js?ver=r102"></script>
-    <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
+    <script src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
+    <script src="assets/js/min/three.min.js?ver=r114"></script>
+    <script src="assets/js/min/anime.min.js?ver=3.1"></script>
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    <script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
+    <script src="assets/js/min/muuri.min.js?ver=0.8.0"></script>
 
 
     
@@ -601,14 +616,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.8.6",
+		var REVISION     = "4.1.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=HHe04omX2uTIym5BFmhq"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=PyKvgPmgStd0Thd0UplM"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

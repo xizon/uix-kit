@@ -54,7 +54,7 @@ import LAVA_LAMP_STYLE_MENU from '@uixkit/core/lava-lamp-style-menu/js';
 import LIGHTBOX from '@uixkit/core/lightbox/js';
 import BULLETED_LIST from '@uixkit/core/list-bulleted/js';
 import POST_LIST_AJAX from '@uixkit/core/list-posts/js';
-import POST_LIST_SPLIT_FULLWIDTH from '@uixkit/core/list-split-imagery/js';
+import FULL_WIDTH_COLUMN_TO_EDGE from '@uixkit/core/fullwidth-column-to-edge/js';
 import LOGIN_UI from '@uixkit/core/login-templates/js';
 import MODAL_DIALOG from '@uixkit/core/modal-dialog/js';
 import MOUSEWHEEL_INTERACTION from '@uixkit/core/mousewheel-interaction/js';
@@ -73,6 +73,7 @@ import SCROLLSPY_ANIM from '@uixkit/core/scrollspy-animate/js';
 import SHOW_MORELESS from '@uixkit/core/show-more-less/js';
 import SKEW_ON_SCROLL from '@uixkit/core/skew-on-scroll/js';
 import SMOOTH_SCROLLING_ANCHORLINK from '@uixkit/core/smooth-scrolling-anchor-link/js';
+import SMOOTH_SCROLLING_PAGE from '@uixkit/core/smooth-scrolling-page/js';
 import STICKY_EL from '@uixkit/core/sticky-elements/js';
 import SVG_MAP_CHINA from '@uixkit/core/svg-map/js/china';
 import SVG_MAP_WORLD from '@uixkit/core/svg-map/js/world';
@@ -92,6 +93,7 @@ import THREE_MOUSE_INTERACTION from '@uixkit/core/simple-3D-mouse-interaction/js
 import THREE_MOUSE_INTERACTION2 from '@uixkit/core/simple-3D-mouse-interaction2/js';
 import THREE_SHATTER_SLIDER from '@uixkit/core/simple-3D-shatter-slider/js';	
 import THREE_EXP_PARTICLE_SLIDER from '@uixkit/core/simple-3D-explosive-particle-slider/js';
+import THREE_LIQUID_SCROLLSPY_SLIDER from '@uixkit/core/simple-3D-liquid-scrollspy-slider/js';
 import THREE_FILMIC_EFF from '@uixkit/core/simple-3D-filmic-effects/js';
 import TABLE from '@uixkit/core/table/js/basic';
 import TABLE_SORTER from '@uixkit/core/table/js/sorter';	
@@ -101,6 +103,7 @@ import TEXT_EFFECT from '@uixkit/core/text-effect/js';
 import TIMELINE from '@uixkit/core/timeline/js';
 import VERTICAL_MENU from '@uixkit/core/vertical-menu/js';
 import WP_CORE from '@uixkit/core/wordpress/js';
+
 
 
 	
@@ -121,13 +124,13 @@ import '@uixkit/core/dotted-line/scss/_style.scss';
 import '@uixkit/core/equal-width-columns/scss/_style.scss';
 import '@uixkit/core/features/scss/_style.scss';
 import '@uixkit/core/footer-templates/scss/_style.scss';
+import '@uixkit/core/gallery-grid-layout/scss/_style.scss';
 import '@uixkit/core/heading/scss/_style.scss';
 import '@uixkit/core/image-animation/scss/_style.scss';
 import '@uixkit/core/list-brands/scss/_style.scss';
 import '@uixkit/core/list-maintain-aspect-ratio/scss/_style.scss';
 import '@uixkit/core/list-side-by-side/scss/_style.scss';
 import '@uixkit/core/list-side-by-side-img/scss/_style.scss';
-import '@uixkit/core/list-split-content/scss/_style.scss';
 import '@uixkit/core/mouse-animation-scroll/scss/_style.scss';
 import '@uixkit/core/overlay/scss/_style.scss';
 import '@uixkit/core/ribbon/scss/_style.scss';

@@ -55,7 +55,7 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 		 * Sets an animation for each element
 		 *
 		 * @param  {Number} base           - Base offset value.
-		 * @param  {Object} obj            - An HTML element.
+		 * @param  {String} obj            - An HTML element.
 		 * @param  {Boolean} reset         - Reset block on mouse leave
 		 * @return {Void}
 		 */
@@ -143,7 +143,7 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 		 *
 		 * @param  {Number} base           - Base offset value.
 		 * @param  {Number} multiple       - The power of target number.
-		 * @param  {Object} obj            - An HTML element.
+		 * @param  {String} obj            - An HTML element.
 		 * @param  {Boolean} reset         - Reset block on mouse leave
 		 * @return {Void}
 		 */

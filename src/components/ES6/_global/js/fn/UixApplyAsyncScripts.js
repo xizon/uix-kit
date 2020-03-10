@@ -59,7 +59,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.COMMON_HEIGHT )                UixModuleInstance.COMMON_HEIGHT.pageLoaded(); //Common Height
 			if ( UixModuleInstance.ADVANCED_SLIDER )              UixModuleInstance.ADVANCED_SLIDER.pageLoaded(); //Advanced Slider (Basic)
 			if ( UixModuleInstance.ADVANCED_SLIDER_FILTER )       UixModuleInstance.ADVANCED_SLIDER_FILTER.pageLoaded(); //Advanced Slider
-			if ( UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH )    UixModuleInstance.POST_LIST_SPLIT_FULLWIDTH.pageLoaded(); //Fullwidth List of Split
+			if ( UixModuleInstance.FULL_WIDTH_COLUMN_TO_EDGE )    UixModuleInstance.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded(); //Full Width Column to Edge
 			if ( UixModuleInstance.STICKY_EL )                    UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 			if ( UixModuleInstance.TEXT_EFFECT )                  UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
 			if ( UixModuleInstance.TIMELINE )                     UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
@@ -100,6 +100,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.MULTI_ITEMS_CAROUSEL )         UixModuleInstance.MULTI_ITEMS_CAROUSEL.documentReady($); //Multiple Items Carousel
 			if ( UixModuleInstance.THREE_BACKGROUND )             UixModuleInstance.THREE_BACKGROUND.documentReady($); //3D Background
 			if ( UixModuleInstance.THREE_CAROUSEL )               UixModuleInstance.THREE_CAROUSEL.documentReady($); //3D Carousel
+            if ( UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER ) UixModuleInstance.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady($); //3D Liquid Scrollspy Slider
 
 
 			//---- Prevent overlay clicks on asynchronous requests

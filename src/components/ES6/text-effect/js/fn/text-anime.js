@@ -6,7 +6,6 @@
  * @return {Void}
  */
 ( function ( $ ) {
-    'use strict';
     $.fn.UixTextEff = function( options ) {
  
         // This is the easiest way to have default options.
@@ -26,7 +25,10 @@
 				if ( typeof speed === typeof undefined ) {
 					speed = 1200;
 				}	
-			
+			    
+                //The data-text-eff attribute must be unique, otherwise it will not execute correctly.
+                if ( $( customControls ).length > 1 ) return false;
+            
 	
 				$( customControls ).html( $( customControls ).text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>") );
 			

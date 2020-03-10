@@ -30,7 +30,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE2               = module.ONEPAGE2 || {};
-    module.ONEPAGE2.version       = '0.0.4';
+    module.ONEPAGE2.version       = '0.0.5';
     module.ONEPAGE2.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -46,7 +46,6 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 			$sectionsContainer = $( '.uix-normal-load__onepage-container2' ),
 			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
 			sectionTotal       = $sections.length,
-			topSectionSpacing  = 0,
 			$primaryMenu       = $( '.uix-menu' ),
 			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
@@ -172,7 +171,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {Void}
 		 */
@@ -202,7 +201,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {Object} el           - The container of each sections.
+		 * @param  {Element} el           - The container of each sections.
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} hashID       - ID of custom hashchange event.
 		 * @return {Void}
@@ -343,8 +342,8 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		/*
 		 * Get all links by section or article
 		 *
-		 * @param  {Object} menuObj     - Returns the menu element within the document.
-		 * @return {Object}             - A new selector.
+		 * @param  {Element} menuObj     - Returns the menu element within the document.
+		 * @return {Element}             - A new selector.
 		 */
         function getAllNavigation( menuObj ) {
             return menuObj.find( 'li' );
@@ -354,11 +353,11 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		/*
 		 * Smooth scroll to content
 		 *
-		 * @param  {Object} menuObj     - Returns the menu element within the document.
+		 * @param  {Element} menuObj     - Returns the menu element within the document.
 		 * @return {Void}
 		 */
         function goPageSection( menuObj ) {
-			menuObj.find( 'li > a' ).on( 'click', function(e) {
+			menuObj.find( 'li > a' ).off( 'click.ONEPAGE2' ).on( 'click.ONEPAGE2', function(e) {
 				e.preventDefault();
 				
 				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;

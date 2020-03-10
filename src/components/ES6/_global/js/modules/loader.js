@@ -22,7 +22,7 @@ export const LOADER = ( ( module, $, window, document ) => {
 	
 	
 	module.LOADER               = module.LOADER || {};
-    module.LOADER.version       = '0.0.2';
+    module.LOADER.version       = '0.0.4';
 	module.LOADER.documentReady = function( $ ) {
 
 
@@ -44,39 +44,165 @@ export const LOADER = ( ( module, $, window, document ) => {
 		},false);
 		
 		
-		
+        
 		// Loader Process
 		//-------------------------------------	
+
+        // Detect if video.load is successful or not 
+        var videos = [];
+        var videosTotal = 0;
+        var videosLoaded = 0;
+        $( '.uix-video__slider > video' ).each( function()  {
+            videos.push( $( this ) );
+        });
+        
+        videosTotal = videos.length;
+        console.log( 'videosTotal: ' + videosTotal + ', videosLoaded: ' + videosLoaded );
+
+
+        
+        // Loading progress event
+        var loadedPercent = 0;
+        var imgTotal = 0;
+        var loadingAnim = function( per ) {
+			$( '.uix-loader-progress > span' ).text( $( '.uix-loader-progress' ).data( 'txt' ).replace(/\{progress\}/g, per) );
+            TweenMax.to( '.uix-loader-progress__line', 0.3, {
+                width: per/100.0 * window.innerWidth
+            });   
+        };
+        
 		$( 'body' ).waitForImages().progress( function( loaded, count, success ) {
 			
-			var per = parseInt( loaded/(count-1) * 100 );
+            imgTotal = count;
+            
+			var per = parseInt( loaded/(count - (1-videosTotal) ) * 100 );
 			
+            //
 			if ( $( 'img' ).length <= 1 ) {
 				per = 100;
 			}
 			
+            //
 			if ( isNaN( per ) ) per = 100;
-			
-			$( '.uix-loader-progress span' ).text( per + '%' );
-			
+            
+            //
+            loadedPercent = per;
+
+
+            //animation classes for loader
+            for (var i = 1; i < 10; i++ ) {
+                if ( per < i*10 ) $( 'body' ).addClass( 'loaded' + i );
+            } 
+
+
+            
+            
+            
+            //loading animation
+            loadingAnim( per );
+
 			
 		}).done( function() {
-			
-			//Event after loading is complete
-			
-			
-			// Remove loader
-			TweenMax.to( '.uix-loader, .uix-loader-progress', 0.5, {
-				css: {
-					opacity : 0,
-					display : 'none'
-				}
-			});
-							
-			
-			
+            
+            
+            //Event after loading is complete
+            // Main scene
+            console.log( 'loadedPercent: ' + loadedPercent + ', imageTotal: ' + imgTotal );
+            mainObjLoader( loadedPercent, imgTotal );
 
+            
+            
 		});    
+        
+        /*
+         * Main Object Loader
+         *
+         * @param  {Number} loadedPercent  - The percentage value after the page loads the image.
+         * @param  {Number} imgTotal       - The total number of imags.
+         * @return {Void}
+         */ 
+        function mainObjLoader( loadedPercent, imgTotal ) {
+            
+            var remainedPercentComplete = 0;
+            
+            var loadedFun = function() {
+                
+                //loading animation
+                loadingAnim( 100 );
+                
+                
+                //animation classes for loader
+                $( 'body' ).addClass( 'loaded10' );
+                
+                // Remove loader
+                TweenMax.to( '.uix-loader, .uix-loader-progress, .uix-loader-progress__line', 0.5, {
+                    css: {
+                        opacity : 0,
+                        display : 'none'
+                    }
+                });
+                
+                
+                
+                //page animation when elements loaded
+                //...
+               
+                
+            };
+            
+            
+            
+            //
+            if ( loadedPercent < 100 ) {
+                
+                videos.forEach( function( element ) {
+
+                    var _src = element.find( 'source:first' ).attr( 'src' );
+                    if ( typeof _src === typeof undefined ) _src = element.attr( 'src' );
+
+                    var video    = document.getElementById( element.attr( 'id' ) ),
+                        videoURL = _src;
+
+                    video.addEventListener( 'loadedmetadata', function( e ) {
+
+                        //Video has started loading successfully
+                        videosLoaded++;
+                        
+                        //get remained percent
+                        remainedPercentComplete = (1 - videosLoaded / videosTotal) * (100 - loadedPercent);
+                        
+                        //current percent
+                        var currentPercent = loadedPercent + ( (100 - loadedPercent) - remainedPercentComplete );
+                        
+                        //loading animation
+                        loadingAnim( currentPercent );
+                        
+                        // All videos loaded
+                        if ( currentPercent == 100 ) {
+                            loadedFun();
+                        }   
+                        
+                        //debug
+                        console.log( 'remainedPercentComplete: ' + remainedPercentComplete + ', currentPercent: ' + currentPercent );
+                        console.log( 'videosTotal: ' + videosTotal + ', videosLoaded: ' + videosLoaded );
+
+                    }, false);	
+
+                    video.src = videoURL;
+
+                });
+    
+            } else {
+                // All videos loaded
+                if ( remainedPercentComplete == 0 ) {
+                    loadedFun();
+                }  
+            }
+            
+            
+        }
+                
+        
 
 
 	};

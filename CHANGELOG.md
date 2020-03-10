@@ -1,5 +1,174 @@
 # Changelog
 
+#### = 4.1.3 (March 10, 2020) =
+
+* New: Added style of loader progress to `<body>` tag.
+* Tweak: Modified the HTML tag of Modal Dialog and Lightbox to use `<template>` instead.
+* Fix: Fixed display issues in Modal Dialog video popup and browser development mode
+
+
+
+#### = 4.1.2 (March 5, 2020) =
+
+* Tweak: Upgraded threejs to the latest version of r114.
+* Tweak: Upgraded animejs to the latest version of 3.1.
+* Tweak: Upgraded Mouse Interaction with three.js.
+
+
+
+
+#### = 4.1.1 (February 16, 2020) =
+
+* Tweak: Optimized the loading method via AJAX request.
+* Tweak: Change the method of importing the shader.
+* Tweak: Optimized the button and HTML structure of the popup module.
+
+
+#### = 4.1.0 (January 16, 2020) =
+
+* Fix: Fixed an issue where webpack might skip uncompressed CSS files packaging.
+
+
+
+#### = 4.0.9 (January 15, 2020) =
+
+* Tweak: Optimized @param in comments.
+* Tweak: Added activation style for Dropdown Menu.
+
+
+
+#### = 4.0.8 (January 13, 2020) =
+
+* Fix: Fixed a possible error when the value of the Dropdown Menu module is a pure number.
+
+
+
+#### = 4.0.7 (January 7, 2020) =
+
+* Fix: Fixed duplicate dynamic addition of wrapping layers for Smooth Scrolling Page.
+
+
+
+#### = 4.0.6 (January 3, 2020) =
+
+* New: Added progress of loading video.
+* Tweak: Modify loading display animation.
+* Fix: Fixed compatibility issue of Promise method on Safari and Firefox.
+
+
+
+#### = 4.0.5 (December 30, 2019) =
+
+* Tweak: Upgraded PIXI to 5.2.0.
+* Tweak: Solved the display problem of Advanced Slider under PIXI 5.
+
+
+
+#### = 4.0.3 (December 30, 2019) =
+
+* Tweak: Upgraded Promise objects' load event for threejs.
+* Tweak: Upgraded Muuri to 0.8.0.
+
+
+
+#### = 4.0.2 (December 29, 2019) =
+
+* Tweak: Change the viewport property of Smooth Scrolling Page to percent.
+* Tweak: Optimized click event of trigger for One Page module.
+
+
+#### = 4.0.1 (December 6, 2019) =
+
+* Tweak: Upgraded three.js to the latest version of r110.
+* Tweak: Upgrade serialize-javascript to version 2.1.1.
+
+
+
+#### = 4.0.0 (November 6, 2019) =
+
+* Tweak: When the module is added or removed, the webpack scaffold resolution time will increase or decrease.
+
+
+#### = 3.9.9 (November 4, 2019) =
+
+* Tweak: Increase the preloading progress of images when using AJAX requests to load new pages.
+
+
+#### = 3.9.8 (October 26, 2019) =
+
+* Tweak: Upgraded background animation and added its demo.
+* Tweak: Optimized style for some modules.
+
+
+
+#### = 3.9.7 (October 23, 2019) =
+
+* Tweak: Optimized the scrolling animation of some modules.
+* Fix: Fixed autoplay issue for multiple Advanced Slider on the same page.
+
+
+#### = 3.9.6 (October 17, 2019) =
+
+* Fix: Optimized the "Text Effect" that may be caused by duplicate properties.
+* Fix: Fixed script issue with equal heights for columns.
+* Fix: Add a viewport to display the visual area of the Smooth Scrolling Page.
+* Tweak: Modified the compilation delay time of the webpack configuration file. The more modules, the longer the time, the default 3500ms can guarantee the time-consuming compilation of 150 modules.
+* New: Add a new module "3D Liquid Scrollspy Slider".
+
+
+
+#### = 3.9.5 (October 16, 2019) =
+
+* New: Add a new module "Full Width Column to Edge".
+* New: Add a new module "Smooth Scrolling Page".
+* Tweak: Optimized Scrollspy Animate.
+* Tweak: Refactored the "Full Width Column to Edge" related code.
+* Tweak: Removed "Fullwidth List of Split" and "Fullwidth List of Split 2".
+* Fix: Fixed Common Height javascript when you change the window size.
+
+
+
+
+#### = 3.9.4 (October 11, 2019) =
+
+* Fix:Fixed issue with initialization height for Advanced Slider.
+* Tweak: Prevent slider buttons' events from firing multiple times.
+* Tweak: Modified webpack.config.js.
+
+
+
+#### = 3.9.3 (October 9, 2019) =
+
+* Fix: Prevents front-end javascripts of Advanced Slider that are activated with AJAX to repeat loading.
+* Tweak: Unify the slider config parameters.
+
+
+#### = 3.9.1 (October 5, 2019) =
+
+* Fix: Solved a transparency transition problem of Advanced Slider.
+
+
+#### = 3.9.0 (October 2, 2019) =
+
+* Fix: Solved a problem of video playback sequence in the Advanced Slider.
+
+
+#### = 3.8.8 (September 28, 2019) =
+
+* New: Add some new demo for Vertical Centering module.
+* Fix: Solved the problem of displaying extra scrollbar for Gallery tiles.
+* Tweak: Optimized style of overlay.
+
+
+
+#### = 3.8.7 (September 28, 2019) =
+
+* New: Add a new module "Gallery Grid Layout".
+* Tweak: Upgraded config of parallax module.
+* Fix: Solved the problem of displaying extra scrollbar for Masonry With AJAX.
+
+
+
 #### = 3.8.6 (September 17, 2019) =
 
 * New: Added a hyperlink style to Button. 

@@ -1,9 +1,13 @@
+# For more information about the configurations used
+# in this file, please see the Travis CI documentation:
+# https://docs.travis-ci.com
 language: node_js
 
 node_js:
-  - 8
   - 10
+  
+# Use README.md command `npm install --only=dev --unsafe-perm --production`, don't use `npm ci`
 
-script: 
- - npm install --dev
- - npm view build
+script:
+  - npm install --dev
+  - npm view build

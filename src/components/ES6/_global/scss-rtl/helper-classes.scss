@@ -7,6 +7,7 @@
  * 5. Element Floating
  * 6. Element Alignment
  * 12. Tip Bubble
+ * 14. Position
 */
 
 
@@ -54,5 +55,42 @@
 		right: auto;
 		left: 1rem;
 	}
+
+}
+
+
+
+/* 
+ ---------------------------
+ 14. Position
+ ---------------------------
+ */ 
+
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.uix-dir--left {
+    left: auto !important;
+	right: 0 !important;
+}
+.uix-dir--right {
+	left: 0 !important;
+    right: auto !important;
+}
+
+.uix-dir--top-left {
+    left: auto !important;
+	right: 0 !important;
+}
+.uix-dir--top-right {
+	left: 0 !important;
+    right: auto !important;
+
+}
+.uix-dir--bottom-left {
+    left: auto !important;
+	right: 0 !important;
+}
+.uix-dir--bottom-right {
+	left: 0 !important;
+    right: auto !important;
 
 }

@@ -23,7 +23,7 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 	
 	
 	module.BODY_AND_HEADER               = module.BODY_AND_HEADER || {};
-    module.BODY_AND_HEADER.version       = '0.0.3';
+    module.BODY_AND_HEADER.version       = '0.0.4';
 	module.BODY_AND_HEADER.documentReady = function( $ ) {
 
 
@@ -69,7 +69,7 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 		var $el = $( '.uix-header__container, .uix-header__placeholder' );
-		$window.on('scroll touchmove', function() {
+		$window.on( 'scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function() {
 
 			var scrollTop = $( this ).scrollTop(),
 				spyTop    = 220;

@@ -303,7 +303,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize single switch
 		 *
-		 * @param  {Object} obj                 - Radio controls. 
+		 * @param  {Element} obj                 - Radio controls. 
 		 * @return {Void}
 		 */
 		var hideAllSingleSelItems = function( obj ) {
@@ -390,7 +390,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize single switch
 		 *
-		 * @param  {Object} obj                 - Radio controls. 
+		 * @param  {Element} obj                 - Radio controls. 
 		 * @return {Void}
 		 */
 		var hideAllNormalRadioItems = function( obj ) {

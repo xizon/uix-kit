@@ -27,7 +27,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 	
 	
 	module.PARALLAX               = module.PARALLAX || {};
-    module.PARALLAX.version       = '0.0.5';
+    module.PARALLAX.version       = '0.0.6';
 	module.PARALLAX.documentReady = function( $ ) {
 
         var $window      = $( window ),
@@ -66,14 +66,18 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 			/* Pure parallax scrolling effect without other embedded HTML elements */
 			$( '.uix-parallax--el' ).each( function() {
 				var $this       = $( this ),
-					dataSpeed   = $this.data( 'parallax' );
+					dataSpeed   = $this.data( 'speed' ),
+                    dataEasing  = $this.data( 'transition' );
 				
 				if ( typeof dataSpeed === typeof undefined ) {
 					dataSpeed = 0;
 				}
+				if ( typeof dataEasing === typeof undefined ) {
+					dataEasing = 'none 0s ease 0s';
+				} 
 				
 				
-				$this.UixParallax( { 'speed': dataSpeed, 'bg': false } );	
+				$this.UixParallax( { 'speed': dataSpeed, 'bg': false, transition : dataEasing } );	
 				
 		
 			});
@@ -86,8 +90,10 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 					dataImg          = $curImg.attr( 'src' ),
 					dataSkew         = $this.data( 'skew' ),
 					dataSpeed        = $this.data( 'speed' ),
+                    dataEasing       = $this.data( 'transition' ),
 					dataOverlay      = $this.data( 'overlay-bg' ),
 					dataFullyVisible = $this.data( 'fully-visible' ),
+                    dataXPos         = $this.data( 'xpos' ),
 					curImgH          = null,
 					curImgW          = null,
 					curSize          = 'cover';
@@ -105,8 +111,13 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 				if ( typeof dataSpeed === typeof undefined ) { // If there is no data-xxx, save current source to it
 					dataSpeed = 0;
 				}	
-				
-				
+				if ( typeof dataEasing === typeof undefined ) {
+					dataEasing = 'none 0s ease 0s';
+				} 
+                
+				if ( typeof dataXPos === typeof undefined ) {
+					dataXPos = '50%';
+				} 	
 				if ( typeof dataFullyVisible === typeof undefined ) {
 					dataFullyVisible = false;
 				}	
@@ -194,13 +205,13 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 							// supported
 
 							$this.css( {
-								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') 50% 0/'+curSize+' no-repeat fixed'
+								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') '+dataXPos+' 0/'+curSize+' no-repeat fixed'
 							} );
 						} else {
 							// not-supported
 
 							$this.css( {
-								'background' : 'url(' + dataImg + ') 50% 0/'+curSize+' no-repeat fixed'
+								'background' : 'url(' + dataImg + ') '+dataXPos+' 0/'+curSize+' no-repeat fixed'
 							} );
 						}
 
@@ -219,7 +230,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 
 
 					//Use parallax to background
-					$this.UixParallax( { 'speed': dataSpeed, 'bg': { enable: true, xPos: '50%' } } );
+					$this.UixParallax( { 'speed': dataSpeed, transition : dataEasing, 'bg': { enable: true, xPos: dataXPos } } );
 
 
 					

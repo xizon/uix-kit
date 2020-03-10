@@ -249,7 +249,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 			/*
 			 * Load Image
 			 *
-			 * @param  {Object} imgLoader       - A loader for loading all images from array.
+			 * @param  {Element} imgLoader       - A loader for loading all images from array.
 			 * @param  {String} src             - URL of image.
 			 * @param  {Number} index           - Index of image.
 			 * @param  {Number} w               - The width of an image, in pixels. 
@@ -257,7 +257,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 			 * @param  {Number} total           - Total number of preload images.
 			 * @param  {Number} itemRadAngle    - An equal radian angle of a sphere for each element.
 			 * @param  {Number} radius          - Radius length of the sphere (circumference).
-			 * @param  {Object} loading         - Progress bar display control.
+			 * @param  {Element|String} loading         - Progress bar display control.
 			 * @return {Void}
 			 */
 			function loadImage( imgLoader, src, index, w, h, total, itemRadAngle, radius, loading ) {

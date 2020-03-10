@@ -24,7 +24,7 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 	
 	
     module.BACK_TO_TOP               = module.BACK_TO_TOP || {};
-    module.BACK_TO_TOP.version       = '0.0.4';
+    module.BACK_TO_TOP.version       = '0.0.5';
     module.BACK_TO_TOP.documentReady = function( $ ) {
 
 		
@@ -39,7 +39,7 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 			//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 			var $el = $( '#uix-to-top' );
 			
-			$window.on('scroll touchmove', function() {
+			$window.on( 'scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function() {
 
 				var scrollTop = $( this ).scrollTop(),
 					spyTop    = windowHeight/2;

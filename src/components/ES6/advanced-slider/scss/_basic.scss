@@ -120,6 +120,8 @@ $anim-duration: 0.6s;
 
 
 /* Tests native CSS3 and HTML5 features are available */
+/*---- Effect: Scale ----*/
+/* --------------------------- */
 .cssanimations {
 
 	.uix-advanced-slider {
@@ -183,6 +185,102 @@ $anim-duration: 0.6s;
 
 
 }
+
+/*---- Effect: Slide ----*/
+/* --------------------------- */
+.cssanimations {
+
+	.uix-advanced-slider {
+
+		&.uix-advanced-slider--eff-slide {
+			.uix-advanced-slider__inner {
+
+                .uix-advanced-slider__item {
+                    opacity: 1;
+                    z-index: 3;
+
+                    &:not(.leave):not(.is-active) {
+                        transition: none;
+                        z-index: 1;
+                    }
+
+                    &.leave {
+                        &.prev {
+                            animation: uix-cssAnim--slideLeftLeave 1.2s ease 1 forwards;
+                        }
+
+                        &.next {
+                            animation: uix-cssAnim--slideRightLeave 1.2s ease 1 forwards;
+                        }
+                    }
+
+                    &.is-active {
+                        transition-delay: 0s;
+
+                        &.prev {
+                            animation: uix-cssAnim--slideRight 1.2s ease 1 forwards;
+                        }
+
+                        &.next {
+                            animation: uix-cssAnim--slideLeft 1.2s ease 1 forwards;
+                        }
+                    }
+                }
+                
+
+			}
+
+		}
+
+	}
+
+
+}
+
+
+@keyframes uix-cssAnim--slideRightLeave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes uix-cssAnim--slideRight {
+    0% {
+        transform: translateX(100%);
+        z-index: 2;
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes uix-cssAnim--slideLeftLeave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes uix-cssAnim--slideLeft {
+    0% {
+        transform: translateX(-100%);
+        z-index: 2;
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
 
 
 @media all and (max-width: 768px) {

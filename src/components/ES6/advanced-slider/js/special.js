@@ -30,11 +30,9 @@ import '../scss/_special.scss';
 export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	if ( window.ADVANCED_SLIDER_FILTER === null ) return false;
 	
-	
-	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.0';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.8';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -63,6 +61,9 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			container__items,
 			displacementSprite,
 			displacementFilter;
+        
+        
+
 		
 		sliderInit( false );
 		
@@ -95,137 +96,174 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 					$first                   = $items.first(),
 					nativeItemW,
-					nativeItemH;
+					nativeItemH,
+                    activated                = $this.data( 'activated' ); 
 				
 				
-				//Autoplay times
-				var playTimes;
-				//A function called "timer" once every second (like a digital watch).
-				$this[0].animatedSlides;
+                
+                if ( typeof activated === typeof undefined || activated === 0 ) {
+                    
+                    
+                    //Get parameter configuration from the data-* attribute of HTML
+                    var dataAuto                 = $this.data( 'auto' ),
+                        dataTiming               = $this.data( 'timing' ),
+                        dataLoop                 = $this.data( 'loop' ),
+                        dataControlsPagination   = $this.data( 'controls-pagination' ),
+                        dataControlsArrows       = $this.data( 'controls-arrows' ),
+                        dataDraggable            = $this.data( 'draggable' ),
+                        dataDraggableCursor      = $this.data( 'draggable-cursor' ),                     
+                        dataCountTotal           = $this.data( 'count-total' ),
+                        dataCountCur             = $this.data( 'count-now' ),
+                        dataSpeed                = $this.data( 'speed' ),
+                        dataFilterTexture        = $this.data( 'filter-texture' );
+
+                    
+                    
+                    if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+                    if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+                    if ( typeof dataLoop === typeof undefined ) dataLoop = false; 
+                    if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
+                    if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
+                    if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
+                    if ( typeof dataDraggableCursor === typeof undefined || dataDraggableCursor == false ) dataDraggableCursor = 'move';
+                    if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
+                    if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
+                    if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+                    
+                    
+                    
+                    //Autoplay times
+                    var playTimes;
+                    //A function called "timer" once every second (like a digital watch).
+                    $this[0].animatedSlides;
+
+
+                    //Get the animation speed
+                    //-------------------------------------	
+                    if ( typeof dataSpeed != typeof undefined && dataSpeed != false ) {
+                        animSpeed = dataSpeed;
+                    }
+
+
+
+                    //Display all images
+                    //-------------------------------------	
+                    if ( !Modernizr.webgl ) {
+                        $this.find( 'img' ).css( 'visibility', 'visible' );
+                    }
+
+
+
+                    //Initialize the first item container
+                    //-------------------------------------		
+                    $items.addClass( 'next' );
+
+                    $first.addClass( 'is-active' );
+
+
+                    TweenMax.set( $items, {
+                        alpha      : 0,
+                        onComplete : function() {
+
+                            TweenMax.to( $first, animSpeed/1000, {
+                                alpha : 1,
+                                delay : animSpeed/1000
+                            });		
+                        }
+
+                    });			
+
+
+
+                    if ( $first.find( 'video' ).length > 0 ) {
+
+                        //Returns the dimensions (intrinsic height and width ) of the video
+                        var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
+                            videoURL = $first.find( 'source:first' ).attr( 'src' );
+                        if ( typeof videoURL === typeof undefined ) videoURL = $first.attr( 'src' ); 
+
+                        if ( typeof videoURL != typeof undefined ) {
+                            video.addEventListener( 'loadedmetadata', function( e ) {
+                                $this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
+
+                                nativeItemW = this.videoWidth;
+                                nativeItemH = this.videoHeight;	
+
+                                //Initialize all the items to the stage
+                                addItemsToStage( $this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, dataFilterTexture );
+
+
+                            }, false);	
+
+                            video.src = videoURL;
+                        }
+
+
+
+
+                    } else {
+
+                        var imgURL   = $first.find( 'img' ).attr( 'src' );
+
+                        if ( typeof imgURL != typeof undefined ) {
+
+                            var img = new Image();
+
+                            img.onload = function() {
+                                $this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
+
+                                nativeItemW = this.width;
+                                nativeItemH = this.height;	
+
+                                //Initialize all the items to the stage
+                                addItemsToStage( $this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, dataFilterTexture );
+
+
+
+                            };
+
+                            img.src = imgURL;
+                        }
+
+
+                    }	
+
+
+
+
+                    //Autoplay Slider
+                    //-------------------------------------		
+                    if ( !resize ) {
+
+
+                        if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
+
+                            sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+
+                            $this.on({
+                                mouseenter: function() {
+                                    clearInterval( $this[0].animatedSlides );
+                                },
+                                mouseleave: function() {
+                                    sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+                                }
+                            });	
+
+                        }
+
+
+                    }
+
+                    
+                    
+                    //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+                    $this.data( 'activated', 1 );
+                    
+                }//endif activated
+  
 				
 				
-				//Get the animation speed
-				//-------------------------------------	
-				if ( typeof $this.data( 'speed' ) != typeof undefined && $this.data( 'speed' ) != false ) {
-					animSpeed = $this.data( 'speed' );
-				}
-				
-		
-			
-				//Display all images
-				//-------------------------------------	
-				if ( !Modernizr.webgl ) {
-				    $this.find( 'img' ).css( 'visibility', 'visible' );
-				}
-
-
-
-				//Initialize the first item container
-				//-------------------------------------		
-				$items.addClass( 'next' );
-				
-				$first.addClass( 'is-active' );
-				
-				
-				TweenMax.set( $items, {
-					alpha      : 0,
-					onComplete : function() {
-
-						TweenMax.to( $first, animSpeed/1000, {
-							alpha : 1,
-							delay : animSpeed/1000
-						});		
-					}
-					
-				});			
-
-				
-
-				if ( $first.find( 'video' ).length > 0 ) {
-
-					//Returns the dimensions (intrinsic height and width ) of the video
-					var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
-						videoURL = $first.find( 'source:first' ).attr( 'src' );
-					
-					if ( typeof videoURL != typeof undefined ) {
-						video.addEventListener( 'loadedmetadata', function( e ) {
-							$this.css( 'height', this.videoHeight*($this.width()/this.videoWidth) + 'px' );	
-
-							nativeItemW = this.videoWidth;
-							nativeItemH = this.videoHeight;	
-
-							//Initialize all the items to the stage
-							addItemsToStage( $this, nativeItemW, nativeItemH );
-
-
-						}, false);	
-
-						video.src = videoURL;
-					}
-
-
-
-
-				} else {
-
-					var imgURL   = $first.find( 'img' ).attr( 'src' );
-
-					if ( typeof imgURL != typeof undefined ) {
-						
-						var img = new Image();
-						
-						img.onload = function() {
-							$this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
-
-							nativeItemW = this.width;
-							nativeItemH = this.height;	
-
-							//Initialize all the items to the stage
-							addItemsToStage( $this, nativeItemW, nativeItemH );
-							
-
-							
-						};
-
-						img.src = imgURL;
-					}
-
-
-				}	
-				
-				
-				
-
-				//Autoplay Slider
-				//-------------------------------------		
-				if ( !resize ) {
-
-					var dataAuto                 = $this.data( 'auto' ),
-						dataTiming               = $this.data( 'timing' ),
-						dataLoop                 = $this.data( 'loop' );
-
-					if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
-					if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-					if ( typeof dataLoop === typeof undefined ) dataLoop = false;
-
-
-					if ( dataAuto && !isNaN( parseFloat( dataTiming ) ) && isFinite( dataTiming ) ) {
-
-						sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
-
-						$this.on({
-							mouseenter: function() {
-								clearInterval( $this[0].animatedSlides );
-							},
-							mouseleave: function() {
-								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this );
-							}
-						});	
-
-					}
-
-
-				}
 
 				
 				
@@ -240,13 +278,17 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
          /*
 		 * Trigger slider autoplay
 		 *
-		 * @param  {Function} playTimes      - Number of times.
-		 * @param  {Number} timing           - Autoplay interval.
-		 * @param  {Boolean} loop            - Determine whether to loop through each item.
-		 * @param  {Object} slider           - Selector of the slider .
-		 * @return {Void}                    - The constructor.
+		 * @param  {Function} playTimes            - Number of times.
+		 * @param  {Number} timing                 - Autoplay interval.
+		 * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+		 * @param  {Element} slider                 - Selector of the slider .
+         * @param  {String} countTotalID           - Total number ID or class of counter.
+         * @param  {String} countCurID             - Current number ID or class of counter.
+         * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+         * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+		 * @return {Void}                          - The constructor.
 		 */
-		function sliderAutoPlay( playTimes, timing, loop, slider ) {	
+		function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
 			var items = slider.find( '.uix-advanced-slider-sp__item' ),
 				total = items.length;
@@ -258,16 +300,16 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				
 			
 				if ( !loop ) {
-					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, $sliderWrapper, 'next' );
+					if ( playTimes < total && playTimes >= 0 ) sliderUpdates( playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 				} else {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
 					
 					//Prevent problems with styles when switching in positive order
 					if ( playTimes == 0 ) {
-						sliderUpdates( playTimes, $sliderWrapper, 'prev' );
+						sliderUpdates( playTimes, slider, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 					} else {
-						sliderUpdates( playTimes, $sliderWrapper, 'next' );
+						sliderUpdates( playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 					}
 					
 				}
@@ -282,46 +324,44 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize all the items to the stage
 		 *
-		 * @param  {Object} slider           - Current selector of each slider.
-		 * @param  {Number} nativeItemW      - Returns the intrinsic width of the image/video.
-		 * @param  {Number} nativeItemH      - Returns the intrinsic height of the image/video.
+		 * @param  {Element} slider                 - Current selector of each slider.
+		 * @param  {Number} nativeItemW            - Returns the intrinsic width of the image/video.
+		 * @param  {Number} nativeItemH            - Returns the intrinsic height of the image/video.
+         * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+         * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+         * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+         * @param  {Boolean} draggable             - Allow drag and drop on the slider.
+         * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+         * @param  {String} countTotalID           - Total number ID or class of counter.
+         * @param  {String} countCurID             - Current number ID or class of counter.
+         * @param  {String} filterTexture          - The texture used for the displacement map.
 		 * @return {Void}
 		 */
-        function addItemsToStage( slider, nativeItemW, nativeItemH ) {
+        function addItemsToStage( slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID, filterTexture ) {
 			
 			var $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 				$first                   = $items.first(),
-				itemsTotal               = $items.length,
-				dataControlsPagination   = $this.data( 'controls-pagination' ),
-				dataControlsArrows       = $this.data( 'controls-arrows' ),
-				dataLoop                 = $this.data( 'loop' ),
-				dataFilterTexture        = $this.data( 'filter-texture' ),
-				dataDraggable            = $this.data( 'draggable' ),
-				dataDraggableCursor      = $this.data( 'draggable-cursor' );
+				itemsTotal               = $items.length;
 	
 			
-			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-			if ( typeof dataLoop === typeof undefined ) dataLoop = false;
-			if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-			if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
-			if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-
-				
 			
 			//If arrows does not exist on the page, it will be added by default, 
 			//and the drag and drop function will be activated.
-			if ( $( dataControlsArrows ).length == 0 ) {
-				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider-sp__arrows '+dataControlsArrows.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>' );
+			if ( $( arrowsID ).length == 0 ) {
+				$( 'body' ).prepend( '<div style="display:none;" class="uix-advanced-slider-sp__arrows '+arrowsID.replace('#','').replace('.','')+'"><a href="#" class="uix-advanced-slider-sp__arrows--prev"></a><a href="#" class="uix-advanced-slider-sp__arrows--next"></a></div>' );
 			}
 			
+            
+            //Add identifiers for the first and last items
+            $items.last().addClass( 'last' );
+            $items.first().addClass( 'first' );
 			
         
 		    //Prevent bubbling
 			if ( itemsTotal == 1 ) {
-				$( dataControlsPagination ).hide();
-				$( dataControlsArrows ).hide();
+				$( paginationID ).hide();
+				$( arrowsID ).hide();
 			}
 
 			if ( Modernizr.webgl ) {
@@ -407,30 +447,34 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 					}	
 					
-				});
-				
+				});//$this.find( '.uix-advanced-slider-sp__item' ).each
 				
 
 				//Basic webGL renderers 
 				//-------------------------------------
-				renderer              = new PIXI.Application( $this.width(), $this.height(), {
-														//backgroundColor : 0x000000, 
-					                                    antialias       : true,
-					                                    transparent     : true,
-														autoResize      : true, 
-														view            : document.getElementById( rendererCanvasID )
-													});
+				renderer              = new PIXI.Application({
+                                            width           : $this.width(),
+                                            height          : $this.height(),
+                                            transparent     : true,
+                                            antialias       : true,
+                                            autoResize      : true,
+                                            view            : document.getElementById( rendererCanvasID )
+                                        });
+                
+				renderer__filter       = new PIXI.autoDetectRenderer({
+                                            width           : $this.width(),
+                                            height          : $this.height(),
+                                            transparent     : true,
+                                            view            : document.getElementById( rendererCanvasID__filter )
+                                        });
+                
 
-				renderer__filter       = new PIXI.autoDetectRenderer( $this.width(), $this.height(), {
-														//backgroundColor : 0x000000, 
-														transparent     : true,
-														view            : document.getElementById( rendererCanvasID__filter )
-													});
 
-
+                //
+                //
 				stage__filter          = new PIXI.Container();
 				container__items       = new PIXI.Container();
-				displacementSprite    = ( /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test( dataFilterTexture ) ) ? new PIXI.Sprite( PIXI.Texture.fromVideo( dataFilterTexture ) ) : new PIXI.Sprite.fromImage( dataFilterTexture );
+				displacementSprite    = ( /^.*\.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4)/.test( filterTexture ) ) ? new PIXI.Sprite( PIXI.Texture.from( filterTexture ) ) : new PIXI.Sprite.from( filterTexture );
 				displacementFilter    = new PIXI.filters.DisplacementFilter( displacementSprite );
 
 				
@@ -453,13 +497,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							
 							videoSource.autoplay = false;
 							videoSource.pause();
@@ -487,7 +533,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -503,18 +549,26 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
-
-						// Render updated scene
-						renderer.stage.addChild( curSprite );
-
+						//Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
 
+                        
+                        
+						//Render updated scene
+						//-------------------------------------   
+						renderer.stage.addChild( curSprite );
 
+                        
 
 					});
 
@@ -523,7 +577,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 					
@@ -556,13 +610,16 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
+                            
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -589,7 +646,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -605,15 +662,23 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
 
-						container__items.addChild( curSprite );
+                        
+						//Render updated scene
+						//-------------------------------------   
+                        container__items.addChild( curSprite );
 
 
 						//Add child container to the main container 
@@ -647,9 +712,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						stage__filter.addChild( displacementSprite );
 
 
+
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 
@@ -666,7 +732,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 	
@@ -697,13 +763,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -729,7 +797,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -743,18 +811,26 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
+                        
+                        //Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
 
-
+						//Render updated scene
+						//-------------------------------------   
 						container__items.addChild( curSprite );
 
 
@@ -789,7 +865,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 							
@@ -806,7 +882,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 
@@ -834,13 +910,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -867,7 +945,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -882,18 +960,26 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                        // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 
+                        
+                        //Avoid error texture rendering errors ***!Important***
 						TweenMax.set( curSprite, {
 							alpha : 0
 						});	
 
-
+						//Render updated scene
+						//-------------------------------------   
 						container__items.addChild( curSprite );
 
 
@@ -928,7 +1014,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 							
@@ -949,7 +1035,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 
@@ -979,13 +1065,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 
 							// create a video texture from a path
-							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' ),
-								texture  = PIXI.Texture.fromVideo( videoURL );
+							var videoURL = $thisItem.find( 'source:first' ).attr( 'src' );
+                            if ( typeof videoURL === typeof undefined ) videoURL = $thisItem.attr( 'src' ); 
+                            
+                            var texture  = PIXI.Texture.from( videoURL );
 
 							curSprite = new PIXI.Sprite( texture );
 
 							// pause the video
-							var videoSource = texture.baseTexture.source;
+							var videoSource = texture.baseTexture.resource.source;
 							videoSource.autoplay = false;
 							videoSource.pause();
 							videoSource.currentTime = 0;
@@ -1012,7 +1100,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							var imgURL   = $thisItem.find( 'img' ).attr( 'src' ),
 								imgCur   = new Image();
 
-							curSprite = new PIXI.Sprite.fromImage( imgURL );
+							curSprite = new PIXI.Sprite.from( imgURL );
 
 							imgCur.onload = function() {
 
@@ -1027,14 +1115,26 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						}
 
-						curSprite.width  = $this.width();
-						curSprite.height = $this.height();	
+                        
+                         // center the sprite's anchor point
+                        curSprite.anchor.set( 0 );
+                        
+                        // sprite size
+						curSprite.width  = renderer.view.width;
+						curSprite.height = renderer.view.height;	
 
 
 						//Need to scale according to the screen
 						curSprite.scale.set( canvasRatio );
 						
-
+                        
+                        //Avoid error texture rendering errors ***!Important***
+						TweenMax.set( curSprite, {
+							alpha : 0
+						});
+                        
+						//Render updated scene
+						//-------------------------------------   
 						container__items.addChild( curSprite );
 
 
@@ -1072,7 +1172,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Animation Effects
 						//-------------------------------------
-						var ticker       = new PIXI.ticker.Ticker();
+						var ticker       = new PIXI.Ticker();
 						ticker.autoStart = true;
 						ticker.add( function( delta ) {
 
@@ -1090,7 +1190,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					//Initialize the default height of canvas
 					//-------------------------------------	
 					setTimeout( function() {
-						canvasDefaultInit( $first );
+						canvasDefaultInit( $this, $first );
 					}, animSpeed );
 
 
@@ -1126,11 +1226,21 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			}
 			_dot += '</ul>';
 
-			if ( $( dataControlsPagination ).html() == '' ) $( dataControlsPagination ).html( _dot );
+			if ( $( paginationID ).html() == '' ) $( paginationID ).html( _dot );
 
-			$( dataControlsPagination ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
+			$( paginationID ).find( 'li a' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
+                
+                //Prevent buttons' events from firing multiple times
+                var $btn = $( this );
+                if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
+                $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' );
+                }, animSpeed );
+
+                
 				if ( !$( this ).hasClass( 'is-active' ) ) {
 
 					
@@ -1147,7 +1257,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					
 					
 					//Update the current and previous/next items
-					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir );
+					sliderUpdates( $( this ).attr( 'data-index' ), $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop );
 
 					//Pause the auto play event
 					clearInterval( $this[0].animatedSlides );	
@@ -1159,13 +1269,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			//Next/Prev buttons
 			//-------------------------------------		
-			var _prev = $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ),
-				_next = $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' );
+			var _prev = $( arrowsID ).find( '.uix-advanced-slider-sp__arrows--prev' ),
+				_next = $( arrowsID ).find( '.uix-advanced-slider-sp__arrows--next' );
 
-			$( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
+			$( arrowsID ).find( 'a' ).attr( 'href', 'javascript:' );
 
-			$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
-			if ( !dataLoop ) {
+			$( arrowsID ).find( 'a' ).removeClass( 'is-disabled' );
+			if ( !loop ) {
 				_prev.addClass( 'is-disabled' );
 			}
 
@@ -1173,12 +1283,20 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+                
+                //Prevent buttons' events from firing multiple times
+                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                _prev.attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    _prev.attr( 'aria-disabled', 'false' );
+                }, animSpeed ); 
+                
 
 				//Canvas Interactions
 				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
 
 				//Update the current and previous items
-				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 
 				//Pause the auto play event
 				clearInterval( $this[0].animatedSlides );
@@ -1187,12 +1305,20 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+                
+                
+                //Prevent buttons' events from firing multiple times
+                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                _next.attr( 'aria-disabled', 'true' );
+                setTimeout( function() {
+                    _next.attr( 'aria-disabled', 'false' );
+                }, animSpeed );
 
 				//Canvas Interactions
 				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
 
 				//Update the current and next items
-				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next' );
+				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 
 
 				//Pause the auto play event
@@ -1211,7 +1337,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			
 
 			//Make the cursor a move icon when a user hovers over an item
-			if ( dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false ) $dragDropTrigger.css( 'cursor', dataDraggableCursor );
+			if ( draggable && draggableCursor != '' && draggableCursor != false ) $dragDropTrigger.css( 'cursor', draggableCursor );
 
 
 			//Mouse event
@@ -1228,7 +1354,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 				} else {
 
-					if ( dataDraggable ) {
+					if ( draggable ) {
 						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
 						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
 					}
@@ -1280,7 +1406,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					} else {
 
 						
-						if ( dataDraggable ) {
+						if ( draggable ) {
 							//right
 							if ( e.pageX > origin_mouse_x ) {				
 								if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
@@ -1327,33 +1453,29 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Transition Between Slides
 		 *
-		 * @param  {Number} elementIndex     - Index of current slider.
-		 * @param  {Object} slider           - Selector of the slider .
-		 * @param  {String} dir              - Switching direction indicator.
+		 * @param  {Number} elementIndex           - Index of current slider.
+		 * @param  {Element} slider                 - Selector of the slider .
+		 * @param  {String} dir                    - Switching direction indicator.
+         * @param  {String} countTotalID           - Total number ID or class of counter.
+         * @param  {String} countCurID             - Current number ID or class of counter.
+         * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+         * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+         * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
 		 * @return {Void}
 		 */
-        function sliderUpdates( elementIndex, slider, dir ) {
+        function sliderUpdates( elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 			
 			var $items                   = slider.find( '.uix-advanced-slider-sp__item' ),
 				$current                 = $items.eq( elementIndex ),
-			    total                    = $items.length,
-				dataCountTotal           = slider.data( 'count-total' ),
-				dataCountCur             = slider.data( 'count-now' ),
-				dataControlsPagination   = slider.data( 'controls-pagination' ),
-				dataControlsArrows       = slider.data( 'controls-arrows' ),	
-				dataLoop                 = slider.data( 'loop' );
+			    total                    = $items.length;
 			
 
-			if ( typeof dataCountTotal === typeof undefined ) dataCountTotal = 'p.count em.count';
-			if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
-			if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
-			if ( typeof dataControlsArrows === typeof undefined ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
-			if ( typeof dataLoop === typeof undefined ) dataLoop = false;			
+
 		
 		    //Prevent bubbling
 			if ( total == 1 ) {
-				$( dataControlsPagination ).hide();
-				$( dataControlsArrows ).hide();
+				$( paginationID ).hide();
+				$( arrowsID ).hide();
 				return false;
 			}
 	
@@ -1362,13 +1484,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			
 			//Transition Interception
 			//-------------------------------------
-			if ( dataLoop ) {
+			if ( loop ) {
 				if ( elementIndex == total ) elementIndex = 0;
 				if ( elementIndex < 0 ) elementIndex = total-1;	
 			} else {
-				$( dataControlsArrows ).find( 'a' ).removeClass( 'is-disabled' );
-				if ( elementIndex == total - 1 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
-				if ( elementIndex == 0 ) $( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
+				$( arrowsID ).find( 'a' ).removeClass( 'is-disabled' );
+				if ( elementIndex == total - 1 ) $( arrowsID ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
+				if ( elementIndex == 0 ) $( arrowsID ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
 			}
 
 
@@ -1380,15 +1502,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				if ( elementIndex < 0 ) elementIndex = 0;	
 				
 				//Prevent bubbling
-				if ( !dataLoop ) {
+				if ( !loop ) {
 					//first item
 					if ( elementIndex == 0 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
+						$( arrowsID ).find( '.uix-advanced-slider-sp__arrows--prev' ).addClass( 'is-disabled' );
 					}
 
 					//last item
 					if ( elementIndex == total - 1 ) {
-						$( dataControlsArrows ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
+						$( arrowsID ).find( '.uix-advanced-slider-sp__arrows--next' ).addClass( 'is-disabled' );
 					}	
 				}
 
@@ -1404,9 +1526,9 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			//Add transition class to Controls Pagination
 			//-------------------------------------
-			$( dataControlsPagination ).find( 'li a' ).removeClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a.is-active' ).removeClass( 'is-active' ).addClass( 'leave' );
-			$( dataControlsPagination ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'is-active' ).removeClass( 'leave' );
+			$( paginationID ).find( 'li a' ).removeClass( 'leave' );
+			$( paginationID ).find( 'li a.is-active' ).removeClass( 'is-active' ).addClass( 'leave' );
+			$( paginationID ).find( 'li a[data-index="'+elementIndex+'"]' ).addClass( 'is-active' ).removeClass( 'leave' );
 			
 			
 			
@@ -1422,8 +1544,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			//Display counter
 			//-------------------------------------
-			$( dataCountTotal ).text( total );
-			$( dataCountCur ).text( parseFloat( elementIndex ) + 1 );		
+			$( countTotalID ).text( total );
+			$( countCurID ).text( parseFloat( elementIndex ) + 1 );		
 			
 
 			// Fires local videos asynchronously with slider switch.
@@ -1436,7 +1558,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			//Reset the default height of canvas
 			//-------------------------------------	
 			setTimeout( function() {
-				canvasDefaultInit( $current );
+				canvasDefaultInit( slider, $current );
 			}, animSpeed );
 			
 			
@@ -1473,7 +1595,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			//-- Parallax Effect 
 			if ( slider.hasClass( 'uix-advanced-slider-sp--eff-parallax' ) ) {
 
-				if ( dataLoop ) {
+				if ( loop ) {
 					if ( elementIndex == 0 ) dir = 'prev';
 				}
 
@@ -1511,30 +1633,31 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize the default height of canvas
 		 *
-		 * @param  {Object} slider           - Current selector of each slider.
+         * @param  {Element} slider                 - Selector of the slider .
+		 * @param  {Element} currentLlement         - Current selector of each slider.
 		 * @return {Void}
 		 */
-        function canvasDefaultInit( slider ) {
+        function canvasDefaultInit( slider, currentLlement ) {
 			
-
-			
-			if ( slider.find( 'video' ).length > 0 ) {
+			if ( currentLlement.find( 'video' ).length > 0 ) {
 
 				//Returns the dimensions (intrinsic height and width ) of the video
-				var video    = document.getElementById( slider.find( 'video' ).attr( 'id' ) ),
-					videoURL = slider.find( 'source:first' ).attr( 'src' );
+				var video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) ),
+					videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
+                
+                if ( typeof videoURL === typeof undefined ) videoURL = currentLlement.attr( 'src' ); 
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
 
 					//At the same time change the height of the canvas and slider container
-					var h = this.videoHeight*(slider.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth);
+					var h = this.videoHeight*(currentLlement.closest( '.uix-advanced-slider__outline' ).width()/this.videoWidth);
 					
 					if ( Modernizr.webgl ) {
 						renderer.view.style.height = h + 'px';
 					}
 					
 					//---
-					$sliderWrapper.css( 'height', h + 'px' );	
+					slider.css( 'height', h + 'px' );	
 
 				}, false);	
 
@@ -1543,7 +1666,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			} else {
 
-				var imgURL   = slider.find( 'img' ).attr( 'src' );
+				var imgURL   = currentLlement.find( 'img' ).attr( 'src' );
 				
 				if ( typeof imgURL != typeof undefined ) {
 					
@@ -1552,10 +1675,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 					img.onload = function() {
 
 						if ( Modernizr.webgl ) {
-							renderer.view.style.height = slider.find( 'img' ).height() + 'px';		
+							renderer.view.style.height = currentLlement.find( 'img' ).height() + 'px';		
 						}
 						//---
-						$sliderWrapper.css( 'height', slider.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
+						slider.css( 'height', currentLlement.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 					};
 
@@ -1565,7 +1688,6 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			}	
 			
-
 
 		}
 		
@@ -1577,7 +1699,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		 *
 		 * @param  {Number} elementIndex           - Index of current slider.
 		 * @param  {Number} prevElementIndex       - Index of previous slider.
-		 * @param  {Object} slider                 - Selector of the slider.
+		 * @param  {Element} slider                 - Selector of the slider.
 		 * @param  {String} goType                 - The type of entry and exit between two items.  
 		                                             Optional values: in, out
 		 * @param  {String} dir                    - Switching direction indicator.	 
@@ -1656,7 +1778,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 									//pause all videos
 									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
+										var videoSource = obj.texture.baseTexture.resource.source;
 
 										// play the video
 										videoSource.currentTime = 0;
@@ -1671,7 +1793,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 								//play current video
 								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
+									var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 									// play the video
 									videoSource2.currentTime = 0;
@@ -1786,7 +1908,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 								
 								//pause all videos
 								if ( obj._texture.baseTexture.imageType == null ) {
-									var videoSource = obj.texture.baseTexture.source;
+									var videoSource = obj.texture.baseTexture.resource.source;
 
 
 									// play the video
@@ -1801,7 +1923,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							//play current video
 							if ( curSp._texture.baseTexture.imageType == null ) {
-								var videoSource2 = curSp.texture.baseTexture.source;
+								var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 								// play the video
 								videoSource2.currentTime = 0;
@@ -1851,12 +1973,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//Add new ripple each time mouse
 						//-------------------------------------
-						$sliderWrapper[0].addEventListener("mousedown", function(e) {
+						slider[0].addEventListener("mousedown", function(e) {
 					  
 							TweenMax.to( displacementFilter.scale, 1, { x: "+=" + Math.sin( e.pageX ) * 100 + "", y: "+=" + Math.cos( e.pageY ) * 100 + ""  });   
 							rotateSpite();
 						});
-						$sliderWrapper[0].addEventListener("mouseup", function(e) {
+						slider[0].addEventListener("mouseup", function(e) {
 					
 							TweenMax.to( displacementFilter.scale, 1, { x: 0, y: 0 } );
 						});
@@ -1929,7 +2051,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 									//pause all videos
 									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
+										var videoSource = obj.texture.baseTexture.resource.source;
 
 										// play the video
 										videoSource.currentTime = 0;
@@ -1944,7 +2066,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 								//play current video
 								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
+									var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 									// play the video
 									videoSource2.currentTime = 0;
@@ -2070,7 +2192,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 									//pause all videos
 									if ( obj._texture.baseTexture.imageType == null ) {
-										var videoSource = obj.texture.baseTexture.source;
+										var videoSource = obj.texture.baseTexture.resource.source;
 
 										// play the video
 										videoSource.currentTime = 0;
@@ -2085,7 +2207,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 								//play current video
 								if ( curSp._texture.baseTexture.imageType == null ) {
-									var videoSource2 = curSp.texture.baseTexture.source;
+									var videoSource2 = curSp.texture.baseTexture.resource.source;
 
 									// play the video
 									videoSource2.currentTime = 0;
@@ -2203,7 +2325,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 								
 								//pause all videos
 								if ( obj._texture.baseTexture.imageType == null ) {
-									var videoSource = obj.texture.baseTexture.source;
+									var videoSource = obj.texture.baseTexture.resource.source;
 
 
 									// play the video
@@ -2218,7 +2340,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							//play current video
 							if ( curSpParallax._texture.baseTexture.imageType == null ) {
-								var videoSource2 = curSpParallax.texture.baseTexture.source;
+								var videoSource2 = curSpParallax.texture.baseTexture.resource.source;
 
 								// play the video
 								videoSource2.currentTime = 0;
@@ -2254,10 +2376,17 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							goNextItem    = function() {
 								
 								// Paralax effect on current slide
-								TweenMax.to( curSpParallax, parallaxSpeed, { 
-									x      : 0, 
-									ease   : Power2.easeInOut 
+								TweenMax.set( curSpParallax, {
+                                    alpha  : 1, //Avoid error texture rendering errors ***!Important***
+									onComplete : function() {
+                                        TweenMax.to( this.target, parallaxSpeed, { 
+                                            x      : 0, 
+                                            ease   : Power2.easeInOut
+                                        });
+									} 
 								});
+                                
+
 
 								// Current Mask animation
 								TweenMax.to( curSpParallax.mask, parallaxSpeed, { 
@@ -2362,7 +2491,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		/*
 		 * Initialize embedded local video.
 		 *
-		 * @param  {Object} wrapper          - The outermost video container, which can contain multiple videos
+		 * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
 		 * @param  {Boolean} play            - Forced to trigger pause or play events.
 		 * @return {Void}
 		 */
@@ -2499,7 +2628,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						/* ---------  Set, tell the player it's in fullscreen  */
 						if ( dataAuto ) {
 							//Fix an error of Video auto play is not working in browser
-							//this.muted( true ); 
+							this.muted( true ); 
 
 							//Prevent autoplay error: Uncaught (in promise) DOMException
 							var promise = this.play();
@@ -2548,13 +2677,17 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 						});
 
 
-
 						/* ---------  Pause the video when it is not current slider  */
 						if ( !play ) {
 							this.pause();
 							this.currentTime(0);
 
 						} else {
+                            
+                            //Unmute, because there is interaction, you can turn on the audio.
+                            this.muted( false );
+                            
+                            
 							if ( dataAuto ) {
 
 								this.currentTime(0);
@@ -2618,6 +2751,10 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 		
     };
 
+    
+    
+    
+    
     module.components.pageLoaded.push( module.ADVANCED_SLIDER_FILTER.pageLoaded );
 	
 

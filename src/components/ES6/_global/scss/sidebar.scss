@@ -103,7 +103,7 @@
 .widget_categories ul, 
 .widget_nav_menu ul, 
 .widget_pages ul {
-    margin-left: 0.875rem;
+    margin-left: 1.25rem;
 	
 	li {
 		margin-bottom: 0;
@@ -148,8 +148,19 @@
 			border-bottom: none;
 		}	
 	}
-
+    
 }
+
+
+.widget_categories ul.children, 
+.widget_nav_menu ul.children, 
+.widget_pages ul.children {
+    
+	li:last-child {
+		border-bottom: none;
+    }
+}
+
 
 /* 
  ---------------------------

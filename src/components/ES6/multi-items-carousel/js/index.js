@@ -325,8 +325,8 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			/*
 			 * Transition Between Items
 			 *
-			 * @param  {Object} wrapper         - Wrapper of carousel.
-			 * @param  {Object} curBtn          - The button that currently triggers the move.
+			 * @param  {Element} wrapper         - Wrapper of carousel.
+			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 			 * @param  {Number} steps           - The number of steps per move.
@@ -633,9 +633,9 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //			/*
 //			 * Transition between items next (left/up)
 //			 *
-//			 * @param  {Object} wrapper         - Wrapper of carousel.
-//			 * @param  {Object} items           - Items of carousel.
-//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {Element} wrapper         - Wrapper of carousel.
+//			 * @param  {Element} items           - Items of carousel.
+//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 //			 * @return {Void}
@@ -772,9 +772,9 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //			/*
 //			 * Transition between items previously (right/down)
 //			 *
-//			 * @param  {Object} wrapper         - Wrapper of carousel.
-//			 * @param  {Object} items           - Items of carousel.
-//			 * @param  {Object} curBtn          - The button that currently triggers the move.
+//			 * @param  {Element} wrapper         - Wrapper of carousel.
+//			 * @param  {Element} items           - Items of carousel.
+//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
 //			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
 //			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
 //			 * @return {Void}

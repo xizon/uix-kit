@@ -8,7 +8,7 @@
  * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
 										   This attribute "data-modal-height" may not exist. Such as: 200px
  * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
- * @param  {Object|Boolean} btn          - Link or button that fires an event.
+ * @param  {?Element|Boolean} btn          - Link or button that fires an event.
  * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
  * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
  * @param  {Boolean} closeOnlyBtn        - Disable mask to close the window.
@@ -61,7 +61,7 @@
 
 
 					if ( linkBtn.data( 'video-win' ) ) {
-						$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+						$obj.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
 					}
 
 				}
@@ -123,9 +123,9 @@
 					setTimeout( function() {
 
 						if ( !$obj.hasClass( 'is-video' ) ) {
-							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'scroll' );
+							$obj.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'scroll' );
 						} else {
-							$obj.find( '.uix-modal-box__content > div' ).css( 'overflow-y', 'hidden' );
+							$obj.find( '.uix-modal-box__content > .uix-modal-box__body' ).css( 'overflow-y', 'hidden' );
 						}
 
 					}, settings.speed );

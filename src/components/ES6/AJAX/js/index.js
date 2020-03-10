@@ -25,13 +25,19 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.0';
+    module.AJAX_PAGE_LOADER.version       = '0.1.4';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
         var $window                  = $( window ),
 		    windowWidth              = window.innerWidth,
 		    windowHeight             = window.innerHeight;
+        
+        
+        //all images from pages
+        var sources = []; 
 
+        //Added timer to prevent page loading errors for a long time
+        var timeClockInit;   
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
@@ -46,7 +52,16 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			ajaxContainer       = '.ajax-container',
 			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
 		
+        
+        // The progress of each page load, using global variables to accurately determine
+        var loadedProgress = 0;
 		
+        //loading animation
+        var loadingAnim = function( per ) {
+			$( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per ) );
+        }; 
+        
+        
 		//Prevent this module from loading in other pages
 		if ( $sectionsContainer.length == 0 ) return false;
 		
@@ -118,7 +133,11 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			
 			e.preventDefault();
 			
-			
+            
+            // The progress of each page load
+            loadedProgress = 0; 
+
+			//
 			var $this            = $( this ),
 				curIndex         = $this.attr( 'data-index' ),
 			    curURL           = $this.attr( 'href' ); 
@@ -195,7 +214,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		/*
 		 * Scroll initialize
 		 *
-		 * @param  {Object} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
+		 * @param  {Event} event        - The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated. 
 		 * @param  {String} dir          - Gets a value that indicates the amount that the mouse wheel has changed.
 		 * @return {Void}
 		 */
@@ -226,7 +245,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		/*
 		 * Move Animation
 		 *
-		 * @param  {Object} container    - The instance returned from the request succeeds 
+		 * @param  {Element} container    - The instance returned from the request succeeds 
 		 * @param  {String} url          - The target URL via AJAX.
 		 * @param  {String} dir          - Rolling direction indicator.
 		 * @param  {Number} customIndex  - User-specified index value, located on the corresponding AJAX hyperlink.
@@ -302,6 +321,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					},
 					beforeSend: function() {
 
+                        //loading animation
+                        loadingAnim( 0 );
+
+                        //loader effect from AJAX request
 						TweenMax.set( '.uix-ajax-load__loader', {
 							css         : {
 								'display' : 'block'
@@ -316,8 +339,181 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					}
                 })
                 .done( function (response) { 
+                    
                     //A function to be called if the request succeeds
-                    ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() );  
+                    //Display loading image when AJAX call is in progress
+                    
+                    //Remove existing images
+                    sources = [];
+
+                    //Push all images from page
+                    $( response ).find( 'img' ).each(function() {
+                        sources.push(
+                            {
+                                "url": this.src,
+                                "id": 'img-' + UixGUID.create(),
+                                "type": 'img'
+                            }
+                        );
+                    }); 
+                    
+                    
+                    //Push all videos from page
+                    $( response ).find( '.uix-video__slider > video' ).each(function() {
+
+                        var _src = $( this ).find( 'source:first' ).attr( 'src' );
+                        if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
+
+                        sources.push(
+                            {
+                                "url": _src,
+                                "id": 'video-' + UixGUID.create(),
+                                "type": 'video'
+                            }
+                        );
+                    });    
+
+
+                    //Execute after all images have loaded
+                    var per;
+                    var perInit = 1;
+                    if ( sources.length == 0 ) {
+                        per = 100;
+
+                        //loading animation
+                        loadingAnim( per );
+                        
+                        
+                    }
+                    
+                    
+                    var loadImages = function() {
+                        var promises = [];
+
+                        for (var i = 0; i < sources.length; i++) {
+
+                            if ( sources[i].type == 'img' ) {
+
+                                ///////////
+                                // IMAGE //
+                                ///////////   
+
+                                promises.push( 
+
+                                    new Promise(function(resolve, reject) {
+
+                                        var img = document.createElement("img");
+                                        img.crossOrigin = "anonymous";
+                                        img.src = sources[i].url;
+
+                                        img.onload = function(image) {
+                                          //Compatible with safari and firefox
+                                          if ( typeof image.path === typeof undefined ) {
+                                              return resolve(image.target.currentSrc);
+                                          } else {
+                                              return resolve(image.path[0].currentSrc);
+                                          }
+                                        };  
+
+                                    }).then( textureLoaded )
+                                );
+
+
+
+                            } else {
+
+
+
+                                ///////////
+                                // VIDEO //
+                                ///////////    
+
+                                promises.push( 
+                                    new Promise( function(resolve, reject) {
+
+                                        $( '#' + sources[i].id ).one( 'loadedmetadata', resolve );
+
+                                        return resolve( sources[i].url);
+
+
+                                    }).then( textureLoaded )
+                                );
+
+
+
+                            }                   
+
+                        }
+
+
+
+                        return Promise.all(promises);
+                    };
+
+
+                    var textureLoaded = function( url ) {
+                      
+                        //loading
+                        per = parseInt( 100 * ( perInit / sources.length ) );
+
+                        console.log( 'progress: ' + per + '%' );
+
+                        if ( isNaN( per ) ) per = 100;  
+                        
+                        // The progress of each page load
+                        loadedProgress = per;
+                        
+
+                        //loading animation
+                        loadingAnim( per ); 
+
+                        var texture = null;
+
+                        perInit++;
+                        return per;   
+                        
+                    };
+  
+                    
+
+                    var func = function() {
+                        ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() ); 
+                    };
+
+
+                    //images loaded
+                    //Must be placed behind the loadImages()
+                    loadImages().then( function( images ) {
+                        clearInterval( timeClockInit );
+                        func();
+                    });
+
+
+
+                    //Calculating page load time
+                    var timeLimit = 10,
+                        timeStart = new Date().getTime();
+
+                    //Prevent duplicate runs when returning to this page
+                    if ( timeClockInit ) {
+                        clearInterval( timeClockInit );
+                    } 
+
+
+                    timeClockInit = setInterval( function() {
+
+                        //Converting milliseconds to minutes and seconds
+                        var _time = (new Date().getTime() - timeStart) / 1000;
+
+                        if ( _time >= timeLimit ) {
+                            console.log( 'Page load timeout!' );
+                            clearInterval( timeClockInit );
+                            func();
+                        }    
+                    }, 500 );
+
+                  
+                    
                 })
                 .fail( function (jqXHR, textStatus, errorThrown) { 
 					window.location.href = url;
@@ -337,13 +533,17 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 * A function to be called if the request succeeds
 		 *
 		 * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
-		 * @param  {Object} container - The instance returned from the request succeeds
+		 * @param  {Element} container - The instance returned from the request succeeds
 		 * @param  {String} content   - The data returned from the server
 		 * @param  {String} title        - The title of a requested page.
 		 * @return {Void}
 		 */
 		function ajaxSucceeds( dir, container, content, title ) {
+            
+            //If the page resource is not loaded, then the following code is not executed
+            if ( loadedProgress < 100 ) return false;
 			
+            //
 			var oldContent = container.html();
 		
 			//Remove loader

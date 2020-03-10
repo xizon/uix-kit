@@ -37,31 +37,41 @@ $lb-radius: 3px;
 .uix-lightbox__close {
 	display: none;
 	border-radius: 50%;
-	width: 36px;
-	height: 36px;
 	text-align: center;
-	line-height: 34px;
-	overflow: hidden;
 	position: fixed;
 	z-index: 99998;
 	top: 15px;
 	right: 15px;
-	transform: rotate(45deg);
-	cursor: pointer;
+
+    > button {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        line-height: 34px;
+        
+        &::after {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 600;
+            content: "\f00d";
+            color: #fff;
+            font-size: 2rem;
+            text-shadow: 0 2px 3px rgba(0,0,0,.3);
+        }
+
+        &:focus {
+            outline: 3px auto -webkit-focus-ring-color;
+        } 
+        
+    }
 
 	&.is-active {
 		display: block;
 	}
 
-
-	&::after {
-		font-family: 'Font Awesome 5 Free';
-		font-weight: 600;
-		content: "\f067";
-		color: #fff;
-		font-size: 2rem;
-		text-shadow: 0 2px 3px rgba(0,0,0,.3);
-	}
+    
 }
 
 .uix-lightbox__loading {
@@ -166,6 +176,7 @@ $lb-radius: 3px;
 					margin: 0;
 					padding: 0;
 					height: 100%;
+                    text-align: center;
 
 					li {
 						padding: 0;
@@ -175,7 +186,6 @@ $lb-radius: 3px;
 						left: 0;
 						width: 100%;
 						height: 100%;
-						width: 0;
 						@include transition-default();
 
 						img {
@@ -183,7 +193,7 @@ $lb-radius: 3px;
 						}
 
 						&.is-active {
-							width: auto;
+							
 						}
 
 						&:first-child {

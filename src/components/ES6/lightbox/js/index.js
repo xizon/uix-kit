@@ -35,14 +35,38 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.1.6';
+    module.LIGHTBOX.version       = '0.1.8';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
-			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"></div>' );
+			$( 'body' ).prepend( '<div class="uix-lightbox__loading is-loaded uix-t-c"><i class="fa fa-spinner fa-spin"></i> Loading...</div><a class="uix-lightbox__original__close" href="javascript:void(0);"></a><div class="uix-lightbox__container"><div class="uix-lightbox__inner"><div class="uix-lightbox__html"></div><p class="title"></p></div></div><div class="uix-lightbox__container-mask"></div><div class="uix-lightbox__close"><button type="button"></button></div>' );
 		}
 		
-		
+    
+        
+        // To display the template tag content.
+        $( 'template' ).each( function()  {
+            
+            var _content = $( this ).html( function( index,html ) {
+                                        return html.replace(/[\r\n]/g, '' );
+                                    }).context.innerHTML,
+                _id = $( this ).attr( 'id' );
+            
+            //If it is dialog, clone the contents of the <template> into the body
+            if ( ! $( 'body' ).hasClass( _id ) && $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 ) {
+                
+                //reset id
+                $( this ).removeAttr( 'id' );
+                $( 'body' ).addClass( _id );
+                
+                //append content to body
+                $( _content.replace(/role=[\'\"]dialog[\'\"]/, 'role="dialog" id="'+_id+'"' ) ).appendTo( 'body' );
+                
+            }
+
+        });
+        
+  
 		
 		var	innerEl         = '.uix-lightbox__inner',
 			wrapperEl       = '.uix-lightbox__container',
@@ -180,8 +204,9 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			hideLightboxContent();
 			
 			
-			//-------- If it is photo
-			//-----------------------------
+            ////////////////////////
+            //////// PHOTOS ///////
+            ////////////////////////  
 			if ( typeof dataPhoto != typeof undefined && dataPhoto != '' ) {
 				
 				//show the lightbox
@@ -343,14 +368,14 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			}	
 			
 			
-			
-			
-			
-			//-------- If it is not photo
-			//-----------------------------
+			 
+            ////////////////////////
+            //////// HTML /////////
+            ////////////////////////  
 			if ( typeof dataHtmlID != typeof undefined && dataHtmlID != '' ) {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
+                
 				var $htmlAjaxContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
 		
 				//show the lightbox
@@ -445,14 +470,13 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 					
 					// show the content container
 					showLightboxContent();	
-
-					
+                
 					$content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
 						
 						// Content pushing completed
 						htmlContentLoaded();
 					});	
-				}
+				}//endif $( wrapperEl ).hasClass( 'js-uix-ajax' )
 
 				
 				
@@ -470,8 +494,9 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		
 		
 
-		
-		//Close the lightbox
+        ////////////////////////
+        // Close the lightbox //
+        ////////////////////////   	
 		$( document ).off( 'click.LIGHTBOX_CLOSE' ).on( 'click.LIGHTBOX_CLOSE', closeEl + ',' + maskEl, function() {
 			lightboxClose( docURL );
 		});	
@@ -509,8 +534,9 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			
 		});		
 		
-		
-		//Close/Open enlarge image
+        ////////////////////////////////
+        // Close/Open enlarge image //
+        ///////////////////////////////	
 		if ( window.innerWidth > 768 ) {
 
 			$( document ).off( 'click.LIGHTBOX_ORGINAL_LINK' ).on( 'click.LIGHTBOX_ORGINAL_LINK', '.uix-lightbox__original__link', function( e ) {
@@ -550,7 +576,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		 * Click thumbnail to show large photo
 		 *
 		 * @param  {Number} index           - The target index of large photo.
-		 * @param  {Object} obj             - Target large image <li>.
+		 * @param  {Element} obj             - Target large image <li>.
 		 * @return {Void}
 		 */
 		function lightboxThumbSwitch( index, obj ) {
@@ -575,63 +601,89 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			$thumb.removeClass( 'is-active' );
 			obj.addClass( 'is-active' );
 			
-			$largePhoto.find( 'li' ).hide().removeClass( 'is-active' );
-			$largePhoto.find( 'li' ).eq( index ).addClass( 'is-active' ).show( 400, function() {
-				
-				//Reset the container height
-				var imgClick = new Image();
-				imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
-				imgClick.onload = function() {
-					
-					//remove loading
-					$( loaderEl ).addClass( 'is-loaded' );
+		
+            //all items
+            TweenMax.set( $largePhoto.find( 'li' ),  {
+                css         : {
+                    'display' : 'none',
+                    'opacity' : 0
+                },
+                onComplete  : function() {
+                    $( this.target ).removeClass( 'is-active' );
+                }
+            });
+            
+            
+            //current item
+            TweenMax.set( $largePhoto.find( 'li' ).eq( index ), {
+                css         : {
+                    'display' : 'block',
+                    'opacity' : 0
+                },
+                onComplete  : function() {
+                    
+                    var _cur = this.target;
+                    
+                    $( _cur ).addClass( 'is-active' );
+                    //
+                    //Reset the container height
+                    var imgClick = new Image();
+                    imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
+                    imgClick.onload = function() {
 
-					// show the content container
-					showLightboxContent();	
+                        //remove loading
+                        $( loaderEl ).addClass( 'is-loaded' );
 
-					
-					
-					var sw     = window.innerWidth - 30,
-						ow     = this.width,
-						oh     = this.height,
-						ratioH = oh/ow,
-						w      = ( ow > customWidth ) ? customWidth : ow,
-						h;
-					
-
-					if ( w > sw ) w = sw;
-
-					h = w * ratioH;
+                        // show the content container
+                        showLightboxContent();	
 
 
-					//Prevent height overflow
-					if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
 
-					
-					$largePhoto.css( {
-						'height': h + 'px'
-					} )
-					.find( 'img' ).css( {
-						'height': h + 'px'
-					} );	
-					
+                        var sw     = window.innerWidth - 30,
+                            ow     = this.width,
+                            oh     = this.height,
+                            ratioH = oh/ow,
+                            w      = ( ow > customWidth ) ? customWidth : ow,
+                            h;
 
-					//If the image is larger than the current window, it will display at the top.
-					//Don't write variables outside
-					var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
-					if ( oh > window.innerHeight ) {
-						$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
-					} else {
-						$lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
-					}
 
-					
+                        if ( w > sw ) w = sw;
 
-				};
+                        h = w * ratioH;
 
-				
 
-			});	
+                        //Prevent height overflow
+                        if ( h > window.innerHeight ) h = window.innerHeight * 0.95;
+
+
+                        $largePhoto.css( {
+                            'height': h + 'px'
+                        } )
+                        .find( 'img' ).css( {
+                            'height': h + 'px'
+                        } );	
+
+
+                        //If the image is larger than the current window, it will display at the top.
+                        //Don't write variables outside
+                        var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
+                        if ( oh > window.innerHeight ) {
+                            $lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
+                        } else {
+                            $lbTarImg.removeClass( 'uix-lightbox__original__target--imgfull' );
+                        }
+
+                        TweenMax.to( _cur, 0.5, {
+                            alpha : 1
+                        });
+
+                    };//imgClick.onload       
+                    
+                    
+
+                }
+            });	
+          
 		}
 		
 		

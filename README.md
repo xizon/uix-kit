@@ -4,8 +4,8 @@
   </a>
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
-      <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=3.8.6&x2=0"/></a>
+      <a href="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F" title="w3c"><img src="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=4.1.3&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -138,7 +138,12 @@ http://localhost:8080/examples/
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ```
 
-**b) Site Info Configuration**
+**b) How to use modules?**
+
+You could custom modules of what to import in `src/components/ES6/_app-load.js` and `src/components/ES6/_app-load-rtl.js`. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the `webpack.config.js` according to the imported modules you want.
+
+
+**c) Site Info Configuration**
 
 You can update the Placeholders in Templates by modifying the Site Info configuration of `package.json`. Like this:
 

@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=HHe04omX2uTIym5BFmhq"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=PyKvgPmgStd0Thd0UplM"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=HHe04omX2uTIym5BFmhq" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=PyKvgPmgStd0Thd0UplM" />
 	<![endif]-->
 
 
@@ -95,7 +95,8 @@
 			<path d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"></path>
         </svg>
     </div>
-    <div class="uix-loader-progress"><span>0%</span></div>
+    <div class="uix-loader-progress" data-txt="{progress}%"><span>0%</span></div>
+    <div class="uix-loader-progress__line"></div>
     <!-- .uix-loader end -->
     
 
@@ -126,7 +127,7 @@
                                                 <div class="uix-brand">
                             <a href="index.html"><img src="assets/images/logo.png" alt="Uix Kit"></a>                       
                         </div>
-                        <!-- .logo end -->
+                        <!-- .uix-brand end -->
                         
                         
                         
@@ -149,6 +150,7 @@
 														<li><a href="uix-grid.html">Uix Grid</a></li>
 														<li><a href="bootstrap-grid.html">Bootstrap Grid</a></li>
 														<li><a href="blended-grid-layout.html">Blended Grid</a></li>
+                                                        <li><a href="gallery-grid-layout.html">Gallery Grid</a></li>
 														<li><a href="spacing.html">Spacing</a></li>
 														<li><a href="material-container.html">Material Container</a></li>
 														<li><a href="striking.html">Striking</a></li>
@@ -159,6 +161,7 @@
 														<li><a href="heading.html">Heading</a></li>
 														<li><a href="dividing-line.html">Dividing Line</a></li>
 														<li><a href="responsive-images.html">Responsive Images</a></li>
+                                                        <li><a href="background-interaction.html">Background</a></li>
 														<li><a href="parallax.html">Parallax</a></li>
 														<li><a href="parallax2.html">Parallax 2</a></li>
 														<li><a href="vertical-centering.html">Vertical Centering</a></li>
@@ -229,8 +232,9 @@
 														<li><a href="advanced-slider-liquid3.html">Advanced Slider Liquid 3</a></li>
 														<li><a href="advanced-slider-parallax.html">Advanced Slider Parallax</a></li>
 														<li><a href="advanced-content-slider.html">Advanced Content Slider</a></li>
-														<li><a href="3D-explosive-particle-slider.html">3D Explosive Particle Slider</a><span class="uix-bubble">new</span></li>
-														<li><a href="3D-shatter-slider.html">3D Shatter Slider</a><span class="uix-bubble">new</span></li>
+														<li><a href="3D-explosive-particle-slider.html">3D Explosive Particle Slider</a></li>
+														<li><a href="3D-shatter-slider.html">3D Shatter Slider</a></li>
+                                                        <li><a href="3D-liquid-scrollspy-slider.html">3D Liquid Scrollspy Slider</a><span class="uix-bubble">new</span></li>
 															
 														
 														
@@ -246,8 +250,7 @@
 														
 														<li><a href="content-placeholder-animated.html">Content Placeholder Animated</a></li>
 														<li><a href="list-posts.html">Posts List</a></li>
-														<li><a href="list-split-imagery.html">Fullwidth List of Split</a></li>
-														<li><a href="list-split-content.html">Fullwidth List of Split 2</a></li>
+														<li><a href="fullwidth-column-to-edge.html">Full Width Column to Edge</a><span class="uix-bubble">new</span></li>
 														<li><a href="list-side-by-side.html">Side by Side List</a></li>
 														<li><a href="list-side-by-side-img.html">Side by Side List With Photo</a></li>
 														<li><a href="list-bulleted.html">Bulleted List</a></li>
@@ -302,6 +305,7 @@
 														<li><a href="scrollspy-animate.html">Scrollspy Animate</a><span class="uix-bubble">new</span></li>
 														<li><a href="skew-on-scroll.html">Skew on Scroll</a><span class="uix-bubble">new</span></li>
 														<li><a href="text-effect.html">Text Effect</a><span class="uix-bubble">new</span></li>
+                                                        <li><a href="smooth-scrolling-page.html">Smooth Scrolling Page</a><span class="uix-bubble">new</span></li>
 														<li><a href="list-posts-with-ajax.html">Ajax Load Posts</a></li>
 														<li><a href="list-posts-with-ajax2.html">Ajax Load Posts 2</a></li>
 														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
@@ -311,8 +315,8 @@
 														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
 														<li><a href="one-page.html">Full Page/One Page</a></li>
 														<li><a href="one-page2.html">Full Page/One Page 2</a></li>
-														<li><a href="ajax-page-loader.html">Ajax Page Loader</a><span class="uix-bubble">new</span></li>
-														<li><a href="ajax-push-content.html">Ajax Push Content</a><span class="uix-bubble">new</span></li>
+														<li><a href="ajax-page-loader.html">Ajax Page Loader</a></li>
+														<li><a href="ajax-push-content.html">Ajax Push Content</a></li>
 														<li><a href="3D-background.html">3D Background</a></li>
 														<li><a href="3D-background-three.html">3D Background 1 (threejs)</a></li>
 														<li><a href="3D-background-three2.html">3D Background 2 (threejs)</a></li>
@@ -604,11 +608,11 @@
 	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
     <script src="assets/js/min/template7.min.js?ver=1.4.2"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
-    <script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
-    <script src="assets/js/min/three.min.js?ver=r102"></script>
-    <script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
+    <script src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
+    <script src="assets/js/min/three.min.js?ver=r114"></script>
+    <script src="assets/js/min/anime.min.js?ver=3.1"></script>
     <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    <script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
+    <script src="assets/js/min/muuri.min.js?ver=0.8.0"></script>
 
 
     
@@ -616,14 +620,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "3.8.6",
+		var REVISION     = "4.1.3",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=HHe04omX2uTIym5BFmhq"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=PyKvgPmgStd0Thd0UplM"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 
