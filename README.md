@@ -5,7 +5,7 @@
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
       <a href="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F" title="w3c"><img src="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=4.1.3&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=4.1.4&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>

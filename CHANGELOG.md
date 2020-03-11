@@ -1,5 +1,12 @@
 # Changelog
 
+
+
+#### = 4.1.4 (March 11, 2020) =
+
+* Tweak: Optimized the width of the tooltip.
+
+
 #### = 4.1.3 (March 10, 2020) =
 
 * New: Added style of loader progress to `<body>` tag.

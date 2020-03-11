@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.1.3
+ * ## Version             :  4.1.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 10, 2020
+ * ## Last Update         :  March 11, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -19349,6 +19349,14 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 .uix-tooltip [role~="tooltip"][data-microtip-position="right"]:hover::before,
 .uix-tooltip [role~="tooltip"][data-microtip-position="right"]:hover ~ div {
   transform: translate3d(0, -50%, 0);
+}
+
+.uix-tooltip [role~="tooltip"][data-microtip-size="auto"] ~ div {
+  white-space: nowrap;
+  width: auto;
+  max-width: 530px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .uix-tooltip [role~="tooltip"][data-microtip-size="small"] ~ div {
