@@ -5,7 +5,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  4.1.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 11, 2020
+ * ## Last Update         :  March 12, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "da54d8761dd0c2dba97e";
+/******/ 	var hotCurrentHash = "0fc7b84a02f8784456eb";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11270,7 +11270,7 @@ function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.8';
+  module.LIGHTBOX.version = '0.1.9';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -11285,7 +11285,7 @@ var LIGHTBOX = function (module, $, window, document) {
           _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
 
 
-      if (!$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
+      if (lightbox_js_typeof(_id) !== ( true ? "undefined" : undefined) && !$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
         //reset id
         $(this).removeAttr('id');
         $('body').addClass(_id); //append content to body
@@ -12374,7 +12374,7 @@ function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.4';
+  module.MODAL_DIALOG.version = '0.1.5';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -12387,7 +12387,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
           _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
 
 
-      if (!$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
+      if (modal_dialog_js_typeof(_id) !== ( true ? "undefined" : undefined) && !$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
         //reset id
         $(this).removeAttr('id');
         $('body').addClass(_id); //append content to body

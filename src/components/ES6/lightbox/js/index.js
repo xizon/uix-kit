@@ -35,7 +35,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.1.8';
+    module.LIGHTBOX.version       = '0.1.9';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -53,7 +53,11 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
                 _id = $( this ).attr( 'id' );
             
             //If it is dialog, clone the contents of the <template> into the body
-            if ( ! $( 'body' ).hasClass( _id ) && $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 ) {
+            if ( 
+                typeof _id !== typeof undefined && 
+                ! $( 'body' ).hasClass( _id ) && 
+                $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 
+            ) {
                 
                 //reset id
                 $( this ).removeAttr( 'id' );

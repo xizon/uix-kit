@@ -34,7 +34,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.1.4';
+    module.MODAL_DIALOG.version       = '0.1.5';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		
@@ -50,8 +50,14 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
                                     }).context.innerHTML,
                 _id = $( this ).attr( 'id' );
             
+            
             //If it is dialog, clone the contents of the <template> into the body
-            if ( ! $( 'body' ).hasClass( _id ) && $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 ) {
+            if ( 
+                typeof _id !== typeof undefined && 
+                ! $( 'body' ).hasClass( _id ) && 
+                $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 
+            ) {
+
                 
                 //reset id
                 $( this ).removeAttr( 'id' );
@@ -65,7 +71,8 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
         });
         
         
-	
+        
+        
 		
 		/*
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.

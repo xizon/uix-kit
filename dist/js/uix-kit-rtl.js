@@ -5,7 +5,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  4.1.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 11, 2020
+ * ## Last Update         :  March 12, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -75,7 +75,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "da54d8761dd0c2dba97e";
+/******/ 	var hotCurrentHash = "0fc7b84a02f8784456eb";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
