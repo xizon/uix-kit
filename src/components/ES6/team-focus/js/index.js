@@ -27,19 +27,23 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
     module.TEAM_FOCUS.version       = '0.0.3';
     module.TEAM_FOCUS.documentReady = function( $ ) {
 
-		var teamFocusContent = '.uix-team-focus',
-			teamFocusMask    = '.uix-team-focus__mask';
+		const teamFocusContent = '.uix-team-focus',
+			  teamFocusMask    = '.uix-team-focus__mask';
 			
 			
 		$( teamFocusContent ).each( function() {
-			var $this           = $( this ),
-				thisID          = 'uix-team-focus-' + UixGUID.create(),
-				hoverWidth      = $this.data( 'hover-width' ),
+			const $this           = $( this );
+            
+			const thisID          = 'uix-team-focus-' + UixGUID.create(),
+                  el              = '#' + thisID + '> div';
+            
+            let total           = 0;
+            
+			let	hoverWidth      = $this.data( 'hover-width' ),
 				targetWidth     = $this.data( 'target-width' ), // Div over width as a percentage 
 				targetInfo      = $this.data( 'target-info' ), // Corresponding character details display
-				closeBtn        = $this.data( 'close-btn' ),
-				el              = '#' + thisID + '> div',
-				total           = 0;
+				closeBtn        = $this.data( 'close-btn' );
+				
 			
 			
 			
@@ -79,8 +83,8 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 			//Create item hover overlay effects
 			$( el ).on( 'mouseenter', function() {
 
-				var $cur      = $( this ),
-					$neighbor = $cur.siblings().not( '.focus' ); //Get the siblings of each element in the set of matched elements
+				const $cur      = $( this ),
+					  $neighbor = $cur.siblings().not( '.focus' ); //Get the siblings of each element in the set of matched elements
 
 				TweenMax.to( $cur, 0.3, {
 					width: hoverWidth + '%'
@@ -97,9 +101,9 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 			$( document ).off( 'click.TEAM_FOCUS' ).on( 'click.TEAM_FOCUS', el, function( e ) {
 				e.preventDefault();
 
-				var $cur        = $( this ),
-					$neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
-					$cloneItem  = $cur.clone();
+				const $cur        = $( this ),
+					  $neighbor   = $cur.siblings(), //Get the siblings of each element in the set of matched elements
+					  $cloneItem  = $cur.clone();
 				
 				//The mask prevent click and hover
 				$( teamFocusMask ).show();
@@ -109,10 +113,10 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 				
 				
 				
-				var $info   = $( targetInfo ),
-					cName   = $cur.data( 'name' ),
-					cPo     = $cur.data( 'po' ),
-					cIntro  = $cur.data( 'intro' );
+				const $info   = $( targetInfo ),
+					  cName   = $cur.data( 'name' ),
+					  cPo     = $cur.data( 'po' ),
+					  cIntro  = $cur.data( 'intro' );
 					
 				TweenMax.set( $info, {
 					css: {
@@ -195,7 +199,7 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 				});
 
 				
-				var $info = $( targetInfo );
+				const $info = $( targetInfo );
 				TweenMax.to( $info, 0.5, {
 					css: {
 						opacity : 0,

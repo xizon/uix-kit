@@ -35,9 +35,9 @@ export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
 
         
         
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
         
 		
 		commonHeightInit( windowWidth );
@@ -58,19 +58,19 @@ export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
         function commonHeightInit( w ) {
             
             $( '.js-uix-common-height' ).each( function()  {
-                var $this        = $( this ),
-                    element      = $this,
-                    selectors    = '[class*=col-], [class*=uix-core-grid__col-]', //Bootstrap grid system and Custom uix grid system
-                    maxHeight    = 0;
+                const $this        = $( this );
+                const element = $this;
+                const selectors = '[class*=col-], [class*=uix-core-grid__col-]'; //Bootstrap grid system and Custom uix grid system
+                let maxHeight = 0;
 
 
                 // Select and loop the elements you want to equalise
                 element.children( selectors ).each( function() {
-                    var element = $( this );
+                    const element = $( this );
                     
                     //Solve the problem that the image cannot be read accurately
                     element.find( 'img' ).each( function()  {
-                        var imgOuter = $( this ).parent( 'a' ).css( 'display' );
+                        const imgOuter = $( this ).parent( 'a' ).css( 'display' );
                         if ( imgOuter == 'inline' ) {
                             $( this ).parent( 'a' ).css( 'display', 'inline-block' );
                         }

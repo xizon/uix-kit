@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 4.1.5 (March 13, 2020) =
+
+* Tweak: Modify the primary highlight color style.
+* Tweak: Replace var of all modules with const and let. Enhance semantics and optimize script performance.
+* New: Added disable status of radio and checkbox.
+
+
+
 
 #### = 4.1.4 (March 11, 2020) =
 

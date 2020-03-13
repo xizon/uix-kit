@@ -25,13 +25,13 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
     module.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
-		var viewport;
+		let viewport;
 		
 		//From JSON config in data attribute in HTML
-		var $scrollRevealElements = $( '[data-uix-anim]' ),
+		const $scrollRevealElements = $( '[data-uix-anim]' ),
 			tmAnim = function( obj, type ) {
 
-				var config = obj.data( 'uix-anim' );
+				let config = obj.data( 'uix-anim' );
 
 				if( typeof config === typeof undefined || config == '' || config === false ) {
 					config = {
@@ -47,7 +47,7 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 				
 			
 				//get attributes to tweenMax
-				var fromCSS     = config.from,
+				let fromCSS     = config.from,
 					toCSS       = config.to,
 					myEase      = config.ease,
 					myDuration  = config.duration,
@@ -131,7 +131,7 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 		$scrollRevealElements.each( function()  {
 			
 			//Prevent asynchronous loading of repeated calls
-			var actived = $( this ).data( 'activated' );
+			const actived = $( this ).data( 'activated' );
 			
 			if( typeof actived === typeof undefined ) {
 				tmAnim( $( this ), 'from' );
@@ -146,12 +146,12 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 		//Invoking a jQuery function after .each() has completed
 		setTimeout( function() {
 		
-			var waypoints = $scrollRevealElements.waypoint({
+			const waypoints = $scrollRevealElements.waypoint({
 				handler: function( direction ) {
 
 					
 					//Prevent asynchronous loading of repeated calls
-					var actived = $( this.element ).data( 'activated' ),
+					const actived = $( this.element ).data( 'activated' ),
 						tmLoop  = tmAnim( $( this.element ), 'loop' );
 					
 

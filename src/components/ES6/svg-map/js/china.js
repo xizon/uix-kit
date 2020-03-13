@@ -30,16 +30,17 @@ export const SVG_MAP_CHINA = ( ( module, $, window, document ) => {
 
 
 		
-		var $svgEl = $( '.uix-svgmap--china' );
+		const $svgEl = $( '.uix-svgmap--china' );
 		
 		$( document ).off( 'click.SVG_MAP_CHINA' ).on( 'click.SVG_MAP_CHINA', '.uix-svgmap--china__trigger a', function( e ) {
 			
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();
 
-			var goName       = $( this ).data( 'title' ),
-				goText       = $( this ).text(),
-				svgCurName   = '',
+			const goName       = $( this ).data( 'title' ),
+				  goText       = $( this ).text();
+            
+			let	svgCurName   = '',
 				svgNameIndex = 0;
 			
 			$( '.uix-svgmap--china .uix-svgmap--china__name' ).each( function()  {
@@ -72,7 +73,7 @@ export const SVG_MAP_CHINA = ( ( module, $, window, document ) => {
 
 		function svgMapRestore( type ) {
 
-			var alpha = ( type == 1 ) ? 0.3 : 1;
+			const alpha = ( type == 1 ) ? 0.3 : 1;
 
 			$svgEl.children().removeClass( 'is-show' );
 			$svgEl.find( 'circle' ).css({

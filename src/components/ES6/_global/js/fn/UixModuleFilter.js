@@ -49,7 +49,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
     $.fn.UixModuleFilter = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			destroy       : false,
 			add           : {
 				moduleName    : 'OLD_MODULE_NAME',
@@ -66,7 +66,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			//remove a module
 			//-------------------------------------	
 			if ( settings.destroy && Object.prototype.toString.call( settings.destroy )=='[object String]' ) {
-				var moduleName = settings.destroy;
+				const moduleName = settings.destroy;
 				if ( typeof UixModuleInstance[ moduleName ] != typeof undefined ) {
 					delete UixModuleInstance[ moduleName ];	
 				}
@@ -80,7 +80,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			//-------------------------------------	
 			if ( settings.add && Object.prototype.toString.call( settings.add )=='[object Object]' && settings.add.hasOwnProperty( 'pageLoaded' ) ) {
 
-				var moduleName = settings.add.moduleName;
+				const moduleName = settings.add.moduleName;
 				
 				
 				//delete the old module if exist
@@ -91,7 +91,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 					//loading mode "documentReady"
 					if ( ! settings.add.pageLoaded || settings.add.pageLoaded == 0 ) {
 
-						var _moduleName = ( function ( module, $, window, document ) {
+						const _moduleName = ( function ( module, $, window, document ) {
 
 							module[ moduleName ]               = module[ moduleName ] || {};
 							module[ moduleName ].version       = settings.add.version;
@@ -112,7 +112,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 					//loading mode "pageLoaded"
 					if ( settings.add.pageLoaded || settings.add.pageLoaded == 1  ) {
 
-						var _moduleName = ( function ( module, $, window, document ) {
+						const _moduleName = ( function ( module, $, window, document ) {
 
 							module[ moduleName ]               = module[ moduleName ] || {};
 							module[ moduleName ].version       = settings.add.version;

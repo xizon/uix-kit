@@ -31,9 +31,10 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+        const $window          = $( window );
+        let	windowWidth        = window.innerWidth,
+            windowHeight       = window.innerHeight;
+        
 
 		//-------- Header initialize
 		headerInit( windowWidth );
@@ -53,7 +54,7 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 		});
 		function headerInit( w ) {
 			
-			var $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
+			const $headerPlaceholder = $( '.uix-header__placeholder.js-uix-header__placeholder-autoheight' );
 			
 			if ( w > 768 ) {
 				$headerPlaceholder.css( 'height', $( '.uix-header__container' ).outerHeight( true ) + 'px' ); 
@@ -68,11 +69,11 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 		
 		//-------- Sticky header area
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.uix-header__container, .uix-header__placeholder' );
+		const $el = $( '.uix-header__container, .uix-header__placeholder' );
 		$window.on( 'scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function() {
 
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = 220;
+			const scrollTop = $( this ).scrollTop(),
+				  spyTop    = 220;
 			
 			if ( scrollTop >= spyTop ) {
 				$el.addClass( 'is-fixed' );

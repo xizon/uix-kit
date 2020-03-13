@@ -30,9 +30,9 @@ export const PARALLAX = ( ( module, $, window, document ) => {
     module.PARALLAX.version       = '0.0.6';
 	module.PARALLAX.documentReady = function( $ ) {
 
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 
       
 		//  Initialize
@@ -65,8 +65,9 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
 			$( '.uix-parallax--el' ).each( function() {
-				var $this       = $( this ),
-					dataSpeed   = $this.data( 'speed' ),
+				const $this       = $( this );
+                
+				let	dataSpeed   = $this.data( 'speed' ),
                     dataEasing  = $this.data( 'transition' );
 				
 				if ( typeof dataSpeed === typeof undefined ) {
@@ -85,10 +86,12 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 			
 			/* Parallax scrolling effect with embedded HTML elements */
 			$( '.uix-parallax' ).each( function() {
-				var $this            = $( this ),
-					$curImg          = $this.find( '.uix-parallax__img' ),
-					dataImg          = $curImg.attr( 'src' ),
-					dataSkew         = $this.data( 'skew' ),
+				const $this            = $( this );
+                
+				const $curImg          = $this.find( '.uix-parallax__img' ),
+					  dataImg          = $curImg.attr( 'src' );
+                      
+				let	dataSkew         = $this.data( 'skew' ),
 					dataSpeed        = $this.data( 'speed' ),
                     dataEasing       = $this.data( 'transition' ),
 					dataOverlay      = $this.data( 'overlay-bg' ),
@@ -124,7 +127,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 				
 				//Trigger a callback when the selected images are loaded
 				//Check if the picture is loaded on the page
-				var img    = new Image();
+				const img    = new Image();
 				img.onload = function() {
 					
 					curImgH = $curImg.height();
@@ -144,7 +147,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 						$this.hasClass( 'uix-height--100' )
 					 ) {		
 
-						var newH = $this.height();
+						const newH = $this.height();
 						$this.css( {
 							'height': newH + 'px'
 						} );	

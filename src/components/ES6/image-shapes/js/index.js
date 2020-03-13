@@ -28,10 +28,9 @@ export const IMAGE_SHAPES = ( ( module, $, window, document ) => {
     module.IMAGE_SHAPES.version       = '0.0.1';
     module.IMAGE_SHAPES.documentReady = function( $ ) {
 
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
-
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
         
 		//  Initialize
 		shapesInit( windowWidth );
@@ -61,21 +60,23 @@ export const IMAGE_SHAPES = ( ( module, $, window, document ) => {
 		function shapesInit( w ) {
 			
 			$( '.uix-shape-img' ).each( function()  {
-				var $this          = $( this ),
-					ranID          = 'uix-shape-img-' + UixGUID.create(),
-					svgPath        = $this.data( 'path' ),
-					svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
-					svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
-					imgW           = parseFloat( $this.data( 'img-width' ) ),
-					svgRatio       = svgW / svgH,
-					imgRatio       = null,
+				const $this          = $( this );
+                
+				const ranID          = 'uix-shape-img-' + UixGUID.create(),
+					  svgPath        = $this.data( 'path' ),
+					  svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
+					  svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
+					  imgW           = parseFloat( $this.data( 'img-width' ) ),
+					  svgRatio       = svgW / svgH,
+                      curImgURL      = $this.find( 'img' ).attr( 'src' );
+                
+				let	imgRatio       = null,
 					bothWidthRatio = null,
 					newSvgHeight   = null,		
 					newImgHeight   = null,		
 					svgOut         = '',
 					curImgW        = imgW,
-					curImgH        = null,
-					curImgURL      = $this.find( 'img' ).attr( 'src' );
+					curImgH        = null;
 
 				if ( imgW > w ) {
 					imgW = w;
@@ -83,7 +84,7 @@ export const IMAGE_SHAPES = ( ( module, $, window, document ) => {
 
 
 				//Check if the picture is loaded on the page
-				var img = new Image();
+				const img = new Image();
 				img.onload = function() {
 					curImgH   = $this.find( 'img' ).height();
 					curImgW   = $this.find( 'img' ).width();

@@ -37,30 +37,27 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 		//Prevent this module from loading in other pages
 		if ( $( '.uix-3d-slider--shatter' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
-
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight;
+		let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
 
-			var animSpeed                 = 1000,
-				$sliderWrapper            = $( '.uix-3d-slider--shatter' ),
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
 
 
+			const $sliderWrapper            = $( '.uix-3d-slider--shatter' ),
+				  //Basic webGL renderers 
+				  renderLoaderID            = 'uix-3d-slider--shatter__loader',
+				  rendererOuterID           = 'uix-3d-slider--shatter__canvas-container',
+				  rendererCanvasID          = 'uix-3d-slider--shatter__canvas';
 
-				//Basic webGL renderers 
-				renderLoaderID            = 'uix-3d-slider--shatter__loader',
-				rendererOuterID           = 'uix-3d-slider--shatter__canvas-container',
-				rendererCanvasID          = 'uix-3d-slider--shatter__canvas',
-				renderer;
-
+            let animSpeed  = 1000;
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -70,7 +67,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 				theta        = 0;
 
 
-			var offsetWidth   = 475, //Set the display width of the objects in the Stage
+			let offsetWidth   = 475, //Set the display width of the objects in the Stage
 				offsetHeight  = 375, //Set the display height of the objects in the Stage
 				allSources    = [],
 				objTotal,
@@ -78,22 +75,23 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 			
 		
-			var sources = [];
-			var isAnimating = false;
+			let sources = [];
+			let isAnimating = false;
 			
 			
 			// constants
-			var activeSlider = 0;
+			let activeSlider = 0;
 			
 			function wrapperInit() {
 				
 				$sliderWrapper.each( function()  {
 
-					var $this                    = $( this ),
-						$items                   = $this.find( '.uix-3d-slider--shatter__item' ),
-						$first                   = $items.first(),
-						itemsTotal               = $items.length,
-                        activated                = $this.data( 'activated' ); 
+					const $this                    = $( this );
+                    
+					const $items                   = $this.find( '.uix-3d-slider--shatter__item' ),
+						  $first                   = $items.first(),
+						  itemsTotal               = $items.length,
+                          activated                = $this.data( 'activated' ); 
 				
                     
                     if ( typeof activated === typeof undefined || activated === 0 ) {
@@ -101,7 +99,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
                         //Get parameter configuration from the data-* attribute of HTML
-                        var	dataControlsPagination   = $this.data( 'controls-pagination' ),
+                        let	dataControlsPagination   = $this.data( 'controls-pagination' ),
                             dataControlsArrows       = $this.data( 'controls-arrows' ),
                             dataLoop                 = $this.data( 'loop' ),
                             dataFilterTexture        = $this.data( 'filter-texture' ),
@@ -126,7 +124,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
                         //Autoplay times
-                        var playTimes;
+                        let playTimes;
                         //A function called "timer" once every second (like a digital watch).
                         $this[0].animatedSlides;
 
@@ -190,13 +188,14 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                         //Get all images and videos
                         //-------------------------------------		
                         $items.each( function()  {
-                            var _item = $( this );
+                            const _item = $( this );
 
                             if ( _item.find( 'video' ).length > 0 ) {
 
                                 //Returns the dimensions (intrinsic height and width ) of the video
-                                var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
-                                    videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                const video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) );
+                                let videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                
                                 if ( typeof videoURL === typeof undefined ) videoURL = _item.attr( 'src' ); 
 
                                 if ( typeof videoURL != typeof undefined ) {
@@ -214,7 +213,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                             } else {
 
-                                var imgURL   = _item.find( 'img' ).attr( 'src' );
+                                let imgURL   = _item.find( 'img' ).attr( 'src' );
 
                                 if ( typeof imgURL != typeof undefined ) {
 
@@ -236,10 +235,10 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                         //Pagination dots 
                         //-------------------------------------	
-                        var _dot       = '',
+                        let _dot       = '',
                             _dotActive = '';
                         _dot += '<ul>';
-                        for ( var i = 0; i < itemsTotal; i++ ) {
+                        for ( let i = 0; i < itemsTotal; i++ ) {
 
                             _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -256,7 +255,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
                             //Prevent buttons' events from firing multiple times
-                            var $btn = $( this );
+                            const $btn = $( this );
                             if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                             $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'true' );
                             setTimeout( function() {
@@ -265,12 +264,12 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                             
                             
-                            var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
-                                slideNextId = $( this ).index();
+                            const slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
+                                  slideNextId = $( this ).index();
 
 
                             //Determine the direction
-                            var curDir = 'prev';
+                            let curDir = 'prev';
                             if ( $( this ).attr( 'data-index' ) > slideCurId ) {
                                 curDir = 'next';
                             }
@@ -288,8 +287,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                         //Next/Prev buttons
                         //-------------------------------------		
-                        var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ),
-                            _next = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' );
+                        const _prev = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--prev' ),
+                              _next = $( dataControlsArrows ).find( '.uix-3d-slider--shatter__arrows--next' );
 
                         $( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -310,8 +309,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                                 _prev.attr( 'aria-disabled', 'false' );
                             }, animSpeed );   
 
-                            var slideCurId  = $items.filter( '.is-active' ).index(),
-                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
+                            const slideCurId  = $items.filter( '.is-active' ).index(),
+                                  slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 
                             //Transition Between Slides
                             sliderUpdates( slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
@@ -335,8 +334,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                             }, animSpeed ); 
 
 
-                            var slideCurId  = $items.filter( '.is-active' ).index(),
-                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
+                            const slideCurId  = $items.filter( '.is-active' ).index(),
+                                  slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 
                             //Transition Between Slides
                             sliderUpdates( slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
@@ -431,7 +430,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
 				//A loader for loading all images from array.
-				var loader = new THREE.TextureLoader();
+				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
 
@@ -469,7 +468,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 					} else {
 						
 					
-						var texture = new THREE.VideoTexture( document.getElementById( element.id ) );
+						const texture = new THREE.VideoTexture( document.getElementById( element.id ) );
 						texture.minFilter = THREE.LinearFilter;
 						texture.magFilter = THREE.LinearFilter;
 						texture.format = THREE.RGBFormat;
@@ -526,7 +525,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 							//if the first object is video and play it
 							if ( index == 0 ) {
-								var videoObCur =  element.material.map.image;
+								const videoObCur =  element.material.map.image;
 								if ( videoObCur.localName == 'video' ) {
 									videoObCur.autoplay = true;
 									videoObCur.currentTime = 0;
@@ -538,12 +537,12 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 							
 							//initialize all objects
 							if ( index > 0 ) {
-								var fragment =  element.geometry.vertices;
+								const fragment =  element.geometry.vertices;
 
-								for ( var i = 0; i < fragment.length; i++ ) {
+								for ( let i = 0; i < fragment.length; i++ ) {
 
-									var pos = new THREE.Vector3();
-									var final = Math.random();
+									const pos = new THREE.Vector3();
+									const final = Math.random();
 
 									pos.x = Math.random();
 									pos.y = Math.random() * (50 * i);
@@ -576,7 +575,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -586,7 +585,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 
@@ -618,8 +617,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 			 */
 			function loadSource( texture, index, w, h, total, loading ) {
 
-				var imgW = w,
-					imgH = h;
+				const imgW = w,
+					  imgH = h;
 
 				
 				// Immediately use the texture for material creation
@@ -629,7 +628,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 				 } );
 
 
-				var geometryExplode = new THREE.BoxGeometry( imgW, imgH, 13 ),
+				const geometryExplode = new THREE.BoxGeometry( imgW, imgH, 13 ),
 
 
 				displacementSprite = new THREE.Mesh( geometryExplode, material );
@@ -642,14 +641,14 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 				geometryExplode.center();
 
 				// Shattering Images
-				var explodeModifier = new THREE.ExplodeModifier();
+				const explodeModifier = new THREE.ExplodeModifier();
 				explodeModifier.modify( geometryExplode );
 
 				// add some additional vars to the
 				// fragments to ensure we can do physics
 				// and so on
-				for ( var i = 0; i < geometryExplode.vertices.length; i++ ) {
-					var fragment = geometryExplode.vertices[i];
+				for ( let i = 0; i < geometryExplode.vertices.length; i++ ) {
+					const fragment = geometryExplode.vertices[i];
 					fragment.origPos	= {
 						x: fragment.x,
 						y: fragment.y,
@@ -697,8 +696,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
              */
             function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-                var items = slider.find( '.uix-3d-slider--shatter__item' ),
-                    total = items.length;
+                const items = slider.find( '.uix-3d-slider--shatter__item' ),
+                      total = items.length;
 
                 slider[0].animatedSlides = setInterval( function() {
 
@@ -709,8 +708,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                         if ( !loop ) {
                             if ( playTimes < total && playTimes >= 0 ) {
 
-                                var slideCurId  = items.filter( '.is-active' ).index(),
-                                    slideNextId = playTimes;	
+                                const slideCurId  = items.filter( '.is-active' ).index(),
+                                      slideNextId = playTimes;	
 
                                 sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
                             }
@@ -718,8 +717,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                             if ( playTimes == total ) playTimes = 0;
                             if ( playTimes < 0 ) playTimes = total-1;		
 
-                            var slideCurId  = items.filter( '.is-active' ).index(),
-                                slideNextId = playTimes;	
+                            const slideCurId  = items.filter( '.is-active' ).index(),
+                                  slideNextId = playTimes;	
 
 
                             //Prevent problems with styles when switching in positive order
@@ -754,8 +753,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 			function sliderUpdates( slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 
 
-				var $items                   = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ),
-					total                    = $items.length;
+				const $items                   = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ),
+					  total                    = $items.length;
 		
 
 				//Prevent bubbling
@@ -793,8 +792,8 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 					//Get previous and next index of item
 					//-------------------------------------
-					var $current = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideCurId );
-					var	$next    = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideNextId );
+					const $current = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideCurId );
+					const	$next    = $sliderWrapper.find( '.uix-3d-slider--shatter__item' ).eq( slideNextId );
 
 
 
@@ -803,7 +802,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 					//Determine the direction and add class to switching direction indicator.
 					//-------------------------------------
-					var dirIndicatorClass = '';
+					let dirIndicatorClass = '';
 					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
 					if ( dir == 'next' ) dirIndicatorClass = 'next';
 
@@ -851,7 +850,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 					// pause all videos
 					allSources.forEach( function ( element, index ) {
 
-						var videoOb = element.material.map.image;
+						const videoOb = element.material.map.image;
 
 						if ( videoOb.localName == 'video' ) {
 							videoOb.autoplay = false;
@@ -870,9 +869,9 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 					
 					if ( typeof allSources[slideNextId] != typeof undefined ) {
 
-						var fragment = allSources[slideNextId].geometry.vertices;
+						const fragment = allSources[slideNextId].geometry.vertices;
 
-						for ( var i = 0; i < fragment.length; i++ ) {
+						for ( let i = 0; i < fragment.length; i++ ) {
 
 							TweenMax.to( fragment[i], 2, {
 								x: fragment[i].origPos.x,
@@ -886,7 +885,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 					}	
 
 					// play the video
-					var videoObCur =  allSources[ slideNextId ].material.map.image;
+					const videoObCur =  allSources[ slideNextId ].material.map.image;
 
 					if ( videoObCur.localName == 'video' ) {
 						videoObCur.autoplay = true;
@@ -900,12 +899,12 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 					//-------------------------------------
 					if ( typeof allSources[slideCurId] != typeof undefined ) {
 
-						var fragment = allSources[slideCurId].geometry.vertices;
+						const fragment = allSources[slideCurId].geometry.vertices;
 
-						for ( var i = 0; i < fragment.length; i++ ) {
+						for ( let i = 0; i < fragment.length; i++ ) {
 
-							var pos = new THREE.Vector3();
-							var final = Math.random();
+							const pos = new THREE.Vector3();
+							const final = Math.random();
 
 							pos.x = Math.random();
 							pos.y = Math.random() * (50 * i);

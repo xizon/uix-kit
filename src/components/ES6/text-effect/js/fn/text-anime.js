@@ -9,15 +9,17 @@
     $.fn.UixTextEff = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			selectors    : '.letters-eff-fadeInRight'
         }, options );
  
         this.each( function() {
 			
-			var $this                = $( this ),
-				customControls       = settings.selectors,
-				speed                = $( customControls ).data( 'text-eff-speed' ),
+			const $this                = $( this );
+            
+			const customControls       = settings.selectors;
+            
+			let	speed                = $( customControls ).data( 'text-eff-speed' ),
 				txtEff;
 
 			

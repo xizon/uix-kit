@@ -29,14 +29,18 @@ export const ACCORDION = ( ( module, $, window, document ) => {
     module.ACCORDION.documentReady = function( $ ) {
 
 		$( '.uix-accordion' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
-				firstShow       = $this.data( 'first-show' ),
-				$li             = $this.children( 'dl' ),
-				$titlebox       = $this.find( 'dt' );
+			const $this           = $( this );
+            
+			const $li             = $this.children( 'dl' ),
+				  $titlebox       = $this.find( 'dt' );
+            
+			let	aEvent          = $this.data( 'event' ),
+				firstShow       = $this.data( 'first-show' );
+            
+
 			
 			
-			var openItem = function( obj ) {
+			const openItem = function( obj ) {
 				//to open
 				// - temporarilty set height:auto
 				// - tween from height:0
@@ -67,12 +71,12 @@ export const ACCORDION = ( ( module, $, window, document ) => {
 				
 			
 				//Its value is not a boolean but a string
-				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true,
-					$content = $( this ).find( 'dd' );
+				const expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true,
+					  $content = $( this ).find( 'dd' );
 				
 				if ( expanded ) {
 					//Hide other all sibling <dt> of the selected element
-					var $e = $( this ).siblings();
+					const $e = $( this ).siblings();
 					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
 					
 					$( this ).addClass( 'is-active' ).attr( 'aria-expanded', true );

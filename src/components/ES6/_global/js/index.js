@@ -73,7 +73,7 @@ export const browser = {
  */
 export const UixModuleInstance = ( ( $, window, document ) => {
 
-    var _APP           = {},
+    let _APP           = {},
         components     = { documentReady: [], pageLoaded: [] };
 
 	if ( $( 'img' ).length == 0 ) {
@@ -106,7 +106,7 @@ export const UixModuleInstance = ( ( $, window, document ) => {
     }
 
     _APP.setContext = function ( contextSelector ) {
-        var context = $;
+        let context = $;
         if ( typeof contextSelector !== typeof undefined ) {
             return function( selector ) {
                 return $( contextSelector ).find( selector );
@@ -135,39 +135,19 @@ export const UixModuleInstance = ( ( $, window, document ) => {
  * @return {String}                        - The globally-unique identifiers.
  */
 export const UixGUID = UixGUID || ( () => {
-    function t() {
-        do {
-            var x = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,
-            function(t) {
-                var x = 16 * Math.random() | 0;
-                return ("x" == t ? x: 3 & x | 8).toString(16)
-            })
-        } while (! t . register ( x ));
-        return x;
-    }
+    function t() { }
 
-    return t.version = "1.4.2",
+    return t.version = "0.0.1",
+
     t.create = function() {
-        return t();
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0,
+                  v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     },
-    t._list = {},
-    Object.defineProperty(t, "list", {
-        get: function() {
-            var x = [];
-            for (var r in t._list) x.push(r);
-            return x;
-        },
-        set: function(x) {
-            t._list = {};
-            for (var r = 0; r < x.length; r++) t._list[x[r]] = 1;
-        }
-    }),
-    t.exists = function(x) {
-        return !! t._list[x];
-    },
-    t.register = function(x) {
-        return ! t.exists(x) && (t._list[x] = 1, !0);
-    },
+
+    //
 	t
 })();
 
@@ -187,13 +167,13 @@ export const UixMath = UixMath || ( () => {
 
     t.evaluate = function(s) {
 
-		var chars = s.replace(/\s/g, '').split("");
-		var n = [], op = [], index = 0, oplast = true;
+		const chars = s.replace(/\s/g, '').split("");
+		let n = [], op = [], index = 0, oplast = true;
 
 		n[index] = "";
 
 		// Parse the expression
-		for (var c = 0; c < chars.length; c++) {
+		for (let c = 0; c < chars.length; c++) {
 
 			if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
 				op[index] = chars[c];
@@ -208,8 +188,8 @@ export const UixMath = UixMath || ( () => {
 
 		// Calculate the expression
 		s = parseFloat(n[0]);
-		for (var o = 0; o < op.length; o++) {
-			var num = parseFloat(n[o + 1]);
+		for (let o = 0; o < op.length; o++) {
+			const num = parseFloat(n[o + 1]);
 			switch (op[o]) {
 				case "+":
 					s = s + num;
@@ -228,6 +208,8 @@ export const UixMath = UixMath || ( () => {
 
 		return s;
     },
+        
+    //
 	t
 })();
 
@@ -253,7 +235,7 @@ export const UixCssProperty = UixCssProperty || ( () => {
 		}
 
 
-		var style    = window.getComputedStyle(el),
+		let style    = window.getComputedStyle(el),
 			duration = style.webkitTransitionDuration,
 			delay    = style.webkitTransitionDelay;
 
@@ -272,7 +254,7 @@ export const UixCssProperty = UixCssProperty || ( () => {
     //
     t.getAbsoluteCoordinates = function( el ) {
 
-		var windowWidth     = window.innerWidth,
+		let windowWidth     = window.innerWidth,
 			leftPos         = null,
 			topPos          = null;
 
@@ -296,6 +278,7 @@ export const UixCssProperty = UixCssProperty || ( () => {
     },
 
 
+     //
 	t
 })();
 

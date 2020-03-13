@@ -16,7 +16,7 @@
     $.fn.UixParallax = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			speed    : 0.25,
             transition : 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
 			bg       : { enable: true, xPos: '50%' }
@@ -24,7 +24,7 @@
  
         this.each( function() {
 			
-			var bgEff      = settings.bg,
+			let bgEff      = settings.bg,
 				$this      = $( this ),
 				bgXpos     = '50%',
 				speed      = -parseFloat( settings.speed );
@@ -61,8 +61,8 @@
 			
 			
 			function scrollUpdate() {
-				var scrolled = $( window ).scrollTop(),
-					st       = $this.offset().top - scrolled;
+				const scrolled = $( window ).scrollTop(),
+					  st       = $this.offset().top - scrolled;
 				
 
 				if ( bgEff ) {

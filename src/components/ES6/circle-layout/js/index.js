@@ -28,12 +28,15 @@ export const CIRCLE_LAYOUT = ( ( module, $, window, document ) => {
     module.CIRCLE_LAYOUT.documentReady = function( $ ) {
 
 		$( '.js-uix-circle-layout' ).each( function( id ) {
-			var $this             = $( this ),
-				$ul               = $this.find( '> ul' ),
-			    $li               = $ul.find( '> li' ),
-				liWidth           = $li.first().outerWidth(),
-				liHeight          = $li.first().outerHeight(),
-				display           = $this.data( 'circle-layout-display' ),
+			const $this             = $( this );
+            
+			const $ul               = $this.find( '> ul' ),
+			      $li               = $ul.find( '> li' ),
+				  liWidth           = $li.first().outerWidth(),
+				  liHeight          = $li.first().outerHeight();
+            
+            
+			let	display           = $this.data( 'circle-layout-display' ),
 				radius            = $this.data( 'circle-layout-radius' ),
 				radius2           = $this.data( 'circle-layout-radius-c' ),
 				rotation          = $this.data( 'circle-layout-rotation' );
@@ -78,17 +81,18 @@ export const CIRCLE_LAYOUT = ( ( module, $, window, document ) => {
 			
 
 			//Layout components in a circle layout
-			var angle           = 0,
-			    step            = 2 * Math.PI / display,
-			    transitionDelay = 0,
-				pad             = $ul.width();
+			const step            = 2 * Math.PI / display,
+				  pad             = $ul.width();
+            
+            let angle             = 0,
+                transitionDelay   = 0;   
 
 			
 			$li.each( function() { //Can'nt use arrow function here!!!
 				// 'this' works differently with arrow fucntions
-				var el          = $( this ),
-					x           = radius * Math.cos(angle) - liWidth / 2,
-					y           = radius * Math.sin(angle) - liHeight / 2;
+				const el          = $( this ),
+					  x           = radius * Math.cos(angle) - liWidth / 2,
+					  y           = radius * Math.sin(angle) - liHeight / 2;
 
 				
 				el.css({

@@ -35,18 +35,19 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 		if ( $( '#3D-gallery-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-gallery-three-canvas';
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+            
+			const rendererCanvasID          = '3D-gallery-three-canvas';
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -55,7 +56,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 				theta        = 0;
 
 
-			var offsetWidth  = 1400,
+			let offsetWidth  = 1400,
 				offsetHeight = 933,
 				allImages    = [],
 				imgTotal,
@@ -63,8 +64,8 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
 
 			// we will keep track of the scroll
-			var scrollValue = 0;
-			var lastScrollValue = 0;
+			let scrollValue = 0;
+			let lastScrollValue = 0;
 
 
 
@@ -119,7 +120,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
 				// Immediately use the texture for material creation
 				// Create a texture loader so we can load our image file
-				var imgs = [
+				const imgs = [
 					'https://placekitten.com/2100/2100',
 					'https://placekitten.com/2200/2200',
 					'https://placekitten.com/2300/2300',
@@ -135,16 +136,16 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
 
 				//A loader for loading all images from array.
-				var loader = new THREE.TextureLoader();
+				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
 				//Preload
 				imgTotal = imgs.length;
 
-				var gap               = 100,
-					circumference         = (offsetWidth + gap) * imgTotal,  //get circumference from all images width
-					galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
-					eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
+				const gap               = 100,
+					  circumference         = (offsetWidth + gap) * imgTotal,  //get circumference from all images width
+					  galleryRadius       = circumference / ( Math.PI * 2 ), // C = 2πr = Math.PI * 2 * radius
+					  eachItemAngleToRad  = ( Math.PI * 2 ) / imgTotal; // 360° = 2π = Math.PI * 2
 
 				if ( camera.position.length() > galleryRadius ) {
 					camera.position.set( 0, 0, 0 );
@@ -174,7 +175,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 				renderer.setClearColor( 0x000000 );	
 
 				// listen to scroll to update
-				var delta = scrollValue - lastScrollValue;
+				let delta = scrollValue - lastScrollValue;
 				// threshold
 				if (delta > 60) {
 					delta = 60;
@@ -208,7 +209,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -218,7 +219,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 
@@ -270,24 +271,24 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 					// onLoad callback
 					function ( texture ) {
 						// in this example we create the material when the texture is loaded
-						var material = new THREE.MeshBasicMaterial( {
+						const material = new THREE.MeshBasicMaterial( {
 							map: texture
 						 } );
 
-						var geometry = new THREE.PlaneGeometry( w, h );
-						var displacementSprite = new THREE.Mesh( geometry, material );
+						const geometry = new THREE.PlaneGeometry( w, h );
+						const mesh = new THREE.Mesh( geometry, material );
 
 						//LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
-						displacementSprite.minFilter = THREE.LinearFilter;
-						displacementSprite.overdraw = true;
+						mesh.minFilter = THREE.LinearFilter;
+						mesh.overdraw = true;
 
 						//Calculate the position of the image 
 						//X axis: a = sinA * c = Math.sin( rad ) * radius
 						//Z axis: b = cosA * c = Math.cos( rad ) * radius
-						displacementSprite.rotation.y = -index * itemRadAngle;
-						displacementSprite.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
+						mesh.rotation.y = -index * itemRadAngle;
+						mesh.position.set( radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle) );
 
-						allImages.push( displacementSprite );
+						allImages.push( mesh );
 
 						//loading
 						TweenMax.to( loading, 0.5, {

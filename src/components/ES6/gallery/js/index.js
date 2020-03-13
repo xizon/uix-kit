@@ -36,7 +36,7 @@ export const GALLERY = ( ( module, $, window, document ) => {
 
 		$( '.uix-gallery' ).each( function() {
 
-			var galleryType = $( this ).data( 'show-type' );
+			const galleryType = $( this ).data( 'show-type' );
 			
 			
 			/* 
@@ -59,13 +59,13 @@ export const GALLERY = ( ( module, $, window, document ) => {
 			
 			if ( galleryType.indexOf( 'filter' ) >= 0 || galleryType.indexOf( 'masonry' ) >= 0 ) {
 
-				var filterCat      = $( this ).data( 'filter-id' ),
+				const filterCat      = $( this ).data( 'filter-id' ),
 					$grid          = $( this ).find( '.uix-gallery__tiles' ),
 					$allItems      = $( this ).find( '.uix-gallery__item' ),
 					$filterOptions = $( filterCat );
 
 				
-				var MuuriGrid = new Muuri( $grid.get(0), {
+				const MuuriGrid = new Muuri( $grid.get(0), {
 					items: $grid.get(0).querySelectorAll( '.uix-gallery__item' ),
 					
 					// Default show animation
@@ -123,10 +123,10 @@ export const GALLERY = ( ( module, $, window, document ) => {
 				 */ 
 				if ( galleryType.indexOf( 'filter' ) >= 0 ) {
 					$filterOptions.find( 'li > a' ).off( 'click' ).on( 'click', function() {
-						var $this       = $( this ),
-							activeClass = 'current-cat',
-							isActive    = $this.parent().hasClass( activeClass ),
-							group       = isActive ? 'all' : $this.data( 'group' );
+						const $this       = $( this );
+						const activeClass = 'current-cat',
+							  isActive    = $this.parent().hasClass( activeClass ),
+							  group       = isActive ? 'all' : $this.data( 'group' );
 
 						// Hide current label, show current label in title
 						if ( !isActive ) {
@@ -136,12 +136,12 @@ export const GALLERY = ( ( module, $, window, document ) => {
 						$this.parent().toggleClass( activeClass );
 
 						// Filter elements
-						var filterFieldValue = group;
+						const filterFieldValue = group;
 						MuuriGrid.filter( function ( item ) {
 
-							var element       = item.getElement(),
-								curCats       = element.getAttribute( 'data-groups' ).toString().replace(/^\,|\,$/g, '').replace(/^\[|\]$/g, '') + ',all',
-								isFilterMatch = !filterFieldValue ? true : ( curCats || '' ).indexOf( filterFieldValue ) > -1;
+							const element       = item.getElement(),
+								  curCats       = element.getAttribute( 'data-groups' ).toString().replace(/^\,|\,$/g, '').replace(/^\[|\]$/g, '') + ',all',
+								  isFilterMatch = !filterFieldValue ? true : ( curCats || '' ).indexOf( filterFieldValue ) > -1;
 
 							return isFilterMatch;
 						});

@@ -47,7 +47,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
         // To display the template tag content.
         $( 'template' ).each( function()  {
             
-            var _content = $( this ).html( function( index,html ) {
+            const _content = $( this ).html( function( index,html ) {
                                         return html.replace(/[\r\n]/g, '' );
                                     }).context.innerHTML,
                 _id = $( this ).attr( 'id' );
@@ -72,26 +72,26 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
         
   
 		
-		var	innerEl         = '.uix-lightbox__inner',
-			wrapperEl       = '.uix-lightbox__container',
-			loaderEl        = '.uix-lightbox__loading',
-			maskEl          = '.uix-lightbox__container-mask',
-			closeEl         = '.uix-lightbox__close',
-			largeImgCloseEl = '.uix-lightbox__original__close',
-			triggerEl       = '.uix-lightbox__trigger',
-			docURL          = window.location.href,
-			$content        = $( innerEl ).find( '.uix-lightbox__html' ),
-			customWidth     = 1000; //Match the width in the css file;
+		const innerEl         = '.uix-lightbox__inner',
+			  wrapperEl       = '.uix-lightbox__container',
+			  loaderEl        = '.uix-lightbox__loading',
+			  maskEl          = '.uix-lightbox__container-mask',
+			  closeEl         = '.uix-lightbox__close',
+			  largeImgCloseEl = '.uix-lightbox__original__close',
+			  triggerEl       = '.uix-lightbox__trigger',
+			  docURL          = window.location.href,
+			  $content        = $( innerEl ).find( '.uix-lightbox__html' ),
+			  customWidth     = 1000; //Match the width in the css file;
 		
 
 		//Detect URL change & Fire click event
 		window.addEventListener( 'popstate', function( e ) {
 		
-			var eleTarget = null;
+			let eleTarget = null;
 			
 			$( '[data-lb-ajax]' ).each( function() {
 				
-				var prevURL = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent( 'uix-lightbox-ajaxURL' ).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+				let prevURL = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent( 'uix-lightbox-ajaxURL' ).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 
 				if ( $( this ).attr( 'href' ) === prevURL ) {
 					eleTarget = this;
@@ -100,7 +100,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			});
 			
 			
-			var backURL = $( eleTarget ).data( 'lb-ajax-doc-url' );
+			const backURL = $( eleTarget ).data( 'lb-ajax-doc-url' );
 			if ( typeof backURL != typeof undefined ) {
 				lightboxClose( backURL );
 			}
@@ -113,8 +113,9 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		
 		$( document ).off( 'click.LIGHTBOX_TRIGGER' ).on( 'click.LIGHTBOX_TRIGGER', triggerEl, function() { 
 
-			var $this         = $( this ),
-				dataPhoto     = $this.data( 'lb-src' ),
+			const $this         = $( this );
+            
+			let	dataPhoto     = $this.data( 'lb-src' ),
 				dataHtmlID    = $this.data( 'lb-html' ),
 				dataFixed     = $this.data( 'lb-fixed' ),
 				dataMaskClose = $this.data( 'lb-mask-close' ),
@@ -172,7 +173,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			
 			
 			// Show the lightbox
-			var showLightbox = function() {
+			const showLightbox = function() {
 				$( closeEl ).addClass( 'is-active' );
 				$( wrapperEl ).show();
 				$( maskEl ).show();
@@ -181,7 +182,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			
 			
 			// hide the content container
-			var hideLightboxContent = function() {
+			const hideLightboxContent = function() {
 				TweenMax.set( $content, {
 					css         : {
 						'display' : 'none'
@@ -191,7 +192,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			
 			
 			// show the content container
-			var showLightboxContent = function() {
+			const showLightboxContent = function() {
 				TweenMax.set( $content, {
 					css         : {
 						'display' : 'block'
@@ -227,16 +228,16 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 				//Judging whether multiple image sets
 				if ( Object.prototype.toString.call( imgSrcStr ) =='[object Array]' ) {
 					
-					var largePhotos = '',
+					let largePhotos = '',
 						thumbs      = '';
 					
 					imgSrcStrToW = imgSrcStr[0].large;
 					
 					//push the large photos
 					largePhotos += '<div class="uix-lightbox__photo-container uix-lightbox__photo-sets-container"><a href="javascript:" class="uix-lightbox__photo-sets__prev"></a><a href="javascript:" class="uix-lightbox__photo-sets__next"></a><ul>';
-					for ( var i = 0; i < imgSrcStr.length; i++ ) {
+					for ( let i = 0; i < imgSrcStr.length; i++ ) {
 						
-						var tempID = 'lightbox-' + UixGUID.create();
+						const tempID = 'lightbox-' + UixGUID.create();
 						
 						largePhotos += '<li>';
 						largePhotos += '	<a class="uix-lightbox__original__link" data-target-id="'+tempID+'-sets-'+i+'" href="javascript:void(0);">';
@@ -252,9 +253,9 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 					
 					//push the thumbs
 					thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
-					for ( var k = 0; k < imgSrcStr.length; k++ ) {
+					for ( let k = 0; k < imgSrcStr.length; k++ ) {
 						
-						var active = ( k == 0 ) ? 'class="is-active"' : '';
+						const active = ( k == 0 ) ? 'class="is-active"' : '';
 						
 						thumbs += '<li '+active+'><img src="'+ imgSrcStr[k].thumb +'" alt=""></li>';
 					}
@@ -266,7 +267,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 					
 				} else {
 
-					var tempID = 'lightbox-' + UixGUID.create();
+					const tempID = 'lightbox-' + UixGUID.create();
 					
 					//Only one image
 					imgSrcStrToW = imgSrcStr;
@@ -287,7 +288,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 					$( innerEl ).addClass( 'js-uix-pure-image' );
 
 					//Set container width
-					var img = new Image();
+					const img = new Image();
 					img.src = imgSrcStrToW;
 					img.onload = function() {
 						
@@ -298,7 +299,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 						showLightboxContent();	
 
 						
-						var sw     = window.innerWidth - 30,
+						let sw     = window.innerWidth - 30,
 							ow     = this.width,
 							oh     = this.height,
 							ratioH = oh/ow,
@@ -321,7 +322,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 						
 
 						//Don't write variables outside
-						var $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
+						const $lbSetsContainer = $( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' );
 						$lbSetsContainer.css( {
 							'height': h + 'px'
 						} );
@@ -351,7 +352,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 						
 						//If the image is larger than the current window, it will display at the top.
 						//Don't write variables outside
-						var $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
+						const $lbTarImg = $( '.uix-lightbox__photo-container > .uix-lightbox__original__target' );
 						if ( oh > window.innerHeight ) {
 							$lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
 						} else {
@@ -380,13 +381,13 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 				dataHtmlID = dataHtmlID.replace( '#', '' );
 
                 
-				var $htmlAjaxContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
+				const $htmlAjaxContainer = $( '#' + dataHtmlID ).find( '.uix-lightbox__content > div' );
 		
 				//show the lightbox
 				showLightbox();
 				
 				// Content pushing completed
-				var htmlContentLoaded = function() {
+				const htmlContentLoaded = function() {
 					//remove loading
 					$( loaderEl ).addClass( 'is-loaded' );
 					
@@ -417,8 +418,8 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 				if ( $( wrapperEl ).hasClass( 'js-uix-ajax' ) ) {
 
 					//Add content to the dynamic AJAX container
-					var ajaxURL               = $this.attr( 'href' ),
-						ajaxConfig            = dataAjax;
+					const ajaxURL               = $this.attr( 'href' ),
+						  ajaxConfig            = dataAjax;
 
 
 					// Modify the URL without reloading the page
@@ -515,11 +516,12 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		
 		
 		$( document ).off( 'click.LIGHTBOX_PHOTO_SETS' ).on( 'click.LIGHTBOX_PHOTO_SETS', '.uix-lightbox__photo-sets-container > a', function() {
-			var $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+			const $largePhoto = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
 				$thumb      = $( this ).closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
 				total       = $thumb.length,
-				curIndex    = $thumb.filter( '.is-active' ).index(),
-				prevIndex   = curIndex - 1,
+				curIndex    = $thumb.filter( '.is-active' ).index();
+            
+            let prevIndex   = curIndex - 1,
 				nextIndex   = curIndex + 1;
 			
 			
@@ -584,12 +586,11 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function lightboxThumbSwitch( index, obj ) {
-			var $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
-				$thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' ),
-				curImgH     = 0;
+			const $largePhoto = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__photo-container.uix-lightbox__photo-sets-container' ),
+				  $thumb      = obj.closest( '.uix-lightbox__html' ).find( '.uix-lightbox__thumb-container li' );
 
 			// show the content container
-			var showLightboxContent = function() {
+			const showLightboxContent = function() {
 				TweenMax.set( obj.closest( '.uix-lightbox__html' ), {
 					css         : {
 						'display' : 'block'
@@ -626,12 +627,12 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
                 },
                 onComplete  : function() {
                     
-                    var _cur = this.target;
+                    const _cur = this.target;
                     
                     $( _cur ).addClass( 'is-active' );
                     //
                     //Reset the container height
-                    var imgClick = new Image();
+                    const imgClick = new Image();
                     imgClick.src = $largePhoto.find( 'li' ).eq( index ).find( 'img' ).attr( 'src' );
                     imgClick.onload = function() {
 
@@ -643,7 +644,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 
 
 
-                        var sw     = window.innerWidth - 30,
+                        let sw     = window.innerWidth - 30,
                             ow     = this.width,
                             oh     = this.height,
                             ratioH = oh/ow,
@@ -670,7 +671,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 
                         //If the image is larger than the current window, it will display at the top.
                         //Don't write variables outside
-                        var $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
+                        const $lbTarImg = $largePhoto.find( 'li' ).eq( index ).find( '.uix-lightbox__original__target' );
                         if ( oh > window.innerHeight ) {
                             $lbTarImg.addClass( 'uix-lightbox__original__target--imgfull' );
                         } else {

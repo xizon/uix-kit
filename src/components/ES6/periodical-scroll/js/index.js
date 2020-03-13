@@ -29,8 +29,9 @@ export const PERIODICAL_SCROLL = ( ( module, $, window, document ) => {
 
 		$( '[data-periodical-scroll-container]' ).each( function() {
 
-			var $this       = $( this ),
-				ul          = $this.data( 'periodical-scroll-container' ),
+			const $this       = $( this );
+            
+			let ul          = $this.data( 'periodical-scroll-container' ),
 				speed       = $this.data( 'periodical-scroll-speed' ),
 				timing      = $this.data( 'periodical-scroll-timing' ),
 				$wrap       = $this.find( ul ),
@@ -45,16 +46,16 @@ export const PERIODICAL_SCROLL = ( ( module, $, window, document ) => {
 				timing = 2000;
 			}	
 			
-			var $item     = $wrap.find( '> li' ),
-				moveY     = itemHeight*2,
-				timeline  = new TimelineMax({
-				onComplete: function() {
-					setTimeout( function() {
-						timeline.restart();
-					}, timing );
-					
-				}
-			});
+			const $item     = $wrap.find( '> li' ),
+				  moveY     = itemHeight*2,
+				  timeline  = new TimelineMax({
+                      onComplete: function() {
+                            setTimeout( function() {
+                                    timeline.restart();
+                                }, timing );
+
+                      }
+                   });
 
 			TweenLite.defaultEase = Circ.easeInOut;
 

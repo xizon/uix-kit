@@ -37,27 +37,28 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 		if ( $( '#3D-background-three-canvas3' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-background-three-canvas3';
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+            
+			const	rendererCanvasID = '3D-background-three-canvas3';
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				scene,
 				renderer,
 				displacementSprite,
 				theta        = 0;
 
-			var mouseVector  = new THREE.Vector2(),
-				sphereTarget = new THREE.Euler(),
-				xrad         = THREE.Math.degToRad(30),
-				yrad         = THREE.Math.degToRad(10);
+			const mouseVector  = new THREE.Vector2(),
+				  sphereTarget = new THREE.Euler(),
+				  xrad         = THREE.Math.degToRad(30),
+				  yrad         = THREE.Math.degToRad(10);
 
 
 			function init() {
@@ -81,8 +82,8 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 
 
 				// Immediately use the texture for material creation
-				var sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
-				var sphereMat = new THREE.MeshBasicMaterial({
+				const sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
+				const sphereMat = new THREE.MeshBasicMaterial({
 					color: 0x494949,
 					wireframe: true
 				});
@@ -118,7 +119,7 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -128,7 +129,7 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 } 
                 
@@ -148,7 +149,7 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 
 			function onDocumentMouseMove( event ) {
 				// NDC -1 to 1
-				var rect = renderer.domElement.getBoundingClientRect();
+				const rect = renderer.domElement.getBoundingClientRect();
 				mouseVector.x = ( event.clientX - rect.left ) / rect.width * 2 - 1;
 				mouseVector.y = ( event.clientY - rect.top ) / rect.height * -2 + 1;
 

@@ -35,12 +35,12 @@
 //
 //    Placeholder Text Color     :    #E6E6E8
 //	  Primary Background Color   :    transparent
-//	  Highlight Color            :    #EC5E79, #E8588C
+//	  Highlight Color            :    #CE3A3E, #DE510E
 //	  Primary Text Color         :    #212121, #474747
 //    Heading Text Color         :    #212121
 //	  Subordinate Text Color     :    #AEAEAE
 //	  Dividing Line Color        :    #F4F4F4
-//    Button Gradient Color      :    #EC5E79, #f60, #d83ba0
+//    Button Gradient Color      :    #CE3A3E, #C04645, #DE510E
 
 
 
@@ -124,8 +124,8 @@ $spacing-small-mobile   : $spacing-small/2;
 $placeholder-text-color: #E6E6E8;
 
 //Highlight Color
-$highlight-color1      : #EC5E79; //rgba($highlight-color1, 1)
-$highlight-color2      : #E8588C; //rgba($highlight-color2, 1)
+$highlight-color1      : #CE3A3E; //rgba($highlight-color1, 1)
+$highlight-color2      : #DE510E; //rgba($highlight-color2, 1)
 
 //Primary Text Color
 $primary-text-color    : #212121;
@@ -141,9 +141,9 @@ $sub-text-color        : #AEAEAE;
 $dividing-line-color   : #DCDCDC; //rgba($dividing-line-color, 1)
 
 //Button Gradient Color
-$btn-gradient-color1   : #EC5E79;
-$btn-gradient-color2   : #f60;
-$btn-gradient-color3   : #d83ba0;
+$btn-gradient-color1   : #CE3A3E;
+$btn-gradient-color2   : #C04645;
+$btn-gradient-color3   : #DE510E;
 
 
 //Primary Background Color

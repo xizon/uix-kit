@@ -27,11 +27,9 @@ export const TABLE = ( ( module, $, window, document ) => {
     module.TABLE.version       = '0.0.3';
     module.TABLE.documentReady = function( $ ) {
 
-
-		
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;	
+        const $window          = $( window );
+        let	windowWidth        = window.innerWidth,
+            windowHeight       = window.innerHeight;
 		
 		/* 
 		 ---------------------------
@@ -39,20 +37,20 @@ export const TABLE = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */
 					
-		var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-			$thead    = $resTable.find( 'thead' ),
-			$tbody    = $resTable.find( 'tbody' );
+		const $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
+			  $thead    = $resTable.find( 'thead' ),
+			  $tbody    = $resTable.find( 'tbody' );
 
         $thead.find( 'th' ).each(function() {
-            var data = $( this ).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
+            const data = $( this ).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
             if ( !$( this ).attr( 'data-table' ) ) {
                 $( this ).attr( 'data-table', data );
             }
         });
 
         $tbody.find( 'td' ).each(function() {
-            var index = $(this).index();
-            var data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
+            const index = $(this).index();
+            const data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
             $( this ).attr( 'data-table', data );
         });
 		
@@ -62,9 +60,9 @@ export const TABLE = ( ( module, $, window, document ) => {
 		 With scroll bars
 		 ---------------------------
 		 */
-		var resTableSCrolled = '.js-uix-table--responsive-scrolled',
-			columns          = $( resTableSCrolled + ' tr').length,
-			rows             = $( resTableSCrolled + ' th').length;
+		const resTableSCrolled = '.js-uix-table--responsive-scrolled',
+			  columns          = $( resTableSCrolled + ' tr').length,
+			  rows             = $( resTableSCrolled + ' th').length;
 		
 		tableDataScrolledInit( windowWidth );
 		
@@ -86,9 +84,9 @@ export const TABLE = ( ( module, $, window, document ) => {
 		function tableDataScrolledInit( w ) {
 			
 			if ( w <= 768 ) {
-				for ( var i = 0; i < rows; i++ ) {
-					var maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
-					for ( var j = 0; j < columns; j++ ) {
+				for ( let i = 0; i < rows; i++ ) {
+					const maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
+					for ( let j = 0; j < columns; j++ ) {
 						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
 							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
 						}
@@ -96,7 +94,7 @@ export const TABLE = ( ( module, $, window, document ) => {
 							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop( 'scrollHeight' );
 						}
 					}
-					for (var j = 0; j < columns; j++ ) {
+					for (let j = 0; j < columns; j++ ) {
 						$( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css( 'height', maxHeight );
 						$( resTableSCrolled + ' th:nth-child(' + i + ')').css( 'height', maxHeight );
 					}

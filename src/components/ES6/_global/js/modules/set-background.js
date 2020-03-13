@@ -27,10 +27,9 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	module.SET_BG.documentReady = function( $ ) {
 
 
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
-
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
         
 		//  Initialize
 		setBGInit( windowWidth, windowHeight );
@@ -61,8 +60,9 @@ export const SET_BG = ( ( module, $, window, document ) => {
 		function setBGInit( w, h ) {
 			
 			$( '[data-bg]' ).each( function() {
-				var $this    = $( this ),
-					config   = $this.data( 'bg' );
+				const $this    = $( this );
+                
+				let config   = $this.data( 'bg' );
 
 
 				if ( typeof config === typeof undefined ) {
@@ -79,7 +79,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 
 				if ( config ) {
 
-					var dataImg       = config.src,
+					let dataImg       = config.src,
 						dataPos       = config.position,
 						dataSize      = config.size,
 						dataRepeat    = config.repeat,
@@ -101,7 +101,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
                
                     
                     //background animation
-                    var moveAnim             = 'none',
+                    let moveAnim             = 'none',
                         moveAnimLoop         = 'infinite',
                         moveEasing           = 'linear',
                         moveKeyframesTop     = '@keyframes js-uix-cssanim--move-t{from{background-position:0 0;}to{background-position:0 -19999px;}',

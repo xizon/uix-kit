@@ -31,9 +31,9 @@ export const FULL_WIDTH_COLUMN_TO_EDGE = ( ( module, $, window, document ) => {
     module.FULL_WIDTH_COLUMN_TO_EDGE.version       = '0.0.1';
     module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded    = function() {
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
         
 		
 		fullwidthColumnToEdgeInit( windowWidth );
@@ -67,16 +67,16 @@ export const FULL_WIDTH_COLUMN_TO_EDGE = ( ( module, $, window, document ) => {
 		
 		
         function fullwidthToDir( obj, dir, w ) {
-            var dividerPosition = obj.offset();
-            var dividerWidth = $( window ).width() - dividerPosition.left;
-            var bsGridGutter = 15;
+            const dividerPosition = obj.offset();
+            const dividerWidth = $( window ).width() - dividerPosition.left;
+            const bsGridGutter = 15;
         
         
             if ( w > 768 ) {
                 obj.css( 'width', dividerWidth + bsGridGutter );
                 
                 if ( dir == 'left' ) {
-                    var _dis = -(dividerPosition.left + bsGridGutter*2 );
+                    const _dis = -(dividerPosition.left + bsGridGutter*2 );
                     obj.css( 'margin-left', _dis+'px' );
                 }  
 

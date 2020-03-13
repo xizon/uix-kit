@@ -28,36 +28,37 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
     module.AJAX_PAGE_LOADER.version       = '0.1.4';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
-        var $window                  = $( window ),
-		    windowWidth              = window.innerWidth,
-		    windowHeight             = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
         
         
         //all images from pages
-        var sources = []; 
+        let sources = []; 
 
         //Added timer to prevent page loading errors for a long time
-        var timeClockInit;   
+        let timeClockInit;   
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation       = 0,
-			quietPeriod         = 500, //Do not change it
-			animationTime       = 1000,//According to page transition animation changes
-			loaderRemoveDelay   = 500,
-			AJAXPageLinks       = '[data-ajax-page]',
-			$navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
-			total               = $navs.length,
-			$sectionsContainer  = $( '.uix-ajax-load__fullpage-container' ),
-			ajaxContainer       = '.ajax-container',
-			curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
+		const quietPeriod         = 500, //Do not change it
+			  animationTime       = 1000,//According to page transition animation changes
+			  loaderRemoveDelay   = 500,
+			  AJAXPageLinks       = '[data-ajax-page]',
+			  $navs               = $( AJAXPageLinks ).parent().parent().find( 'li' ),
+			  total               = $navs.length,
+			  $sectionsContainer  = $( '.uix-ajax-load__fullpage-container' ),
+			  ajaxContainer       = '.ajax-container',
+			  curAjaxPageID       = $( ajaxContainer ).data( 'ajax-page-id' );
+        
+        let lastAnimation = 0;
 		
         
         // The progress of each page load, using global variables to accurately determine
-        var loadedProgress = 0;
+        let loadedProgress = 0;
 		
         //loading animation
-        var loadingAnim = function( per ) {
+        const loadingAnim = function( per ) {
 			$( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per ) );
         }; 
         
@@ -138,9 +139,9 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
             loadedProgress = 0; 
 
 			//
-			var $this            = $( this ),
-				curIndex         = $this.attr( 'data-index' ),
-			    curURL           = $this.attr( 'href' ); 
+			const $this = $( this );
+            const curIndex = $this.attr( 'data-index' );
+            let curURL = $this.attr( 'href' ); 
 
 			
 			//The currently URL of link
@@ -167,7 +168,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			
 			
 			//Click on this link element using an AJAX request
-			var dir = ( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
+			const dir = ( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) > curIndex ) ? 'up' : 'down';
 			moveTo( $( ajaxContainer ), curURL, dir, curIndex, false );
 			
 			
@@ -180,7 +181,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		//Detect URL change & Fire click event
 		window.addEventListener( 'popstate', function( e ) {
 		
-			var eleTarget = null,
+			let eleTarget = null,
 				goURL     = location.href;
 			
 			$( AJAXPageLinks ).each( function() {
@@ -194,7 +195,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			});
 
 		
-			var pageIndex = $( eleTarget ).data( 'index' );
+			const pageIndex = $( eleTarget ).data( 'index' );
 			
 			//Push new content to target container
 			if ( typeof pageIndex != typeof undefined ) {
@@ -220,7 +221,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 */
 		function scrollMoveInit( event, dir ) {
 	
-			var timeNow = new Date().getTime();
+			const timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
 			if( timeNow - lastAnimation < quietPeriod + animationTime) {
 				return;
@@ -253,9 +254,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function moveTo( container, url, dir, customIndex, wheel ) {
-			var index     = parseFloat( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			const index     = parseFloat( $navs.filter( '.is-active' ).find( '> a' ).attr( 'data-index' ) );
+			const isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+            
+            let	nextIndex = null;
 			
 		
 			//If there is a custom index, it is enabled first
@@ -298,7 +300,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 						
 				// Modify the URL without reloading the page when mouse wheel
 				if ( wheel ) {
-					var turl = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
+					const turl = $navs.eq( nextIndex ).find( '> a' ).attr( 'href' );
 					
 					if( history.pushState ) {
 						history.pushState( null, null, url );
@@ -361,7 +363,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     //Push all videos from page
                     $( response ).find( '.uix-video__slider > video' ).each(function() {
 
-                        var _src = $( this ).find( 'source:first' ).attr( 'src' );
+                        const _src = $( this ).find( 'source:first' ).attr( 'src' );
                         if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
 
                         sources.push(
@@ -375,8 +377,8 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
 
                     //Execute after all images have loaded
-                    var per;
-                    var perInit = 1;
+                    let per;
+                    let perInit = 1;
                     if ( sources.length == 0 ) {
                         per = 100;
 
@@ -387,10 +389,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     }
                     
                     
-                    var loadImages = function() {
-                        var promises = [];
+                    const loadImages = function() {
+                        let promises = [];
 
-                        for (var i = 0; i < sources.length; i++) {
+                        for (let i = 0; i < sources.length; i++) {
 
                             if ( sources[i].type == 'img' ) {
 
@@ -402,7 +404,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
                                     new Promise(function(resolve, reject) {
 
-                                        var img = document.createElement("img");
+                                        const img = document.createElement("img");
                                         img.crossOrigin = "anonymous";
                                         img.src = sources[i].url;
 
@@ -451,7 +453,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     };
 
 
-                    var textureLoaded = function( url ) {
+                    const textureLoaded = function( url ) {
                       
                         //loading
                         per = parseInt( 100 * ( perInit / sources.length ) );
@@ -467,7 +469,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                         //loading animation
                         loadingAnim( per ); 
 
-                        var texture = null;
+                        let texture = null;
 
                         perInit++;
                         return per;   
@@ -476,7 +478,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
   
                     
 
-                    var func = function() {
+                    const func = function() {
                         ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() ); 
                     };
 
@@ -491,8 +493,8 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
 
                     //Calculating page load time
-                    var timeLimit = 10,
-                        timeStart = new Date().getTime();
+                    const timeLimit = 10,
+                          timeStart = new Date().getTime();
 
                     //Prevent duplicate runs when returning to this page
                     if ( timeClockInit ) {
@@ -503,7 +505,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     timeClockInit = setInterval( function() {
 
                         //Converting milliseconds to minutes and seconds
-                        var _time = (new Date().getTime() - timeStart) / 1000;
+                        let _time = (new Date().getTime() - timeStart) / 1000;
 
                         if ( _time >= timeLimit ) {
                             console.log( 'Page load timeout!' );
@@ -544,7 +546,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
             if ( loadedProgress < 100 ) return false;
 			
             //
-			var oldContent = container.html();
+			let oldContent = container.html();
 		
 			//Remove loader
 			TweenMax.to( '.uix-ajax-load__loader', 0.5, {
@@ -599,7 +601,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 */
 		function eleTransitionEff( dir, oldContent, newContent ) {
 			
-			var $originalItem   = $sectionsContainer.find( '> section' ),
+			const $originalItem   = $sectionsContainer.find( '> section' ),
 				$cloneItem      = $originalItem.clone();
 
 			
@@ -661,9 +663,9 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		 *  Mouse Wheel Method
 		 ====================================================
 		 */
-		var startY = 0;
-		var onTouchStart = function ( e ) {
-			var touches = e.touches;
+		let startY = 0;
+		const onTouchStart = function ( e ) {
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				startY = touches[0].pageY;
 				
@@ -671,12 +673,12 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		};
 
 		
-		var onDeviceWheel = function ( e ) {
+		const onDeviceWheel = function ( e ) {
 			
 			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var dir, delta, mobileDeltaY = null;
+			let dir, delta, mobileDeltaY = null;
 			
-			var touches = e.touches;
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				mobileDeltaY = startY - touches[0].pageY;
 			} else {

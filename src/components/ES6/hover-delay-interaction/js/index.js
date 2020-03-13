@@ -25,11 +25,11 @@ export const HOVER_DELAY_INTERACTION = ( ( module, $, window, document ) => {
     module.HOVER_DELAY_INTERACTION.documentReady = function( $ ) {
 
 		
-		var delayTime = 250;
+		const delayTime = 250;
 	   
 		$( '.uix-hover-delay-el' ).on( 'mouseover', function() {
 
-			var $this = $( this );
+			const $this = $( this );
 
 			if ($this.prop('hoverTimeout' ) ) {
 				$this.prop('hoverTimeout', clearTimeout($this.prop('hoverTimeout')));
@@ -40,7 +40,7 @@ export const HOVER_DELAY_INTERACTION = ( ( module, $, window, document ) => {
 			}, delayTime ) );
 			
 		}).on( 'mouseleave', function() {
-			var $this = $( this );
+			const $this = $( this );
 
 			if ($this.prop( 'hoverIntent' ) ) {
 				$this.prop( 'hoverIntent', clearTimeout($this.prop('hoverIntent')));

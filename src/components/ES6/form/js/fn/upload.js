@@ -10,7 +10,7 @@
     $.fn.UixRenderCustomFile = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '.uix-controls__file-container'
         }, options );
  
@@ -18,7 +18,7 @@
 		
 		
 			$( settings.controls ).each( function()  {
-				var $fileInput  = $( this ).find( 'input[type="file"]' ),
+				const $fileInput  = $( this ).find( 'input[type="file"]' ),
 					$fileBtn    = $( this ).find( '.uix-controls__file-trigger' ),
 					$filePath   = $( this ).next( '.uix-controls__file-return' );
 

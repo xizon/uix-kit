@@ -35,11 +35,11 @@ export const GET_CUSTOM_ATTRS = ( ( module, $, window, document ) => {
 
 
 		$( '[data-my-custom-datas]' ).each( function() {
-			var $this         = $( this );
+			const $this         = $( this );
 
 			
 			//Get all attributes of an element and push the new attributes like "data-*"
-			var curAttrs        = $this.attr(),
+			let curAttrs        = $this.attr(),
 				customPostData  = '';
 			
 			$.each( curAttrs, function( i, val ) {

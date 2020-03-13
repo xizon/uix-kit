@@ -28,7 +28,7 @@ export const SVG_MAP_WORLD = ( ( module, $, window, document ) => {
     module.SVG_MAP_WORLD.documentReady = function( $ ) {
 
 
-		var $svgEl = $( '.uix-svgmap--world' );
+		const $svgEl = $( '.uix-svgmap--world' );
 		
 
 		$( document ).off( 'click.SVG_MAP_WORLD' ).on( 'click.SVG_MAP_WORLD', '.uix-svgmap--world__trigger a', function( e ) {
@@ -36,9 +36,10 @@ export const SVG_MAP_WORLD = ( ( module, $, window, document ) => {
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();
 
-			var goName       = $( this ).data( 'title' ),
-				goText       = $( this ).text(),
-				svgCurName   = '',
+			const goName       = $( this ).data( 'title' ),
+				  goText       = $( this ).text();
+            
+			let	svgCurName   = '',
 				svgNameIndex = 0;
 			
 			$( '.uix-svgmap--world .uix-svgmap--world__name' ).each( function( index )  {
@@ -72,7 +73,7 @@ export const SVG_MAP_WORLD = ( ( module, $, window, document ) => {
 		
 		function svgMapRestore( type ) {
 
-			var alpha = ( type == 1 ) ? 0.3 : 1;
+			const alpha = ( type == 1 ) ? 0.3 : 1;
 
 			$svgEl.children().removeClass( 'is-show' );
 			$svgEl.find( 'path' ).css({

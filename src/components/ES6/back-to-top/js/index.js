@@ -28,21 +28,21 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
     module.BACK_TO_TOP.documentReady = function( $ ) {
 
 		
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 		
 		$( '<a href="#" id="uix-to-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>' ).appendTo( 'body' );
 		$.when( $( '#uix-to-top' ).length > 0).then( function() {
 			
 			//-------- Sticky button of back to top 
 			//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-			var $el = $( '#uix-to-top' );
+			const $el = $( '#uix-to-top' );
 			
 			$window.on( 'scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function() {
 
-				var scrollTop = $( this ).scrollTop(),
-					spyTop    = windowHeight/2;
+				const scrollTop = $( this ).scrollTop(),
+					  spyTop    = windowHeight/2;
 
 
 				if ( scrollTop >= spyTop ) {

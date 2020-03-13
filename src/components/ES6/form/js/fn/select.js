@@ -14,7 +14,7 @@
     $.fn.UixRenderCustomSelect = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			selector         : '.uix-controls__select',
 			targetWrapper    : '.uix-controls__select-wrapper',
 			trigger          : '.uix-controls__select-trigger',	
@@ -27,14 +27,16 @@
 		
 			$( settings.selector ).not( '.js-uix-new' ).each( function() {
 
-				var $this     = $( this ),
-					classes   = $this.attr( 'class' ),
-					id        = $this.attr( 'id' ),
-					name      = $this.attr( 'name' ),
-					template  = '',
-					labelText = $this.find( '> span' ).html(),
-					dataExist = $this.data( 'exist' );
-
+				const $this     = $( this );
+                
+				const classes   = $this.attr( 'class' ),
+					  id        = $this.attr( 'id' ),
+					  name      = $this.attr( 'name' ),
+                      labelText = $this.find( '> span' ).html(),
+					  dataExist = $this.data( 'exist' );
+                
+				let	template  = '';
+			
 				
 
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
@@ -45,7 +47,7 @@
 
 					$this.find( 'select option' ).each( function( index ) {
 
-						var selected = '';
+						let selected = '';
 
 						if ( $( this ).is( ':selected' ) ) {
 							selected = 'is-active';
@@ -76,7 +78,7 @@
 			$( document ).off( 'click.FORM_CUSTOM_SELECT' ).on( 'click.FORM_CUSTOM_SELECT', settings.trigger, function( e ) {
 				e.preventDefault();
 
-				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+				const $selectWrapper    = $( this ).closest( settings.targetWrapper ),
 					$selectCurWrapper = $selectWrapper.find( settings.selector + '.js-uix-new' );
 
 				$selectCurWrapper.addClass( 'is-opened' );
@@ -113,7 +115,7 @@
 			$( document ).off( 'click.FORM_CUSTOM_SELECT_ITEM' ).on( 'click.FORM_CUSTOM_SELECT_ITEM', settings.item, function( e ) {
 				e.preventDefault();
 
-				var $selectWrapper    = $( this ).closest( settings.targetWrapper ),
+				const $selectWrapper    = $( this ).closest( settings.targetWrapper ),
 					$selectCurWrapper = $selectWrapper.find( settings.selector + '.js-uix-new' ),
 					curVal            = $( this ).data( 'value' );
 
@@ -139,14 +141,15 @@
 			//Synchronize to the original select change event
 			$( settings.selector ).not( '.js-uix-new' ).each( function() {
 
-				var $this       = $( this ).find( 'select' ),
-					$cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.js-uix-new' ),
-					newOptions  = '';
+				const $this       = $( this ).find( 'select' ),
+					  $cusSelect  = $this.closest( settings.targetWrapper ).find( settings.selector + '.js-uix-new' );
+                
+				let	newOptions  = '';
 
 
 				$this.closest( settings.targetWrapper ).find( 'select option' ).each( function( index ) {
 
-					var selected = '';
+					let selected = '';
 
 					if ( $( this ).is( ':selected' ) ) {
 						selected = 'is-active';

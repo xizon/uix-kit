@@ -26,10 +26,9 @@ export const VIDEOS = ( ( module, $, window, document ) => {
     module.VIDEOS.version       = '0.1.3';
 	module.VIDEOS.documentReady = function( $ ) {
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
-		
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 		
 		
 		
@@ -39,11 +38,13 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */  
 		$( '.uix-video' ).each( function()  {
-			var $this          = $( this ),
-			    curVideoID     = $this.find( 'video' ).attr( 'id' ),
-				coverPlayBtnID = 'videocover-' + curVideoID,
-				videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
-				dataAuto       = $this.data( 'embed-video-autoplay' ),
+			const $this          = $( this );
+            
+			const curVideoID     = $this.find( 'video' ).attr( 'id' ),
+				  coverPlayBtnID = 'videocover-' + curVideoID,
+				  videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width();
+                  
+			let	dataAuto       = $this.data( 'embed-video-autoplay' ),
 				dataLoop       = $this.data( 'embed-video-loop' ),
 				dataControls   = $this.data( 'embed-video-controls' ),
 				dataW          = $this.data( 'embed-video-width' ),
@@ -81,7 +82,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 				
 				
 	
-				var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+				const btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
 				$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 					e.preventDefault();
 					
@@ -110,7 +111,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			}
 			
 			
-			var myPlayer = videojs( curVideoID, 
+			const myPlayer = videojs( curVideoID, 
 			   {
 				  width     : dataW,
 				  height    : dataH,
@@ -120,9 +121,9 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			   function onPlayerReady() {
 				
 			
-				    var initVideo = function( obj ) {
+				    const initVideo = function( obj ) {
 						//Get Video Dimensions
-						var curW    = obj.videoWidth(),
+						let curW    = obj.videoWidth(),
 							curH    = obj.videoHeight(),
 							newW    = curW,
 							newH    = curH;
@@ -172,11 +173,11 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 
 
 					/* ---------  Determine if the video is auto played from mobile devices  */
-					var autoPlayOK = false;
+					let autoPlayOK = false;
 
 					this.on( 'timeupdate', function() {
 
-						var duration = this.duration();
+						let duration = this.duration();
 						if ( duration > 0 ) {
 							autoPlayOK = true;
 							if ( this.currentTime() > 0 ) {
@@ -207,15 +208,15 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 		 Video Popup Interaction
 		 ---------------------------
 		 */  
-		var modalDialogTrigger = '[data-video-win]';
+		const modalDialogTrigger = '[data-video-win]';
 		
 		//Add video container
 		$( modalDialogTrigger ).each( function()  {
 			
 
-			
-			var $this             = $( this ),
-				videoSrcIfm       = '',
+			const $this             = $( this );
+            
+			let	videoSrcIfm       = '',
 				videoSrcMp4       = $this.data( 'video-mp4' ),
 				videoSrcWebm      = $this.data( 'video-webm' ),
 				videoSrcOgv       = $this.data( 'video-ogv' ),
@@ -245,7 +246,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			//Add modal dialog
 			if ( $( '#' + videoContainerMid ).length == 0 ) {
 				
-				var v      = '',
+				let v      = '',
 					vmp4   = '',
 					vwebm  = '',
 					vogv   = '';
@@ -295,18 +296,17 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 		//Check out: http://docs.videojs.com/tutorial-player-workflows.html
 		$( document ).off( 'click.VIDEOS' ).on( 'click.VIDEOS', modalDialogTrigger, function() {
 
-			var vid          = $( this ).data( 'modal-id' ) + '--videopush',
-				$ifm         = false,
-				newMaxW      = windowWidth - 80,
-				newMaxH      = windowHeight - 80,
-				$vContainer  = $( '#' + vid ).closest( '.uix-modal-box__video-container' ),
-				$vLoader     = $vContainer.prev( '.uix-modal-box__video-waiting' ),
-				myPlayerInit = $vContainer.data( 'video-player-init' );
+			const vid          = $( this ).data( 'modal-id' ) + '--videopush',
+				  newMaxW      = windowWidth - 80,
+				  newMaxH      = windowHeight - 80,
+				  $vContainer  = $( '#' + vid ).closest( '.uix-modal-box__video-container' ),
+				  $vLoader     = $vContainer.prev( '.uix-modal-box__video-waiting' ),
+				  myPlayerInit = $vContainer.data( 'video-player-init' );
 
-			
+			let $ifm = false;
 
 			//----- Hidden/Display the wrapper of video
-			var displayVC = function() {
+			const displayVC = function() {
 				
 				TweenMax.set( $vContainer, {
 					alpha: 1
@@ -314,7 +314,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 				$vLoader.removeClass( 'is-active' );
 			};
 			
-			var hiddenVC = function() {
+			const hiddenVC = function() {
 				
 				TweenMax.set( $vContainer, {
 					alpha: 0
@@ -339,7 +339,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 
 				if ( $ifm.length > 0 ) {
 
-					var curW    = $ifm.width(),
+					let curW    = $ifm.width(),
 						curH    = $ifm.height(),
 						newW    = curW,
 						newH    = curH;
@@ -396,7 +396,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 
 
 			//----- Embed local video
-			var myPlayer = videojs( vid, 
+			const myPlayer = videojs( vid, 
 			   {
 				  width     : 1,
 				  height    : 1,
@@ -406,9 +406,9 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 			   function onPlayerReady() {
 				
 			
-				    var initVideo = function( obj ) {
+				    const initVideo = function( obj ) {
 						//Get Video Dimensions
-						var curW    = obj.videoWidth(),
+						let curW    = obj.videoWidth(),
 							curH    = obj.videoHeight(),
 							newW    = curW,
 							newH    = curH;
@@ -443,7 +443,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 
 
 						//Vertically center the video area
-						var mt = parseFloat( windowHeight - newH )/2 - 50;
+						let mt = parseFloat( windowHeight - newH )/2 - 50;
 						$vContainer.css({
 							'transform' : 'translateY('+ mt +'px)'
 						});			
@@ -478,7 +478,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 					/* ---------  Display video playback progress  */
 					this.on( 'timeupdate', function() {
 
-						var duration = this.duration(),
+						let duration = this.duration(),
 						progressAmount = '0%';
 						if (duration > 0) {
 							progressAmount = ((this.currentTime() / duration) * 100) + "%";

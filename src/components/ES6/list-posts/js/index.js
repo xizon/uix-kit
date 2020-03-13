@@ -42,9 +42,11 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
     module.POST_LIST_AJAX.documentReady = function( $ ) {
 
 		$( '[data-ajax-list-json]' ).each( function() {
-			var $this            = $( this ),
-				wrapperID        = 'refresh-all-waypoint-' + UixGUID.create(),
-			    curPage          = $this.data( 'ajax-list-page-now' ),
+			const $this            = $( this );
+            
+			const wrapperID        = 'refresh-all-waypoint-' + UixGUID.create();
+            
+			let    curPage          = $this.data( 'ajax-list-page-now' ),
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),
 				method           = $this.data( 'ajax-list-method' ),
@@ -140,7 +142,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 			
 			
 			//Get all attributes of an element and push the new attributes like "data-*"
-			var curAttrs        = $this.attr(),
+			let curAttrs        = $this.attr(),
 				defaultPostData = '',
 				customPostData  = '';
 			
@@ -183,8 +185,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					 Infinite scroll
 					 ---------------------------
 					 */ 	
-					var $button = $( trigger ),
-						btnTop  = $button.offset().top;
+					const $button = $( trigger ),
+						  btnTop  = $button.offset().top;
 					
 					//Add default page number to the button
 					$button.attr( 'data-cur-page', 1 );
@@ -199,14 +201,14 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						
 					$( window ).on( 'scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function() {
 						
-						var scrolled = $( window ).scrollTop();
+						const scrolled = $( window ).scrollTop();
 						
 						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/1.5 - $button.outerHeight( true ) ) && !$button.hasClass( triggerActive ) ) {
 
 								// Active this button
 								$button.addClass( triggerActive );					    
 							
-								var curPage = $button.attr( 'data-cur-page' );
+								let curPage = $button.attr( 'data-cur-page' );
 							
 								//Add next page number to the button
 								curPage = parseFloat( curPage ) + 1;
@@ -238,7 +240,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					 ---------------------------
 					 */
 					
-					var triggerStr = '';
+					let triggerStr = '';
 					
 					if ( trigger.indexOf( '[' ) >= 0 &&  trigger.indexOf( ']' ) >= 0 ) {
 						triggerStr = JSON.parse( trigger.replace(/([a-zA-Z0-9]+?):/g, '"$1":').replace(/'/g,'"') );
@@ -250,8 +252,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					//Whether there are two flip buttons "Previous" and "Next"
 					if ( Object.prototype.toString.call( triggerStr ) =='[object Array]' ) {
 
-						var prevTrigger = triggerStr[0].prev,
-							nextTrigger = triggerStr[1].next;
+						const prevTrigger = triggerStr[0].prev,
+							  nextTrigger = triggerStr[1].next;
 						
 						//Add default page number to the button
 						$( nextTrigger ).parent().attr( 'data-cur-page', 1 );
@@ -269,8 +271,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 
 							e.preventDefault();
 
-							var $button = $( this ),
-								curPage = $button.parent().attr( 'data-cur-page' );
+							const $button = $( this );
+                            let curPage = $button.parent().attr( 'data-cur-page' );
 							
 							//Add next page number to the button
 							curPage = parseFloat( curPage ) + 1;
@@ -312,8 +314,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 
 							e.preventDefault();
 
-							var $button = $( this ),
-								curPage = $button.parent().attr( 'data-cur-page' );
+							const $button = $( this );
+                            let curPage = $button.parent().attr( 'data-cur-page' );
 				
 							//Add next page number to the button
 							curPage = parseFloat( curPage ) - 1;
@@ -366,8 +368,9 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 							e.preventDefault();
 
 							
-							var $button = $( this ),
-								curPage = $button.attr( 'data-cur-page' );
+							const $button = $( this );
+                            
+                            let curPage = $button.attr( 'data-cur-page' );
 
 							//Add next page number to the button
 							curPage = parseFloat( curPage ) + 1;
@@ -426,21 +429,21 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 		
 		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo ) {
 
-			var $divRoot         = ajaxWrapper,
-				template         = document.getElementById( template7ID ).innerHTML,
-				compiledTemplate = Template7.compile( template ),
-				$button          = $( trigger );
+			const $divRoot         = ajaxWrapper,
+				  template         = document.getElementById( template7ID ).innerHTML,
+				  compiledTemplate = Template7.compile( template ),
+				  $button          = $( trigger );
 
 			
 			
 			
 			//hide the button and callback the information
-			var returnEmptyInfo = function() {
+			const returnEmptyInfo = function() {
 				$button.addClass( 'is-hide' );
 				$divRoot.after( noneInfo.none );		
 			};
 			
-			var returnDataError = function() {
+			const returnDataError = function() {
 				$button.addClass( 'is-hide' );
 				$divRoot.after( noneInfo.error );	
 			};
@@ -467,10 +470,11 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
                     //Data overflow may occur when the total number of pages is not posted
                     try {
 
-                        var thisData      = data,
-                            html          = compiledTemplate( thisData ),
-                            curHtml       = $divRoot.find( pushContainer ).html(),
-                            result        = null,
+                        const thisData      = data,
+                              html          = compiledTemplate( thisData ),
+                              curHtml       = $divRoot.find( pushContainer ).html();
+                        
+                        let result        = null,
                             htmlEl        = null;
 
 

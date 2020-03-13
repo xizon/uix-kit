@@ -19,7 +19,7 @@
     $.fn.UixFormProgressToNext = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			selector         : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 			formTarget       : $( '.uix-form-progress__target' ),
 			indicator        : '.uix-form-progress .uix-form-progress__indicator',
@@ -28,15 +28,16 @@
  
         this.each( function() {
 			
-			var $this            = $( this ),
-				transitionEnd    = 'webkitTransitionEnd transitionend',
-				$sections        = settings.selector,
-				$formTarget      = settings.formTarget,	
-				$indicator       = $( settings.indicator ),
-				allStep          = $indicator.length,
-				stepPerValue     = 100/( allStep - 1 ),
-				value            = 0,
-				tarIndex, curIndex;
+			const $this          = $( this );
+			const  transitionEnd    = 'webkitTransitionEnd transitionend',
+				   $sections        = settings.selector,
+				   $formTarget      = settings.formTarget,	
+				   $indicator       = $( settings.indicator ),
+				   allStep          = $indicator.length,
+				   stepPerValue     = 100/( allStep - 1 );
+            
+            
+			let value = 0, tarIndex, curIndex;
 			
 			
 			if ( $indicator.length == 0 ) return false;
@@ -67,28 +68,29 @@
 			value = stepPerValue * curIndex;
 
 			//Get form transition speed
-			var dur = $formTarget.data( 'anime-speed' );
+			let dur = $formTarget.data( 'anime-speed' );
 			if ( typeof dur === typeof undefined ) { 
 				dur = '0.5s';
 			}
 
-			var durString  = dur.toLowerCase(),
-				isMS       = durString.indexOf( 'ms' ) >= 0,
-				numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-				animeSpeed = isMS ? numberNum : numberNum * 1000;
+			const durString  = dur.toLowerCase(),
+				  isMS       = durString.indexOf( 'ms' ) >= 0,
+				  numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+				  animeSpeed = isMS ? numberNum : numberNum * 1000;
 
 
 
-			var currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
-				$nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
-				currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
+			const currentFormStep  = parseInt($sections.eq( tarIndex ).attr( 'data-step' ) ) || false,
+				  $nextForm        = $formTarget.find( '.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]');
+            
+            let currentFormIndex = $nextForm.attr( 'data-step' ) - 1;
 
 
 			if ( isNaN( currentFormIndex ) ) currentFormIndex = 0;
 
 			// Activate other unused modules
 			if ( currentFormIndex > 0 ) {
-				for ( var i = 0; i < curIndex; i++ ) {
+				for ( let i = 0; i < curIndex; i++ ) {
 					$sections.eq( i ).addClass( 'leaving' );
 					$indicator.eq( i ).addClass( 'is-active' );
 				}
@@ -153,10 +155,10 @@
 
 
 			//Set wrapper height
-			var currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
+			const currentContentH  = $formTarget.find( '.uix-form-progress__target__step:eq('+currentFormIndex+') > .uix-form-progress__content' ).height() + 100;
 			$formTarget.css( 'height', currentContentH + 'px' );
 
-			var curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
+			const curText = $( '.uix-form-progress .uix-form-progress__indicator:eq('+currentFormIndex+') > span' ).html();
 			$( '#app-form-progress-text' ).text( curText );
 
 			//The current indicator class

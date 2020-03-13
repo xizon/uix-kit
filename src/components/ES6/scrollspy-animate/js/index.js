@@ -37,65 +37,65 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		PIXI.utils.skipHello();
 		
 		
-		var $el         = $( '#scrollspy-animate-demo' ),
-			panelHeight = 0;	
+		const $el         = $( '#scrollspy-animate-demo' ),
+		  	  panelHeight = 0;	
 		
 
 		//Prevent this module from loading in other pages
 		if ( $el.length == 0 ) return false;
 		
         
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
-
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
         
-		
+            
+        let curSprite;
+        let filterSprite;
+        
+        
 		//-------- Text Affect
 		if ( Modernizr.webgl ) {
 			
-			var $txtContainer    = $el.find( '.row canvas' ),
-				count            = 0,
-				curSprite,
-				text             = $txtContainer.data( 'txt' ).split( '' ),
-				tHeight          = 45,
-				tWidth           = 25,
-				renderer         = new PIXI.Application({
-                    width        : tWidth*(text.length+2),
-                    height       : tHeight*2,
-					antialias    : true,
-					transparent  : true,
-					resolution   : 1,
-					autoResize   : 1,
-                    view         : document.getElementById( 'scrollspy-animate-demo--txt' )
-				});
-			
-            
-			
+			const   $txtContainer    = $el.find( '.row canvas' ),
+                    text             = $txtContainer.data( 'txt' ).split( '' ),
+                    tHeight          = 45,
+                    tWidth           = 25,
+                    renderer         = new PIXI.Application({
+                        width        : tWidth*(text.length+2),
+                        height       : tHeight*2,
+                        antialias    : true,
+                        transparent  : true,
+                        resolution   : 1,
+                        autoResize   : 1,
+                        view         : document.getElementById( 'scrollspy-animate-demo--txt' )
+                    });
 
-			var stage        = new PIXI.Container(),
-				filterSprite = PIXI.Sprite.from( $txtContainer.data( 'filter-texture' ) );
-			
+
+
+			const stage        = new PIXI.Container();
+				  
+            filterSprite = PIXI.Sprite.from( $txtContainer.data( 'filter-texture' ) );
 			filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-			var filter = new PIXI.filters.DisplacementFilter( filterSprite );
+			const filter = new PIXI.filters.DisplacementFilter( filterSprite );
 
 
-			var txtStyle = new PIXI.TextStyle({
-				fontSize        : tHeight,
-				letterSpacing   : 0,
-				breakWords      : true,
-				dropShadow      : true,
-				dropShadowAngle : Math.PI / 6,
-				dropShadowAlpha : 0.5,
-				dropShadowColor : '#333',
-				dropShadowBlur  : 1,
-				fill            : 'white',
-				fontFamily      : 'Arial Black',
-				fontStyle       : 'normal',
-				fontWeight      : 'bold',
-				wordWrap        : false,
-				align           : 'left'
-			});	
+			const txtStyle = new PIXI.TextStyle({
+                                fontSize        : tHeight,
+                                letterSpacing   : 0,
+                                breakWords      : true,
+                                dropShadow      : true,
+                                dropShadowAngle : Math.PI / 6,
+                                dropShadowAlpha : 0.5,
+                                dropShadowColor : '#333',
+                                dropShadowBlur  : 1,
+                                fill            : 'white',
+                                fontFamily      : 'Arial Black',
+                                fontStyle       : 'normal',
+                                fontWeight      : 'bold',
+                                wordWrap        : false,
+                                align           : 'left'
+                            });	
 
 			curSprite = new PIXI.Text( $txtContainer.data( 'txt' ), txtStyle );
 			curSprite.x = 0;
@@ -119,7 +119,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 			renderer.stage.filters = [filter];
 
 			
-			var ticker       = new PIXI.Ticker();
+			const ticker       = new PIXI.Ticker();
 			ticker.autoStart = true;
 			ticker.add( function( delta ) {
 
@@ -137,18 +137,18 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
         $window.on( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function( event ) {
 		
             
-            var elHeight      = $el.height(),
-                elOffsetTop   = $el.offset().top - panelHeight; 
+            const elHeight      = $el.height(),
+                  elOffsetTop   = $el.offset().top - panelHeight; 
             
 
-            var scrollTop           = $( this ).scrollTop(),
-				translateTitle      = scrollTop / 2,
-				translateBackground = scrollTop / 3,
-				scale               = scrollTop / elHeight,
-				backgroundScale     = 1, // + scale / 10
-				titleScale          = 1 - scale * 0.1,
-				titleOpacity        = 1 - scale,
-				scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
+            const scrollTop           = $( this ).scrollTop(),
+				  translateTitle      = scrollTop / 2,
+				  translateBackground = scrollTop / 3,
+				  scale               = scrollTop / elHeight,
+				  backgroundScale     = 1, // + scale / 10
+				  titleScale          = 1 - scale * 0.1,
+				  titleOpacity        = 1 - scale,
+				  scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
 
 			
 			

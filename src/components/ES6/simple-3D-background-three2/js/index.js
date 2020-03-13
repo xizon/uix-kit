@@ -41,18 +41,19 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 		
 		
 
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-background-three-canvas2';
-			
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+
+            const rendererCanvasID          = '3D-background-three-canvas2';
+
 			
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				scene,
 				renderer,
 				material,
@@ -60,10 +61,10 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 				clock = new THREE.Clock();
 
 
-			var mouseVector  = new THREE.Vector2();
+			const mouseVector  = new THREE.Vector2();
 
-			var mouseX = 0;
-			var mouseY = 0;
+			let mouseX = 0;
+			let mouseY = 0;
 
 
 
@@ -105,7 +106,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 				material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 
 
-				var geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+				const geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
 				displacementSprite = new THREE.Mesh( geometry, material );
 				scene.add( displacementSprite );
 
@@ -120,7 +121,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 			function render() {
 				requestAnimationFrame( render );
 
-				var delta = clock.getDelta();
+				const delta = clock.getDelta();
 
 				//To set a background color.
 				renderer.setClearColor( 0x000000 );	
@@ -139,7 +140,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -149,7 +150,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
                 
@@ -168,7 +169,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 
 			function onDocumentMouseMove( event ) {
 
-				var rect = renderer.domElement.getBoundingClientRect();
+				const rect = renderer.domElement.getBoundingClientRect();
 				displacementSprite.position.z = ( event.clientX - rect.left ) / rect.width * 4 - 1;
 
 			}
@@ -176,7 +177,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 
 
 			function avgArr(arr) {
-				var total = arr.reduce(function(sum, b) {
+				const total = arr.reduce(function(sum, b) {
 					return sum + b
 				});
 				return (total / arr.length);

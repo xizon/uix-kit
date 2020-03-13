@@ -28,9 +28,9 @@ export const PRICING = ( ( module, $, window, document ) => {
     module.PRICING.documentReady = function( $ ) {
 
 		
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 
 		
 		//-------- Pricing initialize
@@ -58,24 +58,26 @@ export const PRICING = ( ( module, $, window, document ) => {
 
 
 					//returns new id
-					var $this            = $( this ),
-						priceBGH         = Array(),
-						priceBGH_excerpt = Array(),
-						$initHeight      = $this.find( '.js-uix-init-height' );
+					const $this            = $( this );
+                
+                    const $initHeight      = $this.find( '.js-uix-init-height' );
+                
+					let	priceBGH         = [],
+						priceBGH_excerpt = [];
 
 					$initHeight.each( function( index ) {
 						//Screen protection of height
 						$( this ).find( '.uix-price__outline, .uix-price__excerpt' ).css( 'height', 'auto' );
 
-						var tempheight = $( this ).height();
-						var tempheight_excerpt = $( this ).find( '.uix-price__excerpt' ).height();
+						const tempheight = $( this ).height();
+						const tempheight_excerpt = $( this ).find( '.uix-price__excerpt' ).height();
 						priceBGH.push( tempheight );
 						priceBGH_excerpt.push( tempheight_excerpt );
 
 
 					} );
 
-					var priceBGH_Max = Math.max.apply( Math, priceBGH );
+					const priceBGH_Max = Math.max.apply( Math, priceBGH );
 
 
 					if ( priceBGH_Max > 0 ) {
@@ -87,7 +89,7 @@ export const PRICING = ( ( module, $, window, document ) => {
 							// Actived columns
 							$initHeight.find( '.uix-price__outline.is-active' ).each( function() {
 
-								var ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
+								const ty = Math.abs( parseInt( $( this ).css('transform').split(',')[5]));
 								if ( !isNaN(ty) ) {
 									$( this ).css( 'height', priceBGH_Max + ty*2 + 'px' );
 								}
@@ -106,8 +108,8 @@ export const PRICING = ( ( module, $, window, document ) => {
 						// Actived columns
 						$initHeight.find( '.uix-price__outline.is-active' ).each( function() {
 
-							var textColor = $( this ).closest( '.uix-price__outline--hover' ).data( 'tcolor' ),
-								btnColor  = $( this ).closest( '.uix-price__outline--hover' ).data( 'bcolor' );
+							const textColor = $( this ).closest( '.uix-price__outline--hover' ).data( 'tcolor' ),
+								  btnColor  = $( this ).closest( '.uix-price__outline--hover' ).data( 'bcolor' );
 
 							$( this ).css( 'background-color', btnColor );
 							$( this ).find( '.uix-btn' ).removeClass( 'uix-btn__bg--primary' ).addClass( 'uix-btn__bg--secondary' );

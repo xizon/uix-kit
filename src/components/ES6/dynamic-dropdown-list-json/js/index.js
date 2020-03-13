@@ -30,11 +30,14 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 			
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
-			var $this            = $( this ),
-			    jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
-				ranID            = 'dynamic-dd-control-' + UixGUID.create(),
-				ID               = $this.attr( 'id' ),
-				method           = $this.data( 'ajax-dynamic-dd-method' ),
+			const $this            = $( this );
+            
+            const ranID            = 'dynamic-dd-control-' + UixGUID.create(),
+				  ID               = $this.attr( 'id' );
+            
+            
+			let	jsonFile         = $this.data( 'ajax-dynamic-dd-json' ),
+                method           = $this.data( 'ajax-dynamic-dd-method' ),
 				autoExpand       = $this.data( 'ajax-dynamic-dd-auto-expand' ),
 				associated       = $this.data( 'ajax-dynamic-dd-associated' ),
 				associated2      = $this.data( 'ajax-dynamic-dd-associated2' ),
@@ -67,7 +70,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 			if ( jsonFile != '' ) {
 			
 				//Initialize dependent/chained dropdown list
-				var dataExist = $this.data( 'exist' );
+				let dataExist = $this.data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
 					$.ajax({
@@ -77,7 +80,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 						dataType : 'json'
                     })
                     .done( function (data) { 
-                        var _level1 = [],
+                        let _level1 = [],
                             _level2 = [],
                             _level3 = [],
                             _level1IDs     = [],
@@ -85,12 +88,12 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                             _level3IDs     = [];
 
 
-                        for ( var m = 0; m < data.length; m++ ) {
+                        for ( let m = 0; m < data.length; m++ ) {
 
                             _level1.push( data[m].name );
                             _level1IDs.push( data[m].id );
 
-                            var level2_List;
+                            let level2_List;
 
                             if ( typeof data[0].list === typeof undefined ) {
                                 //============ China cities dropdown list demo
@@ -102,20 +105,20 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                                 level2_List = data[m].list;
                             }
 
-                            var _curLevel2Items   = [],
+                            let _curLevel2Items   = [],
                                 _curLevel3Items   = [],
                                 _curLevel2IDs     = [],
                                 _curLevel3IDs     = [];
 
 
-                            for ( var i = 0; i < level2_List.length; i++ ) {
+                            for ( let i = 0; i < level2_List.length; i++ ) {
 
 
 
                                 if ( typeof data[0].list === typeof undefined ) {
                                     //============ China cities dropdown list demo
                                     //================================================
-                                    var city      = level2_List[i].name,
+                                    let city      = level2_List[i].name,
                                         area      = level2_List[i].area,
                                         areaIDs   = level2_List[i].areaid,
                                         ids       = level2_List[i].id;
@@ -125,18 +128,18 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                                     _curLevel2Items.push( city );
                                     _curLevel2IDs.push( ids );
 
-                                    var _tempLevel3Items = [],
+                                    let _tempLevel3Items = [],
                                         _tempLevel3IDs   = [];
 
                                     if ( typeof area != typeof undefined ) {
-                                        for ( var k = 0; k < area.length; k++ ) {
+                                        for ( let k = 0; k < area.length; k++ ) {
                                             _tempLevel3Items.push( area[k] );
 
                                         }		
                                     }
 
                                     if ( typeof areaIDs != typeof undefined ) {
-                                        for ( var p = 0; p < areaIDs.length; p++ ) {
+                                        for ( let p = 0; p < areaIDs.length; p++ ) {
                                             _tempLevel3IDs.push( areaIDs[p] );
 
                                         }		
@@ -149,8 +152,8 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                                 } else {
                                     //============ Sort object then subsort further demo
                                     //================================================
-                                    var sort1    = level2_List[i].name,
-                                        sortID   = level2_List[i].id;
+                                    const sort1    = level2_List[i].name,
+                                          sortID   = level2_List[i].id;
 
                                     _curLevel2Items.push( sort1 );
                                     _curLevel2IDs.push( sortID );
@@ -172,7 +175,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 
                         function initSelectControls() {
-                            var allLevel1Items           = _level1,
+                            const allLevel1Items           = _level1,
                                 allLevel2Items           = _level2,
                                 allLevel3Items           = _level3,
                                 allLevel1IDs             = _level1IDs,
@@ -221,8 +224,8 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                                 if ( autoExpand ) $level2Wrapper.show();
                             }
                             $level1El.append( level1EmptyOption );
-                            for (var i = 0; i < allLevel1Items.length; i++) {
-                                var _v = allLevel1Items[i],
+                            for (let i = 0; i < allLevel1Items.length; i++) {
+                                const _v = allLevel1Items[i],
                                     _id = allLevel1IDs[i];
 
                                 if ( defaultLevel1Val == _v ) {
@@ -235,7 +238,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 
                             //---------- Initialize the level 2
-                            var curLevel1Index = $level1El.find( 'option:selected' ).data( 'index' );
+                            const curLevel1Index = $level1El.find( 'option:selected' ).data( 'index' );
 
                             if ( defaultLevel2Val != '' && defaultLevel2Val != null ) {
                                 //Hide or display controls
@@ -244,8 +247,8 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                             $level2El.append( level2EmptyOption );
 
                             if ( typeof curLevel1Index != typeof undefined ) {
-                                for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
-                                    var _v = allLevel2Items[curLevel1Index - 1][i],
+                                for (let i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
+                                    const _v = allLevel2Items[curLevel1Index - 1][i],
                                         _id = allLevel2IDs[curLevel1Index - 1][i];
 
 
@@ -259,7 +262,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 
                             //---------- Initialization level 3
-                            var curLevel2Index = $level2El.find( 'option:selected' ).data( 'index' );
+                            const curLevel2Index = $level2El.find( 'option:selected' ).data( 'index' );
                             $level3El.append( level3EmptyOption );
 
                             if ( typeof curLevel2Index != typeof undefined ) {
@@ -267,8 +270,8 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                                 //If the data exists, you need to determine if the array is empty.
                                 if ( allLevel3Items[curLevel1Index - 1].length > 0 ) {
 
-                                    for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-                                        var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
+                                    for (let i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
+                                        const _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
                                             _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
 
 
@@ -312,13 +315,13 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 
                                 //Set the current subscript of the selected option and assign
-                                var level1Index = $(this).find( 'option:selected' ).data( 'index' );
-                                var level2Items = allLevel2Items[level1Index - 1];
-                                var level2IDs = allLevel2IDs[level1Index - 1];
+                                const level1Index = $(this).find( 'option:selected' ).data( 'index' );
+                                const level2Items = allLevel2Items[level1Index - 1];
+                                const level2IDs = allLevel2IDs[level1Index - 1];
 
                                 if ( typeof level2Items != typeof undefined ) {
-                                    for (var i = 0; i < level2Items.length; i++) {
-                                        var _v = level2Items[i],
+                                    for (let i = 0; i < level2Items.length; i++) {
+                                        const _v = level2Items[i],
                                             _id = level2IDs[i];
 
                                         $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
@@ -352,18 +355,18 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 
                                 //Get the subscript corresponding to the level 1 and level 2 at this time
-                                var level1Index = $level1El.find( 'option:selected' ).data( 'index' );
-                                var level2Index = $(this).find( 'option:selected' ).data( 'index' );
+                                const level1Index = $level1El.find( 'option:selected' ).data( 'index' );
+                                const level2Index = $(this).find( 'option:selected' ).data( 'index' );
 
 
 
                                 if ( typeof level1Index != typeof undefined && typeof level2Index != typeof undefined ) {
-                                    var level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
-                                    var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
+                                    const level3Items = allLevel3Items[level1Index - 1][level2Index - 1];
+                                    const level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
 
                                     if ( typeof level3Items != typeof undefined ) {
-                                        for (var i = 0; i < level3Items.length; i++) {
-                                            var _v = level3Items[i],
+                                        for (let i = 0; i < level3Items.length; i++) {
+                                            const _v = level3Items[i],
                                                 _id = level3IDs[i];
 
                                             $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");

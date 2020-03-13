@@ -12,7 +12,7 @@
     $.fn.UixRenderCustomRadioCheckbox = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			radioWrapper    : '.uix-controls__radio',
 			toggle          : '.uix-controls__toggle',
 			checkboxWrapper : '.uix-controls__checkbox'
@@ -20,14 +20,15 @@
  
         this.each( function() {
 			
-			var $this              = $( this ),
-				customRadio        = settings.radioWrapper,
-				customToggle       = settings.toggle,
-				customCheckbox     = settings.checkboxWrapper;
+			const $this              = $( this );
+            
+			const customRadio        = settings.radioWrapper,
+				  customToggle       = settings.toggle,
+				  customCheckbox     = settings.checkboxWrapper;
 
 
 			$( customRadio ).find( 'input[type="radio"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' );
+				const dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__radio-trigger"></span>' ).insertAfter( $( this ) );
 
@@ -39,7 +40,7 @@
 
 
 			$( customToggle ).find( 'input[type="checkbox"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' ),
+				let dataExist = $( this ).data( 'exist' ),
 					$obj      = $( this ).closest( '.uix-controls' ),
 					offText   = $obj.data( 'off-text' ),
 					onText    = $obj.data( 'on-text' );
@@ -47,7 +48,7 @@
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__toggle-trigger" data-off-text="'+offText+'" data-on-text="'+onText+'"></span>' ).insertAfter( $( this ) );
 					//hide or display a associated div
-					var targetID = '#' + $obj.attr( 'data-targetid' );
+					const targetID = '#' + $obj.attr( 'data-targetid' );
 					if ( $( this ).is( ':checked' ) ) {
 						$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 						$( targetID ).show();
@@ -65,14 +66,14 @@
 			});
 
 			$( customCheckbox ).find( 'input[type="checkbox"]' ).each( function() {
-				var dataExist = $( this ).data( 'exist' ),
+				const dataExist = $( this ).data( 'exist' ),
 					$obj      = $( this ).closest( '.uix-controls' );
 				
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<span class="uix-controls__checkbox-trigger"></span>' ).insertAfter( $( this ) );
 
 					//hide or display a associated div
-					var targetID = '#' + $obj.attr( 'data-targetid' );
+					const targetID = '#' + $obj.attr( 'data-targetid' );
 					if ( $( this ).is( ':checked' ) ) {
 						$obj.addClass( 'is-active' ).attr( 'aria-checked', true );
 						$( targetID ).show();

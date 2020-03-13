@@ -39,13 +39,13 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 
 		
 		//Delay Time when Full Screen Effect is fired.
-		var modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+		const modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
         
         
         // To display the template tag content.
         $( 'template' ).each( function()  {
             
-            var _content = $( this ).html( function( index,html ) {
+            const _content = $( this ).html( function( index,html ) {
                                         return html.replace(/[\r\n]/g, '' );
                                     }).context.innerHTML,
                 _id = $( this ).attr( 'id' );
@@ -92,7 +92,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	    
 		$( document ).off( 'click.MODAL_DIALOG' ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
 
-			var dataH         = $( this ).data( 'modal-height' ),
+			let dataH         = $( this ).data( 'modal-height' ),
 				dataW         = $( this ).data( 'modal-width' ),
 				lightbox      = $( this ).data( 'modal-lightbox' ),
 				closeTime     = $( this ).data( 'modal-close-time' ),

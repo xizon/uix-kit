@@ -33,21 +33,22 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
     module.ONEPAGE2.version       = '0.0.5';
     module.ONEPAGE2.documentReady = function( $ ) {
 
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-normal-load__onepage-container2' ),
-			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
-			sectionTotal       = $sections.length,
-			$primaryMenu       = $( '.uix-menu' ),
-			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
+		const quietPeriod        = 500, //Do not change it
+			  animationTime      = 1000,//According to page transition animation changes
+			  $sectionsContainer = $( '.uix-normal-load__onepage-container2' ),
+			  $sections          = $sectionsContainer.find( '[data-highlight-section]' ),
+			  sectionTotal       = $sections.length,
+			  $primaryMenu       = $( '.uix-menu' ),
+			  $sidefixedMenu     = $( '.uix-menu-sidefixed' );
+        
+        let lastAnimation = 0;
 		
 		
 		//Prevent this module from loading in other pages
@@ -59,8 +60,8 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 			'position' : 'relative'
 		});
 		
-		var secIndex = 10;
-		for ( var i = 0; i < sectionTotal; i++ ) {
+		let secIndex = 10;
+		for ( let i = 0; i < sectionTotal; i++ ) {
 			
 			$sections.eq( i ).css({
 				'position' : 'absolute',
@@ -94,7 +95,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 
 		//Detect URL change
 		$( window ).on( 'hashchange', function(){
-			var hash = window.location.hash,
+			let hash = window.location.hash,
 				locArr,
 				loc;
 
@@ -120,7 +121,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		function sectionStart() {
 	
 			setTimeout( function() {
-				var hash = window.location.hash,
+				let hash = window.location.hash,
 					locArr,
 					loc, 
 					curTab;
@@ -150,9 +151,9 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		 */
 		function sectionsDepthInit( nextIndex, currentIndex ) {
 	
-			var secIndex = 10;
+			let secIndex = 10;
 			
-			for ( var i = 0; i < sectionTotal; i++ ) {
+			for ( let i = 0; i < sectionTotal; i++ ) {
 
 				if ( nextIndex && i != nextIndex && i != currentIndex ) {
 					$sections.eq( i ).css( 'z-index', secIndex );
@@ -177,7 +178,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		 */
 		function scrollMoveInit( event, dir ) {
 	
-			var timeNow = new Date().getTime();
+			const timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
 			if( timeNow - lastAnimation < quietPeriod + animationTime) {
 				return;
@@ -207,12 +208,13 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+			const index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
+				  isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
 			
-			
+			let	nextIndex = null,
+				$next     = null;
+            
+            
 			if ( dir == 'down' || dir === false ) {
 				nextIndex = index + 1;
 			} else {
@@ -272,8 +274,8 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 
 
 									//Changing The Site URL
-									var curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
-										href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
+									const curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
+										  href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
 
 									
 									// Save state on history stack
@@ -363,7 +365,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 				if ( $( this ).parent().hasClass( 'is-active' ) ) return false;
 				
 			
-				var dir = 'down';
+				let dir = 'down';
 				
 				if ( $sections.filter( '.is-active' ).index() > $( this ).parent().index() ) {
 					dir = 'up';
@@ -382,9 +384,9 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		 *  Mouse Wheel & Touch Method
 		 ====================================================
 		 */
-		var startY = 0;
-		var onTouchStart = function ( e ) {
-			var touches = e.touches;
+		let startY = 0;
+		const onTouchStart = function ( e ) {
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				startY = touches[0].pageY;
 				
@@ -392,12 +394,12 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		};
 
 		
-		var onDeviceWheel = function ( e ) {
+		const onDeviceWheel = function ( e ) {
 			
 			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var dir, delta, mobileDeltaY = null;
+			let dir, delta, mobileDeltaY = null;
 			
-			var touches = e.touches;
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				mobileDeltaY = startY - touches[0].pageY;
 			} else {

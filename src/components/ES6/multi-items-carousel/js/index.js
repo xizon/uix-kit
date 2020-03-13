@@ -36,7 +36,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 		$( '.uix-multi-carousel' ).each( function()  {
 
-			var $carouselWrapper        = $( this ),
+			let $carouselWrapper        = $( this ),
 				goSteps                 = 0,
 				$carousel               = $carouselWrapper.find( '.uix-multi-carousel__items' ),
 				$carouselItem           = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
@@ -78,7 +78,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 Get the number of steps to the last visible element
 			 ---------------------------
 			 */ 
-			var lastSteps = parseFloat( itemTotal - amountVisible );
+			const lastSteps = parseFloat( itemTotal - amountVisible );
 			 
 
 
@@ -87,7 +87,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 Initialize carousel
 			 ---------------------------
 			 */  
-			var newWidth, newHeight;
+			let newWidth, newHeight;
 			if ( carouselDir == 'horizontal' ) { 
 				newWidth = ( $carouselWrapper.width() / amountVisible );
 				$carousel.css( 'width', itemTotal * carouselItemWidth );
@@ -143,8 +143,8 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 */ 
 			
 			function carouselActiveCenterItem( el, dir, steps ) {
-				var curItemIndex    = (amountVisible/2).toFixed(0),
-					centerItemIndex = Math.floor(amountVisible / 2)-1;		
+				const curItemIndex    = (amountVisible/2).toFixed(0),
+					  centerItemIndex = Math.floor(amountVisible / 2)-1;		
 				el.removeClass( 'is-active active-prev active-next' );
 				
 				
@@ -182,10 +182,10 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 				e.preventDefault();
 				
 				
-				var $btn        = $( this ),
-					$curWrapper = $( e.data[0] ),
-					//Protection button is not triggered multiple times.
-					btnLock     = $btn.data( 'click' );
+				const $btn        = $( this ),
+					  $curWrapper = $( e.data[0] ),
+					  //Protection button is not triggered multiple times.
+					  btnLock     = $btn.data( 'click' );
 				
 				
 				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
@@ -215,10 +215,10 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
 
-				var $btn        = $( this ),
-					$curWrapper = $( e.data[0] ),
-					//Protection button is not triggered multiple times.
-					btnLock     = $btn.data( 'click' );
+				const $btn        = $( this ),
+					  $curWrapper = $( e.data[0] ),
+					  //Protection button is not triggered multiple times.
+					  btnLock     = $btn.data( 'click' );
 				
 				
 				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
@@ -255,8 +255,8 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			
 			//Drag and Drop
 			//-------------------------------------	
-			var $dragDropTrigger = $carouselWrapper,
-				hammerProps      = {};
+			const $dragDropTrigger = $carouselWrapper;
+            let hammerProps      = {};
 
 			//Make the cursor a move icon when a user hovers over an item
 			if ( carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false ) $dragDropTrigger.css( 'cursor', carouseDraggableCursor );
@@ -269,9 +269,9 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 			//Mouse event
 			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-			var direction,
-				dragDropElement = $dragDropTrigger[0],
-				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			let direction;
+            const dragDropElement = $dragDropTrigger[0],
+				  dragDropMC      = new Hammer( dragDropElement, hammerProps );
 			
 			
 			dragDropMC.on( 'panright press panleft panup pandown', function( ev ) {
@@ -335,14 +335,14 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
 
 		
-				var $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $carousel
+				let $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $carousel
 					$curItems   = $curWrapper.find( '> div' ), //Default: $carouselItem
 					isEnd       = false,
 					isFirst     = false,
 					isMid       = false;
 		
 				//Reset prevents code from duplicate run
-				var preventEvent = function() {
+				const preventEvent = function() {
 					if ( curBtn ) curBtn.data( 'click', 0 );
 				};
 				
@@ -451,7 +451,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //
 //		$( '.uix-multi-carousel' ).each( function()  {
 //
-//			var $carouselWrapper   = $( this ),
+//			let $carouselWrapper   = $( this ),
 //				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
 //				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 //				carouselItemTotal  = $carouselItem.length,
@@ -491,7 +491,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //			 Initialize carousel
 //			 ---------------------------
 //			 */  
-//			var newWidth, newHeight;
+//			let newWidth, newHeight;
 //			if ( carouselDir == 'horizontal' ) { 
 //				newWidth = ( $carouselWrapper.width() / showcarouselItem );
 //				$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
@@ -547,8 +547,8 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //			 */ 
 //			
 //			function carouselActiveCenterItem( el, dir ) {
-//				var curItemIndex    = (showcarouselItem/2).toFixed(0),
-//					centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
+//				const curItemIndex    = (showcarouselItem/2).toFixed(0),
+//					  centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
 //				el.removeClass( 'is-active active-prev active-next' );
 //				
 //				
@@ -589,11 +589,11 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //				e.preventDefault();
 //				
 //				
-//				var $btn        = $( this ),
-//					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> div' ),
-//					//Protection button is not triggered multiple times.
-//					btnLock     = $btn.data( 'click' );
+//				const $btn        = $( this ),
+//					  $curWrapper = $( e.data[0] ),
+//					  $curItems   = $curWrapper.children().find( '> div' ),
+//					  //Protection button is not triggered multiple times.
+//					  btnLock     = $btn.data( 'click' );
 //				
 //				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
 //					moveNext( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
@@ -612,11 +612,11 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //				e.preventDefault();
 //
 //				
-//				var $btn        = $( this ),
-//					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> div' ),
-//					//Protection button is not triggered multiple times.
-//					btnLock     = $btn.data( 'click' );
+//				const $btn        = $( this ),
+//					  $curWrapper = $( e.data[0] ),
+//					  $curItems   = $curWrapper.children().find( '> div' ),
+//					  //Protection button is not triggered multiple times.
+//					  btnLock     = $btn.data( 'click' );
 //
 //			
 //				
@@ -643,7 +643,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
 //		
-//				var $curWrapper = wrapper,  //Default: $carousel
+//				let $curWrapper = wrapper,  //Default: $carousel
 //					$curItems   = items,  //Default: $carouselItem
 //					isEnd       = false,
 //					$cloneItem  = null;
@@ -664,7 +664,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //				}
 //				
 //				//Reset prevents code from duplicate run
-//				var preventEvent = function() {
+//				const preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
 //						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
@@ -782,7 +782,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
 //		
-//				var $curWrapper = wrapper,  //Default: $carousel
+//				let $curWrapper = wrapper,  //Default: $carousel
 //					$curItems   = items,  //Default: $carouselItem
 //					isEnd       = false,
 //					$cloneItem  = null;
@@ -804,7 +804,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 //				}
 //				
 //				//Reset prevents code from duplicate run
-//				var preventEvent = function() {
+//				const preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
 //						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}

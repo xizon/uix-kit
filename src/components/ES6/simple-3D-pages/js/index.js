@@ -37,18 +37,20 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 		if ( $( '#3D-renderer' ).length == 0 || ! Modernizr.webgl ) return false;
 
         
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				viewRenderer              = '3D-renderer';
+
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+            
+			const viewRenderer = '3D-renderer';
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -94,11 +96,11 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 
 
 				//Add HTML elements to scene
-				var target  = $( '#html3D-view' ).clone(),
-					pages   = target.find( '.html3D-view-content' );
+				const target  = $( '#html3D-view' ).clone(),
+					  pages   = target.find( '.html3D-view-content' );
 
 				pages.each( function() {
-					var el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+					const el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
 
 					el.position.x = $( this ).data( 'position-x' ) || 0;
 					el.position.y = $( this ).data( 'position-y' ) || 0;
@@ -129,7 +131,7 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 			function render() {
 				requestAnimationFrame( render );
 
-				var delta = clock.getDelta();
+				const delta = clock.getDelta();
 
 				//update camera and controls
 				controls.update();
@@ -140,7 +142,7 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -150,7 +152,7 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 

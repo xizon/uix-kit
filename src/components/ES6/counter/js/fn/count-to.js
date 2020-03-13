@@ -22,7 +22,7 @@
 		
 		return $(this).each(function () {
 			// set options for current element
-			var settings = $.extend({}, $.fn.UixCountTo.defaults, {
+			const settings = $.extend({}, $.fn.UixCountTo.defaults, {
 				from            : $( this ).data( 'counter-start' ),
 				to              : $( this ).data( 'counter-number' ),
                 fixed           : $( this ).data( 'counter-fixed' ),
@@ -35,13 +35,13 @@
             
 			
 			// how many times to update the value, and how much to increment the value on each update
-			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+			let loops = Math.ceil(settings.speed / settings.refreshInterval),
 				increment = (settings.to - settings.from) / loops;
             
        
 			
 			// references & variables that will change with each update
-			var self      = this,
+			let self      = this,
 				$self     = $( this ),
 				loopCount = 0,
 				value     = settings.from,
@@ -81,7 +81,7 @@
 			}
 			
 			function render( value ) {
-				var formattedValue = Number( value ).toFixed( settings.fixed );
+				let formattedValue = Number( value ).toFixed( settings.fixed );
                 
 				
 				if ( settings.dilimiter && formattedValue > 0 ) {

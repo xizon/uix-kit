@@ -10,7 +10,7 @@
     $.fn.UixRenderControlsHover = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '.js-uix-float-label'
         }, options );
  
@@ -18,7 +18,7 @@
 		
 			$( settings.controls ).each( function(){
 
-				var $this = $( this );
+				const $this = $( this );
 
 
 				// on focus add cladd active to label

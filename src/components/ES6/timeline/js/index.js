@@ -29,10 +29,9 @@ export const TIMELINE = ( ( module, $, window, document ) => {
     module.TIMELINE.version       = '0.1.6';
     module.TIMELINE.pageLoaded    = function() {
 
-		var $window          = $( window ),
-			windowWidth      = window.innerWidth,
-			windowHeight     = window.innerHeight;
-				
+        const $window          = $( window );
+        let	windowWidth        = window.innerWidth,
+            windowHeight       = window.innerHeight;
 				
 
 		/*! 
@@ -43,10 +42,12 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 		if ( windowWidth > 768 ) {
 			$( '.uix-timeline__container-wrapper.is-horizontal' ).each( function()  {
 
-				var $this          = $( this ),
-					$container     = $this.find( '.uix-timeline__container.is-horizontal' ),
-					$timeline      = $container.find( '> .uix-timeline' ),
-					dateShowEle    = $timeline.data( 'show-ele' );
+				const $this          = $( this );
+                
+				const $container     = $this.find( '.uix-timeline__container.is-horizontal' ),
+					  $timeline      = $container.find( '> .uix-timeline' );
+                
+				let	  dateShowEle    = $timeline.data( 'show-ele' );
 
 				if ( typeof dateShowEle === typeof undefined ) {
 					dateShowEle = '#timeline-number-show';
@@ -84,19 +85,19 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 				if ( $this.hasClass( 'is-reversed' ) ) {
 					
 					// Set equal heights
-					var setEqualHeights = function( el ) {
-						var counter = 0;
+					const setEqualHeights = function( el ) {
+						let counter = 0;
 
-						for ( var i = 0; i < el.length; i++) {
+						for ( let i = 0; i < el.length; i++) {
 
-							var singleHeight = $( el[i] ).outerHeight( true );
+							const singleHeight = $( el[i] ).outerHeight( true );
 
 							if (counter < singleHeight) {
 								counter = singleHeight;
 							}
 						}
 
-						for ( var k = 0; k < el.length; k++) {
+						for ( let k = 0; k < el.length; k++) {
 							$( el[k] ).css( 'height', counter + 'px' );
 						}
 
@@ -104,7 +105,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 
 					};
 					
-					var infoNewHeight = setEqualHeights( $timeline.find( '.uix-timeline__item--info' ) );
+					const infoNewHeight = setEqualHeights( $timeline.find( '.uix-timeline__item--info' ) );
 					
 					
 			
@@ -132,12 +133,12 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev ) {
-			var	itemTotal  = obj.find( '.uix-timeline__item' ).length,
-				tNav       = obj.find( '.uix-timeline__item' ),
-				tLoop      = false;
+			const itemTotal  = obj.find( '.uix-timeline__item' ).length,
+				  tNav       = obj.find( '.uix-timeline__item' ),
+				  tLoop      = false;
 			
 			
-			var curIndex = obj.find( '.uix-timeline__item.is-active' ).index(),
+			let curIndex = obj.find( '.uix-timeline__item.is-active' ).index(),
 				tarIndex;
 
 			//Check if a value is an object currently
@@ -189,8 +190,8 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'is-active' );
 
 			//scroll left
-			var tNavW = 0;
-			for ( var i = 0; i < tarIndex; i++ ) {
+			let tNavW = 0;
+			for ( let i = 0; i < tarIndex; i++ ) {
 				tNavW += obj.find( '.uix-timeline__item:eq('+i+')' ).width();
 			}
 	
@@ -199,7 +200,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 			});
 			
 			//Push the current text to element 
-			$( showEle ).text( obj.find( '.uix-timeline__item:eq('+i+')' ).find( '.uix-timeline__item--date' ).text() );
+			$( showEle ).text( obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).find( '.uix-timeline__item--date' ).text() );
 			
 			
 		}

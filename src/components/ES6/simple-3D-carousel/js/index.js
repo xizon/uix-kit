@@ -36,18 +36,20 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
     module.THREE_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-3d-carousel' ).each( function() {
-			var $this             = $( this ),
-				dataTiming        = $this.data( 'timing' ),
+			const $this             = $( this );
+            
+            let $wrapper          = $this.find( '> ul' ),
+				$items            = $wrapper.find( '> li' ),
+                itemCount         = $items.length;
+            
+			let	dataTiming        = $this.data( 'timing' ),
 				dataPrevBtn       = $this.data( 'prev-btn' ),
 				dataNextBtn       = $this.data( 'next-btn' ),
 				dataDraggable     = $this.data( 'draggable' ),
 			    autoSwap          = null,
-				$wrapper          = $this.find( '> ul' ),
-				$items            = $wrapper.find( '> li' ),
 				items             = [],
 				startItem         = 1,
 				position          = 0,
-				itemCount         = $items.length,
 				leftpos           = itemCount,
 				resetCount        = itemCount;
 
@@ -60,20 +62,20 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 			//Avoid problems caused by insufficient quantity
 			//-------------------------------------		
 			if ( itemCount == 3 ) {
-				var $clone3 = $items.eq(1).clone();
+				const $clone3 = $items.eq(1).clone();
 				$items.last().after( $clone3 );
 			}
 			
 			if ( itemCount == 2 ) {
-				var $clone2_1 = $items.eq(0).clone(),
-					$clone2_2 = $items.eq(1).clone();
+				const $clone2_1 = $items.eq(0).clone(),
+					  $clone2_2 = $items.eq(1).clone();
 				$items.last().after( [$clone2_1, $clone2_2 ] );
 			}
 			
 			if ( itemCount == 1 ) {
-				var $clone1_1 = $items.eq(0).clone(),
-					$clone1_2 = $items.eq(0).clone(),
-					$clone1_3 = $items.eq(0).clone();
+				const $clone1_1 = $items.eq(0).clone(),
+					  $clone1_2 = $items.eq(0).clone(),
+					  $clone1_3 = $items.eq(0).clone();
 					
 				$items.last().after( [$clone1_1, $clone1_2, $clone1_3 ] );
 			}		
@@ -138,8 +140,9 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 
 			//Drag and Drop
 			//-------------------------------------	
-			var $dragDropTrigger = $wrapper,
-				hammerProps      = {};
+			const $dragDropTrigger = $wrapper;
+            
+			let	hammerProps = {};
 
 			
 			if ( !dataDraggable ) {
@@ -150,9 +153,9 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 
 			//Mouse event
 			//Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-			var direction,
-				dragDropElement = $dragDropTrigger[0],
-				dragDropMC      = new Hammer( dragDropElement, hammerProps );
+			let direction;
+            const dragDropElement = $dragDropTrigger[0],
+				  dragDropMC      = new Hammer( dragDropElement, hammerProps );
 			
 			
 			dragDropMC.on( 'panright press panleft', function( ev ) {
@@ -189,11 +192,11 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 			 * @return {Void}
 			 */
 			function itemUpdates( action ) {
-				var direction = action;
+				const direction = action;
 
 				//moving carousel backwards
 				if ( direction == 'counter-clockwise' ) {
-					var leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
+					let leftitem = parseFloat( $wrapper.find( '> li.uix-3d-carousel__item--left-pos' ).attr( 'id' ) - 1 );
 					if ( leftitem == 0 ) {
 						leftitem = itemCount;
 					}
@@ -212,7 +215,7 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 
 				//moving carousel forward
 				if ( direction == 'clockwise' || direction == '' || direction == null ) {
-					var carousel3DPos = function( dir ) {
+					const carousel3DPos = function( dir ) {
 						if ( dir != 'leftposition' ) {
 							//increment image list id
 							position++;

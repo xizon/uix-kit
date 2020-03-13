@@ -32,7 +32,7 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
         
         //Initialize option status
         $( '.uix-dropdown-menu' ).each( function()  {
-            var v = $( this ).find( 'input[type="hidden"]' ).val(),
+            const v = $( this ).find( 'input[type="hidden"]' ).val(),
                 selectedIndex = $( this ).find( 'ul > li > a[data-value="'+v+'"]' ).parent().index(),
                 $li = $( this ).find( 'ul > li' );
           
@@ -51,7 +51,7 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();
 			
-			var $this = $( this ).parent( '.uix-dropdown-menu' );
+			const $this = $( this ).parent( '.uix-dropdown-menu' );
 
 			$this.toggleClass( 'is-opened' );
 
@@ -63,7 +63,7 @@ export const DROPDOWN_MENU = ( ( module, $, window, document ) => {
 			// stop propagation of this event, it will never reach body in bubbling phase.
 			e.stopPropagation();
 			
-			var $this = $( this ).closest( '.uix-dropdown-menu' );
+			const $this = $( this ).closest( '.uix-dropdown-menu' );
 
 			if ( $this.hasClass( 'is-opened' ) ) {
 				$this.removeAttr( 'open' ).removeClass( 'is-opened' );

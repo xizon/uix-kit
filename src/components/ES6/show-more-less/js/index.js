@@ -30,17 +30,17 @@ export const SHOW_MORELESS = ( ( module, $, window, document ) => {
 
 	
 		$( '.uix-more-btn__link' ).each( function()  {
-			var $btn          = $( this ),
-				$con          = $btn.parent().prev( '.uix-more-btn' ),
-				$btnTxt       = $btn.find( '> span' ),
-				defaultHeight = $con.height()
+			const $btn          = $( this ),
+			  	  $con          = $btn.parent().prev( '.uix-more-btn' ),
+				  $btnTxt       = $btn.find( '> span' ),
+				  defaultHeight = $con.height()
 
 
 			
 			$btn.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
-				var expanded      = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+				const expanded      = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 
 				if ( expanded ) {
 

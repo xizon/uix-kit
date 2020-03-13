@@ -27,20 +27,20 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 	module.MOBILE_MENU.documentReady = function( $ ) {
 
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 
 
 
 
 		//-------- Show Toolbar when viewing site for WordPress
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.admin-bar .uix-menu-mobile__toggle' );
+		const $el = $( '.admin-bar .uix-menu-mobile__toggle' );
 		$window.on( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU', function() {
 
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = 46;
+			const scrollTop = $( this ).scrollTop(),
+				  spyTop    = 46;
 			
 			if ( scrollTop >= spyTop ) {
 				$el.addClass( 'is-fixed' );
@@ -53,8 +53,8 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 
 
 		//-------- Mobile Menu
-		var $toggle     = $( '.uix-menu-mobile__toggle' ),
-			$toggleBody = $( 'body' );
+		const $toggle     = $( '.uix-menu-mobile__toggle' ),
+			  $toggleBody = $( 'body' );
 
 
 
@@ -74,7 +74,7 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 				if ( $( this ).hasClass( 'is-opened' ) ) {
 
 					//Add mobile brand
-					var logoURL = $( '.uix-brand--mobile img' ).attr( 'src' );
+					const logoURL = $( '.uix-brand--mobile img' ).attr( 'src' );
 					if ( typeof logoURL !== typeof undefined && logoURL != '' ) {
 						if ( logoURL.indexOf( 'blank.gif' ) >= 0 ) $( '.mobile-inner' ).css( 'margin-top', '-70px' );
 					}	
@@ -96,11 +96,11 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 
 
 			// Fires drop-menu event 
-			var $drMenuLi = $( '.uix-menu__container.is-mobile ul li' );
+			const $drMenuLi = $( '.uix-menu__container.is-mobile ul li' );
 
 			$drMenuLi.find( '> a' ).on( 'click', function( e ) {
 				
-				var arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" ),
+				const arrowText = $( this ).find( '.uix-menu__arrow-mobile' ).text().replace( /(.).*\1/g, "$1" ),
 					$sub      = $( this ).next( 'ul' );
 
 				if ( $sub.length > 0 ) {
@@ -109,11 +109,11 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 
 					
 					//Its value is not a boolean but a string
-					var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+					const expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 
 					if ( expanded ) {
 						//Hide other all sibling <ul> of the selected element
-						var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
+						const $e = $( this ).parent( 'li' ).siblings().find( '> a' );
 
 						$e.removeClass( 'is-opened' ).attr( 'aria-expanded', false );
 						$e.parent( 'li' ).find( '.uix-menu__arrow-mobile' ).removeClass( 'is-opened' );
