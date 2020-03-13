@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "679dc7ed81b7032ef666";
+/******/ 	var hotCurrentHash = "372d177ab74a67603955";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -17905,7 +17905,7 @@ var THREE_PARTICLE = function (module, $, window, document) {
         var spotLightColor = 0xffffff,
             spotLightIntensity = 2,
             spotLightDistance = 1200,
-            spotLightAngle = getRadian(55),
+            spotLightAngle = getRadian(50),
             spotLightPenumbra = 1,
             spotLightDecay = 1;
         sceneForSpotLight = new THREE.SpotLight(spotLightColor, spotLightIntensity, spotLightDistance, spotLightAngle, spotLightPenumbra, spotLightDecay);
@@ -17978,8 +17978,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
 
           particles = new THREE.Points(geometry, material);
           scene.add(particles);
-          particles.scale.setScalar(0.67);
+          particles.scale.setScalar(0.7);
           particles.position.y = 50;
+          particles.position.z = 70;
           particles.rotation.y = getRadian(180); // set castShadow to object
 
           particles.castShadow = true;

@@ -143,7 +143,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 var spotLightColor = 0xffffff,
                     spotLightIntensity = 2,
                     spotLightDistance = 1200,
-                    spotLightAngle = getRadian( 55 ),
+                    spotLightAngle = getRadian( 50 ),
                     spotLightPenumbra = 1,
                     spotLightDecay = 1;
                 
@@ -244,8 +244,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 						}
 						particles = new THREE.Points( geometry, material );
 						scene.add( particles );
-                        particles.scale.setScalar( 0.67 );
+                        particles.scale.setScalar( 0.7 );
                         particles.position.y = 50;
+                        particles.position.z = 70;
                         particles.rotation.y = getRadian( 180 );
 
                         // set castShadow to object
