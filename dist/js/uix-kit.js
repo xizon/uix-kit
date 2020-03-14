@@ -3,7 +3,7 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.1.5
+ * ## Version             :  4.1.53
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  March 14, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "372d177ab74a67603955";
+/******/ 	var hotCurrentHash = "2b6166ef2d650456f159";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -7950,8 +7950,6 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/AJAX-push/js/index.js
 function AJAX_push_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_push_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_push_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_push_js_typeof(obj); }
 
 /* 
@@ -8121,7 +8119,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         $(response).find('.uix-video__slider > video').each(function () {
           var _src = $(this).find('source:first').attr('src');
 
-          if (AJAX_push_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = (_readOnlyError("_src"), $(this).attr('src'));
+          if (AJAX_push_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
           sources.push({
             "url": _src,
             "id": 'video-' + UixGUID.create(),
@@ -8282,8 +8280,6 @@ var AJAX_scss_style = __webpack_require__(11);
 // CONCATENATED MODULE: ./src/components/ES6/AJAX/js/index.js
 function AJAX_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function js_readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_js_typeof(obj); }
 
 /* 
@@ -8297,7 +8293,7 @@ function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.4';
+  module.AJAX_PAGE_LOADER.version = '0.1.5';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window);
@@ -8522,19 +8518,8 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             action: 'load_singlepages_ajax_content'
           },
           beforeSend: function beforeSend() {
-            //loading animation
-            loadingAnim(0); //loader effect from AJAX request
-
-            TweenMax.set('.uix-ajax-load__loader', {
-              css: {
-                'display': 'block'
-              },
-              onComplete: function onComplete() {
-                TweenMax.to(this.target, 0.5, {
-                  alpha: 1
-                });
-              }
-            });
+            //Display loader
+            showLoader();
           }
         }).done(function (response) {
           //A function to be called if the request succeeds
@@ -8553,7 +8538,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           $(response).find('.uix-video__slider > video').each(function () {
             var _src = $(this).find('source:first').attr('src');
 
-            if (AJAX_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = (js_readOnlyError("_src"), $(this).attr('src'));
+            if (AJAX_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
             sources.push({
               "url": _src,
               "id": 'video-' + UixGUID.create(),
@@ -8567,7 +8552,10 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           if (sources.length == 0) {
             per = 100; //loading animation
 
-            loadingAnim(per);
+            loadingAnim(per); //Remove loader
+
+            var oldContent = container.html();
+            hideLoader(container, $(response).filter('title').text(), dir, oldContent, response);
           }
 
           var loadImages = function loadImages() {
@@ -8647,7 +8635,12 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             var _time = (new Date().getTime() - timeStart) / 1000;
 
             if (_time >= timeLimit) {
-              console.log('Page load timeout!');
+              console.log('Page load timeout!'); //Remove loader
+
+              var _oldContent = container.html();
+
+              hideLoader(container, $(response).filter('title').text(), dir, _oldContent, response); // clear loader event
+
               clearInterval(timeClockInit);
               func();
             }
@@ -8670,10 +8663,24 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
     function ajaxSucceeds(dir, container, content, title) {
       //If the page resource is not loaded, then the following code is not executed
-      if (loadedProgress < 100) return false; //
+      if (loadedProgress < 100) return false; //Remove loader
 
-      var oldContent = container.html(); //Remove loader
+      var oldContent = container.html();
+      hideLoader(container, title, dir, oldContent, content);
+    }
+    /*
+     * Remove loader
+     *
+           * @param  {Element} container - The instance returned from the request succeeds
+           * @param  {String} title     - The title of a requested page.
+     * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
+     * @param  {String} oldContent   - The old data returned from the server
+           * @param  {String} content   - The data returned from the server
+     * @return {Void}
+     */
 
+
+    function hideLoader(container, title, dir, oldContent, content) {
       TweenMax.to('.uix-ajax-load__loader', 0.5, {
         alpha: 0,
         onComplete: function onComplete() {
@@ -8696,6 +8703,28 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           });
         },
         delay: loaderRemoveDelay / 1000
+      });
+    }
+    /*
+     * Display loader
+     *
+     * @return {Void}
+     */
+
+
+    function showLoader() {
+      //loading animation
+      loadingAnim(0); //loader effect from AJAX request
+
+      TweenMax.set('.uix-ajax-load__loader', {
+        css: {
+          'display': 'block'
+        },
+        onComplete: function onComplete() {
+          TweenMax.to(this.target, 0.5, {
+            alpha: 1
+          });
+        }
       });
     }
     /*
@@ -11077,8 +11106,6 @@ var image_shapes_scss_style = __webpack_require__(39);
 // CONCATENATED MODULE: ./src/components/ES6/image-shapes/js/index.js
 function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function image_shapes_js_readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 /* 
  *************************************
  * <!-- Image Shapes -->
@@ -11121,9 +11148,9 @@ var IMAGE_SHAPES = function (module, $, window, document) {
             svgPath = $this.data('path'),
             svgW = parseFloat($this.data('svg-const-width')),
             svgH = parseFloat($this.data('svg-const-height')),
-            imgW = parseFloat($this.data('img-width')),
             svgRatio = svgW / svgH,
             curImgURL = $this.find('img').attr('src');
+        var imgW = parseFloat($this.data('img-width'));
         var imgRatio = null,
             bothWidthRatio = null,
             newSvgHeight = null,
@@ -11133,7 +11160,7 @@ var IMAGE_SHAPES = function (module, $, window, document) {
             curImgH = null;
 
         if (imgW > w) {
-          imgW = (image_shapes_js_readOnlyError("imgW"), w);
+          imgW = w;
         } //Check if the picture is loaded on the page
 
 
@@ -22626,8 +22653,6 @@ var vertical_menu_scss_style = __webpack_require__(69);
 // CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function vertical_menu_js_readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 /* 
  *************************************
  * <!-- Vertical Menu -->
@@ -22717,12 +22742,12 @@ var VERTICAL_MENU = function (module, $, window, document) {
 
     function menuWrapInit(w, h) {
       var $menuWrap = $('.uix-v-menu__container:not(.is-mobile)'),
-          vMenuTop = 0,
-          //This value is equal to the $vertical-menu-top variable in the SCSS
-      winHeight = h - vMenuTop; //WoedPress spy
+          vMenuTop = 0; //This value is equal to the $vertical-menu-top variable in the SCSS
+
+      var winHeight = h - vMenuTop; //WoedPress spy
 
       if ($('.admin-bar').length > 0) {
-        winHeight = (vertical_menu_js_readOnlyError("winHeight"), h - 132);
+        winHeight = h - 132;
       }
 
       $menuWrap.css({

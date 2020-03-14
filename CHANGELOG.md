@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+#### = 4.1.53 (March 14, 2020) =
+
+* Fix: Read-only issue with some variables.
+* Fix: Mask does not disappear when ajax request times out or no image is loaded.
+
+
 #### = 4.1.5 (March 13, 2020) =
 
 * Tweak: Modify the primary highlight color style.

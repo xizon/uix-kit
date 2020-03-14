@@ -247,7 +247,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                //Push all videos from page
                 $( response ).find( '.uix-video__slider > video' ).each(function() {
 
-                    const _src = $( this ).find( 'source:first' ).attr( 'src' );
+                    let _src = $( this ).find( 'source:first' ).attr( 'src' );
                     if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
 
                     sources.push(

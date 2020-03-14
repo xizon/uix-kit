@@ -146,8 +146,10 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 		function menuWrapInit( w, h ) {
 			
 			const $menuWrap  = $( '.uix-v-menu__container:not(.is-mobile)' ),
-				  vMenuTop   = 0, //This value is equal to the $vertical-menu-top variable in the SCSS
-				  winHeight  = h - vMenuTop;
+				  vMenuTop   = 0; //This value is equal to the $vertical-menu-top variable in the SCSS
+            
+            
+			let	winHeight  = h - vMenuTop;
 
 			//WoedPress spy
 			if ( $( '.admin-bar' ).length > 0 ) {

@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.4';
+    module.AJAX_PAGE_LOADER.version       = '0.1.5';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -323,20 +323,8 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					},
 					beforeSend: function() {
 
-                        //loading animation
-                        loadingAnim( 0 );
-
-                        //loader effect from AJAX request
-						TweenMax.set( '.uix-ajax-load__loader', {
-							css         : {
-								'display' : 'block'
-							},
-							onComplete  : function() {
-								TweenMax.to( this.target, 0.5, {
-									alpha : 1
-								});
-							}
-						});
+                        //Display loader
+                        showLoader();
 
 					}
                 })
@@ -363,7 +351,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     //Push all videos from page
                     $( response ).find( '.uix-video__slider > video' ).each(function() {
 
-                        const _src = $( this ).find( 'source:first' ).attr( 'src' );
+                        let _src = $( this ).find( 'source:first' ).attr( 'src' );
                         if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
 
                         sources.push(
@@ -385,6 +373,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                         //loading animation
                         loadingAnim( per );
                         
+                        //Remove loader
+                        const oldContent = container.html();
+                        hideLoader(container, $( response ).filter( 'title' ).text(), dir, oldContent, response);
+
                         
                     }
                     
@@ -509,6 +501,13 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
                         if ( _time >= timeLimit ) {
                             console.log( 'Page load timeout!' );
+                            
+                            //Remove loader
+                            const oldContent = container.html();
+                            hideLoader(container, $( response ).filter( 'title' ).text(), dir, oldContent, response);
+
+                            
+                            // clear loader event
                             clearInterval( timeClockInit );
                             func();
                         }    
@@ -545,10 +544,28 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
             //If the page resource is not loaded, then the following code is not executed
             if ( loadedProgress < 100 ) return false;
 			
-            //
-			let oldContent = container.html();
-		
+   
 			//Remove loader
+            const oldContent = container.html();
+            hideLoader(container, title, dir, oldContent, content);
+
+			
+			
+		}
+		
+		
+		/*
+		 * Remove loader
+		 *
+         * @param  {Element} container - The instance returned from the request succeeds
+         * @param  {String} title     - The title of a requested page.
+		 * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
+		 * @param  {String} oldContent   - The old data returned from the server
+         * @param  {String} content   - The data returned from the server
+		 * @return {Void}
+		 */
+		function hideLoader( container, title, dir, oldContent, content ) {
+			
 			TweenMax.to( '.uix-ajax-load__loader', 0.5, {
 				alpha       : 0,
 				onComplete  : function() {
@@ -575,8 +592,6 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 						//Prevent multiple request on click
 						$( AJAXPageLinks ).data( 'request-running', false );	
 						
-						
-						
 					});
 					
 
@@ -584,13 +599,40 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 					
 				},
 				delay       : loaderRemoveDelay/1000
-			});
-			
+			});   
+            
+           
 			
 		}
 		
+
 		
-		
+		/*
+		 * Display loader
+		 *
+		 * @return {Void}
+		 */
+		function showLoader() {
+			
+            //loading animation
+            loadingAnim( 0 );
+
+            //loader effect from AJAX request
+            TweenMax.set( '.uix-ajax-load__loader', {
+                css         : {
+                    'display' : 'block'
+                },
+                onComplete  : function() {
+                    TweenMax.to( this.target, 0.5, {
+                        alpha : 1
+                    });
+                }
+            });
+		}
+        
+        
+        
+        
 		/*
 		 * Transition effect between two elements.
 		 *

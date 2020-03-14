@@ -66,10 +66,10 @@ export const IMAGE_SHAPES = ( ( module, $, window, document ) => {
 					  svgPath        = $this.data( 'path' ),
 					  svgW           = parseFloat( $this.data( 'svg-const-width' ) ),
 					  svgH           = parseFloat( $this.data( 'svg-const-height' ) ),
-					  imgW           = parseFloat( $this.data( 'img-width' ) ),
 					  svgRatio       = svgW / svgH,
                       curImgURL      = $this.find( 'img' ).attr( 'src' );
                 
+                let imgW           = parseFloat( $this.data( 'img-width' ) );
 				let	imgRatio       = null,
 					bothWidthRatio = null,
 					newSvgHeight   = null,		
