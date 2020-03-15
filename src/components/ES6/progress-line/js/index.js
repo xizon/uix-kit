@@ -27,11 +27,11 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
     module.PROGRESS_LINE.version       = '0.0.2';
     module.PROGRESS_LINE.documentReady = function( $ ) {
 
-		var $obj                = $( '.uix-progress-line' ),
-			$progressLineCircle = $obj.find( '.uix-progress-line__circle' ),
-			progressLineRestore = function() {
-				var k = 0;
-				var progressLineAnimGo = setInterval( function() {
+		const $obj                = $( '.uix-progress-line' ),
+			  $progressLineCircle = $obj.find( '.uix-progress-line__circle' ),
+			  progressLineRestore = function() {
+				let k = 0;
+				const progressLineAnimGo = setInterval( function() {
 					$progressLineCircle.eq( k ).addClass( 'is-active' );
 					$progressLineCircle.eq( k ).next( '.uix-progress-line__bar' ).addClass( 'is-active' );
 					k++;
@@ -45,7 +45,7 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
 				}, 50 );
 			};
 		
-		var waypoints = $('.uix-progress-line' ).waypoint({
+		const waypoints = $('.uix-progress-line' ).waypoint({
 			handler: function( direction ) {
 
 				progressLineRestore();
@@ -61,11 +61,11 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
 		
 		$progressLineCircle.on( 'mouseenter', function() {
 		
-			var curIndex = $( this ).index()/2;
+			const curIndex = $( this ).index()/2;
 			
 			$progressLineCircle.removeClass( 'is-active' );	
 			$progressLineCircle.next( '.uix-progress-line__bar' ).removeClass( 'is-active' );	
-			for ( var i = curIndex; i >= 0; i-- ) {
+			for ( let i = curIndex; i >= 0; i-- ) {
 				$progressLineCircle.eq( i ).addClass('is-active');	
 				$progressLineCircle.eq( i ).next( '.uix-progress-line__bar' ).addClass( 'is-active' );	
 			}
@@ -81,9 +81,9 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
 		
 		
 		//Adapt line width for different resolution
-//		var plLength     = $progressLineCircle.length,
-//			newPlW       = $obj.find( '.uix-progress-line__circle' ).first().width(),
-//			plWrapperW   = $obj.width();
+//		const plLength     = $progressLineCircle.length,
+//			  newPlW       = $obj.find( '.uix-progress-line__circle' ).first().width(),
+//			  plWrapperW   = $obj.width();
 //
 //		$obj.find( '.uix-progress-line__bar' ).css( 'width', parseFloat( plWrapperW - newPlW*plLength )/(plLength-1) + 'px' );
 //		

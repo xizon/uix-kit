@@ -45,7 +45,7 @@ export const WP_CORE = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */  
 		  $( '#cat' ).on( 'change', function () {
-			  var cvalue = $( this ).val();
+			  const cvalue = $( this ).val();
 			  if ( cvalue ) {
 				  location.href = homeUrl + "/?cat=" + cvalue;
 			  }

@@ -42,30 +42,29 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 		//Prevent this module from loading in other pages
 		if ( $( '.uix-3d-slider--liquid-scrollspy' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+		let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight;
-
-
-			var animSpeed                 = 1000,
-				$sliderWrapper            = $( '.uix-3d-slider--liquid-scrollspy' ),
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
 
 
-
-				//Basic webGL renderers 
-				renderLoaderID            = 'uix-3d-slider--liquid-scrollspy__loader',
-				rendererOuterID           = 'uix-3d-slider--liquid-scrollspy__canvas-container',
-				rendererCanvasID          = 'uix-3d-slider--liquid-scrollspy__canvas',
-				renderer;
+            const $sliderWrapper = $( '.uix-3d-slider--liquid-scrollspy' ),
+                  //Basic webGL renderers 
+				  renderLoaderID            = 'uix-3d-slider--liquid-scrollspy__loader',
+				  rendererOuterID           = 'uix-3d-slider--liquid-scrollspy__canvas-container',
+				  rendererCanvasID          = 'uix-3d-slider--liquid-scrollspy__canvas';
+            
+            
+			let animSpeed  = 1000;
+			
 
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -75,26 +74,26 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 				theta        = 0;
 
             
-			var offsetWidth   = 1920, //Set the display width of the objects
-				offsetHeight  = 1080, //Set the display height of the objects
-                imgAspect     = offsetHeight / offsetWidth;
+			const offsetWidth   = 1920, //Set the display width of the objects
+				  offsetHeight  = 1080, //Set the display height of the objects
+                  imgAspect     = offsetHeight / offsetWidth;
             
             
-			var dispImage;
+			let dispImage;
 
             
 
-            var loader = new THREE.TextureLoader();
+            const loader = new THREE.TextureLoader();
             loader.crossOrigin = 'anonymous'; 
             
             
-            var textures;
-			var sources = [];
-			var isAnimating = false;
+            let textures;
+			let sources = [];
+			let isAnimating = false;
             
             
             //scroll spy
-            var scrollspyEnable,
+            let scrollspyEnable,
                 scrollspyConfigAutoAnim,
                 scrollspyConfigItems, 
                 scrollspyConfigCountTotal, 
@@ -105,17 +104,18 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 			
 			// constants
-			var activeSlider = 0;
+			let activeSlider = 0;
 			
 			function wrapperInit() {
 				
 				$sliderWrapper.each( function()  {
 
-					var $this                    = $( this ),
-						$items                   = $this.find( '.uix-3d-slider--liquid-scrollspy__item' ),
-						$first                   = $items.first(),
-						itemsTotal               = $items.length,
-                        activated                = $this.data( 'activated' ); 
+					const $this                    = $( this );
+                    
+					const $items                   = $this.find( '.uix-3d-slider--liquid-scrollspy__item' ),
+						  $first                   = $items.first(),
+						  itemsTotal               = $items.length,
+                          activated                = $this.data( 'activated' ); 
 				
                     
                     if ( typeof activated === typeof undefined || activated === 0 ) {
@@ -123,7 +123,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 
                         //Get parameter configuration from the data-* attribute of HTML
-                        var	dataControlsPagination   = $this.data( 'controls-pagination' ),
+                        let	dataControlsPagination   = $this.data( 'controls-pagination' ),
                             dataControlsArrows       = $this.data( 'controls-arrows' ),
                             dataLoop                 = $this.data( 'loop' ),
                             dataFilterTexture        = $this.data( 'filter-texture' ),
@@ -155,7 +155,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 
                         //Autoplay times
-                        var playTimes;
+                        let playTimes;
                         //A function called "timer" once every second (like a digital watch).
                         $this[0].animatedSlides;
 
@@ -235,13 +235,14 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         //Get all images and videos
                         //-------------------------------------		
                         $items.each( function()  {
-                            var _item = $( this );
+                            const _item = $( this );
 
                             if ( _item.find( 'video' ).length > 0 ) {
 
                                 //Returns the dimensions (intrinsic height and width ) of the video
-                                var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
-                                    videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                const video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) );
+                                let videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                
                                 if ( typeof videoURL === typeof undefined ) videoURL = _item.attr( 'src' ); 
 
                                 if ( typeof videoURL != typeof undefined ) {
@@ -259,7 +260,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                             } else {
 
-                                var imgURL   = _item.find( 'img' ).attr( 'src' );
+                                let imgURL   = _item.find( 'img' ).attr( 'src' );
 
                                 if ( typeof imgURL != typeof undefined ) {
 
@@ -281,10 +282,10 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                         //Pagination dots 
                         //-------------------------------------	
-                        var _dot       = '',
+                        let _dot       = '',
                             _dotActive = '';
                         _dot += '<ul>';
-                        for ( var i = 0; i < itemsTotal; i++ ) {
+                        for ( let i = 0; i < itemsTotal; i++ ) {
 
                             _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -301,7 +302,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 
                             //Prevent buttons' events from firing multiple times
-                            var $btn = $( this );
+                            const $btn = $( this );
                             if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                             $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'true' );
                             setTimeout( function() {
@@ -310,12 +311,12 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                             
                             
-                            var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
-                                slideNextId = $( this ).index();
+                            const slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
+                                  slideNextId = $( this ).index();
 
 
                             //Determine the direction
-                            var curDir = 'prev';
+                            let curDir = 'prev';
                             if ( $( this ).attr( 'data-index' ) > slideCurId ) {
                                 curDir = 'next';
                             }
@@ -333,8 +334,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                         //Next/Prev buttons
                         //-------------------------------------		
-                        var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--liquid-scrollspy__arrows--prev' ),
-                            _next = $( dataControlsArrows ).find( '.uix-3d-slider--liquid-scrollspy__arrows--next' );
+                        const _prev = $( dataControlsArrows ).find( '.uix-3d-slider--liquid-scrollspy__arrows--prev' ),
+                              _next = $( dataControlsArrows ).find( '.uix-3d-slider--liquid-scrollspy__arrows--next' );
 
                         $( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -355,8 +356,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                                 _prev.attr( 'aria-disabled', 'false' );
                             }, animSpeed );   
 
-                            var slideCurId  = $items.filter( '.is-active' ).index(),
-                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
+                            const slideCurId  = $items.filter( '.is-active' ).index(),
+                                  slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 
                             //Transition Between Slides
                             sliderUpdates( slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
@@ -380,8 +381,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                             }, animSpeed ); 
 
 
-                            var slideCurId  = $items.filter( '.is-active' ).index(),
-                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
+                            const slideCurId  = $items.filter( '.is-active' ).index(),
+                                  slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 
                             //Transition Between Slides
                             sliderUpdates( slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
@@ -427,9 +428,9 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
             
             
             function loadImages() {
-                var promises = [];
+                let promises = [];
 
-                for (var i = 0; i < sources.length; i++) {
+                for (let i = 0; i < sources.length; i++) {
                     
                     if ( sources[i].type == 'img' ) {
 	
@@ -441,7 +442,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                             
                             new Promise(function(resolve, reject) {
                             
-                                var img = document.createElement("img");
+                                const img = document.createElement("img");
                                 img.crossOrigin = "anonymous";
                                 img.src = sources[i].url;
 
@@ -505,7 +506,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
             function makeThreeTexture( url ) {
                 
-                var texture;
+                let texture;
                 
                 if ( /[\/.](gif|jpg|jpeg|png)$/i.test( url ) ) {
                     
@@ -521,7 +522,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                     // VIDEO //
                     ///////////   
                     
-                    var video = document.createElement( 'video' );
+                    const video = document.createElement( 'video' );
                     video.src = url;
                     
                     texture = new THREE.VideoTexture( video );
@@ -580,10 +581,10 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                 
                 
                 // Fit plane to screen
-                var dist        = 1000,
-                    vFOV        = THREE.Math.degToRad( camera.fov ),   // convert vertical fov to radians
-                    objHeight   = 2 * Math.tan( vFOV / 2 ) * dist,     // visible height
-                    objWidth    = objHeight * camera.aspect;           // visible width   
+                const dist        = 1000,
+                      vFOV        = THREE.Math.degToRad( camera.fov ),   // convert vertical fov to radians
+                      objHeight   = 2 * Math.tan( vFOV / 2 ) * dist,     // visible height
+                      objWidth    = objHeight * camera.aspect;           // visible width   
                 
             
 
@@ -617,10 +618,10 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                 // Immediately use the texture for material creation
                 // Create a texture loader so we can load our image file
-                var texture1     = textures[0],
-                    texture2     = textures[1],
-                    intensity    = 1,
-                    disp         = loader.load( dispImage );
+                const texture1     = textures[0],
+                      texture2     = textures[1],
+                      intensity    = 1,
+                      disp         = loader.load( dispImage );
 
 
                 disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
@@ -633,7 +634,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 
 
-                var geometry = new THREE.PlaneBufferGeometry(
+                const geometry = new THREE.PlaneBufferGeometry(
                     objWidth,
                     objHeight,
                     1
@@ -706,7 +707,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -716,7 +717,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 
@@ -736,12 +737,12 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
             function onMouseWheel( e ) {
                 
-                var  scrollPos;
+                let  scrollPos;
 
                 //Gets a value that indicates the amount that the mouse wheel has changed.
-                var dir, delta, mobileDeltaY = null;
+                let dir, delta, mobileDeltaY = null;
 
-                var touches = e.touches;
+                const touches = e.touches;
                 if ( touches && touches.length ) {
                     mobileDeltaY = startY - touches[0].pageY;
                     scrollPos = touches[0].pageY;
@@ -779,8 +780,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
               
                 if ( scrollspyEnable ) {
                     
-                    var slideCurId = scrollspyConfigItems.filter( '.is-active' ).index(), 
-                        slideNextId;
+                    const slideCurId = scrollspyConfigItems.filter( '.is-active' ).index();
+                    let slideNextId;
 
                     if ( dir == 'down' ) {
 
@@ -832,8 +833,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
              */
             function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-                var items = slider.find( '.uix-3d-slider--liquid-scrollspy__item' ),
-                    total = items.length;
+                const items = slider.find( '.uix-3d-slider--liquid-scrollspy__item' ),
+                      total = items.length;
 
                 slider[0].animatedSlides = setInterval( function() {
 
@@ -844,8 +845,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         if ( !loop ) {
                             if ( playTimes < total && playTimes >= 0 ) {
 
-                                var slideCurId  = items.filter( '.is-active' ).index(),
-                                    slideNextId = playTimes;	
+                                const slideCurId  = items.filter( '.is-active' ).index(),
+                                      slideNextId = playTimes;	
 
                                 sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
                             }
@@ -853,8 +854,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                             if ( playTimes == total ) playTimes = 0;
                             if ( playTimes < 0 ) playTimes = total-1;		
 
-                            var slideCurId  = items.filter( '.is-active' ).index(),
-                                slideNextId = playTimes;	
+                            const slideCurId  = items.filter( '.is-active' ).index(),
+                                  slideNextId = playTimes;	
 
 
                             //Prevent problems with styles when switching in positive order
@@ -889,8 +890,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 			function sliderUpdates( slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 
 
-				var $items                   = $sliderWrapper.find( '.uix-3d-slider--liquid-scrollspy__item' ),
-					total                    = $items.length;
+				const $items                   = $sliderWrapper.find( '.uix-3d-slider--liquid-scrollspy__item' ),
+					  total                    = $items.length;
 		
 
 				//Prevent bubbling
@@ -928,8 +929,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 					//Get previous and next index of item
 					//-------------------------------------
-					var $current = $sliderWrapper.find( '.uix-3d-slider--liquid-scrollspy__item' ).eq( slideCurId );
-					var	$next    = $sliderWrapper.find( '.uix-3d-slider--liquid-scrollspy__item' ).eq( slideNextId );
+					const $current = $sliderWrapper.find( '.uix-3d-slider--liquid-scrollspy__item' ).eq( slideCurId );
+					const	$next    = $sliderWrapper.find( '.uix-3d-slider--liquid-scrollspy__item' ).eq( slideNextId );
 
 
 
@@ -938,7 +939,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 					//Determine the direction and add class to switching direction indicator.
 					//-------------------------------------
-					var dirIndicatorClass = '';
+					let dirIndicatorClass = '';
 					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
 					if ( dir == 'next' ) dirIndicatorClass = 'next';
 
@@ -1002,7 +1003,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         onComplete: function() {
 
                             //Update Texture
-                            var tx1ID, tx2ID;
+                            let tx1ID, tx2ID;
                             
                             if ( dir == 'prev' ) {
                                 

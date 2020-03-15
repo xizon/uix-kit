@@ -30,9 +30,9 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 
 
 		
-		var $menuContainer = $( '.uix-lavalamp-menu__container' ),
-		    menu           = 'ul.uix-lavalamp-menu',
-			line           = menu + ' .uix-lavalamp-menu__slide-line';
+		const $menuContainer = $( '.uix-lavalamp-menu__container' ),
+		      menu           = 'ul.uix-lavalamp-menu',
+			  line           = menu + ' .uix-lavalamp-menu__slide-line';
 		
 		
 		//Prevent this module from loading in other pages
@@ -55,11 +55,9 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 		
 		function nemuLineGo( index ) {
 			
-			var $this  = $( menu + ' > li' ).eq( index ).find( 'a' ),
-			    offset = $this.offset(),
-				
-			//find the offset of the wrapping div  
-			offsetBody = $( '.uix-lavalamp-menu__container' ).offset();
+			const $this      = $( menu + ' > li' ).eq( index ).find( 'a' ),
+			      offset     = $this.offset(),
+                  offsetBody = $( '.uix-lavalamp-menu__container' ).offset(); //find the offset of the wrapping div  
 
 			
 			//Activate navigation style

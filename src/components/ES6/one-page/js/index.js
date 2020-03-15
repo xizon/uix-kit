@@ -32,24 +32,24 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
     module.ONEPAGE.version       = '0.0.6';
     module.ONEPAGE.documentReady = function( $ ) {
 
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 		
 
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation      = 0,
-			quietPeriod        = 500, //Do not change it
-			animationTime      = 1000,//According to page transition animation changes
-			$sectionsContainer = $( '.uix-normal-load__onepage-container' ),
-			$sections          = $sectionsContainer.find( '[data-highlight-section]' ),
-			sectionTotal       = $sections.length,
-            /* topSpacing         = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ), //with margin */
-			topSpacing         = 0,
-			$primaryMenu       = $( '.uix-menu' ),
-			$sidefixedMenu     = $( '.uix-menu-sidefixed' );
+		const quietPeriod        = 500, //Do not change it
+			  animationTime      = 1000,//According to page transition animation changes
+			  $sectionsContainer = $( '.uix-normal-load__onepage-container' ),
+			  $sections          = $sectionsContainer.find( '[data-highlight-section]' ),
+			  sectionTotal       = $sections.length,
+              /* topSpacing         = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ), //with margin */
+			  topSpacing         = 0,
+			  $primaryMenu       = $( '.uix-menu' ),
+			  $sidefixedMenu     = $( '.uix-menu-sidefixed' );
 		
+        let lastAnimation = 0;
 		
 		//Prevent this module from loading in other pages
 		if ( $sectionsContainer.length == 0 ) return false;
@@ -73,7 +73,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		
 		//Detect URL change
 		$( window ).on( 'hashchange', function(){
-			var hash = window.location.hash,
+			let hash = window.location.hash,
 				locArr,
 				loc;
 
@@ -97,7 +97,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		function sectionStart() {
 	
 			setTimeout( function() {
-				var hash = window.location.hash,
+				let hash = window.location.hash,
 					locArr,
 					loc, 
 					curTab;
@@ -126,7 +126,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		 */
 		function scrollMoveInit( event, dir ) {
 	
-			var timeNow = new Date().getTime();
+			const timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
 			if( timeNow - lastAnimation < quietPeriod + animationTime) {
 				return;
@@ -156,12 +156,11 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function moveTo( el, dir, hashID ) {
-			var index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
-				nextIndex = null,
-				$next     = null,
-				isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
-			
-			
+			const index     = parseFloat( $sections.filter( '.is-active' ).attr( 'data-index' ) ),
+				  isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+            
+			let	nextIndex = null,
+				$next     = null;
 			 
 			if ( dir == 'down' || dir === false ) {
 				nextIndex = index + 1;
@@ -202,8 +201,8 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 
 
 							//Changing The Site URL
-							var curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
-								href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
+							const curSectionIndex = $sections.filter( '.is-active' ).index() + 1,
+								  href            = window.location.href.substr( 0, window.location.href.indexOf( '#' ) ) + '#' + $sections.filter( '.is-active' ).attr( 'id' );
 
 							// Save state on history stack
 							// - First argument is any object that will let you restore state
@@ -302,18 +301,18 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 
 
 
-		var navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
-			navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
+		const navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
+			  navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
 
 		$window.on( 'scroll.ONEPAGE touchmove.ONEPAGE', function() {
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = parseFloat( scrollTop + topSpacing ),
-				minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
-				maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
+			const scrollTop = $( this ).scrollTop(),
+				  spyTop    = parseFloat( scrollTop + topSpacing ),
+				  minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
+				  maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
 
 			$( '[data-highlight-section="true"]' ).each( function()  {
-				var block     = $( this ),
-					eleTop    = block.offset().top;
+				const block     = $( this ),
+					  eleTop    = block.offset().top;
 				
 
 				// The 1 pixel in order to solve inaccurate value of outerHeight() 
@@ -358,9 +357,9 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		 *  Mouse Wheel & Touch Method
 		 ====================================================
 		 */
-		var startY = 0;
-		var onTouchStart = function ( e ) {
-			var touches = e.touches;
+		let startY = 0;
+		const onTouchStart = function ( e ) {
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				startY = touches[0].pageY;
 				
@@ -368,12 +367,12 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		};
 
 		
-		var onDeviceWheel = function ( e ) {
+		const onDeviceWheel = function ( e ) {
 			
 			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var dir, delta, mobileDeltaY = null;
+			let dir, delta, mobileDeltaY = null;
 			
-			var touches = e.touches;
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				mobileDeltaY = startY - touches[0].pageY;
 			} else {

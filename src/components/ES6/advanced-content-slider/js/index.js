@@ -34,10 +34,12 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
     module.ADVANCED_CONTENT_SLIDER.version       = '0.0.7';
     module.ADVANCED_CONTENT_SLIDER.documentReady = function( $ ) {
 
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			animSpeed                 = 1200;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
+        
+        
+		let	animSpeed = 1200;
 		
 		
 		
@@ -64,15 +66,17 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
         function sliderInit() {
 			
 			$( '.uix-advanced-content-slider' ).each( function() {
-				var $this                      = $( this ),
-					$items                     = $this.find( '.uix-advanced-content-slider__item' ),
-					$itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
-					$first                     = $items.first(),
-					itemWidth                  = $this.width(),
-					itemsTotal                 = $items.length,
-					totalWidth                 = itemWidth*itemsTotal,
-					dataControlsPaginationAuto = false,
-                    activated                  = $this.data( 'activated' ); 
+				const $this                      = $( this );
+                
+				const $items                     = $this.find( '.uix-advanced-content-slider__item' ),
+					  $itemsWrapper              = $this.children( '.uix-advanced-content-slider__inner' ),
+					  $first                     = $items.first(),
+					  itemWidth                  = $this.width(),
+					  itemsTotal                 = $items.length,
+					  totalWidth                 = itemWidth*itemsTotal,
+                      activated                  = $this.data( 'activated' ); 
+                
+                let dataControlsPaginationAuto = false;
 				
 				
                 
@@ -80,7 +84,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     
                     
                     //Get parameter configuration from the data-* attribute of HTML
-                    var dataControlsPagination     = $this.data( 'controls-pagination' ),
+                    let dataControlsPagination     = $this.data( 'controls-pagination' ),
                         dataControlsArrows         = $this.data( 'controls-arrows' ),
                         dataDraggable              = $this.data( 'draggable' ),
                         dataDraggableCursor        = $this.data( 'draggable-cursor' ),
@@ -101,7 +105,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     
                     
                     //Autoplay times
-                    var playTimes;
+                    let playTimes;
                     //A function called "timer" once every second (like a digital watch).
                     $this[0].animatedSlides;
 
@@ -141,10 +145,10 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     //Pagination dots 
                     //-------------------------------------	
                     if ( dataControlsPaginationAuto ) {
-                        var _dot       = '',
+                        let _dot       = '',
                             _dotActive = '';
                         _dot += '<ul class="uix-advanced-content-slider__pagination--default">';
-                        for ( var i = 0; i < itemsTotal; i++ ) {
+                        for ( let i = 0; i < itemsTotal; i++ ) {
 
                             _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -163,7 +167,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                         e.preventDefault();
                         
                         //Prevent buttons' events from firing multiple times
-                        var $btn = $( this );
+                        const $btn = $( this );
                         if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                         $( dataControlsPagination ).find( 'li a' ).attr( 'aria-disabled', 'true' );
                         setTimeout( function() {
@@ -189,7 +193,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                     //Next/Prev buttons
                     //-------------------------------------		
-                    var _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
+                    const _prev = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--prev' ),
                         _next = $( dataControlsArrows ).find( '.uix-advanced-content-slider__arrows--next' );
 
 
@@ -243,7 +247,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                     //Drag and Drop
                     //-------------------------------------	
-                    var $dragDropTrigger = $this,
+                    let $dragDropTrigger = $this,
                         hammerProps      = {};
 
                     //Make the cursor a move icon when a user hovers over an item
@@ -257,7 +261,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                     //Mouse event
                     //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-                    var direction,
+                    let direction,
                         dragDropElement = $dragDropTrigger[0],
                         dragDropMC      = new Hammer( dragDropElement, hammerProps );
 
@@ -335,8 +339,8 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 		 */
 		function sliderAutoPlay( playTimes, timing, loop, slider, paginationID, arrowsID ) {	
 
-			var items = slider.find( '.uix-advanced-content-slider__item' ),
-				total = items.length;
+			const items = slider.find( '.uix-advanced-content-slider__item' ),
+				  total = items.length;
 			
 			slider[0].animatedSlides = setInterval( function() {
 
@@ -347,7 +351,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 				if ( !loop ) {
 					if ( playTimes < total && playTimes >= 0 ) {
 
-						var slideNextId = playTimes;	
+						let slideNextId = playTimes;	
 
 						sliderUpdates( slideNextId, slider, paginationID, arrowsID, loop );
 					}
@@ -355,7 +359,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 					if ( playTimes == total ) playTimes = 0;
 					if ( playTimes < 0 ) playTimes = total-1;		
 
-					var slideNextId = playTimes;	
+					let slideNextId = playTimes;	
 
 
 					//Prevent problems with styles when switching in positive order
@@ -383,7 +387,7 @@ export const ADVANCED_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 		 */
         function sliderUpdates( elementIndex, slider, paginationID, arrowsID, loop ) {
 			
-			var $items        = slider.find( '.uix-advanced-content-slider__item' ),
+			const $items        = slider.find( '.uix-advanced-content-slider__item' ),
 				itemsTotal    = $items.length,
 				$prev         = $( arrowsID ).find( '.uix-advanced-content-slider__arrows--prev' ),
 				$next         = $( arrowsID ).find( '.uix-advanced-content-slider__arrows--next' ),

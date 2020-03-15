@@ -10,18 +10,18 @@
     $.fn.UixRenderControlsLineEff = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '.uix-controls.uix-controls--line'
         }, options );
  
         this.each( function() {
 			
-			var $this              = $( this ),
-				customControls     = settings.controls;
+			const $this              = $( this );
+			const customControls     = settings.controls;
 
 
 			$( customControls ).each( function() {
-				var dataExist = $( this ).data( 'exist' );
+				const dataExist = $( this ).data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 					$( '<ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>' ).insertAfter( $( this ).find( 'label' ) );
 					

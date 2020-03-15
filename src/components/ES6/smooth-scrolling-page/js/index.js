@@ -27,12 +27,11 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 		//Prevent this module from loading in other pages
 		if ( !$( 'body' ).hasClass( 'smooth-scrolling-page' ) ) return false;
 		
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
+        const $window          = $( window );
+        let	windowWidth        = window.innerWidth,
+            windowHeight       = window.innerHeight;
 
-        
-        var html = document.documentElement,
+        const html = document.documentElement,
             body = document.body,
             scroller = {
                 target        : '#uix-scrollspy-area',
@@ -43,8 +42,9 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                 y             : 0,
                 resizeRequest : 1,
                 scrollRequest : 0
-            },
-            requestId = null;
+            }
+        
+        let requestId = null;
 
         TweenMax.set( scroller.target, {
             rotation: 0.01,
@@ -54,8 +54,8 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
 
         //Increase the viewport to display the visual area
-        var elTop = $( scroller.target ).offset().top;
-        var initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
+        const elTop = $( scroller.target ).offset().top;
+        const initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
 
         if ( ! $( 'body' ).hasClass( initSmoothScrollingPageWrapper ) ) {
             $( 'body' ).addClass( initSmoothScrollingPageWrapper );
@@ -93,16 +93,16 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
         function updateScroller() {
 
-            var resized = scroller.resizeRequest > 0;
+            const resized = scroller.resizeRequest > 0;
 
             if (resized) {
-                var height = $( scroller.target ).height();
+                const height = $( scroller.target ).height();
                 body.style.height = parseFloat( height + elTop ) + "px";
                 scroller.resizeRequest = 0;
             }
 
 
-            var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0;
+            const scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0;
 
             scroller.endY = scrollY;
             scroller.y += (scrollY - scroller.y) * scroller.ease;
@@ -134,23 +134,23 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             //+++++++++++++++++++++++++++++++++++++++++++++++++
             
 
-            var scrollTop   = scroller.y,
-                topSpacing  = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin 
+            const scrollTop   = scroller.y,
+                  topSpacing  = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin 
 
             //----------------------------------------------------------------------------------
             //--------------------------------- Scrollspy Animate -------------------------------	
             //----------------------------------------------------------------------------------   
 
-            var $targetEl = $( '#uix-scrollspy-animate' );
+            const $targetEl = $( '#uix-scrollspy-animate' );
 
             if ( $targetEl.length > 0 ) {
-                var elHeight      = $targetEl.height(),
-                    elOffsetTop   = $targetEl.offset().top - topSpacing;
+                const elHeight      = $targetEl.height(),
+                      elOffsetTop   = $targetEl.offset().top - topSpacing;
 
-                var scale               = scrollTop / elHeight,
-                    elScale             = 1 - scale * 0.1,
-                    elOpacity           = 1 - scale,
-                    scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
+                const scale               = scrollTop / elHeight,
+                      elScale             = 1 - scale * 0.1,
+                      elOpacity           = 1 - scale,
+                      scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
 
 
                 //
@@ -179,8 +179,8 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                 if ( $( '#app-demo-element2' ).length > 0 ) {
                     if ( parseFloat( scrollTop + windowHeight ) > $( '#app-demo-element2' ).offset().top ) {
 
-                        var elStart    = parseInt( $( '#app-btn1' ).offset().top - scrollTop - windowHeight ),// > 0
-                            elProgress = Math.abs( elStart / windowHeight );
+                        const elStart    = parseInt( $( '#app-btn1' ).offset().top - scrollTop - windowHeight ),// > 0
+                              elProgress = Math.abs( elStart / windowHeight );
 
                         TweenMax.set( '#app-demo-element2', {
                             x: elProgress * 150
@@ -204,11 +204,11 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
              * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":"90%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
             */    
             
-            var $scrollRevealElements = $( '[data-scrollspy-anim]' );
-            var tmAnim = function( obj, type ) {
+            const $scrollRevealElements = $( '[data-scrollspy-anim]' );
+            const tmAnim = function( obj, type ) {
 
 
-                    var config = obj.data( 'scrollspy-anim' );
+                    let config = obj.data( 'scrollspy-anim' );
 
                     if( typeof config === typeof undefined || config == '' || config === false ) {
                         config = {
@@ -224,7 +224,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
 
                     //get attributes to tweenMax
-                    var fromCSS     = config.from,
+                    let fromCSS     = config.from,
                         toCSS       = config.to,
                         myEase      = config.ease,
                         myDuration  = config.duration,
@@ -232,7 +232,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         infinite    = config.infinite;
 
                     //A percentage of the viewport's height.
-                    var viewport = config.viewport;
+                    let viewport = config.viewport;
 
                     if ( typeof viewport === typeof undefined ) viewport = '90%';
                     if ( typeof myEase === typeof undefined ) myEase = 'Power2.easeOut';
@@ -311,12 +311,12 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             $scrollRevealElements.each( function()  {
 
 
-                var $el = $( this ),
-                    viewport = tmAnim( $el, 'viewport' );
+                const $el = $( this ),
+                      viewport = tmAnim( $el, 'viewport' );
 
                 //Prevent asynchronous loading of repeated calls
-                var actived = $el.data( 'activated' ),
-                    tmLoop  = tmAnim( $el, 'loop' );
+                const actived = $el.data( 'activated' ),
+                      tmLoop  = tmAnim( $el, 'loop' );
 
                 
                 if( typeof actived === typeof undefined ) {
@@ -336,7 +336,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         //------------------
                         if ( $.isFunction( $.fn.UixTextEff ) ) {
 
-                            var _ids = $el.data( 'texteff-ids' );
+                            const _ids = $el.data( 'texteff-ids' );
                             if ( typeof _ids !== typeof undefined ) {
                                 _ids.forEach( function( element ) {
                                     $( document ).UixTextEff( { selectors: '[data-text-eff="'+element+'"]' } );
@@ -353,7 +353,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         //Counter
                         if ( $.isFunction( $.fn.UixCountTo ) ) {
 
-                            var _counterIds = $el.data( 'counter-ids' );
+                            const _counterIds = $el.data( 'counter-ids' );
                             if ( typeof _counterIds !== typeof undefined ) {
                                 _counterIds.forEach( function( element ) {
                                     $( element ).each( function()  {
@@ -369,7 +369,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         
                         //
                         //Image transition
-                        var _imgIds = $el.data( 'img-ids' );
+                        const _imgIds = $el.data( 'img-ids' );
                         if ( typeof _imgIds !== typeof undefined ) {
                             _imgIds.forEach( function( element ) {
                                 $( element ).each( function( index )  {
@@ -419,8 +419,9 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             */    
             
             $( '[data-scrollspy-bg]' ).each( function() {
-                var $this    = $( this ),
-                    config   = $this.data( 'scrollspy-bg' );
+                const $this    = $( this );
+                
+                let config   = $this.data( 'scrollspy-bg' );
 
 
                 if ( typeof config === typeof undefined ) {
@@ -436,7 +437,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
                 if ( config ) {
 
-                    var dataImg       = config.src,
+                    let dataImg       = config.src,
                         dataPos       = config.position,
                         dataSize      = config.size,
                         dataRepeat    = config.repeat,
@@ -485,9 +486,9 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                         if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 
 
-                            var bgEff      = { enable: true, xPos: '50%' },
-                                bgXpos     = '50%',
-                                speed      = -parseFloat( dataParallax );
+                            const bgEff      = { enable: true, xPos: '50%' },
+                                  bgXpos     = '50%',
+                                  speed      = -parseFloat( dataParallax );
 
 
                             //Prohibit transition delay
@@ -510,8 +511,8 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                             }//endif bgEff
 
 
-                            var scrolled = scrollTop,
-                                st       = $this.offset().top - scrolled;
+                            const scrolled = scrollTop,
+                                  st       = $this.offset().top - scrolled;
 
 
                             if ( bgEff ) {
@@ -561,8 +562,9 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             /* Pure parallax scrolling effect without other embedded HTML elements */
             $( '[data-scrollspy-parallax]' ).each( function() {
         
-				var $this       = $( this ),
-					dataSpeed   = $this.data( 'scrollspy-parallax' ).speed,
+				const $this     = $( this );
+                
+				let	dataSpeed   = $this.data( 'scrollspy-parallax' ).speed,
                     dataEasing  = $this.data( 'scrollspy-parallax' ).transition;
 				
 				if ( typeof dataSpeed === typeof undefined ) {
@@ -585,7 +587,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                 });	
 
 
-                var scrolled = scrollTop;
+                const scrolled = scrollTop;
 
                 //element parallax
                 TweenMax.set( $this, {

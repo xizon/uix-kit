@@ -27,11 +27,12 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
     module.ADVANCED_SLIDER.version       = '0.1.9';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
-		var $window                   = $( window ),
-			windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight,
-			animDelay                 = 0,
-			$sliderWrapper            = $( '.uix-advanced-slider' );
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
+        
+		let	animDelay = 0;
+		const $sliderWrapper = $( '.uix-advanced-slider' );
 			
         
         
@@ -62,12 +63,15 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
 			$sliderWrapper.each( function()  {
 
-				var $this                    = $( this ),
-					$items                   = $this.find( '.uix-advanced-slider__item' ),
-					$first                   = $items.first(),
-					nativeItemW,
-					nativeItemH,
-                    activated                = $this.data( 'activated' ); 
+				const $this                    = $( this );
+                
+				const $items                   = $this.find( '.uix-advanced-slider__item' ),
+				      $first                   = $items.first(),
+                      activated                = $this.data( 'activated' ); 
+                
+				let	  nativeItemW,
+					  nativeItemH;
+                      
 				
 				
                 
@@ -75,7 +79,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                     
 
                     //Get parameter configuration from the data-* attribute of HTML
-                    var dataAuto                 = $this.data( 'auto' ),
+                    let dataAuto                 = $this.data( 'auto' ),
                         dataTiming               = $this.data( 'timing' ),
                         dataLoop                 = $this.data( 'loop' ),
                         dataControlsPagination   = $this.data( 'controls-pagination' ),
@@ -100,7 +104,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                     
                
                     //Autoplay times
-                    var playTimes;
+                    let playTimes;
                     //A function called "timer" once every second (like a digital watch).
                     $this[0].animatedSlides;
 
@@ -122,8 +126,9 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                     if ( $first.find( 'video' ).length > 0 ) {
 
                         //Returns the dimensions (intrinsic height and width ) of the video
-                        var video    = document.getElementById( $first.find( 'video' ).attr( 'id' ) ),
-                            videoURL = $first.find( 'source:first' ).attr( 'src' );
+                        const video = document.getElementById( $first.find( 'video' ).attr( 'id' ) );
+                        let videoURL = $first.find( 'source:first' ).attr( 'src' );
+                        
                         if ( typeof videoURL === typeof undefined ) videoURL = $first.attr( 'src' ); 
 
                         video.addEventListener( 'loadedmetadata', function( e ) {
@@ -142,10 +147,10 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
                     } else {
 
-                        var imgURL   = $first.find( 'img' ).attr( 'src' );
+                        let imgURL   = $first.find( 'img' ).attr( 'src' );
 
                         if ( typeof imgURL != typeof undefined ) {
-                            var img = new Image();
+                            const img = new Image();
 
                             img.onload = function() {
                                 $this.css( 'height', $this.width()*(this.height/this.width) + 'px' );		
@@ -221,7 +226,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		 */
 		function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-			var items = slider.find( '.uix-advanced-slider__item' ),
+			const items = slider.find( '.uix-advanced-slider__item' ),
 				total = items.length;
 			
 			slider[0].animatedSlides = setInterval( function() {
@@ -262,7 +267,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		 */
         function addItemsToStage( slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID  ) {
 			
-			var $this                    = slider,
+			const $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider__item' ),
 				$first                   = $items.first(),
 				itemsTotal               = $items.length;
@@ -297,10 +302,10 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			//Pagination dots 
 			//-------------------------------------	
-			var _dot       = '',
+			let _dot       = '',
 				_dotActive = '';
 			_dot += '<ul>';
-			for ( var i = 0; i < itemsTotal; i++ ) {
+			for ( let i = 0; i < itemsTotal; i++ ) {
 
 				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -314,7 +319,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				e.preventDefault();
                 
                 //Prevent buttons' events from firing multiple times
-                var $btn = $( this );
+                const $btn = $( this );
                 if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                 $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'true' );
                 setTimeout( function() {
@@ -326,7 +331,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 					
 
 					//Determine the direction
-					var curDir = 'prev';
+					let curDir = 'prev';
 					if ( $( this ).attr( 'data-index' ) > parseFloat( $items.filter( '.is-active' ).index() ) ) {
 						curDir = 'next';
 					}
@@ -344,7 +349,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			//Next/Prev buttons
 			//-------------------------------------		
-			var _prev = $( arrowsID ).find( '.uix-advanced-slider__arrows--prev' ),
+			const _prev = $( arrowsID ).find( '.uix-advanced-slider__arrows--prev' ),
 				_next = $( arrowsID ).find( '.uix-advanced-slider__arrows--next' );
 
 			$( arrowsID ).find( 'a' ).attr( 'href', 'javascript:' );
@@ -395,7 +400,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			//Added touch method to mobile device and desktop
 			//-------------------------------------	
-			var $dragDropTrigger = $items;
+			const $dragDropTrigger = $items;
 			
 
 			//Make the cursor a move icon when a user hovers over an item
@@ -407,7 +412,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				
 				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
 
-				var touches = e.originalEvent.touches;
+				const touches = e.originalEvent.touches;
 
 				$( this ).addClass( 'is-dragging' );
 
@@ -430,13 +435,13 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 					
 
 					$( this ).removeClass( 'is-dragging' );
-					var touches        = e.originalEvent.touches,
+					let touches        = e.originalEvent.touches,
 						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
 
 					if ( touches && touches.length ) {
 
-						var deltaX = origin_mouse_x - touches[0].pageX,
+						let deltaX = origin_mouse_x - touches[0].pageX,
 							deltaY = origin_mouse_y - touches[0].pageY;
 
 						//--- left
@@ -528,7 +533,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		 */
         function sliderUpdates( elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 			
-			var $items                   = slider.find( '.uix-advanced-slider__item' ),
+			const $items                   = slider.find( '.uix-advanced-slider__item' ),
 				$current                 = $items.eq( elementIndex ),
 			    total                    = $items.length
 			
@@ -576,7 +581,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			
 			
 			//Determine the direction and add class to switching direction indicator.
-			var dirIndicatorClass = '';
+			let dirIndicatorClass = '';
 			if ( dir == 'prev' ) dirIndicatorClass = 'prev';
 			if ( dir == 'next' ) dirIndicatorClass = 'next';
 			
@@ -628,8 +633,9 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			if ( currentLlement.find( 'video' ).length > 0 ) {
 
 				//Returns the dimensions (intrinsic height and width ) of the video
-				var video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) ),
-					videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
+				const video    = document.getElementById( currentLlement.find( 'video' ).attr( 'id' ) );
+				let	videoURL = currentLlement.find( 'source:first' ).attr( 'src' );
+                
                 if ( typeof videoURL === typeof undefined ) videoURL = currentLlement.attr( 'src' ); 
 
 				video.addEventListener( 'loadedmetadata', function( e ) {
@@ -643,11 +649,11 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			} else {
 
-				var imgURL   = currentLlement.find( 'img' ).attr( 'src' );
+				let imgURL   = currentLlement.find( 'img' ).attr( 'src' );
 				
 
 				if ( typeof imgURL != typeof undefined ) {
-					var img = new Image();
+					const img = new Image();
 
 					img.onload = function() {
 
@@ -672,16 +678,20 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		 */
 		function normalSliderVideoInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
-				var $this          = $( this ),
-					videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
-					curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
-					coverPlayBtnID = 'videocover-' + curVideoID,
-					dataControls   = $this.data( 'embed-video-controls' ),
-					dataAuto       = $this.data( 'embed-video-autoplay' ),
-					dataLoop       = $this.data( 'embed-video-loop' ),
-					dataW          = $this.data( 'embed-video-width' ),
-					dataH          = $this.data( 'embed-video-height' ),
-					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+				const $this          = $( this );
+                
+				const videoWrapperW  = $this.closest( '.uix-advanced-slider__outline' ).width(),
+					  curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
+					  coverPlayBtnID = 'videocover-' + curVideoID,
+                      $replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+                
+                
+				let	  dataControls   = $this.data( 'embed-video-controls' ),
+					  dataAuto       = $this.data( 'embed-video-autoplay' ),
+					  dataLoop       = $this.data( 'embed-video-loop' ),
+					  dataW          = $this.data( 'embed-video-width' ),
+					  dataH          = $this.data( 'embed-video-height' );
+				
 				
 				//Push a new ID to video
 				//Solve the problem that ajax asynchronous loading does not play
@@ -715,7 +725,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 
 
-					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+					const btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
 					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
@@ -745,7 +755,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				}
 
 				
-				var myPlayer = videojs( curVideoID, 
+				const myPlayer = videojs( curVideoID, 
 				   {
 					  width     : dataW,
 					  height    : dataH,
@@ -755,10 +765,10 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				   function onPlayerReady() {
 
 
-						var initVideo = function( obj ) {
+						const initVideo = function( obj ) {
 
 							//Get Video Dimensions
-							var curW    = obj.videoWidth(),
+							let curW    = obj.videoWidth(),
 								curH    = obj.videoHeight(),
 								newW    = curW,
 								newH    = curH;
@@ -807,7 +817,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 							this.muted( true ); 
 
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = this.play();
+							const promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -833,11 +843,11 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 
 						/* ---------  Determine if the video is auto played from mobile devices  */
-						var autoPlayOK = false;
+						let autoPlayOK = false;
 
 						this.on( 'timeupdate', function() {
 
-							var duration = this.duration();
+							let duration = this.duration();
 							if ( duration > 0 ) {
 								autoPlayOK = true;
 								if ( this.currentTime() > 0 ) {
@@ -870,7 +880,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 								this.currentTime(0);
 
 								//Prevent autoplay error: Uncaught (in promise) DOMException
-								var promise = this.play();
+								const promise = this.play();
 
 								if ( promise !== undefined ) {
 									promise.then( function() {

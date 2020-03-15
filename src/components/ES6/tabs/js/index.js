@@ -28,20 +28,23 @@ export const TABS = ( ( module, $, window, document ) => {
     module.TABS.documentReady = function( $ ) {
 
 		$( '.uix-tabs' ).each( function( id ) {
-			var $this             = $( this ),
-			    $li               = $this.find( '.uix-tabs__nav ul > li' ),
-				liWidth           = $li.first().outerWidth(),
-				liHeight          = $li.first().outerHeight(),
-				liNum             = $li.length,
-				$contentbox       = $this.find( '.uix-tabs__content' ),
-				ulWidth           = $this.data( 'width' ),
+			const $this             = $( this );
+            
+			const $li               = $this.find( '.uix-tabs__nav ul > li' ),
+				  liWidth           = $li.first().outerWidth(),
+				  liHeight          = $li.first().outerHeight(),
+				  liNum             = $li.length,
+				  $contentbox       = $this.find( '.uix-tabs__content' ),
+                  isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/,
+                  tabBoxID          = id;
+            
+			let	ulWidth           = $this.data( 'width' ),
 				fullwidth         = $this.data( 'fullwidth' ),
 				rotation          = $this.data( 'rotation' ),
 				rotationRadius    = $this.data( 'rotation-radius' ),
 				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
-				rotationDisplay   = $this.data( 'rotation-display' ),
-				tabBoxID          = id,
-				isNumeric         = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+				rotationDisplay   = $this.data( 'rotation-display' );
+            
 			
 			if ( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
 				$li.css( 'width', ( 100 / liNum ) + '%' );
@@ -92,17 +95,18 @@ export const TABS = ( ( module, $, window, document ) => {
 				
 
 				//Layout components in a circle layout
-				var angle           = 0,
-					step            = 2 * Math.PI / rotationDisplay,
-					transitionDelay = 0,
-					pad             = $this.find( '.uix-tabs__nav ul' ).width();
+				const step            = 2 * Math.PI / rotationDisplay,
+					  pad             = $this.find( '.uix-tabs__nav ul' ).width();
 
+                let angle             = 0,
+                    transitionDelay   = 0;
+                
 
 				$this.find( '.uix-tabs__nav ul > li' ).each( function() { //Can'nt use arrow function here!!!
 					// 'this' works differently with arrow fucntions
-					var el          = $( this ),
-						x           = rotationRadius * Math.cos(angle) - liWidth / 2,
-						y           = rotationRadius * Math.sin(angle) - liHeight / 2;
+					const el          = $( this ),
+						  x           = rotationRadius * Math.cos(angle) - liWidth / 2,
+						  y           = rotationRadius * Math.sin(angle) - liHeight / 2;
 
 
 					el.css({
@@ -124,14 +128,14 @@ export const TABS = ( ( module, $, window, document ) => {
 					//----------------------- begin ----------------------
 					el.off( 'click' ).on( 'click', function( e ) {
 						
-						var increase   = Math.PI * 2 / rotationDisplay,
-							n          = $( this ).index(),
-							endAngle   = n % rotationDisplay * increase; 
+						const increase   = Math.PI * 2 / rotationDisplay,
+							  n          = $( this ).index(),
+							  endAngle   = n % rotationDisplay * increase; 
 
 
 						( function turn() {
 							if (Math.abs(endAngle - angle) > 1 / 8) {
-								var sign = endAngle > angle ? 1 : -1;
+								const sign = endAngle > angle ? 1 : -1;
 								angle = angle + sign / 8;
 								setTimeout(turn, 20);
 							} else {
@@ -141,8 +145,8 @@ export const TABS = ( ( module, $, window, document ) => {
 							
 						
 							$this.find( '.uix-tabs__nav ul > li' ).each( function( index ) {
-								var x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
-									y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
+								const x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
+									  y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
 
 							
 								$( this ).css({
@@ -180,8 +184,8 @@ export const TABS = ( ( module, $, window, document ) => {
 			// Tab Fade Effect
 			$this.off( 'click' ).on( 'click', '.uix-tabs__nav ul > li', function( e ) {
 				
-				var tabID = $( this ).attr( 'data-tab' ),
-					index = parseFloat( $( this ).index() - 1 );
+				const tabID = $( this ).attr( 'data-tab' ),
+					  index = parseFloat( $( this ).index() - 1 );
 				
 				
 				$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'is-active' );
@@ -192,9 +196,9 @@ export const TABS = ( ( module, $, window, document ) => {
 				
 
 				//sliding marker
-				var translateX = $( this ).index() * 100,
-					liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
-					translateY = $( this ).index() * liHeight;
+				const translateX = $( this ).index() * 100,
+					  liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
+					  translateY = $( this ).index() * liHeight;
 				
 				if ( window.innerWidth <= 768 ) {
 					$this.find( '.uix-tabs__marker' ).css({
@@ -217,7 +221,7 @@ export const TABS = ( ( module, $, window, document ) => {
 			$this.find( '.uix-tabs__nav ul > li.is-active' ).trigger( 'click' );
 			
 			//Active current tab
-			var url    = window.location.href,
+			let url    = window.location.href,
 				locArr,
 			    loc, 
 				curTab;

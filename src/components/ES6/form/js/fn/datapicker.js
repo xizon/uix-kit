@@ -10,7 +10,7 @@
     $.fn.UixRenderDatePicker = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '[data-picker]'
         }, options );
  
@@ -21,8 +21,9 @@
 
 				$( settings.controls ).each( function() {
 
-					var $this            = $( this ),
-						dateFormat       = $this.data( 'picker-format' ),
+					const $this            = $( this );
+                    
+					let	dateFormat       = $this.data( 'picker-format' ),
 						timeEnable       = $this.data( 'picker-timepicker' ),
 						lang             = $this.data( 'picker-lang' ),
 						myminDate        = $this.data( 'picker-min-date' ),

@@ -34,24 +34,30 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.1.4';
+    module.MODAL_DIALOG.version       = '0.1.5';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		
 		//Delay Time when Full Screen Effect is fired.
-		var modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
+		const modalSpeed = UixCssProperty.getTransitionDuration( $( '.uix-modal-box:first' )[0] );
         
         
         // To display the template tag content.
         $( 'template' ).each( function()  {
             
-            var _content = $( this ).html( function( index,html ) {
+            const _content = $( this ).html( function( index,html ) {
                                         return html.replace(/[\r\n]/g, '' );
                                     }).context.innerHTML,
                 _id = $( this ).attr( 'id' );
             
+            
             //If it is dialog, clone the contents of the <template> into the body
-            if ( ! $( 'body' ).hasClass( _id ) && $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 ) {
+            if ( 
+                typeof _id !== typeof undefined && 
+                ! $( 'body' ).hasClass( _id ) && 
+                $( '<div>' + _content + '</div>' ).find( '[role="dialog"]' ).length > 0 
+            ) {
+
                 
                 //reset id
                 $( this ).removeAttr( 'id' );
@@ -65,7 +71,8 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
         });
         
         
-	
+        
+        
 		
 		/*
 		  * Unbind that one in a safe way that won't accidentally unbind other click handlers.
@@ -85,7 +92,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	    
 		$( document ).off( 'click.MODAL_DIALOG' ).on( 'click.MODAL_DIALOG', '[data-modal-id]', function() {
 
-			var dataH         = $( this ).data( 'modal-height' ),
+			let dataH         = $( this ).data( 'modal-height' ),
 				dataW         = $( this ).data( 'modal-width' ),
 				lightbox      = $( this ).data( 'modal-lightbox' ),
 				closeTime     = $( this ).data( 'modal-close-time' ),

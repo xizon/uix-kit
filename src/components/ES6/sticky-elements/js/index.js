@@ -28,19 +28,20 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
     module.STICKY_EL.version       = '0.0.5';
     module.STICKY_EL.pageLoaded    = function() {
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight,
-			topSpacing   = ( windowWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin
+        const $window          = $( window );
+        let	windowWidth        = window.innerWidth,
+            windowHeight       = window.innerHeight;
+        
+		const topSpacing   = ( windowWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin
 		
 		
 		//prepend a placeholder
 		$( '.js-uix-sticky-el' ).each( function()  {
 
-			var $el      = $( this ),
-				elHeight = $el.outerHeight( true ), //with margin
-				elClass  = $el.attr( 'class' ).replace( 'js-uix-sticky-el', ''),
-				tempID   = 'sticky-' + UixGUID.create();
+			const $el      = $( this ),
+				  elHeight = $el.outerHeight( true ), //with margin
+				  elClass  = $el.attr( 'class' ).replace( 'js-uix-sticky-el', ''),
+				  tempID   = 'sticky-' + UixGUID.create();
 
 			$el.attr( 'data-sticky-id', tempID );
 			
@@ -94,19 +95,19 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 			if ( w > 768 ) {
 				
 				$( '.js-uix-sticky-el' ).each( function()  {
-					var $el      = $( this ),
-						elTop    = $el.offset().top,
-						oWidth   = $el.width(),
-						clsID    = $el.data( 'sticky-id' ),
-						$ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
+					const $el      = $( this ),
+						  elTop    = $el.offset().top,
+						  oWidth   = $el.width(),
+						  clsID    = $el.data( 'sticky-id' ),
+						  $ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
 					
 					
 					
 					//spy the scroll event
 					$window.on( 'scroll.STICKY_EL touchmove.STICKY_EL', function() {
 
-						var scrollTop   = $window.scrollTop(),
-							dynamicTop  = parseFloat( scrollTop + window.innerHeight );
+						const scrollTop   = $window.scrollTop(),
+							  dynamicTop  = parseFloat( scrollTop + window.innerHeight );
 
 
 						//------
@@ -133,8 +134,8 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 						//------
 						if ( typeof $el.data( 'stop-trigger' ) != typeof undefined && $( $el.data( 'stop-trigger' ) ).length > 0 ) {
 
-							var diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
-								targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
+							const diff      = typeof $el.data( 'stop-trigger-diff' ) != typeof undefined && $el.data( 'stop-trigger-diff' ).length > 0 ? UixMath.evaluate( $el.data( 'stop-trigger-diff' ).replace(/\s/g, '').replace(/\%\h/g, windowHeight ).replace(/\%\w/g, windowWidth ) ) : 0,
+								  targetTop = $( $el.data( 'stop-trigger' ) ).offset().top - diff;
 
 
 							//Detecting when user scrolls to bottom of div

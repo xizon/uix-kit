@@ -1063,6 +1063,8 @@ $controls-merge-button-width: 20%;
 
 	position: relative;
 
+    
+
 	label {
         margin: #{$control-padding-height} .5rem #{$control-padding-side} 0;
 		position: relative;
@@ -1072,6 +1074,18 @@ $controls-merge-button-width: 20%;
 		cursor: pointer;
 		@include control-label-text();
 	}
+    
+    
+    &:not(.uix-controls--line).is-disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: .3;
+        
+        label {
+            user-select: none;
+            pointer-events: none; 
+        }
+    }
 
 	input[type="radio"] {
 		display: none;
@@ -1113,7 +1127,12 @@ $controls-merge-button-width: 20%;
 .uix-controls__toggle {
 
 	position: relative;
-
+    
+    &:not(.uix-controls--line).is-disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: .3;
+    }
 
 	label {
 		display: inline-block;
@@ -1188,6 +1207,13 @@ $controls-merge-button-width: 20%;
 .uix-controls__checkbox {
 
 	position: relative;
+    
+    &:not(.uix-controls--line).is-disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: .3;
+    }
+    
 
 	label {
 	    @include control-label-text();

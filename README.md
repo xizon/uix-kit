@@ -4,8 +4,9 @@
   </a>
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
+      <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://api.travis-ci.org/xizon/uix-kit.svg?branch=master"/></a>
       <a href="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F" title="w3c"><img src="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F"/></a>
-	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=4.1.3&x2=0"/></a>
+	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=4.1.53&x2=0"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 	   
   </p>
@@ -46,6 +47,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * [Description](#description)
 * [Installation And Test](#installation-and-test)
 * [How To Use？](#how-to-use)
+* [How to Create a Custom Module？ &#128293; ](#how-to-create-a-custom-module)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
 * [Browser Support](#browser-support)
@@ -288,9 +290,11 @@ uix-kit/
 ├── src/
 │   ├── components/
 │   │   ├── ES5/  ------------------------- # Third-party plugins adopt pure file merger and do not import and export
-│   │   ├── ES6/_global ------------------- # Generic modules
-│   │   ├── ES6/_main  -------------------- # Customization site file directory (for secondary or new website development)
-│   │   └── ES6/*  ------------------------ # Core functional modules
+│   │   ├── ES6/_app-load.js  ------------- # Import your modules to be used
+│   │   ├── ES6/_app-load-rtl.js  --------- # Import your RTL modules to be used
+│   │   ├── ES6/_global/ ------------------ # Generic modules
+│   │   ├── ES6/_main/  ------------------- # Customization site file directory (for secondary or new website development)
+│   │   └── ES6/*/  ----------------------- # Core functional modules
 ├── examples/                                
 │   ├── *.html  --------------------------- # HTML templates
 │   └── assets/  -------------------------- # Static resource directory
@@ -313,6 +317,224 @@ You can download the corresponding .PSD grid files.
 *   `misc/grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
 *   `misc/grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
 *   `misc/grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
+
+
+
+## How to Create a Custom Module
+
+Assuming you are in your application's root directory and want to create components inside `src/components/ES6/` as you show above. You can create a new directory and name it **demo-module**. 
+
+&#128071;&#128071;&#128071;
+
+
+Here’s a sample custom module directory structure, I’ve included some examples of files that would sit inside of each folder:
+
+
+```sh
+
+uix-kit/
+├── src/
+│   ├── components/
+│   │   ├── ES6/_app-load.js
+│   │   ├── ES6/_app-load-rtl.js
+│   │   ├── ES6/demo-module/scss/
+│   │   ├── ES6/demo-module/scss-rtl/
+│   │   ├── ES6/demo-module/js/
+│   │   └── ES6/demo-module/demo-module.html
+└──
+```
+
+
+**Step 1.** Inside that folder create two sub folders: `/scss` and `/js`. If you need to support RTL, create another `/scss-rtl`.
+
+
+**Step 2.** Create a SASS/SCSS file. Go into the `src/components/ES6/demo-module/scss/` folder and create a file called: `_style.scss`. Please import global variables or functions. Here's an example:
+
+```sh
+/* ====================================================== 
+   <!-- Demo Module Stylesheets --> 
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.app-demo {
+	font-size: $basic-font-size;
+    text-align: left;
+}
+```
+
+**Step 2-2 &#128161; Optional.** Alright, so if you need to support RTL. You need create a new SASS/SCSS file. Go into the `src/components/ES6/demo-module/scss-rtl/` folder and create a file called: `_style.scss`. Like this:
+
+```sh
+/* ====================================================== 
+   <!-- Demo Module Stylesheets --> 
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+.app-demo {
+    text-align: right;
+}
+```
+
+
+**Step 3.** Create a JS file. Go into the `src/components/ES6/demo-module/js/` folder and create a file called: `index.js`. In order to make it work we need to import the global variables or functions in file index.js. 
+
+Simultaneously, Now you’re ready to import your Stylesheets to use with this component. Import SASS/SCSS file in `src/components/ES6/demo-module/js/index.js`.
+
+Like this:.
+
+```sh
+/* 
+ *************************************
+ * <!-- Demo Module Scripts  -->
+ *************************************
+ */
+import {
+    templateUrl,
+    homeUrl,
+    ajaxUrl,
+    browser,
+    UixModuleInstance,
+    UixGUID,
+    UixMath,
+    UixCssProperty
+} from '@uixkit/core/_global/js';
+
+import '../scss/_style.scss';
+
+export const DEMO_MODULE = ( ( module, $, window, document ) => {
+	if ( window.DEMO_MODULE === null ) return false;
+
+    module.DEMO_MODULE               = module.DEMO_MODULE || {};
+    module.DEMO_MODULE.version       = '0.0.1';
+    
+    
+    // executes when HTML-Document is loaded and DOM is ready
+    module.DEMO_MODULE.documentReady = function( $ ) {
+		/* 
+		 ---------------------------
+		 Function Name
+		 ---------------------------
+		 */ 
+		// your code here...
+	
+    };
+    module.components.documentReady.push( module.DEMO_MODULE.documentReady );
+	
+    
+    
+    // executes when complete page is fully loaded, including all frames, objects and images
+    module.DEMO_MODULE.pageLoaded    = function() {
+		/* 
+		 ---------------------------
+		 Function Name
+		 ---------------------------
+		 */ 
+		 // your code here...
+		
+    };
+    module.components.pageLoaded.push( module.DEMO_MODULE.pageLoaded );	
+
+
+	return class DEMO_MODULE {
+		constructor() {
+			this.module = module;
+		}
+	};
+})( UixModuleInstance, jQuery, window, document );
+
+```
+
+
+
+**Step 4.** So far, to dynamically import the module you just created in `src/components/ES6/_app-load.js`.  The simplest version directly imports the default:
+
+
+```sh
+import DEMO_MODULE from '@uixkit/core/demo-module/js';
+```
+
+
+**Step 4-2  &#128161; Optional.** If you need to support RTL, in `src/components/ES6/_app-load-rtl.js`.  like this:
+
+
+```sh
+import '@uixkit/core/demo-module/scss-rtl/_style.scss';
+```
+
+These RTL modules do not need JavaScript.
+
+
+**Step 5 &#128161; Optional.** You could also create an HTML file to run the demo of this module separately, all HTML files will be automatically exported into the directory `examples/`. The demo code of the HTML file is as follows:
+
+
+```sh
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Demo Module - @@{website_title}</title>	
+	@@include('./src/components/ES6/_global/include-header.html')
+</head>  
+<body class="page">
+     
+    @@include('./src/components/ES6/_global/include-loader.html')
+    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+ 
+    <div class="uix-wrapper">
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+             <div class="uix-header">
+                 <div class="container">
+                        @@include('./src/components/ES6/_global/include-brand.html')
+                        @@include('./src/components/ES6/_global/include-menu.html')
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+    
+		<main id="uix-maincontent">
+			<!-- Content   
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Demo Module</h3>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+		   <!-- Content  
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container uix-t-c">
+                    <div class="row">
+                        <div class="col-12">
+                            ...
+                        </div>
+                    </div>
+				</div>
+			</section>   
+		</main> 
+        
+        @@include('./src/components/ES6/_global/include-copyright.html')
+        
+    </div>
+    <!-- .uix-wrapper end -->
+        
+    @@include('./src/components/ES6/_global/include-footer.html')
+```
+
+**Since Uix Kit is not a JavaScript framework, you could use any third-party libraries to build your custom module styles and animation scripts in the most intuitive way.**
+
+
 
 
 

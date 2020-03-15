@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.1.3
+ * ## Version             :  4.1.53
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 10, 2020
+ * ## Last Update         :  March 14, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "24fc699aecebf4bdfff3";
+/******/ 	var hotCurrentHash = "2b6166ef2d650456f159";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -927,13 +927,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }, options);
     this.each(function () {
       $(settings.selector).not('.js-uix-new').each(function () {
-        var $this = $(this),
-            classes = $this.attr('class'),
+        var $this = $(this);
+        var classes = $this.attr('class'),
             id = $this.attr('id'),
             name = $this.attr('name'),
-            template = '',
             labelText = $this.find('> span').html(),
             dataExist = $this.data('exist');
+        var template = '';
 
         if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
           template = '<div class="' + classes + ' js-uix-new">';
@@ -1002,8 +1002,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       $(settings.selector).not('.js-uix-new').each(function () {
         var $this = $(this).find('select'),
-            $cusSelect = $this.closest(settings.targetWrapper).find(settings.selector + '.js-uix-new'),
-            newOptions = '';
+            $cusSelect = $this.closest(settings.targetWrapper).find(settings.selector + '.js-uix-new');
+        var newOptions = '';
         $this.closest(settings.targetWrapper).find('select option').each(function (index) {
           var selected = '';
 
@@ -1384,14 +1384,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       index: 0
     }, options);
     this.each(function () {
-      var $this = $(this),
-          transitionEnd = 'webkitTransitionEnd transitionend',
+      var $this = $(this);
+      var transitionEnd = 'webkitTransitionEnd transitionend',
           $sections = settings.selector,
           $formTarget = settings.formTarget,
           $indicator = $(settings.indicator),
           allStep = $indicator.length,
-          stepPerValue = 100 / (allStep - 1),
-          value = 0,
+          stepPerValue = 100 / (allStep - 1);
+      var value = 0,
           tarIndex,
           curIndex;
       if ($indicator.length == 0) return false; //Returns current index
@@ -1425,8 +1425,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           numberNum = durString.replace('ms', '').replace('s', ''),
           animeSpeed = isMS ? numberNum : numberNum * 1000;
       var currentFormStep = parseInt($sections.eq(tarIndex).attr('data-step')) || false,
-          $nextForm = $formTarget.find('.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]'),
-          currentFormIndex = $nextForm.attr('data-step') - 1;
+          $nextForm = $formTarget.find('.uix-form-progress__target__step[data-step="' + (currentFormStep + 1) + '"]');
+      var currentFormIndex = $nextForm.attr('data-step') - 1;
       if (isNaN(currentFormIndex)) currentFormIndex = 0; // Activate other unused modules
 
       if (currentFormIndex > 0) {
@@ -1522,8 +1522,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.each(function () {
       $(settings.controls).each(function () {
         $(this).find('> label').each(function () {
-          var targetID = '#' + $(this).parent().attr("data-targetid"),
-              switchIDs = ''; //add switch IDs
+          var targetID = '#' + $(this).parent().attr("data-targetid");
+          var switchIDs = ''; //add switch IDs
 
           $(this).parent().find('> label').each(function () {
             if (_typeof($(this).data("switchid")) != ( true ? "undefined" : undefined)) {
@@ -1568,8 +1568,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.each(function () {
       if ($.isFunction($.fn.datetimepicker)) {
         $(settings.controls).each(function () {
-          var $this = $(this),
-              dateFormat = $this.data('picker-format'),
+          var $this = $(this);
+          var dateFormat = $this.data('picker-format'),
               timeEnable = $this.data('picker-timepicker'),
               lang = $this.data('picker-lang'),
               myminDate = $this.data('picker-min-date'),
@@ -1692,8 +1692,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.each(function () {
       $(settings.controls).each(function () {
         $(this).find('> span').each(function () {
-          var targetID = '#' + $(this).parent().attr('data-targetid'),
-              switchIDs = ''; //add switch IDs
+          var targetID = '#' + $(this).parent().attr('data-targetid');
+          var switchIDs = ''; //add switch IDs
 
           $(this).parent().find('> span').each(function () {
             if (_typeof($(this).data("switchid")) != ( true ? "undefined" : undefined)) {
@@ -1899,8 +1899,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       controls: '.uix-controls.uix-controls--line'
     }, options);
     this.each(function () {
-      var $this = $(this),
-          customControls = settings.controls;
+      var $this = $(this);
+      var customControls = settings.controls;
       $(customControls).each(function () {
         var dataExist = $(this).data('exist');
 
@@ -1951,8 +1951,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       checkboxWrapper: '.uix-controls__checkbox'
     }, options);
     this.each(function () {
-      var $this = $(this),
-          customRadio = settings.radioWrapper,
+      var $this = $(this);
+      var customRadio = settings.radioWrapper,
           customToggle = settings.toggle,
           customCheckbox = settings.checkboxWrapper;
       $(customRadio).find('input[type="radio"]').each(function () {
@@ -2423,9 +2423,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       selectors: '.letters-eff-fadeInRight'
     }, options);
     this.each(function () {
-      var $this = $(this),
-          customControls = settings.selectors,
-          speed = $(customControls).data('text-eff-speed'),
+      var $this = $(this);
+      var customControls = settings.selectors;
+      var speed = $(customControls).data('text-eff-speed'),
           txtEff;
 
       if (_typeof(speed) === ( true ? "undefined" : undefined)) {
@@ -3029,41 +3029,16 @@ var UixModuleInstance = function ($, window, document) {
  */
 
 var UixGUID = UixGUID || function () {
-  function t() {
-    do {
-      var x = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (t) {
-        var x = 16 * Math.random() | 0;
-        return ("x" == t ? x : 3 & x | 8).toString(16);
-      });
-    } while (!t.register(x));
+  function t() {}
 
-    return x;
-  }
-
-  return t.version = "1.4.2", t.create = function () {
-    return t();
-  }, t._list = {}, Object.defineProperty(t, "list", {
-    get: function get() {
-      var x = [];
-
-      for (var r in t._list) {
-        x.push(r);
-      }
-
-      return x;
-    },
-    set: function set(x) {
-      t._list = {};
-
-      for (var r = 0; r < x.length; r++) {
-        t._list[x[r]] = 1;
-      }
-    }
-  }), t.exists = function (x) {
-    return !!t._list[x];
-  }, t.register = function (x) {
-    return !t.exists(x) && (t._list[x] = 1, !0);
-  }, t;
+  return t.version = "0.0.1", t.create = function () {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : r & 0x3 | 0x8;
+      return v.toString(16);
+    });
+  }, //
+  t;
 }();
 /*
  * Evaluating a string as a mathematical expression in JavaScript
@@ -3122,7 +3097,8 @@ var UixMath = UixMath || function () {
     }
 
     return s;
-  }, t;
+  }, //
+  t;
 }();
 /*
  * Get the CSS property
@@ -3173,7 +3149,8 @@ var UixCssProperty = UixCssProperty || function () {
       'left': leftPos,
       'top': topPos
     };
-  }, t;
+  }, //
+  t;
 }();
 // CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixModuleFilter.js
 function UixModuleFilter_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
@@ -3249,43 +3226,43 @@ window.MAIN = null;
 
 
       if (settings.add && Object.prototype.toString.call(settings.add) == '[object Object]' && settings.add.hasOwnProperty('pageLoaded')) {
-        var moduleName = settings.add.moduleName; //delete the old module if exist
+        var _moduleName2 = settings.add.moduleName; //delete the old module if exist
 
-        if (UixModuleFilter_typeof(UixModuleInstance[moduleName]) != ( true ? "undefined" : undefined)) {
+        if (UixModuleFilter_typeof(UixModuleInstance[_moduleName2]) != ( true ? "undefined" : undefined)) {
           console.log('The module already exists, please destroy the old module or change the new module name.');
         } else {
           //loading mode "documentReady"
           if (!settings.add.pageLoaded || settings.add.pageLoaded == 0) {
             var _moduleName = function (module, $, window, document) {
-              module[moduleName] = module[moduleName] || {};
-              module[moduleName].version = settings.add.version;
+              module[_moduleName2] = module[_moduleName2] || {};
+              module[_moduleName2].version = settings.add.version;
 
-              module[moduleName].documentReady = function ($) {
+              module[_moduleName2].documentReady = function ($) {
                 settings.add.callback();
               };
 
-              module.components.documentReady.push(module[moduleName].documentReady);
+              module.components.documentReady.push(module[_moduleName2].documentReady);
               return _moduleName;
             }(UixModuleInstance, jQuery, window, document);
 
-            UixModuleInstance[moduleName].documentReady($);
+            UixModuleInstance[_moduleName2].documentReady($);
           } //loading mode "pageLoaded"
 
 
           if (settings.add.pageLoaded || settings.add.pageLoaded == 1) {
-            var _moduleName = function (module, $, window, document) {
-              module[moduleName] = module[moduleName] || {};
-              module[moduleName].version = settings.add.version;
+            var _moduleName3 = function (module, $, window, document) {
+              module[_moduleName2] = module[_moduleName2] || {};
+              module[_moduleName2].version = settings.add.version;
 
-              module[moduleName].pageLoaded = function () {
+              module[_moduleName2].pageLoaded = function () {
                 settings.add.callback();
               };
 
-              module.components.pageLoaded.push(module[moduleName].pageLoaded);
-              return _moduleName;
+              module.components.pageLoaded.push(module[_moduleName2].pageLoaded);
+              return _moduleName3;
             }(UixModuleInstance, jQuery, window, document);
 
-            UixModuleInstance[moduleName].pageLoaded();
+            UixModuleInstance[_moduleName2].pageLoaded();
           }
         }
       }
@@ -3541,8 +3518,8 @@ var BODY_AND_HEADER = function (module, $, window, document) {
   module.BODY_AND_HEADER.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('body').hasClass('onepage')) return false;
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //-------- Header initialize
 
     headerInit(windowWidth);
@@ -3612,8 +3589,8 @@ var COMMON_HEIGHT = function (module, $, window, document) {
   module.COMMON_HEIGHT.version = '0.0.3';
 
   module.COMMON_HEIGHT.pageLoaded = function () {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     commonHeightInit(windowWidth);
     $window.on('resize', function () {
@@ -3628,11 +3605,11 @@ var COMMON_HEIGHT = function (module, $, window, document) {
 
     function commonHeightInit(w) {
       $('.js-uix-common-height').each(function () {
-        var $this = $(this),
-            element = $this,
-            selectors = '[class*=col-], [class*=uix-core-grid__col-]',
-            //Bootstrap grid system and Custom uix grid system
-        maxHeight = 0; // Select and loop the elements you want to equalise
+        var $this = $(this);
+        var element = $this;
+        var selectors = '[class*=col-], [class*=uix-core-grid__col-]'; //Bootstrap grid system and Custom uix grid system
+
+        var maxHeight = 0; // Select and loop the elements you want to equalise
 
         element.children(selectors).each(function () {
           var element = $(this); //Solve the problem that the image cannot be read accurately
@@ -3884,8 +3861,8 @@ var MEGA_MENU = function (module, $, window, document) {
   module.MEGA_MENU.version = '0.0.3';
 
   module.MEGA_MENU.pageLoaded = function () {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; // Using delay is for more accurate calculation
 
     setTimeout(function () {
@@ -3979,7 +3956,7 @@ var MEGA_MENU = function (module, $, window, document) {
                     'margin-right': -(chkWidth - w) + 'px'
                   });
                 } //If the CSS sets the offset of ul::before
-                //								var mega_div_offset = mega_div_w/2 - 0;
+                //								const mega_div_offset = mega_div_w/2 - 0;
                 //								
                 //								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
                 //									mega_div.css( {
@@ -4023,8 +4000,8 @@ var MOBILE_MENU = function (module, $, window, document) {
   module.MOBILE_MENU.version = '0.0.5';
 
   module.MOBILE_MENU.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //-------- Show Toolbar when viewing site for WordPress
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
@@ -4174,10 +4151,10 @@ var NAVIGATION = function (module, $, window, document) {
   module.NAVIGATION.version = '0.0.5';
 
   module.NAVIGATION.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu'; //-------- Menu selected (if it exists "data-current" property in <ul>)
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu'; //-------- Menu selected (if it exists "data-current" property in <ul>)
 
     var curMenuIndex = $(ulForDesktop).data('current');
 
@@ -4270,8 +4247,8 @@ var SET_BG = function (module, $, window, document) {
   module.SET_BG.version = '0.0.5';
 
   module.SET_BG.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //  Initialize
 
     setBGInit(windowWidth, windowHeight);
@@ -4295,8 +4272,8 @@ var SET_BG = function (module, $, window, document) {
 
     function setBGInit(w, h) {
       $('[data-bg]').each(function () {
-        var $this = $(this),
-            config = $this.data('bg');
+        var $this = $(this);
+        var config = $this.data('bg');
 
         if (set_background_typeof(config) === ( true ? "undefined" : undefined)) {
           config = {
@@ -4442,8 +4419,8 @@ var VIDEOS = function (module, $, window, document) {
   module.VIDEOS.version = '0.1.3';
 
   module.VIDEOS.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     /* 
      ---------------------------
@@ -4452,11 +4429,11 @@ var VIDEOS = function (module, $, window, document) {
      */
 
     $('.uix-video').each(function () {
-      var $this = $(this),
-          curVideoID = $this.find('video').attr('id'),
+      var $this = $(this);
+      var curVideoID = $this.find('video').attr('id'),
           coverPlayBtnID = 'videocover-' + curVideoID,
-          videoWrapperW = $this.closest('[data-embed-video-wrapper]').width(),
-          dataAuto = $this.data('embed-video-autoplay'),
+          videoWrapperW = $this.closest('[data-embed-video-wrapper]').width();
+      var dataAuto = $this.data('embed-video-autoplay'),
           dataLoop = $this.data('embed-video-loop'),
           dataControls = $this.data('embed-video-controls'),
           dataW = $this.data('embed-video-width'),
@@ -4583,8 +4560,8 @@ var VIDEOS = function (module, $, window, document) {
     var modalDialogTrigger = '[data-video-win]'; //Add video container
 
     $(modalDialogTrigger).each(function () {
-      var $this = $(this),
-          videoSrcIfm = '',
+      var $this = $(this);
+      var videoSrcIfm = '',
           videoSrcMp4 = $this.data('video-mp4'),
           videoSrcWebm = $this.data('video-webm'),
           videoSrcOgv = $this.data('video-ogv'),
@@ -4654,12 +4631,12 @@ var VIDEOS = function (module, $, window, document) {
 
     $(document).off('click.VIDEOS').on('click.VIDEOS', modalDialogTrigger, function () {
       var vid = $(this).data('modal-id') + '--videopush',
-          $ifm = false,
           newMaxW = windowWidth - 80,
           newMaxH = windowHeight - 80,
           $vContainer = $('#' + vid).closest('.uix-modal-box__video-container'),
           $vLoader = $vContainer.prev('.uix-modal-box__video-waiting'),
-          myPlayerInit = $vContainer.data('video-player-init'); //----- Hidden/Display the wrapper of video
+          myPlayerInit = $vContainer.data('video-player-init');
+      var $ifm = false; //----- Hidden/Display the wrapper of video
 
       var displayVC = function displayVC() {
         TweenMax.set($vContainer, {
@@ -4888,13 +4865,13 @@ var ACCORDION_BG = function (module, $, window, document) {
   module.ACCORDION_BG.version = '0.0.6';
 
   module.ACCORDION_BG.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     if (windowWidth <= 768) return false;
     $('.uix-accordion-img').each(function () {
-      var $this = $(this),
-          aEvent = $this.data('event'),
+      var $this = $(this);
+      var aEvent = $this.data('event'),
           outReset = $this.data('out-reset'),
           activeIndex = $this.data('actived-item'),
           widthShow = $this.data('width-show'),
@@ -5006,11 +4983,11 @@ var ACCORDION = function (module, $, window, document) {
 
   module.ACCORDION.documentReady = function ($) {
     $('.uix-accordion').each(function () {
-      var $this = $(this),
-          aEvent = $this.data('event'),
-          firstShow = $this.data('first-show'),
-          $li = $this.children('dl'),
+      var $this = $(this);
+      var $li = $this.children('dl'),
           $titlebox = $this.find('dt');
+      var aEvent = $this.data('event'),
+          firstShow = $this.data('first-show');
 
       var openItem = function openItem(obj) {
         //to open
@@ -5101,10 +5078,10 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
   module.ADVANCED_CONTENT_SLIDER.version = '0.0.7';
 
   module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        animSpeed = 1200;
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var animSpeed = 1200;
     sliderInit();
     $window.on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -5122,15 +5099,15 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
 
     function sliderInit() {
       $('.uix-advanced-content-slider').each(function () {
-        var $this = $(this),
-            $items = $this.find('.uix-advanced-content-slider__item'),
+        var $this = $(this);
+        var $items = $this.find('.uix-advanced-content-slider__item'),
             $itemsWrapper = $this.children('.uix-advanced-content-slider__inner'),
             $first = $items.first(),
             itemWidth = $this.width(),
             itemsTotal = $items.length,
             totalWidth = itemWidth * itemsTotal,
-            dataControlsPaginationAuto = false,
             activated = $this.data('activated');
+        var dataControlsPaginationAuto = false;
 
         if (advanced_content_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
           //Get parameter configuration from the data-* attribute of HTML
@@ -5337,9 +5314,9 @@ var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
         } else {
           if (playTimes == total) playTimes = 0;
           if (playTimes < 0) playTimes = total - 1;
-          var slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+          var _slideNextId = playTimes; //Prevent problems with styles when switching in positive order
 
-          sliderUpdates(slideNextId, slider, paginationID, arrowsID, loop);
+          sliderUpdates(_slideNextId, slider, paginationID, arrowsID, loop);
         }
       }, timing);
     }
@@ -5416,11 +5393,11 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
   module.ADVANCED_SLIDER.version = '0.1.9';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        animDelay = 0,
-        $sliderWrapper = $('.uix-advanced-slider');
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var animDelay = 0;
+    var $sliderWrapper = $('.uix-advanced-slider');
     sliderInit(false);
     $window.on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -5439,12 +5416,11 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
     function sliderInit(resize) {
       $sliderWrapper.each(function () {
-        var $this = $(this),
-            $items = $this.find('.uix-advanced-slider__item'),
+        var $this = $(this);
+        var $items = $this.find('.uix-advanced-slider__item'),
             $first = $items.first(),
-            nativeItemW,
-            nativeItemH,
             activated = $this.data('activated');
+        var nativeItemW, nativeItemH;
 
         if (basic_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
           //Get parameter configuration from the data-* attribute of HTML
@@ -5480,8 +5456,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
           if ($first.find('video').length > 0) {
             //Returns the dimensions (intrinsic height and width ) of the video
-            var video = document.getElementById($first.find('video').attr('id')),
-                videoURL = $first.find('source:first').attr('src');
+            var video = document.getElementById($first.find('video').attr('id'));
+            var videoURL = $first.find('source:first').attr('src');
             if (basic_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $first.attr('src');
             video.addEventListener('loadedmetadata', function (e) {
               $this.css('height', this.videoHeight * ($this.width() / this.videoWidth) + 'px');
@@ -5845,8 +5821,8 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     function itemDefaultInit(slider, currentLlement) {
       if (currentLlement.find('video').length > 0) {
         //Returns the dimensions (intrinsic height and width ) of the video
-        var video = document.getElementById(currentLlement.find('video').attr('id')),
-            videoURL = currentLlement.find('source:first').attr('src');
+        var video = document.getElementById(currentLlement.find('video').attr('id'));
+        var videoURL = currentLlement.find('source:first').attr('src');
         if (basic_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = currentLlement.attr('src');
         video.addEventListener('loadedmetadata', function (e) {
           slider.css('height', this.videoHeight * (currentLlement.closest('.uix-advanced-slider__outline').width() / this.videoWidth) + 'px');
@@ -5877,16 +5853,16 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
     function normalSliderVideoInit(wrapper, play) {
       wrapper.find('.uix-video__slider').each(function () {
-        var $this = $(this),
-            videoWrapperW = $this.closest('.uix-advanced-slider__outline').width(),
+        var $this = $(this);
+        var videoWrapperW = $this.closest('.uix-advanced-slider__outline').width(),
             curVideoID = $this.find('video').attr('id') + '-slider-videopush',
             coverPlayBtnID = 'videocover-' + curVideoID,
-            dataControls = $this.data('embed-video-controls'),
+            $replayBtn = $('#' + curVideoID + '-replay-btn');
+        var dataControls = $this.data('embed-video-controls'),
             dataAuto = $this.data('embed-video-autoplay'),
             dataLoop = $this.data('embed-video-loop'),
             dataW = $this.data('embed-video-width'),
-            dataH = $this.data('embed-video-height'),
-            $replayBtn = $('#' + curVideoID + '-replay-btn'); //Push a new ID to video
+            dataH = $this.data('embed-video-height'); //Push a new ID to video
         //Solve the problem that ajax asynchronous loading does not play
 
         $this.find('.video-js').attr('id', curVideoID);
@@ -6029,10 +6005,10 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
-              var promise = this.play();
+              var _promise = this.play();
 
-              if (promise !== undefined) {
-                promise.then(function () {// Autoplay started!
+              if (_promise !== undefined) {
+                _promise.then(function () {// Autoplay started!
                 })["catch"](function (error) {
                   // Autoplay was prevented.
                   $('#' + coverPlayBtnID).show();
@@ -6102,12 +6078,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
     PIXI.utils.skipHello();
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        animSpeed = 1000,
-        $sliderWrapper = $('.uix-advanced-slider-sp'),
-        //Save different canvas heights as an array
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var animSpeed = 1000;
+    var $sliderWrapper = $('.uix-advanced-slider-sp');
+    var //Save different canvas heights as an array
     canvasHeights = [],
         //Basic webGL renderers 
     rendererOuterID = 'uix-advanced-slider-sp__canvas-container',
@@ -6138,12 +6114,11 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
     function sliderInit(resize) {
       $sliderWrapper.each(function () {
-        var $this = $(this),
-            $items = $this.find('.uix-advanced-slider-sp__item'),
+        var $this = $(this);
+        var $items = $this.find('.uix-advanced-slider-sp__item'),
             $first = $items.first(),
-            nativeItemW,
-            nativeItemH,
             activated = $this.data('activated');
+        var nativeItemW, nativeItemH;
 
         if (special_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
           //Get parameter configuration from the data-* attribute of HTML
@@ -6200,8 +6175,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
           if ($first.find('video').length > 0) {
             //Returns the dimensions (intrinsic height and width ) of the video
-            var video = document.getElementById($first.find('video').attr('id')),
-                videoURL = $first.find('source:first').attr('src');
+            var video = document.getElementById($first.find('video').attr('id'));
+            var videoURL = $first.find('source:first').attr('src');
             if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $first.attr('src');
 
             if (special_typeof(videoURL) != ( true ? "undefined" : undefined)) {
@@ -6342,8 +6317,9 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
           if ($thisItem.find('video').length > 0) {
             //Returns the dimensions (intrinsic height and width ) of the video
-            var video = document.getElementById($thisItem.find('video').attr('id')),
-                videoURL = $thisItem.find('video source:first').attr('src');
+            var video = document.getElementById($thisItem.find('video').attr('id'));
+            var videoURL = $thisItem.find('video source:first').attr('src');
+            if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = $thisItem.attr('src');
             video.addEventListener('loadedmetadata', function (e) {
               var curW = this.videoWidth,
                   curH = this.videoHeight,
@@ -7158,8 +7134,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     function canvasDefaultInit(slider, currentLlement) {
       if (currentLlement.find('video').length > 0) {
         //Returns the dimensions (intrinsic height and width ) of the video
-        var video = document.getElementById(currentLlement.find('video').attr('id')),
-            videoURL = currentLlement.find('source:first').attr('src');
+        var video = document.getElementById(currentLlement.find('video').attr('id'));
+        var videoURL = currentLlement.find('source:first').attr('src');
         if (special_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = currentLlement.attr('src');
         video.addEventListener('loadedmetadata', function (e) {
           //At the same time change the height of the canvas and slider container
@@ -7332,11 +7308,11 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             //Video sprite initialization
             //Need to ensure that the video tag exists
             setTimeout(function () {
-              for (var k = 0; k < spTotal; k++) {
-                var obj = container__items.children[k]; //pause all videos
+              for (var _k = 0; _k < spTotal; _k++) {
+                var _obj = container__items.children[_k]; //pause all videos
 
-                if (obj._texture.baseTexture.imageType == null) {
-                  var videoSource = obj.texture.baseTexture.resource.source; // play the video
+                if (_obj._texture.baseTexture.imageType == null) {
+                  var videoSource = _obj.texture.baseTexture.resource.source; // play the video
 
                   videoSource.currentTime = 0;
                   videoSource.autoplay = false;
@@ -7443,14 +7419,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   alpha: 1
                 }); //display the current item
 
-                for (var k = 0; k < spTotal; k++) {
-                  var obj = container__items.children[k];
-                  TweenMax.set(obj, {
+                for (var _k2 = 0; _k2 < spTotal; _k2++) {
+                  var _obj2 = container__items.children[_k2];
+                  TweenMax.set(_obj2, {
                     alpha: 0
                   }); //pause all videos
 
-                  if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
+                  if (_obj2._texture.baseTexture.imageType == null) {
+                    var videoSource = _obj2.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7549,14 +7525,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                   alpha: 1
                 }); //display the current item
 
-                for (var k = 0; k < spTotal; k++) {
-                  var obj = container__items.children[k];
-                  TweenMax.set(obj, {
+                for (var _k3 = 0; _k3 < spTotal; _k3++) {
+                  var _obj3 = container__items.children[_k3];
+                  TweenMax.set(_obj3, {
                     alpha: 0
                   }); //pause all videos
 
-                  if (obj._texture.baseTexture.imageType == null) {
-                    var videoSource = obj.texture.baseTexture.resource.source; // play the video
+                  if (_obj3._texture.baseTexture.imageType == null) {
+                    var videoSource = _obj3.texture.baseTexture.resource.source; // play the video
 
                     videoSource.currentTime = 0;
                     videoSource.autoplay = false;
@@ -7645,11 +7621,11 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             //Video sprite initialization
             //Need to ensure that the video tag exists
             setTimeout(function () {
-              for (var m = 0; m < spTotal; m++) {
-                var obj = container__items.children[m]; //pause all videos
+              for (var _m = 0; _m < spTotal; _m++) {
+                var _obj4 = container__items.children[_m]; //pause all videos
 
-                if (obj._texture.baseTexture.imageType == null) {
-                  var videoSource = obj.texture.baseTexture.resource.source; // play the video
+                if (_obj4._texture.baseTexture.imageType == null) {
+                  var videoSource = _obj4.texture.baseTexture.resource.source; // play the video
 
                   videoSource.currentTime = 0;
                   videoSource.autoplay = false;
@@ -7680,8 +7656,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 restoreItems = function restoreItems() {
               //restore other items besides the current item
               for (var n = 0; n < spTotal; n++) {
-                var objParallax = container__items.children[n];
-                if (elementIndex != n) objParallax.mask.x = restoreX;
+                var _objParallax = container__items.children[n];
+                if (elementIndex != n) _objParallax.mask.x = restoreX;
               }
             },
                 goNextItem = function goNextItem() {
@@ -7776,16 +7752,16 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
     function normalSliderVideoInit(wrapper, play) {
       wrapper.find('.uix-video__slider').each(function () {
-        var $this = $(this),
-            videoWrapperW = $this.closest('.uix-advanced-slider__outline').width(),
+        var $this = $(this);
+        var videoWrapperW = $this.closest('.uix-advanced-slider__outline').width(),
             curVideoID = $this.find('video').attr('id') + '-slider-videopush',
             coverPlayBtnID = 'videocover-' + curVideoID,
-            dataControls = $this.data('embed-video-controls'),
+            $replayBtn = $('#' + curVideoID + '-replay-btn');
+        var dataControls = $this.data('embed-video-controls'),
             dataAuto = $this.data('embed-video-autoplay'),
             dataLoop = $this.data('embed-video-loop'),
             dataW = $this.data('embed-video-width'),
-            dataH = $this.data('embed-video-height'),
-            $replayBtn = $('#' + curVideoID + '-replay-btn'); //Push a new ID to video
+            dataH = $this.data('embed-video-height'); //Push a new ID to video
         //Solve the problem that ajax asynchronous loading does not play
 
         $this.find('.video-js').attr('id', curVideoID);
@@ -7928,10 +7904,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
-              var promise = this.play();
+              var _promise = this.play();
 
-              if (promise !== undefined) {
-                promise.then(function () {// Autoplay started!
+              if (_promise !== undefined) {
+                _promise.then(function () {// Autoplay started!
                 })["catch"](function (error) {
                   // Autoplay was prevented.
                   $('#' + coverPlayBtnID).show();
@@ -8017,8 +7993,8 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
 
       loadedProgress = 0; //
 
-      var $this = $(this),
-          curURL = $this.attr('href'),
+      var $this = $(this);
+      var curURL = $this.attr('href'),
           config = $this.data('ajax-push-content');
 
       if (AJAX_push_js_typeof(config) == ( true ? "undefined" : undefined)) {
@@ -8163,7 +8139,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         var loadImages = function loadImages() {
           var promises = [];
 
-          for (var i = 0; i < sources.length; i++) {
+          var _loop = function _loop(i) {
             if (sources[i].type == 'img') {
               ///////////
               // IMAGE //
@@ -8191,6 +8167,10 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
                 return resolve(sources[i].url);
               }).then(textureLoaded));
             }
+          };
+
+          for (var i = 0; i < sources.length; i++) {
+            _loop(i);
           }
 
           return Promise.all(promises);
@@ -8313,11 +8293,11 @@ function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.4';
+  module.AJAX_PAGE_LOADER.version = '0.1.5';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //all images from pages
 
     var sources = []; //Added timer to prevent page loading errors for a long time
@@ -8325,8 +8305,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     var timeClockInit; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
-    var lastAnimation = 0,
-        quietPeriod = 500,
+    var quietPeriod = 500,
         //Do not change it
     animationTime = 1000,
         //According to page transition animation changes
@@ -8336,7 +8315,8 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
         total = $navs.length,
         $sectionsContainer = $('.uix-ajax-load__fullpage-container'),
         ajaxContainer = '.ajax-container',
-        curAjaxPageID = $(ajaxContainer).data('ajax-page-id'); // The progress of each page load, using global variables to accurately determine
+        curAjaxPageID = $(ajaxContainer).data('ajax-page-id');
+    var lastAnimation = 0; // The progress of each page load, using global variables to accurately determine
 
     var loadedProgress = 0; //loading animation
 
@@ -8404,9 +8384,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
       loadedProgress = 0; //
 
-      var $this = $(this),
-          curIndex = $this.attr('data-index'),
-          curURL = $this.attr('href'); //The currently URL of link
+      var $this = $(this);
+      var curIndex = $this.attr('data-index');
+      var curURL = $this.attr('href'); //The currently URL of link
 
       if (AJAX_js_typeof(curURL) === ( true ? "undefined" : undefined)) {
         curURL = $this.closest('a').attr('href');
@@ -8487,9 +8467,9 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
 
     function moveTo(container, url, dir, customIndex, wheel) {
-      var index = parseFloat($navs.filter('.is-active').find('> a').attr('data-index')),
-          nextIndex = null,
-          isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/; //If there is a custom index, it is enabled first
+      var index = parseFloat($navs.filter('.is-active').find('> a').attr('data-index'));
+      var isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+      var nextIndex = null; //If there is a custom index, it is enabled first
 
       if (isNumeric.test(customIndex)) {
         nextIndex = customIndex;
@@ -8538,19 +8518,8 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             action: 'load_singlepages_ajax_content'
           },
           beforeSend: function beforeSend() {
-            //loading animation
-            loadingAnim(0); //loader effect from AJAX request
-
-            TweenMax.set('.uix-ajax-load__loader', {
-              css: {
-                'display': 'block'
-              },
-              onComplete: function onComplete() {
-                TweenMax.to(this.target, 0.5, {
-                  alpha: 1
-                });
-              }
-            });
+            //Display loader
+            showLoader();
           }
         }).done(function (response) {
           //A function to be called if the request succeeds
@@ -8583,13 +8552,16 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           if (sources.length == 0) {
             per = 100; //loading animation
 
-            loadingAnim(per);
+            loadingAnim(per); //Remove loader
+
+            var oldContent = container.html();
+            hideLoader(container, $(response).filter('title').text(), dir, oldContent, response);
           }
 
           var loadImages = function loadImages() {
             var promises = [];
 
-            for (var i = 0; i < sources.length; i++) {
+            var _loop = function _loop(i) {
               if (sources[i].type == 'img') {
                 ///////////
                 // IMAGE //
@@ -8617,6 +8589,10 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
                   return resolve(sources[i].url);
                 }).then(textureLoaded));
               }
+            };
+
+            for (var i = 0; i < sources.length; i++) {
+              _loop(i);
             }
 
             return Promise.all(promises);
@@ -8659,7 +8635,12 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             var _time = (new Date().getTime() - timeStart) / 1000;
 
             if (_time >= timeLimit) {
-              console.log('Page load timeout!');
+              console.log('Page load timeout!'); //Remove loader
+
+              var _oldContent = container.html();
+
+              hideLoader(container, $(response).filter('title').text(), dir, _oldContent, response); // clear loader event
+
               clearInterval(timeClockInit);
               func();
             }
@@ -8682,10 +8663,24 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
     function ajaxSucceeds(dir, container, content, title) {
       //If the page resource is not loaded, then the following code is not executed
-      if (loadedProgress < 100) return false; //
+      if (loadedProgress < 100) return false; //Remove loader
 
-      var oldContent = container.html(); //Remove loader
+      var oldContent = container.html();
+      hideLoader(container, title, dir, oldContent, content);
+    }
+    /*
+     * Remove loader
+     *
+           * @param  {Element} container - The instance returned from the request succeeds
+           * @param  {String} title     - The title of a requested page.
+     * @param  {String} dir       - Gets a value that indicates the amount that the mouse wheel has changed.
+     * @param  {String} oldContent   - The old data returned from the server
+           * @param  {String} content   - The data returned from the server
+     * @return {Void}
+     */
 
+
+    function hideLoader(container, title, dir, oldContent, content) {
       TweenMax.to('.uix-ajax-load__loader', 0.5, {
         alpha: 0,
         onComplete: function onComplete() {
@@ -8708,6 +8703,28 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           });
         },
         delay: loaderRemoveDelay / 1000
+      });
+    }
+    /*
+     * Display loader
+     *
+     * @return {Void}
+     */
+
+
+    function showLoader() {
+      //loading animation
+      loadingAnim(0); //loader effect from AJAX request
+
+      TweenMax.set('.uix-ajax-load__loader', {
+        css: {
+          'display': 'block'
+        },
+        onComplete: function onComplete() {
+          TweenMax.to(this.target, 0.5, {
+            alpha: 1
+          });
+        }
       });
     }
     /*
@@ -8840,8 +8857,8 @@ var BACK_TO_TOP = function (module, $, window, document) {
   module.BACK_TO_TOP.version = '0.0.5';
 
   module.BACK_TO_TOP.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     $('<a href="#" id="uix-to-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>').appendTo('body');
     $.when($('#uix-to-top').length > 0).then(function () {
@@ -8903,12 +8920,12 @@ var CIRCLE_LAYOUT = function (module, $, window, document) {
 
   module.CIRCLE_LAYOUT.documentReady = function ($) {
     $('.js-uix-circle-layout').each(function (id) {
-      var $this = $(this),
-          $ul = $this.find('> ul'),
+      var $this = $(this);
+      var $ul = $this.find('> ul'),
           $li = $ul.find('> li'),
           liWidth = $li.first().outerWidth(),
-          liHeight = $li.first().outerHeight(),
-          display = $this.data('circle-layout-display'),
+          liHeight = $li.first().outerHeight();
+      var display = $this.data('circle-layout-display'),
           radius = $this.data('circle-layout-radius'),
           radius2 = $this.data('circle-layout-radius-c'),
           rotation = $this.data('circle-layout-rotation');
@@ -8942,10 +8959,10 @@ var CIRCLE_LAYOUT = function (module, $, window, document) {
         'height': radius2 * 2 + 'px'
       }); //Layout components in a circle layout
 
-      var angle = 0,
-          step = 2 * Math.PI / display,
-          transitionDelay = 0,
+      var step = 2 * Math.PI / display,
           pad = $ul.width();
+      var angle = 0,
+          transitionDelay = 0;
       $li.each(function () {
         //Can'nt use arrow function here!!!
         // 'this' works differently with arrow fucntions
@@ -9195,10 +9212,10 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
 
   module.DYNAMIC_DD_LIST.documentReady = function ($) {
     $('[data-ajax-dynamic-dd-json]').each(function () {
-      var $this = $(this),
-          jsonFile = $this.data('ajax-dynamic-dd-json'),
-          ranID = 'dynamic-dd-control-' + UixGUID.create(),
-          ID = $this.attr('id'),
+      var $this = $(this);
+      var ranID = 'dynamic-dd-control-' + UixGUID.create(),
+          ID = $this.attr('id');
+      var jsonFile = $this.data('ajax-dynamic-dd-json'),
           method = $this.data('ajax-dynamic-dd-method'),
           autoExpand = $this.data('ajax-dynamic-dd-auto-expand'),
           associated = $this.data('ajax-dynamic-dd-associated'),
@@ -9244,7 +9261,7 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
 
               _level1IDs.push(data[m].id);
 
-              var level2_List;
+              var level2_List = void 0;
 
               if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
                 //============ China cities dropdown list demo
@@ -9358,14 +9375,14 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
 
               $level1El.append(level1EmptyOption);
 
-              for (var i = 0; i < allLevel1Items.length; i++) {
-                var _v = allLevel1Items[i],
-                    _id = allLevel1IDs[i];
+              for (var _i = 0; _i < allLevel1Items.length; _i++) {
+                var _v = allLevel1Items[_i],
+                    _id = allLevel1IDs[_i];
 
                 if (defaultLevel1Val == _v) {
-                  $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                  $level1El.append("<option data-index='" + (_i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
                 } else {
-                  $level1El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                  $level1El.append("<option data-index='" + (_i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
                 }
               } //---------- Initialize the level 2
 
@@ -9380,14 +9397,14 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
               $level2El.append(level2EmptyOption);
 
               if (dynamic_dropdown_list_json_js_typeof(curLevel1Index) != ( true ? "undefined" : undefined)) {
-                for (var i = 0; i < allLevel2Items[curLevel1Index - 1].length; i++) {
-                  var _v = allLevel2Items[curLevel1Index - 1][i],
-                      _id = allLevel2IDs[curLevel1Index - 1][i];
+                for (var _i2 = 0; _i2 < allLevel2Items[curLevel1Index - 1].length; _i2++) {
+                  var _v2 = allLevel2Items[curLevel1Index - 1][_i2],
+                      _id2 = allLevel2IDs[curLevel1Index - 1][_i2];
 
-                  if (defaultLevel2Val == _v) {
-                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                  if (defaultLevel2Val == _v2) {
+                    $level2El.append("<option data-index='" + (_i2 + 1) + "' data-id='" + _id2 + "' value='" + _v2 + "' selected>" + _v2 + "</option>");
                   } else {
-                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                    $level2El.append("<option data-index='" + (_i2 + 1) + "' data-id='" + _id2 + "' value='" + _v2 + "'>" + _v2 + "</option>");
                   }
                 }
               } //---------- Initialization level 3
@@ -9399,14 +9416,14 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
               if (dynamic_dropdown_list_json_js_typeof(curLevel2Index) != ( true ? "undefined" : undefined)) {
                 //If the data exists, you need to determine if the array is empty.
                 if (allLevel3Items[curLevel1Index - 1].length > 0) {
-                  for (var i = 0; i < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; i++) {
-                    var _v = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][i],
-                        _id = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][i];
+                  for (var _i3 = 0; _i3 < allLevel3Items[curLevel1Index - 1][curLevel2Index - 1].length; _i3++) {
+                    var _v3 = allLevel3Items[curLevel1Index - 1][curLevel2Index - 1][_i3],
+                        _id3 = allLevel3IDs[curLevel1Index - 1][curLevel2Index - 1][_i3];
 
-                    if (defaultLevel3Val == _v) {
-                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "' selected>" + _v + "</option>");
+                    if (defaultLevel3Val == _v3) {
+                      $level3El.append("<option data-index='" + (_i3 + 1) + "' data-id='" + _id3 + "' value='" + _v3 + "' selected>" + _v3 + "</option>");
                     } else {
-                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                      $level3El.append("<option data-index='" + (_i3 + 1) + "' data-id='" + _id3 + "' value='" + _v3 + "'>" + _v3 + "</option>");
                     }
                   }
                 }
@@ -9433,10 +9450,10 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                 var level2IDs = allLevel2IDs[level1Index - 1];
 
                 if (dynamic_dropdown_list_json_js_typeof(level2Items) != ( true ? "undefined" : undefined)) {
-                  for (var i = 0; i < level2Items.length; i++) {
-                    var _v = level2Items[i],
-                        _id = level2IDs[i];
-                    $level2El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                  for (var _i4 = 0; _i4 < level2Items.length; _i4++) {
+                    var _v4 = level2Items[_i4],
+                        _id4 = level2IDs[_i4];
+                    $level2El.append("<option data-index='" + (_i4 + 1) + "' data-id='" + _id4 + "' value='" + _v4 + "'>" + _v4 + "</option>");
                   }
                 } else {
                   //Hide or display controls
@@ -9464,10 +9481,10 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                   var level3IDs = allLevel3IDs[level1Index - 1][level2Index - 1];
 
                   if (dynamic_dropdown_list_json_js_typeof(level3Items) != ( true ? "undefined" : undefined)) {
-                    for (var i = 0; i < level3Items.length; i++) {
-                      var _v = level3Items[i],
-                          _id = level3IDs[i];
-                      $level3El.append("<option data-index='" + (i + 1) + "' data-id='" + _id + "' value='" + _v + "'>" + _v + "</option>");
+                    for (var _i5 = 0; _i5 < level3Items.length; _i5++) {
+                      var _v5 = level3Items[_i5],
+                          _id5 = level3IDs[_i5];
+                      $level3El.append("<option data-index='" + (_i5 + 1) + "' data-id='" + _id5 + "' value='" + _v5 + "'>" + _v5 + "</option>");
                     }
                   }
                 } else {
@@ -9528,10 +9545,10 @@ var FLEXSLIDER = function (module, $, window, document) {
   module.FLEXSLIDER.version = '0.1.7';
 
   module.FLEXSLIDER.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        flexslider = {
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var flexslider = {
       vars: {}
     };
     /*
@@ -9778,16 +9795,16 @@ var FLEXSLIDER = function (module, $, window, document) {
 
     function videoEmbedInit(wrapper, play) {
       wrapper.find('.uix-video__slider').each(function () {
-        var $this = $(this),
-            videoWrapperW = $this.closest('[data-embed-video-wrapper]').width(),
+        var $this = $(this);
+        var videoWrapperW = $this.closest('[data-embed-video-wrapper]').width(),
             curVideoID = $this.find('video').attr('id') + '-slider-videopush',
             coverPlayBtnID = 'videocover-' + curVideoID,
-            dataControls = $this.data('embed-video-controls'),
+            $replayBtn = $('#' + curVideoID + '-replay-btn');
+        var dataControls = $this.data('embed-video-controls'),
             dataAuto = $this.data('embed-video-autoplay'),
             dataLoop = $this.data('embed-video-loop'),
             dataW = $this.data('embed-video-width'),
-            dataH = $this.data('embed-video-height'),
-            $replayBtn = $('#' + curVideoID + '-replay-btn'); //Push a new ID to video
+            dataH = $this.data('embed-video-height'); //Push a new ID to video
         //Solve the problem that ajax asynchronous loading does not play
 
         $this.find('.video-js').attr('id', curVideoID);
@@ -9927,10 +9944,10 @@ var FLEXSLIDER = function (module, $, window, document) {
             if (dataAuto) {
               this.currentTime(0); //Prevent autoplay error: Uncaught (in promise) DOMException
 
-              var promise = this.play();
+              var _promise = this.play();
 
-              if (promise !== undefined) {
-                promise.then(function () {// Autoplay started!
+              if (_promise !== undefined) {
+                _promise.then(function () {// Autoplay started!
                 })["catch"](function (error) {
                   // Autoplay was prevented.
                   $('#' + coverPlayBtnID).show();
@@ -10114,8 +10131,8 @@ var FLEXSLIDER = function (module, $, window, document) {
 
     var $sliderDefault = $('.uix-flexslider');
     $sliderDefault.each(function () {
-      var $this = $(this),
-          dataSpeed = $this.data('speed'),
+      var $this = $(this);
+      var dataSpeed = $this.data('speed'),
           dataDrag = $this.data('draggable'),
           dataWheel = $this.data('wheel'),
           dataTiming = $this.data('timing'),
@@ -10193,8 +10210,8 @@ var FLEXSLIDER = function (module, $, window, document) {
 
 
       $('[data-my-sync]').each(function () {
-        var curSync = $(this).data('my-sync'),
-            thisSliderID = $this.attr('id');
+        var curSync = $(this).data('my-sync');
+        var thisSliderID = $this.attr('id');
 
         if (flexslider_js_typeof(curSync) != ( true ? "undefined" : undefined)) {
           curSync = curSync.toString().replace('#', '').replace('.', '');
@@ -10624,14 +10641,14 @@ var FORM = function (module, $, window, document) {
      */
 
     $('.uix-controls__dynamic-fields-container').each(function () {
-      var $this = $(this),
-          $addButton = $this.find('.uix-controls__dynamic-fields__addbtn'),
+      var $this = $(this);
+      var $addButton = $this.find('.uix-controls__dynamic-fields__addbtn'),
           //The add button
       removeButton = '.uix-controls__dynamic-fields__removebtn',
           //The remove button selector ID or class
-      $appendWrapper = $this.find('.uix-controls__dynamic-fields__append'),
-          //The field wrapper ID or class 
-      x = 1,
+      $appendWrapper = $this.find('.uix-controls__dynamic-fields__append'); //The field wrapper ID or class 
+
+      var x = 1,
           maxField = $this.data('max-fields'),
           fieldHTML = ''; //Maximum number of forms added
 
@@ -11002,8 +11019,8 @@ var GALLERY = function (module, $, window, document) {
 
         if (galleryType.indexOf('filter') >= 0) {
           $filterOptions.find('li > a').off('click').on('click', function () {
-            var $this = $(this),
-                activeClass = 'current-cat',
+            var $this = $(this);
+            var activeClass = 'current-cat',
                 isActive = $this.parent().hasClass(activeClass),
                 group = isActive ? 'all' : $this.data('group'); // Hide current label, show current label in title
 
@@ -11102,8 +11119,8 @@ var IMAGE_SHAPES = function (module, $, window, document) {
   module.IMAGE_SHAPES.version = '0.0.1';
 
   module.IMAGE_SHAPES.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //  Initialize
 
     shapesInit(windowWidth);
@@ -11126,21 +11143,21 @@ var IMAGE_SHAPES = function (module, $, window, document) {
 
     function shapesInit(w) {
       $('.uix-shape-img').each(function () {
-        var $this = $(this),
-            ranID = 'uix-shape-img-' + UixGUID.create(),
+        var $this = $(this);
+        var ranID = 'uix-shape-img-' + UixGUID.create(),
             svgPath = $this.data('path'),
             svgW = parseFloat($this.data('svg-const-width')),
             svgH = parseFloat($this.data('svg-const-height')),
-            imgW = parseFloat($this.data('img-width')),
             svgRatio = svgW / svgH,
-            imgRatio = null,
+            curImgURL = $this.find('img').attr('src');
+        var imgW = parseFloat($this.data('img-width'));
+        var imgRatio = null,
             bothWidthRatio = null,
             newSvgHeight = null,
             newImgHeight = null,
             svgOut = '',
             curImgW = imgW,
-            curImgH = null,
-            curImgURL = $this.find('img').attr('src');
+            curImgH = null;
 
         if (imgW > w) {
           imgW = w;
@@ -11216,8 +11233,8 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
     function nemuLineGo(index) {
       var $this = $(menu + ' > li').eq(index).find('a'),
           offset = $this.offset(),
-          //find the offset of the wrapping div  
-      offsetBody = $('.uix-lavalamp-menu__container').offset(); //Activate navigation style
+          offsetBody = $('.uix-lavalamp-menu__container').offset(); //find the offset of the wrapping div  
+      //Activate navigation style
 
       $(menu + ' > li').removeClass('is-active');
       $this.parent().addClass('is-active'); // GSAP animate to clicked menu item
@@ -11270,7 +11287,7 @@ function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.8';
+  module.LIGHTBOX.version = '0.1.9';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -11285,7 +11302,7 @@ var LIGHTBOX = function (module, $, window, document) {
           _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
 
 
-      if (!$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
+      if (lightbox_js_typeof(_id) !== ( true ? "undefined" : undefined) && !$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
         //reset id
         $(this).removeAttr('id');
         $('body').addClass(_id); //append content to body
@@ -11321,8 +11338,8 @@ var LIGHTBOX = function (module, $, window, document) {
       }
     });
     $(document).off('click.LIGHTBOX_TRIGGER').on('click.LIGHTBOX_TRIGGER', triggerEl, function () {
-      var $this = $(this),
-          dataPhoto = $this.data('lb-src'),
+      var $this = $(this);
+      var dataPhoto = $this.data('lb-src'),
           dataHtmlID = $this.data('lb-html'),
           dataFixed = $this.data('lb-fixed'),
           dataMaskClose = $this.data('lb-mask-close'),
@@ -11445,14 +11462,15 @@ var LIGHTBOX = function (module, $, window, document) {
           thumbs += '</ul></div>';
           htmlContent = largePhotos + thumbs;
         } else {
-          var tempID = 'lightbox-' + UixGUID.create(); //Only one image
+          var _tempID = 'lightbox-' + UixGUID.create(); //Only one image
+
 
           imgSrcStrToW = imgSrcStr;
           htmlContent += '<div class="uix-lightbox__photo-container">';
-          htmlContent += '	<a class="uix-lightbox__original__link" data-target-id="' + tempID + '" href="javascript:void(0);">';
+          htmlContent += '	<a class="uix-lightbox__original__link" data-target-id="' + _tempID + '" href="javascript:void(0);">';
           htmlContent += '	   <img src="' + imgSrcStr + '" alt="">';
           htmlContent += '	</a>';
-          htmlContent += '	<div class="uix-lightbox__original__target" id="' + tempID + '">';
+          htmlContent += '	<div class="uix-lightbox__original__target" id="' + _tempID + '">';
           htmlContent += '	   <img src="' + imgSrcStr + '" alt="">';
           htmlContent += '	</div>';
           htmlContent += '</div>';
@@ -11610,8 +11628,8 @@ var LIGHTBOX = function (module, $, window, document) {
       var $largePhoto = $(this).closest('.uix-lightbox__html').find('.uix-lightbox__photo-container.uix-lightbox__photo-sets-container'),
           $thumb = $(this).closest('.uix-lightbox__html').find('.uix-lightbox__thumb-container li'),
           total = $thumb.length,
-          curIndex = $thumb.filter('.is-active').index(),
-          prevIndex = curIndex - 1,
+          curIndex = $thumb.filter('.is-active').index();
+      var prevIndex = curIndex - 1,
           nextIndex = curIndex + 1;
       if (prevIndex < 0) prevIndex = total - 1;
       if (nextIndex > total - 1) nextIndex = 0;
@@ -11658,8 +11676,7 @@ var LIGHTBOX = function (module, $, window, document) {
 
     function lightboxThumbSwitch(index, obj) {
       var $largePhoto = obj.closest('.uix-lightbox__html').find('.uix-lightbox__photo-container.uix-lightbox__photo-sets-container'),
-          $thumb = obj.closest('.uix-lightbox__html').find('.uix-lightbox__thumb-container li'),
-          curImgH = 0; // show the content container
+          $thumb = obj.closest('.uix-lightbox__html').find('.uix-lightbox__thumb-container li'); // show the content container
 
       var showLightboxContent = function showLightboxContent() {
         TweenMax.set(obj.closest('.uix-lightbox__html'), {
@@ -11842,9 +11859,9 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
-      var $this = $(this),
-          wrapperID = 'refresh-all-waypoint-' + UixGUID.create(),
-          curPage = $this.data('ajax-list-page-now'),
+      var $this = $(this);
+      var wrapperID = 'refresh-all-waypoint-' + UixGUID.create();
+      var curPage = $this.data('ajax-list-page-now'),
           perShow = $this.data('ajax-list-page-per'),
           totalPage = $this.data('ajax-list-page-total'),
           method = $this.data('ajax-list-method'),
@@ -11970,20 +11987,22 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             if (scrolled >= parseFloat($button.offset().top - $(window).height() / 1.5 - $button.outerHeight(true)) && !$button.hasClass(triggerActive)) {
               // Active this button
               $button.addClass(triggerActive);
-              var curPage = $button.attr('data-cur-page'); //Add next page number to the button
 
-              curPage = parseFloat(curPage) + 1;
-              $button.attr('data-cur-page', curPage); //Avoid touching the same button multiple times
+              var _curPage = $button.attr('data-cur-page'); //Add next page number to the button
 
-              if (curPage == totalPage + 1) return false; //Perform dynamic loading
+
+              _curPage = parseFloat(_curPage) + 1;
+              $button.attr('data-cur-page', _curPage); //Avoid touching the same button multiple times
+
+              if (_curPage == totalPage + 1) return false; //Perform dynamic loading
 
               if (customPostData != '') {
-                defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ', ' + customPostData + ' }');
+                defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + _curPage + ', ' + customPostData + ' }');
               } else {
-                defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + curPage + ' }');
+                defaultPostData = JSON.parse('{ "' + pageParmStr.totalPage + '": ' + totalPage + ', "' + pageParmStr.displayPerPage + '": ' + perShow + ', "' + pageParmStr.currentPage + '": ' + _curPage + ' }');
               }
 
-              ajaxLoadInit($this, defaultPostData, $button, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
+              ajaxLoadInit($this, defaultPostData, $button, _curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
             }
           });
         } else {
@@ -12015,8 +12034,8 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
             $(nextTrigger).off('click').on('click', function (e) {
               e.preventDefault();
-              var $button = $(this),
-                  curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
+              var $button = $(this);
+              var curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
 
               curPage = parseFloat(curPage) + 1;
               $button.parent().attr('data-cur-page', curPage); //Init button status
@@ -12042,8 +12061,8 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
             $(prevTrigger).off('click').on('click', function (e) {
               e.preventDefault();
-              var $button = $(this),
-                  curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
+              var $button = $(this);
+              var curPage = $button.parent().attr('data-cur-page'); //Add next page number to the button
 
               curPage = parseFloat(curPage) - 1;
               $button.parent().attr('data-cur-page', curPage); //Init button status
@@ -12075,8 +12094,8 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
             $(trigger).on('click.POST_LIST_AJAX', function (e) {
               e.preventDefault();
-              var $button = $(this),
-                  curPage = $button.attr('data-cur-page'); //Add next page number to the button
+              var $button = $(this);
+              var curPage = $button.attr('data-cur-page'); //Add next page number to the button
 
               curPage = parseFloat(curPage) + 1;
               $button.attr('data-cur-page', curPage); // Active this button
@@ -12150,8 +12169,8 @@ var POST_LIST_AJAX = function (module, $, window, document) {
           try {
             var thisData = data,
                 html = compiledTemplate(thisData),
-                curHtml = $divRoot.find(pushContainer).html(),
-                result = null,
+                curHtml = $divRoot.find(pushContainer).html();
+            var result = null,
                 htmlEl = null; //--------- Do or not append to the original content
 
             if (render == 'before') {
@@ -12224,8 +12243,8 @@ var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
   module.FULL_WIDTH_COLUMN_TO_EDGE.version = '0.0.1';
 
   module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded = function () {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     fullwidthColumnToEdgeInit(windowWidth);
     $window.on('resize', function () {
@@ -12374,7 +12393,7 @@ function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.4';
+  module.MODAL_DIALOG.version = '0.1.5';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -12387,7 +12406,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
           _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
 
 
-      if (!$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
+      if (modal_dialog_js_typeof(_id) !== ( true ? "undefined" : undefined) && !$('body').hasClass(_id) && $('<div>' + _content + '</div>').find('[role="dialog"]').length > 0) {
         //reset id
         $(this).removeAttr('id');
         $('body').addClass(_id); //append content to body
@@ -12485,12 +12504,12 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
     if (!$('body').hasClass('mousewheel-interaction')) return false; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
-    var lastAnimation = 0,
-        quietPeriod = 500,
+    var quietPeriod = 500,
         //Do not change it
-    animationTime = 1000,
-        //According to page transition animation changes
-    scrollCount = 0;
+    animationTime = 1000; //According to page transition animation changes
+
+    var lastAnimation = 0;
+    var scrollCount = 0;
     var startY = 0;
 
     var onTouchStart = function onTouchStart(e) {
@@ -12770,8 +12789,8 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       }); //Drag and Drop
       //-------------------------------------	
 
-      var $dragDropTrigger = $carouselWrapper,
-          hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
+      var $dragDropTrigger = $carouselWrapper;
+      var hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
 
       if (carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false) $dragDropTrigger.css('cursor', carouseDraggableCursor);
 
@@ -12783,8 +12802,8 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
 
 
-      var direction,
-          dragDropElement = $dragDropTrigger[0],
+      var direction;
+      var dragDropElement = $dragDropTrigger[0],
           dragDropMC = new Hammer(dragDropElement, hammerProps);
       dragDropMC.on('panright press panleft panup pandown', function (ev) {
         //Set the direction in here
@@ -12902,7 +12921,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //
 //		$( '.uix-multi-carousel' ).each( function()  {
 //
-//			var $carouselWrapper   = $( this ),
+//			let $carouselWrapper   = $( this ),
 //				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
 //				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 //				carouselItemTotal  = $carouselItem.length,
@@ -12942,7 +12961,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			 Initialize carousel
 //			 ---------------------------
 //			 */  
-//			var newWidth, newHeight;
+//			let newWidth, newHeight;
 //			if ( carouselDir == 'horizontal' ) { 
 //				newWidth = ( $carouselWrapper.width() / showcarouselItem );
 //				$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
@@ -12998,8 +13017,8 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			 */ 
 //			
 //			function carouselActiveCenterItem( el, dir ) {
-//				var curItemIndex    = (showcarouselItem/2).toFixed(0),
-//					centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
+//				const curItemIndex    = (showcarouselItem/2).toFixed(0),
+//					  centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
 //				el.removeClass( 'is-active active-prev active-next' );
 //				
 //				
@@ -13040,11 +13059,11 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //				e.preventDefault();
 //				
 //				
-//				var $btn        = $( this ),
-//					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> div' ),
-//					//Protection button is not triggered multiple times.
-//					btnLock     = $btn.data( 'click' );
+//				const $btn        = $( this ),
+//					  $curWrapper = $( e.data[0] ),
+//					  $curItems   = $curWrapper.children().find( '> div' ),
+//					  //Protection button is not triggered multiple times.
+//					  btnLock     = $btn.data( 'click' );
 //				
 //				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
 //					moveNext( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
@@ -13063,11 +13082,11 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //				e.preventDefault();
 //
 //				
-//				var $btn        = $( this ),
-//					$curWrapper = $( e.data[0] ),
-//					$curItems   = $curWrapper.children().find( '> div' ),
-//					//Protection button is not triggered multiple times.
-//					btnLock     = $btn.data( 'click' );
+//				const $btn        = $( this ),
+//					  $curWrapper = $( e.data[0] ),
+//					  $curItems   = $curWrapper.children().find( '> div' ),
+//					  //Protection button is not triggered multiple times.
+//					  btnLock     = $btn.data( 'click' );
 //
 //			
 //				
@@ -13094,7 +13113,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
 //		
-//				var $curWrapper = wrapper,  //Default: $carousel
+//				let $curWrapper = wrapper,  //Default: $carousel
 //					$curItems   = items,  //Default: $carouselItem
 //					isEnd       = false,
 //					$cloneItem  = null;
@@ -13115,7 +13134,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //				}
 //				
 //				//Reset prevents code from duplicate run
-//				var preventEvent = function() {
+//				const preventEvent = function() {
 //					if ( carouselPrev && carouselPrev != '' ) {
 //						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
@@ -13233,7 +13252,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
 //
 //		
-//				var $curWrapper = wrapper,  //Default: $carousel
+//				let $curWrapper = wrapper,  //Default: $carousel
 //					$curItems   = items,  //Default: $carouselItem
 //					isEnd       = false,
 //					$cloneItem  = null;
@@ -13255,7 +13274,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 //				}
 //				
 //				//Reset prevents code from duplicate run
-//				var preventEvent = function() {
+//				const preventEvent = function() {
 //					if ( carouselNext && carouselNext != '' ) {
 //						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
 //					}
@@ -13402,13 +13421,12 @@ var ONEPAGE = function (module, $, window, document) {
   module.ONEPAGE.version = '0.0.6';
 
   module.ONEPAGE.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
-    var lastAnimation = 0,
-        quietPeriod = 500,
+    var quietPeriod = 500,
         //Do not change it
     animationTime = 1000,
         //According to page transition animation changes
@@ -13419,7 +13437,8 @@ var ONEPAGE = function (module, $, window, document) {
     /* topSpacing         = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ), //with margin */
     topSpacing = 0,
         $primaryMenu = $('.uix-menu'),
-        $sidefixedMenu = $('.uix-menu-sidefixed'); //Prevent this module from loading in other pages
+        $sidefixedMenu = $('.uix-menu-sidefixed');
+    var lastAnimation = 0; //Prevent this module from loading in other pages
 
     if ($sectionsContainer.length == 0) return false; // Prepare everything before binding wheel scroll
 
@@ -13506,9 +13525,9 @@ var ONEPAGE = function (module, $, window, document) {
 
     function moveTo(el, dir, hashID) {
       var index = parseFloat($sections.filter('.is-active').attr('data-index')),
-          nextIndex = null,
-          $next = null,
           isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+      var nextIndex = null,
+          $next = null;
 
       if (dir == 'down' || dir === false) {
         nextIndex = index + 1;
@@ -13743,13 +13762,12 @@ var ONEPAGE2 = function (module, $, window, document) {
   module.ONEPAGE2.version = '0.0.5';
 
   module.ONEPAGE2.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
 
-    var lastAnimation = 0,
-        quietPeriod = 500,
+    var quietPeriod = 500,
         //Do not change it
     animationTime = 1000,
         //According to page transition animation changes
@@ -13757,7 +13775,8 @@ var ONEPAGE2 = function (module, $, window, document) {
         $sections = $sectionsContainer.find('[data-highlight-section]'),
         sectionTotal = $sections.length,
         $primaryMenu = $('.uix-menu'),
-        $sidefixedMenu = $('.uix-menu-sidefixed'); //Prevent this module from loading in other pages
+        $sidefixedMenu = $('.uix-menu-sidefixed');
+    var lastAnimation = 0; //Prevent this module from loading in other pages
 
     if ($sectionsContainer.length == 0) return false; //Init the sections style
 
@@ -13835,9 +13854,9 @@ var ONEPAGE2 = function (module, $, window, document) {
     function sectionsDepthInit(nextIndex, currentIndex) {
       var secIndex = 10;
 
-      for (var i = 0; i < sectionTotal; i++) {
-        if (nextIndex && i != nextIndex && i != currentIndex) {
-          $sections.eq(i).css('z-index', secIndex);
+      for (var _i = 0; _i < sectionTotal; _i++) {
+        if (nextIndex && _i != nextIndex && _i != currentIndex) {
+          $sections.eq(_i).css('z-index', secIndex);
         }
 
         secIndex--;
@@ -13881,9 +13900,9 @@ var ONEPAGE2 = function (module, $, window, document) {
 
     function moveTo(el, dir, hashID) {
       var index = parseFloat($sections.filter('.is-active').attr('data-index')),
-          nextIndex = null,
-          $next = null,
           isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+      var nextIndex = null,
+          $next = null;
 
       if (dir == 'down' || dir === false) {
         nextIndex = index + 1;
@@ -14094,8 +14113,8 @@ var PARALLAX = function (module, $, window, document) {
   module.PARALLAX.version = '0.0.6';
 
   module.PARALLAX.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //  Initialize
 
     parallaxInit(windowWidth, windowHeight);
@@ -14120,8 +14139,8 @@ var PARALLAX = function (module, $, window, document) {
     function parallaxInit(w, h) {
       /* Pure parallax scrolling effect without other embedded HTML elements */
       $('.uix-parallax--el').each(function () {
-        var $this = $(this),
-            dataSpeed = $this.data('speed'),
+        var $this = $(this);
+        var dataSpeed = $this.data('speed'),
             dataEasing = $this.data('transition');
 
         if (parallax_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
@@ -14141,10 +14160,10 @@ var PARALLAX = function (module, $, window, document) {
       /* Parallax scrolling effect with embedded HTML elements */
 
       $('.uix-parallax').each(function () {
-        var $this = $(this),
-            $curImg = $this.find('.uix-parallax__img'),
-            dataImg = $curImg.attr('src'),
-            dataSkew = $this.data('skew'),
+        var $this = $(this);
+        var $curImg = $this.find('.uix-parallax__img'),
+            dataImg = $curImg.attr('src');
+        var dataSkew = $this.data('skew'),
             dataSpeed = $this.data('speed'),
             dataEasing = $this.data('transition'),
             dataOverlay = $this.data('overlay-bg'),
@@ -14297,8 +14316,8 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
 
   module.PERIODICAL_SCROLL.documentReady = function ($) {
     $('[data-periodical-scroll-container]').each(function () {
-      var $this = $(this),
-          ul = $this.data('periodical-scroll-container'),
+      var $this = $(this);
+      var ul = $this.data('periodical-scroll-container'),
           speed = $this.data('periodical-scroll-speed'),
           timing = $this.data('periodical-scroll-timing'),
           $wrap = $this.find(ul),
@@ -14367,8 +14386,8 @@ var PRICING = function (module, $, window, document) {
   module.PRICING.version = '0.0.2';
 
   module.PRICING.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //-------- Pricing initialize
 
     pricingInit(windowWidth);
@@ -14386,10 +14405,10 @@ var PRICING = function (module, $, window, document) {
       //Initialize the height
       $('.uix-price').each(function () {
         //returns new id
-        var $this = $(this),
-            priceBGH = Array(),
-            priceBGH_excerpt = Array(),
-            $initHeight = $this.find('.js-uix-init-height');
+        var $this = $(this);
+        var $initHeight = $this.find('.js-uix-init-height');
+        var priceBGH = [],
+            priceBGH_excerpt = [];
         $initHeight.each(function (index) {
           //Screen protection of height
           $(this).find('.uix-price__outline, .uix-price__excerpt').css('height', 'auto');
@@ -14458,8 +14477,8 @@ var PROGRESS_BAR = function (module, $, window, document) {
   module.PROGRESS_BAR.documentReady = function ($) {
     var waypoints = $('[data-progressbar-percent]').waypoint({
       handler: function handler(direction) {
-        var $this = $(this.element),
-            percent = $this.data('progressbar-percent'),
+        var $this = $(this.element);
+        var percent = $this.data('progressbar-percent'),
             unit = $this.data('progressbar-unit');
 
         if (progress_bar_js_typeof(percent) === ( true ? "undefined" : undefined)) {
@@ -14553,9 +14572,9 @@ var PROGRESS_LINE = function (module, $, window, document) {
     $progressLineCircle.parent().on('mouseleave', function () {
       progressLineRestore();
     }); //Adapt line width for different resolution
-    //		var plLength     = $progressLineCircle.length,
-    //			newPlW       = $obj.find( '.uix-progress-line__circle' ).first().width(),
-    //			plWrapperW   = $obj.width();
+    //		const plLength     = $progressLineCircle.length,
+    //			  newPlW       = $obj.find( '.uix-progress-line__circle' ).first().width(),
+    //			  plWrapperW   = $obj.width();
     //
     //		$obj.find( '.uix-progress-line__bar' ).css( 'width', parseFloat( plWrapperW - newPlW*plLength )/(plLength-1) + 'px' );
     //		
@@ -14627,8 +14646,8 @@ var ROTATING_EL = function (module, $, window, document) {
 
   module.ROTATING_EL.documentReady = function ($) {
     $('[data-pointer-to-deg]').each(function () {
-      var $this = $(this),
-          config = $this.data('pointer-to-deg');
+      var $this = $(this);
+      var config = $this.data('pointer-to-deg');
 
       if (rotating_elements_js_typeof(config) === ( true ? "undefined" : undefined)) {
         config = false;
@@ -14639,9 +14658,8 @@ var ROTATING_EL = function (module, $, window, document) {
         var pointer = $(config.target)[0],
             pointerBox = pointer.getBoundingClientRect(),
             centerPoint = window.getComputedStyle(pointer).transformOrigin,
-            centers = centerPoint.split(' '),
-            mouseX,
-            mouseY;
+            centers = centerPoint.split(' ');
+        var mouseX, mouseY;
 
         if (config.mouseSpy) {
           $(document).on('mousemove touchstart touchmove', function (e) {
@@ -14849,14 +14867,14 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
         panelHeight = 0; //Prevent this module from loading in other pages
 
     if ($el.length == 0) return false;
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight; //-------- Text Affect
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var curSprite;
+    var filterSprite; //-------- Text Affect
 
     if (Modernizr.webgl) {
       var $txtContainer = $el.find('.row canvas'),
-          count = 0,
-          curSprite,
           text = $txtContainer.data('txt').split(''),
           tHeight = 45,
           tWidth = 25,
@@ -14869,8 +14887,8 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
         autoResize: 1,
         view: document.getElementById('scrollspy-animate-demo--txt')
       });
-      var stage = new PIXI.Container(),
-          filterSprite = PIXI.Sprite.from($txtContainer.data('filter-texture'));
+      var stage = new PIXI.Container();
+      filterSprite = PIXI.Sprite.from($txtContainer.data('filter-texture'));
       filterSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
       var filter = new PIXI.filters.DisplacementFilter(filterSprite);
       var txtStyle = new PIXI.TextStyle({
@@ -15036,8 +15054,8 @@ var SKEW_ON_SCROLL = function (module, $, window, document) {
     $('.uix-skewscroll-container').each(function () {
       var $this = $(this),
           $animObj = $this.find('p'),
-          followY = 0,
           ease = 0.15;
+      var followY = 0;
       TweenMax.set($animObj, {
         transformOrigin: "center left"
       });
@@ -15183,8 +15201,8 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if (!$('body').hasClass('smooth-scrolling-page')) return false;
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var html = document.documentElement,
         body = document.body,
@@ -15196,8 +15214,8 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       y: 0,
       resizeRequest: 1,
       scrollRequest: 0
-    },
-        requestId = null;
+    };
+    var requestId = null;
     TweenMax.set(scroller.target, {
       rotation: 0.01,
       force3D: true
@@ -15476,8 +15494,8 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       */
 
       $('[data-scrollspy-bg]').each(function () {
-        var $this = $(this),
-            config = $this.data('scrollspy-bg');
+        var $this = $(this);
+        var config = $this.data('scrollspy-bg');
 
         if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined)) {
           config = {
@@ -15589,8 +15607,8 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       /* Pure parallax scrolling effect without other embedded HTML elements */
 
       $('[data-scrollspy-parallax]').each(function () {
-        var $this = $(this),
-            dataSpeed = $this.data('scrollspy-parallax').speed,
+        var $this = $(this);
+        var dataSpeed = $this.data('scrollspy-parallax').speed,
             dataEasing = $this.data('scrollspy-parallax').transition;
 
         if (smooth_scrolling_page_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
@@ -15654,10 +15672,10 @@ var STICKY_EL = function (module, $, window, document) {
   module.STICKY_EL.version = '0.0.5';
 
   module.STICKY_EL.pageLoaded = function () {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        topSpacing = windowWidth <= 768 ? 0 : $('.uix-header__container').outerHeight(true); //with margin
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var topSpacing = windowWidth <= 768 ? 0 : $('.uix-header__container').outerHeight(true); //with margin
     //prepend a placeholder
 
     $('.js-uix-sticky-el').each(function () {
@@ -15783,8 +15801,8 @@ var SVG_MAP_CHINA = function (module, $, window, document) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var goName = $(this).data('title'),
-          goText = $(this).text(),
-          svgCurName = '',
+          goText = $(this).text();
+      var svgCurName = '',
           svgNameIndex = 0;
       $('.uix-svgmap--china .uix-svgmap--china__name').each(function () {
         if (goName == $(this).data('title')) {
@@ -15877,8 +15895,8 @@ var SVG_MAP_WORLD = function (module, $, window, document) {
       // stop propagation of this event, it will never reach body in bubbling phase.
       e.stopPropagation();
       var goName = $(this).data('title'),
-          goText = $(this).text(),
-          svgCurName = '',
+          goText = $(this).text();
+      var svgCurName = '',
           svgNameIndex = 0;
       $('.uix-svgmap--world .uix-svgmap--world__name').each(function (index) {
         if (goName == $(this).data('title')) {
@@ -15974,10 +15992,10 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-background-three-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-background-three-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -16076,7 +16094,7 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -16150,8 +16168,8 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
           rotation.z = Math.random() * 2 * Math.PI;
           var scale = new THREE.Vector3();
           scale.x = Math.random() * 200 + 100;
-          var geom,
-              color = new THREE.Color();
+          var geom = void 0;
+          var color = new THREE.Color();
 
           if (objectType == "cube") {
             geom = new THREE.BoxGeometry(1, 1, 1);
@@ -16248,10 +16266,10 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-background-three-canvas2'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-background-three-canvas2'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -16314,7 +16332,7 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -16418,10 +16436,10 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-background-three-canvas3'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-background-three-canvas3'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -16473,7 +16491,7 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -16600,11 +16618,8 @@ var THREE_BACKGROUND = function (module, $, window, document) {
       // mouse move on block
 
       $(obj).on('mousemove touchmove', function (e) {
-        var mX,
-            mY,
-            rmX,
-            rmY,
-            touches = e.originalEvent.touches;
+        var mX, mY, rmX, rmY;
+        var touches = e.originalEvent.touches;
 
         if (touches && touches.length) {
           mX = touches[0].pageX;
@@ -16663,9 +16678,8 @@ var THREE_BACKGROUND = function (module, $, window, document) {
           divHeight = $(obj).innerHeight(); //set an onmousemove event on the element
 
       $(obj).on('mousemove touchmove', function (e) {
-        var pctX,
-            pctY,
-            touches = e.originalEvent.touches;
+        var pctX, pctY;
+        var touches = e.originalEvent.touches;
 
         if (touches && touches.length) {
           pctX = (touches[0].pageX - divLeft) / divWidth;
@@ -16738,18 +16752,18 @@ var THREE_CAROUSEL = function (module, $, window, document) {
 
   module.THREE_CAROUSEL.documentReady = function ($) {
     $('.uix-3d-carousel').each(function () {
-      var $this = $(this),
-          dataTiming = $this.data('timing'),
+      var $this = $(this);
+      var $wrapper = $this.find('> ul'),
+          $items = $wrapper.find('> li'),
+          itemCount = $items.length;
+      var dataTiming = $this.data('timing'),
           dataPrevBtn = $this.data('prev-btn'),
           dataNextBtn = $this.data('next-btn'),
           dataDraggable = $this.data('draggable'),
           autoSwap = null,
-          $wrapper = $this.find('> ul'),
-          $items = $wrapper.find('> li'),
           items = [],
           startItem = 1,
           position = 0,
-          itemCount = $items.length,
           leftpos = itemCount,
           resetCount = itemCount;
       if (simple_3D_carousel_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 5000;
@@ -16821,8 +16835,8 @@ var THREE_CAROUSEL = function (module, $, window, document) {
       }); //Drag and Drop
       //-------------------------------------	
 
-      var $dragDropTrigger = $wrapper,
-          hammerProps = {};
+      var $dragDropTrigger = $wrapper;
+      var hammerProps = {};
 
       if (!dataDraggable) {
         hammerProps = {
@@ -16832,8 +16846,8 @@ var THREE_CAROUSEL = function (module, $, window, document) {
       //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
 
 
-      var direction,
-          dragDropElement = $dragDropTrigger[0],
+      var direction;
+      var dragDropElement = $dragDropTrigger[0],
           dragDropMC = new Hammer(dragDropElement, hammerProps);
       dragDropMC.on('panright press panleft', function (ev) {
         //Set the direction in here
@@ -16955,10 +16969,10 @@ var THREE_GALLERY = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-gallery-three-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-gallery-three-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -17071,7 +17085,7 @@ var THREE_GALLERY = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -17125,16 +17139,16 @@ var THREE_GALLERY = function (module, $, window, document) {
             map: texture
           });
           var geometry = new THREE.PlaneGeometry(w, h);
-          var displacementSprite = new THREE.Mesh(geometry, material); //LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
+          var mesh = new THREE.Mesh(geometry, material); //LinearFilter, which takes the four closest texels and bilinearly interpolates among them. 
 
-          displacementSprite.minFilter = THREE.LinearFilter;
-          displacementSprite.overdraw = true; //Calculate the position of the image 
+          mesh.minFilter = THREE.LinearFilter;
+          mesh.overdraw = true; //Calculate the position of the image 
           //X axis: a = sinA * c = Math.sin( rad ) * radius
           //Z axis: b = cosA * c = Math.cos( rad ) * radius
 
-          displacementSprite.rotation.y = -index * itemRadAngle;
-          displacementSprite.position.set(radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle));
-          allImages.push(displacementSprite); //loading
+          mesh.rotation.y = -index * itemRadAngle;
+          mesh.position.set(radius * Math.sin(index * itemRadAngle), 0, -radius * Math.cos(index * itemRadAngle));
+          allImages.push(mesh); //loading
 
           TweenMax.to(loading, 0.5, {
             width: Math.round(100 * allImages.length / total) + '%',
@@ -17214,10 +17228,10 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-imagetransition-three-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-imagetransition-three-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -17333,7 +17347,7 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -17427,10 +17441,10 @@ var THREE_MODEL = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-model-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-model-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -17442,10 +17456,8 @@ var THREE_MODEL = function (module, $, window, document) {
           radius = 100,
           theta = 0,
           clickEnable = false;
-      var mouseVector = new THREE.Vector2(),
-          INTERSECTED,
-          INTERSECTED_CLICK,
-          raycaster;
+      var mouseVector = new THREE.Vector2();
+      var INTERSECTED, INTERSECTED_CLICK, raycaster;
 
       function init() {
         //camera
@@ -17555,7 +17567,7 @@ var THREE_MODEL = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -17608,7 +17620,7 @@ var THREE_MODEL = function (module, $, window, document) {
         }
         /*
         // Parse all the faces
-        for ( var i in intersects ) {
+        for ( let i in intersects ) {
         		intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
         	}
         */
@@ -17678,10 +17690,10 @@ var THREE_PAGES = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          viewRenderer = '3D-renderer'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var viewRenderer = '3D-renderer'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -17754,7 +17766,7 @@ var THREE_PAGES = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -17826,7 +17838,7 @@ function simple_3D_particle_effect_js_typeof(obj) { "@babel/helpers - typeof"; i
 var THREE_PARTICLE = function (module, $, window, document) {
   if (window.THREE_PARTICLE === null) return false;
   module.THREE_PARTICLE = module.THREE_PARTICLE || {};
-  module.THREE_PARTICLE.version = '0.0.4';
+  module.THREE_PARTICLE.version = '0.0.5';
 
   module.THREE_PARTICLE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -17834,10 +17846,10 @@ var THREE_PARTICLE = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-particle-effect-canvas';
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-particle-effect-canvas';
       var renderer,
           texture,
           scene,
@@ -17853,15 +17865,96 @@ var THREE_PARTICLE = function (module, $, window, document) {
         y: 0
       },
           windowHalfX = windowWidth / 2,
-          windowHalfY = windowHeight / 2; //particle rotation
+          windowHalfY = windowHeight / 2; //background
+
+      var backgroundBg = 0xCE3A3E;
+      var backgroundPlane = 0xDE510E; // Light from scene ready
+
+      var sceneForLightPlane, sceneForSpotLight, sceneForAmbientLight; // camera data
+
+      var fieldOfView, aspectRatio, nearPlane, farPlane;
+      var dist, vFOV, visibleHeight, visibleWidth;
+      var xLimit, yLimit;
+      var maxTargetZ = 200; //particle rotation
 
       var particleRotation;
       var centerVector = new THREE.Vector3(0, 0, 0);
       var previousTime = 0;
 
       function init() {
-        //@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
-        THREE.ImageUtils.crossOrigin = ''; //WebGL Renderer		
+        //==================================
+        //==================================
+        //camera
+        fieldOfView = 60;
+        aspectRatio = windowWidth / windowHeight;
+        nearPlane = 1; // the camera won't "see" any object placed in front of this plane
+
+        farPlane = 10000; // the camera wont't see any object placed further than this plane 
+
+        camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+        camera.position.set(0, 65, -500);
+        camera.lookAt(centerVector); // convert the field of view to radians
+
+        var ang = fieldOfView / 2 * Math.PI / 180; // calculate the max y position seen by the camera related to the maxTargetZ position, I start by calculating the y limit because fielOfView is a vertical field of view. I then calculate the x Limit
+
+        yLimit = (camera.position.z + maxTargetZ) * Math.tan(ang); // this is a formula I found, don't ask me why it works, it just does :) 
+        // Calculate the max x position seen by the camera related to the y Limit position
+
+        xLimit = yLimit * camera.aspect; // Fit plane to screen
+
+        dist = 1000;
+        vFOV = THREE.Math.degToRad(camera.fov); // convert vertical fov to radians
+
+        visibleHeight = 2 * Math.tan(vFOV / 2) * dist; // visible height
+
+        visibleWidth = visibleHeight * camera.aspect; // visible width   
+        //console.log( 'visibleWidth:' + visibleWidth + ', visibleHeight: ' + visibleHeight + ', xLimit: ' + xLimit + ', yLimit: ' + yLimit );
+        //==================================
+        //==================================
+        //Scene
+
+        scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(backgroundBg, 0.0025, 650); // Used to cover the light plane
+        //==================================
+        //==================================
+        //Light from scene ready
+        // Light plane  
+
+        sceneForLightPlane = new THREE.Mesh(new THREE.CircleGeometry(1000, 32), new THREE.MeshPhongMaterial({
+          emissive: backgroundPlane,
+          side: THREE.DoubleSide
+        }));
+        sceneForLightPlane.receiveShadow = true;
+        sceneForLightPlane.position.set(0, -101, 5);
+        sceneForLightPlane.rotation.x = getRadian(-95);
+        scene.add(sceneForLightPlane); // Spot Light
+
+        var spotLightColor = 0xffffff,
+            spotLightIntensity = 2,
+            spotLightDistance = 1200,
+            spotLightAngle = getRadian(50),
+            spotLightPenumbra = 1,
+            spotLightDecay = 1;
+        sceneForSpotLight = new THREE.SpotLight(spotLightColor, spotLightIntensity, spotLightDistance, spotLightAngle, spotLightPenumbra, spotLightDecay);
+        sceneForSpotLight.position.set(5, 320, 5); // Setting the y-axis bond angle is critical
+
+        sceneForSpotLight.castShadow = true;
+        sceneForSpotLight.shadow.mapSize.width = 1024;
+        sceneForSpotLight.shadow.mapSize.height = 1024;
+        sceneForSpotLight.shadow.camera.near = 0.5;
+        sceneForSpotLight.shadow.camera.far = 31;
+        scene.add(sceneForSpotLight); //console.log( sceneForSpotLight );
+
+        /*
+        var spotLightHelper = new THREE.SpotLightHelper( sceneForSpotLight );
+        scene.add( spotLightHelper );   
+        */
+        // Ambient Light
+
+        sceneForAmbientLight = new THREE.AmbientLight(0xffffff, 0.08);
+        scene.add(sceneForAmbientLight); //==================================
+        //==================================
+        //WebGL Renderer		
 
         renderer = new THREE.WebGLRenderer({
           canvas: document.getElementById(rendererCanvasID),
@@ -17869,14 +17962,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
           alpha: true,
           antialias: true
         });
-        renderer.setSize(windowWidth, windowHeight); //Scene
-
-        scene = new THREE.Scene(); //camera
-
-        camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
-        camera.position.set(-100, 0, 600);
-        camera.lookAt(centerVector);
-        scene.add(camera); // instantiate a loader
+        renderer.setSize(windowWidth, windowHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // instantiate a loader
 
         var loader = new THREE.TextureLoader(); // load a resource
 
@@ -17891,7 +17979,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
           var material = new THREE.PointsMaterial({
             size: 3,
             color: 0xffffff,
-            sizeAttenuation: false
+            sizeAttenuation: false,
+            fog: false //Excluding objects from fog
+
           });
 
           for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
@@ -17915,6 +18005,12 @@ var THREE_PARTICLE = function (module, $, window, document) {
 
           particles = new THREE.Points(geometry, material);
           scene.add(particles);
+          particles.scale.setScalar(0.7);
+          particles.position.y = 50;
+          particles.position.z = 70;
+          particles.rotation.y = getRadian(180); // set castShadow to object
+
+          particles.castShadow = true;
         }, // onProgress callback currently not supported
         undefined, // onError callback
         function (err) {
@@ -17926,29 +18022,21 @@ var THREE_PARTICLE = function (module, $, window, document) {
         var geometryPR = new THREE.TetrahedronGeometry(2, 0),
             materialPR = new THREE.MeshPhongMaterial({
           color: 0xffffff,
-          flatShading: THREE.FlatShading
+          emissive: 0xffffff,
+          shininess: 80,
+          flatShading: true
         });
 
-        for (var i = 0; i < 1000; i++) {
+        for (var i = 0; i < 750; i++) {
           var mesh = new THREE.Mesh(geometryPR, materialPR);
           mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
           mesh.position.multiplyScalar(90 + Math.random() * 700);
           mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
-          particleRotation.add(mesh);
-        }
+          particleRotation.add(mesh); // set castShadow to object
 
-        var ambientLight = new THREE.AmbientLight(0x999999);
-        scene.add(ambientLight);
-        var lights = [];
-        lights[0] = new THREE.DirectionalLight(0xffffff, 1);
-        lights[0].position.set(1, 0, 0);
-        lights[1] = new THREE.DirectionalLight(0x11E8BB, 1);
-        lights[1].position.set(0.75, 1, 0.5);
-        lights[2] = new THREE.DirectionalLight(0x8200C9, 1);
-        lights[2].position.set(-0.75, -1, 0.5);
-        scene.add(lights[0]);
-        scene.add(lights[1]);
-        scene.add(lights[2]); //----
+          mesh.castShadow = true;
+        } //----
+
 
         document.addEventListener('mousemove', onDocumentMouseMove, false);
         document.addEventListener('touchstart', onDocumentTouchStart, false);
@@ -17962,11 +18050,19 @@ var THREE_PARTICLE = function (module, $, window, document) {
       function render() {
         requestAnimationFrame(render);
         var delta = clock.getDelta(),
-            thickness = 40; //Need to add judgment to avoid Cannot read property 'geometry' of undefined
+            thickness = 40; //---
+        // 
+        // To set a background color.
+
+        renderer.setClearColor(backgroundBg); //---
+        // 
+        //Need to add judgment to avoid Cannot read property 'geometry' of undefined
 
         if (simple_3D_particle_effect_js_typeof(particles) != ( true ? "undefined" : undefined)) {
+          var particle;
+
           for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
-            var particle = particles.geometry.vertices[i];
+            particle = particles.geometry.vertices[i];
             particle.x += (particle.destination.x - particle.x) * particle.speed;
             particle.y += (particle.destination.y - particle.y) * particle.speed;
             particle.z += (particle.destination.z - particle.z) * particle.speed;
@@ -17999,15 +18095,18 @@ var THREE_PARTICLE = function (module, $, window, document) {
 
         camera.position.x += (mouseX - camera.position.x) * 0.09;
         camera.position.y += (-mouseY - camera.position.y) * 0.09;
+        if (camera.position.y < -60) camera.position.y = -60;
         camera.lookAt(centerVector); //particle rotation
 
         particleRotation.rotation.x += 0.0000;
-        particleRotation.rotation.y -= 0.0040; //push objects
+        particleRotation.rotation.y -= 0.0040; //---
+        // 
+        //push objects
 
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -18016,9 +18115,11 @@ var THREE_PARTICLE = function (module, $, window, document) {
              sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
         */
 
-        for (var i = 0; i < sceneSubjects.length; i++) {
-          sceneSubjects[i].update(clock.getElapsedTime() * 1);
-        } //render the scene to display our scene through the camera's eye.
+        for (var _i = 0; _i < sceneSubjects.length; _i++) {
+          sceneSubjects[_i].update(clock.getElapsedTime() * 1);
+        } //---
+        // 
+        //render the scene to display our scene through the camera's eye.
 
 
         renderer.render(scene, camera);
@@ -18087,6 +18188,99 @@ var THREE_PARTICLE = function (module, $, window, document) {
         var ctx = canvas.getContext('2d');
         ctx.drawImage(image, 0, 0);
         return ctx.getImageData(0, 0, image.width, image.height);
+      }
+      /*
+       * Get Object Coordinate, Width and Height From Screen
+       * Note: No data may be acquired without delay !!
+       *
+      * @param  {THREE.Mesh} obj                           - Mesh object.
+       * @param  {THREE.PerspectiveCamera} camera           - Mesh object.
+      * @param  {Number} rendererWidth                     - Width of renderer.
+       * @param  {Number} rendererHeight                    - Height of renderer.
+       * @param  {String} type                              - Build type.
+       * @return {JSON}
+       */
+
+      /* @usage: 
+         var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+        */
+
+
+      function nestedObjectToScreenXYZAndWH(obj, camera, rendererWidth, rendererHeight) {
+        var vector = new THREE.Vector3();
+        vector.setFromMatrixPosition(obj.matrixWorld);
+        var widthHalf = rendererWidth / 2;
+        var heightHalf = rendererHeight / 2;
+        var aspect = rendererHeight / rendererWidth;
+        vector.project(camera);
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf; //compute bounding box after
+
+        var boxInfo = new THREE.Box3().setFromObject(obj).getSize(new THREE.Vector3()); //Change it to fit the width and height of the stage based on the current value
+
+        var ratioFixedNum = 7; //correction
+
+        return {
+          position: vector,
+          width: (boxInfo.x * ratioFixedNum * aspect).toFixed(2),
+          height: (boxInfo.y * ratioFixedNum * aspect).toFixed(2)
+        };
+      }
+      /*
+       * Generate random number between two numbers
+       *
+       * @return {Number}
+       */
+
+
+      function getRandomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      /*
+       * Returns the degree from radian.
+       *
+       * @return {Number} rad - Value of radian.
+       * @return {Number}
+       * @usage: 
+       
+         angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+       */
+
+
+      function getDegree(rad) {
+        return rad / Math.PI * 180;
+      }
+      /*
+       * Returns the radian degree .
+       *
+       * @return {Number} deg - Value of degree.
+       * @return {Number}
+       * @usage: 
+          
+          rad = Math.PI / 180 * 30 ;
+       */
+
+
+      function getRadian(deg) {
+        return deg * Math.PI / 180;
+      }
+      /*
+       * Convert three.js scene rotation to polar coordinates
+       *
+       * @return {Number} deg - Value of degree.
+       * @return {Number}
+       * @usage: 
+       
+          x = r * cos（θ）
+          y = r * sin（θ）  
+       */
+
+
+      function getPolarCoord(x, y, z) {
+        var nx = Math.cos(x) * Math.cos(y) * z,
+            nz = Math.cos(x) * Math.sin(y) * z,
+            ny = Math.sin(x) * z;
+        return new THREE.Vector3(nx, ny, nz);
       } // 
       //-------------------------------------	
 
@@ -18144,10 +18338,10 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-sphere-three-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-sphere-three-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera, controls, scene, light, renderer, displacementSprite;
@@ -18222,7 +18416,7 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -18300,10 +18494,10 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-object-buttonevent-canvas';
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-object-buttonevent-canvas';
       var renderer, scene, controls, camera, targetObj, parent, material, segLength;
       var radius = 3,
           height = 6,
@@ -18373,11 +18567,11 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
         geo.faces.push(new THREE.Face3(0, 1, 4));
         geo.faces.push(new THREE.Face3(1, 4, 5));
 
-        for (var i = 1; i < Math.floor(segments / 2); i++) {
-          geo.faces.push(new THREE.Face3(2 + (i - 1) * 4, 3 + (i - 1) * 4, 6 + (i - 1) * 4));
-          geo.faces.push(new THREE.Face3(3 + (i - 1) * 4, 6 + (i - 1) * 4, 7 + (i - 1) * 4));
-          geo.faces.push(new THREE.Face3(4 + (i - 1) * 4, 5 + (i - 1) * 4, 8 + (i - 1) * 4));
-          geo.faces.push(new THREE.Face3(5 + (i - 1) * 4, 8 + (i - 1) * 4, 9 + (i - 1) * 4));
+        for (var _i = 1; _i < Math.floor(segments / 2); _i++) {
+          geo.faces.push(new THREE.Face3(2 + (_i - 1) * 4, 3 + (_i - 1) * 4, 6 + (_i - 1) * 4));
+          geo.faces.push(new THREE.Face3(3 + (_i - 1) * 4, 6 + (_i - 1) * 4, 7 + (_i - 1) * 4));
+          geo.faces.push(new THREE.Face3(4 + (_i - 1) * 4, 5 + (_i - 1) * 4, 8 + (_i - 1) * 4));
+          geo.faces.push(new THREE.Face3(5 + (_i - 1) * 4, 8 + (_i - 1) * 4, 9 + (_i - 1) * 4));
         }
 
         targetObj = new THREE.Mesh(geo, material);
@@ -18394,7 +18588,7 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -18514,10 +18708,10 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-mouseinteraction-three-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-mouseinteraction-three-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -18529,8 +18723,8 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
           radius = 100,
           theta = 0,
           clickEnable = false;
-      var mouseVector = new THREE.Vector2(),
-          raycaster,
+      var mouseVector = new THREE.Vector2();
+      var raycaster,
           intersects,
           INTERSECTED,
           nucleus,
@@ -18613,7 +18807,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -18655,7 +18849,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
           var _obj = intersects[0].object;
           console.log(_obj.name); //---Change object size
           //				if ( typeof intersects[ 0 ] != typeof undefined ) {
-          //					var obj = intersects[ 0 ].object;
+          //					const obj = intersects[ 0 ].object;
           //
           //
           //					TweenMax.to( obj.scale, 1, {
@@ -18735,7 +18929,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         };
 
         for (var i = 0; i < numObjects; i++) {
-          var geometry;
+          var geometry = void 0;
 
           if (objectType == "cube") {
             geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -18792,7 +18986,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
        */
 
       /* @usage: 
-         var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+         const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
         */
 
 
@@ -18928,10 +19122,10 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-mouseinteraction2-three-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-mouseinteraction2-three-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -18946,8 +19140,8 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         direction: "y"
       }); // mouse
 
-      var mouseVector = new THREE.Vector2(),
-          raycaster,
+      var mouseVector = new THREE.Vector2();
+      var raycaster,
           intersects,
           INTERSECTED,
           nucleus,
@@ -19012,7 +19206,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -19129,8 +19323,8 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         };
 
         for (var i = 0; i < numObjects; i++) {
-          var geom,
-              color = new THREE.Color();
+          var geom = void 0;
+          var color = new THREE.Color();
           var position = new THREE.Vector3();
           position.x = -9000 + i % 10 * 2000;
           position.y = -9000 + Math.floor(i % 100 / 10) * 2000;
@@ -19254,7 +19448,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
        */
 
       /* @usage: 
-         var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+         const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
         */
 
 
@@ -19396,16 +19590,15 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
-      var animSpeed = 1000,
-          $sliderWrapper = $('.uix-3d-slider--shatter'),
+      var $sliderWrapper = $('.uix-3d-slider--shatter'),
           //Basic webGL renderers 
       renderLoaderID = 'uix-3d-slider--shatter__loader',
           rendererOuterID = 'uix-3d-slider--shatter__canvas-container',
-          rendererCanvasID = 'uix-3d-slider--shatter__canvas',
-          renderer; // Generate one plane geometries mesh to scene
+          rendererCanvasID = 'uix-3d-slider--shatter__canvas';
+      var animSpeed = 1000; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -19430,8 +19623,8 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
       function wrapperInit() {
         $sliderWrapper.each(function () {
-          var $this = $(this),
-              $items = $this.find('.uix-3d-slider--shatter__item'),
+          var $this = $(this);
+          var $items = $this.find('.uix-3d-slider--shatter__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
               activated = $this.data('activated');
@@ -19507,8 +19700,9 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
               if (_item.find('video').length > 0) {
                 //Returns the dimensions (intrinsic height and width ) of the video
-                var video = document.getElementById(_item.find('video').attr('id')),
-                    videoURL = _item.find('source:first').attr('src');
+                var video = document.getElementById(_item.find('video').attr('id'));
+
+                var videoURL = _item.find('source:first').attr('src');
 
                 if (simple_3D_shatter_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
 
@@ -19764,7 +19958,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -19872,13 +20066,15 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           } else {
             if (playTimes == total) playTimes = 0;
             if (playTimes < 0) playTimes = total - 1;
-            var slideCurId = items.filter('.is-active').index(),
-                slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
+            var _slideCurId = items.filter('.is-active').index(),
+                _slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
+              sliderUpdates(_slideCurId, _slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+              sliderUpdates(_slideCurId, _slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -20001,17 +20197,17 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
 
           if (simple_3D_shatter_slider_js_typeof(allSources[slideCurId]) != ( true ? "undefined" : undefined)) {
-            var fragment = allSources[slideCurId].geometry.vertices;
+            var _fragment = allSources[slideCurId].geometry.vertices;
 
-            for (var i = 0; i < fragment.length; i++) {
+            for (var _i = 0; _i < _fragment.length; _i++) {
               var pos = new THREE.Vector3();
 
               var _final2 = Math.random();
 
               pos.x = Math.random();
-              pos.y = Math.random() * (50 * i);
+              pos.y = Math.random() * (50 * _i);
               pos.z = Math.random() * -300;
-              TweenMax.to(fragment[i], 2, {
+              TweenMax.to(_fragment[_i], 2, {
                 x: pos.x,
                 y: pos.y,
                 z: pos.z,
@@ -20090,16 +20286,15 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
-      var animSpeed = 1000,
-          $sliderWrapper = $('.uix-3d-slider--expParticle'),
+      var $sliderWrapper = $('.uix-3d-slider--expParticle'),
           //Basic webGL renderers 
       renderLoaderID = 'uix-3d-slider--expParticle__loader',
           rendererOuterID = 'uix-3d-slider--expParticle__canvas-container',
-          rendererCanvasID = 'uix-3d-slider--expParticle__canvas',
-          renderer; // Generate one plane geometries mesh to scene
+          rendererCanvasID = 'uix-3d-slider--expParticle__canvas';
+      var animSpeed = 1000; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -20129,8 +20324,8 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
       function wrapperInit() {
         $sliderWrapper.each(function () {
-          var $this = $(this),
-              $items = $this.find('.uix-3d-slider--expParticle__item'),
+          var $this = $(this);
+          var $items = $this.find('.uix-3d-slider--expParticle__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
               activated = $this.data('activated');
@@ -20207,8 +20402,9 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
               if (_item.find('video').length > 0) {
                 //Returns the dimensions (intrinsic height and width ) of the video
-                var video = document.getElementById(_item.find('video').attr('id')),
-                    videoURL = _item.find('source:first').attr('src');
+                var video = document.getElementById(_item.find('video').attr('id'));
+
+                var videoURL = _item.find('source:first').attr('src');
 
                 if (simple_3D_explosive_particle_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
 
@@ -20431,15 +20627,16 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
         allSources.forEach(function (element, index) {
           if (index != activeSlider) {
-            var objects = element.children;
-            var speed = Math.random() * .00005;
+            var _objects = element.children;
 
-            for (var i = 0; i < objects.length; i++) {
-              for (var j = 0; j < objects[i].parent.children.length; j++) {
-                var obj = objects[i].parent.children[j];
-                obj.position.x += (obj.targetPos.x - obj.position.x) * speed;
-                obj.position.y += (obj.targetPos.y - obj.position.y) * speed;
-                obj.position.z += (obj.targetPos.z - obj.position.z) * speed;
+            var _speed = Math.random() * .00005;
+
+            for (var _i = 0; _i < _objects.length; _i++) {
+              for (var _j = 0; _j < _objects[_i].parent.children.length; _j++) {
+                var _obj = _objects[_i].parent.children[_j];
+                _obj.position.x += (_obj.targetPos.x - _obj.position.x) * _speed;
+                _obj.position.y += (_obj.targetPos.y - _obj.position.y) * _speed;
+                _obj.position.z += (_obj.targetPos.z - _obj.position.z) * _speed;
               }
             }
           }
@@ -20461,7 +20658,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -20470,8 +20667,8 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
              sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
         */
 
-        for (var i = 0; i < sceneSubjects.length; i++) {
-          sceneSubjects[i].update(clock.getElapsedTime() * 1);
+        for (var _i2 = 0; _i2 < sceneSubjects.length; _i2++) {
+          sceneSubjects[_i2].update(clock.getElapsedTime() * 1);
         } //render the scene to display our scene through the camera's eye.
 
 
@@ -20601,13 +20798,15 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           } else {
             if (playTimes == total) playTimes = 0;
             if (playTimes < 0) playTimes = total - 1;
-            var slideCurId = items.filter('.is-active').index(),
-                slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
+            var _slideCurId = items.filter('.is-active').index(),
+                _slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
+              sliderUpdates(_slideCurId, _slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+              sliderUpdates(_slideCurId, _slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -20768,16 +20967,15 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
-      var animSpeed = 1000,
-          $sliderWrapper = $('.uix-3d-slider--liquid-scrollspy'),
+      var $sliderWrapper = $('.uix-3d-slider--liquid-scrollspy'),
           //Basic webGL renderers 
       renderLoaderID = 'uix-3d-slider--liquid-scrollspy__loader',
           rendererOuterID = 'uix-3d-slider--liquid-scrollspy__canvas-container',
-          rendererCanvasID = 'uix-3d-slider--liquid-scrollspy__canvas',
-          renderer; // Generate one plane geometries mesh to scene
+          rendererCanvasID = 'uix-3d-slider--liquid-scrollspy__canvas';
+      var animSpeed = 1000; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -20806,8 +21004,8 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
 
       function wrapperInit() {
         $sliderWrapper.each(function () {
-          var $this = $(this),
-              $items = $this.find('.uix-3d-slider--liquid-scrollspy__item'),
+          var $this = $(this);
+          var $items = $this.find('.uix-3d-slider--liquid-scrollspy__item'),
               $first = $items.first(),
               itemsTotal = $items.length,
               activated = $this.data('activated');
@@ -20896,8 +21094,9 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
 
               if (_item.find('video').length > 0) {
                 //Returns the dimensions (intrinsic height and width ) of the video
-                var video = document.getElementById(_item.find('video').attr('id')),
-                    videoURL = _item.find('source:first').attr('src');
+                var video = document.getElementById(_item.find('video').attr('id'));
+
+                var videoURL = _item.find('source:first').attr('src');
 
                 if (simple_3D_liquid_scrollspy_slider_js_typeof(videoURL) === ( true ? "undefined" : undefined)) videoURL = _item.attr('src');
 
@@ -21029,7 +21228,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
       function loadImages() {
         var promises = [];
 
-        for (var i = 0; i < sources.length; i++) {
+        var _loop = function _loop(i) {
           if (sources[i].type == 'img') {
             ///////////
             // IMAGE //
@@ -21065,6 +21264,10 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
               return resolve(sources[i].url);
             }).then(makeThreeTexture));
           }
+        };
+
+        for (var i = 0; i < sources.length; i++) {
+          _loop(i);
         }
 
         return Promise.all(promises);
@@ -21211,7 +21414,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -21272,8 +21475,8 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
 
 
         if (scrollspyEnable) {
-          var slideCurId = scrollspyConfigItems.filter('.is-active').index(),
-              slideNextId;
+          var slideCurId = scrollspyConfigItems.filter('.is-active').index();
+          var slideNextId;
 
           if (dir == 'down') {
             slideNextId = parseFloat(scrollspyConfigItems.filter('.is-active').index()) + 1; //Transition Between Slides
@@ -21323,13 +21526,15 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
           } else {
             if (playTimes == total) playTimes = 0;
             if (playTimes < 0) playTimes = total - 1;
-            var slideCurId = items.filter('.is-active').index(),
-                slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
+            var _slideCurId = items.filter('.is-active').index(),
+                _slideNextId = playTimes; //Prevent problems with styles when switching in positive order
+
 
             if (playTimes == 0) {
-              sliderUpdates(slideCurId, slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
+              sliderUpdates(_slideCurId, _slideNextId, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
             } else {
-              sliderUpdates(slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+              sliderUpdates(_slideCurId, _slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
             }
           }
         }, timing);
@@ -21520,10 +21725,10 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          rendererCanvasID = '3D-filmic-effects-canvas'; // Generate one plane geometries mesh to scene
+      var $window = $(window);
+      var windowWidth = window.innerWidth,
+          windowHeight = window.innerHeight;
+      var rendererCanvasID = '3D-filmic-effects-canvas'; // Generate one plane geometries mesh to scene
       //-------------------------------------	
 
       var camera,
@@ -21587,11 +21792,11 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
         composer.addPass(filmPass);
         composer.addPass(effectCopy); //=================
 
-        var geo = new THREE.PlaneGeometry(100000, 100000);
-        var mat = new THREE.MeshNormalMaterial({
+        var planeGeometry = new THREE.PlaneGeometry(100000, 100000);
+        var planeMaterial = new THREE.MeshNormalMaterial({
           side: THREE.DoubleSide
         });
-        intersectionPlane = new THREE.Mesh(geo, mat);
+        intersectionPlane = new THREE.Mesh(planeGeometry, planeMaterial);
         intersectionPlane.visible = false;
         scene.add(intersectionPlane);
         var hoverMaterial = new THREE.MeshNormalMaterial();
@@ -21601,8 +21806,8 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
         var selectedMaterial = new THREE.MeshBasicMaterial({
           color: 0x55ff88
         });
-        var geo = new THREE.IcosahedronGeometry(30, 1);
-        var mesh = new THREE.Mesh(geo, neutralMaterial);
+        var neutralGeometry = new THREE.IcosahedronGeometry(30, 1);
+        var mesh = new THREE.Mesh(neutralGeometry, neutralMaterial);
         mesh.position.x = 0;
         mesh.position.y = 0;
         mesh.position.z = 0;
@@ -21620,7 +21825,7 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
         /*
         @Usage: 
              function CustomObj( scene ) {
-                 var elements = new THREE...;
+                 const elements = new THREE...;
                 scene.add( elements );
                  this.update = function( time ) {
                     elements.rotation.y = time*0.003;
@@ -21723,8 +21928,8 @@ var TABLE = function (module, $, window, document) {
   module.TABLE.version = '0.0.3';
 
   module.TABLE.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     /* 
      ---------------------------
@@ -21782,8 +21987,8 @@ var TABLE = function (module, $, window, document) {
             }
           }
 
-          for (var j = 0; j < columns; j++) {
-            $(resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css('height', maxHeight);
+          for (var _j = 0; _j < columns; _j++) {
+            $(resTableSCrolled + ' tr:nth-child(' + _j + ') td:nth-child(' + i + ')').css('height', maxHeight);
             $(resTableSCrolled + ' th:nth-child(' + i + ')').css('height', maxHeight);
           }
         }
@@ -21830,8 +22035,8 @@ var TABLE_SORTER = function (module, $, window, document) {
 
         var $th = $(this),
             thIndex = $th.index(),
-            thType = $th.data('sort-type'),
-            inverse = false;
+            thType = $th.data('sort-type');
+        var inverse = false;
         $th.off('click').on('click', function () {
           $sortTable.find('tbody td').filter(function () {
             return $(this).index() === thIndex;
@@ -21905,20 +22110,20 @@ var TABS = function (module, $, window, document) {
 
   module.TABS.documentReady = function ($) {
     $('.uix-tabs').each(function (id) {
-      var $this = $(this),
-          $li = $this.find('.uix-tabs__nav ul > li'),
+      var $this = $(this);
+      var $li = $this.find('.uix-tabs__nav ul > li'),
           liWidth = $li.first().outerWidth(),
           liHeight = $li.first().outerHeight(),
           liNum = $li.length,
           $contentbox = $this.find('.uix-tabs__content'),
-          ulWidth = $this.data('width'),
+          isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/,
+          tabBoxID = id;
+      var ulWidth = $this.data('width'),
           fullwidth = $this.data('fullwidth'),
           rotation = $this.data('rotation'),
           rotationRadius = $this.data('rotation-radius'),
           rotationWapperDeg = $this.data('rotation-wrapper-angle'),
-          rotationDisplay = $this.data('rotation-display'),
-          tabBoxID = id,
-          isNumeric = /^[-+]?(\d+|\d+\.\d*|\d*\.\d+)$/;
+          rotationDisplay = $this.data('rotation-display');
 
       if (tabs_js_typeof(fullwidth) != ( true ? "undefined" : undefined) && fullwidth == 1) {
         $li.css('width', 100 / liNum + '%');
@@ -21956,10 +22161,10 @@ var TABS = function (module, $, window, document) {
           'transform': 'rotate(' + parseFloat(rotationWapperDeg) + 'deg)'
         }); //Layout components in a circle layout
 
-        var angle = 0,
-            step = 2 * Math.PI / rotationDisplay,
-            transitionDelay = 0,
+        var step = 2 * Math.PI / rotationDisplay,
             pad = $this.find('.uix-tabs__nav ul').width();
+        var angle = 0,
+            transitionDelay = 0;
         $this.find('.uix-tabs__nav ul > li').each(function () {
           //Can'nt use arrow function here!!!
           // 'this' works differently with arrow fucntions
@@ -22084,16 +22289,16 @@ var TEAM_FOCUS = function (module, $, window, document) {
     var teamFocusContent = '.uix-team-focus',
         teamFocusMask = '.uix-team-focus__mask';
     $(teamFocusContent).each(function () {
-      var $this = $(this),
-          thisID = 'uix-team-focus-' + UixGUID.create(),
-          hoverWidth = $this.data('hover-width'),
+      var $this = $(this);
+      var thisID = 'uix-team-focus-' + UixGUID.create(),
+          el = '#' + thisID + '> div';
+      var total = 0;
+      var hoverWidth = $this.data('hover-width'),
           targetWidth = $this.data('target-width'),
           // Div over width as a percentage 
       targetInfo = $this.data('target-info'),
           // Corresponding character details display
-      closeBtn = $this.data('close-btn'),
-          el = '#' + thisID + '> div',
-          total = 0;
+      closeBtn = $this.data('close-btn');
       $this.attr('id', thisID);
 
       if (team_focus_js_typeof(hoverWidth) === ( true ? "undefined" : undefined)) {
@@ -22297,8 +22502,8 @@ var TIMELINE = function (module, $, window, document) {
   module.TIMELINE.version = '0.1.6';
 
   module.TIMELINE.pageLoaded = function () {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     /*! 
      ---------------------------
@@ -22308,10 +22513,10 @@ var TIMELINE = function (module, $, window, document) {
 
     if (windowWidth > 768) {
       $('.uix-timeline__container-wrapper.is-horizontal').each(function () {
-        var $this = $(this),
-            $container = $this.find('.uix-timeline__container.is-horizontal'),
-            $timeline = $container.find('> .uix-timeline'),
-            dateShowEle = $timeline.data('show-ele');
+        var $this = $(this);
+        var $container = $this.find('.uix-timeline__container.is-horizontal'),
+            $timeline = $container.find('> .uix-timeline');
+        var dateShowEle = $timeline.data('show-ele');
 
         if (timeline_js_typeof(dateShowEle) === ( true ? "undefined" : undefined)) {
           dateShowEle = '#timeline-number-show';
@@ -22431,7 +22636,7 @@ var TIMELINE = function (module, $, window, document) {
         'margin-left': -parseFloat(tNavW) + 'px'
       }); //Push the current text to element 
 
-      $(showEle).text(obj.find('.uix-timeline__item:eq(' + i + ')').find('.uix-timeline__item--date').text());
+      $(showEle).text(obj.find('.uix-timeline__item:eq(' + tarIndex + ')').find('.uix-timeline__item--date').text());
     }
   };
 
@@ -22461,10 +22666,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   module.VERTICAL_MENU.version = '0.0.2';
 
   module.VERTICAL_MENU.documentReady = function ($) {
-    var $window = $(window),
-        windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight,
-        ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu'; // Menu Hover
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu'; // Menu Hover
 
     var mTop = 15;
     $(ulForDesktop + ' > li.multi-column > ul li ul').addClass('multi');
@@ -22537,9 +22742,9 @@ var VERTICAL_MENU = function (module, $, window, document) {
 
     function menuWrapInit(w, h) {
       var $menuWrap = $('.uix-v-menu__container:not(.is-mobile)'),
-          vMenuTop = 0,
-          //This value is equal to the $vertical-menu-top variable in the SCSS
-      winHeight = h - vMenuTop; //WoedPress spy
+          vMenuTop = 0; //This value is equal to the $vertical-menu-top variable in the SCSS
+
+      var winHeight = h - vMenuTop; //WoedPress spy
 
       if ($('.admin-bar').length > 0) {
         winHeight = h - 132;

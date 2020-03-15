@@ -10,7 +10,7 @@
     $.fn.UixRenderCustomSingleSel = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '.uix-controls__single-sel'
         }, options );
  
@@ -20,8 +20,8 @@
 			$( settings.controls ).each( function()  {
 				$( this ).find( '> span' ).each( function()  {
 
-					var targetID  = '#' + $( this ).parent().attr( 'data-targetid' ),
-						switchIDs = '';
+					const targetID  = '#' + $( this ).parent().attr( 'data-targetid' );
+					let	switchIDs = '';
 
 					//add switch IDs
 					$( this ).parent().find( '> span' ).each( function()  {

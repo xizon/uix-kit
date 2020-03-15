@@ -30,7 +30,7 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 
 		//grab each 3dAnimate element and pass it into the animate function along with the config data
 		$( '[data-3d-animate]' ).each( function( index, element ) {
-			var config      = $( element ).data( '3d-animate' );
+			let config      = $( element ).data( '3d-animate' );
 			
 			
 			if ( typeof config === typeof undefined ) {
@@ -61,9 +61,9 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 		 */
 		function animate3dElement( base, obj, reset ) {
 
-			var $el      = $( obj ),
-				w        = $el.innerWidth(),
-				h        = $el.innerHeight();
+			const $el      = $( obj ),
+				  w        = $el.innerWidth(),
+				  h        = $el.innerHeight();
 			
 
 //			TweenMax.set( $el, {
@@ -76,11 +76,12 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 			// mouse move on block
 			$( obj ).on( 'mousemove touchmove', function( e ) {
 				
-				var mX, 
+				let mX, 
 					mY,
 					rmX,
-					rmY,
-					touches = e.originalEvent.touches;
+					rmY;
+                
+				const touches = e.originalEvent.touches;
 			
 				if ( touches && touches.length ) {
 
@@ -101,8 +102,8 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 	
 				
 				// function to run matrix3D effect on block
-				var tX = mousePosition( rmX, w ),
-					tY = mousePosition( rmY, h );
+				const tX = mousePosition( rmX, w ),
+					  tY = mousePosition( rmY, h );
 
 
 				TweenMax.to( $( this ), 0.2, {
@@ -150,20 +151,21 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 		function animate3dMultiElement( base, multiple, obj, reset ) {
 
 			//get the specs of the element
-			var divOffset = $( obj ).offset(),
-				divTop    = divOffset.top,
-				divLeft   = divOffset.left,
-				divWidth  = $( obj ).innerWidth(),
-				divHeight = $( obj ).innerHeight();
+			const divOffset = $( obj ).offset(),
+			  	  divTop    = divOffset.top,
+				  divLeft   = divOffset.left,
+				  divWidth  = $( obj ).innerWidth(),
+				  divHeight = $( obj ).innerHeight();
 
 			
 	
 			//set an onmousemove event on the element
 			$( obj ).on( 'mousemove touchmove', function( e ){
 
-				var pctX, 
-					pctY,
-					touches = e.originalEvent.touches;
+				let pctX, 
+					pctY;
+                
+				const touches = e.originalEvent.touches;
 			
 				if ( touches && touches.length ) {
 
@@ -180,11 +182,11 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 				
 
 				$( this ).children().each( function( index, elementSub ) {
-					var x         = pctX * ( base*Math.pow( multiple, index ) ),
-						y         = pctY * ( base*Math.pow( multiple, index ) ),
-						z         = 0,
-						deg       = pctY * ( 180 / Math.PI ),
-						rotateDeg = parseFloat( deg - 35 );
+					const x         = pctX * ( base*Math.pow( multiple, index ) ),
+						  y         = pctY * ( base*Math.pow( multiple, index ) ),
+						  z         = 0,
+						  deg       = pctY * ( 180 / Math.PI ),
+						  rotateDeg = parseFloat( deg - 35 );
 					
 					
 					TweenMax.to( $( elementSub ), 0.2, {

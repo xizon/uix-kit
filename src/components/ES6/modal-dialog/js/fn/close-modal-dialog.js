@@ -9,7 +9,7 @@
     $.fn.UixCloseModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			target  : '.uix-modal-box'
         }, options );
 		

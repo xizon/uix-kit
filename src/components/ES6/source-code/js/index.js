@@ -53,9 +53,9 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 			// Unlocks the page
 			$.scrollLock( false );
 			
-			var uri = window.location.toString();
+			const uri = window.location.toString();
 			if ( uri.indexOf( '#' ) > 0 ) {
-				var clean_uri = uri.substring(0, uri.indexOf( '#' ) );
+				const clean_uri = uri.substring(0, uri.indexOf( '#' ) );
 				window.history.replaceState({}, document.title, clean_uri );
 			}
 			$( '#uix-source-code' ).hide();
@@ -64,19 +64,19 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 		
 		
 		//Remove tag from HTML-String
-		var removeElements = function( text, selector ) {
-			var wrapped = $( "<div>" + text + "</div>" );
+		const removeElements = function( text, selector ) {
+			const wrapped = $( "<div>" + text + "</div>" );
 			wrapped.find( selector ).remove();
 			return wrapped.html();
 		};
 
 
 		//Source code init
-		var sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
-			sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
+		const sourceCodeBodyClass      = $( 'body' ).attr( 'class' ),
+			  sourceCodeBodyClassCode  = ( typeof sourceCodeBodyClass != typeof undefined ) ? 'body class="'+sourceCodeBodyClass+'"' : 'body';
 		
 		$.get( window.location.toString(), function( data ) {
-			var pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
+			let pageBodyCode   = data.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0],
 				pageHeaderCode = data.split("</head>")[0];
 			
 			pageBodyCode   = removeElements( pageBodyCode, '#uix-view-source, #uix-source-code' );

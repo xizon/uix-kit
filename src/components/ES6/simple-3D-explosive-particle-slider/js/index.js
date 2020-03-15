@@ -39,30 +39,29 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 		if ( $( '.uix-3d-slider--expParticle' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight;
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
 
+            
+			const $sliderWrapper            = $( '.uix-3d-slider--expParticle' ),
+                  //Basic webGL renderers 
+                  renderLoaderID            = 'uix-3d-slider--expParticle__loader',
+                  rendererOuterID           = 'uix-3d-slider--expParticle__canvas-container',
+                  rendererCanvasID          = 'uix-3d-slider--expParticle__canvas';
+            
 
-			var animSpeed                 = 1000,
-				$sliderWrapper            = $( '.uix-3d-slider--expParticle' ),
+            let animSpeed  = 1000;
 
-
-
-				//Basic webGL renderers 
-				renderLoaderID            = 'uix-3d-slider--expParticle__loader',
-				rendererOuterID           = 'uix-3d-slider--expParticle__canvas-container',
-				rendererCanvasID          = 'uix-3d-slider--expParticle__canvas',
-				renderer;
 
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -72,7 +71,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 				clock = new THREE.Clock();
 
 
-			var offsetWidth   = 475, //Set the display width of the objects in the Stage
+			let offsetWidth   = 475, //Set the display width of the objects in the Stage
 				offsetHeight  = 375, //Set the display height of the objects in the Stage
 				allSources    = [],
 				objTotal,
@@ -80,14 +79,14 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 		
 			
-			var sources = [];
-			var isAnimating = false;
+			let sources = [];
+			let isAnimating = false;
 			
 			
 			// constants
-			var activeSlider = 0;
+			let activeSlider = 0;
 			
-			var cube_count,
+			let cube_count,
 				meshes = [],
 				materials = [],
 				xgrid = 25,
@@ -98,18 +97,19 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 				
 				$sliderWrapper.each( function()  {
 
-					var $this                    = $( this ),
-						$items                   = $this.find( '.uix-3d-slider--expParticle__item' ),
-						$first                   = $items.first(),
-						itemsTotal               = $items.length,
-                        activated                = $this.data( 'activated' ); 
+					const $this                    = $( this );
+                    
+					const $items                   = $this.find( '.uix-3d-slider--expParticle__item' ),
+						  $first                   = $items.first(),
+						  itemsTotal               = $items.length,
+                          activated                = $this.data( 'activated' ); 
 				
                     
                     if ( typeof activated === typeof undefined || activated === 0 ) {
 
 
                         //Get parameter configuration from the data-* attribute of HTML
-                        var	dataControlsPagination   = $this.data( 'controls-pagination' ),
+                        let	dataControlsPagination   = $this.data( 'controls-pagination' ),
                             dataControlsArrows       = $this.data( 'controls-arrows' ),
                             dataLoop                 = $this.data( 'loop' ),
                             dataFilterTexture        = $this.data( 'filter-texture' ),
@@ -136,7 +136,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 
                         //Autoplay times
-                        var playTimes;
+                        let playTimes;
                         //A function called "timer" once every second (like a digital watch).
                         $this[0].animatedSlides;
 
@@ -199,13 +199,14 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                         //Get all images and videos
                         //-------------------------------------		
                         $items.each( function()  {
-                            var _item = $( this );
+                            const _item = $( this );
 
                             if ( _item.find( 'video' ).length > 0 ) {
 
                                 //Returns the dimensions (intrinsic height and width ) of the video
-                                var video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) ),
-                                    videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                const video    = document.getElementById( _item.find( 'video' ).attr( 'id' ) );
+                                let videoURL = _item.find( 'source:first' ).attr( 'src' );
+                                
                                 if ( typeof videoURL === typeof undefined ) videoURL = _item.attr( 'src' ); 
 
                                 if ( typeof videoURL != typeof undefined ) {
@@ -223,7 +224,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
                             } else {
 
-                                var imgURL   = _item.find( 'img' ).attr( 'src' );
+                                let imgURL   = _item.find( 'img' ).attr( 'src' );
 
                                 if ( typeof imgURL != typeof undefined ) {
 
@@ -245,10 +246,10 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
                         //Pagination dots 
                         //-------------------------------------	
-                        var _dot       = '',
+                        let _dot       = '',
                             _dotActive = '';
                         _dot += '<ul>';
-                        for ( var i = 0; i < itemsTotal; i++ ) {
+                        for ( let i = 0; i < itemsTotal; i++ ) {
 
                             _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -264,7 +265,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                             e.preventDefault();
 
                             //Prevent buttons' events from firing multiple times
-                            var $btn = $( this );
+                            const $btn = $( this );
                             if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                             $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'true' );
                             setTimeout( function() {
@@ -272,12 +273,12 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                             }, animSpeed );
                             
                             
-                            var slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
-                                slideNextId = $( this ).index();
+                            const slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
+                                  slideNextId = $( this ).index();
 
 
                             //Determine the direction
-                            var curDir = 'prev';
+                            let curDir = 'prev';
                             if ( $( this ).attr( 'data-index' ) > slideCurId ) {
                                 curDir = 'next';
                             }
@@ -295,8 +296,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
                         //Next/Prev buttons
                         //-------------------------------------		
-                        var _prev = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ),
-                            _next = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' );
+                        const _prev = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--prev' ),
+                              _next = $( dataControlsArrows ).find( '.uix-3d-slider--expParticle__arrows--next' );
 
                         $( dataControlsArrows ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -317,8 +318,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                             }, animSpeed );   
                             
 
-                            var slideCurId  = $items.filter( '.is-active' ).index(),
-                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
+                            const slideCurId  = $items.filter( '.is-active' ).index(),
+                                  slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 
                             //Transition Between Slides
                             sliderUpdates( slideCurId, slideNextId, 'prev', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
@@ -342,8 +343,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                             }, animSpeed ); 
  
 
-                            var slideCurId  = $items.filter( '.is-active' ).index(),
-                                slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
+                            const slideCurId  = $items.filter( '.is-active' ).index(),
+                                  slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 
                             //Transition Between Slides
                             sliderUpdates( slideCurId, slideNextId, 'next', dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows, dataLoop );	
@@ -438,7 +439,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 
 				//A loader for loading all images from array.
-				var loader = new THREE.TextureLoader();
+				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
 
@@ -476,7 +477,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 					} else {
 						
 					
-						var texture = new THREE.VideoTexture( document.getElementById( element.id ) );
+						const texture = new THREE.VideoTexture( document.getElementById( element.id ) );
 						texture.minFilter = THREE.LinearFilter;
 						texture.magFilter = THREE.LinearFilter;
 						texture.format = THREE.RGBFormat;
@@ -509,7 +510,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			function render() {
 				requestAnimationFrame( render );
 
-				var elapsed = clock.getElapsedTime();
+				const elapsed = clock.getElapsedTime();
 
 
 				//To set a background color.
@@ -520,14 +521,14 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 				//Display the destination object
 				if ( typeof allSources[activeSlider] != typeof undefined ) {
 
-					var objects = allSources[activeSlider].children;
-					var speed =  Math.random() * .0002;
+					const objects = allSources[activeSlider].children;
+					const speed =  Math.random() * .0002;
 
-					for ( var i = 0; i < objects.length; i++ ) {
+					for ( let i = 0; i < objects.length; i++ ) {
 
 
-						for ( var j = 0; j < objects[i].parent.children.length; j++ ) {
-							var obj = objects[i].parent.children[j];
+						for ( let j = 0; j < objects[i].parent.children.length; j++ ) {
+							const obj = objects[i].parent.children[j];
 
 							obj.position.x += (obj.origPos.x - obj.position.x) * speed;
 							obj.position.y += (obj.origPos.y - obj.position.y) * speed;
@@ -546,14 +547,14 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 				allSources.forEach( function ( element, index ) {
 					if ( index != activeSlider ) {
 
-						var objects = element.children;
-						var speed =  Math.random() * .00005;
+						const objects = element.children;
+						const speed =  Math.random() * .00005;
 
-						for ( var i = 0; i < objects.length; i++ ) {
+						for ( let i = 0; i < objects.length; i++ ) {
 
 
-							for ( var j = 0; j < objects[i].parent.children.length; j++ ) {
-								var obj = objects[i].parent.children[j];
+							for ( let j = 0; j < objects[i].parent.children.length; j++ ) {
+								const obj = objects[i].parent.children[j];
 								
 								obj.position.x += (obj.targetPos.x - obj.position.x) * speed;
 								obj.position.y += (obj.targetPos.y - obj.position.y) * speed;
@@ -594,7 +595,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -604,7 +605,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 
@@ -636,13 +637,13 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			 */
 			function loadSource( texture, index, w, h, total, loading ) {
 
-				var imgW = w,
-					imgH = h;
+				const imgW = w,
+					  imgH = h;
 				
 				
 				//
-				var group = new THREE.Object3D();
-				var i, j, ux, uy, ox, oy,
+				const group = new THREE.Object3D();
+				let i, j, ux, uy, ox, oy,
 					geometry,
 					xsize, ysize;
 				ux = 1 / xgrid;
@@ -673,9 +674,9 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 						
 						//hide all
-						var newPosX = 4000 * Math.random() * ( Math.random() > 0.5 ? 1 : -1 );
-						var newPosY = 2000 * Math.random();
-						var newPosZ = 3000 * Math.random();
+						const newPosX = 4000 * Math.random() * ( Math.random() > 0.5 ? 1 : -1 );
+						const newPosY = 2000 * Math.random();
+						const newPosZ = 3000 * Math.random();
 						displacementSprite.position.x = newPosX;
 						displacementSprite.position.y = newPosY;
 						displacementSprite.position.z = newPosZ;
@@ -721,8 +722,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 
 			function changeUVS( geometry, unitx, unity, offsetx, offsety ) {
-				var uvs = geometry.attributes.uv.array;
-				for ( var i = 0; i < uvs.length; i += 2 ) {
+				const uvs = geometry.attributes.uv.array;
+				for ( let i = 0; i < uvs.length; i += 2 ) {
 					uvs[ i ] = ( uvs[ i ] + offsetx ) * unitx;
 					uvs[ i + 1 ] = ( uvs[ i + 1 ] + offsety ) * unity;
 				}
@@ -744,8 +745,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
              */
             function sliderAutoPlay( playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID ) {	
 
-                var items = slider.find( '.uix-3d-slider--expParticle__item' ),
-                    total = items.length;
+                const items = slider.find( '.uix-3d-slider--expParticle__item' ),
+                      total = items.length;
 
                 slider[0].animatedSlides = setInterval( function() {
 
@@ -756,8 +757,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                         if ( !loop ) {
                             if ( playTimes < total && playTimes >= 0 ) {
 
-                                var slideCurId  = items.filter( '.is-active' ).index(),
-                                    slideNextId = playTimes;	
+                                const slideCurId  = items.filter( '.is-active' ).index(),
+                                      slideNextId = playTimes;	
 
                                 sliderUpdates( slideCurId, slideNextId, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
                             }
@@ -765,8 +766,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
                             if ( playTimes == total ) playTimes = 0;
                             if ( playTimes < 0 ) playTimes = total-1;		
 
-                            var slideCurId  = items.filter( '.is-active' ).index(),
-                                slideNextId = playTimes;	
+                            const slideCurId  = items.filter( '.is-active' ).index(),
+                                  slideNextId = playTimes;	
 
 
                             //Prevent problems with styles when switching in positive order
@@ -801,8 +802,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			function sliderUpdates( slideCurId, slideNextId, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 
 
-				var $items                   = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ),
-					total                    = $items.length;
+				const $items                   = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ),
+					  total                    = $items.length;
 	
 			
                 
@@ -842,8 +843,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 					//Get previous and next index of item
 					//-------------------------------------
-					var $current = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideCurId );
-					var	$next    = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideNextId );
+					const $current = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideCurId );
+					const	$next    = $sliderWrapper.find( '.uix-3d-slider--expParticle__item' ).eq( slideNextId );
 
 
 
@@ -852,7 +853,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 					//Determine the direction and add class to switching direction indicator.
 					//-------------------------------------
-					var dirIndicatorClass = '';
+					let dirIndicatorClass = '';
 					if ( dir == 'prev' ) dirIndicatorClass = 'prev';
 					if ( dir == 'next' ) dirIndicatorClass = 'next';
 

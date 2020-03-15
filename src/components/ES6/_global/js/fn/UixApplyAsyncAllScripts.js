@@ -30,22 +30,22 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
     $.fn.UixApplyAsyncAllScripts = function( options ) {
  
 		// This is the easiest way to have default options.
-		var settings = $.extend({
+		const settings = $.extend({
 			runAll    : true
 		}, options );
 		
 		
         this.each( function() {
 		
-			var scipts_pageLoaded    = UixModuleInstance.components.pageLoaded,
+			let scipts_pageLoaded    = UixModuleInstance.components.pageLoaded,
 				scipts_documentReady = UixModuleInstance.components.documentReady;
 
 			if ( settings.runAll ) {
 
-				for ( var i = 0; i < scipts_pageLoaded.length; i++ ) {
+				for ( let i = 0; i < scipts_pageLoaded.length; i++ ) {
 					 scipts_pageLoaded[i]();
 				}
-				for ( var j = 0; j < scipts_documentReady.length; j++ ) {
+				for ( let j = 0; j < scipts_documentReady.length; j++ ) {
 					 scipts_documentReady[j]( $ );
 				}
 			}

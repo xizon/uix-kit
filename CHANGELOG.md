@@ -1,5 +1,27 @@
 # Changelog
 
+
+
+#### = 4.1.53 (March 14, 2020) =
+
+* Fix: Read-only issue with some variables.
+* Fix: Mask does not disappear when ajax request times out or no image is loaded.
+
+
+#### = 4.1.5 (March 13, 2020) =
+
+* Tweak: Modify the primary highlight color style.
+* Tweak: Replace var of all modules with const and let. Enhance semantics and optimize script performance.
+* New: Added disable status of radio and checkbox.
+
+
+
+
+#### = 4.1.4 (March 11, 2020) =
+
+* Tweak: Optimized the width of the tooltip.
+
+
 #### = 4.1.3 (March 10, 2020) =
 
 * New: Added style of loader progress to `<body>` tag.

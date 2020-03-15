@@ -27,9 +27,9 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
     module.MEGA_MENU.version       = '0.0.3';
 	module.MEGA_MENU.pageLoaded = function() {
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 
 		// Using delay is for more accurate calculation
 		setTimeout( function() {
@@ -55,7 +55,7 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 		
 		// Initialize mega menu
 		function megaMenuInit( w ) {
-			var $menuWrap  = $( '.uix-menu__container:not(.is-mobile)' ),
+			let $menuWrap  = $( '.uix-menu__container:not(.is-mobile)' ),
 				maxWidth     = 1140, //The maximum width of the mega menu wrapper
 				
 				//This value is equal to the $nav-mega-li-w variable in the SCSS
@@ -72,7 +72,7 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 			
 			// Remove the html tag for mega menu item
 			$menuWrap.find( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
-				var mega_old_item = $( this ).html();
+				const mega_old_item = $( this ).html();
 				if ( mega_old_item != '' ) {
 					$( this ).html( mega_old_item.replace(/<[^>]+>/g, '' ) );
 				}
@@ -82,7 +82,7 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 			if ( w > 768 ){
 
 				$menuWrap.find( 'li.multi-column' ).each( function( index ) {
-					var root_li          = $( this ),
+					let root_li          = $( this ),
 						col_total        = root_li.find( '> ul > li' ).length,
 						mega_div         = root_li.find( ' > ul.sub-menu' ),
 						mega_div_w       = mega_div.width(),
@@ -147,7 +147,7 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 								
 							
 							
-							var chkWidth = parseFloat( root_li_left  + mega_div_w );
+							const chkWidth = parseFloat( root_li_left  + mega_div_w );
 
 
 							if ( chkWidth > w ) {
@@ -163,7 +163,7 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 								
 								
 								//If the CSS sets the offset of ul::before
-//								var mega_div_offset = mega_div_w/2 - 0;
+//								const mega_div_offset = mega_div_w/2 - 0;
 //								
 //								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
 //									mega_div.css( {

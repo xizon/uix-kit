@@ -42,7 +42,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
     $.fn.UixApplyAsyncScripts = function( options ) {
  
 		// This is the easiest way to have default options.
-		var settings = $.extend({
+		const settings = $.extend({
 			scrollReveal    : true, // @from ./src/components/ES6/scroll-reveal
 			ajaxPostList    : true, // @from ./src/components/ES6/list-posts
 			ajaxDDList      : true, // @from ./src/components/ES6/dynamic-dropdown-list-json

@@ -30,15 +30,15 @@ export const LOGIN_UI = ( ( module, $, window, document ) => {
 
 		
 		
-		var $loginToggle = $( '.uix-special-login__toggle' ),
-			$loginForms  = $( '.uix-special-login__form' );
+		const $loginToggle = $( '.uix-special-login__toggle' ),
+			  $loginForms  = $( '.uix-special-login__form' );
 
 		$loginToggle.data( 'switched', true ).off( 'click' ).on( 'click', function( e ) {
 			
 			e.preventDefault();
 
-			var $form1 = $loginForms.eq(0),
-			    $form2 = $loginForms.eq(1);
+			const $form1 = $loginForms.eq(0),
+			      $form2 = $loginForms.eq(1);
 
 		
 			if ( $( this ).data( 'switched' ) ) {

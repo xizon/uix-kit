@@ -28,7 +28,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 		if ( $( 'body' ).hasClass( 'onepage' ) ) return false;
 		
 		
-		var browserURL = window.location.href;
+		const browserURL = window.location.href;
 	
 		//Prevent anchor behaviour
         //Do not add off() to this
@@ -36,14 +36,14 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 			
 			if ( $( this ).data( 'smooth-scrolling' ) != false ) {
 
-				var linkURL    = $( this ).attr( 'href' ),
+				let linkURL    = $( this ).attr( 'href' ),
 					locIndex, 
 					locURL;
 
 				if ( linkURL.indexOf( '#' ) >= 0 && linkURL != '#' ) {
 					e.preventDefault();
 
-					var locArr = linkURL.split( '#' );
+					const locArr = linkURL.split( '#' );
 					locIndex = locArr[1];
 					locURL   = locArr[0];
 
@@ -65,8 +65,8 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 		if ( browserURL.indexOf( '#!!' ) >= 0 ) {
 			
 
-			var curndex = browserURL.split( '#!!' ),
-				$target = $( '#' + curndex[1] );
+			const curndex = browserURL.split( '#!!' ),
+				  $target = $( '#' + curndex[1] );
 			
 			//Smooth scrolling
 			if ( $target.length ) {
@@ -111,7 +111,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 			) {
 				
 				// Figure out element to scroll to
-				var target = $( this.hash );
+				let target = $( this.hash );
 				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
 				// Does a scroll target exist?
 				if ( target.length ) {
@@ -130,7 +130,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 							
 							// Callback after animation
 							// Must change focus!
-							var $target = $( target );
+							const $target = $( target );
 							$target.focus();
 							if ( $target.is( ':focus' ) ) { // Checking if the target was focused
 								return false;

@@ -29,23 +29,25 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};
-    module.THREE_PARTICLE.version       = '0.0.4';
+    module.THREE_PARTICLE.version       = '0.0.5';
     module.THREE_PARTICLE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 		
-		var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+		let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-particle-effect-canvas';
 
-			var renderer, 
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+
+            const rendererCanvasID = '3D-particle-effect-canvas';
+
+			let renderer, 
 				texture, 
 				scene, 
 				camera,
@@ -61,45 +63,134 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 
 
-
+            //background
+            const backgroundBg = 0xCE3A3E;
+            const backgroundPlane = 0xDE510E;
+            
+            
+            // Light from scene ready
+            let sceneForLightPlane, sceneForSpotLight, sceneForAmbientLight;        
+            
+            // camera data
+            let fieldOfView, aspectRatio, nearPlane, farPlane;
+            let dist, vFOV, visibleHeight, visibleWidth;
+            let xLimit, yLimit;   
+            const maxTargetZ = 200;
+            
+            
 			//particle rotation
-			var particleRotation;
+			let particleRotation;
 
-			var centerVector = new THREE.Vector3(0, 0, 0);
-			var previousTime = 0;
+			const centerVector = new THREE.Vector3(0, 0, 0);
+			let previousTime = 0;
 
 
 
 			function init() {
 
-				//@https://github.com/mrdoob/three.js/blob/dev/src/extras/ImageUtils.js#L21
-				THREE.ImageUtils.crossOrigin = '';
+				//==================================
+                //==================================
+				//camera
+                fieldOfView = 60;
+                aspectRatio = windowWidth / windowHeight;
+                nearPlane = 1; // the camera won't "see" any object placed in front of this plane
+                farPlane = 10000; // the camera wont't see any object placed further than this plane 
+				camera = new THREE.PerspectiveCamera( fieldOfView, aspectRatio, nearPlane, farPlane );
+				camera.position.set(0, 65, -500);
+				camera.lookAt( centerVector );
+                
+                
+                // convert the field of view to radians
+                var ang = (fieldOfView / 2) * Math.PI / 180;
+                // calculate the max y position seen by the camera related to the maxTargetZ position, I start by calculating the y limit because fielOfView is a vertical field of view. I then calculate the x Limit
+                yLimit = (camera.position.z + maxTargetZ) * Math.tan(ang); // this is a formula I found, don't ask me why it works, it just does :) 
+                // Calculate the max x position seen by the camera related to the y Limit position
+                xLimit = yLimit * camera.aspect;
+                
+                
+                // Fit plane to screen
+                dist = 1000;
+                vFOV = THREE.Math.degToRad( camera.fov );              // convert vertical fov to radians
+                visibleHeight   = 2 * Math.tan( vFOV / 2 ) * dist;     // visible height
+                visibleWidth    = visibleHeight * camera.aspect;       // visible width   
+                
+                //console.log( 'visibleWidth:' + visibleWidth + ', visibleHeight: ' + visibleHeight + ', xLimit: ' + xLimit + ', yLimit: ' + yLimit );
+                
+                
+                
+				
+				//==================================
+                //==================================
+				//Scene
+				scene = new THREE.Scene();
+                scene.fog = new THREE.Fog(backgroundBg, 0.0025, 650); // Used to cover the light plane
+  
+        
+        
+				//==================================
+                //==================================
+				//Light from scene ready
+                
+                // Light plane  
+                sceneForLightPlane = new THREE.Mesh(new THREE.CircleGeometry(1000, 32), new THREE.MeshPhongMaterial({emissive: backgroundPlane, side: THREE.DoubleSide, }));
+                sceneForLightPlane.receiveShadow = true;
+                sceneForLightPlane.position.set(0, -101, 5);
+                sceneForLightPlane.rotation.x = getRadian( -95 );
+                scene.add(sceneForLightPlane);
+                
 
+                // Spot Light
+                var spotLightColor = 0xffffff,
+                    spotLightIntensity = 2,
+                    spotLightDistance = 1200,
+                    spotLightAngle = getRadian( 50 ),
+                    spotLightPenumbra = 1,
+                    spotLightDecay = 1;
+                
+                sceneForSpotLight = new THREE.SpotLight(spotLightColor, spotLightIntensity, spotLightDistance, spotLightAngle, spotLightPenumbra, spotLightDecay);
+                sceneForSpotLight.position.set(5, 320, 5); // Setting the y-axis bond angle is critical
+                
+                
+                sceneForSpotLight.castShadow = true;
+                sceneForSpotLight.shadow.mapSize.width = 1024;
+                sceneForSpotLight.shadow.mapSize.height = 1024;
+                sceneForSpotLight.shadow.camera.near = 0.5;
+                sceneForSpotLight.shadow.camera.far = 31;
+                scene.add(sceneForSpotLight);
+                
+                //console.log( sceneForSpotLight );
+                
+                /*
+                var spotLightHelper = new THREE.SpotLightHelper( sceneForSpotLight );
+                scene.add( spotLightHelper );   
+                */
+     
+                
+
+                // Ambient Light
+                sceneForAmbientLight = new THREE.AmbientLight(0xffffff, 0.08);
+                scene.add(sceneForAmbientLight); 
+
+
+                
+                
+                
+				//==================================
+                //==================================
 				//WebGL Renderer		
 				renderer = new THREE.WebGLRenderer( { 
 										canvas   : document.getElementById( rendererCanvasID ), //canvas
 										alpha    : true, 
 										antialias: true 
 									} );
-
-
-				renderer.setSize(windowWidth, windowHeight);
-
-
-
-
-				//Scene
-				scene = new THREE.Scene();
-
-				//camera
-				camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 10000);
-				camera.position.set(-100, 0, 600);
-				camera.lookAt( centerVector );
-				scene.add( camera );
+				renderer.setSize( windowWidth, windowHeight );
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                
 
 
 				// instantiate a loader
-				var loader = new THREE.TextureLoader();
+				const loader = new THREE.TextureLoader();
 
 				// load a resource
 				loader.load(
@@ -113,24 +204,24 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 						imagedata = getImageData( texture.image );
 
 						// Immediately use the texture for material creation
-						var geometry = new THREE.Geometry();
-						var material = new THREE.PointsMaterial({
+						const geometry = new THREE.Geometry();
+						const material = new THREE.PointsMaterial({
 							size: 3,
 							color: 0xffffff,
-							sizeAttenuation: false
+							sizeAttenuation: false,
+                            fog : false //Excluding objects from fog
 						});
 
+                 
+						for (let y = 0, y2 = imagedata.height; y < y2; y += 2) {
 
-
-						for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
-
-							for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
+							for (let x = 0, x2 = imagedata.width; x < x2; x += 2) {
 
 								if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
 
 
 									// The array of vertices holds the position of every vertex in the model.
-									var vertex = new THREE.Vector3();
+									const vertex = new THREE.Vector3();
 
 
 									vertex.x = Math.random() * 1000 - 500;
@@ -152,9 +243,15 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 							}
 						}
 						particles = new THREE.Points( geometry, material );
-
 						scene.add( particles );
+                        particles.scale.setScalar( 0.7 );
+                        particles.position.y = 50;
+                        particles.position.z = 70;
+                        particles.rotation.y = getRadian( 180 );
 
+                        // set castShadow to object
+                        particles.castShadow = true;
+                        
 
 
 
@@ -174,36 +271,29 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 				// add particle rotation
 				particleRotation = new THREE.Object3D();
 				scene.add( particleRotation );
-				var geometryPR = new THREE.TetrahedronGeometry(2, 0),
+                
+
+
+				const geometryPR = new THREE.TetrahedronGeometry(2, 0),
 					materialPR = new THREE.MeshPhongMaterial({
 					color: 0xffffff,
-					flatShading: THREE.FlatShading
+                    emissive: 0xffffff,
+                    shininess: 80,
+					flatShading: true,
 				});
-
-				for (var i = 0; i < 1000; i++) {
-					var mesh = new THREE.Mesh( geometryPR, materialPR );
+              
+				for (let i = 0; i < 750; i++) {
+					const mesh = new THREE.Mesh( geometryPR, materialPR );
 					mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
 					mesh.position.multiplyScalar(90 + (Math.random() * 700));
 					mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
 					particleRotation.add(mesh);
+                    
+                    // set castShadow to object
+                    mesh.castShadow = true;  
+                    
 				}
-
-				var ambientLight = new THREE.AmbientLight(0x999999 );
-				scene.add(ambientLight);
-
-				var lights = [];
-				lights[0] = new THREE.DirectionalLight( 0xffffff, 1 );
-				lights[0].position.set( 1, 0, 0 );
-				lights[1] = new THREE.DirectionalLight( 0x11E8BB, 1 );
-				lights[1].position.set( 0.75, 1, 0.5 );
-				lights[2] = new THREE.DirectionalLight( 0x8200C9, 1 );
-				lights[2].position.set( -0.75, -1, 0.5 );
-				scene.add( lights[0] );
-				scene.add( lights[1] );
-				scene.add( lights[2] );
-
-
-
+             
 
 				//----
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -226,15 +316,24 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 			function render() {
 				requestAnimationFrame( render );
 
-				var delta      = clock.getDelta(),
-					thickness = 40;
+				const delta      = clock.getDelta(),
+					  thickness = 40;
 
+                //---
+                // 
+				// To set a background color.
+				renderer.setClearColor( backgroundBg );	
+                
 
+                //---
+                // 
 				//Need to add judgment to avoid Cannot read property 'geometry' of undefined
 				if ( typeof particles != typeof undefined ) {
 
-					for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
-						var particle = particles.geometry.vertices[i];
+                    let particle;
+                    
+					for (let i = 0, j = particles.geometry.vertices.length; i < j; i++) {
+						particle = particles.geometry.vertices[i];
 						particle.x += (particle.destination.x - particle.x) * particle.speed;
 						particle.y += (particle.destination.y - particle.y) * particle.speed;
 						particle.z += (particle.destination.z - particle.z) * particle.speed;
@@ -242,9 +341,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 
 					if ( delta - previousTime > thickness ) {
-						var index     = Math.floor(Math.random()*particles.geometry.vertices.length);
-						var particle1 = particles.geometry.vertices[index];
-						var particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
+						const index     = Math.floor(Math.random()*particles.geometry.vertices.length);
+						const particle1 = particles.geometry.vertices[index];
+						const particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
 
 						TweenMax.to( particle, Math.random()*2+1, {
 										x:    particle2.x, 
@@ -276,6 +375,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 				camera.position.x += ( mouseX - camera.position.x ) * 0.09;
 				camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
+                if ( camera.position.y < -60 ) camera.position.y = -60;
 				camera.lookAt( centerVector );
 
 
@@ -283,14 +383,17 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 				particleRotation.rotation.x += 0.0000;
 				particleRotation.rotation.y -= 0.0040;
 
-
+                
+                
+                //---
+                // 
                 //push objects
                 /*
                 @Usage: 
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -300,10 +403,14 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 
+                
+                
+                //---
+                // 
                 //render the scene to display our scene through the camera's eye.
 				renderer.render( scene, camera );
 
@@ -379,17 +486,121 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 			 */
 			function getImageData( image ) {
 
-				var canvas = document.createElement( 'canvas' );
+				const canvas = document.createElement( 'canvas' );
 				canvas.width = image.width;
 				canvas.height = image.height;
 
-				var ctx = canvas.getContext( '2d' );
+				const ctx = canvas.getContext( '2d' );
 				ctx.drawImage(image, 0, 0);
 
 				return ctx.getImageData(0, 0, image.width, image.height);
 			}
 
+            
+            
+          
+            /*
+             * Get Object Coordinate, Width and Height From Screen
+             * Note: No data may be acquired without delay !!
+             *
+			 * @param  {THREE.Mesh} obj                           - Mesh object.
+             * @param  {THREE.PerspectiveCamera} camera           - Mesh object.
+			 * @param  {Number} rendererWidth                     - Width of renderer.
+             * @param  {Number} rendererHeight                    - Height of renderer.
+             * @param  {String} type                              - Build type.
+             * @return {JSON}
+             */
+			/* @usage: 
+			   var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+			  */
+			function nestedObjectToScreenXYZAndWH( obj, camera, rendererWidth, rendererHeight ) {
+                
+                var vector = new THREE.Vector3();
+                vector.setFromMatrixPosition( obj.matrixWorld );
+                var widthHalf = rendererWidth/2;
+                var heightHalf = rendererHeight/2;
+                var aspect = rendererHeight/rendererWidth;
+                vector.project( camera );
+                vector.x = ( vector.x * widthHalf ) + widthHalf;
+                vector.y = - ( vector.y * heightHalf ) + heightHalf;
 
+                //compute bounding box after
+                var boxInfo =  new THREE.Box3().setFromObject( obj ).getSize( new THREE.Vector3() );
+
+                
+                //Change it to fit the width and height of the stage based on the current value
+                var ratioFixedNum = 7;
+                
+                //correction
+                return {
+                    position: vector,
+                    width: ( boxInfo.x * ratioFixedNum * aspect ).toFixed( 2 ),
+                    height: ( boxInfo.y * ratioFixedNum * aspect ).toFixed( 2 )
+                };  
+			}
+			
+			
+            
+           
+            
+            /*
+             * Generate random number between two numbers
+             *
+             * @return {Number}
+             */
+			function getRandomFloat(min, max) {
+				return Math.random() * (max - min) + min;
+			}
+
+            
+            /*
+             * Returns the degree from radian.
+             *
+             * @return {Number} rad - Value of radian.
+             * @return {Number}
+             * @usage: 
+             
+               angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+             */
+            
+            function getDegree( rad ) {
+                return rad / Math.PI * 180;
+            }
+
+            
+            /*
+             * Returns the radian degree .
+             *
+             * @return {Number} deg - Value of degree.
+             * @return {Number}
+             * @usage: 
+                
+                rad = Math.PI / 180 * 30 ;
+             */
+            function getRadian( deg ) {
+                return deg * Math.PI / 180;
+            }
+
+            
+            /*
+             * Convert three.js scene rotation to polar coordinates
+             *
+             * @return {Number} deg - Value of degree.
+             * @return {Number}
+             * @usage: 
+             
+                x = r * cos（θ）
+                y = r * sin（θ）  
+             */
+            function getPolarCoord(x, y, z) {
+                var nx = Math.cos(x) * Math.cos(y) * z,
+                    nz = Math.cos(x) * Math.sin(y) * z,
+                    ny = Math.sin(x) * z;
+                return new THREE.Vector3(nx, ny, nz);
+            }
+
+            
+            
 
 			// 
 			//-------------------------------------	

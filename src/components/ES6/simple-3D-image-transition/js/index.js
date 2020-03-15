@@ -38,19 +38,20 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 		if ( $( '#3D-imagetransition-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
 
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-imagetransition-three-canvas';
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+
+            const rendererCanvasID          = '3D-imagetransition-three-canvas';
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -59,7 +60,7 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 				theta        = 0;
 
 
-			var filterMaterial,
+			let filterMaterial,
 				offsetWidth  = $( '#' + rendererCanvasID ).parent().width(),
 				offsetHeight = $( '#' + rendererCanvasID ).parent().width() * (550/1400);
 
@@ -115,20 +116,20 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 
 				// Immediately use the texture for material creation
 				// Create a texture loader so we can load our image file
-				var imgs = [
+				const imgs = [
 					'https://placekitten.com/1400/550',
 					'https://placekitten.com/1410/550'
 				];
 
-				var loader = new THREE.TextureLoader();
+				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
 
-				var texture1     = loader.load( imgs[0] ),
-					texture2     = loader.load( imgs[1] ),
-					intensity    = 1,
-					dispImage    = $( '#' + rendererCanvasID ).data( 'filter-texture' ), //Load displacement image
-					disp         = loader.load( dispImage );
+				const texture1     = loader.load( imgs[0] ),
+					  texture2     = loader.load( imgs[1] ),
+					  intensity    = 1,
+					  dispImage    = $( '#' + rendererCanvasID ).data( 'filter-texture' ), //Load displacement image
+					  disp         = loader.load( dispImage );
 
 				disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
 
@@ -139,7 +140,7 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 				texture2.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
 
-				var geometry = new THREE.PlaneBufferGeometry(
+				const geometry = new THREE.PlaneBufferGeometry(
 					offsetWidth,
 					offsetHeight,
 					1
@@ -201,7 +202,7 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -211,7 +212,7 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 

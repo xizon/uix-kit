@@ -34,9 +34,9 @@ export const LOADER = ( ( module, $, window, document ) => {
 			}
 		});
 		
-		var lastTouchEnd=0;
+		let lastTouchEnd = 0;
 		document.addEventListener( 'touchend', function (event) {
-			var now=(new Date()).getTime();
+			let now = (new Date()).getTime();
 			if( now-lastTouchEnd <= 300 ){
 				event.preventDefault();
 			}
@@ -49,9 +49,9 @@ export const LOADER = ( ( module, $, window, document ) => {
 		//-------------------------------------	
 
         // Detect if video.load is successful or not 
-        var videos = [];
-        var videosTotal = 0;
-        var videosLoaded = 0;
+        let videos = [];
+        let videosTotal = 0;
+        let videosLoaded = 0;
         $( '.uix-video__slider > video' ).each( function()  {
             videos.push( $( this ) );
         });
@@ -62,9 +62,9 @@ export const LOADER = ( ( module, $, window, document ) => {
 
         
         // Loading progress event
-        var loadedPercent = 0;
-        var imgTotal = 0;
-        var loadingAnim = function( per ) {
+        let loadedPercent = 0;
+        let imgTotal = 0;
+        const loadingAnim = function( per ) {
 			$( '.uix-loader-progress > span' ).text( $( '.uix-loader-progress' ).data( 'txt' ).replace(/\{progress\}/g, per) );
             TweenMax.to( '.uix-loader-progress__line', 0.3, {
                 width: per/100.0 * window.innerWidth
@@ -75,7 +75,7 @@ export const LOADER = ( ( module, $, window, document ) => {
 			
             imgTotal = count;
             
-			var per = parseInt( loaded/(count - (1-videosTotal) ) * 100 );
+			let per = parseInt( loaded/(count - (1-videosTotal) ) * 100 );
 			
             //
 			if ( $( 'img' ).length <= 1 ) {
@@ -90,7 +90,7 @@ export const LOADER = ( ( module, $, window, document ) => {
 
 
             //animation classes for loader
-            for (var i = 1; i < 10; i++ ) {
+            for (let i = 1; i < 10; i++ ) {
                 if ( per < i*10 ) $( 'body' ).addClass( 'loaded' + i );
             } 
 
@@ -123,9 +123,9 @@ export const LOADER = ( ( module, $, window, document ) => {
          */ 
         function mainObjLoader( loadedPercent, imgTotal ) {
             
-            var remainedPercentComplete = 0;
+            let remainedPercentComplete = 0;
             
-            var loadedFun = function() {
+            const loadedFun = function() {
                 
                 //loading animation
                 loadingAnim( 100 );
@@ -157,11 +157,11 @@ export const LOADER = ( ( module, $, window, document ) => {
                 
                 videos.forEach( function( element ) {
 
-                    var _src = element.find( 'source:first' ).attr( 'src' );
+                    let _src = element.find( 'source:first' ).attr( 'src' );
                     if ( typeof _src === typeof undefined ) _src = element.attr( 'src' );
 
-                    var video    = document.getElementById( element.attr( 'id' ) ),
-                        videoURL = _src;
+                    const video    = document.getElementById( element.attr( 'id' ) ),
+                          videoURL = _src;
 
                     video.addEventListener( 'loadedmetadata', function( e ) {
 
@@ -172,7 +172,7 @@ export const LOADER = ( ( module, $, window, document ) => {
                         remainedPercentComplete = (1 - videosLoaded / videosTotal) * (100 - loadedPercent);
                         
                         //current percent
-                        var currentPercent = loadedPercent + ( (100 - loadedPercent) - remainedPercentComplete );
+                        let currentPercent = loadedPercent + ( (100 - loadedPercent) - remainedPercentComplete );
                         
                         //loading animation
                         loadingAnim( currentPercent );

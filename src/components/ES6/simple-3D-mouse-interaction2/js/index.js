@@ -37,19 +37,20 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 		
 
 	
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-mouseinteraction2-three-canvas';
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+
+            const rendererCanvasID          = '3D-mouseinteraction2-three-canvas';
 
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				scene,
 				light,
 				renderer,
@@ -59,12 +60,13 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 
 			// controls
-			var scroller = new CameraScroller({direction: "y"});
+			const scroller = new CameraScroller({direction: "y"});
 
 
 			// mouse
-			var mouseVector = new THREE.Vector2(), 
-				raycaster,
+			const mouseVector = new THREE.Vector2();
+            
+			let	raycaster,
 				intersects,
 				INTERSECTED,
 				nucleus,
@@ -166,7 +168,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -176,7 +178,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 
@@ -219,21 +221,21 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 				if ( intersects.length > 0 && intersects[0].object.name.indexOf( 'nucleus' ) >= 0 ) {
 
                     
-                    var _obj = intersects[0].object;
+                    const _obj = intersects[0].object;
                     
-					var targetAtomPos = _obj.position;
+					const targetAtomPos = _obj.position;
                     
 					console.log(targetAtomPos); 
                     
 
 					// targetAtomPos.tween.pause();
-					var destinationPos = targetAtomPos.clone();
+					const destinationPos = targetAtomPos.clone();
 
 					// jump to new position
 					// y movement via scroller object
 					// x and z movement via TWEEN
 					scroller.targetPosition = _obj.position.y/10000;
-					var targetPos = { x: _obj.position.x, y:_obj.position.y, z:_obj.position.z+1100};
+					const targetPos = { x: _obj.position.x, y:_obj.position.y, z:_obj.position.z+1100};
 
 					TweenMax.to( targetPos, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z});
 					TweenMax.to( camera.position, 2,{ x:destinationPos.x, y:destinationPos.y, z:destinationPos.z+1000,
@@ -244,7 +246,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
                         onComplete: function() {
                             
                             // get object new coordinates
-                            var screenData = nestedObjectToScreenXYZAndWH( _obj, camera, renderer.domElement.width, renderer.domElement.height );
+                            const screenData = nestedObjectToScreenXYZAndWH( _obj, camera, renderer.domElement.width, renderer.domElement.height );
                             console.log( `Current object coordinates: {x: ${screenData.position.x}, y: ${screenData.position.y}, z: ${screenData.position.z} }` ); 
                             
                         }
@@ -292,35 +294,35 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 			 */
 			function generateGeometry( numObjects ) {
 
-				var geometry = new THREE.Geometry();
+				const geometry = new THREE.Geometry();
 
-				var applyVertexColors = function(g, c) {
+				const applyVertexColors = function(g, c) {
 					g.faces.forEach(function(f) {
-						var n = (f instanceof THREE.Face3) ? 3 : 4;
-						for (var j = 0; j < n; j++) {
+						const n = (f instanceof THREE.Face3) ? 3 : 4;
+						for (let j = 0; j < n; j++) {
 							f.vertexColors[j] = c;
 						}
 					});
 				};
 
-				for ( var i = 0; i < numObjects; i ++ ) {
+				for ( let i = 0; i < numObjects; i ++ ) {
 
-					var geom, 
-						color = new THREE.Color();
+					let geom; 
+                    const color = new THREE.Color();
 
 
 
-					var position = new THREE.Vector3();
+					const position = new THREE.Vector3();
 					position.x = -9000 + (i % 10) * 2000;
 					position.y = -9000 + Math.floor((i % 100) / 10) * 2000;
 					position.z = -1000 + Math.floor(i / 100) * 2000;
 
-					var rotation = new THREE.Euler();
+					const rotation = new THREE.Euler();
 					rotation.x = 0;
 					rotation.y = 0;
 					rotation.z = 0;
 
-					var scale = new THREE.Vector3();
+					const scale = new THREE.Vector3();
 					scale.x = 1200;
 					scale.y = 600;
 					scale.z = 200;
@@ -335,12 +337,12 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 
 					// Immediately use the texture for material creation
-					var defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+					const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 
 					displacementSprite = new THREE.Mesh( geom, defaultMaterial );
 					scene.add( displacementSprite );
 
-					var object = new THREE.Mesh( geom );
+					const object = new THREE.Mesh( geom );
 					displacementSprite.name = 'nucleus-' + i;
 					displacementSprite.position.copy( position );
 					displacementSprite.rotation.copy( rotation );
@@ -438,25 +440,25 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
              * @return {JSON}
              */
 			/* @usage: 
-			   var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+			   const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
 			  */
 			function nestedObjectToScreenXYZAndWH( obj, camera, rendererWidth, rendererHeight ) {
                 
-                var vector = new THREE.Vector3();
+                const vector = new THREE.Vector3();
                 vector.setFromMatrixPosition( obj.matrixWorld );
-                var widthHalf = rendererWidth/2;
-                var heightHalf = rendererHeight/2;
-                var aspect = rendererHeight/rendererWidth;
+                const widthHalf = rendererWidth/2;
+                const heightHalf = rendererHeight/2;
+                const aspect = rendererHeight/rendererWidth;
                 vector.project( camera );
                 vector.x = ( vector.x * widthHalf ) + widthHalf;
                 vector.y = - ( vector.y * heightHalf ) + heightHalf;
 
                 //compute bounding box after
-                var boxInfo =  new THREE.Box3().setFromObject( obj ).getSize( new THREE.Vector3() );
+                const boxInfo =  new THREE.Box3().setFromObject( obj ).getSize( new THREE.Vector3() );
 
                 
                 //Change it to fit the width and height of the stage based on the current value
-                var ratioFixedNum = 7;
+                const ratioFixedNum = 7;
                 
                 //correction
                 return {
@@ -520,9 +522,9 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
                 y = r * sin（θ）  
              */
             function getPolarCoord(x, y, z) {
-                var nx = Math.cos(x) * Math.cos(y) * z,
-                    nz = Math.cos(x) * Math.sin(y) * z,
-                    ny = Math.sin(x) * z;
+                const nx = Math.cos(x) * Math.cos(y) * z,
+                      nz = Math.cos(x) * Math.sin(y) * z,
+                      ny = Math.sin(x) * z;
                 return new THREE.Vector3(nx, ny, nz);
             }
 

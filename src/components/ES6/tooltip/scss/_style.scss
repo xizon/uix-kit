@@ -311,6 +311,13 @@
 		 10. Size
 		 ---------------------------
 		 */
+		&[data-microtip-size="auto"] ~ div {
+			white-space: nowrap;
+			width: auto;
+            max-width: 530px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+		}
 		&[data-microtip-size="small"] ~ div {
 			white-space: initial;
 			width: 80px;

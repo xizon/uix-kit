@@ -32,14 +32,16 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 		
 	    //Determine the direction of a jQuery scroll event
 		//Fix an issue for mousewheel event is too fast.
-		var lastAnimation     = 0,
-			quietPeriod       = 500, //Do not change it
-			animationTime     = 1000,//According to page transition animation changes
-			scrollCount       = 0;
-		
-		var startY = 0;
-		var onTouchStart = function ( e ) {
-			var touches = e.touches;
+		const quietPeriod       = 500, //Do not change it
+			  animationTime     = 1000;//According to page transition animation changes
+
+        
+        let lastAnimation = 0;
+        let scrollCount = 0;
+		let startY = 0;
+        
+		const onTouchStart = function ( e ) {
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				startY = touches[0].pageY;
 				
@@ -47,12 +49,12 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 		};
 
 		
-		var onDeviceWheel = function ( e ) {
+		const onDeviceWheel = function ( e ) {
 			
 			//Gets a value that indicates the amount that the mouse wheel has changed.
-			var dir, delta, mobileDeltaY = null;
+			let dir, delta, mobileDeltaY = null;
 			
-			var touches = e.touches;
+			const touches = e.touches;
 			if ( touches && touches.length ) {
 				mobileDeltaY = startY - touches[0].pageY;
 			} else {
@@ -103,7 +105,7 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 		 */
 		function scrollMoveInit( event, dir ) {
 	
-			var timeNow = new Date().getTime();
+			const timeNow = new Date().getTime();
 			// Cancel scroll if currently animating or within quiet period
 			if( timeNow - lastAnimation < quietPeriod + animationTime) {
 				return;

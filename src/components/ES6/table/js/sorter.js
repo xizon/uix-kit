@@ -30,7 +30,7 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 
 		
 		$( '.js-uix-table-sorter' ).each( function()  {
-			var $sortTable = $( this ).find( 'table' );
+			const $sortTable = $( this ).find( 'table' );
 			
 			//add arrows
 			
@@ -39,10 +39,11 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 					$( this ).wrapInner( '<span class="uix-table-sorter" />' );
 				}
 				
-				var $th     = $( this ),
-					thIndex = $th.index(),
-					thType  = $th.data( 'sort-type' ),
-					inverse = false;
+				const $th     = $( this ),
+					  thIndex = $th.index(),
+					  thType  = $th.data( 'sort-type' );
+                
+				let	inverse = false;
 
 				$th.off( 'click' ).on( 'click', function() {
 
@@ -53,8 +54,8 @@ export const TABLE_SORTER = ( ( module, $, window, document ) => {
 					}).sortElements(function(a, b) {
 
 
-						var txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
-							txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
+						let txt1 = $.text([a]).replace(/(<([^>]+)>)/ig, ''),
+				            txt2 = $.text([b]).replace(/(<([^>]+)>)/ig, '');
 
 						//type of number
 						if ( thType == 'number' ) {

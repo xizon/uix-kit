@@ -81,7 +81,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 *
 		 * @return {Void}
 		 */
-		var customSpecialFormsInit = function() {
+		const customSpecialFormsInit = function() {
 			$( document ).UixRenderCustomSelect(); //Render Custom Select
 			$( document ).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
 			$( document ).UixRenderControlsLineEff(); //Create Line Effect on Click
@@ -120,12 +120,15 @@ export const FORM = ( ( module, $, window, document ) => {
 		$( '.uix-controls__dynamic-fields-container' ).each(function(){
 
 
-			var $this            = $( this ),
-				$addButton       = $this.find( '.uix-controls__dynamic-fields__addbtn' ), //The add button
-				removeButton     = '.uix-controls__dynamic-fields__removebtn', //The remove button selector ID or class
-				$appendWrapper   = $this.find( '.uix-controls__dynamic-fields__append' ), //The field wrapper ID or class 
-				x                = 1,
-				maxField         = $this.data( 'max-fields' ),
+			const $this            = $( this );
+            
+			const $addButton       = $this.find( '.uix-controls__dynamic-fields__addbtn' ), //The add button
+				  removeButton     = '.uix-controls__dynamic-fields__removebtn', //The remove button selector ID or class
+				  $appendWrapper   = $this.find( '.uix-controls__dynamic-fields__append' ); //The field wrapper ID or class 
+				
+            
+			let	x                = 1,
+                maxField         = $this.data( 'max-fields' ),
 				fieldHTML        = '';
 
 			//Maximum number of forms added
@@ -134,7 +137,7 @@ export const FORM = ( ( module, $, window, document ) => {
 			}
 
 			//Add a field
-			var addOne = function( fieldCode ) {
+			const addOne = function( fieldCode ) {
 				
 				
 				//replace the index of field name
@@ -180,7 +183,7 @@ export const FORM = ( ( module, $, window, document ) => {
 				$addButton.show();
 
 
-				var $li = $( this ).closest( '.uix-controls__dynamic-fields__tmpl__wrapper' );
+				const $li = $( this ).closest( '.uix-controls__dynamic-fields__tmpl__wrapper' );
 
 				if ( $this.find( '.uix-controls__dynamic-fields .uix-controls__dynamic-fields__tmpl__wrapper' ).length == 1 ) {
 					$li.find( 'input, textarea' ).val( '' );
@@ -206,7 +209,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 */ 	
 		$( document ).off( 'click.FORM_NUMBER_BTN_ADD' ).on( 'click.FORM_NUMBER_BTN_ADD', '.uix-controls__number__btn--add', function( e ) {
 
-			var step           = parseFloat( $( this ).data( 'step' ) ),
+			let step           = parseFloat( $( this ).data( 'step' ) ),
 				decimals       = $( this ).data( 'decimals' ),
 				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
 				numberInputVal = parseFloat( $numberInput.val() ),
@@ -228,7 +231,7 @@ export const FORM = ( ( module, $, window, document ) => {
 
 		$( document ).off( 'click.FORM_NUMBER_BTN_REMOVE' ).on( 'click.FORM_NUMBER_BTN_REMOVE', '.uix-controls__number__btn--remove', function( e ) {
 
-			var step           = $( this ).data( 'step' ),
+			let step           = $( this ).data( 'step' ),
 				decimals       = $( this ).data( 'decimals' ),
 				$numberInput   = $( this ).closest( '.uix-controls__number' ).find( 'input[type="number"]' ),
 				numberInputVal = parseFloat( $numberInput.val() ),
@@ -253,13 +256,13 @@ export const FORM = ( ( module, $, window, document ) => {
 		 Click Event of Multiple Selector
 		 ---------------------------
 		 */ 
-		var multiSel     = '.uix-controls__multi-sel',
+		const multiSel     = '.uix-controls__multi-sel',
 			multiSelItem = multiSel + ' > span';
 
 		$( document ).off( 'click.FORM_MULTI_SEL' ).on( 'click.FORM_MULTI_SEL', multiSelItem, function( e ) {
 			e.preventDefault();
 
-			var $selector     = $( this ).parent(),
+			let $selector     = $( this ).parent(),
 				$option       = $( this ),
 				targetID      = '#' + $selector.data( "targetid" ),
 				curVal        = $option.data( 'value' ),
@@ -296,7 +299,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 Click Event of Single Selector
 		 ---------------------------
 		 */ 
-		var singleSel     = '.uix-controls__single-sel',
+		const singleSel     = '.uix-controls__single-sel',
 			singleSelItem = singleSel + ' > span';
 
 
@@ -306,10 +309,10 @@ export const FORM = ( ( module, $, window, document ) => {
 		 * @param  {Element} obj                 - Radio controls. 
 		 * @return {Void}
 		 */
-		var hideAllSingleSelItems = function( obj ) {
+		const hideAllSingleSelItems = function( obj ) {
 			obj.each( function( index )  {
 
-				var $sel                = $( this ),
+				let $sel                = $( this ),
 					defaultValue        = $( '#' + $sel.attr( 'data-targetid' ) ).val(),
 					deffaultSwitchIndex = 0;
 
@@ -325,7 +328,7 @@ export const FORM = ( ( module, $, window, document ) => {
 
 
 				if ( typeof $sel.data( 'switchids' ) != typeof undefined && $sel.data( 'switchids' ) != '' ) {
-					var _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
+					const _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
 					_switchIDsArr.forEach( function( element, index ) {
 
 						if ( deffaultSwitchIndex != index ) {
@@ -351,7 +354,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		$( document ).off( 'click.FORM_SINGLE_SEL' ).on( 'click.FORM_SINGLE_SEL', singleSelItem, function( e ) {
 			e.preventDefault();
 
-			var $selector     = $( this ).parent(),
+			let $selector     = $( this ).parent(),
 				$option       = $( this ),
 				targetID      = '#' + $selector.data( "targetid" ),
 				switchID      = '#' + $option.data( "switchid" ),
@@ -383,7 +386,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		 Click Event of Normal Radio
 		 ---------------------------
 		 */ 
-		var normalRadio     = '.uix-controls__radio',
+		const normalRadio     = '.uix-controls__radio',
 			normalRadioItem = normalRadio + ' > label';
 
 
@@ -393,10 +396,10 @@ export const FORM = ( ( module, $, window, document ) => {
 		 * @param  {Element} obj                 - Radio controls. 
 		 * @return {Void}
 		 */
-		var hideAllNormalRadioItems = function( obj ) {
+		const hideAllNormalRadioItems = function( obj ) {
 			obj.each( function( index )  {
 
-				var $sel                = $( this ),
+				let $sel                = $( this ),
 					defaultValue        = $( '#' + $sel.attr( "data-targetid" ) ).val(),
 					deffaultSwitchIndex = 0;
 
@@ -412,7 +415,7 @@ export const FORM = ( ( module, $, window, document ) => {
 
 
 				if ( typeof $sel.data( 'switchids' ) != typeof undefined && $sel.data( 'switchids' ) != '' ) {
-					var _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
+					const _switchIDsArr = $sel.data( 'switchids' ).split( ',' );
 					_switchIDsArr.forEach( function( element, index ) {
 
 						if ( deffaultSwitchIndex != index ) {
@@ -438,7 +441,7 @@ export const FORM = ( ( module, $, window, document ) => {
 		$( document ).off( 'click.FORM_NORMAL_RADIO' ).on( 'click.FORM_NORMAL_RADIO', normalRadioItem, function( e ) {
 			e.preventDefault();
 
-			var $selector     = $( this ).parent(),
+			const $selector     = $( this ).parent(),
 				$option       = $( this ),
 				targetID      = '#' + $selector.data( "targetid" ),
 				switchID      = '#' + $option.data( "switchid" ),
@@ -482,11 +485,11 @@ export const FORM = ( ( module, $, window, document ) => {
 		 Click Event of Checkbox and Toggle 
 		 ---------------------------
 		 */ 
-		var checkboxSel     = '.uix-controls__toggle [type="checkbox"], .uix-controls__checkbox [type="checkbox"]';
+		const checkboxSel     = '.uix-controls__toggle [type="checkbox"], .uix-controls__checkbox [type="checkbox"]';
 
 		$( document ).on( 'change', checkboxSel, function( e ) {
 			//hide or display a associated div
-			var $obj      = $( this ).closest( '.uix-controls' ),
+			const $obj      = $( this ).closest( '.uix-controls' ),
 				targetID  = '#' + $obj.attr( 'data-targetid' );
 			
 			if ( this.checked ) {

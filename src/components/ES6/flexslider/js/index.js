@@ -38,10 +38,12 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
     module.FLEXSLIDER.version       = '0.1.7';
     module.FLEXSLIDER.documentReady = function( $ ) {
 
-		var $window            = $( window ),
-			windowWidth        = window.innerWidth,
-			windowHeight       = window.innerHeight,
-			flexslider         = {
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
+        
+        
+		let	flexslider         = {
 						           vars: {}
 					              };
 		
@@ -67,11 +69,11 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
 			
-			var prefix            = 'uix-flexslider__';
+			const prefix            = 'uix-flexslider__';
 			
 			if ( thisSlider.find( '.'+prefix+'item' ).length == 0 ) return false;
 
-			var curIndex          = thisSlider.currentSlide,
+			let curIndex          = thisSlider.currentSlide,
 				count             = thisSlider.count,
 				activeClass       = prefix + 'item--active',
 				prevClass         = activeClass + '-prev',
@@ -102,8 +104,8 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			
 			//Total counter selector
 			//Current counter selector.
-			var countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( '.uix-flexslider__mycontrols__count em.count' ), 
-				countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( '.uix-flexslider__mycontrols__count em.current' );
+			const countTotalSelector = ( dataCountTotal ) ? $( dataCountTotal ) : $( '.uix-flexslider__mycontrols__count em.count' ), 
+				  countCurSelector   = ( dataCountCur ) ? $( dataCountCur ) : $( '.uix-flexslider__mycontrols__count em.current' );
 			
 			
 			
@@ -120,9 +122,9 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				//With Timeline
 				//-------------------------------------	
 				if ( dataTimeline && dataTimeline != '' ) {
-					var curPerMinWidth = curIndex/count*100 + '%',
-						curPerMaxWidth = (curIndex + 1)/count*100 + '%',
-						curTotalWidth  = $( dataTimeline ).width();
+					const curPerMinWidth = curIndex/count*100 + '%',
+						  curPerMaxWidth = (curIndex + 1)/count*100 + '%',
+						  curTotalWidth  = $( dataTimeline ).width();
 				
 					//Fires animation effect of an element width.
 					$( dataTimeline ).find( '> span' ).css( {
@@ -139,7 +141,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				//Display Next/Prev image thumbnail in navigation
 				//-------------------------------------		
 				if ( dataPNThumbs && dataPNThumbs != '' ) {
-					var prevIndex  = curIndex - 1,
+					let prevIndex  = curIndex - 1,
 						nextIndex  = thisSlider.animatingTo + 1,
 						pimg       = '',
 						nimg       = '',
@@ -199,7 +201,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				//Prevent to <a> of page transitions
 				//-------------------------------------
 				$( 'a' ).each( function() {
-					var attr = $( this ).attr( 'href' );
+					const attr = $( this ).attr( 'href' );
 
 					if ( typeof attr === typeof undefined ) {
 						$( this ).attr( 'href', '#' );
@@ -276,8 +278,8 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				//-------------------------------------
 				if ( sliderWrapper.find( '.uix-flexslider__mycontrols__count' ).length == 0 ) {
 					if ( sliderWrapper.closest( 'section' ).find( '.uix-flexslider__mycontrols__count' ).length > 0 ) {
-						var showCountTotal = count,
-							showCountCur   = curIndex + 1;
+						let showCountTotal = count,
+				            showCountCur   = curIndex + 1;
 						
 						if ( showCountTotal < 10 ) showCountTotal = '0' + showCountTotal;
 						if ( showCountCur < 10 ) showCountCur = '0' + showCountCur;
@@ -340,10 +342,10 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				if ( dataParallax ) {
 				
 					
-					var dir = 'uix-flexslider__item--left';
+					let dir = 'uix-flexslider__item--left';
 
 					$.each( thisSlider.slides, function( i, item ) {
-						var el = $( item );
+						const el = $( item );
 						el.removeClass( 'uix-flexslider__item--right uix-flexslider__item--left' );
 						if (i >= thisSlider.animatingTo && dir !== 'uix-flexslider__item--right') {
 							dir = 'uix-flexslider__item--right';
@@ -372,16 +374,18 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 */
 		function videoEmbedInit( wrapper, play ) {
 			wrapper.find( '.uix-video__slider' ).each( function()  {
-				var $this          = $( this ),
-					videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
-					curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
-					coverPlayBtnID = 'videocover-' + curVideoID,
-					dataControls   = $this.data( 'embed-video-controls' ),
+				const $this          = $( this );
+                
+				const videoWrapperW  = $this.closest( '[data-embed-video-wrapper]' ).width(),
+					  curVideoID     = $this.find( 'video' ).attr( 'id' ) + '-slider-videopush',
+					  coverPlayBtnID = 'videocover-' + curVideoID,
+                      $replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+                
+				let	dataControls   = $this.data( 'embed-video-controls' ),
 					dataAuto       = $this.data( 'embed-video-autoplay' ),
 					dataLoop       = $this.data( 'embed-video-loop' ),
 					dataW          = $this.data( 'embed-video-width' ),
-					dataH          = $this.data( 'embed-video-height' ),
-					$replayBtn     = $( '#'+curVideoID+'-replay-btn' );
+					dataH          = $this.data( 'embed-video-height' );
 
 				//Push a new ID to video
 				//Solve the problem that ajax asynchronous loading does not play
@@ -415,7 +419,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 					$( '<div id="'+coverPlayBtnID+'" class="uix-video__cover"><span class="uix-video__cover__placeholder" style="background-image:url('+$this.find( 'video' ).attr( 'poster' )+')"></span><span class="uix-video__cover__playbtn"></span></div>' ).insertBefore( $this );
 
 
-					var btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
+					const btnEv = ( Modernizr.touchevents ) ? 'touchstart' : 'click';
 					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).on( btnEv, function( e ) {
 						e.preventDefault();
 
@@ -450,7 +454,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				}
 
 				
-				var myPlayer = videojs( curVideoID, 
+				const myPlayer = videojs( curVideoID, 
 				   {
 					  width     : dataW,
 					  height    : dataH,
@@ -460,10 +464,10 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				   function onPlayerReady() {
 
 
-						var initVideo = function( obj ) {
+						const initVideo = function( obj ) {
 
 							//Get Video Dimensions
-							var curW    = obj.videoWidth(),
+							let curW    = obj.videoWidth(),
 								curH    = obj.videoHeight(),
 								newW    = curW,
 								newH    = curH;
@@ -515,7 +519,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 
 
 							//Prevent autoplay error: Uncaught (in promise) DOMException
-							var promise = this.play();
+							const promise = this.play();
 
 							if ( promise !== undefined ) {
 								promise.then( function() {
@@ -545,11 +549,11 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 
 
 						/* ---------  Determine if the video is auto played from mobile devices  */
-						var autoPlayOK = false;
+						let autoPlayOK = false;
 
 						this.on( 'timeupdate', function() {
 
-							var duration = this.duration();
+							let duration = this.duration();
 							if ( duration > 0 ) {
 								autoPlayOK = true;
 								if ( this.currentTime() > 0 ) {
@@ -577,7 +581,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 
 
 								//Prevent autoplay error: Uncaught (in promise) DOMException
-								var promise = this.play();
+								const promise = this.play();
 
 								if ( promise !== undefined ) {
 									promise.then( function() {
@@ -646,7 +650,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 */
         function slidesExDraggable( $obj ) {
 			
-			var $dragDropTrigger = $obj.find( '.uix-flexslider__inner > div.uix-flexslider__item' );
+			const $dragDropTrigger = $obj.find( '.uix-flexslider__inner > div.uix-flexslider__item' );
 			
 			//Make the cursor a move icon when a user hovers over an item
 			$dragDropTrigger.css( 'cursor', 'move' );
@@ -672,7 +676,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				}
 
 				$( this ).removeClass( 'is-dragging' );
-				var origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
+				let origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
 					origin_mouse_y = $( this ).data( 'origin_mouse_y' );
 				
 				
@@ -715,13 +719,13 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 */
         function slidesExMousewheel( $obj ) {
 
-			var timer    = null,
+			let timer    = null,
 				wheeling = false;
 
 			$obj[0].addEventListener( 'wheel', function( e ) {
 
 				//Gets a value that indicates the amount that the mouse wheel has changed.
-				var delta = Math.max(-1, Math.min(1, (-e.deltaY)));
+				const delta = Math.max(-1, Math.min(1, (-e.deltaY)));
 
 				if ( timer ) {
 					clearTimeout( timer );
@@ -796,7 +800,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			* Create the children flexsliders. Must be array of jquery objects with the
 			* flexslider data. Easiest way is to place selector group in a var.
 			*/
-			var childrenSlides = $( childrenSlidesObj ).flexslider({
+			let childrenSlides = $( childrenSlidesObj ).flexslider({
 				slideshow         : false, // Remove the animations
 				controlNav        : false, // Remove the controls
 				animationLoop     : loop,
@@ -806,7 +810,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 
 			
 			// Iterate through the children slides but not past the max
-			for ( var i=0; i < childrenSlides.length; i++ ) {
+			for ( let i=0; i < childrenSlides.length; i++ ) {
 				// Run the animate method on the child slide
 				$( childrenSlides[i] ).data( 'flexslider' ).flexAnimate( slideNumber );
 			}   
@@ -818,10 +822,11 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
          Initialize slideshow
 		 ---------------------------
 		 */
-		var $sliderDefault = $( '.uix-flexslider' );
+		const $sliderDefault = $( '.uix-flexslider' );
 		$sliderDefault.each( function()  {
-			var $this             = $( this ),
-				dataSpeed         = $this.data( 'speed' ),
+			const $this             = $( this );
+            
+			let	dataSpeed         = $this.data( 'speed' ),
 				dataDrag          = $this.data( 'draggable' ),
 				dataWheel         = $this.data( 'wheel' ),
 				dataTiming        = $this.data( 'timing' ),
@@ -849,7 +854,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			
 			
 			// Custom Controls
-			var myControlsContainer, myCustomDirectionNav;
+			let myControlsContainer, myCustomDirectionNav;
 			if ( typeof customConID === typeof undefined || customConID == '' || customConID == false ) {
 				myControlsContainer  = '';
 				myCustomDirectionNav = '';
@@ -899,7 +904,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		
 			
 			//Show number of items
-			var my_itemWidth = 0, 
+			let my_itemWidth = 0, 
 				my_move      = dataShowItemsMove,
 				my_minItems  = 0,
 				my_maxItems  = 0;
@@ -915,8 +920,8 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			
 			// Determine if this slider is added with a synchronization event
 			$( '[data-my-sync]' ).each( function()  {
-				var curSync      = $( this ).data( 'my-sync' ),
-					thisSliderID = $this.attr( 'id' );
+				let curSync      = $( this ).data( 'my-sync' );
+				const thisSliderID = $this.attr( 'id' );
 				
 				
 				if ( typeof curSync != typeof undefined ) {
@@ -1019,12 +1024,12 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 					if ( $( this ).length > 0 ) {
 
 						// check grid size on resize event
-						var dataShowItems = $( this ).data( 'my-multiple-items' );
+						const dataShowItems = $( this ).data( 'my-multiple-items' );
 		
 						
 						if ( typeof dataShowItems != typeof undefined && dataShowItems != '' && dataShowItems != 0 ) {
 
-							var gridSize = getGridSize( dataShowItems );
+							const gridSize = getGridSize( dataShowItems );
 							flexslider.vars.minItems = gridSize;
 							flexslider.vars.maxItems = gridSize;
 							

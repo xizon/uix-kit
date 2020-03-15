@@ -27,17 +27,17 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
 
         // trigger of AJAX request
-        var AJAXPageLinks = '[data-ajax-push-content]';
+        const AJAXPageLinks = '[data-ajax-push-content]';
         
         //all images from pages
-        var sources = []; 
+        let sources = []; 
         
         //Added timer to prevent page loading errors for a long time
-        var timeClockInit; 
+        let timeClockInit; 
 
 		
 		/* Need to set it as a global variable for history */
-		var ajaxConfig   = {
+		let ajaxConfig   = {
 					"container" :"#my-ajax-demo-push-container",
 					"target"    :"#my-ajax-demo-target-container",
 					"loading"   :"<div class=\"my-loader\"><span><i class=\"fa fa-spinner fa-spin\"></i> loading <em id=\"app-loading\" data-txt=\"{progress}%\"></em>...</span></div>",
@@ -47,10 +47,10 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		
         
         // The progress of each page load, using global variables to accurately determine
-        var loadedProgress = 0;
+        let loadedProgress = 0;
         
         //loading animation
-        var loadingAnim = function( per ) {
+        const loadingAnim = function( per ) {
 			$( '#app-loading' ).text( $( '#app-loading' ).data( 'txt' ).replace(/\{progress\}/g, per ) );
         }; 
         
@@ -65,8 +65,9 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
             loadedProgress = 0; 
 
 			//
-			var $this               = $( this ),
-			    curURL              = $this.attr( 'href' ),
+			const $this               = $( this );
+            
+			let curURL              = $this.attr( 'href' ),
 				config              = $this.data( 'ajax-push-content' );
 			
 
@@ -114,7 +115,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 		//Detect URL change & Fire click event
 		window.addEventListener( 'popstate', function( e ) {
 		
-			var eleTarget = null,
+			let eleTarget = null,
 				goURL     = location.href;
 			
 			$( AJAXPageLinks ).each( function() {
@@ -130,7 +131,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 			
 			//Empty content that does not exist
 			$( AJAXPageLinks ).each( function() {
-				var curConfig = $( this ).data( 'ajax-push-content' );
+				const curConfig = $( this ).data( 'ajax-push-content' );
 				if ( typeof curConfig != typeof undefined ) {
 					pushAction( $( curConfig.container ), false, curConfig.loading, goURL, curConfig.method, false );
 				}
@@ -143,7 +144,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 			
 			
 			//Push new content to target container
-			var backConfig = $( eleTarget ).data( 'ajax-push-content' );
+			const backConfig = $( eleTarget ).data( 'ajax-push-content' );
 			
 			if ( typeof backConfig != typeof undefined ) {
 				pushAction( $( backConfig.container ), backConfig.target, backConfig.loading, goURL, backConfig.method, $( eleTarget ) );	
@@ -222,7 +223,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
             })
             .done( function (response) { 
                 //A function to be called if the request succeeds
-                var pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+                const pushContent = ( !target ) ? '' : $( response ).find( target ).html();
                 
                 
                 //Display loading image when AJAX call is in progress
@@ -246,7 +247,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                //Push all videos from page
                 $( response ).find( '.uix-video__slider > video' ).each(function() {
 
-                    var _src = $( this ).find( 'source:first' ).attr( 'src' );
+                    let _src = $( this ).find( 'source:first' ).attr( 'src' );
                     if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
 
                     sources.push(
@@ -260,8 +261,8 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
 
                 //Execute after all images have loaded
-                var per;
-                var perInit = 1;
+                let per;
+                let perInit = 1;
                 if ( sources.length == 0 ) {
                     per = 100;
                     
@@ -271,10 +272,10 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 
                 
                 
-                var loadImages = function() {
-                    var promises = [];
+                const loadImages = function() {
+                    let promises = [];
 
-                    for (var i = 0; i < sources.length; i++) {
+                    for (let i = 0; i < sources.length; i++) {
 
                         if ( sources[i].type == 'img' ) {
 
@@ -286,7 +287,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
                                 new Promise(function(resolve, reject) {
 
-                                    var img = document.createElement("img");
+                                    const img = document.createElement("img");
                                     img.crossOrigin = "anonymous";
                                     img.src = sources[i].url;
 
@@ -335,7 +336,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 };
 
 
-                var textureLoaded = function( url ) {
+                const textureLoaded = function( url ) {
                     //loading
                     per = parseInt( 100 * ( perInit / sources.length ) );
 
@@ -349,7 +350,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                     //loading animation
                     loadingAnim( per );
 
-                    var texture = null;
+                    let texture = null;
                     
                     perInit++;
                     return per;   
@@ -357,7 +358,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
   
                 
                 
-                var func = function() {
+                const func = function() {
                     ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
                 };
 
@@ -372,8 +373,8 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 
             
                 //Calculating page load time
-                var timeLimit = 10,
-                    timeStart = new Date().getTime();
+                const timeLimit = 10,
+                      timeStart = new Date().getTime();
 
 
                 //Prevent duplicate runs when returning to this page
@@ -384,7 +385,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 timeClockInit = setInterval( function() {
 
                     //Converting milliseconds to minutes and seconds
-                    var _time = (new Date().getTime() - timeStart) / 1000;
+                    let _time = (new Date().getTime() - timeStart) / 1000;
 
                     if ( _time >= timeLimit ) {
                         console.log( 'Page load timeout!' );

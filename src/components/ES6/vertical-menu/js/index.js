@@ -28,14 +28,15 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
     module.VERTICAL_MENU.version       = '0.0.2';
     module.VERTICAL_MENU.documentReady = function( $ ) {
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight,
-			ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu';
+        const $window          = $( window );
+        let	windowWidth        = window.innerWidth,
+            windowHeight       = window.innerHeight;
+        
+		const ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu';
 
 
 		// Menu Hover
-		var mTop = 15;
+		const mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
 		$( ulForDesktop + ' > li:not(.multi-column) ul, .uix-v-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 
@@ -66,9 +67,9 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 
 		
 			//Calculate whether the total width of a large navigation is greater than the window
-			var megaMenuW        = $( ulForDesktop + ' > li.multi-column > ul' ).width(),
-				megaMaxW         = parseFloat( windowWidth - $( ulForDesktop ).parent().width() ),
-				megaMenuCoLength = $( ulForDesktop + ' > li.multi-column > ul > li' ).length;
+			const megaMenuW        = $( ulForDesktop + ' > li.multi-column > ul' ).width(),
+				  megaMaxW         = parseFloat( windowWidth - $( ulForDesktop ).parent().width() ),
+				  megaMenuCoLength = $( ulForDesktop + ' > li.multi-column > ul > li' ).length;
 			
 			if ( megaMenuW > megaMaxW ) {
 				
@@ -144,9 +145,11 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 		 */
 		function menuWrapInit( w, h ) {
 			
-			var $menuWrap  = $( '.uix-v-menu__container:not(.is-mobile)' ),
-				vMenuTop   = 0, //This value is equal to the $vertical-menu-top variable in the SCSS
-				winHeight  = h - vMenuTop;
+			const $menuWrap  = $( '.uix-v-menu__container:not(.is-mobile)' ),
+				  vMenuTop   = 0; //This value is equal to the $vertical-menu-top variable in the SCSS
+            
+            
+			let	winHeight  = h - vMenuTop;
 
 			//WoedPress spy
 			if ( $( '.admin-bar' ).length > 0 ) {
@@ -161,8 +164,8 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 
 			$window.on( 'scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function() {
 
-				var curULHeight = $( 'ul.uix-menu' ).height(),
-					windowPos   = $window.scrollTop();
+				const curULHeight = $( 'ul.uix-menu' ).height(),
+					  windowPos   = $window.scrollTop();
 
 				if ( curULHeight > winHeight ) {
 					$menuWrap.css({

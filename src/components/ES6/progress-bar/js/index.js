@@ -27,11 +27,12 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
     module.PROGRESS_BAR.version       = '0.0.4';
     module.PROGRESS_BAR.documentReady = function( $ ) {
 
-		var waypoints = $( '[data-progressbar-percent]' ).waypoint({
+		const waypoints = $( '[data-progressbar-percent]' ).waypoint({
 			handler: function( direction ) {
 
-				var $this        = $( this.element ),
-					percent      = $this.data( 'progressbar-percent' ),
+				const $this        = $( this.element );
+                
+				let	percent      = $this.data( 'progressbar-percent' ),
 					unit         = $this.data( 'progressbar-unit' );
 
 				if ( typeof percent === typeof undefined ) {

@@ -46,7 +46,7 @@ export const FORM_PROGRESS = ( ( module, $, window, document ) => {
     module.FORM_PROGRESS.version       = '0.0.3';
     module.FORM_PROGRESS.pageLoaded    = function() {
 
-		var $progressBar   = $( '.uix-form-progress progress' ),
+		let $progressBar   = $( '.uix-form-progress progress' ),
 			$formTarget    = $( '.uix-form-progress__target' ),
 			$indicator     = $( '.uix-form-progress .uix-form-progress__indicator' ),
 			formAreaH      = $formTarget.height(),
@@ -57,15 +57,15 @@ export const FORM_PROGRESS = ( ( module, $, window, document ) => {
 		
 
 		//Get form transition speed
-		var dur = $formTarget.data( 'anime-speed' );
+		let dur = $formTarget.data( 'anime-speed' );
 		if ( typeof dur === typeof undefined ) { 
 			dur = '0.5s';
 		}
 
-		var durString  = dur.toLowerCase(),
-			isMS       = durString.indexOf( 'ms' ) >= 0,
-			numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
-			animeSpeed = isMS ? numberNum : numberNum * 1000;
+		const durString  = dur.toLowerCase(),
+			  isMS       = durString.indexOf( 'ms' ) >= 0,
+			  numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
+			  animeSpeed = isMS ? numberNum : numberNum * 1000;
 	
 		
 		//Gets the party started.
@@ -80,7 +80,8 @@ export const FORM_PROGRESS = ( ( module, $, window, document ) => {
 		// Show next form on continue click
 		$( document ).off( 'click.FORM_PROGRESS' ).on( 'click.FORM_PROGRESS', '.uix-form-progress__target .go-step:not(.disable)', function( e ) {
 			e.preventDefault();
-			var $sections = $( this ).parents( '.uix-form-progress__target__step' );
+			const $sections = $( this ).parents( '.uix-form-progress__target__step' );
+            
 			$( document ).UixFormProgressToNext({ 
 				'selector'   : $( '.uix-form-progress__target .uix-form-progress__target__step' ),
 				'formTarget' : $formTarget,

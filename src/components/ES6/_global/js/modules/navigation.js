@@ -27,14 +27,15 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 	module.NAVIGATION.documentReady = function( $ ) {
 
 
-		var $window      = $( window ),
-			windowWidth  = window.innerWidth,
-			windowHeight = window.innerHeight,
-			ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
+        
+		const ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
 
 
 		//-------- Menu selected (if it exists "data-current" property in <ul>)
-		var curMenuIndex = $( ulForDesktop ).data( 'current' );
+		const curMenuIndex = $( ulForDesktop ).data( 'current' );
 		if ( typeof curMenuIndex !== typeof undefined ) {
 			$( ulForDesktop + ' > li:eq('+curMenuIndex+')' ).addClass( 'is-active' );
 		}
@@ -42,7 +43,7 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 
 
 		//-------- Menu Hover
-		var mTop = 15;
+		const mTop = 15;
 		$( ulForDesktop + ' > li.multi-column > ul li ul' ).addClass( 'multi' );
 		$( ulForDesktop + ' > li:not(.multi-column) ul, .uix-menu__container:not(.is-mobile) li.multi-column > ul.sub-menu > li > ul, '+ulForDesktop+' li.multi-column > ul' ).css( 'margin-top', mTop + 'px' );
 
@@ -109,11 +110,11 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 
 		//-------- Sticky primary navigation
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
-		var $el = $( '.uix-menu__container:not(.is-mobile)' );
+		const $el = $( '.uix-menu__container:not(.is-mobile)' );
 		$window.on( 'scroll.NAVIGATION touchmove.NAVIGATION', function() {
 
-			var scrollTop = $( this ).scrollTop(),
-				spyTop    = 220;
+			const scrollTop = $( this ).scrollTop(),
+				  spyTop    = 220;
 			
 			if ( scrollTop >= spyTop ) {
 				$el.addClass( 'is-fixed' );

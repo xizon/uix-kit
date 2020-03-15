@@ -29,17 +29,18 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
     module.ACCORDION_BG.documentReady = function( $ ) {
 		
 		
-        var $window      = $( window ),
-		    windowWidth  = window.innerWidth,
-		    windowHeight = window.innerHeight;
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
 		
 		
 		if ( windowWidth <= 768 ) return false;
 		
 		
 		$( '.uix-accordion-img' ).each( function() {
-			var $this           = $( this ),
-				aEvent          = $this.data( 'event' ),
+			const $this           = $( this );
+            
+			let	aEvent          = $this.data( 'event' ),
 				outReset        = $this.data( 'out-reset' ),
 				activeIndex     = $this.data( 'actived-item' ),
 				widthShow       = $this.data( 'width-show' ),

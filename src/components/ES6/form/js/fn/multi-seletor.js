@@ -10,7 +10,7 @@
     $.fn.UixRenderCustomMultiSel = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '.uix-controls__multi-sel'
         }, options );
  
@@ -20,7 +20,7 @@
 			$( settings.controls ).each( function()  {
 				$( this ).find( '> span' ).each( function()  {
 
-					var targetID = '#' + $( this ).parent().attr( 'data-targetid' );
+					const targetID = '#' + $( this ).parent().attr( 'data-targetid' );
 
 					if ( $( targetID ).val().indexOf( $( this ).data( 'value' ) ) >= 0 ) {
 						$( this ).addClass( 'is-active' ).attr( 'aria-checked', true );

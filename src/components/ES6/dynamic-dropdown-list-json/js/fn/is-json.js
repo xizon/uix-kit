@@ -11,13 +11,13 @@
     $.fn.UixIsJsonObj = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			string    : ''
         }, options );
  
         this.each( function() {
 			
-			var str = settings.str;
+			const str = settings.str;
 
 			if ( typeof( str ) == 'string' && str.length > 0 ) {
 

@@ -19,7 +19,7 @@
     $.fn.UixFireModalDialog = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			id           : 'demo',
 			height       : false,
 			width        : false,
@@ -47,12 +47,12 @@
 					$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
 				}
 
-				var dataID        = settings.id,
-					dataH         = settings.height,
-					dataW         = settings.width,
-					linkBtn       = settings.btn,
-					closeTime     = settings.autoClose,
-					$obj          = $( '.uix-modal-box#'+dataID );
+				const dataID        = settings.id,
+					  dataH         = settings.height,
+					  dataW         = settings.width,
+					  linkBtn       = settings.btn,
+					  closeTime     = settings.autoClose,
+					  $obj          = $( '.uix-modal-box#'+dataID );
 
 				// Initializate modal
 				if ( linkBtn ) {

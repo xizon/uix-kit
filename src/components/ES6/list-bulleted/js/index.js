@@ -31,7 +31,7 @@ export const BULLETED_LIST = ( ( module, $, window, document ) => {
 
 		// Icon bulleted lists
 		$( '[data-list-bullet]' ).each( function() {
-			var bullet = $( this ).attr( 'data-list-bullet' );
+			const bullet = $( this ).attr( 'data-list-bullet' );
 			$( this ).find( 'li' ).prepend( '<i class="'+bullet+'" aria-hidden="true"></i>' );
 		});
 

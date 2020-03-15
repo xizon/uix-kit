@@ -23,6 +23,7 @@ import {
 } from '@uixkit/core/_global/js';
 
 
+
 export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 	if ( window.THREE_SPHERE_THREE === null ) return false;
 	
@@ -35,20 +36,23 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-sphere-three-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
 		
-		var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+		let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-sphere-three-canvas';
+
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+            
+            
+			const rendererCanvasID = '3D-sphere-three-canvas';
 
 
 
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				controls,
 				scene,
 				light,
@@ -90,23 +94,23 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 				//scene.add( new THREE.AxisHelper( 20 ) );
 
 				// geometry
-				var geometry = new THREE.SphereGeometry( 3, 32, 32 );
+				const geometry = new THREE.SphereGeometry( 3, 32, 32 );
 
 				// material, we create the material when the texture is loaded
-				var loader = new THREE.TextureLoader();
+				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
-				var texture = loader.load( 'https://placekitten.com/1650/1650' ),
-					material = new THREE.MeshBasicMaterial( { map: texture } );
+				const texture = loader.load( 'https://placekitten.com/1650/1650' ),
+					  material = new THREE.MeshBasicMaterial( { map: texture } );
 
 				// parent
 				displacementSprite = new THREE.Object3D();
 				scene.add( displacementSprite );
 
 				// pivots
-				var pivot1 = new THREE.Object3D(),
-					pivot2 = new THREE.Object3D(),
-					pivot3 = new THREE.Object3D();
+				const pivot1 = new THREE.Object3D(),
+					  pivot2 = new THREE.Object3D(),
+					  pivot3 = new THREE.Object3D();
 
 				pivot1.rotation.z = 0;
 				pivot2.rotation.z = 2 * Math.PI / 3;
@@ -116,9 +120,9 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 				displacementSprite.add( pivot3 );
 
 				// mesh
-				var mesh1 = new THREE.Mesh( geometry, material ),
-					mesh2 = new THREE.Mesh( geometry, material ),
-					mesh3 = new THREE.Mesh( geometry, material );
+				const mesh1 = new THREE.Mesh( geometry, material ),
+					  mesh2 = new THREE.Mesh( geometry, material ),
+					  mesh3 = new THREE.Mesh( geometry, material );
 
 				mesh1.position.y = 5;
 				mesh2.position.y = 15;
@@ -149,7 +153,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -159,7 +163,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
 

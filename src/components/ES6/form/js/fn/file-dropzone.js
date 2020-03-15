@@ -10,7 +10,7 @@
     $.fn.UixRenderCustomFileDropzone = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			controls    : '.uix-controls__file-field-container'
         }, options );
  
@@ -18,16 +18,16 @@
 		
 		
 			$( settings.controls ).each( function()  {
-				var $dropZone  = $( this ).find( 'input[type="file"]' );
+				const $dropZone  = $( this ).find( 'input[type="file"]' );
 
 				$( document ).on( 'dragover', function(e) {
-					var timeout = window.dropZoneTimeout;
+					const timeout = window.dropZoneTimeout;
 					if (!timeout) {
 						$dropZone.addClass( 'in' );
 					} else {
 						clearTimeout(timeout);
 					}
-					var found = false,
+					let found = false,
 					node = e.target;
 					do {
 						if (node === $dropZone[0]) {
@@ -48,12 +48,12 @@
 				});
 
 				$dropZone.on( 'change', function( e ) {
-					var input = $( this )[0];
+					const input = $( this )[0];
 					if ( input.files && input.files[0] ) {
-						var reader = new FileReader();
+						const reader = new FileReader();
 						reader.onload = function( e ) {
-							var imgData = e.target.result;
-							var imgName = input.files[0].name;
+							const imgData = e.target.result;
+							const imgName = input.files[0].name;
 							input.setAttribute( 'data-title', imgName );
 							//console.log(e.target.result);
 						}

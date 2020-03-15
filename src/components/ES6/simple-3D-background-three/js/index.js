@@ -40,19 +40,21 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 		
 
 
-        var sceneSubjects = []; // Import objects and animations dynamically
-		var MainStage = function() {
+        let sceneSubjects = []; // Import objects and animations dynamically
+		const MainStage = function() {
 			
-			var $window                   = $( window ),
-				windowWidth               = window.innerWidth,
-				windowHeight              = window.innerHeight,
-				rendererCanvasID          = '3D-background-three-canvas';
+            const $window          = $( window );
+            let	windowWidth        = window.innerWidth,
+                windowHeight       = window.innerHeight;
+
+
+            const rendererCanvasID = '3D-background-three-canvas';
 
 			
 
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
-			var camera,
+			let camera,
 				scene,
 				light,
 				renderer,
@@ -63,14 +65,14 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
 			// controls
 
-			var spriteAnim = false;
+			let spriteAnim = false;
 
-			var mouseX       = 0,
+			let mouseX       = 0,
 				mouseY       = 0,
 				windowHalfX  = windowWidth / 2,
 				windowHalfY  = windowHeight / 2;
 
-			var targetX = 0.0, 
+			let targetX = 0.0, 
 				targetY = 0.0,
 				angle   = 0.0,
 				height  = 0.0,
@@ -78,14 +80,14 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
 
 			// Load multiple ShaderFrog shaders
-			var runtime = new ShaderRuntime();
+			const runtime = new ShaderRuntime();
 
 			runtime.load([
 				$( '#' + rendererCanvasID ).data( 'shader-url' )
 			], function( shaders ) {
 
 				// Get the Three.js material you can assign to your objects
-				var material = runtime.get( shaders[0].name );
+				const material = runtime.get( shaders[0].name );
 				shaderSprite.material = material;
 
 			});
@@ -123,7 +125,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
 
 				//Add shader background
-				var geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
+				const geometry = new THREE.SphereGeometry(5, 32, 32, 0, Math.PI * 2, 0, Math.PI * 2);
 				shaderSprite = new THREE.Mesh( geometry );
 				shaderSprite.scale.setScalar( 10000 );
 				shaderSprite.renderDepth = 0;
@@ -131,7 +133,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
 
 				// Immediately use the texture for material creation
-				var defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+				const defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 
 				displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
 				scene.add( displacementSprite );
@@ -150,8 +152,8 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 			function render() {
 				requestAnimationFrame( render );
 
-				var objVector = new THREE.Vector3(0,0.2,0.1),
-					delta     = clock.getDelta();
+				const objVector = new THREE.Vector3(0,0.2,0.1),
+					  delta     = clock.getDelta();
 
 				if ( ! spriteAnim ) {
 					displacementSprite.rotation.x += delta * objVector.x;
@@ -177,9 +179,9 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 				angle  += 0.01 * ( targetX - angle );
 				height += 0.01 * ( targetY - height );
 
-				var x = -Math.sin( angle * 1.5 ) * 35;
-				var z =  Math.cos( angle * 1.5 ) * 35;
-				var y = 130 * height + 0;
+				const x = -Math.sin( angle * 1.5 ) * 35;
+				const z =  Math.cos( angle * 1.5 ) * 35;
+				const y = 130 * height + 0;
 
 				camera.position.set( x, y, z );
 				camera.lookAt( target );	
@@ -191,7 +193,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
                     function CustomObj( scene ) {
 
-                        var elements = new THREE...;
+                        const elements = new THREE...;
                         scene.add( elements );
 
                         this.update = function( time ) {
@@ -201,7 +203,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
                     sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
                 */
-                for( var i = 0; i < sceneSubjects.length; i++ ) {
+                for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }
                 
@@ -258,35 +260,35 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 			 */
 			function generateGeometry( objectType, numObjects ) {
 
-				var geometry = new THREE.Geometry();
+				const geometry = new THREE.Geometry();
 
-				var applyVertexColors = function(g, c) {
+				const applyVertexColors = function(g, c) {
 					g.faces.forEach(function(f) {
-						var n = (f instanceof THREE.Face3) ? 3 : 4;
-						for (var j = 0; j < n; j++) {
+						const n = (f instanceof THREE.Face3) ? 3 : 4;
+						for (let j = 0; j < n; j++) {
 							f.vertexColors[j] = c;
 						}
 					});
 				};
 
-				for ( var i = 0; i < numObjects; i ++ ) {
+				for ( let i = 0; i < numObjects; i ++ ) {
 
-					var position = new THREE.Vector3();
+					const position = new THREE.Vector3();
 					position.x = Math.random() * 10000 - 5000;
 					position.y = Math.random() * 6000 - 3000;
 					position.z = Math.random() * 8000 - 4000;
 
-					var rotation = new THREE.Euler();
+					const rotation = new THREE.Euler();
 					rotation.x = Math.random() * 2 * Math.PI;
 					rotation.y = Math.random() * 2 * Math.PI;
 					rotation.z = Math.random() * 2 * Math.PI;
 
-					var scale = new THREE.Vector3();
+					const scale = new THREE.Vector3();
 					scale.x = Math.random() * 200 + 100;
 
 
-					var geom, 
-						color = new THREE.Color();
+					let geom;
+					const color = new THREE.Color();
 
 
 					if ( objectType == "cube" ) {
@@ -316,7 +318,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 					// give the geom's vertices a random color, to be displayed
 					applyVertexColors( geom, color );
 
-					var object = new THREE.Mesh( geom );
+					const object = new THREE.Mesh( geom );
 					object.position.copy( position );
 					object.rotation.copy( rotation );
 					object.scale.copy( scale );

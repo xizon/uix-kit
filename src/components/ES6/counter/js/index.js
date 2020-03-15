@@ -28,7 +28,7 @@ export const COUNTER = ( ( module, $, window, document ) => {
     module.COUNTER.version       = '0.0.2';
     module.COUNTER.documentReady = function( $ ) {
 
-		var waypoints = $( '[data-counter-number]' ).waypoint({
+		const waypoints = $( '[data-counter-number]' ).waypoint({
 			handler: function( direction ) {
 
 				$( this.element ).UixCountTo();

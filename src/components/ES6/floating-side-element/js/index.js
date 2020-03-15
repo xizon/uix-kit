@@ -30,7 +30,7 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 
 
 		
-		var documentHeight  = 0,
+		let documentHeight  = 0,
 			$floatingSideEl = $( '.uix-floating-side-el' ),
 			floatingOffset  = $floatingSideEl.offset();
 		
@@ -49,11 +49,11 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 		
 
 		$( window ).on( 'scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function() {
-			var sideBarHeight = $floatingSideEl.height(),
+			let sideBarHeight = $floatingSideEl.height(),
 				scrollTop     = $( window ).scrollTop();
 
 			if ( scrollTop > floatingOffset.top ) {
-				var newPosition = scrollTop - floatingOffset.top,
+				let newPosition = scrollTop - floatingOffset.top,
 					maxPosition = documentHeight - sideBarHeight;
 				if ( newPosition > maxPosition ) {
 					newPosition = maxPosition;

@@ -27,10 +27,11 @@ export const SKEW_ON_SCROLL = ( ( module, $, window, document ) => {
 
 		$( '.uix-skewscroll-container' ).each( function() {
 		
-			var $this    = $( this ),
-				$animObj = $this.find( 'p' ),
-				followY  = 0,
-				ease     = 0.15;
+			const $this    = $( this ),
+				  $animObj = $this.find( 'p' ),
+				  ease     = 0.15;
+            
+            let followY  = 0;
 
 			
 			TweenMax.set( $animObj, {
@@ -40,7 +41,7 @@ export const SKEW_ON_SCROLL = ( ( module, $, window, document ) => {
 			TweenMax.ticker.addEventListener( 'tick', function() {
 				followY += ( window.scrollY - followY) * ease;
 
-				var dy = (window.scrollY - followY) / 20;
+				let dy = (window.scrollY - followY) / 20;
 				
 				dy = Math.min( Math.max(dy, -15), 15);
 				TweenLite.set( $animObj, {

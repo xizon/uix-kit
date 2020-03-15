@@ -13,7 +13,7 @@
     $.fn.UixSearchJsonStr = function( options ) {
  
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        const settings = $.extend({
 			method    : 'POST',
 			callback  : null,
 			jsonFile  : '',
@@ -22,7 +22,7 @@
  
         this.each( function() {
 			
-			var obj = $( this );
+			const obj = $( this );
 			
 			
 			//Returns JSON data
@@ -32,13 +32,13 @@
 				dataType : 'json'
             })
             .done( function (data) { 
-                var newArr = [];
+                let newArr = [];
 
                 //Convert JSON to an array
-                var formatFromServer = function formatFromServer( data ) {
-                    var formatData = {};
+                const formatFromServer = function formatFromServer( data ) {
+                    let formatData = {};
 
-                    for ( var item in data ) {
+                    for ( let item in data ) {
                         if ( $( document ).UixIsJsonObj( { string:  data[item] } ) ) {
                             formatFromServer( data[item], formatData );
                         } else {
@@ -46,7 +46,7 @@
                         }
                     }
 
-                    for ( var item2 in formatData ) {
+                    for ( let item2 in formatData ) {
                         //console.log( formatData[ item2 ] );
                         newArr.push( formatData[ item2 ] );
                     }
@@ -60,9 +60,9 @@
 
 
                 //search JSON key that contains specific string
-                for ( var p = 0; p < newArr.length; p++ ) {
+                for ( let p = 0; p < newArr.length; p++ ) {
 
-                    for ( var n = 0; n < newArr[p].list.length; n++ ) {
+                    for ( let n = 0; n < newArr[p].list.length; n++ ) {
 
                         if ( Object.prototype.toString.call( newArr[p].list[n][settings.key] ) =='[object Array]' ) {
 

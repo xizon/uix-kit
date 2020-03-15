@@ -28,22 +28,22 @@ export const DROPDOWN_MENU2 = ( ( module, $, window, document ) => {
     module.DROPDOWN_MENU2.version       = '0.0.5';
     module.DROPDOWN_MENU2.documentReady = function( $ ) {
 
-		var $verticalMenuLi = $( '.uix-vertical-menu li' );
+		const $verticalMenuLi = $( '.uix-vertical-menu li' );
 		
 		$verticalMenuLi.find( '> a' ).off( 'click' ).on( 'click', function( e ) {
 			
-			var $sub = $( this ).next( 'ul' );
+			const $sub = $( this ).next( 'ul' );
 			
 			if ( $sub.length > 0 ) {
 
 				e.preventDefault();
 				
 				//Its value is not a boolean but a string
-				var expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
+				const expanded = ( $( this ).attr( 'aria-expanded' ) == 'true' ) ? false : true;
 				
 				if ( expanded ) {
 					//Hide other all sibling <ul> of the selected element
-					var $e = $( this ).parent( 'li' ).siblings().find( '> a' );
+					const $e = $( this ).parent( 'li' ).siblings().find( '> a' );
 					
 					$e.removeClass( 'is-active' ).attr( 'aria-expanded', false );
 
@@ -85,7 +85,7 @@ export const DROPDOWN_MENU2 = ( ( module, $, window, document ) => {
 		}
         
 		$verticalMenuLi.each( function() {
-			var len = $( this ).find( 'ul' ).length;
+			const len = $( this ).find( 'ul' ).length;
 			if ( len == 0 ) {
 				$( this ).children( 'a' ).children( '.uix-vertical-menu__arrow' ).hide();
 			}
