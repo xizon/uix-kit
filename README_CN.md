@@ -352,6 +352,17 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
     @@include('./src/components/ES6/_global/include-footer.html')
 ```
 
+
+**Note: ** 您可以调用指定的模块脚本，该脚本通常用于AJAX的异步回调。 演示代码在这里:
+
+```sh
+import { UixModuleInstance } from '@uixkit/core/_global/js';
+
+if ( UixModuleInstance.DEMO_MODULE ) UixModuleInstance.DEMO_MODULE.pageLoaded();
+if ( UixModuleInstance.DEMO_MODULE ) UixModuleInstance.DEMO_MODULE.documentReady($);
+```
+
+
 **由于Uix Kit不是JavaScript框架，因此您可以使用任何第三方库以最直观的方式构建自定义模块样式和动画脚本。**
 
 

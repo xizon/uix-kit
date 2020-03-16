@@ -532,6 +532,17 @@ These RTL modules do not need JavaScript.
     @@include('./src/components/ES6/_global/include-footer.html')
 ```
 
+**Note: ** You could call a specified module script which is commonly used for callbacks of AJAX Response from Asynchronous. The demo code is here:
+
+```sh
+import { UixModuleInstance } from '@uixkit/core/_global/js';
+
+if ( UixModuleInstance.DEMO_MODULE ) UixModuleInstance.DEMO_MODULE.pageLoaded();
+if ( UixModuleInstance.DEMO_MODULE ) UixModuleInstance.DEMO_MODULE.documentReady($);
+```
+
+
+
 **Since Uix Kit is not a JavaScript framework, you could use any third-party libraries to build your custom module styles and animation scripts in the most intuitive way.**
 
 
