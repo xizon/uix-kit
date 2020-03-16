@@ -44,7 +44,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 * [Getting Started with Videos](#getting-started-with-videos)
-* [Description](#description)
+* [Why use it](#why-use-it)
 * [Installation And Test](#installation-and-test)
 * [How To Use？](#how-to-use)
 * [How to Create a Custom Module？ &#128293; ](#how-to-create-a-custom-module)
@@ -63,22 +63,22 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 
 
-## Key Features
+## Why use it
 
-* Supports 3D and 2D rendering with three.js and pixi.js.
-* Using Sass to Control Scope With BEM Naming
-* Automatically generate a table of contents for each module comment of the name.
-* Simple custom CSS and JS core files
-* 100% Responsive & Mobile Ready
-* Prepare some generic plug-ins in advance
+* Not a reusable component structure
+* Not a JavaScript framework
+* Webpack-based dev environment which is an intuitive toolkit system
+* Use any JavaScript libraries in your favorite way to build styles and animation scripts
+* W3C standard and SEO 
+* Control scope with BEM naming, so the core Uix Kit project is not in conflict with the other projects
+* Automatically generate a table of contents for each module comment of the name
+* Each module consists of SASS / SCSS, JavaScript and HTML files
+* Make a foundation for the React architecture
 * Compatible with Bootstrap 4.x
 * Provides a common web page components and layouts
-* W3C Standard Support
-* Support PJAX no refresh method for loading pages
-* Support JS, HTML and SASS component library automatically packaged.
-* Make a foundation for the React architecture.
-* The core module adopts ES6 import and export, and the third-party plugins adopt pure file merger and do not import and export.
-
+* Using ES6 to import or export multiple modules, the third-party plugins could adopt pure file merger method and do not import and export
+* The complete directory of examples in order to develop a responsive website independently without Node.js dev environment
+* Suitable for developing the standardized responsive website and WordPress templates
 
 * * *
 
