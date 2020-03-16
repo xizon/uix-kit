@@ -534,7 +534,7 @@ These RTL modules do not need JavaScript.
     @@include('./src/components/ES6/_global/include-footer.html')
 ```
 
-**Note &#128161;:** You could call a specified module script which is commonly used for callbacks of AJAX Response from Asynchronous. The demo code is here:
+**Note &#128161;:** You could call a specified module script which is commonly used for callbacks of AJAX Response from Asynchronous method. The demo code is here:
 
 ```sh
 import { UixModuleInstance } from '@uixkit/core/_global/js';
