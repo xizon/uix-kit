@@ -155,12 +155,14 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 uix-kit/
 ├── src/
 │   ├── components/
-│   │   ├── ES6/_app-load.js
-│   │   ├── ES6/_app-load-rtl.js
-│   │   ├── ES6/demo-module/scss/
-│   │   ├── ES6/demo-module/scss-rtl/
-│   │   ├── ES6/demo-module/js/
-│   │   └── ES6/demo-module/demo-module.html
+│   │   └── ES6/
+│   │       ├── _app-load.js
+│   │       ├── _app-load-rtl.js
+│   │       └── demo-module/
+│   │                ├── scss/*.scss
+│   │                ├── scss-rtl/*.scss
+│   │                ├── js/*.js
+│   │                └── *.html
 └──
 ```
 
@@ -182,7 +184,7 @@ uix-kit/
 }
 ```
 
-**Step 2-2 &#128161; (可选的).** 当然，如果你还需要支持RTL布局.再创建另一个SASS/SCSS文件到目录 `src/components/ES6/demo-module/scss-rtl/` 中，同样命名为 `_style.scss`. 下面是示例代码:
+**Step 2-2 (可选的).** 当然，如果你还需要支持RTL布局.再创建另一个SASS/SCSS文件到目录 `src/components/ES6/demo-module/scss-rtl/` 中，同样命名为 `_style.scss`. 下面是示例代码:
 
 ```sh
 /* ====================================================== 
@@ -274,7 +276,7 @@ import DEMO_MODULE from '@uixkit/core/demo-module/js';
 ```
 
 
-**Step 4-2  &#128161; (可选的).** 如果需要网站支持RTL布局, 再 `src/components/ES6/_app-load-rtl.js` 中导入样式即可:
+**Step 4-2  (可选的).** 如果需要网站支持RTL布局, 再 `src/components/ES6/_app-load-rtl.js` 中导入样式即可:
 
 
 ```sh
@@ -284,7 +286,7 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
 这些RTL模块都不需要JavaScript，因此只需要导入SASS/SCSS文件即可。（如果你想使用JS也未尝不可）
 
 
-**Step 5 &#128161; (可选的).** 您也可以创建一个HTML文件来单独运行此模块的演示，所有HTML文件将自动导出到目录`examples/`. HTML文件的演示代码如下：
+**Step 5 (可选的).** 您也可以创建一个HTML文件来单独运行此模块的演示，所有HTML文件将自动导出到目录`examples/`. HTML文件的演示代码如下：
 
 
 ```sh
@@ -353,7 +355,7 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
 ```
 
 
-**Note: ** 您可以调用指定的模块脚本，该脚本通常用于AJAX的异步回调。 演示代码在这里:
+**提示 &#128161;:** 您可以调用指定的模块脚本，该脚本通常用于AJAX的异步回调。 演示代码在这里:
 
 ```sh
 import { UixModuleInstance } from '@uixkit/core/_global/js';

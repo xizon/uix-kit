@@ -335,12 +335,14 @@ Here’s a sample custom module directory structure, I’ve included some exampl
 uix-kit/
 ├── src/
 │   ├── components/
-│   │   ├── ES6/_app-load.js
-│   │   ├── ES6/_app-load-rtl.js
-│   │   ├── ES6/demo-module/scss/
-│   │   ├── ES6/demo-module/scss-rtl/
-│   │   ├── ES6/demo-module/js/
-│   │   └── ES6/demo-module/demo-module.html
+│   │   └── ES6/
+│   │       ├── _app-load.js
+│   │       ├── _app-load-rtl.js
+│   │       └── demo-module/
+│   │                ├── scss/*.scss
+│   │                ├── scss-rtl/*.scss
+│   │                ├── js/*.js
+│   │                └── *.html
 └──
 ```
 
@@ -362,7 +364,7 @@ uix-kit/
 }
 ```
 
-**Step 2-2 &#128161; Optional.** Alright, so if you need to support RTL. You need create a new SASS/SCSS file. Go into the `src/components/ES6/demo-module/scss-rtl/` folder and create a file called: `_style.scss`. Like this:
+**Step 2-2 (Optional).** Alright, so if you need to support RTL. You need create a new SASS/SCSS file. Go into the `src/components/ES6/demo-module/scss-rtl/` folder and create a file called: `_style.scss`. Like this:
 
 ```sh
 /* ====================================================== 
@@ -454,7 +456,7 @@ import DEMO_MODULE from '@uixkit/core/demo-module/js';
 ```
 
 
-**Step 4-2  &#128161; Optional.** If you need to support RTL, in `src/components/ES6/_app-load-rtl.js`.  like this:
+**Step 4-2  (Optional).** If you need to support RTL, in `src/components/ES6/_app-load-rtl.js`.  like this:
 
 
 ```sh
@@ -464,7 +466,7 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
 These RTL modules do not need JavaScript.
 
 
-**Step 5 &#128161; Optional.** You could also create an HTML file to run the demo of this module separately, all HTML files will be automatically exported into the directory `examples/`. The demo code of the HTML file is as follows:
+**Step 5 (Optional).** You could also create an HTML file to run the demo of this module separately, all HTML files will be automatically exported into the directory `examples/`. The demo code of the HTML file is as follows:
 
 
 ```sh
@@ -532,7 +534,7 @@ These RTL modules do not need JavaScript.
     @@include('./src/components/ES6/_global/include-footer.html')
 ```
 
-**Note: ** You could call a specified module script which is commonly used for callbacks of AJAX Response from Asynchronous. The demo code is here:
+**Note &#128161;:** You could call a specified module script which is commonly used for callbacks of AJAX Response from Asynchronous. The demo code is here:
 
 ```sh
 import { UixModuleInstance } from '@uixkit/core/_global/js';
