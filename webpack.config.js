@@ -505,6 +505,25 @@ const app = express();
 const instance = webpackDevMiddleware( compiler );
 app.use( instance );
 
+
+/*
+app.listen(globs.port, function() {
+    console.log(colors.fg.Yellow, 'Express server listening on port ' + globs.port, colors.Reset);
+});
+
+
+const router = express.Router();
+app.use(router);
+
+// Serving static files in Express
+app.use('/', express.static(path.join(__dirname, 'examples')));
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
+
+*/
+
+
+
+
 //Provides a way to customize how progress is reported during a compilation.
 new webpack.ProgressPlugin().apply(compiler);
 
@@ -583,7 +602,7 @@ server.listen( globs.port, "localhost", function (err, result) {
 	}
 
 
-	console.log(colors.fg.Yellow, 'Listening at http://localhost:8080/', colors.Reset);
+	console.log(colors.fg.Yellow, 'Listening at http://localhost:' + globs.port, colors.Reset);
 })
 
 
