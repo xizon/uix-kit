@@ -69,6 +69,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * Not a JavaScript framework
 * Webpack-based dev environment which is an intuitive toolkit system
 * Use any JavaScript libraries in your favorite way to build styles and animation scripts
+* Suitable for developing Visual Interaction websites and WordPress templates
 * W3C standard and SEO 
 * Control scope with BEM naming, so the core Uix Kit project is not in conflict with the other projects
 * Automatically generate a table of contents for each module comment of the name
@@ -78,7 +79,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * Provides a common web page components and layouts
 * Using ES6 to import or export multiple modules, the third-party plugins could adopt pure file merger method and do not import and export
 * The complete directory of examples in order to develop a responsive website independently without Node.js dev environment
-* Suitable for developing the standardized responsive website and WordPress templates
+
 
 * * *
 
