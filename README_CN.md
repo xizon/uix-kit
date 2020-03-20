@@ -4,8 +4,7 @@
   </a>
 </p>
 
-<center><strong>超过120+基础模块，快速搭建你的响应式网站!</strong></center>
-
+  <p align="center">超过<strong>120+</strong>基础模块，快速搭建你的响应式网站!</p>
   <p align="center">
       <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://img.shields.io/travis/xizon/uix-kit/master?style=for-the-badge"/></a>
       <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F" title="w3c"><img src="https://img.shields.io/w3c-validation/html?style=for-the-badge&targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F"/></a>
