@@ -26,7 +26,6 @@ Uix Kit bundles the following third-party resources:
 - [waitForImages](https://github.com/alexanderdickson/waitForImages)
 - [modernizr](https://modernizr.com/)
 - [animejs](https://github.com/juliangarnier/anime)
-- [waypoints](https://github.com/imakewebthings/waypoints)
 - [Video.js](https://github.com/videojs)
 - [prefixfree](https://github.com/LeaVerou/prefixfree)
 - [template7](http://www.idangero.us/template7/)
