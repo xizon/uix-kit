@@ -22,7 +22,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.3';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.6';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 
@@ -191,32 +191,8 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 				},
 				beforeSend: function() {
 
-
-					TweenMax.to( container.find( '.ajax-content-loader' ), 0.3, {
-						css: {
-							opacity    : 1
-						},
-						ease   : Power2.easeOut
-					});		
-
-
-					container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function() {
-
-                        //loading animation
-                        loadingAnim( 0 );
-                        
-						//loader effect from AJAX request
-						TweenMax.set( container.find( '.ajax-content-loader' ), {
-							css         : {
-								'display' : 'block'
-							},
-							onComplete  : function() {
-								TweenMax.to( this.target, 0.5, {
-									alpha : 1
-								});
-							}
-						});	
-					});
+                    //Display loader
+                    showLoader( container, loading );
 
 
 				}
@@ -268,6 +244,11 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                     
                     //loading animation
                     loadingAnim( per );
+                    
+                    //Remove loader
+                    hideLoader(container, $( response ).filter( 'title' ).text(), btn, response);     
+                    
+                    
                 }
                 
                 
@@ -389,6 +370,18 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 
                     if ( _time >= timeLimit ) {
                         console.log( 'Page load timeout!' );
+                        
+                        
+                        //Remove loader
+                        if ( response.indexOf( '<body' ) >= 0 ) {
+                            window.location.href = location.href;
+                        } else {
+                            hideLoader(container, $( response ).filter( 'title' ).text(), btn, response);
+
+                        }   
+                    
+
+                        // clear loader event
                         clearInterval( timeClockInit );
                         func();
                     }    
@@ -423,7 +416,29 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
             //If the page resource is not loaded, then the following code is not executed
             if ( loadedProgress < 100 ) return false;
             
+            
 			//Remove loader
+            hideLoader(container, title, btn, content);
+
+			
+		}
+
+        
+        
+        
+		
+		/*
+		 * Remove loader
+		 *
+         * @param  {Element} container - The instance returned from the request succeeds
+         * @param  {String} title      - The title of a requested page.
+		 * @param  {?Element} btn      - Current trigger button.
+         * @param  {String} content    - The data returned from the server
+		 * @return {Void}
+		 */
+		function hideLoader( container, title, btn, content ) {
+			
+            
 			TweenMax.to( container.find( '.ajax-content-loader' ), 0.5, {
 				alpha       : 0,
 				onComplete  : function() {
@@ -466,10 +481,51 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 				//Fix an issue for mousewheel event is too fast.
 				delay       : 0.5
 			});
-			
-			
+            
+           
 		}
+		
 
+		
+		/*
+		 * Display loader
+		 *
+		 * @param  {Element} container       - The target container to which the content will be added.
+		 * @param  {String} loading         - Content of loading area.
+		 * @return {Void}
+		 */
+		function showLoader( container, loading ) {
+			
+
+            TweenMax.to( container.find( '.ajax-content-loader' ), 0.3, {
+                css: {
+                    opacity    : 1
+                },
+                ease   : Power2.easeOut
+            });		
+
+
+            container.html( '<div class="ajax-content-loader">'+loading+'</div>' ).promise().done( function() {
+
+                //loading animation
+                loadingAnim( 0 );
+
+                //loader effect from AJAX request
+                TweenMax.set( container.find( '.ajax-content-loader' ), {
+                    css         : {
+                        'display' : 'block'
+                    },
+                    onComplete  : function() {
+                        TweenMax.to( this.target, 0.5, {
+                            alpha : 1
+                        });
+                    }
+                });	
+            });
+
+		}
+        
+        
 			
 		
     };

@@ -83,6 +83,14 @@
  */ 
 .uix-entry__content {
 	word-wrap: break-word;
+    
+    pre:not(.uix-precode) {
+        background: #fff;
+        border: 1px solid #d9d9d9;
+        border-left: 5px solid $highlight-color1;
+        padding: .3em .7em;   
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
 	
 	img {
 	    height: auto !important;

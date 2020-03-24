@@ -23,13 +23,13 @@ import {
 
 
 
+
 export const ONEPAGE = ( ( module, $, window, document ) => {
 	if ( window.ONEPAGE === null ) return false;
 	
 	
-	
     module.ONEPAGE               = module.ONEPAGE || {};
-    module.ONEPAGE.version       = '0.0.6';
+    module.ONEPAGE.version       = '0.0.7';
     module.ONEPAGE.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -305,14 +305,14 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 			  navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
 
 		$window.on( 'scroll.ONEPAGE touchmove.ONEPAGE', function() {
-			const scrollTop = $( this ).scrollTop(),
-				  spyTop    = parseFloat( scrollTop + topSpacing ),
+			const scrolled  = $( this ).scrollTop(),
+				  spyTop    = parseFloat( scrolled + topSpacing ),
 				  minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
 				  maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
 
 			$( '[data-highlight-section="true"]' ).each( function()  {
-				const block     = $( this ),
-					  eleTop    = block.offset().top;
+				const $block    = $( this ),
+					  eleTop    = $block.offset().top;
 				
 
 				// The 1 pixel in order to solve inaccurate value of outerHeight() 
@@ -322,8 +322,8 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 					// Highlight element when related content
 					getAllNavigation( $primaryMenu ).removeClass( 'is-active' );
 					getAllNavigation( $sidefixedMenu ).removeClass( 'is-active' );
-					getRelatedNavigation( block, $primaryMenu, false ).addClass( 'is-active' );
-					getRelatedNavigation( block, $sidefixedMenu, false ).addClass( 'is-active' );
+					getRelatedNavigation( $block, $primaryMenu, false ).addClass( 'is-active' );
+					getRelatedNavigation( $block, $sidefixedMenu, false ).addClass( 'is-active' );
 					
 					
 				} 

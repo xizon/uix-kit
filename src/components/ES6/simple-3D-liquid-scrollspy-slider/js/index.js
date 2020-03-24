@@ -34,7 +34,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 	
 	
     module.THREE_LIQUID_SCROLLSPY_SLIDER               = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.0.9';
+    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.1.1';
     module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function( $ ) {
 
 	
@@ -676,12 +676,12 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 //                
                 
                 
+
 				// Fires when the window changes
 				window.addEventListener( 'resize', onWindowResize, false );
-                
-                
+            
                 // Scrolling interaction with 3D scenes
-                window.addEventListener( 'wheel', onMouseWheel, false );
+                window.addEventListener( 'wheel', onMouseWheel, browser.supportsPassive ? { passive: true } : false );
 
 
 			}

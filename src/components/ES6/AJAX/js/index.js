@@ -25,7 +25,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.5';
+    module.AJAX_PAGE_LOADER.version       = '0.1.7';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -503,9 +503,14 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                             console.log( 'Page load timeout!' );
                             
                             //Remove loader
-                            const oldContent = container.html();
-                            hideLoader(container, $( response ).filter( 'title' ).text(), dir, oldContent, response);
+                            if ( response.indexOf( '<body' ) >= 0 ) {
+                                window.location.href = location.href;
+                            } else {
+                                const oldContent = container.html();
+                                hideLoader(container, $( response ).filter( 'title' ).text(), dir, oldContent, response);
 
+                            }
+                        
                             
                             // clear loader event
                             clearInterval( timeClockInit );
@@ -756,10 +761,9 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		};
 		
 
-
-		window.addEventListener( 'wheel', onDeviceWheel, { passive: true } );
-		window.addEventListener( 'touchstart', onTouchStart, { passive: true } );
-		window.addEventListener( 'touchmove', onDeviceWheel, { passive: true } );
+		window.addEventListener( 'wheel', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchstart', onTouchStart, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchmove', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
 		
 		
     };

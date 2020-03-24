@@ -23,7 +23,7 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.MOUSEWHEEL_INTERACTION               = module.MOUSEWHEEL_INTERACTION || {};
-    module.MOUSEWHEEL_INTERACTION.version       = '0.0.2';
+    module.MOUSEWHEEL_INTERACTION.version       = '0.0.3';
     module.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -89,10 +89,10 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 			
 		};
 		
-		
-		window.addEventListener( 'wheel', onDeviceWheel, { passive: true } );
-		window.addEventListener( 'touchstart', onTouchStart, { passive: true } );
-		window.addEventListener( 'touchmove', onDeviceWheel, { passive: true } );
+	
+		window.addEventListener( 'wheel', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchstart', onTouchStart, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchmove', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
 		
 		
 		

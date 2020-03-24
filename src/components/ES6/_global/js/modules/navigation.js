@@ -23,7 +23,7 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 	
 	
 	module.NAVIGATION               = module.NAVIGATION || {};
-    module.NAVIGATION.version       = '0.0.5';
+    module.NAVIGATION.version       = '0.0.7';
 	module.NAVIGATION.documentReady = function( $ ) {
 
 
@@ -113,10 +113,10 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 		const $el = $( '.uix-menu__container:not(.is-mobile)' );
 		$window.on( 'scroll.NAVIGATION touchmove.NAVIGATION', function() {
 
-			const scrollTop = $( this ).scrollTop(),
-				  spyTop    = 220;
+			const scrolled = $( this ).scrollTop(),
+				  spyTop   = 220;
 			
-			if ( scrollTop >= spyTop ) {
+			if ( scrolled >= spyTop ) {
 				$el.addClass( 'is-fixed' );
 			} else {
 				$el.removeClass( 'is-fixed' );	

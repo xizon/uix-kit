@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.4';
+    module.SCROLLSPY_ANIM.version       = '0.0.5';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -141,20 +141,21 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
                   elOffsetTop   = $el.offset().top - panelHeight; 
             
 
-            const scrollTop           = $( this ).scrollTop(),
-				  translateTitle      = scrollTop / 2,
-				  translateBackground = scrollTop / 3,
-				  scale               = scrollTop / elHeight,
+            const scrolled            = $( this ).scrollTop(),
+				  translateTitle      = scrolled / 2,
+				  translateBackground = scrolled / 3,
+				  scale               = scrolled / elHeight,
 				  backgroundScale     = 1, // + scale / 10
 				  titleScale          = 1 - scale * 0.1,
 				  titleOpacity        = 1 - scale,
-				  scrollProgress      = ((scrollTop - elOffsetTop) / (elHeight - windowHeight / 6));
+				  scrollProgress      = ((scrolled - elOffsetTop) / (elHeight - windowHeight / 6));
 
 			
 			
             //-------- Animation
-            if ( scrollTop < elHeight ) {
-     
+            const spyTop =  $el[0].getBoundingClientRect().top;
+            
+            if ( spyTop < window.innerHeight ) {
                 $el.find( '.row' ).css({
                     'transition': 'none',
                     'transform': 'translateY(' + translateTitle + 'px) scale(' + titleScale + ')',
@@ -162,7 +163,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
                 });
 				
                 $( 'body' ).removeClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
-            } else if (scrollTop >= elHeight) {
+            } else {
                 $( 'body' ).addClass( 'js-uix-content-part' ).removeClass( 'js-uix-bottom-part' );
 				
 				

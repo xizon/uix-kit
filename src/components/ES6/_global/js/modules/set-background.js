@@ -23,7 +23,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	
 	
 	module.SET_BG               = module.SET_BG || {};
-    module.SET_BG.version       = '0.0.5';
+    module.SET_BG.version       = '0.0.6';
 	module.SET_BG.documentReady = function( $ ) {
 
 
@@ -67,13 +67,14 @@ export const SET_BG = ( ( module, $, window, document ) => {
 
 				if ( typeof config === typeof undefined ) {
 					config = {
-						"src"      : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-						"position" : "top left",
-						"size"     : "cover",
-						"repeat"   : "no-repeat",
-						"fill"     : false,
-						"parallax" : 0,
-                        "move"     : false  // {"dir":"left","duration":"10s","easing":"linear","loop":true}
+						"src"        : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+						"position"   : "top left",
+						"size"       : "cover",
+						"repeat"     : "no-repeat",
+						"fill"       : false,
+						"parallax"   : 0,
+                        "transition" : "none 0s ease 0s",
+                        "move"       : false  // {"dir":"left","duration":"10s","easing":"linear","loop":true}
 					};
 				}
 

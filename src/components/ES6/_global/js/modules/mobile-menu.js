@@ -23,7 +23,7 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 	
 	
 	module.MOBILE_MENU               = module.MOBILE_MENU || {};
-    module.MOBILE_MENU.version       = '0.0.5';
+    module.MOBILE_MENU.version       = '0.0.7';
 	module.MOBILE_MENU.documentReady = function( $ ) {
 
 
@@ -39,10 +39,10 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 		const $el = $( '.admin-bar .uix-menu-mobile__toggle' );
 		$window.on( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU', function() {
 
-			const scrollTop = $( this ).scrollTop(),
+			const scrolled = $( this ).scrollTop(),
 				  spyTop    = 46;
 			
-			if ( scrollTop >= spyTop ) {
+			if ( scrolled >= spyTop ) {
 				$el.addClass( 'is-fixed' );
 			} else {
 				$el.removeClass( 'is-fixed' );	

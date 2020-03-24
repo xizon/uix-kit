@@ -1,0 +1,44 @@
+/* ====================================================== 
+   <!-- Entry -->      
+/* ====================================================== */
+
+/*
+ * 4. Main Content
+ * 5. Meta Info
+*/
+
+
+/* 
+ ---------------------------
+ 4. Main Content
+ ---------------------------
+ */ 
+.uix-entry__content {
+
+    pre:not(.uix-precode) {
+        border-left: 1px solid #d9d9d9;
+        border-right: 5px solid $highlight-color1;
+    }
+
+}
+
+
+
+/* 
+ ---------------------------
+ 5. Meta Info
+ ---------------------------
+ */ 
+ul.uix-entry__meta {
+
+	&.uix-entry__meta--wrap li {
+	
+		strong {
+            padding-right: auto;
+			padding-left: 0.4375rem;
+		}
+	
+	}
+
+	
+}

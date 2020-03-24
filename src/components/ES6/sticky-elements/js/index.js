@@ -25,7 +25,7 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 	
 	
     module.STICKY_EL               = module.STICKY_EL || {};
-    module.STICKY_EL.version       = '0.0.5';
+    module.STICKY_EL.version       = '0.0.6';
     module.STICKY_EL.pageLoaded    = function() {
 
         const $window          = $( window );
@@ -88,9 +88,7 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function stickyInit( w, h ) {
-			
-			$window.off( 'scroll.STICKY_EL touchmove.STICKY_EL' );
-
+		
 			
 			if ( w > 768 ) {
 				
@@ -102,16 +100,17 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 						  $ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
 					
 					
+                    
 					
 					//spy the scroll event
 					$window.on( 'scroll.STICKY_EL touchmove.STICKY_EL', function() {
 
-						const scrollTop   = $window.scrollTop(),
-							  dynamicTop  = parseFloat( scrollTop + window.innerHeight );
+						const scrolled   = $( this ).scrollTop(),
+							  spyTop  = parseFloat( scrolled + window.innerHeight );
 
 
 						//------
-						if ( parseFloat( scrollTop + topSpacing ) > elTop ) {
+						if ( parseFloat( scrolled + topSpacing ) > elTop ) {
 						  $el
 							  .addClass( 'is-active' )
 							  .css( {
@@ -139,10 +138,10 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 
 
 							//Detecting when user scrolls to bottom of div
-							if ( dynamicTop >= targetTop ) {
+							if ( spyTop >= targetTop ) {
 
 									$el.css( {
-										  'top'  : parseFloat( topSpacing - (dynamicTop - targetTop) ) + 'px'
+										  'top'  : parseFloat( topSpacing - (spyTop - targetTop) ) + 'px'
 									  } );
 
 							} else {

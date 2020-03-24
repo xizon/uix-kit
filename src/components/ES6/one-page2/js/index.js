@@ -30,7 +30,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE2               = module.ONEPAGE2 || {};
-    module.ONEPAGE2.version       = '0.0.5';
+    module.ONEPAGE2.version       = '0.0.6';
     module.ONEPAGE2.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -435,10 +435,9 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 		};
 		
 
-
-		window.addEventListener( 'wheel', onDeviceWheel, { passive: true } );
-		window.addEventListener( 'touchstart', onTouchStart, { passive: true } );
-		window.addEventListener( 'touchmove', onDeviceWheel, { passive: true } );
+		window.addEventListener( 'wheel', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchstart', onTouchStart, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchmove', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
 
 		
 		

@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 4.1.6 (March 22, 2020) =
+
+* Tweak: Optimized the performance of all modules with scroll events.
+* Tweak: Remove jquery.waypoints library.
+* Tweak: Optimized smooth scrolling of page elements.
+* Fix: AJAX request do not hide loader when the image is not accessible.
+* New: Added default style to <pre> tag to post content page.
+
 
 #### = 4.1.53 (March 14, 2020) =
 

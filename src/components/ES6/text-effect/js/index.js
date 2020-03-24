@@ -40,17 +40,13 @@ import '../scss/_style.scss';
 export const TEXT_EFFECT = ( ( module, $, window, document ) => {
 	if ( window.TEXT_EFFECT === null ) return false;
 	
-	
-	
-
     module.TEXT_EFFECT               = module.TEXT_EFFECT || {};
-    module.TEXT_EFFECT.version       = '0.0.4';
+    module.TEXT_EFFECT.version       = '0.0.5';
     module.TEXT_EFFECT.pageLoaded    = function() {
 
-		//Default Effect
-		//-------------------------------------	
+
 		$( '[data-text-eff]' ).each( function( index )  {
-			$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+			$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]', scrollSpy: true } );
 		});   
 		
     };

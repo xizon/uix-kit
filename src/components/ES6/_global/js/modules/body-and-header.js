@@ -23,7 +23,7 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 	
 	
 	module.BODY_AND_HEADER               = module.BODY_AND_HEADER || {};
-    module.BODY_AND_HEADER.version       = '0.0.4';
+    module.BODY_AND_HEADER.version       = '0.0.6';
 	module.BODY_AND_HEADER.documentReady = function( $ ) {
 
 
@@ -72,10 +72,10 @@ export const BODY_AND_HEADER = ( ( module, $, window, document ) => {
 		const $el = $( '.uix-header__container, .uix-header__placeholder' );
 		$window.on( 'scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function() {
 
-			const scrollTop = $( this ).scrollTop(),
-				  spyTop    = 220;
+			const scrolled = $( this ).scrollTop(),
+				  spyTop   = 220;
 			
-			if ( scrollTop >= spyTop ) {
+			if ( scrolled >= spyTop ) {
 				$el.addClass( 'is-fixed' );
 			} else {
 				$el.removeClass( 'is-fixed' );	

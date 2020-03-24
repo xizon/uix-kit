@@ -32,7 +32,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.8';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.2.9';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -2410,7 +2410,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 									//text effect
 									if ( $.isFunction( $.fn.UixTextEff ) ) {
 										$current.find( '[data-text-eff]' ).each( function( index )  {
-											$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]' } );
+											$( document ).UixTextEff( { selectors: '[data-text-eff="'+$( this ).data( 'text-eff' )+'"]', scrollSpy: false } );
 										});
 
 									}	

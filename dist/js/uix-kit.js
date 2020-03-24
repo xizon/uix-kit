@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.1.53
+ * ## Version             :  4.1.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 14, 2020
+ * ## Last Update         :  March 24, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "2b6166ef2d650456f159";
+/******/ 	var hotCurrentHash = "cf5032507f4327d060f7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -854,7 +854,8 @@ window.$ = window.jQuery;
 
       $this.css({
         'transition': 'none'
-      });
+      }); // Please do not use scroll's off method in each
+
       $(window).on('scroll.UixParallax touchmove.UixParallax', function (e) {
         scrollUpdate();
       }); //Initialize the position of the background
@@ -872,14 +873,13 @@ window.$ = window.jQuery;
       }
 
       function scrollUpdate() {
-        var scrolled = $(window).scrollTop(),
-            st = $this.offset().top - scrolled;
+        var spyTop = $this[0].getBoundingClientRect().top;
 
         if (bgEff) {
           //background parallax
           TweenMax.set($this, {
             css: {
-              'background-position': bgXpos + ' ' + (0 - st * speed) + 'px',
+              'background-position': bgXpos + ' ' + (0 - spyTop * speed) + 'px',
               'transition': settings.transition
             }
           });
@@ -887,7 +887,7 @@ window.$ = window.jQuery;
           //element parallax
           TweenMax.set($this, {
             css: {
-              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * speed) + ')',
+              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - spyTop * speed) + ')',
               'transition': settings.transition
             }
           });
@@ -2420,12 +2420,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   $.fn.UixTextEff = function (options) {
     // This is the easiest way to have default options.
     var settings = $.extend({
-      selectors: '.letters-eff-fadeInRight'
+      selectors: '.letters-eff-fadeInRight',
+      scrollSpy: false
     }, options);
     this.each(function () {
-      var $this = $(this);
       var customControls = settings.selectors;
-      var speed = $(customControls).data('text-eff-speed'),
+      var scrollSpy = settings.scrollSpy;
+      var $this = $(customControls);
+      var speed = $this.data('text-eff-speed'),
           txtEff;
 
       if (_typeof(speed) === ( true ? "undefined" : undefined)) {
@@ -2433,8 +2435,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       } //The data-text-eff attribute must be unique, otherwise it will not execute correctly.
 
 
-      if ($(customControls).length > 1) return false;
-      $(customControls).html($(customControls).text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>")); //--------------
+      if ($this.length > 1) return false;
+      $this.html($this.text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>")); //--------------
 
       if (customControls.indexOf('fadeInRight') >= 0) {
         txtEff = anime.timeline({
@@ -2523,6 +2525,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           opacity: [0, 1],
           scale: [3.5, 1],
           duration: speed
+        });
+      }
+
+      txtEff.pause();
+
+      if (!scrollSpy) {
+        txtEff.play();
+      } else {
+        var viewport = 1; //
+
+        var scrollUpdate = function scrollUpdate() {
+          var spyTop = $this[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
+
+          var actived = $this.data('activated');
+
+          if (spyTop < window.innerHeight * viewport) {
+            if (_typeof(actived) === ( true ? "undefined" : undefined)) {
+              txtEff.play(); //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+              $this.data('activated', 1);
+            } //endif actived
+
+          }
+        };
+
+        scrollUpdate();
+        $(window).on('scroll.UixTextEff touchmove.UixTextEff', function (event) {
+          scrollUpdate();
         });
       }
     });
@@ -2946,7 +2976,19 @@ if (typeof APP_ROOTPATH === 'undefined') {
  *
  * @private
  */
+// Add feature test for passive event listener support
 
+
+var supportsPassive = false;
+
+try {
+  document.addEventListener("test", null, {
+    get passive() {
+      supportsPassive = true;
+    }
+
+  });
+} catch (e) {}
 
 var browser = {
   isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
@@ -2955,9 +2997,10 @@ var browser = {
   isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
 
   /*Test to 9, 10. */
-  isIE: !!window.ActiveXObject || "ActiveXObject" in window
-  /*Test to 6 ~ 11 (not edge) */
+  isIE: !!window.ActiveXObject || "ActiveXObject" in window,
 
+  /*Test to 6 ~ 11 (not edge) */
+  supportsPassive: supportsPassive
 };
 /*
  * Core scripts for current site
@@ -2966,7 +3009,6 @@ var browser = {
  * @description Used for all modules from ./src/components/ES6/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
- * @requires ./examples/assets/js/min/jquery.waypoints.min.js
  * @requires ./examples/assets/js/min/TweenMax.min.js
  */
 
@@ -3513,7 +3555,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var BODY_AND_HEADER = function (module, $, window, document) {
   if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
-  module.BODY_AND_HEADER.version = '0.0.4';
+  module.BODY_AND_HEADER.version = '0.0.6';
 
   module.BODY_AND_HEADER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -3549,10 +3591,10 @@ var BODY_AND_HEADER = function (module, $, window, document) {
 
     var $el = $('.uix-header__container, .uix-header__placeholder');
     $window.on('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function () {
-      var scrollTop = $(this).scrollTop(),
+      var scrolled = $(this).scrollTop(),
           spyTop = 220;
 
-      if (scrollTop >= spyTop) {
+      if (scrolled >= spyTop) {
         $el.addClass('is-fixed');
       } else {
         $el.removeClass('is-fixed');
@@ -3997,7 +4039,7 @@ function mobile_menu_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var MOBILE_MENU = function (module, $, window, document) {
   if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
-  module.MOBILE_MENU.version = '0.0.5';
+  module.MOBILE_MENU.version = '0.0.7';
 
   module.MOBILE_MENU.documentReady = function ($) {
     var $window = $(window);
@@ -4007,10 +4049,10 @@ var MOBILE_MENU = function (module, $, window, document) {
 
     var $el = $('.admin-bar .uix-menu-mobile__toggle');
     $window.on('scroll.MOBILE_MENU touchmove.MOBILE_MENU', function () {
-      var scrollTop = $(this).scrollTop(),
+      var scrolled = $(this).scrollTop(),
           spyTop = 46;
 
-      if (scrollTop >= spyTop) {
+      if (scrolled >= spyTop) {
         $el.addClass('is-fixed');
       } else {
         $el.removeClass('is-fixed');
@@ -4148,7 +4190,7 @@ function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
 var NAVIGATION = function (module, $, window, document) {
   if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
-  module.NAVIGATION.version = '0.0.5';
+  module.NAVIGATION.version = '0.0.7';
 
   module.NAVIGATION.documentReady = function ($) {
     var $window = $(window);
@@ -4208,10 +4250,10 @@ var NAVIGATION = function (module, $, window, document) {
 
     var $el = $('.uix-menu__container:not(.is-mobile)');
     $window.on('scroll.NAVIGATION touchmove.NAVIGATION', function () {
-      var scrollTop = $(this).scrollTop(),
+      var scrolled = $(this).scrollTop(),
           spyTop = 220;
 
-      if (scrollTop >= spyTop) {
+      if (scrolled >= spyTop) {
         $el.addClass('is-fixed');
       } else {
         $el.removeClass('is-fixed');
@@ -4244,7 +4286,7 @@ function set_background_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symb
 var SET_BG = function (module, $, window, document) {
   if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
-  module.SET_BG.version = '0.0.5';
+  module.SET_BG.version = '0.0.6';
 
   module.SET_BG.documentReady = function ($) {
     var $window = $(window);
@@ -4283,6 +4325,7 @@ var SET_BG = function (module, $, window, document) {
             "repeat": "no-repeat",
             "fill": false,
             "parallax": 0,
+            "transition": "none 0s ease 0s",
             "move": false // {"dir":"left","duration":"10s","easing":"linear","loop":true}
 
           };
@@ -6073,7 +6116,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.8';
+  module.ADVANCED_SLIDER_FILTER.version = '0.2.9';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -7685,7 +7728,8 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 if ($.isFunction($.fn.UixTextEff)) {
                   $current.find('[data-text-eff]').each(function (index) {
                     $(document).UixTextEff({
-                      selectors: '[data-text-eff="' + $(this).data('text-eff') + '"]'
+                      selectors: '[data-text-eff="' + $(this).data('text-eff') + '"]',
+                      scrollSpy: false
                     });
                   });
                 } //Prevent text overlap when switching quickly
@@ -7962,7 +8006,7 @@ function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.3';
+  module.AJAX_PUSH_CONTENT.version = '0.1.6';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     // trigger of AJAX request
@@ -8079,27 +8123,8 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           action: 'load_singlepages_ajax_content'
         },
         beforeSend: function beforeSend() {
-          TweenMax.to(container.find('.ajax-content-loader'), 0.3, {
-            css: {
-              opacity: 1
-            },
-            ease: Power2.easeOut
-          });
-          container.html('<div class="ajax-content-loader">' + loading + '</div>').promise().done(function () {
-            //loading animation
-            loadingAnim(0); //loader effect from AJAX request
-
-            TweenMax.set(container.find('.ajax-content-loader'), {
-              css: {
-                'display': 'block'
-              },
-              onComplete: function onComplete() {
-                TweenMax.to(this.target, 0.5, {
-                  alpha: 1
-                });
-              }
-            });
-          });
+          //Display loader
+          showLoader(container, loading);
         }
       }).done(function (response) {
         //A function to be called if the request succeeds
@@ -8133,7 +8158,9 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         if (sources.length == 0) {
           per = 100; //loading animation
 
-          loadingAnim(per);
+          loadingAnim(per); //Remove loader
+
+          hideLoader(container, $(response).filter('title').text(), btn, response);
         }
 
         var loadImages = function loadImages() {
@@ -8213,7 +8240,15 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           var _time = (new Date().getTime() - timeStart) / 1000;
 
           if (_time >= timeLimit) {
-            console.log('Page load timeout!');
+            console.log('Page load timeout!'); //Remove loader
+
+            if (response.indexOf('<body') >= 0) {
+              window.location.href = location.href;
+            } else {
+              hideLoader(container, $(response).filter('title').text(), btn, response);
+            } // clear loader event
+
+
             clearInterval(timeClockInit);
             func();
           }
@@ -8237,6 +8272,20 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
       //If the page resource is not loaded, then the following code is not executed
       if (loadedProgress < 100) return false; //Remove loader
 
+      hideLoader(container, title, btn, content);
+    }
+    /*
+     * Remove loader
+     *
+           * @param  {Element} container - The instance returned from the request succeeds
+           * @param  {String} title      - The title of a requested page.
+     * @param  {?Element} btn      - Current trigger button.
+           * @param  {String} content    - The data returned from the server
+     * @return {Void}
+     */
+
+
+    function hideLoader(container, title, btn, content) {
       TweenMax.to(container.find('.ajax-content-loader'), 0.5, {
         alpha: 0,
         onComplete: function onComplete() {
@@ -8263,6 +8312,38 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         //Determine the direction of a jQuery scroll event
         //Fix an issue for mousewheel event is too fast.
         delay: 0.5
+      });
+    }
+    /*
+     * Display loader
+     *
+     * @param  {Element} container       - The target container to which the content will be added.
+     * @param  {String} loading         - Content of loading area.
+     * @return {Void}
+     */
+
+
+    function showLoader(container, loading) {
+      TweenMax.to(container.find('.ajax-content-loader'), 0.3, {
+        css: {
+          opacity: 1
+        },
+        ease: Power2.easeOut
+      });
+      container.html('<div class="ajax-content-loader">' + loading + '</div>').promise().done(function () {
+        //loading animation
+        loadingAnim(0); //loader effect from AJAX request
+
+        TweenMax.set(container.find('.ajax-content-loader'), {
+          css: {
+            'display': 'block'
+          },
+          onComplete: function onComplete() {
+            TweenMax.to(this.target, 0.5, {
+              alpha: 1
+            });
+          }
+        });
       });
     }
   };
@@ -8293,7 +8374,7 @@ function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.5';
+  module.AJAX_PAGE_LOADER.version = '0.1.7';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window);
@@ -8637,9 +8718,14 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             if (_time >= timeLimit) {
               console.log('Page load timeout!'); //Remove loader
 
-              var _oldContent = container.html();
+              if (response.indexOf('<body') >= 0) {
+                window.location.href = location.href;
+              } else {
+                var _oldContent = container.html();
 
-              hideLoader(container, $(response).filter('title').text(), dir, _oldContent, response); // clear loader event
+                hideLoader(container, $(response).filter('title').text(), dir, _oldContent, response);
+              } // clear loader event
+
 
               clearInterval(timeClockInit);
               func();
@@ -8820,15 +8906,15 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
       scrollMoveInit(e, dir);
     };
 
-    window.addEventListener('wheel', onDeviceWheel, {
+    window.addEventListener('wheel', onDeviceWheel, browser.supportsPassive ? {
       passive: true
-    });
-    window.addEventListener('touchstart', onTouchStart, {
+    } : false);
+    window.addEventListener('touchstart', onTouchStart, browser.supportsPassive ? {
       passive: true
-    });
-    window.addEventListener('touchmove', onDeviceWheel, {
+    } : false);
+    window.addEventListener('touchmove', onDeviceWheel, browser.supportsPassive ? {
       passive: true
-    });
+    } : false);
   };
 
   module.components.documentReady.push(module.AJAX_PAGE_LOADER.documentReady);
@@ -8854,7 +8940,7 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.5';
+  module.BACK_TO_TOP.version = '0.0.7';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window);
@@ -8866,10 +8952,10 @@ var BACK_TO_TOP = function (module, $, window, document) {
       //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
       var $el = $('#uix-to-top');
       $window.on('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function () {
-        var scrollTop = $(this).scrollTop(),
+        var scrolled = $(this).scrollTop(),
             spyTop = windowHeight / 2;
 
-        if (scrollTop >= spyTop) {
+        if (scrolled >= spyTop) {
           $el.addClass('is-active');
         } else {
           $el.removeClass('is-active');
@@ -8997,6 +9083,8 @@ var counter_scss_style = __webpack_require__(15);
 // CONCATENATED MODULE: ./src/components/ES6/counter/js/index.js
 function counter_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function counter_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { counter_js_typeof = function _typeof(obj) { return typeof obj; }; } else { counter_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return counter_js_typeof(obj); }
+
 /* 
  *************************************
  * <!-- Counter -->
@@ -9008,18 +9096,34 @@ function counter_js_classCallCheck(instance, Constructor) { if (!(instance insta
 var COUNTER = function (module, $, window, document) {
   if (window.COUNTER === null) return false;
   module.COUNTER = module.COUNTER || {};
-  module.COUNTER.version = '0.0.2';
+  module.COUNTER.version = '0.0.3';
 
   module.COUNTER.documentReady = function ($) {
-    var waypoints = $('[data-counter-number]').waypoint({
-      handler: function handler(direction) {
-        $(this.element).UixCountTo(); //Prevents front-end javascripts that are activated in the background to repeat loading.
+    var $scrollElements = $('[data-counter-number]');
+    $scrollElements.each(function () {
+      var viewport = 1;
+      var $el = $(this); //
 
-        this.disable();
-      },
-      offset: '100%' //0~100%, bottom-in-view
+      var scrollUpdate = function scrollUpdate() {
+        var spyTop = $el[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
 
-    });
+        var actived = $el.data('activated');
+
+        if (spyTop < window.innerHeight * viewport) {
+          if (counter_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+            $el.UixCountTo(); //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+            $el.data('activated', 1);
+          } //endif actived
+
+        }
+      };
+
+      scrollUpdate();
+      $(window).on('scroll.COUNTER touchmove.COUNTER', function (event) {
+        scrollUpdate();
+      });
+    }); //end each        
   };
 
   module.components.documentReady.push(module.COUNTER.documentReady);
@@ -9542,7 +9646,7 @@ function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var FLEXSLIDER = function (module, $, window, document) {
   if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
-  module.FLEXSLIDER.version = '0.1.7';
+  module.FLEXSLIDER.version = '0.1.8';
 
   module.FLEXSLIDER.documentReady = function ($) {
     var $window = $(window);
@@ -10068,9 +10172,9 @@ var FLEXSLIDER = function (module, $, window, document) {
         timer = setTimeout(function () {
           wheeling = false;
         }, 60);
-      }, {
+      }, browser.supportsPassive ? {
         passive: true
-      });
+      } : false);
     }
     /*
      * Slider With Thumbnail ControlNav Pattern
@@ -10326,7 +10430,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.2';
+  module.FLOATING_SIDE_EL.version = '0.0.3';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -10343,10 +10447,10 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
     });
     $(window).on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
       var sideBarHeight = $floatingSideEl.height(),
-          scrollTop = $(window).scrollTop();
+          scrolled = $(this).scrollTop();
 
-      if (scrollTop > floatingOffset.top) {
-        var newPosition = scrollTop - floatingOffset.top,
+      if (scrolled > floatingOffset.top) {
+        var newPosition = scrolled - floatingOffset.top,
             maxPosition = documentHeight - sideBarHeight;
 
         if (newPosition > maxPosition) {
@@ -11855,7 +11959,7 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.2';
+  module.POST_LIST_AJAX.version = '0.1.3';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -11979,12 +12083,13 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
           if (totalPage == 1) {
             $button.addClass('is-hide');
-          }
+          } // Please do not use scroll's off method in each
+
 
           $(window).on('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function () {
-            var scrolled = $(window).scrollTop();
+            var spyTop = parseFloat($button[0].getBoundingClientRect().top + $button.outerHeight(true));
 
-            if (scrolled >= parseFloat($button.offset().top - $(window).height() / 1.5 - $button.outerHeight(true)) && !$button.hasClass(triggerActive)) {
+            if (spyTop < window.innerHeight && !$button.hasClass(triggerActive)) {
               // Active this button
               $button.addClass(triggerActive);
 
@@ -12497,7 +12602,7 @@ function mousewheel_interaction_js_classCallCheck(instance, Constructor) { if (!
 var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
   if (window.MOUSEWHEEL_INTERACTION === null) return false;
   module.MOUSEWHEEL_INTERACTION = module.MOUSEWHEEL_INTERACTION || {};
-  module.MOUSEWHEEL_INTERACTION.version = '0.0.2';
+  module.MOUSEWHEEL_INTERACTION.version = '0.0.3';
 
   module.MOUSEWHEEL_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -12556,15 +12661,15 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
       scrollMoveInit(e, dir);
     };
 
-    window.addEventListener('wheel', onDeviceWheel, {
+    window.addEventListener('wheel', onDeviceWheel, browser.supportsPassive ? {
       passive: true
-    });
-    window.addEventListener('touchstart', onTouchStart, {
+    } : false);
+    window.addEventListener('touchstart', onTouchStart, browser.supportsPassive ? {
       passive: true
-    });
-    window.addEventListener('touchmove', onDeviceWheel, {
+    } : false);
+    window.addEventListener('touchmove', onDeviceWheel, browser.supportsPassive ? {
       passive: true
-    });
+    } : false);
     /*
      * Scroll initialize
      *
@@ -13418,7 +13523,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.6';
+  module.ONEPAGE.version = '0.0.7';
 
   module.ONEPAGE.documentReady = function ($) {
     var $window = $(window);
@@ -13639,21 +13744,21 @@ var ONEPAGE = function (module, $, window, document) {
     var navMinTop = $sidefixedMenu.length > 0 ? $sidefixedMenu.offset().top : 0,
         navMaxTop = parseFloat($(document).height() - $('.uix-footer__container').height()) - windowHeight / 3;
     $window.on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
-      var scrollTop = $(this).scrollTop(),
-          spyTop = parseFloat(scrollTop + topSpacing),
+      var scrolled = $(this).scrollTop(),
+          spyTop = parseFloat(scrolled + topSpacing),
           minTop = $('[data-highlight-section="true"]').first().offset().top,
           maxTop = $('[data-highlight-section="true"]').last().offset().top + $('[data-highlight-section="true"]').last().height();
       $('[data-highlight-section="true"]').each(function () {
-        var block = $(this),
-            eleTop = block.offset().top; // The 1 pixel in order to solve inaccurate value of outerHeight() 
+        var $block = $(this),
+            eleTop = $block.offset().top; // The 1 pixel in order to solve inaccurate value of outerHeight() 
         // in Safari and Firefox browsers.
 
         if (eleTop < spyTop + 1) {
           // Highlight element when related content
           getAllNavigation($primaryMenu).removeClass('is-active');
           getAllNavigation($sidefixedMenu).removeClass('is-active');
-          getRelatedNavigation(block, $primaryMenu, false).addClass('is-active');
-          getRelatedNavigation(block, $sidefixedMenu, false).addClass('is-active');
+          getRelatedNavigation($block, $primaryMenu, false).addClass('is-active');
+          getRelatedNavigation($block, $sidefixedMenu, false).addClass('is-active');
         }
       }); //Cancel the current highlight element
       // The 1 pixel in order to solve inaccurate value of outerHeight() 
@@ -13759,7 +13864,7 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
 var ONEPAGE2 = function (module, $, window, document) {
   if (window.ONEPAGE2 === null) return false;
   module.ONEPAGE2 = module.ONEPAGE2 || {};
-  module.ONEPAGE2.version = '0.0.5';
+  module.ONEPAGE2.version = '0.0.6';
 
   module.ONEPAGE2.documentReady = function ($) {
     var $window = $(window);
@@ -14073,15 +14178,15 @@ var ONEPAGE2 = function (module, $, window, document) {
       scrollMoveInit(e, dir);
     };
 
-    window.addEventListener('wheel', onDeviceWheel, {
+    window.addEventListener('wheel', onDeviceWheel, browser.supportsPassive ? {
       passive: true
-    });
-    window.addEventListener('touchstart', onTouchStart, {
+    } : false);
+    window.addEventListener('touchstart', onTouchStart, browser.supportsPassive ? {
       passive: true
-    });
-    window.addEventListener('touchmove', onDeviceWheel, {
+    } : false);
+    window.addEventListener('touchmove', onDeviceWheel, browser.supportsPassive ? {
       passive: true
-    });
+    } : false);
   };
 
   module.components.documentReady.push(module.ONEPAGE2.documentReady);
@@ -14472,41 +14577,56 @@ function progress_bar_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var PROGRESS_BAR = function (module, $, window, document) {
   if (window.PROGRESS_BAR === null) return false;
   module.PROGRESS_BAR = module.PROGRESS_BAR || {};
-  module.PROGRESS_BAR.version = '0.0.4';
+  module.PROGRESS_BAR.version = '0.0.5';
 
   module.PROGRESS_BAR.documentReady = function ($) {
-    var waypoints = $('[data-progressbar-percent]').waypoint({
-      handler: function handler(direction) {
-        var $this = $(this.element);
-        var percent = $this.data('progressbar-percent'),
-            unit = $this.data('progressbar-unit');
+    var $scrollElements = $('[data-progressbar-percent]');
+    $scrollElements.each(function () {
+      var viewport = 1;
+      var $el = $(this); //
 
-        if (progress_bar_js_typeof(percent) === ( true ? "undefined" : undefined)) {
-          percent = 0;
+      var scrollUpdate = function scrollUpdate() {
+        var spyTop = $el[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
+
+        var actived = $el.data('activated');
+
+        if (spyTop < window.innerHeight * viewport) {
+          if (progress_bar_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+            var percent = $el.data('progressbar-percent'),
+                unit = $el.data('progressbar-unit');
+
+            if (progress_bar_js_typeof(percent) === ( true ? "undefined" : undefined)) {
+              percent = 0;
+            }
+
+            if (progress_bar_js_typeof(unit) === ( true ? "undefined" : undefined)) {
+              unit = '%';
+            } //Radial Progress Bar
+
+
+            if ($el.hasClass('uix-progressbar--circle')) {
+              $el.find('.uix-progressbar__track').html('<span>' + percent + '<em class="uix-progressbar__unit">' + unit + '</em></span>');
+              $el.addClass('uix-progressbar--progress-' + percent);
+            } //Rectangle Progress Bar
+
+
+            if ($el.hasClass('uix-progressbar--rectangle')) {
+              $el.find('.uix-progressbar__bar > span').html('' + percent + '<em class="uix-progressbar__unit">' + unit + '</em>');
+              $el.addClass('uix-progressbar--progress-' + percent);
+            } //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+
+            $el.data('activated', 1);
+          } //endif actived
+
         }
+      };
 
-        if (progress_bar_js_typeof(unit) === ( true ? "undefined" : undefined)) {
-          unit = '%';
-        } //Radial Progress Bar
-
-
-        if ($this.hasClass('uix-progressbar--circle')) {
-          $this.find('.uix-progressbar__track').html('<span>' + percent + '<em class="uix-progressbar__unit">' + unit + '</em></span>');
-          $this.addClass('uix-progressbar--progress-' + percent);
-        } //Rectangle Progress Bar
-
-
-        if ($this.hasClass('uix-progressbar--rectangle')) {
-          $this.find('.uix-progressbar__bar > span').html('' + percent + '<em class="uix-progressbar__unit">' + unit + '</em>');
-          $this.addClass('uix-progressbar--progress-' + percent);
-        } //Prevents front-end javascripts that are activated in the background to repeat loading.
-
-
-        this.disable();
-      },
-      offset: '100%' //0~100%, bottom-in-view
-
-    });
+      scrollUpdate();
+      $(window).on('scroll.PROGRESS_BAR touchmove.PROGRESS_BAR', function (event) {
+        scrollUpdate();
+      });
+    }); //end each        
   };
 
   module.components.documentReady.push(module.PROGRESS_BAR.documentReady);
@@ -14532,7 +14652,7 @@ function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance
 var PROGRESS_LINE = function (module, $, window, document) {
   if (window.PROGRESS_LINE === null) return false;
   module.PROGRESS_LINE = module.PROGRESS_LINE || {};
-  module.PROGRESS_LINE.version = '0.0.2';
+  module.PROGRESS_LINE.version = '0.0.3';
 
   module.PROGRESS_LINE.documentReady = function ($) {
     var $obj = $('.uix-progress-line'),
@@ -14548,17 +14668,9 @@ var PROGRESS_LINE = function (module, $, window, document) {
           clearInterval(progressLineAnimGo);
         }
       }, 50);
-    };
+    }; //
 
-    var waypoints = $('.uix-progress-line').waypoint({
-      handler: function handler(direction) {
-        progressLineRestore(); //Prevents front-end javascripts that are activated in the background to repeat loading.
 
-        this.disable();
-      },
-      offset: '100%' //0~100%, bottom-in-view
-
-    });
     $progressLineCircle.on('mouseenter', function () {
       var curIndex = $(this).index() / 2;
       $progressLineCircle.removeClass('is-active');
@@ -14712,14 +14824,19 @@ function scroll_reveal_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
 var SCROLL_REVEAL = function (module, $, window, document) {
   if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
-  module.SCROLL_REVEAL.version = '0.1.2';
+  module.SCROLL_REVEAL.version = '0.1.3';
 
   module.SCROLL_REVEAL.documentReady = function ($) {
-    var viewport; //From JSON config in data attribute in HTML
+    //From JSON config in data attribute in HTML
+    var $scrollElements = $('[data-uix-anim]');
+    $scrollElements.each(function () {
+      var viewport;
+      var $el = $(this);
+      var tl = new TimelineMax({
+        paused: true
+      }); //
 
-    var $scrollRevealElements = $('[data-uix-anim]'),
-        tmAnim = function tmAnim(obj, type) {
-      var config = obj.data('uix-anim');
+      var config = $el.data('uix-anim');
 
       if (scroll_reveal_js_typeof(config) === ( true ? "undefined" : undefined) || config == '' || config === false) {
         config = {
@@ -14753,83 +14870,70 @@ var SCROLL_REVEAL = function (module, $, window, document) {
       if (scroll_reveal_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
       if (scroll_reveal_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
       if (scroll_reveal_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
-      if (scroll_reveal_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Return a value
+      if (scroll_reveal_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Conversion between percentage and decimal
 
-      if (type == 'viewport') return viewport;
-      if (type == 'delay') return myDelay;
-      if (type == 'loop') return infinite ? 1 : 0;
+      viewport = parseFloat(viewport) / 100.0; //Make it go back and forth
 
-      if (Object.prototype.toString.call(fromCSS) == '[object String]') {
-        //Add class when element becomes visible
+      var reverse = infinite ? 1 : 0; //Set the initial state of the element
+
+      TweenMax.set($el, {
+        css: fromCSS
+      }); //
+
+      var fromIsString = Object.prototype.toString.call(fromCSS) == '[object String]' ? true : false;
+
+      if (fromIsString) {
         toCSS = toCSS.replace(/\./, '');
-        if (type == 'from') obj.removeClass(toCSS);
-        if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
-
-        if (type == 'to') {
-          setTimeout(function () {
-            obj.addClass(toCSS);
-          }, myDelay * 1000);
-        }
       } else {
-        //Using TweenMax to create animations
-        if (type == 'from') {
-          TweenMax.set(obj, {
-            css: fromCSS
-          });
-        }
-
-        if (type == 'from-anim') {
-          TweenMax.to(obj, myDuration, {
-            css: fromCSS
-          });
-        } //Target animation
+        tl.to($el, myDuration, {
+          css: toCSS,
+          ease: myEase,
+          delay: myDelay
+        });
+        $el[0].animation = tl;
+      } //
 
 
-        if (type == 'to') {
-          TweenMax.to(obj, myDuration, {
-            css: toCSS,
-            ease: myEase,
-            delay: myDelay
-          });
-        }
-      }
-    };
+      var scrollUpdate = function scrollUpdate() {
+        var spyTop = $el[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
 
-    $scrollRevealElements.each(function () {
-      //Prevent asynchronous loading of repeated calls
-      var actived = $(this).data('activated');
+        var actived = $el.data('activated');
 
-      if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined)) {
-        tmAnim($(this), 'from');
-      }
-    }); //Prevent the location of page elements from being loaded incorrectly
-    //Invoking a jQuery function after .each() has completed
-
-    setTimeout(function () {
-      var waypoints = $scrollRevealElements.waypoint({
-        handler: function handler(direction) {
-          //Prevent asynchronous loading of repeated calls
-          var actived = $(this.element).data('activated'),
-              tmLoop = tmAnim($(this.element), 'loop');
-
-          if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined) && tmLoop != 1) {
-            //$( this.element ).toggleClass( 'animated fadeInUp', direction === 'down' );
-            tmAnim($(this.element), 'to');
-            $(this.element).data('activated', 1);
-          }
-
-          if (tmLoop === 1) {
-            if (direction === 'up') {
-              tmAnim($(this.element), 'from-anim');
+        if (spyTop < window.innerHeight * viewport) {
+          if (scroll_reveal_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+            if (fromIsString) {
+              //Add class when element becomes visible
+              $el.delay(myDelay * 1000).queue('fx', function () {
+                $(this).addClass(toCSS).dequeue();
+              });
             } else {
-              tmAnim($(this.element), 'to');
-            }
-          }
-        },
-        offset: viewport //0~100%, bottom-in-view
+              $el[0].animation.play();
+            } //Prevents front-end javascripts that are activated in the background to repeat loading.
 
+
+            $el.data('activated', 1);
+          } //endif actived
+
+        } else {
+          if (scroll_reveal_js_typeof(actived) !== ( true ? "undefined" : undefined) && reverse === 1) {
+            if (fromIsString) {
+              //Add class when element becomes visible
+              $el.removeClass(toCSS);
+            } else {
+              $el[0].animation.reverse();
+            }
+
+            $el.removeData('activated');
+          } //endif actived
+
+        }
+      };
+
+      scrollUpdate();
+      $(window).on('scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function (event) {
+        scrollUpdate();
       });
-    }, 500);
+    }); //end each        
   };
 
   module.components.documentReady.push(module.SCROLL_REVEAL.documentReady);
@@ -14858,7 +14962,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.4';
+  module.SCROLLSPY_ANIM.version = '0.0.5';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -14932,24 +15036,26 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
     $window.on('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function (event) {
       var elHeight = $el.height(),
           elOffsetTop = $el.offset().top - panelHeight;
-      var scrollTop = $(this).scrollTop(),
-          translateTitle = scrollTop / 2,
-          translateBackground = scrollTop / 3,
-          scale = scrollTop / elHeight,
+      var scrolled = $(this).scrollTop(),
+          translateTitle = scrolled / 2,
+          translateBackground = scrolled / 3,
+          scale = scrolled / elHeight,
           backgroundScale = 1,
           // + scale / 10
       titleScale = 1 - scale * 0.1,
           titleOpacity = 1 - scale,
-          scrollProgress = (scrollTop - elOffsetTop) / (elHeight - windowHeight / 6); //-------- Animation
+          scrollProgress = (scrolled - elOffsetTop) / (elHeight - windowHeight / 6); //-------- Animation
 
-      if (scrollTop < elHeight) {
+      var spyTop = $el[0].getBoundingClientRect().top;
+
+      if (spyTop < window.innerHeight) {
         $el.find('.row').css({
           'transition': 'none',
           'transform': 'translateY(' + translateTitle + 'px) scale(' + titleScale + ')',
           'opacity': titleOpacity
         });
         $('body').removeClass('js-uix-content-part').removeClass('js-uix-bottom-part');
-      } else if (scrollTop >= elHeight) {
+      } else {
         $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
       } //-------- Display progress
 
@@ -15089,7 +15195,7 @@ function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) {
 var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_ANCHORLINK === null) return false;
   module.SMOOTH_SCROLLING_ANCHORLINK = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.6';
+  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.7';
 
   module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -15129,7 +15235,9 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
           ease: Power2.easeOut,
           onComplete: function onComplete() {
             //Fixed an error that offset().top returns wrong value
-            if (parseFloat($target.offset().top - $(window).scrollTop()) < 50) {
+            var spyTop = $target[0].getBoundingClientRect().top;
+
+            if (spyTop < 0 || spyTop > 30) {
               $('a[href*="#' + curndex[1] + '"]').trigger('click');
             }
           }
@@ -15185,8 +15293,6 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/smooth-scrolling-page/js/index.js
 function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function smooth_scrolling_page_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { smooth_scrolling_page_js_typeof = function _typeof(obj) { return typeof obj; }; } else { smooth_scrolling_page_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return smooth_scrolling_page_js_typeof(obj); }
-
 /* 
  *************************************
  * <!-- Smooth Scrolling Page -->
@@ -15196,7 +15302,7 @@ function smooth_scrolling_page_js_typeof(obj) { "@babel/helpers - typeof"; if (t
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.7';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.8';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -15229,7 +15335,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       $(scroller.target).wrap('<div id="uix-scrollspy-area__wrapper" style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>').css('margin-top', elTop + 'px');
     }
 
-    $(window).off('resize.SMOOTH_SCROLLING_PAGE').on('resize.SMOOTH_SCROLLING_PAGE', function () {
+    $(window).on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -15238,20 +15344,20 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
         scroller.resizeRequest++;
 
         if (!requestId) {
-          requestId = requestAnimationFrame(updateScroller);
+          requestId = requestAnimationFrame(scrollUpdate);
         }
       }
     });
-    $(window).off('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE').on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
+    $(window).on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
       scroller.scrollRequest++;
 
       if (!requestId) {
-        requestId = requestAnimationFrame(updateScroller);
+        requestId = requestAnimationFrame(scrollUpdate);
       }
     });
-    updateScroller();
+    scrollUpdate();
 
-    function updateScroller() {
+    function scrollUpdate() {
       var resized = scroller.resizeRequest > 0;
 
       if (resized) {
@@ -15275,11 +15381,11 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
           //your code here...
         }
       });
-      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
+      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(scrollUpdate) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
       // Custom Functions
       //+++++++++++++++++++++++++++++++++++++++++++++++++
 
-      var scrollTop = scroller.y,
+      var scrolled = scroller.y,
           topSpacing = window.innerWidth <= 768 ? 0 : $('.uix-header__container').outerHeight(true); //with margin 
       //----------------------------------------------------------------------------------
       //--------------------------------- Scrollspy Animate -------------------------------	
@@ -15290,357 +15396,19 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       if ($targetEl.length > 0) {
         var elHeight = $targetEl.height(),
             elOffsetTop = $targetEl.offset().top - topSpacing;
-        var scale = scrollTop / elHeight,
+        var scale = scrolled / elHeight,
             elScale = 1 - scale * 0.1,
             elOpacity = 1 - scale,
-            scrollProgress = (scrollTop - elOffsetTop) / (elHeight - windowHeight / 6); //
-
-        if (scrollTop < elHeight) {
-          $('body').removeClass('js-uix-content-part').removeClass('js-uix-bottom-part');
-        } else if (scrollTop >= elHeight) {
-          $('body').addClass('js-uix-content-part').removeClass('js-uix-bottom-part');
-        } //
+            scrollProgress = (scrolled - elOffsetTop) / (elHeight - windowHeight / 6); // Transparency changes when scrolling
         //-------------------------------------	
 
-
-        console.log('scrollProgress: ' + scrollProgress); // Transparency changes when scrolling
-        //-------------------------------------	
-
-        TweenMax.set('#app-demo-element1', {
-          alpha: elOpacity
-        }); // Triggered when scrolling to an element position
-        //-------------------------------------	
-
-        if ($('#app-demo-element2').length > 0) {
-          if (parseFloat(scrollTop + windowHeight) > $('#app-demo-element2').offset().top) {
-            var elStart = parseInt($('#app-btn1').offset().top - scrollTop - windowHeight),
-                // > 0
-            elProgress = Math.abs(elStart / windowHeight);
-            TweenMax.set('#app-demo-element2', {
-              x: elProgress * 150
-            });
-          }
-        } // endif $( '#app-demo-element2' ).length
-
+        console.log('scrolled: ' + scrolled + ' | scrollProgress: ' + scrollProgress + ' | elOpacity: ' + elOpacity + ' | elScale: ' + elScale);
       } //endif $targetEl
-      //----------------------------------------------------------------------------------
-      //--------------------------------- Scroll Reveal  -------------------------------	
-      //----------------------------------------------------------------------------------  
-
-      /*
-       * Usage: <div class="...  uix-el--transparent" data-scrollspy-anim='{"viewport":"90%","from":{"opacity":0,"y":150},"to":{"opacity":1,"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.6,"infinite":false}'>
-      */
-
-
-      var $scrollRevealElements = $('[data-scrollspy-anim]');
-
-      var tmAnim = function tmAnim(obj, type) {
-        var config = obj.data('scrollspy-anim');
-
-        if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined) || config == '' || config === false) {
-          config = {
-            "from": {
-              "opacity": 0,
-              "x": 70
-            },
-            "to": {
-              "opacity": 1,
-              "x": 0
-            },
-            "ease": "Power2.easeOut",
-            "duration": 0.8,
-            "delay": 0,
-            "infinite": false,
-            "viewport": '90%' //A percentage of the viewport's height.
-
-          };
-        } //get attributes to tweenMax
-
-
-        var fromCSS = config.from,
-            toCSS = config.to,
-            myEase = config.ease,
-            myDuration = config.duration,
-            myDelay = config.delay,
-            infinite = config.infinite; //A percentage of the viewport's height.
-
-        var viewport = config.viewport;
-        if (smooth_scrolling_page_js_typeof(viewport) === ( true ? "undefined" : undefined)) viewport = '90%';
-        if (smooth_scrolling_page_js_typeof(myEase) === ( true ? "undefined" : undefined)) myEase = 'Power2.easeOut';
-        if (smooth_scrolling_page_js_typeof(myDelay) === ( true ? "undefined" : undefined)) myDelay = 0;
-        if (smooth_scrolling_page_js_typeof(myDuration) === ( true ? "undefined" : undefined)) myDuration = 0.4;
-        if (smooth_scrolling_page_js_typeof(infinite) === ( true ? "undefined" : undefined)) infinite = false; //Conversion between percentage and decimal
-
-        viewport = parseFloat(viewport) / 100.0; //Return a value
-
-        if (type == 'viewport') return viewport;
-        if (type == 'delay') return myDelay;
-        if (type == 'loop') return infinite ? 1 : 0;
-
-        if (Object.prototype.toString.call(fromCSS) == '[object String]') {
-          //Add class when element becomes visible
-          toCSS = toCSS.replace(/\./, '');
-          if (type == 'from') obj.removeClass(toCSS);
-          if (type == 'from-anim') obj.removeClass(toCSS); //Target animation
-
-          if (type == 'to') {
-            setTimeout(function () {
-              obj.addClass(toCSS);
-            }, myDelay * 1000);
-          }
-        } else {
-          //Using TweenMax to create animations
-          if (type == 'from') {
-            TweenMax.set(obj, {
-              css: fromCSS
-            });
-          }
-
-          if (type == 'from-anim') {
-            TweenMax.to(obj, myDuration, {
-              css: fromCSS
-            });
-          } //Target animation
-
-
-          if (type == 'to') {
-            TweenMax.to(obj, myDuration, {
-              css: toCSS,
-              ease: myEase,
-              delay: myDelay
-            });
-          }
-        }
-      }; //end function tmAnim()
-
-
-      $scrollRevealElements.each(function () {
-        var $el = $(this),
-            viewport = tmAnim($el, 'viewport'); //Prevent asynchronous loading of repeated calls
-
-        var actived = $el.data('activated'),
-            tmLoop = tmAnim($el, 'loop');
-
-        if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
-          tmAnim($el, 'from');
-        }
-
-        if (parseFloat(scrollTop + topSpacing) > parseFloat($el.offset().top - window.innerHeight * viewport)) {
-          if (smooth_scrolling_page_js_typeof(actived) === ( true ? "undefined" : undefined)) {
-            tmAnim($el, 'to');
-            $el.data('activated', 1); //text effect
-            //------------------
-
-            if ($.isFunction($.fn.UixTextEff)) {
-              var _ids = $el.data('texteff-ids');
-
-              if (smooth_scrolling_page_js_typeof(_ids) !== ( true ? "undefined" : undefined)) {
-                _ids.forEach(function (element) {
-                  $(document).UixTextEff({
-                    selectors: '[data-text-eff="' + element + '"]'
-                  });
-                });
-              }
-            } //endif $.fn.UixTextEff
-            //
-            //Counter
-
-
-            if ($.isFunction($.fn.UixCountTo)) {
-              var _counterIds = $el.data('counter-ids');
-
-              if (smooth_scrolling_page_js_typeof(_counterIds) !== ( true ? "undefined" : undefined)) {
-                _counterIds.forEach(function (element) {
-                  $(element).each(function () {
-                    $(this).UixCountTo();
-                  });
-                });
-              }
-            } //endif $.fn.UixCountTo
-            //
-            //Image transition
-
-
-            var _imgIds = $el.data('img-ids');
-
-            if (smooth_scrolling_page_js_typeof(_imgIds) !== ( true ? "undefined" : undefined)) {
-              _imgIds.forEach(function (element) {
-                $(element).each(function (index) {
-                  $(this).delay(120 * index).queue('fx', function () {
-                    $(this).addClass('is-active');
-                  });
-                });
-              });
-            } //
-            //other effect
-            //------------------
-
-          } //endif actived
-
-        } else {
-          if (smooth_scrolling_page_js_typeof(actived) !== ( true ? "undefined" : undefined) && tmLoop === 1) {
-            tmAnim($el, 'from-anim');
-            $el.removeData('activated');
-          } //endif actived
-
-        }
-      }); //end each
-      //----------------------------------------------------------------------------------
-      //----------------------- Specify a background image -------------------------------	
-      //----------------------------------------------------------------------------------          
-
-      /*
-       * Usage: <div class="..." data-scrollspy-bg='{"src":"assets/images/demo.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0}'>
-      */
-
-      $('[data-scrollspy-bg]').each(function () {
-        var $this = $(this);
-        var config = $this.data('scrollspy-bg');
-
-        if (smooth_scrolling_page_js_typeof(config) === ( true ? "undefined" : undefined)) {
-          config = {
-            "src": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-            "position": "top left",
-            "size": "cover",
-            "repeat": "no-repeat",
-            "fill": false,
-            "parallax": 0
-          };
-        }
-
-        if (config) {
-          var dataImg = config.src,
-              dataPos = config.position,
-              dataSize = config.size,
-              dataRepeat = config.repeat,
-              dataEasing = config.transition,
-              dataParallax = config.parallax;
-          if (smooth_scrolling_page_js_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
-          if (smooth_scrolling_page_js_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
-          if (smooth_scrolling_page_js_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
-          if (smooth_scrolling_page_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s'; //Using parallax
-
-          if (dataParallax && smooth_scrolling_page_js_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
-            dataPos = dataPos.replace('top', '50%');
-          }
-
-          if (smooth_scrolling_page_js_typeof(dataImg) != ( true ? "undefined" : undefined) && dataImg != '') {
-            if (config.fill) {
-              //Show Image Under Text
-              if (Modernizr.cssanimations) {
-                $this.css({
-                  'background': 'url(' + dataImg + ') ' + dataRepeat + '',
-                  'background-size': dataSize,
-                  '-webkit-background-clip': 'text',
-                  '-webkit-text-fill-color': 'transparent'
-                });
-              }
-            } else {
-              $this.css({
-                'background-image': 'url(' + dataImg + ')',
-                'background-position': dataPos,
-                'background-size': dataSize,
-                'background-repeat': dataRepeat
-              });
-            } //Using parallax
-
-
-            if (dataParallax && smooth_scrolling_page_js_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
-              var bgEff = {
-                enable: true,
-                xPos: '50%'
-              },
-                  bgXpos = '50%',
-                  speed = -parseFloat(dataParallax); //Prohibit transition delay
-
-              $this.css({
-                'transition': 'none'
-              }); //Initialize the position of the background
-
-              if (bgEff) {
-                //background parallax
-                TweenMax.set($this, {
-                  backgroundPosition: bgXpos + ' ' + -$this.offset().top * speed + 'px'
-                });
-              } else {
-                //element parallax
-                TweenMax.set($this, {
-                  y: 0
-                });
-              } //endif bgEff
-
-
-              var scrolled = scrollTop,
-                  st = $this.offset().top - scrolled;
-
-              if (bgEff) {
-                //background parallax
-                TweenMax.set($this, {
-                  css: {
-                    'background-position': bgXpos + ' ' + (0 - st * speed) + 'px',
-                    'transition': dataEasing
-                  }
-                });
-              } else {
-                //element parallax
-                TweenMax.set($this, {
-                  css: {
-                    'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * speed) + ')',
-                    'transition': dataEasing
-                  }
-                });
-              } //endif bgEff
-
-            } //endif dataParallax
-
-          }
-        }
-      }); //end each 
-      //----------------------------------------------------------------------------------
-      //--------------------------------- Parallax --------------------------------------
-      //----------------------------------------------------------------------------------    
-
-      /*
-       * Usage: <div class="..." data-scrollspy-parallax='{"transition":"none 0s ease 0s","speed":0.2}'>
-      */
-
-      /* Pure parallax scrolling effect without other embedded HTML elements */
-
-      $('[data-scrollspy-parallax]').each(function () {
-        var $this = $(this);
-        var dataSpeed = $this.data('scrollspy-parallax').speed,
-            dataEasing = $this.data('scrollspy-parallax').transition;
-
-        if (smooth_scrolling_page_js_typeof(dataSpeed) === ( true ? "undefined" : undefined)) {
-          dataSpeed = 0;
-        }
-
-        if (smooth_scrolling_page_js_typeof(dataEasing) === ( true ? "undefined" : undefined)) {
-          dataEasing = 'none 0s ease 0s';
-        } //Prohibit transition delay
-
-
-        $this.css({
-          'transition': 'none'
-        }); //Initialize the position of the background
-        //element parallax
-
-        TweenMax.set($this, {
-          y: 0
-        });
-        var scrolled = scrollTop; //element parallax
-
-        TweenMax.set($this, {
-          css: {
-            'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - scrolled * dataSpeed) + ')',
-            'transition': dataEasing
-          }
-        });
-      }); //end each   
       //----------------------------------------------------------------------------------
       //---------------------------------------------------------------------------------	
       //----------------------------------------------------------------------------------  
-    } //end updateScroller()
+
+    } //end scrollUpdate()
 
   };
 
@@ -15669,7 +15437,7 @@ function sticky_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var STICKY_EL = function (module, $, window, document) {
   if (window.STICKY_EL === null) return false;
   module.STICKY_EL = module.STICKY_EL || {};
-  module.STICKY_EL.version = '0.0.5';
+  module.STICKY_EL.version = '0.0.6';
 
   module.STICKY_EL.pageLoaded = function () {
     var $window = $(window);
@@ -15716,8 +15484,6 @@ var STICKY_EL = function (module, $, window, document) {
      */
 
     function stickyInit(w, h) {
-      $window.off('scroll.STICKY_EL touchmove.STICKY_EL');
-
       if (w > 768) {
         $('.js-uix-sticky-el').each(function () {
           var $el = $(this),
@@ -15727,10 +15493,10 @@ var STICKY_EL = function (module, $, window, document) {
               $ph = $('[data-sticky-id="' + clsID + '"].is-placeholder'); //spy the scroll event
 
           $window.on('scroll.STICKY_EL touchmove.STICKY_EL', function () {
-            var scrollTop = $window.scrollTop(),
-                dynamicTop = parseFloat(scrollTop + window.innerHeight); //------
+            var scrolled = $(this).scrollTop(),
+                spyTop = parseFloat(scrolled + window.innerHeight); //------
 
-            if (parseFloat(scrollTop + topSpacing) > elTop) {
+            if (parseFloat(scrolled + topSpacing) > elTop) {
               $el.addClass('is-active').css({
                 'width': oWidth + 'px',
                 'top': topSpacing + 'px'
@@ -15748,9 +15514,9 @@ var STICKY_EL = function (module, $, window, document) {
               var diff = sticky_elements_js_typeof($el.data('stop-trigger-diff')) != ( true ? "undefined" : undefined) && $el.data('stop-trigger-diff').length > 0 ? UixMath.evaluate($el.data('stop-trigger-diff').replace(/\s/g, '').replace(/\%\h/g, windowHeight).replace(/\%\w/g, windowWidth)) : 0,
                   targetTop = $($el.data('stop-trigger')).offset().top - diff; //Detecting when user scrolls to bottom of div
 
-              if (dynamicTop >= targetTop) {
+              if (spyTop >= targetTop) {
                 $el.css({
-                  'top': parseFloat(topSpacing - (dynamicTop - targetTop)) + 'px'
+                  'top': parseFloat(topSpacing - (spyTop - targetTop)) + 'px'
                 });
               } else {
                 if ($el.length > 0 && $el.position().top < topSpacing) {
@@ -17946,7 +17712,7 @@ var THREE_PARTICLE = function (module, $, window, document) {
         scene.add(sceneForSpotLight); //console.log( sceneForSpotLight );
 
         /*
-        var spotLightHelper = new THREE.SpotLightHelper( sceneForSpotLight );
+        const spotLightHelper = new THREE.SpotLightHelper( sceneForSpotLight );
         scene.add( spotLightHelper );   
         */
         // Ambient Light
@@ -18202,7 +17968,7 @@ var THREE_PARTICLE = function (module, $, window, document) {
        */
 
       /* @usage: 
-         var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+         const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
         */
 
 
@@ -19114,7 +18880,7 @@ function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) {
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
-  module.THREE_MOUSE_INTERACTION2.version = '0.0.3';
+  module.THREE_MOUSE_INTERACTION2.version = '0.0.4';
 
   module.THREE_MOUSE_INTERACTION2.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -19378,9 +19144,12 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
           this.domElem = domEl;
           this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
           this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
-          this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, false);
-          this.domElem.addEventListener('DOMMouseScroll', this.onDocumentMousewheel, false);
-          this.domElem.addEventListener('mousewheel', this.onDocumentMousewheel, false);
+          this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, browser.supportsPassive ? {
+            passive: true
+          } : false);
+          this.domElem.addEventListener('wheel', this.onDocumentMousewheel, browser.supportsPassive ? {
+            passive: true
+          } : false);
         };
 
         this.onDocumentMouseDown = function (event) {
@@ -20959,7 +20728,7 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { "@babel/helpers - ty
 var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
   module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.0.9';
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.1.1';
 
   module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -21402,7 +21171,9 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
 
         window.addEventListener('resize', onWindowResize, false); // Scrolling interaction with 3D scenes
 
-        window.addEventListener('wheel', onMouseWheel, false);
+        window.addEventListener('wheel', onMouseWheel, browser.supportsPassive ? {
+          passive: true
+        } : false);
       }
 
       function render() {
@@ -22462,14 +22233,13 @@ function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance i
 var TEXT_EFFECT = function (module, $, window, document) {
   if (window.TEXT_EFFECT === null) return false;
   module.TEXT_EFFECT = module.TEXT_EFFECT || {};
-  module.TEXT_EFFECT.version = '0.0.4';
+  module.TEXT_EFFECT.version = '0.0.5';
 
   module.TEXT_EFFECT.pageLoaded = function () {
-    //Default Effect
-    //-------------------------------------	
     $('[data-text-eff]').each(function (index) {
       $(document).UixTextEff({
-        selectors: '[data-text-eff="' + $(this).data('text-eff') + '"]'
+        selectors: '[data-text-eff="' + $(this).data('text-eff') + '"]',
+        scrollSpy: true
       });
     });
   };
@@ -22663,7 +22433,7 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 var VERTICAL_MENU = function (module, $, window, document) {
   if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
-  module.VERTICAL_MENU.version = '0.0.2';
+  module.VERTICAL_MENU.version = '0.0.3';
 
   module.VERTICAL_MENU.documentReady = function ($) {
     var $window = $(window);
@@ -22757,7 +22527,7 @@ var VERTICAL_MENU = function (module, $, window, document) {
       });
       $window.on('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function () {
         var curULHeight = $('ul.uix-menu').height(),
-            windowPos = $window.scrollTop();
+            scrolled = $(this).scrollTop();
 
         if (curULHeight > winHeight) {
           $menuWrap.css({
@@ -22765,7 +22535,7 @@ var VERTICAL_MENU = function (module, $, window, document) {
             height: curULHeight + 'px'
           });
 
-          if (windowPos >= curULHeight - winHeight) {
+          if (scrolled >= curULHeight - winHeight) {
             $menuWrap.css({
               position: 'fixed',
               marginTop: -(curULHeight - winHeight) + 'px'

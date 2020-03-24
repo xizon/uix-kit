@@ -29,7 +29,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION2               = module.THREE_MOUSE_INTERACTION2 || {};
-    module.THREE_MOUSE_INTERACTION2.version       = '0.0.3';
+    module.THREE_MOUSE_INTERACTION2.version       = '0.0.4';
     module.THREE_MOUSE_INTERACTION2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -359,6 +359,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 
 
+            
 			/*
 			 * CameraSroller
 			 * Scrolls the camera vertically (up/down) by mouse, scrollwhell and touch
@@ -375,9 +376,8 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 					this.domElem = domEl;
 					this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
 					this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
-					this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, false);
-					this.domElem.addEventListener('DOMMouseScroll', this.onDocumentMousewheel, false);
-					this.domElem.addEventListener('mousewheel', this.onDocumentMousewheel, false);
+					this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, browser.supportsPassive ? { passive: true } : false);
+					this.domElem.addEventListener('wheel', this.onDocumentMousewheel, browser.supportsPassive ? { passive: true } : false);
 				};
 				this.onDocumentMouseDown = function(event) {
 					event.preventDefault();

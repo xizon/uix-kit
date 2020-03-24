@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 	
 	
     module.SMOOTH_SCROLLING_ANCHORLINK               = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.6';
+    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.7';
     module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -80,8 +80,8 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 
 
 						//Fixed an error that offset().top returns wrong value
-						if ( parseFloat( $target.offset().top - $( window ).scrollTop() ) < 50 ) {
-
+                        const spyTop = $target[0].getBoundingClientRect().top;
+                        if ( spyTop < 0 || spyTop > 30 ) {
 							$( 'a[href*="#' + curndex[1] +'"]' ).trigger( 'click' );	
 
 						}

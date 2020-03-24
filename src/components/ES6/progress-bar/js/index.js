@@ -24,48 +24,79 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
 	
 	
     module.PROGRESS_BAR               = module.PROGRESS_BAR || {};
-    module.PROGRESS_BAR.version       = '0.0.4';
+    module.PROGRESS_BAR.version       = '0.0.5';
     module.PROGRESS_BAR.documentReady = function( $ ) {
 
-		const waypoints = $( '[data-progressbar-percent]' ).waypoint({
-			handler: function( direction ) {
+		
+		const $scrollElements = $( '[data-progressbar-percent]' );
+       
+        $scrollElements.each( function()  {
 
-				const $this        = $( this.element );
+            
+            const viewport = 1;
+            const $el = $( this );
+           
+
+            //
+            const scrollUpdate = function() {
                 
-				let	percent      = $this.data( 'progressbar-percent' ),
-					unit         = $this.data( 'progressbar-unit' );
-
-				if ( typeof percent === typeof undefined ) {
-					percent = 0;
-				}
-
-				if ( typeof unit === typeof undefined ) {
-					unit = '%';
-				}	
+                const spyTop = $el[0].getBoundingClientRect().top;
+                
+                //Prevent asynchronous loading of repeated calls
+                const actived = $el.data( 'activated' );
 
 
-				//Radial Progress Bar
-				if ( $this.hasClass( 'uix-progressbar--circle' ) ) {
-					$this.find( '.uix-progressbar__track' ).html( '<span>'+percent+'<em class="uix-progressbar__unit">'+unit+'</em></span>' );
-					$this.addClass( 'uix-progressbar--progress-' + percent );	
-				} 
+                if ( spyTop < ( window.innerHeight * viewport ) ) {
+
+                    if( typeof actived === typeof undefined ) {
+
+                        let	percent      = $el.data( 'progressbar-percent' ),
+                            unit         = $el.data( 'progressbar-unit' );
+
+                        if ( typeof percent === typeof undefined ) {
+                            percent = 0;
+                        }
+
+                        if ( typeof unit === typeof undefined ) {
+                            unit = '%';
+                        }	
 
 
-				//Rectangle Progress Bar
-				if ( $this.hasClass( 'uix-progressbar--rectangle' ) ) {
-					$this.find( '.uix-progressbar__bar > span' ).html( ''+percent+'<em class="uix-progressbar__unit">'+unit+'</em>' );
-					$this.addClass( 'uix-progressbar--progress-' + percent );	
-				} 
-
-				//Prevents front-end javascripts that are activated in the background to repeat loading.
-				this.disable();
+                        //Radial Progress Bar
+                        if ( $el.hasClass( 'uix-progressbar--circle' ) ) {
+                            $el.find( '.uix-progressbar__track' ).html( '<span>'+percent+'<em class="uix-progressbar__unit">'+unit+'</em></span>' );
+                            $el.addClass( 'uix-progressbar--progress-' + percent );	
+                        } 
 
 
+                        //Rectangle Progress Bar
+                        if ( $el.hasClass( 'uix-progressbar--rectangle' ) ) {
+                            $el.find( '.uix-progressbar__bar > span' ).html( ''+percent+'<em class="uix-progressbar__unit">'+unit+'</em>' );
+                            $el.addClass( 'uix-progressbar--progress-' + percent );	
+                        } 
+                        
+                        
+                        //Prevents front-end javascripts that are activated in the background to repeat loading.
+                        $el.data( 'activated', 1 );
 
-			},
-			offset: '100%' //0~100%, bottom-in-view
-		});
 
+
+                    }//endif actived
+
+
+                }
+            };
+            
+            
+            scrollUpdate();
+            $( window ).on( 'scroll.PROGRESS_BAR touchmove.PROGRESS_BAR', function( event ) {
+                 scrollUpdate();
+            });
+
+
+
+        });//end each        
+		
 		
     };
 

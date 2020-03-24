@@ -25,21 +25,56 @@ export const COUNTER = ( ( module, $, window, document ) => {
 	
 	
     module.COUNTER               = module.COUNTER || {};
-    module.COUNTER.version       = '0.0.2';
+    module.COUNTER.version       = '0.0.3';
     module.COUNTER.documentReady = function( $ ) {
 
-		const waypoints = $( '[data-counter-number]' ).waypoint({
-			handler: function( direction ) {
+		
+		const $scrollElements = $( '[data-counter-number]' );
+      
+        $scrollElements.each( function()  {
 
-				$( this.element ).UixCountTo();
+            
+            const viewport = 1;
+            const $el = $( this );
+           
 
-				//Prevents front-end javascripts that are activated in the background to repeat loading.
-				this.disable();
+            //
+            const scrollUpdate = function() {
+                
+                const spyTop = $el[0].getBoundingClientRect().top;
+                
+                //Prevent asynchronous loading of repeated calls
+                const actived = $el.data( 'activated' );
 
 
-			},
-			offset: '100%' //0~100%, bottom-in-view
-		});
+                if ( spyTop < ( window.innerHeight * viewport ) ) {
+
+                    if( typeof actived === typeof undefined ) {
+
+                    
+                        $el.UixCountTo();
+                        
+                        //Prevents front-end javascripts that are activated in the background to repeat loading.
+                        $el.data( 'activated', 1 );
+
+
+
+                    }//endif actived
+
+
+                }
+            };
+            
+            
+            scrollUpdate();
+            $( window ).on( 'scroll.COUNTER touchmove.COUNTER', function( event ) {
+                 scrollUpdate();
+            });
+
+
+
+        });//end each        
+		
 
 		
     };

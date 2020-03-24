@@ -24,7 +24,7 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
 	
 	
     module.PROGRESS_LINE               = module.PROGRESS_LINE || {};
-    module.PROGRESS_LINE.version       = '0.0.2';
+    module.PROGRESS_LINE.version       = '0.0.3';
     module.PROGRESS_LINE.documentReady = function( $ ) {
 
 		const $obj                = $( '.uix-progress-line' ),
@@ -45,20 +45,8 @@ export const PROGRESS_LINE = ( ( module, $, window, document ) => {
 				}, 50 );
 			};
 		
-		const waypoints = $('.uix-progress-line' ).waypoint({
-			handler: function( direction ) {
-
-				progressLineRestore();
-
-				//Prevents front-end javascripts that are activated in the background to repeat loading.
-				this.disable();
-
-
-			},
-			offset: '100%' //0~100%, bottom-in-view
-		});
-
-		
+        
+        //
 		$progressLineCircle.on( 'mouseenter', function() {
 		
 			const curIndex = $( this ).index()/2;

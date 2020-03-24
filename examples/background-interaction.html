@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=pmKt5eANZTVXQHxEPC9c"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=Dz0Pg0dMjP5TNaRxF0kj"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=pmKt5eANZTVXQHxEPC9c" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=Dz0Pg0dMjP5TNaRxF0kj" />
 	<![endif]-->
 
 
@@ -307,7 +307,7 @@
 														<li><a href="scrollspy-animate.html">Scrollspy Animate</a><span class="uix-bubble">new</span></li>
 														<li><a href="skew-on-scroll.html">Skew on Scroll</a><span class="uix-bubble">new</span></li>
 														<li><a href="text-effect.html">Text Effect</a><span class="uix-bubble">new</span></li>
-                                                        <li><a href="smooth-scrolling-page.html">Smooth Scrolling Page</a><span class="uix-bubble">new</span></li>
+                                                        <li><a href="smooth-scrolling-page.html">Smooth Scrolling Page</a></li>
 														<li><a href="list-posts-with-ajax.html">Ajax Load Posts</a></li>
 														<li><a href="list-posts-with-ajax2.html">Ajax Load Posts 2</a></li>
 														<li><a href="list-posts-with-ajax-infinitescroll.html">Infinite Scroll Posts</a></li>
@@ -437,9 +437,9 @@
 					<div class="row">
 						<div class="col-12">
                             <h3>Parallax Background</h3>
-                            <p>Use the <code>data-bg</code> attribute to set the background and parallax effect.</p>
-							<hr>
-							
+                            <p>Use the <code>data-bg</code> attribute to set the background and parallax effect. E.g.</p>
+<pre class="uix-precode"><label>HTML</label><code>&lt;div style=&quot;width:300px;height:300px;&quot; data-bg='{"src":"assets/images/demo/cool-slider-3.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":false,"parallax":0.2, "transition":"0s linear"}'&gt;&lt;/div&gt;</code>
+</pre>	      
 							
 						</div>
 					</div>
@@ -487,7 +487,11 @@
                             <h3>
                                 Background Text
                             </h3>
-							<hr>
+                            <p>Use the following sample code to achieve the following effects:</p>
+<pre class="uix-precode"><label>HTML</label><code>&lt;h1 class=&quot;uix-relative&quot; data-bg='{"src":"assets/images/demo/cool-slider-1.jpg","position":"top left","size":"cover","repeat":"no-repeat","fill":true,"parallax":-0.3}'&gt;
+    Background-Clip Text 
+&lt;/h1&gt;&#x9;</code>
+</pre>	
 							
 							
 						</div>
@@ -525,9 +529,17 @@
                             <h3>
                                 Movement Animation
                             </h3>
-                            <p>Continuous position movement in different directions.</p>
-							<hr>
-							
+                            <p>Continuous position movement in different directions. E.g.</p>
+<pre class="uix-precode"><label>HTML</label><code>&lt;div class=&quot;uix-relative&quot; data-bg='{"src":"assets/images/demo/templates.jpg","size":"auto","repeat":"repeat","move":{"dir":"right","speed":"350","easing":"linear","loop":true}}' style=&quot;height: 450px;&quot;&gt;
+    &lt;div class=&quot;uix-overlay uix-overlay--black uix-overlay--cover&quot;&gt;
+        &lt;div class=&quot;uix-v-align--table&quot;&gt;
+            &lt;div&gt;
+                &lt;h2 class=&quot;uix-typo--color-white uix-t-c&quot;&gt;Text Here&lt;/h2&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;&#x9;</code>
+</pre>	
 							
 						</div>
 					</div>
@@ -689,8 +701,7 @@
     <!-- Vendor -->
 	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
     <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/video.min.js?ver=7.5.3"></script> 
-	<script src="assets/js/min/jquery.waypoints.min.js?ver=4.0.1"></script> 
+    <script src="assets/js/min/video.min.js?ver=7.5.3"></script>
     <script src="assets/js/min/template7.min.js?ver=1.4.2"></script>
     <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
     <script src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
@@ -705,14 +716,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "4.1.5",
+		var REVISION     = "4.1.6",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=pmKt5eANZTVXQHxEPC9c"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=Dz0Pg0dMjP5TNaRxF0kj"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

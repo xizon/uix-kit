@@ -24,7 +24,7 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 	
 	
     module.BACK_TO_TOP               = module.BACK_TO_TOP || {};
-    module.BACK_TO_TOP.version       = '0.0.5';
+    module.BACK_TO_TOP.version       = '0.0.7';
     module.BACK_TO_TOP.documentReady = function( $ ) {
 
 		
@@ -41,11 +41,11 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 			
 			$window.on( 'scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function() {
 
-				const scrollTop = $( this ).scrollTop(),
-					  spyTop    = windowHeight/2;
+				const scrolled = $( this ).scrollTop(),
+					  spyTop   = windowHeight/2;
 
 
-				if ( scrollTop >= spyTop ) {
+				if ( scrolled >= spyTop ) {
 					$el.addClass( 'is-active' );
 				} else {
 					$el.removeClass( 'is-active' );	

@@ -35,7 +35,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.FLEXSLIDER               = module.FLEXSLIDER || {};
-    module.FLEXSLIDER.version       = '0.1.7';
+    module.FLEXSLIDER.version       = '0.1.8';
     module.FLEXSLIDER.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -722,6 +722,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			let timer    = null,
 				wheeling = false;
 
+            
 			$obj[0].addEventListener( 'wheel', function( e ) {
 
 				//Gets a value that indicates the amount that the mouse wheel has changed.
@@ -752,7 +753,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				}, 60 );			
 				
 			
-			}, { passive: true } );
+			}, browser.supportsPassive ? { passive: true } : false );
 
 			
 			

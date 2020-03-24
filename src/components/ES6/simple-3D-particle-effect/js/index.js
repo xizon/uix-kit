@@ -101,7 +101,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 
                 
                 // convert the field of view to radians
-                var ang = (fieldOfView / 2) * Math.PI / 180;
+                const ang = (fieldOfView / 2) * Math.PI / 180;
                 // calculate the max y position seen by the camera related to the maxTargetZ position, I start by calculating the y limit because fielOfView is a vertical field of view. I then calculate the x Limit
                 yLimit = (camera.position.z + maxTargetZ) * Math.tan(ang); // this is a formula I found, don't ask me why it works, it just does :) 
                 // Calculate the max x position seen by the camera related to the y Limit position
@@ -140,12 +140,12 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 
 
                 // Spot Light
-                var spotLightColor = 0xffffff,
-                    spotLightIntensity = 2,
-                    spotLightDistance = 1200,
-                    spotLightAngle = getRadian( 50 ),
-                    spotLightPenumbra = 1,
-                    spotLightDecay = 1;
+                const spotLightColor = 0xffffff,
+                      spotLightIntensity = 2,
+                      spotLightDistance = 1200,
+                      spotLightAngle = getRadian( 50 ),
+                      spotLightPenumbra = 1,
+                      spotLightDecay = 1;
                 
                 sceneForSpotLight = new THREE.SpotLight(spotLightColor, spotLightIntensity, spotLightDistance, spotLightAngle, spotLightPenumbra, spotLightDecay);
                 sceneForSpotLight.position.set(5, 320, 5); // Setting the y-axis bond angle is critical
@@ -161,7 +161,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 //console.log( sceneForSpotLight );
                 
                 /*
-                var spotLightHelper = new THREE.SpotLightHelper( sceneForSpotLight );
+                const spotLightHelper = new THREE.SpotLightHelper( sceneForSpotLight );
                 scene.add( spotLightHelper );   
                 */
      
@@ -511,25 +511,25 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
              * @return {JSON}
              */
 			/* @usage: 
-			   var screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+			   const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
 			  */
 			function nestedObjectToScreenXYZAndWH( obj, camera, rendererWidth, rendererHeight ) {
                 
-                var vector = new THREE.Vector3();
+                const vector = new THREE.Vector3();
                 vector.setFromMatrixPosition( obj.matrixWorld );
-                var widthHalf = rendererWidth/2;
-                var heightHalf = rendererHeight/2;
-                var aspect = rendererHeight/rendererWidth;
+                const widthHalf = rendererWidth/2;
+                const heightHalf = rendererHeight/2;
+                const aspect = rendererHeight/rendererWidth;
                 vector.project( camera );
                 vector.x = ( vector.x * widthHalf ) + widthHalf;
                 vector.y = - ( vector.y * heightHalf ) + heightHalf;
 
                 //compute bounding box after
-                var boxInfo =  new THREE.Box3().setFromObject( obj ).getSize( new THREE.Vector3() );
+                const boxInfo =  new THREE.Box3().setFromObject( obj ).getSize( new THREE.Vector3() );
 
                 
                 //Change it to fit the width and height of the stage based on the current value
-                var ratioFixedNum = 7;
+                const ratioFixedNum = 7;
                 
                 //correction
                 return {
@@ -593,9 +593,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 y = r * sin（θ）  
              */
             function getPolarCoord(x, y, z) {
-                var nx = Math.cos(x) * Math.cos(y) * z,
-                    nz = Math.cos(x) * Math.sin(y) * z,
-                    ny = Math.sin(x) * z;
+                const nx = Math.cos(x) * Math.cos(y) * z,
+                      nz = Math.cos(x) * Math.sin(y) * z,
+                      ny = Math.sin(x) * z;
                 return new THREE.Vector3(nx, ny, nz);
             }
 

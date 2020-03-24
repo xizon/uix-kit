@@ -21,7 +21,7 @@
             transition : 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
 			bg       : { enable: true, xPos: '50%' }
         }, options );
- 
+        
         this.each( function() {
 			
 			let bgEff      = settings.bg,
@@ -41,6 +41,7 @@
 				'transition': 'none'
 			} );
 
+            // Please do not use scroll's off method in each
 		    $( window ).on( 'scroll.UixParallax touchmove.UixParallax', function( e ){
 				scrollUpdate();
 			});
@@ -61,15 +62,13 @@
 			
 			
 			function scrollUpdate() {
-				const scrolled = $( window ).scrollTop(),
-					  st       = $this.offset().top - scrolled;
-				
-
+				const spyTop = $this[0].getBoundingClientRect().top;
+         
 				if ( bgEff ) {
 					//background parallax
 					TweenMax.set( $this, {
                         css:{ 
-                            'background-position': bgXpos + ' ' + ( 0 - ( st * speed ) ) + 'px',
+                            'background-position': bgXpos + ' ' + ( 0 - ( spyTop * speed ) ) + 'px',
                             'transition': settings.transition
                         }
 					});
@@ -77,7 +76,7 @@
 					//element parallax
 					TweenMax.set( $this, {
                         css:{ 
-                            'transform': 'matrix(1, 0, 0, 1, 0, '+( 0 - ( scrolled * speed ) )+')',
+                            'transform': 'matrix(1, 0, 0, 1, 0, '+( 0 - ( spyTop * speed ) )+')',
                             'transition': settings.transition
                         }
 					});
@@ -94,7 +93,5 @@
     };
  
 }( jQuery ));
-
-
 
 

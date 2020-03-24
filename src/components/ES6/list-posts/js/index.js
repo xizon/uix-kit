@@ -38,9 +38,9 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.2';
+    module.POST_LIST_AJAX.version       = '0.1.3';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
-
+        
 		$( '[data-ajax-list-json]' ).each( function() {
 			const $this            = $( this );
             
@@ -199,12 +199,14 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					
 				
 						
+                    // Please do not use scroll's off method in each
 					$( window ).on( 'scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function() {
 						
-						const scrolled = $( window ).scrollTop();
-						
-						if ( scrolled >= parseFloat( $button.offset().top - $( window ).height()/1.5 - $button.outerHeight( true ) ) && !$button.hasClass( triggerActive ) ) {
-
+                        
+                        const spyTop = parseFloat( $button[0].getBoundingClientRect().top + $button.outerHeight( true ) );
+					
+                        if ( spyTop < window.innerHeight && !$button.hasClass( triggerActive ) ) {
+                            
 								// Active this button
 								$button.addClass( triggerActive );					    
 							

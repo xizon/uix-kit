@@ -26,16 +26,16 @@
  */
 jQuery.fn.sortElements = (function(){
     
-    var sort = [].sort;
+    const sort = [].sort;
     
     return function(comparator, getSortable) {
         
         getSortable = getSortable || function(){return this;};
         
-        var placements = this.map(function(){
+        const placements = this.map(function(){
             
-            var sortElement = getSortable.call(this),
-                parentNode = sortElement.parentNode,
+            const sortElement = getSortable.call(this),
+                  parentNode = sortElement.parentNode,
                 
                 // Since the element itself will change position, we have
                 // to have some way of storing it's original position in
