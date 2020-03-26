@@ -23,9 +23,8 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	if ( window.AJAX_PAGE_LOADER === null ) return false;
 	
 	
-	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.7';
+    module.AJAX_PAGE_LOADER.version       = '0.1.8';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -81,15 +80,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 			if ( typeof curAjaxPageID != typeof undefined ) $navs.eq( curAjaxPageID ).addClass( 'is-active' );
 		}
 
-		
-		
-		
-		//Detect URL change
-		window.addEventListener( 'popstate', function( e ) {
-			moveTo( $( ajaxContainer ), false, 'down', 0, false );
-		});
 
-		
 		
 
 		/* 
@@ -194,13 +185,25 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 				}
 			});
 
-		
+            
+            //Empty content that does not exist
+            if ( eleTarget == null ) {
+                moveTo( $( ajaxContainer ), false, 'down', 0, false );
+            }  
+
+			  
+            
+		    //Push new content to target container
 			const pageIndex = $( eleTarget ).data( 'index' );
 			
 			//Push new content to target container
 			if ( typeof pageIndex != typeof undefined ) {
 				moveTo( $( ajaxContainer ), goURL, 'down', pageIndex, false );
 			}
+            
+            
+            
+            
 			
 			// Output history button
 			//console.log(  $( eleTarget ).data( 'index' ) );
@@ -313,31 +316,50 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
  
 				//Click on this link element using an AJAX request
-				$.ajax({
-					timeout  : 15000,
-					url      : url,
-					method   : ( typeof container.data( 'ajax-method' ) === typeof undefined ) ? 'POST' : container.data( 'ajax-method' ),
-					dataType : 'html',
-					data     : {
-						action  : 'load_singlepages_ajax_content'
-					},
-					beforeSend: function() {
+                // Add a request or response interceptor
+                const axiosInterceptor = axios.interceptors.request.use(function(config) {
+                    // Do something before request is sent
 
-                        //Display loader
-                        showLoader();
+                    //Display loader
+                    showLoader();
+                    
+                    //
+                    return config;
+                },
+                function(error) {
+                    return Promise.reject(error);
+                });
 
-					}
+			
+                // To send data in the application/x-www-form-urlencoded format instead
+                const formData = new FormData();
+                const defaultPostData = {
+                    action  : 'load_singlepages_ajax_content'
+                };
+                for(var k in defaultPostData) {
+                    formData.append(k, defaultPostData[k]);
+                }
+                
+                // Create a request event
+                axios({
+                    timeout: 15000,
+                    method: ( typeof container.data( 'ajax-method' ) === typeof undefined ) ? 'POST' : container.data( 'ajax-method' ),
+                    url: url,
+                    data: formData,
+                    responseType: 'text',
                 })
-                .done( function (response) { 
+                .then(function (response) {
+
+                    const htmlCode = response.data;
                     
                     //A function to be called if the request succeeds
                     //Display loading image when AJAX call is in progress
-                    
+
                     //Remove existing images
                     sources = [];
 
                     //Push all images from page
-                    $( response ).find( 'img' ).each(function() {
+                    $( htmlCode ).find( 'img' ).each(function() {
                         sources.push(
                             {
                                 "url": this.src,
@@ -346,10 +368,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                             }
                         );
                     }); 
-                    
-                    
+
+
                     //Push all videos from page
-                    $( response ).find( '.uix-video__slider > video' ).each(function() {
+                    $( htmlCode ).find( '.uix-video__slider > video' ).each(function() {
 
                         let _src = $( this ).find( 'source:first' ).attr( 'src' );
                         if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
@@ -372,15 +394,15 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
                         //loading animation
                         loadingAnim( per );
-                        
+
                         //Remove loader
                         const oldContent = container.html();
-                        hideLoader(container, $( response ).filter( 'title' ).text(), dir, oldContent, response);
+                        hideLoader(container, $( htmlCode ).filter( 'title' ).text(), dir, oldContent, htmlCode);
 
-                        
+
                     }
-                    
-                    
+
+
                     const loadImages = function() {
                         let promises = [];
 
@@ -446,17 +468,17 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
 
                     const textureLoaded = function( url ) {
-                      
+
                         //loading
                         per = parseInt( 100 * ( perInit / sources.length ) );
 
                         console.log( 'progress: ' + per + '%' );
 
                         if ( isNaN( per ) ) per = 100;  
-                        
+
                         // The progress of each page load
                         loadedProgress = per;
-                        
+
 
                         //loading animation
                         loadingAnim( per ); 
@@ -465,13 +487,13 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
                         perInit++;
                         return per;   
-                        
+
                     };
-  
-                    
+
+
 
                     const func = function() {
-                        ajaxSucceeds( dir, container, $( response ).find( '.js-uix-ajax-load__container' ).html(), $( response ).filter( 'title' ).text() ); 
+                        ajaxSucceeds( dir, container, $( htmlCode ).find( '.js-uix-ajax-load__container' ).html(), $( htmlCode ).filter( 'title' ).text() ); 
                     };
 
 
@@ -501,30 +523,54 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 
                         if ( _time >= timeLimit ) {
                             console.log( 'Page load timeout!' );
-                            
+
                             //Remove loader
-                            if ( response.indexOf( '<body' ) >= 0 ) {
+                            if ( htmlCode.indexOf( '<body' ) >= 0 ) {
                                 window.location.href = location.href;
                             } else {
                                 const oldContent = container.html();
-                                hideLoader(container, $( response ).filter( 'title' ).text(), dir, oldContent, response);
+                                hideLoader(container, $( htmlCode ).filter( 'title' ).text(), dir, oldContent, htmlCode);
 
                             }
-                        
-                            
+
+
                             // clear loader event
                             clearInterval( timeClockInit );
                             func();
                         }    
                     }, 500 );
 
-                  
-                    
-                })
-                .fail( function (jqXHR, textStatus, errorThrown) { 
-					window.location.href = url;
+
+                })  
+                .catch(function (error) {
+
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        const status = error.response.status;
+                        console.log(status);
+
+
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+
+                        //
+                        window.location.href = url;
+
+                    } else {
+                        // If there was a problem, we need to
+                        // dispatch the error condition
+                        console.log(error.message);
+                    }
                 });
-           	
+
+
+                // Remove an interceptor later
+                axios.interceptors.request.eject(axiosInterceptor);
+
 				
 				
 			}

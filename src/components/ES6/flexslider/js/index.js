@@ -8,7 +8,6 @@
 /**
  * module.FLEXSLIDER
  * 
- * @requires ./examples/assets/js/min/jquery.easing.min.js
  * @requires ./src/components/ES5/_plugins-Miscellaneous
  */
 

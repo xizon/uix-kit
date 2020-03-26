@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.1.6
+ * ## Version             :  4.1.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 24, 2020
+ * ## Last Update         :  March 26, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "cf5032507f4327d060f7";
+/******/ 	var hotCurrentHash = "1bfaa32328f57447b952";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1253,13 +1253,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       key: 'attributes'
     }, options);
     this.each(function () {
-      var obj = $(this); //Returns JSON data
+      var obj = $(this); // Add a request or response interceptor
 
-      $.ajax({
-        url: settings.jsonFile,
+      var axiosInterceptor = axios.interceptors.request.use(function (config) {
+        // Do something before request is sent
+        //
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      }); // To send data in the application/x-www-form-urlencoded format instead
+
+      var formData = new FormData();
+      var defaultPostData = {
+        action: 'load_singlepages_ajax_content'
+      };
+
+      for (var k in defaultPostData) {
+        formData.append(k, defaultPostData[k]);
+      } // Create a request event
+
+
+      axios({
+        timeout: 15000,
         method: settings.method,
-        dataType: 'json'
-      }).done(function (data) {
+        url: settings.jsonFile,
+        data: formData,
+        responseType: 'text'
+      }).then(function (response) {
+        var jsonData = response.data;
         var newArr = []; //Convert JSON to an array
 
         var formatFromServer = function formatFromServer(data) {
@@ -1283,7 +1304,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           return formatData;
         };
 
-        formatFromServer(data); //search JSON key that contains specific string
+        formatFromServer(jsonData); //search JSON key that contains specific string
 
         for (var p = 0; p < newArr.length; p++) {
           for (var n = 0; n < newArr[p].list.length; n++) {
@@ -1293,9 +1314,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }
           }
         }
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("Request failed: " + textStatus);
-      });
+      })["catch"](function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          var status = error.response.status;
+          console.log(status);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // If there was a problem, we need to
+          // dispatch the error condition
+          console.log(error.message);
+        }
+      }); // Remove an interceptor later
+
+      axios.interceptors.request.eject(axiosInterceptor);
     });
   };
 })(jQuery);
@@ -8006,7 +8043,7 @@ function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.6';
+  module.AJAX_PUSH_CONTENT.version = '0.1.7';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     // trigger of AJAX request
@@ -8079,13 +8116,16 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         }
       }); //Empty content that does not exist
 
-      $(AJAXPageLinks).each(function () {
-        var curConfig = $(this).data('ajax-push-content');
+      if (eleTarget == null) {
+        $(AJAXPageLinks).each(function () {
+          var curConfig = $(this).data('ajax-push-content');
 
-        if (AJAX_push_js_typeof(curConfig) != ( true ? "undefined" : undefined)) {
-          pushAction($(curConfig.container), false, curConfig.loading, goURL, curConfig.method, false);
-        }
-      }); //Push new content to target container
+          if (AJAX_push_js_typeof(curConfig) != ( true ? "undefined" : undefined)) {
+            $(curConfig.container).html('');
+          }
+        });
+      } //Push new content to target container
+
 
       var backConfig = $(eleTarget).data('ajax-push-content');
 
@@ -8112,28 +8152,44 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
 
       if (AJAX_push_js_typeof(method) === ( true ? "undefined" : undefined) || method == '') {
         method = 'POST';
-      }
+      } // Add a request or response interceptor
 
-      $.ajax({
+
+      var axiosInterceptor = axios.interceptors.request.use(function (config) {
+        // Do something before request is sent
+        //Display loader
+        showLoader(container, loading); //
+
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      }); // To send data in the application/x-www-form-urlencoded format instead
+
+      var formData = new FormData();
+      var defaultPostData = {
+        action: 'load_singlepages_ajax_content'
+      };
+
+      for (var k in defaultPostData) {
+        formData.append(k, defaultPostData[k]);
+      } // Create a request event
+
+
+      axios({
         timeout: 15000,
-        url: url,
         method: method,
-        dataType: 'html',
-        data: {
-          action: 'load_singlepages_ajax_content'
-        },
-        beforeSend: function beforeSend() {
-          //Display loader
-          showLoader(container, loading);
-        }
-      }).done(function (response) {
-        //A function to be called if the request succeeds
-        var pushContent = !target ? '' : $(response).find(target).html(); //Display loading image when AJAX call is in progress
+        url: url,
+        data: formData,
+        responseType: 'text'
+      }).then(function (response) {
+        var htmlCode = response.data; //A function to be called if the request succeeds
+
+        var pushContent = !target ? '' : $(htmlCode).find(target).html(); //Display loading image when AJAX call is in progress
         //Remove existing images
 
         sources = []; //Push all images from page
 
-        $(response).find('img').each(function () {
+        $(htmlCode).find('img').each(function () {
           sources.push({
             "url": this.src,
             "id": 'img-' + UixGUID.create(),
@@ -8141,7 +8197,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           });
         }); //Push all videos from page
 
-        $(response).find('.uix-video__slider > video').each(function () {
+        $(htmlCode).find('.uix-video__slider > video').each(function () {
           var _src = $(this).find('source:first').attr('src');
 
           if (AJAX_push_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
@@ -8160,7 +8216,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
 
           loadingAnim(per); //Remove loader
 
-          hideLoader(container, $(response).filter('title').text(), btn, response);
+          hideLoader(container, $(htmlCode).filter('title').text(), btn, htmlCode);
         }
 
         var loadImages = function loadImages() {
@@ -8218,7 +8274,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
         };
 
         var func = function func() {
-          ajaxSucceeds(container, pushContent, $(response).filter('title').text(), btn);
+          ajaxSucceeds(container, pushContent, $(htmlCode).filter('title').text(), btn);
         }; //images loaded
         //Must be placed behind the loadImages()
 
@@ -8242,10 +8298,10 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           if (_time >= timeLimit) {
             console.log('Page load timeout!'); //Remove loader
 
-            if (response.indexOf('<body') >= 0) {
+            if (htmlCode.indexOf('<body') >= 0) {
               window.location.href = location.href;
             } else {
-              hideLoader(container, $(response).filter('title').text(), btn, response);
+              hideLoader(container, $(htmlCode).filter('title').text(), btn, htmlCode);
             } // clear loader event
 
 
@@ -8253,9 +8309,27 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
             func();
           }
         }, 500);
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-        window.location.href = url;
-      });
+      })["catch"](function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          var status = error.response.status;
+          console.log(status);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request); //
+
+          window.location.href = url;
+        } else {
+          // If there was a problem, we need to
+          // dispatch the error condition
+          console.log(error.message);
+        }
+      }); // Remove an interceptor later
+
+      axios.interceptors.request.eject(axiosInterceptor);
     }
     /*
      * A function to be called if the request succeeds
@@ -8374,7 +8448,7 @@ function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.7';
+  module.AJAX_PAGE_LOADER.version = '0.1.8';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window);
@@ -8419,12 +8493,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     } else {
       //Activate navigation from AJAX request
       if (AJAX_js_typeof(curAjaxPageID) != ( true ? "undefined" : undefined)) $navs.eq(curAjaxPageID).addClass('is-active');
-    } //Detect URL change
-
-
-    window.addEventListener('popstate', function (e) {
-      moveTo($(ajaxContainer), false, 'down', 0, false);
-    });
+    }
     /* 
      ====================================================
      *  AJAX Interaction
@@ -8436,6 +8505,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
      *
      * @return {Void}
      */
+
 
     function ajaxInit() {
       if (windowWidth <= 768) {
@@ -8501,7 +8571,13 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           eleTarget = this;
           goURL = this.href;
         }
-      });
+      }); //Empty content that does not exist
+
+      if (eleTarget == null) {
+        moveTo($(ajaxContainer), false, 'down', 0, false);
+      } //Push new content to target container
+
+
       var pageIndex = $(eleTarget).data('index'); //Push new content to target container
 
       if (AJAX_js_typeof(pageIndex) != ( true ? "undefined" : undefined)) {
@@ -8588,27 +8664,43 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             location.hash = turl;
           }
         } //Click on this link element using an AJAX request
+        // Add a request or response interceptor
 
 
-        $.ajax({
+        var axiosInterceptor = axios.interceptors.request.use(function (config) {
+          // Do something before request is sent
+          //Display loader
+          showLoader(); //
+
+          return config;
+        }, function (error) {
+          return Promise.reject(error);
+        }); // To send data in the application/x-www-form-urlencoded format instead
+
+        var formData = new FormData();
+        var defaultPostData = {
+          action: 'load_singlepages_ajax_content'
+        };
+
+        for (var k in defaultPostData) {
+          formData.append(k, defaultPostData[k]);
+        } // Create a request event
+
+
+        axios({
           timeout: 15000,
-          url: url,
           method: AJAX_js_typeof(container.data('ajax-method')) === ( true ? "undefined" : undefined) ? 'POST' : container.data('ajax-method'),
-          dataType: 'html',
-          data: {
-            action: 'load_singlepages_ajax_content'
-          },
-          beforeSend: function beforeSend() {
-            //Display loader
-            showLoader();
-          }
-        }).done(function (response) {
-          //A function to be called if the request succeeds
+          url: url,
+          data: formData,
+          responseType: 'text'
+        }).then(function (response) {
+          var htmlCode = response.data; //A function to be called if the request succeeds
           //Display loading image when AJAX call is in progress
           //Remove existing images
+
           sources = []; //Push all images from page
 
-          $(response).find('img').each(function () {
+          $(htmlCode).find('img').each(function () {
             sources.push({
               "url": this.src,
               "id": 'img-' + UixGUID.create(),
@@ -8616,7 +8708,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             });
           }); //Push all videos from page
 
-          $(response).find('.uix-video__slider > video').each(function () {
+          $(htmlCode).find('.uix-video__slider > video').each(function () {
             var _src = $(this).find('source:first').attr('src');
 
             if (AJAX_js_typeof(_src) === ( true ? "undefined" : undefined)) _src = $(this).attr('src');
@@ -8636,7 +8728,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             loadingAnim(per); //Remove loader
 
             var oldContent = container.html();
-            hideLoader(container, $(response).filter('title').text(), dir, oldContent, response);
+            hideLoader(container, $(htmlCode).filter('title').text(), dir, oldContent, htmlCode);
           }
 
           var loadImages = function loadImages() {
@@ -8694,7 +8786,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
           };
 
           var func = function func() {
-            ajaxSucceeds(dir, container, $(response).find('.js-uix-ajax-load__container').html(), $(response).filter('title').text());
+            ajaxSucceeds(dir, container, $(htmlCode).find('.js-uix-ajax-load__container').html(), $(htmlCode).filter('title').text());
           }; //images loaded
           //Must be placed behind the loadImages()
 
@@ -8718,12 +8810,12 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             if (_time >= timeLimit) {
               console.log('Page load timeout!'); //Remove loader
 
-              if (response.indexOf('<body') >= 0) {
+              if (htmlCode.indexOf('<body') >= 0) {
                 window.location.href = location.href;
               } else {
                 var _oldContent = container.html();
 
-                hideLoader(container, $(response).filter('title').text(), dir, _oldContent, response);
+                hideLoader(container, $(htmlCode).filter('title').text(), dir, _oldContent, htmlCode);
               } // clear loader event
 
 
@@ -8731,9 +8823,27 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
               func();
             }
           }, 500);
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-          window.location.href = url;
-        });
+        })["catch"](function (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            var status = error.response.status;
+            console.log(status);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request); //
+
+            window.location.href = url;
+          } else {
+            // If there was a problem, we need to
+            // dispatch the error condition
+            console.log(error.message);
+          }
+        }); // Remove an interceptor later
+
+        axios.interceptors.request.eject(axiosInterceptor);
       }
     }
     /*
@@ -9312,7 +9422,7 @@ function dynamic_dropdown_list_json_js_typeof(obj) { "@babel/helpers - typeof"; 
 var DYNAMIC_DD_LIST = function (module, $, window, document) {
   if (window.DYNAMIC_DD_LIST === null) return false;
   module.DYNAMIC_DD_LIST = module.DYNAMIC_DD_LIST || {};
-  module.DYNAMIC_DD_LIST.version = '0.0.7';
+  module.DYNAMIC_DD_LIST.version = '0.0.8';
 
   module.DYNAMIC_DD_LIST.documentReady = function ($) {
     $('[data-ajax-dynamic-dd-json]').each(function () {
@@ -9347,12 +9457,31 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
         var dataExist = $this.data('exist');
 
         if (dynamic_dropdown_list_json_js_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
-          $.ajax({
-            url: jsonFile,
+          // Add a request or response interceptor
+          var axiosInterceptor = axios.interceptors.request.use(function (config) {
+            // Do something before request is sent
+            //
+            return config;
+          }, function (error) {
+            return Promise.reject(error);
+          }); // To send data in the application/x-www-form-urlencoded format instead
+
+          var formData = new FormData();
+          var defaultPostData = toData;
+
+          for (var k in defaultPostData) {
+            formData.append(k, defaultPostData[k]);
+          } // Create a request event
+
+
+          axios({
+            timeout: 15000,
             method: method,
-            data: toData,
-            dataType: 'json'
-          }).done(function (data) {
+            url: jsonFile,
+            data: formData,
+            responseType: 'text'
+          }).then(function (response) {
+            var jsonData = response.data;
             var _level1 = [],
                 _level2 = [],
                 _level3 = [],
@@ -9360,21 +9489,21 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                 _level2IDs = [],
                 _level3IDs = [];
 
-            for (var m = 0; m < data.length; m++) {
-              _level1.push(data[m].name);
+            for (var m = 0; m < jsonData.length; m++) {
+              _level1.push(jsonData[m].name);
 
-              _level1IDs.push(data[m].id);
+              _level1IDs.push(jsonData[m].id);
 
               var level2_List = void 0;
 
-              if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
+              if (dynamic_dropdown_list_json_js_typeof(jsonData[0].list) === ( true ? "undefined" : undefined)) {
                 //============ China cities dropdown list demo
                 //================================================
-                level2_List = data[m].city;
+                level2_List = jsonData[m].city;
               } else {
                 //============ Sort object then subsort further demo
                 //================================================
-                level2_List = data[m].list;
+                level2_List = jsonData[m].list;
               }
 
               var _curLevel2Items = [],
@@ -9383,7 +9512,7 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                   _curLevel3IDs = [];
 
               for (var i = 0; i < level2_List.length; i++) {
-                if (dynamic_dropdown_list_json_js_typeof(data[0].list) === ( true ? "undefined" : undefined)) {
+                if (dynamic_dropdown_list_json_js_typeof(jsonData[0].list) === ( true ? "undefined" : undefined)) {
                   //============ China cities dropdown list demo
                   //================================================
                   var city = level2_List[i].name,
@@ -9399,8 +9528,8 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
                       _tempLevel3IDs = [];
 
                   if (dynamic_dropdown_list_json_js_typeof(area) != ( true ? "undefined" : undefined)) {
-                    for (var k = 0; k < area.length; k++) {
-                      _tempLevel3Items.push(area[k]);
+                    for (var _k = 0; _k < area.length; _k++) {
+                      _tempLevel3Items.push(area[_k]);
                     }
                   }
 
@@ -9603,9 +9732,25 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
             }
 
             initSelectControls();
-          }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log("Request failed: " + textStatus);
-          }); //Prevent the form from being initialized again
+          })["catch"](function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              var status = error.response.status;
+              console.log(status);
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request);
+            } else {
+              // If there was a problem, we need to
+              // dispatch the error condition
+              console.log(error.message);
+            }
+          }); // Remove an interceptor later
+
+          axios.interceptors.request.eject(axiosInterceptor); //Prevent the form from being initialized again
 
           $this.data('exist', 1);
         }
@@ -9638,7 +9783,6 @@ function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 /**
  * module.FLEXSLIDER
  * 
- * @requires ./examples/assets/js/min/jquery.easing.min.js
  * @requires ./src/components/ES5/_plugins-Miscellaneous
  */
 
@@ -11391,7 +11535,7 @@ function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.1.9';
+  module.LIGHTBOX.version = '0.2.0';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -11558,9 +11702,9 @@ var LIGHTBOX = function (module, $, window, document) {
 
           thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
 
-          for (var k = 0; k < imgSrcStr.length; k++) {
-            var active = k == 0 ? 'class="is-active"' : '';
-            thumbs += '<li ' + active + '><img src="' + imgSrcStr[k].thumb + '" alt=""></li>';
+          for (var _k = 0; _k < imgSrcStr.length; _k++) {
+            var active = _k == 0 ? 'class="is-active"' : '';
+            thumbs += '<li ' + active + '><img src="' + imgSrcStr[_k].thumb + '" alt=""></li>';
           }
 
           thumbs += '</ul></div>';
@@ -11680,15 +11824,35 @@ var LIGHTBOX = function (module, $, window, document) {
             location.hash = ajaxURL;
           }
 
-          document.cookie = 'uix-lightbox-ajaxURL=' + ajaxURL;
-          $.ajax({
+          document.cookie = 'uix-lightbox-ajaxURL=' + ajaxURL; // Add a request or response interceptor
+
+          var axiosInterceptor = axios.interceptors.request.use(function (config) {
+            // Do something before request is sent
+            //
+            return config;
+          }, function (error) {
+            return Promise.reject(error);
+          }); // To send data in the application/x-www-form-urlencoded format instead
+
+          var formData = new FormData();
+          var defaultPostData = {
+            action: 'load_singlepages_ajax_content'
+          };
+
+          for (var k in defaultPostData) {
+            formData.append(k, defaultPostData[k]);
+          } // Create a request event
+
+
+          axios({
             timeout: 15000,
-            url: ajaxURL,
             method: ajaxConfig.method,
-            dataType: 'html',
-            beforeSend: function beforeSend() {}
-          }).done(function (response) {
-            $htmlAjaxContainer.html($(response).find(dataAjax.target).html()).promise().done(function () {
+            url: ajaxURL,
+            data: formData,
+            responseType: 'text'
+          }).then(function (response) {
+            var htmlCode = response.data;
+            $htmlAjaxContainer.html($(htmlCode).find(dataAjax.target).html()).promise().done(function () {
               $content.html($('#' + dataHtmlID).html()).promise().done(function () {
                 // Apply some asynchronism scripts
                 $(document).UixApplyAsyncScripts({
@@ -11701,9 +11865,27 @@ var LIGHTBOX = function (module, $, window, document) {
                 htmlContentLoaded();
               });
             });
-          }).fail(function (jqXHR, textStatus, errorThrown) {
-            window.location.href = ajaxURL;
-          });
+          })["catch"](function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              var status = error.response.status;
+              console.log(status);
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request); //
+
+              window.location.href = ajaxURL;
+            } else {
+              // If there was a problem, we need to
+              // dispatch the error condition
+              console.log(error.message);
+            }
+          }); // Remove an interceptor later
+
+          axios.interceptors.request.eject(axiosInterceptor);
         } else {
           // show the content container
           showLightboxContent();
@@ -11959,7 +12141,7 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.3';
+  module.POST_LIST_AJAX.version = '0.1.4';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $('[data-ajax-list-json]').each(function () {
@@ -12254,26 +12436,42 @@ var POST_LIST_AJAX = function (module, $, window, document) {
       var returnDataError = function returnDataError() {
         $button.addClass('is-hide');
         $divRoot.after(noneInfo.error);
-      };
+      }; // Add a request or response interceptor
 
-      $.ajax({
-        url: jsonFile,
-        //Be careful about the format of the JSON file
+
+      var axiosInterceptor = axios.interceptors.request.use(function (config) {
+        // Do something before request is sent
+        //
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      }); // To send data in the application/x-www-form-urlencoded format instead
+
+      var formData = new FormData();
+
+      for (var k in defaultPostData) {
+        formData.append(k, defaultPostData[k]);
+      } // Create a request event
+
+
+      axios({
+        timeout: 15000,
         method: method,
-        data: defaultPostData,
-        dataType: 'json'
-      }).done(function (data) {
-        //If the data is empty
-        if (data && (data == null || Object.prototype.toString.call(data.items) == '[object String]')) {
+        url: jsonFile,
+        data: formData,
+        responseType: 'json'
+      }).then(function (response) {
+        var jsonData = response.data; //If the data is empty
+
+        if (jsonData && (jsonData == null || Object.prototype.toString.call(jsonData.items) == '[object String]')) {
           returnEmptyInfo();
         } //Check if a key exists inside a json object
 
 
-        if (data && data.hasOwnProperty('items') && Object.prototype.toString.call(data.items) == '[object Array]') {
+        if (jsonData && jsonData.hasOwnProperty('items') && Object.prototype.toString.call(jsonData.items) == '[object Array]') {
           //Data overflow may occur when the total number of pages is not posted
           try {
-            var thisData = data,
-                html = compiledTemplate(thisData),
+            var html = compiledTemplate(jsonData),
                 curHtml = $divRoot.find(pushContainer).html();
             var result = null,
                 htmlEl = null; //--------- Do or not append to the original content
@@ -12316,9 +12514,27 @@ var POST_LIST_AJAX = function (module, $, window, document) {
           //if not array
           returnEmptyInfo();
         }
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-        returnEmptyInfo();
-      });
+      })["catch"](function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          var status = error.response.status;
+          console.log(status);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request); //
+
+          returnEmptyInfo();
+        } else {
+          // If there was a problem, we need to
+          // dispatch the error condition
+          console.log(error.message);
+        }
+      }); // Remove an interceptor later
+
+      axios.interceptors.request.eject(axiosInterceptor);
     }
   };
 

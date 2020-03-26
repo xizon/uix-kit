@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+#### = 4.1.7 (March 25, 2020) =
+
+* Tweak: Use axios instead of jQuery AJAX request to improve data processing performance.
+* Tweak: Remove jquery.easing.
+
+
 #### = 4.1.6 (March 22, 2020) =
 
 * Tweak: Optimized the performance of all modules with scroll events.

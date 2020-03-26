@@ -150,7 +150,7 @@ $ sudo npm install --only=dev --unsafe-perm --production
 $ npm run build
 ```
 
-**Step 4.** 可以使用下面的网址来访问，建议使用本地服务器来访问，因为下面的网址是静态访问，不会执行ajax异步请求，一些网站需要异步来测试效果
+**Step 4.** 可以使用下面的网址来访问，建议使用本地服务器来访问，因为下面的网址是静态访问，不会执行AJAX请求，一些模块需要异步来测试效果
 
 ```sh
 http://localhost:8080/examples/
@@ -381,7 +381,7 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
 ```
 
 
-**提示 &#128161;:** 您可以调用指定的模块脚本，该脚本通常用于AJAX的异步回调。 演示代码在这里:
+**提示 &#128161;:** 您可以调用指定的模块脚本，该脚本通常用于AJAX异步请求的回调。 演示代码在这里:
 
 ```sh
 import { UixModuleInstance } from '@uixkit/core/_global/js';

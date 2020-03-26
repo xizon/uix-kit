@@ -38,7 +38,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.3';
+    module.POST_LIST_AJAX.version       = '0.1.4';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
         
 		$( '[data-ajax-list-json]' ).each( function() {
@@ -450,30 +450,55 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				$divRoot.after( noneInfo.error );	
 			};
 			
-							
-			
-			$.ajax({
-				url      : jsonFile, //Be careful about the format of the JSON file
-				method   : method,
-				data     : defaultPostData,
-				dataType : 'json'
+				
+            
+            // Add a request or response interceptor
+            const axiosInterceptor = axios.interceptors.request.use(function(config) {
+                // Do something before request is sent
+
+          
+                //
+                return config;
+            },
+            function(error) {
+                return Promise.reject(error);
+            });
+     
+            
+            
+            // To send data in the application/x-www-form-urlencoded format instead
+            const formData = new FormData();
+            for(var k in defaultPostData) {
+                formData.append(k, defaultPostData[k]);
+            }
+            
+            // Create a request event
+            axios({
+                timeout: 15000,
+                method: method,
+                url: jsonFile,
+                data: formData,
+                responseType: 'json',
             })
-            .done( function (data) { 
+            .then(function (response) {
+                
+                const jsonData = response.data;
+         
+
                 //If the data is empty
-                if ( data && ( data == null || Object.prototype.toString.call( data.items )=='[object String]' ) ) {
+                if ( jsonData && ( jsonData == null || Object.prototype.toString.call( jsonData.items )=='[object String]' ) ) {
                     returnEmptyInfo();
                 }
 
 
                 //Check if a key exists inside a json object
-                if ( data && data.hasOwnProperty( 'items' ) && Object.prototype.toString.call( data.items )=='[object Array]' ) {
+                if ( jsonData && jsonData.hasOwnProperty( 'items' ) && Object.prototype.toString.call( jsonData.items )=='[object Array]' ) {
 
 
                     //Data overflow may occur when the total number of pages is not posted
                     try {
 
-                        const thisData      = data,
-                              html          = compiledTemplate( thisData ),
+                        const html          = compiledTemplate( jsonData ),
                               curHtml       = $divRoot.find( pushContainer ).html();
                         
                         let result        = null,
@@ -540,10 +565,40 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
                     //if not array
                     returnEmptyInfo();
                 }
-            })
-            .fail( function (jqXHR, textStatus, errorThrown) { 
-                returnEmptyInfo();
+                
+                
+            })  
+            .catch(function (error) {
+                
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    const status = error.response.status;
+                    console.log(status);
+                    
+                    
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                    
+                    //
+                    returnEmptyInfo();
+                    
+                    
+                } else {
+                    // If there was a problem, we need to
+                    // dispatch the error condition
+                    console.log(error.message);
+                }
             });
+
+
+            // Remove an interceptor later
+            axios.interceptors.request.eject(axiosInterceptor);
+
+
 
 		}
 

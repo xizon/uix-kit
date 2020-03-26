@@ -34,7 +34,7 @@ It can be used separately, or merge components and grid systems using bootstrap.
 
 [https://xizon.github.io/uix-kit/examples/](https://xizon.github.io/uix-kit/examples/)
 
-GitHub pages can only serve static content, and there is no way to run PHP or get Ajax request on the pages. You need to visit the link below to see some special demos &#128071;
+GitHub pages can only serve static content, and there is no way to run PHP or get AJAX request on the pages. You need to visit the link below to see some special demos &#128071;
 
 [https://uiux.cc/uix-kit](https://uiux.cc/uix-kit) 
 
@@ -222,7 +222,7 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 	
 	
 	<!-- Vendor -->
-	<script src="assets/js/min/jquery.easing.min.js?ver=1.3"></script>
+    <script src="assets/js/min/axios.min.js?ver=0.19.2"></script>
 	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
 	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
 	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
@@ -534,7 +534,7 @@ These RTL modules do not need JavaScript.
     @@include('./src/components/ES6/_global/include-footer.html')
 ```
 
-**Note &#128161;:** You could call a specified module script which is commonly used for callbacks of AJAX Response from Asynchronous method. The demo code is here:
+**Note &#128161;:** You could call a specified module script which is commonly used for callbacks of AJAX request from Asynchronous method. The demo code is here:
 
 ```sh
 import { UixModuleInstance } from '@uixkit/core/_global/js';

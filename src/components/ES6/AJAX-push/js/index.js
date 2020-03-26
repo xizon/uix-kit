@@ -22,7 +22,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.6';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.7';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 
@@ -121,26 +121,25 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 			$( AJAXPageLinks ).each( function() {
 				
 				//don't use $( this ).attr( 'href' )
-				
 				if ( this.href === location.href ) {
 					eleTarget = this;
 					goURL = this.href;
 				}
+                
+                
 			});
 
-			
-			//Empty content that does not exist
-			$( AJAXPageLinks ).each( function() {
-				const curConfig = $( this ).data( 'ajax-push-content' );
-				if ( typeof curConfig != typeof undefined ) {
-					pushAction( $( curConfig.container ), false, curConfig.loading, goURL, curConfig.method, false );
-				}
+            //Empty content that does not exist
+            if ( eleTarget == null ) {
+                $( AJAXPageLinks ).each( function() {
+                    const curConfig = $( this ).data( 'ajax-push-content' );
+                    if ( typeof curConfig != typeof undefined ) {
+                        $( curConfig.container ).html( '' );
+                    }  
+                });
+            }  
 
-			});
 			
-			
-			
-
 			
 			
 			//Push new content to target container
@@ -179,27 +178,50 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 			if ( typeof method === typeof undefined || method == '' ) {
 			    method = 'POST';
 			}
-		
-			
-			$.ajax({
-				timeout  : 15000,
-				url      : url,
-				method   : method,
-				dataType : 'html',
-				data     : {
-					action  : 'load_singlepages_ajax_content'
-				},
-				beforeSend: function() {
+            
+            
 
-                    //Display loader
-                    showLoader( container, loading );
+ 
+            // Add a request or response interceptor
+            const axiosInterceptor = axios.interceptors.request.use(function(config) {
+                // Do something before request is sent
+
+                //Display loader
+                showLoader( container, loading );
+
+                //
+                return config;
+            },
+            function(error) {
+                return Promise.reject(error);
+            });
+            
+            
 
 
-				}
+            // To send data in the application/x-www-form-urlencoded format instead
+            const formData = new FormData();
+            const defaultPostData = {
+                action  : 'load_singlepages_ajax_content'
+            };
+            for(var k in defaultPostData) {
+                formData.append(k, defaultPostData[k]);
+            }
+
+            // Create a request event
+            axios({
+                timeout: 15000,
+                method: method,
+                url: url,
+                data: formData,
+                responseType: 'text',
             })
-            .done( function (response) { 
+            .then(function (response) {
+                
+                const htmlCode = response.data;
+                
                 //A function to be called if the request succeeds
-                const pushContent = ( !target ) ? '' : $( response ).find( target ).html();
+                const pushContent = ( !target ) ? '' : $( htmlCode ).find( target ).html();
                 
                 
                 //Display loading image when AJAX call is in progress
@@ -209,7 +231,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 sources = [];
 
                 //Push all images from page
-                $( response ).find( 'img' ).each(function() {
+                $( htmlCode ).find( 'img' ).each(function() {
                     sources.push(
                         {
                             "url": this.src,
@@ -221,7 +243,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 
                 
                //Push all videos from page
-                $( response ).find( '.uix-video__slider > video' ).each(function() {
+                $( htmlCode ).find( '.uix-video__slider > video' ).each(function() {
 
                     let _src = $( this ).find( 'source:first' ).attr( 'src' );
                     if ( typeof _src === typeof undefined ) _src = $( this ).attr( 'src' );     
@@ -246,7 +268,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                     loadingAnim( per );
                     
                     //Remove loader
-                    hideLoader(container, $( response ).filter( 'title' ).text(), btn, response);     
+                    hideLoader(container, $( htmlCode ).filter( 'title' ).text(), btn, htmlCode);     
                     
                     
                 }
@@ -340,7 +362,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                 
                 
                 const func = function() {
-                    ajaxSucceeds( container, pushContent, $( response ).filter( 'title' ).text(), btn );
+                    ajaxSucceeds( container, pushContent, $( htmlCode ).filter( 'title' ).text(), btn );
                 };
 
 
@@ -373,10 +395,10 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                         
                         
                         //Remove loader
-                        if ( response.indexOf( '<body' ) >= 0 ) {
+                        if ( htmlCode.indexOf( '<body' ) >= 0 ) {
                             window.location.href = location.href;
                         } else {
-                            hideLoader(container, $( response ).filter( 'title' ).text(), btn, response);
+                            hideLoader(container, $( htmlCode ).filter( 'title' ).text(), btn, htmlCode);
 
                         }   
                     
@@ -386,17 +408,39 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                         func();
                     }    
                 }, 500 );
-  
                 
-
                 
-
-            })
-            .fail( function (jqXHR, textStatus, errorThrown) { 
-                window.location.href = url;
+            })  
+            .catch(function (error) {
+                
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    const status = error.response.status;
+                    console.log(status);
+                    
+                    
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                    
+                    //
+                    window.location.href = url;
+                    
+                } else {
+                    // If there was a problem, we need to
+                    // dispatch the error condition
+                    console.log(error.message);
+                }
             });
+            
+            // Remove an interceptor later
+            axios.interceptors.request.eject(axiosInterceptor);
 
-	
+
+			
 			
 		}
 		

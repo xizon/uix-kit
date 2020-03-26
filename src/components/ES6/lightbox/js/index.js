@@ -35,7 +35,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.1.9';
+    module.LIGHTBOX.version       = '0.2.0';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -432,17 +432,41 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 
 					document.cookie = 'uix-lightbox-ajaxURL=' + ajaxURL;
 
-					$.ajax({
-						timeout  : 15000,
-						url      : ajaxURL,
-						method   : ajaxConfig.method,
-						dataType : 'html',
-						beforeSend: function() {
-							
-						}
+                    
+                    // Add a request or response interceptor
+                    const axiosInterceptor = axios.interceptors.request.use(function(config) {
+                        // Do something before request is sent
+
+
+                        //
+                        return config;
+                    },
+                    function(error) {
+                        return Promise.reject(error);
+                    });
+
+                    // To send data in the application/x-www-form-urlencoded format instead
+                    const formData = new FormData();
+                    const defaultPostData = {
+                        action  : 'load_singlepages_ajax_content'
+                    };
+                    for(var k in defaultPostData) {
+                        formData.append(k, defaultPostData[k]);
+                    }
+
+                    // Create a request event
+                    axios({
+                        timeout: 15000,
+                        method: ajaxConfig.method,
+                        url: ajaxURL,
+                        data: formData,
+                        responseType: 'text',
                     })
-                    .done( function (response) { 
-                        $htmlAjaxContainer.html( $( response ).find( dataAjax.target ).html() ).promise().done( function(){
+                    .then(function (response) {
+
+                        const htmlCode = response.data;
+
+                        $htmlAjaxContainer.html( $( htmlCode ).find( dataAjax.target ).html() ).promise().done( function(){
 
 
                             $content.html( $( '#' + dataHtmlID ).html() ).promise().done( function(){
@@ -464,10 +488,37 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 
                         });
 
-                    })
-                    .fail( function (jqXHR, textStatus, errorThrown) { 
-						window.location.href = ajaxURL;
+
+
+                    })  
+                    .catch(function (error) {
+
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            const status = error.response.status;
+                            console.log(status);
+
+
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+
+                            //
+                            window.location.href = ajaxURL;
+
+                        } else {
+                            // If there was a problem, we need to
+                            // dispatch the error condition
+                            console.log(error.message);
+                        }
                     });
+
+
+                    // Remove an interceptor later
+                    axios.interceptors.request.eject(axiosInterceptor);
 
 
 					

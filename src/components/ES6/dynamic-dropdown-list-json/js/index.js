@@ -24,9 +24,8 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 	
 	
     module.DYNAMIC_DD_LIST               = module.DYNAMIC_DD_LIST || {};
-    module.DYNAMIC_DD_LIST.version       = '0.0.7';
+    module.DYNAMIC_DD_LIST.version       = '0.0.8';
     module.DYNAMIC_DD_LIST.documentReady = function( $ ) {
-
 
 			
 		$( '[data-ajax-dynamic-dd-json]' ).each( function() {
@@ -73,13 +72,39 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 				let dataExist = $this.data( 'exist' );
 				if ( typeof dataExist === typeof undefined && dataExist != 1 ) {
 
-					$.ajax({
-						url      : jsonFile,
-						method   : method,
-						data     : toData,
-						dataType : 'json'
+                    
+                    // Add a request or response interceptor
+                    const axiosInterceptor = axios.interceptors.request.use(function(config) {
+                        // Do something before request is sent
+
+
+                        //
+                        return config;
+                    },
+                    function(error) {
+                        return Promise.reject(error);
+                    });
+
+
+                    // To send data in the application/x-www-form-urlencoded format instead
+                    const formData = new FormData();
+                    const defaultPostData = toData;
+                    for(var k in defaultPostData) {
+                        formData.append(k, defaultPostData[k]);
+                    }
+
+                    // Create a request event
+                    axios({
+                        timeout: 15000,
+                        method: method,
+                        url: jsonFile,
+                        data: formData,
+                        responseType: 'text',
                     })
-                    .done( function (data) { 
+                    .then(function (response) {
+
+                        const jsonData = response.data;
+
                         let _level1 = [],
                             _level2 = [],
                             _level3 = [],
@@ -88,21 +113,21 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
                             _level3IDs     = [];
 
 
-                        for ( let m = 0; m < data.length; m++ ) {
+                        for ( let m = 0; m < jsonData.length; m++ ) {
 
-                            _level1.push( data[m].name );
-                            _level1IDs.push( data[m].id );
+                            _level1.push( jsonData[m].name );
+                            _level1IDs.push( jsonData[m].id );
 
                             let level2_List;
 
-                            if ( typeof data[0].list === typeof undefined ) {
+                            if ( typeof jsonData[0].list === typeof undefined ) {
                                 //============ China cities dropdown list demo
                                 //================================================
-                                level2_List = data[m].city;
+                                level2_List = jsonData[m].city;
                             } else {
                                 //============ Sort object then subsort further demo
                                 //================================================
-                                level2_List = data[m].list;
+                                level2_List = jsonData[m].list;
                             }
 
                             let _curLevel2Items   = [],
@@ -115,7 +140,7 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
 
 
-                                if ( typeof data[0].list === typeof undefined ) {
+                                if ( typeof jsonData[0].list === typeof undefined ) {
                                     //============ China cities dropdown list demo
                                     //================================================
                                     let city      = level2_List[i].name,
@@ -394,10 +419,35 @@ export const DYNAMIC_DD_LIST = ( ( module, $, window, document ) => {
 
                         initSelectControls();
 
-                    })
-                    .fail( function (jqXHR, textStatus, errorThrown) { 
-                        console.log( "Request failed: " + textStatus );
+
+                    })  
+                    .catch(function (error) {
+
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            const status = error.response.status;
+                            console.log(status);
+
+
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+
+
+                        } else {
+                            // If there was a problem, we need to
+                            // dispatch the error condition
+                            console.log(error.message);
+                        }
                     });
+
+
+                    // Remove an interceptor later
+                    axios.interceptors.request.eject(axiosInterceptor);
+
 
 
 

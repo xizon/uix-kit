@@ -24,14 +24,42 @@
 			
 			const obj = $( this );
 			
-			
-			//Returns JSON data
-			$.ajax({
-				url      : settings.jsonFile,
-				method   : settings.method,
-				dataType : 'json'
+            // Add a request or response interceptor
+            const axiosInterceptor = axios.interceptors.request.use(function(config) {
+                // Do something before request is sent
+
+          
+                //
+                return config;
+            },
+            function(error) {
+                return Promise.reject(error);
+            });
+            
+
+            
+            // To send data in the application/x-www-form-urlencoded format instead
+            const formData = new FormData();
+            const defaultPostData = {
+                action  : 'load_singlepages_ajax_content'
+            };
+            for(var k in defaultPostData) {
+                formData.append(k, defaultPostData[k]);
+            }
+
+            // Create a request event
+            axios({
+                timeout: 15000,
+                method: settings.method,
+                url: settings.jsonFile,
+                data: formData,
+                responseType: 'text',
             })
-            .done( function (data) { 
+            .then(function (response) {
+                
+                const jsonData = response.data;
+                
+                
                 let newArr = [];
 
                 //Convert JSON to an array
@@ -56,7 +84,7 @@
                     return formatData;
                 };
 
-                formatFromServer( data );
+                formatFromServer( jsonData );
 
 
                 //search JSON key that contains specific string
@@ -75,11 +103,38 @@
                     }
 
 
+                }   
+                
+                
+            })  
+            .catch(function (error) {
+                
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    const status = error.response.status;
+                    console.log(status);
+                    
+                    
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                    
+                    
+                } else {
+                    // If there was a problem, we need to
+                    // dispatch the error condition
+                    console.log(error.message);
                 }
-            })
-            .fail( function (jqXHR, textStatus, errorThrown) { 
-                console.log( "Request failed: " + textStatus );
             });
+
+
+            // Remove an interceptor later
+            axios.interceptors.request.eject(axiosInterceptor);
+
+
 
 			
 		});

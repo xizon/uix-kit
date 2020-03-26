@@ -474,10 +474,9 @@ webpackConfig.plugins.push(
 //		outputPath: '',
 //		fileName: 'vendor.js',
 //		filesToConcat: [
-//			'./vendor/files/jquery.easing.min.js',
+//			'./vendor/files/axios.min.js',
 //			'./vendor/files/jquery.waitforimages.min.js',
 //			'./vendor/files/video.min.js',
-//			'./vendor/files/jquery.waypoints.min.js',
 //			'./vendor/files/template7.min.js',
 //			'./vendor/files/TweenMax.min.js',
 //			'./vendor/files/pixi.min.js',
