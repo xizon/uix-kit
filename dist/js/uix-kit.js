@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.1.7
+ * ## Version             :  4.2.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 26, 2020
+ * ## Last Update         :  March 27, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "1bfaa32328f57447b952";
+/******/ 	var hotCurrentHash = "0ecde31d16ce25bae4df";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2587,7 +2587,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         };
 
-        scrollUpdate();
+        scrollUpdate(); // Please do not use scroll's off method in each
+
         $(window).on('scroll.UixTextEff touchmove.UixTextEff', function (event) {
           scrollUpdate();
         });
@@ -3592,7 +3593,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var BODY_AND_HEADER = function (module, $, window, document) {
   if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
-  module.BODY_AND_HEADER.version = '0.0.6';
+  module.BODY_AND_HEADER.version = '0.0.7';
 
   module.BODY_AND_HEADER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -3627,7 +3628,7 @@ var BODY_AND_HEADER = function (module, $, window, document) {
 
 
     var $el = $('.uix-header__container, .uix-header__placeholder');
-    $window.on('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function () {
+    $window.off('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER').on('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function () {
       var scrolled = $(this).scrollTop(),
           spyTop = 220;
 
@@ -4076,7 +4077,7 @@ function mobile_menu_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var MOBILE_MENU = function (module, $, window, document) {
   if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
-  module.MOBILE_MENU.version = '0.0.7';
+  module.MOBILE_MENU.version = '0.0.8';
 
   module.MOBILE_MENU.documentReady = function ($) {
     var $window = $(window);
@@ -4085,7 +4086,7 @@ var MOBILE_MENU = function (module, $, window, document) {
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.admin-bar .uix-menu-mobile__toggle');
-    $window.on('scroll.MOBILE_MENU touchmove.MOBILE_MENU', function () {
+    $window.off('scroll.MOBILE_MENU touchmove.MOBILE_MENU').on('scroll.MOBILE_MENU touchmove.MOBILE_MENU', function () {
       var scrolled = $(this).scrollTop(),
           spyTop = 46;
 
@@ -4227,7 +4228,7 @@ function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
 var NAVIGATION = function (module, $, window, document) {
   if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
-  module.NAVIGATION.version = '0.0.7';
+  module.NAVIGATION.version = '0.0.8';
 
   module.NAVIGATION.documentReady = function ($) {
     var $window = $(window);
@@ -4286,7 +4287,7 @@ var NAVIGATION = function (module, $, window, document) {
     //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.uix-menu__container:not(.is-mobile)');
-    $window.on('scroll.NAVIGATION touchmove.NAVIGATION', function () {
+    $window.off('scroll.NAVIGATION touchmove.NAVIGATION').on('scroll.NAVIGATION touchmove.NAVIGATION', function () {
       var scrolled = $(this).scrollTop(),
           spyTop = 220;
 
@@ -8684,7 +8685,17 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
 
         for (var k in defaultPostData) {
           formData.append(k, defaultPostData[k]);
-        } // Create a request event
+        }
+        /*
+        // For multiple form fields data acquisition
+        const formData = new FormData();
+        const oldFormData = $this.serializeArray();
+        oldFormData.forEach(function(item){
+            formData.append(item.name, item.value);
+        });
+        formData.append('action', 'load_singlepages_ajax_content');
+        */
+        // Create a request event
 
 
         axios({
@@ -9050,7 +9061,7 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.7';
+  module.BACK_TO_TOP.version = '0.0.8';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window);
@@ -9061,7 +9072,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
       //-------- Sticky button of back to top 
       //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
       var $el = $('#uix-to-top');
-      $window.on('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function () {
+      $window.off('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP').on('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function () {
         var scrolled = $(this).scrollTop(),
             spyTop = windowHeight / 2;
 
@@ -9206,10 +9217,11 @@ function counter_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
 var COUNTER = function (module, $, window, document) {
   if (window.COUNTER === null) return false;
   module.COUNTER = module.COUNTER || {};
-  module.COUNTER.version = '0.0.3';
+  module.COUNTER.version = '0.0.4';
 
   module.COUNTER.documentReady = function ($) {
     var $scrollElements = $('[data-counter-number]');
+    $(window).off('scroll.COUNTER touchmove.COUNTER');
     $scrollElements.each(function () {
       var viewport = 1;
       var $el = $(this); //
@@ -9229,7 +9241,8 @@ var COUNTER = function (module, $, window, document) {
         }
       };
 
-      scrollUpdate();
+      scrollUpdate(); // Please do not use scroll's off method in each
+
       $(window).on('scroll.COUNTER touchmove.COUNTER', function (event) {
         scrollUpdate();
       });
@@ -10574,7 +10587,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.3';
+  module.FLOATING_SIDE_EL.version = '0.0.4';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -10589,7 +10602,7 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
         marginTop: -floatingOffset.top + ($(window).height() - $floatingSideEl.height()) / 2
       }
     });
-    $(window).on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
+    $(window).off('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL').on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
       var sideBarHeight = $floatingSideEl.height(),
           scrolled = $(this).scrollTop();
 
@@ -12141,9 +12154,10 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.4';
+  module.POST_LIST_AJAX.version = '0.1.5';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
+    $(window).off('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX');
     $('[data-ajax-list-json]').each(function () {
       var $this = $(this);
       var wrapperID = 'refresh-all-waypoint-' + UixGUID.create();
@@ -13739,7 +13753,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.7';
+  module.ONEPAGE.version = '0.0.8';
 
   module.ONEPAGE.documentReady = function ($) {
     var $window = $(window);
@@ -13959,7 +13973,7 @@ var ONEPAGE = function (module, $, window, document) {
 
     var navMinTop = $sidefixedMenu.length > 0 ? $sidefixedMenu.offset().top : 0,
         navMaxTop = parseFloat($(document).height() - $('.uix-footer__container').height()) - windowHeight / 3;
-    $window.on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
+    $window.off('scroll.ONEPAGE touchmove.ONEPAGE').on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
       var scrolled = $(this).scrollTop(),
           spyTop = parseFloat(scrolled + topSpacing),
           minTop = $('[data-highlight-section="true"]').first().offset().top,
@@ -14793,10 +14807,11 @@ function progress_bar_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var PROGRESS_BAR = function (module, $, window, document) {
   if (window.PROGRESS_BAR === null) return false;
   module.PROGRESS_BAR = module.PROGRESS_BAR || {};
-  module.PROGRESS_BAR.version = '0.0.5';
+  module.PROGRESS_BAR.version = '0.0.6';
 
   module.PROGRESS_BAR.documentReady = function ($) {
     var $scrollElements = $('[data-progressbar-percent]');
+    $(window).off('scroll.PROGRESS_BAR touchmove.PROGRESS_BAR');
     $scrollElements.each(function () {
       var viewport = 1;
       var $el = $(this); //
@@ -14838,7 +14853,8 @@ var PROGRESS_BAR = function (module, $, window, document) {
         }
       };
 
-      scrollUpdate();
+      scrollUpdate(); // Please do not use scroll's off method in each
+
       $(window).on('scroll.PROGRESS_BAR touchmove.PROGRESS_BAR', function (event) {
         scrollUpdate();
       });
@@ -15040,11 +15056,12 @@ function scroll_reveal_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
 var SCROLL_REVEAL = function (module, $, window, document) {
   if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
-  module.SCROLL_REVEAL.version = '0.1.3';
+  module.SCROLL_REVEAL.version = '0.1.4';
 
   module.SCROLL_REVEAL.documentReady = function ($) {
     //From JSON config in data attribute in HTML
     var $scrollElements = $('[data-uix-anim]');
+    $(window).off('scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL');
     $scrollElements.each(function () {
       var viewport;
       var $el = $(this);
@@ -15145,7 +15162,8 @@ var SCROLL_REVEAL = function (module, $, window, document) {
         }
       };
 
-      scrollUpdate();
+      scrollUpdate(); // Please do not use scroll's off method in each
+
       $(window).on('scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function (event) {
         scrollUpdate();
       });
@@ -15178,7 +15196,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.5';
+  module.SCROLLSPY_ANIM.version = '0.0.6';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -15249,7 +15267,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
       });
     }
 
-    $window.on('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function (event) {
+    $window.off('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM').on('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function (event) {
       var elHeight = $el.height(),
           elOffsetTop = $el.offset().top - panelHeight;
       var scrolled = $(this).scrollTop(),
@@ -15518,7 +15536,7 @@ function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.8';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.0.9';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -15564,7 +15582,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
         }
       }
     });
-    $(window).on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
+    $(window).off('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE').on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
       scroller.scrollRequest++;
 
       if (!requestId) {
@@ -15653,7 +15671,7 @@ function sticky_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var STICKY_EL = function (module, $, window, document) {
   if (window.STICKY_EL === null) return false;
   module.STICKY_EL = module.STICKY_EL || {};
-  module.STICKY_EL.version = '0.0.6';
+  module.STICKY_EL.version = '0.0.7';
 
   module.STICKY_EL.pageLoaded = function () {
     var $window = $(window);
@@ -15701,12 +15719,13 @@ var STICKY_EL = function (module, $, window, document) {
 
     function stickyInit(w, h) {
       if (w > 768) {
+        $(window).off('scroll.STICKY_EL touchmove.STICKY_EL');
         $('.js-uix-sticky-el').each(function () {
           var $el = $(this),
               elTop = $el.offset().top,
               oWidth = $el.width(),
               clsID = $el.data('sticky-id'),
-              $ph = $('[data-sticky-id="' + clsID + '"].is-placeholder'); //spy the scroll event
+              $ph = $('[data-sticky-id="' + clsID + '"].is-placeholder'); // Please do not use scroll's off method in each
 
           $window.on('scroll.STICKY_EL touchmove.STICKY_EL', function () {
             var scrolled = $(this).scrollTop(),
@@ -17820,7 +17839,7 @@ function simple_3D_particle_effect_js_typeof(obj) { "@babel/helpers - typeof"; i
 var THREE_PARTICLE = function (module, $, window, document) {
   if (window.THREE_PARTICLE === null) return false;
   module.THREE_PARTICLE = module.THREE_PARTICLE || {};
-  module.THREE_PARTICLE.version = '0.0.5';
+  module.THREE_PARTICLE.version = '0.0.6';
 
   module.THREE_PARTICLE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -18021,8 +18040,12 @@ var THREE_PARTICLE = function (module, $, window, document) {
 
 
         document.addEventListener('mousemove', onDocumentMouseMove, false);
-        document.addEventListener('touchstart', onDocumentTouchStart, false);
-        document.addEventListener('touchmove', onDocumentTouchMove, false);
+        document.addEventListener('touchstart', onDocumentTouchStart, browser.supportsPassive ? {
+          passive: true
+        } : false);
+        document.addEventListener('touchmove', onDocumentTouchMove, browser.supportsPassive ? {
+          passive: true
+        } : false);
         document.addEventListener('mousedown', onDocumentMouseDown, false);
         document.addEventListener('mouseup', onDocumentMouseUp, false); // Fires when the window changes
 
@@ -19096,7 +19119,7 @@ function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) {
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
-  module.THREE_MOUSE_INTERACTION2.version = '0.0.4';
+  module.THREE_MOUSE_INTERACTION2.version = '0.0.5';
 
   module.THREE_MOUSE_INTERACTION2.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -19359,7 +19382,9 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         this.init = function (domEl) {
           this.domElem = domEl;
           this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
-          this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, false);
+          this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, browser.supportsPassive ? {
+            passive: true
+          } : false);
           this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, browser.supportsPassive ? {
             passive: true
           } : false);
@@ -22649,7 +22674,7 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 var VERTICAL_MENU = function (module, $, window, document) {
   if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
-  module.VERTICAL_MENU.version = '0.0.3';
+  module.VERTICAL_MENU.version = '0.0.4';
 
   module.VERTICAL_MENU.documentReady = function ($) {
     var $window = $(window);
@@ -22741,7 +22766,7 @@ var VERTICAL_MENU = function (module, $, window, document) {
         height: winHeight + 'px',
         marginTop: 0
       });
-      $window.on('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function () {
+      $window.off('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU').on('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function () {
         var curULHeight = $('ul.uix-menu').height(),
             scrolled = $(this).scrollTop();
 

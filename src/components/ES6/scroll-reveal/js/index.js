@@ -21,13 +21,15 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLL_REVEAL               = module.SCROLL_REVEAL || {};
-    module.SCROLL_REVEAL.version       = '0.1.3';
+    module.SCROLL_REVEAL.version       = '0.1.4';
     module.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
 		//From JSON config in data attribute in HTML
 		const $scrollElements = $( '[data-uix-anim]' );
     
+        $( window ).off( 'scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL' );
+        
         $scrollElements.each( function()  {
 
             
@@ -155,6 +157,8 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
             
             
             scrollUpdate();
+            
+            // Please do not use scroll's off method in each
             $( window ).on( 'scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function( event ) {
                  scrollUpdate();
             });

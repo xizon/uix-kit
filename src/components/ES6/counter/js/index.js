@@ -25,12 +25,14 @@ export const COUNTER = ( ( module, $, window, document ) => {
 	
 	
     module.COUNTER               = module.COUNTER || {};
-    module.COUNTER.version       = '0.0.3';
+    module.COUNTER.version       = '0.0.4';
     module.COUNTER.documentReady = function( $ ) {
 
 		
 		const $scrollElements = $( '[data-counter-number]' );
       
+        $( window ).off( 'scroll.COUNTER touchmove.COUNTER' );
+        
         $scrollElements.each( function()  {
 
             
@@ -67,6 +69,8 @@ export const COUNTER = ( ( module, $, window, document ) => {
             
             
             scrollUpdate();
+            
+            // Please do not use scroll's off method in each
             $( window ).on( 'scroll.COUNTER touchmove.COUNTER', function( event ) {
                  scrollUpdate();
             });

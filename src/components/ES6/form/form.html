@@ -995,7 +995,7 @@
 			 Input Validation 
 			 ---------------------------
 			 */ 
-			$(document).on( 'submit', '#app-my-form', function(e) {
+			$(document).off( 'submit' ).on( 'submit', '#app-my-form', function(e) {
 
 				var $form        = $( this ),
 					validationOK = true,

@@ -30,7 +30,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.5';
+    module.SCROLLSPY_ANIM.version       = '0.0.6';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -134,7 +134,7 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		}
 
 
-        $window.on( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function( event ) {
+        $window.off( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM' ).on( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function( event ) {
 		
             
             const elHeight      = $el.height(),

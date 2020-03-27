@@ -170,6 +170,31 @@ $button-class-margin-b: 1rem;
 	padding: 1.25rem 5rem;
 }
 
+
+@media all and (max-width: 320px) { 
+    
+    /* tiny */
+    .uix-btn__size--t {
+        font-size: 0.625rem;
+        padding: .3rem .7rem;
+    }
+    /* small */
+    .uix-btn__size--s {
+        font-size: 0.75rem;
+        padding: .5rem 1rem;
+    }
+    /* medium */
+    .uix-btn__size--m {
+        font-size: 0.875rem;
+        padding: 0.7rem 2rem;
+    }
+    /* large */
+    .uix-btn__size--l {
+        font-size: 1rem;
+        padding: 1rem 3.5rem;
+    }
+   
+}
 /*
  ---------------------------
  4. Icons

@@ -24,12 +24,14 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
 	
 	
     module.PROGRESS_BAR               = module.PROGRESS_BAR || {};
-    module.PROGRESS_BAR.version       = '0.0.5';
+    module.PROGRESS_BAR.version       = '0.0.6';
     module.PROGRESS_BAR.documentReady = function( $ ) {
 
 		
 		const $scrollElements = $( '[data-progressbar-percent]' );
        
+        $( window ).off( 'scroll.PROGRESS_BAR touchmove.PROGRESS_BAR' );
+        
         $scrollElements.each( function()  {
 
             
@@ -89,6 +91,8 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
             
             
             scrollUpdate();
+            
+            // Please do not use scroll's off method in each
             $( window ).on( 'scroll.PROGRESS_BAR touchmove.PROGRESS_BAR', function( event ) {
                  scrollUpdate();
             });

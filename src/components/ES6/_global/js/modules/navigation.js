@@ -23,7 +23,7 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 	
 	
 	module.NAVIGATION               = module.NAVIGATION || {};
-    module.NAVIGATION.version       = '0.0.7';
+    module.NAVIGATION.version       = '0.0.8';
 	module.NAVIGATION.documentReady = function( $ ) {
 
 
@@ -111,7 +111,7 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 		//-------- Sticky primary navigation
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 		const $el = $( '.uix-menu__container:not(.is-mobile)' );
-		$window.on( 'scroll.NAVIGATION touchmove.NAVIGATION', function() {
+		$window.off( 'scroll.NAVIGATION touchmove.NAVIGATION' ).on( 'scroll.NAVIGATION touchmove.NAVIGATION', function() {
 
 			const scrolled = $( this ).scrollTop(),
 				  spyTop   = 220;

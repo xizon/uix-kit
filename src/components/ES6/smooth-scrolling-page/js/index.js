@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.8';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.9';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -82,7 +82,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             }
         });
 
-        $( window ).on( 'scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function() {
+        $( window ).off( 'scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE' ).on( 'scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function() {
             scroller.scrollRequest++;
             if (!requestId) {
                 requestId = requestAnimationFrame(scrollUpdate);

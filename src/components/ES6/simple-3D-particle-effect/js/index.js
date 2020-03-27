@@ -26,10 +26,8 @@ import {
 export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 	if ( window.THREE_PARTICLE === null ) return false;
 	
-	
-	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};
-    module.THREE_PARTICLE.version       = '0.0.5';
+    module.THREE_PARTICLE.version       = '0.0.6';
     module.THREE_PARTICLE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -297,8 +295,8 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 				//----
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+				document.addEventListener( 'touchstart', onDocumentTouchStart, browser.supportsPassive ? { passive: true } : false );
+				document.addEventListener( 'touchmove', onDocumentTouchMove, browser.supportsPassive ? { passive: true } : false );
 
 				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 				document.addEventListener( 'mouseup', onDocumentMouseUp, false );

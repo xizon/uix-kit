@@ -38,8 +38,11 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.4';
+    module.POST_LIST_AJAX.version       = '0.1.5';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
+        
+        
+        $( window ).off( 'scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX' );
         
 		$( '[data-ajax-list-json]' ).each( function() {
 			const $this            = $( this );

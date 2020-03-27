@@ -174,6 +174,8 @@
 
 
                 scrollUpdate();
+                
+                // Please do not use scroll's off method in each
                 $( window ).on( 'scroll.UixTextEff touchmove.UixTextEff', function( event ) {
                      scrollUpdate();
                 });  

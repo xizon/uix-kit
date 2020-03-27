@@ -23,7 +23,7 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 	
 	
 	module.MOBILE_MENU               = module.MOBILE_MENU || {};
-    module.MOBILE_MENU.version       = '0.0.7';
+    module.MOBILE_MENU.version       = '0.0.8';
 	module.MOBILE_MENU.documentReady = function( $ ) {
 
 
@@ -37,7 +37,7 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 		//-------- Show Toolbar when viewing site for WordPress
 		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 		const $el = $( '.admin-bar .uix-menu-mobile__toggle' );
-		$window.on( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU', function() {
+		$window.off( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU' ).on( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU', function() {
 
 			const scrolled = $( this ).scrollTop(),
 				  spyTop    = 46;

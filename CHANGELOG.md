@@ -1,6 +1,10 @@
 # Changelog
 
 
+#### = 4.2.0 (March 27, 2020) =
+
+* Fix: Avoid duplicate scroll events.
+
 
 #### = 4.1.7 (March 25, 2020) =
 

@@ -25,7 +25,7 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 	
 	
     module.STICKY_EL               = module.STICKY_EL || {};
-    module.STICKY_EL.version       = '0.0.6';
+    module.STICKY_EL.version       = '0.0.7';
     module.STICKY_EL.pageLoaded    = function() {
 
         const $window          = $( window );
@@ -92,6 +92,8 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 			
 			if ( w > 768 ) {
 				
+                $( window ).off( 'scroll.STICKY_EL touchmove.STICKY_EL' );
+                
 				$( '.js-uix-sticky-el' ).each( function()  {
 					const $el      = $( this ),
 						  elTop    = $el.offset().top,
@@ -102,7 +104,7 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 					
                     
 					
-					//spy the scroll event
+					// Please do not use scroll's off method in each
 					$window.on( 'scroll.STICKY_EL touchmove.STICKY_EL', function() {
 
 						const scrolled   = $( this ).scrollTop(),

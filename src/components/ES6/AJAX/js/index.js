@@ -340,6 +340,18 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                     formData.append(k, defaultPostData[k]);
                 }
                 
+                /*
+                // For multiple form fields data acquisition
+                const formData = new FormData();
+                const oldFormData = $this.serializeArray();
+                oldFormData.forEach(function(item){
+                    formData.append(item.name, item.value);
+                });
+                formData.append('action', 'load_singlepages_ajax_content');
+                */
+
+
+                
                 // Create a request event
                 axios({
                     timeout: 15000,
