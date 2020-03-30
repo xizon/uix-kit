@@ -336,7 +336,7 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
                 const defaultPostData = {
                     action  : 'load_singlepages_ajax_content'
                 };
-                for(var k in defaultPostData) {
+                for(let k in defaultPostData) {
                     formData.append(k, defaultPostData[k]);
                 }
                 

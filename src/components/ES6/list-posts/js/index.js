@@ -471,7 +471,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
             
             // To send data in the application/x-www-form-urlencoded format instead
             const formData = new FormData();
-            for(var k in defaultPostData) {
+            for(let k in defaultPostData) {
                 formData.append(k, defaultPostData[k]);
             }
             
