@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 4.2.1 (March 30, 2020) =
+
+* Fix: Prevent click events firing multiple times for AJAX.
+* Tweak: Modified variable declaration.
+
+
 
 #### = 4.2.0 (March 27, 2020) =
 

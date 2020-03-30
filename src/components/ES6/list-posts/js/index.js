@@ -38,7 +38,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.5';
+    module.POST_LIST_AJAX.version       = '0.1.6';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
         
         
@@ -367,7 +367,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						}
 
 						//Avoid using $( document ) to cause an asynchronous load without counting from 1
-						$( trigger ).on( 'click.POST_LIST_AJAX', function( e ) {
+						$( trigger ).off( 'click.POST_LIST_AJAX' ).on( 'click.POST_LIST_AJAX', function( e ) {
 							
 
 							e.preventDefault();

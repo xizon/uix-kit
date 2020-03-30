@@ -71,6 +71,7 @@ $button-class-margin-b: 1rem;
 		background-size: 30px 30px !important;
 		animation: uix-cssAnim--moveWaitingStripes 0.5s linear infinite !important;
 		cursor: wait !important;
+        pointer-events: none !important;
 
 	}
 

@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.0
+ * ## Version             :  4.2.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 27, 2020
+ * ## Last Update         :  March 30, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0ecde31d16ce25bae4df";
+/******/ 	var hotCurrentHash = "9cb79232a653c07f8010";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -11715,9 +11715,9 @@ var LIGHTBOX = function (module, $, window, document) {
 
           thumbs += '<div class="uix-lightbox__thumb-container"><ul>';
 
-          for (var _k = 0; _k < imgSrcStr.length; _k++) {
-            var active = _k == 0 ? 'class="is-active"' : '';
-            thumbs += '<li ' + active + '><img src="' + imgSrcStr[_k].thumb + '" alt=""></li>';
+          for (var k = 0; k < imgSrcStr.length; k++) {
+            var active = k == 0 ? 'class="is-active"' : '';
+            thumbs += '<li ' + active + '><img src="' + imgSrcStr[k].thumb + '" alt=""></li>';
           }
 
           thumbs += '</ul></div>';
@@ -11852,8 +11852,8 @@ var LIGHTBOX = function (module, $, window, document) {
             action: 'load_singlepages_ajax_content'
           };
 
-          for (var k in defaultPostData) {
-            formData.append(k, defaultPostData[k]);
+          for (var _k in defaultPostData) {
+            formData.append(_k, defaultPostData[_k]);
           } // Create a request event
 
 
@@ -12154,7 +12154,7 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.5';
+  module.POST_LIST_AJAX.version = '0.1.6';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $(window).off('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX');
@@ -12393,7 +12393,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             } //Avoid using $( document ) to cause an asynchronous load without counting from 1
 
 
-            $(trigger).on('click.POST_LIST_AJAX', function (e) {
+            $(trigger).off('click.POST_LIST_AJAX').on('click.POST_LIST_AJAX', function (e) {
               e.preventDefault();
               var $button = $(this);
               var curPage = $button.attr('data-cur-page'); //Add next page number to the button
