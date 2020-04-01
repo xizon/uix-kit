@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.1
+ * ## Version             :  4.2.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 30, 2020
+ * ## Last Update         :  April 1, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -8836,11 +8836,13 @@ select:-webkit-autofill:focus {
 }
 
 /* Filter or Masonry */
+/* You can directly use uix-core-grid__col-* to control the width of the item */
 .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles,
 .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles {
   position: relative;
   /* required */
   overflow: inherit;
+  width: calc(100% + 15px);
 }
 
 .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item,
@@ -8854,7 +8856,7 @@ select:-webkit-autofill:focus {
 .uix-gallery[data-show-type*="filter"] > .uix-gallery__tiles .uix-gallery__item > div,
 .uix-gallery[data-show-type*="masonry"] > .uix-gallery__tiles .uix-gallery__item > div {
   position: relative;
-  width: 100%;
+  width: calc(100% - 15px);
   height: 100%;
 }
 

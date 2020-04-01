@@ -31,7 +31,7 @@ export const GALLERY = ( ( module, $, window, document ) => {
 	
 	
     module.GALLERY               = module.GALLERY || {};
-    module.GALLERY.version       = '0.0.4';
+    module.GALLERY.version       = '0.0.5';
     module.GALLERY.documentReady = function( $ ) {
 
 		$( '.uix-gallery' ).each( function() {
@@ -100,7 +100,7 @@ export const GALLERY = ( ( module, $, window, document ) => {
 					layoutEasing: 'ease',
 					
 					//// Drag & Drop
-					dragEnabled: true
+					dragEnabled: false
 				});
 
 

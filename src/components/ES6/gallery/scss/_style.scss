@@ -109,37 +109,39 @@
 
 
 /* Filter or Masonry */
+/* You can directly use uix-core-grid__col-* to control the width of the item */
+$gallery-masonry-item-gap: 15px;
 .uix-gallery[data-show-type*="filter"],
 .uix-gallery[data-show-type*="masonry"] {
 	> .uix-gallery__tiles {
 		position: relative;/* required */
         overflow: inherit;
+        width: calc(100% + #{$gallery-masonry-item-gap});
 
-		.uix-gallery__item {
+        .uix-gallery__item {
+            
+            /* required */
+            display: block;
+            position: absolute;
+            z-index: 1;
 
+            > div {
+                position: relative;
+                width: calc(100% - #{$gallery-masonry-item-gap});
+                height: 100%;
+            }
 
-			/* required */
-			display: block;
-			position: absolute;
-			z-index: 1;
+            &.muuri-item-dragging {
+                z-index: 3;
+            }
+            &.muuri-item-releasing {
+                z-index: 2;
+            }
+            &.muuri-item-hidden {
+                z-index: 0;
+            }
 
-			> div {
-			  position: relative;
-			  width: 100%;
-			  height: 100%;
-			}
-
-			&.muuri-item-dragging {
-			  z-index: 3;
-			}
-			&.muuri-item-releasing {
-			  z-index: 2;
-			}
-			&.muuri-item-hidden {
-			  z-index: 0;
-			}
-
-		}
+        }
 
 	}
 

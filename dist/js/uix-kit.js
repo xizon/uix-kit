@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.1
+ * ## Version             :  4.2.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 30, 2020
+ * ## Last Update         :  April 1, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9cb79232a653c07f8010";
+/******/ 	var hotCurrentHash = "4498cdf7f0c57b84c108";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -10587,7 +10587,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.4';
+  module.FLOATING_SIDE_EL.version = '0.0.5';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -10605,6 +10605,7 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
     $(window).off('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL').on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
       var sideBarHeight = $floatingSideEl.height(),
           scrolled = $(this).scrollTop();
+      documentHeight = $(document).height();
 
       if (scrolled > floatingOffset.top) {
         var newPosition = scrolled - floatingOffset.top,
@@ -11203,7 +11204,7 @@ function gallery_js_classCallCheck(instance, Constructor) { if (!(instance insta
 var GALLERY = function (module, $, window, document) {
   if (window.GALLERY === null) return false;
   module.GALLERY = module.GALLERY || {};
-  module.GALLERY.version = '0.0.4';
+  module.GALLERY.version = '0.0.5';
 
   module.GALLERY.documentReady = function ($) {
     $('.uix-gallery').each(function () {
@@ -11261,7 +11262,7 @@ var GALLERY = function (module, $, window, document) {
           layoutDuration: 300,
           layoutEasing: 'ease',
           //// Drag & Drop
-          dragEnabled: true
+          dragEnabled: false
         }); // When all items have loaded refresh their
         // dimensions and layout the grid.
 

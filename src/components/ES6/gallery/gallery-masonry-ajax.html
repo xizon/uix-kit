@@ -96,218 +96,201 @@
 			<div class="uix-spacing--s">
 				<div class="container uix-t-c">
 
-					 <div class="uix-core-grid">
-						<div class="uix-core-grid__row uix-core-grid__row--loop">
+                    <div class="uix-gallery" data-show-type="masonry" data-filter-id="">
 
-						<div class="uix-gallery" data-show-type="masonry" data-filter-id="">
 
-							
-							<!-- 
-								Note: Recommended to enter the total number of attribute "data-ajax-list-page-total".
+                        <!-- 
+                            Note: Recommended to enter the total number of attribute "data-ajax-list-page-total".
 
-								* @param  {String} data-ajax-list-json                    - JSON file path to docking data.
-								* @param  {String} data-ajax-list-method                  - The type of request to make, which can be either "POST" or "GET".
-								* @param  {String} data-ajax-list-render                  - Rendering mode of display information. ==> before | html | append
-								* @param  {String} data-ajax-list-temp-id                 - HTML template ID
-								* @param  {Object} data-ajax-list-page-parm-str           - Data to be sent to the server which is custom JSON fields.
-								* @param  {Number} data-ajax-list-page-now                - The current page to load.
-								* @param  {Number} data-ajax-list-page-per                - The amount to load each time.
-								* @param  {Number} data-ajax-list-page-total              - The total page to load.
-								* @param  {Object} data-ajax-list-trigger                 - Trigger ajax loaded button object.
-								* @param  {String} data-ajax-list-trigger-active-class    - The class name of trigger button actived.
-								* @param  {String} data-ajax-list-push-container-class    - This container is used to display the loaded dynamic data.
-								* @param  {Boolean} data-ajax-list-infinitescroll         - Returns information of ajax asynchronous callback when the content is empty.    
-								* @param  {String} data-ajax-list-field-{str}             - Customize the fields to be transferred to the server.
-                             -->
-							<div class="uix-gallery__tiles"
-								 data-ajax-list-json="assets/json/content-posts.php" 
-								 data-ajax-list-method="POST" 
-								 data-ajax-list-render="before" 
-								 data-ajax-list-temp-id="list-topic-ajax-template-1" 
-								 data-ajax-list-page-parm-str='{"totalPage":"total","currentPage":"page","displayPerPage":"per"}' 
-								 data-ajax-list-page-now="1" 
-								 data-ajax-list-page-per="8" 
-								 data-ajax-list-page-total="-1" 
-								 data-ajax-list-trigger="#ajax-loadmore-btn-1" 
-								 data-ajax-list-trigger-active-class=".wait" 
-								 data-ajax-list-push-container-class=".uix-list-topic__items-ajax-container" 
-								 data-ajax-list-infinitescroll="false"
-								 data-ajax-list-none-info='{"none":"<div class=\"uix-clearfix\"></div><p class=\"uix-typo--color-sub uix-t-c\">No content yet.</p>","error":"<div class=\"uix-clearfix\"></div><p class=\"uix-typo--color-sub uix-t-c\">An unknown error has occurred.</p>"}'
-								 data-ajax-list-field-name1="Custom String 1"
-								 data-ajax-list-field-name2="Custom String 2">
+                            * @param  {String} data-ajax-list-json                    - JSON file path to docking data.
+                            * @param  {String} data-ajax-list-method                  - The type of request to make, which can be either "POST" or "GET".
+                            * @param  {String} data-ajax-list-render                  - Rendering mode of display information. ==> before | html | append
+                            * @param  {String} data-ajax-list-temp-id                 - HTML template ID
+                            * @param  {Object} data-ajax-list-page-parm-str           - Data to be sent to the server which is custom JSON fields.
+                            * @param  {Number} data-ajax-list-page-now                - The current page to load.
+                            * @param  {Number} data-ajax-list-page-per                - The amount to load each time.
+                            * @param  {Number} data-ajax-list-page-total              - The total page to load.
+                            * @param  {Object} data-ajax-list-trigger                 - Trigger ajax loaded button object.
+                            * @param  {String} data-ajax-list-trigger-active-class    - The class name of trigger button actived.
+                            * @param  {String} data-ajax-list-push-container-class    - This container is used to display the loaded dynamic data.
+                            * @param  {Boolean} data-ajax-list-infinitescroll         - Returns information of ajax asynchronous callback when the content is empty.    
+                            * @param  {String} data-ajax-list-field-{str}             - Customize the fields to be transferred to the server.
+                         -->
+                        <div class="uix-gallery__tiles"
+                             data-ajax-list-json="assets/json/content-posts.php" 
+                             data-ajax-list-method="POST" 
+                             data-ajax-list-render="before" 
+                             data-ajax-list-temp-id="list-topic-ajax-template-1" 
+                             data-ajax-list-page-parm-str='{"totalPage":"total","currentPage":"page","displayPerPage":"per"}' 
+                             data-ajax-list-page-now="1" 
+                             data-ajax-list-page-per="8" 
+                             data-ajax-list-page-total="-1" 
+                             data-ajax-list-trigger="#ajax-loadmore-btn-1" 
+                             data-ajax-list-trigger-active-class=".wait" 
+                             data-ajax-list-push-container-class=".uix-list-topic__items-ajax-container" 
+                             data-ajax-list-infinitescroll="false"
+                             data-ajax-list-none-info='{"none":"<div class=\"uix-clearfix\"></div><p class=\"uix-typo--color-sub uix-t-c\">No content yet.</p>","error":"<div class=\"uix-clearfix\"></div><p class=\"uix-typo--color-sub uix-t-c\">An unknown error has occurred.</p>"}'
+                             data-ajax-list-field-name1="Custom String 1"
+                             data-ajax-list-field-name2="Custom String 2">
 
 
 
-								<!-- Item  -->
-								<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["web-design","seo"]'>
+                            <!-- Item  -->
+                            <article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["web-design","seo"]'>
 
-									<div>
+                                <div>
 
-										<a href="#" class="uix-gallery__image" >
-											<div class="uix-gallery__image-cover">
-												<img src="assets/images/demo/test-img-big-1.jpg" height="300" alt="" />
-											</div>
-										</a>
-										<h3>
-											<a href="#">Project Title Here</a>
-											<span class="uix-gallery__title">Beautiful WordPress Theme</span>
-											<span class="uix-gallery__cat"><a href="#">Free</a></span>
-										</h3>
+                                    <a href="#" class="uix-gallery__image" >
+                                        <div class="uix-gallery__image-cover">
+                                            <img src="assets/images/demo/test-img-big-1.jpg" height="300" alt="" />
+                                        </div>
+                                    </a>
+                                    <h3>
+                                        <a href="#">Project Title Here</a>
+                                        <span class="uix-gallery__title">Beautiful WordPress Theme</span>
+                                        <span class="uix-gallery__cat"><a href="#">Free</a></span>
+                                    </h3>
 
-									</div>
+                                </div>
 
 
 
-								</article>
-								<!--  .uix-gallery__item  end -->  
+                            </article>
+                            <!--  .uix-gallery__item  end -->  
 
 
 
 
 
-								<!-- Item  -->
-								<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["web-design"]'>
+                            <!-- Item  -->
+                            <article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["web-design"]'>
 
 
-									<div>
-										<a href="#" class="uix-gallery__image" >
-											<div class="uix-gallery__image-cover">
-												<img src="assets/images/demo/test-img-big-2.jpg" height="120" alt="" />
-											</div>
-										</a>
-										<h3>
-											<a href="#">Project Title Here</a>
-											<span class="uix-gallery__title">Beautiful WordPress Theme</span>
-											<span class="uix-gallery__cat"><a href="#">Free</a></span>
-										</h3>
+                                <div>
+                                    <a href="#" class="uix-gallery__image" >
+                                        <div class="uix-gallery__image-cover">
+                                            <img src="assets/images/demo/test-img-big-2.jpg" height="120" alt="" />
+                                        </div>
+                                    </a>
+                                    <h3>
+                                        <a href="#">Project Title Here</a>
+                                        <span class="uix-gallery__title">Beautiful WordPress Theme</span>
+                                        <span class="uix-gallery__cat"><a href="#">Free</a></span>
+                                    </h3>
 
-									</div>
+                                </div>
 
 
 
-								</article>
-								<!--  .uix-gallery__item  end -->             
+                            </article>
+                            <!--  .uix-gallery__item  end -->             
 
-								<!-- Item  -->
-								<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["web-design"]'>
+                            <!-- Item  -->
+                            <article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["web-design"]'>
 
 
-									<div>
-										<a href="#" class="uix-gallery__image" >
-											<div class="uix-gallery__image-cover">
-												<img src="assets/images/demo/test-img-big-3.jpg" alt="" />
-											</div>
-										</a>
-										<h3>
-											<a href="#">Project Title Here</a>
-											<span class="uix-gallery__title">Beautiful WordPress Theme</span>
-											<span class="uix-gallery__cat"><a href="#">Free</a></span>
-										</h3>
+                                <div>
+                                    <a href="#" class="uix-gallery__image" >
+                                        <div class="uix-gallery__image-cover">
+                                            <img src="assets/images/demo/test-img-big-3.jpg" alt="" />
+                                        </div>
+                                    </a>
+                                    <h3>
+                                        <a href="#">Project Title Here</a>
+                                        <span class="uix-gallery__title">Beautiful WordPress Theme</span>
+                                        <span class="uix-gallery__cat"><a href="#">Free</a></span>
+                                    </h3>
 
-									</div>
+                                </div>
 
 
 
-								</article>
-								<!--  .uix-gallery__item  end -->  
+                            </article>
+                            <!--  .uix-gallery__item  end -->  
 
 
-								 <!-- Item  -->
-								<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["seo"]'>
+                             <!-- Item  -->
+                            <article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["seo"]'>
 
 
-									<div>
-										<a href="#" class="uix-gallery__image" >
-											<div class="uix-gallery__image-cover">
-												<img src="assets/images/demo/test-img-big-4.jpg" height="220" alt="" />
-											</div>
-										</a>
-										<h3>
-											<a href="#">Project Title Here</a>
-											<span class="uix-gallery__title">Commerce Theme</span>
-											<span class="uix-gallery__cat"><a href="#">Free</a></span>
-										</h3>
+                                <div>
+                                    <a href="#" class="uix-gallery__image" >
+                                        <div class="uix-gallery__image-cover">
+                                            <img src="assets/images/demo/test-img-big-4.jpg" height="220" alt="" />
+                                        </div>
+                                    </a>
+                                    <h3>
+                                        <a href="#">Project Title Here</a>
+                                        <span class="uix-gallery__title">Commerce Theme</span>
+                                        <span class="uix-gallery__cat"><a href="#">Free</a></span>
+                                    </h3>
 
-									</div>			
+                                </div>			
 
 
 
-								</article>
-								<!--  .uix-gallery__item  end -->  
+                            </article>
+                            <!--  .uix-gallery__item  end -->  
 
 
-								<!-- Item  -->
-								<article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["ui"]'>
+                            <!-- Item  -->
+                            <article class="uix-core-grid__col-4 uix-gallery__item" data-groups='["ui"]'>
 
 
-									<div>
-										<a href="#" class="uix-gallery__image" >
-											<div class="uix-gallery__image-cover">
-												<img src="assets/images/demo/test-img-big-5.jpg" alt="" />
-											</div>
-										</a>
-										<h3>
-											<a href="#">Project Title Here</a>
-											<span class="uix-gallery__title">Simple WordPress Theme</span>
-											<span class="uix-gallery__cat"><a href="#">Free</a></span>
-										</h3>
+                                <div>
+                                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                                </div>
 
-									</div>
 
 
+                            </article>
+                            <!--  .uix-gallery__item  end -->     
 
-								</article>
-								<!--  .uix-gallery__item  end -->     
 
+                            <div class="uix-list-topic__items-ajax-container"></div>
+                            <script id="list-topic-ajax-template-1" type="text/template7">
 
-								<div class="uix-list-topic__items-ajax-container"></div>
-								<script id="list-topic-ajax-template-1" type="text/template7">
+                                {{#each items}}
 
-									{{#each items}}
 
+                                    <!-- Item  -->
+                                    <article class="uix-core-grid__col-4 uix-gallery__item {{js "@index % 2 === 0 ? 'even' : 'odd'"}}" data-groups='[]'>
 
-										<!-- Item  -->
-										<article class="uix-core-grid__col-4 uix-gallery__item {{js "@index % 2 === 0 ? 'even' : 'odd'"}}" data-groups='[]'>
 
+                                        <div>
+                                            <a href="#" class="uix-gallery__image" >
+                                                <div class="uix-gallery__image-cover {{js "this.img === '' ? 'none' : ''"}}">
+                                                    <img src="{{img}}" alt="" />
+                                                </div>
+                                            </a>
+                                            <h3>
+                                                <a href="{{link}}">{{title}}</a>
+                                                <span class="uix-gallery__title">{{title}}</span>
+                                                <span class="uix-gallery__cat"><a href="{{link}}">Free</a></span>
+                                            </h3>
 
-											<div>
-												<a href="#" class="uix-gallery__image" >
-													<div class="uix-gallery__image-cover {{js "this.img === '' ? 'none' : ''"}}">
-														<img src="{{img}}" alt="" />
-													</div>
-												</a>
-												<h3>
-													<a href="{{link}}">{{title}}</a>
-													<span class="uix-gallery__title">{{title}}</span>
-													<span class="uix-gallery__cat"><a href="{{link}}">Free</a></span>
-												</h3>
+                                        </div>
 
-											</div>
 
+                                    </article>
+                                    <!--  .uix-gallery__item  end -->     
 
-										</article>
-										<!--  .uix-gallery__item  end -->     
 
 
+                                {{/each}}
 
-									{{/each}}
+                            </script>  
 
-								</script>  
 
 
+                        </div>
+                        <!-- .uix-gallery__tiles end -->
 
-							</div>
-							<!-- .uix-gallery__tiles end -->
 
-
-						</div>
-						<!-- .uix-gallery end -->
-
-						</div>
-						<!-- .uix-core-grid__row  end -->          
-
-					</div>
-					  <!-- /.uix-core-grid -->
+                    </div>
+                    <!-- .uix-gallery end -->
 
 
 					<p class="uix-t-c">

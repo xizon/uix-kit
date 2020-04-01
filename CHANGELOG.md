@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 4.2.2 (April 1, 2020) =
+
+* Tweak: Modified the parameters of masonry layout.
+
+
+
 #### = 4.2.1 (March 30, 2020) =
 
 * Fix: Prevent click events firing multiple times for AJAX.
