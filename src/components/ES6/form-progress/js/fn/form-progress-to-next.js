@@ -73,7 +73,7 @@
 				dur = '0.5s';
 			}
 
-			const durString  = dur.toLowerCase(),
+			const durString  = dur.toString().toLowerCase(),
 				  isMS       = durString.indexOf( 'ms' ) >= 0,
 				  numberNum  = durString.replace( 'ms', '' ).replace( 's', '' ),
 				  animeSpeed = isMS ? numberNum : numberNum * 1000;
