@@ -48,7 +48,7 @@
 					<div class="row">
 						<div class="col-12">
 							<h3>Dynamic Drop Down List from JSON</h3>
-							<p>Create a dynamic dropdown form that loads its data from a JSON file.</p>
+							<p>Create a dynamic dropdown form that loads its data from a JSON file. Support infinite recursion.</p>
 								<p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
 							<hr>
 							
@@ -72,39 +72,29 @@
 				<div class="container">
 						<div class="row">
 							<div class="col-12">
+                                
+                                    <h4>Empty value</h4>
 
-								
-									<div class="uix-controls uix-controls__normal-select">
-										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-										<select 
-												id="dynamic-dd-sort" 
-												name="dynamic-dd-sort" 
-												data-ajax-dynamic-dd-json="assets/json/catgories.json"
-												data-ajax-dynamic-dd-method="POST"
-												data-ajax-dynamic-dd-auto-expand="false"
-												data-ajax-dynamic-dd-data="" 
-												data-ajax-dynamic-dd-this-text="- Sort -" 
-												data-ajax-dynamic-dd-associated-text="- SubSort -" 
-												data-ajax-dynamic-dd-associated2-text="" 
-												data-ajax-dynamic-dd-associated="#dynamic-dd-subsort"
-												data-ajax-dynamic-dd-associated2="">	
+                                    <div data-ajax-dynamic-dd-datatype="category"
+                                         data-ajax-dynamic-dd-json="assets/json/catgories.json"
+                                         data-ajax-dynamic-dd-method="POST"
+                                         data-ajax-dynamic-dd-data='{}' 
+                                         data-ajax-dynamic-dd-placeholder-str='["- Sort -","- Child Sort 1 -","- Child Sort 2 -"]'
+                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-sort","dynamic-dd-sort--child","dynamic-dd-sort--child-child"]'
+                                         data-ajax-dynamic-dd-append-temp='
+                                            <div class="uix-controls uix-controls__normal-select">
+                                                <span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+                                                <select></select>
+                                            </div>			                                
+                                        '>
+                                    </div>
+                                    
+                                    <!-- default value here -->
+                                    <input type="hidden" name="myname1" id="dynamic-dd-sort" data-default-value="">
+                                    <input type="hidden" name="myname2" id="dynamic-dd-sort--child" data-default-value="">
+                                    <input type="hidden" name="myname3" id="dynamic-dd-sort--child-child" data-default-value="">
 
-										</select>
 
-									</div>
-
-
-									<!-- ////////   -->
-
-									<div class="uix-controls uix-controls__normal-select">
-										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-										<select id="dynamic-dd-subsort" name="dynamic-dd-subsort">
-											<option value="" selected>Sub-sort</option>
-										</select>
-
-									</div>			
-
-								   
 								
 							</div>
 							<!-- .col-12 end -->
@@ -118,60 +108,37 @@
 
 			</section>
 
-
-
+            
+            
 		   <!-- Content 
 			====================================================== -->
-			<section class="uix-spacing--s uix-spacing--no-top">
+			<section class="uix-spacing--s">
 				<div class="container">
 						<div class="row">
 							<div class="col-12">
+                                
+                                    <h4>The default value is specified</h4>
 
-								    <p>Normal Select Control</p>
+                                    <div data-ajax-dynamic-dd-datatype="category"
+                                         data-ajax-dynamic-dd-json="assets/json/catgories.json"
+                                         data-ajax-dynamic-dd-method="POST"
+                                         data-ajax-dynamic-dd-data='{}' 
+                                         data-ajax-dynamic-dd-placeholder-str='["- Sort -","- Child Sort 1 -"]'
+                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-sort2","dynamic-dd-sort2--child"]'
+                                         data-ajax-dynamic-dd-append-temp='
+                                            <div class="uix-controls uix-controls__normal-select">
+                                                <span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+                                                <select></select>
+                                            </div>			                                
+                                        '>
+                                    </div>
+                                    
+                                    <!-- default value here -->
+                                    <input type="hidden" name="myname4" id="dynamic-dd-sort2" data-default-value="Level-1 | 2">
+                                    <input type="hidden" name="myname5" id="dynamic-dd-sort2--child" data-default-value="Level-2 | 2_1">
+
+
 								
-									<div class="uix-controls uix-controls__normal-select">
-										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-										<select 
-												id="dynamic-dd-china-province" 
-												name="dynamic-dd-china-province" 
-												data-ajax-dynamic-dd-json="assets/json/china.json"
-												data-ajax-dynamic-dd-method="POST"
-												data-ajax-dynamic-dd-auto-expand="true"
-												data-ajax-dynamic-dd-data="" 
-												data-ajax-dynamic-dd-this-text="- 省 -" 
-												data-ajax-dynamic-dd-associated-text="- 市 -" 
-												data-ajax-dynamic-dd-associated2-text="- 区 -" 
-												data-ajax-dynamic-dd-associated="#dynamic-dd-china-city",
-												data-ajax-dynamic-dd-associated2="#dynamic-dd-china-area">	
-
-											    <!--<option value="湖南省">湖南省</option>-->
-										</select>
-
-									</div>
-
-
-									<!-- ////////   -->
-
-									<div class="uix-controls uix-controls__normal-select">
-										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-										<select name="dynamic-dd-china-city" id="dynamic-dd-china-city">
-										    <!--<option value="长沙市">长沙市</option>-->
-										</select>
-
-									</div>		
-
-
-									<!-- ////////   -->
-
-									<div class="uix-controls uix-controls__normal-select">
-										<span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-										<select name="dynamic-dd-china-area" id="dynamic-dd-china-area"></select>
-
-
-									</div>		
-
-
-
 							</div>
 							<!-- .col-12 end -->
 						</div>
@@ -183,68 +150,41 @@
 
 
 			</section>
-			
-			
-			
-			
+
+            
+            
+            
 		   <!-- Content 
 			====================================================== -->
-			<section class="uix-spacing--s uix-spacing--no-top">
+			<section class="uix-spacing--s">
 				<div class="container">
 						<div class="row">
 							<div class="col-12">
+                                
+                                    <h4>Using custom theme for the select control</h4>
 
-								   <p>Custom Select Control</p>
-
-									<div class="uix-controls uix-controls__select uix-controls__select--top">
-										<label>
-											<select 
-													id="dynamic-dd-china-province2" 
-													name="dynamic-dd-china-province2" 
-													data-ajax-dynamic-dd-json="assets/json/china.json"
-													data-ajax-dynamic-dd-method="POST"
-													data-ajax-dynamic-dd-auto-expand="true"
-													data-ajax-dynamic-dd-data="" 
-													data-ajax-dynamic-dd-this-text="- 省 -" 
-													data-ajax-dynamic-dd-associated-text="- 市 -" 
-													data-ajax-dynamic-dd-associated2-text="- 区 -" 
-													data-ajax-dynamic-dd-associated="#dynamic-dd-china-city2",
-													data-ajax-dynamic-dd-associated2="#dynamic-dd-china-area2">	
-
-												<option value="湖南省">湖南省</option>
-											</select>
-
-										</label>
-									</div>
-
-
-									<!-- ////////   -->
-
-									<div class="uix-controls uix-controls__select uix-controls__select--top">
-										<label>
-											<select name="dynamic-dd-china-city" id="dynamic-dd-china-city2">
-												<option value="长沙市">长沙市</option>
-											</select>
-
-										</label>
-
-									</div>		
+                                    <div data-ajax-dynamic-dd-datatype="category"
+                                         data-ajax-dynamic-dd-json="assets/json/catgories.json"
+                                         data-ajax-dynamic-dd-method="POST"
+                                         data-ajax-dynamic-dd-data='{}' 
+                                         data-ajax-dynamic-dd-placeholder-str='["- Sort -","- Child Sort 1 -","- Child Sort 2 -"]'
+                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-sort3","dynamic-dd-sort3--child","dynamic-dd-sort3--child-child"]'
+                                         data-ajax-dynamic-dd-append-temp='
+                                            <div class="uix-controls uix-controls__select uix-controls__select--top">
+                                                <label>
+                                                    <select></select>
+                                                </label>
+                                            </div>			                                
+                                        '>
+                                    </div>
+                                    
+                                    <!-- default value here -->
+                                    <input type="hidden" name="myname6" id="dynamic-dd-sort3" data-default-value="Level-1 | 2">
+                                    <input type="hidden" name="myname7" id="dynamic-dd-sort3--child" data-default-value="">
+                                    <input type="hidden" name="myname8" id="dynamic-dd-sort3--child-child" data-default-value="">
 
 
-									<!-- ////////   -->
-
-									<div class="uix-controls uix-controls__select uix-controls__select--top">
-										<label>
-											<select name="dynamic-dd-china-area" id="dynamic-dd-china-area2">
-												<option value="">- 区县 -</option>
-											</select>
-
-										</label>
-
-									</div>		
-
-
-
+								
 							</div>
 							<!-- .col-12 end -->
 						</div>
@@ -256,8 +196,52 @@
 
 
 			</section>
+            
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+                                
+                                    <h4>Show city list of China as per state select in dropdown select box</h4>
+
+                                    <div data-ajax-dynamic-dd-datatype="place"
+                                         data-ajax-dynamic-dd-json="assets/json/china.json"
+                                         data-ajax-dynamic-dd-method="POST"
+                                         data-ajax-dynamic-dd-data='{}' 
+                                         data-ajax-dynamic-dd-placeholder-str='["- Province -","- City -","- District -"]'
+                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-place","dynamic-dd-place--child","dynamic-dd-place--child-child"]'
+                                         data-ajax-dynamic-dd-append-temp='
+                                            <div class="uix-controls uix-controls__normal-select">
+                                                <span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
+                                                <select></select>
+                                            </div>			                                
+                                        '>
+                                    </div>
+                                    
+                                    <!-- default value here -->
+                                    <input type="hidden" name="myplace1" id="dynamic-dd-place" data-default-value="">
+                                    <input type="hidden" name="myplace2" id="dynamic-dd-place--child" data-default-value="">
+                                    <input type="hidden" name="myplace3" id="dynamic-dd-place--child-child" data-default-value="">
 
 
+								
+							</div>
+							<!-- .col-12 end -->
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+
+			</section>
+            
+            
+            
 			
 			
 		</main>
@@ -294,9 +278,6 @@
 
 				$( '#dynamic-callback').html( curVal );
 				
-				//set id
-				$( this ).next( '[type="hidden"]' ).val( $this.data( 'id' ) );
-
 				return false;
 
 			});		

@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 4.2.3 (April 11, 2020) =
+
+* Tweak: Refactored select form via AJAX.
+* Tweak: Infinite recursion in selector for Dynamic Drop Down List.
+* New: Added a new Heading style with flex.
+
+
 
 #### = 4.2.2 (April 1, 2020) =
 
