@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 4.2.4 (April 12, 2020) =
+
+* Tweak: Improved the experience of axios request website error.
+
+
 #### = 4.2.3 (April 11, 2020) =
 
 * Tweak: Refactored select form via AJAX.

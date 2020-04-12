@@ -35,7 +35,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.2.0';
+    module.LIGHTBOX.version       = '0.2.1';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -498,6 +498,8 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
                             // that falls out of the range of 2xx
                             const status = error.response.status;
                             console.log(status);
+                            
+                            if ( status == 404 || status == 405 ) window.location.href = ajaxURL;
 
 
                         } else if (error.request) {

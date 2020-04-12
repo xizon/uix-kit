@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.32
+ * ## Version             :  4.2.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 11, 2020
+ * ## Last Update         :  April 12, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "eb0d2466bdc0e54b6383";
+/******/ 	var hotCurrentHash = "b66eae064e204dc15700";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -7896,7 +7896,7 @@ function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.7';
+  module.AJAX_PUSH_CONTENT.version = '0.1.8';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     // trigger of AJAX request
@@ -8168,6 +8168,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
           // that falls out of the range of 2xx
           var status = error.response.status;
           console.log(status);
+          if (status == 404 || status == 405) window.location.href = url;
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -8301,7 +8302,7 @@ function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.8';
+  module.AJAX_PAGE_LOADER.version = '0.1.9';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
     var $window = $(window);
@@ -8692,6 +8693,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
             // that falls out of the range of 2xx
             var status = error.response.status;
             console.log(status);
+            if (status == 404 || status == 405) window.location.href = url;
           } else if (error.request) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -11292,7 +11294,7 @@ function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.2.0';
+  module.LIGHTBOX.version = '0.2.1';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -11628,6 +11630,7 @@ var LIGHTBOX = function (module, $, window, document) {
               // that falls out of the range of 2xx
               var status = error.response.status;
               console.log(status);
+              if (status == 404 || status == 405) window.location.href = ajaxURL;
             } else if (error.request) {
               // The request was made but no response was received
               // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

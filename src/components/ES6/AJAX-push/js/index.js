@@ -22,7 +22,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.7';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.8';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 
@@ -418,6 +418,8 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                     // that falls out of the range of 2xx
                     const status = error.response.status;
                     console.log(status);
+                    
+                    if ( status == 404 || status == 405 ) window.location.href = url;
                     
                     
                 } else if (error.request) {
