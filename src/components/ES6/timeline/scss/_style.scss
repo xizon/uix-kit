@@ -5,10 +5,12 @@
 
 /*
  * 1. Vertical
- * 2. Vertical & Reversed
- * 3. Horizontal
- * 4. Horizontal & Reversed
- * 5. Horizontal ( Classic)
+ * 2. Vertical  - Interaction
+ * 3. Vertical & Reversed
+ * 4. Horizontal - Interaction
+ * 5. Horizontal & Reversed  - Interaction
+ * 6. Horizontal ( Classic)  - Interaction
+ * 7. Buttons
 */
 
 
@@ -18,261 +20,374 @@
  1. Vertical
  ---------------------------
  */
-.uix-timeline__container {
-	width: 100%;
-	overflow: hidden;
-
-	.uix-timeline {
 
 
-		.uix-timeline__item {
+.uix-timeline__container-wrapper {
+    
+    .uix-timeline__container {
+        width: 100%;
+        overflow: hidden;
 
-			position: relative;
-			margin: 3.5rem 0;
-			padding-bottom: 3rem;
-
-			&::after {
-				clear: both;
-				content: "";
-				display: table;
-			}
-			&:first-child {
-				margin-top: 0;
-			}
-			&:last-child {
-				margin-bottom: 0;
-			}
-			.uix-timeline__line {
-				height: calc( 100% + 5rem );
-				width: 1px;
-				background: $highlight-color1;
-				position: absolute;
-				top: 40px;
-				left: 20px;
-			}
-
-			.uix-timeline__item--img {
-				position: absolute;
-				top: 0;
-				width: 40px;
-				height: 40px;
-				left: 20px;
-				margin-left: -20px;
-				@include transition-default();
-
-				img {
-					width: 40px;
-					height: 40px;
-				}
-			}
-
-			.uix-timeline__item--info {
-				position: relative;
-				padding: 1.4rem;
-				width: calc(90% - 2.8rem);
-				margin-left: 120px;
+        .uix-timeline {
 
 
-				@include outer-shadow( 'regular' );
-				@include transition-default();
+            .uix-timeline__item {
 
-				&::after {
-					clear: both;
-					content: '';
-					display: table;
-				}
-				h3 {
-					font-size: 1.25rem;
-					line-height: 1.625;
-				}
-				p {
-					font-size: 0.875rem;
-					margin: 0.875rem 0;
-				}
-				.uix-timeline__item--date {
-					font-size: 0.875rem;
-					display: inline-block;
-					float: left;
-					padding: .6875rem 0;
-					opacity: .7;
-					position: absolute;
-					width: 100%;
-					left: -70px;
-					top: 0;
+                position: relative;
+                margin: 3.5rem 0;
+                padding-bottom: 3rem;
+
+                &::after {
+                    clear: both;
+                    content: "";
+                    display: table;
+                }
+                &:first-child {
+                    margin-top: 0;
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                .uix-timeline__line {
+                    height: calc( 100% + 5rem );
+                    width: 1px;
+                    background: $highlight-color1;
+                    position: absolute;
+                    top: 40px;
+                    left: 20px;
+                }
+
+                .uix-timeline__item__img {
+                    position: absolute;
+                    top: 0;
+                    width: 40px;
+                    height: 40px;
+                    left: 20px;
+                    margin-left: -20px;
+                    cursor: pointer;
+                    @include transition-default();
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+
+                .uix-timeline__item__info {
+                    position: relative;
+                    padding: 1.4rem;
+                    width: calc(90% - 2.8rem);
+                    margin-left: 120px;
 
 
-				}
+                    @include outer-shadow( 'regular' );
+                    @include transition-default();
 
-			}
+                    &::after {
+                        clear: both;
+                        content: '';
+                        display: table;
+                    }
+                    h3 {
+                        font-size: 1.25rem;
+                        line-height: 1.625;
+                    }
+                    p {
+                        font-size: 0.875rem;
+                        margin: 0.875rem 0;
+                    }
+                    .uix-timeline__item__date {
+                        font-size: 0.875rem;
+                        display: inline-block;
+                        float: left;
+                        padding: .6875rem 0;
+                        opacity: .7;
+                        position: absolute;
+                        width: 100%;
+                        left: -70px;
+                        top: 0;
 
 
-		}
+                    }
+
+                }
 
 
-	}
+            }
+
+
+        }
+
+
+    }
+
 
 
 }
+
 
 
 
 
 @media all and (max-width: 768px) {
 
+
+    .uix-timeline__container-wrapper {
+        .uix-timeline__container {
+
+            .uix-timeline {
+
+                .uix-timeline__item {
+
+                    .uix-timeline__line {
+                        left: 20px;
+                    }
+                    .uix-timeline__item__img {
+                        left: 0;
+                        margin-left: auto;
+                    }
+
+                    .uix-timeline__item__info {
+                        width: 80%;
+                        margin-left: 3.5rem;
+
+                        .uix-timeline__item__date {
+                            top: 45px;
+                            left: -60px !important;
+                            right: auto !important;
+                            text-align: left !important;
+                        }
+                    }
+
+
+                }
+
+            }
+
+        }
+
+
+    }
+ 
+
+}
+    
+
+
+/*
+ ---------------------------
+ 2. Vertical  - Interaction
+ ---------------------------
+ */
+.uix-timeline__container-wrapper.is-vertical.js-uix-timeline {
+
 	.uix-timeline__container {
+		padding: 0;
+		margin: 0 auto;
+        height: 400px;
 
 		.uix-timeline {
+            
+            width: auto;
+			height: 9999px;
+			transition: .5s ease-in-out;
 
+            
 			.uix-timeline__item {
 
-				.uix-timeline__line {
-					left: 20px;
+                margin: 0;
+                padding: 0;
+                
+                
+				.uix-timeline__item__img {
+					/* Default status*/
+					opacity: .3;
+                    
+
+                    .uix-timeline__item__date {
+						font-size: 0.875rem;
+						display: inline-block;
+						min-width: 100px;
+                        transform: translate(50px, -35px);
+                    }       
+                    
 				}
-				.uix-timeline__item--img {
+                
+
+
+				.uix-timeline__item__info {
+					margin-bottom: 0;
+					float: none;
 					left: 0;
-					margin-left: auto;
+                    opacity: 0;
+                    transform: translateY(100px);
+                
 				}
+                
+                
+				&.is-active {
 
-				.uix-timeline__item--info {
-					width: 80%;
-					margin-left: 3.5rem;
-
-					.uix-timeline__item--date {
-						top: 45px;
-						left: -60px !important;
-						right: auto !important;
-						text-align: left !important;
+					.uix-timeline__item__img {
+						opacity: 1;
 					}
+
+					.uix-timeline__item__info {
+                        opacity: 1;
+                        
+						.uix-timeline__item__date {
+							color: $highlight-color1;
+						}
+					}
+
 				}
 
 
-			}
+
+			}//.uix-timeline__item end
+
+
+
+
 
 		}
+
 
 	}
 
 }
 
 
+@media all and (max-width: 768px) {
+
+    .uix-timeline__container-wrapper.is-vertical.js-uix-timeline {
+
+        .uix-timeline__container {
+
+            .uix-timeline {
+
+                .uix-timeline__item {
+
+                    .uix-timeline__item__img {
+
+                        .uix-timeline__item__date {
+                            transform: translate(0,0);
+                        }       
+
+                    }
+
+
+                }//.uix-timeline__item end
+
+
+            }
+
+
+        }
+
+    }
+   
+}
+
 
 /*
  ---------------------------
- 2. Vertical & Reversed
+ 3. Vertical & Reversed
  ---------------------------
  */
 
 @media all and (min-width: 769px) {
 
-	.uix-timeline__container.is-vertical.is-reversed {
+    .uix-timeline__container-wrapper.is-vertical.is-reversed {
+        
 
-		.uix-timeline {
+        .uix-timeline__container {
 
-			.uix-timeline__item {
+            .uix-timeline {
 
-				.uix-timeline__line {
-					left: 50%;
-				}
+                .uix-timeline__item {
 
-
-				.uix-timeline__item--img {
-					left: 50%;
-				}
-
-				.uix-timeline__item--info {
-					margin-left: 10px;
-					width: 45%;
-
-					.uix-timeline__item--date {
-						left: 122%;
-					}
-
-				}
-
-				&:nth-child(even) .uix-timeline__item--info {
-					float: right;
-					margin-right: 10px;
-
-					.uix-timeline__item--date {
-						left: auto;
-						right: 122%;
-						text-align: right;
-					}
-				}
-
-			}
+                    .uix-timeline__line {
+                        left: 50%;
+                    }
 
 
-		}
+                    .uix-timeline__item__img {
+                        left: 50%;
+                    }
+
+                    .uix-timeline__item__info {
+                        margin-left: 10px;
+                        width: 45%;
+
+                        .uix-timeline__item__date {
+                            left: 122%;
+                        }
+
+                    }
+
+                    &:nth-child(even) .uix-timeline__item__info {
+                        float: right;
+                        margin-right: 10px;
+
+                        .uix-timeline__item__date {
+                            left: auto;
+                            right: 122%;
+                            text-align: right;
+                        }
+                    }
+
+                }
 
 
-	}
+            }
+
+
+        }    
+    }
+
 }
 
 
 
 @media all and (max-width: 768px) {
 
-	.uix-timeline__container.is-vertical.is-reversed {
+    
+    .uix-timeline__container-wrapper.is-vertical.is-reversed {
 
-		.uix-timeline {
+        .uix-timeline__container {
 
-			.uix-timeline__item {
+            .uix-timeline {
 
-				&:nth-child(even) .uix-timeline__item--info {
-					float: none;
-				}
+                .uix-timeline__item {
+
+                    &:nth-child(even) .uix-timeline__item__info {
+                        float: none;
+                    }
 
 
-			}
+                }
 
-		}
+            }
 
-	}
+        }    
+        
+    }
+
 
 }
 
 /*
  ---------------------------
- 3. Horizontal
+ 4. Horizontal  - Interaction
  ---------------------------
  */
 $horizontal-item-width: 250px;
 $horizontal-container-width: 1000px;
 
+    
 .uix-timeline__container-wrapper.is-horizontal {
 
-	.uix-timeline__btn {
-		box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
-		border-radius: 100%;
-		width: 50px;
-		height: 50px;
-		position: absolute;
-		z-index: 3;
-		left: 8%;
-		top: 80px;
-		transition: .3s ease-in-out;
-		line-height: 50px;
-		text-align: center;
-		background: #fff;
-
-		&.uix-timeline__btn--next {
-			left: auto;
-			right: 8%;
-		}
-		&.uix-timeline__btn--prev:hover {
-			margin-left: -0.3125rem;
-		}
-		&.uix-timeline__btn--next:hover {
-			margin-right: -0.3125rem;
-		}
-
-		&.is-disabled {
-			display: none;
-		}
-	}
-
-	.uix-timeline__container.is-horizontal {
+	.uix-timeline__container {
 		padding: 3.5rem 0;
 		width: $horizontal-container-width;
 		margin: 0 auto;
@@ -323,7 +438,7 @@ $horizontal-container-width: 1000px;
 					z-index: 1;
 				}
 
-				.uix-timeline__item--img {
+				.uix-timeline__item__img {
 					top: -20px;
 					left: 50%;
 					transform: translateX(-50%);
@@ -339,7 +454,7 @@ $horizontal-container-width: 1000px;
 				}
 
 
-				.uix-timeline__item--info {
+				.uix-timeline__item__info {
 					min-width: #{$horizontal-item-width - 50};
 					margin-bottom: 17px;
 					/* Scrollbar width is 17px by default */
@@ -348,7 +463,7 @@ $horizontal-container-width: 1000px;
 					transform: translateX(-50%);
 					left: 0;
 
-					.uix-timeline__item--date {
+					.uix-timeline__item__date {
 						position: absolute;
 						display: inline-block;
 						width: 50px;
@@ -366,12 +481,12 @@ $horizontal-container-width: 1000px;
 
 				&.is-active {
 
-					.uix-timeline__item--img {
+					.uix-timeline__item__img {
 						opacity: 1;
 					}
 
-					.uix-timeline__item--info {
-						.uix-timeline__item--date {
+					.uix-timeline__item__info {
+						.uix-timeline__item__date {
 							color: $highlight-color1;
 						}
 					}
@@ -404,7 +519,7 @@ $horizontal-container-width: 1000px;
 			background: #f00;
 		}
 
-		.uix-timeline__container.is-horizontal {
+		.uix-timeline__container {
 			padding: 0;
 			width: auto;
 
@@ -428,21 +543,21 @@ $horizontal-container-width: 1000px;
 						top: 20px;
 					}
 
-					.uix-timeline__item--img {
+					.uix-timeline__item__img {
 						top: 20px;
 						left: 16px;
 						margin-left: 20px;
 						opacity: 1;
 					}
 
-					.uix-timeline__item--info {
+					.uix-timeline__item__info {
 						position: relative;
 						width: calc( 80% - 40px );
 						margin: 0;
 						margin-left: .5rem;
 						left: 50%;
 
-						.uix-timeline__item--date {
+						.uix-timeline__item__date {
 							float: left;
 							top: 45px;
 							left: -28px !important;
@@ -453,8 +568,8 @@ $horizontal-container-width: 1000px;
 
 					&.is-active {
 
-						.uix-timeline__item--info {
-							.uix-timeline__item--date {
+						.uix-timeline__item__info {
+							.uix-timeline__item__date {
 								color: inherit;
 							}
 						}
@@ -473,7 +588,7 @@ $horizontal-container-width: 1000px;
 
 /*
  ---------------------------
- 4. Horizontal & Reversed
+ 5. Horizontal & Reversed  - Interaction
  ---------------------------
  */
 @media all and (min-width: 769px) {
@@ -486,7 +601,7 @@ $horizontal-container-width: 1000px;
 
 		}
 
-		.uix-timeline__container.is-horizontal.is-reversed {
+		.uix-timeline__container {
 
 			&::after {
 				top: 50%;
@@ -499,12 +614,12 @@ $horizontal-container-width: 1000px;
 				.uix-timeline__item:nth-child(odd) {
 
 
-					.uix-timeline__item--img {
+					.uix-timeline__item__img {
 						position: relative;
 						margin-top: 0;
 					}
 
-					.uix-timeline__item--info {
+					.uix-timeline__item__info {
 						position: absolute;
 
 					}
@@ -517,18 +632,18 @@ $horizontal-container-width: 1000px;
 				.uix-timeline__item:nth-child(even) {
 
 
-					.uix-timeline__item--img {
+					.uix-timeline__item__img {
 						position: relative;
 						margin-top: 0;
 					}
 
-					.uix-timeline__item--info {
+					.uix-timeline__item__info {
 						position: absolute;
 						transform: translate(-50%, -100%);/* Required */
 						margin-top: -50px;
 
 
-						.uix-timeline__item--date {
+						.uix-timeline__item__date {
 							top: auto;
 							bottom: -90px;
 
@@ -557,7 +672,7 @@ $horizontal-container-width: 1000px;
 
 /*
  ---------------------------
- 5. Horizontal ( Classic)
+ 6. Horizontal ( Classic)  - Interaction
  ---------------------------
  */
 
@@ -567,7 +682,7 @@ $horizontal-container-width: 1000px;
 		top: 147px;
 	}
 
-	.uix-timeline__container.is-horizontal {
+	.uix-timeline__container {
 
 		&::after {
 			top: 171px;
@@ -587,9 +702,9 @@ $horizontal-container-width: 1000px;
 
 
 
-				.uix-timeline__item--img {
+				.uix-timeline__item__img {
 
-					.uix-timeline__item--date {
+					.uix-timeline__item__date {
 						font-size: 0.875rem;
 						display: inline-block;
 						min-width: 100px;
@@ -597,7 +712,7 @@ $horizontal-container-width: 1000px;
 
 				}
 
-				.uix-timeline__item--info {
+				.uix-timeline__item__info {
 					width: #{$horizontal-item-width*2};
 					margin: 0 auto;
 					top: 135px;
@@ -611,7 +726,7 @@ $horizontal-container-width: 1000px;
 
 
 				&.is-active {
-					.uix-timeline__item--info {
+					.uix-timeline__item__info {
 						opacity: 1;
 					}
 
@@ -628,7 +743,7 @@ $horizontal-container-width: 1000px;
 
 				.uix-timeline__item {
 
-					.uix-timeline__item--info {
+					.uix-timeline__item__info {
 						transform: translateX(-#{$horizontal-item-width/2});
 
 					}
@@ -653,7 +768,7 @@ $horizontal-container-width: 1000px;
 	.uix-timeline__container-wrapper.is-horizontal.uix-timeline__container-wrapper--classic {
 
 
-		.uix-timeline__container.is-horizontal {
+		.uix-timeline__container {
 
 			.uix-timeline {
 
@@ -666,7 +781,7 @@ $horizontal-container-width: 1000px;
 					}
 
 
-					.uix-timeline__item--info {
+					.uix-timeline__item__info {
 						position: relative;
 						width: calc( 80% - 40px );
 						margin: 0;
@@ -690,7 +805,7 @@ $horizontal-container-width: 1000px;
 
 					.uix-timeline__item {
 
-						.uix-timeline__item--info {
+						.uix-timeline__item__info {
 							transform: translateX(0);
 
 						}
@@ -710,3 +825,74 @@ $horizontal-container-width: 1000px;
 
 
 }
+
+
+
+/*
+ ---------------------------
+ 7. Buttons
+ ---------------------------
+ */
+
+.uix-timeline__container-wrapper {
+
+	.uix-timeline__btn {
+		box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+		border-radius: 100%;
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		z-index: 3;
+		transition: .3s ease-in-out;
+		line-height: 50px;
+		text-align: center;
+		background: #fff;
+
+
+		&.is-disabled {
+			display: none;
+		}
+	}
+    
+    &.is-vertical {
+        .uix-timeline__btn {
+            top: -60px;
+            left: 10px;
+
+            &.uix-timeline__btn--next {
+                top: auto;
+                bottom: -60px;
+            }
+            &.uix-timeline__btn--prev:hover {
+                margin-top: -0.3125rem;
+            }
+            &.uix-timeline__btn--next:hover {
+                margin-bottom: -0.3125rem;
+            }
+        }
+        
+    }
+    
+    
+    &.is-horizontal {
+        .uix-timeline__btn {
+            left: 8%;
+            top: 80px;
+
+            &.uix-timeline__btn--next {
+                left: auto;
+                right: 8%;
+            }
+            &.uix-timeline__btn--prev:hover {
+                margin-left: -0.3125rem;
+            }
+            &.uix-timeline__btn--next:hover {
+                margin-right: -0.3125rem;
+            }
+        }
+        
+    }
+    
+    
+}
+

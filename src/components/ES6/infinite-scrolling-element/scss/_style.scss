@@ -1,0 +1,31 @@
+/* ======================================================
+       <!-- Infinite Scrolling Element -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+.uix-infinite-scrolling {
+  
+    position: relative;
+    width: auto;
+    height: 30px;
+    overflow: hidden;
+    @include outer-shadow( 'regular' );
+    
+    
+	ul {
+        position: relative;
+        display: inline-block;
+        
+        &.cloned {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+		li {
+            float: left;
+            padding-left: 20px;
+		}
+	}
+}

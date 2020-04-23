@@ -24,18 +24,18 @@ export const PERIODICAL_SCROLL = ( ( module, $, window, document ) => {
 	
 	
     module.PERIODICAL_SCROLL               = module.PERIODICAL_SCROLL || {};
-    module.PERIODICAL_SCROLL.version       = '0.0.2';
+    module.PERIODICAL_SCROLL.version       = '0.0.3';
     module.PERIODICAL_SCROLL.documentReady = function( $ ) {
 
-		$( '[data-periodical-scroll-container]' ).each( function() {
+		$( '.uix-periodical-scroll' ).each( function() {
 
 			const $this       = $( this );
             
-			let ul          = $this.data( 'periodical-scroll-container' ),
-				speed       = $this.data( 'periodical-scroll-speed' ),
-				timing      = $this.data( 'periodical-scroll-timing' ),
-				$wrap       = $this.find( ul ),
-				itemHeight  = $wrap.find( 'li:first' ).height();
+			let speed       = $this.data( 'speed' ),
+				timing      = $this.data( 'timing' );
+            
+			const $list       = $this.find( '> ul' );
+			const itemHeight  = $list.find( 'li:first' ).height();
 
 
 			if ( typeof speed === typeof undefined ) {
@@ -46,42 +46,47 @@ export const PERIODICAL_SCROLL = ( ( module, $, window, document ) => {
 				timing = 2000;
 			}	
 			
-			const $item     = $wrap.find( '> li' ),
-				  moveY     = itemHeight*2,
-				  timeline  = new TimelineMax({
-                      onComplete: function() {
-                            setTimeout( function() {
-                                    timeline.restart();
-                                }, timing );
+			const $item = $list.find( '> li' );
+			const moveY = itemHeight*2;
+			const tl = new TimelineMax({
+                              onComplete: function() {
+                                  
+                                    TweenMax.set( $item.first(), {
+                                        opacity : 0,
+                                        y       : moveY
+                                    });
+                                  
+                                    setTimeout( function() {
+                                        tl.restart();
+                                    }, timing );
 
-                      }
-                   });
+                              }
+                           });
+            
+            
 
-			TweenLite.defaultEase = Circ.easeInOut;
+			tl
+            .add( TweenMax.staggerFromTo( $item, speed/1000, {
+                opacity : 0,
+                y       : moveY
+            },{
+                opacity : 1,
+                y       : 0,
+            }, timing/1000 ) )
 
-			timeline
-					.add( TweenMax.staggerFromTo( $item, speed/1000, {
-						opacity : 0,
-						y       : moveY
-					},
-					{
-						opacity : 1,
-						y       : 0,
-					}, timing/1000 ))
+            .add( TweenMax.staggerTo( $item, speed/1000, {
+                delay    : timing/1000,
+                opacity  : 0,
+                y        : -moveY,
+            }, timing/1000 ), 0 );
+            
+            
 			
-					.add( TweenMax.staggerTo( $item, speed/1000, {
-						delay    : timing/1000,
-						opacity  : 0,
-						y        : -moveY,
-					}, timing/1000 ), 0 );
-			
-
-			
-			$wrap.on( 'mouseenter', function() { 
-				timeline.pause();
+			$list.on( 'mouseenter', function() { 
+				tl.pause();
 			} )
 		    .on( 'mouseleave', function() { 
-				timeline.play();
+				tl.play();
 			} );
 			
 

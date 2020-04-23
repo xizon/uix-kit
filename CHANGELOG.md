@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 4.2.5 (April 23, 2020) =
+
+* New: Added vertical timeline control.
+* New: Added Infinite Scrolling Element.
+* Tweak: Improved the experience of Periodical Scroll.
+
+
 #### = 4.2.4 (April 12, 2020) =
 
 * Tweak: Improved the experience of axios request website error.

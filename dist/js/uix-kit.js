@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.4
+ * ## Version             :  4.2.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 12, 2020
+ * ## Last Update         :  April 23, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b66eae064e204dc15700";
+/******/ 	var hotCurrentHash = "f68bf331de38808fc168";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -809,7 +809,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(129)(__webpack_require__.s = 129);
+/******/ 	return hotCreateRequire(131)(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2705,6 +2705,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 127 */,
 /* 128 */,
 /* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 130 */,
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2777,59 +2784,60 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     29.Gallery
     30.Hover Delay Interaction
     31.Image Shapes
-    32.Lava-Lamp Style Menu
-    33.Custom Lightbox
-    34.Bulleted List
-    35.Posts List With Ajax
-    36.Full Width Column to Edge
-    37.Login Templates
-    38.Modal Dialog
-    39.Mousewheel Interaction
-    40.Multiple Items Carousel
-    41.Full Page/One Page Transition
-    42.Full Page/One Page Transition 2
-    43.Parallax
-    44.Periodical Scroll
-    45.Pricing
-    46.Progress Bar
-    47.Progress Line
-    48.Retina Graphics for Website
-    49.Rotating Elements
-    50.Scroll Reveal
-    51.Scrollspy Animate
-    52.Show More Less
-    53.Skew Based On Velocity of Scroll
-    54.Smooth Scrolling When Clicking An Anchor Link
-    55.Smooth Scrolling Page
-    56.Sticky Elements
-    57.SVG Map (China)
-    58.SVG Map (World)
-    59.3D Background 1 with three.js
-    60.3D Background 2 with three.js
-    61.3D Background 3 with three.js
-    62.3D Background
-    63.3D Carousel
-    64.3D Gallery with three.js
-    65.3D Image Transition with three.js
-    66.3D Model
-    67.3D Pages
-    68.3D Particle Effect
-    69.3D Sphere Rotation
-    70.3D Object Anim When Click
-    71.3D Mouse Interaction with three.js
+    32.Infinite Scrolling Element
+    33.Lava-Lamp Style Menu
+    34.Custom Lightbox
+    35.Bulleted List
+    36.Posts List With Ajax
+    37.Full Width Column to Edge
+    38.Login Templates
+    39.Modal Dialog
+    40.Mousewheel Interaction
+    41.Multiple Items Carousel
+    42.Full Page/One Page Transition
+    43.Full Page/One Page Transition 2
+    44.Parallax
+    45.Periodical Scroll
+    46.Pricing
+    47.Progress Bar
+    48.Progress Line
+    49.Retina Graphics for Website
+    50.Rotating Elements
+    51.Scroll Reveal
+    52.Scrollspy Animate
+    53.Show More Less
+    54.Skew Based On Velocity of Scroll
+    55.Smooth Scrolling When Clicking An Anchor Link
+    56.Smooth Scrolling Page
+    57.Sticky Elements
+    58.SVG Map (China)
+    59.SVG Map (World)
+    60.3D Background 1 with three.js
+    61.3D Background 2 with three.js
+    62.3D Background 3 with three.js
+    63.3D Background
+    64.3D Carousel
+    65.3D Gallery with three.js
+    66.3D Image Transition with three.js
+    67.3D Model
+    68.3D Pages
+    69.3D Particle Effect
+    70.3D Sphere Rotation
+    71.3D Object Anim When Click
     72.3D Mouse Interaction with three.js
-    73.3D Shatter Slider
-    74.3D Explosive Particle Slider
-    75.3D Liquid Scrollspy Slider
-    76.3D Filmic Effects
-    77.Responsive Table
-    78.Table Sorter
-    79.Tabs
-    80.Team Focus
-    81.Text effect
-    82.Timeline
-    83.Vertical Menu
-    84.WordPress Core Scripts
+    73.3D Mouse Interaction with three.js
+    74.3D Shatter Slider
+    75.3D Explosive Particle Slider
+    76.3D Liquid Scrollspy Slider
+    77.3D Filmic Effects
+    78.Responsive Table
+    79.Table Sorter
+    80.Tabs
+    81.Team Focus
+    82.Text effect
+    83.Timeline
+    84.Vertical Menu
+    85.WordPress Core Scripts
 
 
 */
@@ -11202,6 +11210,98 @@ var IMAGE_SHAPES = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// EXTERNAL MODULE: ./src/components/ES6/infinite-scrolling-element/scss/_style.scss
+var infinite_scrolling_element_scss_style = __webpack_require__(129);
+
+// CONCATENATED MODULE: ./src/components/ES6/infinite-scrolling-element/js/index.js
+function infinite_scrolling_element_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function infinite_scrolling_element_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { infinite_scrolling_element_js_typeof = function _typeof(obj) { return typeof obj; }; } else { infinite_scrolling_element_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return infinite_scrolling_element_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- Infinite Scrolling Element -->
+ *************************************
+ */
+
+
+var INFINITE_SCROLLING_EL = function (module, $, window, document) {
+  if (window.INFINITE_SCROLLING_EL === null) return false;
+  module.INFINITE_SCROLLING_EL = module.INFINITE_SCROLLING_EL || {};
+  module.INFINITE_SCROLLING_EL.version = '0.0.1';
+
+  module.INFINITE_SCROLLING_EL.documentReady = function ($) {
+    $('.uix-infinite-scrolling').each(function () {
+      var $this = $(this);
+      var speed = $this.data('speed');
+
+      if (infinite_scrolling_element_js_typeof(speed) === ( true ? "undefined" : undefined)) {
+        speed = 3000;
+      }
+
+      var $list = $this.find('> ul');
+      var $clonedList = $list.clone(); //Calculate the total width
+
+      var listWidth = $list.find('li:first').width();
+      $list.find('li').each(function (i) {
+        listWidth += $(this, i).width();
+      }); // Set the width of the outer container to match the width of the content
+
+      $this.css('width', listWidth + 'px'); //
+
+      $list.add($clonedList);
+      $clonedList.addClass('cloned').appendTo($this); //TimelineMax
+
+      var tl = new TimelineMax({
+        repeat: -1,
+        paused: true
+      });
+      var time = speed / 1000;
+      tl.fromTo($list, time, {
+        rotation: 0.01,
+        x: 0
+      }, {
+        force3D: true,
+        x: -listWidth,
+        ease: Linear.easeNone
+      }, 0).fromTo($clonedList, time, {
+        rotation: 0.01,
+        x: listWidth
+      }, {
+        force3D: true,
+        x: 0,
+        ease: Linear.easeNone
+      }, 0).set($list, {
+        force3D: true,
+        rotation: 0.01,
+        x: listWidth
+      }).to($clonedList, time, {
+        force3D: true,
+        rotation: 0.01,
+        x: -listWidth,
+        ease: Linear.easeNone
+      }, time).to($list, time, {
+        force3D: true,
+        rotation: 0.01,
+        x: 0,
+        ease: Linear.easeNone
+      }, time).progress(1).progress(0).play(); //Pause/Play		
+
+      $this.on('mouseenter', function () {
+        tl.pause();
+      }).on('mouseleave', function () {
+        tl.play();
+      });
+    });
+  };
+
+  module.components.documentReady.push(module.INFINITE_SCROLLING_EL.documentReady);
+  return function INFINITE_SCROLLING_EL() {
+    infinite_scrolling_element_js_classCallCheck(this, INFINITE_SCROLLING_EL);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lava-lamp-style-menu/scss/_style.scss
 var lava_lamp_style_menu_scss_style = __webpack_require__(38);
 
@@ -14394,16 +14494,15 @@ function periodical_scroll_js_typeof(obj) { "@babel/helpers - typeof"; if (typeo
 var PERIODICAL_SCROLL = function (module, $, window, document) {
   if (window.PERIODICAL_SCROLL === null) return false;
   module.PERIODICAL_SCROLL = module.PERIODICAL_SCROLL || {};
-  module.PERIODICAL_SCROLL.version = '0.0.2';
+  module.PERIODICAL_SCROLL.version = '0.0.3';
 
   module.PERIODICAL_SCROLL.documentReady = function ($) {
-    $('[data-periodical-scroll-container]').each(function () {
+    $('.uix-periodical-scroll').each(function () {
       var $this = $(this);
-      var ul = $this.data('periodical-scroll-container'),
-          speed = $this.data('periodical-scroll-speed'),
-          timing = $this.data('periodical-scroll-timing'),
-          $wrap = $this.find(ul),
-          itemHeight = $wrap.find('li:first').height();
+      var speed = $this.data('speed'),
+          timing = $this.data('timing');
+      var $list = $this.find('> ul');
+      var itemHeight = $list.find('li:first').height();
 
       if (periodical_scroll_js_typeof(speed) === ( true ? "undefined" : undefined)) {
         speed = 600;
@@ -14413,17 +14512,20 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
         timing = 2000;
       }
 
-      var $item = $wrap.find('> li'),
-          moveY = itemHeight * 2,
-          timeline = new TimelineMax({
+      var $item = $list.find('> li');
+      var moveY = itemHeight * 2;
+      var tl = new TimelineMax({
         onComplete: function onComplete() {
+          TweenMax.set($item.first(), {
+            opacity: 0,
+            y: moveY
+          });
           setTimeout(function () {
-            timeline.restart();
+            tl.restart();
           }, timing);
         }
       });
-      TweenLite.defaultEase = Circ.easeInOut;
-      timeline.add(TweenMax.staggerFromTo($item, speed / 1000, {
+      tl.add(TweenMax.staggerFromTo($item, speed / 1000, {
         opacity: 0,
         y: moveY
       }, {
@@ -14434,10 +14536,10 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
         opacity: 0,
         y: -moveY
       }, timing / 1000), 0);
-      $wrap.on('mouseenter', function () {
-        timeline.pause();
+      $list.on('mouseenter', function () {
+        tl.pause();
       }).on('mouseleave', function () {
-        timeline.play();
+        tl.play();
       });
     });
   };
@@ -22257,7 +22359,7 @@ function timeline_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var TIMELINE = function (module, $, window, document) {
   if (window.TIMELINE === null) return false;
   module.TIMELINE = module.TIMELINE || {};
-  module.TIMELINE.version = '0.1.6';
+  module.TIMELINE.version = '0.1.7';
 
   module.TIMELINE.pageLoaded = function () {
     var $window = $(window);
@@ -22269,79 +22371,79 @@ var TIMELINE = function (module, $, window, document) {
      ---------------------------
      */
 
-    if (windowWidth > 768) {
-      $('.uix-timeline__container-wrapper.is-horizontal').each(function () {
-        var $this = $(this);
-        var $container = $this.find('.uix-timeline__container.is-horizontal'),
-            $timeline = $container.find('> .uix-timeline');
-        var dateShowEle = $timeline.data('show-ele');
+    $('.uix-timeline__container-wrapper.js-uix-timeline').each(function () {
+      var $this = $(this);
+      var $container = $this.find('.uix-timeline__container'),
+          $timeline = $container.find('> .uix-timeline');
+      var dir = $this.hasClass('is-vertical') ? 'vertical' : 'horizontal';
+      var dateShowEle = $timeline.data('show-ele');
 
-        if (timeline_js_typeof(dateShowEle) === ( true ? "undefined" : undefined)) {
-          dateShowEle = '#timeline-number-show';
-        }
+      if (timeline_js_typeof(dateShowEle) === ( true ? "undefined" : undefined)) {
+        dateShowEle = '#timeline-number-show';
+      }
 
-        $this.find('.uix-timeline__btn--prev').off('click').on('click', function (e) {
-          e.preventDefault();
-          timelineUpdate($this, false, dateShowEle, true);
-          return false;
-        });
-        $this.find('.uix-timeline__btn--next').off('click').on('click', function (e) {
-          e.preventDefault();
-          timelineUpdate($this, false, dateShowEle, false);
-          return false;
-        });
-        $this.find('.uix-timeline__item .uix-timeline__item--img').off('click').on('click', function (e) {
-          e.preventDefault();
-          timelineUpdate($this, $(this).parent(), dateShowEle, false);
-          return false;
-        }); //Activate the default selection
-
-        timelineUpdate($this, $this.find('.uix-timeline__item.is-active'), dateShowEle, false);
-
-        if ($this.find('.uix-timeline__item.is-active').index() == 0) {
-          $this.find('.uix-timeline__btn--prev').addClass('is-disabled');
-        }
-
-        if ($this.hasClass('is-reversed')) {
-          // Set equal heights
-          var setEqualHeights = function setEqualHeights(el) {
-            var counter = 0;
-
-            for (var i = 0; i < el.length; i++) {
-              var singleHeight = $(el[i]).outerHeight(true);
-
-              if (counter < singleHeight) {
-                counter = singleHeight;
-              }
-            }
-
-            for (var k = 0; k < el.length; k++) {
-              $(el[k]).css('height', counter + 'px');
-            }
-
-            return counter;
-          };
-
-          var infoNewHeight = setEqualHeights($timeline.find('.uix-timeline__item--info')); // Reset container height
-
-          $container.css({
-            'padding': parseFloat(infoNewHeight + 64) + 'px 0'
-          });
-        }
+      $this.find('.uix-timeline__btn--prev').off('click').on('click', function (e) {
+        e.preventDefault();
+        timelineUpdate($this, false, dateShowEle, true, dir);
+        return false;
       });
-    }
+      $this.find('.uix-timeline__btn--next').off('click').on('click', function (e) {
+        e.preventDefault();
+        timelineUpdate($this, false, dateShowEle, false, dir);
+        return false;
+      });
+      $this.find('.uix-timeline__item .uix-timeline__item__img').off('click').on('click', function (e) {
+        e.preventDefault();
+        timelineUpdate($this, $(this).parent(), dateShowEle, false, dir);
+        return false;
+      }); //Activate the default selection
+
+      timelineUpdate($this, $this.find('.uix-timeline__item.is-active'), dateShowEle, false, dir);
+
+      if ($this.find('.uix-timeline__item.is-active').index() == 0) {
+        $this.find('.uix-timeline__btn--prev').addClass('is-disabled');
+      } // for reversed timeline
+
+
+      if (dir == 'horizontal' && $this.hasClass('is-reversed') && windowWidth > 768) {
+        // Set equal heights
+        var setEqualHeights = function setEqualHeights(el) {
+          var counter = 0;
+
+          for (var i = 0; i < el.length; i++) {
+            var singleHeight = $(el[i]).outerHeight(true);
+
+            if (counter < singleHeight) {
+              counter = singleHeight;
+            }
+          }
+
+          for (var k = 0; k < el.length; k++) {
+            $(el[k]).css('height', counter + 'px');
+          }
+
+          return counter;
+        }; // Reset container height
+
+
+        var infoNewHeight = setEqualHeights($timeline.find('.uix-timeline__item__info'));
+        $container.css({
+          'padding': parseFloat(infoNewHeight + 64) + 'px 0'
+        });
+      }
+    });
     /*
      * Method that updates items of timeline
      *
-     * @param  {Element} obj                  - Wrapper of timeline.
-     * @param  {?Element} iscur                - The current item.
+     * @param  {Element} obj                 - Wrapper of timeline.
+     * @param  {?Element} iscur              - The current item.
      * @param  {String} showEle              - Element ID or class name that push the current text.
      * @param  {Boolean} prev                - Whether to slide forward.
+           * @param  {String} dir                  - Timeline direction.
      * @return {Void}
      */
 
-
-    function timelineUpdate(obj, iscur, showEle, prev) {
+    function timelineUpdate(obj, iscur, showEle, prev, dir) {
       var itemTotal = obj.find('.uix-timeline__item').length,
           tNav = obj.find('.uix-timeline__item'),
           tLoop = false;
@@ -22384,17 +22486,33 @@ var TIMELINE = function (module, $, window, document) {
       tNav.removeClass('is-active');
       obj.find('.uix-timeline__item:eq(' + tarIndex + ')').addClass('is-active'); //scroll left
 
-      var tNavW = 0;
+      if (dir == 'horizontal') {
+        var moveWidth = 0;
 
-      for (var i = 0; i < tarIndex; i++) {
-        tNavW += obj.find('.uix-timeline__item:eq(' + i + ')').width();
-      }
+        for (var i = 0; i < tarIndex; i++) {
+          moveWidth += obj.find('.uix-timeline__item:eq(' + i + ')').width();
+        }
 
-      obj.find('.uix-timeline__container.is-horizontal > .uix-timeline').css({
-        'margin-left': -parseFloat(tNavW) + 'px'
-      }); //Push the current text to element 
+        obj.find('.uix-timeline__container > .uix-timeline').css({
+          'margin-left': -parseFloat(moveWidth) + 'px'
+        });
+      } //scroll top
 
-      $(showEle).text(obj.find('.uix-timeline__item:eq(' + tarIndex + ')').find('.uix-timeline__item--date').text());
+
+      if (dir == 'vertical') {
+        var moveHeight = 0;
+
+        for (var _i = 0; _i < tarIndex; _i++) {
+          moveHeight += obj.find('.uix-timeline__item:eq(' + _i + ')').outerHeight(true);
+        }
+
+        obj.find('.uix-timeline__container > .uix-timeline').css({
+          'margin-top': -parseFloat(moveHeight) + 'px'
+        });
+      } //Push the current text to element 
+
+
+      $(showEle).text(obj.find('.uix-timeline__item:eq(' + tarIndex + ')').find('.uix-timeline__item__date').text());
     }
   };
 
@@ -22741,6 +22859,7 @@ var wave_background_scss_style = __webpack_require__(102);
 /******/
 
 /* pages */
+
 
 
 

@@ -50,6 +50,7 @@ import FORM from '@uixkit/core/form/js';
 import GALLERY from '@uixkit/core/gallery/js';
 import HOVER_DELAY_INTERACTION from '@uixkit/core/hover-delay-interaction/js';
 import IMAGE_SHAPES from '@uixkit/core/image-shapes/js';
+import INFINITE_SCROLLING_EL from '@uixkit/core/infinite-scrolling-element/js';
 import LAVA_LAMP_STYLE_MENU from '@uixkit/core/lava-lamp-style-menu/js';
 import LIGHTBOX from '@uixkit/core/lightbox/js';
 import BULLETED_LIST from '@uixkit/core/list-bulleted/js';
