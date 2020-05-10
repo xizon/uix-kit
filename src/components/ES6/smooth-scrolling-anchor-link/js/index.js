@@ -4,6 +4,12 @@
  * <!-- Smooth Scrolling When Clicking An Anchor Link -->
  *************************************
  */
+/**
+ * module.SMOOTH_SCROLLING_ANCHORLINK
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -21,7 +27,7 @@ export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => 
 	
 	
     module.SMOOTH_SCROLLING_ANCHORLINK               = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.7';
+    module.SMOOTH_SCROLLING_ANCHORLINK.version       = '0.0.8';
     module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages

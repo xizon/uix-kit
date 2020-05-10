@@ -4,52 +4,97 @@
 @import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
 
 
+/*
+ * 1. Initialize the core style
+ * 2. Next/Prev buttons
+*/
+
+
+/*
+ ---------------------------
+ 1. Initialize the core style
+ ---------------------------
+ */
 .uix-multi-carousel {
 	/* Required */
 	overflow: hidden;
+    width: 100%;
 
 	.uix-multi-carousel__items {
 		height: 150px;
-		width: 100%;
 		position: relative;
-		overflow: hidden;
 
-		> div {
-			position: relative;
-			float: left;
+		> .uix-multi-carousel__item {
+			position: absolute; /* required */
 			height: 100%;
-			visibility: hidden;
-			box-sizing: border-box;
 
-			&.active-current,
-			&:hover {
-
-			}
-
+            img {
+                pointer-events: none;
+            }
+            
 
 			/* Demo Style */
 			box-shadow: inset -1px 0px 0px 0px rgba(255,255,255,.5);
 			font-size: 1.2rem;
-			padding: 2rem 0;
 			text-align: center;
 			color: #fff;
 			background: #333;
+            
+            > span {
+                display: inline-block;
+                position: absolute;
+                transform: translateY(-50%);
+                top: 50%;
+                width: 100%;
+                left: 0;
+            }
 
 			&.is-active {
 				background: #000;
 				font-size: 3rem;
 			}
 
-			&.active-prev,
-			&.active-next {
-				font-size: 2rem;
-			}
 
 		}
 	}
+    
+    
+
+    /*----- Vertical Carousel -----*/
+    &.is-vertical {
+        /* Required */
+        overflow: hidden;
+        width: 500px;
+        height: 450px;
+
+        .uix-multi-carousel__items {
+
+            width: 100%;
+            /* Required */
+            height: 100%;
+
+            > .uix-multi-carousel__item {
+                width: 100%;
+
+                /* Demo Style */
+                box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,.5);
+
+            }
+        }
+    }
+ 
+    
+    
 }
 
-/*----- Previous/Next Arrows -----*/
+
+
+/*
+ ---------------------------
+ 2. Next/Prev buttons
+ ---------------------------
+ */
+
 .uix-multi-carousel__controls {
 	margin-top: 30px;
 	text-align: center;
@@ -80,41 +125,19 @@
 
 		&.is-disabled {
 			opacity: .3;
+            pointer-events: none;
 		}
 	}
+    
+    
+    /*----- Vertical Carousel -----*/
+    &.is-vertical {
+        width: 300px;
+        position: absolute;
+        top: 20%;
+        left: 600px;
+    }
+    
 }
 
 
-
-/*----- Vertical Carousel -----*/
-.uix-multi-carousel.is-vertical {
-	/* Required */
-	overflow: hidden;
-	width: 500px;
-	height: 450px;
-
-	.uix-multi-carousel__items {
-
-		width: 100%;
-		/* Required */
-		height: 100%;
-
-		> div {
-			float: none;
-			width: 100%;
-
-			/* Demo Style */
-			box-shadow: inset 0px -1px 0px 0px rgba(255,255,255,.5);
-			padding: 0 0;
-
-		}
-	}
-}
-
-
-.uix-multi-carousel__controls.is-vertical {
-	width: 300px;
-	position: absolute;
-	top: 20%;
-	left: 600px;
-}

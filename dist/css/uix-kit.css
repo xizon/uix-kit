@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.5
+ * ## Version             :  4.2.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 23, 2020
+ * ## Last Update         :  May 10, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -39,23 +39,23 @@
     21.Custom Core Scripts & Stylesheets
     22.Accordion Background Images
     23.Accordion
-    24.Advanced Content Slider
-    25.Advanced Slider (Basic)
-    26.Advanced Slider (Special Effects)
-    27.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    28.Back to Top
-    29.Circle Layout
-    30.Counter
-    31.Dropdown Menu
-    32.Dropdown Menu 2 (Multi-level drop-down navigation)
-    33.Flexslider
-    34.Floating Side Element
-    35.Form Progress
-    36.Form
-    37.Form ( Layout )-
-    38.Form  ( Material Design Theme )
-    39.Form ( 3rd Party Plugin )
-    40.Gallery
+    24.Advanced Slider (Basic)
+    25.Advanced Slider (Special Effects)
+    26.Ajax Page Loader (Loading A Page via Ajax Into Div)
+    27.Back to Top
+    28.Circle Layout
+    29.Counter
+    30.Dropdown Menu
+    31.Dropdown Menu 2 (Multi-level drop-down navigation)
+    32.Flexslider
+    33.Floating Side Element
+    34.Form Progress
+    35.Form
+    36.Form ( Layout )-
+    37.Form  ( Material Design Theme )
+    38.Form ( 3rd Party Plugin )
+    39.Gallery
+    40.Hybrid Content Slider
     41.Image Shapes
     42.Infinite Scrolling Element
     43.Lava-Lamp Style Menu
@@ -4428,165 +4428,6 @@ h6 {
 }
 
 /* ======================================================
-    <!-- Advanced Content Slider -->
-/* ====================================================== */
-/*
- * 1. Initialize the slider style
- * 2. Pagination dots
- * 3. Next/Prev buttons
-*/
-/*
- ---------------------------
- 1. Initialize the slider style
- ---------------------------
- */
-.uix-advanced-content-slider {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  z-index: 1;
-  height: 0;
-}
-
-.uix-advanced-content-slider .uix-advanced-content-slider__inner {
-  position: relative;
-  z-index: 1;
-}
-
-.uix-advanced-content-slider .uix-advanced-content-slider__inner .uix-advanced-content-slider__item {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  float: left;
-}
-
-.uix-advanced-content-slider .uix-advanced-content-slider__inner .uix-advanced-content-slider__item a {
-  box-shadow: inset 0px -6px 0px 0px #CE3A3E;
-}
-
-.uix-advanced-content-slider .uix-advanced-content-slider__inner .uix-advanced-content-slider__item img {
-  width: 100%;
-  pointer-events: none !important;
-  /* Fix an error fot swipe event not working on images */
-}
-
-/*
- ---------------------------
- 2. Pagination dots
- ---------------------------
- */
-.uix-advanced-content-slider__pagination {
-  position: relative;
-  z-index: 2;
-  margin-top: 1rem;
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--default {
-  list-style: none;
-  left: 0;
-  bottom: 0;
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: block;
-  width: 100%;
-  text-align: center;
-  /*require*/
-  position: relative;
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--default li {
-  font-size: 1rem;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: inline-block;
-  /*require*/
-  margin: 0 .2rem;
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--default li a {
-  width: 12px;
-  height: 12px;
-  display: block;
-  background: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  text-indent: -9999px;
-  border-radius: 20px;
-  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--default li a:hover, .uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--default li a.is-active {
-  background: black;
-  width: 25px;
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--custom {
-  list-style: none;
-  left: 0;
-  bottom: 0;
-  font-size: 0;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: block;
-  width: 100%;
-  text-align: center;
-  /*require*/
-  position: relative;
-  transform: translateY(0.5rem);
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--custom li {
-  font-size: 0.75rem;
-  /*Fighting the Space Between Inline Block Elements*/
-  display: inline-block;
-  /*require*/
-  margin: 0 .2rem;
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--custom li a {
-  display: block;
-  background: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  border-radius: 20px;
-  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
-  color: #fff;
-  padding: .2rem 1rem;
-}
-
-.uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--custom li a:hover, .uix-advanced-content-slider__pagination ul.uix-advanced-content-slider__pagination--custom li a.is-active {
-  background: black;
-}
-
-/*
- ---------------------------
- 3. Next/Prev buttons
- ---------------------------
- */
-.uix-advanced-content-slider__arrows {
-  position: relative;
-  z-index: 3;
-}
-
-.uix-advanced-content-slider__arrows a {
-  display: inline-block;
-  margin-right: 1rem;
-}
-
-.uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--prev {
-  left: 15px;
-}
-
-.uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--prev.is-disabled {
-  display: none;
-}
-
-.uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--next {
-  right: 15px;
-  text-align: right;
-}
-
-.uix-advanced-content-slider__arrows .uix-advanced-content-slider__arrows--next.is-disabled {
-  display: none;
-}
-
-/* ======================================================
    <!-- Advanced Slider (Basic) -->
 /* ====================================================== */
 /*
@@ -7246,11 +7087,11 @@ select:-webkit-autofill:focus {
 .uix-controls__select-wrapper .uix-controls__select__option {
   position: relative;
   display: block;
-  padding: 0 1.5rem;
   border-bottom: 1px solid #dce4e8;
   font-size: 0.875rem;
   color: #888;
-  line-height: 47px;
+  line-height: 1.5;
+  padding: .75rem 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -8877,6 +8718,177 @@ select:-webkit-autofill:focus {
 }
 
 /* ======================================================
+    <!-- Hybrid Content Slider -->
+/* ====================================================== */
+/*
+ * 1. Initialize the core style
+ * 2. Next/Prev buttons
+ * 3. Pagination dots
+ * 
+*/
+/*
+ ---------------------------
+ 1. Initialize the core style
+ ---------------------------
+ */
+.uix-hybrid-content-slider {
+  /* Required */
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+}
+
+.uix-hybrid-content-slider .uix-hybrid-content-slider__items {
+  height: 100%;
+  position: relative;
+}
+
+.uix-hybrid-content-slider .uix-hybrid-content-slider__items > .uix-hybrid-content-slider__item {
+  height: 100%;
+}
+
+.uix-hybrid-content-slider .uix-hybrid-content-slider__items > .uix-hybrid-content-slider__item img {
+  pointer-events: none;
+}
+
+.uix-hybrid-content-slider .uix-hybrid-content-slider__items > .uix-hybrid-content-slider__item.js-is-ready {
+  position: absolute;
+  /* required */
+}
+
+/*
+ ---------------------------
+ 2. Next/Prev buttons
+ ---------------------------
+ */
+.uix-hybrid-content-slider__controls {
+  margin-top: 30px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.uix-hybrid-content-slider__controls .uix-hybrid-content-slider__controls--prev {
+  padding-left: 2px;
+}
+
+.uix-hybrid-content-slider__controls .uix-hybrid-content-slider__controls--next {
+  padding-right: 2px;
+}
+
+.uix-hybrid-content-slider__controls a {
+  pointer-events: all;
+  margin-left: 10px;
+  margin-right: 10px;
+  outline: 0;
+  border: 0;
+  color: #000;
+  font-weight: bold;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 32px;
+  cursor: pointer;
+  opacity: 1;
+  text-decoration: none;
+  font-family: Arial, "sans-serif";
+}
+
+.uix-hybrid-content-slider__controls a.is-disabled {
+  opacity: .3;
+  pointer-events: none;
+}
+
+/*
+ ---------------------------
+ 3. Pagination dots
+ ---------------------------
+ */
+.uix-hybrid-content-slider__pagination {
+  position: relative;
+  z-index: 2;
+  margin-top: 40px;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--default {
+  list-style: none;
+  left: 0;
+  bottom: 0;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: block;
+  width: 100%;
+  text-align: center;
+  /*require*/
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--default li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: inline-block;
+  /*require*/
+  margin: 0 .2rem;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--default li a {
+  width: 12px;
+  height: 12px;
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  text-indent: -9999px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--default li:hover a,
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--default li.is-active a {
+  background: black;
+  width: 25px;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--custom {
+  list-style: none;
+  left: 0;
+  bottom: 0;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: block;
+  width: 100%;
+  text-align: center;
+  /*require*/
+  position: relative;
+  transform: translateY(0.5rem);
+  margin: 0;
+  padding: 0;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--custom li {
+  font-size: 0.75rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: inline-block;
+  /*require*/
+  margin: 0 .2rem;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--custom li a {
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
+  color: #fff;
+  padding: .2rem 1rem;
+}
+
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--custom li:hover a,
+.uix-hybrid-content-slider__pagination ul.uix-hybrid-content-slider__pagination--custom li.is-active a {
+  background: black;
+}
+
+/* ======================================================
         <!-- Image Shapes -->
 /* ====================================================== */
 .uix-shape-img {
@@ -10086,47 +10098,86 @@ a.uix-lightbox__original__link {
 /* ======================================================
    <!-- Multiple Items Carousel -->
 /* ====================================================== */
+/*
+ * 1. Initialize the core style
+ * 2. Next/Prev buttons
+*/
+/*
+ ---------------------------
+ 1. Initialize the core style
+ ---------------------------
+ */
 .uix-multi-carousel {
   /* Required */
   overflow: hidden;
+  width: 100%;
+  /*----- Vertical Carousel -----*/
 }
 
 .uix-multi-carousel .uix-multi-carousel__items {
   height: 150px;
-  width: 100%;
   position: relative;
-  overflow: hidden;
 }
 
-.uix-multi-carousel .uix-multi-carousel__items > div {
-  position: relative;
-  float: left;
+.uix-multi-carousel .uix-multi-carousel__items > .uix-multi-carousel__item {
+  position: absolute;
+  /* required */
   height: 100%;
-  visibility: hidden;
-  box-sizing: border-box;
   /* Demo Style */
   box-shadow: inset -1px 0px 0px 0px rgba(255, 255, 255, 0.5);
   font-size: 1.2rem;
-  padding: 2rem 0;
   text-align: center;
   color: #fff;
   background: #333;
 }
 
-.uix-multi-carousel .uix-multi-carousel__items > div.is-active {
+.uix-multi-carousel .uix-multi-carousel__items > .uix-multi-carousel__item img {
+  pointer-events: none;
+}
+
+.uix-multi-carousel .uix-multi-carousel__items > .uix-multi-carousel__item > span {
+  display: inline-block;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  width: 100%;
+  left: 0;
+}
+
+.uix-multi-carousel .uix-multi-carousel__items > .uix-multi-carousel__item.is-active {
   background: #000;
   font-size: 3rem;
 }
 
-.uix-multi-carousel .uix-multi-carousel__items > div.active-prev, .uix-multi-carousel .uix-multi-carousel__items > div.active-next {
-  font-size: 2rem;
+.uix-multi-carousel.is-vertical {
+  /* Required */
+  overflow: hidden;
+  width: 500px;
+  height: 450px;
 }
 
-/*----- Previous/Next Arrows -----*/
+.uix-multi-carousel.is-vertical .uix-multi-carousel__items {
+  width: 100%;
+  /* Required */
+  height: 100%;
+}
+
+.uix-multi-carousel.is-vertical .uix-multi-carousel__items > .uix-multi-carousel__item {
+  width: 100%;
+  /* Demo Style */
+  box-shadow: inset 0px -1px 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+/*
+ ---------------------------
+ 2. Next/Prev buttons
+ ---------------------------
+ */
 .uix-multi-carousel__controls {
   margin-top: 30px;
   text-align: center;
   pointer-events: none;
+  /*----- Vertical Carousel -----*/
 }
 
 .uix-multi-carousel__controls .uix-multi-carousel__controls--prev {
@@ -10157,28 +10208,7 @@ a.uix-lightbox__original__link {
 
 .uix-multi-carousel__controls a.is-disabled {
   opacity: .3;
-}
-
-/*----- Vertical Carousel -----*/
-.uix-multi-carousel.is-vertical {
-  /* Required */
-  overflow: hidden;
-  width: 500px;
-  height: 450px;
-}
-
-.uix-multi-carousel.is-vertical .uix-multi-carousel__items {
-  width: 100%;
-  /* Required */
-  height: 100%;
-}
-
-.uix-multi-carousel.is-vertical .uix-multi-carousel__items > div {
-  float: none;
-  width: 100%;
-  /* Demo Style */
-  box-shadow: inset 0px -1px 0px 0px rgba(255, 255, 255, 0.5);
-  padding: 0 0;
+  pointer-events: none;
 }
 
 .uix-multi-carousel__controls.is-vertical {
@@ -18444,6 +18474,7 @@ dl.uix-list-abreast dd {
   margin: 0;
   text-align: left;
   padding-left: 1rem;
+  word-break: break-all;
 }
 
 dl.uix-list-abreast dd p {

@@ -4,6 +4,12 @@
  * <!-- Form Progress -->
  *************************************
  */
+/**
+ * module.FORM_PROGRESS
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 /*
     Note:
 	
@@ -43,7 +49,7 @@ export const FORM_PROGRESS = ( ( module, $, window, document ) => {
 	
 	
     module.FORM_PROGRESS               = module.FORM_PROGRESS || {};
-    module.FORM_PROGRESS.version       = '0.0.4';
+    module.FORM_PROGRESS.version       = '0.0.5';
     module.FORM_PROGRESS.pageLoaded    = function() {
 
 		let $progressBar   = $( '.uix-form-progress progress' ),

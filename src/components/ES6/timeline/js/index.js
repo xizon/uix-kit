@@ -26,7 +26,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 	
 
     module.TIMELINE               = module.TIMELINE || {};
-    module.TIMELINE.version       = '0.1.7';
+    module.TIMELINE.version       = '0.1.8';
     module.TIMELINE.pageLoaded    = function() {
 
         const $window          = $( window );
@@ -59,13 +59,13 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 
             $this.find( '.uix-timeline__btn--prev' ).off( 'click' ).on( 'click', function( e ) {
                 e.preventDefault();
-                timelineUpdate( $this, false, dateShowEle, true, dir );
+                timelineUpdate( $this, null, dateShowEle, true, dir );
                 return false;
             });
 
             $this.find( '.uix-timeline__btn--next' ).off( 'click' ).on( 'click', function( e ) {
                 e.preventDefault();
-                timelineUpdate( $this, false, dateShowEle, false, dir );
+                timelineUpdate( $this, null, dateShowEle, false, dir );
                 return false;
             });
 
@@ -144,7 +144,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 				tarIndex;
 
 			//Check if a value is an object currently
-			if ( iscur && typeof iscur === 'object' ) {
+			if ( iscur != null && typeof iscur === 'object' ) {
 				curIndex = iscur.index();
 				tarIndex = curIndex;
 			} else {

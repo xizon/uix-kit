@@ -3,6 +3,12 @@
  * <!-- Back to Top -->
  *************************************
  */
+/**
+ * module.BACK_TO_TOP
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -24,7 +30,7 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 	
 	
     module.BACK_TO_TOP               = module.BACK_TO_TOP || {};
-    module.BACK_TO_TOP.version       = '0.0.8';
+    module.BACK_TO_TOP.version       = '0.0.9';
     module.BACK_TO_TOP.documentReady = function( $ ) {
 
 		

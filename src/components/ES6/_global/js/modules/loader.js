@@ -3,6 +3,12 @@
  * <!-- Loader -->
  *************************************
  */
+/**
+ * module.LOADER
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -22,7 +28,7 @@ export const LOADER = ( ( module, $, window, document ) => {
 	
 	
 	module.LOADER               = module.LOADER || {};
-    module.LOADER.version       = '0.0.4';
+    module.LOADER.version       = '0.0.5';
 	module.LOADER.documentReady = function( $ ) {
 
 

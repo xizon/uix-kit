@@ -4,6 +4,14 @@
  * <!-- Lava-Lamp Style Menu -->
  *************************************
  */
+
+/**
+ * module.LAVA_LAMP_STYLE_MENU
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
+
 import {
     templateUrl,
     homeUrl,
@@ -25,7 +33,7 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.LAVA_LAMP_STYLE_MENU               = module.LAVA_LAMP_STYLE_MENU || {};
-    module.LAVA_LAMP_STYLE_MENU.version       = '0.0.1';
+    module.LAVA_LAMP_STYLE_MENU.version       = '0.0.2';
     module.LAVA_LAMP_STYLE_MENU.documentReady = function( $ ) {
 
 

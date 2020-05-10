@@ -1,5 +1,16 @@
 # Changelog
 
+#### = 4.2.6 (May 9, 2020) =
+
+* New: Added Hybrid Content Slider.
+* Tweak: Remove Advanced Content Slider.
+* Tweak: Refactored "Infinite Scrolling Multi Item Carousel".
+* Tweak: Optimized custom select control.
+* Tweak: Optimized the Drag and Drop method of some modules.
+* Tweak: Optimization of some events related to carousel.
+* Tweak: Improved protection method for repeated triggering of multiple module buttons.
+
+
 
 #### = 4.2.5 (April 23, 2020) =
 

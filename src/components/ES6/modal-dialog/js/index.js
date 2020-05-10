@@ -9,9 +9,8 @@
  * module.MODAL_DIALOG
  * 
  * @requires ./src/components/ES5/_plugins-Miscellaneous
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
-
-
 
 import {
     templateUrl,
@@ -34,7 +33,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.1.5';
+    module.MODAL_DIALOG.version       = '0.1.6';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		

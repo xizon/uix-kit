@@ -3,6 +3,12 @@
  * <!-- 3D Background -->
  *************************************
  */
+/**
+ * module.THREE_BACKGROUND
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -24,7 +30,7 @@ export const THREE_BACKGROUND = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND               = module.THREE_BACKGROUND || {};
-    module.THREE_BACKGROUND.version       = '0.0.2';
+    module.THREE_BACKGROUND.version       = '0.0.3';
     module.THREE_BACKGROUND.documentReady = function( $ ) {
 
 

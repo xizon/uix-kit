@@ -25,16 +25,17 @@ const UIXKIT_3RD_PARTY_PLUGINS_IMPORT = { "files": [
 	
 //GSAP plugins
 //---------------------
-"./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js",
-"./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js",
-"./src/components/ES5/_plugins-GSAP/js/TextPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/ColorPropsPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/CSSRulePlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/EaselPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/EndArrayPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/ModifiersPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/PixiPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/RaphaelPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/ScrollToPlugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/TEMPLATE_Plugin.js",
+"./src/components/ES5/_plugins-GSAP/js/plugins/TextPlugin.js",
+    
 	
 //three.js plugins
 //---------------------

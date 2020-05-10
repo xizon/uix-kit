@@ -950,11 +950,11 @@ $controls-merge-button-width: 20%;
 	.uix-controls__select__option {
 		position: relative;
 		display: block;
-		padding: 0 1.5rem;
 		border-bottom: 1px solid $control-sub-color;
 		font-size: $font-size-form;
 		color: $control-text-color;
-		line-height: 47px;
+		line-height: 1.5;
+        padding: .75rem 1.2rem;
 		cursor: pointer;
 		@include transition-default();
 

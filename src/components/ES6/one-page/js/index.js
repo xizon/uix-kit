@@ -8,6 +8,7 @@
  * module.ONEPAGE
  * 
  * @requires ./src/components/ES5/_plugins-Miscellaneous
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 import {
@@ -29,7 +30,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE               = module.ONEPAGE || {};
-    module.ONEPAGE.version       = '0.0.8';
+    module.ONEPAGE.version       = '0.0.9';
     module.ONEPAGE.documentReady = function( $ ) {
 
 		const $window          = $( window );

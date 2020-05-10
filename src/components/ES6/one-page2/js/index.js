@@ -7,8 +7,8 @@
  * module.ONEPAGE2
  * 
  * @requires ./src/components/ES5/_plugins-Miscellaneous
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
-
 
 import {
     templateUrl,
@@ -30,7 +30,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE2               = module.ONEPAGE2 || {};
-    module.ONEPAGE2.version       = '0.0.6';
+    module.ONEPAGE2.version       = '0.0.7';
     module.ONEPAGE2.documentReady = function( $ ) {
 
 		const $window          = $( window );

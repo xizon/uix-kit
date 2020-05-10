@@ -3,6 +3,11 @@
  * <!-- Ajax Push Content  -->
  *************************************
  */
+/**
+ * module.AJAX_PUSH_CONTENT
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
 
 import {
     templateUrl,
@@ -22,7 +27,7 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PUSH_CONTENT               = module.AJAX_PUSH_CONTENT || {};
-    module.AJAX_PUSH_CONTENT.version       = '0.1.8';
+    module.AJAX_PUSH_CONTENT.version       = '0.1.9';
     module.AJAX_PUSH_CONTENT.documentReady = function( $ ) {
 
 

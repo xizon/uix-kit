@@ -32,7 +32,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.2.9';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.3.0';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -110,10 +110,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
                     
                     
                     //Get parameter configuration from the data-* attribute of HTML
-                    let dataAuto                 = $this.data( 'auto' ),
-                        dataTiming               = $this.data( 'timing' ),
-                        dataLoop                 = $this.data( 'loop' ),
-                        dataControlsPagination   = $this.data( 'controls-pagination' ),
+                    let dataControlsPagination   = $this.data( 'controls-pagination' ),
                         dataControlsArrows       = $this.data( 'controls-arrows' ),
                         dataDraggable            = $this.data( 'draggable' ),
                         dataDraggableCursor      = $this.data( 'draggable-cursor' ),                     
@@ -122,11 +119,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
                         dataSpeed                = $this.data( 'speed' ),
                         dataFilterTexture        = $this.data( 'filter-texture' );
 
-                    
-                    
-                    if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
-                    if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-                    if ( typeof dataLoop === typeof undefined ) dataLoop = false; 
+
                     if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
                     if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
                     if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
@@ -135,6 +128,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
                     if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
                     if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
+                    
+                    //Autoplay parameters
+                    let dataAuto                   = $this.data( 'auto' ),
+                        dataTiming                 = $this.data( 'timing' ),
+                        dataLoop                   = $this.data( 'loop' );  
+                    
+                    if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+                    if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+                    if ( typeof dataLoop === typeof undefined ) dataLoop = false; 
                     
                     
                     
@@ -348,7 +350,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			const $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 				$first                   = $items.first(),
-				itemsTotal               = $items.length;
+				itemTotal               = $items.length;
 	
 			
 			
@@ -365,7 +367,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			
         
 		    //Prevent bubbling
-			if ( itemsTotal == 1 ) {
+			if ( itemTotal == 1 ) {
 				$( paginationID ).hide();
 				$( arrowsID ).hide();
 			}
@@ -411,7 +413,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							newH = curH*(newW/curW);
 
 							//Save different canvas heights as an array
-							if ( canvasHeights.length < itemsTotal ) {
+							if ( canvasHeights.length < itemTotal ) {
 								canvasHeights.push( newH );
 							}
 					
@@ -442,7 +444,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							
 							//Save different canvas heights as an array
-							if ( canvasHeights.length < itemsTotal ) {
+							if ( canvasHeights.length < itemTotal ) {
 								canvasHeights.push( newH_img );
 							}
 
@@ -1207,7 +1209,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 				//Canvas Interactions
 				//-------------------------------------
-				transitionInteractions( 0, itemsTotal-1, $this, 'in', 'next' );
+				transitionInteractions( 0, itemTotal-1, $this, 'in', 'next' );
 				
 				
 				
@@ -1225,7 +1227,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			let _dot       = '',
 				_dotActive = '';
 			_dot += '<ul>';
-			for ( let i = 0; i < itemsTotal; i++ ) {
+			for ( let i = 0; i < itemTotal; i++ ) {
 
 				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -1243,11 +1245,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
                 const $btn = $( this );
                 if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                 $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'true' );
-                setTimeout( function() {
-                    $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' );
-                }, animSpeed );
-
                 
+                $( paginationID ).find( 'li a' )
+                    .delay(animSpeed)
+                    .queue(function(next) { $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' ); next(); });  
+                
+                
+                //
 				if ( !$( this ).hasClass( 'is-active' ) ) {
 
 					
@@ -1292,12 +1296,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				e.preventDefault();
                 
                 //Prevent buttons' events from firing multiple times
-                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
-                _prev.attr( 'aria-disabled', 'true' );
-                setTimeout( function() {
-                    _prev.attr( 'aria-disabled', 'false' );
-                }, animSpeed ); 
-                
+                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                $( this ).attr( 'aria-disabled', 'true' );
+
+                $( this )
+                    .delay(animSpeed)
+                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+           
 
 				//Canvas Interactions
 				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'prev' );	
@@ -1313,13 +1318,15 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
                 
-                
                 //Prevent buttons' events from firing multiple times
-                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
-                _next.attr( 'aria-disabled', 'true' );
-                setTimeout( function() {
-                    _next.attr( 'aria-disabled', 'false' );
-                }, animSpeed );
+                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                $( this ).attr( 'aria-disabled', 'true' );
+
+                $( this )
+                    .delay(animSpeed)
+                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+                
+                //
 
 				//Canvas Interactions
 				transitionInteractions( $items.filter( '.is-active' ).index(), $items.filter( '.leave' ).index(), $this, 'out', 'next' );	
@@ -1384,7 +1391,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 						//--- left
 						if ( deltaX >= 50) {
-							if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() < itemTotal - 1 ) _next.trigger( 'click' );
 						}
 						
 						//--- right
@@ -1421,7 +1428,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							//left
 							if ( e.pageX < origin_mouse_x ) {
-								if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() < itemTotal - 1 ) _next.trigger( 'click' );
 							}
 
 							//down

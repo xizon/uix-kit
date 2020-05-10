@@ -4,6 +4,12 @@
  * <!-- Floating Side Element -->
  *************************************
  */
+/**
+ * module.FLOATING_SIDE_EL
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -25,7 +31,7 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 	
 	
     module.FLOATING_SIDE_EL               = module.FLOATING_SIDE_EL || {};
-    module.FLOATING_SIDE_EL.version       = '0.0.5';
+    module.FLOATING_SIDE_EL.version       = '0.0.6';
     module.FLOATING_SIDE_EL.documentReady = function( $ ) {
 
 

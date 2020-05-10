@@ -84,7 +84,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.DROPDOWN_MENU )                UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 			if ( UixModuleInstance.DROPDOWN_MENU2 )               UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 			if ( UixModuleInstance.ACCORDION )                    UixModuleInstance.ACCORDION.documentReady($); //Accordion
-			if ( UixModuleInstance.ADVANCED_CONTENT_SLIDER )      UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+			if ( UixModuleInstance.HYBRID_CONTENT_SLIDER )      UixModuleInstance.HYBRID_CONTENT_SLIDER.documentReady($); //Hybrid Content Slider
 			if ( UixModuleInstance.GALLERY )                      UixModuleInstance.GALLERY.documentReady($); //Gallery
 			if ( UixModuleInstance.IMAGE_SHAPES )                 UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
 			if ( UixModuleInstance.PERIODICAL_SCROLL )            UixModuleInstance.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll

@@ -32,7 +32,7 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_CAROUSEL               = module.THREE_CAROUSEL || {};
-    module.THREE_CAROUSEL.version       = '0.0.1';
+    module.THREE_CAROUSEL.version       = '0.0.2';
     module.THREE_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-3d-carousel' ).each( function() {
@@ -157,8 +157,11 @@ export const THREE_CAROUSEL = ( ( module, $, window, document ) => {
             const dragDropElement = $dragDropTrigger[0],
 				  dragDropMC      = new Hammer( dragDropElement, hammerProps );
 			
-			
-			dragDropMC.on( 'panright press panleft', function( ev ) {
+            // let the pan gesture support all directions.
+            // this will block the vertical scrolling on a touch-device while on the element
+            dragDropMC.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+            
+			dragDropMC.on( 'press panright panleft', function( ev ) {
 
 				//Set the direction in here
 				direction = ev.type;

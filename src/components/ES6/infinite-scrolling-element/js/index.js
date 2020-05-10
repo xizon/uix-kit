@@ -24,7 +24,7 @@ export const INFINITE_SCROLLING_EL = ( ( module, $, window, document ) => {
 	
 	
     module.INFINITE_SCROLLING_EL               = module.INFINITE_SCROLLING_EL || {};
-    module.INFINITE_SCROLLING_EL.version       = '0.0.1';
+    module.INFINITE_SCROLLING_EL.version       = '0.0.2';
     module.INFINITE_SCROLLING_EL.documentReady = function( $ ) {
 
 		$( '.uix-infinite-scrolling' ).each( function() {
@@ -60,12 +60,12 @@ export const INFINITE_SCROLLING_EL = ( ( module, $, window, document ) => {
             $clonedList.addClass( 'cloned' ).appendTo( $this );
 
             //TimelineMax
-            var tl = new TimelineMax({
+            const tl = new TimelineMax({
                 repeat: -1,
                 paused: true
             });
 
-            var time = speed/1000;
+            const time = speed/1000;
 
             tl.fromTo($list, time, {
                 rotation: 0.01,

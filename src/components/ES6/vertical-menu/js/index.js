@@ -4,6 +4,12 @@
  * <!-- Vertical Menu -->
  *************************************
  */
+/**
+ * module.VERTICAL_MENU
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -25,7 +31,7 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.VERTICAL_MENU               = module.VERTICAL_MENU || {};
-    module.VERTICAL_MENU.version       = '0.0.4';
+    module.VERTICAL_MENU.version       = '0.0.5';
     module.VERTICAL_MENU.documentReady = function( $ ) {
 
         const $window          = $( window );

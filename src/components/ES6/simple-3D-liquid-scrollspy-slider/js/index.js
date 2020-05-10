@@ -34,7 +34,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 	
 	
     module.THREE_LIQUID_SCROLLSPY_SLIDER               = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.1.1';
+    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.1.3';
     module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function( $ ) {
 
 	
@@ -114,7 +114,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                     
 					const $items                   = $this.find( '.uix-3d-slider--liquid-scrollspy__item' ),
 						  $first                   = $items.first(),
-						  itemsTotal               = $items.length,
+						  itemTotal                = $items.length,
                           activated                = $this.data( 'activated' ); 
 				
                     
@@ -125,13 +125,10 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         //Get parameter configuration from the data-* attribute of HTML
                         let	dataControlsPagination   = $this.data( 'controls-pagination' ),
                             dataControlsArrows       = $this.data( 'controls-arrows' ),
-                            dataLoop                 = $this.data( 'loop' ),
                             dataFilterTexture        = $this.data( 'filter-texture' ),
                             dataDraggable            = $this.data( 'draggable' ),
                             dataDraggableCursor      = $this.data( 'draggable-cursor' ),
                             dataSpeed                = $this.data( 'speed' ),
-                            dataAuto                 = $this.data( 'auto' ),
-                            dataTiming               = $this.data( 'timing' ),
                             dataCountTotal           = $this.data( 'count-total' ),
                             dataCountCur             = $this.data( 'count-now' ),
                             dataScrollspy            = $this.data( 'scrollspy' );
@@ -143,11 +140,18 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         if ( typeof dataFilterTexture === typeof undefined || !dataFilterTexture || dataFilterTexture == '' ) dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
                         if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
                         if ( typeof dataDraggableCursor === typeof undefined ) dataDraggableCursor = 'move';
-                        if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
-                        if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-                        if ( typeof dataLoop === typeof undefined ) dataLoop = false;
                         if ( typeof dataScrollspy === typeof undefined ) dataScrollspy = false;
 
+                        
+                        //Autoplay parameters
+                        let dataAuto                   = $this.data( 'auto' ),
+                            dataTiming                 = $this.data( 'timing' ),
+                            dataLoop                   = $this.data( 'loop' );  
+
+                        if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+                        if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+                        if ( typeof dataLoop === typeof undefined ) dataLoop = false;  
+                        
                         
                         //Load displacement image
                         dispImage = dataFilterTexture;
@@ -182,7 +186,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 
 
                         //Prevent bubbling
-                        if ( itemsTotal == 1 ) {
+                        if ( itemTotal == 1 ) {
                             $( dataControlsPagination ).hide();
                             $( dataControlsArrows ).hide();
                         }
@@ -285,7 +289,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         let _dot       = '',
                             _dotActive = '';
                         _dot += '<ul>';
-                        for ( let i = 0; i < itemsTotal; i++ ) {
+                        for ( let i = 0; i < itemTotal; i++ ) {
 
                             _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -305,12 +309,13 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                             const $btn = $( this );
                             if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                             $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'true' );
-                            setTimeout( function() {
-                                $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'false' );
-                            }, animSpeed );
-
                             
+                            $( dataControlsPagination ).find( 'ul > li' )
+                                .delay(animSpeed)
+                                .queue(function(next) { $( dataControlsPagination ).find( 'ul > li' ).attr( 'aria-disabled', 'false' ); next(); });   
+       
                             
+                            //
                             const slideCurId  = $( dataControlsPagination ).find( 'ul > li.is-active' ).index(),
                                   slideNextId = $( this ).index();
 
@@ -348,14 +353,15 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         _prev.off( 'click' ).on( 'click', function( e ) {
                             e.preventDefault();
                             
-                            
                             //Prevent buttons' events from firing multiple times
-                            if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
-                            _prev.attr( 'aria-disabled', 'true' );
-                            setTimeout( function() {
-                                _prev.attr( 'aria-disabled', 'false' );
-                            }, animSpeed );   
+                            if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                            $( this ).attr( 'aria-disabled', 'true' );
 
+                            $( this )
+                                .delay(animSpeed)
+                                .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+
+                            //
                             const slideCurId  = $items.filter( '.is-active' ).index(),
                                   slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) - 1;
 
@@ -374,13 +380,14 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                             e.preventDefault();
                             
                             //Prevent buttons' events from firing multiple times
-                            if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
-                            _next.attr( 'aria-disabled', 'true' );
-                            setTimeout( function() {
-                                _next.attr( 'aria-disabled', 'false' );
-                            }, animSpeed ); 
+                            if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                            $( this ).attr( 'aria-disabled', 'true' );
 
+                            $( this )
+                                .delay(animSpeed)
+                                .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
 
+                            //
                             const slideCurId  = $items.filter( '.is-active' ).index(),
                                   slideNextId = parseFloat( $items.filter( '.is-active' ).index() ) + 1;
 

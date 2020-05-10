@@ -3,9 +3,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.5
+ * ## Version             :  4.2.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 23, 2020
+ * ## Last Update         :  May 10, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f68bf331de38808fc168";
+/******/ 	var hotCurrentHash = "c19b77c80bba53b0091e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -809,7 +809,7 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(131)(__webpack_require__.s = 131);
+/******/ 	return hotCreateRequire(130)(__webpack_require__.s = 130);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1091,12 +1091,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports) {
 
 /* 
@@ -1211,6 +1205,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1236,12 +1236,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1383,13 +1377,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1435,7 +1429,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1514,7 +1508,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports) {
 
 /*
@@ -1559,7 +1553,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1603,7 +1597,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /*
@@ -1637,7 +1631,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /*
@@ -1710,7 +1704,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /*
@@ -1744,7 +1738,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /*
@@ -1768,7 +1762,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1816,7 +1810,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1902,6 +1896,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1981,6 +1981,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2103,7 +2109,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /*
@@ -2137,12 +2143,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 48 */
@@ -2224,6 +2224,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -2282,12 +2288,6 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2295,6 +2295,12 @@ jQuery.fn.sortElements = function () {
 
 /***/ }),
 /* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2448,12 +2454,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 66 */
@@ -2678,7 +2678,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 103 */,
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 104 */,
 /* 105 */,
 /* 106 */,
@@ -2704,14 +2709,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 126 */,
 /* 127 */,
 /* 128 */,
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 130 */,
-/* 131 */
+/* 129 */,
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2732,7 +2731,7 @@ var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
   //---------------------
   "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", //GSAP plugins
   //---------------------
-  "./src/components/ES5/_plugins-GSAP/js/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/TextPlugin.js", //three.js plugins
+  "./src/components/ES5/_plugins-GSAP/js/plugins/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/TextPlugin.js", //three.js plugins
   //---------------------
   "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js", // loader
   //---------------------
@@ -2766,22 +2765,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     11.Theme Scripts
     12.Accordion Background Images
     13.Accordion
-    14.Advanced Content Slider
-    15.Advanced Slider (Basic)
-    16.Advanced Slider (Special Effects)
-    17.Ajax Push Content
-    18.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    19.Back to Top
-    20.Circle Layout
-    21.Counter
-    22.Dropdown Menu
-    23.Dropdown Menu 2 (Multi-level drop-down navigation)
-    24.Dynamic Drop Down List from JSON
-    25.Flexslider
-    26.Floating Side Element
-    27.Form Progress
-    28.Form
-    29.Gallery
+    14.Advanced Slider (Basic)
+    15.Advanced Slider (Special Effects)
+    16.Ajax Push Content
+    17.Ajax Page Loader (Loading A Page via Ajax Into Div)
+    18.Back to Top
+    19.Circle Layout
+    20.Counter
+    21.Dropdown Menu
+    22.Dropdown Menu 2 (Multi-level drop-down navigation)
+    23.Dynamic Drop Down List from JSON
+    24.Flexslider
+    25.Floating Side Element
+    26.Form Progress
+    27.Form
+    28.Gallery
+    29.Hybrid Content Slider
     30.Hover Delay Interaction
     31.Image Shapes
     32.Infinite Scrolling Element
@@ -3318,7 +3317,7 @@ window.MAIN = null;
 
       if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
 
-      if (UixModuleInstance.ADVANCED_CONTENT_SLIDER) UixModuleInstance.ADVANCED_CONTENT_SLIDER.documentReady($); //Advanced Content Slider
+      if (UixModuleInstance.HYBRID_CONTENT_SLIDER) UixModuleInstance.HYBRID_CONTENT_SLIDER.documentReady($); //Hybrid Content Slider
 
       if (UixModuleInstance.GALLERY) UixModuleInstance.GALLERY.documentReady($); //Gallery
 
@@ -3646,10 +3645,16 @@ function loader_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "
  *************************************
  */
 
+/**
+ * module.LOADER
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 var LOADER = function (module, $, window, document) {
   if (window.LOADER === null) return false;
   module.LOADER = module.LOADER || {};
-  module.LOADER.version = '0.0.4';
+  module.LOADER.version = '0.0.5';
 
   module.LOADER.documentReady = function ($) {
     // Disable devices scaling
@@ -4085,10 +4090,16 @@ function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
  *************************************
  */
 
+/**
+ * module.NAVIGATION
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 var NAVIGATION = function (module, $, window, document) {
   if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
-  module.NAVIGATION.version = '0.0.8';
+  module.NAVIGATION.version = '0.0.9';
 
   module.NAVIGATION.documentReady = function ($) {
     var $window = $(window);
@@ -4992,329 +5003,8 @@ var ACCORDION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/advanced-content-slider/scss/_style.scss
-var advanced_content_slider_scss_style = __webpack_require__(8);
-
-// CONCATENATED MODULE: ./src/components/ES6/advanced-content-slider/js/index.js
-function advanced_content_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function advanced_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { advanced_content_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { advanced_content_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return advanced_content_slider_js_typeof(obj); }
-
-/* 
- *************************************
- * <!-- Advanced Content Slider -->
- *************************************
- */
-
-/**
- * module.ADVANCED_CONTENT_SLIDER
- * 
- * @requires ./examples/assets/js/min/hammer.min.js
- */
-
-
-var ADVANCED_CONTENT_SLIDER = function (module, $, window, document) {
-  if (window.ADVANCED_CONTENT_SLIDER === null) return false;
-  module.ADVANCED_CONTENT_SLIDER = module.ADVANCED_CONTENT_SLIDER || {};
-  module.ADVANCED_CONTENT_SLIDER.version = '0.0.7';
-
-  module.ADVANCED_CONTENT_SLIDER.documentReady = function ($) {
-    var $window = $(window);
-    var windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight;
-    var animSpeed = 1200;
-    sliderInit();
-    $window.on('resize', function () {
-      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-      if (window.innerWidth != windowWidth) {
-        // Update the window width for next time
-        windowWidth = window.innerWidth;
-        sliderInit();
-      }
-    });
-    /*
-     * Initialize slideshow
-     *
-     * @return {Void}
-     */
-
-    function sliderInit() {
-      $('.uix-advanced-content-slider').each(function () {
-        var $this = $(this);
-        var $items = $this.find('.uix-advanced-content-slider__item'),
-            $itemsWrapper = $this.children('.uix-advanced-content-slider__inner'),
-            $first = $items.first(),
-            itemWidth = $this.width(),
-            itemsTotal = $items.length,
-            totalWidth = itemWidth * itemsTotal,
-            activated = $this.data('activated');
-        var dataControlsPaginationAuto = false;
-
-        if (advanced_content_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
-          //Get parameter configuration from the data-* attribute of HTML
-          var dataControlsPagination = $this.data('controls-pagination'),
-              dataControlsArrows = $this.data('controls-arrows'),
-              dataDraggable = $this.data('draggable'),
-              dataDraggableCursor = $this.data('draggable-cursor'),
-              dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop'),
-              dataSpeed = $this.data('speed');
-          if (advanced_content_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-content-slider-sp-pagination';
-          if (advanced_content_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined)) dataControlsArrows = '.uix-advanced-content-slider-sp-arrows';
-          if (advanced_content_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-          if (advanced_content_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
-          if (advanced_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (advanced_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (advanced_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
-
-          var playTimes; //A function called "timer" once every second (like a digital watch).
-
-          $this[0].animatedSlides; //Navigation ID for paging control of each slide is automatically numbered.
-
-          if ($(dataControlsPagination).html().length == 0) dataControlsPaginationAuto = true; //Get the animation speed
-          //-------------------------------------	
-
-          if (advanced_content_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
-            animSpeed = dataSpeed;
-          } //Initialize the width of each item
-          //-------------------------------------		
-
-
-          $first.addClass('is-active');
-          $items.css('width', itemWidth + 'px');
-          TweenMax.set($itemsWrapper, {
-            width: totalWidth,
-            onComplete: function onComplete() {
-              $this.css('height', 'auto');
-            }
-          }); //Add identifiers for the first and last items
-          //-------------------------------------		
-
-          $items.last().addClass('last');
-          $items.first().addClass('first'); //Pagination dots 
-          //-------------------------------------	
-
-          if (dataControlsPaginationAuto) {
-            var _dot = '',
-                _dotActive = '';
-            _dot += '<ul class="uix-advanced-content-slider__pagination--default">';
-
-            for (var i = 0; i < itemsTotal; i++) {
-              _dotActive = i == 0 ? 'class="is-active"' : '';
-              _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
-            }
-
-            _dot += '</ul>';
-            if ($(dataControlsPagination).html() == '') $(dataControlsPagination).html(_dot);
-          } else {
-            $(dataControlsPagination).find('li').first().find('a').addClass('is-active');
-            $(dataControlsPagination).find('li').first().addClass('is-active');
-          }
-
-          $(dataControlsPagination).find('li a').off('click').on('click', function (e) {
-            e.preventDefault(); //Prevent buttons' events from firing multiple times
-
-            var $btn = $(this);
-            if ($btn.attr('aria-disabled') == 'true') return false;
-            $(dataControlsPagination).find('li a').attr('aria-disabled', 'true');
-            setTimeout(function () {
-              $(dataControlsPagination).find('li a').attr('aria-disabled', 'false');
-            }, animSpeed);
-
-            if (!$(this).hasClass('is-active')) {
-              sliderUpdates($(this).attr('data-index'), $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
-
-              clearInterval($this[0].animatedSlides);
-            }
-          }); //Next/Prev buttons
-          //-------------------------------------		
-
-          var _prev = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--prev'),
-              _next = $(dataControlsArrows).find('.uix-advanced-content-slider__arrows--next');
-
-          $(dataControlsArrows).find('a').attr('href', 'javascript:');
-
-          if (!dataLoop) {
-            _prev.addClass('is-disabled');
-          }
-
-          _prev.off('click').on('click', function (e) {
-            e.preventDefault(); //Prevent buttons' events from firing multiple times
-
-            if (_prev.attr('aria-disabled') == 'true') return false;
-
-            _prev.attr('aria-disabled', 'true');
-
-            setTimeout(function () {
-              _prev.attr('aria-disabled', 'false');
-            }, animSpeed);
-            sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          });
-
-          _next.off('click').on('click', function (e) {
-            e.preventDefault(); //Prevent buttons' events from firing multiple times
-
-            if (_next.attr('aria-disabled') == 'true') return false;
-
-            _next.attr('aria-disabled', 'true');
-
-            setTimeout(function () {
-              _next.attr('aria-disabled', 'false');
-            }, animSpeed);
-            sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
-
-            clearInterval($this[0].animatedSlides);
-          }); //Drag and Drop
-          //-------------------------------------	
-
-
-          var $dragDropTrigger = $this,
-              hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
-
-          if (dataDraggable && dataDraggableCursor != '' && dataDraggableCursor != false) $dragDropTrigger.css('cursor', dataDraggableCursor);
-
-          if (!dataDraggable) {
-            hammerProps = {
-              inputClass: Hammer.TouchInput
-            };
-          } //Mouse event
-          //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
-
-
-          var direction,
-              dragDropElement = $dragDropTrigger[0],
-              dragDropMC = new Hammer(dragDropElement, hammerProps);
-          dragDropMC.on('panright press panleft', function (ev) {
-            //Set the direction in here
-            direction = ev.type;
-          });
-          dragDropMC.on('panend', function (ev) {
-            //Use the direction in here
-            //You know the pan has ended
-            //and you know which action they were taking
-            if (direction == 'panleft') {
-              sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
-
-              clearInterval($this[0].animatedSlides);
-            }
-
-            if (direction == 'panright') {
-              sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, dataControlsPagination, dataControlsArrows, dataLoop); //Pause the auto play event
-
-              clearInterval($this[0].animatedSlides);
-            }
-          }); //Autoplay Slider
-          //-------------------------------------		
-
-          if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsPagination, dataControlsArrows);
-            $this.on({
-              mouseenter: function mouseenter() {
-                clearInterval($this[0].animatedSlides);
-              },
-              mouseleave: function mouseleave() {
-                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataControlsPagination, dataControlsArrows);
-              }
-            });
-          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
-
-
-          $this.data('activated', 1);
-        } //endif activated        
-
-      });
-    }
-    /*
-     * Trigger slider autoplay
-     *
-     * @param  {Function} playTimes      - Number of times.
-     * @param  {Number} timing           - Autoplay interval.
-     * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
-     * @param  {Element} slider           - Selector of the slider .
-           * @param  {String} paginationID     - Navigation ID for paging control of each slide.
-           * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
-     * @return {Void}                    - The constructor.
-     */
-
-
-    function sliderAutoPlay(playTimes, timing, loop, slider, paginationID, arrowsID) {
-      var items = slider.find('.uix-advanced-content-slider__item'),
-          total = items.length;
-      slider[0].animatedSlides = setInterval(function () {
-        playTimes = parseFloat(items.filter('.is-active').index());
-        playTimes++;
-
-        if (!loop) {
-          if (playTimes < total && playTimes >= 0) {
-            var slideNextId = playTimes;
-            sliderUpdates(slideNextId, slider, paginationID, arrowsID, loop);
-          }
-        } else {
-          if (playTimes == total) playTimes = 0;
-          if (playTimes < 0) playTimes = total - 1;
-          var _slideNextId = playTimes; //Prevent problems with styles when switching in positive order
-
-          sliderUpdates(_slideNextId, slider, paginationID, arrowsID, loop);
-        }
-      }, timing);
-    }
-    /*
-     * Transition Between Slides
-     *
-     * @param  {Number} elementIndex     - Index of current slider.
-     * @param  {Element} slider           - Selector of the slider .
-           * @param  {String} paginationID     - Navigation ID for paging control of each slide.
-           * @param  {String} arrowsID         - Previous/Next arrow navigation ID.
-           * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
-     * @return {Void}
-     */
-
-
-    function sliderUpdates(elementIndex, slider, paginationID, arrowsID, loop) {
-      var $items = slider.find('.uix-advanced-content-slider__item'),
-          itemsTotal = $items.length,
-          $prev = $(arrowsID).find('.uix-advanced-content-slider__arrows--prev'),
-          $next = $(arrowsID).find('.uix-advanced-content-slider__arrows--next'),
-          $pagination = $(paginationID).find('li a');
-      $pagination.removeClass('is-active');
-      $pagination.parent().removeClass('is-active');
-
-      if (loop) {
-        if (elementIndex == itemsTotal) elementIndex = 0;
-        if (elementIndex < 0) elementIndex = itemsTotal - 1;
-      } else {
-        if (elementIndex > parseFloat(itemsTotal - 1)) elementIndex = parseFloat(itemsTotal - 1);
-        if (elementIndex < 0) elementIndex = 0;
-        $next.removeClass('is-disabled');
-        $prev.removeClass('is-disabled');
-        if (elementIndex == itemsTotal - 1) $next.addClass('is-disabled');
-        if (elementIndex == 0) $prev.addClass('is-disabled');
-      }
-
-      $items.removeClass('is-active');
-      $items.eq(elementIndex).addClass('is-active');
-      $pagination.eq(elementIndex).addClass('is-active');
-      $pagination.eq(elementIndex).parent().addClass('is-active');
-      TweenMax.to(slider.children('.uix-advanced-content-slider__inner'), animSpeed / 1000, {
-        x: '-' + slider.width() * elementIndex,
-        onComplete: function onComplete() {},
-        ease: Power3.easeOut
-      });
-    }
-  };
-
-  module.components.documentReady.push(module.ADVANCED_CONTENT_SLIDER.documentReady);
-  return function ADVANCED_CONTENT_SLIDER() {
-    advanced_content_slider_js_classCallCheck(this, ADVANCED_CONTENT_SLIDER);
-
-    this.module = module;
-  };
-}(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss/_basic.scss
-var _basic = __webpack_require__(9);
+var _basic = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/basic.js
 function basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5331,7 +5021,7 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.1.9';
+  module.ADVANCED_SLIDER.version = '0.2.1';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -5365,24 +5055,25 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
         if (basic_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
           //Get parameter configuration from the data-* attribute of HTML
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop'),
-              dataControlsPagination = $this.data('controls-pagination'),
+          var dataControlsPagination = $this.data('controls-pagination'),
               dataControlsArrows = $this.data('controls-arrows'),
               dataDraggable = $this.data('draggable'),
               dataDraggableCursor = $this.data('draggable-cursor'),
               dataCountTotal = $this.data('count-total'),
               dataCountCur = $this.data('count-now');
-          if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
           if (basic_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider__pagination';
           if (basic_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider__arrows';
           if (basic_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
           if (basic_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
           if (basic_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-          if (basic_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay times
+          if (basic_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay parameters
+
+          var dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop');
+          if (basic_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (basic_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (basic_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
           var playTimes; //A function called "timer" once every second (like a digital watch).
 
@@ -5500,7 +5191,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider__item'),
           $first = $items.first(),
-          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
+          itemTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
       if ($(arrowsID).length == 0) {
@@ -5511,7 +5202,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       $items.last().addClass('last');
       $items.first().addClass('first'); //Prevent bubbling
 
-      if (itemsTotal == 1) {
+      if (itemTotal == 1) {
         $(paginationID).hide();
         $(arrowsID).hide();
       } // Fires local videos asynchronously with slider switch.
@@ -5525,7 +5216,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
           _dotActive = '';
       _dot += '<ul>';
 
-      for (var i = 0; i < itemsTotal; i++) {
+      for (var i = 0; i < itemTotal; i++) {
         _dotActive = i == 0 ? 'class="is-active"' : '';
         _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
       }
@@ -5538,9 +5229,10 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         var $btn = $(this);
         if ($btn.attr('aria-disabled') == 'true') return false;
         $(paginationID).find('li a').attr('aria-disabled', 'true');
-        setTimeout(function () {
+        $(paginationID).find('li a').delay(animDelay).queue(function (next) {
           $(paginationID).find('li a').attr('aria-disabled', 'false');
-        }, animDelay);
+          next();
+        }); //
 
         if (!$(this).hasClass('is-active')) {
           //Determine the direction
@@ -5570,13 +5262,13 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       _prev.off('click').on('click', function (e) {
         e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-        if (_prev.attr('aria-disabled') == 'true') return false;
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(animDelay).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
 
-        _prev.attr('aria-disabled', 'true');
-
-        setTimeout(function () {
-          _prev.attr('aria-disabled', 'false');
-        }, animDelay);
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
@@ -5585,13 +5277,13 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       _next.off('click').on('click', function (e) {
         e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-        if (_next.attr('aria-disabled') == 'true') return false;
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(animDelay).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
 
-        _next.attr('aria-disabled', 'true');
-
-        setTimeout(function () {
-          _next.attr('aria-disabled', 'false');
-        }, animDelay);
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
@@ -5629,7 +5321,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
                 deltaY = origin_mouse_y - touches[0].pageY; //--- left
 
             if (deltaX >= 50) {
-              if ($items.filter('.is-active').index() < itemsTotal - 1) _next.trigger('click');
+              if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
             } //--- right
 
 
@@ -5655,7 +5347,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
 
               if (e.pageX < origin_mouse_x) {
-                if ($items.filter('.is-active').index() < itemsTotal - 1) _next.trigger('click');
+                if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
               } //down
 
 
@@ -5990,7 +5682,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss/_special.scss
-var _special = __webpack_require__(10);
+var _special = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/special.js
 function special_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6014,7 +5706,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.2.9';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.0';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -6063,10 +5755,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
         if (special_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
           //Get parameter configuration from the data-* attribute of HTML
-          var dataAuto = $this.data('auto'),
-              dataTiming = $this.data('timing'),
-              dataLoop = $this.data('loop'),
-              dataControlsPagination = $this.data('controls-pagination'),
+          var dataControlsPagination = $this.data('controls-pagination'),
               dataControlsArrows = $this.data('controls-arrows'),
               dataDraggable = $this.data('draggable'),
               dataDraggableCursor = $this.data('draggable-cursor'),
@@ -6074,16 +5763,20 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
               dataCountCur = $this.data('count-now'),
               dataSpeed = $this.data('speed'),
               dataFilterTexture = $this.data('filter-texture');
-          if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
-          if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-          if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
           if (special_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-advanced-slider-sp__pagination';
           if (special_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-advanced-slider-sp__arrows';
           if (special_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
           if (special_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
           if (special_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
           if (special_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current';
-          if (special_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; //Autoplay times
+          if (special_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; //Autoplay parameters
+
+          var dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop');
+          if (special_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (special_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (special_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
           var playTimes; //A function called "timer" once every second (like a digital watch).
 
@@ -6228,7 +5921,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider-sp__item'),
           $first = $items.first(),
-          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
+          itemTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
       if ($(arrowsID).length == 0) {
@@ -6239,7 +5932,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       $items.last().addClass('last');
       $items.first().addClass('first'); //Prevent bubbling
 
-      if (itemsTotal == 1) {
+      if (itemTotal == 1) {
         $(paginationID).hide();
         $(arrowsID).hide();
       }
@@ -6270,7 +5963,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
               newH = curH * (newW / curW); //Save different canvas heights as an array
 
-              if (canvasHeights.length < itemsTotal) {
+              if (canvasHeights.length < itemTotal) {
                 canvasHeights.push(newH);
               }
             }, false);
@@ -6288,7 +5981,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
               newH_img = curH_img * (newW_img / curW_img); //Save different canvas heights as an array
 
-              if (canvasHeights.length < itemsTotal) {
+              if (canvasHeights.length < itemTotal) {
                 canvasHeights.push(newH_img);
               }
             };
@@ -6771,7 +6464,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         //-------------------------------------
 
 
-        transitionInteractions(0, itemsTotal - 1, $this, 'in', 'next');
+        transitionInteractions(0, itemTotal - 1, $this, 'in', 'next');
       } // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
@@ -6783,7 +6476,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           _dotActive = '';
       _dot += '<ul>';
 
-      for (var i = 0; i < itemsTotal; i++) {
+      for (var i = 0; i < itemTotal; i++) {
         _dotActive = i == 0 ? 'class="is-active"' : '';
         _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
       }
@@ -6796,9 +6489,10 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         var $btn = $(this);
         if ($btn.attr('aria-disabled') == 'true') return false;
         $(paginationID).find('li a').attr('aria-disabled', 'true');
-        setTimeout(function () {
+        $(paginationID).find('li a').delay(animSpeed).queue(function (next) {
           $(paginationID).find('li a').attr('aria-disabled', 'false');
-        }, animSpeed);
+          next();
+        }); //
 
         if (!$(this).hasClass('is-active')) {
           //Determine the direction
@@ -6831,13 +6525,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       _prev.off('click').on('click', function (e) {
         e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-        if (_prev.attr('aria-disabled') == 'true') return false;
-
-        _prev.attr('aria-disabled', 'true');
-
-        setTimeout(function () {
-          _prev.attr('aria-disabled', 'false');
-        }, animSpeed); //Canvas Interactions
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(animSpeed).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
 
@@ -6849,13 +6542,13 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       _next.off('click').on('click', function (e) {
         e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-        if (_next.attr('aria-disabled') == 'true') return false;
-
-        _next.attr('aria-disabled', 'true');
-
-        setTimeout(function () {
-          _next.attr('aria-disabled', 'false');
-        }, animSpeed); //Canvas Interactions
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(animSpeed).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
+        //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
 
@@ -6896,7 +6589,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
                 deltaY = origin_mouse_y - touches[0].pageY; //--- left
 
             if (deltaX >= 50) {
-              if ($items.filter('.is-active').index() < itemsTotal - 1) _next.trigger('click');
+              if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
             } //--- right
 
 
@@ -6922,7 +6615,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
               if (e.pageX < origin_mouse_x) {
-                if ($items.filter('.is-active').index() < itemsTotal - 1) _next.trigger('click');
+                if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
               } //down
 
 
@@ -7900,11 +7593,17 @@ function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol
  *************************************
  */
 
+/**
+ * module.AJAX_PUSH_CONTENT
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   if (window.AJAX_PUSH_CONTENT === null) return false;
   module.AJAX_PUSH_CONTENT = module.AJAX_PUSH_CONTENT || {};
-  module.AJAX_PUSH_CONTENT.version = '0.1.8';
+  module.AJAX_PUSH_CONTENT.version = '0.1.9';
 
   module.AJAX_PUSH_CONTENT.documentReady = function ($) {
     // trigger of AJAX request
@@ -8292,7 +7991,7 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/AJAX/scss/_style.scss
-var AJAX_scss_style = __webpack_require__(11);
+var AJAX_scss_style = __webpack_require__(10);
 
 // CONCATENATED MODULE: ./src/components/ES6/AJAX/js/index.js
 function AJAX_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8908,7 +8607,7 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/back-to-top/scss/_style.scss
-var back_to_top_scss_style = __webpack_require__(12);
+var back_to_top_scss_style = __webpack_require__(11);
 
 // CONCATENATED MODULE: ./src/components/ES6/back-to-top/js/index.js
 function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8919,11 +8618,17 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
  *************************************
  */
 
+/**
+ * module.BACK_TO_TOP
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.8';
+  module.BACK_TO_TOP.version = '0.0.9';
 
   module.BACK_TO_TOP.documentReady = function ($) {
     var $window = $(window);
@@ -8968,7 +8673,7 @@ var BACK_TO_TOP = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/circle-layout/scss/_style.scss
-var circle_layout_scss_style = __webpack_require__(13);
+var circle_layout_scss_style = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./src/components/ES6/circle-layout/js/index.js
 function circle_layout_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9058,10 +8763,10 @@ var CIRCLE_LAYOUT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/counter/js/fn/count-to.js
-var count_to = __webpack_require__(14);
+var count_to = __webpack_require__(13);
 
 // EXTERNAL MODULE: ./src/components/ES6/counter/scss/_style.scss
-var counter_scss_style = __webpack_require__(15);
+var counter_scss_style = __webpack_require__(14);
 
 // CONCATENATED MODULE: ./src/components/ES6/counter/js/index.js
 function counter_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9119,7 +8824,7 @@ var COUNTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/dropdown-menu/scss/_style.scss
-var dropdown_menu_scss_style = __webpack_require__(16);
+var dropdown_menu_scss_style = __webpack_require__(15);
 
 // CONCATENATED MODULE: ./src/components/ES6/dropdown-menu/js/index.js
 function dropdown_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9195,7 +8900,7 @@ var DROPDOWN_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/dropdown-menu2/scss/_style.scss
-var dropdown_menu2_scss_style = __webpack_require__(17);
+var dropdown_menu2_scss_style = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./src/components/ES6/dropdown-menu2/js/index.js
 function dropdown_menu2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9533,7 +9238,7 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/flexslider/scss/_style.scss
-var flexslider_scss_style = __webpack_require__(18);
+var flexslider_scss_style = __webpack_require__(17);
 
 // CONCATENATED MODULE: ./src/components/ES6/flexslider/js/index.js
 function flexslider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10325,7 +10030,7 @@ var FLEXSLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/floating-side-element/scss/_style.scss
-var floating_side_element_scss_style = __webpack_require__(19);
+var floating_side_element_scss_style = __webpack_require__(18);
 
 // CONCATENATED MODULE: ./src/components/ES6/floating-side-element/js/index.js
 function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10336,11 +10041,17 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
  *************************************
  */
 
+/**
+ * module.FLOATING_SIDE_EL
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.5';
+  module.FLOATING_SIDE_EL.version = '0.0.6';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -10391,10 +10102,10 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/form-progress/js/fn/form-progress-to-next.js
-var form_progress_to_next = __webpack_require__(20);
+var form_progress_to_next = __webpack_require__(19);
 
 // EXTERNAL MODULE: ./src/components/ES6/form-progress/scss/_style.scss
-var form_progress_scss_style = __webpack_require__(21);
+var form_progress_scss_style = __webpack_require__(20);
 
 // CONCATENATED MODULE: ./src/components/ES6/form-progress/js/index.js
 function form_progress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10405,6 +10116,12 @@ function form_progress_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
  *************************************
  * <!-- Form Progress -->
  *************************************
+ */
+
+/**
+ * module.FORM_PROGRESS
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 /*
@@ -10430,7 +10147,7 @@ function form_progress_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
 var FORM_PROGRESS = function (module, $, window, document) {
   if (window.FORM_PROGRESS === null) return false;
   module.FORM_PROGRESS = module.FORM_PROGRESS || {};
-  module.FORM_PROGRESS.version = '0.0.4';
+  module.FORM_PROGRESS.version = '0.0.5';
 
   module.FORM_PROGRESS.pageLoaded = function () {
     var $progressBar = $('.uix-form-progress progress'),
@@ -10506,46 +10223,46 @@ var FORM_PROGRESS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/normal-radio.js
-var normal_radio = __webpack_require__(22);
+var normal_radio = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/datapicker.js
-var datapicker = __webpack_require__(23);
+var datapicker = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-hover.js
-var controls_hover = __webpack_require__(24);
+var controls_hover = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/single-seletor.js
-var single_seletor = __webpack_require__(25);
+var single_seletor = __webpack_require__(24);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/multi-seletor.js
-var multi_seletor = __webpack_require__(26);
+var multi_seletor = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/file-dropzone.js
-var file_dropzone = __webpack_require__(27);
+var file_dropzone = __webpack_require__(26);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/upload.js
-var upload = __webpack_require__(28);
+var upload = __webpack_require__(27);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-disable.js
-var controls_disable = __webpack_require__(29);
+var controls_disable = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-line.js
-var controls_line = __webpack_require__(30);
+var controls_line = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/js/fn/radio-and-checkbox.js
-var radio_and_checkbox = __webpack_require__(31);
+var radio_and_checkbox = __webpack_require__(30);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss/_basic.scss
-var scss_basic = __webpack_require__(32);
+var scss_basic = __webpack_require__(31);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss/_layout.scss
-var _layout = __webpack_require__(33);
+var _layout = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss/_theme_material.scss
-var _theme_material = __webpack_require__(34);
+var _theme_material = __webpack_require__(33);
 
 // EXTERNAL MODULE: ./src/components/ES6/form/scss/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(35);
+var _3rd_party_plugins = __webpack_require__(34);
 
 // CONCATENATED MODULE: ./src/components/ES6/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10936,7 +10653,7 @@ var FORM = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/gallery/scss/_style.scss
-var gallery_scss_style = __webpack_require__(36);
+var gallery_scss_style = __webpack_require__(35);
 
 // CONCATENATED MODULE: ./src/components/ES6/gallery/js/index.js
 function gallery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11065,6 +10782,809 @@ var GALLERY = function (module, $, window, document) {
   module.components.documentReady.push(module.GALLERY.documentReady);
   return function GALLERY() {
     gallery_js_classCallCheck(this, GALLERY);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
+// EXTERNAL MODULE: ./src/components/ES6/hybrid-content-slider/scss/_style.scss
+var hybrid_content_slider_scss_style = __webpack_require__(36);
+
+// CONCATENATED MODULE: ./src/components/ES6/hybrid-content-slider/js/index.js
+function hybrid_content_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function hybrid_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { hybrid_content_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { hybrid_content_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return hybrid_content_slider_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- Hybrid Content Slider -->
+ *************************************
+ */
+
+/**
+ * module.HYBRID_CONTENT_SLIDER
+ * 
+ * @requires ./examples/assets/js/min/hammer.min.js
+ */
+
+
+var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
+  if (window.HYBRID_CONTENT_SLIDER === null) return false;
+  module.HYBRID_CONTENT_SLIDER = module.HYBRID_CONTENT_SLIDER || {};
+  module.HYBRID_CONTENT_SLIDER.version = '0.0.95';
+
+  module.HYBRID_CONTENT_SLIDER.pageLoaded = function () {
+    $('.uix-hybrid-content-slider').each(function () {
+      var $carouselWrapper = $(this),
+          $carousel = $carouselWrapper.find('.uix-hybrid-content-slider__items'),
+          $carouselItem = $carouselWrapper.find('.uix-hybrid-content-slider__items > div'),
+          itemTotal = $carouselItem.length,
+          amountVisible = 1,
+          carouselDir = $carouselWrapper.data('dir'),
+          carouselSpeed = $carouselWrapper.data('speed'),
+          carouselNext = $carouselWrapper.data('next'),
+          carouselPrev = $carouselWrapper.data('prev'),
+          carouselPagination = $carouselWrapper.data('pagination'),
+          carouseDraggable = $carouselWrapper.data('draggable'),
+          carouseDraggableCursor = $carouselWrapper.data('draggable-cursor');
+      if (hybrid_content_slider_js_typeof(carouselDir) === ( true ? "undefined" : undefined)) carouselDir = 'horizontal';
+      if (hybrid_content_slider_js_typeof(carouselSpeed) === ( true ? "undefined" : undefined)) carouselSpeed = 250;
+      if (hybrid_content_slider_js_typeof(carouselNext) === ( true ? "undefined" : undefined)) carouselNext = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--next';
+      if (hybrid_content_slider_js_typeof(carouselPrev) === ( true ? "undefined" : undefined)) carouselPrev = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--prev';
+      if (hybrid_content_slider_js_typeof(carouselPagination) === ( true ? "undefined" : undefined)) carouselPagination = '#uix-hybrid-content-slider__pagination-123';
+      if (hybrid_content_slider_js_typeof(carouseDraggable) === ( true ? "undefined" : undefined)) carouseDraggable = false;
+      if (hybrid_content_slider_js_typeof(carouseDraggableCursor) === ( true ? "undefined" : undefined)) carouseDraggableCursor = 'move'; //Autoplay parameters
+
+      var dataAuto = $carouselWrapper.data('auto'),
+          dataTiming = $carouselWrapper.data('timing'),
+          dataLoop = $carouselWrapper.data('loop');
+      if (hybrid_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+      if (hybrid_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+      if (hybrid_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
+
+      var playTimes; //A function called "timer" once every second (like a digital watch).
+
+      $carouselWrapper[0].animatedSlides; //Store the latest position (X,Y) in a temporary variable
+
+      var tempItemsPos = []; //each item width and height
+
+      var eachItemNewWidth,
+          eachItemNewHeight = []; // Returns the value of a number rounded to the nearest integer.
+
+      var midIndex = 0; // Get the width and height of each item
+
+      $carouselItem.each(function (index) {
+        var _height = $(this).height();
+
+        eachItemNewHeight.push(_height);
+        $(this).attr({
+          'data-height': _height,
+          'data-index': index
+        });
+      }); //Returns the total height of items
+
+      var totalItemsHeight = 0;
+
+      for (var i = 0; i < eachItemNewHeight.length; i++) {
+        totalItemsHeight += eachItemNewHeight[i];
+        if (i + 1 == itemTotal - amountVisible) break;
+      } //Set target index of the carousel buttons
+
+
+      setButtonTargetIndex($(carouselNext), $(carouselPrev), 'init', null); //set actived item & initialize the height of container
+
+      setContainerSize(0);
+      $carouselItem.addClass('js-is-ready'); // Activate the current item from carouse
+
+      setItemState(0);
+      /* 
+       ---------------------------
+       Initialize carousel
+       ---------------------------
+       */
+
+      var eachItemOldWidth = $carousel.width() / amountVisible;
+      eachItemNewWidth = $carouselWrapper.width() / amountVisible;
+
+      if (carouselDir == 'horizontal') {
+        $carousel.css('width', itemTotal * eachItemOldWidth);
+      } // Re-order all items
+
+
+      carouselReOrder(); //default button status
+
+      $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+      /* 
+       ---------------------------
+       Re-order all items
+       ---------------------------
+       */
+
+      function carouselReOrder() {
+        //Initialize the width and height of each item
+        if (carouselDir == 'horizontal') {
+          var boxWidth = eachItemNewWidth;
+          TweenMax.set($carouselItem, {
+            width: boxWidth,
+            height: function height(i, target) {
+              return eachItemNewHeight[i];
+            },
+            x: function x(i, target) {
+              return i * boxWidth;
+            }
+          });
+        } else {
+          TweenMax.set($carouselItem, {
+            height: function height(i, target) {
+              return eachItemNewHeight[i];
+            },
+            y: function y(i, target) {
+              var yIncrement = 0;
+
+              for (var k = 0; k < eachItemNewHeight.length; k++) {
+                var tempY = hybrid_content_slider_js_typeof(eachItemNewHeight[k - 1]) === ( true ? "undefined" : undefined) ? 0 : eachItemNewHeight[k - 1];
+                yIncrement += tempY;
+                if (k == i) break;
+              }
+
+              return yIncrement;
+            }
+          });
+        }
+      }
+      /* 
+       ---------------------------
+       Move left/up
+       ---------------------------
+       */
+
+
+      $(carouselNext).off('click').on('click', $carouselWrapper, function (e) {
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(carouselSpeed).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
+
+        movePositionWithButton(false, $(this), e, 'next'); //Pause the auto play event
+
+        clearInterval($carouselWrapper[0].animatedSlides);
+      });
+      /* 
+       ---------------------------
+       Move right/down
+       ---------------------------
+       */
+
+      $(carouselPrev).off('click').on('click', $carouselWrapper, function (e) {
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(carouselSpeed).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
+
+        movePositionWithButton(false, $(this), e, 'prev'); //Pause the auto play event
+
+        clearInterval($carouselWrapper[0].animatedSlides);
+      });
+      /* 
+       ---------------------------
+       Pagination
+       ---------------------------
+       */
+
+      if ($(carouselPagination).length > 0 && $(carouselPagination).html().length == 0) {
+        //Button to add pagination automatically
+        var _dot = '';
+        _dot += '<ul class="uix-hybrid-content-slider__pagination--default">';
+
+        for (var _i = 0; _i < itemTotal; _i++) {
+          _dot += '<li><a data-target-index="' + _i + '" href="javascript:void(0);"></a></li>';
+        }
+
+        _dot += '</ul>';
+        $(carouselPagination).html(_dot).promise().done(function () {
+          // Activate the currently selected Pagination
+          setPaginationState(0);
+        });
+      } else {
+        // Activate the currently selected Pagination
+        setPaginationState(0);
+      }
+
+      $(carouselPagination).find('li a').off('click').on('click', $carouselWrapper, function (e) {
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
+
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(carouselPagination).find('li a').attr('aria-disabled', 'true');
+        $(carouselPagination).find('li a').delay(carouselSpeed).queue(function (next) {
+          $(carouselPagination).find('li a').attr('aria-disabled', 'false');
+          next();
+        }); //
+
+        if (!$(this).parent().hasClass('is-active')) {
+          movePositionWithButton(true, $(this), e, 'next'); //Pause the auto play event
+
+          clearInterval($carouselWrapper[0].animatedSlides);
+        }
+      }); //Drag and Drop
+      //-------------------------------------	
+
+      var $dragDropTrigger = $carouselWrapper;
+      var hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
+
+      if (carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false) $dragDropTrigger.css('cursor', carouseDraggableCursor);
+
+      if (!carouseDraggable) {
+        hammerProps = {
+          inputClass: Hammer.TouchInput
+        };
+      } //Mouse event
+      //Hammer.js pan event only for touch devices and not for desktop computer Click+Drag
+
+
+      var direction;
+      var dragDropElement = $dragDropTrigger[0],
+          dragDropMC = new Hammer(dragDropElement, hammerProps);
+      var elAnim = true;
+      var targetIndex = 0; //Temporarily store arrays as strings
+      //!!!important ///////////////////////////////////////
+      //!!! Prevent dragging events from nesting multiple 
+      //!!! times to reduce subscripts.
+      //!!!important ///////////////////////////////////////
+
+      var allHeightStr = eachItemNewHeight.toString(); // let the pan gesture support all directions.
+      // this will block the vertical scrolling on a touch-device while on the element
+
+      dragDropMC.get('pan').set({
+        direction: Hammer.DIRECTION_ALL
+      });
+      dragDropMC.on('press panright panleft panup pandown', function (ev) {
+        //Set the direction in here
+        direction = ev.type; //Get the current item index
+
+        targetIndex = $(ev.target).data('index');
+        if (hybrid_content_slider_js_typeof(targetIndex) === ( true ? "undefined" : undefined)) targetIndex = $(ev.target).closest('.uix-hybrid-content-slider__item').data('index');
+        if (hybrid_content_slider_js_typeof(targetIndex) === ( true ? "undefined" : undefined)) targetIndex = $(ev.target).find('.uix-hybrid-content-slider__item').data('index');
+
+        switch (direction) {
+          case 'panleft':
+          case 'panup':
+            targetIndex = targetIndex + 1;
+            break;
+
+          case 'panright':
+          case 'pandown':
+            targetIndex = targetIndex;
+            break;
+        } //Determine whether it is the first or the last    
+
+
+        var currentIsFirstOrLast = false;
+        var firstItemOffset = carouselDir == 'horizontal' ? $carousel.find('[data-index="0"]')[0]._gsTransform.x : $carousel.find('[data-index="0"]')[0]._gsTransform.y;
+        var maxMoveOffset = carouselDir == 'horizontal' ? -eachItemNewWidth * (itemTotal - amountVisible) : -totalItemsHeight; //
+
+        if ((direction == 'panright' || direction == 'pandown') && firstItemOffset >= 0) {
+          //first item
+          currentIsFirstOrLast = true;
+        }
+
+        if ((direction == 'panleft' || direction == 'panup') && firstItemOffset <= maxMoveOffset) {
+          //last item
+          currentIsFirstOrLast = true;
+        } //Rebound effect of drag offset 
+        //
+        //!important -> Please do not use multiple case conditions, 
+        //otherwise it may cause vertical data problems
+
+
+        if (carouselDir == 'horizontal') {
+          switch (direction) {
+            case 'panleft':
+              if (ev.deltaX > -eachItemNewWidth / 4 && ev.deltaX < 0) {
+                elAnim = false;
+                var simulationButtonNext = $(carouselNext);
+                itemUpdates($carouselWrapper, simulationButtonNext, ev.deltaX, 0.1, true, targetIndex, allHeightStr);
+              } else {
+                elAnim = currentIsFirstOrLast ? false : true;
+              }
+
+              break;
+
+            case 'panright':
+              if (ev.deltaX < eachItemNewWidth / 4 && ev.deltaX > 0) {
+                elAnim = false;
+                var simulationButtonPrev = $(carouselPrev);
+                itemUpdates($carouselWrapper, simulationButtonPrev, ev.deltaX, 0.1, true, targetIndex, allHeightStr);
+              } else {
+                elAnim = currentIsFirstOrLast ? false : true;
+              }
+
+              break;
+          }
+        } else {
+          var draggingItemHeight = hybrid_content_slider_js_typeof(allHeightStr.split(',')[targetIndex - 1]) === ( true ? "undefined" : undefined) ? allHeightStr.split(',')[targetIndex] : allHeightStr.split(',')[targetIndex - 1];
+
+          switch (direction) {
+            case 'panup':
+              if (ev.deltaY > -draggingItemHeight / 4 && ev.deltaY < 0) {
+                elAnim = false;
+
+                var _simulationButtonNext = $(carouselNext);
+
+                itemUpdates($carouselWrapper, _simulationButtonNext, ev.deltaY, 0.1, true, targetIndex, allHeightStr);
+              } else {
+                elAnim = currentIsFirstOrLast ? false : true;
+              }
+
+              break;
+
+            case 'pandown':
+              if (ev.deltaY < draggingItemHeight / 4 && ev.deltaY > 0) {
+                elAnim = false;
+
+                var _simulationButtonPrev = $(carouselPrev);
+
+                itemUpdates($carouselWrapper, _simulationButtonPrev, ev.deltaY, 0.1, true, targetIndex, allHeightStr);
+              } else {
+                elAnim = currentIsFirstOrLast ? false : true;
+              }
+
+              break;
+          }
+        }
+      });
+      dragDropMC.on('panend', function (ev) {
+        if (elAnim) {
+          //Use the direction in here
+          //You know the pan has ended
+          //and you know which action they were taking
+          //
+          //!important -> Please do not use multiple case conditions, 
+          //otherwise it may cause vertical data problems
+          if (carouselDir == 'horizontal') {
+            switch (direction) {
+              case 'panleft':
+                var deltaNext = -eachItemNewWidth;
+                var simulationButtonNext = $(carouselNext);
+                itemUpdates($carouselWrapper, simulationButtonNext, deltaNext, null, false, targetIndex, allHeightStr);
+                break;
+
+              case 'panright':
+                var deltaPrev = eachItemNewWidth;
+                var simulationButtonPrev = $(carouselPrev);
+                itemUpdates($carouselWrapper, simulationButtonPrev, deltaPrev, null, false, targetIndex, allHeightStr);
+                break;
+            }
+          } else {
+            switch (direction) {
+              case 'panup':
+                var _deltaNext = -1;
+
+                var _simulationButtonNext2 = $(carouselNext);
+
+                itemUpdates($carouselWrapper, _simulationButtonNext2, _deltaNext, null, false, targetIndex, allHeightStr);
+                break;
+
+              case 'pandown':
+                var _deltaPrev = -1;
+
+                var _simulationButtonPrev2 = $(carouselPrev);
+
+                itemUpdates($carouselWrapper, _simulationButtonPrev2, _deltaPrev, null, false, targetIndex, allHeightStr);
+                break;
+            }
+          }
+        } else {
+          //Rebound effect of drag offset 
+          itemUpdates($carouselWrapper, null, tempItemsPos, null, false, targetIndex, allHeightStr);
+        } //Pause the auto play event
+
+
+        clearInterval($carouselWrapper[0].animatedSlides);
+      }); //Autoplay Slider
+      //-------------------------------------		
+
+      if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+        sliderAutoPlay(playTimes, dataTiming, dataLoop);
+        $carouselWrapper.on({
+          mouseenter: function mouseenter() {
+            clearInterval($carouselWrapper[0].animatedSlides);
+          },
+          mouseleave: function mouseleave() {
+            sliderAutoPlay(playTimes, dataTiming, dataLoop);
+          }
+        });
+      }
+      /*
+       * Trigger slider autoplay
+       *
+       * @param  {Function} playTimes      - Number of times.
+       * @param  {Number} timing           - Autoplay interval.
+       * @param  {Boolean} loop            - Gives the slider a seamless infinite loop.
+       * @return {Void}             
+       */
+
+
+      function sliderAutoPlay(playTimes, timing, loop) {
+        $carouselWrapper[0].animatedSlides = setInterval(function () {
+          var autoMove = function autoMove(indexGo) {
+            // Retrieve the position (X,Y) of an element 
+            var moveX = eachItemNewWidth * indexGo;
+            var moveYIncrement = 0;
+
+            for (var k = 0; k < eachItemNewHeight.length; k++) {
+              var tempY = hybrid_content_slider_js_typeof(eachItemNewHeight[k - 1]) === ( true ? "undefined" : undefined) ? 0 : eachItemNewHeight[k - 1];
+              moveYIncrement += tempY;
+              if (k == indexGo) break;
+            }
+
+            var moveY = moveYIncrement; //
+
+            var delta = carouselDir == 'horizontal' ? -moveX : -moveY; //
+
+            itemUpdates($carouselWrapper, 'auto', delta, null, false, indexGo, eachItemNewHeight);
+          };
+
+          playTimes = parseFloat($carouselItem.filter('.is-active').index());
+          playTimes++;
+
+          if (!loop) {
+            if (playTimes < itemTotal && playTimes >= 0) {
+              autoMove(playTimes);
+            }
+          } else {
+            if (playTimes == itemTotal) playTimes = 0;
+            if (playTimes < 0) playTimes = itemTotal - 1;
+            autoMove(playTimes);
+          }
+        }, timing);
+      }
+      /*
+       * Transition Between Items
+       *
+       * @param  {Element} wrapper            - Wrapper of carousel.
+       * @param  {?Element|String} curBtn     - The button that currently triggers the move.
+                * @param  {Number|Array} delta         - The value returned will need to be adjusted according to the offset rate.
+                * @param  {?Number} speed              - Sliding speed. Please set to 0 when rebounding.
+                * @param  {Boolean} dragging           - Determine if the object is being dragged.
+                * @param  {!Number} indexGo            - The target item index.
+                * @param  {String|Array} itemsHeight   - Return all items height.
+       * @return {Void}
+       */
+
+
+      function itemUpdates(wrapper, curBtn, delta, speed, dragging, indexGo, itemsHeight) {
+        if (speed == null) speed = carouselSpeed / 1000;
+        var $curWrapper = wrapper.children('.uix-hybrid-content-slider__items'),
+            //Default: $carousel
+        $curItems = $curWrapper.find('> div'); //Default: $carouselItem
+        //Get height constant
+
+        var itemsHeightArr = [];
+
+        var _itemsHeight = itemsHeight.toString().split(',');
+
+        _itemsHeight.forEach(function (element) {
+          itemsHeightArr.push(parseFloat(element));
+        }); //Check next or previous event
+
+
+        var btnType = 'init';
+
+        if (curBtn != null && curBtn != 'auto') {
+          if (hybrid_content_slider_js_typeof(curBtn.attr('class')) !== ( true ? "undefined" : undefined)) {
+            btnType = curBtn.attr('class').indexOf('--next') >= 0 ? 'next' : 'prev';
+          } else {
+            btnType = 'next';
+          }
+        } //Check next or previous event ( Autoplay )
+
+
+        if (curBtn == 'auto') btnType = 'next';
+        ; //Clone the first element to the last position
+
+        if (carouselDir == 'horizontal') {
+          var boxWidth = eachItemNewWidth;
+          TweenMax.to($curItems, speed, {
+            x: function x(i, target) {
+              var xIncrement = 0;
+
+              for (var k = 0; k < itemTotal; k++) {
+                var tempX = k == 0 ? 0 : boxWidth;
+                xIncrement += tempX;
+                if (k == i) break;
+              }
+
+              if (Array.isArray(delta)) {
+                //Rebound effect of drag offset 
+                return delta.length == 0 ? xIncrement : delta[i];
+              } else {
+                if (!dragging) {
+                  //console.log( 'btnType: ' + btnType + ' indexGo: ' + indexGo );
+                  var curWidthIncrement = 0;
+
+                  for (var m = 0; m < itemTotal; m++) {
+                    var tempW = m == 0 ? 0 : boxWidth;
+                    curWidthIncrement += tempW;
+                    if (m == (btnType == 'next' ? indexGo : indexGo - 1)) break;
+                  }
+
+                  return xIncrement + -curWidthIncrement;
+                } else {
+                  //console.log( 'dragging...' );
+                  var x = Math.round(target._gsTransform.x / boxWidth) * boxWidth;
+                  return x + delta;
+                }
+              }
+            },
+            onComplete: function onComplete() {
+              if (!dragging && !Array.isArray(delta)) {
+                //Get index of current element
+                var currentIndex = 0; //The state of the control button
+
+                setButtonState(Math.round($curItems.first()[0]._gsTransform.x), Math.round(($curItems.length - amountVisible) * boxWidth)); //Initialize the height of container
+
+                currentIndex = Math.round($curItems.first()[0]._gsTransform.x / boxWidth);
+                setContainerSize(currentIndex); //Set target index of the carousel buttons
+
+                setButtonTargetIndex($(carouselNext), $(carouselPrev), btnType, btnType == 'next' ? Math.abs(currentIndex) : Math.abs(currentIndex) + 1); // Activate the currently selected Pagination
+
+                setPaginationState(Math.abs(currentIndex)); // Activate the current item from carouse
+
+                setItemState(Math.abs(currentIndex)); //Store the latest position (X,Y) in a temporary variable
+
+                tempItemsPos = createStoreLatestPosition();
+              }
+            }
+          });
+        } else {
+          TweenMax.to($curItems, speed, {
+            y: function y(i, target) {
+              var yIncrement = 0;
+
+              for (var k = 0; k < itemsHeightArr.length; k++) {
+                var tempY = hybrid_content_slider_js_typeof(itemsHeightArr[k - 1]) === ( true ? "undefined" : undefined) ? 0 : itemsHeightArr[k - 1];
+                yIncrement += tempY;
+                if (k == i) break;
+              }
+
+              if (Array.isArray(delta)) {
+                //Rebound effect of drag offset 
+                return delta.length == 0 ? yIncrement : delta[i];
+              } else {
+                if (!dragging) {
+                  //console.log( 'btnType: ' + btnType + ' indexGo: ' + indexGo );
+                  var curHeightIncrement = 0;
+
+                  for (var m = 0; m < itemsHeightArr.length; m++) {
+                    var tempH = hybrid_content_slider_js_typeof(itemsHeightArr[m - 1]) === ( true ? "undefined" : undefined) ? 0 : itemsHeightArr[m - 1];
+                    curHeightIncrement += tempH;
+                    if (m == (btnType == 'next' ? indexGo : indexGo - 1)) break;
+                  }
+
+                  return yIncrement + -curHeightIncrement;
+                } else {
+                  //console.log( 'dragging...' );
+                  var draggingItemHeight = hybrid_content_slider_js_typeof(itemsHeightArr[indexGo - 1]) === ( true ? "undefined" : undefined) ? itemsHeightArr[indexGo] : itemsHeightArr[indexGo - 1];
+                  var y = Math.round(target._gsTransform.y / draggingItemHeight) * draggingItemHeight;
+                  return y + delta;
+                }
+              }
+            },
+            onComplete: function onComplete() {
+              if (!dragging && !Array.isArray(delta)) {
+                //The state of the control button
+                setButtonState($curItems.first()[0]._gsTransform.y, totalItemsHeight); //Set target index of the carousel buttons
+
+                setButtonTargetIndex($(carouselNext), $(carouselPrev), btnType, indexGo); //set actived item & initialize the height of container
+
+                setContainerSize(btnType == 'next' ? indexGo : indexGo - 1); // Activate the currently selected Pagination
+
+                setPaginationState(btnType == 'next' ? indexGo : indexGo - 1); // Activate the current item from carouse
+
+                setItemState(btnType == 'next' ? indexGo : indexGo - 1); //Store the latest position (X,Y) in a temporary variable
+
+                tempItemsPos = createStoreLatestPosition();
+              }
+            }
+          });
+        }
+      }
+      /*
+       * Use the button to trigger the transition between the two sliders
+       *
+       * @param  {Boolean} paginationEnable   - Determine whether it is triggered by pagination
+       * @param  {Element} $btn               - The button that currently triggers the move.
+                * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
+                * @param  {String} type                - Move next or previous.
+       * @return {Void}
+       */
+
+
+      function movePositionWithButton(paginationEnable, $btn, event, type) {
+        var $curWrapper = $(event.data[0]),
+            //Protection button is not triggered multiple times.
+        btnDisabled = $btn.data('disabled'),
+            //Get current button index
+        tIndex = parseFloat($btn.attr('data-target-index')); // Retrieve the position (X,Y) of an element 
+
+        var moveX = eachItemNewWidth,
+            moveY = hybrid_content_slider_js_typeof(eachItemNewHeight[tIndex - 1]) === ( true ? "undefined" : undefined) ? 0 : eachItemNewHeight[tIndex - 1];
+
+        if (paginationEnable) {
+          //--
+          moveX = eachItemNewWidth * tIndex; //--
+
+          var moveYIncrement = 0;
+
+          for (var k = 0; k < eachItemNewHeight.length; k++) {
+            var tempY = hybrid_content_slider_js_typeof(eachItemNewHeight[k - 1]) === ( true ? "undefined" : undefined) ? 0 : eachItemNewHeight[k - 1];
+            moveYIncrement += tempY;
+            if (k == tIndex) break;
+          }
+
+          moveY = moveYIncrement;
+        } //
+
+
+        var delta;
+
+        if (type == 'next') {
+          delta = carouselDir == 'horizontal' ? -moveX : -moveY;
+        } else {
+          delta = carouselDir == 'horizontal' ? moveX : moveY;
+        }
+
+        if (hybrid_content_slider_js_typeof(btnDisabled) === ( true ? "undefined" : undefined)) {
+          itemUpdates($curWrapper, $btn, delta, null, false, tIndex, eachItemNewHeight);
+        }
+      }
+      /*
+       * Activate the currently selected Pagination
+       *
+                * @param  {Number} index          - Get index of current element.
+       * @return {Void}
+       */
+
+
+      function setPaginationState(index) {
+        $(carouselPagination).find('li').removeClass('is-active');
+        $(carouselPagination).find('li a[data-target-index="' + index + '"]').parent().addClass('is-active');
+      }
+      /*
+       * Activate the current item from carouse
+       *
+                * @param  {Number} index          - Get index of current element.
+       * @return {Void}
+       */
+
+
+      function setItemState(index) {
+        $carouselItem.removeClass('is-active');
+        $carouselItem.eq(index).addClass('is-active');
+      }
+      /*
+       * Store the latest position (X,Y) in a temporary variable
+       *
+       * @return {Array}              - Return to a new position.
+       */
+
+
+      function createStoreLatestPosition() {
+        var pos = []; // Retrieve the temporary variable of each item.
+
+        $carouselItem.each(function () {
+          pos.push(carouselDir == 'horizontal' ? $(this)[0]._gsTransform.x : $(this)[0]._gsTransform.y);
+        });
+        return pos;
+      }
+      /*
+       * Initialize the height of container
+       *
+                * @param  {Number} index          - Get index of current element.
+       * @return {Void}
+       */
+
+
+      function setContainerSize(index) {
+        var _h = eachItemNewHeight[Math.abs(index)];
+
+        if (hybrid_content_slider_js_typeof(_h) !== ( true ? "undefined" : undefined)) {
+          TweenMax.to($carousel, 0.2, {
+            height: eachItemNewHeight[Math.abs(index)]
+          });
+        }
+      }
+      /*
+       * Set target index of the carousel buttons
+       *
+       * @param  {Element} nextBtn      - The next move button.
+       * @param  {Element} prevBtn      - The previous move button.
+                * @param  {String} type          - The type of button is triggered. Values: next, prev, init
+                * @param  {?Number} indexGo      - The target item index.
+       * @return {Void}
+       */
+
+
+      function setButtonTargetIndex(nextBtn, prevBtn, type, indexGo) {
+        switch (type) {
+          case 'init':
+            nextBtn.attr({
+              'data-target-index': 1
+            });
+            prevBtn.attr({
+              'data-target-index': 0
+            });
+            break;
+
+          case 'next':
+            var nextBtnOldTargetIndex1 = parseFloat(nextBtn.attr('data-target-index'));
+            var prevBtnOldTargetIndex1 = parseFloat(prevBtn.attr('data-target-index'));
+
+            if (indexGo != null) {
+              nextBtnOldTargetIndex1 = indexGo;
+              prevBtnOldTargetIndex1 = indexGo - 1;
+            }
+
+            nextBtn.attr({
+              'data-target-index': nextBtnOldTargetIndex1 + 1
+            });
+            prevBtn.attr({
+              'data-target-index': prevBtnOldTargetIndex1 + 1
+            });
+            break;
+
+          case 'prev':
+            var nextBtnOldTargetIndex2 = parseFloat(nextBtn.attr('data-target-index')) - 1;
+            var prevBtnOldTargetIndex2 = parseFloat(prevBtn.attr('data-target-index')) - 1;
+
+            if (indexGo != null) {
+              nextBtnOldTargetIndex2 = indexGo;
+              prevBtnOldTargetIndex2 = indexGo - 1;
+            }
+
+            nextBtn.attr({
+              'data-target-index': nextBtnOldTargetIndex2
+            });
+            prevBtn.attr({
+              'data-target-index': prevBtnOldTargetIndex2
+            });
+            break;
+        }
+      }
+      /*
+       * The state of the control button
+       *
+                * @param  {Number} firstOffset          - Get the computed Translate X or Y values of a given first DOM element.
+                * @param  {Number} lastOffset           - Get the computed Translate X or Y values of a given last DOM element.
+       * @return {Void}
+       */
+
+
+      function setButtonState(firstOffset, lastOffset) {
+        if (Math.abs(firstOffset) == lastOffset) {
+          $(carouselNext).addClass('is-disabled').data('disabled', 1);
+          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+        } else if (Math.round(firstOffset) == 0) {
+          $(carouselNext).removeClass('is-disabled').removeData('disabled');
+          $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+        } else {
+          $(carouselNext).removeClass('is-disabled').removeData('disabled');
+          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+        }
+      }
+    });
+  };
+
+  module.components.pageLoaded.push(module.HYBRID_CONTENT_SLIDER.pageLoaded);
+  return function HYBRID_CONTENT_SLIDER() {
+    hybrid_content_slider_js_classCallCheck(this, HYBRID_CONTENT_SLIDER);
 
     this.module = module;
   };
@@ -11211,7 +11731,7 @@ var IMAGE_SHAPES = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/infinite-scrolling-element/scss/_style.scss
-var infinite_scrolling_element_scss_style = __webpack_require__(129);
+var infinite_scrolling_element_scss_style = __webpack_require__(38);
 
 // CONCATENATED MODULE: ./src/components/ES6/infinite-scrolling-element/js/index.js
 function infinite_scrolling_element_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11228,7 +11748,7 @@ function infinite_scrolling_element_js_typeof(obj) { "@babel/helpers - typeof"; 
 var INFINITE_SCROLLING_EL = function (module, $, window, document) {
   if (window.INFINITE_SCROLLING_EL === null) return false;
   module.INFINITE_SCROLLING_EL = module.INFINITE_SCROLLING_EL || {};
-  module.INFINITE_SCROLLING_EL.version = '0.0.1';
+  module.INFINITE_SCROLLING_EL.version = '0.0.2';
 
   module.INFINITE_SCROLLING_EL.documentReady = function ($) {
     $('.uix-infinite-scrolling').each(function () {
@@ -11303,7 +11823,7 @@ var INFINITE_SCROLLING_EL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lava-lamp-style-menu/scss/_style.scss
-var lava_lamp_style_menu_scss_style = __webpack_require__(38);
+var lava_lamp_style_menu_scss_style = __webpack_require__(39);
 
 // CONCATENATED MODULE: ./src/components/ES6/lava-lamp-style-menu/js/index.js
 function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11314,11 +11834,17 @@ function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(i
  *************************************
  */
 
+/**
+ * module.LAVA_LAMP_STYLE_MENU
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
   if (window.LAVA_LAMP_STYLE_MENU === null) return false;
   module.LAVA_LAMP_STYLE_MENU = module.LAVA_LAMP_STYLE_MENU || {};
-  module.LAVA_LAMP_STYLE_MENU.version = '0.0.1';
+  module.LAVA_LAMP_STYLE_MENU.version = '0.0.2';
 
   module.LAVA_LAMP_STYLE_MENU.documentReady = function ($) {
     var $menuContainer = $('.uix-lavalamp-menu__container'),
@@ -11370,7 +11896,7 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/lightbox/scss/_style.scss
-var lightbox_scss_style = __webpack_require__(39);
+var lightbox_scss_style = __webpack_require__(40);
 
 // CONCATENATED MODULE: ./src/components/ES6/lightbox/js/index.js
 function lightbox_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11938,7 +12464,7 @@ var LIGHTBOX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-bulleted/scss/_style.scss
-var list_bulleted_scss_style = __webpack_require__(40);
+var list_bulleted_scss_style = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-bulleted/js/index.js
 function list_bulleted_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11971,10 +12497,10 @@ var BULLETED_LIST = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_basic.scss
-var list_posts_scss_basic = __webpack_require__(41);
+var list_posts_scss_basic = __webpack_require__(42);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_split.scss
-var _split = __webpack_require__(42);
+var _split = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./src/components/ES6/list-posts/js/index.js
 function list_posts_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12407,7 +12933,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/fullwidth-column-to-edge/scss/_style.scss
-var fullwidth_column_to_edge_scss_style = __webpack_require__(43);
+var fullwidth_column_to_edge_scss_style = __webpack_require__(44);
 
 // CONCATENATED MODULE: ./src/components/ES6/fullwidth-column-to-edge/js/index.js
 function fullwidth_column_to_edge_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12479,7 +13005,7 @@ var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/login-templates/scss/_style.scss
-var login_templates_scss_style = __webpack_require__(44);
+var login_templates_scss_style = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./src/components/ES6/login-templates/js/index.js
 function login_templates_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12544,13 +13070,13 @@ var LOGIN_UI = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/fire-modal-dialog.js
-var fire_modal_dialog = __webpack_require__(45);
+var fire_modal_dialog = __webpack_require__(46);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/close-modal-dialog.js
-var close_modal_dialog = __webpack_require__(46);
+var close_modal_dialog = __webpack_require__(47);
 
 // EXTERNAL MODULE: ./src/components/ES6/modal-dialog/scss/_style.scss
-var modal_dialog_scss_style = __webpack_require__(47);
+var modal_dialog_scss_style = __webpack_require__(48);
 
 // CONCATENATED MODULE: ./src/components/ES6/modal-dialog/js/index.js
 function modal_dialog_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12567,6 +13093,7 @@ function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
  * module.MODAL_DIALOG
  * 
  * @requires ./src/components/ES5/_plugins-Miscellaneous
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -12575,7 +13102,7 @@ function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.5';
+  module.MODAL_DIALOG.version = '0.1.6';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -12784,7 +13311,7 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/multi-items-carousel/scss/_style.scss
-var multi_items_carousel_scss_style = __webpack_require__(48);
+var multi_items_carousel_scss_style = __webpack_require__(49);
 
 // CONCATENATED MODULE: ./src/components/ES6/multi-items-carousel/js/index.js
 function multi_items_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12801,32 +13328,29 @@ function multi_items_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (ty
  * module.MULTI_ITEMS_CAROUSEL
  * 
  * @requires ./examples/assets/js/min/hammer.min.js
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
 var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
   if (window.MULTI_ITEMS_CAROUSEL === null) return false;
   module.MULTI_ITEMS_CAROUSEL = module.MULTI_ITEMS_CAROUSEL || {};
-  module.MULTI_ITEMS_CAROUSEL.version = '0.0.4';
+  module.MULTI_ITEMS_CAROUSEL.version = '0.0.5';
 
   module.MULTI_ITEMS_CAROUSEL.documentReady = function ($) {
     $('.uix-multi-carousel').each(function () {
       var $carouselWrapper = $(this),
-          goSteps = 0,
           $carousel = $carouselWrapper.find('.uix-multi-carousel__items'),
           $carouselItem = $carouselWrapper.find('.uix-multi-carousel__items > div'),
           itemTotal = $carouselItem.length,
-          amountVisible = $carouselWrapper.data('cus-carousel-show'),
-          carouselItemWidth = null,
-          carouselItemHeight = null,
-          carouselDir = $carouselWrapper.data('cus-carousel-dir'),
-          carouselLoop = $carouselWrapper.data('cus-carousel-loop'),
-          carouselSpeed = $carouselWrapper.data('cus-carousel-speed'),
-          carouselNext = $carouselWrapper.data('cus-carousel-next'),
-          carouselPrev = $carouselWrapper.data('cus-carousel-prev'),
-          carouselPaging = $carouselWrapper.data('cus-carousel-paging'),
-          carouseDraggable = $carouselWrapper.data('cus-carousel-draggable'),
-          carouseDraggableCursor = $carouselWrapper.data('cus-carousel-draggable-cursor');
+          amountVisible = $carouselWrapper.data('show'),
+          carouselDir = $carouselWrapper.data('dir'),
+          carouselLoop = $carouselWrapper.data('loop'),
+          carouselSpeed = $carouselWrapper.data('speed'),
+          carouselNext = $carouselWrapper.data('next'),
+          carouselPrev = $carouselWrapper.data('prev'),
+          carouseDraggable = $carouselWrapper.data('draggable'),
+          carouseDraggableCursor = $carouselWrapper.data('draggable-cursor');
       if (multi_items_carousel_js_typeof(carouselDir) === ( true ? "undefined" : undefined)) carouselDir = 'horizontal';
       if (multi_items_carousel_js_typeof(carouselLoop) === ( true ? "undefined" : undefined)) carouselLoop = false;
       if (multi_items_carousel_js_typeof(amountVisible) === ( true ? "undefined" : undefined)) amountVisible = 3;
@@ -12835,37 +13359,32 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       if (multi_items_carousel_js_typeof(carouselPrev) === ( true ? "undefined" : undefined)) carouselPrev = '.uix-multi-carousel__controls--prev';
       if (multi_items_carousel_js_typeof(carouseDraggable) === ( true ? "undefined" : undefined)) carouseDraggable = false;
       if (multi_items_carousel_js_typeof(carouseDraggableCursor) === ( true ? "undefined" : undefined)) carouseDraggableCursor = 'move';
-      if (window.innerWidth <= 768) amountVisible = 3;
-      carouselItemWidth = $carousel.width() / amountVisible;
-      carouselItemHeight = $carousel.height() / amountVisible;
-      /* 
-       ---------------------------
-       Get the number of steps to the last visible element
-       ---------------------------
-       */
+      if (window.innerWidth <= 768) amountVisible = 3; // Returns the value of a number rounded to the nearest integer.
 
-      var lastSteps = parseFloat(itemTotal - amountVisible);
+      var midIndex = Math.round(amountVisible / 2) - 1;
       /* 
        ---------------------------
        Initialize carousel
        ---------------------------
        */
 
-      var newWidth, newHeight;
+      var eachItemNewWidth, eachItemNewHeight;
+      var eachItemOldWidth = $carousel.width() / amountVisible;
+      var eachItemOldHeight = $carousel.height() / amountVisible;
 
       if (carouselDir == 'horizontal') {
-        newWidth = $carouselWrapper.width() / amountVisible;
-        $carousel.css('width', itemTotal * carouselItemWidth);
+        eachItemNewWidth = $carouselWrapper.width() / amountVisible;
+        $carousel.css('width', itemTotal * eachItemOldWidth);
       } else {
-        newHeight = $carouselWrapper.height() / amountVisible;
-        $carousel.css('height', itemTotal * carouselItemHeight);
+        eachItemNewHeight = $carouselWrapper.height() / amountVisible;
+        $carousel.css('height', itemTotal * eachItemOldHeight);
       } // Re-order all items
 
 
       carouselReOrder(); //default button status
 
-      if ($carouselItem.first().data('id') == 1 && !carouselLoop) {
-        $(carouselPrev).addClass('is-disabled');
+      if (!carouselLoop) {
+        $(carouselPrev).addClass('is-disabled').data('disabled', 1);
       }
       /* 
        ---------------------------
@@ -12875,42 +13394,41 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 
 
       function carouselReOrder() {
-        //Active the center item
-        carouselActiveCenterItem($carouselItem, 'default', null);
-        $carouselItem.each(function (index) {
-          if (carouselDir == 'horizontal') {
-            $(this).width(newWidth + 'px').css('visibility', 'visible').attr('data-id', index + 1);
-          } else {
-            $(this).height(newHeight + 'px').css('visibility', 'visible').attr('data-id', index + 1);
-          }
-        });
-      }
-      /* 
-       ---------------------------
-       Active the center item
-       ---------------------------
-       */
+        if (carouselDir == 'horizontal') {
+          var boxWidth = eachItemNewWidth;
+          TweenMax.set($carouselItem, {
+            width: boxWidth,
+            x: function x(i, target) {
+              //Active the center item
+              if (i === midIndex && carouselLoop) {
+                TweenMax.set(target, {
+                  className: "+=is-active"
+                });
+              } //Add index to each item
 
 
-      function carouselActiveCenterItem(el, dir, steps) {
-        var curItemIndex = (amountVisible / 2).toFixed(0),
-            centerItemIndex = Math.floor(amountVisible / 2) - 1;
-        el.removeClass('is-active active-prev active-next');
-
-        if (dir == 'default') {
-          el.eq(parseFloat(curItemIndex - 1)).addClass('is-active');
+              $carouselItem.eq(i).attr('data-index', i);
+              return i * boxWidth;
+            }
+          });
         } else {
-          el.eq(parseFloat(steps + centerItemIndex + 1)).addClass('is-active');
-        } //Add nearest classes for 3 elements
+          var boxHeight = eachItemNewHeight;
+          TweenMax.set($carouselItem, {
+            height: boxHeight,
+            y: function y(i, target) {
+              //Active the center item
+              if (i === midIndex && carouselLoop) {
+                TweenMax.set(target, {
+                  className: "+=is-active"
+                });
+              } //Add index to each item
 
 
-        el.each(function () {
-          if ($(this).hasClass('is-active')) {
-            $(this).prev().addClass('active-prev');
-            $(this).next().addClass('active-next');
-            return false;
-          }
-        });
+              $carouselItem.eq(i).attr('data-index', i);
+              return i * boxHeight;
+            }
+          });
+        }
       }
       /* 
        ---------------------------
@@ -12920,23 +13438,16 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 
 
       $(carouselNext).off('click').on('click', $carouselWrapper, function (e) {
-        e.preventDefault();
-        var $btn = $(this),
-            $curWrapper = $(e.data[0]),
-            //Protection button is not triggered multiple times.
-        btnLock = $btn.data('click');
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-        if (multi_items_carousel_js_typeof(btnLock) === ( true ? "undefined" : undefined) || btnLock === 0) {
-          goSteps++; //Loop items
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(carouselSpeed).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
 
-          if (carouselLoop) {
-            if (goSteps > lastSteps) goSteps = 0;
-          } else {
-            if (goSteps > lastSteps) goSteps = lastSteps;
-          }
-
-          itemUpdates($curWrapper, $btn, carouselNext, carouselPrev, goSteps);
-        }
+        movePositionWithButton($(this), e, 'next');
       });
       /* 
        ---------------------------
@@ -12945,29 +13456,16 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        */
 
       $(carouselPrev).off('click').on('click', $carouselWrapper, function (e) {
-        e.preventDefault();
-        var $btn = $(this),
-            $curWrapper = $(e.data[0]),
-            //Protection button is not triggered multiple times.
-        btnLock = $btn.data('click');
+        e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-        if (multi_items_carousel_js_typeof(btnLock) === ( true ? "undefined" : undefined) || btnLock === 0) {
-          goSteps--; //Loop items
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(carouselSpeed).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //
 
-          if (carouselLoop) {
-            if (goSteps < 0) goSteps = lastSteps;
-          } else {
-            if (goSteps < 0) goSteps = 0;
-          }
-
-          itemUpdates($curWrapper, $btn, carouselNext, carouselPrev, goSteps);
-        }
-      }); //Solve the activation problem of touch events
-      //-------------------------------------	
-
-      $carouselItem.on('click touchstart', function () {
-        $carouselItem.removeClass('active-current');
-        $(this).addClass('active-current');
+        movePositionWithButton($(this), e, 'prev');
       }); //Drag and Drop
       //-------------------------------------	
 
@@ -12987,101 +13485,251 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       var direction;
       var dragDropElement = $dragDropTrigger[0],
           dragDropMC = new Hammer(dragDropElement, hammerProps);
-      dragDropMC.on('panright press panleft panup pandown', function (ev) {
+      var elAnim = true; // let the pan gesture support all directions.
+      // this will block the vertical scrolling on a touch-device while on the element
+
+      dragDropMC.get('pan').set({
+        direction: Hammer.DIRECTION_ALL
+      });
+      dragDropMC.on('press panright panleft panup pandown', function (ev) {
         //Set the direction in here
-        direction = ev.type;
+        direction = ev.type; //Determine whether it is the first or the last    
+
+        var currentIsFirstOrLast = false;
+
+        if (!carouselLoop) {
+          var firstItemOffset = carouselDir == 'horizontal' ? $carousel.find('[data-index="0"]')[0]._gsTransform.x : $carousel.find('[data-index="0"]')[0]._gsTransform.y;
+          var maxMoveOffset = carouselDir == 'horizontal' ? -eachItemNewWidth * (itemTotal - amountVisible) : -eachItemNewHeight * (itemTotal - amountVisible);
+
+          if ((direction == 'panright' || direction == 'pandown') && firstItemOffset >= 0) {
+            //first item
+            currentIsFirstOrLast = true;
+          }
+
+          if ((direction == 'panleft' || direction == 'panup') && firstItemOffset <= maxMoveOffset) {
+            //last item
+            currentIsFirstOrLast = true;
+          }
+        } //Rebound effect of drag offset 
+
+
+        switch (direction) {
+          case 'panleft':
+            if (ev.deltaX > -eachItemNewWidth / 4 && ev.deltaX < 0) {
+              elAnim = false;
+              itemUpdates($carouselWrapper, ev.deltaX, 0.1, true);
+            } else {
+              elAnim = currentIsFirstOrLast ? false : true;
+            }
+
+            break;
+
+          case 'panup':
+            if (ev.deltaY > -eachItemNewHeight / 4 && ev.deltaY < 0) {
+              elAnim = false;
+              itemUpdates($carouselWrapper, ev.deltaY, 0.1, true);
+            } else {
+              elAnim = currentIsFirstOrLast ? false : true;
+            }
+
+            break;
+
+          case 'panright':
+            if (ev.deltaX < eachItemNewWidth / 4 && ev.deltaX > 0) {
+              elAnim = false;
+              itemUpdates($carouselWrapper, ev.deltaX, 0.1, true);
+            } else {
+              elAnim = currentIsFirstOrLast ? false : true;
+            }
+
+            break;
+
+          case 'pandown':
+            if (ev.deltaY < eachItemNewHeight / 4 && ev.deltaY > 0) {
+              elAnim = false;
+              itemUpdates($carouselWrapper, ev.deltaY, 0.1, true);
+            } else {
+              elAnim = currentIsFirstOrLast ? false : true;
+            }
+
+            break;
+        }
       });
       dragDropMC.on('panend', function (ev) {
-        //Use the direction in here
-        //You know the pan has ended
-        //and you know which action they were taking
-        if (direction == 'panleft' || direction == 'panup') {
-          goSteps++; //Loop items
+        if (elAnim) {
+          //Use the direction in here
+          //You know the pan has ended
+          //and you know which action they were taking
+          switch (direction) {
+            case 'panleft':
+            case 'panup':
+              var delta1 = carouselDir == 'horizontal' ? -eachItemNewWidth : -eachItemNewHeight;
+              itemUpdates($carouselWrapper, delta1, null, false);
+              break;
 
-          if (carouselLoop) {
-            if (goSteps > lastSteps) goSteps = 0;
-          } else {
-            if (goSteps > lastSteps) goSteps = lastSteps;
+            case 'panright':
+            case 'pandown':
+              var delta2 = carouselDir == 'horizontal' ? eachItemNewWidth : eachItemNewHeight;
+              itemUpdates($carouselWrapper, delta2, null, false);
+              break;
           }
-
-          itemUpdates($carouselWrapper, false, carouselNext, carouselPrev, goSteps);
-        }
-
-        if (direction == 'panright' || direction == 'pandown') {
-          goSteps--; //Loop items
-
-          if (carouselLoop) {
-            if (goSteps < 0) goSteps = lastSteps;
-          } else {
-            if (goSteps < 0) goSteps = 0;
-          }
-
-          itemUpdates($carouselWrapper, false, carouselNext, carouselPrev, goSteps);
+        } else {
+          itemUpdates($carouselWrapper, 0, null, false);
         }
       });
       /*
        * Transition Between Items
        *
-       * @param  {Element} wrapper         - Wrapper of carousel.
-       * @param  {?Element} curBtn          - The button that currently triggers the move.
-       * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
-       * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-       * @param  {Number} steps           - The number of steps per move.
+       * @param  {Element} wrapper        - Wrapper of carousel.
+                * @param  {Number} delta           - The value returned will need to be adjusted according to the offset rate.
+                * @param  {?Number} speed          - Sliding speed. Please set to 0 when rebounding.
+                * @param  {Boolean} dragging       - Determine if the object is being dragged.
        * @return {Void}
        */
 
-      function itemUpdates(wrapper, curBtn, nextBtnStr, prevBtnStr, steps) {
+      function itemUpdates(wrapper, delta, speed, dragging) {
+        if (speed == null) speed = carouselSpeed / 1000;
         var $curWrapper = wrapper.children('.uix-multi-carousel__items'),
             //Default: $carousel
-        $curItems = $curWrapper.find('> div'),
-            //Default: $carouselItem
-        isEnd = false,
-            isFirst = false,
-            isMid = false; //Reset prevents code from duplicate run
-
-        var preventEvent = function preventEvent() {
-          if (curBtn) curBtn.data('click', 0);
-        }; //Determine if the element is at the end or beginning
-
-
-        if (steps == lastSteps) isEnd = true;
-        if (steps == 0) isFirst = true;
-        if (steps < lastSteps && steps > 0) isMid = true; //The state of the control button
-
-        if (!carouselLoop) {
-          if (isEnd) $(nextBtnStr).addClass('is-disabled');
-          if (isFirst) $(prevBtnStr).addClass('is-disabled');
-
-          if (isMid) {
-            $(nextBtnStr).removeClass('is-disabled');
-            $(prevBtnStr).removeClass('is-disabled');
-          }
-        } //Avoid button repeated trigger
-
-
-        if (curBtn) curBtn.data('click', 1); //Clone the first element to the last position
+        $curItems = $curWrapper.find('> div'); //Default: $carouselItem
+        //Clone the first element to the last position
 
         if (carouselDir == 'horizontal') {
-          TweenMax.to($curWrapper, carouselSpeed / 1000, {
-            x: '-' + carouselItemWidth * steps,
-            onComplete: function onComplete() {
-              //Active the center item
-              carouselActiveCenterItem($curItems, 'move', steps); //Reset prevents code from duplicate run
+          var boxWidth = eachItemNewWidth;
+          var wrapWidth = ($curItems.length - 1) * boxWidth;
+          TweenMax.to($curItems, speed, {
+            x: function x(i, target) {
+              var x = Math.round(target._gsTransform.x / boxWidth) * boxWidth;
+              return x + delta;
+            },
+            modifiers: {
+              x: function x(_x, target) {
+                if (carouselLoop) {
+                  //Active the center item
+                  if (_x === midIndex * boxWidth) {
+                    TweenMax.set(target, {
+                      className: "+=is-active"
+                    });
+                  } else {
+                    TweenMax.set(target, {
+                      className: "-=is-active"
+                    });
+                  }
 
-              preventEvent();
+                  return wrap(_x, -boxWidth, wrapWidth);
+                } else {
+                  return _x;
+                }
+              }
+            },
+            onComplete: function onComplete() {
+              if (!dragging && delta != 0) {
+                //The state of the control button
+                setButtonState(Math.round($curItems.first()[0]._gsTransform.x), Math.round(($curItems.length - amountVisible) * boxWidth));
+              }
             }
           });
         } else {
-          TweenMax.to($curWrapper, carouselSpeed / 1000, {
-            y: '-' + carouselItemHeight * steps,
-            onComplete: function onComplete() {
-              //Active the center item
-              carouselActiveCenterItem($curItems, 'move', steps); //Reset prevents code from duplicate run
+          var boxHeight = eachItemNewHeight;
+          var wrapHeight = ($curItems.length - 1) * boxHeight;
+          TweenMax.to($curItems, speed, {
+            y: function y(i, target) {
+              var y = Math.round(target._gsTransform.y / boxHeight) * boxHeight;
+              return y + delta;
+            },
+            modifiers: {
+              y: function y(_y, target) {
+                if (carouselLoop) {
+                  //Active the center item
+                  if (_y === midIndex * boxHeight) {
+                    TweenMax.set(target, {
+                      className: "+=is-active"
+                    });
+                  } else {
+                    TweenMax.set(target, {
+                      className: "-=is-active"
+                    });
+                  }
 
-              preventEvent();
+                  return wrap(_y, -boxHeight, wrapHeight);
+                } else {
+                  return _y;
+                }
+              }
+            },
+            onComplete: function onComplete() {
+              if (!dragging && delta != 0) {
+                //The state of the control button
+                setButtonState(Math.round($curItems.first()[0]._gsTransform.y), Math.round(($curItems.length - amountVisible) * boxHeight));
+              }
             }
           });
         }
+      }
+      /*
+       * Move function with buttons
+       *
+       * @param  {Element} $btn               - The button that currently triggers the move.
+                * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
+                * @param  {String} type                - Move next or previous.
+       * @return {Void}
+       */
+
+
+      function movePositionWithButton($btn, event, type) {
+        var $curWrapper = $(event.data[0]),
+            //Protection button is not triggered multiple times.
+        btnDisabled = $btn.data('disabled');
+        var delta;
+
+        if (type == 'next') {
+          delta = carouselDir == 'horizontal' ? -eachItemNewWidth : -eachItemNewHeight;
+        } else {
+          delta = carouselDir == 'horizontal' ? eachItemNewWidth : eachItemNewHeight;
+        }
+
+        if (multi_items_carousel_js_typeof(btnDisabled) === ( true ? "undefined" : undefined)) {
+          itemUpdates($curWrapper, delta, null, false);
+        }
+      }
+      /*
+       * The state of the control button
+       *
+                * @param  {Number} firstOffset          - Get the computed Translate X or Y values of a given first DOM element.
+                * @param  {Number} lastOffset           - Get the computed Translate X or Y values of a given last DOM element.
+       * @return {Void}
+       */
+
+
+      function setButtonState(firstOffset, lastOffset) {
+        if (carouselLoop) return false;
+
+        if (Math.abs(firstOffset) == lastOffset) {
+          $(carouselNext).addClass('is-disabled').data('disabled', 1);
+          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+        } else if (Math.round(firstOffset) == 0) {
+          $(carouselNext).removeClass('is-disabled').removeData('disabled');
+          $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+        } else {
+          $(carouselNext).removeClass('is-disabled').removeData('disabled');
+          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+        }
+      }
+      /*
+       * Tweens each box to a relative x/y position of "+={number}"
+       *
+       * @param  {Number} value           - Current position of the element, x or y coordinates.
+       * @param  {Number} min             - The minimum value, used to mark the width or height of each element.
+       * @param  {Number} max             - The maximum value, used to mark the width or height of the entire container.
+       * @return {Number}                 - The about-to-be-applied value from the regular tween.
+       */
+
+
+      function wrap(value, min, max) {
+        var v = value - min;
+        var r = max - min; // force x/y value to be between {min} and {max} using modulus
+
+        return (r + v % r) % r + min;
       }
     });
   };
@@ -13092,496 +13740,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 
     this.module = module;
   };
-}(UixModuleInstance, jQuery, window, document); //
-//export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
-//	if ( window.MULTI_ITEMS_CAROUSEL === null ) return false;
-//	
-//	
-//    module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-//	  module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
-//    module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
-//
-//		$( '.uix-multi-carousel' ).each( function()  {
-//
-//			let $carouselWrapper   = $( this ),
-//				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
-//				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
-//				carouselItemTotal  = $carouselItem.length,
-//				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
-//				carouselItemWidth  = $carousel.width()/showcarouselItem,
-//				carouselItemHeight = $carousel.height()/showcarouselItem,
-//				carouselDir        = $carouselWrapper.data( 'cus-carousel-dir' ),
-//				carouselLoop       = $carouselWrapper.data( 'cus-carousel-loop' ),
-//				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
-//				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
-//				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
-//
-//			if ( typeof carouselDir === typeof undefined ) {
-//				carouselDir = 'horizontal';
-//			}
-//			
-//			if ( typeof carouselLoop === typeof undefined ) {
-//				carouselLoop = false;
-//			}
-//			if ( typeof showcarouselItem === typeof undefined ) {
-//				showcarouselItem = 3;
-//			}
-//			if ( typeof carouselSpeed === typeof undefined ) {
-//				carouselSpeed = 250;
-//			}
-//			if ( typeof carouselNext === typeof undefined ) {
-//				carouselNext = '.uix-multi-carousel__controls--next';
-//			}
-//			if ( typeof carouselPrev === typeof undefined ) {
-//				carouselPrev = '.uix-multi-carousel__controls--prev';
-//			}
-//
-//
-//			
-//			/* 
-//			 ---------------------------
-//			 Initialize carousel
-//			 ---------------------------
-//			 */  
-//			let newWidth, newHeight;
-//			if ( carouselDir == 'horizontal' ) { 
-//				newWidth = ( $carouselWrapper.width() / showcarouselItem );
-//				$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
-//			} else {
-//				newHeight = ( $carouselWrapper.height() / showcarouselItem );
-//				$carousel.css( 'height', carouselItemTotal * carouselItemHeight );
-//			}
-//
-//
-//			// Re-order all items
-//			carouselReOrder();
-//
-//
-//
-//			//default button status
-//			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'is-disabled' );
-//			}	
-//
-//			/* 
-//			 ---------------------------
-//			 Re-order all items
-//			 ---------------------------
-//			 */ 
-//			
-//			function carouselReOrder() {
-//				
-//				//Active the center item
-//				carouselActiveCenterItem( $carouselItem, 'default' );
-//				
-//				$carouselItem.each( function( index ) {
-//				
-//
-//						if ( carouselDir == 'horizontal' ) {
-//							$( this )
-//								.width( newWidth + 'px' )
-//								.css( 'visibility', 'visible' )
-//								.attr( 'data-id', index+1 );
-//						} else {
-//							$( this )
-//								.height( newHeight + 'px' )
-//								.css( 'visibility', 'visible' )
-//								.attr( 'data-id', index+1 );
-//						}
-//
-//					});	
-//			}
-//			
-//			/* 
-//			 ---------------------------
-//			 Active the center item
-//			 ---------------------------
-//			 */ 
-//			
-//			function carouselActiveCenterItem( el, dir ) {
-//				const curItemIndex    = (showcarouselItem/2).toFixed(0),
-//					  centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
-//				el.removeClass( 'is-active active-prev active-next' );
-//				
-//				
-//				
-//				if ( dir == 'left' ) {
-//					el.eq( curItemIndex ).addClass( 'is-active' );
-//					
-//				} else if ( dir == 'right' ) {
-//					el.eq( centerItemIndex ).addClass( 'is-active' );	
-//					
-//				} else if ( dir == 'default' ) {
-//					el.eq( curItemIndex - 1 ).addClass( 'is-active' );		
-//				}
-//				
-//				//Add nearest classes for 3 elements
-//				el.each( function() {
-//					if ( $( this ).hasClass( 'is-active' ) ) {
-//						$( this ).prev().addClass( 'active-prev' );
-//						$( this ).next().addClass( 'active-next' );
-//						
-//						return false;
-//					}
-//				});	
-//				
-//				
-//				
-//			}	
-//			
-//
-//			
-//			
-//			/* 
-//			 ---------------------------
-//			 Move left/up
-//			 ---------------------------
-//			 */ 
-//			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-//				e.preventDefault();
-//				
-//				
-//				const $btn        = $( this ),
-//					  $curWrapper = $( e.data[0] ),
-//					  $curItems   = $curWrapper.children().find( '> div' ),
-//					  //Protection button is not triggered multiple times.
-//					  btnLock     = $btn.data( 'click' );
-//				
-//				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-//					moveNext( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
-//				}
-//
-//
-//			});
-//
-//			
-//			/* 
-//			 ---------------------------
-//			 Move right/down
-//			 ---------------------------
-//			 */ 
-//			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-//				e.preventDefault();
-//
-//				
-//				const $btn        = $( this ),
-//					  $curWrapper = $( e.data[0] ),
-//					  $curItems   = $curWrapper.children().find( '> div' ),
-//					  //Protection button is not triggered multiple times.
-//					  btnLock     = $btn.data( 'click' );
-//
-//			
-//				
-//				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-//					movePrev( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
-//				}
-//				
-//				
-//
-//			});
-//			
-//			
-//			
-//			/*
-//			 * Transition between items next (left/up)
-//			 *
-//			 * @param  {Element} wrapper         - Wrapper of carousel.
-//			 * @param  {Element} items           - Items of carousel.
-//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
-//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {Void}
-//			 */
-//			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
-//
-//		
-//				let $curWrapper = wrapper,  //Default: $carousel
-//					$curItems   = items,  //Default: $carouselItem
-//					isEnd       = false,
-//					$cloneItem  = null;
-//					
-//
-//				//Move to the end
-//				if ( (carouselItemTotal - showcarouselItem + 1) == $curItems.first().data( 'id' ) ) {
-//					isEnd = true;
-//				}
-//				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
-//				}
-//				
-//				
-//				//Loop items
-//				if ( carouselLoop ) {
-//					isEnd = false;
-//				}
-//				
-//				//Reset prevents code from duplicate run
-//				const preventEvent = function() {
-//					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
-//					}
-//
-//					if ( curBtn ) curBtn.data( 'click', 0 );
-//			
-//				};
-//				
-//				if ( !isEnd ) {
-//
-//
-//					//Avoid button repeated trigger
-//					if ( curBtn ) curBtn.data( 'click', 1 );
-//
-//
-//
-//					//Clone the first element to the last position
-//					if ( carouselDir == 'horizontal' ) {
-//
-//						TweenMax.to( $curItems.first(), carouselSpeed/1000, {
-//							css: {
-//								marginLeft : -carouselItemWidth
-//							},
-//							onComplete : function() {
-//
-//								//Initialize each item "margin-left"
-//								$curItems.css( 'margin-left', 0 );
-//
-//								//Clone the first element to the last position
-//								$curItems
-//									.first()
-//									.clone()
-//									.appendTo( $carousel );
-//
-//
-//								//Remove duplicate elements
-//								this.target.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'left' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//								
-//
-//							}
-//						});		
-//						
-//					
-//
-//
-//					} else {
-//
-//
-//
-//						TweenMax.to( $curItems.first(), carouselSpeed/1000, {
-//							css: {
-//								marginTop : -carouselItemHeight
-//							},
-//							onComplete : function() {
-//
-//								//Initialize each item "margin-top"
-//								$curItems.css( 'margin-top', 0 );
-//
-//								//Clone the first element to the last position
-//								$curItems
-//									.first()
-//									.clone()
-//									.appendTo( $carousel );
-//
-//
-//								//Remove duplicate elements
-//								this.target.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'left' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//
-//
-//							}
-//						});		
-//
-//
-//					}
-//
-//
-//
-//				}// end isEnd
-//				
-//				
-//
-//					
-//
-//			}
-//	
-//			
-//			
-//			
-//			/*
-//			 * Transition between items previously (right/down)
-//			 *
-//			 * @param  {Element} wrapper         - Wrapper of carousel.
-//			 * @param  {Element} items           - Items of carousel.
-//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
-//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {Void}
-//			 */
-//			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
-//
-//		
-//				let $curWrapper = wrapper,  //Default: $carousel
-//					$curItems   = items,  //Default: $carouselItem
-//					isEnd       = false,
-//					$cloneItem  = null;
-//					
-//
-//				
-//				//Move to the end
-//				if ( 1 == $curItems.first().data( 'id' ) ) {
-//					isEnd = true;
-//				}
-//				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
-//				}
-//				
-//				
-//				//Loop items
-//				if ( carouselLoop ) {
-//					isEnd = false;
-//				}
-//				
-//				//Reset prevents code from duplicate run
-//				const preventEvent = function() {
-//					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
-//					}
-//
-//					if ( curBtn ) curBtn.data( 'click', 0 );
-//			
-//				};
-//				
-//				if ( !isEnd ) {
-//
-//
-//					//Avoid button repeated trigger
-//					if ( curBtn ) curBtn.data( 'click', 1 );
-//
-//
-//
-//					//Clone the first element to the last position
-//					if ( carouselDir == 'horizontal' ) {
-//
-//						$cloneItem = $curItems.last().clone();
-//
-//
-//						//Clone the last element to the first position
-//						$cloneItem
-//							.prependTo( $carousel )
-//							.css( 'margin-left', -carouselItemWidth + 'px' );
-//
-//
-//						TweenMax.to( $cloneItem, carouselSpeed/1000, {
-//							css: {
-//								marginLeft : 0
-//							},
-//							onComplete : function() {
-//
-//								//Remove duplicate elements
-//								$curItems
-//									.last()
-//									.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'right' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//								
-//						
-//
-//
-//
-//							}
-//						});
-//						
-//
-//
-//
-//					} else {
-//
-//
-//						$cloneItem = $curItems.last().clone();
-//
-//
-//						//Clone the last element to the first position
-//						$cloneItem
-//							.prependTo( $carousel )
-//							.css( 'margin-top', -carouselItemHeight + 'px' );
-//
-//
-//						TweenMax.to( $cloneItem, carouselSpeed/1000, {
-//							css: {
-//								marginTop : 0
-//							},
-//							onComplete : function() {
-//
-//								//Remove duplicate elements
-//								$curItems
-//									.last()
-//									.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'right' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//
-//
-//
-//							}
-//						});
-//
-//
-//
-//					}
-//
-//
-//
-//				}// end isEnd
-//				
-//				
-//
-//					
-//
-//			}
-//
-//
-//
-//
-//
-//		});		
-//		
-//    };
-//
-//    module.components.documentReady.push( module.MULTI_ITEMS_CAROUSEL.documentReady );
-//
-//	return class MULTI_ITEMS_CAROUSEL {
-//		constructor() {
-//			this.module = module;
-//		}
-//		
-//	};
-//	
-//})( UixModuleInstance, jQuery, window, document );
+}(UixModuleInstance, jQuery, window, document);
 // CONCATENATED MODULE: ./src/components/ES6/one-page/js/index.js
 function one_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -13595,12 +13754,13 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
  * module.ONEPAGE
  * 
  * @requires ./src/components/ES5/_plugins-Miscellaneous
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.8';
+  module.ONEPAGE.version = '0.0.9';
 
   module.ONEPAGE.documentReady = function ($) {
     var $window = $(window);
@@ -13936,12 +14096,13 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
  * module.ONEPAGE2
  * 
  * @requires ./src/components/ES5/_plugins-Miscellaneous
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 var ONEPAGE2 = function (module, $, window, document) {
   if (window.ONEPAGE2 === null) return false;
   module.ONEPAGE2 = module.ONEPAGE2 || {};
-  module.ONEPAGE2.version = '0.0.6';
+  module.ONEPAGE2.version = '0.0.7';
 
   module.ONEPAGE2.documentReady = function ($) {
     var $window = $(window);
@@ -14274,7 +14435,7 @@ var ONEPAGE2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/parallax/scss/_style.scss
-var parallax_scss_style = __webpack_require__(49);
+var parallax_scss_style = __webpack_require__(50);
 
 // CONCATENATED MODULE: ./src/components/ES6/parallax/js/index.js
 function parallax_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14477,7 +14638,7 @@ var PARALLAX = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/periodical-scroll/scss/_style.scss
-var periodical_scroll_scss_style = __webpack_require__(50);
+var periodical_scroll_scss_style = __webpack_require__(51);
 
 // CONCATENATED MODULE: ./src/components/ES6/periodical-scroll/js/index.js
 function periodical_scroll_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14552,7 +14713,7 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/pricing/scss/_style.scss
-var pricing_scss_style = __webpack_require__(51);
+var pricing_scss_style = __webpack_require__(52);
 
 // CONCATENATED MODULE: ./src/components/ES6/pricing/js/index.js
 function pricing_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14639,7 +14800,7 @@ var PRICING = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/progress-bar/scss/_style.scss
-var progress_bar_scss_style = __webpack_require__(52);
+var progress_bar_scss_style = __webpack_require__(53);
 
 // CONCATENATED MODULE: ./src/components/ES6/progress-bar/js/index.js
 function progress_bar_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14718,7 +14879,7 @@ var PROGRESS_BAR = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/progress-line/scss/_style.scss
-var progress_line_scss_style = __webpack_require__(53);
+var progress_line_scss_style = __webpack_require__(54);
 
 // CONCATENATED MODULE: ./src/components/ES6/progress-line/js/index.js
 function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15161,7 +15322,7 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/show-more-less/scss/_style.scss
-var show_more_less_scss_style = __webpack_require__(54);
+var show_more_less_scss_style = __webpack_require__(55);
 
 // CONCATENATED MODULE: ./src/components/ES6/show-more-less/js/index.js
 function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15275,10 +15436,16 @@ function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) {
  *************************************
  */
 
+/**
+ * module.SMOOTH_SCROLLING_ANCHORLINK
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_ANCHORLINK === null) return false;
   module.SMOOTH_SCROLLING_ANCHORLINK = module.SMOOTH_SCROLLING_ANCHORLINK || {};
-  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.7';
+  module.SMOOTH_SCROLLING_ANCHORLINK.version = '0.0.8';
 
   module.SMOOTH_SCROLLING_ANCHORLINK.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -15503,7 +15670,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/sticky-elements/scss/_style.scss
-var sticky_elements_scss_style = __webpack_require__(55);
+var sticky_elements_scss_style = __webpack_require__(56);
 
 // CONCATENATED MODULE: ./src/components/ES6/sticky-elements/js/index.js
 function sticky_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16413,7 +16580,7 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-background/scss/_style.scss
-var simple_3D_background_scss_style = __webpack_require__(56);
+var simple_3D_background_scss_style = __webpack_require__(57);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-background/js/index.js
 function simple_3D_background_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16426,11 +16593,17 @@ function simple_3D_background_js_typeof(obj) { "@babel/helpers - typeof"; if (ty
  *************************************
  */
 
+/**
+ * module.THREE_BACKGROUND
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var THREE_BACKGROUND = function (module, $, window, document) {
   if (window.THREE_BACKGROUND === null) return false;
   module.THREE_BACKGROUND = module.THREE_BACKGROUND || {};
-  module.THREE_BACKGROUND.version = '0.0.2';
+  module.THREE_BACKGROUND.version = '0.0.3';
 
   module.THREE_BACKGROUND.documentReady = function ($) {
     //grab each 3dAnimate element and pass it into the animate function along with the config data
@@ -16575,7 +16748,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-carousel/scss/_style.scss
-var simple_3D_carousel_scss_style = __webpack_require__(57);
+var simple_3D_carousel_scss_style = __webpack_require__(58);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-carousel/js/index.js
 function simple_3D_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16598,7 +16771,7 @@ function simple_3D_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (type
 var THREE_CAROUSEL = function (module, $, window, document) {
   if (window.THREE_CAROUSEL === null) return false;
   module.THREE_CAROUSEL = module.THREE_CAROUSEL || {};
-  module.THREE_CAROUSEL.version = '0.0.1';
+  module.THREE_CAROUSEL.version = '0.0.2';
 
   module.THREE_CAROUSEL.documentReady = function ($) {
     $('.uix-3d-carousel').each(function () {
@@ -16698,8 +16871,13 @@ var THREE_CAROUSEL = function (module, $, window, document) {
 
       var direction;
       var dragDropElement = $dragDropTrigger[0],
-          dragDropMC = new Hammer(dragDropElement, hammerProps);
-      dragDropMC.on('panright press panleft', function (ev) {
+          dragDropMC = new Hammer(dragDropElement, hammerProps); // let the pan gesture support all directions.
+      // this will block the vertical scrolling on a touch-device while on the element
+
+      dragDropMC.get('pan').set({
+        direction: Hammer.DIRECTION_ALL
+      });
+      dragDropMC.on('press panright panleft', function (ev) {
         //Set the direction in here
         direction = ev.type;
       });
@@ -19417,7 +19595,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-shatter-slider/scss/_style.scss
-var simple_3D_shatter_slider_scss_style = __webpack_require__(58);
+var simple_3D_shatter_slider_scss_style = __webpack_require__(59);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-shatter-slider/js/index.js
 function simple_3D_shatter_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19441,7 +19619,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { "@babel/helpers - typeof"; if
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.7';
+  module.THREE_SHATTER_SLIDER.version = '0.0.9';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -19485,20 +19663,17 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           var $this = $(this);
           var $items = $this.find('.uix-3d-slider--shatter__item'),
               $first = $items.first(),
-              itemsTotal = $items.length,
+              itemTotal = $items.length,
               activated = $this.data('activated');
 
           if (simple_3D_shatter_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
             //Get parameter configuration from the data-* attribute of HTML
             var dataControlsPagination = $this.data('controls-pagination'),
                 dataControlsArrows = $this.data('controls-arrows'),
-                dataLoop = $this.data('loop'),
                 dataFilterTexture = $this.data('filter-texture'),
                 dataDraggable = $this.data('draggable'),
                 dataDraggableCursor = $this.data('draggable-cursor'),
                 dataSpeed = $this.data('speed'),
-                dataAuto = $this.data('auto'),
-                dataTiming = $this.data('timing'),
                 dataCountTotal = $this.data('count-total'),
                 dataCountCur = $this.data('count-now');
             if (simple_3D_shatter_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--shatter__pagination';
@@ -19506,7 +19681,11 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
             if (simple_3D_shatter_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
             if (simple_3D_shatter_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
-            if (simple_3D_shatter_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_shatter_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move'; //Autoplay parameters
+
+            var dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataLoop = $this.data('loop');
             if (simple_3D_shatter_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
             if (simple_3D_shatter_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
             if (simple_3D_shatter_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
@@ -19521,7 +19700,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             } //Prevent bubbling
 
 
-            if (itemsTotal == 1) {
+            if (itemTotal == 1) {
               $(dataControlsPagination).hide();
               $(dataControlsArrows).hide();
             } //Initialize the controlers classes
@@ -19590,7 +19769,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
                 _dotActive = '';
             _dot += '<ul>';
 
-            for (var i = 0; i < itemsTotal; i++) {
+            for (var i = 0; i < itemTotal; i++) {
               _dotActive = i == 0 ? 'class="is-active"' : '';
               _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
@@ -19604,9 +19783,11 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
               var $btn = $(this);
               if ($btn.attr('aria-disabled') == 'true') return false;
               $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
-              setTimeout(function () {
+              $(dataControlsPagination).find('ul > li').delay(animSpeed).queue(function (next) {
                 $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
-              }, animSpeed);
+                next();
+              }); //
+
               var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
                   slideNextId = $(this).index(); //Determine the direction
 
@@ -19636,13 +19817,13 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             _prev.off('click').on('click', function (e) {
               e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-              if (_prev.attr('aria-disabled') == 'true') return false;
+              if ($(this).attr('aria-disabled') == 'true') return false;
+              $(this).attr('aria-disabled', 'true');
+              $(this).delay(animSpeed).queue(function (next) {
+                $(this).attr('aria-disabled', 'false');
+                next();
+              }); //
 
-              _prev.attr('aria-disabled', 'true');
-
-              setTimeout(function () {
-                _prev.attr('aria-disabled', 'false');
-              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
@@ -19654,13 +19835,13 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             _next.off('click').on('click', function (e) {
               e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-              if (_next.attr('aria-disabled') == 'true') return false;
+              if ($(this).attr('aria-disabled') == 'true') return false;
+              $(this).attr('aria-disabled', 'true');
+              $(this).delay(animSpeed).queue(function (next) {
+                $(this).attr('aria-disabled', 'false');
+                next();
+              }); //
 
-              _next.attr('aria-disabled', 'true');
-
-              setTimeout(function () {
-                _next.attr('aria-disabled', 'false');
-              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
 
@@ -20113,7 +20294,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/scss/_style.scss
-var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(59);
+var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(60);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/js/index.js
 function simple_3D_explosive_particle_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20137,7 +20318,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { "@babel/helpers - 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.7';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.9';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -20186,32 +20367,33 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           var $this = $(this);
           var $items = $this.find('.uix-3d-slider--expParticle__item'),
               $first = $items.first(),
-              itemsTotal = $items.length,
+              itemTotal = $items.length,
               activated = $this.data('activated');
 
           if (simple_3D_explosive_particle_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
             //Get parameter configuration from the data-* attribute of HTML
             var dataControlsPagination = $this.data('controls-pagination'),
                 dataControlsArrows = $this.data('controls-arrows'),
-                dataLoop = $this.data('loop'),
                 dataFilterTexture = $this.data('filter-texture'),
                 dataDraggable = $this.data('draggable'),
                 dataDraggableCursor = $this.data('draggable-cursor'),
                 dataSpeed = $this.data('speed'),
-                dataAuto = $this.data('auto'),
-                dataTiming = $this.data('timing'),
                 dataCountTotal = $this.data('count-total'),
                 dataCountCur = $this.data('count-now');
             if (simple_3D_explosive_particle_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-3d-slider--expParticle__pagination';
             if (simple_3D_explosive_particle_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-3d-slider--expParticle__arrows';
-            if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
             if (simple_3D_explosive_particle_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
             if (simple_3D_explosive_particle_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
             if (simple_3D_explosive_particle_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+            if (simple_3D_explosive_particle_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay parameters
+
+            var dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataLoop = $this.data('loop');
             if (simple_3D_explosive_particle_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
             if (simple_3D_explosive_particle_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-            if (simple_3D_explosive_particle_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
-            if (simple_3D_explosive_particle_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay times
+            if (simple_3D_explosive_particle_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
 
             var playTimes; //A function called "timer" once every second (like a digital watch).
 
@@ -20223,7 +20405,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             } //Prevent bubbling
 
 
-            if (itemsTotal == 1) {
+            if (itemTotal == 1) {
               $(dataControlsPagination).hide();
               $(dataControlsArrows).hide();
             } //Initialize the controlers classes
@@ -20292,7 +20474,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
                 _dotActive = '';
             _dot += '<ul>';
 
-            for (var i = 0; i < itemsTotal; i++) {
+            for (var i = 0; i < itemTotal; i++) {
               _dotActive = i == 0 ? 'class="is-active"' : '';
               _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
@@ -20306,9 +20488,11 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
               var $btn = $(this);
               if ($btn.attr('aria-disabled') == 'true') return false;
               $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
-              setTimeout(function () {
+              $(dataControlsPagination).find('ul > li').delay(animSpeed).queue(function (next) {
                 $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
-              }, animSpeed);
+                next();
+              }); //
+
               var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
                   slideNextId = $(this).index(); //Determine the direction
 
@@ -20338,13 +20522,13 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             _prev.off('click').on('click', function (e) {
               e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-              if (_prev.attr('aria-disabled') == 'true') return false;
+              if ($(this).attr('aria-disabled') == 'true') return false;
+              $(this).attr('aria-disabled', 'true');
+              $(this).delay(animSpeed).queue(function (next) {
+                $(this).attr('aria-disabled', 'false');
+                next();
+              }); //
 
-              _prev.attr('aria-disabled', 'true');
-
-              setTimeout(function () {
-                _prev.attr('aria-disabled', 'false');
-              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
@@ -20356,13 +20540,13 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             _next.off('click').on('click', function (e) {
               e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-              if (_next.attr('aria-disabled') == 'true') return false;
+              if ($(this).attr('aria-disabled') == 'true') return false;
+              $(this).attr('aria-disabled', 'true');
+              $(this).delay(animSpeed).queue(function (next) {
+                $(this).attr('aria-disabled', 'false');
+                next();
+              }); //
 
-              _next.attr('aria-disabled', 'true');
-
-              setTimeout(function () {
-                _next.attr('aria-disabled', 'false');
-              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
 
@@ -20792,7 +20976,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
 /* harmony default export */ var js_shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 // EXTERNAL MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/scss/_style.scss
-var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(60);
+var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(61);
 
 // CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/index.js
 function simple_3D_liquid_scrollspy_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20818,7 +21002,7 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { "@babel/helpers - ty
 var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
   module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.1.1';
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.1.3';
 
   module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -20866,20 +21050,17 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
           var $this = $(this);
           var $items = $this.find('.uix-3d-slider--liquid-scrollspy__item'),
               $first = $items.first(),
-              itemsTotal = $items.length,
+              itemTotal = $items.length,
               activated = $this.data('activated');
 
           if (simple_3D_liquid_scrollspy_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
             //Get parameter configuration from the data-* attribute of HTML
             var dataControlsPagination = $this.data('controls-pagination'),
                 dataControlsArrows = $this.data('controls-arrows'),
-                dataLoop = $this.data('loop'),
                 dataFilterTexture = $this.data('filter-texture'),
                 dataDraggable = $this.data('draggable'),
                 dataDraggableCursor = $this.data('draggable-cursor'),
                 dataSpeed = $this.data('speed'),
-                dataAuto = $this.data('auto'),
-                dataTiming = $this.data('timing'),
                 dataCountTotal = $this.data('count-total'),
                 dataCountCur = $this.data('count-now'),
                 dataScrollspy = $this.data('scrollspy');
@@ -20889,10 +21070,14 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
             if (simple_3D_liquid_scrollspy_slider_js_typeof(dataFilterTexture) === ( true ? "undefined" : undefined) || !dataFilterTexture || dataFilterTexture == '') dataFilterTexture = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
             if (simple_3D_liquid_scrollspy_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
             if (simple_3D_liquid_scrollspy_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined)) dataDraggableCursor = 'move';
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataScrollspy) === ( true ? "undefined" : undefined)) dataScrollspy = false; //Autoplay parameters
+
+            var dataAuto = $this.data('auto'),
+                dataTiming = $this.data('timing'),
+                dataLoop = $this.data('loop');
             if (simple_3D_liquid_scrollspy_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
             if (simple_3D_liquid_scrollspy_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
-            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false;
-            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataScrollspy) === ( true ? "undefined" : undefined)) dataScrollspy = false; //Load displacement image
+            if (simple_3D_liquid_scrollspy_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Load displacement image
 
             dispImage = dataFilterTexture; //Autoplay times
 
@@ -20915,7 +21100,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
             } //Prevent bubbling
 
 
-            if (itemsTotal == 1) {
+            if (itemTotal == 1) {
               $(dataControlsPagination).hide();
               $(dataControlsArrows).hide();
             } //Initialize the controlers classes
@@ -20984,7 +21169,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
                 _dotActive = '';
             _dot += '<ul>';
 
-            for (var i = 0; i < itemsTotal; i++) {
+            for (var i = 0; i < itemTotal; i++) {
               _dotActive = i == 0 ? 'class="is-active"' : '';
               _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
@@ -20998,9 +21183,11 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
               var $btn = $(this);
               if ($btn.attr('aria-disabled') == 'true') return false;
               $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'true');
-              setTimeout(function () {
+              $(dataControlsPagination).find('ul > li').delay(animSpeed).queue(function (next) {
                 $(dataControlsPagination).find('ul > li').attr('aria-disabled', 'false');
-              }, animSpeed);
+                next();
+              }); //
+
               var slideCurId = $(dataControlsPagination).find('ul > li.is-active').index(),
                   slideNextId = $(this).index(); //Determine the direction
 
@@ -21030,13 +21217,13 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
             _prev.off('click').on('click', function (e) {
               e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-              if (_prev.attr('aria-disabled') == 'true') return false;
+              if ($(this).attr('aria-disabled') == 'true') return false;
+              $(this).attr('aria-disabled', 'true');
+              $(this).delay(animSpeed).queue(function (next) {
+                $(this).attr('aria-disabled', 'false');
+                next();
+              }); //
 
-              _prev.attr('aria-disabled', 'true');
-
-              setTimeout(function () {
-                _prev.attr('aria-disabled', 'false');
-              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) - 1; //Transition Between Slides
 
@@ -21048,13 +21235,13 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
             _next.off('click').on('click', function (e) {
               e.preventDefault(); //Prevent buttons' events from firing multiple times
 
-              if (_next.attr('aria-disabled') == 'true') return false;
+              if ($(this).attr('aria-disabled') == 'true') return false;
+              $(this).attr('aria-disabled', 'true');
+              $(this).delay(animSpeed).queue(function (next) {
+                $(this).attr('aria-disabled', 'false');
+                next();
+              }); //
 
-              _next.attr('aria-disabled', 'true');
-
-              setTimeout(function () {
-                _next.attr('aria-disabled', 'false');
-              }, animSpeed);
               var slideCurId = $items.filter('.is-active').index(),
                   slideNextId = parseFloat($items.filter('.is-active').index()) + 1; //Transition Between Slides
 
@@ -21867,7 +22054,7 @@ var TABLE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(61);
+var sort_elements = __webpack_require__(62);
 
 // CONCATENATED MODULE: ./src/components/ES6/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21950,7 +22137,7 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(62);
+var tabs_scss_style = __webpack_require__(63);
 
 // CONCATENATED MODULE: ./src/components/ES6/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22127,7 +22314,7 @@ var TABS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(63);
+var team_focus_scss_style = __webpack_require__(64);
 
 // CONCATENATED MODULE: ./src/components/ES6/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22140,11 +22327,17 @@ function team_focus_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
  *************************************
  */
 
+/**
+ * module.TEAM_FOCUS
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var TEAM_FOCUS = function (module, $, window, document) {
   if (window.TEAM_FOCUS === null) return false;
   module.TEAM_FOCUS = module.TEAM_FOCUS || {};
-  module.TEAM_FOCUS.version = '0.0.3';
+  module.TEAM_FOCUS.version = '0.0.4';
 
   module.TEAM_FOCUS.documentReady = function ($) {
     var teamFocusContent = '.uix-team-focus',
@@ -22290,10 +22483,10 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(64);
+var text_anime = __webpack_require__(65);
 
 // EXTERNAL MODULE: ./src/components/ES6/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(65);
+var text_effect_scss_style = __webpack_require__(66);
 
 // CONCATENATED MODULE: ./src/components/ES6/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22342,7 +22535,7 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(66);
+var timeline_scss_style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./src/components/ES6/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22359,7 +22552,7 @@ function timeline_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var TIMELINE = function (module, $, window, document) {
   if (window.TIMELINE === null) return false;
   module.TIMELINE = module.TIMELINE || {};
-  module.TIMELINE.version = '0.1.7';
+  module.TIMELINE.version = '0.1.8';
 
   module.TIMELINE.pageLoaded = function () {
     var $window = $(window);
@@ -22384,12 +22577,12 @@ var TIMELINE = function (module, $, window, document) {
 
       $this.find('.uix-timeline__btn--prev').off('click').on('click', function (e) {
         e.preventDefault();
-        timelineUpdate($this, false, dateShowEle, true, dir);
+        timelineUpdate($this, null, dateShowEle, true, dir);
         return false;
       });
       $this.find('.uix-timeline__btn--next').off('click').on('click', function (e) {
         e.preventDefault();
-        timelineUpdate($this, false, dateShowEle, false, dir);
+        timelineUpdate($this, null, dateShowEle, false, dir);
         return false;
       });
       $this.find('.uix-timeline__item .uix-timeline__item__img').off('click').on('click', function (e) {
@@ -22450,7 +22643,7 @@ var TIMELINE = function (module, $, window, document) {
       var curIndex = obj.find('.uix-timeline__item.is-active').index(),
           tarIndex; //Check if a value is an object currently
 
-      if (iscur && timeline_js_typeof(iscur) === 'object') {
+      if (iscur != null && timeline_js_typeof(iscur) === 'object') {
         curIndex = iscur.index();
         tarIndex = curIndex;
       } else {
@@ -22524,7 +22717,7 @@ var TIMELINE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(67);
+var vertical_menu_scss_style = __webpack_require__(68);
 
 // CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22535,11 +22728,17 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
  *************************************
  */
 
+/**
+ * module.VERTICAL_MENU
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 
 var VERTICAL_MENU = function (module, $, window, document) {
   if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
-  module.VERTICAL_MENU.version = '0.0.4';
+  module.VERTICAL_MENU.version = '0.0.5';
 
   module.VERTICAL_MENU.documentReady = function ($) {
     var $window = $(window);
@@ -22673,10 +22872,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(68);
+var _wp_core = __webpack_require__(69);
 
 // EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_3rd_party_plugins.scss
-var scss_3rd_party_plugins = __webpack_require__(69);
+var scss_3rd_party_plugins = __webpack_require__(70);
 
 // CONCATENATED MODULE: ./src/components/ES6/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22728,103 +22927,103 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/ES6/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(70);
+var badges_scss_style = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./src/components/ES6/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(71);
+var blended_grid_layout_scss_style = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./src/components/ES6/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(72);
+var breadcrumbs_scss_style = __webpack_require__(73);
 
 // EXTERNAL MODULE: ./src/components/ES6/button/scss/_style.scss
-var button_scss_style = __webpack_require__(73);
+var button_scss_style = __webpack_require__(74);
 
 // EXTERNAL MODULE: ./src/components/ES6/card/scss/_style.scss
-var card_scss_style = __webpack_require__(74);
+var card_scss_style = __webpack_require__(75);
 
 // EXTERNAL MODULE: ./src/components/ES6/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(75);
+var circle_text_scss_style = __webpack_require__(76);
 
 // EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(76);
+var content_placeholder_animated_scss_style = __webpack_require__(77);
 
 // EXTERNAL MODULE: ./src/components/ES6/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(77);
+var dividing_line_scss_style = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./src/components/ES6/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(78);
+var dots_scss_style = __webpack_require__(79);
 
 // EXTERNAL MODULE: ./src/components/ES6/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(79);
+var dotted_line_scss_style = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./src/components/ES6/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(80);
+var equal_width_columns_scss_style = __webpack_require__(81);
 
 // EXTERNAL MODULE: ./src/components/ES6/features/scss/_style.scss
-var features_scss_style = __webpack_require__(81);
+var features_scss_style = __webpack_require__(82);
 
 // EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(82);
+var footer_templates_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/ES6/gallery-grid-layout/scss/_style.scss
-var gallery_grid_layout_scss_style = __webpack_require__(83);
+var gallery_grid_layout_scss_style = __webpack_require__(84);
 
 // EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(84);
+var heading_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(85);
+var image_animation_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(86);
+var list_brands_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(87);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(88);
+var list_side_by_side_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(89);
+var list_side_by_side_img_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(90);
+var mouse_animation_scroll_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(91);
+var overlay_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(92);
+var ribbon_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(93);
+var shape_animation_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(94);
+var _comments = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(95);
+var _editing = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(96);
+var striking_scss_style = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(97);
+var team_fullwidth_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(98);
+var team_grid_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(99);
+var testimonials_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(100);
+var tooltip_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(101);
+var vertical_separator_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(102);
+var wave_background_scss_style = __webpack_require__(103);
 
 // CONCATENATED MODULE: ./src/components/ES6/_app-load.js
 /*

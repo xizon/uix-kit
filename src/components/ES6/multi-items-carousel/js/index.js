@@ -7,6 +7,7 @@
  * module.MULTI_ITEMS_CAROUSEL
  * 
  * @requires ./examples/assets/js/min/hammer.min.js
+ * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -31,27 +32,23 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 	
 	
     module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-    module.MULTI_ITEMS_CAROUSEL.version       = '0.0.4';
+    module.MULTI_ITEMS_CAROUSEL.version       = '0.0.5';
     module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-multi-carousel' ).each( function()  {
 
 			let $carouselWrapper        = $( this ),
-				goSteps                 = 0,
 				$carousel               = $carouselWrapper.find( '.uix-multi-carousel__items' ),
 				$carouselItem           = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
 				itemTotal               = $carouselItem.length,
-				amountVisible           = $carouselWrapper.data( 'cus-carousel-show' ),
-				carouselItemWidth       = null,
-				carouselItemHeight      = null,
-				carouselDir             = $carouselWrapper.data( 'cus-carousel-dir' ),
-				carouselLoop            = $carouselWrapper.data( 'cus-carousel-loop' ),
-				carouselSpeed           = $carouselWrapper.data( 'cus-carousel-speed' ),
-				carouselNext            = $carouselWrapper.data( 'cus-carousel-next' ),
-				carouselPrev            = $carouselWrapper.data( 'cus-carousel-prev' ),
-				carouselPaging          = $carouselWrapper.data( 'cus-carousel-paging' ),
-				carouseDraggable        = $carouselWrapper.data( 'cus-carousel-draggable' ),
-				carouseDraggableCursor  = $carouselWrapper.data( 'cus-carousel-draggable-cursor' );
+				amountVisible           = $carouselWrapper.data( 'show' ),
+				carouselDir             = $carouselWrapper.data( 'dir' ),
+				carouselLoop            = $carouselWrapper.data( 'loop' ),
+				carouselSpeed           = $carouselWrapper.data( 'speed' ),
+				carouselNext            = $carouselWrapper.data( 'next' ),
+				carouselPrev            = $carouselWrapper.data( 'prev' ),
+				carouseDraggable        = $carouselWrapper.data( 'draggable' ),
+				carouseDraggableCursor  = $carouselWrapper.data( 'draggable-cursor' );
 
 			
 			
@@ -67,19 +64,10 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			
 			
 			if ( window.innerWidth <= 768 ) amountVisible = 3;
+            
+            // Returns the value of a number rounded to the nearest integer.
+            const midIndex = Math.round( amountVisible/2 ) - 1; 
 
-			
-			carouselItemWidth  = $carousel.width()/amountVisible;
-			carouselItemHeight = $carousel.height()/amountVisible;
-
-			
-			/* 
-			 ---------------------------
-			 Get the number of steps to the last visible element
-			 ---------------------------
-			 */ 
-			const lastSteps = parseFloat( itemTotal - amountVisible );
-			 
 
 
 			/* 
@@ -87,13 +75,16 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 Initialize carousel
 			 ---------------------------
 			 */  
-			let newWidth, newHeight;
+			let eachItemNewWidth, eachItemNewHeight;
+			const eachItemOldWidth  = $carousel.width()/amountVisible;
+			const eachItemOldHeight = $carousel.height()/amountVisible;
+
 			if ( carouselDir == 'horizontal' ) { 
-				newWidth = ( $carouselWrapper.width() / amountVisible );
-				$carousel.css( 'width', itemTotal * carouselItemWidth );
+				eachItemNewWidth = ( $carouselWrapper.width() / amountVisible );
+				$carousel.css( 'width', itemTotal * eachItemOldWidth );
 			} else {
-				newHeight = ( $carouselWrapper.height() / amountVisible );
-				$carousel.css( 'height', itemTotal * carouselItemHeight );
+				eachItemNewHeight = ( $carouselWrapper.height() / amountVisible );
+				$carousel.css( 'height', itemTotal * eachItemOldHeight );
 			}
 
 
@@ -103,8 +94,8 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 
 			//default button status
-			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-				$( carouselPrev ).addClass( 'is-disabled' );
+			if ( !carouselLoop ) {
+				$( carouselPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
 			}	
 
 			/* 
@@ -115,61 +106,47 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			
 			function carouselReOrder() {
 				
-				//Active the center item
-				carouselActiveCenterItem( $carouselItem, 'default', null );
-				
-				$carouselItem.each( function( index ) {
-				
+				if ( carouselDir == 'horizontal' ) {
+                    const boxWidth = eachItemNewWidth;
+                    TweenMax.set($carouselItem, {
+                        width: boxWidth,
+                        x: function(i, target) {
 
-						if ( carouselDir == 'horizontal' ) {
-							$( this )
-								.width( newWidth + 'px' )
-								.css( 'visibility', 'visible' )
-								.attr( 'data-id', index+1 );
-						} else {
-							$( this )
-								.height( newHeight + 'px' )
-								.css( 'visibility', 'visible' )
-								.attr( 'data-id', index+1 );
-						}
+                            //Active the center item
+                            if( i === midIndex && carouselLoop ) {
+                                TweenMax.set( target, {className:"+=is-active"});
+                            }
+                            
+                            //Add index to each item
+                            $carouselItem.eq(i).attr( 'data-index', i );
 
-					});	
-			}
-			
-			/* 
-			 ---------------------------
-			 Active the center item
-			 ---------------------------
-			 */ 
-			
-			function carouselActiveCenterItem( el, dir, steps ) {
-				const curItemIndex    = (amountVisible/2).toFixed(0),
-					  centerItemIndex = Math.floor(amountVisible / 2)-1;		
-				el.removeClass( 'is-active active-prev active-next' );
-				
-				
-			
-				if ( dir == 'default' ) {
-					el.eq( parseFloat( curItemIndex - 1 ) ).addClass( 'is-active' );		
+                            return i * boxWidth;
+                        }
+                    });
+
 				} else {
-					el.eq( parseFloat( steps + centerItemIndex + 1 ) ).addClass( 'is-active' );	
-				}
-				
-				//Add nearest classes for 3 elements
-				el.each( function() {
-					if ( $( this ).hasClass( 'is-active' ) ) {
-						$( this ).prev().addClass( 'active-prev' );
-						$( this ).next().addClass( 'active-next' );
-						
-						return false;
-					}
-				});	
-				
-				
-				
-			}	
-			
+                    
+                    const boxHeight = eachItemNewHeight;
+                    TweenMax.set($carouselItem, {
+                        height: boxHeight,
+                        y: function(i, target) {
 
+                            //Active the center item
+                            if( i === midIndex && carouselLoop ) {
+                                TweenMax.set( target, {className:"+=is-active"});
+                            }
+                            
+                            //Add index to each item
+                            $carouselItem.eq(i).attr( 'data-index', i );   
+
+                            return i * boxHeight;
+                        }
+                    });  
+                    
+                }
+   
+
+			}
 
 			
 			
@@ -180,33 +157,21 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 */ 
 			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
-				
-				
-				const $btn        = $( this ),
-					  $curWrapper = $( e.data[0] ),
-					  //Protection button is not triggered multiple times.
-					  btnLock     = $btn.data( 'click' );
-				
-				
-				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-					
-					goSteps++;
-				
-					//Loop items
-					if ( carouselLoop ) {
-						if ( goSteps > lastSteps ) goSteps = 0;
-					} else {
-						if ( goSteps > lastSteps ) goSteps = lastSteps;
-					}
-					
-					itemUpdates( $curWrapper, $btn, carouselNext, carouselPrev, goSteps );
-
-				}
-
-
+                
+                //Prevent buttons' events from firing multiple times
+                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                $( this ).attr( 'aria-disabled', 'true' );
+                $( this )
+                    .delay(carouselSpeed)
+                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });
+ 
+                
+                //
+                movePositionWithButton( $( this ), e, 'next' );
 			});
 
 			
+            
 			/* 
 			 ---------------------------
 			 Move right/down
@@ -214,44 +179,20 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 */ 
 			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
 				e.preventDefault();
-
-				const $btn        = $( this ),
-					  $curWrapper = $( e.data[0] ),
-					  //Protection button is not triggered multiple times.
-					  btnLock     = $btn.data( 'click' );
-				
-				
-				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-					
-					goSteps--;
-				
-					//Loop items
-					if ( carouselLoop ) {
-						if ( goSteps < 0 ) goSteps = lastSteps;
-					} else {
-						if ( goSteps < 0 ) goSteps = 0;
-					}
-					
-					itemUpdates( $curWrapper, $btn, carouselNext, carouselPrev, goSteps );
-
-				
-
-				}
-
-
+                
+                //Prevent buttons' events from firing multiple times
+                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                $( this ).attr( 'aria-disabled', 'true' );
+                $( this )
+                    .delay(carouselSpeed)
+                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });  
+                
+                //
+                movePositionWithButton( $( this ), e, 'prev' );
 			});
-			
-			
-			
-			//Solve the activation problem of touch events
-			//-------------------------------------	
-			$carouselItem.on( 'click touchstart', function() {
-				$carouselItem.removeClass( 'active-current' );
-				$( this ).addClass( 'active-current' );
-			});
-			
-			
-			
+		
+
+            	
 			
 			//Drag and Drop
 			//-------------------------------------	
@@ -273,11 +214,87 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
             const dragDropElement = $dragDropTrigger[0],
 				  dragDropMC      = new Hammer( dragDropElement, hammerProps );
 			
+            let elAnim = true;
+            
+            // let the pan gesture support all directions.
+            // this will block the vertical scrolling on a touch-device while on the element
+            dragDropMC.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 			
-			dragDropMC.on( 'panright press panleft panup pandown', function( ev ) {
+			dragDropMC.on( 'press panright panleft panup pandown', function( ev ) {
 
 				//Set the direction in here
 				direction = ev.type;
+                
+                //Determine whether it is the first or the last    
+                let currentIsFirstOrLast = false;
+                if ( ! carouselLoop ) {
+                    const firstItemOffset = ( carouselDir == 'horizontal' ) ? $carousel.find( '[data-index="0"]' )[0]._gsTransform.x : $carousel.find( '[data-index="0"]' )[0]._gsTransform.y;
+                    
+                    const maxMoveOffset = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth*(itemTotal-amountVisible) : -eachItemNewHeight*(itemTotal-amountVisible);
+                    
+                    if ( ( direction == 'panright' || direction == 'pandown' ) && firstItemOffset >= 0 ) { //first item
+                        currentIsFirstOrLast = true;
+                    }
+
+                    if ( ( direction == 'panleft' || direction == 'panup' ) && firstItemOffset <= maxMoveOffset ) { //last item
+                        currentIsFirstOrLast = true;
+                    }      
+                }
+                
+
+                
+                //Rebound effect of drag offset 
+                switch ( direction ) {
+                    case 'panleft':
+                        
+                        if ( ev.deltaX > -eachItemNewWidth/4 && ev.deltaX < 0 ) {
+                            elAnim = false;  
+                            itemUpdates( $carouselWrapper, ev.deltaX, 0.1, true );
+                        } else {
+                            elAnim = ( currentIsFirstOrLast ) ? false : true;
+                        }
+                        
+                        
+                        break;
+                        
+                    case 'panup':
+                        
+                        if ( ev.deltaY > -eachItemNewHeight/4 && ev.deltaY < 0 ) {
+                            elAnim = false;  
+                            itemUpdates( $carouselWrapper, ev.deltaY, 0.1, true );
+                        } else {
+                            elAnim = ( currentIsFirstOrLast ) ? false : true;
+                        }
+                        
+                        
+                        break;
+                        
+                    case 'panright':
+                        
+                        if ( ev.deltaX < eachItemNewWidth/4 && ev.deltaX > 0 ) {
+                            elAnim = false;  
+                            itemUpdates( $carouselWrapper, ev.deltaX, 0.1, true );
+                        } else {
+                            elAnim = ( currentIsFirstOrLast ) ? false : true;
+                        }
+                        
+                        
+                        break;  
+                        
+                    case 'pandown':
+                        if ( ev.deltaY < eachItemNewHeight/4 && ev.deltaY > 0 ) {
+                            elAnim = false;  
+                            itemUpdates( $carouselWrapper, ev.deltaY, 0.1, true );
+                        } else {
+                            elAnim = ( currentIsFirstOrLast ) ? false : true;
+                        }
+                        
+                        
+                        break;            
+                        
+                }
+                
+
 			});
 
 			
@@ -285,141 +302,216 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 			dragDropMC.on( 'panend', function( ev ) {
 
-			
-				//Use the direction in here
-				//You know the pan has ended
-				//and you know which action they were taking
-				if ( direction == 'panleft' || direction == 'panup' ) {
-					goSteps++;
+                if ( elAnim ) {
 
-					//Loop items
-					if ( carouselLoop ) {
-						if ( goSteps > lastSteps ) goSteps = 0;
-					} else {
-						if ( goSteps > lastSteps ) goSteps = lastSteps;
-					}
+                    
+                    //Use the direction in here
+                    //You know the pan has ended
+                    //and you know which action they were taking
+                    switch ( direction ) {
+                        case 'panleft':
+                        case 'panup':
 
-					itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
-				}
+                            const delta1 = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth : -eachItemNewHeight;
+                            itemUpdates( $carouselWrapper, delta1, null, false );
+                            
+                            break;
 
-				if ( direction == 'panright' || direction == 'pandown' ) {
-					goSteps--;
-
-					//Loop items
-					if ( carouselLoop ) {
-						if ( goSteps < 0 ) goSteps = lastSteps;
-					} else {
-						if ( goSteps < 0 ) goSteps = 0;
-					}
-
-					itemUpdates( $carouselWrapper, false, carouselNext, carouselPrev, goSteps );
-				}			
-
-
+                        case 'panright':
+                        case 'pandown':
+                          
+                            const delta2 = ( carouselDir == 'horizontal' ) ? eachItemNewWidth : eachItemNewHeight;
+                            itemUpdates( $carouselWrapper, delta2, null, false );
+                            
+                            break;                 
+                            
+                    }
+                    		    
+                } else {    
+                    itemUpdates( $carouselWrapper, 0, null, false );
+                }
 
 			});	
-
-		
-		
+            
 			
 			/*
 			 * Transition Between Items
 			 *
-			 * @param  {Element} wrapper         - Wrapper of carousel.
-			 * @param  {?Element} curBtn          - The button that currently triggers the move.
-			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
-			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-			 * @param  {Number} steps           - The number of steps per move.
+			 * @param  {Element} wrapper        - Wrapper of carousel.
+             * @param  {Number} delta           - The value returned will need to be adjusted according to the offset rate.
+             * @param  {?Number} speed          - Sliding speed. Please set to 0 when rebounding.
+             * @param  {Boolean} dragging       - Determine if the object is being dragged.
 			 * @return {Void}
 			 */
-			function itemUpdates( wrapper, curBtn, nextBtnStr, prevBtnStr, steps ) {
+			function itemUpdates( wrapper, delta, speed, dragging ) {
 
-		
+                if ( speed == null ) speed = carouselSpeed/1000;
+             
+                
 				let $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $carousel
-					$curItems   = $curWrapper.find( '> div' ), //Default: $carouselItem
-					isEnd       = false,
-					isFirst     = false,
-					isMid       = false;
+					$curItems   = $curWrapper.find( '> div' ); //Default: $carouselItem
 		
-				//Reset prevents code from duplicate run
-				const preventEvent = function() {
-					if ( curBtn ) curBtn.data( 'click', 0 );
-				};
-				
-				
-				//Determine if the element is at the end or beginning
-				if ( steps == lastSteps ) isEnd = true;
-				if ( steps == 0 ) isFirst = true;
-				if ( steps < lastSteps && steps > 0 ) isMid = true;
-				
-				
-				//The state of the control button
-				if ( !carouselLoop ) {
-					
-					if ( isEnd ) $( nextBtnStr ).addClass( 'is-disabled' );
-					if ( isFirst ) $( prevBtnStr ).addClass( 'is-disabled' );
-					
-					if ( isMid ) {
-						$( nextBtnStr ).removeClass( 'is-disabled' );
-						$( prevBtnStr ).removeClass( 'is-disabled' );
-					}
-					
-					
-				}
-				
 
-
-				//Avoid button repeated trigger
-				if ( curBtn ) curBtn.data( 'click', 1 );
-
-
+            
 				//Clone the first element to the last position
 				if ( carouselDir == 'horizontal' ) {
 
-					TweenMax.to( $curWrapper, carouselSpeed/1000, {
-						x          : '-' + carouselItemWidth*steps,
-						onComplete : function() {
+                    const boxWidth = eachItemNewWidth;
+                    const wrapWidth = ($curItems.length - 1) * boxWidth; 
+                    
+                    TweenMax.to( $curItems, speed, {
+                        x: function(i, target) {
+                            const x = Math.round(target._gsTransform.x / boxWidth ) * boxWidth;
+                            return x + delta;
+                        },
+                        modifiers: {
+                            x: function(x, target) {
+                                
+                                if ( carouselLoop ) {
+                                    //Active the center item
+                                    if( x === midIndex*boxWidth ) {
+                                        TweenMax.set( target, {className:"+=is-active"});
+                                    } else {
+                                        TweenMax.set( target, {className:"-=is-active"});
+                                    }
 
-							//Active the center item
-							carouselActiveCenterItem( $curItems, 'move', steps );
 
-							//Reset prevents code from duplicate run
-							preventEvent();
+                                    return wrap(x, -boxWidth, wrapWidth);  
+                                } else {
+                                    return x;
+                                }
+                                
+
+                            }
+                        },
+                        onComplete : function() {
+                            
+                            if ( !dragging && delta != 0 ) {
+                                //The state of the control button
+                                setButtonState( Math.round( $curItems.first()[0]._gsTransform.x ), Math.round( ($curItems.length - amountVisible) * boxWidth ) );  
+
+                            }
 
 
 						}
-					});		
+                    });    
+              
 
-
-
+                    
 				} else {
+                    
+                    const boxHeight = eachItemNewHeight;
+                    const wrapHeight = ($curItems.length - 1) * boxHeight; 
+                    
+                    TweenMax.to( $curItems, speed, {
+                        y: function(i, target) {
+                            const y = Math.round(target._gsTransform.y / boxHeight) * boxHeight;
+                            return y + delta;
+                        },
+                        modifiers: {
+                            y: function(y, target) {
+                                
+                                
+                                if ( carouselLoop ) {
+                                    //Active the center item
+                                    if( y === midIndex*boxHeight ) {
+                                        TweenMax.set( target, {className:"+=is-active"});
+                                    } else {
+                                        TweenMax.set( target, {className:"-=is-active"});
+                                    }
 
-					TweenMax.to( $curWrapper, carouselSpeed/1000, {
-						y          : '-' + carouselItemHeight*steps,
-						onComplete : function() {
+                                    return wrap(y, -boxHeight, wrapHeight)
+                                } else {
+                                    return y;
+                                }
 
-							//Active the center item
-							carouselActiveCenterItem( $curItems, 'move', steps );
-
-							//Reset prevents code from duplicate run
-							preventEvent();
-
-
+                            }
+                        },
+                        onComplete : function() {
+                            
+                            if ( !dragging && delta != 0 ) {
+                                //The state of the control button
+                                setButtonState( Math.round( $curItems.first()[0]._gsTransform.y ), Math.round( ($curItems.length - amountVisible) * boxHeight ) );   
+   
+                            }
+                         
 						}
-					});		
+                    });         
+                    
+                }
 
-
-				}
-				
-				
-
+			
 					
 
 			}
+     
+            
+			/*
+			 * Move function with buttons
+			 *
+			 * @param  {Element} $btn               - The button that currently triggers the move.
+             * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
+             * @param  {String} type                - Move next or previous.
+			 * @return {Void}
+			 */
+            function movePositionWithButton( $btn, event, type ) {
+   				const $curWrapper = $( event.data[0] ),
+					  //Protection button is not triggered multiple times.
+                      btnDisabled = $btn.data( 'disabled' );
+                
+                let delta;
+                if ( type == 'next' ) {
+                    delta = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth : -eachItemNewHeight;
+                } else {
+                    delta = ( carouselDir == 'horizontal' ) ? eachItemNewWidth : eachItemNewHeight;
+                }
+                
+				if ( typeof btnDisabled === typeof undefined ) {	
+					itemUpdates( $curWrapper, delta, null, false );
+				} 
+            }  
+            
+            
+			/*
+			 * The state of the control button
+			 *
+             * @param  {Number} firstOffset          - Get the computed Translate X or Y values of a given first DOM element.
+             * @param  {Number} lastOffset           - Get the computed Translate X or Y values of a given last DOM element.
+			 * @return {Void}
+			 */
+            function setButtonState( firstOffset, lastOffset ) {
+                
+                if ( carouselLoop ) return false;
+               
+                if ( Math.abs( firstOffset ) == lastOffset ) {
+                    $( carouselNext ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+                    $( carouselPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                } else if ( Math.round( firstOffset ) == 0 ) {
+                    $( carouselNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( carouselPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+                } else {
+                    $( carouselNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( carouselPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                }
+            }   
+            
 	
-			
-			
-		
+			/*
+			 * Tweens each box to a relative x/y position of "+={number}"
+			 *
+			 * @param  {Number} value           - Current position of the element, x or y coordinates.
+			 * @param  {Number} min             - The minimum value, used to mark the width or height of each element.
+			 * @param  {Number} max             - The maximum value, used to mark the width or height of the entire container.
+			 * @return {Number}                 - The about-to-be-applied value from the regular tween.
+			 */
+            function wrap(value, min, max) {
+                const v = value - min;
+                const r = max - min;
+
+                // force x/y value to be between {min} and {max} using modulus
+                return ((r + v % r) % r) + min;
+            }
+
 
 
 
@@ -438,495 +530,3 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 	};
 	
 })( UixModuleInstance, jQuery, window, document );
-
-
-//
-//export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
-//	if ( window.MULTI_ITEMS_CAROUSEL === null ) return false;
-//	
-//	
-//    module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-//	  module.MULTI_ITEMS_CAROUSEL.version       = '0.0.1';
-//    module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
-//
-//		$( '.uix-multi-carousel' ).each( function()  {
-//
-//			let $carouselWrapper   = $( this ),
-//				$carousel          = $carouselWrapper.find( '.uix-multi-carousel__items' ),
-//				$carouselItem      = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
-//				carouselItemTotal  = $carouselItem.length,
-//				showcarouselItem   = $carouselWrapper.data( 'cus-carousel-show' ),
-//				carouselItemWidth  = $carousel.width()/showcarouselItem,
-//				carouselItemHeight = $carousel.height()/showcarouselItem,
-//				carouselDir        = $carouselWrapper.data( 'cus-carousel-dir' ),
-//				carouselLoop       = $carouselWrapper.data( 'cus-carousel-loop' ),
-//				carouselSpeed      = $carouselWrapper.data( 'cus-carousel-speed' ),
-//				carouselNext       = $carouselWrapper.data( 'cus-carousel-next' ),
-//				carouselPrev       = $carouselWrapper.data( 'cus-carousel-prev' );
-//
-//			if ( typeof carouselDir === typeof undefined ) {
-//				carouselDir = 'horizontal';
-//			}
-//			
-//			if ( typeof carouselLoop === typeof undefined ) {
-//				carouselLoop = false;
-//			}
-//			if ( typeof showcarouselItem === typeof undefined ) {
-//				showcarouselItem = 3;
-//			}
-//			if ( typeof carouselSpeed === typeof undefined ) {
-//				carouselSpeed = 250;
-//			}
-//			if ( typeof carouselNext === typeof undefined ) {
-//				carouselNext = '.uix-multi-carousel__controls--next';
-//			}
-//			if ( typeof carouselPrev === typeof undefined ) {
-//				carouselPrev = '.uix-multi-carousel__controls--prev';
-//			}
-//
-//
-//			
-//			/* 
-//			 ---------------------------
-//			 Initialize carousel
-//			 ---------------------------
-//			 */  
-//			let newWidth, newHeight;
-//			if ( carouselDir == 'horizontal' ) { 
-//				newWidth = ( $carouselWrapper.width() / showcarouselItem );
-//				$carousel.css( 'width', carouselItemTotal * carouselItemWidth );
-//			} else {
-//				newHeight = ( $carouselWrapper.height() / showcarouselItem );
-//				$carousel.css( 'height', carouselItemTotal * carouselItemHeight );
-//			}
-//
-//
-//			// Re-order all items
-//			carouselReOrder();
-//
-//
-//
-//			//default button status
-//			if ( $carouselItem.first().data( 'id' ) == 1 && !carouselLoop ) {
-//				$( carouselPrev ).addClass( 'is-disabled' );
-//			}	
-//
-//			/* 
-//			 ---------------------------
-//			 Re-order all items
-//			 ---------------------------
-//			 */ 
-//			
-//			function carouselReOrder() {
-//				
-//				//Active the center item
-//				carouselActiveCenterItem( $carouselItem, 'default' );
-//				
-//				$carouselItem.each( function( index ) {
-//				
-//
-//						if ( carouselDir == 'horizontal' ) {
-//							$( this )
-//								.width( newWidth + 'px' )
-//								.css( 'visibility', 'visible' )
-//								.attr( 'data-id', index+1 );
-//						} else {
-//							$( this )
-//								.height( newHeight + 'px' )
-//								.css( 'visibility', 'visible' )
-//								.attr( 'data-id', index+1 );
-//						}
-//
-//					});	
-//			}
-//			
-//			/* 
-//			 ---------------------------
-//			 Active the center item
-//			 ---------------------------
-//			 */ 
-//			
-//			function carouselActiveCenterItem( el, dir ) {
-//				const curItemIndex    = (showcarouselItem/2).toFixed(0),
-//					  centerItemIndex = Math.floor(showcarouselItem / 2)-1;		
-//				el.removeClass( 'is-active active-prev active-next' );
-//				
-//				
-//				
-//				if ( dir == 'left' ) {
-//					el.eq( curItemIndex ).addClass( 'is-active' );
-//					
-//				} else if ( dir == 'right' ) {
-//					el.eq( centerItemIndex ).addClass( 'is-active' );	
-//					
-//				} else if ( dir == 'default' ) {
-//					el.eq( curItemIndex - 1 ).addClass( 'is-active' );		
-//				}
-//				
-//				//Add nearest classes for 3 elements
-//				el.each( function() {
-//					if ( $( this ).hasClass( 'is-active' ) ) {
-//						$( this ).prev().addClass( 'active-prev' );
-//						$( this ).next().addClass( 'active-next' );
-//						
-//						return false;
-//					}
-//				});	
-//				
-//				
-//				
-//			}	
-//			
-//
-//			
-//			
-//			/* 
-//			 ---------------------------
-//			 Move left/up
-//			 ---------------------------
-//			 */ 
-//			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-//				e.preventDefault();
-//				
-//				
-//				const $btn        = $( this ),
-//					  $curWrapper = $( e.data[0] ),
-//					  $curItems   = $curWrapper.children().find( '> div' ),
-//					  //Protection button is not triggered multiple times.
-//					  btnLock     = $btn.data( 'click' );
-//				
-//				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-//					moveNext( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
-//				}
-//
-//
-//			});
-//
-//			
-//			/* 
-//			 ---------------------------
-//			 Move right/down
-//			 ---------------------------
-//			 */ 
-//			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-//				e.preventDefault();
-//
-//				
-//				const $btn        = $( this ),
-//					  $curWrapper = $( e.data[0] ),
-//					  $curItems   = $curWrapper.children().find( '> div' ),
-//					  //Protection button is not triggered multiple times.
-//					  btnLock     = $btn.data( 'click' );
-//
-//			
-//				
-//				if ( typeof btnLock === typeof undefined || btnLock === 0 ) {
-//					movePrev( $curWrapper, $curItems, $btn, carouselNext, carouselPrev );
-//				}
-//				
-//				
-//
-//			});
-//			
-//			
-//			
-//			/*
-//			 * Transition between items next (left/up)
-//			 *
-//			 * @param  {Element} wrapper         - Wrapper of carousel.
-//			 * @param  {Element} items           - Items of carousel.
-//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
-//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {Void}
-//			 */
-//			function moveNext( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
-//
-//		
-//				let $curWrapper = wrapper,  //Default: $carousel
-//					$curItems   = items,  //Default: $carouselItem
-//					isEnd       = false,
-//					$cloneItem  = null;
-//					
-//
-//				//Move to the end
-//				if ( (carouselItemTotal - showcarouselItem + 1) == $curItems.first().data( 'id' ) ) {
-//					isEnd = true;
-//				}
-//				if ( (carouselItemTotal - showcarouselItem) == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
-//				}
-//				
-//				
-//				//Loop items
-//				if ( carouselLoop ) {
-//					isEnd = false;
-//				}
-//				
-//				//Reset prevents code from duplicate run
-//				const preventEvent = function() {
-//					if ( carouselPrev && carouselPrev != '' ) {
-//						$( carouselPrev ).data( 'click', 0 ).removeClass( 'is-disabled' );
-//					}
-//
-//					if ( curBtn ) curBtn.data( 'click', 0 );
-//			
-//				};
-//				
-//				if ( !isEnd ) {
-//
-//
-//					//Avoid button repeated trigger
-//					if ( curBtn ) curBtn.data( 'click', 1 );
-//
-//
-//
-//					//Clone the first element to the last position
-//					if ( carouselDir == 'horizontal' ) {
-//
-//						TweenMax.to( $curItems.first(), carouselSpeed/1000, {
-//							css: {
-//								marginLeft : -carouselItemWidth
-//							},
-//							onComplete : function() {
-//
-//								//Initialize each item "margin-left"
-//								$curItems.css( 'margin-left', 0 );
-//
-//								//Clone the first element to the last position
-//								$curItems
-//									.first()
-//									.clone()
-//									.appendTo( $carousel );
-//
-//
-//								//Remove duplicate elements
-//								this.target.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'left' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//								
-//
-//							}
-//						});		
-//						
-//					
-//
-//
-//					} else {
-//
-//
-//
-//						TweenMax.to( $curItems.first(), carouselSpeed/1000, {
-//							css: {
-//								marginTop : -carouselItemHeight
-//							},
-//							onComplete : function() {
-//
-//								//Initialize each item "margin-top"
-//								$curItems.css( 'margin-top', 0 );
-//
-//								//Clone the first element to the last position
-//								$curItems
-//									.first()
-//									.clone()
-//									.appendTo( $carousel );
-//
-//
-//								//Remove duplicate elements
-//								this.target.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'left' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//
-//
-//							}
-//						});		
-//
-//
-//					}
-//
-//
-//
-//				}// end isEnd
-//				
-//				
-//
-//					
-//
-//			}
-//	
-//			
-//			
-//			
-//			/*
-//			 * Transition between items previously (right/down)
-//			 *
-//			 * @param  {Element} wrapper         - Wrapper of carousel.
-//			 * @param  {Element} items           - Items of carousel.
-//			 * @param  {?Element} curBtn          - The button that currently triggers the move.
-//			 * @param  {String} nextBtnStr      - The button ID or class that triggers the next move.
-//			 * @param  {String} prevBtnStr      - The button ID or class that triggers the previous move.
-//			 * @return {Void}
-//			 */
-//			function movePrev( wrapper, items, curBtn, nextBtnStr, prevBtnStr ) {
-//
-//		
-//				let $curWrapper = wrapper,  //Default: $carousel
-//					$curItems   = items,  //Default: $carouselItem
-//					isEnd       = false,
-//					$cloneItem  = null;
-//					
-//
-//				
-//				//Move to the end
-//				if ( 1 == $curItems.first().data( 'id' ) ) {
-//					isEnd = true;
-//				}
-//				if ( 2 == $curItems.first().data( 'id' ) && !carouselLoop ) {
-//					if ( curBtn ) curBtn.addClass( 'is-disabled' );
-//				}
-//				
-//				
-//				//Loop items
-//				if ( carouselLoop ) {
-//					isEnd = false;
-//				}
-//				
-//				//Reset prevents code from duplicate run
-//				const preventEvent = function() {
-//					if ( carouselNext && carouselNext != '' ) {
-//						$( carouselNext ).data( 'click', 0 ).removeClass( 'is-disabled' );
-//					}
-//
-//					if ( curBtn ) curBtn.data( 'click', 0 );
-//			
-//				};
-//				
-//				if ( !isEnd ) {
-//
-//
-//					//Avoid button repeated trigger
-//					if ( curBtn ) curBtn.data( 'click', 1 );
-//
-//
-//
-//					//Clone the first element to the last position
-//					if ( carouselDir == 'horizontal' ) {
-//
-//						$cloneItem = $curItems.last().clone();
-//
-//
-//						//Clone the last element to the first position
-//						$cloneItem
-//							.prependTo( $carousel )
-//							.css( 'margin-left', -carouselItemWidth + 'px' );
-//
-//
-//						TweenMax.to( $cloneItem, carouselSpeed/1000, {
-//							css: {
-//								marginLeft : 0
-//							},
-//							onComplete : function() {
-//
-//								//Remove duplicate elements
-//								$curItems
-//									.last()
-//									.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'right' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//								
-//						
-//
-//
-//
-//							}
-//						});
-//						
-//
-//
-//
-//					} else {
-//
-//
-//						$cloneItem = $curItems.last().clone();
-//
-//
-//						//Clone the last element to the first position
-//						$cloneItem
-//							.prependTo( $carousel )
-//							.css( 'margin-top', -carouselItemHeight + 'px' );
-//
-//
-//						TweenMax.to( $cloneItem, carouselSpeed/1000, {
-//							css: {
-//								marginTop : 0
-//							},
-//							onComplete : function() {
-//
-//								//Remove duplicate elements
-//								$curItems
-//									.last()
-//									.remove();
-//
-//
-//
-//								//Active the center item
-//								carouselActiveCenterItem( $curItems, 'right' );
-//
-//								//Reset prevents code from duplicate run
-//								preventEvent();
-//
-//
-//
-//							}
-//						});
-//
-//
-//
-//					}
-//
-//
-//
-//				}// end isEnd
-//				
-//				
-//
-//					
-//
-//			}
-//
-//
-//
-//
-//
-//		});		
-//		
-//    };
-//
-//    module.components.documentReady.push( module.MULTI_ITEMS_CAROUSEL.documentReady );
-//
-//	return class MULTI_ITEMS_CAROUSEL {
-//		constructor() {
-//			this.module = module;
-//		}
-//		
-//	};
-//	
-//})( UixModuleInstance, jQuery, window, document );

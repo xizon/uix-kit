@@ -24,7 +24,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.1.9';
+    module.ADVANCED_SLIDER.version       = '0.2.1';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		const $window          = $( window );
@@ -79,21 +79,14 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                     
 
                     //Get parameter configuration from the data-* attribute of HTML
-                    let dataAuto                 = $this.data( 'auto' ),
-                        dataTiming               = $this.data( 'timing' ),
-                        dataLoop                 = $this.data( 'loop' ),
-                        dataControlsPagination   = $this.data( 'controls-pagination' ),
+                    let dataControlsPagination   = $this.data( 'controls-pagination' ),
                         dataControlsArrows       = $this.data( 'controls-arrows' ),
                         dataDraggable            = $this.data( 'draggable' ),
                         dataDraggableCursor      = $this.data( 'draggable-cursor' ),                     
                         dataCountTotal           = $this.data( 'count-total' ),
                         dataCountCur             = $this.data( 'count-now' );
 
-                    
-                    
-                    if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
-                    if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
-                    if ( typeof dataLoop === typeof undefined ) dataLoop = false; 
+
                     if ( typeof dataControlsPagination === typeof undefined ) dataControlsPagination = '.uix-advanced-slider__pagination';
                     if ( typeof dataControlsArrows === typeof undefined || dataControlsArrows == false ) dataControlsArrows = '.uix-advanced-slider__arrows';
                     if ( typeof dataDraggable === typeof undefined ) dataDraggable = false;
@@ -102,7 +95,16 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                     if ( typeof dataCountCur === typeof undefined ) dataCountCur = 'p.count em.current';
 
                     
-               
+                    //Autoplay parameters
+                    let dataAuto                   = $this.data( 'auto' ),
+                        dataTiming                 = $this.data( 'timing' ),
+                        dataLoop                   = $this.data( 'loop' );  
+                    
+                    if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
+                    if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
+                    if ( typeof dataLoop === typeof undefined ) dataLoop = false; 
+                    
+                    
                     //Autoplay times
                     let playTimes;
                     //A function called "timer" once every second (like a digital watch).
@@ -267,10 +269,10 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		 */
         function addItemsToStage( slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID  ) {
 			
-			const $this                    = slider,
+			const $this                  = slider,
 				$items                   = $this.find( '.uix-advanced-slider__item' ),
 				$first                   = $items.first(),
-				itemsTotal               = $items.length;
+				itemTotal                = $items.length;
 	
 
 			//If arrows does not exist on the page, it will be added by default, 
@@ -286,7 +288,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 			
 		    //Prevent bubbling
-			if ( itemsTotal == 1 ) {
+			if ( itemTotal == 1 ) {
 				$( paginationID ).hide();
 				$( arrowsID ).hide();
 			}
@@ -305,7 +307,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			let _dot       = '',
 				_dotActive = '';
 			_dot += '<ul>';
-			for ( let i = 0; i < itemsTotal; i++ ) {
+			for ( let i = 0; i < itemTotal; i++ ) {
 
 				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -322,11 +324,13 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
                 const $btn = $( this );
                 if ( $btn.attr( 'aria-disabled' ) == 'true' ) return false;
                 $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'true' );
-                setTimeout( function() {
-                    $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' );
-                }, animDelay );
-
-
+                
+                $( paginationID ).find( 'li a' )
+                    .delay(animDelay)
+                    .queue(function(next) { $( paginationID ).find( 'li a' ).attr( 'aria-disabled', 'false' ); next(); }); 
+                
+                
+                //
 				if ( !$( this ).hasClass( 'is-active' ) ) {
 					
 
@@ -364,12 +368,14 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				e.preventDefault();
 
                 //Prevent buttons' events from firing multiple times
-                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
-                _prev.attr( 'aria-disabled', 'true' );
-                setTimeout( function() {
-                    _prev.attr( 'aria-disabled', 'false' );
-                }, animDelay ); 
+                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                $( this ).attr( 'aria-disabled', 'true' );
+
+                $( this )
+                    .delay(animDelay)
+                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
                 
+                //
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 
 				//Pause the auto play event
@@ -381,12 +387,14 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 				e.preventDefault();
                 
                 //Prevent buttons' events from firing multiple times
-                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
-                _next.attr( 'aria-disabled', 'true' );
-                setTimeout( function() {
-                    _next.attr( 'aria-disabled', 'false' );
-                }, animDelay );
+                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
+                $( this ).attr( 'aria-disabled', 'true' );
 
+                $( this )
+                    .delay(animDelay)
+                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+                
+                //
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 
 
@@ -446,7 +454,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 						//--- left
 						if ( deltaX >= 50) {
-							if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+							if ( $items.filter( '.is-active' ).index() < itemTotal - 1 ) _next.trigger( 'click' );
 						}
 						
 						//--- right
@@ -483,7 +491,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 							//left
 							if ( e.pageX < origin_mouse_x ) {
-								if ( $items.filter( '.is-active' ).index() < itemsTotal - 1 ) _next.trigger( 'click' );
+								if ( $items.filter( '.is-active' ).index() < itemTotal - 1 ) _next.trigger( 'click' );
 							}
 
 							//down

@@ -4,6 +4,12 @@
  * <!-- Navigation -->
  *************************************
  */
+/**
+ * module.NAVIGATION
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -23,7 +29,7 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 	
 	
 	module.NAVIGATION               = module.NAVIGATION || {};
-    module.NAVIGATION.version       = '0.0.8';
+    module.NAVIGATION.version       = '0.0.9';
 	module.NAVIGATION.documentReady = function( $ ) {
 
 

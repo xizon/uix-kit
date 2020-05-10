@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=fWwZVnZ0F0EQ8WLKTfMf"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=rBDZgShlsQZwgElYF5OA"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=fWwZVnZ0F0EQ8WLKTfMf" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=rBDZgShlsQZwgElYF5OA" />
 	<![endif]-->
 
 
@@ -233,7 +233,7 @@
 														<li><a href="advanced-slider-liquid2.html">Advanced Slider Liquid 2</a></li>
 														<li><a href="advanced-slider-liquid3.html">Advanced Slider Liquid 3</a></li>
 														<li><a href="advanced-slider-parallax.html">Advanced Slider Parallax</a></li>
-														<li><a href="advanced-content-slider.html">Advanced Content Slider</a></li>
+														<li><a href="hybrid-content-slider.html">Hybrid Content Slider</a><span class="uix-bubble">new</span></li>
 														<li><a href="3D-explosive-particle-slider.html">3D Explosive Particle Slider</a></li>
 														<li><a href="3D-shatter-slider.html">3D Shatter Slider</a></li>
                                                         <li><a href="3D-liquid-scrollspy-slider.html">3D Liquid Scrollspy Slider</a><span class="uix-bubble">new</span></li>
@@ -436,8 +436,8 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12">
-							<h3>Multiple Items Carousel</h3>
-							<p>A simple example that can customize JavaScript and CSS to meet your different needs.</p>
+							<h3>Horizontal Carousel</h3>
+							<p>Infinite scrolling and Drag-Drop</p>
 							<hr>
 							
 							
@@ -460,24 +460,30 @@
 							<div class="col-12">
 
 								<div role="slider" class="uix-multi-carousel" 
-									data-cus-carousel-dir="horizontal" 
-									data-cus-carousel-loop="false" 
-									data-cus-carousel-show="3" 
-									data-cus-carousel-speed="250" 
-									data-cus-carousel-draggable="true" 
-									data-cus-carousel-draggable-cursor="move" 
-									data-cus-carousel-next="#uix-multi-carousel__controls-1 .uix-multi-carousel__controls--next" 
-									data-cus-carousel-prev="#uix-multi-carousel__controls-1 .uix-multi-carousel__controls--prev">
+									data-dir="horizontal" 
+									data-loop="true" 
+									data-show="7" 
+									data-speed="250" 
+									data-draggable="true" 
+									data-draggable-cursor="move" 
+									data-next="#uix-multi-carousel__controls-1 .uix-multi-carousel__controls--next" 
+									data-prev="#uix-multi-carousel__controls-1 .uix-multi-carousel__controls--prev">
 
 									<div class="uix-multi-carousel__items">
 
-										<div>1</div>
-										<div>2</div>
-										<div>3</div>
-										<div>4</div>
-										<div>5</div>
-										<div>6</div>
-										<div>7</div>
+										<div class="uix-multi-carousel__item"><span>1</span></div>
+										<div class="uix-multi-carousel__item"><span>2</span></div>
+										<div class="uix-multi-carousel__item"><span>3</span></div>
+										<div class="uix-multi-carousel__item"><span>4</span></div>
+										<div class="uix-multi-carousel__item"><span>5</span></div>
+										<div class="uix-multi-carousel__item"><span>6</span></div>
+										<div class="uix-multi-carousel__item"><span>7</span></div>
+                                        <div class="uix-multi-carousel__item"><span>8</span></div>
+                                        <div class="uix-multi-carousel__item"><span>9</span></div>
+                                        <div class="uix-multi-carousel__item"><span>10</span></div>
+                                        <div class="uix-multi-carousel__item"><span>11</span></div>
+                                        <div class="uix-multi-carousel__item"><span>12</span></div>
+                                        
 
 									</div>
 
@@ -509,65 +515,16 @@
 			</section>
 
 
-			<section class="uix-spacing--s">
-				<div class="container">
-						<div class="row">
-							<div class="col-12">
-
-								<div class="uix-multi-carousel is-vertical" 
-									data-cus-carousel-dir="vertical" 
-									data-cus-carousel-loop="false" 
-									data-cus-carousel-show="5" 
-									data-cus-carousel-speed="250" 
-									data-cus-carousel-draggable="true" 
-									data-cus-carousel-draggable-cursor="move" 
-									data-cus-carousel-next="#uix-multi-carousel__controls-1_2 .uix-multi-carousel__controls--next" 
-									data-cus-carousel-prev="#uix-multi-carousel__controls-1_2 .uix-multi-carousel__controls--prev">
-
-									<div class="uix-multi-carousel__items">
-
-										<div>1</div>
-										<div>2</div>
-										<div>3</div>
-										<div>4</div>
-										<div>5</div>
-										<div>6</div>
-										<div>7</div>
-										<div>8</div>
-
-									</div>
-
-								</div>
-								<!-- /.uix-multi-carousel -->
-
-								<div class="uix-multi-carousel__controls is-vertical" id="uix-multi-carousel__controls-1_2">
-									<a href="javascript:void(0);" class="uix-multi-carousel__controls--prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-									<a href="javascript:void(0);" class="uix-multi-carousel__controls--next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-								</div>
-								<!-- /.uix-multi-carousel__controls -->
-
-
-							</div>
-							<!-- .col-12 end -->
-						</div>
-						<!-- .row end -->
-
-
-				</div>
-				<!-- .container end -->
-
-
-			</section>
-
-
+			
+			
 			<!-- Content 
 			====================================================== -->
-			<section>
+			<section class="uix-spacing--s uix-spacing--no-bottom">
 				<div class="container">
 					<div class="row">
 						<div class="col-12">
-							<h3>Multiple Items Carousel (Loop)</h3>
-							<p>Simply modify the <code>data-*</code> property of html.</p>
+							<h3>Vertical Carousel</h3>
+							<p>Infinite scrolling and Drag-Drop</p>
 							<hr>
 							
 							
@@ -580,10 +537,89 @@
 
 			</section>
 			
-			
-			
-			
+            
+            
+		   <!-- Content 
+			====================================================== -->
+            <section class="uix-spacing--s">
+                <div class="container">
+                        <div class="row">
+                            <div class="col-12">
 
+                                <div class="uix-multi-carousel is-vertical" 
+                                    data-dir="vertical" 
+                                    data-loop="true" 
+                                    data-show="5" 
+                                    data-speed="250" 
+                                    data-draggable="true" 
+                                    data-draggable-cursor="move" 
+                                    data-next="#uix-multi-carousel__controls-1_2 .uix-multi-carousel__controls--next" 
+                                    data-prev="#uix-multi-carousel__controls-1_2 .uix-multi-carousel__controls--prev">
+
+                                    <div class="uix-multi-carousel__items">
+
+										<div class="uix-multi-carousel__item"><span>1</span></div>
+										<div class="uix-multi-carousel__item"><span>2</span></div>
+										<div class="uix-multi-carousel__item"><span>3</span></div>
+										<div class="uix-multi-carousel__item"><span>4</span></div>
+										<div class="uix-multi-carousel__item"><span>5</span></div>
+										<div class="uix-multi-carousel__item"><span>6</span></div>
+										<div class="uix-multi-carousel__item"><span>7</span></div>
+                                        <div class="uix-multi-carousel__item"><span>8</span></div>
+                                        <div class="uix-multi-carousel__item"><span>9</span></div>
+                                        <div class="uix-multi-carousel__item"><span>10</span></div>
+                                        <div class="uix-multi-carousel__item"><span>11</span></div>
+                                        <div class="uix-multi-carousel__item"><span>12</span></div>
+
+                                    </div>
+
+                                </div>
+                                <!-- /.uix-multi-carousel -->
+
+                                <div class="uix-multi-carousel__controls is-vertical" id="uix-multi-carousel__controls-1_2">
+                                    <a href="javascript:void(0);" class="uix-multi-carousel__controls--prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0);" class="uix-multi-carousel__controls--next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                </div>
+                                <!-- /.uix-multi-carousel__controls -->
+
+
+                            </div>
+                            <!-- .col-12 end -->
+                        </div>
+                        <!-- .row end -->
+
+
+                </div>
+                <!-- .container end -->
+
+
+            </section>
+
+
+	
+
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Horizontal Carousel</h3>
+							<p>Not an infinite loop</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+            
+			
 
 
 		   <!-- Content 
@@ -594,24 +630,29 @@
 							<div class="col-12">
 
 								<div role="slider" class="uix-multi-carousel" 
-									data-cus-carousel-dir="horizontal" 
-									data-cus-carousel-loop="true" 
-									data-cus-carousel-show="3" 
-									data-cus-carousel-speed="250" 
-									data-cus-carousel-draggable="false" 
-									data-cus-carousel-draggable-cursor="move" 
-									data-cus-carousel-next="#uix-multi-carousel__controls-2 .uix-multi-carousel__controls--next" 
-									data-cus-carousel-prev="#uix-multi-carousel__controls-2 .uix-multi-carousel__controls--prev">
+									data-dir="horizontal" 
+									data-loop="false" 
+									data-show="7" 
+									data-speed="250" 
+									data-draggable="true" 
+									data-draggable-cursor="move" 
+									data-next="#uix-multi-carousel__controls-2 .uix-multi-carousel__controls--next" 
+									data-prev="#uix-multi-carousel__controls-2 .uix-multi-carousel__controls--prev">
 
 									<div class="uix-multi-carousel__items">
 
-										<div>1</div>
-										<div>2</div>
-										<div>3</div>
-										<div>4</div>
-										<div>5</div>
-										<div>6</div>
-										<div>7</div>
+										<div class="uix-multi-carousel__item"><span>1</span></div>
+										<div class="uix-multi-carousel__item"><span>2</span></div>
+										<div class="uix-multi-carousel__item"><span>3</span></div>
+										<div class="uix-multi-carousel__item"><span>4</span></div>
+										<div class="uix-multi-carousel__item"><span>5</span></div>
+										<div class="uix-multi-carousel__item"><span>6</span></div>
+										<div class="uix-multi-carousel__item"><span>7</span></div>
+                                        <div class="uix-multi-carousel__item"><span>8</span></div>
+                                        <div class="uix-multi-carousel__item"><span>9</span></div>
+                                        <div class="uix-multi-carousel__item"><span>10</span></div>
+                                        <div class="uix-multi-carousel__item"><span>11</span></div>
+                                        <div class="uix-multi-carousel__item"><span>12</span></div>
 
 									</div>
 
@@ -640,31 +681,63 @@
 			</section>
 
 
+            
+            
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Vertical Carousel</h3>
+							<p>Not an infinite loop + Disable Drag-Drop</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+            
+			
+
+
+		   <!-- Content 
+			====================================================== -->
 			<section class="uix-spacing--s">
 				<div class="container">
 						<div class="row">
 							<div class="col-12">
 
 								<div class="uix-multi-carousel is-vertical" 
-									data-cus-carousel-dir="vertical" 
-									data-cus-carousel-loop="true" 
-									data-cus-carousel-show="5" 
-									data-cus-carousel-speed="250" 
-									data-cus-carousel-draggable="false" 
-									data-cus-carousel-draggable-cursor="move" 
-									data-cus-carousel-next="#uix-multi-carousel__controls-2_2 .uix-multi-carousel__controls--next" 
-									data-cus-carousel-prev="#uix-multi-carousel__controls-2_2 .uix-multi-carousel__controls--prev">
+									data-dir="vertical" 
+									data-loop="false" 
+									data-show="5" 
+									data-speed="250" 
+									data-draggable="false" 
+									data-draggable-cursor="move" 
+									data-next="#uix-multi-carousel__controls-2_2 .uix-multi-carousel__controls--next" 
+									data-prev="#uix-multi-carousel__controls-2_2 .uix-multi-carousel__controls--prev">
 
 									<div class="uix-multi-carousel__items">
 
-										<div>1</div>
-										<div>2</div>
-										<div>3</div>
-										<div>4</div>
-										<div>5</div>
-										<div>6</div>
-										<div>7</div>
-										<div>8</div>
+										<div class="uix-multi-carousel__item"><span>1</span></div>
+										<div class="uix-multi-carousel__item"><span>2</span></div>
+										<div class="uix-multi-carousel__item"><span>3</span></div>
+										<div class="uix-multi-carousel__item"><span>4</span></div>
+										<div class="uix-multi-carousel__item"><span>5</span></div>
+										<div class="uix-multi-carousel__item"><span>6</span></div>
+										<div class="uix-multi-carousel__item"><span>7</span></div>
+                                        <div class="uix-multi-carousel__item"><span>8</span></div>
+                                        <div class="uix-multi-carousel__item"><span>9</span></div>
+                                        <div class="uix-multi-carousel__item"><span>10</span></div>
+                                        <div class="uix-multi-carousel__item"><span>11</span></div>
+                                        <div class="uix-multi-carousel__item"><span>12</span></div>
 
 									</div>
 
@@ -775,14 +848,14 @@
 	============================================= -->
 	
 	<script>
-		var REVISION     = "4.2.5",
+		var REVISION     = "4.2.6",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=fWwZVnZ0F0EQ8WLKTfMf"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=rBDZgShlsQZwgElYF5OA"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

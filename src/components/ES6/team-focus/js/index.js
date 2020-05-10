@@ -3,6 +3,12 @@
  * <!-- Team Focus -->
  *************************************
  */
+/**
+ * module.TEAM_FOCUS
+ * 
+ * @requires ./src/components/ES5/_plugins-GSAP
+ */
+
 import {
     templateUrl,
     homeUrl,
@@ -24,7 +30,7 @@ export const TEAM_FOCUS = ( ( module, $, window, document ) => {
 	
 	
     module.TEAM_FOCUS               = module.TEAM_FOCUS || {};
-    module.TEAM_FOCUS.version       = '0.0.3';
+    module.TEAM_FOCUS.version       = '0.0.4';
     module.TEAM_FOCUS.documentReady = function( $ ) {
 
 		const teamFocusContent = '.uix-team-focus',
