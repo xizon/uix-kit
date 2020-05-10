@@ -3,7 +3,7 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.6
+ * ## Version             :  4.2.62
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  May 10, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -82,7 +82,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c19b77c80bba53b0091e";
+/******/ 	var hotCurrentHash = "4721617c106be02edd7f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -3281,6 +3281,8 @@ window.MAIN = null;
       if (UixModuleInstance.TEXT_EFFECT) UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
 
       if (UixModuleInstance.TIMELINE) UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
+
+      if (UixModuleInstance.HYBRID_CONTENT_SLIDER) UixModuleInstance.HYBRID_CONTENT_SLIDER.pageLoaded(); //Hybrid Content Slider
       //----
 
       if (UixModuleInstance.MAIN) UixModuleInstance.MAIN.documentReady($); //Theme Scripts
@@ -3316,8 +3318,6 @@ window.MAIN = null;
       if (UixModuleInstance.DROPDOWN_MENU2) UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 
       if (UixModuleInstance.ACCORDION) UixModuleInstance.ACCORDION.documentReady($); //Accordion
-
-      if (UixModuleInstance.HYBRID_CONTENT_SLIDER) UixModuleInstance.HYBRID_CONTENT_SLIDER.documentReady($); //Hybrid Content Slider
 
       if (UixModuleInstance.GALLERY) UixModuleInstance.GALLERY.documentReady($); //Gallery
 

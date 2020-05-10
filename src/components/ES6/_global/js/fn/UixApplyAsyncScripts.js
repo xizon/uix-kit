@@ -63,6 +63,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.STICKY_EL )                    UixModuleInstance.STICKY_EL.pageLoaded(); //Sticky Elements
 			if ( UixModuleInstance.TEXT_EFFECT )                  UixModuleInstance.TEXT_EFFECT.pageLoaded(); //Text effect
 			if ( UixModuleInstance.TIMELINE )                     UixModuleInstance.TIMELINE.pageLoaded(); //Timeline
+            if ( UixModuleInstance.HYBRID_CONTENT_SLIDER )        UixModuleInstance.HYBRID_CONTENT_SLIDER.pageLoaded(); //Hybrid Content Slider
 
 
 
@@ -84,7 +85,6 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.DROPDOWN_MENU )                UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
 			if ( UixModuleInstance.DROPDOWN_MENU2 )               UixModuleInstance.DROPDOWN_MENU2.documentReady($); //Dropdown Menu2
 			if ( UixModuleInstance.ACCORDION )                    UixModuleInstance.ACCORDION.documentReady($); //Accordion
-			if ( UixModuleInstance.HYBRID_CONTENT_SLIDER )      UixModuleInstance.HYBRID_CONTENT_SLIDER.documentReady($); //Hybrid Content Slider
 			if ( UixModuleInstance.GALLERY )                      UixModuleInstance.GALLERY.documentReady($); //Gallery
 			if ( UixModuleInstance.IMAGE_SHAPES )                 UixModuleInstance.IMAGE_SHAPES.documentReady($); //Image Shapes
 			if ( UixModuleInstance.PERIODICAL_SCROLL )            UixModuleInstance.PERIODICAL_SCROLL.documentReady($); //Periodical Scroll
