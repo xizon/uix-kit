@@ -563,9 +563,6 @@ server.listen( globs.port, "localhost", function (err, result) {
 /*! 
  *************************************
  * Process of processing files after compilation
- * 
- * Step 1 => read targetJSFile
- * Step 2 => read all core css and js files and build a table of contents (TOC)
  *************************************
  */
 const compilerDelayTimePer = 50; //The time it takes to load each js (ms)
@@ -601,80 +598,67 @@ if ( fs.existsSync( compilerCoreJSsFile ) ) {
 
             setTimeout ( () => {
                 
-       
-                // Step 1 => read targetJSFile
+                // Read all core css and js files and build a table of contents
                 //---------------------------------------------------------------------
-                //Prevent JS from adding code repeatedly
-                fs.readFile( targetJSFile, 'utf8', function(err, data ){
+                // Build a table of contents (TOC)
+                tocBuildedFiles.map( ( filepath ) => {
+
+                    if ( fs.existsSync( filepath ) ) {
+
+                        fs.readFile( filepath, 'utf8', function( err, content ) {
+
+                            if ( err ) throw err;
+
+                            const curCon  = content.toString(),
+                                  newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
 
-                    if (err) throw err;
+                            //is the matched group if found
+                            if ( newtext && newtext.length > 0 ) {  
 
-                    // Step 2 => read all core css and js files and build a table of contents
-                    //---------------------------------------------------------------------
-                    // Build a table of contents (TOC)
-                    tocBuildedFiles.map( ( filepath ) => {
+                                let curToc = '';
 
-                        if ( fs.existsSync( filepath ) ) {
+                                for ( let p = 0; p < newtext.length; p++ ) {
 
-                            fs.readFile( filepath, 'utf8', function( err, content ) {
+                                    let curIndex = p + 1,
+                                        newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
 
-                                if ( err ) throw err;
-
-                                const curCon  = content.toString(),
-                                      newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
-
-
-                                //is the matched group if found
-                                if ( newtext && newtext.length > 0 ) {  
-
-                                    let curToc = '';
-
-                                    for ( let p = 0; p < newtext.length; p++ ) {
-
-                                        let curIndex = p + 1,
-                                            newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
-
-                                        if ( p > 0 ) {
-                                            curToc += '    ' + curIndex + '.' + newStr + '\n';
-                                        } else {
-                                            curToc +=  curIndex + '.' + newStr + '\n';
-                                        }
-
+                                    if ( p > 0 ) {
+                                        curToc += '    ' + curIndex + '.' + newStr + '\n';
+                                    } else {
+                                        curToc +=  curIndex + '.' + newStr + '\n';
                                     }
-
-                                    //Replace a string in a file with nodejs
-                                    const resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-                                    fs.writeFile( filepath, resultData, 'utf8', function (err) {
-
-                                        if ( err ) {
-                                            console.log(colors.fg.Red, err, colors.Reset);
-                                            return;
-                                        }
-                                        //file written successfully	
-                                        console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${tocBuildedTotal})`, colors.Reset);
-
-                                        tocBuildedIndex++;
-
-
-                                    });
-
 
                                 }
 
+                                //Replace a string in a file with nodejs
+                                const resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
 
-                            });// fs.readFile( filepath ...
+                                fs.writeFile( filepath, resultData, 'utf8', function (err) {
+
+                                    if ( err ) {
+                                        console.log(colors.fg.Red, err, colors.Reset);
+                                        return;
+                                    }
+                                    //file written successfully	
+                                    console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${tocBuildedTotal})`, colors.Reset);
+
+                                    tocBuildedIndex++;
 
 
-                        }//endif fs.existsSync( filepath ) 
+                                });
 
 
-                    });	//.map( ( filepath )...
+                            }
 
 
-                }); //fs.readFile( targetJSFile ...
+                        });// fs.readFile( filepath ...
 
+
+                    }//endif fs.existsSync( filepath ) 
+
+
+                });	//.map( ( filepath )...
 
 
 
@@ -700,5 +684,6 @@ if ( fs.existsSync( compilerCoreJSsFile ) ) {
  *************************************
  */
 module.exports = webpackConfig;
+
 
 
