@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Video Background - @@{website_title}</title>	
+	@@include('./src/components/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container uix-header__container--overlay">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/_global/include-brand.html')
+                        
+                        @@include('./src/components/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+      
+      
+		<main id="uix-maincontent">
+			
+			<!-- Content   
+			====================================================== -->
+			<div class="uix-video__container-bg" data-embed-video-wrapper="true">
+
+				  <div class="uix-video" data-embed-video-width="auto" data-embed-video-height="auto" data-embed-video-controls="false" data-embed-video-autoplay="true" data-embed-video-loop="true">
+					  <video id="video-demo-1" class="video-js vjs-default-skin" controls poster="assets/videos/480x270/demo.jpg">
+						  <source src="assets/videos/480x270/demo.mp4" type="video/mp4">
+						  <source src="assets/videos/480x270/demo.webm" type="video/webm">
+					  </video>
+				  </div>
+		   </div>
+
+
+
+
+			
+		</main>
+		
+		
+		   
+        
+        
+        @@include('./src/components/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/_global/include-footer.html')
+

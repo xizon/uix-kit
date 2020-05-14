@@ -143,7 +143,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 
 **b) How to use modules?**
 
-You could custom modules of what to import in `src/components/ES6/_app-load.js` and `src/components/ES6/_app-load-rtl.js`. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the `webpack.config.js` according to the imported modules you want.
+You could custom modules of what to import in `src/components/_app-load.js` and `src/components/_app-load-rtl.js`. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the `webpack.config.js` according to the imported modules you want.
 
 
 **c) Site Info Configuration**
@@ -236,12 +236,24 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
 	<script>
-	var REVISION = "1.0.0",
-	APP_ROOTPATH = {
-		"templateUrl": "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
-		"homeUrl": "", //Eg. https://uiux.cc
-	"ajaxUrl": "" //Eg. https://uiux.cc/wp-admin/admin-ajax.php
-	};
+        /*
+        * Some global vars. DO NOT change these variables names. 
+        * These variables are being used in `uix-kit.min.js`.
+        *    
+        */ 
+		var REVISION     = "1.0.0",
+			APP_ROOTPATH = {
+				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
+				"homeUrl"     : "",  //Eg. https://uiux.cc
+				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+			};
+        
+
+        /*
+        * Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+        *    
+        */
+        window.$ = window.jQuery;
 	</script>
 	<script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
 	
@@ -288,13 +300,13 @@ uix-kit/
 │   ├── screenshots/  --------------------- # Screenshots
 │   └── grid/ ----------------------------- # PSD grid system
 ├── src/
+│   ├── third-party-plugins/  ------------------------- # Third-party plugins
 │   ├── components/
-│   │   ├── ES5/  ------------------------- # Third-party plugins adopt pure file merger and do not import and export
-│   │   ├── ES6/_app-load.js  ------------- # Import your modules to be used
-│   │   ├── ES6/_app-load-rtl.js  --------- # Import your RTL modules to be used
-│   │   ├── ES6/_global/ ------------------ # Generic modules
-│   │   ├── ES6/_main/  ------------------- # Customization site file directory (for secondary or new website development)
-│   │   └── ES6/*/  ----------------------- # Core functional modules
+│   │   ├── _app-load.js  ------------- # Import your modules to be used
+│   │   ├── _app-load-rtl.js  --------- # Import your RTL modules to be used
+│   │   ├── _global/ ------------------ # Generic modules
+│   │   ├── _main/  ------------------- # Customization site file directory (for secondary or new website development)
+│   │   └── */  ----------------------- # Core functional modules
 ├── examples/                                
 │   ├── *.html  --------------------------- # HTML templates
 │   └── assets/  -------------------------- # Static resource directory
@@ -322,7 +334,7 @@ You can download the corresponding .PSD grid files.
 
 ## How to Create a Custom Module
 
-Assuming you are in your application's root directory and want to create components inside `src/components/ES6/` as you show above. You can create a new directory and name it **demo-module**. 
+Assuming you are in your application's root directory and want to create components inside `src/components/` as you show above. You can create a new directory and name it **demo-module**. 
 
 &#128071;&#128071;&#128071;
 
@@ -335,14 +347,13 @@ Here’s a sample custom module directory structure, I’ve included some exampl
 uix-kit/
 ├── src/
 │   ├── components/
-│   │   └── ES6/
-│   │       ├── _app-load.js
-│   │       ├── _app-load-rtl.js
-│   │       └── demo-module/
-│   │                ├── scss/*.scss
-│   │                ├── scss-rtl/*.scss
-│   │                ├── js/*.js
-│   │                └── *.html
+│   │     ├── _app-load.js
+│   │     ├── _app-load-rtl.js
+│   │     └── demo-module/
+│   │              ├── scss/*.scss
+│   │              ├── scss-rtl/*.scss
+│   │              ├── js/*.js
+│   │              └── *.html
 └──
 ```
 
@@ -350,7 +361,7 @@ uix-kit/
 **Step 1.** Inside that folder create two sub folders: `/scss` and `/js`. If you need to support RTL, create another `/scss-rtl`.
 
 
-**Step 2.** Create a SASS/SCSS file. Go into the `src/components/ES6/demo-module/scss/` folder and create a file called: `_style.scss`. Please import global variables or functions. Here's an example:
+**Step 2.** Create a SASS/SCSS file. Go into the `src/components/demo-module/scss/` folder and create a file called: `_style.scss`. Please import global variables or functions. Here's an example:
 
 ```sh
 /* ====================================================== 
@@ -364,7 +375,7 @@ uix-kit/
 }
 ```
 
-**Step 2-2 (Optional).** Alright, so if you need to support RTL. You need create a new SASS/SCSS file. Go into the `src/components/ES6/demo-module/scss-rtl/` folder and create a file called: `_style.scss`. Like this:
+**Step 2-2 (Optional).** Alright, so if you need to support RTL. You need create a new SASS/SCSS file. Go into the `src/components/demo-module/scss-rtl/` folder and create a file called: `_style.scss`. Like this:
 
 ```sh
 /* ====================================================== 
@@ -378,9 +389,9 @@ uix-kit/
 ```
 
 
-**Step 3.** Create a JS file. Go into the `src/components/ES6/demo-module/js/` folder and create a file called: `index.js`. In order to make it work we need to import the global variables or functions in file index.js. 
+**Step 3.** Create a JS file. Go into the `src/components/demo-module/js/` folder and create a file called: `index.js`. In order to make it work we need to import the global variables or functions in file index.js. 
 
-Simultaneously, Now you’re ready to import your Stylesheets to use with this component. Import SASS/SCSS file in `src/components/ES6/demo-module/js/index.js`.
+Simultaneously, Now you’re ready to import your Stylesheets to use with this component. Import SASS/SCSS file in `src/components/demo-module/js/index.js`.
 
 Like this:.
 
@@ -448,7 +459,7 @@ export const DEMO_MODULE = ( ( module, $, window, document ) => {
 
 
 
-**Step 4.** So far, to dynamically import the module you just created in `src/components/ES6/_app-load.js`.  The simplest version directly imports the default:
+**Step 4.** So far, to dynamically import the module you just created in `src/components/_app-load.js`.  The simplest version directly imports the default:
 
 
 ```sh
@@ -456,7 +467,7 @@ import DEMO_MODULE from '@uixkit/core/demo-module/js';
 ```
 
 
-**Step 4-2  (Optional).** If you need to support RTL, in `src/components/ES6/_app-load-rtl.js`.  like this:
+**Step 4-2  (Optional).** If you need to support RTL, in `src/components/_app-load-rtl.js`.  like this:
 
 
 ```sh
@@ -475,12 +486,12 @@ These RTL modules do not need JavaScript.
 <head>
 	<meta charset="@@{website_charset}" />
 	<title>Demo Module - @@{website_title}</title>	
-	@@include('./src/components/ES6/_global/include-header.html')
+	@@include('./src/components/_global/include-header.html')
 </head>  
 <body class="page">
      
-    @@include('./src/components/ES6/_global/include-loader.html')
-    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
  
     <div class="uix-wrapper">
         <!-- Header Area
@@ -488,8 +499,8 @@ These RTL modules do not need JavaScript.
         <header class="uix-header__container">
              <div class="uix-header">
                  <div class="container">
-                        @@include('./src/components/ES6/_global/include-brand.html')
-                        @@include('./src/components/ES6/_global/include-menu.html')
+                        @@include('./src/components/_global/include-brand.html')
+                        @@include('./src/components/_global/include-menu.html')
                   </div>
                   <!-- .container end -->
                   
@@ -526,12 +537,12 @@ These RTL modules do not need JavaScript.
 			</section>   
 		</main> 
         
-        @@include('./src/components/ES6/_global/include-copyright.html')
+        @@include('./src/components/_global/include-copyright.html')
         
     </div>
     <!-- .uix-wrapper end -->
         
-    @@include('./src/components/ES6/_global/include-footer.html')
+    @@include('./src/components/_global/include-footer.html')
 ```
 
 **Note &#128161;:** You could call a specified module script which is commonly used for callbacks of AJAX request from Asynchronous method. The demo code is here:

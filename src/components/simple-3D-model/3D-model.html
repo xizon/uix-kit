@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>3D Model - @@{website_title}</title>	
+	@@include('./src/components/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/_global/include-brand.html')
+                        
+                        @@include('./src/components/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+		<div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+      
+		
+		<main id="uix-maincontent">
+			
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>3D Model</h3>
+							<p>Model created by Fongoose. https://sketchfab.com/fongoose </p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+			
+			
+			<!-- Content 
+			====================================================== -->
+			<canvas style="margin-top: -5rem;" id="3D-model-canvas" data-texture-src="assets/models/obj/project.png" data-model-src="assets/models/obj/project.obj"></canvas>
+			
+			
+		</main>
+		
+		
+		   
+		
+        @@include('./src/components/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/_global/include-footer.html')
+

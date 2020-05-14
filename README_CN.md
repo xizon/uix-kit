@@ -86,13 +86,13 @@ uix-kit/
 │   ├── screenshots/  --------------------- # 截图
 │   └── grid/ ----------------------------- # PSD版本网格系统，辅助UI设计
 ├── src/
+│   ├── third-party-plugins/  ------------------------- # 第三方插件
 │   ├── components/
-│   │   ├── ES5/  ------------------------- # 第三方插件(直接合并，不经过ES6的编译)
-│   │   ├── ES6/_app-load.js  ------------- # 网站需要使用的模块导入入口文件
-│   │   ├── ES6/_app-load-rtl.js  --------- # 网站需要使用的RTL模块导入入口文件
-│   │   ├── ES6/_global/ ------------------ # 网站通用代码模块
-│   │   ├── ES6/_main/  ------------------- # 网站定制化文件目录【用于二次开发或者新网站开发。网站新的HTML模板和其它样式脚本可以直接放到此文件夹】
-│   │   └── ES6/*/  ----------------------- # 网站通用功能模块【一般不需要去修改它们，可以根据情况修改其样式和脚本】
+│   │   ├── _app-load.js  ------------- # 网站需要使用的模块导入入口文件
+│   │   ├── _app-load-rtl.js  --------- # 网站需要使用的RTL模块导入入口文件
+│   │   ├── _global/ ------------------ # 网站通用代码模块
+│   │   ├── _main/  ------------------- # 网站定制化文件目录【用于二次开发或者新网站开发。网站新的HTML模板和其它样式脚本可以直接放到此文件夹】
+│   │   └── */  ----------------------- # 网站通用功能模块【一般不需要去修改它们，可以根据情况修改其样式和脚本】
 ├── examples/                                
 │   ├── *.html  --------------------------- # 编译后的纯HTML模板，用于后端整合或者演示
 │   └── assets/  -------------------------- # 静态资源目录
@@ -116,7 +116,7 @@ uix-kit/
 
 3. 当你需要配置脚手架和网站基础信息和结构的时候，请直接编辑 `package.json` 文件。
 
-4. 网站的定制化模块功能在 `src/components/ES6/_global` 和 `src/components/ES6/_main` 中，`src/components/ES6/*` 其它模块是通用型的功能模块。HTML文件将会自动打包生成到 `examples/` 文件夹中，核心JavaScript和CSS文件会自动打包到 `dist/` 文件夹里
+4. 网站的定制化模块功能在 `src/components/_global` 和 `src/components/_main` 中，`src/components/*` 其它模块是通用型的功能模块。HTML文件将会自动打包生成到 `examples/` 文件夹中，核心JavaScript和CSS文件会自动打包到 `dist/` 文件夹里
 
 不建议跳过开发模式直接修改examples/ 文件夹里的文件，因为代码量非常大，很难去维护和定制各种动画、交互、结构。
 
@@ -169,7 +169,7 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 
 ## 如何创建一个新的自定义模块?
 
-假设你下载的文件位于根目录中，并且想要在`src/components/ES6/`目录中创建模块。 您可以创建一个新目录并将其命名为**demo-module**。
+假设你下载的文件位于根目录中，并且想要在`src/components/`目录中创建模块。 您可以创建一个新目录并将其命名为**demo-module**。
 
 &#128071;&#128071;&#128071;
 
@@ -181,14 +181,13 @@ $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 uix-kit/
 ├── src/
 │   ├── components/
-│   │   └── ES6/
-│   │       ├── _app-load.js
-│   │       ├── _app-load-rtl.js
-│   │       └── demo-module/
-│   │                ├── scss/*.scss
-│   │                ├── scss-rtl/*.scss
-│   │                ├── js/*.js
-│   │                └── *.html
+│   │     ├── _app-load.js
+│   │     ├── _app-load-rtl.js
+│   │     └── demo-module/
+│   │              ├── scss/*.scss
+│   │              ├── scss-rtl/*.scss
+│   │              ├── js/*.js
+│   │              └── *.html
 └──
 ```
 
@@ -196,7 +195,7 @@ uix-kit/
 **Step 1.** 在新创建的目录中新建两个文件夹: `/scss` 和 `/js` 用来存放JS和CSS代码. 如果你需要网站支持RTL布局, 则再创建一个文件夹 `/scss-rtl`.
 
 
-**Step 2.** 进入目录`src/components/ES6/demo-module/scss/`，创建一个SASS/SCSS文件并命名为: `_style.scss`. 记得在文件中导入全局变量和函数，下面是示例代码:
+**Step 2.** 进入目录`src/components/demo-module/scss/`，创建一个SASS/SCSS文件并命名为: `_style.scss`. 记得在文件中导入全局变量和函数，下面是示例代码:
 
 ```sh
 /* ====================================================== 
@@ -210,7 +209,7 @@ uix-kit/
 }
 ```
 
-**Step 2-2 (可选的).** 当然，如果你还需要支持RTL布局.再创建另一个SASS/SCSS文件到目录 `src/components/ES6/demo-module/scss-rtl/` 中，同样命名为 `_style.scss`. 下面是示例代码:
+**Step 2-2 (可选的).** 当然，如果你还需要支持RTL布局.再创建另一个SASS/SCSS文件到目录 `src/components/demo-module/scss-rtl/` 中，同样命名为 `_style.scss`. 下面是示例代码:
 
 ```sh
 /* ====================================================== 
@@ -224,9 +223,9 @@ uix-kit/
 ```
 
 
-**Step 3.** 进入目录`src/components/ES6/demo-module/js/` 创建一个JAVASCRIPT文件 `index.js`. 为了使其正确工作，需要导入网站全局变量和函数到 index.js 中. 
+**Step 3.** 进入目录`src/components/demo-module/js/` 创建一个JAVASCRIPT文件 `index.js`. 为了使其正确工作，需要导入网站全局变量和函数到 index.js 中. 
 
-同时，你可以将SASS/SCSS文件一起导入到 `src/components/ES6/demo-module/js/index.js` 文件中，使样式生效.
+同时，你可以将SASS/SCSS文件一起导入到 `src/components/demo-module/js/index.js` 文件中，使样式生效.
 
 代码如下:.
 
@@ -294,7 +293,7 @@ export const DEMO_MODULE = ( ( module, $, window, document ) => {
 
 
 
-**Step 4.** 最后，你还需要动态导入刚刚创建好的模块到 `src/components/ES6/_app-load.js` 文件中. 下面是示例代码:
+**Step 4.** 最后，你还需要动态导入刚刚创建好的模块到 `src/components/_app-load.js` 文件中. 下面是示例代码:
 
 
 ```sh
@@ -302,7 +301,7 @@ import DEMO_MODULE from '@uixkit/core/demo-module/js';
 ```
 
 
-**Step 4-2  (可选的).** 如果需要网站支持RTL布局, 再 `src/components/ES6/_app-load-rtl.js` 中导入样式即可:
+**Step 4-2  (可选的).** 如果需要网站支持RTL布局, 再 `src/components/_app-load-rtl.js` 中导入样式即可:
 
 
 ```sh
@@ -321,12 +320,12 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
 <head>
 	<meta charset="@@{website_charset}" />
 	<title>模块标题 - @@{website_title}</title>	
-	@@include('./src/components/ES6/_global/include-header.html')
+	@@include('./src/components/_global/include-header.html')
 </head>  
 <body class="page">
      
-    @@include('./src/components/ES6/_global/include-loader.html')
-    @@include('./src/components/ES6/_global/include-toggle-trigger.html')
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
  
     <div class="uix-wrapper">
         <!-- Header Area
@@ -334,8 +333,8 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
         <header class="uix-header__container">
              <div class="uix-header">
                  <div class="container">
-                        @@include('./src/components/ES6/_global/include-brand.html')
-                        @@include('./src/components/ES6/_global/include-menu.html')
+                        @@include('./src/components/_global/include-brand.html')
+                        @@include('./src/components/_global/include-menu.html')
                   </div>
                   <!-- .container end -->
                   
@@ -372,12 +371,12 @@ import '@uixkit/core/demo-module/scss-rtl/_style.scss';
 			</section>   
 		</main> 
         
-        @@include('./src/components/ES6/_global/include-copyright.html')
+        @@include('./src/components/_global/include-copyright.html')
         
     </div>
     <!-- .uix-wrapper end -->
         
-    @@include('./src/components/ES6/_global/include-footer.html')
+    @@include('./src/components/_global/include-footer.html')
 ```
 
 

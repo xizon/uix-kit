@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=VwQndHL26ZPMbW3Ar4q1"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=mTGM3VZIN8L4hqYUCHKm"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=VwQndHL26ZPMbW3Ar4q1" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=mTGM3VZIN8L4hqYUCHKm" />
 	<![endif]-->
 
 
@@ -652,14 +652,26 @@ viewBox=&quot;0 0 300 300&quot;&gt;<br>
 	============================================= -->
 	
 	<script>
-		var REVISION     = "4.2.62",
+        /*
+        * Some global vars. DO NOT change these variables names. 
+        * These variables are being used in `uix-kit.min.js`.
+        *    
+        */ 
+		var REVISION     = "4.2.7",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
 				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
 			};
+        
+
+        /*
+        * Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+        *    
+        */
+        window.$ = window.jQuery;
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=VwQndHL26ZPMbW3Ar4q1"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=mTGM3VZIN8L4hqYUCHKm"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

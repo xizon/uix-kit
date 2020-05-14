@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Dropdown Menu - @@{website_title}</title>	
+	@@include('./src/components/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
+    
+    
+
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/_global/include-brand.html')
+                        
+                        @@include('./src/components/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+      
+		
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Dropdown Menu</h3>
+							<p>Click the hyperlink to display the drop-down menu</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+			
+
+		   <!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<details class="uix-details-reset uix-dropdown-menu">
+									<summary><i class="fa fa-cog" aria-hidden="true"></i> <span>Click Me</span></summary>
+									<input type="hidden" value="boy">
+									<ul>
+										<li><a data-value="boy" data-display-text="Boy(ok)" href="#1">Boy</a></li>
+										<li><a data-value="girl" data-display-text="Girl(ok)" href="#2">Girl</a></li>
+										<li><a data-value="" data-display-text="" href="#3">Don't Change Text</a></li>
+									</ul>
+								</details><!-- /.uix-dropdown-menu -->
+
+
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+			
+		</main>
+       
+     
+			
+        
+        
+        @@include('./src/components/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/_global/include-footer.html')
+

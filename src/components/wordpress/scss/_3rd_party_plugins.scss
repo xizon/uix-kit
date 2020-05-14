@@ -1,0 +1,733 @@
+/* ====================================================== 
+   <!-- 3rd Party Plugins -->     
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+
+/*
+ * 1. Disqus
+ * 2. Captcha
+ * 3. Easy Digital Downloads (WP Plugin) 
+ *    3.1 AJAX Button
+ *    3.2 AJAX Add To Cart Button & Form 
+ *    3.3 Purchase Summary Tables
+ *    3.4 Download Card
+ *    3.5 Login & Register From
+ *    3.6 Login & Register Button of Checkout
+ *    3.7 Easy Digital Downloads - Pricing Tables (Plugin)
+ *    3.8 Downloads Page Pagination
+
+*/
+
+
+/* 
+ ---------------------------
+ 1. Disqus
+ ---------------------------
+ */ 
+#disqus_thread {
+    padding-top: 1.75rem;
+}
+
+
+
+/* 
+ ---------------------------
+ 2. Captcha
+ ---------------------------
+ */ 
+.custom-captcha-code-str {
+    background-color: #F2F2F2;
+    font-size: 20px;
+    text-align: center;
+    padding: .7rem 1.3rem;
+    display: inline-block;
+    margin-top: .2rem;
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* 
+ ---------------------------
+ 3. Easy Digital Downloads (WP Plugin) 
+
+    @requires ./src/components/_main
+    @requires ./src/components/AJAX
+
+ ---------------------------
+ */ 
+
+/* ---- 3.1 AJAX Button----- */
+
+form.edd_download_purchase_form {
+	opacity: 0;
+	&.show {
+		opacity: 1;
+	}
+}
+
+
+form.edd_download_purchase_form .edd_price {
+	display: none;
+}
+
+.edd-loading {
+	border-top-color: #fff !important;
+	border-right-color: #fff !important;
+	border-bottom-color: #fff !important;
+	border-left-color: transparent !important;
+}
+
+
+.edd-submit {
+	padding: .8rem 1.5rem !important;
+	border: none !important;
+	border-radius: 35px !important;
+	font-size: 0.875rem !important;
+	font-weight: 600 !important;
+	letter-spacing: .02rem !important;
+	background-color: $btn-gradient-color1 !important;
+	background: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%) !important;
+	color: #fff !important;
+	cursor: pointer !important;
+	margin: 0 0 1rem !important;
+	transition: .1s ease-in-out !important;
+	
+	&.gray,
+	&:visited {
+		color: #fff !important;
+		background: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%) !important;
+	}
+
+	&:hover {
+		background: linear-gradient(to right, $btn-gradient-color3 0%, $btn-gradient-color2 20%, $btn-gradient-color1 100%) !important;
+		color: #fff !important;
+	}
+	&:focus {
+		outline: -webkit-focus-ring-color auto 5px !important;
+	}
+	
+}
+
+#edd_checkout_login_register {
+	.edd-submit {
+		background: #24272A !important;
+
+		&.gray,
+		&:visited {
+			background: #24272A !important;
+		}
+
+		&:hover {
+			background: #000 !important;
+
+		}
+	}	
+}
+
+/* ---- 3.2 AJAX Add To Cart Button & Form ----- */
+fieldset#edd_register_account_fields,
+fieldset#edd_checkout_user_info {
+	position: relative;
+	border: 1px solid #eee !important;
+	padding: 1rem 1rem 2rem !important;
+	margin-bottom: 1.5rem !important;
+
+	legend {
+		position: absolute;
+		top: -10px;
+		border: none;
+		background: #FFF;
+		display: inline-block;
+		width: 250px;
+		text-indent: 1.2em;
+	}
+}
+
+fieldset#edd_register_account_fields {
+	#edd-user-login-wrap {
+		padding-top: 3rem !important;
+	}
+}
+
+
+#edd-email-wrap {
+	padding-top: 2em;
+}
+
+#edd-last-name-wrap {
+	padding-bottom: 1em;
+}
+
+.edd_cart_amount {
+	color: #f00;
+	font-size: 1.5em;
+	letter-spacing: 1px;
+}
+
+#edd_show_terms {
+	padding-left: 0;
+	
+	a.edd_terms_links {
+		background: #f2f2f2;
+		color: #333;
+		border-radius: 35px;
+		font-size: 0.875rem;
+	}
+}
+
+#edd_checkout_form_wrap .edd-payment-icons {
+	padding-bottom: 60px;
+	
+	img.payment-icon {
+		max-height: 42px;
+		border: 1px solid #EEEEEE;
+	}
+}
+
+.edd-cart-added-alert {
+	padding-left: 1.25em;
+}
+
+
+.edd-terms-agreement, 
+#edd_terms {
+	display: block;
+	padding: 1.25em;
+	padding-left: .5rem;
+}
+
+.edd_show_terms {}
+
+a.edd_terms_links {
+	padding: .5em 1em;
+	background: #ECECEC;
+	border: 1px solid #eee;
+}
+
+/* ---- 3.3 Purchase Summary Tables ----- */
+
+.edd_purchase_receipt_files_list {
+	padding-top: 1em;
+	
+	a {
+		display: block;
+		line-height: 1.7;
+	}
+}
+
+table.edd-table {
+	border: none  !important;
+	
+	thead th {
+		width: 150px;
+	}
+	
+	td, 
+	th {
+		border: none  !important;
+	}
+	tr {
+		border-bottom: 1px solid #E8E8E8 !important;
+		height: 4em;
+	}
+}
+
+a.edd_download_file_link {
+	border: 1px solid #333;
+	padding: .3em 1em;
+	margin: 1em 0;
+	display: inline-block;
+}
+
+.edd_purchase_receipt_title {
+	padding-top: 2.5em;
+	color: #BBBBBB;
+}
+
+.edd_purchase_receipt_title2 {
+	font-weight: normal;
+	font-size: 14px;
+}
+
+ul {
+	&.edd_bundled_product_files, 
+	&.edd_purchase_receipt_files, 
+	&.edd_bundled_product_files li, 
+	&.edd_purchase_receipt_files li {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+}
+
+/* ---- 3.4 Download Card ----- */
+
+.edd-custom-download-file {
+	width: 100%;
+	height: 36px;
+	border: 1px solid #4CAF50;
+	position: relative;
+	background: #e4ffe5;
+	margin: .3em 0;
+}
+
+.edd-custom-download-text {
+	margin-left: 45px;
+	line-height: 36px;
+	color: #585858;
+	transition: .1s ease-in-out;
+}
+
+.edd-custom-download-file:hover .edd-custom-download-text {
+	color: #000;
+}
+
+.edd-custom-download-text {
+	&:before {
+		content: '\f15c';
+		position: absolute;
+		font-family: 'Font Awesome 5 Free';
+		font-weight: 600;
+		transform: translate(-28px, 0);
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		margin-left: 8px;
+		font-size: 0.875rem;
+		color: #626262;
+		transform: translate(0, 10px);
+	}
+}
+
+.edd-custom-download-field {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px;
+	height: 36px;
+	color: #FFF;
+	background: #4CAF50;
+	font: 16pt;
+	text-align: center;
+	line-height: 36px;
+	cursor: pointer;
+	
+	&:hover {
+		background: #43A047;
+	}
+}
+
+
+/* ---- 3.5 Login & Register From ----- */
+.login-register-wrapper {
+	display: table;
+	max-width: 340px;
+	margin: 2.5rem auto;
+	background: #fff;
+	padding: 1.5rem;
+	box-shadow: 0 0.313rem 7.813rem rgba(42, 42, 100, 0.125), 0 0.063rem 2.5rem rgba(0, 0, 0, 0.03);
+	border-radius: 8px;
+	
+	
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+	legend {
+		font-size: 1.5rem !important;
+		margin-bottom: 45px !important;
+		text-align: center;
+	}
+	.edd-alert {
+		margin-bottom: 40px;
+	}
+	#edd_login_form {
+		width: 100%;
+	}
+	
+	fieldset {
+		input, 
+		label {
+			width: 100%;
+		}
+		
+		input {
+			border: 1px solid #BFBFBF !important;
+			border-radius: 3px!important;
+			padding: 5px !important;
+			
+			&:focus {
+			    outline: -webkit-focus-ring-color auto 5px !important;
+			}
+		}
+	}
+	.edd-login-submit {
+		float: right;
+	}
+	.edd-reg-entrance a,
+	.edd-lost-password a {
+		background: none;
+		box-shadow: none;
+		border: none;
+		padding: 0;
+		margin-top: 10px;
+		display: inline-block;
+		font-weight: 200;
+		color: #6a7483;
+		font-size: 0.875rem;
+		letter-spacing: -.3px;
+		&:hover {
+			color: #2d53fe;
+		}
+	}
+	
+	.edd-reg-entrance {
+		margin-bottom: 0;
+	}
+	
+	.edd-login-entrance a {
+		font-size: 0.875rem;
+	}
+	
+	
+	input[type=submit] {
+		padding: 10px 25px !important;
+		border: none !important;
+		border-radius: 35px !important;
+		background: #24272A !important;
+		color: #fff !important;
+		width: auto !important;
+		margin: 0 !important;
+	}
+	.edd-login-remember {
+		input, 
+		label {
+			width: auto;
+		}
+	}
+	
+}
+
+@media (max-width: 889px) {
+	.login-register-wrapper #edd_login_form {
+		width: 100%;
+		margin: 1.5rem auto;
+	}
+}
+
+#edd_login_form legend, 
+#edd_register_form legend {
+	font-size: 120%;
+	margin-bottom: 1em;
+}
+
+#edd_login_form fieldset, 
+#edd_register_form fieldset {
+	border: none;
+}
+
+#edd_login_form .edd-input, 
+#edd_register_form .edd-input {
+	box-sizing: border-box;
+}
+
+#edd_login_form label, 
+#edd_register_form label {
+	cursor: pointer;
+}
+
+#edd_register_fields {
+	#edd-captcha-wrap {
+		padding-top: 2rem;
+		
+		input,
+		textarea {
+			margin-top: .5rem;
+		}
+	}
+	
+}
+#edd_login_fields {
+	#edd-captcha-wrap {
+		padding-top: 0;
+		
+		input,
+		textarea {
+			margin-top: .5rem;
+		}
+	}
+	
+}
+
+
+/* ---- 3.6 Login & Register Button of Checkout ----- */
+#edd_checkout_login_register {
+
+	[type="submit"] {
+		padding: 10px 25px;
+		border: none;
+		border-radius: 35px;
+		background: #24272A;
+		color: #fff;
+		width: auto;
+		margin: 0 !important;
+
+	}
+}
+
+/* ---- 3.7 Easy Digital Downloads - Pricing Tables (Plugin)  ----- */
+.edd-pricing-table {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-left: -0.5rem;
+	margin-right: -0.5rem;
+	margin-bottom: 2rem;
+
+
+	.featured-text {
+		padding: .75rem;
+		background: #222;
+		color: #fff;
+		display: inline-block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		border-radius: 10px 0 10px 0;
+		font-size: 0.75rem;
+	}
+	
+	.edd-pt-title {
+		font-size: 1.5rem;
+		font-weight: bold;
+		text-align: center;
+	}
+	.edd-pt-description {
+		font-size: 0.875rem;
+		text-align: center;
+		opacity: .6;
+	}
+	
+	sup {
+		display: inline-block;
+		font-size: 1rem;
+		line-height: 1;
+		top: -1.8rem;
+		left: -.5rem;
+		position: relative;
+		vertical-align: baseline;
+	}
+	ul {
+		list-style-type: none;
+		margin: 0;
+		margin-left: -1rem;
+		margin-right: -1rem;
+		li {
+			padding: .5rem;
+			line-height: 1.5;
+			font-size: 0.875rem;
+			margin: 0;
+			
+			&.edd-pt-feature {
+				padding: .6rem 1rem;
+				border-bottom: 1px solid #f5f5f5;
+				opacity: .8;
+				color: #565656;
+
+				&::before {
+					font-family: 'Font Awesome 5 Free';
+					font-weight: 600;
+					content: "\f00c";
+					display: inline-block;
+					margin-right: .4rem;
+				}
+			}
+
+			&.pricing {
+				text-align: center;
+
+				+ .edd-pt-feature {
+					border-top: 1px solid #f5f5f5;
+				}
+
+				.price {
+					font-size: 3.5rem;
+					display: inline-block;
+					font-weight: bold;
+				}
+			}
+
+			.period {
+				display: inline-block;
+				margin-left: .2rem;
+
+				&::before {
+					content: '/';
+					display: inline-block;
+				}
+			}
+	
+			
+		}
+	}
+	
+
+
+	.edd-price-option {
+		display: flex;
+		padding: .5rem;
+		width: 33.33333333%;		
+		
+		> div {
+			display: flex;
+			box-shadow: 0 22px 40px 0 #eef4fc;
+			border-radius: 10px;
+			width: 100%;
+			flex-flow: column;
+			text-align: left;
+			border: 2px solid #f5f5f5;
+			padding: 1rem;
+		}
+		
+		&.featured > div {
+			position: relative;
+			background-color: rgba(210, 210, 210, 0.05);
+
+			li {
+				&.edd-pt-feature, 
+				&.pricing .price {
+					color: #333;
+				}
+			}
+			.period, 
+			.edd-pt-title, 
+			.edd-pt-description, 
+			.period::before {
+				color: #333;
+			}
+		}
+
+
+	}
+	
+	.footer {
+		margin-top: auto;
+		text-align: center;
+		padding: 1.5rem;
+		
+		.edd-pt-button {
+			padding: .8rem 1.5rem;
+			border: none;
+			border-radius: 35px;
+			font-size: 1rem;
+			font-weight: 600;
+			letter-spacing: .02rem;
+			background-color: $btn-gradient-color1;
+			background: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+			color: #fff;
+			transition: .1s ease-in-out;
+
+			&:hover {
+				background-color: $btn-gradient-color1 !important;
+				background: linear-gradient(to right, $btn-gradient-color3 0%, $btn-gradient-color2 20%, $btn-gradient-color1 100%) !important;
+				color: #fff !important;
+			}
+			&:focus {
+			    outline: -webkit-focus-ring-color auto 5px !important;
+			}
+			
+		}	
+	}
+
+}
+
+
+@media all and (max-width: 768px) {
+	.edd-pricing-table {
+		.edd-price-option {
+			width: 100%;
+		}
+	}
+}
+
+/* ---- 3.8 Downloads Page Pagination  ----- */
+#edd_download_history_pagination {
+	margin-top: 1.5rem;
+	
+	&::before {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&::after {
+		display: table;
+		content: "";
+		line-height: 0;
+		clear: both;
+	}
+	
+	> a, 
+	> span {
+		display: inline-block;
+		width: 3.125rem;
+		height: 3.125rem;
+		padding-top: 0.25rem;
+		text-align: center;
+		background: none;
+		border: none;
+		color: $primary-text-color;
+		font-variant-ligatures: common-ligatures;
+		border-radius: 4px;
+		/*Ligatures and contextual forms are ways of combining glyphs to produce more harmonized forms.*/
+		margin-bottom: 0;
+		font-size: 0.875rem;
+		line-height: 3.25;
+		margin-top: 0;
+		margin-bottom: 2.06818181818rem;
+		
+		&.prev,
+		&.next {
+			font-size: 0;
+			transform: translateY(0.25rem);
+		}
+		
+		&.prev::before,
+		&.next::after {
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
+			display: inline-block;
+			margin-right: .4rem;
+			font-size: 1rem;
+			transform: translateY(-0.25rem);
+		}
+		
+		&.prev::before {
+			content: "\f104";
+
+		}
+		&.next::after {
+			content: "\f105";
+		}
+	
+	}	
+
+	a:hover {
+		background: #efefef;
+		color: #232323;	
+	}
+
+	span.current {
+		
+		border-color: $btn-gradient-color1;
+		background-color: $btn-gradient-color1;
+		background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+		@include outer-shadow( 'highlight', $highlight-color1 );
+		color: #fff;
+		font-style: italic;
+	}	
+
+
+}

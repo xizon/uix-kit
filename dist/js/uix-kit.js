@@ -1,22 +1,18 @@
 /*!
  * 
+ * DO NOT OVERRIDE THIS FILE.
+ * Generated with "npm run build"
+ * 
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.62
+ * ## Version             :  4.2.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 10, 2020
+ * ## Last Update         :  May 14, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
  */
-// Must leave a line blank
-/*
-* Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
-*    
-*/
-window.$ = window.jQuery;
-
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	function hotDisposeChunk(chunkId) {
 /******/ 		delete installedChunks[chunkId];
@@ -82,7 +78,7 @@ window.$ = window.jQuery;
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4721617c106be02edd7f";
+/******/ 	var hotCurrentHash = "382e45a70e059e275803";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -809,11 +805,2756 @@ window.$ = window.jQuery;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(130)(__webpack_require__.s = 130);
+/******/ 	return hotCreateRequire(138)(__webpack_require__.s = 138);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module, global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _gsScope; });
+/* unused harmony export TweenLite */
+/* unused harmony export globals */
+/* unused harmony export default */
+/* unused harmony export SimpleTimeline */
+/* unused harmony export Animation */
+/* unused harmony export Ease */
+/* unused harmony export Linear */
+/* unused harmony export Power0 */
+/* unused harmony export Power1 */
+/* unused harmony export Power2 */
+/* unused harmony export Power3 */
+/* unused harmony export Power4 */
+/* unused harmony export TweenPlugin */
+/* unused harmony export EventDispatcher */
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*!
+ * VERSION: 2.1.3
+ * DATE: 2019-05-17
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2019, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ *
+ * @author: Jack Doyle, jack@greensock.com
+ */
+
+/* eslint-disable */
+
+/* ES6 changes:
+	- declare and export _gsScope at top.
+	- set var TweenLite = the result of the main function
+	- export default TweenLite at the bottom
+	- return TweenLite at the bottom of the main function
+	- pass in _gsScope as the first parameter of the main function (which is actually at the bottom)
+	- remove the "export to multiple environments" in Definition().
+ */
+var _gsScope = typeof window !== "undefined" ? window :  true && module.exports && typeof global !== "undefined" ? global : undefined || {};
+var TweenLite = function (window) {
+  "use strict";
+
+  var _exports = {},
+      _doc = window.document,
+      _globals = window.GreenSockGlobals = window.GreenSockGlobals || window;
+
+  if (_globals.TweenLite) {
+    return _globals.TweenLite; //in case the core set of classes is already loaded, don't instantiate twice.
+  }
+
+  var _namespace = function _namespace(ns) {
+    var a = ns.split("."),
+        p = _globals,
+        i;
+
+    for (i = 0; i < a.length; i++) {
+      p[a[i]] = p = p[a[i]] || {};
+    }
+
+    return p;
+  },
+      gs = _namespace("com.greensock"),
+      _tinyNum = 0.00000001,
+      _slice = function _slice(a) {
+    //don't use Array.prototype.slice.call(target, 0) because that doesn't work in IE8 with a NodeList that's returned by querySelectorAll()
+    var b = [],
+        l = a.length,
+        i;
+
+    for (i = 0; i !== l; b.push(a[i++])) {}
+
+    return b;
+  },
+      _emptyFunc = function _emptyFunc() {},
+      _isArray = function () {
+    //works around issues in iframe environments where the Array global isn't shared, thus if the object originates in a different window/iframe, "(obj instanceof Array)" will evaluate false. We added some speed optimizations to avoid Object.prototype.toString.call() unless it's absolutely necessary because it's VERY slow (like 20x slower)
+    var toString = Object.prototype.toString,
+        array = toString.call([]);
+    return function (obj) {
+      return obj != null && (obj instanceof Array || _typeof(obj) === "object" && !!obj.push && toString.call(obj) === array);
+    };
+  }(),
+      a,
+      i,
+      p,
+      _ticker,
+      _tickerActive,
+      _defLookup = {},
+
+  /**
+   * @constructor
+   * Defines a GreenSock class, optionally with an array of dependencies that must be instantiated first and passed into the definition.
+   * This allows users to load GreenSock JS files in any order even if they have interdependencies (like CSSPlugin extends TweenPlugin which is
+   * inside TweenLite.js, but if CSSPlugin is loaded first, it should wait to run its code until TweenLite.js loads and instantiates TweenPlugin
+   * and then pass TweenPlugin to CSSPlugin's definition). This is all done automatically and internally.
+   *
+   * Every definition will be added to a "com.greensock" global object (typically window, but if a window.GreenSockGlobals object is found,
+   * it will go there as of v1.7). For example, TweenLite will be found at window.com.greensock.TweenLite and since it's a global class that should be available anywhere,
+   * it is ALSO referenced at window.TweenLite. However some classes aren't considered global, like the base com.greensock.core.Animation class, so
+   * those will only be at the package like window.com.greensock.core.Animation. Again, if you define a GreenSockGlobals object on the window, everything
+   * gets tucked neatly inside there instead of on the window directly. This allows you to do advanced things like load multiple versions of GreenSock
+   * files and put them into distinct objects (imagine a banner ad uses a newer version but the main site uses an older one). In that case, you could
+   * sandbox the banner one like:
+   *
+   * <script>
+   *     var gs = window.GreenSockGlobals = {}; //the newer version we're about to load could now be referenced in a "gs" object, like gs.TweenLite.to(...). Use whatever alias you want as long as it's unique, "gs" or "banner" or whatever.
+   * </script>
+   * <script src="js/greensock/v1.7/TweenMax.js"></script>
+   * <script>
+   *     window.GreenSockGlobals = window._gsQueue = window._gsDefine = null; //reset it back to null (along with the special _gsQueue variable) so that the next load of TweenMax affects the window and we can reference things directly like TweenLite.to(...)
+   * </script>
+   * <script src="js/greensock/v1.6/TweenMax.js"></script>
+   * <script>
+   *     gs.TweenLite.to(...); //would use v1.7
+   *     TweenLite.to(...); //would use v1.6
+   * </script>
+   *
+   * @param {!string} ns The namespace of the class definition, leaving off "com.greensock." as that's assumed. For example, "TweenLite" or "plugins.CSSPlugin" or "easing.Back".
+   * @param {!Array.<string>} dependencies An array of dependencies (described as their namespaces minus "com.greensock." prefix). For example ["TweenLite","plugins.TweenPlugin","core.Animation"]
+   * @param {!function():Object} func The function that should be called and passed the resolved dependencies which will return the actual class for this definition.
+   * @param {boolean=} global If true, the class will be added to the global scope (typically window unless you define a window.GreenSockGlobals object)
+   */
+  Definition = function Definition(ns, dependencies, func, global) {
+    this.sc = _defLookup[ns] ? _defLookup[ns].sc : []; //subclasses
+
+    _defLookup[ns] = this;
+    this.gsClass = null;
+    this.func = func;
+    var _classes = [];
+
+    this.check = function (init) {
+      var i = dependencies.length,
+          missing = i,
+          cur,
+          a,
+          n,
+          cl;
+
+      while (--i > -1) {
+        if ((cur = _defLookup[dependencies[i]] || new Definition(dependencies[i], [])).gsClass) {
+          _classes[i] = cur.gsClass;
+          missing--;
+        } else if (init) {
+          cur.sc.push(this);
+        }
+      }
+
+      if (missing === 0 && func) {
+        a = ("com.greensock." + ns).split(".");
+        n = a.pop();
+        cl = _namespace(a.join("."))[n] = this.gsClass = func.apply(func, _classes); //exports to multiple environments
+
+        if (global) {
+          _globals[n] = _exports[n] = cl; //provides a way to avoid global namespace pollution. By default, the main classes like TweenLite, Power1, Strong, etc. are added to window unless a GreenSockGlobals is defined. So if you want to have things added to a custom object instead, just do something like window.GreenSockGlobals = {} before loading any GreenSock files. You can even set up an alias like window.GreenSockGlobals = windows.gs = {} so that you can access everything like gs.TweenLite. Also remember that ALL classes are added to the window.com.greensock object (in their respective packages, like com.greensock.easing.Power1, com.greensock.TweenLite, etc.)
+
+          /*
+          if (typeof(module) !== "undefined" && module.exports) { //node
+          	if (ns === moduleName) {
+          		module.exports = _exports[moduleName] = cl;
+          		for (i in _exports) {
+          			cl[i] = _exports[i];
+          		}
+          	} else if (_exports[moduleName]) {
+          		_exports[moduleName][n] = cl;
+          	}
+          } else if (typeof(define) === "function" && define.amd){ //AMD
+          	define((window.GreenSockAMDPath ? window.GreenSockAMDPath + "/" : "") + ns.split(".").pop(), [], function() { return cl; });
+          }
+          */
+        }
+
+        for (i = 0; i < this.sc.length; i++) {
+          this.sc[i].check();
+        }
+      }
+    };
+
+    this.check(true);
+  },
+      //used to create Definition instances (which basically registers a class that has dependencies).
+  _gsDefine = window._gsDefine = function (ns, dependencies, func, global) {
+    return new Definition(ns, dependencies, func, global);
+  },
+      //a quick way to create a class that doesn't have any dependencies. Returns the class, but first registers it in the GreenSock namespace so that other classes can grab it (other classes might be dependent on the class).
+  _class = gs._class = function (ns, func, global) {
+    func = func || function () {};
+
+    _gsDefine(ns, [], function () {
+      return func;
+    }, global);
+
+    return func;
+  };
+
+  _gsDefine.globals = _globals;
+  /*
+   * ----------------------------------------------------------------
+   * Ease
+   * ----------------------------------------------------------------
+   */
+
+  var _baseParams = [0, 0, 1, 1],
+      Ease = _class("easing.Ease", function (func, extraParams, type, power) {
+    this._func = func;
+    this._type = type || 0;
+    this._power = power || 0;
+    this._params = extraParams ? _baseParams.concat(extraParams) : _baseParams;
+  }, true),
+      _easeMap = Ease.map = {},
+      _easeReg = Ease.register = function (ease, names, types, create) {
+    var na = names.split(","),
+        i = na.length,
+        ta = (types || "easeIn,easeOut,easeInOut").split(","),
+        e,
+        name,
+        j,
+        type;
+
+    while (--i > -1) {
+      name = na[i];
+      e = create ? _class("easing." + name, null, true) : gs.easing[name] || {};
+      j = ta.length;
+
+      while (--j > -1) {
+        type = ta[j];
+        _easeMap[name + "." + type] = _easeMap[type + name] = e[type] = ease.getRatio ? ease : ease[type] || new ease();
+      }
+    }
+  };
+
+  p = Ease.prototype;
+  p._calcEnd = false;
+
+  p.getRatio = function (p) {
+    if (this._func) {
+      this._params[0] = p;
+      return this._func.apply(null, this._params);
+    }
+
+    var t = this._type,
+        pw = this._power,
+        r = t === 1 ? 1 - p : t === 2 ? p : p < 0.5 ? p * 2 : (1 - p) * 2;
+
+    if (pw === 1) {
+      r *= r;
+    } else if (pw === 2) {
+      r *= r * r;
+    } else if (pw === 3) {
+      r *= r * r * r;
+    } else if (pw === 4) {
+      r *= r * r * r * r;
+    }
+
+    return t === 1 ? 1 - r : t === 2 ? r : p < 0.5 ? r / 2 : 1 - r / 2;
+  }; //create all the standard eases like Linear, Quad, Cubic, Quart, Quint, Strong, Power0, Power1, Power2, Power3, and Power4 (each with easeIn, easeOut, and easeInOut)
+
+
+  a = ["Linear", "Quad", "Cubic", "Quart", "Quint,Strong"];
+  i = a.length;
+
+  while (--i > -1) {
+    p = a[i] + ",Power" + i;
+
+    _easeReg(new Ease(null, null, 1, i), p, "easeOut", true);
+
+    _easeReg(new Ease(null, null, 2, i), p, "easeIn" + (i === 0 ? ",easeNone" : ""));
+
+    _easeReg(new Ease(null, null, 3, i), p, "easeInOut");
+  }
+
+  _easeMap.linear = gs.easing.Linear.easeIn;
+  _easeMap.swing = gs.easing.Quad.easeInOut; //for jQuery folks
+
+  /*
+   * ----------------------------------------------------------------
+   * EventDispatcher
+   * ----------------------------------------------------------------
+   */
+
+  var EventDispatcher = _class("events.EventDispatcher", function (target) {
+    this._listeners = {};
+    this._eventTarget = target || this;
+  });
+
+  p = EventDispatcher.prototype;
+
+  p.addEventListener = function (type, callback, scope, useParam, priority) {
+    priority = priority || 0;
+    var list = this._listeners[type],
+        index = 0,
+        listener,
+        i;
+
+    if (this === _ticker && !_tickerActive) {
+      _ticker.wake();
+    }
+
+    if (list == null) {
+      this._listeners[type] = list = [];
+    }
+
+    i = list.length;
+
+    while (--i > -1) {
+      listener = list[i];
+
+      if (listener.c === callback && listener.s === scope) {
+        list.splice(i, 1);
+      } else if (index === 0 && listener.pr < priority) {
+        index = i + 1;
+      }
+    }
+
+    list.splice(index, 0, {
+      c: callback,
+      s: scope,
+      up: useParam,
+      pr: priority
+    });
+  };
+
+  p.removeEventListener = function (type, callback) {
+    var list = this._listeners[type],
+        i;
+
+    if (list) {
+      i = list.length;
+
+      while (--i > -1) {
+        if (list[i].c === callback) {
+          list.splice(i, 1);
+          return;
+        }
+      }
+    }
+  };
+
+  p.dispatchEvent = function (type) {
+    var list = this._listeners[type],
+        i,
+        t,
+        listener;
+
+    if (list) {
+      i = list.length;
+
+      if (i > 1) {
+        list = list.slice(0); //in case addEventListener() is called from within a listener/callback (otherwise the index could change, resulting in a skip)
+      }
+
+      t = this._eventTarget;
+
+      while (--i > -1) {
+        listener = list[i];
+
+        if (listener) {
+          if (listener.up) {
+            listener.c.call(listener.s || t, {
+              type: type,
+              target: t
+            });
+          } else {
+            listener.c.call(listener.s || t);
+          }
+        }
+      }
+    }
+  };
+  /*
+   * ----------------------------------------------------------------
+   * Ticker
+   * ----------------------------------------------------------------
+   */
+
+
+  var _reqAnimFrame = window.requestAnimationFrame,
+      _cancelAnimFrame = window.cancelAnimationFrame,
+      _getTime = Date.now || function () {
+    return new Date().getTime();
+  },
+      _lastUpdate = _getTime(); //now try to determine the requestAnimationFrame and cancelAnimationFrame functions and if none are found, we'll use a setTimeout()/clearTimeout() polyfill.
+
+
+  a = ["ms", "moz", "webkit", "o"];
+  i = a.length;
+
+  while (--i > -1 && !_reqAnimFrame) {
+    _reqAnimFrame = window[a[i] + "RequestAnimationFrame"];
+    _cancelAnimFrame = window[a[i] + "CancelAnimationFrame"] || window[a[i] + "CancelRequestAnimationFrame"];
+  }
+
+  _class("Ticker", function (fps, useRAF) {
+    var _self = this,
+        _startTime = _getTime(),
+        _useRAF = useRAF !== false && _reqAnimFrame ? "auto" : false,
+        _lagThreshold = 500,
+        _adjustedLag = 33,
+        _tickWord = "tick",
+        //helps reduce gc burden
+    _fps,
+        _req,
+        _id,
+        _gap,
+        _nextTime,
+        _tick = function _tick(manual) {
+      var elapsed = _getTime() - _lastUpdate,
+          overlap,
+          dispatch;
+
+      if (elapsed > _lagThreshold) {
+        _startTime += elapsed - _adjustedLag;
+      }
+
+      _lastUpdate += elapsed;
+      _self.time = (_lastUpdate - _startTime) / 1000;
+      overlap = _self.time - _nextTime;
+
+      if (!_fps || overlap > 0 || manual === true) {
+        _self.frame++;
+        _nextTime += overlap + (overlap >= _gap ? 0.004 : _gap - overlap);
+        dispatch = true;
+      }
+
+      if (manual !== true) {
+        //make sure the request is made before we dispatch the "tick" event so that timing is maintained. Otherwise, if processing the "tick" requires a bunch of time (like 15ms) and we're using a setTimeout() that's based on 16.7ms, it'd technically take 31.7ms between frames otherwise.
+        _id = _req(_tick);
+      }
+
+      if (dispatch) {
+        _self.dispatchEvent(_tickWord);
+      }
+    };
+
+    EventDispatcher.call(_self);
+    _self.time = _self.frame = 0;
+
+    _self.tick = function () {
+      _tick(true);
+    };
+
+    _self.lagSmoothing = function (threshold, adjustedLag) {
+      if (!arguments.length) {
+        //if lagSmoothing() is called with no arguments, treat it like a getter that returns a boolean indicating if it's enabled or not. This is purposely undocumented and is for internal use.
+        return _lagThreshold < 1 / _tinyNum;
+      }
+
+      _lagThreshold = threshold || 1 / _tinyNum; //zero should be interpreted as basically unlimited
+
+      _adjustedLag = Math.min(adjustedLag, _lagThreshold, 0);
+    };
+
+    _self.sleep = function () {
+      if (_id == null) {
+        return;
+      }
+
+      if (!_useRAF || !_cancelAnimFrame) {
+        clearTimeout(_id);
+      } else {
+        _cancelAnimFrame(_id);
+      }
+
+      _req = _emptyFunc;
+      _id = null;
+
+      if (_self === _ticker) {
+        _tickerActive = false;
+      }
+    };
+
+    _self.wake = function (seamless) {
+      if (_id !== null) {
+        _self.sleep();
+      } else if (seamless) {
+        _startTime += -_lastUpdate + (_lastUpdate = _getTime());
+      } else if (_self.frame > 10) {
+        //don't trigger lagSmoothing if we're just waking up, and make sure that at least 10 frames have elapsed because of the iOS bug that we work around below with the 1.5-second setTimout().
+        _lastUpdate = _getTime() - _lagThreshold + 5;
+      }
+
+      _req = _fps === 0 ? _emptyFunc : !_useRAF || !_reqAnimFrame ? function (f) {
+        return setTimeout(f, (_nextTime - _self.time) * 1000 + 1 | 0);
+      } : _reqAnimFrame;
+
+      if (_self === _ticker) {
+        _tickerActive = true;
+      }
+
+      _tick(2);
+    };
+
+    _self.fps = function (value) {
+      if (!arguments.length) {
+        return _fps;
+      }
+
+      _fps = value;
+      _gap = 1 / (_fps || 60);
+      _nextTime = this.time + _gap;
+
+      _self.wake();
+    };
+
+    _self.useRAF = function (value) {
+      if (!arguments.length) {
+        return _useRAF;
+      }
+
+      _self.sleep();
+
+      _useRAF = value;
+
+      _self.fps(_fps);
+    };
+
+    _self.fps(fps); //a bug in iOS 6 Safari occasionally prevents the requestAnimationFrame from working initially, so we use a 1.5-second timeout that automatically falls back to setTimeout() if it senses this condition.
+
+
+    setTimeout(function () {
+      if (_useRAF === "auto" && _self.frame < 5 && (_doc || {}).visibilityState !== "hidden") {
+        _self.useRAF(false);
+      }
+    }, 1500);
+  });
+
+  p = gs.Ticker.prototype = new gs.events.EventDispatcher();
+  p.constructor = gs.Ticker;
+  /*
+   * ----------------------------------------------------------------
+   * Animation
+   * ----------------------------------------------------------------
+   */
+
+  var Animation = _class("core.Animation", function (duration, vars) {
+    this.vars = vars = vars || {};
+    this._duration = this._totalDuration = duration || 0;
+    this._delay = Number(vars.delay) || 0;
+    this._timeScale = 1;
+    this._active = !!vars.immediateRender;
+    this.data = vars.data;
+    this._reversed = !!vars.reversed;
+
+    if (!_rootTimeline) {
+      return;
+    }
+
+    if (!_tickerActive) {
+      //some browsers (like iOS 6 Safari) shut down JavaScript execution when the tab is disabled and they [occasionally] neglect to start up requestAnimationFrame again when returning - this code ensures that the engine starts up again properly.
+      _ticker.wake();
+    }
+
+    var tl = this.vars.useFrames ? _rootFramesTimeline : _rootTimeline;
+    tl.add(this, tl._time);
+
+    if (this.vars.paused) {
+      this.paused(true);
+    }
+  });
+
+  _ticker = Animation.ticker = new gs.Ticker();
+  p = Animation.prototype;
+  p._dirty = p._gc = p._initted = p._paused = false;
+  p._totalTime = p._time = 0;
+  p._rawPrevTime = -1;
+  p._next = p._last = p._onUpdate = p._timeline = p.timeline = null;
+  p._paused = false; //some browsers (like iOS) occasionally drop the requestAnimationFrame event when the user switches to a different tab and then comes back again, so we use a 2-second setTimeout() to sense if/when that condition occurs and then wake() the ticker.
+
+  var _checkTimeout = function _checkTimeout() {
+    if (_tickerActive && _getTime() - _lastUpdate > 2000 && ((_doc || {}).visibilityState !== "hidden" || !_ticker.lagSmoothing())) {
+      //note: if the tab is hidden, we should still wake if lagSmoothing has been disabled.
+      _ticker.wake();
+    }
+
+    var t = setTimeout(_checkTimeout, 2000);
+
+    if (t.unref) {
+      // allows a node process to exit even if the timeout’s callback hasn't been invoked. Without it, the node process could hang as this function is called every two seconds.
+      t.unref();
+    }
+  };
+
+  _checkTimeout();
+
+  p.play = function (from, suppressEvents) {
+    if (from != null) {
+      this.seek(from, suppressEvents);
+    }
+
+    return this.reversed(false).paused(false);
+  };
+
+  p.pause = function (atTime, suppressEvents) {
+    if (atTime != null) {
+      this.seek(atTime, suppressEvents);
+    }
+
+    return this.paused(true);
+  };
+
+  p.resume = function (from, suppressEvents) {
+    if (from != null) {
+      this.seek(from, suppressEvents);
+    }
+
+    return this.paused(false);
+  };
+
+  p.seek = function (time, suppressEvents) {
+    return this.totalTime(Number(time), suppressEvents !== false);
+  };
+
+  p.restart = function (includeDelay, suppressEvents) {
+    return this.reversed(false).paused(false).totalTime(includeDelay ? -this._delay : 0, suppressEvents !== false, true);
+  };
+
+  p.reverse = function (from, suppressEvents) {
+    if (from != null) {
+      this.seek(from || this.totalDuration(), suppressEvents);
+    }
+
+    return this.reversed(true).paused(false);
+  };
+
+  p.render = function (time, suppressEvents, force) {//stub - we override this method in subclasses.
+  };
+
+  p.invalidate = function () {
+    this._time = this._totalTime = 0;
+    this._initted = this._gc = false;
+    this._rawPrevTime = -1;
+
+    if (this._gc || !this.timeline) {
+      this._enabled(true);
+    }
+
+    return this;
+  };
+
+  p.isActive = function () {
+    var tl = this._timeline,
+        //the 2 root timelines won't have a _timeline; they're always active.
+    startTime = this._startTime,
+        rawTime;
+    return !tl || !this._gc && !this._paused && tl.isActive() && (rawTime = tl.rawTime(true)) >= startTime && rawTime < startTime + this.totalDuration() / this._timeScale - _tinyNum;
+  };
+
+  p._enabled = function (enabled, ignoreTimeline) {
+    if (!_tickerActive) {
+      _ticker.wake();
+    }
+
+    this._gc = !enabled;
+    this._active = this.isActive();
+
+    if (ignoreTimeline !== true) {
+      if (enabled && !this.timeline) {
+        this._timeline.add(this, this._startTime - this._delay);
+      } else if (!enabled && this.timeline) {
+        this._timeline._remove(this, true);
+      }
+    }
+
+    return false;
+  };
+
+  p._kill = function (vars, target) {
+    return this._enabled(false, false);
+  };
+
+  p.kill = function (vars, target) {
+    this._kill(vars, target);
+
+    return this;
+  };
+
+  p._uncache = function (includeSelf) {
+    var tween = includeSelf ? this : this.timeline;
+
+    while (tween) {
+      tween._dirty = true;
+      tween = tween.timeline;
+    }
+
+    return this;
+  };
+
+  p._swapSelfInParams = function (params) {
+    var i = params.length,
+        copy = params.concat();
+
+    while (--i > -1) {
+      if (params[i] === "{self}") {
+        copy[i] = this;
+      }
+    }
+
+    return copy;
+  };
+
+  p._callback = function (type) {
+    var v = this.vars,
+        callback = v[type],
+        params = v[type + "Params"],
+        scope = v[type + "Scope"] || v.callbackScope || this,
+        l = params ? params.length : 0;
+
+    switch (l) {
+      //speed optimization; call() is faster than apply() so use it when there are only a few parameters (which is by far most common). Previously we simply did var v = this.vars; v[type].apply(v[type + "Scope"] || v.callbackScope || this, v[type + "Params"] || _blankArray);
+      case 0:
+        callback.call(scope);
+        break;
+
+      case 1:
+        callback.call(scope, params[0]);
+        break;
+
+      case 2:
+        callback.call(scope, params[0], params[1]);
+        break;
+
+      default:
+        callback.apply(scope, params);
+    }
+  }; //----Animation getters/setters --------------------------------------------------------
+
+
+  p.eventCallback = function (type, callback, params, scope) {
+    if ((type || "").substr(0, 2) === "on") {
+      var v = this.vars;
+
+      if (arguments.length === 1) {
+        return v[type];
+      }
+
+      if (callback == null) {
+        delete v[type];
+      } else {
+        v[type] = callback;
+        v[type + "Params"] = _isArray(params) && params.join("").indexOf("{self}") !== -1 ? this._swapSelfInParams(params) : params;
+        v[type + "Scope"] = scope;
+      }
+
+      if (type === "onUpdate") {
+        this._onUpdate = callback;
+      }
+    }
+
+    return this;
+  };
+
+  p.delay = function (value) {
+    if (!arguments.length) {
+      return this._delay;
+    }
+
+    if (this._timeline.smoothChildTiming) {
+      this.startTime(this._startTime + value - this._delay);
+    }
+
+    this._delay = value;
+    return this;
+  };
+
+  p.duration = function (value) {
+    if (!arguments.length) {
+      this._dirty = false;
+      return this._duration;
+    }
+
+    this._duration = this._totalDuration = value;
+
+    this._uncache(true); //true in case it's a TweenMax or TimelineMax that has a repeat - we'll need to refresh the totalDuration.
+
+
+    if (this._timeline.smoothChildTiming) if (this._time > 0) if (this._time < this._duration) if (value !== 0) {
+      this.totalTime(this._totalTime * (value / this._duration), true);
+    }
+    return this;
+  };
+
+  p.totalDuration = function (value) {
+    this._dirty = false;
+    return !arguments.length ? this._totalDuration : this.duration(value);
+  };
+
+  p.time = function (value, suppressEvents) {
+    if (!arguments.length) {
+      return this._time;
+    }
+
+    if (this._dirty) {
+      this.totalDuration();
+    }
+
+    return this.totalTime(value > this._duration ? this._duration : value, suppressEvents);
+  };
+
+  p.totalTime = function (time, suppressEvents, uncapped) {
+    if (!_tickerActive) {
+      _ticker.wake();
+    }
+
+    if (!arguments.length) {
+      return this._totalTime;
+    }
+
+    if (this._timeline) {
+      if (time < 0 && !uncapped) {
+        time += this.totalDuration();
+      }
+
+      if (this._timeline.smoothChildTiming) {
+        if (this._dirty) {
+          this.totalDuration();
+        }
+
+        var totalDuration = this._totalDuration,
+            tl = this._timeline;
+
+        if (time > totalDuration && !uncapped) {
+          time = totalDuration;
+        }
+
+        this._startTime = (this._paused ? this._pauseTime : tl._time) - (!this._reversed ? time : totalDuration - time) / this._timeScale;
+
+        if (!tl._dirty) {
+          //for performance improvement. If the parent's cache is already dirty, it already took care of marking the ancestors as dirty too, so skip the function call here.
+          this._uncache(false);
+        } //in case any of the ancestor timelines had completed but should now be enabled, we should reset their totalTime() which will also ensure that they're lined up properly and enabled. Skip for animations that are on the root (wasteful). Example: a TimelineLite.exportRoot() is performed when there's a paused tween on the root, the export will not complete until that tween is unpaused, but imagine a child gets restarted later, after all [unpaused] tweens have completed. The startTime of that child would get pushed out, but one of the ancestors may have completed.
+
+
+        if (tl._timeline) {
+          while (tl._timeline) {
+            if (tl._timeline._time !== (tl._startTime + tl._totalTime) / tl._timeScale) {
+              tl.totalTime(tl._totalTime, true);
+            }
+
+            tl = tl._timeline;
+          }
+        }
+      }
+
+      if (this._gc) {
+        this._enabled(true, false);
+      }
+
+      if (this._totalTime !== time || this._duration === 0) {
+        if (_lazyTweens.length) {
+          _lazyRender();
+        }
+
+        this.render(time, suppressEvents, false);
+
+        if (_lazyTweens.length) {
+          //in case rendering caused any tweens to lazy-init, we should render them because typically when someone calls seek() or time() or progress(), they expect an immediate render.
+          _lazyRender();
+        }
+      }
+    }
+
+    return this;
+  };
+
+  p.progress = p.totalProgress = function (value, suppressEvents) {
+    var duration = this.duration();
+    return !arguments.length ? duration ? this._time / duration : this.ratio : this.totalTime(duration * value, suppressEvents);
+  };
+
+  p.startTime = function (value) {
+    if (!arguments.length) {
+      return this._startTime;
+    }
+
+    if (value !== this._startTime) {
+      this._startTime = value;
+      if (this.timeline) if (this.timeline._sortChildren) {
+        this.timeline.add(this, value - this._delay); //ensures that any necessary re-sequencing of Animations in the timeline occurs to make sure the rendering order is correct.
+      }
+    }
+
+    return this;
+  };
+
+  p.endTime = function (includeRepeats) {
+    return this._startTime + (includeRepeats != false ? this.totalDuration() : this.duration()) / this._timeScale;
+  };
+
+  p.timeScale = function (value) {
+    if (!arguments.length) {
+      return this._timeScale;
+    }
+
+    var pauseTime, t;
+    value = value || _tinyNum; //can't allow zero because it'll throw the math off
+
+    if (this._timeline && this._timeline.smoothChildTiming) {
+      pauseTime = this._pauseTime;
+      t = pauseTime || pauseTime === 0 ? pauseTime : this._timeline.totalTime();
+      this._startTime = t - (t - this._startTime) * this._timeScale / value;
+    }
+
+    this._timeScale = value;
+    t = this.timeline;
+
+    while (t && t.timeline) {
+      //must update the duration/totalDuration of all ancestor timelines immediately in case in the middle of a render loop, one tween alters another tween's timeScale which shoves its startTime before 0, forcing the parent timeline to shift around and shiftChildren() which could affect that next tween's render (startTime). Doesn't matter for the root timeline though.
+      t._dirty = true;
+      t.totalDuration();
+      t = t.timeline;
+    }
+
+    return this;
+  };
+
+  p.reversed = function (value) {
+    if (!arguments.length) {
+      return this._reversed;
+    }
+
+    if (value != this._reversed) {
+      this._reversed = value;
+      this.totalTime(this._timeline && !this._timeline.smoothChildTiming ? this.totalDuration() - this._totalTime : this._totalTime, true);
+    }
+
+    return this;
+  };
+
+  p.paused = function (value) {
+    if (!arguments.length) {
+      return this._paused;
+    }
+
+    var tl = this._timeline,
+        raw,
+        elapsed;
+    if (value != this._paused) if (tl) {
+      if (!_tickerActive && !value) {
+        _ticker.wake();
+      }
+
+      raw = tl.rawTime();
+      elapsed = raw - this._pauseTime;
+
+      if (!value && tl.smoothChildTiming) {
+        this._startTime += elapsed;
+
+        this._uncache(false);
+      }
+
+      this._pauseTime = value ? raw : null;
+      this._paused = value;
+      this._active = this.isActive();
+
+      if (!value && elapsed !== 0 && this._initted && this.duration()) {
+        raw = tl.smoothChildTiming ? this._totalTime : (raw - this._startTime) / this._timeScale;
+        this.render(raw, raw === this._totalTime, true); //in case the target's properties changed via some other tween or manual update by the user, we should force a render.
+      }
+    }
+
+    if (this._gc && !value) {
+      this._enabled(true, false);
+    }
+
+    return this;
+  };
+  /*
+   * ----------------------------------------------------------------
+   * SimpleTimeline
+   * ----------------------------------------------------------------
+   */
+
+
+  var SimpleTimeline = _class("core.SimpleTimeline", function (vars) {
+    Animation.call(this, 0, vars);
+    this.autoRemoveChildren = this.smoothChildTiming = true;
+  });
+
+  p = SimpleTimeline.prototype = new Animation();
+  p.constructor = SimpleTimeline;
+  p.kill()._gc = false;
+  p._first = p._last = p._recent = null;
+  p._sortChildren = false;
+
+  p.add = p.insert = function (child, position, align, stagger) {
+    var prevTween, st;
+    child._startTime = Number(position || 0) + child._delay;
+    if (child._paused) if (this !== child._timeline) {
+      //we only adjust the _pauseTime if it wasn't in this timeline already. Remember, sometimes a tween will be inserted again into the same timeline when its startTime is changed so that the tweens in the TimelineLite/Max are re-ordered properly in the linked list (so everything renders in the proper order).
+      child._pauseTime = this.rawTime() - (child._timeline.rawTime() - child._pauseTime);
+    }
+
+    if (child.timeline) {
+      child.timeline._remove(child, true); //removes from existing timeline so that it can be properly added to this one.
+
+    }
+
+    child.timeline = child._timeline = this;
+
+    if (child._gc) {
+      child._enabled(true, true);
+    }
+
+    prevTween = this._last;
+
+    if (this._sortChildren) {
+      st = child._startTime;
+
+      while (prevTween && prevTween._startTime > st) {
+        prevTween = prevTween._prev;
+      }
+    }
+
+    if (prevTween) {
+      child._next = prevTween._next;
+      prevTween._next = child;
+    } else {
+      child._next = this._first;
+      this._first = child;
+    }
+
+    if (child._next) {
+      child._next._prev = child;
+    } else {
+      this._last = child;
+    }
+
+    child._prev = prevTween;
+    this._recent = child;
+
+    if (this._timeline) {
+      this._uncache(true);
+    }
+
+    return this;
+  };
+
+  p._remove = function (tween, skipDisable) {
+    if (tween.timeline === this) {
+      if (!skipDisable) {
+        tween._enabled(false, true);
+      }
+
+      if (tween._prev) {
+        tween._prev._next = tween._next;
+      } else if (this._first === tween) {
+        this._first = tween._next;
+      }
+
+      if (tween._next) {
+        tween._next._prev = tween._prev;
+      } else if (this._last === tween) {
+        this._last = tween._prev;
+      }
+
+      tween._next = tween._prev = tween.timeline = null;
+
+      if (tween === this._recent) {
+        this._recent = this._last;
+      }
+
+      if (this._timeline) {
+        this._uncache(true);
+      }
+    }
+
+    return this;
+  };
+
+  p.render = function (time, suppressEvents, force) {
+    var tween = this._first,
+        next;
+    this._totalTime = this._time = this._rawPrevTime = time;
+
+    while (tween) {
+      next = tween._next; //record it here because the value could change after rendering...
+
+      if (tween._active || time >= tween._startTime && !tween._paused && !tween._gc) {
+        if (!tween._reversed) {
+          tween.render((time - tween._startTime) * tween._timeScale, suppressEvents, force);
+        } else {
+          tween.render((!tween._dirty ? tween._totalDuration : tween.totalDuration()) - (time - tween._startTime) * tween._timeScale, suppressEvents, force);
+        }
+      }
+
+      tween = next;
+    }
+  };
+
+  p.rawTime = function () {
+    if (!_tickerActive) {
+      _ticker.wake();
+    }
+
+    return this._totalTime;
+  };
+  /*
+   * ----------------------------------------------------------------
+   * TweenLite
+   * ----------------------------------------------------------------
+   */
+
+
+  var TweenLite = _class("TweenLite", function (target, duration, vars) {
+    Animation.call(this, duration, vars);
+    this.render = TweenLite.prototype.render; //speed optimization (avoid prototype lookup on this "hot" method)
+
+    if (target == null) {
+      throw "Cannot tween a null target.";
+    }
+
+    this.target = target = typeof target !== "string" ? target : TweenLite.selector(target) || target;
+    var isSelector = target.jquery || target.length && target !== window && target[0] && (target[0] === window || target[0].nodeType && target[0].style && !target.nodeType),
+        overwrite = this.vars.overwrite,
+        i,
+        targ,
+        targets;
+    this._overwrite = overwrite = overwrite == null ? _overwriteLookup[TweenLite.defaultOverwrite] : typeof overwrite === "number" ? overwrite >> 0 : _overwriteLookup[overwrite];
+
+    if ((isSelector || target instanceof Array || target.push && _isArray(target)) && typeof target[0] !== "number") {
+      this._targets = targets = _slice(target); //don't use Array.prototype.slice.call(target, 0) because that doesn't work in IE8 with a NodeList that's returned by querySelectorAll()
+
+      this._propLookup = [];
+      this._siblings = [];
+
+      for (i = 0; i < targets.length; i++) {
+        targ = targets[i];
+
+        if (!targ) {
+          targets.splice(i--, 1);
+          continue;
+        } else if (typeof targ === "string") {
+          targ = targets[i--] = TweenLite.selector(targ); //in case it's an array of strings
+
+          if (typeof targ === "string") {
+            targets.splice(i + 1, 1); //to avoid an endless loop (can't imagine why the selector would return a string, but just in case)
+          }
+
+          continue;
+        } else if (targ.length && targ !== window && targ[0] && (targ[0] === window || targ[0].nodeType && targ[0].style && !targ.nodeType)) {
+          //in case the user is passing in an array of selector objects (like jQuery objects), we need to check one more level and pull things out if necessary. Also note that <select> elements pass all the criteria regarding length and the first child having style, so we must also check to ensure the target isn't an HTML node itself.
+          targets.splice(i--, 1);
+          this._targets = targets = targets.concat(_slice(targ));
+          continue;
+        }
+
+        this._siblings[i] = _register(targ, this, false);
+        if (overwrite === 1) if (this._siblings[i].length > 1) {
+          _applyOverwrite(targ, this, null, 1, this._siblings[i]);
+        }
+      }
+    } else {
+      this._propLookup = {};
+      this._siblings = _register(target, this, false);
+      if (overwrite === 1) if (this._siblings.length > 1) {
+        _applyOverwrite(target, this, null, 1, this._siblings);
+      }
+    }
+
+    if (this.vars.immediateRender || duration === 0 && this._delay === 0 && this.vars.immediateRender !== false) {
+      this._time = -_tinyNum; //forces a render without having to set the render() "force" parameter to true because we want to allow lazying by default (using the "force" parameter always forces an immediate full render)
+
+      this.render(Math.min(0, -this._delay)); //in case delay is negative
+    }
+  }, true),
+      _isSelector = function _isSelector(v) {
+    return v && v.length && v !== window && v[0] && (v[0] === window || v[0].nodeType && v[0].style && !v.nodeType); //we cannot check "nodeType" if the target is window from within an iframe, otherwise it will trigger a security error in some browsers like Firefox.
+  },
+      _autoCSS = function _autoCSS(vars, target) {
+    var css = {},
+        p;
+
+    for (p in vars) {
+      if (!_reservedProps[p] && (!(p in target) || p === "transform" || p === "x" || p === "y" || p === "width" || p === "height" || p === "className" || p === "border") && (!_plugins[p] || _plugins[p] && _plugins[p]._autoCSS)) {
+        //note: <img> elements contain read-only "x" and "y" properties. We should also prioritize editing css width/height rather than the element's properties.
+        css[p] = vars[p];
+        delete vars[p];
+      }
+    }
+
+    vars.css = css;
+  };
+
+  p = TweenLite.prototype = new Animation();
+  p.constructor = TweenLite;
+  p.kill()._gc = false; //----TweenLite defaults, overwrite management, and root updates ----------------------------------------------------
+
+  p.ratio = 0;
+  p._firstPT = p._targets = p._overwrittenProps = p._startAt = null;
+  p._notifyPluginsOfEnabled = p._lazy = false;
+  TweenLite.version = "2.1.3";
+  TweenLite.defaultEase = p._ease = new Ease(null, null, 1, 1);
+  TweenLite.defaultOverwrite = "auto";
+  TweenLite.ticker = _ticker;
+  TweenLite.autoSleep = 120;
+
+  TweenLite.lagSmoothing = function (threshold, adjustedLag) {
+    _ticker.lagSmoothing(threshold, adjustedLag);
+  };
+
+  TweenLite.selector = window.$ || window.jQuery || function (e) {
+    var selector = window.$ || window.jQuery;
+
+    if (selector) {
+      TweenLite.selector = selector;
+      return selector(e);
+    }
+
+    if (!_doc) {
+      //in some dev environments (like Angular 6), GSAP gets loaded before the document is defined! So re-query it here if/when necessary.
+      _doc = window.document;
+    }
+
+    return !_doc ? e : _doc.querySelectorAll ? _doc.querySelectorAll(e) : _doc.getElementById(e.charAt(0) === "#" ? e.substr(1) : e);
+  };
+
+  var _lazyTweens = [],
+      _lazyLookup = {},
+      _numbersExp = /(?:(-|-=|\+=)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
+      _relExp = /[\+-]=-?[\.\d]/,
+      //_nonNumbersExp = /(?:([\-+](?!(\d|=)))|[^\d\-+=e]|(e(?![\-+][\d])))+/ig,
+  _setRatio = function _setRatio(v) {
+    var pt = this._firstPT,
+        min = 0.000001,
+        val;
+
+    while (pt) {
+      val = !pt.blob ? pt.c * v + pt.s : v === 1 && this.end != null ? this.end : v ? this.join("") : this.start;
+
+      if (pt.m) {
+        val = pt.m.call(this._tween, val, this._target || pt.t, this._tween);
+      } else if (val < min) if (val > -min && !pt.blob) {
+        //prevents issues with converting very small numbers to strings in the browser
+        val = 0;
+      }
+
+      if (!pt.f) {
+        pt.t[pt.p] = val;
+      } else if (pt.fp) {
+        pt.t[pt.p](pt.fp, val);
+      } else {
+        pt.t[pt.p](val);
+      }
+
+      pt = pt._next;
+    }
+  },
+      _blobRound = function _blobRound(v) {
+    return (v * 1000 | 0) / 1000 + "";
+  },
+      //compares two strings (start/end), finds the numbers that are different and spits back an array representing the whole value but with the changing values isolated as elements. For example, "rgb(0,0,0)" and "rgb(100,50,0)" would become ["rgb(", 0, ",", 50, ",0)"]. Notice it merges the parts that are identical (performance optimization). The array also has a linked list of PropTweens attached starting with _firstPT that contain the tweening data (t, p, s, c, f, etc.). It also stores the starting value as a "start" property so that we can revert to it if/when necessary, like when a tween rewinds fully. If the quantity of numbers differs between the start and end, it will always prioritize the end value(s). The pt parameter is optional - it's for a PropTween that will be appended to the end of the linked list and is typically for actually setting the value after all of the elements have been updated (with array.join("")).
+  _blobDif = function _blobDif(start, end, filter, pt) {
+    var a = [],
+        charIndex = 0,
+        s = "",
+        color = 0,
+        startNums,
+        endNums,
+        num,
+        i,
+        l,
+        nonNumbers,
+        currentNum;
+    a.start = start;
+    a.end = end;
+    start = a[0] = start + ""; //ensure values are strings
+
+    end = a[1] = end + "";
+
+    if (filter) {
+      filter(a); //pass an array with the starting and ending values and let the filter do whatever it needs to the values.
+
+      start = a[0];
+      end = a[1];
+    }
+
+    a.length = 0;
+    startNums = start.match(_numbersExp) || [];
+    endNums = end.match(_numbersExp) || [];
+
+    if (pt) {
+      pt._next = null;
+      pt.blob = 1;
+      a._firstPT = a._applyPT = pt; //apply last in the linked list (which means inserting it first)
+    }
+
+    l = endNums.length;
+
+    for (i = 0; i < l; i++) {
+      currentNum = endNums[i];
+      nonNumbers = end.substr(charIndex, end.indexOf(currentNum, charIndex) - charIndex);
+      s += nonNumbers || !i ? nonNumbers : ","; //note: SVG spec allows omission of comma/space when a negative sign is wedged between two numbers, like 2.5-5.3 instead of 2.5,-5.3 but when tweening, the negative value may switch to positive, so we insert the comma just in case.
+
+      charIndex += nonNumbers.length;
+
+      if (color) {
+        //sense rgba() values and round them.
+        color = (color + 1) % 5;
+      } else if (nonNumbers.substr(-5) === "rgba(") {
+        color = 1;
+      }
+
+      if (currentNum === startNums[i] || startNums.length <= i) {
+        s += currentNum;
+      } else {
+        if (s) {
+          a.push(s);
+          s = "";
+        }
+
+        num = parseFloat(startNums[i]);
+        a.push(num);
+        a._firstPT = {
+          _next: a._firstPT,
+          t: a,
+          p: a.length - 1,
+          s: num,
+          c: (currentNum.charAt(1) === "=" ? parseInt(currentNum.charAt(0) + "1", 10) * parseFloat(currentNum.substr(2)) : parseFloat(currentNum) - num) || 0,
+          f: 0,
+          m: color && color < 4 ? Math.round : _blobRound
+        }; //limiting to 3 decimal places and casting as a string can really help performance when array.join() is called!
+        //note: we don't set _prev because we'll never need to remove individual PropTweens from this list.
+      }
+
+      charIndex += currentNum.length;
+    }
+
+    s += end.substr(charIndex);
+
+    if (s) {
+      a.push(s);
+    }
+
+    a.setRatio = _setRatio;
+
+    if (_relExp.test(end)) {
+      //if the end string contains relative values, delete it so that on the final render (in _setRatio()), we don't actually set it to the string with += or -= characters (forces it to use the calculated value).
+      a.end = null;
+    }
+
+    return a;
+  },
+      //note: "funcParam" is only necessary for function-based getters/setters that require an extra parameter like getAttribute("width") and setAttribute("width", value). In this example, funcParam would be "width". Used by AttrPlugin for example.
+  _addPropTween = function _addPropTween(target, prop, start, end, overwriteProp, mod, funcParam, stringFilter, index) {
+    if (typeof end === "function") {
+      end = end(index || 0, target);
+    }
+
+    var type = _typeof(target[prop]),
+        getterName = type !== "function" ? "" : prop.indexOf("set") || typeof target["get" + prop.substr(3)] !== "function" ? prop : "get" + prop.substr(3),
+        s = start !== "get" ? start : !getterName ? target[prop] : funcParam ? target[getterName](funcParam) : target[getterName](),
+        isRelative = typeof end === "string" && end.charAt(1) === "=",
+        pt = {
+      t: target,
+      p: prop,
+      s: s,
+      f: type === "function",
+      pg: 0,
+      n: overwriteProp || prop,
+      m: !mod ? 0 : typeof mod === "function" ? mod : Math.round,
+      pr: 0,
+      c: isRelative ? parseInt(end.charAt(0) + "1", 10) * parseFloat(end.substr(2)) : parseFloat(end) - s || 0
+    },
+        blob;
+
+    if (typeof s !== "number" || typeof end !== "number" && !isRelative) {
+      if (funcParam || isNaN(s) || !isRelative && isNaN(end) || typeof s === "boolean" || typeof end === "boolean") {
+        //a blob (string that has multiple numbers in it)
+        pt.fp = funcParam;
+        blob = _blobDif(s, isRelative ? parseFloat(pt.s) + pt.c + (pt.s + "").replace(/[0-9\-\.]/g, "") : end, stringFilter || TweenLite.defaultStringFilter, pt);
+        pt = {
+          t: blob,
+          p: "setRatio",
+          s: 0,
+          c: 1,
+          f: 2,
+          pg: 0,
+          n: overwriteProp || prop,
+          pr: 0,
+          m: 0
+        }; //"2" indicates it's a Blob property tween. Needed for RoundPropsPlugin for example.
+      } else {
+        pt.s = parseFloat(s);
+
+        if (!isRelative) {
+          pt.c = parseFloat(end) - pt.s || 0;
+        }
+      }
+    }
+
+    if (pt.c) {
+      //only add it to the linked list if there's a change.
+      if (pt._next = this._firstPT) {
+        pt._next._prev = pt;
+      }
+
+      this._firstPT = pt;
+      return pt;
+    }
+  },
+      _internals = TweenLite._internals = {
+    isArray: _isArray,
+    isSelector: _isSelector,
+    lazyTweens: _lazyTweens,
+    blobDif: _blobDif
+  },
+      //gives us a way to expose certain private values to other GreenSock classes without contaminating tha main TweenLite object.
+  _plugins = TweenLite._plugins = {},
+      _tweenLookup = _internals.tweenLookup = {},
+      _tweenLookupNum = 0,
+      _reservedProps = _internals.reservedProps = {
+    ease: 1,
+    delay: 1,
+    overwrite: 1,
+    onComplete: 1,
+    onCompleteParams: 1,
+    onCompleteScope: 1,
+    useFrames: 1,
+    runBackwards: 1,
+    startAt: 1,
+    onUpdate: 1,
+    onUpdateParams: 1,
+    onUpdateScope: 1,
+    onStart: 1,
+    onStartParams: 1,
+    onStartScope: 1,
+    onReverseComplete: 1,
+    onReverseCompleteParams: 1,
+    onReverseCompleteScope: 1,
+    onRepeat: 1,
+    onRepeatParams: 1,
+    onRepeatScope: 1,
+    easeParams: 1,
+    yoyo: 1,
+    immediateRender: 1,
+    repeat: 1,
+    repeatDelay: 1,
+    data: 1,
+    paused: 1,
+    reversed: 1,
+    autoCSS: 1,
+    lazy: 1,
+    onOverwrite: 1,
+    callbackScope: 1,
+    stringFilter: 1,
+    id: 1,
+    yoyoEase: 1,
+    stagger: 1
+  },
+      _overwriteLookup = {
+    none: 0,
+    all: 1,
+    auto: 2,
+    concurrent: 3,
+    allOnStart: 4,
+    preexisting: 5,
+    "true": 1,
+    "false": 0
+  },
+      _rootFramesTimeline = Animation._rootFramesTimeline = new SimpleTimeline(),
+      _rootTimeline = Animation._rootTimeline = new SimpleTimeline(),
+      _nextGCFrame = 30,
+      _lazyRender = _internals.lazyRender = function () {
+    var l = _lazyTweens.length,
+        i,
+        tween;
+    _lazyLookup = {};
+
+    for (i = 0; i < l; i++) {
+      tween = _lazyTweens[i];
+
+      if (tween && tween._lazy !== false) {
+        tween.render(tween._lazy[0], tween._lazy[1], true);
+        tween._lazy = false;
+      }
+    }
+
+    _lazyTweens.length = 0;
+  };
+
+  _rootTimeline._startTime = _ticker.time;
+  _rootFramesTimeline._startTime = _ticker.frame;
+  _rootTimeline._active = _rootFramesTimeline._active = true;
+  setTimeout(_lazyRender, 1); //on some mobile devices, there isn't a "tick" before code runs which means any lazy renders wouldn't run before the next official "tick".
+
+  Animation._updateRoot = TweenLite.render = function () {
+    var i, a, p;
+
+    if (_lazyTweens.length) {
+      //if code is run outside of the requestAnimationFrame loop, there may be tweens queued AFTER the engine refreshed, so we need to ensure any pending renders occur before we refresh again.
+      _lazyRender();
+    }
+
+    _rootTimeline.render((_ticker.time - _rootTimeline._startTime) * _rootTimeline._timeScale, false, false);
+
+    _rootFramesTimeline.render((_ticker.frame - _rootFramesTimeline._startTime) * _rootFramesTimeline._timeScale, false, false);
+
+    if (_lazyTweens.length) {
+      _lazyRender();
+    }
+
+    if (_ticker.frame >= _nextGCFrame) {
+      //dump garbage every 120 frames or whatever the user sets TweenLite.autoSleep to
+      _nextGCFrame = _ticker.frame + (parseInt(TweenLite.autoSleep, 10) || 120);
+
+      for (p in _tweenLookup) {
+        a = _tweenLookup[p].tweens;
+        i = a.length;
+
+        while (--i > -1) {
+          if (a[i]._gc) {
+            a.splice(i, 1);
+          }
+        }
+
+        if (a.length === 0) {
+          delete _tweenLookup[p];
+        }
+      } //if there are no more tweens in the root timelines, or if they're all paused, make the _timer sleep to reduce load on the CPU slightly
+
+
+      p = _rootTimeline._first;
+      if (!p || p._paused) if (TweenLite.autoSleep && !_rootFramesTimeline._first && _ticker._listeners.tick.length === 1) {
+        while (p && p._paused) {
+          p = p._next;
+        }
+
+        if (!p) {
+          _ticker.sleep();
+        }
+      }
+    }
+  };
+
+  _ticker.addEventListener("tick", Animation._updateRoot);
+
+  var _register = function _register(target, tween, scrub) {
+    var id = target._gsTweenID,
+        a,
+        i;
+
+    if (!_tweenLookup[id || (target._gsTweenID = id = "t" + _tweenLookupNum++)]) {
+      _tweenLookup[id] = {
+        target: target,
+        tweens: []
+      };
+    }
+
+    if (tween) {
+      a = _tweenLookup[id].tweens;
+      a[i = a.length] = tween;
+
+      if (scrub) {
+        while (--i > -1) {
+          if (a[i] === tween) {
+            a.splice(i, 1);
+          }
+        }
+      }
+    }
+
+    return _tweenLookup[id].tweens;
+  },
+      _onOverwrite = function _onOverwrite(overwrittenTween, overwritingTween, target, killedProps) {
+    var func = overwrittenTween.vars.onOverwrite,
+        r1,
+        r2;
+
+    if (func) {
+      r1 = func(overwrittenTween, overwritingTween, target, killedProps);
+    }
+
+    func = TweenLite.onOverwrite;
+
+    if (func) {
+      r2 = func(overwrittenTween, overwritingTween, target, killedProps);
+    }
+
+    return r1 !== false && r2 !== false;
+  },
+      _applyOverwrite = function _applyOverwrite(target, tween, props, mode, siblings) {
+    var i, changed, curTween, l;
+
+    if (mode === 1 || mode >= 4) {
+      l = siblings.length;
+
+      for (i = 0; i < l; i++) {
+        if ((curTween = siblings[i]) !== tween) {
+          if (!curTween._gc) {
+            if (curTween._kill(null, target, tween)) {
+              changed = true;
+            }
+          }
+        } else if (mode === 5) {
+          break;
+        }
+      }
+
+      return changed;
+    } //NOTE: Add tiny amount to overcome floating point errors that can cause the startTime to be VERY slightly off (when a tween's time() is set for example)
+
+
+    var startTime = tween._startTime + _tinyNum,
+        overlaps = [],
+        oCount = 0,
+        zeroDur = tween._duration === 0,
+        globalStart;
+    i = siblings.length;
+
+    while (--i > -1) {
+      if ((curTween = siblings[i]) === tween || curTween._gc || curTween._paused) {//ignore
+      } else if (curTween._timeline !== tween._timeline) {
+        globalStart = globalStart || _checkOverlap(tween, 0, zeroDur);
+
+        if (_checkOverlap(curTween, globalStart, zeroDur) === 0) {
+          overlaps[oCount++] = curTween;
+        }
+      } else if (curTween._startTime <= startTime) if (curTween._startTime + curTween.totalDuration() / curTween._timeScale > startTime) if (!((zeroDur || !curTween._initted) && startTime - curTween._startTime <= _tinyNum * 2)) {
+        overlaps[oCount++] = curTween;
+      }
+    }
+
+    i = oCount;
+
+    while (--i > -1) {
+      curTween = overlaps[i];
+      l = curTween._firstPT; //we need to discern if there were property tweens originally; if they all get removed in the next line's _kill() call, the tween should be killed. See https://github.com/greensock/GreenSock-JS/issues/278
+
+      if (mode === 2) if (curTween._kill(props, target, tween)) {
+        changed = true;
+      }
+
+      if (mode !== 2 || !curTween._firstPT && curTween._initted && l) {
+        if (mode !== 2 && !_onOverwrite(curTween, tween)) {
+          continue;
+        }
+
+        if (curTween._enabled(false, false)) {
+          //if all property tweens have been overwritten, kill the tween.
+          changed = true;
+        }
+      }
+    }
+
+    return changed;
+  },
+      _checkOverlap = function _checkOverlap(tween, reference, zeroDur) {
+    var tl = tween._timeline,
+        ts = tl._timeScale,
+        t = tween._startTime;
+
+    while (tl._timeline) {
+      t += tl._startTime;
+      ts *= tl._timeScale;
+
+      if (tl._paused) {
+        return -100;
+      }
+
+      tl = tl._timeline;
+    }
+
+    t /= ts;
+    return t > reference ? t - reference : zeroDur && t === reference || !tween._initted && t - reference < 2 * _tinyNum ? _tinyNum : (t += tween.totalDuration() / tween._timeScale / ts) > reference + _tinyNum ? 0 : t - reference - _tinyNum;
+  }; //---- TweenLite instance methods -----------------------------------------------------------------------------
+
+
+  p._init = function () {
+    var v = this.vars,
+        op = this._overwrittenProps,
+        dur = this._duration,
+        immediate = !!v.immediateRender,
+        ease = v.ease,
+        startAt = this._startAt,
+        i,
+        initPlugins,
+        pt,
+        p,
+        startVars,
+        l;
+
+    if (v.startAt) {
+      if (startAt) {
+        startAt.render(-1, true); //if we've run a startAt previously (when the tween instantiated), we should revert it so that the values re-instantiate correctly particularly for relative tweens. Without this, a TweenLite.fromTo(obj, 1, {x:"+=100"}, {x:"-=100"}), for example, would actually jump to +=200 because the startAt would run twice, doubling the relative change.
+
+        startAt.kill();
+      }
+
+      startVars = {};
+
+      for (p in v.startAt) {
+        //copy the properties/values into a new object to avoid collisions, like var to = {x:0}, from = {x:500}; timeline.fromTo(e, 1, from, to).fromTo(e, 1, to, from);
+        startVars[p] = v.startAt[p];
+      }
+
+      startVars.data = "isStart";
+      startVars.overwrite = false;
+      startVars.immediateRender = true;
+      startVars.lazy = immediate && v.lazy !== false;
+      startVars.startAt = startVars.delay = null; //no nesting of startAt objects allowed (otherwise it could cause an infinite loop).
+
+      startVars.onUpdate = v.onUpdate;
+      startVars.onUpdateParams = v.onUpdateParams;
+      startVars.onUpdateScope = v.onUpdateScope || v.callbackScope || this;
+      this._startAt = TweenLite.to(this.target || {}, 0, startVars);
+
+      if (immediate) {
+        if (this._time > 0) {
+          this._startAt = null; //tweens that render immediately (like most from() and fromTo() tweens) shouldn't revert when their parent timeline's playhead goes backward past the startTime because the initial render could have happened anytime and it shouldn't be directly correlated to this tween's startTime. Imagine setting up a complex animation where the beginning states of various objects are rendered immediately but the tween doesn't happen for quite some time - if we revert to the starting values as soon as the playhead goes backward past the tween's startTime, it will throw things off visually. Reversion should only happen in TimelineLite/Max instances where immediateRender was false (which is the default in the convenience methods like from()).
+        } else if (dur !== 0) {
+          return; //we skip initialization here so that overwriting doesn't occur until the tween actually begins. Otherwise, if you create several immediateRender:true tweens of the same target/properties to drop into a TimelineLite or TimelineMax, the last one created would overwrite the first ones because they didn't get placed into the timeline yet before the first render occurs and kicks in overwriting.
+        }
+      }
+    } else if (v.runBackwards && dur !== 0) {
+      //from() tweens must be handled uniquely: their beginning values must be rendered but we don't want overwriting to occur yet (when time is still 0). Wait until the tween actually begins before doing all the routines like overwriting. At that time, we should render at the END of the tween to ensure that things initialize correctly (remember, from() tweens go backwards)
+      if (startAt) {
+        startAt.render(-1, true);
+        startAt.kill();
+        this._startAt = null;
+      } else {
+        if (this._time !== 0) {
+          //in rare cases (like if a from() tween runs and then is invalidate()-ed), immediateRender could be true but the initial forced-render gets skipped, so there's no need to force the render in this context when the _time is greater than 0
+          immediate = false;
+        }
+
+        pt = {};
+
+        for (p in v) {
+          //copy props into a new object and skip any reserved props, otherwise onComplete or onUpdate or onStart could fire. We should, however, permit autoCSS to go through.
+          if (!_reservedProps[p] || p === "autoCSS") {
+            pt[p] = v[p];
+          }
+        }
+
+        pt.overwrite = 0;
+        pt.data = "isFromStart"; //we tag the tween with as "isFromStart" so that if [inside a plugin] we need to only do something at the very END of a tween, we have a way of identifying this tween as merely the one that's setting the beginning values for a "from()" tween. For example, clearProps in CSSPlugin should only get applied at the very END of a tween and without this tag, from(...{height:100, clearProps:"height", delay:1}) would wipe the height at the beginning of the tween and after 1 second, it'd kick back in.
+
+        pt.lazy = immediate && v.lazy !== false;
+        pt.immediateRender = immediate; //zero-duration tweens render immediately by default, but if we're not specifically instructed to render this tween immediately, we should skip this and merely _init() to record the starting values (rendering them immediately would push them to completion which is wasteful in that case - we'd have to render(-1) immediately after)
+
+        this._startAt = TweenLite.to(this.target, 0, pt);
+
+        if (!immediate) {
+          this._startAt._init(); //ensures that the initial values are recorded
+
+
+          this._startAt._enabled(false); //no need to have the tween render on the next cycle. Disable it because we'll always manually control the renders of the _startAt tween.
+
+
+          if (this.vars.immediateRender) {
+            this._startAt = null;
+          }
+        } else if (this._time === 0) {
+          return;
+        }
+      }
+    }
+
+    this._ease = ease = !ease ? TweenLite.defaultEase : ease instanceof Ease ? ease : typeof ease === "function" ? new Ease(ease, v.easeParams) : _easeMap[ease] || TweenLite.defaultEase;
+
+    if (v.easeParams instanceof Array && ease.config) {
+      this._ease = ease.config.apply(ease, v.easeParams);
+    }
+
+    this._easeType = this._ease._type;
+    this._easePower = this._ease._power;
+    this._firstPT = null;
+
+    if (this._targets) {
+      l = this._targets.length;
+
+      for (i = 0; i < l; i++) {
+        if (this._initProps(this._targets[i], this._propLookup[i] = {}, this._siblings[i], op ? op[i] : null, i)) {
+          initPlugins = true;
+        }
+      }
+    } else {
+      initPlugins = this._initProps(this.target, this._propLookup, this._siblings, op, 0);
+    }
+
+    if (initPlugins) {
+      TweenLite._onPluginEvent("_onInitAllProps", this); //reorders the array in order of priority. Uses a static TweenPlugin method in order to minimize file size in TweenLite
+
+    }
+
+    if (op) if (!this._firstPT) if (typeof this.target !== "function") {
+      //if all tweening properties have been overwritten, kill the tween. If the target is a function, it's probably a delayedCall so let it live.
+      this._enabled(false, false);
+    }
+
+    if (v.runBackwards) {
+      pt = this._firstPT;
+
+      while (pt) {
+        pt.s += pt.c;
+        pt.c = -pt.c;
+        pt = pt._next;
+      }
+    }
+
+    this._onUpdate = v.onUpdate;
+    this._initted = true;
+  };
+
+  p._initProps = function (target, propLookup, siblings, overwrittenProps, index) {
+    var p, i, initPlugins, plugin, pt, v;
+
+    if (target == null) {
+      return false;
+    }
+
+    if (_lazyLookup[target._gsTweenID]) {
+      _lazyRender(); //if other tweens of the same target have recently initted but haven't rendered yet, we've got to force the render so that the starting values are correct (imagine populating a timeline with a bunch of sequential tweens and then jumping to the end)
+
+    }
+
+    if (!this.vars.css) if (target.style) if (target !== window && target.nodeType) if (_plugins.css) if (this.vars.autoCSS !== false) {
+      //it's so common to use TweenLite/Max to animate the css of DOM elements, we assume that if the target is a DOM element, that's what is intended (a convenience so that users don't have to wrap things in css:{}, although we still recommend it for a slight performance boost and better specificity). Note: we cannot check "nodeType" on the window inside an iframe.
+      _autoCSS(this.vars, target);
+    }
+
+    for (p in this.vars) {
+      v = this.vars[p];
+
+      if (_reservedProps[p]) {
+        if (v) if (v instanceof Array || v.push && _isArray(v)) if (v.join("").indexOf("{self}") !== -1) {
+          this.vars[p] = v = this._swapSelfInParams(v, this);
+        }
+      } else if (_plugins[p] && (plugin = new _plugins[p]())._onInitTween(target, this.vars[p], this, index)) {
+        //t - target 		[object]
+        //p - property 		[string]
+        //s - start			[number]
+        //c - change		[number]
+        //f - isFunction	[boolean]
+        //n - name			[string]
+        //pg - isPlugin 	[boolean]
+        //pr - priority		[number]
+        //m - mod           [function | 0]
+        this._firstPT = pt = {
+          _next: this._firstPT,
+          t: plugin,
+          p: "setRatio",
+          s: 0,
+          c: 1,
+          f: 1,
+          n: p,
+          pg: 1,
+          pr: plugin._priority,
+          m: 0
+        };
+        i = plugin._overwriteProps.length;
+
+        while (--i > -1) {
+          propLookup[plugin._overwriteProps[i]] = this._firstPT;
+        }
+
+        if (plugin._priority || plugin._onInitAllProps) {
+          initPlugins = true;
+        }
+
+        if (plugin._onDisable || plugin._onEnable) {
+          this._notifyPluginsOfEnabled = true;
+        }
+
+        if (pt._next) {
+          pt._next._prev = pt;
+        }
+      } else {
+        propLookup[p] = _addPropTween.call(this, target, p, "get", v, p, 0, null, this.vars.stringFilter, index);
+      }
+    }
+
+    if (overwrittenProps) if (this._kill(overwrittenProps, target)) {
+      //another tween may have tried to overwrite properties of this tween before init() was called (like if two tweens start at the same time, the one created second will run first)
+      return this._initProps(target, propLookup, siblings, overwrittenProps, index);
+    }
+    if (this._overwrite > 1) if (this._firstPT) if (siblings.length > 1) if (_applyOverwrite(target, this, propLookup, this._overwrite, siblings)) {
+      this._kill(propLookup, target);
+
+      return this._initProps(target, propLookup, siblings, overwrittenProps, index);
+    }
+    if (this._firstPT) if (this.vars.lazy !== false && this._duration || this.vars.lazy && !this._duration) {
+      //zero duration tweens don't lazy render by default; everything else does.
+      _lazyLookup[target._gsTweenID] = true;
+    }
+    return initPlugins;
+  };
+
+  p.render = function (time, suppressEvents, force) {
+    var self = this,
+        prevTime = self._time,
+        duration = self._duration,
+        prevRawPrevTime = self._rawPrevTime,
+        isComplete,
+        callback,
+        pt,
+        rawPrevTime;
+
+    if (time >= duration - _tinyNum && time >= 0) {
+      //to work around occasional floating point math artifacts.
+      self._totalTime = self._time = duration;
+      self.ratio = self._ease._calcEnd ? self._ease.getRatio(1) : 1;
+
+      if (!self._reversed) {
+        isComplete = true;
+        callback = "onComplete";
+        force = force || self._timeline.autoRemoveChildren; //otherwise, if the animation is unpaused/activated after it's already finished, it doesn't get removed from the parent timeline.
+      }
+
+      if (duration === 0) if (self._initted || !self.vars.lazy || force) {
+        //zero-duration tweens are tricky because we must discern the momentum/direction of time in order to determine whether the starting values should be rendered or the ending values. If the "playhead" of its timeline goes past the zero-duration tween in the forward direction or lands directly on it, the end values should be rendered, but if the timeline's "playhead" moves past it in the backward direction (from a postitive time to a negative time), the starting values must be rendered.
+        if (self._startTime === self._timeline._duration) {
+          //if a zero-duration tween is at the VERY end of a timeline and that timeline renders at its end, it will typically add a tiny bit of cushion to the render time to prevent rounding errors from getting in the way of tweens rendering their VERY end. If we then reverse() that timeline, the zero-duration tween will trigger its onReverseComplete even though technically the playhead didn't pass over it again. It's a very specific edge case we must accommodate.
+          time = 0;
+        }
+
+        if (prevRawPrevTime < 0 || time <= 0 && time >= -_tinyNum || prevRawPrevTime === _tinyNum && self.data !== "isPause") if (prevRawPrevTime !== time) {
+          //note: when this.data is "isPause", it's a callback added by addPause() on a timeline that we should not be triggered when LEAVING its exact start time. In other words, tl.addPause(1).play(1) shouldn't pause.
+          force = true;
+
+          if (prevRawPrevTime > _tinyNum) {
+            callback = "onReverseComplete";
+          }
+        }
+        self._rawPrevTime = rawPrevTime = !suppressEvents || time || prevRawPrevTime === time ? time : _tinyNum; //when the playhead arrives at EXACTLY time 0 (right on top) of a zero-duration tween, we need to discern if events are suppressed so that when the playhead moves again (next time), it'll trigger the callback. If events are NOT suppressed, obviously the callback would be triggered in this render. Basically, the callback should fire either when the playhead ARRIVES or LEAVES this exact spot, not both. Imagine doing a timeline.seek(0) and there's a callback that sits at 0. Since events are suppressed on that seek() by default, nothing will fire, but when the playhead moves off of that position, the callback should fire. This behavior is what people intuitively expect. We set the _rawPrevTime to be a precise tiny number to indicate this scenario rather than using another property/variable which would increase memory usage. This technique is less readable, but more efficient.
+      }
+    } else if (time < _tinyNum) {
+      //to work around occasional floating point math artifacts, round super small values to 0.
+      self._totalTime = self._time = 0;
+      self.ratio = self._ease._calcEnd ? self._ease.getRatio(0) : 0;
+
+      if (prevTime !== 0 || duration === 0 && prevRawPrevTime > 0) {
+        callback = "onReverseComplete";
+        isComplete = self._reversed;
+      }
+
+      if (time > -_tinyNum) {
+        time = 0;
+      } else if (time < 0) {
+        self._active = false;
+        if (duration === 0) if (self._initted || !self.vars.lazy || force) {
+          //zero-duration tweens are tricky because we must discern the momentum/direction of time in order to determine whether the starting values should be rendered or the ending values. If the "playhead" of its timeline goes past the zero-duration tween in the forward direction or lands directly on it, the end values should be rendered, but if the timeline's "playhead" moves past it in the backward direction (from a postitive time to a negative time), the starting values must be rendered.
+          if (prevRawPrevTime >= 0 && !(prevRawPrevTime === _tinyNum && self.data === "isPause")) {
+            force = true;
+          }
+
+          self._rawPrevTime = rawPrevTime = !suppressEvents || time || prevRawPrevTime === time ? time : _tinyNum; //when the playhead arrives at EXACTLY time 0 (right on top) of a zero-duration tween, we need to discern if events are suppressed so that when the playhead moves again (next time), it'll trigger the callback. If events are NOT suppressed, obviously the callback would be triggered in this render. Basically, the callback should fire either when the playhead ARRIVES or LEAVES this exact spot, not both. Imagine doing a timeline.seek(0) and there's a callback that sits at 0. Since events are suppressed on that seek() by default, nothing will fire, but when the playhead moves off of that position, the callback should fire. This behavior is what people intuitively expect. We set the _rawPrevTime to be a precise tiny number to indicate this scenario rather than using another property/variable which would increase memory usage. This technique is less readable, but more efficient.
+        }
+      }
+
+      if (!self._initted || self._startAt && self._startAt.progress()) {
+        //if we render the very beginning (time == 0) of a fromTo(), we must force the render (normal tweens wouldn't need to render at a time of 0 when the prevTime was also 0). This is also mandatory to make sure overwriting kicks in immediately. Also, we check progress() because if startAt has already rendered at its end, we should force a render at its beginning. Otherwise, if you put the playhead directly on top of where a fromTo({immediateRender:false}) starts, and then move it backwards, the from() won't revert its values.
+        force = true;
+      }
+    } else {
+      self._totalTime = self._time = time;
+
+      if (self._easeType) {
+        var r = time / duration,
+            type = self._easeType,
+            pow = self._easePower;
+
+        if (type === 1 || type === 3 && r >= 0.5) {
+          r = 1 - r;
+        }
+
+        if (type === 3) {
+          r *= 2;
+        }
+
+        if (pow === 1) {
+          r *= r;
+        } else if (pow === 2) {
+          r *= r * r;
+        } else if (pow === 3) {
+          r *= r * r * r;
+        } else if (pow === 4) {
+          r *= r * r * r * r;
+        }
+
+        self.ratio = type === 1 ? 1 - r : type === 2 ? r : time / duration < 0.5 ? r / 2 : 1 - r / 2;
+      } else {
+        self.ratio = self._ease.getRatio(time / duration);
+      }
+    }
+
+    if (self._time === prevTime && !force) {
+      return;
+    } else if (!self._initted) {
+      self._init();
+
+      if (!self._initted || self._gc) {
+        //immediateRender tweens typically won't initialize until the playhead advances (_time is greater than 0) in order to ensure that overwriting occurs properly. Also, if all of the tweening properties have been overwritten (which would cause _gc to be true, as set in _init()), we shouldn't continue otherwise an onStart callback could be called for example.
+        return;
+      } else if (!force && self._firstPT && (self.vars.lazy !== false && self._duration || self.vars.lazy && !self._duration)) {
+        self._time = self._totalTime = prevTime;
+        self._rawPrevTime = prevRawPrevTime;
+
+        _lazyTweens.push(self);
+
+        self._lazy = [time, suppressEvents];
+        return;
+      } //_ease is initially set to defaultEase, so now that init() has run, _ease is set properly and we need to recalculate the ratio. Overall this is faster than using conditional logic earlier in the method to avoid having to set ratio twice because we only init() once but renderTime() gets called VERY frequently.
+
+
+      if (self._time && !isComplete) {
+        self.ratio = self._ease.getRatio(self._time / duration);
+      } else if (isComplete && self._ease._calcEnd) {
+        self.ratio = self._ease.getRatio(self._time === 0 ? 0 : 1);
+      }
+    }
+
+    if (self._lazy !== false) {
+      //in case a lazy render is pending, we should flush it because the new render is occurring now (imagine a lazy tween instantiating and then immediately the user calls tween.seek(tween.duration()), skipping to the end - the end render would be forced, and then if we didn't flush the lazy render, it'd fire AFTER the seek(), rendering it at the wrong time.
+      self._lazy = false;
+    }
+
+    if (!self._active) if (!self._paused && self._time !== prevTime && time >= 0) {
+      self._active = true; //so that if the user renders a tween (as opposed to the timeline rendering it), the timeline is forced to re-render and align it with the proper time/frame on the next rendering cycle. Maybe the tween already finished but the user manually re-renders it as halfway done.
+    }
+
+    if (prevTime === 0) {
+      if (self._startAt) {
+        if (time >= 0) {
+          self._startAt.render(time, true, force);
+        } else if (!callback) {
+          callback = "_dummyGS"; //if no callback is defined, use a dummy value just so that the condition at the end evaluates as true because _startAt should render AFTER the normal render loop when the time is negative. We could handle this in a more intuitive way, of course, but the render loop is the MOST important thing to optimize, so this technique allows us to avoid adding extra conditional logic in a high-frequency area.
+        }
+      }
+
+      if (self.vars.onStart) if (self._time !== 0 || duration === 0) if (!suppressEvents) {
+        self._callback("onStart");
+      }
+    }
+
+    pt = self._firstPT;
+
+    while (pt) {
+      if (pt.f) {
+        pt.t[pt.p](pt.c * self.ratio + pt.s);
+      } else {
+        pt.t[pt.p] = pt.c * self.ratio + pt.s;
+      }
+
+      pt = pt._next;
+    }
+
+    if (self._onUpdate) {
+      if (time < 0) if (self._startAt && time !== -0.0001) {
+        //if the tween is positioned at the VERY beginning (_startTime 0) of its parent timeline, it's illegal for the playhead to go back further, so we should not render the recorded startAt values.
+        self._startAt.render(time, true, force); //note: for performance reasons, we tuck this conditional logic inside less traveled areas (most tweens don't have an onUpdate). We'd just have it at the end before the onComplete, but the values should be updated before any onUpdate is called, so we ALSO put it here and then if it's not called, we do so later near the onComplete.
+
+      }
+      if (!suppressEvents) if (self._time !== prevTime || isComplete || force) {
+        self._callback("onUpdate");
+      }
+    }
+
+    if (callback) if (!self._gc || force) {
+      //check _gc because there's a chance that kill() could be called in an onUpdate
+      if (time < 0 && self._startAt && !self._onUpdate && time !== -0.0001) {
+        //-0.0001 is a special value that we use when looping back to the beginning of a repeated TimelineMax, in which case we shouldn't render the _startAt values.
+        self._startAt.render(time, true, force);
+      }
+
+      if (isComplete) {
+        if (self._timeline.autoRemoveChildren) {
+          self._enabled(false, false);
+        }
+
+        self._active = false;
+      }
+
+      if (!suppressEvents && self.vars[callback]) {
+        self._callback(callback);
+      }
+
+      if (duration === 0 && self._rawPrevTime === _tinyNum && rawPrevTime !== _tinyNum) {
+        //the onComplete or onReverseComplete could trigger movement of the playhead and for zero-duration tweens (which must discern direction) that land directly back on their start time, we don't want to fire again on the next render. Think of several addPause()'s in a timeline that forces the playhead to a certain spot, but what if it's already paused and another tween is tweening the "time" of the timeline? Each time it moves [forward] past that spot, it would move back, and since suppressEvents is true, it'd reset _rawPrevTime to _tinyNum so that when it begins again, the callback would fire (so ultimately it could bounce back and forth during that tween). Again, this is a very uncommon scenario, but possible nonetheless.
+        self._rawPrevTime = 0;
+      }
+    }
+  };
+
+  p._kill = function (vars, target, overwritingTween) {
+    if (vars === "all") {
+      vars = null;
+    }
+
+    if (vars == null) if (target == null || target === this.target) {
+      this._lazy = false;
+      return this._enabled(false, false);
+    }
+    target = typeof target !== "string" ? target || this._targets || this.target : TweenLite.selector(target) || target;
+    var simultaneousOverwrite = overwritingTween && this._time && overwritingTween._startTime === this._startTime && this._timeline === overwritingTween._timeline,
+        firstPT = this._firstPT,
+        i,
+        overwrittenProps,
+        p,
+        pt,
+        propLookup,
+        changed,
+        killProps,
+        record,
+        killed;
+
+    if ((_isArray(target) || _isSelector(target)) && typeof target[0] !== "number") {
+      i = target.length;
+
+      while (--i > -1) {
+        if (this._kill(vars, target[i], overwritingTween)) {
+          changed = true;
+        }
+      }
+    } else {
+      if (this._targets) {
+        i = this._targets.length;
+
+        while (--i > -1) {
+          if (target === this._targets[i]) {
+            propLookup = this._propLookup[i] || {};
+            this._overwrittenProps = this._overwrittenProps || [];
+            overwrittenProps = this._overwrittenProps[i] = vars ? this._overwrittenProps[i] || {} : "all";
+            break;
+          }
+        }
+      } else if (target !== this.target) {
+        return false;
+      } else {
+        propLookup = this._propLookup;
+        overwrittenProps = this._overwrittenProps = vars ? this._overwrittenProps || {} : "all";
+      }
+
+      if (propLookup) {
+        killProps = vars || propLookup;
+        record = vars !== overwrittenProps && overwrittenProps !== "all" && vars !== propLookup && (_typeof(vars) !== "object" || !vars._tempKill); //_tempKill is a super-secret way to delete a particular tweening property but NOT have it remembered as an official overwritten property (like in BezierPlugin)
+
+        if (overwritingTween && (TweenLite.onOverwrite || this.vars.onOverwrite)) {
+          for (p in killProps) {
+            if (propLookup[p]) {
+              if (!killed) {
+                killed = [];
+              }
+
+              killed.push(p);
+            }
+          }
+
+          if ((killed || !vars) && !_onOverwrite(this, overwritingTween, target, killed)) {
+            //if the onOverwrite returned false, that means the user wants to override the overwriting (cancel it).
+            return false;
+          }
+        }
+
+        for (p in killProps) {
+          if (pt = propLookup[p]) {
+            if (simultaneousOverwrite) {
+              //if another tween overwrites this one and they both start at exactly the same time, yet this tween has already rendered once (for example, at 0.001) because it's first in the queue, we should revert the values to where they were at 0 so that the starting values aren't contaminated on the overwriting tween.
+              if (pt.f) {
+                pt.t[pt.p](pt.s);
+              } else {
+                pt.t[pt.p] = pt.s;
+              }
+
+              changed = true;
+            }
+
+            if (pt.pg && pt.t._kill(killProps)) {
+              changed = true; //some plugins need to be notified so they can perform cleanup tasks first
+            }
+
+            if (!pt.pg || pt.t._overwriteProps.length === 0) {
+              if (pt._prev) {
+                pt._prev._next = pt._next;
+              } else if (pt === this._firstPT) {
+                this._firstPT = pt._next;
+              }
+
+              if (pt._next) {
+                pt._next._prev = pt._prev;
+              }
+
+              pt._next = pt._prev = null;
+            }
+
+            delete propLookup[p];
+          }
+
+          if (record) {
+            overwrittenProps[p] = 1;
+          }
+        }
+
+        if (!this._firstPT && this._initted && firstPT) {
+          //if all tweening properties are killed, kill the tween. Without this line, if there's a tween with multiple targets and then you killTweensOf() each target individually, the tween would technically still remain active and fire its onComplete even though there aren't any more properties tweening.
+          this._enabled(false, false);
+        }
+      }
+    }
+
+    return changed;
+  };
+
+  p.invalidate = function () {
+    if (this._notifyPluginsOfEnabled) {
+      TweenLite._onPluginEvent("_onDisable", this);
+    }
+
+    var t = this._time;
+    this._firstPT = this._overwrittenProps = this._startAt = this._onUpdate = null;
+    this._notifyPluginsOfEnabled = this._active = this._lazy = false;
+    this._propLookup = this._targets ? {} : [];
+    Animation.prototype.invalidate.call(this);
+
+    if (this.vars.immediateRender) {
+      this._time = -_tinyNum; //forces a render without having to set the render() "force" parameter to true because we want to allow lazying by default (using the "force" parameter always forces an immediate full render)
+
+      this.render(t, false, this.vars.lazy !== false);
+    }
+
+    return this;
+  };
+
+  p._enabled = function (enabled, ignoreTimeline) {
+    if (!_tickerActive) {
+      _ticker.wake();
+    }
+
+    if (enabled && this._gc) {
+      var targets = this._targets,
+          i;
+
+      if (targets) {
+        i = targets.length;
+
+        while (--i > -1) {
+          this._siblings[i] = _register(targets[i], this, true);
+        }
+      } else {
+        this._siblings = _register(this.target, this, true);
+      }
+    }
+
+    Animation.prototype._enabled.call(this, enabled, ignoreTimeline);
+
+    if (this._notifyPluginsOfEnabled) if (this._firstPT) {
+      return TweenLite._onPluginEvent(enabled ? "_onEnable" : "_onDisable", this);
+    }
+    return false;
+  }; //----TweenLite static methods -----------------------------------------------------
+
+
+  TweenLite.to = function (target, duration, vars) {
+    return new TweenLite(target, duration, vars);
+  };
+
+  TweenLite.from = function (target, duration, vars) {
+    vars.runBackwards = true;
+    vars.immediateRender = vars.immediateRender != false;
+    return new TweenLite(target, duration, vars);
+  };
+
+  TweenLite.fromTo = function (target, duration, fromVars, toVars) {
+    toVars.startAt = fromVars;
+    toVars.immediateRender = toVars.immediateRender != false && fromVars.immediateRender != false;
+    return new TweenLite(target, duration, toVars);
+  };
+
+  TweenLite.delayedCall = function (delay, callback, params, scope, useFrames) {
+    return new TweenLite(callback, 0, {
+      delay: delay,
+      onComplete: callback,
+      onCompleteParams: params,
+      callbackScope: scope,
+      onReverseComplete: callback,
+      onReverseCompleteParams: params,
+      immediateRender: false,
+      lazy: false,
+      useFrames: useFrames,
+      overwrite: 0
+    });
+  };
+
+  TweenLite.set = function (target, vars) {
+    return new TweenLite(target, 0, vars);
+  };
+
+  TweenLite.getTweensOf = function (target, onlyActive) {
+    if (target == null) {
+      return [];
+    }
+
+    target = typeof target !== "string" ? target : TweenLite.selector(target) || target;
+    var i, a, j, t;
+
+    if ((_isArray(target) || _isSelector(target)) && typeof target[0] !== "number") {
+      i = target.length;
+      a = [];
+
+      while (--i > -1) {
+        a = a.concat(TweenLite.getTweensOf(target[i], onlyActive));
+      }
+
+      i = a.length; //now get rid of any duplicates (tweens of arrays of objects could cause duplicates)
+
+      while (--i > -1) {
+        t = a[i];
+        j = i;
+
+        while (--j > -1) {
+          if (t === a[j]) {
+            a.splice(i, 1);
+          }
+        }
+      }
+    } else if (target._gsTweenID) {
+      a = _register(target).concat();
+      i = a.length;
+
+      while (--i > -1) {
+        if (a[i]._gc || onlyActive && !a[i].isActive()) {
+          a.splice(i, 1);
+        }
+      }
+    }
+
+    return a || [];
+  };
+
+  TweenLite.killTweensOf = TweenLite.killDelayedCallsTo = function (target, onlyActive, vars) {
+    if (_typeof(onlyActive) === "object") {
+      vars = onlyActive; //for backwards compatibility (before "onlyActive" parameter was inserted)
+
+      onlyActive = false;
+    }
+
+    var a = TweenLite.getTweensOf(target, onlyActive),
+        i = a.length;
+
+    while (--i > -1) {
+      a[i]._kill(vars, target);
+    }
+  };
+  /*
+   * ----------------------------------------------------------------
+   * TweenPlugin   (could easily be split out as a separate file/class, but included for ease of use (so that people don't need to include another script call before loading plugins which is easy to forget)
+   * ----------------------------------------------------------------
+   */
+
+
+  var TweenPlugin = _class("plugins.TweenPlugin", function (props, priority) {
+    this._overwriteProps = (props || "").split(",");
+    this._propName = this._overwriteProps[0];
+    this._priority = priority || 0;
+    this._super = TweenPlugin.prototype;
+  }, true);
+
+  p = TweenPlugin.prototype;
+  TweenPlugin.version = "1.19.0";
+  TweenPlugin.API = 2;
+  p._firstPT = null;
+  p._addTween = _addPropTween;
+  p.setRatio = _setRatio;
+
+  p._kill = function (lookup) {
+    var a = this._overwriteProps,
+        pt = this._firstPT,
+        i;
+
+    if (lookup[this._propName] != null) {
+      this._overwriteProps = [];
+    } else {
+      i = a.length;
+
+      while (--i > -1) {
+        if (lookup[a[i]] != null) {
+          a.splice(i, 1);
+        }
+      }
+    }
+
+    while (pt) {
+      if (lookup[pt.n] != null) {
+        if (pt._next) {
+          pt._next._prev = pt._prev;
+        }
+
+        if (pt._prev) {
+          pt._prev._next = pt._next;
+          pt._prev = null;
+        } else if (this._firstPT === pt) {
+          this._firstPT = pt._next;
+        }
+      }
+
+      pt = pt._next;
+    }
+
+    return false;
+  };
+
+  p._mod = p._roundProps = function (lookup) {
+    var pt = this._firstPT,
+        val;
+
+    while (pt) {
+      val = lookup[this._propName] || pt.n != null && lookup[pt.n.split(this._propName + "_").join("")];
+
+      if (val && typeof val === "function") {
+        //some properties that are very plugin-specific add a prefix named after the _propName plus an underscore, so we need to ignore that extra stuff here.
+        if (pt.f === 2) {
+          pt.t._applyPT.m = val;
+        } else {
+          pt.m = val;
+        }
+      }
+
+      pt = pt._next;
+    }
+  };
+
+  TweenLite._onPluginEvent = function (type, tween) {
+    var pt = tween._firstPT,
+        changed,
+        pt2,
+        first,
+        last,
+        next;
+
+    if (type === "_onInitAllProps") {
+      //sorts the PropTween linked list in order of priority because some plugins need to render earlier/later than others, like MotionBlurPlugin applies its effects after all x/y/alpha tweens have rendered on each frame.
+      while (pt) {
+        next = pt._next;
+        pt2 = first;
+
+        while (pt2 && pt2.pr > pt.pr) {
+          pt2 = pt2._next;
+        }
+
+        if (pt._prev = pt2 ? pt2._prev : last) {
+          pt._prev._next = pt;
+        } else {
+          first = pt;
+        }
+
+        if (pt._next = pt2) {
+          pt2._prev = pt;
+        } else {
+          last = pt;
+        }
+
+        pt = next;
+      }
+
+      pt = tween._firstPT = first;
+    }
+
+    while (pt) {
+      if (pt.pg) if (typeof pt.t[type] === "function") if (pt.t[type]()) {
+        changed = true;
+      }
+      pt = pt._next;
+    }
+
+    return changed;
+  };
+
+  TweenPlugin.activate = function (plugins) {
+    var i = plugins.length;
+
+    while (--i > -1) {
+      if (plugins[i].API === TweenPlugin.API) {
+        _plugins[new plugins[i]()._propName] = plugins[i];
+      }
+    }
+
+    return true;
+  }; //provides a more concise way to define plugins that have no dependencies besides TweenPlugin and TweenLite, wrapping common boilerplate stuff into one function (added in 1.9.0). You don't NEED to use this to define a plugin - the old way still works and can be useful in certain (rare) situations.
+
+
+  _gsDefine.plugin = function (config) {
+    if (!config || !config.propName || !config.init || !config.API) {
+      throw "illegal plugin definition.";
+    }
+
+    var propName = config.propName,
+        priority = config.priority || 0,
+        overwriteProps = config.overwriteProps,
+        map = {
+      init: "_onInitTween",
+      set: "setRatio",
+      kill: "_kill",
+      round: "_mod",
+      mod: "_mod",
+      initAll: "_onInitAllProps"
+    },
+        Plugin = _class("plugins." + propName.charAt(0).toUpperCase() + propName.substr(1) + "Plugin", function () {
+      TweenPlugin.call(this, propName, priority);
+      this._overwriteProps = overwriteProps || [];
+    }, config.global === true),
+        p = Plugin.prototype = new TweenPlugin(propName),
+        prop;
+
+    p.constructor = Plugin;
+    Plugin.API = config.API;
+
+    for (prop in map) {
+      if (typeof config[prop] === "function") {
+        p[map[prop]] = config[prop];
+      }
+    }
+
+    Plugin.version = config.version;
+    TweenPlugin.activate([Plugin]);
+    return Plugin;
+  }; //now run through all the dependencies discovered and if any are missing, log that to the console as a warning. This is why it's best to have TweenLite load last - it can check all the dependencies for you.
+
+
+  a = window._gsQueue;
+
+  if (a) {
+    for (i = 0; i < a.length; i++) {
+      a[i]();
+    }
+
+    for (p in _defLookup) {
+      if (!_defLookup[p].func) {
+        window.console.log("GSAP encountered missing dependency: " + p);
+      }
+    }
+  }
+
+  _tickerActive = false; //ensures that the first official animation forces a ticker.tick() to update the time when it is instantiated
+
+  return TweenLite;
+}(_gsScope, "TweenLite");
+var globals = _gsScope.GreenSockGlobals;
+var nonGlobals = globals.com.greensock;
+
+var SimpleTimeline = nonGlobals.core.SimpleTimeline;
+var Animation = nonGlobals.core.Animation;
+var Ease = globals.Ease;
+var Linear = globals.Linear;
+var Power0 = Linear;
+var Power1 = globals.Power1;
+var Power2 = globals.Power2;
+var Power3 = globals.Power3;
+var Power4 = globals.Power4;
+var TweenPlugin = globals.TweenPlugin;
+var EventDispatcher = nonGlobals.events.EventDispatcher;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14)(module), __webpack_require__(1)))
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+/* 
+ *************************************
+ * Scroll Lock
+ * @https://gist.github.com/barneycarroll/6550066
+ * @return {Void}
+ *************************************
+ */
+
+/*
+	 // Locks the page
+	$.scrollLock( true );
+	
+	// Unlocks the page
+	$.scrollLock( false );
+*/
+(function ($) {
+  'use strict';
+
+  $.scrollLock = function scrollLockClosure() {
+    var $html = $('html'),
+        // State: unlocked by default
+    locked = false,
+        // State: scroll to revert to
+    prevScroll = {
+      scrollLeft: $(window).scrollLeft(),
+      scrollTop: $(window).scrollTop()
+    },
+        // State: styles to revert to
+    prevStyles = {},
+        lockStyles = {
+      'overflow-y': 'scroll',
+      'position': 'fixed',
+      'width': '100%'
+    }; // Instantiate cache in case someone tries to unlock before locking
+
+    saveStyles(); // Save context's inline styles in cache
+
+    function saveStyles() {
+      var styleAttr = $html.attr('style'),
+          styleStrs = [],
+          styleHash = {};
+
+      if (!styleAttr) {
+        return;
+      }
+
+      styleStrs = styleAttr.split(/;\s/);
+      $.each(styleStrs, function serializeStyleProp(styleString) {
+        if (!styleString) {
+          return;
+        }
+
+        var keyValue = styleString.split(/\s:\s/);
+
+        if (keyValue.length < 2) {
+          return;
+        }
+
+        styleHash[keyValue[0]] = keyValue[1];
+      });
+      $.extend(prevStyles, styleHash);
+    }
+
+    function lock() {
+      var appliedLock = {}; // Duplicate execution will break DOM statefulness
+
+      if (locked) {
+        return;
+      } // Save scroll state...
+
+
+      prevScroll = {
+        scrollLeft: $(window).scrollLeft(),
+        scrollTop: $(window).scrollTop()
+      }; // ...and styles
+
+      saveStyles(); // Compose our applied CSS
+
+      $.extend(appliedLock, lockStyles, {
+        // And apply scroll state as styles
+        'left': -prevScroll.scrollLeft + 'px',
+        'top': -prevScroll.scrollTop + 'px'
+      }); // Then lock styles...
+
+      $html.css(appliedLock); // ...and scroll state
+
+      $(window).scrollLeft(0).scrollTop(0);
+      locked = true;
+    }
+
+    function unlock() {
+      // Duplicate execution will break DOM statefulness
+      if (!locked) {
+        return;
+      } // Revert styles
+
+
+      $html.attr('style', $('<x>').css(prevStyles).attr('style') || ''); // Revert scroll values
+
+      $(window).scrollLeft(prevScroll.scrollLeft).scrollTop(prevScroll.scrollTop);
+      locked = false;
+    }
+
+    return function scrollLock(on) {
+      // If an argument is passed, lock or unlock depending on truthiness
+      if (arguments.length) {
+        if (on) {
+          lock();
+        } else {
+          unlock();
+        }
+      } // Otherwise, toggle
+      else {
+          if (locked) {
+            unlock();
+          } else {
+            lock();
+          }
+        }
+    };
+  }();
+})(jQuery);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+/* 
+ *************************************
+ * Get all attributes of an element using jQuery
+ *
+ * @return {array}                        - Returns a new array.
+ * @usage:
+ 
+	$( '#demo' ).attr();  // { "data-a": "1", "id": "b" }
+
+ *************************************
+ */
+(function (old) {
+  $.fn.attr = function () {
+    if (arguments.length === 0) {
+      if (this.length === 0) {
+        return null;
+      }
+
+      var obj = {};
+      $.each(this[0].attributes, function () {
+        if (this.specified) {
+          obj[this.name] = this.value;
+        }
+      });
+      return obj;
+    }
+
+    return old.apply(this, arguments);
+  };
+})($.fn.attr);
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 /* 
@@ -898,7 +3639,7 @@ window.$ = window.jQuery;
 })(jQuery);
 
 /***/ }),
-/* 1 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1024,34 +3765,137 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-// extracted by mini-css-extract-plugin
+/* 
+ *************************************
+ * jQuery hashchange event - v1.3 - 7/21/2010
+ * http://benalman.com/projects/jquery-hashchange-plugin/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ * 
+ *************************************
+ */
+(function ($, window, undefined) {
+  '$:nomunge';
+
+  var str_hashchange = 'hashchange',
+      doc = document,
+      fake_onhashchange,
+      special = $.event.special,
+      doc_mode = doc.documentMode,
+      supports_onhashchange = 'on' + str_hashchange in window && (doc_mode === undefined || doc_mode > 7);
+
+  function get_fragment(url) {
+    url = url || location.href;
+    return '#' + url.replace(/^[^#]*#?(.*)$/, '$1');
+  }
+
+  ;
+
+  $.fn[str_hashchange] = function (fn) {
+    return fn ? this.bind(str_hashchange, fn) : this.trigger(str_hashchange);
+  };
+
+  $.fn[str_hashchange].delay = 50;
+  special[str_hashchange] = $.extend(special[str_hashchange], {
+    setup: function setup() {
+      if (supports_onhashchange) {
+        return false;
+      }
+
+      $(fake_onhashchange.start);
+    },
+    teardown: function teardown() {
+      if (supports_onhashchange) {
+        return false;
+      }
+
+      $(fake_onhashchange.stop);
+    }
+  });
+
+  fake_onhashchange = function () {
+    var self = {},
+        timeout_id,
+        last_hash = get_fragment(),
+        fn_retval = function fn_retval(val) {
+      return val;
+    },
+        history_set = fn_retval,
+        history_get = fn_retval;
+
+    self.start = function () {
+      timeout_id || poll();
+    };
+
+    self.stop = function () {
+      timeout_id && clearTimeout(timeout_id);
+      timeout_id = undefined;
+    };
+
+    function poll() {
+      var hash = get_fragment(),
+          history_hash = history_get(last_hash);
+
+      if (hash !== last_hash) {
+        history_set(last_hash = hash, history_hash);
+        $(window).trigger(str_hashchange);
+      } else if (history_hash !== last_hash) {
+        location.href = location.href.replace(/#.*/, '') + history_hash;
+      }
+
+      timeout_id = setTimeout(poll, $.fn[str_hashchange].delay);
+    }
+
+    ;
+    $.browser.msie && !supports_onhashchange && function () {
+      var iframe, iframe_src;
+
+      self.start = function () {
+        if (!iframe) {
+          iframe_src = $.fn[str_hashchange].src;
+          iframe_src = iframe_src && iframe_src + get_fragment();
+          iframe = $('<iframe tabindex="-1" title="empty"/>').hide().one('load', function () {
+            iframe_src || history_set(get_fragment());
+            poll();
+          }).attr('src', iframe_src || 'javascript:0').insertAfter('body')[0].contentWindow;
+
+          doc.onpropertychange = function () {
+            try {
+              if (event.propertyName === 'title') {
+                iframe.document.title = doc.title;
+              }
+            } catch (e) {}
+          };
+        }
+      };
+
+      self.stop = fn_retval;
+
+      history_get = function history_get() {
+        return get_fragment(iframe.location.href);
+      };
+
+      history_set = function history_set(hash, history_hash) {
+        var iframe_doc = iframe.document,
+            domain = $.fn[str_hashchange].domain;
+
+        if (hash !== history_hash) {
+          iframe_doc.title = doc.title;
+          iframe_doc.open();
+          domain && iframe_doc.write('<script>document.domain="' + domain + '"</script>');
+          iframe_doc.close();
+          iframe.location.hash = hash;
+        }
+      };
+    }();
+    return self;
+  }();
+})(jQuery, this);
 
 /***/ }),
 /* 7 */
@@ -1091,6 +3935,66 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = function(originalModule) {
+	if (!originalModule.webpackPolyfill) {
+		var module = Object.create(originalModule);
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		Object.defineProperty(module, "exports", {
+			enumerable: true
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports) {
 
 /* 
@@ -1205,37 +4109,1935 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 14 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 15 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 16 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 17 */
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(setImmediate) {function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*
+ * jQuery FlexSlider v2.7.0
+ * Copyright 2012 WooThemes
+ * Contributing Author: Tyler Smith
+ */
+(function ($) {
+  var focused = true; //FlexSlider: Object Instance
+
+  $.flexslider = function (el, options) {
+    var slider = $(el); // making variables public
+    //if rtl value was not passed and html is in rtl..enable it by default.
+
+    if (typeof options.rtl == 'undefined' && $('html').attr('dir') == 'rtl') {
+      options.rtl = true;
+    }
+
+    slider.vars = $.extend({}, $.flexslider.defaults, options);
+    var namespace = slider.vars.namespace,
+        msGesture = window.navigator && window.navigator.msPointerEnabled && window.MSGesture,
+        touch = ("ontouchstart" in window || msGesture || window.DocumentTouch && document instanceof DocumentTouch) && slider.vars.touch,
+        // deprecating this idea, as devices are being released with both of these events
+    eventType = "click touchend MSPointerUp keyup",
+        watchedEvent = "",
+        watchedEventClearTimer,
+        vertical = slider.vars.direction === "vertical",
+        reverse = slider.vars.reverse,
+        carousel = slider.vars.itemWidth > 0,
+        fade = slider.vars.animation === "fade",
+        asNav = slider.vars.asNavFor !== "",
+        methods = {}; // Store a reference to the slider object
+
+    $.data(el, "flexslider", slider); // Private slider methods
+
+    methods = {
+      init: function init() {
+        slider.animating = false; // Get current slide and make sure it is a number
+
+        slider.currentSlide = parseInt(slider.vars.startAt ? slider.vars.startAt : 0, 10);
+
+        if (isNaN(slider.currentSlide)) {
+          slider.currentSlide = 0;
+        }
+
+        slider.animatingTo = slider.currentSlide;
+        slider.atEnd = slider.currentSlide === 0 || slider.currentSlide === slider.last;
+        slider.containerSelector = slider.vars.selector.substr(0, slider.vars.selector.search(' '));
+        slider.slides = $(slider.vars.selector, slider);
+        slider.container = $(slider.containerSelector, slider);
+        slider.count = slider.slides.length; // SYNC:
+
+        slider.syncExists = $(slider.vars.sync).length > 0; // SLIDE:
+
+        if (slider.vars.animation === "slide") {
+          slider.vars.animation = "swing";
+        }
+
+        slider.prop = vertical ? "top" : slider.vars.rtl ? "marginRight" : "marginLeft";
+        slider.args = {}; // SLIDESHOW:
+
+        slider.manualPause = false;
+        slider.stopped = false; //PAUSE WHEN INVISIBLE
+
+        slider.started = false;
+        slider.startTimeout = null; // TOUCH/USECSS:
+
+        slider.transitions = !slider.vars.video && !fade && slider.vars.useCSS && function () {
+          var obj = document.createElement('div'),
+              props = ['perspectiveProperty', 'WebkitPerspective', 'MozPerspective', 'OPerspective', 'msPerspective'];
+
+          for (var i in props) {
+            if (obj.style[props[i]] !== undefined) {
+              slider.pfx = props[i].replace('Perspective', '').toLowerCase();
+              slider.prop = "-" + slider.pfx + "-transform";
+              return true;
+            }
+          }
+
+          return false;
+        }();
+
+        slider.ensureAnimationEnd = ''; // CONTROLSCONTAINER:
+
+        if (slider.vars.controlsContainer !== "") slider.controlsContainer = $(slider.vars.controlsContainer).length > 0 && $(slider.vars.controlsContainer); // MANUAL:
+
+        if (slider.vars.manualControls !== "") slider.manualControls = $(slider.vars.manualControls).length > 0 && $(slider.vars.manualControls); // CUSTOM DIRECTION NAV:
+
+        if (slider.vars.customDirectionNav !== "") slider.customDirectionNav = $(slider.vars.customDirectionNav).length === 2 && $(slider.vars.customDirectionNav); // RANDOMIZE:
+
+        if (slider.vars.randomize) {
+          slider.slides.sort(function () {
+            return Math.round(Math.random()) - 0.5;
+          });
+          slider.container.empty().append(slider.slides);
+        }
+
+        slider.doMath(); // INIT
+
+        slider.setup("init"); // CONTROLNAV:
+
+        if (slider.vars.controlNav) {
+          methods.controlNav.setup();
+        } // DIRECTIONNAV:
+
+
+        if (slider.vars.directionNav) {
+          methods.directionNav.setup();
+        } // KEYBOARD:
+
+
+        if (slider.vars.keyboard && ($(slider.containerSelector).length === 1 || slider.vars.multipleKeyboard)) {
+          $(document).bind('keyup', function (event) {
+            var keycode = event.keyCode;
+
+            if (!slider.animating && (keycode === 39 || keycode === 37)) {
+              var target = slider.vars.rtl ? keycode === 37 ? slider.getTarget('next') : keycode === 39 ? slider.getTarget('prev') : false : keycode === 39 ? slider.getTarget('next') : keycode === 37 ? slider.getTarget('prev') : false;
+              slider.flexAnimate(target, slider.vars.pauseOnAction);
+            }
+          });
+        } // MOUSEWHEEL:
+
+
+        if (slider.vars.mousewheel) {
+          slider.bind('mousewheel', function (event, delta, deltaX, deltaY) {
+            event.preventDefault();
+            var target = delta < 0 ? slider.getTarget('next') : slider.getTarget('prev');
+            slider.flexAnimate(target, slider.vars.pauseOnAction);
+          });
+        } // PAUSEPLAY
+
+
+        if (slider.vars.pausePlay) {
+          methods.pausePlay.setup();
+        } //PAUSE WHEN INVISIBLE
+
+
+        if (slider.vars.slideshow && slider.vars.pauseInvisible) {
+          methods.pauseInvisible.init();
+        } // SLIDSESHOW
+
+
+        if (slider.vars.slideshow) {
+          if (slider.vars.pauseOnHover) {
+            slider.hover(function () {
+              if (!slider.manualPlay && !slider.manualPause) {
+                slider.pause();
+              }
+            }, function () {
+              if (!slider.manualPause && !slider.manualPlay && !slider.stopped) {
+                slider.play();
+              }
+            });
+          } // initialize animation
+          //If we're visible, or we don't use PageVisibility API
+
+
+          if (!slider.vars.pauseInvisible || !methods.pauseInvisible.isHidden()) {
+            slider.vars.initDelay > 0 ? slider.startTimeout = setTimeout(slider.play, slider.vars.initDelay) : slider.play();
+          }
+        } // ASNAV:
+
+
+        if (asNav) {
+          methods.asNav.setup();
+        } // TOUCH
+
+
+        if (touch && slider.vars.touch) {
+          methods.touch();
+        } // FADE&&SMOOTHHEIGHT || SLIDE:
+
+
+        if (!fade || fade && slider.vars.smoothHeight) {
+          $(window).bind("resize orientationchange focus", methods.resize);
+        }
+
+        slider.find("img").attr("draggable", "false"); // API: start() Callback
+
+        setTimeout(function () {
+          slider.vars.start(slider);
+        }, 200);
+      },
+      asNav: {
+        setup: function setup() {
+          slider.asNav = true;
+          slider.animatingTo = Math.floor(slider.currentSlide / slider.move);
+          slider.currentItem = slider.currentSlide;
+          slider.slides.removeClass(namespace + "active-slide").eq(slider.currentItem).addClass(namespace + "active-slide");
+
+          if (!msGesture) {
+            slider.slides.on(eventType, function (e) {
+              e.preventDefault();
+              var $slide = $(this),
+                  target = $slide.index();
+              var posFromX;
+
+              if (slider.vars.rtl) {
+                posFromX = -1 * ($slide.offset().right - $(slider).scrollLeft()); // Find position of slide relative to right of slider container
+              } else {
+                posFromX = $slide.offset().left - $(slider).scrollLeft(); // Find position of slide relative to left of slider container
+              }
+
+              if (posFromX <= 0 && $slide.hasClass(namespace + 'active-slide')) {
+                slider.flexAnimate(slider.getTarget("prev"), true);
+              } else if (!$(slider.vars.asNavFor).data('flexslider').animating && !$slide.hasClass(namespace + "active-slide")) {
+                slider.direction = slider.currentItem < target ? "next" : "prev";
+                slider.flexAnimate(target, slider.vars.pauseOnAction, false, true, true);
+              }
+            });
+          } else {
+            el._slider = slider;
+            slider.slides.each(function () {
+              var that = this;
+              that._gesture = new MSGesture();
+              that._gesture.target = that;
+              that.addEventListener("MSPointerDown", function (e) {
+                e.preventDefault();
+
+                if (e.currentTarget._gesture) {
+                  e.currentTarget._gesture.addPointer(e.pointerId);
+                }
+              }, false);
+              that.addEventListener("MSGestureTap", function (e) {
+                e.preventDefault();
+                var $slide = $(this),
+                    target = $slide.index();
+
+                if (!$(slider.vars.asNavFor).data('flexslider').animating && !$slide.hasClass('active')) {
+                  slider.direction = slider.currentItem < target ? "next" : "prev";
+                  slider.flexAnimate(target, slider.vars.pauseOnAction, false, true, true);
+                }
+              });
+            });
+          }
+        }
+      },
+      controlNav: {
+        setup: function setup() {
+          if (!slider.manualControls) {
+            methods.controlNav.setupPaging();
+          } else {
+            // MANUALCONTROLS:
+            methods.controlNav.setupManual();
+          }
+        },
+        setupPaging: function setupPaging() {
+          var type = slider.vars.controlNav === "thumbnails" ? 'control-thumbs' : 'control-paging',
+              j = 1,
+              item,
+              slide;
+          slider.controlNavScaffold = $('<ol class="' + namespace + 'control-nav ' + namespace + type + '"></ol>');
+
+          if (slider.pagingCount > 1) {
+            for (var i = 0; i < slider.pagingCount; i++) {
+              slide = slider.slides.eq(i);
+
+              if (undefined === slide.attr('data-thumb-alt')) {
+                slide.attr('data-thumb-alt', '');
+              }
+
+              var altText = '' !== slide.attr('data-thumb-alt') ? altText = ' alt="' + slide.attr('data-thumb-alt') + '"' : '';
+              item = slider.vars.controlNav === "thumbnails" ? '<img src="' + slide.attr('data-thumb') + '"' + altText + '/>' : '<a href="#">' + j + '</a>';
+
+              if ('thumbnails' === slider.vars.controlNav && true === slider.vars.thumbCaptions) {
+                var captn = slide.attr('data-thumbcaption');
+
+                if ('' !== captn && undefined !== captn) {
+                  item += '<span class="' + namespace + 'caption">' + captn + '</span>';
+                }
+              }
+
+              slider.controlNavScaffold.append('<li>' + item + '</li>');
+              j++;
+            }
+          } // CONTROLSCONTAINER:
+
+
+          slider.controlsContainer ? $(slider.controlsContainer).append(slider.controlNavScaffold) : slider.append(slider.controlNavScaffold);
+          methods.controlNav.set();
+          methods.controlNav.active();
+          slider.controlNavScaffold.delegate('a, img', eventType, function (event) {
+            event.preventDefault();
+
+            if (watchedEvent === "" || watchedEvent === event.type) {
+              var $this = $(this),
+                  target = slider.controlNav.index($this);
+
+              if (!$this.hasClass(namespace + 'active')) {
+                slider.direction = target > slider.currentSlide ? "next" : "prev";
+                slider.flexAnimate(target, slider.vars.pauseOnAction);
+              }
+            } // setup flags to prevent event duplication
+
+
+            if (watchedEvent === "") {
+              watchedEvent = event.type;
+            }
+
+            methods.setToClearWatchedEvent();
+          });
+        },
+        setupManual: function setupManual() {
+          slider.controlNav = slider.manualControls;
+          methods.controlNav.active();
+          slider.controlNav.bind(eventType, function (event) {
+            event.preventDefault();
+
+            if (watchedEvent === "" || watchedEvent === event.type) {
+              var $this = $(this),
+                  target = slider.controlNav.index($this);
+
+              if (!$this.hasClass(namespace + 'active')) {
+                target > slider.currentSlide ? slider.direction = "next" : slider.direction = "prev";
+                slider.flexAnimate(target, slider.vars.pauseOnAction);
+              }
+            } // setup flags to prevent event duplication
+
+
+            if (watchedEvent === "") {
+              watchedEvent = event.type;
+            }
+
+            methods.setToClearWatchedEvent();
+          });
+        },
+        set: function set() {
+          var selector = slider.vars.controlNav === "thumbnails" ? 'img' : 'a';
+          slider.controlNav = $('.' + namespace + 'control-nav li ' + selector, slider.controlsContainer ? slider.controlsContainer : slider);
+        },
+        active: function active() {
+          slider.controlNav.removeClass(namespace + "active").eq(slider.animatingTo).addClass(namespace + "active");
+        },
+        update: function update(action, pos) {
+          if (slider.pagingCount > 1 && action === "add") {
+            slider.controlNavScaffold.append($('<li><a href="#">' + slider.count + '</a></li>'));
+          } else if (slider.pagingCount === 1) {
+            slider.controlNavScaffold.find('li').remove();
+          } else {
+            slider.controlNav.eq(pos).closest('li').remove();
+          }
+
+          methods.controlNav.set();
+          slider.pagingCount > 1 && slider.pagingCount !== slider.controlNav.length ? slider.update(pos, action) : methods.controlNav.active();
+        }
+      },
+      directionNav: {
+        setup: function setup() {
+          var directionNavScaffold = $('<ul class="' + namespace + 'direction-nav"><li class="' + namespace + 'nav-prev"><a class="' + namespace + 'prev" href="#">' + slider.vars.prevText + '</a></li><li class="' + namespace + 'nav-next"><a class="' + namespace + 'next" href="#">' + slider.vars.nextText + '</a></li></ul>'); // CUSTOM DIRECTION NAV:
+
+          if (slider.customDirectionNav) {
+            slider.directionNav = slider.customDirectionNav; // CONTROLSCONTAINER:
+          } else if (slider.controlsContainer) {
+            $(slider.controlsContainer).append(directionNavScaffold);
+            slider.directionNav = $('.' + namespace + 'direction-nav li a', slider.controlsContainer);
+          } else {
+            slider.append(directionNavScaffold);
+            slider.directionNav = $('.' + namespace + 'direction-nav li a', slider);
+          }
+
+          methods.directionNav.update();
+          slider.directionNav.bind(eventType, function (event) {
+            event.preventDefault();
+            var target;
+
+            if (watchedEvent === "" || watchedEvent === event.type) {
+              target = $(this).hasClass(namespace + 'next') ? slider.getTarget('next') : slider.getTarget('prev');
+              slider.flexAnimate(target, slider.vars.pauseOnAction);
+            } // setup flags to prevent event duplication
+
+
+            if (watchedEvent === "") {
+              watchedEvent = event.type;
+            }
+
+            methods.setToClearWatchedEvent();
+          });
+        },
+        update: function update() {
+          var disabledClass = namespace + 'disabled';
+
+          if (slider.pagingCount === 1) {
+            slider.directionNav.addClass(disabledClass).attr('tabindex', '-1');
+          } else if (!slider.vars.animationLoop) {
+            if (slider.animatingTo === 0) {
+              slider.directionNav.removeClass(disabledClass).filter('.' + namespace + "prev").addClass(disabledClass).attr('tabindex', '-1');
+            } else if (slider.animatingTo === slider.last) {
+              slider.directionNav.removeClass(disabledClass).filter('.' + namespace + "next").addClass(disabledClass).attr('tabindex', '-1');
+            } else {
+              slider.directionNav.removeClass(disabledClass).removeAttr('tabindex');
+            }
+          } else {
+            slider.directionNav.removeClass(disabledClass).removeAttr('tabindex');
+          }
+        }
+      },
+      pausePlay: {
+        setup: function setup() {
+          var pausePlayScaffold = $('<div class="' + namespace + 'pauseplay"><a href="#"></a></div>'); // CONTROLSCONTAINER:
+
+          if (slider.controlsContainer) {
+            slider.controlsContainer.append(pausePlayScaffold);
+            slider.pausePlay = $('.' + namespace + 'pauseplay a', slider.controlsContainer);
+          } else {
+            slider.append(pausePlayScaffold);
+            slider.pausePlay = $('.' + namespace + 'pauseplay a', slider);
+          }
+
+          methods.pausePlay.update(slider.vars.slideshow ? namespace + 'pause' : namespace + 'play');
+          slider.pausePlay.bind(eventType, function (event) {
+            event.preventDefault();
+
+            if (watchedEvent === "" || watchedEvent === event.type) {
+              if ($(this).hasClass(namespace + 'pause')) {
+                slider.manualPause = true;
+                slider.manualPlay = false;
+                slider.pause();
+              } else {
+                slider.manualPause = false;
+                slider.manualPlay = true;
+                slider.play();
+              }
+            } // setup flags to prevent event duplication
+
+
+            if (watchedEvent === "") {
+              watchedEvent = event.type;
+            }
+
+            methods.setToClearWatchedEvent();
+          });
+        },
+        update: function update(state) {
+          state === "play" ? slider.pausePlay.removeClass(namespace + 'pause').addClass(namespace + 'play').html(slider.vars.playText) : slider.pausePlay.removeClass(namespace + 'play').addClass(namespace + 'pause').html(slider.vars.pauseText);
+        }
+      },
+      touch: function touch() {
+        var startX,
+            startY,
+            offset,
+            cwidth,
+            dx,
+            startT,
+            onTouchStart,
+            onTouchMove,
+            _onTouchEnd,
+            scrolling = false,
+            localX = 0,
+            localY = 0,
+            accDx = 0;
+
+        if (!msGesture) {
+          onTouchStart = function onTouchStart(e) {
+            if (slider.animating) {
+              e.preventDefault();
+            } else if (window.navigator.msPointerEnabled || e.touches.length === 1) {
+              slider.pause(); // CAROUSEL:
+
+              cwidth = vertical ? slider.h : slider.w;
+              startT = Number(new Date()); // CAROUSEL:
+              // Local vars for X and Y points.
+
+              localX = e.touches[0].pageX;
+              localY = e.touches[0].pageY;
+              offset = carousel && reverse && slider.animatingTo === slider.last ? 0 : carousel && reverse ? slider.limit - (slider.itemW + slider.vars.itemMargin) * slider.move * slider.animatingTo : carousel && slider.currentSlide === slider.last ? slider.limit : carousel ? (slider.itemW + slider.vars.itemMargin) * slider.move * slider.currentSlide : reverse ? (slider.last - slider.currentSlide + slider.cloneOffset) * cwidth : (slider.currentSlide + slider.cloneOffset) * cwidth;
+              startX = vertical ? localY : localX;
+              startY = vertical ? localX : localY;
+              el.addEventListener('touchmove', onTouchMove, false);
+              el.addEventListener('touchend', _onTouchEnd, false);
+            }
+          };
+
+          onTouchMove = function onTouchMove(e) {
+            // Local vars for X and Y points.
+            localX = e.touches[0].pageX;
+            localY = e.touches[0].pageY;
+            dx = vertical ? startX - localY : (slider.vars.rtl ? -1 : 1) * (startX - localX);
+            scrolling = vertical ? Math.abs(dx) < Math.abs(localX - startY) : Math.abs(dx) < Math.abs(localY - startY);
+            var fxms = 500;
+
+            if (!scrolling || Number(new Date()) - startT > fxms) {
+              e.preventDefault();
+
+              if (!fade && slider.transitions) {
+                if (!slider.vars.animationLoop) {
+                  dx = dx / (slider.currentSlide === 0 && dx < 0 || slider.currentSlide === slider.last && dx > 0 ? Math.abs(dx) / cwidth + 2 : 1);
+                }
+
+                slider.setProps(offset + dx, "setTouch");
+              }
+            }
+          };
+
+          _onTouchEnd = function onTouchEnd(e) {
+            // finish the touch by undoing the touch session
+            el.removeEventListener('touchmove', onTouchMove, false);
+
+            if (slider.animatingTo === slider.currentSlide && !scrolling && !(dx === null)) {
+              var updateDx = reverse ? -dx : dx,
+                  target = updateDx > 0 ? slider.getTarget('next') : slider.getTarget('prev');
+
+              if (slider.canAdvance(target) && (Number(new Date()) - startT < 550 && Math.abs(updateDx) > 50 || Math.abs(updateDx) > cwidth / 2)) {
+                slider.flexAnimate(target, slider.vars.pauseOnAction);
+              } else {
+                if (!fade) {
+                  slider.flexAnimate(slider.currentSlide, slider.vars.pauseOnAction, true);
+                }
+              }
+            }
+
+            el.removeEventListener('touchend', _onTouchEnd, false);
+            startX = null;
+            startY = null;
+            dx = null;
+            offset = null;
+          };
+
+          el.addEventListener('touchstart', onTouchStart, false);
+        } else {
+          var onMSPointerDown = function onMSPointerDown(e) {
+            e.stopPropagation();
+
+            if (slider.animating) {
+              e.preventDefault();
+            } else {
+              slider.pause();
+
+              el._gesture.addPointer(e.pointerId);
+
+              accDx = 0;
+              cwidth = vertical ? slider.h : slider.w;
+              startT = Number(new Date()); // CAROUSEL:
+
+              offset = carousel && reverse && slider.animatingTo === slider.last ? 0 : carousel && reverse ? slider.limit - (slider.itemW + slider.vars.itemMargin) * slider.move * slider.animatingTo : carousel && slider.currentSlide === slider.last ? slider.limit : carousel ? (slider.itemW + slider.vars.itemMargin) * slider.move * slider.currentSlide : reverse ? (slider.last - slider.currentSlide + slider.cloneOffset) * cwidth : (slider.currentSlide + slider.cloneOffset) * cwidth;
+            }
+          };
+
+          var onMSGestureChange = function onMSGestureChange(e) {
+            e.stopPropagation();
+            var slider = e.target._slider;
+
+            if (!slider) {
+              return;
+            }
+
+            var transX = -e.translationX,
+                transY = -e.translationY; //Accumulate translations.
+
+            accDx = accDx + (vertical ? transY : transX);
+            dx = (slider.vars.rtl ? -1 : 1) * accDx;
+            scrolling = vertical ? Math.abs(accDx) < Math.abs(-transX) : Math.abs(accDx) < Math.abs(-transY);
+
+            if (e.detail === e.MSGESTURE_FLAG_INERTIA) {
+              setImmediate(function () {
+                el._gesture.stop();
+              });
+              return;
+            }
+
+            if (!scrolling || Number(new Date()) - startT > 500) {
+              e.preventDefault();
+
+              if (!fade && slider.transitions) {
+                if (!slider.vars.animationLoop) {
+                  dx = accDx / (slider.currentSlide === 0 && accDx < 0 || slider.currentSlide === slider.last && accDx > 0 ? Math.abs(accDx) / cwidth + 2 : 1);
+                }
+
+                slider.setProps(offset + dx, "setTouch");
+              }
+            }
+          };
+
+          var onMSGestureEnd = function onMSGestureEnd(e) {
+            e.stopPropagation();
+            var slider = e.target._slider;
+
+            if (!slider) {
+              return;
+            }
+
+            if (slider.animatingTo === slider.currentSlide && !scrolling && !(dx === null)) {
+              var updateDx = reverse ? -dx : dx,
+                  target = updateDx > 0 ? slider.getTarget('next') : slider.getTarget('prev');
+
+              if (slider.canAdvance(target) && (Number(new Date()) - startT < 550 && Math.abs(updateDx) > 50 || Math.abs(updateDx) > cwidth / 2)) {
+                slider.flexAnimate(target, slider.vars.pauseOnAction);
+              } else {
+                if (!fade) {
+                  slider.flexAnimate(slider.currentSlide, slider.vars.pauseOnAction, true);
+                }
+              }
+            }
+
+            startX = null;
+            startY = null;
+            dx = null;
+            offset = null;
+            accDx = 0;
+          };
+
+          el.style.msTouchAction = "none";
+          el._gesture = new MSGesture();
+          el._gesture.target = el;
+          el.addEventListener("MSPointerDown", onMSPointerDown, false);
+          el._slider = slider;
+          el.addEventListener("MSGestureChange", onMSGestureChange, false);
+          el.addEventListener("MSGestureEnd", onMSGestureEnd, false);
+        }
+      },
+      resize: function resize() {
+        if (!slider.animating && slider.is(':visible')) {
+          if (!carousel) {
+            slider.doMath();
+          }
+
+          if (fade) {
+            // SMOOTH HEIGHT:
+            methods.smoothHeight();
+          } else if (carousel) {
+            //CAROUSEL:
+            slider.slides.width(slider.computedW);
+            slider.update(slider.pagingCount);
+            slider.setProps();
+          } else if (vertical) {
+            //VERTICAL:
+            slider.viewport.height(slider.h);
+            slider.setProps(slider.h, "setTotal");
+          } else {
+            // SMOOTH HEIGHT:
+            if (slider.vars.smoothHeight) {
+              methods.smoothHeight();
+            }
+
+            slider.newSlides.width(slider.computedW);
+            slider.setProps(slider.computedW, "setTotal");
+          }
+        }
+      },
+      smoothHeight: function smoothHeight(dur) {
+        if (!vertical || fade) {
+          var $obj = fade ? slider : slider.viewport;
+          dur ? $obj.animate({
+            "height": slider.slides.eq(slider.animatingTo).innerHeight()
+          }, dur) : $obj.innerHeight(slider.slides.eq(slider.animatingTo).innerHeight());
+        }
+      },
+      sync: function sync(action) {
+        var $obj = $(slider.vars.sync).data("flexslider"),
+            target = slider.animatingTo;
+
+        switch (action) {
+          case "animate":
+            $obj.flexAnimate(target, slider.vars.pauseOnAction, false, true);
+            break;
+
+          case "play":
+            if (!$obj.playing && !$obj.asNav) {
+              $obj.play();
+            }
+
+            break;
+
+          case "pause":
+            $obj.pause();
+            break;
+        }
+      },
+      uniqueID: function uniqueID($clone) {
+        // Append _clone to current level and children elements with id attributes
+        $clone.filter('[id]').add($clone.find('[id]')).each(function () {
+          var $this = $(this);
+          $this.attr('id', $this.attr('id') + '_clone');
+        });
+        return $clone;
+      },
+      pauseInvisible: {
+        visProp: null,
+        init: function init() {
+          var visProp = methods.pauseInvisible.getHiddenProp();
+
+          if (visProp) {
+            var evtname = visProp.replace(/[H|h]idden/, '') + 'visibilitychange';
+            document.addEventListener(evtname, function () {
+              if (methods.pauseInvisible.isHidden()) {
+                if (slider.startTimeout) {
+                  clearTimeout(slider.startTimeout); //If clock is ticking, stop timer and prevent from starting while invisible
+                } else {
+                  slider.pause(); //Or just pause
+                }
+              } else {
+                if (slider.started) {
+                  slider.play(); //Initiated before, just play
+                } else {
+                  if (slider.vars.initDelay > 0) {
+                    setTimeout(slider.play, slider.vars.initDelay);
+                  } else {
+                    slider.play(); //Didn't init before: simply init or wait for it
+                  }
+                }
+              }
+            });
+          }
+        },
+        isHidden: function isHidden() {
+          var prop = methods.pauseInvisible.getHiddenProp();
+
+          if (!prop) {
+            return false;
+          }
+
+          return document[prop];
+        },
+        getHiddenProp: function getHiddenProp() {
+          var prefixes = ['webkit', 'moz', 'ms', 'o']; // if 'hidden' is natively supported just return it
+
+          if ('hidden' in document) {
+            return 'hidden';
+          } // otherwise loop over all the known prefixes until we find one
+
+
+          for (var i = 0; i < prefixes.length; i++) {
+            if (prefixes[i] + 'Hidden' in document) {
+              return prefixes[i] + 'Hidden';
+            }
+          } // otherwise it's not supported
+
+
+          return null;
+        }
+      },
+      setToClearWatchedEvent: function setToClearWatchedEvent() {
+        clearTimeout(watchedEventClearTimer);
+        watchedEventClearTimer = setTimeout(function () {
+          watchedEvent = "";
+        }, 3000);
+      }
+    }; // public methods
+
+    slider.flexAnimate = function (target, pause, override, withSync, fromNav) {
+      if (!slider.vars.animationLoop && target !== slider.currentSlide) {
+        slider.direction = target > slider.currentSlide ? "next" : "prev";
+      }
+
+      if (asNav && slider.pagingCount === 1) slider.direction = slider.currentItem < target ? "next" : "prev";
+
+      if (!slider.animating && (slider.canAdvance(target, fromNav) || override) && slider.is(":visible")) {
+        if (asNav && withSync) {
+          var master = $(slider.vars.asNavFor).data('flexslider');
+          slider.atEnd = target === 0 || target === slider.count - 1;
+          master.flexAnimate(target, true, false, true, fromNav);
+          slider.direction = slider.currentItem < target ? "next" : "prev";
+          master.direction = slider.direction;
+
+          if (Math.ceil((target + 1) / slider.visible) - 1 !== slider.currentSlide && target !== 0) {
+            slider.currentItem = target;
+            slider.slides.removeClass(namespace + "active-slide").eq(target).addClass(namespace + "active-slide");
+            target = Math.floor(target / slider.visible);
+          } else {
+            slider.currentItem = target;
+            slider.slides.removeClass(namespace + "active-slide").eq(target).addClass(namespace + "active-slide");
+            return false;
+          }
+        }
+
+        slider.animating = true;
+        slider.animatingTo = target; // SLIDESHOW:
+
+        if (pause) {
+          slider.pause();
+        } // API: before() animation Callback
+
+
+        slider.vars.before(slider); // SYNC:
+
+        if (slider.syncExists && !fromNav) {
+          methods.sync("animate");
+        } // CONTROLNAV
+
+
+        if (slider.vars.controlNav) {
+          methods.controlNav.active();
+        } // !CAROUSEL:
+        // CANDIDATE: slide active class (for add/remove slide)
+
+
+        if (!carousel) {
+          slider.slides.removeClass(namespace + 'active-slide').eq(target).addClass(namespace + 'active-slide');
+        } // INFINITE LOOP:
+        // CANDIDATE: atEnd
+
+
+        slider.atEnd = target === 0 || target === slider.last; // DIRECTIONNAV:
+
+        if (slider.vars.directionNav) {
+          methods.directionNav.update();
+        }
+
+        if (target === slider.last) {
+          // API: end() of cycle Callback
+          slider.vars.end(slider); // SLIDESHOW && !INFINITE LOOP:
+
+          if (!slider.vars.animationLoop) {
+            slider.pause();
+          }
+        } // SLIDE:
+
+
+        if (!fade) {
+          var dimension = vertical ? slider.slides.filter(':first').height() : slider.computedW,
+              margin,
+              slideString,
+              calcNext; // INFINITE LOOP / REVERSE:
+
+          if (carousel) {
+            margin = slider.vars.itemMargin;
+            calcNext = (slider.itemW + margin) * slider.move * slider.animatingTo;
+            slideString = calcNext > slider.limit && slider.visible !== 1 ? slider.limit : calcNext;
+          } else if (slider.currentSlide === 0 && target === slider.count - 1 && slider.vars.animationLoop && slider.direction !== "next") {
+            slideString = reverse ? (slider.count + slider.cloneOffset) * dimension : 0;
+          } else if (slider.currentSlide === slider.last && target === 0 && slider.vars.animationLoop && slider.direction !== "prev") {
+            slideString = reverse ? 0 : (slider.count + 1) * dimension;
+          } else {
+            slideString = reverse ? (slider.count - 1 - target + slider.cloneOffset) * dimension : (target + slider.cloneOffset) * dimension;
+          }
+
+          slider.setProps(slideString, "", slider.vars.animationSpeed);
+
+          if (slider.transitions) {
+            if (!slider.vars.animationLoop || !slider.atEnd) {
+              slider.animating = false;
+              slider.currentSlide = slider.animatingTo;
+            } // Unbind previous transitionEnd events and re-bind new transitionEnd event
+
+
+            slider.container.unbind("webkitTransitionEnd transitionend");
+            slider.container.bind("webkitTransitionEnd transitionend", function () {
+              clearTimeout(slider.ensureAnimationEnd);
+              slider.wrapup(dimension);
+            }); // Insurance for the ever-so-fickle transitionEnd event
+
+            clearTimeout(slider.ensureAnimationEnd);
+            slider.ensureAnimationEnd = setTimeout(function () {
+              slider.wrapup(dimension);
+            }, slider.vars.animationSpeed + 100);
+          } else {
+            slider.container.animate(slider.args, slider.vars.animationSpeed, slider.vars.easing, function () {
+              slider.wrapup(dimension);
+            });
+          }
+        } else {
+          // FADE:
+          if (!touch) {
+            slider.slides.eq(slider.currentSlide).css({
+              "zIndex": 1
+            }).animate({
+              "opacity": 0
+            }, slider.vars.animationSpeed, slider.vars.easing);
+            slider.slides.eq(target).css({
+              "zIndex": 2
+            }).animate({
+              "opacity": 1
+            }, slider.vars.animationSpeed, slider.vars.easing, slider.wrapup);
+          } else {
+            slider.slides.eq(slider.currentSlide).css({
+              "opacity": 0,
+              "zIndex": 1
+            });
+            slider.slides.eq(target).css({
+              "opacity": 1,
+              "zIndex": 2
+            });
+            slider.wrapup(dimension);
+          }
+        } // SMOOTH HEIGHT:
+
+
+        if (slider.vars.smoothHeight) {
+          methods.smoothHeight(slider.vars.animationSpeed);
+        }
+      }
+    };
+
+    slider.wrapup = function (dimension) {
+      // SLIDE:
+      if (!fade && !carousel) {
+        if (slider.currentSlide === 0 && slider.animatingTo === slider.last && slider.vars.animationLoop) {
+          slider.setProps(dimension, "jumpEnd");
+        } else if (slider.currentSlide === slider.last && slider.animatingTo === 0 && slider.vars.animationLoop) {
+          slider.setProps(dimension, "jumpStart");
+        }
+      }
+
+      slider.animating = false;
+      slider.currentSlide = slider.animatingTo; // API: after() animation Callback
+
+      slider.vars.after(slider);
+    }; // SLIDESHOW:
+
+
+    slider.animateSlides = function () {
+      if (!slider.animating && focused) {
+        slider.flexAnimate(slider.getTarget("next"));
+      }
+    }; // SLIDESHOW:
+
+
+    slider.pause = function () {
+      clearInterval(slider.animatedSlides);
+      slider.animatedSlides = null;
+      slider.playing = false; // PAUSEPLAY:
+
+      if (slider.vars.pausePlay) {
+        methods.pausePlay.update("play");
+      } // SYNC:
+
+
+      if (slider.syncExists) {
+        methods.sync("pause");
+      }
+    }; // SLIDESHOW:
+
+
+    slider.play = function () {
+      if (slider.playing) {
+        clearInterval(slider.animatedSlides);
+      }
+
+      slider.animatedSlides = slider.animatedSlides || setInterval(slider.animateSlides, slider.vars.slideshowSpeed);
+      slider.started = slider.playing = true; // PAUSEPLAY:
+
+      if (slider.vars.pausePlay) {
+        methods.pausePlay.update("pause");
+      } // SYNC:
+
+
+      if (slider.syncExists) {
+        methods.sync("play");
+      }
+    }; // STOP:
+
+
+    slider.stop = function () {
+      slider.pause();
+      slider.stopped = true;
+    };
+
+    slider.canAdvance = function (target, fromNav) {
+      // ASNAV:
+      var last = asNav ? slider.pagingCount - 1 : slider.last;
+      return fromNav ? true : asNav && slider.currentItem === slider.count - 1 && target === 0 && slider.direction === "prev" ? true : asNav && slider.currentItem === 0 && target === slider.pagingCount - 1 && slider.direction !== "next" ? false : target === slider.currentSlide && !asNav ? false : slider.vars.animationLoop ? true : slider.atEnd && slider.currentSlide === 0 && target === last && slider.direction !== "next" ? false : slider.atEnd && slider.currentSlide === last && target === 0 && slider.direction === "next" ? false : true;
+    };
+
+    slider.getTarget = function (dir) {
+      slider.direction = dir;
+
+      if (dir === "next") {
+        return slider.currentSlide === slider.last ? 0 : slider.currentSlide + 1;
+      } else {
+        return slider.currentSlide === 0 ? slider.last : slider.currentSlide - 1;
+      }
+    }; // SLIDE:
+
+
+    slider.setProps = function (pos, special, dur) {
+      var target = function () {
+        var posCheck = pos ? pos : (slider.itemW + slider.vars.itemMargin) * slider.move * slider.animatingTo,
+            posCalc = function () {
+          if (carousel) {
+            return special === "setTouch" ? pos : reverse && slider.animatingTo === slider.last ? 0 : reverse ? slider.limit - (slider.itemW + slider.vars.itemMargin) * slider.move * slider.animatingTo : slider.animatingTo === slider.last ? slider.limit : posCheck;
+          } else {
+            switch (special) {
+              case "setTotal":
+                return reverse ? (slider.count - 1 - slider.currentSlide + slider.cloneOffset) * pos : (slider.currentSlide + slider.cloneOffset) * pos;
+
+              case "setTouch":
+                return reverse ? pos : pos;
+
+              case "jumpEnd":
+                return reverse ? pos : slider.count * pos;
+
+              case "jumpStart":
+                return reverse ? slider.count * pos : pos;
+
+              default:
+                return pos;
+            }
+          }
+        }();
+
+        return posCalc * (slider.vars.rtl ? 1 : -1) + "px";
+      }();
+
+      if (slider.transitions) {
+        target = vertical ? "translate3d(0," + target + ",0)" : "translate3d(" + ((slider.vars.rtl ? -1 : 1) * parseInt(target) + 'px') + ",0,0)";
+        dur = dur !== undefined ? dur / 1000 + "s" : "0s";
+        slider.container.css("-" + slider.pfx + "-transition-duration", dur);
+        slider.container.css("transition-duration", dur);
+      }
+
+      slider.args[slider.prop] = target;
+
+      if (slider.transitions || dur === undefined) {
+        slider.container.css(slider.args);
+      }
+
+      slider.container.css('transform', target);
+    };
+
+    slider.setup = function (type) {
+      // SLIDE:
+      if (!fade) {
+        var sliderOffset, arr;
+
+        if (type === "init") {
+          slider.viewport = $('<div class="' + namespace + 'viewport"></div>').css({
+            "overflow": "hidden",
+            "position": "relative"
+          }).appendTo(slider).append(slider.container); // INFINITE LOOP:
+
+          slider.cloneCount = 0;
+          slider.cloneOffset = 0; // REVERSE:
+
+          if (reverse) {
+            arr = $.makeArray(slider.slides).reverse();
+            slider.slides = $(arr);
+            slider.container.empty().append(slider.slides);
+          }
+        } // INFINITE LOOP && !CAROUSEL:
+
+
+        if (slider.vars.animationLoop && !carousel) {
+          slider.cloneCount = 2;
+          slider.cloneOffset = 1; // clear out old clones
+
+          if (type !== "init") {
+            slider.container.find('.clone').remove();
+          }
+
+          slider.container.append(methods.uniqueID(slider.slides.first().clone().addClass('clone')).attr('aria-hidden', 'true')).prepend(methods.uniqueID(slider.slides.last().clone().addClass('clone')).attr('aria-hidden', 'true'));
+        }
+
+        slider.newSlides = $(slider.vars.selector, slider);
+        sliderOffset = reverse ? slider.count - 1 - slider.currentSlide + slider.cloneOffset : slider.currentSlide + slider.cloneOffset; // VERTICAL:
+
+        if (vertical && !carousel) {
+          slider.container.height((slider.count + slider.cloneCount) * 200 + "%").css("position", "absolute").width("100%");
+          setTimeout(function () {
+            slider.newSlides.css({
+              "display": "block"
+            });
+            slider.doMath();
+            slider.viewport.height(slider.h);
+            slider.setProps(sliderOffset * slider.h, "init");
+          }, type === "init" ? 100 : 0);
+        } else {
+          slider.container.width((slider.count + slider.cloneCount) * 200 + "%");
+          slider.setProps(sliderOffset * slider.computedW, "init");
+          setTimeout(function () {
+            slider.doMath();
+
+            if (slider.vars.rtl) {
+              slider.newSlides.css({
+                "width": slider.computedW,
+                "marginRight": slider.computedM,
+                "float": "left",
+                "display": "block"
+              });
+            } else {
+              slider.newSlides.css({
+                "width": slider.computedW,
+                "marginRight": slider.computedM,
+                "float": "left",
+                "display": "block"
+              });
+            } // SMOOTH HEIGHT:
+
+
+            if (slider.vars.smoothHeight) {
+              methods.smoothHeight();
+            }
+          }, type === "init" ? 100 : 0);
+        }
+      } else {
+        // FADE:
+        if (slider.vars.rtl) {
+          slider.slides.css({
+            "width": "100%",
+            "float": 'right',
+            "marginLeft": "-100%",
+            "position": "relative"
+          });
+        } else {
+          slider.slides.css({
+            "width": "100%",
+            "float": 'left',
+            "marginRight": "-100%",
+            "position": "relative"
+          });
+        }
+
+        if (type === "init") {
+          if (!touch) {
+            //slider.slides.eq(slider.currentSlide).fadeIn(slider.vars.animationSpeed, slider.vars.easing);
+            if (slider.vars.fadeFirstSlide == false) {
+              slider.slides.css({
+                "opacity": 0,
+                "display": "block",
+                "zIndex": 1
+              }).eq(slider.currentSlide).css({
+                "zIndex": 2
+              }).css({
+                "opacity": 1
+              });
+            } else {
+              slider.slides.css({
+                "opacity": 0,
+                "display": "block",
+                "zIndex": 1
+              }).eq(slider.currentSlide).css({
+                "zIndex": 2
+              }).animate({
+                "opacity": 1
+              }, slider.vars.animationSpeed, slider.vars.easing);
+            }
+          } else {
+            slider.slides.css({
+              "opacity": 0,
+              "display": "block",
+              "webkitTransition": "opacity " + slider.vars.animationSpeed / 1000 + "s ease",
+              "zIndex": 1
+            }).eq(slider.currentSlide).css({
+              "opacity": 1,
+              "zIndex": 2
+            });
+          }
+        } // SMOOTH HEIGHT:
+
+
+        if (slider.vars.smoothHeight) {
+          methods.smoothHeight();
+        }
+      } // !CAROUSEL:
+      // CANDIDATE: active slide
+
+
+      if (!carousel) {
+        slider.slides.removeClass(namespace + "active-slide").eq(slider.currentSlide).addClass(namespace + "active-slide");
+      } //FlexSlider: init() Callback
+
+
+      slider.vars.init(slider);
+    };
+
+    slider.doMath = function () {
+      var slide = slider.slides.first(),
+          slideMargin = slider.vars.itemMargin,
+          minItems = slider.vars.minItems,
+          maxItems = slider.vars.maxItems;
+      slider.w = slider.viewport === undefined ? slider.width() : slider.viewport.width();
+      slider.h = slide.height();
+      slider.boxPadding = slide.outerWidth() - slide.width(); // CAROUSEL:
+
+      if (carousel) {
+        slider.itemT = slider.vars.itemWidth + slideMargin;
+        slider.itemM = slideMargin;
+        slider.minW = minItems ? minItems * slider.itemT : slider.w;
+        slider.maxW = maxItems ? maxItems * slider.itemT - slideMargin : slider.w;
+        slider.itemW = slider.minW > slider.w ? (slider.w - slideMargin * (minItems - 1)) / minItems : slider.maxW < slider.w ? (slider.w - slideMargin * (maxItems - 1)) / maxItems : slider.vars.itemWidth > slider.w ? slider.w : slider.vars.itemWidth;
+        slider.visible = Math.floor(slider.w / slider.itemW);
+        slider.move = slider.vars.move > 0 && slider.vars.move < slider.visible ? slider.vars.move : slider.visible;
+        slider.pagingCount = Math.ceil((slider.count - slider.visible) / slider.move + 1);
+        slider.last = slider.pagingCount - 1;
+        slider.limit = slider.pagingCount === 1 ? 0 : slider.vars.itemWidth > slider.w ? slider.itemW * (slider.count - 1) + slideMargin * (slider.count - 1) : (slider.itemW + slideMargin) * slider.count - slider.w - slideMargin;
+      } else {
+        slider.itemW = slider.w;
+        slider.itemM = slideMargin;
+        slider.pagingCount = slider.count;
+        slider.last = slider.count - 1;
+      }
+
+      slider.computedW = slider.itemW - slider.boxPadding;
+      slider.computedM = slider.itemM;
+    };
+
+    slider.update = function (pos, action) {
+      slider.doMath(); // update currentSlide and slider.animatingTo if necessary
+
+      if (!carousel) {
+        if (pos < slider.currentSlide) {
+          slider.currentSlide += 1;
+        } else if (pos <= slider.currentSlide && pos !== 0) {
+          slider.currentSlide -= 1;
+        }
+
+        slider.animatingTo = slider.currentSlide;
+      } // update controlNav
+
+
+      if (slider.vars.controlNav && !slider.manualControls) {
+        if (action === "add" && !carousel || slider.pagingCount > slider.controlNav.length) {
+          methods.controlNav.update("add");
+        } else if (action === "remove" && !carousel || slider.pagingCount < slider.controlNav.length) {
+          if (carousel && slider.currentSlide > slider.last) {
+            slider.currentSlide -= 1;
+            slider.animatingTo -= 1;
+          }
+
+          methods.controlNav.update("remove", slider.last);
+        }
+      } // update directionNav
+
+
+      if (slider.vars.directionNav) {
+        methods.directionNav.update();
+      }
+    };
+
+    slider.addSlide = function (obj, pos) {
+      var $obj = $(obj);
+      slider.count += 1;
+      slider.last = slider.count - 1; // append new slide
+
+      if (vertical && reverse) {
+        pos !== undefined ? slider.slides.eq(slider.count - pos).after($obj) : slider.container.prepend($obj);
+      } else {
+        pos !== undefined ? slider.slides.eq(pos).before($obj) : slider.container.append($obj);
+      } // update currentSlide, animatingTo, controlNav, and directionNav
+
+
+      slider.update(pos, "add"); // update slider.slides
+
+      slider.slides = $(slider.vars.selector + ':not(.clone)', slider); // re-setup the slider to accomdate new slide
+
+      slider.setup(); //FlexSlider: added() Callback
+
+      slider.vars.added(slider);
+    };
+
+    slider.removeSlide = function (obj) {
+      var pos = isNaN(obj) ? slider.slides.index($(obj)) : obj; // update count
+
+      slider.count -= 1;
+      slider.last = slider.count - 1; // remove slide
+
+      if (isNaN(obj)) {
+        $(obj, slider.slides).remove();
+      } else {
+        vertical && reverse ? slider.slides.eq(slider.last).remove() : slider.slides.eq(obj).remove();
+      } // update currentSlide, animatingTo, controlNav, and directionNav
+
+
+      slider.doMath();
+      slider.update(pos, "remove"); // update slider.slides
+
+      slider.slides = $(slider.vars.selector + ':not(.clone)', slider); // re-setup the slider to accomdate new slide
+
+      slider.setup(); // FlexSlider: removed() Callback
+
+      slider.vars.removed(slider);
+    }; //FlexSlider: Initialize
+
+
+    methods.init();
+  }; // Ensure the slider isn't focussed if the window loses focus.
+
+
+  $(window).blur(function (e) {
+    focused = false;
+  }).focus(function (e) {
+    focused = true;
+  }); //FlexSlider: Default Settings
+
+  $.flexslider.defaults = {
+    namespace: "flex-",
+    //{NEW} String: Prefix string attached to the class of every element generated by the plugin
+    selector: ".slides > li",
+    //{NEW} Selector: Must match a simple pattern. '{container} > {slide}' -- Ignore pattern at your own peril
+    animation: "fade",
+    //String: Select your animation type, "fade" or "slide"
+    easing: "swing",
+    //{NEW} String: Determines the easing method used in jQuery transitions. jQuery easing plugin is supported!
+    direction: "horizontal",
+    //String: Select the sliding direction, "horizontal" or "vertical"
+    reverse: false,
+    //{NEW} Boolean: Reverse the animation direction
+    animationLoop: true,
+    //Boolean: Should the animation loop? If false, directionNav will received "disable" classes at either end
+    smoothHeight: false,
+    //{NEW} Boolean: Allow height of the slider to animate smoothly in horizontal mode
+    startAt: 0,
+    //Integer: The slide that the slider should start on. Array notation (0 = first slide)
+    slideshow: true,
+    //Boolean: Animate slider automatically
+    slideshowSpeed: 7000,
+    //Integer: Set the speed of the slideshow cycling, in milliseconds
+    animationSpeed: 600,
+    //Integer: Set the speed of animations, in milliseconds
+    initDelay: 0,
+    //{NEW} Integer: Set an initialization delay, in milliseconds
+    randomize: false,
+    //Boolean: Randomize slide order
+    fadeFirstSlide: true,
+    //Boolean: Fade in the first slide when animation type is "fade"
+    thumbCaptions: false,
+    //Boolean: Whether or not to put captions on thumbnails when using the "thumbnails" controlNav.
+    // Usability features
+    pauseOnAction: true,
+    //Boolean: Pause the slideshow when interacting with control elements, highly recommended.
+    pauseOnHover: false,
+    //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
+    pauseInvisible: true,
+    //{NEW} Boolean: Pause the slideshow when tab is invisible, resume when visible. Provides better UX, lower CPU usage.
+    useCSS: true,
+    //{NEW} Boolean: Slider will use CSS3 transitions if available
+    touch: true,
+    //{NEW} Boolean: Allow touch swipe navigation of the slider on touch-enabled devices
+    video: false,
+    //{NEW} Boolean: If using video in the slider, will prevent CSS3 3D Transforms to avoid graphical glitches
+    // Primary Controls
+    controlNav: true,
+    //Boolean: Create navigation for paging control of each slide? Note: Leave true for manualControls usage
+    directionNav: true,
+    //Boolean: Create navigation for previous/next navigation? (true/false)
+    prevText: "Previous",
+    //String: Set the text for the "previous" directionNav item
+    nextText: "Next",
+    //String: Set the text for the "next" directionNav item
+    // Secondary Navigation
+    keyboard: true,
+    //Boolean: Allow slider navigating via keyboard left/right keys
+    multipleKeyboard: false,
+    //{NEW} Boolean: Allow keyboard navigation to affect multiple sliders. Default behavior cuts out keyboard navigation with more than one slider present.
+    mousewheel: false,
+    //{UPDATED} Boolean: Requires jquery.mousewheel.js (https://github.com/brandonaaron/jquery-mousewheel) - Allows slider navigating via mousewheel
+    pausePlay: false,
+    //Boolean: Create pause/play dynamic element
+    pauseText: "Pause",
+    //String: Set the text for the "pause" pausePlay item
+    playText: "Play",
+    //String: Set the text for the "play" pausePlay item
+    // Special properties
+    controlsContainer: "",
+    //{UPDATED} jQuery Object/Selector: Declare which container the navigation elements should be appended too. Default container is the FlexSlider element. Example use would be $(".flexslider-container"). Property is ignored if given element is not found.
+    manualControls: "",
+    //{UPDATED} jQuery Object/Selector: Declare custom control navigation. Examples would be $(".flex-control-nav li") or "#tabs-nav li img", etc. The number of elements in your controlNav should match the number of slides/tabs.
+    customDirectionNav: "",
+    //{NEW} jQuery Object/Selector: Custom prev / next button. Must be two jQuery elements. In order to make the events work they have to have the classes "prev" and "next" (plus namespace)
+    sync: "",
+    //{NEW} Selector: Mirror the actions performed on this slider with another slider. Use with care.
+    asNavFor: "",
+    //{NEW} Selector: Internal property exposed for turning the slider into a thumbnail navigation for another slider
+    // Carousel Options
+    itemWidth: 0,
+    //{NEW} Integer: Box-model width of individual carousel items, including horizontal borders and padding.
+    itemMargin: 0,
+    //{NEW} Integer: Margin between carousel items.
+    minItems: 1,
+    //{NEW} Integer: Minimum number of carousel items that should be visible. Items will resize fluidly when below this.
+    maxItems: 0,
+    //{NEW} Integer: Maxmimum number of carousel items that should be visible. Items will resize fluidly when above this limit.
+    move: 0,
+    //{NEW} Integer: Number of carousel items that should move on animation. If 0, slider will move all visible items.
+    allowOneSlide: true,
+    //{NEW} Boolean: Whether or not to allow a slider comprised of a single slide
+    // Callback API
+    start: function start() {},
+    //Callback: function(slider) - Fires when the slider loads the first slide
+    before: function before() {},
+    //Callback: function(slider) - Fires asynchronously with each slider animation
+    after: function after() {},
+    //Callback: function(slider) - Fires after each slider animation completes
+    end: function end() {},
+    //Callback: function(slider) - Fires when the slider reaches the last slide (asynchronous)
+    added: function added() {},
+    //{NEW} Callback: function(slider) - Fires after a slide is added
+    removed: function removed() {},
+    //{NEW} Callback: function(slider) - Fires after a slide is removed
+    init: function init() {},
+    //{NEW} Callback: function(slider) - Fires after the slider is initially setup
+    rtl: false //{NEW} Boolean: Whether or not to enable RTL mode
+
+  }; //FlexSlider: Plugin Function
+
+  $.fn.flexslider = function (options) {
+    if (options === undefined) {
+      options = {};
+    }
+
+    if (_typeof(options) === "object") {
+      return this.each(function () {
+        var $this = $(this),
+            selector = options.selector ? options.selector : ".slides > li",
+            $slides = $this.find(selector);
+
+        if ($slides.length === 1 && options.allowOneSlide === false || $slides.length === 0) {
+          $slides.fadeIn(400);
+
+          if (options.start) {
+            options.start($this);
+          }
+        } else if ($this.data('flexslider') === undefined) {
+          new $.flexslider(this, options);
+        }
+      });
+    } else {
+      // Helper strings to quickly perform functions on the slider
+      var $slider = $(this).data('flexslider');
+
+      switch (options) {
+        case "play":
+          $slider.play();
+          break;
+
+        case "pause":
+          $slider.pause();
+          break;
+
+        case "stop":
+          $slider.stop();
+          break;
+
+        case "next":
+          $slider.flexAnimate($slider.getTarget("next"), true);
+          break;
+
+        case "prev":
+        case "previous":
+          $slider.flexAnimate($slider.getTarget("prev"), true);
+          break;
+
+        default:
+          if (typeof options === "number") {
+            $slider.flexAnimate(options, true);
+          }
+
+      }
+    }
+  };
+})(jQuery);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24).setImmediate))
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(25);
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1), __webpack_require__(26)))
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 18 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 19 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1377,13 +6179,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 20 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 21 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1429,86 +6231,230 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 32 */
+/***/ (function(module, exports) {
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-/*
- * Render Date Picker
+/*!
+ * jQuery Mousewheel 3.1.13
  *
- * @param  {String} controls                 - Wrapper of controls.
- * @return {Void}
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
  */
 (function ($) {
-  'use strict';
+  var toFix = ['wheel', 'mousewheel', 'DOMMouseScroll', 'MozMousePixelScroll'],
+      toBind = 'onwheel' in document || document.documentMode >= 9 ? ['wheel'] : ['mousewheel', 'DomMouseScroll', 'MozMousePixelScroll'],
+      slice = Array.prototype.slice,
+      nullLowestDeltaTimeout,
+      lowestDelta;
 
-  $.fn.UixRenderDatePicker = function (options) {
-    // This is the easiest way to have default options.
-    var settings = $.extend({
-      controls: '[data-picker]'
-    }, options);
-    this.each(function () {
-      if ($.isFunction($.fn.datetimepicker)) {
-        $(settings.controls).each(function () {
-          var $this = $(this);
-          var dateFormat = $this.data('picker-format'),
-              timeEnable = $this.data('picker-timepicker'),
-              lang = $this.data('picker-lang'),
-              myminDate = $this.data('picker-min-date'),
-              mymaxDate = $this.data('picker-max-date'),
-              rtlEnable = false; // If there is no data-xxx, save current source to it
+  if ($.event.fixHooks) {
+    for (var i = toFix.length; i;) {
+      $.event.fixHooks[toFix[--i]] = $.event.mouseHooks;
+    }
+  }
 
-          if (_typeof(dateFormat) === ( true ? "undefined" : undefined)) dateFormat = 'M d, Y'; //Y-m-d H:i:s
-
-          if (_typeof(timeEnable) === ( true ? "undefined" : undefined)) timeEnable = false;
-          if (_typeof(lang) === ( true ? "undefined" : undefined)) lang = 'en';
-          if (_typeof(myminDate) === ( true ? "undefined" : undefined)) myminDate = false; //yesterday is minimum date(for today use 0 or -1970/01/01)
-
-          if (_typeof(mymaxDate) === ( true ? "undefined" : undefined)) mymaxDate = false; //tomorrow is maximum date calendar, such as '+2050/01/01'
-
-          if (_typeof(rtlEnable) === ( true ? "undefined" : undefined)) rtlEnable = false;
-          $.datetimepicker.setLocale(lang); //RTL 
-
-          if ($('body').hasClass('rtl')) {
-            rtlEnable = true;
-          } //hide or display time selector
+  var special = $.event.special.mousewheel = {
+    version: '3.1.12',
+    setup: function setup() {
+      if (this.addEventListener) {
+        for (var i = toBind.length; i;) {
+          this.addEventListener(toBind[--i], handler, false);
+        }
+      } else {
+        this.onmousewheel = handler;
+      } // Store the line height and page height for this particular element
 
 
-          if (timeEnable) {
-            $(document).on('mouseenter', 'td.xdsoft_date[data-date]', function () {
-              if ($(this).hasClass('xdsoft_disabled')) {
-                $(this).closest('.xdsoft_datepicker').next('.xdsoft_timepicker.active').hide();
-              } else {
-                $(this).closest('.xdsoft_datepicker').next('.xdsoft_timepicker.active').show();
-              }
-            });
-          }
+      $.data(this, 'mousewheel-line-height', special.getLineHeight(this));
+      $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
+    },
+    teardown: function teardown() {
+      if (this.removeEventListener) {
+        for (var i = toBind.length; i;) {
+          this.removeEventListener(toBind[--i], handler, false);
+        }
+      } else {
+        this.onmousewheel = null;
+      } // Clean up the data we added to the element
 
-          $this.datetimepicker({
-            rtl: rtlEnable,
-            timepicker: timeEnable,
-            format: dateFormat,
-            formatTime: 'H:i',
-            formatDate: 'Y/m/d',
-            minDate: myminDate,
-            maxDate: mymaxDate
-          });
-        }); //Dynamic listening for the latest value
 
-        $(document).on('mouseleave', '[data-handler]', function () {
-          $('[data-picker]').each(function () {
-            $(this).closest('div').find('label, .uix-controls__bar').addClass('is-active');
-          });
-        });
-      } // function datetimepicker is exist
+      $.removeData(this, 'mousewheel-line-height');
+      $.removeData(this, 'mousewheel-page-height');
+    },
+    getLineHeight: function getLineHeight(elem) {
+      var $elem = $(elem),
+          $parent = $elem['offsetParent' in $.fn ? 'offsetParent' : 'parent']();
 
-    });
+      if (!$parent.length) {
+        $parent = $('body');
+      }
+
+      return parseInt($parent.css('fontSize'), 10) || parseInt($elem.css('fontSize'), 10) || 16;
+    },
+    getPageHeight: function getPageHeight(elem) {
+      return $(elem).height();
+    },
+    settings: {
+      adjustOldDeltas: true,
+      // see shouldAdjustOldDeltas() below
+      normalizeOffset: true // calls getBoundingClientRect for each event
+
+    }
   };
+  $.fn.extend({
+    mousewheel: function mousewheel(fn) {
+      return fn ? this.bind('mousewheel', fn) : this.trigger('mousewheel');
+    },
+    unmousewheel: function unmousewheel(fn) {
+      return this.unbind('mousewheel', fn);
+    }
+  });
+
+  function handler(event) {
+    var orgEvent = event || window.event,
+        args = slice.call(arguments, 1),
+        delta = 0,
+        deltaX = 0,
+        deltaY = 0,
+        absDelta = 0,
+        offsetX = 0,
+        offsetY = 0;
+    event = $.event.fix(orgEvent);
+    event.type = 'mousewheel'; // Old school scrollwheel delta
+
+    if ('detail' in orgEvent) {
+      deltaY = orgEvent.detail * -1;
+    }
+
+    if ('wheelDelta' in orgEvent) {
+      deltaY = orgEvent.wheelDelta;
+    }
+
+    if ('wheelDeltaY' in orgEvent) {
+      deltaY = orgEvent.wheelDeltaY;
+    }
+
+    if ('wheelDeltaX' in orgEvent) {
+      deltaX = orgEvent.wheelDeltaX * -1;
+    } // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
+
+
+    if ('axis' in orgEvent && orgEvent.axis === orgEvent.HORIZONTAL_AXIS) {
+      deltaX = deltaY * -1;
+      deltaY = 0;
+    } // Set delta to be deltaY or deltaX if deltaY is 0 for backwards compatabilitiy
+
+
+    delta = deltaY === 0 ? deltaX : deltaY; // New school wheel delta (wheel event)
+
+    if ('deltaY' in orgEvent) {
+      deltaY = orgEvent.deltaY * -1;
+      delta = deltaY;
+    }
+
+    if ('deltaX' in orgEvent) {
+      deltaX = orgEvent.deltaX;
+
+      if (deltaY === 0) {
+        delta = deltaX * -1;
+      }
+    } // No change actually happened, no reason to go any further
+
+
+    if (deltaY === 0 && deltaX === 0) {
+      return;
+    } // Need to convert lines and pages to pixels if we aren't already in pixels
+    // There are three delta modes:
+    //   * deltaMode 0 is by pixels, nothing to do
+    //   * deltaMode 1 is by lines
+    //   * deltaMode 2 is by pages
+
+
+    if (orgEvent.deltaMode === 1) {
+      var lineHeight = $.data(this, 'mousewheel-line-height');
+      delta *= lineHeight;
+      deltaY *= lineHeight;
+      deltaX *= lineHeight;
+    } else if (orgEvent.deltaMode === 2) {
+      var pageHeight = $.data(this, 'mousewheel-page-height');
+      delta *= pageHeight;
+      deltaY *= pageHeight;
+      deltaX *= pageHeight;
+    } // Store lowest absolute delta to normalize the delta values
+
+
+    absDelta = Math.max(Math.abs(deltaY), Math.abs(deltaX));
+
+    if (!lowestDelta || absDelta < lowestDelta) {
+      lowestDelta = absDelta; // Adjust older deltas if necessary
+
+      if (shouldAdjustOldDeltas(orgEvent, absDelta)) {
+        lowestDelta /= 40;
+      }
+    } // Adjust older deltas if necessary
+
+
+    if (shouldAdjustOldDeltas(orgEvent, absDelta)) {
+      // Divide all the things by 40!
+      delta /= 40;
+      deltaX /= 40;
+      deltaY /= 40;
+    } // Get a whole, normalized value for the deltas
+
+
+    delta = Math[delta >= 1 ? 'floor' : 'ceil'](delta / lowestDelta);
+    deltaX = Math[deltaX >= 1 ? 'floor' : 'ceil'](deltaX / lowestDelta);
+    deltaY = Math[deltaY >= 1 ? 'floor' : 'ceil'](deltaY / lowestDelta); // Normalise offsetX and offsetY properties
+
+    if (special.settings.normalizeOffset && this.getBoundingClientRect) {
+      var boundingRect = this.getBoundingClientRect();
+      offsetX = event.clientX - boundingRect.left;
+      offsetY = event.clientY - boundingRect.top;
+    } // Add information to the event object
+
+
+    event.deltaX = deltaX;
+    event.deltaY = deltaY;
+    event.deltaFactor = lowestDelta;
+    event.offsetX = offsetX;
+    event.offsetY = offsetY; // Go ahead and set deltaMode to 0 since we converted to pixels
+    // Although this is a little odd since we overwrite the deltaX/Y
+    // properties with normalized deltas.
+
+    event.deltaMode = 0; // Add event and delta to the front of the arguments
+
+    args.unshift(event, delta, deltaX, deltaY); // Clearout lowestDelta after sometime to better
+    // handle multiple device types that give different
+    // a different lowestDelta
+    // Ex: trackpad = 3 and mouse wheel = 120
+
+    if (nullLowestDeltaTimeout) {
+      clearTimeout(nullLowestDeltaTimeout);
+    }
+
+    nullLowestDeltaTimeout = setTimeout(nullLowestDelta, 200);
+    return ($.event.dispatch || $.event.handle).apply(this, args);
+  }
+
+  function nullLowestDelta() {
+    lowestDelta = null;
+  }
+
+  function shouldAdjustOldDeltas(orgEvent, absDelta) {
+    // If this is an older event and the delta is divisable by 120,
+    // then we are assuming that the browser is treating this as an
+    // older mouse wheel event and that we should divide the deltas
+    // by 40 to try and get a more usable deltaFactor.
+    // Side note, this actually impacts the reported scroll distance
+    // in older browsers and can cause scrolling to be slower than native.
+    // Turn this off by setting $.event.special.mousewheel.settings.adjustOldDeltas to false.
+    return special.settings.adjustOldDeltas && orgEvent.type === 'mousewheel' && absDelta % 120 === 0;
+  }
 })(jQuery);
 
 /***/ }),
-/* 23 */
+/* 33 */
 /***/ (function(module, exports) {
 
 /*
@@ -1553,7 +6499,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 24 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1597,7 +6543,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 25 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /*
@@ -1631,7 +6577,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 26 */
+/* 36 */
 /***/ (function(module, exports) {
 
 /*
@@ -1704,7 +6650,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 27 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /*
@@ -1738,7 +6684,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 28 */
+/* 38 */
 /***/ (function(module, exports) {
 
 /*
@@ -1762,7 +6708,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 29 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1810,7 +6756,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 30 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1896,66 +6842,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(jQuery);
 
 /***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1989,160 +6875,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-/*
- * Fire Modal Dialog
- *
- * @param  {String} id                   - Modal's unique identifier.
- * @param  {Number|Boolean} height       - Custom modal height whick need a unit string. 
-										   This attribute "data-modal-height" may not exist. Such as: 200px
- * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
-										   This attribute "data-modal-height" may not exist. Such as: 200px
- * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
- * @param  {?Element|Boolean} btn          - Link or button that fires an event.
- * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
- * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
- * @param  {Boolean} closeOnlyBtn        - Disable mask to close the window.
- * @return {Void}
- */
-(function ($) {
-  'use strict';
-
-  $.fn.UixFireModalDialog = function (options) {
-    // This is the easiest way to have default options.
-    var settings = $.extend({
-      id: 'demo',
-      height: false,
-      width: false,
-      speed: 500,
-      btn: false,
-      lightbox: true,
-      autoClose: false,
-      closeOnlyBtn: false
-    }, options);
-    this.each(function () {
-      if (settings.id == '') return false; //Add modal mask to stage
-
-      if ($('.uix-modal-mask').length == 0) {
-        $('body').prepend('<div class="uix-modal-mask"></div>');
-      }
-
-      $.when($('.uix-modal-mask').length > 0).then(function () {
-        if (settings.closeOnlyBtn) {
-          $('.uix-modal-mask').addClass('js-uix-disabled');
-        } else {
-          $('.uix-modal-mask').removeClass('js-uix-disabled');
-        }
-
-        var dataID = settings.id,
-            dataH = settings.height,
-            dataW = settings.width,
-            linkBtn = settings.btn,
-            closeTime = settings.autoClose,
-            $obj = $('.uix-modal-box#' + dataID); // Initializate modal
-
-        if (linkBtn) {
-          linkBtn.attr('href', 'javascript:void(0)');
-          $obj.find('.uix-modal-box__content').addClass('js-uix-no-fullscreen');
-
-          if (linkBtn.data('video-win')) {
-            $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
-          }
-        }
-
-        if ($obj.length > 0) {
-          // Locks the page
-          $.scrollLock(true);
-
-          if (_typeof(dataH) != ( true ? "undefined" : undefined) && dataH != '' && dataH) {
-            $obj.css({
-              'height': dataH
-            });
-          }
-
-          if (_typeof(dataW) != ( true ? "undefined" : undefined) && dataW != '' && dataW) {
-            $obj.css({
-              'width': dataW
-            });
-          } //Enable the lightbox effect.
-
-
-          if (settings.lightbox) {
-            TweenMax.set('.uix-modal-mask', {
-              css: {
-                opacity: 0,
-                display: 'none'
-              },
-              onComplete: function onComplete() {
-                TweenMax.to(this.target, 0.3, {
-                  css: {
-                    opacity: 1,
-                    display: 'block'
-                  }
-                });
-              }
-            });
-          }
-
-          $obj.addClass('is-active'); //auto close
-
-          if (closeTime && !isNaN(closeTime)) {
-            window.setCloseModalDialog = setTimeout(function () {
-              $(document).closeModalDialog();
-            }, closeTime);
-          }
-        }
-
-        if ($obj.hasClass('is-fullscreen')) {
-          setTimeout(function () {
-            if (!$obj.hasClass('is-video')) {
-              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'scroll');
-            } else {
-              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
-            }
-          }, settings.speed);
-        }
-      });
-    });
-  };
-})(jQuery);
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 47 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/*
- * Close Modal Dialog
- *
- * @return {Void}
- */
-(function ($) {
-  'use strict';
-
-  $.fn.UixCloseModalDialog = function (options) {
-    // This is the easiest way to have default options.
-    var settings = $.extend({
-      target: '.uix-modal-box'
-    }, options);
-    this.each(function () {
-      //Enable mask to close the window.
-      $('.uix-modal-mask').removeClass('js-uix-disabled');
-      $(settings.target).removeClass('is-active');
-      TweenMax.to('.uix-modal-mask', 0.3, {
-        css: {
-          opacity: 0,
-          display: 'none'
-        }
-      });
-      $(settings.target).find('.uix-modal-box__content').removeClass('js-uix-no-fullscreen'); // Unlocks the page
-
-      $.scrollLock(false); //Prevent automatic close from affecting new fire effects
-
-      clearTimeout(window.setCloseModalDialog);
-    });
-  };
-})(jQuery);
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 48 */
@@ -2230,6 +6969,54 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 70 */
 /***/ (function(module, exports) {
 
 /**
@@ -2288,19 +7075,19 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 63 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 64 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 65 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2454,54 +7241,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 74 */
@@ -2684,14 +7423,54 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 112 */,
 /* 113 */,
 /* 114 */,
@@ -2710,40 +7489,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 127 */,
 /* 128 */,
 /* 129 */,
-/* 130 */
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./src/components/ES5/_app-load.js
-/*
- * Third-party plugins for website
- *    
- * !!! Third-party plugins adopt pure file merger and do not import and export
- * !!! Please do not modify variable "UIXKIT_3RD_PARTY_PLUGINS_IMPORT" name
- */
-var UIXKIT_3RD_PARTY_PLUGINS_IMPORT = {
-  "files": [//Dependencies
-  //Must be placed in the first place
-  //---------------------
-  "./src/components/ES5/_plugins-Miscellaneous/js/_dependencies.js", //Website ==> miscellaneous
-  //---------------------
-  "./src/components/ES5/_plugins-Miscellaneous/js/scrollLock.js", "./src/components/ES5/_plugins-Miscellaneous/js/attrExt.js", "./src/components/ES5/_plugins-Miscellaneous/js/hashchange.js", "./src/components/ES5/_plugins-Miscellaneous/js/datepicker.js", "./src/components/ES5/_plugins-Miscellaneous/js/jquery.flexslider.js", //GSAP plugins
-  //---------------------
-  "./src/components/ES5/_plugins-GSAP/js/plugins/ColorPropsPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/CSSRulePlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/EaselPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/EndArrayPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/ModifiersPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/PixiPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/RaphaelPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/ScrollToPlugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/TEMPLATE_Plugin.js", "./src/components/ES5/_plugins-GSAP/js/plugins/TextPlugin.js", //three.js plugins
-  //---------------------
-  "./src/components/ES5/_plugins-THREE/js/renderers/CSS3DRenderer.js", "./src/components/ES5/_plugins-THREE/js/controls/OrbitControls.js", "./src/components/ES5/_plugins-THREE/js/shaders/CopyShader.js", "./src/components/ES5/_plugins-THREE/js/shaders/ConvolutionShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/EffectComposer.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/BloomPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/MaskPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/TexturePass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ShaderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/RenderPass.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/ClearPass.js", "./src/components/ES5/_plugins-THREE/js/modifiers/TessellateModifier.js", "./src/components/ES5/_plugins-THREE/js/modifiers/ExplodeModifier.js", "./src/components/ES5/_plugins-THREE/js/extensions/ShaderRuntime.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/d3-threeD.custom.js", "./src/components/ES5/_plugins-THREE/js/extensions/simplex-noise.js", "./src/components/ES5/_plugins-THREE/js/extensions/THREE.MeshLine.js", // loader
-  //---------------------
-  "./src/components/ES5/_plugins-THREE/js/loaders/OBJLoader.js", //Extra filter -- film
-  //---------------------
-  "./src/components/ES5/_plugins-THREE/js/shaders/FilmShader.js", "./src/components/ES5/_plugins-THREE/js/postprocessing/FilmPass.js"]
-};
+// EXTERNAL MODULE: ./src/components/_global/scss/_style.scss
+var _style = __webpack_require__(9);
 
-// EXTERNAL MODULE: ./src/components/ES6/_global/scss/_style.scss
-var _style = __webpack_require__(4);
-
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/index.js
+// CONCATENATED MODULE: ./src/components/_global/js/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /**
@@ -2903,7 +7666,7 @@ var browser = {
  * Core scripts for current site
  *
  * @private
- * @description Used for all modules from ./src/components/ES6/[__]/js
+ * @description Used for all modules from ./src/components/[__]/js
  * @requires ./examples/assets/js/min/jquery.waitforimages.min.js
  * @requires ./examples/assets/js/min/video.min.js
  * @requires ./examples/assets/js/min/TweenMax.min.js
@@ -3091,7 +7854,7 @@ var UixCssProperty = UixCssProperty || function () {
   }, //
   t;
 }();
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixModuleFilter.js
+// CONCATENATED MODULE: ./src/components/_global/js/fn/UixModuleFilter.js
 function UixModuleFilter_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
 
 /*
@@ -3208,7 +7971,7 @@ window.MAIN = null;
     });
   };
 })(jQuery);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixApplyAsyncScripts.js
+// CONCATENATED MODULE: ./src/components/_global/js/fn/UixApplyAsyncScripts.js
 /*
  * Apply some asynchronism scripts
  *
@@ -3254,14 +8017,14 @@ window.MAIN = null;
     // This is the easiest way to have default options.
     var settings = $.extend({
       scrollReveal: true,
-      // @from ./src/components/ES6/scroll-reveal
+      // @from ./src/components/scroll-reveal
       ajaxPostList: true,
-      // @from ./src/components/ES6/list-posts
+      // @from ./src/components/list-posts
       ajaxDDList: true,
-      // @from ./src/components/ES6/dynamic-dropdown-list-json
+      // @from ./src/components/dynamic-dropdown-list-json
       counterAnim: true,
-      // @from ./src/components/ES6/counter
-      lightBox: true // @from ./src/components/ES6/lightbox
+      // @from ./src/components/counter
+      lightBox: true // @from ./src/components/lightbox
 
     }, options);
     this.each(function () {
@@ -3385,7 +8148,7 @@ window.MAIN = null;
     });
   };
 })(jQuery);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/fn/UixApplyAsyncAllScripts.js
+// CONCATENATED MODULE: ./src/components/_global/js/fn/UixApplyAsyncAllScripts.js
 /*
  * Apply all the asynchronism scripts
  *
@@ -3440,7 +8203,7 @@ window.MAIN = null;
     });
   };
 })(jQuery);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/body-and-header.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/body-and-header.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -3506,7 +8269,7 @@ var BODY_AND_HEADER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/common-height.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/common-height.js
 function common_height_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -3592,7 +8355,10 @@ var COMMON_HEIGHT = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/custom-data-attrs.js
+// EXTERNAL MODULE: ./src/third-party-plugins/esm/Miscellaneous/attrExt.js
+var attrExt = __webpack_require__(3);
+
+// CONCATENATED MODULE: ./src/components/_global/js/modules/custom-data-attrs.js
 function custom_data_attrs_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -3601,11 +8367,6 @@ function custom_data_attrs_classCallCheck(instance, Constructor) { if (!(instanc
  *************************************
  */
 
-/**
- * module.GET_CUSTOM_ATTRS
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- */
 
 var GET_CUSTOM_ATTRS = function (module, $, window, document) {
   if (window.GET_CUSTOM_ATTRS === null) return false;
@@ -3634,7 +8395,7 @@ var GET_CUSTOM_ATTRS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/loader.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/loader.js
 function loader_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function loader_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { loader_typeof = function _typeof(obj) { return typeof obj; }; } else { loader_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return loader_typeof(obj); }
@@ -3643,12 +8404,6 @@ function loader_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "
  *************************************
  * <!-- Loader -->
  *************************************
- */
-
-/**
- * module.LOADER
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 var LOADER = function (module, $, window, document) {
@@ -3791,7 +8546,7 @@ var LOADER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/mega-menu.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/mega-menu.js
 function mega_menu_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -3928,7 +8683,7 @@ var MEGA_MENU = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/mobile-menu.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/mobile-menu.js
 function mobile_menu_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function mobile_menu_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { mobile_menu_typeof = function _typeof(obj) { return typeof obj; }; } else { mobile_menu_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return mobile_menu_typeof(obj); }
@@ -4079,7 +8834,7 @@ var MOBILE_MENU = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/navigation.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/navigation.js
 function navigation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { navigation_typeof = function _typeof(obj) { return typeof obj; }; } else { navigation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return navigation_typeof(obj); }
@@ -4088,12 +8843,6 @@ function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
  *************************************
  * <!-- Navigation -->
  *************************************
- */
-
-/**
- * module.NAVIGATION
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 var NAVIGATION = function (module, $, window, document) {
@@ -4177,10 +8926,10 @@ var NAVIGATION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/_global/js/fn/UixParallax.js
-var UixParallax = __webpack_require__(0);
+// EXTERNAL MODULE: ./src/components/_global/js/fn/UixParallax.js
+var UixParallax = __webpack_require__(4);
 
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/set-background.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/set-background.js
 function set_background_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function set_background_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { set_background_typeof = function _typeof(obj) { return typeof obj; }; } else { set_background_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return set_background_typeof(obj); }
@@ -4354,7 +9103,7 @@ var SET_BG = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/_global/js/modules/videos.js
+// CONCATENATED MODULE: ./src/components/_global/js/modules/videos.js
 function videos_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function videos_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { videos_typeof = function _typeof(obj) { return typeof obj; }; } else { videos_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return videos_typeof(obj); }
@@ -4752,10 +9501,10 @@ var VIDEOS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/_main/scss/_style.scss
-var scss_style = __webpack_require__(5);
+// EXTERNAL MODULE: ./src/components/_main/scss/_style.scss
+var scss_style = __webpack_require__(10);
 
-// CONCATENATED MODULE: ./src/components/ES6/_main/js/index.js
+// CONCATENATED MODULE: ./src/components/_main/js/index.js
 function js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -4796,10 +9545,10 @@ var MAIN = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/accordion-img/scss/_style.scss
-var accordion_img_scss_style = __webpack_require__(6);
+// EXTERNAL MODULE: ./src/components/accordion-img/scss/_style.scss
+var accordion_img_scss_style = __webpack_require__(11);
 
-// CONCATENATED MODULE: ./src/components/ES6/accordion-img/js/index.js
+// CONCATENATED MODULE: ./src/components/accordion-img/js/index.js
 function accordion_img_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { js_typeof = function _typeof(obj) { return typeof obj; }; } else { js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return js_typeof(obj); }
@@ -4913,10 +9662,10 @@ var ACCORDION_BG = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/accordion/scss/_style.scss
-var accordion_scss_style = __webpack_require__(7);
+// EXTERNAL MODULE: ./src/components/accordion/scss/_style.scss
+var accordion_scss_style = __webpack_require__(12);
 
-// CONCATENATED MODULE: ./src/components/ES6/accordion/js/index.js
+// CONCATENATED MODULE: ./src/components/accordion/js/index.js
 function accordion_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function accordion_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { accordion_js_typeof = function _typeof(obj) { return typeof obj; }; } else { accordion_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return accordion_js_typeof(obj); }
@@ -5003,10 +9752,10 @@ var ACCORDION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss/_basic.scss
-var _basic = __webpack_require__(8);
+// EXTERNAL MODULE: ./src/components/advanced-slider/scss/_basic.scss
+var _basic = __webpack_require__(13);
 
-// CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/basic.js
+// CONCATENATED MODULE: ./src/components/advanced-slider/js/basic.js
 function basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { basic_typeof = function _typeof(obj) { return typeof obj; }; } else { basic_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return basic_typeof(obj); }
@@ -5681,10 +10430,635 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/advanced-slider/scss/_special.scss
-var _special = __webpack_require__(9);
+// EXTERNAL MODULE: ./src/third-party-plugins/esm/GSAP/TweenLite.js
+var GSAP_TweenLite = __webpack_require__(0);
 
-// CONCATENATED MODULE: ./src/components/ES6/advanced-slider/js/special.js
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/GSAP/PixiPlugin.js
+/*!
+ * VERSION: 0.3.0
+ * DATE: 2019-05-13
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2019, GreenSock. All rights reserved.
+ * PixiPlugin is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ *
+ * @author: Jack Doyle, jack@greensock.com
+ */
+
+/* eslint-disable */
+
+
+var _numExp = /(\d|\.)+/g,
+    _relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
+    _colorLookup = {
+  aqua: [0, 255, 255],
+  lime: [0, 255, 0],
+  silver: [192, 192, 192],
+  black: [0, 0, 0],
+  maroon: [128, 0, 0],
+  teal: [0, 128, 128],
+  blue: [0, 0, 255],
+  navy: [0, 0, 128],
+  white: [255, 255, 255],
+  fuchsia: [255, 0, 255],
+  olive: [128, 128, 0],
+  yellow: [255, 255, 0],
+  orange: [255, 165, 0],
+  gray: [128, 128, 128],
+  purple: [128, 0, 128],
+  green: [0, 128, 0],
+  red: [255, 0, 0],
+  pink: [255, 192, 203],
+  cyan: [0, 255, 255],
+  transparent: [255, 255, 255, 0]
+},
+    _hue = function _hue(h, m1, m2) {
+  h = h < 0 ? h + 1 : h > 1 ? h - 1 : h;
+  return (h * 6 < 1 ? m1 + (m2 - m1) * h * 6 : h < 0.5 ? m2 : h * 3 < 2 ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255 + 0.5 | 0;
+},
+
+/**
+ * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if "format" parameter is "hsl", it will populate the array with hue, saturation, and lightness values. Or if "format" is "number", it'll return a number like 0xFF0000 instead of an array. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
+ * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
+ * @param {(string)} format If "hsl", an hsl() or hsla() value will be returned instead of rgb() or rgba(). Or if "number", then a numeric value will be returned, like 0xFF0000. Default is rgb.
+ * @return {(array|number)} An array containing red, green, and blue (and optionally alpha) in that order, or if the format parameter was "hsl", the array will contain hue, saturation and lightness (and optionally alpha) in that order. Or if "format" is defined as "number", it'll return a number like 0xFF0000. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and "format" is "hsl".
+ */
+_parseColor = function _parseColor(v, format) {
+  var toHSL = format === "hsl",
+      a,
+      r,
+      g,
+      b,
+      h,
+      s,
+      l,
+      max,
+      min,
+      d,
+      wasHSL;
+
+  if (!v) {
+    a = _colorLookup.black;
+  } else if (typeof v === "number") {
+    a = [v >> 16, v >> 8 & 255, v & 255];
+  } else {
+    if (v.charAt(v.length - 1) === ",") {
+      //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
+      v = v.substr(0, v.length - 1);
+    }
+
+    if (_colorLookup[v]) {
+      a = _colorLookup[v];
+    } else if (v.charAt(0) === "#") {
+      if (v.length === 4) {
+        //for shorthand like #9F0
+        r = v.charAt(1);
+        g = v.charAt(2);
+        b = v.charAt(3);
+        v = "#" + r + r + g + g + b + b;
+      }
+
+      v = parseInt(v.substr(1), 16);
+      a = [v >> 16, v >> 8 & 255, v & 255];
+    } else if (v.substr(0, 3) === "hsl") {
+      a = wasHSL = v.match(_numExp);
+
+      if (!toHSL) {
+        h = Number(a[0]) % 360 / 360;
+        s = Number(a[1]) / 100;
+        l = Number(a[2]) / 100;
+        g = l <= 0.5 ? l * (s + 1) : l + s - l * s;
+        r = l * 2 - g;
+
+        if (a.length > 3) {
+          a[3] = Number(v[3]);
+        }
+
+        a[0] = _hue(h + 1 / 3, r, g);
+        a[1] = _hue(h, r, g);
+        a[2] = _hue(h - 1 / 3, r, g);
+      } else if (v.indexOf("=") !== -1) {
+        //if relative values are found, just return the raw strings with the relative prefixes in place.
+        return v.match(_relNumExp);
+      }
+    } else {
+      a = v.match(_numExp) || _colorLookup.transparent;
+    }
+
+    a[0] = Number(a[0]);
+    a[1] = Number(a[1]);
+    a[2] = Number(a[2]);
+
+    if (a.length > 3) {
+      a[3] = Number(a[3]);
+    }
+  }
+
+  if (toHSL && !wasHSL) {
+    r = a[0] / 255;
+    g = a[1] / 255;
+    b = a[2] / 255;
+    max = Math.max(r, g, b);
+    min = Math.min(r, g, b);
+    l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0;
+    } else {
+      d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      h *= 60;
+    }
+
+    a[0] = h + 0.5 | 0;
+    a[1] = s * 100 + 0.5 | 0;
+    a[2] = l * 100 + 0.5 | 0;
+  }
+
+  return format === "number" ? a[0] << 16 | a[1] << 8 | a[2] : a;
+},
+    _formatColors = function _formatColors(s, toHSL) {
+  var colors = (s + "").match(_colorExp) || [],
+      charIndex = 0,
+      parsed = "",
+      i,
+      color,
+      temp;
+
+  if (!colors.length) {
+    return s;
+  }
+
+  for (i = 0; i < colors.length; i++) {
+    color = colors[i];
+    temp = s.substr(charIndex, s.indexOf(color, charIndex) - charIndex);
+    charIndex += temp.length + color.length;
+    color = _parseColor(color, toHSL ? "hsl" : "rgb");
+
+    if (color.length === 3) {
+      color.push(1);
+    }
+
+    parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
+  }
+
+  return parsed + s.substr(charIndex);
+},
+    _colorStringFilter,
+    PixiPlugin_TweenLite = (GSAP_TweenLite["a" /* _gsScope */].GreenSockGlobals || GSAP_TweenLite["a" /* _gsScope */]).TweenLite,
+    _colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b",
+    //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
+_idMatrix = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+    _lumR = 0.212671,
+    _lumG = 0.715160,
+    _lumB = 0.072169,
+    _applyMatrix = function _applyMatrix(m, m2) {
+  var temp = [],
+      i = 0,
+      z = 0,
+      y,
+      x;
+
+  for (y = 0; y < 4; y++) {
+    for (x = 0; x < 5; x++) {
+      z = x === 4 ? m[i + 4] : 0;
+      temp[i + x] = m[i] * m2[x] + m[i + 1] * m2[x + 5] + m[i + 2] * m2[x + 10] + m[i + 3] * m2[x + 15] + z;
+    }
+
+    i += 5;
+  }
+
+  return temp;
+},
+    _setSaturation = function _setSaturation(m, n) {
+  var inv = 1 - n,
+      r = inv * _lumR,
+      g = inv * _lumG,
+      b = inv * _lumB;
+  return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
+},
+    _colorize = function _colorize(m, color, amount) {
+  var c = _parseColor(color),
+      r = c[0] / 255,
+      g = c[1] / 255,
+      b = c[2] / 255,
+      inv = 1 - amount;
+
+  return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
+},
+    _setHue = function _setHue(m, n) {
+  n *= Math.PI / 180;
+  var c = Math.cos(n),
+      s = Math.sin(n);
+  return _applyMatrix([_lumR + c * (1 - _lumR) + s * -_lumR, _lumG + c * -_lumG + s * -_lumG, _lumB + c * -_lumB + s * (1 - _lumB), 0, 0, _lumR + c * -_lumR + s * 0.143, _lumG + c * (1 - _lumG) + s * 0.14, _lumB + c * -_lumB + s * -0.283, 0, 0, _lumR + c * -_lumR + s * -(1 - _lumR), _lumG + c * -_lumG + s * _lumG, _lumB + c * (1 - _lumB) + s * _lumB, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
+},
+    _setContrast = function _setContrast(m, n) {
+  return _applyMatrix([n, 0, 0, 0, 0.5 * (1 - n), 0, n, 0, 0, 0.5 * (1 - n), 0, 0, n, 0, 0.5 * (1 - n), 0, 0, 0, 1, 0], m);
+},
+    PixiPlugin_getFilter = function _getFilter(t, type) {
+  var filterClass = GSAP_TweenLite["a" /* _gsScope */].PIXI.filters[type],
+      filters = t.filters || [],
+      i = filters.length,
+      filter;
+
+  if (!filterClass) {
+    throw "PixiPlugin error: " + type + " isn't present.";
+  }
+
+  while (--i > -1) {
+    if (filters[i] instanceof filterClass) {
+      return filters[i];
+    }
+  }
+
+  filter = new filterClass();
+
+  if (type === "BlurFilter") {
+    filter.blur = 0;
+  }
+
+  filters.push(filter);
+  t.filters = filters;
+  return filter;
+},
+    _addColorMatrixFilterCacheTween = function _addColorMatrixFilterCacheTween(p, pg, cache, vars) {
+  //we cache the ColorMatrixFilter components in a _gsColorMatrixFilter object attached to the target object so that it's easy to grab the current value at any time.
+  pg._addTween(cache, p, cache[p], vars[p], p);
+
+  pg._overwriteProps.push(p);
+},
+    PixiPlugin_applyBrightnessToMatrix = function _applyBrightnessToMatrix(brightness, matrix) {
+  var temp = new GSAP_TweenLite["a" /* _gsScope */].PIXI.filters.ColorMatrixFilter();
+  temp.matrix = matrix;
+  temp.brightness(brightness, true);
+  return temp.matrix;
+},
+    _CMFdefaults = {
+  contrast: 1,
+  saturation: 1,
+  colorizeAmount: 0,
+  colorize: "rgb(255,255,255)",
+  hue: 0,
+  brightness: 1
+},
+    _parseColorMatrixFilter = function _parseColorMatrixFilter(t, v, pg) {
+  var filter = PixiPlugin_getFilter(t, "ColorMatrixFilter"),
+      cache = t._gsColorMatrixFilter = t._gsColorMatrixFilter || {
+    contrast: 1,
+    saturation: 1,
+    colorizeAmount: 0,
+    colorize: "rgb(255,255,255)",
+    hue: 0,
+    brightness: 1
+  },
+      combine = v.combineCMF && !("colorMatrixFilter" in v && !v.colorMatrixFilter),
+      i,
+      matrix,
+      startMatrix;
+
+  startMatrix = filter.matrix;
+
+  if (v.resolution) {
+    filter.resolution = v.resolution;
+  }
+
+  if (v.matrix && v.matrix.length === startMatrix.length) {
+    matrix = v.matrix;
+
+    if (cache.contrast !== 1) {
+      _addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
+    }
+
+    if (cache.hue) {
+      _addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
+    }
+
+    if (cache.brightness !== 1) {
+      _addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
+    }
+
+    if (cache.colorizeAmount) {
+      _addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
+
+      _addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
+    }
+
+    if (cache.saturation !== 1) {
+      _addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
+    }
+  } else {
+    matrix = _idMatrix.slice();
+
+    if (v.contrast != null) {
+      matrix = _setContrast(matrix, Number(v.contrast));
+
+      _addColorMatrixFilterCacheTween("contrast", pg, cache, v);
+    } else if (cache.contrast !== 1) {
+      if (combine) {
+        matrix = _setContrast(matrix, cache.contrast);
+      } else {
+        _addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
+      }
+    }
+
+    if (v.hue != null) {
+      matrix = _setHue(matrix, Number(v.hue));
+
+      _addColorMatrixFilterCacheTween("hue", pg, cache, v);
+    } else if (cache.hue) {
+      if (combine) {
+        matrix = _setHue(matrix, cache.hue);
+      } else {
+        _addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
+      }
+    }
+
+    if (v.brightness != null) {
+      matrix = PixiPlugin_applyBrightnessToMatrix(Number(v.brightness), matrix);
+
+      _addColorMatrixFilterCacheTween("brightness", pg, cache, v);
+    } else if (cache.brightness !== 1) {
+      if (combine) {
+        matrix = PixiPlugin_applyBrightnessToMatrix(cache.brightness, matrix);
+      } else {
+        _addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
+      }
+    }
+
+    if (v.colorize != null) {
+      v.colorizeAmount = "colorizeAmount" in v ? Number(v.colorizeAmount) : 1;
+      matrix = _colorize(matrix, v.colorize, v.colorizeAmount);
+
+      _addColorMatrixFilterCacheTween("colorize", pg, cache, v);
+
+      _addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, v);
+    } else if (cache.colorizeAmount) {
+      if (combine) {
+        matrix = _colorize(matrix, cache.colorize, cache.colorizeAmount);
+      } else {
+        _addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
+
+        _addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
+      }
+    }
+
+    if (v.saturation != null) {
+      matrix = _setSaturation(matrix, Number(v.saturation));
+
+      _addColorMatrixFilterCacheTween("saturation", pg, cache, v);
+    } else if (cache.saturation !== 1) {
+      if (combine) {
+        matrix = _setSaturation(matrix, cache.saturation);
+      } else {
+        _addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
+      }
+    }
+  }
+
+  i = matrix.length;
+
+  while (--i > -1) {
+    if (matrix[i] !== startMatrix[i]) {
+      pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "colorMatrixFilter");
+    }
+  }
+
+  pg._overwriteProps.push("colorMatrixFilter");
+},
+    _addColorTween = function _addColorTween(target, p, value, colorSetter, plugin) {
+  var pt = colorSetter._firstPT = {
+    _next: colorSetter._firstPT,
+    t: target,
+    p: p,
+    proxy: {},
+    f: typeof target[p] === "function"
+  };
+  pt.proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[p.indexOf("set") || typeof target["get" + p.substr(3)] !== "function" ? p : "get" + p.substr(3)]()).join(",") + ")";
+
+  plugin._addTween(pt.proxy, p, "get", typeof value === "number" ? "rgb(" + _parseColor(value, false).join(",") + ")" : value, p, null, null, _colorStringFilter);
+},
+    //to improve performance, when a color is sensed, we hijack the setRatio() method of the plugin instance with a new function that this method spits back. This is a special method that handles parsing color values on-the-fly and turns them into numeric values which PixiJS requires. In other words, instead of "rgb(255, 0, 0)", PixiJS wants 0xFF0000. This also works with hsl() values.
+_buildColorSetter = function _buildColorSetter(tween, plugin) {
+  var setRatio = plugin.setRatio,
+      //save the original (super) setRatio() function
+  func = function func(v) {
+    var pt = func._firstPT,
+        val;
+    setRatio.call(plugin, v);
+
+    while (pt) {
+      val = _parseColor(pt.proxy[pt.p], "number");
+
+      if (pt.f) {
+        pt.t[pt.p](val);
+      } else {
+        pt.t[pt.p] = val;
+      }
+
+      pt = pt._next;
+    }
+
+    if (func.graphics) {
+      //in order for PixiJS to actually redraw GraphicsData, we've gotta increment the "dirty" and "clearDirty" values. If we don't do this, the values will be tween properly, but not rendered.
+      func.graphics.dirty++;
+      func.graphics.clearDirty++;
+    }
+  };
+
+  plugin.setRatio = func;
+  return func;
+},
+    _colorProps = {
+  tint: 1,
+  lineColor: 1,
+  fillColor: 1
+},
+    _xyContexts = "position,scale,skew,pivot,anchor,tilePosition,tileScale".split(","),
+    _contexts = {
+  x: "position",
+  y: "position",
+  tileX: "tilePosition",
+  tileY: "tilePosition"
+},
+    _colorMatrixFilterProps = {
+  colorMatrixFilter: 1,
+  saturation: 1,
+  contrast: 1,
+  hue: 1,
+  colorize: 1,
+  colorizeAmount: 1,
+  brightness: 1,
+  combineCMF: 1
+},
+    _DEG2RAD = Math.PI / 180,
+    _degreesToRadians = function _degreesToRadians(value) {
+  return typeof value === "string" && value.charAt(1) === "=" ? value.substr(0, 2) + parseFloat(value.substr(2)) * _DEG2RAD : value * _DEG2RAD;
+},
+    PixiPlugin_i,
+    PixiPlugin_p; //context setup...
+
+
+for (PixiPlugin_i = 0; PixiPlugin_i < _xyContexts.length; PixiPlugin_i++) {
+  PixiPlugin_p = _xyContexts[PixiPlugin_i];
+  _contexts[PixiPlugin_p + "X"] = PixiPlugin_p;
+  _contexts[PixiPlugin_p + "Y"] = PixiPlugin_p;
+} //color parsing setup...
+
+
+for (PixiPlugin_p in _colorLookup) {
+  _colorExp += "|" + PixiPlugin_p + "\\b";
+}
+
+_colorExp = new RegExp(_colorExp + ")", "gi");
+
+_colorStringFilter = function _colorStringFilter(a) {
+  var combined = a[0] + " " + a[1],
+      toHSL;
+  _colorExp.lastIndex = 0;
+
+  if (_colorExp.test(combined)) {
+    toHSL = combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1;
+    a[0] = _formatColors(a[0], toHSL);
+    a[1] = _formatColors(a[1], toHSL);
+  }
+};
+
+if (!PixiPlugin_TweenLite.defaultStringFilter) {
+  PixiPlugin_TweenLite.defaultStringFilter = _colorStringFilter;
+}
+
+var PixiPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
+  propName: "pixi",
+  priority: 0,
+  API: 2,
+  global: true,
+  version: "0.3.0",
+  init: function init(target, values, tween, index) {
+    if (!target instanceof GSAP_TweenLite["a" /* _gsScope */].PIXI.DisplayObject) {
+      return false;
+    }
+
+    var isV4 = GSAP_TweenLite["a" /* _gsScope */].PIXI.VERSION.charAt(0) === "4",
+        context,
+        axis,
+        value,
+        colorMatrix,
+        filter,
+        p,
+        padding,
+        colorSetter,
+        i,
+        data,
+        pt;
+
+    for (p in values) {
+      context = _contexts[p];
+      value = values[p];
+
+      if (typeof value === "function") {
+        value = value(index || 0, target);
+      }
+
+      if (context) {
+        axis = p.charAt(p.length - 1).toLowerCase().indexOf("x") !== -1 ? "x" : "y";
+
+        this._addTween(target[context], axis, target[context][axis], context === "skew" ? _degreesToRadians(value) : value, p);
+      } else if (p === "scale" || p === "anchor" || p === "pivot" || p === "tileScale") {
+        this._addTween(target[p], "x", target[p].x, value, p + "X");
+
+        this._addTween(target[p], "y", target[p].y, value, p + "Y");
+      } else if (p === "rotation") {
+        //PIXI expects rotation in radians, but as a convenience we let folks define it in degrees and we do the conversion.
+        this._addTween(target, p, target.rotation, _degreesToRadians(value), p);
+      } else if (_colorMatrixFilterProps[p]) {
+        if (!colorMatrix) {
+          _parseColorMatrixFilter(target, values.colorMatrixFilter || values, this);
+
+          colorMatrix = true;
+        }
+      } else if (p === "blur" || p === "blurX" || p === "blurY" || p === "blurPadding") {
+        filter = PixiPlugin_getFilter(target, "BlurFilter");
+
+        this._addTween(filter, p, filter[p], value, p);
+
+        if (values.blurPadding !== 0) {
+          padding = values.blurPadding || Math.max(filter[p], value) * 2;
+          i = target.filters.length;
+
+          while (--i > -1) {
+            target.filters[i].padding = Math.max(target.filters[i].padding, padding); //if we don't expand the padding on all the filters, it can look clipped.
+          }
+        }
+      } else if (_colorProps[p]) {
+        if (!colorSetter) {
+          colorSetter = _buildColorSetter(tween, this);
+        }
+
+        if ((p === "lineColor" || p === "fillColor") && target instanceof GSAP_TweenLite["a" /* _gsScope */].PIXI.Graphics) {
+          data = (target.geometry || target).graphicsData; //"geometry" was introduced in PIXI version 5
+
+          i = data.length;
+
+          while (--i > -1) {
+            _addColorTween(isV4 ? data[i] : data[i][p.substr(0, 4) + "Style"], isV4 ? p : "color", value, colorSetter, this);
+          }
+
+          colorSetter.graphics = target.geometry || target;
+        } else {
+          _addColorTween(target, p, value, colorSetter, this);
+        }
+      } else if (p === "autoAlpha") {
+        this._firstPT = pt = {
+          t: {
+            setRatio: function setRatio() {
+              target.visible = !!target.alpha;
+            }
+          },
+          p: "setRatio",
+          s: 0,
+          c: 1,
+          f: 1,
+          pg: 0,
+          n: "visible",
+          pr: 0,
+          m: 0,
+          _next: this._firstPT
+        };
+
+        if (pt._next) {
+          pt._next._prev = pt;
+        }
+
+        this._addTween(target, "alpha", target.alpha, value, "alpha");
+
+        this._overwriteProps.push("alpha", "visible");
+      } else {
+        this._addTween(target, p, target[p], value, p);
+      }
+
+      this._overwriteProps.push(p);
+    }
+
+    return true;
+  }
+});
+
+PixiPlugin.colorProps = _colorProps;
+PixiPlugin.parseColor = _parseColor;
+PixiPlugin.formatColors = _formatColors;
+PixiPlugin.colorStringFilter = _colorStringFilter;
+
+PixiPlugin.registerPIXI = function (PIXI) {
+  GSAP_TweenLite["a" /* _gsScope */].PIXI = PIXI;
+};
+
+
+// EXTERNAL MODULE: ./src/components/advanced-slider/scss/_special.scss
+var _special = __webpack_require__(15);
+
+// CONCATENATED MODULE: ./src/components/advanced-slider/js/special.js
 function special_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { special_typeof = function _typeof(obj) { return typeof obj; }; } else { special_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return special_typeof(obj); }
@@ -5695,12 +11069,6 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
  *************************************
  */
 
-/**
- * module.ADVANCED_SLIDER_FILTER
- * 
- * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./src/components/ES5/_plugins-GSAP
- */
 
 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
@@ -7582,7 +12950,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/AJAX-push/js/index.js
+// CONCATENATED MODULE: ./src/components/AJAX-push/js/index.js
 function AJAX_push_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_push_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_push_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_push_js_typeof(obj); }
@@ -7591,12 +12959,6 @@ function AJAX_push_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol
  *************************************
  * <!-- Ajax Push Content  -->
  *************************************
- */
-
-/**
- * module.AJAX_PUSH_CONTENT
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -7990,10 +13352,10 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/AJAX/scss/_style.scss
-var AJAX_scss_style = __webpack_require__(10);
+// EXTERNAL MODULE: ./src/components/AJAX/scss/_style.scss
+var AJAX_scss_style = __webpack_require__(16);
 
-// CONCATENATED MODULE: ./src/components/ES6/AJAX/js/index.js
+// CONCATENATED MODULE: ./src/components/AJAX/js/index.js
 function AJAX_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AJAX_js_typeof = function _typeof(obj) { return typeof obj; }; } else { AJAX_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AJAX_js_typeof(obj); }
@@ -8606,10 +13968,228 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/back-to-top/scss/_style.scss
-var back_to_top_scss_style = __webpack_require__(11);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/GSAP/ScrollToPlugin.js
+function ScrollToPlugin_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ScrollToPlugin_typeof = function _typeof(obj) { return typeof obj; }; } else { ScrollToPlugin_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ScrollToPlugin_typeof(obj); }
 
-// CONCATENATED MODULE: ./src/components/ES6/back-to-top/js/index.js
+/*!
+ * VERSION: 1.9.2
+ * DATE: 2019-02-07
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2019, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ **/
+
+/* eslint-disable */
+
+
+var _doc = (GSAP_TweenLite["a" /* _gsScope */].document || {}).documentElement,
+    _window = GSAP_TweenLite["a" /* _gsScope */],
+    _max = function _max(element, axis) {
+  var dim = axis === "x" ? "Width" : "Height",
+      scroll = "scroll" + dim,
+      client = "client" + dim,
+      body = document.body;
+  return element === _window || element === _doc || element === body ? Math.max(_doc[scroll], body[scroll]) - (_window["inner" + dim] || _doc[client] || body[client]) : element[scroll] - element["offset" + dim];
+},
+    _unwrapElement = function _unwrapElement(value) {
+  if (typeof value === "string") {
+    value = TweenLite.selector(value);
+  }
+
+  if (value.length && value !== _window && value[0] && value[0].style && !value.nodeType) {
+    value = value[0];
+  }
+
+  return value === _window || value.nodeType && value.style ? value : null;
+},
+    _buildGetter = function _buildGetter(e, axis) {
+  //pass in an element and an axis ("x" or "y") and it'll return a getter function for the scroll position of that element (like scrollTop or scrollLeft, although if the element is the window, it'll use the pageXOffset/pageYOffset or the documentElement's scrollTop/scrollLeft or document.body's. Basically this streamlines things and makes a very fast getter across browsers.
+  var p = "scroll" + (axis === "x" ? "Left" : "Top");
+
+  if (e === _window) {
+    if (e.pageXOffset != null) {
+      p = "page" + axis.toUpperCase() + "Offset";
+    } else if (_doc[p] != null) {
+      e = _doc;
+    } else {
+      e = document.body;
+    }
+  }
+
+  return function () {
+    return e[p];
+  };
+},
+    _getOffset = function _getOffset(element, container) {
+  var rect = _unwrapElement(element).getBoundingClientRect(),
+      b = document.body,
+      isRoot = !container || container === _window || container === b,
+      cRect = isRoot ? {
+    top: _doc.clientTop - (window.pageYOffset || _doc.scrollTop || b.scrollTop || 0),
+    left: _doc.clientLeft - (window.pageXOffset || _doc.scrollLeft || b.scrollLeft || 0)
+  } : container.getBoundingClientRect(),
+      offsets = {
+    x: rect.left - cRect.left,
+    y: rect.top - cRect.top
+  };
+
+  if (!isRoot && container) {
+    //only add the current scroll position if it's not the window/body.
+    offsets.x += _buildGetter(container, "x")();
+    offsets.y += _buildGetter(container, "y")();
+  }
+
+  return offsets;
+  /*	PREVIOUS
+  var rect = _unwrapElement(element).getBoundingClientRect(),
+  	isRoot = (!container || container === _window || container === document.body),
+  	cRect = (isRoot ? _doc : container).getBoundingClientRect(),
+  	offsets = {x: rect.left - cRect.left, y: rect.top - cRect.top};
+  if (!isRoot && container) { //only add the current scroll position if it's not the window/body.
+  	offsets.x += _buildGetter(container, "x")();
+  	offsets.y += _buildGetter(container, "y")();
+  }
+  return offsets;
+  */
+},
+    _parseVal = function _parseVal(value, target, axis, currentVal) {
+  var type = ScrollToPlugin_typeof(value);
+
+  return !isNaN(value) ? parseFloat(value) : type === "string" && value.charAt(1) === "=" ? parseInt(value.charAt(0) + "1", 10) * parseFloat(value.substr(2)) + currentVal : value === "max" ? _max(target, axis) : Math.min(_max(target, axis), _getOffset(value, target)[axis]);
+},
+    ScrollToPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
+  propName: "scrollTo",
+  API: 2,
+  global: true,
+  version: "1.9.2",
+  //called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+  init: function init(target, value, tween) {
+    this._wdw = target === _window;
+    this._target = target;
+    this._tween = tween;
+
+    if (ScrollToPlugin_typeof(value) !== "object") {
+      value = {
+        y: value
+      }; //if we don't receive an object as the parameter, assume the user intends "y".
+
+      if (typeof value.y === "string" && value.y !== "max" && value.y.charAt(1) !== "=") {
+        value.x = value.y;
+      }
+    } else if (value.nodeType) {
+      value = {
+        y: value,
+        x: value
+      };
+    }
+
+    this.vars = value;
+    this._autoKill = value.autoKill !== false;
+    this.getX = _buildGetter(target, "x");
+    this.getY = _buildGetter(target, "y");
+    this.x = this.xPrev = this.getX();
+    this.y = this.yPrev = this.getY();
+
+    if (value.x != null) {
+      this._addTween(this, "x", this.x, _parseVal(value.x, target, "x", this.x) - (value.offsetX || 0), "scrollTo_x", true);
+
+      this._overwriteProps.push("scrollTo_x");
+    } else {
+      this.skipX = true;
+    }
+
+    if (value.y != null) {
+      this._addTween(this, "y", this.y, _parseVal(value.y, target, "y", this.y) - (value.offsetY || 0), "scrollTo_y", true);
+
+      this._overwriteProps.push("scrollTo_y");
+    } else {
+      this.skipY = true;
+    }
+
+    return true;
+  },
+  //called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
+  set: function set(v) {
+    this._super.setRatio.call(this, v);
+
+    var x = this._wdw || !this.skipX ? this.getX() : this.xPrev,
+        y = this._wdw || !this.skipY ? this.getY() : this.yPrev,
+        yDif = y - this.yPrev,
+        xDif = x - this.xPrev,
+        threshold = ScrollToPlugin.autoKillThreshold;
+
+    if (this.x < 0) {
+      //can't scroll to a position less than 0! Might happen if someone uses a Back.easeOut or Elastic.easeOut when scrolling back to the top of the page (for example)
+      this.x = 0;
+    }
+
+    if (this.y < 0) {
+      this.y = 0;
+    }
+
+    if (this._autoKill) {
+      //note: iOS has a bug that throws off the scroll by several pixels, so we need to check if it's within 7 pixels of the previous one that we set instead of just looking for an exact match.
+      if (!this.skipX && (xDif > threshold || xDif < -threshold) && x < _max(this._target, "x")) {
+        this.skipX = true; //if the user scrolls separately, we should stop tweening!
+      }
+
+      if (!this.skipY && (yDif > threshold || yDif < -threshold) && y < _max(this._target, "y")) {
+        this.skipY = true; //if the user scrolls separately, we should stop tweening!
+      }
+
+      if (this.skipX && this.skipY) {
+        this._tween.kill();
+
+        if (this.vars.onAutoKill) {
+          this.vars.onAutoKill.apply(this.vars.onAutoKillScope || this._tween, this.vars.onAutoKillParams || []);
+        }
+      }
+    }
+
+    if (this._wdw) {
+      _window.scrollTo(!this.skipX ? this.x : x, !this.skipY ? this.y : y);
+    } else {
+      if (!this.skipY) {
+        this._target.scrollTop = this.y;
+      }
+
+      if (!this.skipX) {
+        this._target.scrollLeft = this.x;
+      }
+    }
+
+    this.xPrev = this.x;
+    this.yPrev = this.y;
+  }
+}),
+    ScrollToPlugin_p = ScrollToPlugin.prototype;
+
+ScrollToPlugin.max = _max;
+ScrollToPlugin.getOffset = _getOffset;
+ScrollToPlugin.buildGetter = _buildGetter;
+ScrollToPlugin.autoKillThreshold = 7;
+
+ScrollToPlugin_p._kill = function (lookup) {
+  if (lookup.scrollTo_x) {
+    this.skipX = true;
+  }
+
+  if (lookup.scrollTo_y) {
+    this.skipY = true;
+  }
+
+  return this._super._kill.call(this, lookup);
+};
+
+
+// EXTERNAL MODULE: ./src/components/back-to-top/scss/_style.scss
+var back_to_top_scss_style = __webpack_require__(17);
+
+// CONCATENATED MODULE: ./src/components/back-to-top/js/index.js
 function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -8618,11 +14198,6 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
  *************************************
  */
 
-/**
- * module.BACK_TO_TOP
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
- */
 
 
 var BACK_TO_TOP = function (module, $, window, document) {
@@ -8672,10 +14247,10 @@ var BACK_TO_TOP = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/circle-layout/scss/_style.scss
-var circle_layout_scss_style = __webpack_require__(12);
+// EXTERNAL MODULE: ./src/components/circle-layout/scss/_style.scss
+var circle_layout_scss_style = __webpack_require__(18);
 
-// CONCATENATED MODULE: ./src/components/ES6/circle-layout/js/index.js
+// CONCATENATED MODULE: ./src/components/circle-layout/js/index.js
 function circle_layout_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function circle_layout_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { circle_layout_js_typeof = function _typeof(obj) { return typeof obj; }; } else { circle_layout_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return circle_layout_js_typeof(obj); }
@@ -8762,13 +14337,13 @@ var CIRCLE_LAYOUT = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/counter/js/fn/count-to.js
-var count_to = __webpack_require__(13);
+// EXTERNAL MODULE: ./src/components/counter/js/fn/count-to.js
+var count_to = __webpack_require__(19);
 
-// EXTERNAL MODULE: ./src/components/ES6/counter/scss/_style.scss
-var counter_scss_style = __webpack_require__(14);
+// EXTERNAL MODULE: ./src/components/counter/scss/_style.scss
+var counter_scss_style = __webpack_require__(20);
 
-// CONCATENATED MODULE: ./src/components/ES6/counter/js/index.js
+// CONCATENATED MODULE: ./src/components/counter/js/index.js
 function counter_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function counter_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { counter_js_typeof = function _typeof(obj) { return typeof obj; }; } else { counter_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return counter_js_typeof(obj); }
@@ -8823,10 +14398,10 @@ var COUNTER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/dropdown-menu/scss/_style.scss
-var dropdown_menu_scss_style = __webpack_require__(15);
+// EXTERNAL MODULE: ./src/components/dropdown-menu/scss/_style.scss
+var dropdown_menu_scss_style = __webpack_require__(21);
 
-// CONCATENATED MODULE: ./src/components/ES6/dropdown-menu/js/index.js
+// CONCATENATED MODULE: ./src/components/dropdown-menu/js/index.js
 function dropdown_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function dropdown_menu_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dropdown_menu_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dropdown_menu_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dropdown_menu_js_typeof(obj); }
@@ -8899,10 +14474,10 @@ var DROPDOWN_MENU = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/dropdown-menu2/scss/_style.scss
-var dropdown_menu2_scss_style = __webpack_require__(16);
+// EXTERNAL MODULE: ./src/components/dropdown-menu2/scss/_style.scss
+var dropdown_menu2_scss_style = __webpack_require__(22);
 
-// CONCATENATED MODULE: ./src/components/ES6/dropdown-menu2/js/index.js
+// CONCATENATED MODULE: ./src/components/dropdown-menu2/js/index.js
 function dropdown_menu2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -8976,10 +14551,10 @@ var DROPDOWN_MENU2 = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/select.js
-var fn_select = __webpack_require__(1);
+// EXTERNAL MODULE: ./src/components/form/js/fn/select.js
+var fn_select = __webpack_require__(5);
 
-// CONCATENATED MODULE: ./src/components/ES6/dynamic-dropdown-list-json/js/index.js
+// CONCATENATED MODULE: ./src/components/dynamic-dropdown-list-json/js/index.js
 function dynamic_dropdown_list_json_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function dynamic_dropdown_list_json_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dynamic_dropdown_list_json_js_typeof(obj); }
@@ -9237,10 +14812,13 @@ var DYNAMIC_DD_LIST = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/flexslider/scss/_style.scss
-var flexslider_scss_style = __webpack_require__(17);
+// EXTERNAL MODULE: ./src/components/flexslider/js/third-party/jquery.flexslider.js
+var jquery_flexslider = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./src/components/ES6/flexslider/js/index.js
+// EXTERNAL MODULE: ./src/components/flexslider/scss/_style.scss
+var flexslider_scss_style = __webpack_require__(27);
+
+// CONCATENATED MODULE: ./src/components/flexslider/js/index.js
 function flexslider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { flexslider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { flexslider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return flexslider_js_typeof(obj); }
@@ -9251,11 +14829,6 @@ function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
  *************************************
  */
 
-/**
- * module.FLEXSLIDER
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- */
 
 
 var FLEXSLIDER = function (module, $, window, document) {
@@ -10029,22 +15602,16 @@ var FLEXSLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/floating-side-element/scss/_style.scss
-var floating_side_element_scss_style = __webpack_require__(18);
+// EXTERNAL MODULE: ./src/components/floating-side-element/scss/_style.scss
+var floating_side_element_scss_style = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./src/components/ES6/floating-side-element/js/index.js
+// CONCATENATED MODULE: ./src/components/floating-side-element/js/index.js
 function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- Floating Side Element -->
  *************************************
- */
-
-/**
- * module.FLOATING_SIDE_EL
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -10101,13 +15668,13 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/form-progress/js/fn/form-progress-to-next.js
-var form_progress_to_next = __webpack_require__(19);
+// EXTERNAL MODULE: ./src/components/form-progress/js/fn/form-progress-to-next.js
+var form_progress_to_next = __webpack_require__(29);
 
-// EXTERNAL MODULE: ./src/components/ES6/form-progress/scss/_style.scss
-var form_progress_scss_style = __webpack_require__(20);
+// EXTERNAL MODULE: ./src/components/form-progress/scss/_style.scss
+var form_progress_scss_style = __webpack_require__(30);
 
-// CONCATENATED MODULE: ./src/components/ES6/form-progress/js/index.js
+// CONCATENATED MODULE: ./src/components/form-progress/js/index.js
 function form_progress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function form_progress_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_progress_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_progress_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_progress_js_typeof(obj); }
@@ -10116,12 +15683,6 @@ function form_progress_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
  *************************************
  * <!-- Form Progress -->
  *************************************
- */
-
-/**
- * module.FORM_PROGRESS
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 /*
@@ -10141,6 +15702,7 @@ function form_progress_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
 
 
 */
+
 
 
 
@@ -10222,49 +15784,2941 @@ var FORM_PROGRESS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/normal-radio.js
-var normal_radio = __webpack_require__(21);
+// EXTERNAL MODULE: ./src/components/form/js/fn/normal-radio.js
+var normal_radio = __webpack_require__(31);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/datapicker.js
-var datapicker = __webpack_require__(22);
+// EXTERNAL MODULE: ./src/components/form/js/third-party/jquery.mousewheel.esm.js
+var jquery_mousewheel_esm = __webpack_require__(32);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-hover.js
-var controls_hover = __webpack_require__(23);
+// CONCATENATED MODULE: ./src/components/form/js/third-party/jquery.datetimepicker.esm.js
+function jquery_datetimepicker_esm_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { jquery_datetimepicker_esm_typeof = function _typeof(obj) { return typeof obj; }; } else { jquery_datetimepicker_esm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return jquery_datetimepicker_esm_typeof(obj); }
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/single-seletor.js
-var single_seletor = __webpack_require__(24);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/multi-seletor.js
-var multi_seletor = __webpack_require__(25);
+/*!
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
+ * @version 1.3.4
+ *
+ * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
+ * @see http://php.net/manual/en/function.date.php
+ *
+ * For more JQuery plugins visit http://plugins.krajee.com
+ * For more Yii related demos visit http://demos.krajee.com
+ */
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/file-dropzone.js
-var file_dropzone = __webpack_require__(26);
+var DateFormatter;
+!function () {
+  "use strict";
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/upload.js
-var upload = __webpack_require__(27);
+  var t, _e, _r, n, a, u, i;
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-disable.js
-var controls_disable = __webpack_require__(28);
+  u = 864e5, i = 3600, t = function t(_t, e) {
+    return "string" == typeof _t && "string" == typeof e && _t.toLowerCase() === e.toLowerCase();
+  }, _e = function e(t, r, n) {
+    var a = n || "0",
+        u = t.toString();
+    return u.length < r ? _e(a + u, r) : u;
+  }, _r = function r(t) {
+    var e, n;
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/controls-line.js
-var controls_line = __webpack_require__(29);
+    for (t = t || {}, e = 1; e < arguments.length; e++) {
+      if (n = arguments[e]) for (var a in n) {
+        n.hasOwnProperty(a) && ("object" == jquery_datetimepicker_esm_typeof(n[a]) ? _r(t[a], n[a]) : t[a] = n[a]);
+      }
+    }
 
-// EXTERNAL MODULE: ./src/components/ES6/form/js/fn/radio-and-checkbox.js
-var radio_and_checkbox = __webpack_require__(30);
+    return t;
+  }, n = function n(t, e) {
+    for (var r = 0; r < e.length; r++) {
+      if (e[r].toLowerCase() === t.toLowerCase()) return r;
+    }
 
-// EXTERNAL MODULE: ./src/components/ES6/form/scss/_basic.scss
-var scss_basic = __webpack_require__(31);
+    return -1;
+  }, a = {
+    dateSettings: {
+      days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      meridiem: ["AM", "PM"],
+      ordinal: function ordinal(t) {
+        var e = t % 10,
+            r = {
+          1: "st",
+          2: "nd",
+          3: "rd"
+        };
+        return 1 !== Math.floor(t % 100 / 10) && r[e] ? r[e] : "th";
+      }
+    },
+    separators: /[ \-+\/\.T:@]/g,
+    validParts: /[dDjlNSwzWFmMntLoYyaABgGhHisueTIOPZcrU]/g,
+    intParts: /[djwNzmnyYhHgGis]/g,
+    tzParts: /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+    tzClip: /[^-+\dA-Z]/g
+  }, DateFormatter = function DateFormatter(t) {
+    var e = this,
+        n = _r(a, t);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/scss/_layout.scss
-var _layout = __webpack_require__(32);
+    e.dateSettings = n.dateSettings, e.separators = n.separators, e.validParts = n.validParts, e.intParts = n.intParts, e.tzParts = n.tzParts, e.tzClip = n.tzClip;
+  }, DateFormatter.prototype = {
+    constructor: DateFormatter,
+    getMonth: function getMonth(t) {
+      var e,
+          r = this;
+      return e = n(t, r.dateSettings.monthsShort) + 1, 0 === e && (e = n(t, r.dateSettings.months) + 1), e;
+    },
+    parseDate: function parseDate(e, r) {
+      var n,
+          a,
+          u,
+          i,
+          s,
+          o,
+          c,
+          f,
+          l,
+          h,
+          d = this,
+          g = !1,
+          m = !1,
+          p = d.dateSettings,
+          y = {
+        date: null,
+        year: null,
+        month: null,
+        day: null,
+        hour: 0,
+        min: 0,
+        sec: 0
+      };
+      if (!e) return null;
+      if (e instanceof Date) return e;
+      if ("U" === r) return u = parseInt(e), u ? new Date(1e3 * u) : e;
 
-// EXTERNAL MODULE: ./src/components/ES6/form/scss/_theme_material.scss
-var _theme_material = __webpack_require__(33);
+      switch (jquery_datetimepicker_esm_typeof(e)) {
+        case "number":
+          return new Date(e);
 
-// EXTERNAL MODULE: ./src/components/ES6/form/scss/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(34);
+        case "string":
+          break;
 
-// CONCATENATED MODULE: ./src/components/ES6/form/js/index.js
+        default:
+          return null;
+      }
+
+      if (n = r.match(d.validParts), !n || 0 === n.length) throw new Error("Invalid date format definition.");
+
+      for (a = e.replace(d.separators, "\x00").split("\x00"), u = 0; u < a.length; u++) {
+        switch (i = a[u], s = parseInt(i), n[u]) {
+          case "y":
+          case "Y":
+            if (!s) return null;
+            l = i.length, y.year = 2 === l ? parseInt((70 > s ? "20" : "19") + i) : s, g = !0;
+            break;
+
+          case "m":
+          case "n":
+          case "M":
+          case "F":
+            if (isNaN(s)) {
+              if (o = d.getMonth(i), !(o > 0)) return null;
+              y.month = o;
+            } else {
+              if (!(s >= 1 && 12 >= s)) return null;
+              y.month = s;
+            }
+
+            g = !0;
+            break;
+
+          case "d":
+          case "j":
+            if (!(s >= 1 && 31 >= s)) return null;
+            y.day = s, g = !0;
+            break;
+
+          case "g":
+          case "h":
+            if (c = n.indexOf("a") > -1 ? n.indexOf("a") : n.indexOf("A") > -1 ? n.indexOf("A") : -1, h = a[c], c > -1) f = t(h, p.meridiem[0]) ? 0 : t(h, p.meridiem[1]) ? 12 : -1, s >= 1 && 12 >= s && f > -1 ? y.hour = s + f - 1 : s >= 0 && 23 >= s && (y.hour = s);else {
+              if (!(s >= 0 && 23 >= s)) return null;
+              y.hour = s;
+            }
+            m = !0;
+            break;
+
+          case "G":
+          case "H":
+            if (!(s >= 0 && 23 >= s)) return null;
+            y.hour = s, m = !0;
+            break;
+
+          case "i":
+            if (!(s >= 0 && 59 >= s)) return null;
+            y.min = s, m = !0;
+            break;
+
+          case "s":
+            if (!(s >= 0 && 59 >= s)) return null;
+            y.sec = s, m = !0;
+        }
+      }
+
+      if (g === !0 && y.year && y.month && y.day) y.date = new Date(y.year, y.month - 1, y.day, y.hour, y.min, y.sec, 0);else {
+        if (m !== !0) return null;
+        y.date = new Date(0, 0, 0, y.hour, y.min, y.sec, 0);
+      }
+      return y.date;
+    },
+    guessDate: function guessDate(t, e) {
+      if ("string" != typeof t) return t;
+      var r,
+          n,
+          a,
+          u,
+          i,
+          s,
+          o = this,
+          c = t.replace(o.separators, "\x00").split("\x00"),
+          f = /^[djmn]/g,
+          l = e.match(o.validParts),
+          h = new Date(),
+          d = 0;
+      if (!f.test(l[0])) return t;
+
+      for (a = 0; a < c.length; a++) {
+        if (d = 2, i = c[a], s = parseInt(i.substr(0, 2)), isNaN(s)) return null;
+
+        switch (a) {
+          case 0:
+            "m" === l[0] || "n" === l[0] ? h.setMonth(s - 1) : h.setDate(s);
+            break;
+
+          case 1:
+            "m" === l[0] || "n" === l[0] ? h.setDate(s) : h.setMonth(s - 1);
+            break;
+
+          case 2:
+            if (n = h.getFullYear(), r = i.length, d = 4 > r ? r : 4, n = parseInt(4 > r ? n.toString().substr(0, 4 - r) + i : i.substr(0, 4)), !n) return null;
+            h.setFullYear(n);
+            break;
+
+          case 3:
+            h.setHours(s);
+            break;
+
+          case 4:
+            h.setMinutes(s);
+            break;
+
+          case 5:
+            h.setSeconds(s);
+        }
+
+        u = i.substr(d), u.length > 0 && c.splice(a + 1, 0, u);
+      }
+
+      return h;
+    },
+    parseFormat: function parseFormat(t, r) {
+      var n,
+          a = this,
+          s = a.dateSettings,
+          o = /\\?(.?)/gi,
+          _c = function c(t, e) {
+        return n[t] ? n[t]() : e;
+      };
+
+      return n = {
+        d: function d() {
+          return _e(n.j(), 2);
+        },
+        D: function D() {
+          return s.daysShort[n.w()];
+        },
+        j: function j() {
+          return r.getDate();
+        },
+        l: function l() {
+          return s.days[n.w()];
+        },
+        N: function N() {
+          return n.w() || 7;
+        },
+        w: function w() {
+          return r.getDay();
+        },
+        z: function z() {
+          var t = new Date(n.Y(), n.n() - 1, n.j()),
+              e = new Date(n.Y(), 0, 1);
+          return Math.round((t - e) / u);
+        },
+        W: function W() {
+          var t = new Date(n.Y(), n.n() - 1, n.j() - n.N() + 3),
+              r = new Date(t.getFullYear(), 0, 4);
+          return _e(1 + Math.round((t - r) / u / 7), 2);
+        },
+        F: function F() {
+          return s.months[r.getMonth()];
+        },
+        m: function m() {
+          return _e(n.n(), 2);
+        },
+        M: function M() {
+          return s.monthsShort[r.getMonth()];
+        },
+        n: function n() {
+          return r.getMonth() + 1;
+        },
+        t: function t() {
+          return new Date(n.Y(), n.n(), 0).getDate();
+        },
+        L: function L() {
+          var t = n.Y();
+          return t % 4 === 0 && t % 100 !== 0 || t % 400 === 0 ? 1 : 0;
+        },
+        o: function o() {
+          var t = n.n(),
+              e = n.W(),
+              r = n.Y();
+          return r + (12 === t && 9 > e ? 1 : 1 === t && e > 9 ? -1 : 0);
+        },
+        Y: function Y() {
+          return r.getFullYear();
+        },
+        y: function y() {
+          return n.Y().toString().slice(-2);
+        },
+        a: function a() {
+          return n.A().toLowerCase();
+        },
+        A: function A() {
+          var t = n.G() < 12 ? 0 : 1;
+          return s.meridiem[t];
+        },
+        B: function B() {
+          var t = r.getUTCHours() * i,
+              n = 60 * r.getUTCMinutes(),
+              a = r.getUTCSeconds();
+          return _e(Math.floor((t + n + a + i) / 86.4) % 1e3, 3);
+        },
+        g: function g() {
+          return n.G() % 12 || 12;
+        },
+        G: function G() {
+          return r.getHours();
+        },
+        h: function h() {
+          return _e(n.g(), 2);
+        },
+        H: function H() {
+          return _e(n.G(), 2);
+        },
+        i: function i() {
+          return _e(r.getMinutes(), 2);
+        },
+        s: function s() {
+          return _e(r.getSeconds(), 2);
+        },
+        u: function u() {
+          return _e(1e3 * r.getMilliseconds(), 6);
+        },
+        e: function e() {
+          var t = /\((.*)\)/.exec(String(r))[1];
+          return t || "Coordinated Universal Time";
+        },
+        I: function I() {
+          var t = new Date(n.Y(), 0),
+              e = Date.UTC(n.Y(), 0),
+              r = new Date(n.Y(), 6),
+              a = Date.UTC(n.Y(), 6);
+          return t - e !== r - a ? 1 : 0;
+        },
+        O: function O() {
+          var t = r.getTimezoneOffset(),
+              n = Math.abs(t);
+          return (t > 0 ? "-" : "+") + _e(100 * Math.floor(n / 60) + n % 60, 4);
+        },
+        P: function P() {
+          var t = n.O();
+          return t.substr(0, 3) + ":" + t.substr(3, 2);
+        },
+        T: function T() {
+          var t = (String(r).match(a.tzParts) || [""]).pop().replace(a.tzClip, "");
+          return t || "UTC";
+        },
+        Z: function Z() {
+          return 60 * -r.getTimezoneOffset();
+        },
+        c: function c() {
+          return "Y-m-d\\TH:i:sP".replace(o, _c);
+        },
+        r: function r() {
+          return "D, d M Y H:i:s O".replace(o, _c);
+        },
+        U: function U() {
+          return r.getTime() / 1e3 || 0;
+        }
+      }, _c(t, t);
+    },
+    formatDate: function formatDate(t, e) {
+      var r,
+          n,
+          a,
+          u,
+          i,
+          s = this,
+          o = "",
+          c = "\\";
+      if ("string" == typeof t && (t = s.parseDate(t, e), !t)) return null;
+
+      if (t instanceof Date) {
+        for (a = e.length, r = 0; a > r; r++) {
+          i = e.charAt(r), "S" !== i && i !== c && (r > 0 && e.charAt(r - 1) === c ? o += i : (u = s.parseFormat(i, t), r !== a - 1 && s.intParts.test(i) && "S" === e.charAt(r + 1) && (n = parseInt(u) || 0, u += s.dateSettings.ordinal(n)), o += u));
+        }
+
+        return o;
+      }
+
+      return "";
+    }
+  };
+}();
+/**
+* @preserve jQuery DateTimePicker
+* @homepage http://xdsoft.net/jqplugins/datetimepicker/
+* @author Chupurnov Valeriy (<chupurnov@gmail.com>)
+*/
+
+(function ($) {
+  'use strict';
+
+  var default_options = {
+    i18n: {
+      ar: {
+        // Arabic
+        months: ["كانون الثاني", "شباط", "آذار", "نيسان", "مايو", "حزيران", "تموز", "آب", "أيلول", "تشرين الأول", "تشرين الثاني", "كانون الأول"],
+        dayOfWeekShort: ["ن", "ث", "ع", "خ", "ج", "س", "ح"],
+        dayOfWeek: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
+      },
+      ro: {
+        // Romanian
+        months: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
+        dayOfWeekShort: ["Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sâ"],
+        dayOfWeek: ["Duminică", "Luni", "Marţi", "Miercuri", "Joi", "Vineri", "Sâmbătă"]
+      },
+      id: {
+        // Indonesian
+        months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+        dayOfWeekShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+        dayOfWeek: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+      },
+      is: {
+        // Icelandic
+        months: ["Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí", "Ágúst", "September", "Október", "Nóvember", "Desember"],
+        dayOfWeekShort: ["Sun", "Mán", "Þrið", "Mið", "Fim", "Fös", "Lau"],
+        dayOfWeek: ["Sunnudagur", "Mánudagur", "Þriðjudagur", "Miðvikudagur", "Fimmtudagur", "Föstudagur", "Laugardagur"]
+      },
+      bg: {
+        // Bulgarian
+        months: ["Януари", "Февруари", "Март", "Април", "Май", "Юни", "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"],
+        dayOfWeekShort: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+        dayOfWeek: ["Неделя", "Понеделник", "Вторник", "Сряда", "Четвъртък", "Петък", "Събота"]
+      },
+      fa: {
+        // Persian/Farsi
+        months: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+        dayOfWeekShort: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'],
+        dayOfWeek: ["یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه", "یک‌شنبه"]
+      },
+      ru: {
+        // Russian
+        months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        dayOfWeekShort: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+        dayOfWeek: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+      },
+      uk: {
+        // Ukrainian
+        months: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'],
+        dayOfWeekShort: ["Ндл", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Сбт"],
+        dayOfWeek: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
+      },
+      en: {
+        // English
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        dayOfWeekShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      },
+      el: {
+        // Ελληνικά
+        months: ["Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"],
+        dayOfWeekShort: ["Κυρ", "Δευ", "Τρι", "Τετ", "Πεμ", "Παρ", "Σαβ"],
+        dayOfWeek: ["Κυριακή", "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο"]
+      },
+      de: {
+        // German
+        months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        dayOfWeekShort: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+        dayOfWeek: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]
+      },
+      nl: {
+        // Dutch
+        months: ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"],
+        dayOfWeekShort: ["zo", "ma", "di", "wo", "do", "vr", "za"],
+        dayOfWeek: ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"]
+      },
+      tr: {
+        // Turkish
+        months: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+        dayOfWeekShort: ["Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"],
+        dayOfWeek: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"]
+      },
+      fr: {
+        //French
+        months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        dayOfWeekShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+        dayOfWeek: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"]
+      },
+      es: {
+        // Spanish
+        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        dayOfWeekShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+        dayOfWeek: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
+      },
+      th: {
+        // Thai
+        months: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+        dayOfWeekShort: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+        dayOfWeek: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
+      },
+      pl: {
+        // Polish
+        months: ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"],
+        dayOfWeekShort: ["nd", "pn", "wt", "śr", "cz", "pt", "sb"],
+        dayOfWeek: ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"]
+      },
+      pt: {
+        // Portuguese
+        months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+        dayOfWeekShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+        dayOfWeek: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
+      },
+      ch: {
+        // Simplified Chinese
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        dayOfWeekShort: ["日", "一", "二", "三", "四", "五", "六"]
+      },
+      se: {
+        // Swedish
+        months: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"],
+        dayOfWeekShort: ["Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"]
+      },
+      km: {
+        // Khmer (ភាសាខ្មែរ)
+        months: ["មករា​", "កុម្ភៈ", "មិនា​", "មេសា​", "ឧសភា​", "មិថុនា​", "កក្កដា​", "សីហា​", "កញ្ញា​", "តុលា​", "វិច្ឆិកា", "ធ្នូ​"],
+        dayOfWeekShort: ["អាទិ​", "ច័ន្ទ​", "អង្គារ​", "ពុធ​", "ព្រហ​​", "សុក្រ​", "សៅរ៍"],
+        dayOfWeek: ["អាទិត្យ​", "ច័ន្ទ​", "អង្គារ​", "ពុធ​", "ព្រហស្បតិ៍​", "សុក្រ​", "សៅរ៍"]
+      },
+      kr: {
+        // Korean
+        months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+        dayOfWeekShort: ["일", "월", "화", "수", "목", "금", "토"],
+        dayOfWeek: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
+      },
+      it: {
+        // Italian
+        months: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+        dayOfWeekShort: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+        dayOfWeek: ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
+      },
+      da: {
+        // Dansk
+        months: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"],
+        dayOfWeekShort: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
+        dayOfWeek: ["søndag", "mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag"]
+      },
+      no: {
+        // Norwegian
+        months: ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"],
+        dayOfWeekShort: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
+        dayOfWeek: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag']
+      },
+      ja: {
+        // Japanese
+        months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+        dayOfWeekShort: ["日", "月", "火", "水", "木", "金", "土"],
+        dayOfWeek: ["日曜", "月曜", "火曜", "水曜", "木曜", "金曜", "土曜"]
+      },
+      vi: {
+        // Vietnamese
+        months: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+        dayOfWeekShort: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        dayOfWeek: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"]
+      },
+      sl: {
+        // Slovenščina
+        months: ["Januar", "Februar", "Marec", "April", "Maj", "Junij", "Julij", "Avgust", "September", "Oktober", "November", "December"],
+        dayOfWeekShort: ["Ned", "Pon", "Tor", "Sre", "Čet", "Pet", "Sob"],
+        dayOfWeek: ["Nedelja", "Ponedeljek", "Torek", "Sreda", "Četrtek", "Petek", "Sobota"]
+      },
+      cs: {
+        // Čeština
+        months: ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"],
+        dayOfWeekShort: ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"]
+      },
+      hu: {
+        // Hungarian
+        months: ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"],
+        dayOfWeekShort: ["Va", "Hé", "Ke", "Sze", "Cs", "Pé", "Szo"],
+        dayOfWeek: ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"]
+      },
+      az: {
+        //Azerbaijanian (Azeri)
+        months: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"],
+        dayOfWeekShort: ["B", "Be", "Ça", "Ç", "Ca", "C", "Ş"],
+        dayOfWeek: ["Bazar", "Bazar ertəsi", "Çərşənbə axşamı", "Çərşənbə", "Cümə axşamı", "Cümə", "Şənbə"]
+      },
+      bs: {
+        //Bosanski
+        months: ["Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"],
+        dayOfWeekShort: ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+        dayOfWeek: ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"]
+      },
+      ca: {
+        //Català
+        months: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"],
+        dayOfWeekShort: ["Dg", "Dl", "Dt", "Dc", "Dj", "Dv", "Ds"],
+        dayOfWeek: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"]
+      },
+      'en-GB': {
+        //English (British)
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        dayOfWeekShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      },
+      et: {
+        //"Eesti"
+        months: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"],
+        dayOfWeekShort: ["P", "E", "T", "K", "N", "R", "L"],
+        dayOfWeek: ["Pühapäev", "Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev"]
+      },
+      eu: {
+        //Euskara
+        months: ["Urtarrila", "Otsaila", "Martxoa", "Apirila", "Maiatza", "Ekaina", "Uztaila", "Abuztua", "Iraila", "Urria", "Azaroa", "Abendua"],
+        dayOfWeekShort: ["Ig.", "Al.", "Ar.", "Az.", "Og.", "Or.", "La."],
+        dayOfWeek: ['Igandea', 'Astelehena', 'Asteartea', 'Asteazkena', 'Osteguna', 'Ostirala', 'Larunbata']
+      },
+      fi: {
+        //Finnish (Suomi)
+        months: ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"],
+        dayOfWeekShort: ["Su", "Ma", "Ti", "Ke", "To", "Pe", "La"],
+        dayOfWeek: ["sunnuntai", "maanantai", "tiistai", "keskiviikko", "torstai", "perjantai", "lauantai"]
+      },
+      gl: {
+        //Galego
+        months: ["Xan", "Feb", "Maz", "Abr", "Mai", "Xun", "Xul", "Ago", "Set", "Out", "Nov", "Dec"],
+        dayOfWeekShort: ["Dom", "Lun", "Mar", "Mer", "Xov", "Ven", "Sab"],
+        dayOfWeek: ["Domingo", "Luns", "Martes", "Mércores", "Xoves", "Venres", "Sábado"]
+      },
+      hr: {
+        //Hrvatski
+        months: ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"],
+        dayOfWeekShort: ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+        dayOfWeek: ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"]
+      },
+      ko: {
+        //Korean (한국어)
+        months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+        dayOfWeekShort: ["일", "월", "화", "수", "목", "금", "토"],
+        dayOfWeek: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
+      },
+      lt: {
+        //Lithuanian (lietuvių)
+        months: ["Sausio", "Vasario", "Kovo", "Balandžio", "Gegužės", "Birželio", "Liepos", "Rugpjūčio", "Rugsėjo", "Spalio", "Lapkričio", "Gruodžio"],
+        dayOfWeekShort: ["Sek", "Pir", "Ant", "Tre", "Ket", "Pen", "Šeš"],
+        dayOfWeek: ["Sekmadienis", "Pirmadienis", "Antradienis", "Trečiadienis", "Ketvirtadienis", "Penktadienis", "Šeštadienis"]
+      },
+      lv: {
+        //Latvian (Latviešu)
+        months: ["Janvāris", "Februāris", "Marts", "Aprīlis ", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
+        dayOfWeekShort: ["Sv", "Pr", "Ot", "Tr", "Ct", "Pk", "St"],
+        dayOfWeek: ["Svētdiena", "Pirmdiena", "Otrdiena", "Trešdiena", "Ceturtdiena", "Piektdiena", "Sestdiena"]
+      },
+      mk: {
+        //Macedonian (Македонски)
+        months: ["јануари", "февруари", "март", "април", "мај", "јуни", "јули", "август", "септември", "октомври", "ноември", "декември"],
+        dayOfWeekShort: ["нед", "пон", "вто", "сре", "чет", "пет", "саб"],
+        dayOfWeek: ["Недела", "Понеделник", "Вторник", "Среда", "Четврток", "Петок", "Сабота"]
+      },
+      mn: {
+        //Mongolian (Монгол)
+        months: ["1-р сар", "2-р сар", "3-р сар", "4-р сар", "5-р сар", "6-р сар", "7-р сар", "8-р сар", "9-р сар", "10-р сар", "11-р сар", "12-р сар"],
+        dayOfWeekShort: ["Дав", "Мяг", "Лха", "Пүр", "Бсн", "Бям", "Ням"],
+        dayOfWeek: ["Даваа", "Мягмар", "Лхагва", "Пүрэв", "Баасан", "Бямба", "Ням"]
+      },
+      'pt-BR': {
+        //Português(Brasil)
+        months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+        dayOfWeekShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+        dayOfWeek: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
+      },
+      sk: {
+        //Slovenčina
+        months: ["Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"],
+        dayOfWeekShort: ["Ne", "Po", "Ut", "St", "Št", "Pi", "So"],
+        dayOfWeek: ["Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"]
+      },
+      sq: {
+        //Albanian (Shqip)
+        months: ["Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"],
+        dayOfWeekShort: ["Die", "Hën", "Mar", "Mër", "Enj", "Pre", "Shtu"],
+        dayOfWeek: ["E Diel", "E Hënë", "E Martē", "E Mërkurë", "E Enjte", "E Premte", "E Shtunë"]
+      },
+      'sr-YU': {
+        //Serbian (Srpski)
+        months: ["Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"],
+        dayOfWeekShort: ["Ned", "Pon", "Uto", "Sre", "čet", "Pet", "Sub"],
+        dayOfWeek: ["Nedelja", "Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota"]
+      },
+      sr: {
+        //Serbian Cyrillic (Српски)
+        months: ["јануар", "фебруар", "март", "април", "мај", "јун", "јул", "август", "септембар", "октобар", "новембар", "децембар"],
+        dayOfWeekShort: ["нед", "пон", "уто", "сре", "чет", "пет", "суб"],
+        dayOfWeek: ["Недеља", "Понедељак", "Уторак", "Среда", "Четвртак", "Петак", "Субота"]
+      },
+      sv: {
+        //Svenska
+        months: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"],
+        dayOfWeekShort: ["Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"],
+        dayOfWeek: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"]
+      },
+      'zh-TW': {
+        //Traditional Chinese (繁體中文)
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        dayOfWeekShort: ["日", "一", "二", "三", "四", "五", "六"],
+        dayOfWeek: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+      },
+      zh: {
+        //Simplified Chinese (简体中文)
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        dayOfWeekShort: ["日", "一", "二", "三", "四", "五", "六"],
+        dayOfWeek: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+      },
+      ug: {
+        // Uyghur(ئۇيغۇرچە)
+        months: ["1-ئاي", "2-ئاي", "3-ئاي", "4-ئاي", "5-ئاي", "6-ئاي", "7-ئاي", "8-ئاي", "9-ئاي", "10-ئاي", "11-ئاي", "12-ئاي"],
+        dayOfWeek: ["يەكشەنبە", "دۈشەنبە", "سەيشەنبە", "چارشەنبە", "پەيشەنبە", "جۈمە", "شەنبە"]
+      },
+      he: {
+        //Hebrew (עברית)
+        months: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'],
+        dayOfWeekShort: ['א\'', 'ב\'', 'ג\'', 'ד\'', 'ה\'', 'ו\'', 'שבת'],
+        dayOfWeek: ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת", "ראשון"]
+      },
+      hy: {
+        // Armenian
+        months: ["Հունվար", "Փետրվար", "Մարտ", "Ապրիլ", "Մայիս", "Հունիս", "Հուլիս", "Օգոստոս", "Սեպտեմբեր", "Հոկտեմբեր", "Նոյեմբեր", "Դեկտեմբեր"],
+        dayOfWeekShort: ["Կի", "Երկ", "Երք", "Չոր", "Հնգ", "Ուրբ", "Շբթ"],
+        dayOfWeek: ["Կիրակի", "Երկուշաբթի", "Երեքշաբթի", "Չորեքշաբթի", "Հինգշաբթի", "Ուրբաթ", "Շաբաթ"]
+      },
+      kg: {
+        // Kyrgyz
+        months: ['Үчтүн айы', 'Бирдин айы', 'Жалган Куран', 'Чын Куран', 'Бугу', 'Кулжа', 'Теке', 'Баш Оона', 'Аяк Оона', 'Тогуздун айы', 'Жетинин айы', 'Бештин айы'],
+        dayOfWeekShort: ["Жек", "Дүй", "Шей", "Шар", "Бей", "Жум", "Ише"],
+        dayOfWeek: ["Жекшемб", "Дүйшөмб", "Шейшемб", "Шаршемб", "Бейшемби", "Жума", "Ишенб"]
+      },
+      rm: {
+        // Romansh
+        months: ["Schaner", "Favrer", "Mars", "Avrigl", "Matg", "Zercladur", "Fanadur", "Avust", "Settember", "October", "November", "December"],
+        dayOfWeekShort: ["Du", "Gli", "Ma", "Me", "Gie", "Ve", "So"],
+        dayOfWeek: ["Dumengia", "Glindesdi", "Mardi", "Mesemna", "Gievgia", "Venderdi", "Sonda"]
+      },
+      ka: {
+        // Georgian
+        months: ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'],
+        dayOfWeekShort: ["კვ", "ორშ", "სამშ", "ოთხ", "ხუთ", "პარ", "შაბ"],
+        dayOfWeek: ["კვირა", "ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი"]
+      }
+    },
+    ownerDocument: document,
+    contentWindow: window,
+    value: '',
+    rtl: false,
+    format: 'Y/m/d H:i',
+    formatTime: 'H:i',
+    formatDate: 'Y/m/d',
+    startDate: false,
+    // new Date(), '1986/12/08', '-1970/01/05','-1970/01/05',
+    step: 60,
+    monthChangeSpinner: true,
+    closeOnDateSelect: false,
+    closeOnTimeSelect: true,
+    closeOnWithoutClick: true,
+    closeOnInputClick: true,
+    openOnFocus: true,
+    timepicker: true,
+    datepicker: true,
+    weeks: false,
+    defaultTime: false,
+    // use formatTime format (ex. '10:00' for formatTime:	'H:i')
+    defaultDate: false,
+    // use formatDate format (ex new Date() or '1986/12/08' or '-1970/01/05' or '-1970/01/05')
+    minDate: false,
+    maxDate: false,
+    minTime: false,
+    maxTime: false,
+    minDateTime: false,
+    maxDateTime: false,
+    allowTimes: [],
+    opened: false,
+    initTime: true,
+    inline: false,
+    theme: '',
+    touchMovedThreshold: 5,
+    onSelectDate: function onSelectDate() {},
+    onSelectTime: function onSelectTime() {},
+    onChangeMonth: function onChangeMonth() {},
+    onGetWeekOfYear: function onGetWeekOfYear() {},
+    onChangeYear: function onChangeYear() {},
+    onChangeDateTime: function onChangeDateTime() {},
+    onShow: function onShow() {},
+    onClose: function onClose() {},
+    onGenerate: function onGenerate() {},
+    withoutCopyright: true,
+    inverseButton: false,
+    hours12: false,
+    next: 'xdsoft_next',
+    prev: 'xdsoft_prev',
+    dayOfWeekStart: 0,
+    parentID: 'body',
+    timeHeightInTimePicker: 25,
+    timepickerScrollbar: true,
+    todayButton: true,
+    prevButton: true,
+    nextButton: true,
+    defaultSelect: true,
+    scrollMonth: true,
+    scrollTime: true,
+    scrollInput: true,
+    lazyInit: false,
+    mask: false,
+    validateOnBlur: true,
+    allowBlank: true,
+    yearStart: 1950,
+    yearEnd: 2050,
+    monthStart: 0,
+    monthEnd: 11,
+    style: '',
+    id: '',
+    fixed: false,
+    roundTime: 'round',
+    // ceil, floor
+    className: '',
+    weekends: [],
+    highlightedDates: [],
+    highlightedPeriods: [],
+    allowDates: [],
+    allowDateRe: null,
+    disabledDates: [],
+    disabledWeekDays: [],
+    yearOffset: 0,
+    beforeShowDay: null,
+    enterLikeTab: true,
+    showApplyButton: false,
+    insideParent: false
+  };
+  var dateHelper = null,
+      defaultDateHelper = null,
+      globalLocaleDefault = 'en',
+      globalLocale = 'en';
+  var dateFormatterOptionsDefault = {
+    meridiem: ['AM', 'PM']
+  };
+
+  var initDateFormatter = function initDateFormatter() {
+    var locale = default_options.i18n[globalLocale],
+        opts = {
+      days: locale.dayOfWeek,
+      daysShort: locale.dayOfWeekShort,
+      months: locale.months,
+      monthsShort: $.map(locale.months, function (n) {
+        return n.substring(0, 3);
+      })
+    };
+
+    if (typeof DateFormatter === 'function') {
+      dateHelper = defaultDateHelper = new DateFormatter({
+        dateSettings: $.extend({}, dateFormatterOptionsDefault, opts)
+      });
+    }
+  };
+
+  var dateFormatters = {
+    moment: {
+      default_options: {
+        format: 'YYYY/MM/DD HH:mm',
+        formatDate: 'YYYY/MM/DD',
+        formatTime: 'HH:mm'
+      },
+      formatter: {
+        parseDate: function parseDate(date, format) {
+          if (isFormatStandard(format)) {
+            return defaultDateHelper.parseDate(date, format);
+          }
+
+          var d = moment(date, format);
+          return d.isValid() ? d.toDate() : false;
+        },
+        formatDate: function formatDate(date, format) {
+          if (isFormatStandard(format)) {
+            return defaultDateHelper.formatDate(date, format);
+          }
+
+          return moment(date).format(format);
+        },
+        formatMask: function formatMask(format) {
+          return format.replace(/Y{4}/g, '9999').replace(/Y{2}/g, '99').replace(/M{2}/g, '19').replace(/D{2}/g, '39').replace(/H{2}/g, '29').replace(/m{2}/g, '59').replace(/s{2}/g, '59');
+        }
+      }
+    }
+  }; // for locale settings
+
+  $.datetimepicker = {
+    setLocale: function setLocale(locale) {
+      var newLocale = default_options.i18n[locale] ? locale : globalLocaleDefault;
+
+      if (globalLocale !== newLocale) {
+        globalLocale = newLocale; // reinit date formatter
+
+        initDateFormatter();
+      }
+    },
+    setDateFormatter: function setDateFormatter(dateFormatter) {
+      if (typeof dateFormatter === 'string' && dateFormatters.hasOwnProperty(dateFormatter)) {
+        var df = dateFormatters[dateFormatter];
+        $.extend(default_options, df.default_options);
+        dateHelper = df.formatter;
+      } else {
+        dateHelper = dateFormatter;
+      }
+    }
+  };
+  var standardFormats = {
+    RFC_2822: 'D, d M Y H:i:s O',
+    ATOM: 'Y-m-d\TH:i:sP',
+    ISO_8601: 'Y-m-d\TH:i:sO',
+    RFC_822: 'D, d M y H:i:s O',
+    RFC_850: 'l, d-M-y H:i:s T',
+    RFC_1036: 'D, d M y H:i:s O',
+    RFC_1123: 'D, d M Y H:i:s O',
+    RSS: 'D, d M Y H:i:s O',
+    W3C: 'Y-m-d\TH:i:sP'
+  };
+
+  var isFormatStandard = function isFormatStandard(format) {
+    return Object.values(standardFormats).indexOf(format) === -1 ? false : true;
+  };
+
+  $.extend($.datetimepicker, standardFormats); // first init date formatter
+
+  initDateFormatter(); // fix for ie8
+
+  if (!window.getComputedStyle) {
+    window.getComputedStyle = function (el) {
+      this.el = el;
+
+      this.getPropertyValue = function (prop) {
+        var re = /(-([a-z]))/g;
+
+        if (prop === 'float') {
+          prop = 'styleFloat';
+        }
+
+        if (re.test(prop)) {
+          prop = prop.replace(re, function (a, b, c) {
+            return c.toUpperCase();
+          });
+        }
+
+        return el.currentStyle[prop] || null;
+      };
+
+      return this;
+    };
+  }
+
+  if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (obj, start) {
+      var i, j;
+
+      for (i = start || 0, j = this.length; i < j; i += 1) {
+        if (this[i] === obj) {
+          return i;
+        }
+      }
+
+      return -1;
+    };
+  }
+
+  Date.prototype.countDaysInMonth = function () {
+    return new Date(this.getFullYear(), this.getMonth() + 1, 0).getDate();
+  };
+
+  $.fn.xdsoftScroller = function (options, percent) {
+    return this.each(function () {
+      var timeboxparent = $(this),
+          pointerEventToXY = function pointerEventToXY(e) {
+        var out = {
+          x: 0,
+          y: 0
+        },
+            touch;
+
+        if (e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend' || e.type === 'touchcancel') {
+          touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+          out.x = touch.clientX;
+          out.y = touch.clientY;
+        } else if (e.type === 'mousedown' || e.type === 'mouseup' || e.type === 'mousemove' || e.type === 'mouseover' || e.type === 'mouseout' || e.type === 'mouseenter' || e.type === 'mouseleave') {
+          out.x = e.clientX;
+          out.y = e.clientY;
+        }
+
+        return out;
+      },
+          timebox,
+          parentHeight,
+          height,
+          scrollbar,
+          scroller,
+          maximumOffset = 100,
+          start = false,
+          startY = 0,
+          startTop = 0,
+          h1 = 0,
+          touchStart = false,
+          startTopScroll = 0,
+          calcOffset = function calcOffset() {};
+
+      if (percent === 'hide') {
+        timeboxparent.find('.xdsoft_scrollbar').hide();
+        return;
+      }
+
+      if (!$(this).hasClass('xdsoft_scroller_box')) {
+        timebox = timeboxparent.children().eq(0);
+        parentHeight = timeboxparent[0].clientHeight;
+        height = timebox[0].offsetHeight;
+        scrollbar = $('<div class="xdsoft_scrollbar"></div>');
+        scroller = $('<div class="xdsoft_scroller"></div>');
+        scrollbar.append(scroller);
+        timeboxparent.addClass('xdsoft_scroller_box').append(scrollbar);
+
+        calcOffset = function calcOffset(event) {
+          var offset = pointerEventToXY(event).y - startY + startTopScroll;
+
+          if (offset < 0) {
+            offset = 0;
+          }
+
+          if (offset + scroller[0].offsetHeight > h1) {
+            offset = h1 - scroller[0].offsetHeight;
+          }
+
+          timeboxparent.trigger('scroll_element.xdsoft_scroller', [maximumOffset ? offset / maximumOffset : 0]);
+        };
+
+        scroller.on('touchstart.xdsoft_scroller mousedown.xdsoft_scroller', function (event) {
+          if (!parentHeight) {
+            timeboxparent.trigger('resize_scroll.xdsoft_scroller', [percent]);
+          }
+
+          startY = pointerEventToXY(event).y;
+          startTopScroll = parseInt(scroller.css('margin-top'), 10);
+          h1 = scrollbar[0].offsetHeight;
+
+          if (event.type === 'mousedown' || event.type === 'touchstart') {
+            if (options.ownerDocument) {
+              $(options.ownerDocument.body).addClass('xdsoft_noselect');
+            }
+
+            $([options.ownerDocument.body, options.contentWindow]).on('touchend mouseup.xdsoft_scroller', function arguments_callee() {
+              $([options.ownerDocument.body, options.contentWindow]).off('touchend mouseup.xdsoft_scroller', arguments_callee).off('mousemove.xdsoft_scroller', calcOffset).removeClass('xdsoft_noselect');
+            });
+            $(options.ownerDocument.body).on('mousemove.xdsoft_scroller', calcOffset);
+          } else {
+            touchStart = true;
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }).on('touchmove', function (event) {
+          if (touchStart) {
+            event.preventDefault();
+            calcOffset(event);
+          }
+        }).on('touchend touchcancel', function () {
+          touchStart = false;
+          startTopScroll = 0;
+        });
+        timeboxparent.on('scroll_element.xdsoft_scroller', function (event, percentage) {
+          if (!parentHeight) {
+            timeboxparent.trigger('resize_scroll.xdsoft_scroller', [percentage, true]);
+          }
+
+          percentage = percentage > 1 ? 1 : percentage < 0 || isNaN(percentage) ? 0 : percentage;
+          scroller.css('margin-top', maximumOffset * percentage);
+          setTimeout(function () {
+            timebox.css('marginTop', -parseInt((timebox[0].offsetHeight - parentHeight) * percentage, 10));
+          }, 10);
+        }).on('resize_scroll.xdsoft_scroller', function (event, percentage, noTriggerScroll) {
+          var percent, sh;
+          parentHeight = timeboxparent[0].clientHeight;
+          height = timebox[0].offsetHeight;
+          percent = parentHeight / height;
+          sh = percent * scrollbar[0].offsetHeight;
+
+          if (percent > 1) {
+            scroller.hide();
+          } else {
+            scroller.show();
+            scroller.css('height', parseInt(sh > 10 ? sh : 10, 10));
+            maximumOffset = scrollbar[0].offsetHeight - scroller[0].offsetHeight;
+
+            if (noTriggerScroll !== true) {
+              timeboxparent.trigger('scroll_element.xdsoft_scroller', [percentage || Math.abs(parseInt(timebox.css('marginTop'), 10)) / (height - parentHeight)]);
+            }
+          }
+        });
+        timeboxparent.on('mousewheel', function (event) {
+          var top = Math.abs(parseInt(timebox.css('marginTop'), 10));
+          top = top - event.deltaY * 20;
+
+          if (top < 0) {
+            top = 0;
+          }
+
+          timeboxparent.trigger('scroll_element.xdsoft_scroller', [top / (height - parentHeight)]);
+          event.stopPropagation();
+          return false;
+        });
+        timeboxparent.on('touchstart', function (event) {
+          start = pointerEventToXY(event);
+          startTop = Math.abs(parseInt(timebox.css('marginTop'), 10));
+        });
+        timeboxparent.on('touchmove', function (event) {
+          if (start) {
+            event.preventDefault();
+            var coord = pointerEventToXY(event);
+            timeboxparent.trigger('scroll_element.xdsoft_scroller', [(startTop - (coord.y - start.y)) / (height - parentHeight)]);
+          }
+        });
+        timeboxparent.on('touchend touchcancel', function () {
+          start = false;
+          startTop = 0;
+        });
+      }
+
+      timeboxparent.trigger('resize_scroll.xdsoft_scroller', [percent]);
+    });
+  };
+
+  $.fn.datetimepicker = function (opt, opt2) {
+    var result = this,
+        KEY0 = 48,
+        KEY9 = 57,
+        _KEY0 = 96,
+        _KEY9 = 105,
+        CTRLKEY = 17,
+        CMDKEY = 91,
+        DEL = 46,
+        ENTER = 13,
+        ESC = 27,
+        BACKSPACE = 8,
+        ARROWLEFT = 37,
+        ARROWUP = 38,
+        ARROWRIGHT = 39,
+        ARROWDOWN = 40,
+        TAB = 9,
+        F5 = 116,
+        AKEY = 65,
+        CKEY = 67,
+        VKEY = 86,
+        ZKEY = 90,
+        YKEY = 89,
+        ctrlDown = false,
+        cmdDown = false,
+        options = $.isPlainObject(opt) || !opt ? $.extend(true, {}, default_options, opt) : $.extend(true, {}, default_options),
+        lazyInitTimer = 0,
+        createDateTimePicker,
+        destroyDateTimePicker,
+        lazyInit = function lazyInit(input) {
+      input.on('open.xdsoft focusin.xdsoft mousedown.xdsoft touchstart', function initOnActionCallback() {
+        if (input.is(':disabled') || input.data('xdsoft_datetimepicker')) {
+          return;
+        }
+
+        clearTimeout(lazyInitTimer);
+        lazyInitTimer = setTimeout(function () {
+          if (!input.data('xdsoft_datetimepicker')) {
+            createDateTimePicker(input);
+          }
+
+          input.off('open.xdsoft focusin.xdsoft mousedown.xdsoft touchstart', initOnActionCallback).trigger('open.xdsoft');
+        }, 100);
+      });
+    };
+
+    createDateTimePicker = function createDateTimePicker(input) {
+      var datetimepicker = $('<div class="xdsoft_datetimepicker xdsoft_noselect"></div>'),
+          xdsoft_copyright = $('<div class="xdsoft_copyright"><a target="_blank" href="http://xdsoft.net/jqplugins/datetimepicker/">xdsoft.net</a></div>'),
+          datepicker = $('<div class="xdsoft_datepicker active"></div>'),
+          month_picker = $('<div class="xdsoft_monthpicker"><button type="button" class="xdsoft_prev"></button><button type="button" class="xdsoft_today_button"></button>' + '<div class="xdsoft_label xdsoft_month"><span></span><i></i></div>' + '<div class="xdsoft_label xdsoft_year"><span></span><i></i></div>' + '<button type="button" class="xdsoft_next"></button></div>'),
+          calendar = $('<div class="xdsoft_calendar"></div>'),
+          timepicker = $('<div class="xdsoft_timepicker active"><button type="button" class="xdsoft_prev"></button><div class="xdsoft_time_box"></div><button type="button" class="xdsoft_next"></button></div>'),
+          timeboxparent = timepicker.find('.xdsoft_time_box').eq(0),
+          timebox = $('<div class="xdsoft_time_variant"></div>'),
+          applyButton = $('<button type="button" class="xdsoft_save_selected blue-gradient-button">Save Selected</button>'),
+          monthselect = $('<div class="xdsoft_select xdsoft_monthselect"><div></div></div>'),
+          yearselect = $('<div class="xdsoft_select xdsoft_yearselect"><div></div></div>'),
+          triggerAfterOpen = false,
+          XDSoft_datetime,
+          xchangeTimer,
+          timerclick,
+          current_time_index,
+          setPos,
+          timer = 0,
+          _xdsoft_datetime,
+          forEachAncestorOf;
+
+      if (options.id) {
+        datetimepicker.attr('id', options.id);
+      }
+
+      if (options.style) {
+        datetimepicker.attr('style', options.style);
+      }
+
+      if (options.weeks) {
+        datetimepicker.addClass('xdsoft_showweeks');
+      }
+
+      if (options.rtl) {
+        datetimepicker.addClass('xdsoft_rtl');
+      }
+
+      datetimepicker.addClass('xdsoft_' + options.theme);
+      datetimepicker.addClass(options.className);
+      month_picker.find('.xdsoft_month span').after(monthselect);
+      month_picker.find('.xdsoft_year span').after(yearselect);
+      month_picker.find('.xdsoft_month,.xdsoft_year').on('touchstart mousedown.xdsoft', function (event) {
+        var select = $(this).find('.xdsoft_select').eq(0),
+            val = 0,
+            top = 0,
+            visible = select.is(':visible'),
+            items,
+            i;
+        month_picker.find('.xdsoft_select').hide();
+
+        if (_xdsoft_datetime.currentTime) {
+          val = _xdsoft_datetime.currentTime[$(this).hasClass('xdsoft_month') ? 'getMonth' : 'getFullYear']();
+        }
+
+        select[visible ? 'hide' : 'show']();
+
+        for (items = select.find('div.xdsoft_option'), i = 0; i < items.length; i += 1) {
+          if (items.eq(i).data('value') === val) {
+            break;
+          } else {
+            top += items[0].offsetHeight;
+          }
+        }
+
+        select.xdsoftScroller(options, top / (select.children()[0].offsetHeight - select[0].clientHeight));
+        event.stopPropagation();
+        return false;
+      });
+
+      var handleTouchMoved = function handleTouchMoved(event) {
+        var evt = event.originalEvent;
+        var touchPosition = evt.touches ? evt.touches[0] : evt;
+        this.touchStartPosition = this.touchStartPosition || touchPosition;
+        var xMovement = Math.abs(this.touchStartPosition.clientX - touchPosition.clientX);
+        var yMovement = Math.abs(this.touchStartPosition.clientY - touchPosition.clientY);
+        var distance = Math.sqrt(xMovement * xMovement + yMovement * yMovement);
+
+        if (distance > options.touchMovedThreshold) {
+          this.touchMoved = true;
+        }
+      };
+
+      month_picker.find('.xdsoft_select').xdsoftScroller(options).on('touchstart mousedown.xdsoft', function (event) {
+        var evt = event.originalEvent;
+        this.touchMoved = false;
+        this.touchStartPosition = evt.touches ? evt.touches[0] : evt;
+        event.stopPropagation();
+        event.preventDefault();
+      }).on('touchmove', '.xdsoft_option', handleTouchMoved).on('touchend mousedown.xdsoft', '.xdsoft_option', function () {
+        if (!this.touchMoved) {
+          if (_xdsoft_datetime.currentTime === undefined || _xdsoft_datetime.currentTime === null) {
+            _xdsoft_datetime.currentTime = _xdsoft_datetime.now();
+          }
+
+          var year = _xdsoft_datetime.currentTime.getFullYear();
+
+          if (_xdsoft_datetime && _xdsoft_datetime.currentTime) {
+            _xdsoft_datetime.currentTime[$(this).parent().parent().hasClass('xdsoft_monthselect') ? 'setMonth' : 'setFullYear']($(this).data('value'));
+          }
+
+          $(this).parent().parent().hide();
+          datetimepicker.trigger('xchange.xdsoft');
+
+          if (options.onChangeMonth && $.isFunction(options.onChangeMonth)) {
+            options.onChangeMonth.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
+          }
+
+          if (year !== _xdsoft_datetime.currentTime.getFullYear() && $.isFunction(options.onChangeYear)) {
+            options.onChangeYear.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
+          }
+        }
+      });
+
+      datetimepicker.getValue = function () {
+        return _xdsoft_datetime.getCurrentTime();
+      };
+
+      datetimepicker.setOptions = function (_options) {
+        var highlightedDates = {};
+        options = $.extend(true, {}, options, _options);
+
+        if (_options.allowTimes && $.isArray(_options.allowTimes) && _options.allowTimes.length) {
+          options.allowTimes = $.extend(true, [], _options.allowTimes);
+        }
+
+        if (_options.weekends && $.isArray(_options.weekends) && _options.weekends.length) {
+          options.weekends = $.extend(true, [], _options.weekends);
+        }
+
+        if (_options.allowDates && $.isArray(_options.allowDates) && _options.allowDates.length) {
+          options.allowDates = $.extend(true, [], _options.allowDates);
+        }
+
+        if (_options.allowDateRe && Object.prototype.toString.call(_options.allowDateRe) === "[object String]") {
+          options.allowDateRe = new RegExp(_options.allowDateRe);
+        }
+
+        if (_options.highlightedDates && $.isArray(_options.highlightedDates) && _options.highlightedDates.length) {
+          $.each(_options.highlightedDates, function (index, value) {
+            var splitData = $.map(value.split(','), $.trim),
+                exDesc,
+                hDate = new HighlightedDate(dateHelper.parseDate(splitData[0], options.formatDate), splitData[1], splitData[2]),
+                // date, desc, style
+            keyDate = dateHelper.formatDate(hDate.date, options.formatDate);
+
+            if (highlightedDates[keyDate] !== undefined) {
+              exDesc = highlightedDates[keyDate].desc;
+
+              if (exDesc && exDesc.length && hDate.desc && hDate.desc.length) {
+                highlightedDates[keyDate].desc = exDesc + "\n" + hDate.desc;
+              }
+            } else {
+              highlightedDates[keyDate] = hDate;
+            }
+          });
+          options.highlightedDates = $.extend(true, [], highlightedDates);
+        }
+
+        if (_options.highlightedPeriods && $.isArray(_options.highlightedPeriods) && _options.highlightedPeriods.length) {
+          highlightedDates = $.extend(true, [], options.highlightedDates);
+          $.each(_options.highlightedPeriods, function (index, value) {
+            var dateTest, // start date
+            dateEnd, desc, hDate, keyDate, exDesc, style;
+
+            if ($.isArray(value)) {
+              dateTest = value[0];
+              dateEnd = value[1];
+              desc = value[2];
+              style = value[3];
+            } else {
+              var splitData = $.map(value.split(','), $.trim);
+              dateTest = dateHelper.parseDate(splitData[0], options.formatDate);
+              dateEnd = dateHelper.parseDate(splitData[1], options.formatDate);
+              desc = splitData[2];
+              style = splitData[3];
+            }
+
+            while (dateTest <= dateEnd) {
+              hDate = new HighlightedDate(dateTest, desc, style);
+              keyDate = dateHelper.formatDate(dateTest, options.formatDate);
+              dateTest.setDate(dateTest.getDate() + 1);
+
+              if (highlightedDates[keyDate] !== undefined) {
+                exDesc = highlightedDates[keyDate].desc;
+
+                if (exDesc && exDesc.length && hDate.desc && hDate.desc.length) {
+                  highlightedDates[keyDate].desc = exDesc + "\n" + hDate.desc;
+                }
+              } else {
+                highlightedDates[keyDate] = hDate;
+              }
+            }
+          });
+          options.highlightedDates = $.extend(true, [], highlightedDates);
+        }
+
+        if (_options.disabledDates && $.isArray(_options.disabledDates) && _options.disabledDates.length) {
+          options.disabledDates = $.extend(true, [], _options.disabledDates);
+        }
+
+        if (_options.disabledWeekDays && $.isArray(_options.disabledWeekDays) && _options.disabledWeekDays.length) {
+          options.disabledWeekDays = $.extend(true, [], _options.disabledWeekDays);
+        }
+
+        if ((options.open || options.opened) && !options.inline) {
+          input.trigger('open.xdsoft');
+        }
+
+        if (options.inline) {
+          triggerAfterOpen = true;
+          datetimepicker.addClass('xdsoft_inline');
+          input.after(datetimepicker).hide();
+        }
+
+        if (options.inverseButton) {
+          options.next = 'xdsoft_prev';
+          options.prev = 'xdsoft_next';
+        }
+
+        if (options.datepicker) {
+          datepicker.addClass('active');
+        } else {
+          datepicker.removeClass('active');
+        }
+
+        if (options.timepicker) {
+          timepicker.addClass('active');
+        } else {
+          timepicker.removeClass('active');
+        }
+
+        if (options.value) {
+          _xdsoft_datetime.setCurrentTime(options.value);
+
+          if (input && input.val) {
+            input.val(_xdsoft_datetime.str);
+          }
+        }
+
+        if (isNaN(options.dayOfWeekStart)) {
+          options.dayOfWeekStart = 0;
+        } else {
+          options.dayOfWeekStart = parseInt(options.dayOfWeekStart, 10) % 7;
+        }
+
+        if (!options.timepickerScrollbar) {
+          timeboxparent.xdsoftScroller(options, 'hide');
+        }
+
+        if (options.minDate && /^[\+\-](.*)$/.test(options.minDate)) {
+          options.minDate = dateHelper.formatDate(_xdsoft_datetime.strToDateTime(options.minDate), options.formatDate);
+        }
+
+        if (options.maxDate && /^[\+\-](.*)$/.test(options.maxDate)) {
+          options.maxDate = dateHelper.formatDate(_xdsoft_datetime.strToDateTime(options.maxDate), options.formatDate);
+        }
+
+        if (options.minDateTime && /^\+(.*)$/.test(options.minDateTime)) {
+          options.minDateTime = _xdsoft_datetime.strToDateTime(options.minDateTime).dateFormat(options.formatDate);
+        }
+
+        if (options.maxDateTime && /^\+(.*)$/.test(options.maxDateTime)) {
+          options.maxDateTime = _xdsoft_datetime.strToDateTime(options.maxDateTime).dateFormat(options.formatDate);
+        }
+
+        applyButton.toggle(options.showApplyButton);
+        month_picker.find('.xdsoft_today_button').css('visibility', !options.todayButton ? 'hidden' : 'visible');
+        month_picker.find('.' + options.prev).css('visibility', !options.prevButton ? 'hidden' : 'visible');
+        month_picker.find('.' + options.next).css('visibility', !options.nextButton ? 'hidden' : 'visible');
+        setMask(options);
+
+        if (options.validateOnBlur) {
+          input.off('blur.xdsoft').on('blur.xdsoft', function () {
+            if (options.allowBlank && (!$.trim($(this).val()).length || typeof options.mask === "string" && $.trim($(this).val()) === options.mask.replace(/[0-9]/g, '_'))) {
+              $(this).val(null);
+              datetimepicker.data('xdsoft_datetime').empty();
+            } else {
+              var d = dateHelper.parseDate($(this).val(), options.format);
+
+              if (d) {
+                // parseDate() may skip some invalid parts like date or time, so make it clear for user: show parsed date/time
+                $(this).val(dateHelper.formatDate(d, options.format));
+              } else {
+                var splittedHours = +[$(this).val()[0], $(this).val()[1]].join(''),
+                    splittedMinutes = +[$(this).val()[2], $(this).val()[3]].join(''); // parse the numbers as 0312 => 03:12
+
+                if (!options.datepicker && options.timepicker && splittedHours >= 0 && splittedHours < 24 && splittedMinutes >= 0 && splittedMinutes < 60) {
+                  $(this).val([splittedHours, splittedMinutes].map(function (item) {
+                    return item > 9 ? item : '0' + item;
+                  }).join(':'));
+                } else {
+                  $(this).val(dateHelper.formatDate(_xdsoft_datetime.now(), options.format));
+                }
+              }
+
+              datetimepicker.data('xdsoft_datetime').setCurrentTime($(this).val());
+            }
+
+            datetimepicker.trigger('changedatetime.xdsoft');
+            datetimepicker.trigger('close.xdsoft');
+          });
+        }
+
+        options.dayOfWeekStartPrev = options.dayOfWeekStart === 0 ? 6 : options.dayOfWeekStart - 1;
+        datetimepicker.trigger('xchange.xdsoft').trigger('afterOpen.xdsoft');
+      };
+
+      datetimepicker.data('options', options).on('touchstart mousedown.xdsoft', function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+        yearselect.hide();
+        monthselect.hide();
+        return false;
+      }); //scroll_element = timepicker.find('.xdsoft_time_box');
+
+      timeboxparent.append(timebox);
+      timeboxparent.xdsoftScroller(options);
+      datetimepicker.on('afterOpen.xdsoft', function () {
+        timeboxparent.xdsoftScroller(options);
+      });
+      datetimepicker.append(datepicker).append(timepicker);
+
+      if (options.withoutCopyright !== true) {
+        datetimepicker.append(xdsoft_copyright);
+      }
+
+      datepicker.append(month_picker).append(calendar).append(applyButton);
+
+      if (options.insideParent) {
+        $(input).parent().append(datetimepicker);
+      } else {
+        $(options.parentID).append(datetimepicker);
+      }
+
+      XDSoft_datetime = function XDSoft_datetime() {
+        var _this = this;
+
+        _this.now = function (norecursion) {
+          var d = new Date(),
+              date,
+              time;
+
+          if (!norecursion && options.defaultDate) {
+            date = _this.strToDateTime(options.defaultDate);
+            d.setFullYear(date.getFullYear());
+            d.setMonth(date.getMonth());
+            d.setDate(date.getDate());
+          }
+
+          d.setFullYear(d.getFullYear());
+
+          if (!norecursion && options.defaultTime) {
+            time = _this.strtotime(options.defaultTime);
+            d.setHours(time.getHours());
+            d.setMinutes(time.getMinutes());
+            d.setSeconds(time.getSeconds());
+            d.setMilliseconds(time.getMilliseconds());
+          }
+
+          return d;
+        };
+
+        _this.isValidDate = function (d) {
+          if (Object.prototype.toString.call(d) !== "[object Date]") {
+            return false;
+          }
+
+          return !isNaN(d.getTime());
+        };
+
+        _this.setCurrentTime = function (dTime, requireValidDate) {
+          if (typeof dTime === 'string') {
+            _this.currentTime = _this.strToDateTime(dTime);
+          } else if (_this.isValidDate(dTime)) {
+            _this.currentTime = dTime;
+          } else if (!dTime && !requireValidDate && options.allowBlank && !options.inline) {
+            _this.currentTime = null;
+          } else {
+            _this.currentTime = _this.now();
+          }
+
+          datetimepicker.trigger('xchange.xdsoft');
+        };
+
+        _this.empty = function () {
+          _this.currentTime = null;
+        };
+
+        _this.getCurrentTime = function () {
+          return _this.currentTime;
+        };
+
+        _this.nextMonth = function () {
+          if (_this.currentTime === undefined || _this.currentTime === null) {
+            _this.currentTime = _this.now();
+          }
+
+          var month = _this.currentTime.getMonth() + 1,
+              year;
+
+          if (month === 12) {
+            _this.currentTime.setFullYear(_this.currentTime.getFullYear() + 1);
+
+            month = 0;
+          }
+
+          year = _this.currentTime.getFullYear();
+
+          _this.currentTime.setDate(Math.min(new Date(_this.currentTime.getFullYear(), month + 1, 0).getDate(), _this.currentTime.getDate()));
+
+          _this.currentTime.setMonth(month);
+
+          if (options.onChangeMonth && $.isFunction(options.onChangeMonth)) {
+            options.onChangeMonth.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
+          }
+
+          if (year !== _this.currentTime.getFullYear() && $.isFunction(options.onChangeYear)) {
+            options.onChangeYear.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
+          }
+
+          datetimepicker.trigger('xchange.xdsoft');
+          return month;
+        };
+
+        _this.prevMonth = function () {
+          if (_this.currentTime === undefined || _this.currentTime === null) {
+            _this.currentTime = _this.now();
+          }
+
+          var month = _this.currentTime.getMonth() - 1;
+
+          if (month === -1) {
+            _this.currentTime.setFullYear(_this.currentTime.getFullYear() - 1);
+
+            month = 11;
+          }
+
+          _this.currentTime.setDate(Math.min(new Date(_this.currentTime.getFullYear(), month + 1, 0).getDate(), _this.currentTime.getDate()));
+
+          _this.currentTime.setMonth(month);
+
+          if (options.onChangeMonth && $.isFunction(options.onChangeMonth)) {
+            options.onChangeMonth.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
+          }
+
+          datetimepicker.trigger('xchange.xdsoft');
+          return month;
+        };
+
+        _this.getWeekOfYear = function (datetime) {
+          if (options.onGetWeekOfYear && $.isFunction(options.onGetWeekOfYear)) {
+            var week = options.onGetWeekOfYear.call(datetimepicker, datetime);
+
+            if (typeof week !== 'undefined') {
+              return week;
+            }
+          }
+
+          var onejan = new Date(datetime.getFullYear(), 0, 1); //First week of the year is th one with the first Thursday according to ISO8601
+
+          if (onejan.getDay() !== 4) {
+            onejan.setMonth(0, 1 + (4 - onejan.getDay() + 7) % 7);
+          }
+
+          return Math.ceil(((datetime - onejan) / 86400000 + onejan.getDay() + 1) / 7);
+        };
+
+        _this.strToDateTime = function (sDateTime) {
+          var tmpDate = [],
+              timeOffset,
+              currentTime;
+
+          if (sDateTime && sDateTime instanceof Date && _this.isValidDate(sDateTime)) {
+            return sDateTime;
+          }
+
+          tmpDate = /^([+-]{1})(.*)$/.exec(sDateTime);
+
+          if (tmpDate) {
+            tmpDate[2] = dateHelper.parseDate(tmpDate[2], options.formatDate);
+          }
+
+          if (tmpDate && tmpDate[2]) {
+            timeOffset = tmpDate[2].getTime() - tmpDate[2].getTimezoneOffset() * 60000;
+            currentTime = new Date(_this.now(true).getTime() + parseInt(tmpDate[1] + '1', 10) * timeOffset);
+          } else {
+            currentTime = sDateTime ? dateHelper.parseDate(sDateTime, options.format) : _this.now();
+          }
+
+          if (!_this.isValidDate(currentTime)) {
+            currentTime = _this.now();
+          }
+
+          return currentTime;
+        };
+
+        _this.strToDate = function (sDate) {
+          if (sDate && sDate instanceof Date && _this.isValidDate(sDate)) {
+            return sDate;
+          }
+
+          var currentTime = sDate ? dateHelper.parseDate(sDate, options.formatDate) : _this.now(true);
+
+          if (!_this.isValidDate(currentTime)) {
+            currentTime = _this.now(true);
+          }
+
+          return currentTime;
+        };
+
+        _this.strtotime = function (sTime) {
+          if (sTime && sTime instanceof Date && _this.isValidDate(sTime)) {
+            return sTime;
+          }
+
+          var currentTime = sTime ? dateHelper.parseDate(sTime, options.formatTime) : _this.now(true);
+
+          if (!_this.isValidDate(currentTime)) {
+            currentTime = _this.now(true);
+          }
+
+          return currentTime;
+        };
+
+        _this.str = function () {
+          var format = options.format;
+
+          if (options.yearOffset) {
+            format = format.replace('Y', _this.currentTime.getFullYear() + options.yearOffset);
+            format = format.replace('y', String(_this.currentTime.getFullYear() + options.yearOffset).substring(2, 4));
+          }
+
+          return dateHelper.formatDate(_this.currentTime, format);
+        };
+
+        _this.currentTime = this.now();
+      };
+
+      _xdsoft_datetime = new XDSoft_datetime();
+      applyButton.on('touchend click', function (e) {
+        //pathbrite
+        e.preventDefault();
+        datetimepicker.data('changed', true);
+
+        _xdsoft_datetime.setCurrentTime(getCurrentValue());
+
+        input.val(_xdsoft_datetime.str());
+        datetimepicker.trigger('close.xdsoft');
+      });
+      month_picker.find('.xdsoft_today_button').on('touchend mousedown.xdsoft', function () {
+        datetimepicker.data('changed', true);
+
+        _xdsoft_datetime.setCurrentTime(0, true);
+
+        datetimepicker.trigger('afterOpen.xdsoft');
+      }).on('dblclick.xdsoft', function () {
+        var currentDate = _xdsoft_datetime.getCurrentTime(),
+            minDate,
+            maxDate;
+
+        currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+        minDate = _xdsoft_datetime.strToDate(options.minDate);
+        minDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
+
+        if (currentDate < minDate) {
+          return;
+        }
+
+        maxDate = _xdsoft_datetime.strToDate(options.maxDate);
+        maxDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate());
+
+        if (currentDate > maxDate) {
+          return;
+        }
+
+        input.val(_xdsoft_datetime.str());
+        input.trigger('change');
+        datetimepicker.trigger('close.xdsoft');
+      });
+      month_picker.find('.xdsoft_prev,.xdsoft_next').on('touchend mousedown.xdsoft', function () {
+        var $this = $(this),
+            timer = 0,
+            stop = false;
+
+        (function arguments_callee1(v) {
+          if ($this.hasClass(options.next)) {
+            _xdsoft_datetime.nextMonth();
+          } else if ($this.hasClass(options.prev)) {
+            _xdsoft_datetime.prevMonth();
+          }
+
+          if (options.monthChangeSpinner) {
+            if (!stop) {
+              timer = setTimeout(arguments_callee1, v || 100);
+            }
+          }
+        })(500);
+
+        $([options.ownerDocument.body, options.contentWindow]).on('touchend mouseup.xdsoft', function arguments_callee2() {
+          clearTimeout(timer);
+          stop = true;
+          $([options.ownerDocument.body, options.contentWindow]).off('touchend mouseup.xdsoft', arguments_callee2);
+        });
+      });
+      timepicker.find('.xdsoft_prev,.xdsoft_next').on('touchend mousedown.xdsoft', function () {
+        var $this = $(this),
+            timer = 0,
+            stop = false,
+            period = 110;
+
+        (function arguments_callee4(v) {
+          var pheight = timeboxparent[0].clientHeight,
+              height = timebox[0].offsetHeight,
+              top = Math.abs(parseInt(timebox.css('marginTop'), 10));
+
+          if ($this.hasClass(options.next) && height - pheight - options.timeHeightInTimePicker >= top) {
+            timebox.css('marginTop', '-' + (top + options.timeHeightInTimePicker) + 'px');
+          } else if ($this.hasClass(options.prev) && top - options.timeHeightInTimePicker >= 0) {
+            timebox.css('marginTop', '-' + (top - options.timeHeightInTimePicker) + 'px');
+          }
+          /**
+           * Fixed bug:
+           * When using css3 transition, it will cause a bug that you cannot scroll the timepicker list.
+           * The reason is that the transition-duration time, if you set it to 0, all things fine, otherwise, this
+           * would cause a bug when you use jquery.css method.
+           * Let's say: * { transition: all .5s ease; }
+           * jquery timebox.css('marginTop') will return the original value which is before you clicking the next/prev button,
+           * meanwhile the timebox[0].style.marginTop will return the right value which is after you clicking the
+           * next/prev button.
+           *
+           * What we should do:
+           * Replace timebox.css('marginTop') with timebox[0].style.marginTop.
+           */
+
+
+          timeboxparent.trigger('scroll_element.xdsoft_scroller', [Math.abs(parseInt(timebox[0].style.marginTop, 10) / (height - pheight))]);
+          period = period > 10 ? 10 : period - 10;
+
+          if (!stop) {
+            timer = setTimeout(arguments_callee4, v || period);
+          }
+        })(500);
+
+        $([options.ownerDocument.body, options.contentWindow]).on('touchend mouseup.xdsoft', function arguments_callee5() {
+          clearTimeout(timer);
+          stop = true;
+          $([options.ownerDocument.body, options.contentWindow]).off('touchend mouseup.xdsoft', arguments_callee5);
+        });
+      });
+      xchangeTimer = 0; // base handler - generating a calendar and timepicker
+
+      datetimepicker.on('xchange.xdsoft', function (event) {
+        clearTimeout(xchangeTimer);
+        xchangeTimer = setTimeout(function () {
+          if (_xdsoft_datetime.currentTime === undefined || _xdsoft_datetime.currentTime === null) {
+            _xdsoft_datetime.currentTime = _xdsoft_datetime.now();
+          }
+
+          var table = '',
+              start = new Date(_xdsoft_datetime.currentTime.getFullYear(), _xdsoft_datetime.currentTime.getMonth(), 1, 12, 0, 0),
+              i = 0,
+              j,
+              today = _xdsoft_datetime.now(),
+              maxDate = false,
+              minDate = false,
+              minDateTime = false,
+              maxDateTime = false,
+              hDate,
+              day,
+              d,
+              y,
+              m,
+              w,
+              classes = [],
+              customDateSettings,
+              newRow = true,
+              time = '',
+              h,
+              line_time,
+              description;
+
+          while (start.getDay() !== options.dayOfWeekStart) {
+            start.setDate(start.getDate() - 1);
+          }
+
+          table += '<table><thead><tr>';
+
+          if (options.weeks) {
+            table += '<th></th>';
+          }
+
+          for (j = 0; j < 7; j += 1) {
+            table += '<th>' + options.i18n[globalLocale].dayOfWeekShort[(j + options.dayOfWeekStart) % 7] + '</th>';
+          }
+
+          table += '</tr></thead>';
+          table += '<tbody>';
+
+          if (options.maxDate !== false) {
+            maxDate = _xdsoft_datetime.strToDate(options.maxDate);
+            maxDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate(), 23, 59, 59, 999);
+          }
+
+          if (options.minDate !== false) {
+            minDate = _xdsoft_datetime.strToDate(options.minDate);
+            minDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
+          }
+
+          if (options.minDateTime !== false) {
+            minDateTime = _xdsoft_datetime.strToDate(options.minDateTime);
+            minDateTime = new Date(minDateTime.getFullYear(), minDateTime.getMonth(), minDateTime.getDate(), minDateTime.getHours(), minDateTime.getMinutes(), minDateTime.getSeconds());
+          }
+
+          if (options.maxDateTime !== false) {
+            maxDateTime = _xdsoft_datetime.strToDate(options.maxDateTime);
+            maxDateTime = new Date(maxDateTime.getFullYear(), maxDateTime.getMonth(), maxDateTime.getDate(), maxDateTime.getHours(), maxDateTime.getMinutes(), maxDateTime.getSeconds());
+          }
+
+          var maxDateTimeDay;
+
+          if (maxDateTime !== false) {
+            maxDateTimeDay = (maxDateTime.getFullYear() * 12 + maxDateTime.getMonth()) * 31 + maxDateTime.getDate();
+          }
+
+          while (i < _xdsoft_datetime.currentTime.countDaysInMonth() || start.getDay() !== options.dayOfWeekStart || _xdsoft_datetime.currentTime.getMonth() === start.getMonth()) {
+            classes = [];
+            i += 1;
+            day = start.getDay();
+            d = start.getDate();
+            y = start.getFullYear();
+            m = start.getMonth();
+            w = _xdsoft_datetime.getWeekOfYear(start);
+            description = '';
+            classes.push('xdsoft_date');
+
+            if (options.beforeShowDay && $.isFunction(options.beforeShowDay.call)) {
+              customDateSettings = options.beforeShowDay.call(datetimepicker, start);
+            } else {
+              customDateSettings = null;
+            }
+
+            if (options.allowDateRe && Object.prototype.toString.call(options.allowDateRe) === "[object RegExp]") {
+              if (!options.allowDateRe.test(dateHelper.formatDate(start, options.formatDate))) {
+                classes.push('xdsoft_disabled');
+              }
+            }
+
+            if (options.allowDates && options.allowDates.length > 0) {
+              if (options.allowDates.indexOf(dateHelper.formatDate(start, options.formatDate)) === -1) {
+                classes.push('xdsoft_disabled');
+              }
+            }
+
+            var currentDay = (start.getFullYear() * 12 + start.getMonth()) * 31 + start.getDate();
+
+            if (maxDate !== false && start > maxDate || minDateTime !== false && start < minDateTime || minDate !== false && start < minDate || maxDateTime !== false && currentDay > maxDateTimeDay || customDateSettings && customDateSettings[0] === false) {
+              classes.push('xdsoft_disabled');
+            }
+
+            if (options.disabledDates.indexOf(dateHelper.formatDate(start, options.formatDate)) !== -1) {
+              classes.push('xdsoft_disabled');
+            }
+
+            if (options.disabledWeekDays.indexOf(day) !== -1) {
+              classes.push('xdsoft_disabled');
+            }
+
+            if (input.is('[disabled]')) {
+              classes.push('xdsoft_disabled');
+            }
+
+            if (customDateSettings && customDateSettings[1] !== "") {
+              classes.push(customDateSettings[1]);
+            }
+
+            if (_xdsoft_datetime.currentTime.getMonth() !== m) {
+              classes.push('xdsoft_other_month');
+            }
+
+            if ((options.defaultSelect || datetimepicker.data('changed')) && dateHelper.formatDate(_xdsoft_datetime.currentTime, options.formatDate) === dateHelper.formatDate(start, options.formatDate)) {
+              classes.push('xdsoft_current');
+            }
+
+            if (dateHelper.formatDate(today, options.formatDate) === dateHelper.formatDate(start, options.formatDate)) {
+              classes.push('xdsoft_today');
+            }
+
+            if (start.getDay() === 0 || start.getDay() === 6 || options.weekends.indexOf(dateHelper.formatDate(start, options.formatDate)) !== -1) {
+              classes.push('xdsoft_weekend');
+            }
+
+            if (options.highlightedDates[dateHelper.formatDate(start, options.formatDate)] !== undefined) {
+              hDate = options.highlightedDates[dateHelper.formatDate(start, options.formatDate)];
+              classes.push(hDate.style === undefined ? 'xdsoft_highlighted_default' : hDate.style);
+              description = hDate.desc === undefined ? '' : hDate.desc;
+            }
+
+            if (options.beforeShowDay && $.isFunction(options.beforeShowDay)) {
+              classes.push(options.beforeShowDay(start));
+            }
+
+            if (newRow) {
+              table += '<tr>';
+              newRow = false;
+
+              if (options.weeks) {
+                table += '<th>' + w + '</th>';
+              }
+            }
+
+            table += '<td data-date="' + d + '" data-month="' + m + '" data-year="' + y + '"' + ' class="xdsoft_date xdsoft_day_of_week' + start.getDay() + ' ' + classes.join(' ') + '" title="' + description + '">' + '<div>' + d + '</div>' + '</td>';
+
+            if (start.getDay() === options.dayOfWeekStartPrev) {
+              table += '</tr>';
+              newRow = true;
+            }
+
+            start.setDate(d + 1);
+          }
+
+          table += '</tbody></table>';
+          calendar.html(table);
+          month_picker.find('.xdsoft_label span').eq(0).text(options.i18n[globalLocale].months[_xdsoft_datetime.currentTime.getMonth()]);
+          month_picker.find('.xdsoft_label span').eq(1).text(_xdsoft_datetime.currentTime.getFullYear() + options.yearOffset); // generate timebox
+
+          time = '';
+          h = '';
+          m = '';
+          var minTimeMinutesOfDay = 0;
+
+          if (options.minTime !== false) {
+            var t = _xdsoft_datetime.strtotime(options.minTime);
+
+            minTimeMinutesOfDay = 60 * t.getHours() + t.getMinutes();
+          }
+
+          var maxTimeMinutesOfDay = 24 * 60;
+
+          if (options.maxTime !== false) {
+            var t = _xdsoft_datetime.strtotime(options.maxTime);
+
+            maxTimeMinutesOfDay = 60 * t.getHours() + t.getMinutes();
+          }
+
+          if (options.minDateTime !== false) {
+            var t = _xdsoft_datetime.strToDateTime(options.minDateTime);
+
+            var currentDayIsMinDateTimeDay = dateHelper.formatDate(_xdsoft_datetime.currentTime, options.formatDate) === dateHelper.formatDate(t, options.formatDate);
+
+            if (currentDayIsMinDateTimeDay) {
+              var m = 60 * t.getHours() + t.getMinutes();
+              if (m > minTimeMinutesOfDay) minTimeMinutesOfDay = m;
+            }
+          }
+
+          if (options.maxDateTime !== false) {
+            var t = _xdsoft_datetime.strToDateTime(options.maxDateTime);
+
+            var currentDayIsMaxDateTimeDay = dateHelper.formatDate(_xdsoft_datetime.currentTime, options.formatDate) === dateHelper.formatDate(t, options.formatDate);
+
+            if (currentDayIsMaxDateTimeDay) {
+              var m = 60 * t.getHours() + t.getMinutes();
+              if (m < maxTimeMinutesOfDay) maxTimeMinutesOfDay = m;
+            }
+          }
+
+          line_time = function line_time(h, m) {
+            var now = _xdsoft_datetime.now(),
+                current_time,
+                isALlowTimesInit = options.allowTimes && $.isArray(options.allowTimes) && options.allowTimes.length;
+
+            now.setHours(h);
+            h = parseInt(now.getHours(), 10);
+            now.setMinutes(m);
+            m = parseInt(now.getMinutes(), 10);
+            classes = [];
+            var currentMinutesOfDay = 60 * h + m;
+
+            if (input.is('[disabled]') || currentMinutesOfDay >= maxTimeMinutesOfDay || currentMinutesOfDay < minTimeMinutesOfDay) {
+              classes.push('xdsoft_disabled');
+            }
+
+            current_time = new Date(_xdsoft_datetime.currentTime);
+            current_time.setHours(parseInt(_xdsoft_datetime.currentTime.getHours(), 10));
+
+            if (!isALlowTimesInit) {
+              current_time.setMinutes(Math[options.roundTime](_xdsoft_datetime.currentTime.getMinutes() / options.step) * options.step);
+            }
+
+            if ((options.initTime || options.defaultSelect || datetimepicker.data('changed')) && current_time.getHours() === parseInt(h, 10) && (!isALlowTimesInit && options.step > 59 || current_time.getMinutes() === parseInt(m, 10))) {
+              if (options.defaultSelect || datetimepicker.data('changed')) {
+                classes.push('xdsoft_current');
+              } else if (options.initTime) {
+                classes.push('xdsoft_init_time');
+              }
+            }
+
+            if (parseInt(today.getHours(), 10) === parseInt(h, 10) && parseInt(today.getMinutes(), 10) === parseInt(m, 10)) {
+              classes.push('xdsoft_today');
+            }
+
+            time += '<div class="xdsoft_time ' + classes.join(' ') + '" data-hour="' + h + '" data-minute="' + m + '">' + dateHelper.formatDate(now, options.formatTime) + '</div>';
+          };
+
+          if (!options.allowTimes || !$.isArray(options.allowTimes) || !options.allowTimes.length) {
+            for (i = 0, j = 0; i < (options.hours12 ? 12 : 24); i += 1) {
+              for (j = 0; j < 60; j += options.step) {
+                var currentMinutesOfDay = i * 60 + j;
+                if (currentMinutesOfDay < minTimeMinutesOfDay) continue;
+                if (currentMinutesOfDay >= maxTimeMinutesOfDay) continue;
+                h = (i < 10 ? '0' : '') + i;
+                m = (j < 10 ? '0' : '') + j;
+                line_time(h, m);
+              }
+            }
+          } else {
+            for (i = 0; i < options.allowTimes.length; i += 1) {
+              h = _xdsoft_datetime.strtotime(options.allowTimes[i]).getHours();
+              m = _xdsoft_datetime.strtotime(options.allowTimes[i]).getMinutes();
+              line_time(h, m);
+            }
+          }
+
+          timebox.html(time);
+          opt = '';
+
+          for (i = parseInt(options.yearStart, 10); i <= parseInt(options.yearEnd, 10); i += 1) {
+            opt += '<div class="xdsoft_option ' + (_xdsoft_datetime.currentTime.getFullYear() === i ? 'xdsoft_current' : '') + '" data-value="' + i + '">' + (i + options.yearOffset) + '</div>';
+          }
+
+          yearselect.children().eq(0).html(opt);
+
+          for (i = parseInt(options.monthStart, 10), opt = ''; i <= parseInt(options.monthEnd, 10); i += 1) {
+            opt += '<div class="xdsoft_option ' + (_xdsoft_datetime.currentTime.getMonth() === i ? 'xdsoft_current' : '') + '" data-value="' + i + '">' + options.i18n[globalLocale].months[i] + '</div>';
+          }
+
+          monthselect.children().eq(0).html(opt);
+          $(datetimepicker).trigger('generate.xdsoft');
+        }, 10);
+        event.stopPropagation();
+      }).on('afterOpen.xdsoft', function () {
+        if (options.timepicker) {
+          var classType, pheight, height, top;
+
+          if (timebox.find('.xdsoft_current').length) {
+            classType = '.xdsoft_current';
+          } else if (timebox.find('.xdsoft_init_time').length) {
+            classType = '.xdsoft_init_time';
+          }
+
+          if (classType) {
+            pheight = timeboxparent[0].clientHeight;
+            height = timebox[0].offsetHeight;
+            top = timebox.find(classType).index() * options.timeHeightInTimePicker + 1;
+
+            if (height - pheight < top) {
+              top = height - pheight;
+            }
+
+            timeboxparent.trigger('scroll_element.xdsoft_scroller', [parseInt(top, 10) / (height - pheight)]);
+          } else {
+            timeboxparent.trigger('scroll_element.xdsoft_scroller', [0]);
+          }
+        }
+      });
+      timerclick = 0;
+      calendar.on('touchend click.xdsoft', 'td', function (xdevent) {
+        xdevent.stopPropagation(); // Prevents closing of Pop-ups, Modals and Flyouts in Bootstrap
+
+        timerclick += 1;
+        var $this = $(this),
+            currentTime = _xdsoft_datetime.currentTime;
+
+        if (currentTime === undefined || currentTime === null) {
+          _xdsoft_datetime.currentTime = _xdsoft_datetime.now();
+          currentTime = _xdsoft_datetime.currentTime;
+        }
+
+        if ($this.hasClass('xdsoft_disabled')) {
+          return false;
+        }
+
+        currentTime.setDate(1);
+        currentTime.setFullYear($this.data('year'));
+        currentTime.setMonth($this.data('month'));
+        currentTime.setDate($this.data('date'));
+        datetimepicker.trigger('select.xdsoft', [currentTime]);
+        input.val(_xdsoft_datetime.str());
+
+        if (options.onSelectDate && $.isFunction(options.onSelectDate)) {
+          options.onSelectDate.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), xdevent);
+        }
+
+        datetimepicker.data('changed', true);
+        datetimepicker.trigger('xchange.xdsoft');
+        datetimepicker.trigger('changedatetime.xdsoft');
+
+        if ((timerclick > 1 || options.closeOnDateSelect === true || options.closeOnDateSelect === false && !options.timepicker) && !options.inline) {
+          datetimepicker.trigger('close.xdsoft');
+        }
+
+        setTimeout(function () {
+          timerclick = 0;
+        }, 200);
+      });
+      timebox.on('touchstart', 'div', function (xdevent) {
+        this.touchMoved = false;
+      }).on('touchmove', 'div', handleTouchMoved).on('touchend click.xdsoft', 'div', function (xdevent) {
+        if (!this.touchMoved) {
+          xdevent.stopPropagation();
+          var $this = $(this),
+              currentTime = _xdsoft_datetime.currentTime;
+
+          if (currentTime === undefined || currentTime === null) {
+            _xdsoft_datetime.currentTime = _xdsoft_datetime.now();
+            currentTime = _xdsoft_datetime.currentTime;
+          }
+
+          if ($this.hasClass('xdsoft_disabled')) {
+            return false;
+          }
+
+          currentTime.setHours($this.data('hour'));
+          currentTime.setMinutes($this.data('minute'));
+          datetimepicker.trigger('select.xdsoft', [currentTime]);
+          datetimepicker.data('input').val(_xdsoft_datetime.str());
+
+          if (options.onSelectTime && $.isFunction(options.onSelectTime)) {
+            options.onSelectTime.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), xdevent);
+          }
+
+          datetimepicker.data('changed', true);
+          datetimepicker.trigger('xchange.xdsoft');
+          datetimepicker.trigger('changedatetime.xdsoft');
+
+          if (options.inline !== true && options.closeOnTimeSelect === true) {
+            datetimepicker.trigger('close.xdsoft');
+          }
+        }
+      });
+      datepicker.on('mousewheel.xdsoft', function (event) {
+        if (!options.scrollMonth) {
+          return true;
+        }
+
+        if (event.deltaY < 0) {
+          _xdsoft_datetime.nextMonth();
+        } else {
+          _xdsoft_datetime.prevMonth();
+        }
+
+        return false;
+      });
+      input.on('mousewheel.xdsoft', function (event) {
+        if (!options.scrollInput) {
+          return true;
+        }
+
+        if (!options.datepicker && options.timepicker) {
+          current_time_index = timebox.find('.xdsoft_current').length ? timebox.find('.xdsoft_current').eq(0).index() : 0;
+
+          if (current_time_index + event.deltaY >= 0 && current_time_index + event.deltaY < timebox.children().length) {
+            current_time_index += event.deltaY;
+          }
+
+          if (timebox.children().eq(current_time_index).length) {
+            timebox.children().eq(current_time_index).trigger('mousedown');
+          }
+
+          return false;
+        }
+
+        if (options.datepicker && !options.timepicker) {
+          datepicker.trigger(event, [event.deltaY, event.deltaX, event.deltaY]);
+
+          if (input.val) {
+            input.val(_xdsoft_datetime.str());
+          }
+
+          datetimepicker.trigger('changedatetime.xdsoft');
+          return false;
+        }
+      });
+      datetimepicker.on('changedatetime.xdsoft', function (event) {
+        if (options.onChangeDateTime && $.isFunction(options.onChangeDateTime)) {
+          var $input = datetimepicker.data('input');
+          options.onChangeDateTime.call(datetimepicker, _xdsoft_datetime.currentTime, $input, event);
+          delete options.value;
+          $input.trigger('change');
+        }
+      }).on('generate.xdsoft', function () {
+        if (options.onGenerate && $.isFunction(options.onGenerate)) {
+          options.onGenerate.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
+        }
+
+        if (triggerAfterOpen) {
+          datetimepicker.trigger('afterOpen.xdsoft');
+          triggerAfterOpen = false;
+        }
+      }).on('click.xdsoft', function (xdevent) {
+        xdevent.stopPropagation();
+      });
+      current_time_index = 0;
+      /**
+       * Runs the callback for each of the specified node's ancestors.
+       *
+       * Return FALSE from the callback to stop ascending.
+       *
+       * @param {DOMNode} node
+       * @param {Function} callback
+       * @returns {undefined}
+       */
+
+      forEachAncestorOf = function forEachAncestorOf(node, callback) {
+        do {
+          node = node.parentNode;
+
+          if (!node || callback(node) === false) {
+            break;
+          }
+        } while (node.nodeName !== 'HTML');
+      };
+      /**
+       * Sets the position of the picker.
+       *
+       * @returns {undefined}
+       */
+
+
+      setPos = function setPos() {
+        var dateInputOffset, dateInputElem, verticalPosition, left, position, datetimepickerElem, dateInputHasFixedAncestor, $dateInput, windowWidth, verticalAnchorEdge, datetimepickerCss, windowHeight, windowScrollTop;
+        $dateInput = datetimepicker.data('input');
+        dateInputOffset = $dateInput.offset();
+        dateInputElem = $dateInput[0];
+        verticalAnchorEdge = 'top';
+        verticalPosition = dateInputOffset.top + dateInputElem.offsetHeight - 1;
+        left = dateInputOffset.left;
+        position = "absolute";
+        windowWidth = $(options.contentWindow).width();
+        windowHeight = $(options.contentWindow).height();
+        windowScrollTop = $(options.contentWindow).scrollTop();
+
+        if (options.ownerDocument.documentElement.clientWidth - dateInputOffset.left < datepicker.parent().outerWidth(true)) {
+          var diff = datepicker.parent().outerWidth(true) - dateInputElem.offsetWidth;
+          left = left - diff;
+        }
+
+        if ($dateInput.parent().css('direction') === 'rtl') {
+          left -= datetimepicker.outerWidth() - $dateInput.outerWidth();
+        }
+
+        if (options.fixed) {
+          verticalPosition -= windowScrollTop;
+          left -= $(options.contentWindow).scrollLeft();
+          position = "fixed";
+        } else {
+          dateInputHasFixedAncestor = false;
+          forEachAncestorOf(dateInputElem, function (ancestorNode) {
+            if (ancestorNode === null) {
+              return false;
+            }
+
+            if (options.contentWindow.getComputedStyle(ancestorNode).getPropertyValue('position') === 'fixed') {
+              dateInputHasFixedAncestor = true;
+              return false;
+            }
+          });
+
+          if (dateInputHasFixedAncestor && !options.insideParent) {
+            position = 'fixed'; //If the picker won't fit entirely within the viewport then display it above the date input.
+
+            if (verticalPosition + datetimepicker.outerHeight() > windowHeight + windowScrollTop) {
+              verticalAnchorEdge = 'bottom';
+              verticalPosition = windowHeight + windowScrollTop - dateInputOffset.top;
+            } else {
+              verticalPosition -= windowScrollTop;
+            }
+          } else {
+            if (verticalPosition + datetimepicker[0].offsetHeight > windowHeight + windowScrollTop) {
+              verticalPosition = dateInputOffset.top - datetimepicker[0].offsetHeight + 1;
+            }
+          }
+
+          if (verticalPosition < 0) {
+            verticalPosition = 0;
+          }
+
+          if (left + dateInputElem.offsetWidth > windowWidth) {
+            left = windowWidth - dateInputElem.offsetWidth;
+          }
+        }
+
+        datetimepickerElem = datetimepicker[0];
+        forEachAncestorOf(datetimepickerElem, function (ancestorNode) {
+          var ancestorNodePosition;
+          ancestorNodePosition = options.contentWindow.getComputedStyle(ancestorNode).getPropertyValue('position');
+
+          if (ancestorNodePosition === 'relative' && windowWidth >= ancestorNode.offsetWidth) {
+            left = left - (windowWidth - ancestorNode.offsetWidth) / 2;
+            return false;
+          }
+        });
+        datetimepickerCss = {
+          position: position,
+          left: options.insideParent ? dateInputElem.offsetLeft : left,
+          top: '',
+          //Initialize to prevent previous values interfering with new ones.
+          bottom: '' //Initialize to prevent previous values interfering with new ones.
+
+        };
+
+        if (options.insideParent) {
+          datetimepickerCss[verticalAnchorEdge] = dateInputElem.offsetTop + dateInputElem.offsetHeight;
+        } else {
+          datetimepickerCss[verticalAnchorEdge] = verticalPosition;
+        }
+
+        datetimepicker.css(datetimepickerCss);
+      };
+
+      datetimepicker.on('open.xdsoft', function (event) {
+        var onShow = true;
+
+        if (options.onShow && $.isFunction(options.onShow)) {
+          onShow = options.onShow.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), event);
+        }
+
+        if (onShow !== false) {
+          datetimepicker.show();
+          setPos();
+          $(options.contentWindow).off('resize.xdsoft', setPos).on('resize.xdsoft', setPos);
+
+          if (options.closeOnWithoutClick) {
+            $([options.ownerDocument.body, options.contentWindow]).on('touchstart mousedown.xdsoft', function arguments_callee6() {
+              datetimepicker.trigger('close.xdsoft');
+              $([options.ownerDocument.body, options.contentWindow]).off('touchstart mousedown.xdsoft', arguments_callee6);
+            });
+          }
+        }
+      }).on('close.xdsoft', function (event) {
+        var onClose = true;
+        month_picker.find('.xdsoft_month,.xdsoft_year').find('.xdsoft_select').hide();
+
+        if (options.onClose && $.isFunction(options.onClose)) {
+          onClose = options.onClose.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), event);
+        }
+
+        if (onClose !== false && !options.opened && !options.inline) {
+          datetimepicker.hide();
+        }
+
+        event.stopPropagation();
+      }).on('toggle.xdsoft', function () {
+        if (datetimepicker.is(':visible')) {
+          datetimepicker.trigger('close.xdsoft');
+        } else {
+          datetimepicker.trigger('open.xdsoft');
+        }
+      }).data('input', input);
+      timer = 0;
+      datetimepicker.data('xdsoft_datetime', _xdsoft_datetime);
+      datetimepicker.setOptions(options);
+
+      function getCurrentValue() {
+        var ct = false,
+            time;
+
+        if (options.startDate) {
+          ct = _xdsoft_datetime.strToDate(options.startDate);
+        } else {
+          ct = options.value || (input && input.val && input.val() ? input.val() : '');
+
+          if (ct) {
+            ct = _xdsoft_datetime.strToDateTime(ct);
+
+            if (options.yearOffset) {
+              ct = new Date(ct.getFullYear() - options.yearOffset, ct.getMonth(), ct.getDate(), ct.getHours(), ct.getMinutes(), ct.getSeconds(), ct.getMilliseconds());
+            }
+          } else if (options.defaultDate) {
+            ct = _xdsoft_datetime.strToDateTime(options.defaultDate);
+
+            if (options.defaultTime) {
+              time = _xdsoft_datetime.strtotime(options.defaultTime);
+              ct.setHours(time.getHours());
+              ct.setMinutes(time.getMinutes());
+            }
+          }
+        }
+
+        if (ct && _xdsoft_datetime.isValidDate(ct)) {
+          datetimepicker.data('changed', true);
+        } else {
+          ct = '';
+        }
+
+        return ct || 0;
+      }
+
+      function setMask(options) {
+        var isValidValue = function isValidValue(mask, value) {
+          var reg = mask.replace(/([\[\]\/\{\}\(\)\-\.\+]{1})/g, '\\$1').replace(/_/g, '{digit+}').replace(/([0-9]{1})/g, '{digit$1}').replace(/\{digit([0-9]{1})\}/g, '[0-$1_]{1}').replace(/\{digit[\+]\}/g, '[0-9_]{1}');
+          return new RegExp(reg).test(value);
+        },
+            getCaretPos = function getCaretPos(input) {
+          try {
+            if (options.ownerDocument.selection && options.ownerDocument.selection.createRange) {
+              var range = options.ownerDocument.selection.createRange();
+              return range.getBookmark().charCodeAt(2) - 2;
+            }
+
+            if (input.setSelectionRange) {
+              return input.selectionStart;
+            }
+          } catch (e) {
+            return 0;
+          }
+        },
+            setCaretPos = function setCaretPos(node, pos) {
+          node = typeof node === "string" || node instanceof String ? options.ownerDocument.getElementById(node) : node;
+
+          if (!node) {
+            return false;
+          }
+
+          if (node.createTextRange) {
+            var textRange = node.createTextRange();
+            textRange.collapse(true);
+            textRange.moveEnd('character', pos);
+            textRange.moveStart('character', pos);
+            textRange.select();
+            return true;
+          }
+
+          if (node.setSelectionRange) {
+            node.setSelectionRange(pos, pos);
+            return true;
+          }
+
+          return false;
+        };
+
+        if (options.mask) {
+          input.off('keydown.xdsoft');
+        }
+
+        if (options.mask === true) {
+          if (dateHelper.formatMask) {
+            options.mask = dateHelper.formatMask(options.format);
+          } else {
+            options.mask = options.format.replace(/Y/g, '9999').replace(/F/g, '9999').replace(/m/g, '19').replace(/d/g, '39').replace(/H/g, '29').replace(/i/g, '59').replace(/s/g, '59');
+          }
+        }
+
+        if ($.type(options.mask) === 'string') {
+          if (!isValidValue(options.mask, input.val())) {
+            input.val(options.mask.replace(/[0-9]/g, '_'));
+            setCaretPos(input[0], 0);
+          }
+
+          input.on('paste.xdsoft', function (event) {
+            // couple options here
+            // 1. return false - tell them they can't paste
+            // 2. insert over current characters - minimal validation
+            // 3. full fledged parsing and validation
+            // let's go option 2 for now
+            // fires multiple times for some reason
+            // https://stackoverflow.com/a/30496488/1366033
+            var clipboardData = event.clipboardData || event.originalEvent.clipboardData || window.clipboardData,
+                pastedData = clipboardData.getData('text'),
+                val = this.value,
+                pos = this.selectionStart;
+            var valueBeforeCursor = val.substr(0, pos);
+            var valueAfterPaste = val.substr(pos + pastedData.length);
+            val = valueBeforeCursor + pastedData + valueAfterPaste;
+            pos += pastedData.length;
+
+            if (isValidValue(options.mask, val)) {
+              this.value = val;
+              setCaretPos(this, pos);
+            } else if ($.trim(val) === '') {
+              this.value = options.mask.replace(/[0-9]/g, '_');
+            } else {
+              input.trigger('error_input.xdsoft');
+            }
+
+            event.preventDefault();
+            return false;
+          });
+          input.on('keydown.xdsoft', function (event) {
+            var val = this.value,
+                key = event.which,
+                pos = this.selectionStart,
+                selEnd = this.selectionEnd,
+                hasSel = pos !== selEnd,
+                digit; // only alow these characters
+
+            if (key >= KEY0 && key <= KEY9 || key >= _KEY0 && key <= _KEY9 || key === BACKSPACE || key === DEL) {
+              // get char to insert which is new character or placeholder ('_')
+              digit = key === BACKSPACE || key === DEL ? '_' : String.fromCharCode(_KEY0 <= key && key <= _KEY9 ? key - KEY0 : key); // we're deleting something, we're not at the start, and have normal cursor, move back one
+              // if we have a selection length, cursor actually sits behind deletable char, not in front
+
+              if (key === BACKSPACE && pos && !hasSel) {
+                pos -= 1;
+              } // don't stop on a separator, continue whatever direction you were going
+              //   value char - keep incrementing position while on separator char and we still have room
+              //   del char   - keep decrementing position while on separator char and we still have room
+
+
+              while (true) {
+                var maskValueAtCurPos = options.mask.substr(pos, 1);
+                var posShorterThanMaskLength = pos < options.mask.length;
+                var posGreaterThanZero = pos > 0;
+                var notNumberOrPlaceholder = /[^0-9_]/;
+                var curPosOnSep = notNumberOrPlaceholder.test(maskValueAtCurPos);
+                var continueMovingPosition = curPosOnSep && posShorterThanMaskLength && posGreaterThanZero; // if we hit a real char, stay where we are
+
+                if (!continueMovingPosition) break; // hitting backspace in a selection, you can possibly go back any further - go forward
+
+                pos += key === BACKSPACE && !hasSel ? -1 : 1;
+              }
+
+              if (event.metaKey) {
+                // cmd has been pressed
+                pos = 0;
+                hasSel = true;
+              }
+
+              if (hasSel) {
+                // pos might have moved so re-calc length
+                var selLength = selEnd - pos; // if we have a selection length we will wipe out entire selection and replace with default template for that range
+
+                var defaultBlank = options.mask.replace(/[0-9]/g, '_');
+                var defaultBlankSelectionReplacement = defaultBlank.substr(pos, selLength);
+                var selReplacementRemainder = defaultBlankSelectionReplacement.substr(1); // might be empty
+
+                var valueBeforeSel = val.substr(0, pos);
+                var insertChars = digit + selReplacementRemainder;
+                var charsAfterSelection = val.substr(pos + selLength);
+                val = valueBeforeSel + insertChars + charsAfterSelection;
+              } else {
+                var valueBeforeCursor = val.substr(0, pos);
+                var insertChar = digit;
+                var valueAfterNextChar = val.substr(pos + 1);
+                val = valueBeforeCursor + insertChar + valueAfterNextChar;
+              }
+
+              if ($.trim(val) === '') {
+                // if empty, set to default
+                val = defaultBlank;
+              } else {
+                // if at the last character don't need to do anything
+                if (pos === options.mask.length) {
+                  event.preventDefault();
+                  return false;
+                }
+              } // resume cursor location
+
+
+              pos += key === BACKSPACE ? 0 : 1; // don't stop on a separator, continue whatever direction you were going
+
+              while (/[^0-9_]/.test(options.mask.substr(pos, 1)) && pos < options.mask.length && pos > 0) {
+                pos += key === BACKSPACE ? 0 : 1;
+              }
+
+              if (isValidValue(options.mask, val)) {
+                this.value = val;
+                setCaretPos(this, pos);
+              } else if ($.trim(val) === '') {
+                this.value = options.mask.replace(/[0-9]/g, '_');
+              } else {
+                input.trigger('error_input.xdsoft');
+              }
+            } else {
+              if ([AKEY, CKEY, VKEY, ZKEY, YKEY].indexOf(key) !== -1 && ctrlDown || [ESC, ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT, F5, CTRLKEY, TAB, ENTER].indexOf(key) !== -1) {
+                return true;
+              }
+            }
+
+            event.preventDefault();
+            return false;
+          });
+        }
+      }
+
+      _xdsoft_datetime.setCurrentTime(getCurrentValue());
+
+      input.data('xdsoft_datetimepicker', datetimepicker).on('open.xdsoft focusin.xdsoft mousedown.xdsoft touchstart', function () {
+        if (input.is(':disabled') || input.data('xdsoft_datetimepicker').is(':visible') && options.closeOnInputClick) {
+          return;
+        }
+
+        if (!options.openOnFocus) {
+          return;
+        }
+
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          if (input.is(':disabled')) {
+            return;
+          }
+
+          triggerAfterOpen = true;
+
+          _xdsoft_datetime.setCurrentTime(getCurrentValue(), true);
+
+          if (options.mask) {
+            setMask(options);
+          }
+
+          datetimepicker.trigger('open.xdsoft');
+        }, 100);
+      }).on('keydown.xdsoft', function (event) {
+        var elementSelector,
+            key = event.which;
+
+        if ([ENTER].indexOf(key) !== -1 && options.enterLikeTab) {
+          elementSelector = $("input:visible,textarea:visible,button:visible,a:visible");
+          datetimepicker.trigger('close.xdsoft');
+          elementSelector.eq(elementSelector.index(this) + 1).focus();
+          return false;
+        }
+
+        if ([TAB].indexOf(key) !== -1) {
+          datetimepicker.trigger('close.xdsoft');
+          return true;
+        }
+      }).on('blur.xdsoft', function () {
+        datetimepicker.trigger('close.xdsoft');
+      });
+    };
+
+    destroyDateTimePicker = function destroyDateTimePicker(input) {
+      var datetimepicker = input.data('xdsoft_datetimepicker');
+
+      if (datetimepicker) {
+        datetimepicker.data('xdsoft_datetime', null);
+        datetimepicker.remove();
+        input.data('xdsoft_datetimepicker', null).off('.xdsoft');
+        $(options.contentWindow).off('resize.xdsoft');
+        $([options.contentWindow, options.ownerDocument.body]).off('mousedown.xdsoft touchstart');
+
+        if (input.unmousewheel) {
+          input.unmousewheel();
+        }
+      }
+    };
+
+    $(options.ownerDocument).off('keydown.xdsoftctrl keyup.xdsoftctrl').off('keydown.xdsoftcmd keyup.xdsoftcmd').on('keydown.xdsoftctrl', function (e) {
+      if (e.keyCode === CTRLKEY) {
+        ctrlDown = true;
+      }
+    }).on('keyup.xdsoftctrl', function (e) {
+      if (e.keyCode === CTRLKEY) {
+        ctrlDown = false;
+      }
+    }).on('keydown.xdsoftcmd', function (e) {
+      if (e.keyCode === CMDKEY) {
+        cmdDown = true;
+      }
+    }).on('keyup.xdsoftcmd', function (e) {
+      if (e.keyCode === CMDKEY) {
+        cmdDown = false;
+      }
+    });
+    this.each(function () {
+      var datetimepicker = $(this).data('xdsoft_datetimepicker'),
+          $input;
+
+      if (datetimepicker) {
+        if ($.type(opt) === 'string') {
+          switch (opt) {
+            case 'show':
+              $(this).select().focus();
+              datetimepicker.trigger('open.xdsoft');
+              break;
+
+            case 'hide':
+              datetimepicker.trigger('close.xdsoft');
+              break;
+
+            case 'toggle':
+              datetimepicker.trigger('toggle.xdsoft');
+              break;
+
+            case 'destroy':
+              destroyDateTimePicker($(this));
+              break;
+
+            case 'reset':
+              this.value = this.defaultValue;
+
+              if (!this.value || !datetimepicker.data('xdsoft_datetime').isValidDate(dateHelper.parseDate(this.value, options.format))) {
+                datetimepicker.data('changed', false);
+              }
+
+              datetimepicker.data('xdsoft_datetime').setCurrentTime(this.value);
+              break;
+
+            case 'validate':
+              $input = datetimepicker.data('input');
+              $input.trigger('blur.xdsoft');
+              break;
+
+            default:
+              if (datetimepicker[opt] && $.isFunction(datetimepicker[opt])) {
+                result = datetimepicker[opt](opt2);
+              }
+
+          }
+        } else {
+          datetimepicker.setOptions(opt);
+        }
+
+        return 0;
+      }
+
+      if ($.type(opt) !== 'string') {
+        if (!options.lazyInit || options.open || options.inline) {
+          createDateTimePicker($(this));
+        } else {
+          lazyInit($(this));
+        }
+      }
+    });
+    return result;
+  };
+
+  $.fn.datetimepicker.defaults = default_options;
+
+  function HighlightedDate(date, desc, style) {
+    "use strict";
+
+    this.date = date;
+    this.desc = desc;
+    this.style = style;
+  }
+})(jQuery);
+// CONCATENATED MODULE: ./src/components/form/js/fn/datepicker.js
+function datepicker_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { datepicker_typeof = function _typeof(obj) { return typeof obj; }; } else { datepicker_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return datepicker_typeof(obj); }
+
+/*
+ * Render Date Picker
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+
+
+(function ($) {
+  'use strict';
+
+  $.fn.UixRenderDatePicker = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      controls: '[data-picker]'
+    }, options);
+    this.each(function () {
+      if ($.isFunction($.fn.datetimepicker)) {
+        $(settings.controls).each(function () {
+          var $this = $(this);
+          var dateFormat = $this.data('picker-format'),
+              timeEnable = $this.data('picker-timepicker'),
+              lang = $this.data('picker-lang'),
+              myminDate = $this.data('picker-min-date'),
+              mymaxDate = $this.data('picker-max-date'),
+              rtlEnable = false; // If there is no data-xxx, save current source to it
+
+          if (datepicker_typeof(dateFormat) === ( true ? "undefined" : undefined)) dateFormat = 'M d, Y'; //Y-m-d H:i:s
+
+          if (datepicker_typeof(timeEnable) === ( true ? "undefined" : undefined)) timeEnable = false;
+          if (datepicker_typeof(lang) === ( true ? "undefined" : undefined)) lang = 'en';
+          if (datepicker_typeof(myminDate) === ( true ? "undefined" : undefined)) myminDate = false; //yesterday is minimum date(for today use 0 or -1970/01/01)
+
+          if (datepicker_typeof(mymaxDate) === ( true ? "undefined" : undefined)) mymaxDate = false; //tomorrow is maximum date calendar, such as '+2050/01/01'
+
+          if (datepicker_typeof(rtlEnable) === ( true ? "undefined" : undefined)) rtlEnable = false;
+          $.datetimepicker.setLocale(lang); //RTL 
+
+          if ($('body').hasClass('rtl')) {
+            rtlEnable = true;
+          } //hide or display time selector
+
+
+          if (timeEnable) {
+            $(document).on('mouseenter', 'td.xdsoft_date[data-date]', function () {
+              if ($(this).hasClass('xdsoft_disabled')) {
+                $(this).closest('.xdsoft_datepicker').next('.xdsoft_timepicker.active').hide();
+              } else {
+                $(this).closest('.xdsoft_datepicker').next('.xdsoft_timepicker.active').show();
+              }
+            });
+          }
+
+          $this.datetimepicker({
+            rtl: rtlEnable,
+            timepicker: timeEnable,
+            format: dateFormat,
+            formatTime: 'H:i',
+            formatDate: 'Y/m/d',
+            minDate: myminDate,
+            maxDate: mymaxDate
+          });
+        }); //Dynamic listening for the latest value
+
+        $(document).on('mouseleave', '[data-handler]', function () {
+          $('[data-picker]').each(function () {
+            $(this).closest('div').find('label, .uix-controls__bar').addClass('is-active');
+          });
+        });
+      } // function datetimepicker is exist
+
+    });
+  };
+})(jQuery);
+// EXTERNAL MODULE: ./src/components/form/js/fn/controls-hover.js
+var controls_hover = __webpack_require__(33);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/single-seletor.js
+var single_seletor = __webpack_require__(34);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/multi-seletor.js
+var multi_seletor = __webpack_require__(35);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/file-dropzone.js
+var file_dropzone = __webpack_require__(36);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/upload.js
+var upload = __webpack_require__(37);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/controls-disable.js
+var controls_disable = __webpack_require__(38);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/controls-line.js
+var controls_line = __webpack_require__(39);
+
+// EXTERNAL MODULE: ./src/components/form/js/fn/radio-and-checkbox.js
+var radio_and_checkbox = __webpack_require__(40);
+
+// EXTERNAL MODULE: ./src/components/form/scss/_basic.scss
+var scss_basic = __webpack_require__(41);
+
+// EXTERNAL MODULE: ./src/components/form/scss/_layout.scss
+var _layout = __webpack_require__(42);
+
+// EXTERNAL MODULE: ./src/components/form/scss/_theme_material.scss
+var _theme_material = __webpack_require__(43);
+
+// EXTERNAL MODULE: ./src/components/form/scss/_jquery.datetimepicker.scss
+var _jquery_datetimepicker = __webpack_require__(44);
+
+// CONCATENATED MODULE: ./src/components/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function form_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_js_typeof(obj); }
@@ -10273,12 +18727,6 @@ function form_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
  *************************************
  * <!-- Form -->
  *************************************
- */
-
-/**
- * module.FORM
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
  */
 
 /*
@@ -10652,22 +19100,16 @@ var FORM = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/gallery/scss/_style.scss
-var gallery_scss_style = __webpack_require__(35);
+// EXTERNAL MODULE: ./src/components/gallery/scss/_style.scss
+var gallery_scss_style = __webpack_require__(45);
 
-// CONCATENATED MODULE: ./src/components/ES6/gallery/js/index.js
+// CONCATENATED MODULE: ./src/components/gallery/js/index.js
 function gallery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- Gallery -->
  *************************************
- */
-
-/**
- * module.GALLERY
- * 
- * @requires ./examples/assets/js/min/muuri.min.js
  */
 
 
@@ -10786,10 +19228,10 @@ var GALLERY = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/hybrid-content-slider/scss/_style.scss
-var hybrid_content_slider_scss_style = __webpack_require__(36);
+// EXTERNAL MODULE: ./src/components/hybrid-content-slider/scss/_style.scss
+var hybrid_content_slider_scss_style = __webpack_require__(46);
 
-// CONCATENATED MODULE: ./src/components/ES6/hybrid-content-slider/js/index.js
+// CONCATENATED MODULE: ./src/components/hybrid-content-slider/js/index.js
 function hybrid_content_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function hybrid_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { hybrid_content_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { hybrid_content_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return hybrid_content_slider_js_typeof(obj); }
@@ -10798,12 +19240,6 @@ function hybrid_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (t
  *************************************
  * <!-- Hybrid Content Slider -->
  *************************************
- */
-
-/**
- * module.HYBRID_CONTENT_SLIDER
- * 
- * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 
@@ -11589,7 +20025,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/hover-delay-interaction/js/index.js
+// CONCATENATED MODULE: ./src/components/hover-delay-interaction/js/index.js
 function hover_delay_interaction_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -11635,10 +20071,10 @@ var HOVER_DELAY_INTERACTION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/image-shapes/scss/_style.scss
-var image_shapes_scss_style = __webpack_require__(37);
+// EXTERNAL MODULE: ./src/components/image-shapes/scss/_style.scss
+var image_shapes_scss_style = __webpack_require__(47);
 
-// CONCATENATED MODULE: ./src/components/ES6/image-shapes/js/index.js
+// CONCATENATED MODULE: ./src/components/image-shapes/js/index.js
 function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -11730,10 +20166,10 @@ var IMAGE_SHAPES = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/infinite-scrolling-element/scss/_style.scss
-var infinite_scrolling_element_scss_style = __webpack_require__(38);
+// EXTERNAL MODULE: ./src/components/infinite-scrolling-element/scss/_style.scss
+var infinite_scrolling_element_scss_style = __webpack_require__(48);
 
-// CONCATENATED MODULE: ./src/components/ES6/infinite-scrolling-element/js/index.js
+// CONCATENATED MODULE: ./src/components/infinite-scrolling-element/js/index.js
 function infinite_scrolling_element_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function infinite_scrolling_element_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { infinite_scrolling_element_js_typeof = function _typeof(obj) { return typeof obj; }; } else { infinite_scrolling_element_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return infinite_scrolling_element_js_typeof(obj); }
@@ -11822,22 +20258,16 @@ var INFINITE_SCROLLING_EL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/lava-lamp-style-menu/scss/_style.scss
-var lava_lamp_style_menu_scss_style = __webpack_require__(39);
+// EXTERNAL MODULE: ./src/components/lava-lamp-style-menu/scss/_style.scss
+var lava_lamp_style_menu_scss_style = __webpack_require__(49);
 
-// CONCATENATED MODULE: ./src/components/ES6/lava-lamp-style-menu/js/index.js
+// CONCATENATED MODULE: ./src/components/lava-lamp-style-menu/js/index.js
 function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- Lava-Lamp Style Menu -->
  *************************************
- */
-
-/**
- * module.LAVA_LAMP_STYLE_MENU
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -11895,10 +20325,13 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/lightbox/scss/_style.scss
-var lightbox_scss_style = __webpack_require__(40);
+// EXTERNAL MODULE: ./src/third-party-plugins/esm/Miscellaneous/scrollLock.js
+var scrollLock = __webpack_require__(2);
 
-// CONCATENATED MODULE: ./src/components/ES6/lightbox/js/index.js
+// EXTERNAL MODULE: ./src/components/lightbox/scss/_style.scss
+var lightbox_scss_style = __webpack_require__(50);
+
+// CONCATENATED MODULE: ./src/components/lightbox/js/index.js
 function lightbox_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { lightbox_js_typeof = function _typeof(obj) { return typeof obj; }; } else { lightbox_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return lightbox_js_typeof(obj); }
@@ -11909,11 +20342,6 @@ function lightbox_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
  *************************************
  */
 
-/**
- * module.LIGHTBOX
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- */
 
 
 
@@ -12463,10 +20891,10 @@ var LIGHTBOX = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/list-bulleted/scss/_style.scss
-var list_bulleted_scss_style = __webpack_require__(41);
+// EXTERNAL MODULE: ./src/components/list-bulleted/scss/_style.scss
+var list_bulleted_scss_style = __webpack_require__(51);
 
-// CONCATENATED MODULE: ./src/components/ES6/list-bulleted/js/index.js
+// CONCATENATED MODULE: ./src/components/list-bulleted/js/index.js
 function list_bulleted_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -12496,13 +20924,13 @@ var BULLETED_LIST = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_basic.scss
-var list_posts_scss_basic = __webpack_require__(42);
+// EXTERNAL MODULE: ./src/components/list-posts/scss/_basic.scss
+var list_posts_scss_basic = __webpack_require__(52);
 
-// EXTERNAL MODULE: ./src/components/ES6/list-posts/scss/_split.scss
-var _split = __webpack_require__(43);
+// EXTERNAL MODULE: ./src/components/list-posts/scss/_split.scss
+var _split = __webpack_require__(53);
 
-// CONCATENATED MODULE: ./src/components/ES6/list-posts/js/index.js
+// CONCATENATED MODULE: ./src/components/list-posts/js/index.js
 function list_posts_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { list_posts_js_typeof = function _typeof(obj) { return typeof obj; }; } else { list_posts_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return list_posts_js_typeof(obj); }
@@ -12513,13 +20941,6 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
  *************************************
  */
 
-/**
- * module.POST_LIST_AJAX 
- * 
- * @requires ./examples/assets/js/min/template7.min.js
- * @requires ./examples/assets/js/min/muuri.min.js
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- */
 
 
 
@@ -12932,10 +21353,10 @@ var POST_LIST_AJAX = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/fullwidth-column-to-edge/scss/_style.scss
-var fullwidth_column_to_edge_scss_style = __webpack_require__(44);
+// EXTERNAL MODULE: ./src/components/fullwidth-column-to-edge/scss/_style.scss
+var fullwidth_column_to_edge_scss_style = __webpack_require__(54);
 
-// CONCATENATED MODULE: ./src/components/ES6/fullwidth-column-to-edge/js/index.js
+// CONCATENATED MODULE: ./src/components/fullwidth-column-to-edge/js/index.js
 function fullwidth_column_to_edge_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -13004,10 +21425,10 @@ var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/login-templates/scss/_style.scss
-var login_templates_scss_style = __webpack_require__(45);
+// EXTERNAL MODULE: ./src/components/login-templates/scss/_style.scss
+var login_templates_scss_style = __webpack_require__(55);
 
-// CONCATENATED MODULE: ./src/components/ES6/login-templates/js/index.js
+// CONCATENATED MODULE: ./src/components/login-templates/js/index.js
 function login_templates_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -13069,16 +21490,165 @@ var LOGIN_UI = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/fire-modal-dialog.js
-var fire_modal_dialog = __webpack_require__(46);
+// CONCATENATED MODULE: ./src/components/modal-dialog/js/fn/fire-modal-dialog.js
+function fire_modal_dialog_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { fire_modal_dialog_typeof = function _typeof(obj) { return typeof obj; }; } else { fire_modal_dialog_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return fire_modal_dialog_typeof(obj); }
 
-// EXTERNAL MODULE: ./src/components/ES6/modal-dialog/js/fn/close-modal-dialog.js
-var close_modal_dialog = __webpack_require__(47);
+/*
+ * Fire Modal Dialog
+ *
+ * @param  {String} id                   - Modal's unique identifier.
+ * @param  {Number|Boolean} height       - Custom modal height whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number|Boolean} width        - Custom modal width whick need a unit string. 
+										   This attribute "data-modal-height" may not exist. Such as: 200px
+ * @param  {Number} speed                - Delay Time when Full Screen Effect is fired.   
+ * @param  {?Element|Boolean} btn          - Link or button that fires an event.
+ * @param  {Boolean} lightbox            - Whether to enable the lightbox effect.
+ * @param  {Number|Boolean} autoClose    - Specify auto-close time. This function is not enabled when this value is false.
+ * @param  {Boolean} closeOnlyBtn        - Disable mask to close the window.
+ * @return {Void}
+ */
 
-// EXTERNAL MODULE: ./src/components/ES6/modal-dialog/scss/_style.scss
-var modal_dialog_scss_style = __webpack_require__(48);
 
-// CONCATENATED MODULE: ./src/components/ES6/modal-dialog/js/index.js
+(function ($) {
+  'use strict';
+
+  $.fn.UixFireModalDialog = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      id: 'demo',
+      height: false,
+      width: false,
+      speed: 500,
+      btn: false,
+      lightbox: true,
+      autoClose: false,
+      closeOnlyBtn: false
+    }, options);
+    this.each(function () {
+      if (settings.id == '') return false; //Add modal mask to stage
+
+      if ($('.uix-modal-mask').length == 0) {
+        $('body').prepend('<div class="uix-modal-mask"></div>');
+      }
+
+      $.when($('.uix-modal-mask').length > 0).then(function () {
+        if (settings.closeOnlyBtn) {
+          $('.uix-modal-mask').addClass('js-uix-disabled');
+        } else {
+          $('.uix-modal-mask').removeClass('js-uix-disabled');
+        }
+
+        var dataID = settings.id,
+            dataH = settings.height,
+            dataW = settings.width,
+            linkBtn = settings.btn,
+            closeTime = settings.autoClose,
+            $obj = $('.uix-modal-box#' + dataID); // Initializate modal
+
+        if (linkBtn) {
+          linkBtn.attr('href', 'javascript:void(0)');
+          $obj.find('.uix-modal-box__content').addClass('js-uix-no-fullscreen');
+
+          if (linkBtn.data('video-win')) {
+            $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
+          }
+        }
+
+        if ($obj.length > 0) {
+          // Locks the page
+          $.scrollLock(true);
+
+          if (fire_modal_dialog_typeof(dataH) != ( true ? "undefined" : undefined) && dataH != '' && dataH) {
+            $obj.css({
+              'height': dataH
+            });
+          }
+
+          if (fire_modal_dialog_typeof(dataW) != ( true ? "undefined" : undefined) && dataW != '' && dataW) {
+            $obj.css({
+              'width': dataW
+            });
+          } //Enable the lightbox effect.
+
+
+          if (settings.lightbox) {
+            TweenMax.set('.uix-modal-mask', {
+              css: {
+                opacity: 0,
+                display: 'none'
+              },
+              onComplete: function onComplete() {
+                TweenMax.to(this.target, 0.3, {
+                  css: {
+                    opacity: 1,
+                    display: 'block'
+                  }
+                });
+              }
+            });
+          }
+
+          $obj.addClass('is-active'); //auto close
+
+          if (closeTime && !isNaN(closeTime)) {
+            window.setCloseModalDialog = setTimeout(function () {
+              $(document).closeModalDialog();
+            }, closeTime);
+          }
+        }
+
+        if ($obj.hasClass('is-fullscreen')) {
+          setTimeout(function () {
+            if (!$obj.hasClass('is-video')) {
+              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'scroll');
+            } else {
+              $obj.find('.uix-modal-box__content > .uix-modal-box__body').css('overflow-y', 'hidden');
+            }
+          }, settings.speed);
+        }
+      });
+    });
+  };
+})(jQuery);
+// CONCATENATED MODULE: ./src/components/modal-dialog/js/fn/close-modal-dialog.js
+/*
+ * Close Modal Dialog
+ *
+ * @return {Void}
+ */
+
+
+(function ($) {
+  'use strict';
+
+  $.fn.UixCloseModalDialog = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      target: '.uix-modal-box'
+    }, options);
+    this.each(function () {
+      //Enable mask to close the window.
+      $('.uix-modal-mask').removeClass('js-uix-disabled');
+      $(settings.target).removeClass('is-active');
+      TweenMax.to('.uix-modal-mask', 0.3, {
+        css: {
+          opacity: 0,
+          display: 'none'
+        }
+      });
+      $(settings.target).find('.uix-modal-box__content').removeClass('js-uix-no-fullscreen'); // Unlocks the page
+
+      $.scrollLock(false); //Prevent automatic close from affecting new fire effects
+
+      clearTimeout(window.setCloseModalDialog);
+    });
+  };
+})(jQuery);
+// EXTERNAL MODULE: ./src/components/modal-dialog/scss/_style.scss
+var modal_dialog_scss_style = __webpack_require__(56);
+
+// CONCATENATED MODULE: ./src/components/modal-dialog/js/index.js
 function modal_dialog_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { modal_dialog_js_typeof = function _typeof(obj) { return typeof obj; }; } else { modal_dialog_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return modal_dialog_js_typeof(obj); }
@@ -13087,13 +21657,6 @@ function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
  *************************************
  * <!-- Modal Dialog -->
  *************************************
- */
-
-/**
- * module.MODAL_DIALOG
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -13194,7 +21757,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/mousewheel-interaction/js/index.js
+// CONCATENATED MODULE: ./src/components/mousewheel-interaction/js/index.js
 function mousewheel_interaction_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -13310,10 +21873,204 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/multi-items-carousel/scss/_style.scss
-var multi_items_carousel_scss_style = __webpack_require__(49);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/GSAP/ModifiersPlugin.js
+function ModifiersPlugin_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ModifiersPlugin_typeof = function _typeof(obj) { return typeof obj; }; } else { ModifiersPlugin_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ModifiersPlugin_typeof(obj); }
 
-// CONCATENATED MODULE: ./src/components/ES6/multi-items-carousel/js/index.js
+/*!
+ * VERSION: 0.0.4
+ * DATE: 2018-05-30
+ * UPDATES AND DOCS AT: http://greensock.com
+ *
+ * @license Copyright (c) 2008-2019, GreenSock. All rights reserved.
+ * This work is subject to the terms at http://greensock.com/standard-license or for
+ * Club GreenSock members, the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ */
+
+/* eslint-disable */
+
+
+var _cssRatioSetter = function _cssRatioSetter(pt, cssp, mod) {
+  //Takes an individual CSSPropTween and converts it into a type:2 that has a setRatio that does everything the regular CSSPlugin.setRatio() method does but applying the mod() too. We do this to keep the main CSSPlugin.setRatio() as fast as possible (the vast majority of times, no mod() will be necessary)
+  var type = pt.type,
+      oldSetRatio = pt.setRatio,
+      tween = cssp._tween,
+      target = cssp._target;
+  pt.type = 2;
+  pt.m = mod;
+
+  pt.setRatio = function (v) {
+    var min = 0.000001,
+        val,
+        str,
+        i;
+
+    if (v === 1 && (tween._time === tween._duration || tween._time === 0)) {
+      if (type !== 2) {
+        if (pt.r && type !== -1) {
+          val = Math.round(pt.s + pt.c);
+
+          if (!type) {
+            pt.t[pt.p] = mod.call(tween, val + pt.xs0, target, tween);
+          } else if (type === 1) {
+            str = pt.xs0 + val + pt.xs1;
+
+            for (i = 1; i < pt.l; i++) {
+              str += pt["xn" + i] + pt["xs" + (i + 1)];
+            }
+
+            pt.t[pt.p] = mod.call(tween, str, target, tween);
+          }
+        } else {
+          pt.t[pt.p] = mod.call(tween, pt.e, target, tween);
+        }
+      } else {
+        oldSetRatio.call(pt, v);
+      }
+    } else if (v || !(tween._time === tween._duration || tween._time === 0) || tween._rawPrevTime === -0.000001) {
+      val = pt.c * v + pt.s;
+
+      if (pt.r) {
+        val = Math.round(val);
+      } else if (val < min) if (val > -min) {
+        val = 0;
+      }
+
+      if (!type) {
+        pt.t[pt.p] = mod.call(tween, val + pt.xs0, target, tween);
+      } else if (type === 1) {
+        str = pt.xs0 + val + pt.xs1;
+
+        for (i = 1; i < pt.l; i++) {
+          str += pt["xn" + i] + pt["xs" + (i + 1)];
+        }
+
+        pt.t[pt.p] = mod.call(tween, str, target, tween);
+      } else if (type === -1) {
+        //non-tweening value
+        pt.t[pt.p] = mod.call(tween, pt.xs0, target, tween);
+      } else if (oldSetRatio) {
+        oldSetRatio.call(pt, v);
+      }
+    } else {
+      if (type !== 2) {
+        pt.t[pt.p] = mod.call(tween, pt.b, target, tween);
+      } else {
+        oldSetRatio.call(pt, v);
+      }
+    }
+  };
+},
+    _modCSS = function _modCSS(lookup, cssp) {
+  var pt = cssp._firstPT,
+      hasBezier = lookup.rotation && cssp._overwriteProps.join("").indexOf("bezier") !== -1; //when a Bezier tween is applying autoRotation, it's a very special case we need to handle differently.
+
+  if (lookup.scale) {
+    lookup.scaleX = lookup.scaleY = lookup.scale;
+  } else if (lookup.rotationZ) {
+    lookup.rotation = lookup.rotationZ;
+  }
+
+  while (pt) {
+    if (typeof lookup[pt.p] === "function") {
+      _cssRatioSetter(pt, cssp, lookup[pt.p]);
+    } else if (hasBezier && pt.n === "bezier" && pt.plugin._overwriteProps.join("").indexOf("rotation") !== -1) {
+      pt.data.mod = lookup.rotation;
+    }
+
+    pt = pt._next;
+  }
+},
+    ModifiersPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
+  propName: "modifiers",
+  version: "0.0.4",
+  API: 2,
+  //called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
+  init: function init(target, value, tween) {
+    this._tween = tween;
+    this._vars = value;
+    return true;
+  },
+  initAll: function initAll() {
+    var tween = this._tween,
+        lookup = this._vars,
+        mpt = this,
+        pt = tween._firstPT,
+        val,
+        next; //initAll() gets called for each and every ModifiersPlugin instance in a tween, so if there are multiple targets, there will be multiple instances. Since we're ripping through the whole tween (and all the PropTweens), we only need to run this code ONCE. So we're setting a toggle on the first PropTween that just tells us if we've done it already. We don't set it on the tween instance because if it gets invalidated, we don't want to have to track this property and reset it. PropTweens get blown away when a tween is invalidated.
+
+    if (pt._modInitted) {
+      return false;
+    } else {
+      pt._modInitted = 1;
+    }
+
+    while (pt) {
+      next = pt._next; //record here, because it may get removed
+
+      val = lookup[pt.n];
+
+      if (pt.pg) {
+        if (pt.t._propName === "css") {
+          //handle CSSPlugin uniquely (for performance, due to the fact that the values almost always are a concatenation of numbers and strings, like suffixes, and we don't want to slow down the regular CSSPlugin setRatio() performance with conditional checks for if the value needs to be modded, so we pull any modding prop out and change it to a type:2 one that simply calls a setRatio() method where we encapsulate the modding and update all together. That way, it says in the main CSSProp linked list and just has some custom logic applied to it inside its setRatio())
+          _modCSS(lookup, pt.t);
+        } else if (pt.t !== mpt) {
+          //don't run modProps on modProps :)
+          val = lookup[pt.t._propName];
+          pt.t._tween = tween;
+
+          pt.t._mod(ModifiersPlugin_typeof(val) === "object" ? val : lookup);
+        }
+      } else if (typeof val === "function") {
+        if (pt.f === 2 && pt.t) {
+          //a blob (text containing multiple numeric values)
+          pt.t._applyPT.m = val;
+          pt.t._tween = tween;
+        } else {
+          this._add(pt.t, pt.p, pt.s, pt.c, val); //remove from linked list
+
+
+          if (next) {
+            next._prev = pt._prev;
+          }
+
+          if (pt._prev) {
+            pt._prev._next = next;
+          } else if (tween._firstPT === pt) {
+            tween._firstPT = next;
+          }
+
+          pt._next = pt._prev = null;
+          tween._propLookup[pt.n] = mpt;
+        }
+      }
+
+      pt = next;
+    }
+
+    return false;
+  }
+}),
+    ModifiersPlugin_p = ModifiersPlugin.prototype;
+
+ModifiersPlugin_p._add = function (target, p, s, c, mod) {
+  this._addTween(target, p, s, s + c, p, mod);
+
+  this._overwriteProps.push(p);
+};
+
+ModifiersPlugin_p = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.globals.TweenLite.version.split(".");
+
+if (Number(ModifiersPlugin_p[0]) <= 1 && Number(ModifiersPlugin_p[1]) < 19 && GSAP_TweenLite["a" /* _gsScope */].console) {
+  console.log("ModifiersPlugin requires GSAP 1.19.0 or later.");
+}
+
+
+// EXTERNAL MODULE: ./src/components/multi-items-carousel/scss/_style.scss
+var multi_items_carousel_scss_style = __webpack_require__(57);
+
+// CONCATENATED MODULE: ./src/components/multi-items-carousel/js/index.js
 function multi_items_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function multi_items_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { multi_items_carousel_js_typeof = function _typeof(obj) { return typeof obj; }; } else { multi_items_carousel_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return multi_items_carousel_js_typeof(obj); }
@@ -13324,12 +22081,6 @@ function multi_items_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (ty
  *************************************
  */
 
-/**
- * module.MULTI_ITEMS_CAROUSEL
- * 
- * @requires ./examples/assets/js/min/hammer.min.js
- * @requires ./src/components/ES5/_plugins-GSAP
- */
 
 
 var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
@@ -13741,7 +22492,10 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/one-page/js/index.js
+// EXTERNAL MODULE: ./src/third-party-plugins/esm/Miscellaneous/hashchange.js
+var hashchange = __webpack_require__(6);
+
+// CONCATENATED MODULE: ./src/components/one-page/js/index.js
 function one_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -13750,12 +22504,7 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
  *************************************
  */
 
-/**
- * module.ONEPAGE
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- * @requires ./src/components/ES5/_plugins-GSAP
- */
+
 
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
@@ -14083,7 +22832,7 @@ var ONEPAGE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/one-page2/js/index.js
+// CONCATENATED MODULE: ./src/components/one-page2/js/index.js
 function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -14092,12 +22841,6 @@ function one_page2_js_classCallCheck(instance, Constructor) { if (!(instance ins
  *************************************
  */
 
-/**
- * module.ONEPAGE2
- * 
- * @requires ./src/components/ES5/_plugins-Miscellaneous
- * @requires ./src/components/ES5/_plugins-GSAP
- */
 
 var ONEPAGE2 = function (module, $, window, document) {
   if (window.ONEPAGE2 === null) return false;
@@ -14434,10 +23177,10 @@ var ONEPAGE2 = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/parallax/scss/_style.scss
-var parallax_scss_style = __webpack_require__(50);
+// EXTERNAL MODULE: ./src/components/parallax/scss/_style.scss
+var parallax_scss_style = __webpack_require__(58);
 
-// CONCATENATED MODULE: ./src/components/ES6/parallax/js/index.js
+// CONCATENATED MODULE: ./src/components/parallax/js/index.js
 function parallax_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function parallax_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { parallax_js_typeof = function _typeof(obj) { return typeof obj; }; } else { parallax_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return parallax_js_typeof(obj); }
@@ -14637,10 +23380,10 @@ var PARALLAX = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/periodical-scroll/scss/_style.scss
-var periodical_scroll_scss_style = __webpack_require__(51);
+// EXTERNAL MODULE: ./src/components/periodical-scroll/scss/_style.scss
+var periodical_scroll_scss_style = __webpack_require__(59);
 
-// CONCATENATED MODULE: ./src/components/ES6/periodical-scroll/js/index.js
+// CONCATENATED MODULE: ./src/components/periodical-scroll/js/index.js
 function periodical_scroll_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function periodical_scroll_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { periodical_scroll_js_typeof = function _typeof(obj) { return typeof obj; }; } else { periodical_scroll_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return periodical_scroll_js_typeof(obj); }
@@ -14712,10 +23455,10 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/pricing/scss/_style.scss
-var pricing_scss_style = __webpack_require__(52);
+// EXTERNAL MODULE: ./src/components/pricing/scss/_style.scss
+var pricing_scss_style = __webpack_require__(60);
 
-// CONCATENATED MODULE: ./src/components/ES6/pricing/js/index.js
+// CONCATENATED MODULE: ./src/components/pricing/js/index.js
 function pricing_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -14799,10 +23542,10 @@ var PRICING = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/progress-bar/scss/_style.scss
-var progress_bar_scss_style = __webpack_require__(53);
+// EXTERNAL MODULE: ./src/components/progress-bar/scss/_style.scss
+var progress_bar_scss_style = __webpack_require__(61);
 
-// CONCATENATED MODULE: ./src/components/ES6/progress-bar/js/index.js
+// CONCATENATED MODULE: ./src/components/progress-bar/js/index.js
 function progress_bar_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function progress_bar_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { progress_bar_js_typeof = function _typeof(obj) { return typeof obj; }; } else { progress_bar_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return progress_bar_js_typeof(obj); }
@@ -14878,10 +23621,10 @@ var PROGRESS_BAR = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/progress-line/scss/_style.scss
-var progress_line_scss_style = __webpack_require__(54);
+// EXTERNAL MODULE: ./src/components/progress-line/scss/_style.scss
+var progress_line_scss_style = __webpack_require__(62);
 
-// CONCATENATED MODULE: ./src/components/ES6/progress-line/js/index.js
+// CONCATENATED MODULE: ./src/components/progress-line/js/index.js
 function progress_line_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -14941,7 +23684,7 @@ var PROGRESS_LINE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/retina/js/index.js
+// CONCATENATED MODULE: ./src/components/retina/js/index.js
 function retina_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -14982,7 +23725,7 @@ var RETINA = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/rotating-elements/js/index.js
+// CONCATENATED MODULE: ./src/components/rotating-elements/js/index.js
 function rotating_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function rotating_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { rotating_elements_js_typeof = function _typeof(obj) { return typeof obj; }; } else { rotating_elements_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return rotating_elements_js_typeof(obj); }
@@ -15052,7 +23795,7 @@ var ROTATING_EL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/scroll-reveal/js/index.js
+// CONCATENATED MODULE: ./src/components/scroll-reveal/js/index.js
 function scroll_reveal_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function scroll_reveal_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { scroll_reveal_js_typeof = function _typeof(obj) { return typeof obj; }; } else { scroll_reveal_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return scroll_reveal_js_typeof(obj); }
@@ -15187,20 +23930,13 @@ var SCROLL_REVEAL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/scrollspy-animate/js/index.js
+// CONCATENATED MODULE: ./src/components/scrollspy-animate/js/index.js
 function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- Scrollspy Animate -->
  *************************************
- */
-
-/**
- * module.SCROLLSPY_ANIM
- * 
- * @requires ./examples/assets/js/min/pixi.min.js
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 var SCROLLSPY_ANIM = function (module, $, window, document) {
@@ -15321,10 +24057,10 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/show-more-less/scss/_style.scss
-var show_more_less_scss_style = __webpack_require__(55);
+// EXTERNAL MODULE: ./src/components/show-more-less/scss/_style.scss
+var show_more_less_scss_style = __webpack_require__(63);
 
-// CONCATENATED MODULE: ./src/components/ES6/show-more-less/js/index.js
+// CONCATENATED MODULE: ./src/components/show-more-less/js/index.js
 function show_more_less_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15386,7 +24122,7 @@ var SHOW_MORELESS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/skew-on-scroll/js/index.js
+// CONCATENATED MODULE: ./src/components/skew-on-scroll/js/index.js
 function skew_on_scroll_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15427,7 +24163,7 @@ var SKEW_ON_SCROLL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/smooth-scrolling-anchor-link/js/index.js
+// CONCATENATED MODULE: ./src/components/smooth-scrolling-anchor-link/js/index.js
 function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15436,11 +24172,6 @@ function smooth_scrolling_anchor_link_js_classCallCheck(instance, Constructor) {
  *************************************
  */
 
-/**
- * module.SMOOTH_SCROLLING_ANCHORLINK
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
- */
 
 var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_ANCHORLINK === null) return false;
@@ -15540,7 +24271,7 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/smooth-scrolling-page/js/index.js
+// CONCATENATED MODULE: ./src/components/smooth-scrolling-page/js/index.js
 function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15669,10 +24400,10 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/sticky-elements/scss/_style.scss
-var sticky_elements_scss_style = __webpack_require__(56);
+// EXTERNAL MODULE: ./src/components/sticky-elements/scss/_style.scss
+var sticky_elements_scss_style = __webpack_require__(64);
 
-// CONCATENATED MODULE: ./src/components/ES6/sticky-elements/js/index.js
+// CONCATENATED MODULE: ./src/components/sticky-elements/js/index.js
 function sticky_elements_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function sticky_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { sticky_elements_js_typeof = function _typeof(obj) { return typeof obj; }; } else { sticky_elements_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return sticky_elements_js_typeof(obj); }
@@ -15794,10 +24525,10 @@ var STICKY_EL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/svg-map/scss/_style.scss
-var svg_map_scss_style = __webpack_require__(2);
+// EXTERNAL MODULE: ./src/components/svg-map/scss/_style.scss
+var svg_map_scss_style = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./src/components/ES6/svg-map/js/china.js
+// CONCATENATED MODULE: ./src/components/svg-map/js/china.js
 function china_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15891,7 +24622,7 @@ var SVG_MAP_CHINA = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/svg-map/js/world.js
+// CONCATENATED MODULE: ./src/components/svg-map/js/world.js
 function world_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15982,7 +24713,334 @@ var SVG_MAP_WORLD = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three/js/index.js
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/extensions/ShaderRuntime.custom.js
+var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
+
+function ShaderRuntime() {}
+
+ShaderRuntime.prototype = {
+  mainCamera: null,
+  cubeCameras: {},
+  reserved: {
+    time: null,
+    cameraPosition: null
+  },
+  umap: {
+    "float": {
+      type: 'f',
+      value: 0
+    },
+    "int": {
+      type: 'i',
+      value: 0
+    },
+    vec2: {
+      type: 'v2',
+      value: function value() {
+        return new THREE.Vector2();
+      }
+    },
+    vec3: {
+      type: 'v3',
+      value: function value() {
+        return new THREE.Vector3();
+      }
+    },
+    vec4: {
+      type: 'v4',
+      value: function value() {
+        return new THREE.Vector4();
+      }
+    },
+    samplerCube: {
+      type: 't'
+    },
+    sampler2D: {
+      type: 't'
+    }
+  },
+  getUmap: function getUmap(type) {
+    var value = this.umap[type].value;
+    return typeof value === 'function' ? value() : value;
+  },
+  load: function load(sourceOrSources, callback) {
+    var _this = this;
+
+    var sources = sourceOrSources,
+        onlyOneSource = typeof sourceOrSources === 'string';
+
+    if (onlyOneSource) {
+      sources = [sourceOrSources];
+    }
+
+    var loadedShaders = new Array(sources.length),
+        itemsLoaded = 0;
+
+    var loadSource = function loadSource(index, source) {
+      var loader = new THREE.FileLoader();
+      loader.load(source, function (json) {
+        var parsed;
+
+        try {
+          parsed = JSON.parse(json);
+          delete parsed.id; // Errors if passed to rawshadermaterial :(
+        } catch (e) {
+          throw new Error('Could not parse shader' + source + '! Please verify the URL is correct.');
+        }
+
+        _this.add(parsed.name, parsed);
+
+        loadedShaders[index] = parsed;
+
+        if (++itemsLoaded === sources.length) {
+          callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+        }
+      });
+    };
+
+    for (var x = 0; x < sources.length; x++) {
+      loadSource(x, sources[x]);
+    }
+  },
+  //Load json code directly
+  loadJSON: function load(sourceOrSources, callback) {
+    var _this = this;
+
+    var sources = sourceOrSources,
+        onlyOneSource = typeof sourceOrSources === 'string';
+
+    if (onlyOneSource) {
+      sources = [sourceOrSources];
+    }
+
+    var loadedShaders = new Array(sources.length),
+        itemsLoaded = 0;
+
+    var loadJSONCode = function loadJSONCode(index, source) {
+      var parsed;
+      parsed = source;
+      delete parsed.id; // Errors if passed to rawshadermaterial :(
+
+      _this.add(parsed.name, parsed);
+
+      loadedShaders[index] = parsed;
+
+      if (++itemsLoaded === sources.length) {
+        callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
+      }
+    };
+
+    for (var x = 0; x < sources.length; x++) {
+      loadJSONCode(x, sources[x]);
+    }
+  },
+  registerCamera: function registerCamera(camera) {
+    if (!(camera instanceof THREE.Camera)) {
+      throw new Error('Cannot register a non-camera as a camera!');
+    }
+
+    this.mainCamera = camera;
+  },
+  registerCubeCamera: function registerCubeCamera(name, camera) {
+    if (!camera.renderTarget) {
+      throw new Error('Cannot register a non-camera as a camera!');
+    }
+
+    this.cubeCameras[name] = camera;
+  },
+  unregisterCamera: function unregisterCamera(name) {
+    if (name in this.cubeCameras) {
+      delete this.cubeCameras[name];
+    } else if (name === this.mainCamera) {
+      delete this.mainCamera;
+    } else {
+      throw new Error('You never registered camera ' + name);
+    }
+  },
+  updateSource: function updateSource(identifier, config, findBy) {
+    findBy = findBy || 'name';
+
+    if (!this.shaderTypes[identifier]) {
+      throw new Error('Runtime Error: Cannot update shader ' + identifier + ' because it has not been added.');
+    }
+
+    var newShaderData = this.add(identifier, config),
+        shader,
+        x;
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      if (shader[findBy] === identifier) {
+        extend(shader.material, omit(newShaderData, 'id'));
+        shader.material.needsUpdate = true;
+      }
+    }
+  },
+  renameShader: function renameShader(oldName, newName) {
+    var x, shader;
+
+    if (!(oldName in this.shaderTypes)) {
+      throw new Error('Could not rename shader ' + oldName + ' to ' + newName + '. It does not exist.');
+    }
+
+    this.shaderTypes[newName] = this.shaderTypes[oldName];
+    delete this.shaderTypes[oldName];
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      if (shader.name === oldName) {
+        shader.name = newName;
+      }
+    }
+  },
+  get: function get(identifier) {
+    var shaderType = this.shaderTypes[identifier];
+
+    if (!shaderType.initted) {
+      this.create(identifier);
+    }
+
+    return shaderType.material;
+  },
+  add: function add(shaderName, config) {
+    var newData = clone(config),
+        uniform;
+    newData.fragmentShader = config.fragment;
+    newData.vertexShader = config.vertex;
+    delete newData.fragment;
+    delete newData.vertex;
+
+    for (var uniformName in newData.uniforms) {
+      uniform = newData.uniforms[uniformName];
+
+      if (uniform.value === null) {
+        newData.uniforms[uniformName].value = this.getUmap(uniform.glslType);
+      }
+    }
+
+    if (shaderName in this.shaderTypes) {
+      // maybe not needed? too sleepy, need document
+      extend(this.shaderTypes[shaderName], newData);
+    } else {
+      this.shaderTypes[shaderName] = newData;
+    }
+
+    return newData;
+  },
+  create: function create(identifier) {
+    var shaderType = this.shaderTypes[identifier];
+    var keys = Object.keys(shaderType); // Three's shadermaterial id is not assignable, so filter it out
+
+    var withoutId = {};
+
+    for (var i = 0; i < keys.length; i++) {
+      if (keys[i] !== 'id') {
+        withoutId[keys[i]] = shaderType[keys[i]];
+      }
+    }
+
+    shaderType.material = new THREE.RawShaderMaterial(withoutId);
+    this.runningShaders.push(shaderType);
+    shaderType.init && shaderType.init(shaderType.material);
+    shaderType.material.needsUpdate = true;
+    shaderType.initted = true;
+    return shaderType.material;
+  },
+  updateRuntime: function updateRuntime(identifier, data, findBy) {
+    findBy = findBy || 'name';
+    var shader, x, uniformName, uniform; // This loop does not appear to be a slowdown culprit
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      if (shader[findBy] === identifier) {
+        for (uniformName in data.uniforms) {
+          if (uniformName in this.reserved) {
+            continue;
+          }
+
+          if (uniformName in shader.material.uniforms) {
+            uniform = data.uniforms[uniformName]; // this is nasty, since the shader serializes
+            // CubeCamera model to string. Maybe not update it at
+            // all?
+
+            if (uniform.type === 't' && typeof uniform.value === 'string') {
+              uniform.value = this.cubeCameras[uniform.value].renderTarget;
+            }
+
+            shader.material.uniforms[uniformName].value = data.uniforms[uniformName].value;
+          }
+        }
+      }
+    }
+  },
+  // Update global shader uniform values
+  updateShaders: function updateShaders(time, obj) {
+    var shader, x;
+    obj = obj || {};
+
+    for (x = 0; shader = this.runningShaders[x++];) {
+      for (var uniform in obj.uniforms) {
+        if (uniform in shader.material.uniforms) {
+          shader.material.uniforms[uniform].value = obj.uniforms[uniform];
+        }
+      }
+
+      if ('cameraPosition' in shader.material.uniforms && this.mainCamera) {
+        shader.material.uniforms.cameraPosition.value = this.mainCamera.position.clone();
+      }
+
+      if ('viewMatrix' in shader.material.uniforms && this.mainCamera) {
+        shader.material.uniforms.viewMatrix.value = this.mainCamera.matrixWorldInverse;
+      }
+
+      if ('time' in shader.material.uniforms) {
+        shader.material.uniforms.time.value = time;
+      }
+    }
+  },
+  shaderTypes: {},
+  runningShaders: []
+}; // Convenience methods so we don't have to include underscore
+
+function extend() {
+  var length = arguments.length,
+      obj = arguments[0];
+
+  if (length < 2) {
+    return obj;
+  }
+
+  for (var index = 1; index < length; index++) {
+    var source = arguments[index],
+        keys = Object.keys(source || {}),
+        l = keys.length;
+
+    for (var i = 0; i < l; i++) {
+      var key = keys[i];
+      obj[key] = source[key];
+    }
+  }
+
+  return obj;
+}
+
+function clone(obj) {
+  return extend({}, obj);
+}
+
+function omit(obj) {
+  var cloned = clone(obj),
+      x,
+      key;
+
+  for (x = 0; key = (_ref = x++ + 1, _ref < 1 || arguments.length <= _ref ? undefined : arguments[_ref]);) {
+    var _ref;
+
+    delete cloned[key];
+  }
+
+  return cloned;
+}
+
+/* harmony default export */ var ShaderRuntime_custom = (ShaderRuntime);
+// CONCATENATED MODULE: ./src/components/simple-3D-background-three/js/index.js
 function simple_3D_background_three_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -15991,12 +25049,6 @@ function simple_3D_background_three_js_classCallCheck(instance, Constructor) { i
  *************************************
  */
 
-/**
- * module.THREE_BACKGROUND_THREE
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
 
 var THREE_BACKGROUND_THREE = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE === null) return false;
@@ -16034,7 +25086,7 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
           height = 0.0,
           target = new THREE.Vector3(); // Load multiple ShaderFrog shaders
 
-      var runtime = new ShaderRuntime();
+      var runtime = new ShaderRuntime_custom();
       runtime.load([$('#' + rendererCanvasID).data('shader-url')], function (shaders) {
         // Get the Three.js material you can assign to your objects
         var material = runtime.get(shaders[0].name);
@@ -16250,24 +25302,17 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/shader/fragment-custom.glsl
+// CONCATENATED MODULE: ./src/components/simple-3D-background-three2/js/shader/fragment-custom.glsl
 /* harmony default export */ var fragment_custom = ("#define GLSLIFY 1\nuniform float time;\n\nuniform sampler2D texture;\n\nvarying vec2 vUv;\n\nvoid main( void ) {\n\n    vec2 position = - 1.0 + 2.0 * vUv;\n\n    float a = atan( position.y, position.x );\n    float r = sqrt( dot( position, position ) );\n\n    vec2 uv;\n    uv.x = cos( a ) / r;\n    uv.y = sin( a ) / r;\n    uv /= 10.0;\n    uv += time * 0.05;\n\n    vec3 color = texture2D( texture, uv ).rgb;\n\n    gl_FragColor = vec4( color * r * 1.5, 1.0 );\n\n}");
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/shader/vertex-custom.glsl
+// CONCATENATED MODULE: ./src/components/simple-3D-background-three2/js/shader/vertex-custom.glsl
 /* harmony default export */ var vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nvoid main()\n{\n    vUv = uv;\n    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n    gl_Position = projectionMatrix * mvPosition;\n}");
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three2/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-background-three2/js/index.js
 function simple_3D_background_three2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- 3D Background 2 with three.js -->
  *************************************
- */
-
-/**
- * module.THREE_BACKGROUND_THREE2
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  */
 
 
@@ -16426,20 +25471,13 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background-three3/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-background-three3/js/index.js
 function simple_3D_background_three3_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- 3D Background 3 with three.js -->
  *************************************
- */
-
-/**
- * module.THREE_BACKGROUND_THREE3
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  */
 
 var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
@@ -16579,10 +25617,10 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/simple-3D-background/scss/_style.scss
-var simple_3D_background_scss_style = __webpack_require__(57);
+// EXTERNAL MODULE: ./src/components/simple-3D-background/scss/_style.scss
+var simple_3D_background_scss_style = __webpack_require__(65);
 
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-background/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-background/js/index.js
 function simple_3D_background_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_background_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_background_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_background_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_background_js_typeof(obj); }
@@ -16591,12 +25629,6 @@ function simple_3D_background_js_typeof(obj) { "@babel/helpers - typeof"; if (ty
  *************************************
  * <!-- 3D Background -->
  *************************************
- */
-
-/**
- * module.THREE_BACKGROUND
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -16747,10 +25779,10 @@ var THREE_BACKGROUND = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/simple-3D-carousel/scss/_style.scss
-var simple_3D_carousel_scss_style = __webpack_require__(58);
+// EXTERNAL MODULE: ./src/components/simple-3D-carousel/scss/_style.scss
+var simple_3D_carousel_scss_style = __webpack_require__(66);
 
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-carousel/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-carousel/js/index.js
 function simple_3D_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_carousel_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_carousel_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_carousel_js_typeof(obj); }
@@ -16759,12 +25791,6 @@ function simple_3D_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (type
  *************************************
  * <!-- 3D Carousel -->
  *************************************
- */
-
-/**
- * module.THREE_CAROUSEL
- * 
- * @requires ./examples/assets/js/min/hammer.min.js
  */
 
 
@@ -16968,7 +25994,709 @@ var THREE_CAROUSEL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-gallery/js/index.js
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/controls/OrbitControls.js
+/**
+ * @author qiao / https://github.com/qiao
+ * @author mrdoob / http://mrdoob.com
+ * @author alteredq / http://alteredqualia.com/
+ * @author WestLangley / http://github.com/WestLangley
+ * @author erich666 / http://erichaines.com
+ */
+// This set of controls performs orbiting, dollying (zooming), and panning.
+// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
+//
+//    Orbit - left mouse / touch: one-finger move
+//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
+//    Pan - right mouse, or arrow keys / touch: two-finger move
+THREE.OrbitControls = function (object, domElement) {
+  this.object = object;
+  this.domElement = domElement !== undefined ? domElement : document; // Set to false to disable this control
+
+  this.enabled = true; // "target" sets the location of focus, where the object orbits around
+
+  this.target = new THREE.Vector3(); // How far you can dolly in and out ( PerspectiveCamera only )
+
+  this.minDistance = 0;
+  this.maxDistance = Infinity; // How far you can zoom in and out ( OrthographicCamera only )
+
+  this.minZoom = 0;
+  this.maxZoom = Infinity; // How far you can orbit vertically, upper and lower limits.
+  // Range is 0 to Math.PI radians.
+
+  this.minPolarAngle = 0; // radians
+
+  this.maxPolarAngle = Math.PI; // radians
+  // How far you can orbit horizontally, upper and lower limits.
+  // If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
+
+  this.minAzimuthAngle = -Infinity; // radians
+
+  this.maxAzimuthAngle = Infinity; // radians
+  // Set to true to enable damping (inertia)
+  // If damping is enabled, you must call controls.update() in your animation loop
+
+  this.enableDamping = false;
+  this.dampingFactor = 0.25; // This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
+  // Set to false to disable zooming
+
+  this.enableZoom = true;
+  this.zoomSpeed = 1.0; // Set to false to disable rotating
+
+  this.enableRotate = true;
+  this.rotateSpeed = 1.0; // Set to false to disable panning
+
+  this.enablePan = true;
+  this.panSpeed = 1.0;
+  this.screenSpacePanning = false; // if true, pan in screen-space
+
+  this.keyPanSpeed = 7.0; // pixels moved per arrow key push
+  // Set to true to automatically rotate around the target
+  // If auto-rotate is enabled, you must call controls.update() in your animation loop
+
+  this.autoRotate = false;
+  this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
+  // Set to false to disable use of the keys
+
+  this.enableKeys = true; // The four arrow keys
+
+  this.keys = {
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    BOTTOM: 40
+  }; // Mouse buttons
+
+  this.mouseButtons = {
+    ORBIT: THREE.MOUSE.LEFT,
+    ZOOM: THREE.MOUSE.MIDDLE,
+    PAN: THREE.MOUSE.RIGHT
+  }; // for reset
+
+  this.target0 = this.target.clone();
+  this.position0 = this.object.position.clone();
+  this.zoom0 = this.object.zoom; //
+  // public methods
+  //
+
+  this.getPolarAngle = function () {
+    return spherical.phi;
+  };
+
+  this.getAzimuthalAngle = function () {
+    return spherical.theta;
+  };
+
+  this.saveState = function () {
+    scope.target0.copy(scope.target);
+    scope.position0.copy(scope.object.position);
+    scope.zoom0 = scope.object.zoom;
+  };
+
+  this.reset = function () {
+    scope.target.copy(scope.target0);
+    scope.object.position.copy(scope.position0);
+    scope.object.zoom = scope.zoom0;
+    scope.object.updateProjectionMatrix();
+    scope.dispatchEvent(changeEvent);
+    scope.update();
+    state = STATE.NONE;
+  }; // this method is exposed, but perhaps it would be better if we can make it private...
+
+
+  this.update = function () {
+    var offset = new THREE.Vector3(); // so camera.up is the orbit axis
+
+    var quat = new THREE.Quaternion().setFromUnitVectors(object.up, new THREE.Vector3(0, 1, 0));
+    var quatInverse = quat.clone().inverse();
+    var lastPosition = new THREE.Vector3();
+    var lastQuaternion = new THREE.Quaternion();
+    return function update() {
+      var position = scope.object.position;
+      offset.copy(position).sub(scope.target); // rotate offset to "y-axis-is-up" space
+
+      offset.applyQuaternion(quat); // angle from z-axis around y-axis
+
+      spherical.setFromVector3(offset);
+
+      if (scope.autoRotate && state === STATE.NONE) {
+        rotateLeft(getAutoRotationAngle());
+      }
+
+      spherical.theta += sphericalDelta.theta;
+      spherical.phi += sphericalDelta.phi; // restrict theta to be between desired limits
+
+      spherical.theta = Math.max(scope.minAzimuthAngle, Math.min(scope.maxAzimuthAngle, spherical.theta)); // restrict phi to be between desired limits
+
+      spherical.phi = Math.max(scope.minPolarAngle, Math.min(scope.maxPolarAngle, spherical.phi));
+      spherical.makeSafe();
+      spherical.radius *= scale; // restrict radius to be between desired limits
+
+      spherical.radius = Math.max(scope.minDistance, Math.min(scope.maxDistance, spherical.radius)); // move target to panned location
+
+      scope.target.add(panOffset);
+      offset.setFromSpherical(spherical); // rotate offset back to "camera-up-vector-is-up" space
+
+      offset.applyQuaternion(quatInverse);
+      position.copy(scope.target).add(offset);
+      scope.object.lookAt(scope.target);
+
+      if (scope.enableDamping === true) {
+        sphericalDelta.theta *= 1 - scope.dampingFactor;
+        sphericalDelta.phi *= 1 - scope.dampingFactor;
+        panOffset.multiplyScalar(1 - scope.dampingFactor);
+      } else {
+        sphericalDelta.set(0, 0, 0);
+        panOffset.set(0, 0, 0);
+      }
+
+      scale = 1; // update condition is:
+      // min(camera displacement, camera rotation in radians)^2 > EPS
+      // using small-angle approximation cos(x/2) = 1 - x^2 / 8
+
+      if (zoomChanged || lastPosition.distanceToSquared(scope.object.position) > EPS || 8 * (1 - lastQuaternion.dot(scope.object.quaternion)) > EPS) {
+        scope.dispatchEvent(changeEvent);
+        lastPosition.copy(scope.object.position);
+        lastQuaternion.copy(scope.object.quaternion);
+        zoomChanged = false;
+        return true;
+      }
+
+      return false;
+    };
+  }();
+
+  this.dispose = function () {
+    scope.domElement.removeEventListener('contextmenu', onContextMenu, false);
+    scope.domElement.removeEventListener('mousedown', onMouseDown, false);
+    scope.domElement.removeEventListener('wheel', onMouseWheel, false);
+    scope.domElement.removeEventListener('touchstart', onTouchStart, false);
+    scope.domElement.removeEventListener('touchend', onTouchEnd, false);
+    scope.domElement.removeEventListener('touchmove', onTouchMove, false);
+    document.removeEventListener('mousemove', onMouseMove, false);
+    document.removeEventListener('mouseup', onMouseUp, false);
+    window.removeEventListener('keydown', onKeyDown, false); //scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
+  }; //
+  // internals
+  //
+
+
+  var scope = this;
+  var changeEvent = {
+    type: 'change'
+  };
+  var startEvent = {
+    type: 'start'
+  };
+  var endEvent = {
+    type: 'end'
+  };
+  var STATE = {
+    NONE: -1,
+    ROTATE: 0,
+    DOLLY: 1,
+    PAN: 2,
+    TOUCH_ROTATE: 3,
+    TOUCH_DOLLY_PAN: 4
+  };
+  var state = STATE.NONE;
+  var EPS = 0.000001; // current position in spherical coordinates
+
+  var spherical = new THREE.Spherical();
+  var sphericalDelta = new THREE.Spherical();
+  var scale = 1;
+  var panOffset = new THREE.Vector3();
+  var zoomChanged = false;
+  var rotateStart = new THREE.Vector2();
+  var rotateEnd = new THREE.Vector2();
+  var rotateDelta = new THREE.Vector2();
+  var panStart = new THREE.Vector2();
+  var panEnd = new THREE.Vector2();
+  var panDelta = new THREE.Vector2();
+  var dollyStart = new THREE.Vector2();
+  var dollyEnd = new THREE.Vector2();
+  var dollyDelta = new THREE.Vector2();
+
+  function getAutoRotationAngle() {
+    return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
+  }
+
+  function getZoomScale() {
+    return Math.pow(0.95, scope.zoomSpeed);
+  }
+
+  function rotateLeft(angle) {
+    sphericalDelta.theta -= angle;
+  }
+
+  function rotateUp(angle) {
+    sphericalDelta.phi -= angle;
+  }
+
+  var panLeft = function () {
+    var v = new THREE.Vector3();
+    return function panLeft(distance, objectMatrix) {
+      v.setFromMatrixColumn(objectMatrix, 0); // get X column of objectMatrix
+
+      v.multiplyScalar(-distance);
+      panOffset.add(v);
+    };
+  }();
+
+  var panUp = function () {
+    var v = new THREE.Vector3();
+    return function panUp(distance, objectMatrix) {
+      if (scope.screenSpacePanning === true) {
+        v.setFromMatrixColumn(objectMatrix, 1);
+      } else {
+        v.setFromMatrixColumn(objectMatrix, 0);
+        v.crossVectors(scope.object.up, v);
+      }
+
+      v.multiplyScalar(distance);
+      panOffset.add(v);
+    };
+  }(); // deltaX and deltaY are in pixels; right and down are positive
+
+
+  var pan = function () {
+    var offset = new THREE.Vector3();
+    return function pan(deltaX, deltaY) {
+      var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+
+      if (scope.object.isPerspectiveCamera) {
+        // perspective
+        var position = scope.object.position;
+        offset.copy(position).sub(scope.target);
+        var targetDistance = offset.length(); // half of the fov is center to top of screen
+
+        targetDistance *= Math.tan(scope.object.fov / 2 * Math.PI / 180.0); // we use only clientHeight here so aspect ratio does not distort speed
+
+        panLeft(2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix);
+        panUp(2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix);
+      } else if (scope.object.isOrthographicCamera) {
+        // orthographic
+        panLeft(deltaX * (scope.object.right - scope.object.left) / scope.object.zoom / element.clientWidth, scope.object.matrix);
+        panUp(deltaY * (scope.object.top - scope.object.bottom) / scope.object.zoom / element.clientHeight, scope.object.matrix);
+      } else {
+        // camera neither orthographic nor perspective
+        console.warn('WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.');
+        scope.enablePan = false;
+      }
+    };
+  }();
+
+  function dollyIn(dollyScale) {
+    if (scope.object.isPerspectiveCamera) {
+      scale /= dollyScale;
+    } else if (scope.object.isOrthographicCamera) {
+      scope.object.zoom = Math.max(scope.minZoom, Math.min(scope.maxZoom, scope.object.zoom * dollyScale));
+      scope.object.updateProjectionMatrix();
+      zoomChanged = true;
+    } else {
+      console.warn('WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
+      scope.enableZoom = false;
+    }
+  }
+
+  function dollyOut(dollyScale) {
+    if (scope.object.isPerspectiveCamera) {
+      scale *= dollyScale;
+    } else if (scope.object.isOrthographicCamera) {
+      scope.object.zoom = Math.max(scope.minZoom, Math.min(scope.maxZoom, scope.object.zoom / dollyScale));
+      scope.object.updateProjectionMatrix();
+      zoomChanged = true;
+    } else {
+      console.warn('WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
+      scope.enableZoom = false;
+    }
+  } //
+  // event callbacks - update the object state
+  //
+
+
+  function handleMouseDownRotate(event) {
+    //console.log( 'handleMouseDownRotate' );
+    rotateStart.set(event.clientX, event.clientY);
+  }
+
+  function handleMouseDownDolly(event) {
+    //console.log( 'handleMouseDownDolly' );
+    dollyStart.set(event.clientX, event.clientY);
+  }
+
+  function handleMouseDownPan(event) {
+    //console.log( 'handleMouseDownPan' );
+    panStart.set(event.clientX, event.clientY);
+  }
+
+  function handleMouseMoveRotate(event) {
+    //console.log( 'handleMouseMoveRotate' );
+    rotateEnd.set(event.clientX, event.clientY);
+    rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed);
+    var element = scope.domElement === document ? scope.domElement.body : scope.domElement; // rotating across whole screen goes 360 degrees around
+
+    rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth); // rotating up and down along whole screen attempts to go 360, but limited to 180
+
+    rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight);
+    rotateStart.copy(rotateEnd);
+    scope.update();
+  }
+
+  function handleMouseMoveDolly(event) {
+    //console.log( 'handleMouseMoveDolly' );
+    dollyEnd.set(event.clientX, event.clientY);
+    dollyDelta.subVectors(dollyEnd, dollyStart);
+
+    if (dollyDelta.y > 0) {
+      dollyIn(getZoomScale());
+    } else if (dollyDelta.y < 0) {
+      dollyOut(getZoomScale());
+    }
+
+    dollyStart.copy(dollyEnd);
+    scope.update();
+  }
+
+  function handleMouseMovePan(event) {
+    //console.log( 'handleMouseMovePan' );
+    panEnd.set(event.clientX, event.clientY);
+    panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);
+    pan(panDelta.x, panDelta.y);
+    panStart.copy(panEnd);
+    scope.update();
+  }
+
+  function handleMouseUp(event) {// console.log( 'handleMouseUp' );
+  }
+
+  function handleMouseWheel(event) {
+    // console.log( 'handleMouseWheel' );
+    if (event.deltaY < 0) {
+      dollyOut(getZoomScale());
+    } else if (event.deltaY > 0) {
+      dollyIn(getZoomScale());
+    }
+
+    scope.update();
+  }
+
+  function handleKeyDown(event) {
+    //console.log( 'handleKeyDown' );
+    switch (event.keyCode) {
+      case scope.keys.UP:
+        pan(0, scope.keyPanSpeed);
+        scope.update();
+        break;
+
+      case scope.keys.BOTTOM:
+        pan(0, -scope.keyPanSpeed);
+        scope.update();
+        break;
+
+      case scope.keys.LEFT:
+        pan(scope.keyPanSpeed, 0);
+        scope.update();
+        break;
+
+      case scope.keys.RIGHT:
+        pan(-scope.keyPanSpeed, 0);
+        scope.update();
+        break;
+    }
+  }
+
+  function handleTouchStartRotate(event) {
+    //console.log( 'handleTouchStartRotate' );
+    rotateStart.set(event.touches[0].pageX, event.touches[0].pageY);
+  }
+
+  function handleTouchStartDollyPan(event) {
+    //console.log( 'handleTouchStartDollyPan' );
+    if (scope.enableZoom) {
+      var dx = event.touches[0].pageX - event.touches[1].pageX;
+      var dy = event.touches[0].pageY - event.touches[1].pageY;
+      var distance = Math.sqrt(dx * dx + dy * dy);
+      dollyStart.set(0, distance);
+    }
+
+    if (scope.enablePan) {
+      var x = 0.5 * (event.touches[0].pageX + event.touches[1].pageX);
+      var y = 0.5 * (event.touches[0].pageY + event.touches[1].pageY);
+      panStart.set(x, y);
+    }
+  }
+
+  function handleTouchMoveRotate(event) {
+    //console.log( 'handleTouchMoveRotate' );
+    rotateEnd.set(event.touches[0].pageX, event.touches[0].pageY);
+    rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed);
+    var element = scope.domElement === document ? scope.domElement.body : scope.domElement; // rotating across whole screen goes 360 degrees around
+
+    rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth); // rotating up and down along whole screen attempts to go 360, but limited to 180
+
+    rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight);
+    rotateStart.copy(rotateEnd);
+    scope.update();
+  }
+
+  function handleTouchMoveDollyPan(event) {
+    //console.log( 'handleTouchMoveDollyPan' );
+    if (scope.enableZoom) {
+      var dx = event.touches[0].pageX - event.touches[1].pageX;
+      var dy = event.touches[0].pageY - event.touches[1].pageY;
+      var distance = Math.sqrt(dx * dx + dy * dy);
+      dollyEnd.set(0, distance);
+      dollyDelta.set(0, Math.pow(dollyEnd.y / dollyStart.y, scope.zoomSpeed));
+      dollyIn(dollyDelta.y);
+      dollyStart.copy(dollyEnd);
+    }
+
+    if (scope.enablePan) {
+      var x = 0.5 * (event.touches[0].pageX + event.touches[1].pageX);
+      var y = 0.5 * (event.touches[0].pageY + event.touches[1].pageY);
+      panEnd.set(x, y);
+      panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);
+      pan(panDelta.x, panDelta.y);
+      panStart.copy(panEnd);
+    }
+
+    scope.update();
+  }
+
+  function handleTouchEnd(event) {} //console.log( 'handleTouchEnd' );
+  //
+  // event handlers - FSM: listen for events and reset state
+  //
+
+
+  function onMouseDown(event) {
+    if (scope.enabled === false) return;
+    event.preventDefault();
+
+    switch (event.button) {
+      case scope.mouseButtons.ORBIT:
+        if (scope.enableRotate === false) return;
+        handleMouseDownRotate(event);
+        state = STATE.ROTATE;
+        break;
+
+      case scope.mouseButtons.ZOOM:
+        if (scope.enableZoom === false) return;
+        handleMouseDownDolly(event);
+        state = STATE.DOLLY;
+        break;
+
+      case scope.mouseButtons.PAN:
+        if (scope.enablePan === false) return;
+        handleMouseDownPan(event);
+        state = STATE.PAN;
+        break;
+    }
+
+    if (state !== STATE.NONE) {
+      document.addEventListener('mousemove', onMouseMove, false);
+      document.addEventListener('mouseup', onMouseUp, false);
+      scope.dispatchEvent(startEvent);
+    }
+  }
+
+  function onMouseMove(event) {
+    if (scope.enabled === false) return;
+    event.preventDefault();
+
+    switch (state) {
+      case STATE.ROTATE:
+        if (scope.enableRotate === false) return;
+        handleMouseMoveRotate(event);
+        break;
+
+      case STATE.DOLLY:
+        if (scope.enableZoom === false) return;
+        handleMouseMoveDolly(event);
+        break;
+
+      case STATE.PAN:
+        if (scope.enablePan === false) return;
+        handleMouseMovePan(event);
+        break;
+    }
+  }
+
+  function onMouseUp(event) {
+    if (scope.enabled === false) return;
+    handleMouseUp(event);
+    document.removeEventListener('mousemove', onMouseMove, false);
+    document.removeEventListener('mouseup', onMouseUp, false);
+    scope.dispatchEvent(endEvent);
+    state = STATE.NONE;
+  }
+
+  function onMouseWheel(event) {
+    if (scope.enabled === false || scope.enableZoom === false || state !== STATE.NONE && state !== STATE.ROTATE) return;
+    event.preventDefault();
+    event.stopPropagation();
+    scope.dispatchEvent(startEvent);
+    handleMouseWheel(event);
+    scope.dispatchEvent(endEvent);
+  }
+
+  function onKeyDown(event) {
+    if (scope.enabled === false || scope.enableKeys === false || scope.enablePan === false) return;
+    handleKeyDown(event);
+  }
+
+  function onTouchStart(event) {
+    if (scope.enabled === false) return;
+    event.preventDefault();
+
+    switch (event.touches.length) {
+      case 1:
+        // one-fingered touch: rotate
+        if (scope.enableRotate === false) return;
+        handleTouchStartRotate(event);
+        state = STATE.TOUCH_ROTATE;
+        break;
+
+      case 2:
+        // two-fingered touch: dolly-pan
+        if (scope.enableZoom === false && scope.enablePan === false) return;
+        handleTouchStartDollyPan(event);
+        state = STATE.TOUCH_DOLLY_PAN;
+        break;
+
+      default:
+        state = STATE.NONE;
+    }
+
+    if (state !== STATE.NONE) {
+      scope.dispatchEvent(startEvent);
+    }
+  }
+
+  function onTouchMove(event) {
+    if (scope.enabled === false) return;
+    event.preventDefault();
+    event.stopPropagation();
+
+    switch (event.touches.length) {
+      case 1:
+        // one-fingered touch: rotate
+        if (scope.enableRotate === false) return;
+        if (state !== STATE.TOUCH_ROTATE) return; // is this needed?
+
+        handleTouchMoveRotate(event);
+        break;
+
+      case 2:
+        // two-fingered touch: dolly-pan
+        if (scope.enableZoom === false && scope.enablePan === false) return;
+        if (state !== STATE.TOUCH_DOLLY_PAN) return; // is this needed?
+
+        handleTouchMoveDollyPan(event);
+        break;
+
+      default:
+        state = STATE.NONE;
+    }
+  }
+
+  function onTouchEnd(event) {
+    if (scope.enabled === false) return;
+    handleTouchEnd(event);
+    scope.dispatchEvent(endEvent);
+    state = STATE.NONE;
+  }
+
+  function onContextMenu(event) {
+    if (scope.enabled === false) return;
+    event.preventDefault();
+  } //
+
+
+  scope.domElement.addEventListener('contextmenu', onContextMenu, false);
+  scope.domElement.addEventListener('mousedown', onMouseDown, false);
+  scope.domElement.addEventListener('wheel', onMouseWheel, false);
+  scope.domElement.addEventListener('touchstart', onTouchStart, false);
+  scope.domElement.addEventListener('touchend', onTouchEnd, false);
+  scope.domElement.addEventListener('touchmove', onTouchMove, false);
+  window.addEventListener('keydown', onKeyDown, false); // force an update at start
+
+  this.update();
+};
+
+THREE.OrbitControls.prototype = Object.create(THREE.EventDispatcher.prototype);
+THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
+Object.defineProperties(THREE.OrbitControls.prototype, {
+  center: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .center has been renamed to .target');
+      return this.target;
+    }
+  },
+  // backward compatibility
+  noZoom: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.');
+      return !this.enableZoom;
+    },
+    set: function set(value) {
+      console.warn('THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.');
+      this.enableZoom = !value;
+    }
+  },
+  noRotate: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.');
+      return !this.enableRotate;
+    },
+    set: function set(value) {
+      console.warn('THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.');
+      this.enableRotate = !value;
+    }
+  },
+  noPan: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.');
+      return !this.enablePan;
+    },
+    set: function set(value) {
+      console.warn('THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.');
+      this.enablePan = !value;
+    }
+  },
+  noKeys: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.');
+      return !this.enableKeys;
+    },
+    set: function set(value) {
+      console.warn('THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.');
+      this.enableKeys = !value;
+    }
+  },
+  staticMoving: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.');
+      return !this.enableDamping;
+    },
+    set: function set(value) {
+      console.warn('THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.');
+      this.enableDamping = !value;
+    }
+  },
+  dynamicDampingFactor: {
+    get: function get() {
+      console.warn('THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.');
+      return this.dampingFactor;
+    },
+    set: function set(value) {
+      console.warn('THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.');
+      this.dampingFactor = value;
+    }
+  }
+});
+/* harmony default export */ var OrbitControls = (THREE.OrbitControls);
+// CONCATENATED MODULE: ./src/components/simple-3D-gallery/js/index.js
 function simple_3D_gallery_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_gallery_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_gallery_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_gallery_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_gallery_js_typeof(obj); }
@@ -16979,12 +26707,6 @@ function simple_3D_gallery_js_typeof(obj) { "@babel/helpers - typeof"; if (typeo
  *************************************
  */
 
-/**
- * module.THREE_GALLERY
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
 
 var THREE_GALLERY = function (module, $, window, document) {
   if (window.THREE_GALLERY === null) return false;
@@ -17223,11 +26945,11 @@ var THREE_GALLERY = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/shader/fragment-custom.glsl
+// CONCATENATED MODULE: ./src/components/simple-3D-image-transition/js/shader/fragment-custom.glsl
 /* harmony default export */ var shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/shader/vertex-custom.glsl
+// CONCATENATED MODULE: ./src/components/simple-3D-image-transition/js/shader/vertex-custom.glsl
 /* harmony default export */ var shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-image-transition/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-image-transition/js/index.js
 function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -17236,12 +26958,6 @@ function simple_3D_image_transition_js_classCallCheck(instance, Constructor) { i
  *************************************
  */
 
-/**
- * module.THREE_IMAGE_TRANSITION
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
 
 
 
@@ -17440,7 +27156,538 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-model/js/index.js
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/loaders/OBJLoader.js
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+THREE.OBJLoader = function () {
+  // o object_name | g group_name
+  var object_pattern = /^[og]\s*(.+)?/; // mtllib file_reference
+
+  var material_library_pattern = /^mtllib /; // usemtl material_name
+
+  var material_use_pattern = /^usemtl /;
+
+  function ParserState() {
+    var state = {
+      objects: [],
+      object: {},
+      vertices: [],
+      normals: [],
+      colors: [],
+      uvs: [],
+      materialLibraries: [],
+      startObject: function startObject(name, fromDeclaration) {
+        // If the current object (initial from reset) is not from a g/o declaration in the parsed
+        // file. We need to use it for the first parsed g/o to keep things in sync.
+        if (this.object && this.object.fromDeclaration === false) {
+          this.object.name = name;
+          this.object.fromDeclaration = fromDeclaration !== false;
+          return;
+        }
+
+        var previousMaterial = this.object && typeof this.object.currentMaterial === 'function' ? this.object.currentMaterial() : undefined;
+
+        if (this.object && typeof this.object._finalize === 'function') {
+          this.object._finalize(true);
+        }
+
+        this.object = {
+          name: name || '',
+          fromDeclaration: fromDeclaration !== false,
+          geometry: {
+            vertices: [],
+            normals: [],
+            colors: [],
+            uvs: []
+          },
+          materials: [],
+          smooth: true,
+          startMaterial: function startMaterial(name, libraries) {
+            var previous = this._finalize(false); // New usemtl declaration overwrites an inherited material, except if faces were declared
+            // after the material, then it must be preserved for proper MultiMaterial continuation.
+
+
+            if (previous && (previous.inherited || previous.groupCount <= 0)) {
+              this.materials.splice(previous.index, 1);
+            }
+
+            var material = {
+              index: this.materials.length,
+              name: name || '',
+              mtllib: Array.isArray(libraries) && libraries.length > 0 ? libraries[libraries.length - 1] : '',
+              smooth: previous !== undefined ? previous.smooth : this.smooth,
+              groupStart: previous !== undefined ? previous.groupEnd : 0,
+              groupEnd: -1,
+              groupCount: -1,
+              inherited: false,
+              clone: function clone(index) {
+                var cloned = {
+                  index: typeof index === 'number' ? index : this.index,
+                  name: this.name,
+                  mtllib: this.mtllib,
+                  smooth: this.smooth,
+                  groupStart: 0,
+                  groupEnd: -1,
+                  groupCount: -1,
+                  inherited: false
+                };
+                cloned.clone = this.clone.bind(cloned);
+                return cloned;
+              }
+            };
+            this.materials.push(material);
+            return material;
+          },
+          currentMaterial: function currentMaterial() {
+            if (this.materials.length > 0) {
+              return this.materials[this.materials.length - 1];
+            }
+
+            return undefined;
+          },
+          _finalize: function _finalize(end) {
+            var lastMultiMaterial = this.currentMaterial();
+
+            if (lastMultiMaterial && lastMultiMaterial.groupEnd === -1) {
+              lastMultiMaterial.groupEnd = this.geometry.vertices.length / 3;
+              lastMultiMaterial.groupCount = lastMultiMaterial.groupEnd - lastMultiMaterial.groupStart;
+              lastMultiMaterial.inherited = false;
+            } // Ignore objects tail materials if no face declarations followed them before a new o/g started.
+
+
+            if (end && this.materials.length > 1) {
+              for (var mi = this.materials.length - 1; mi >= 0; mi--) {
+                if (this.materials[mi].groupCount <= 0) {
+                  this.materials.splice(mi, 1);
+                }
+              }
+            } // Guarantee at least one empty material, this makes the creation later more straight forward.
+
+
+            if (end && this.materials.length === 0) {
+              this.materials.push({
+                name: '',
+                smooth: this.smooth
+              });
+            }
+
+            return lastMultiMaterial;
+          }
+        }; // Inherit previous objects material.
+        // Spec tells us that a declared material must be set to all objects until a new material is declared.
+        // If a usemtl declaration is encountered while this new object is being parsed, it will
+        // overwrite the inherited material. Exception being that there was already face declarations
+        // to the inherited material, then it will be preserved for proper MultiMaterial continuation.
+
+        if (previousMaterial && previousMaterial.name && typeof previousMaterial.clone === 'function') {
+          var declared = previousMaterial.clone(0);
+          declared.inherited = true;
+          this.object.materials.push(declared);
+        }
+
+        this.objects.push(this.object);
+      },
+      finalize: function finalize() {
+        if (this.object && typeof this.object._finalize === 'function') {
+          this.object._finalize(true);
+        }
+      },
+      parseVertexIndex: function parseVertexIndex(value, len) {
+        var index = parseInt(value, 10);
+        return (index >= 0 ? index - 1 : index + len / 3) * 3;
+      },
+      parseNormalIndex: function parseNormalIndex(value, len) {
+        var index = parseInt(value, 10);
+        return (index >= 0 ? index - 1 : index + len / 3) * 3;
+      },
+      parseUVIndex: function parseUVIndex(value, len) {
+        var index = parseInt(value, 10);
+        return (index >= 0 ? index - 1 : index + len / 2) * 2;
+      },
+      addVertex: function addVertex(a, b, c) {
+        var src = this.vertices;
+        var dst = this.object.geometry.vertices;
+        dst.push(src[a + 0], src[a + 1], src[a + 2]);
+        dst.push(src[b + 0], src[b + 1], src[b + 2]);
+        dst.push(src[c + 0], src[c + 1], src[c + 2]);
+      },
+      addVertexPoint: function addVertexPoint(a) {
+        var src = this.vertices;
+        var dst = this.object.geometry.vertices;
+        dst.push(src[a + 0], src[a + 1], src[a + 2]);
+      },
+      addVertexLine: function addVertexLine(a) {
+        var src = this.vertices;
+        var dst = this.object.geometry.vertices;
+        dst.push(src[a + 0], src[a + 1], src[a + 2]);
+      },
+      addNormal: function addNormal(a, b, c) {
+        var src = this.normals;
+        var dst = this.object.geometry.normals;
+        dst.push(src[a + 0], src[a + 1], src[a + 2]);
+        dst.push(src[b + 0], src[b + 1], src[b + 2]);
+        dst.push(src[c + 0], src[c + 1], src[c + 2]);
+      },
+      addColor: function addColor(a, b, c) {
+        var src = this.colors;
+        var dst = this.object.geometry.colors;
+        dst.push(src[a + 0], src[a + 1], src[a + 2]);
+        dst.push(src[b + 0], src[b + 1], src[b + 2]);
+        dst.push(src[c + 0], src[c + 1], src[c + 2]);
+      },
+      addUV: function addUV(a, b, c) {
+        var src = this.uvs;
+        var dst = this.object.geometry.uvs;
+        dst.push(src[a + 0], src[a + 1]);
+        dst.push(src[b + 0], src[b + 1]);
+        dst.push(src[c + 0], src[c + 1]);
+      },
+      addUVLine: function addUVLine(a) {
+        var src = this.uvs;
+        var dst = this.object.geometry.uvs;
+        dst.push(src[a + 0], src[a + 1]);
+      },
+      addFace: function addFace(a, b, c, ua, ub, uc, na, nb, nc) {
+        var vLen = this.vertices.length;
+        var ia = this.parseVertexIndex(a, vLen);
+        var ib = this.parseVertexIndex(b, vLen);
+        var ic = this.parseVertexIndex(c, vLen);
+        this.addVertex(ia, ib, ic);
+
+        if (ua !== undefined && ua !== '') {
+          var uvLen = this.uvs.length;
+          ia = this.parseUVIndex(ua, uvLen);
+          ib = this.parseUVIndex(ub, uvLen);
+          ic = this.parseUVIndex(uc, uvLen);
+          this.addUV(ia, ib, ic);
+        }
+
+        if (na !== undefined && na !== '') {
+          // Normals are many times the same. If so, skip function call and parseInt.
+          var nLen = this.normals.length;
+          ia = this.parseNormalIndex(na, nLen);
+          ib = na === nb ? ia : this.parseNormalIndex(nb, nLen);
+          ic = na === nc ? ia : this.parseNormalIndex(nc, nLen);
+          this.addNormal(ia, ib, ic);
+        }
+
+        if (this.colors.length > 0) {
+          this.addColor(ia, ib, ic);
+        }
+      },
+      addPointGeometry: function addPointGeometry(vertices) {
+        this.object.geometry.type = 'Points';
+        var vLen = this.vertices.length;
+
+        for (var vi = 0, l = vertices.length; vi < l; vi++) {
+          this.addVertexPoint(this.parseVertexIndex(vertices[vi], vLen));
+        }
+      },
+      addLineGeometry: function addLineGeometry(vertices, uvs) {
+        this.object.geometry.type = 'Line';
+        var vLen = this.vertices.length;
+        var uvLen = this.uvs.length;
+
+        for (var vi = 0, l = vertices.length; vi < l; vi++) {
+          this.addVertexLine(this.parseVertexIndex(vertices[vi], vLen));
+        }
+
+        for (var uvi = 0, l = uvs.length; uvi < l; uvi++) {
+          this.addUVLine(this.parseUVIndex(uvs[uvi], uvLen));
+        }
+      }
+    };
+    state.startObject('', false);
+    return state;
+  } //
+
+
+  function OBJLoader(manager) {
+    this.manager = manager !== undefined ? manager : THREE.DefaultLoadingManager;
+    this.materials = null;
+  }
+
+  OBJLoader.prototype = {
+    constructor: OBJLoader,
+    load: function load(url, onLoad, onProgress, onError) {
+      var scope = this;
+      var loader = new THREE.FileLoader(scope.manager);
+      loader.setPath(this.path);
+      loader.load(url, function (text) {
+        onLoad(scope.parse(text));
+      }, onProgress, onError);
+    },
+    setPath: function setPath(value) {
+      this.path = value;
+      return this;
+    },
+    setMaterials: function setMaterials(materials) {
+      this.materials = materials;
+      return this;
+    },
+    parse: function parse(text) {
+      console.time('OBJLoader');
+      var state = new ParserState();
+
+      if (text.indexOf('\r\n') !== -1) {
+        // This is faster than String.split with regex that splits on both
+        text = text.replace(/\r\n/g, '\n');
+      }
+
+      if (text.indexOf('\\\n') !== -1) {
+        // join lines separated by a line continuation character (\)
+        text = text.replace(/\\\n/g, '');
+      }
+
+      var lines = text.split('\n');
+      var line = '',
+          lineFirstChar = '';
+      var lineLength = 0;
+      var result = []; // Faster to just trim left side of the line. Use if available.
+
+      var trimLeft = typeof ''.trimLeft === 'function';
+
+      for (var i = 0, l = lines.length; i < l; i++) {
+        line = lines[i];
+        line = trimLeft ? line.trimLeft() : line.trim();
+        lineLength = line.length;
+        if (lineLength === 0) continue;
+        lineFirstChar = line.charAt(0); // @todo invoke passed in handler if any
+
+        if (lineFirstChar === '#') continue;
+
+        if (lineFirstChar === 'v') {
+          var data = line.split(/\s+/);
+
+          switch (data[0]) {
+            case 'v':
+              state.vertices.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
+
+              if (data.length === 8) {
+                state.colors.push(parseFloat(data[4]), parseFloat(data[5]), parseFloat(data[6]));
+              }
+
+              break;
+
+            case 'vn':
+              state.normals.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
+              break;
+
+            case 'vt':
+              state.uvs.push(parseFloat(data[1]), parseFloat(data[2]));
+              break;
+          }
+        } else if (lineFirstChar === 'f') {
+          var lineData = line.substr(1).trim();
+          var vertexData = lineData.split(/\s+/);
+          var faceVertices = []; // Parse the face vertex data into an easy to work with format
+
+          for (var j = 0, jl = vertexData.length; j < jl; j++) {
+            var vertex = vertexData[j];
+
+            if (vertex.length > 0) {
+              var vertexParts = vertex.split('/');
+              faceVertices.push(vertexParts);
+            }
+          } // Draw an edge between the first vertex and all subsequent vertices to form an n-gon
+
+
+          var v1 = faceVertices[0];
+
+          for (var j = 1, jl = faceVertices.length - 1; j < jl; j++) {
+            var v2 = faceVertices[j];
+            var v3 = faceVertices[j + 1];
+            state.addFace(v1[0], v2[0], v3[0], v1[1], v2[1], v3[1], v1[2], v2[2], v3[2]);
+          }
+        } else if (lineFirstChar === 'l') {
+          var lineParts = line.substring(1).trim().split(" ");
+          var lineVertices = [],
+              lineUVs = [];
+
+          if (line.indexOf("/") === -1) {
+            lineVertices = lineParts;
+          } else {
+            for (var li = 0, llen = lineParts.length; li < llen; li++) {
+              var parts = lineParts[li].split("/");
+              if (parts[0] !== "") lineVertices.push(parts[0]);
+              if (parts[1] !== "") lineUVs.push(parts[1]);
+            }
+          }
+
+          state.addLineGeometry(lineVertices, lineUVs);
+        } else if (lineFirstChar === 'p') {
+          var lineData = line.substr(1).trim();
+          var pointData = lineData.split(" ");
+          state.addPointGeometry(pointData);
+        } else if ((result = object_pattern.exec(line)) !== null) {
+          // o object_name
+          // or
+          // g group_name
+          // WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
+          // var name = result[ 0 ].substr( 1 ).trim();
+          var name = (" " + result[0].substr(1).trim()).substr(1);
+          state.startObject(name);
+        } else if (material_use_pattern.test(line)) {
+          // material
+          state.object.startMaterial(line.substring(7).trim(), state.materialLibraries);
+        } else if (material_library_pattern.test(line)) {
+          // mtl file
+          state.materialLibraries.push(line.substring(7).trim());
+        } else if (lineFirstChar === 's') {
+          result = line.split(' '); // smooth shading
+          // @todo Handle files that have varying smooth values for a set of faces inside one geometry,
+          // but does not define a usemtl for each face set.
+          // This should be detected and a dummy material created (later MultiMaterial and geometry groups).
+          // This requires some care to not create extra material on each smooth value for "normal" obj files.
+          // where explicit usemtl defines geometry groups.
+          // Example asset: examples/models/obj/cerberus/Cerberus.obj
+
+          /*
+           * http://paulbourke.net/dataformats/obj/
+           * or
+           * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
+           *
+           * From chapter "Grouping" Syntax explanation "s group_number":
+           * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
+           * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
+           * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
+           * than 0."
+           */
+
+          if (result.length > 1) {
+            var value = result[1].trim().toLowerCase();
+            state.object.smooth = value !== '0' && value !== 'off';
+          } else {
+            // ZBrush can produce "s" lines #11707
+            state.object.smooth = true;
+          }
+
+          var material = state.object.currentMaterial();
+          if (material) material.smooth = state.object.smooth;
+        } else {
+          // Handle null terminated files without exception
+          if (line === '\0') continue;
+          throw new Error('THREE.OBJLoader: Unexpected line: "' + line + '"');
+        }
+      }
+
+      state.finalize();
+      var container = new THREE.Group();
+      container.materialLibraries = [].concat(state.materialLibraries);
+
+      for (var i = 0, l = state.objects.length; i < l; i++) {
+        var object = state.objects[i];
+        var geometry = object.geometry;
+        var materials = object.materials;
+        var isLine = geometry.type === 'Line';
+        var isPoints = geometry.type === 'Points';
+        var hasVertexColors = false; // Skip o/g line declarations that did not follow with any faces
+
+        if (geometry.vertices.length === 0) continue;
+        var buffergeometry = new THREE.BufferGeometry();
+        buffergeometry.setAttribute('position', new THREE.Float32BufferAttribute(geometry.vertices, 3));
+
+        if (geometry.normals.length > 0) {
+          buffergeometry.setAttribute('normal', new THREE.Float32BufferAttribute(geometry.normals, 3));
+        } else {
+          buffergeometry.computeVertexNormals();
+        }
+
+        if (geometry.colors.length > 0) {
+          hasVertexColors = true;
+          buffergeometry.setAttribute('color', new THREE.Float32BufferAttribute(geometry.colors, 3));
+        }
+
+        if (geometry.uvs.length > 0) {
+          buffergeometry.setAttribute('uv', new THREE.Float32BufferAttribute(geometry.uvs, 2));
+        } // Create materials
+
+
+        var createdMaterials = [];
+
+        for (var mi = 0, miLen = materials.length; mi < miLen; mi++) {
+          var sourceMaterial = materials[mi];
+          var material = undefined;
+
+          if (this.materials !== null) {
+            material = this.materials.create(sourceMaterial.name); // mtl etc. loaders probably can't create line materials correctly, copy properties to a line material.
+
+            if (isLine && material && !(material instanceof THREE.LineBasicMaterial)) {
+              var materialLine = new THREE.LineBasicMaterial();
+              materialLine.copy(material);
+              materialLine.lights = false; // TOFIX
+
+              material = materialLine;
+            } else if (isPoints && material && !(material instanceof THREE.PointsMaterial)) {
+              var materialPoints = new THREE.PointsMaterial({
+                size: 10,
+                sizeAttenuation: false
+              });
+              materialLine.copy(material);
+              material = materialPoints;
+            }
+          }
+
+          if (!material) {
+            if (isLine) {
+              material = new THREE.LineBasicMaterial();
+            } else if (isPoints) {
+              material = new THREE.PointsMaterial({
+                size: 1,
+                sizeAttenuation: false
+              });
+            } else {
+              material = new THREE.MeshPhongMaterial();
+            }
+
+            material.name = sourceMaterial.name;
+          }
+
+          material.flatShading = sourceMaterial.smooth ? false : true;
+          material.vertexColors = hasVertexColors ? THREE.VertexColors : THREE.NoColors;
+          createdMaterials.push(material);
+        } // Create mesh
+
+
+        var mesh;
+
+        if (createdMaterials.length > 1) {
+          for (var mi = 0, miLen = materials.length; mi < miLen; mi++) {
+            var sourceMaterial = materials[mi];
+            buffergeometry.addGroup(sourceMaterial.groupStart, sourceMaterial.groupCount, mi);
+          }
+
+          if (isLine) {
+            mesh = new THREE.LineSegments(buffergeometry, createdMaterials);
+          } else if (isPoints) {
+            mesh = new THREE.Points(buffergeometry, createdMaterials);
+          } else {
+            mesh = new THREE.Mesh(buffergeometry, createdMaterials);
+          }
+        } else {
+          if (isLine) {
+            mesh = new THREE.LineSegments(buffergeometry, createdMaterials[0]);
+          } else if (isPoints) {
+            mesh = new THREE.Points(buffergeometry, createdMaterials[0]);
+          } else {
+            mesh = new THREE.Mesh(buffergeometry, createdMaterials[0]);
+          }
+        }
+
+        mesh.name = object.name;
+        container.add(mesh);
+      }
+
+      console.timeEnd('OBJLoader');
+      return container;
+    }
+  };
+  return OBJLoader;
+}();
+
+/* harmony default export */ var OBJLoader = (THREE.OBJLoader);
+// CONCATENATED MODULE: ./src/components/simple-3D-model/js/index.js
 function simple_3D_model_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_model_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_model_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_model_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_model_js_typeof(obj); }
@@ -17451,12 +27698,7 @@ function simple_3D_model_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
  *************************************
  */
 
-/**
- * module.THREE_MODEL
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
+
 
 var THREE_MODEL = function (module, $, window, document) {
   if (window.THREE_MODEL === null) return false;
@@ -17691,7 +27933,209 @@ var THREE_MODEL = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-pages/js/index.js
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/renderers/CSS3DRenderer.js
+/**
+ * Based on http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
+ * @author mrdoob / http://mrdoob.com/
+ * @author yomotsu / https://yomotsu.net/
+ */
+THREE.CSS3DObject = function (element) {
+  THREE.Object3D.call(this);
+  this.element = element;
+  this.element.style.position = 'absolute';
+  this.addEventListener('removed', function () {
+    if (this.element.parentNode !== null) {
+      this.element.parentNode.removeChild(this.element);
+    }
+  });
+};
+
+THREE.CSS3DObject.prototype = Object.create(THREE.Object3D.prototype);
+THREE.CSS3DObject.prototype.constructor = THREE.CSS3DObject;
+
+THREE.CSS3DSprite = function (element) {
+  THREE.CSS3DObject.call(this, element);
+};
+
+THREE.CSS3DSprite.prototype = Object.create(THREE.CSS3DObject.prototype);
+THREE.CSS3DSprite.prototype.constructor = THREE.CSS3DSprite; //
+
+THREE.CSS3DRenderer = function () {
+  console.log('THREE.CSS3DRenderer', THREE.REVISION);
+
+  var _width, _height;
+
+  var _widthHalf, _heightHalf;
+
+  var matrix = new THREE.Matrix4();
+  var cache = {
+    camera: {
+      fov: 0,
+      style: ''
+    },
+    objects: new WeakMap()
+  };
+  var domElement = document.createElement('div');
+  domElement.style.overflow = 'hidden';
+  this.domElement = domElement;
+  var cameraElement = document.createElement('div');
+  cameraElement.style.WebkitTransformStyle = 'preserve-3d';
+  cameraElement.style.transformStyle = 'preserve-3d';
+  domElement.appendChild(cameraElement);
+  var isIE = /Trident/i.test(navigator.userAgent);
+
+  this.getSize = function () {
+    return {
+      width: _width,
+      height: _height
+    };
+  };
+
+  this.setSize = function (width, height) {
+    _width = width;
+    _height = height;
+    _widthHalf = _width / 2;
+    _heightHalf = _height / 2;
+    domElement.style.width = width + 'px';
+    domElement.style.height = height + 'px';
+    cameraElement.style.width = width + 'px';
+    cameraElement.style.height = height + 'px';
+  };
+
+  function epsilon(value) {
+    return Math.abs(value) < 1e-10 ? 0 : value;
+  }
+
+  function getCameraCSSMatrix(matrix) {
+    var elements = matrix.elements;
+    return 'matrix3d(' + epsilon(elements[0]) + ',' + epsilon(-elements[1]) + ',' + epsilon(elements[2]) + ',' + epsilon(elements[3]) + ',' + epsilon(elements[4]) + ',' + epsilon(-elements[5]) + ',' + epsilon(elements[6]) + ',' + epsilon(elements[7]) + ',' + epsilon(elements[8]) + ',' + epsilon(-elements[9]) + ',' + epsilon(elements[10]) + ',' + epsilon(elements[11]) + ',' + epsilon(elements[12]) + ',' + epsilon(-elements[13]) + ',' + epsilon(elements[14]) + ',' + epsilon(elements[15]) + ')';
+  }
+
+  function getObjectCSSMatrix(matrix, cameraCSSMatrix) {
+    var elements = matrix.elements;
+    var matrix3d = 'matrix3d(' + epsilon(elements[0]) + ',' + epsilon(elements[1]) + ',' + epsilon(elements[2]) + ',' + epsilon(elements[3]) + ',' + epsilon(-elements[4]) + ',' + epsilon(-elements[5]) + ',' + epsilon(-elements[6]) + ',' + epsilon(-elements[7]) + ',' + epsilon(elements[8]) + ',' + epsilon(elements[9]) + ',' + epsilon(elements[10]) + ',' + epsilon(elements[11]) + ',' + epsilon(elements[12]) + ',' + epsilon(elements[13]) + ',' + epsilon(elements[14]) + ',' + epsilon(elements[15]) + ')';
+
+    if (isIE) {
+      return 'translate(-50%,-50%)' + 'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)' + cameraCSSMatrix + matrix3d;
+    }
+
+    return 'translate(-50%,-50%)' + matrix3d;
+  }
+
+  function renderObject(object, camera, cameraCSSMatrix) {
+    if (object instanceof THREE.CSS3DObject) {
+      var style;
+
+      if (object instanceof THREE.CSS3DSprite) {
+        // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
+        matrix.copy(camera.matrixWorldInverse);
+        matrix.transpose();
+        matrix.copyPosition(object.matrixWorld);
+        matrix.scale(object.scale);
+        matrix.elements[3] = 0;
+        matrix.elements[7] = 0;
+        matrix.elements[11] = 0;
+        matrix.elements[15] = 1;
+        style = getObjectCSSMatrix(matrix, cameraCSSMatrix);
+      } else {
+        style = getObjectCSSMatrix(object.matrixWorld, cameraCSSMatrix);
+      }
+
+      var element = object.element;
+      var cachedStyle = cache.objects.get(object);
+
+      if (cachedStyle === undefined || cachedStyle !== style) {
+        element.style.WebkitTransform = style;
+        element.style.transform = style;
+        var objectData = {
+          style: style
+        };
+
+        if (isIE) {
+          objectData.distanceToCameraSquared = getDistanceToSquared(camera, object);
+        }
+
+        cache.objects.set(object, objectData);
+      }
+
+      if (element.parentNode !== cameraElement) {
+        cameraElement.appendChild(element);
+      }
+    }
+
+    for (var i = 0, l = object.children.length; i < l; i++) {
+      renderObject(object.children[i], camera, cameraCSSMatrix);
+    }
+  }
+
+  var getDistanceToSquared = function () {
+    var a = new THREE.Vector3();
+    var b = new THREE.Vector3();
+    return function (object1, object2) {
+      a.setFromMatrixPosition(object1.matrixWorld);
+      b.setFromMatrixPosition(object2.matrixWorld);
+      return a.distanceToSquared(b);
+    };
+  }();
+
+  function filterAndFlatten(scene) {
+    var result = [];
+    scene.traverse(function (object) {
+      if (object instanceof THREE.CSS3DObject) result.push(object);
+    });
+    return result;
+  }
+
+  function zOrder(scene) {
+    var sorted = filterAndFlatten(scene).sort(function (a, b) {
+      var distanceA = cache.objects.get(a).distanceToCameraSquared;
+      var distanceB = cache.objects.get(b).distanceToCameraSquared;
+      return distanceA - distanceB;
+    });
+    var zMax = sorted.length;
+
+    for (var i = 0, l = sorted.length; i < l; i++) {
+      sorted[i].element.style.zIndex = zMax - i;
+    }
+  }
+
+  this.render = function (scene, camera) {
+    var fov = camera.projectionMatrix.elements[5] * _heightHalf;
+
+    if (cache.camera.fov !== fov) {
+      if (camera.isPerspectiveCamera) {
+        domElement.style.WebkitPerspective = fov + 'px';
+        domElement.style.perspective = fov + 'px';
+      }
+
+      cache.camera.fov = fov;
+    }
+
+    scene.updateMatrixWorld();
+    if (camera.parent === null) camera.updateMatrixWorld();
+    var cameraCSSMatrix = camera.isOrthographicCamera ? 'scale(' + fov + ')' + getCameraCSSMatrix(camera.matrixWorldInverse) : 'translateZ(' + fov + 'px)' + getCameraCSSMatrix(camera.matrixWorldInverse);
+    var style = cameraCSSMatrix + 'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)';
+
+    if (cache.camera.style !== style && !isIE) {
+      cameraElement.style.WebkitTransform = style;
+      cameraElement.style.transform = style;
+      cache.camera.style = style;
+    }
+
+    renderObject(scene, camera, cameraCSSMatrix);
+
+    if (isIE) {
+      // IE10 and 11 does not support 'preserve-3d'.
+      // Thus, z-order in 3D will not work.
+      // We have to calc z-order manually and set CSS z-index for IE.
+      // FYI: z-index can't handle object intersection
+      zOrder(scene);
+    }
+  };
+};
+
+/* harmony default export */ var CSS3DRenderer = (THREE.CSS3DObject);
+// CONCATENATED MODULE: ./src/components/simple-3D-pages/js/index.js
 function simple_3D_pages_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -17704,8 +28148,10 @@ function simple_3D_pages_js_classCallCheck(instance, Constructor) { if (!(instan
  * module.THREE_PAGES
  * 
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
+ * @requires ./src/plugins/THREE
  */
+
+
 
 var THREE_PAGES = function (module, $, window, document) {
   if (window.THREE_PAGES === null) return false;
@@ -17845,7 +28291,7 @@ var THREE_PAGES = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-particle-effect/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-particle-effect/js/index.js
 function simple_3D_particle_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_particle_effect_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_particle_effect_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_particle_effect_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_particle_effect_js_typeof(obj); }
@@ -17860,7 +28306,7 @@ function simple_3D_particle_effect_js_typeof(obj) { "@babel/helpers - typeof"; i
  * module.THREE_PARTICLE
  * 
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
+ * @requires ./src/plugins/THREE
  */
 
 var THREE_PARTICLE = function (module, $, window, document) {
@@ -18343,7 +28789,7 @@ var THREE_PARTICLE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-sphere-three/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-sphere-three/js/index.js
 function simple_3D_sphere_three_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -18356,8 +28802,9 @@ function simple_3D_sphere_three_js_classCallCheck(instance, Constructor) { if (!
  * module.THREE_SPHERE_THREE
  * 
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
+ * @requires ./src/plugins/THREE
  */
+
 
 var THREE_SPHERE_THREE = function (module, $, window, document) {
   if (window.THREE_SPHERE_THREE === null) return false;
@@ -18499,7 +28946,7 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-obj-anim-interaction/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-obj-anim-interaction/js/index.js
 function simple_3D_obj_anim_interaction_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -18508,12 +28955,6 @@ function simple_3D_obj_anim_interaction_js_classCallCheck(instance, Constructor)
  *************************************
  */
 
-/**
- * module.THREE_OBJ_ANIM_INTERACTION
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
 
 var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
   if (window.THREE_OBJ_ANIM_INTERACTION === null) return false;
@@ -18713,7 +29154,7 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-mouse-interaction/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-mouse-interaction/js/index.js
 function simple_3D_mouse_interaction_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -18722,12 +29163,6 @@ function simple_3D_mouse_interaction_js_classCallCheck(instance, Constructor) { 
  *************************************
  */
 
-/**
- * module.THREE_MOUSE_INTERACTION
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
 
 var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION === null) return false;
@@ -19127,20 +29562,13 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-mouse-interaction2/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-mouse-interaction2/js/index.js
 function simple_3D_mouse_interaction2_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- 3D Mouse Interaction with three.js -->
  *************************************
- */
-
-/**
- * module.THREE_MOUSE_INTERACTION2
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  */
 
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
@@ -19594,10 +30022,43 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/simple-3D-shatter-slider/scss/_style.scss
-var simple_3D_shatter_slider_scss_style = __webpack_require__(59);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/modifiers/ExplodeModifier.js
+/**
+ * Make all faces use unique vertices
+ * so that each face can be separated from others
+ *
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.ExplodeModifier = function () {};
 
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-shatter-slider/js/index.js
+THREE.ExplodeModifier.prototype.modify = function (geometry) {
+  var vertices = [];
+
+  for (var i = 0, il = geometry.faces.length; i < il; i++) {
+    var n = vertices.length;
+    var face = geometry.faces[i];
+    var a = face.a;
+    var b = face.b;
+    var c = face.c;
+    var va = geometry.vertices[a];
+    var vb = geometry.vertices[b];
+    var vc = geometry.vertices[c];
+    vertices.push(va.clone());
+    vertices.push(vb.clone());
+    vertices.push(vc.clone());
+    face.a = n;
+    face.b = n + 1;
+    face.c = n + 2;
+  }
+
+  geometry.vertices = vertices;
+};
+
+/* harmony default export */ var ExplodeModifier = (THREE.ExplodeModifier);
+// EXTERNAL MODULE: ./src/components/simple-3D-shatter-slider/scss/_style.scss
+var simple_3D_shatter_slider_scss_style = __webpack_require__(67);
+
+// CONCATENATED MODULE: ./src/components/simple-3D-shatter-slider/js/index.js
 function simple_3D_shatter_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_shatter_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_shatter_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_shatter_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_shatter_slider_js_typeof(obj); }
@@ -19612,8 +30073,10 @@ function simple_3D_shatter_slider_js_typeof(obj) { "@babel/helpers - typeof"; if
  * module.THREE_SHATTER_SLIDER
  * 
  * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
+ * @requires ./src/plugins/THREE
  */
+
+
 
 
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
@@ -20293,10 +30756,10 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/scss/_style.scss
-var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(60);
+// EXTERNAL MODULE: ./src/components/simple-3D-explosive-particle-slider/scss/_style.scss
+var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(68);
 
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-explosive-particle-slider/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-explosive-particle-slider/js/index.js
 function simple_3D_explosive_particle_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_explosive_particle_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_explosive_particle_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_explosive_particle_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_explosive_particle_slider_js_typeof(obj); }
@@ -20307,12 +30770,6 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { "@babel/helpers - 
  *************************************
  */
 
-/**
- * module.THREE_EXP_PARTICLE_SLIDER
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
 
 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
@@ -20971,14 +31428,14 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/fragment-custom.glsl
+// CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/shader/fragment-custom.glsl
 /* harmony default export */ var js_shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
+// CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
 /* harmony default export */ var js_shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
-// EXTERNAL MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/scss/_style.scss
-var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(61);
+// EXTERNAL MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/scss/_style.scss
+var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(69);
 
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-liquid-scrollspy-slider/js/index.js
+// CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/index.js
 function simple_3D_liquid_scrollspy_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_liquid_scrollspy_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_liquid_scrollspy_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_liquid_scrollspy_slider_js_typeof(obj); }
@@ -20987,13 +31444,6 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { "@babel/helpers - ty
  *************************************
  * <!-- 3D Liquid Scrollspy Slider -->
  *************************************
- */
-
-/**
- * module.THREE_LIQUID_SCROLLSPY_SLIDER
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
  */
 
 
@@ -21746,7 +32196,661 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// CONCATENATED MODULE: ./src/components/ES6/simple-3D-filmic-effects/js/index.js
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/EffectComposer.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.EffectComposer = function (renderer, renderTarget) {
+  this.renderer = renderer;
+
+  if (renderTarget === undefined) {
+    var parameters = {
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
+      format: THREE.RGBAFormat,
+      stencilBuffer: false
+    };
+    var size = renderer.getDrawingBufferSize(new THREE.Vector2());
+    renderTarget = new THREE.WebGLRenderTarget(size.width, size.height, parameters);
+    renderTarget.texture.name = 'EffectComposer.rt1';
+  }
+
+  this.renderTarget1 = renderTarget;
+  this.renderTarget2 = renderTarget.clone();
+  this.renderTarget2.texture.name = 'EffectComposer.rt2';
+  this.writeBuffer = this.renderTarget1;
+  this.readBuffer = this.renderTarget2;
+  this.renderToScreen = true;
+  this.passes = []; // dependencies
+
+  if (THREE.CopyShader === undefined) {
+    console.error('THREE.EffectComposer relies on THREE.CopyShader');
+  }
+
+  if (THREE.ShaderPass === undefined) {
+    console.error('THREE.EffectComposer relies on THREE.ShaderPass');
+  }
+
+  this.copyPass = new THREE.ShaderPass(THREE.CopyShader);
+  this._previousFrameTime = Date.now();
+};
+
+Object.assign(THREE.EffectComposer.prototype, {
+  swapBuffers: function swapBuffers() {
+    var tmp = this.readBuffer;
+    this.readBuffer = this.writeBuffer;
+    this.writeBuffer = tmp;
+  },
+  addPass: function addPass(pass) {
+    this.passes.push(pass);
+    var size = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+    pass.setSize(size.width, size.height);
+  },
+  insertPass: function insertPass(pass, index) {
+    this.passes.splice(index, 0, pass);
+  },
+  isLastEnabledPass: function isLastEnabledPass(passIndex) {
+    for (var i = passIndex + 1; i < this.passes.length; i++) {
+      if (this.passes[i].enabled) {
+        return false;
+      }
+    }
+
+    return true;
+  },
+  render: function render(deltaTime) {
+    // deltaTime value is in seconds
+    if (deltaTime === undefined) {
+      deltaTime = (Date.now() - this._previousFrameTime) * 0.001;
+    }
+
+    this._previousFrameTime = Date.now();
+    var currentRenderTarget = this.renderer.getRenderTarget();
+    var maskActive = false;
+    var pass,
+        i,
+        il = this.passes.length;
+
+    for (i = 0; i < il; i++) {
+      pass = this.passes[i];
+      if (pass.enabled === false) continue;
+      pass.renderToScreen = this.renderToScreen && this.isLastEnabledPass(i);
+      pass.render(this.renderer, this.writeBuffer, this.readBuffer, deltaTime, maskActive);
+
+      if (pass.needsSwap) {
+        if (maskActive) {
+          var context = this.renderer.context;
+          context.stencilFunc(context.NOTEQUAL, 1, 0xffffffff);
+          this.copyPass.render(this.renderer, this.writeBuffer, this.readBuffer, deltaTime);
+          context.stencilFunc(context.EQUAL, 1, 0xffffffff);
+        }
+
+        this.swapBuffers();
+      }
+
+      if (THREE.MaskPass !== undefined) {
+        if (pass instanceof THREE.MaskPass) {
+          maskActive = true;
+        } else if (pass instanceof THREE.ClearMaskPass) {
+          maskActive = false;
+        }
+      }
+    }
+
+    this.renderer.setRenderTarget(currentRenderTarget);
+  },
+  reset: function reset(renderTarget) {
+    if (renderTarget === undefined) {
+      var size = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+      renderTarget = this.renderTarget1.clone();
+      renderTarget.setSize(size.width, size.height);
+    }
+
+    this.renderTarget1.dispose();
+    this.renderTarget2.dispose();
+    this.renderTarget1 = renderTarget;
+    this.renderTarget2 = renderTarget.clone();
+    this.writeBuffer = this.renderTarget1;
+    this.readBuffer = this.renderTarget2;
+  },
+  setSize: function setSize(width, height) {
+    this.renderTarget1.setSize(width, height);
+    this.renderTarget2.setSize(width, height);
+
+    for (var i = 0; i < this.passes.length; i++) {
+      this.passes[i].setSize(width, height);
+    }
+  }
+});
+
+THREE.Pass = function () {
+  // if set to true, the pass is processed by the composer
+  this.enabled = true; // if set to true, the pass indicates to swap read and write buffer after rendering
+
+  this.needsSwap = true; // if set to true, the pass clears its buffer before rendering
+
+  this.clear = false; // if set to true, the result of the pass is rendered to screen. This is set automatically by EffectComposer.
+
+  this.renderToScreen = false;
+};
+
+Object.assign(THREE.Pass.prototype, {
+  setSize: function setSize(width, height) {},
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    console.error('THREE.Pass: .render() must be implemented in derived pass.');
+  }
+}); // Helper for passes that need to fill the viewport with a single quad.
+
+THREE.Pass.FullScreenQuad = function () {
+  var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  var geometry = new THREE.PlaneBufferGeometry(2, 2);
+
+  var FullScreenQuad = function FullScreenQuad(material) {
+    this._mesh = new THREE.Mesh(geometry, material);
+  };
+
+  Object.defineProperty(FullScreenQuad.prototype, 'material', {
+    get: function get() {
+      return this._mesh.material;
+    },
+    set: function set(value) {
+      this._mesh.material = value;
+    }
+  });
+  Object.assign(FullScreenQuad.prototype, {
+    render: function render(renderer) {
+      renderer.render(this._mesh, camera);
+    }
+  });
+  return FullScreenQuad;
+}();
+
+/* harmony default export */ var EffectComposer = (THREE.EffectComposer);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/MaskPass.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.MaskPass = function (scene, camera) {
+  THREE.Pass.call(this);
+  this.scene = scene;
+  this.camera = camera;
+  this.clear = true;
+  this.needsSwap = false;
+  this.inverse = false;
+};
+
+THREE.MaskPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.MaskPass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    var context = renderer.context;
+    var state = renderer.state; // don't update color or depth
+
+    state.buffers.color.setMask(false);
+    state.buffers.depth.setMask(false); // lock buffers
+
+    state.buffers.color.setLocked(true);
+    state.buffers.depth.setLocked(true); // set up stencil
+
+    var writeValue, clearValue;
+
+    if (this.inverse) {
+      writeValue = 0;
+      clearValue = 1;
+    } else {
+      writeValue = 1;
+      clearValue = 0;
+    }
+
+    state.buffers.stencil.setTest(true);
+    state.buffers.stencil.setOp(context.REPLACE, context.REPLACE, context.REPLACE);
+    state.buffers.stencil.setFunc(context.ALWAYS, writeValue, 0xffffffff);
+    state.buffers.stencil.setClear(clearValue); // draw into the stencil buffer
+
+    renderer.setRenderTarget(readBuffer);
+    if (this.clear) renderer.clear();
+    renderer.render(this.scene, this.camera);
+    renderer.setRenderTarget(writeBuffer);
+    if (this.clear) renderer.clear();
+    renderer.render(this.scene, this.camera); // unlock color and depth buffer for subsequent rendering
+
+    state.buffers.color.setLocked(false);
+    state.buffers.depth.setLocked(false); // only render where stencil is set to 1
+
+    state.buffers.stencil.setFunc(context.EQUAL, 1, 0xffffffff); // draw if == 1
+
+    state.buffers.stencil.setOp(context.KEEP, context.KEEP, context.KEEP);
+  }
+});
+
+THREE.ClearMaskPass = function () {
+  THREE.Pass.call(this);
+  this.needsSwap = false;
+};
+
+THREE.ClearMaskPass.prototype = Object.create(THREE.Pass.prototype);
+Object.assign(THREE.ClearMaskPass.prototype, {
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    renderer.state.buffers.stencil.setTest(false);
+  }
+});
+/* harmony default export */ var MaskPass = (THREE.MaskPass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/TexturePass.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.TexturePass = function (map, opacity) {
+  THREE.Pass.call(this);
+  if (THREE.CopyShader === undefined) console.error("THREE.TexturePass relies on THREE.CopyShader");
+  var shader = THREE.CopyShader;
+  this.map = map;
+  this.opacity = opacity !== undefined ? opacity : 1.0;
+  this.uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+  this.material = new THREE.ShaderMaterial({
+    uniforms: this.uniforms,
+    vertexShader: shader.vertexShader,
+    fragmentShader: shader.fragmentShader,
+    depthTest: false,
+    depthWrite: false
+  });
+  this.needsSwap = false;
+  this.fsQuad = new THREE.Pass.FullScreenQuad(null);
+};
+
+THREE.TexturePass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.TexturePass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    var oldAutoClear = renderer.autoClear;
+    renderer.autoClear = false;
+    this.fsQuad.material = this.material;
+    this.uniforms["opacity"].value = this.opacity;
+    this.uniforms["tDiffuse"].value = this.map;
+    this.material.transparent = this.opacity < 1.0;
+    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
+    if (this.clear) renderer.clear();
+    this.fsQuad.render(renderer);
+    renderer.autoClear = oldAutoClear;
+  }
+});
+/* harmony default export */ var TexturePass = (THREE.TexturePass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/ShaderPass.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.ShaderPass = function (shader, textureID) {
+  THREE.Pass.call(this);
+  this.textureID = textureID !== undefined ? textureID : "tDiffuse";
+
+  if (shader instanceof THREE.ShaderMaterial) {
+    this.uniforms = shader.uniforms;
+    this.material = shader;
+  } else if (shader) {
+    this.uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+    this.material = new THREE.ShaderMaterial({
+      defines: Object.assign({}, shader.defines),
+      uniforms: this.uniforms,
+      vertexShader: shader.vertexShader,
+      fragmentShader: shader.fragmentShader
+    });
+  }
+
+  this.fsQuad = new THREE.Pass.FullScreenQuad(this.material);
+};
+
+THREE.ShaderPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.ShaderPass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    if (this.uniforms[this.textureID]) {
+      this.uniforms[this.textureID].value = readBuffer.texture;
+    }
+
+    this.fsQuad.material = this.material;
+
+    if (this.renderToScreen) {
+      renderer.setRenderTarget(null);
+      this.fsQuad.render(renderer);
+    } else {
+      renderer.setRenderTarget(writeBuffer); // TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
+
+      if (this.clear) renderer.clear(renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil);
+      this.fsQuad.render(renderer);
+    }
+  }
+});
+/* harmony default export */ var ShaderPass = (THREE.ShaderPass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/RenderPass.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.RenderPass = function (scene, camera, overrideMaterial, clearColor, clearAlpha) {
+  THREE.Pass.call(this);
+  this.scene = scene;
+  this.camera = camera;
+  this.overrideMaterial = overrideMaterial;
+  this.clearColor = clearColor;
+  this.clearAlpha = clearAlpha !== undefined ? clearAlpha : 0;
+  this.clear = true;
+  this.clearDepth = false;
+  this.needsSwap = false;
+};
+
+THREE.RenderPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.RenderPass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    var oldAutoClear = renderer.autoClear;
+    renderer.autoClear = false;
+    this.scene.overrideMaterial = this.overrideMaterial;
+    var oldClearColor, oldClearAlpha;
+
+    if (this.clearColor) {
+      oldClearColor = renderer.getClearColor().getHex();
+      oldClearAlpha = renderer.getClearAlpha();
+      renderer.setClearColor(this.clearColor, this.clearAlpha);
+    }
+
+    if (this.clearDepth) {
+      renderer.clearDepth();
+    }
+
+    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer); // TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
+
+    if (this.clear) renderer.clear(renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil);
+    renderer.render(this.scene, this.camera);
+
+    if (this.clearColor) {
+      renderer.setClearColor(oldClearColor, oldClearAlpha);
+    }
+
+    this.scene.overrideMaterial = null;
+    renderer.autoClear = oldAutoClear;
+  }
+});
+/* harmony default export */ var RenderPass = (THREE.RenderPass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/ClearPass.js
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+THREE.ClearPass = function (clearColor, clearAlpha) {
+  THREE.Pass.call(this);
+  this.needsSwap = false;
+  this.clearColor = clearColor !== undefined ? clearColor : 0x000000;
+  this.clearAlpha = clearAlpha !== undefined ? clearAlpha : 0;
+};
+
+THREE.ClearPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.ClearPass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    var oldClearColor, oldClearAlpha;
+
+    if (this.clearColor) {
+      oldClearColor = renderer.getClearColor().getHex();
+      oldClearAlpha = renderer.getClearAlpha();
+      renderer.setClearColor(this.clearColor, this.clearAlpha);
+    }
+
+    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
+    renderer.clear();
+
+    if (this.clearColor) {
+      renderer.setClearColor(oldClearColor, oldClearAlpha);
+    }
+  }
+});
+/* harmony default export */ var ClearPass = (THREE.ClearPass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/shaders/CopyShader.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ *
+ * Full-screen textured quad shader
+ */
+THREE.CopyShader = {
+  uniforms: {
+    "tDiffuse": {
+      value: null
+    },
+    "opacity": {
+      value: 1.0
+    }
+  },
+  vertexShader: ["varying vec2 vUv;", "void main() {", "vUv = uv;", "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );", "}"].join("\n"),
+  fragmentShader: ["uniform float opacity;", "uniform sampler2D tDiffuse;", "varying vec2 vUv;", "void main() {", "vec4 texel = texture2D( tDiffuse, vUv );", "gl_FragColor = opacity * texel;", "}"].join("\n")
+};
+/* harmony default export */ var CopyShader = (THREE.CopyShader);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/shaders/ConvolutionShader.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ *
+ * Convolution shader
+ * ported from o3d sample to WebGL / GLSL
+ * http://o3d.googlecode.com/svn/trunk/samples/convolution.html
+ */
+THREE.ConvolutionShader = {
+  defines: {
+    "KERNEL_SIZE_FLOAT": "25.0",
+    "KERNEL_SIZE_INT": "25"
+  },
+  uniforms: {
+    "tDiffuse": {
+      value: null
+    },
+    "uImageIncrement": {
+      value: new THREE.Vector2(0.001953125, 0.0)
+    },
+    "cKernel": {
+      value: []
+    }
+  },
+  vertexShader: ["uniform vec2 uImageIncrement;", "varying vec2 vUv;", "void main() {", "vUv = uv - ( ( KERNEL_SIZE_FLOAT - 1.0 ) / 2.0 ) * uImageIncrement;", "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );", "}"].join("\n"),
+  fragmentShader: ["uniform float cKernel[ KERNEL_SIZE_INT ];", "uniform sampler2D tDiffuse;", "uniform vec2 uImageIncrement;", "varying vec2 vUv;", "void main() {", "vec2 imageCoord = vUv;", "vec4 sum = vec4( 0.0, 0.0, 0.0, 0.0 );", "for( int i = 0; i < KERNEL_SIZE_INT; i ++ ) {", "sum += texture2D( tDiffuse, imageCoord ) * cKernel[ i ];", "imageCoord += uImageIncrement;", "}", "gl_FragColor = sum;", "}"].join("\n"),
+  buildKernel: function buildKernel(sigma) {
+    // We lop off the sqrt(2 * pi) * sigma term, since we're going to normalize anyway.
+    function gauss(x, sigma) {
+      return Math.exp(-(x * x) / (2.0 * sigma * sigma));
+    }
+
+    var i,
+        values,
+        sum,
+        halfWidth,
+        kMaxKernelSize = 25,
+        kernelSize = 2 * Math.ceil(sigma * 3.0) + 1;
+    if (kernelSize > kMaxKernelSize) kernelSize = kMaxKernelSize;
+    halfWidth = (kernelSize - 1) * 0.5;
+    values = new Array(kernelSize);
+    sum = 0.0;
+
+    for (i = 0; i < kernelSize; ++i) {
+      values[i] = gauss(i - halfWidth, sigma);
+      sum += values[i];
+    } // normalize the kernel
+
+
+    for (i = 0; i < kernelSize; ++i) {
+      values[i] /= sum;
+    }
+
+    return values;
+  }
+};
+/* harmony default export */ var ConvolutionShader = (THREE.ConvolutionShader);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/BloomPass.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.BloomPass = function (strength, kernelSize, sigma, resolution) {
+  THREE.Pass.call(this);
+  strength = strength !== undefined ? strength : 1;
+  kernelSize = kernelSize !== undefined ? kernelSize : 25;
+  sigma = sigma !== undefined ? sigma : 4.0;
+  resolution = resolution !== undefined ? resolution : 256; // render targets
+
+  var pars = {
+    minFilter: THREE.LinearFilter,
+    magFilter: THREE.LinearFilter,
+    format: THREE.RGBAFormat
+  };
+  this.renderTargetX = new THREE.WebGLRenderTarget(resolution, resolution, pars);
+  this.renderTargetX.texture.name = "BloomPass.x";
+  this.renderTargetY = new THREE.WebGLRenderTarget(resolution, resolution, pars);
+  this.renderTargetY.texture.name = "BloomPass.y"; // copy material
+
+  if (THREE.CopyShader === undefined) console.error("THREE.BloomPass relies on THREE.CopyShader");
+  var copyShader = THREE.CopyShader;
+  this.copyUniforms = THREE.UniformsUtils.clone(copyShader.uniforms);
+  this.copyUniforms["opacity"].value = strength;
+  this.materialCopy = new THREE.ShaderMaterial({
+    uniforms: this.copyUniforms,
+    vertexShader: copyShader.vertexShader,
+    fragmentShader: copyShader.fragmentShader,
+    blending: THREE.AdditiveBlending,
+    transparent: true
+  }); // convolution material
+
+  if (THREE.ConvolutionShader === undefined) console.error("THREE.BloomPass relies on THREE.ConvolutionShader");
+  var convolutionShader = THREE.ConvolutionShader;
+  this.convolutionUniforms = THREE.UniformsUtils.clone(convolutionShader.uniforms);
+  this.convolutionUniforms["uImageIncrement"].value = THREE.BloomPass.blurX;
+  this.convolutionUniforms["cKernel"].value = THREE.ConvolutionShader.buildKernel(sigma);
+  this.materialConvolution = new THREE.ShaderMaterial({
+    uniforms: this.convolutionUniforms,
+    vertexShader: convolutionShader.vertexShader,
+    fragmentShader: convolutionShader.fragmentShader,
+    defines: {
+      "KERNEL_SIZE_FLOAT": kernelSize.toFixed(1),
+      "KERNEL_SIZE_INT": kernelSize.toFixed(0)
+    }
+  });
+  this.needsSwap = false;
+  this.fsQuad = new THREE.Pass.FullScreenQuad(null);
+};
+
+THREE.BloomPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.BloomPass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+    if (maskActive) renderer.context.disable(renderer.context.STENCIL_TEST); // Render quad with blured scene into texture (convolution pass 1)
+
+    this.fsQuad.material = this.materialConvolution;
+    this.convolutionUniforms["tDiffuse"].value = readBuffer.texture;
+    this.convolutionUniforms["uImageIncrement"].value = THREE.BloomPass.blurX;
+    renderer.setRenderTarget(this.renderTargetX);
+    renderer.clear();
+    this.fsQuad.render(renderer); // Render quad with blured scene into texture (convolution pass 2)
+
+    this.convolutionUniforms["tDiffuse"].value = this.renderTargetX.texture;
+    this.convolutionUniforms["uImageIncrement"].value = THREE.BloomPass.blurY;
+    renderer.setRenderTarget(this.renderTargetY);
+    renderer.clear();
+    this.fsQuad.render(renderer); // Render original scene with superimposed blur to texture
+
+    this.fsQuad.material = this.materialCopy;
+    this.copyUniforms["tDiffuse"].value = this.renderTargetY.texture;
+    if (maskActive) renderer.context.enable(renderer.context.STENCIL_TEST);
+    renderer.setRenderTarget(readBuffer);
+    if (this.clear) renderer.clear();
+    this.fsQuad.render(renderer);
+  }
+});
+THREE.BloomPass.blurX = new THREE.Vector2(0.001953125, 0.0);
+THREE.BloomPass.blurY = new THREE.Vector2(0.0, 0.001953125);
+/* harmony default export */ var BloomPass = (THREE.BloomPass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/postprocessing/FilmPass.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+THREE.FilmPass = function (noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale) {
+  THREE.Pass.call(this);
+  if (THREE.FilmShader === undefined) console.error("THREE.FilmPass relies on THREE.FilmShader");
+  var shader = THREE.FilmShader;
+  this.uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+  this.material = new THREE.ShaderMaterial({
+    uniforms: this.uniforms,
+    vertexShader: shader.vertexShader,
+    fragmentShader: shader.fragmentShader
+  });
+  if (grayscale !== undefined) this.uniforms.grayscale.value = grayscale;
+  if (noiseIntensity !== undefined) this.uniforms.nIntensity.value = noiseIntensity;
+  if (scanlinesIntensity !== undefined) this.uniforms.sIntensity.value = scanlinesIntensity;
+  if (scanlinesCount !== undefined) this.uniforms.sCount.value = scanlinesCount;
+  this.fsQuad = new THREE.Pass.FullScreenQuad(this.material);
+};
+
+THREE.FilmPass.prototype = Object.assign(Object.create(THREE.Pass.prototype), {
+  constructor: THREE.FilmPass,
+  render: function render(renderer, writeBuffer, readBuffer, deltaTime
+  /*, maskActive */
+  ) {
+    this.uniforms["tDiffuse"].value = readBuffer.texture;
+    this.uniforms["time"].value += deltaTime;
+
+    if (this.renderToScreen) {
+      renderer.setRenderTarget(null);
+      this.fsQuad.render(renderer);
+    } else {
+      renderer.setRenderTarget(writeBuffer);
+      if (this.clear) renderer.clear();
+      this.fsQuad.render(renderer);
+    }
+  }
+});
+/* harmony default export */ var FilmPass = (THREE.FilmPass);
+// CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/shaders/FilmShader.js
+/**
+ * @author alteredq / http://alteredqualia.com/
+ *
+ * Film grain & scanlines shader
+ *
+ * - ported from HLSL to WebGL / GLSL
+ * http://www.truevision3d.com/forums/showcase/staticnoise_colorblackwhite_scanline_shaders-t18698.0.html
+ *
+ * Screen Space Static Postprocessor
+ *
+ * Produces an analogue noise overlay similar to a film grain / TV static
+ *
+ * Original implementation and noise algorithm
+ * Pat 'Hawthorne' Shearon
+ *
+ * Optimized scanlines + noise version with intensity scaling
+ * Georg 'Leviathan' Steinrohder
+ *
+ * This version is provided under a Creative Commons Attribution 3.0 License
+ * http://creativecommons.org/licenses/by/3.0/
+ */
+THREE.FilmShader = {
+  uniforms: {
+    "tDiffuse": {
+      value: null
+    },
+    "time": {
+      value: 0.0
+    },
+    "nIntensity": {
+      value: 0.5
+    },
+    "sIntensity": {
+      value: 0.05
+    },
+    "sCount": {
+      value: 4096
+    },
+    "grayscale": {
+      value: 1
+    }
+  },
+  vertexShader: ["varying vec2 vUv;", "void main() {", "vUv = uv;", "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );", "}"].join("\n"),
+  fragmentShader: ["#include <common>", // control parameter
+  "uniform float time;", "uniform bool grayscale;", // noise effect intensity value (0 = no effect, 1 = full effect)
+  "uniform float nIntensity;", // scanlines effect intensity value (0 = no effect, 1 = full effect)
+  "uniform float sIntensity;", // scanlines effect count value (0 = no effect, 4096 = full effect)
+  "uniform float sCount;", "uniform sampler2D tDiffuse;", "varying vec2 vUv;", "void main() {", // sample the source
+  "vec4 cTextureScreen = texture2D( tDiffuse, vUv );", // make some noise
+  "float dx = rand( vUv + time );", // add noise
+  "vec3 cResult = cTextureScreen.rgb + cTextureScreen.rgb * clamp( 0.1 + dx, 0.0, 1.0 );", // get us a sine and cosine
+  "vec2 sc = vec2( sin( vUv.y * sCount ), cos( vUv.y * sCount ) );", // add scanlines
+  "cResult += cTextureScreen.rgb * vec3( sc.x, sc.y, sc.x ) * sIntensity;", // interpolate between source and result by intensity
+  "cResult = cTextureScreen.rgb + clamp( nIntensity, 0.0,1.0 ) * ( cResult - cTextureScreen.rgb );", // convert to grayscale if desired
+  "if( grayscale ) {", "cResult = vec3( cResult.r * 0.3 + cResult.g * 0.59 + cResult.b * 0.11 );", "}", "gl_FragColor =  vec4( cResult, cTextureScreen.a );", "}"].join("\n")
+};
+/* harmony default export */ var FilmShader = (THREE.FilmShader);
+// CONCATENATED MODULE: ./src/components/simple-3D-filmic-effects/js/index.js
 function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -21754,13 +32858,23 @@ function simple_3D_filmic_effects_js_classCallCheck(instance, Constructor) { if 
  * <!-- 3D Filmic Effects -->
  *************************************
  */
+ //filter basic
+//---------------------
 
-/**
- * module.THREE_FILMIC_EFF
- * 
- * @requires ./examples/assets/js/min/three.min.js
- * @requires ./src/components/ES5/_plugins-THREE
- */
+
+
+
+
+
+
+
+ //Extra filter -- film
+//---------------------
+
+ //Extra filter -- film
+//---------------------
+
+
 
 var THREE_FILMIC_EFF = function (module, $, window, document) {
   if (window.THREE_FILMIC_EFF === null) return false;
@@ -21957,10 +33071,10 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/table/scss/_style.scss
-var table_scss_style = __webpack_require__(3);
+// EXTERNAL MODULE: ./src/components/table/scss/_style.scss
+var table_scss_style = __webpack_require__(8);
 
-// CONCATENATED MODULE: ./src/components/ES6/table/js/basic.js
+// CONCATENATED MODULE: ./src/components/table/js/basic.js
 function js_basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -22053,10 +33167,10 @@ var TABLE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(62);
+// EXTERNAL MODULE: ./src/components/table/js/fn/sort-elements.js
+var sort_elements = __webpack_require__(70);
 
-// CONCATENATED MODULE: ./src/components/ES6/table/js/sorter.js
+// CONCATENATED MODULE: ./src/components/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -22136,10 +33250,10 @@ var TABLE_SORTER = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(63);
+// EXTERNAL MODULE: ./src/components/tabs/scss/_style.scss
+var tabs_scss_style = __webpack_require__(71);
 
-// CONCATENATED MODULE: ./src/components/ES6/tabs/js/index.js
+// CONCATENATED MODULE: ./src/components/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function tabs_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { tabs_js_typeof = function _typeof(obj) { return typeof obj; }; } else { tabs_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return tabs_js_typeof(obj); }
@@ -22313,10 +33427,10 @@ var TABS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(64);
+// EXTERNAL MODULE: ./src/components/team-focus/scss/_style.scss
+var team_focus_scss_style = __webpack_require__(72);
 
-// CONCATENATED MODULE: ./src/components/ES6/team-focus/js/index.js
+// CONCATENATED MODULE: ./src/components/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function team_focus_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { team_focus_js_typeof = function _typeof(obj) { return typeof obj; }; } else { team_focus_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return team_focus_js_typeof(obj); }
@@ -22325,12 +33439,6 @@ function team_focus_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
  *************************************
  * <!-- Team Focus -->
  *************************************
- */
-
-/**
- * module.TEAM_FOCUS
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -22482,13 +33590,13 @@ var TEAM_FOCUS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(65);
+// EXTERNAL MODULE: ./src/components/text-effect/js/fn/text-anime.js
+var text_anime = __webpack_require__(73);
 
-// EXTERNAL MODULE: ./src/components/ES6/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(66);
+// EXTERNAL MODULE: ./src/components/text-effect/scss/_style.scss
+var text_effect_scss_style = __webpack_require__(74);
 
-// CONCATENATED MODULE: ./src/components/ES6/text-effect/js/index.js
+// CONCATENATED MODULE: ./src/components/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -22534,10 +33642,10 @@ var TEXT_EFFECT = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(67);
+// EXTERNAL MODULE: ./src/components/timeline/scss/_style.scss
+var timeline_scss_style = __webpack_require__(75);
 
-// CONCATENATED MODULE: ./src/components/ES6/timeline/js/index.js
+// CONCATENATED MODULE: ./src/components/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function timeline_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { timeline_js_typeof = function _typeof(obj) { return typeof obj; }; } else { timeline_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return timeline_js_typeof(obj); }
@@ -22716,22 +33824,16 @@ var TIMELINE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(68);
+// EXTERNAL MODULE: ./src/components/vertical-menu/scss/_style.scss
+var vertical_menu_scss_style = __webpack_require__(76);
 
-// CONCATENATED MODULE: ./src/components/ES6/vertical-menu/js/index.js
+// CONCATENATED MODULE: ./src/components/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
  *************************************
  * <!-- Vertical Menu -->
  *************************************
- */
-
-/**
- * module.VERTICAL_MENU
- * 
- * @requires ./src/components/ES5/_plugins-GSAP
  */
 
 
@@ -22871,13 +33973,13 @@ var VERTICAL_MENU = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(69);
+// EXTERNAL MODULE: ./src/components/wordpress/scss/_wp_core.scss
+var _wp_core = __webpack_require__(77);
 
-// EXTERNAL MODULE: ./src/components/ES6/wordpress/scss/_3rd_party_plugins.scss
-var scss_3rd_party_plugins = __webpack_require__(70);
+// EXTERNAL MODULE: ./src/components/wordpress/scss/_3rd_party_plugins.scss
+var _3rd_party_plugins = __webpack_require__(78);
 
-// CONCATENATED MODULE: ./src/components/ES6/wordpress/js/index.js
+// CONCATENATED MODULE: ./src/components/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* 
@@ -22926,106 +34028,106 @@ var WP_CORE = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/ES6/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(71);
+// EXTERNAL MODULE: ./src/components/badges/scss/_style.scss
+var badges_scss_style = __webpack_require__(79);
 
-// EXTERNAL MODULE: ./src/components/ES6/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(72);
+// EXTERNAL MODULE: ./src/components/blended-grid-layout/scss/_style.scss
+var blended_grid_layout_scss_style = __webpack_require__(80);
 
-// EXTERNAL MODULE: ./src/components/ES6/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(73);
+// EXTERNAL MODULE: ./src/components/breadcrumbs/scss/_style.scss
+var breadcrumbs_scss_style = __webpack_require__(81);
 
-// EXTERNAL MODULE: ./src/components/ES6/button/scss/_style.scss
-var button_scss_style = __webpack_require__(74);
+// EXTERNAL MODULE: ./src/components/button/scss/_style.scss
+var button_scss_style = __webpack_require__(82);
 
-// EXTERNAL MODULE: ./src/components/ES6/card/scss/_style.scss
-var card_scss_style = __webpack_require__(75);
+// EXTERNAL MODULE: ./src/components/card/scss/_style.scss
+var card_scss_style = __webpack_require__(83);
 
-// EXTERNAL MODULE: ./src/components/ES6/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(76);
+// EXTERNAL MODULE: ./src/components/circle-text/scss/_style.scss
+var circle_text_scss_style = __webpack_require__(84);
 
-// EXTERNAL MODULE: ./src/components/ES6/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(77);
+// EXTERNAL MODULE: ./src/components/content-placeholder-animated/scss/_style.scss
+var content_placeholder_animated_scss_style = __webpack_require__(85);
 
-// EXTERNAL MODULE: ./src/components/ES6/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(78);
+// EXTERNAL MODULE: ./src/components/dividing-line/scss/_style.scss
+var dividing_line_scss_style = __webpack_require__(86);
 
-// EXTERNAL MODULE: ./src/components/ES6/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(79);
+// EXTERNAL MODULE: ./src/components/dots/scss/_style.scss
+var dots_scss_style = __webpack_require__(87);
 
-// EXTERNAL MODULE: ./src/components/ES6/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(80);
+// EXTERNAL MODULE: ./src/components/dotted-line/scss/_style.scss
+var dotted_line_scss_style = __webpack_require__(88);
 
-// EXTERNAL MODULE: ./src/components/ES6/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(81);
+// EXTERNAL MODULE: ./src/components/equal-width-columns/scss/_style.scss
+var equal_width_columns_scss_style = __webpack_require__(89);
 
-// EXTERNAL MODULE: ./src/components/ES6/features/scss/_style.scss
-var features_scss_style = __webpack_require__(82);
+// EXTERNAL MODULE: ./src/components/features/scss/_style.scss
+var features_scss_style = __webpack_require__(90);
 
-// EXTERNAL MODULE: ./src/components/ES6/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(83);
+// EXTERNAL MODULE: ./src/components/footer-templates/scss/_style.scss
+var footer_templates_scss_style = __webpack_require__(91);
 
-// EXTERNAL MODULE: ./src/components/ES6/gallery-grid-layout/scss/_style.scss
-var gallery_grid_layout_scss_style = __webpack_require__(84);
+// EXTERNAL MODULE: ./src/components/gallery-grid-layout/scss/_style.scss
+var gallery_grid_layout_scss_style = __webpack_require__(92);
 
-// EXTERNAL MODULE: ./src/components/ES6/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(85);
+// EXTERNAL MODULE: ./src/components/heading/scss/_style.scss
+var heading_scss_style = __webpack_require__(93);
 
-// EXTERNAL MODULE: ./src/components/ES6/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(86);
+// EXTERNAL MODULE: ./src/components/image-animation/scss/_style.scss
+var image_animation_scss_style = __webpack_require__(94);
 
-// EXTERNAL MODULE: ./src/components/ES6/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(87);
+// EXTERNAL MODULE: ./src/components/list-brands/scss/_style.scss
+var list_brands_scss_style = __webpack_require__(95);
 
-// EXTERNAL MODULE: ./src/components/ES6/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(88);
+// EXTERNAL MODULE: ./src/components/list-maintain-aspect-ratio/scss/_style.scss
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(96);
 
-// EXTERNAL MODULE: ./src/components/ES6/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(89);
+// EXTERNAL MODULE: ./src/components/list-side-by-side/scss/_style.scss
+var list_side_by_side_scss_style = __webpack_require__(97);
 
-// EXTERNAL MODULE: ./src/components/ES6/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(90);
+// EXTERNAL MODULE: ./src/components/list-side-by-side-img/scss/_style.scss
+var list_side_by_side_img_scss_style = __webpack_require__(98);
 
-// EXTERNAL MODULE: ./src/components/ES6/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(91);
+// EXTERNAL MODULE: ./src/components/mouse-animation-scroll/scss/_style.scss
+var mouse_animation_scroll_scss_style = __webpack_require__(99);
 
-// EXTERNAL MODULE: ./src/components/ES6/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(92);
+// EXTERNAL MODULE: ./src/components/overlay/scss/_style.scss
+var overlay_scss_style = __webpack_require__(100);
 
-// EXTERNAL MODULE: ./src/components/ES6/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(93);
+// EXTERNAL MODULE: ./src/components/ribbon/scss/_style.scss
+var ribbon_scss_style = __webpack_require__(101);
 
-// EXTERNAL MODULE: ./src/components/ES6/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(94);
+// EXTERNAL MODULE: ./src/components/shape-animation/scss/_style.scss
+var shape_animation_scss_style = __webpack_require__(102);
 
-// EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_comments.scss
-var _comments = __webpack_require__(95);
+// EXTERNAL MODULE: ./src/components/single-post/scss/_comments.scss
+var _comments = __webpack_require__(103);
 
-// EXTERNAL MODULE: ./src/components/ES6/single-post/scss/_editing.scss
-var _editing = __webpack_require__(96);
+// EXTERNAL MODULE: ./src/components/single-post/scss/_editing.scss
+var _editing = __webpack_require__(104);
 
-// EXTERNAL MODULE: ./src/components/ES6/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(97);
+// EXTERNAL MODULE: ./src/components/striking/scss/_style.scss
+var striking_scss_style = __webpack_require__(105);
 
-// EXTERNAL MODULE: ./src/components/ES6/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(98);
+// EXTERNAL MODULE: ./src/components/team-fullwidth/scss/_style.scss
+var team_fullwidth_scss_style = __webpack_require__(106);
 
-// EXTERNAL MODULE: ./src/components/ES6/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(99);
+// EXTERNAL MODULE: ./src/components/team-grid/scss/_style.scss
+var team_grid_scss_style = __webpack_require__(107);
 
-// EXTERNAL MODULE: ./src/components/ES6/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(100);
+// EXTERNAL MODULE: ./src/components/testimonials/scss/_style.scss
+var testimonials_scss_style = __webpack_require__(108);
 
-// EXTERNAL MODULE: ./src/components/ES6/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(101);
+// EXTERNAL MODULE: ./src/components/tooltip/scss/_style.scss
+var tooltip_scss_style = __webpack_require__(109);
 
-// EXTERNAL MODULE: ./src/components/ES6/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(102);
+// EXTERNAL MODULE: ./src/components/vertical-separator/scss/_style.scss
+var vertical_separator_scss_style = __webpack_require__(110);
 
-// EXTERNAL MODULE: ./src/components/ES6/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(103);
+// EXTERNAL MODULE: ./src/components/wave-background/scss/_style.scss
+var wave_background_scss_style = __webpack_require__(111);
 
-// CONCATENATED MODULE: ./src/components/ES6/_app-load.js
+// CONCATENATED MODULE: ./src/components/_app-load.js
 /*
  * Common website functions, Can be called separately in HTML pages or custom JavaScript.
  *    
@@ -23177,11767 +34279,13 @@ var wave_background_scss_style = __webpack_require__(103);
 
 // CONCATENATED MODULE: ./src/index.js
 /*
- * Import third-party plugins from components of ES5
- * 
- * @description  Third-party plugins adopt pure file merger and do not import and export
- *        
- */
-
-/*
  * Import modules from components of ES6
  * 
  *        
  */
 
 
-
 /***/ })
 /******/ ]);
 //# sourceMappingURL=../css/uix-kit.css.map
-//# sourceMappingURL=uix-kit.js.map// Must leave a line blank
-/*
-* Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
-*    
-*/
-window.$ = window.jQuery;
-
-
-/* 
- *************************************
- * Scroll Lock
- * @https://gist.github.com/barneycarroll/6550066
- * @return {Void}
- *************************************
- */
-/*
-	 // Locks the page
-	$.scrollLock( true );
-	
-	// Unlocks the page
-	$.scrollLock( false );
-*/
-
-( function ( $ ) {
-    'use strict';
-	$.scrollLock = ( function scrollLockClosure() {
-	   
-		var $html      = $( 'html' ),
-			// State: unlocked by default
-			locked     = false,
-			// State: scroll to revert to
-			prevScroll = {
-				scrollLeft : $( window ).scrollLeft(),
-				scrollTop  : $( window ).scrollTop()
-			},
-			// State: styles to revert to
-			prevStyles = {},
-			lockStyles = {
-				'overflow-y' : 'scroll',
-				'position'   : 'fixed',
-				'width'      : '100%'
-			};
-	
-		// Instantiate cache in case someone tries to unlock before locking
-		saveStyles();
-	
-		// Save context's inline styles in cache
-		function saveStyles() {
-			var styleAttr = $html.attr( 'style' ),
-				styleStrs = [],
-				styleHash = {};
-	
-			if( !styleAttr ){
-				return;
-			}
-	
-			styleStrs = styleAttr.split( /;\s/ );
-	
-			$.each( styleStrs, function serializeStyleProp( styleString ){
-				if( !styleString ) {
-					return;
-				}
-	
-				var keyValue = styleString.split( /\s:\s/ );
-	
-				if( keyValue.length < 2 ) {
-					return;
-				}
-	
-				styleHash[ keyValue[ 0 ] ] = keyValue[ 1 ];
-			} );
-	
-			$.extend( prevStyles, styleHash );
-		}
-	
-		function lock() {
-			var appliedLock = {};
-	
-			// Duplicate execution will break DOM statefulness
-			if( locked ) {
-				return;
-			}
-	
-			// Save scroll state...
-			prevScroll = {
-				scrollLeft : $( window ).scrollLeft(),
-				scrollTop  : $( window ).scrollTop()
-			};
-	
-			// ...and styles
-			saveStyles();
-	
-			// Compose our applied CSS
-			$.extend( appliedLock, lockStyles, {
-				// And apply scroll state as styles
-				'left' : - prevScroll.scrollLeft + 'px',
-				'top'  : - prevScroll.scrollTop  + 'px'
-			} );
-	
-			// Then lock styles...
-			$html.css( appliedLock );
-	
-			// ...and scroll state
-			$( window )
-				.scrollLeft( 0 )
-				.scrollTop( 0 );
-	
-			locked = true;
-		}
-	
-		function unlock() {
-			// Duplicate execution will break DOM statefulness
-			if( !locked ) {
-				return;
-			}
-	
-			// Revert styles
-			$html.attr( 'style', $( '<x>' ).css( prevStyles ).attr( 'style' ) || '' );
-	
-			// Revert scroll values
-			$( window )
-				.scrollLeft( prevScroll.scrollLeft )
-				.scrollTop(  prevScroll.scrollTop );
-	
-			locked = false;
-		}
-	
-		return function scrollLock( on ) {
-			// If an argument is passed, lock or unlock depending on truthiness
-			if( arguments.length ) {
-				if( on ) {
-					lock();
-				}
-				else {
-					unlock();
-				}
-			}
-			// Otherwise, toggle
-			else {
-				if( locked ){
-					unlock();
-				}
-				else {
-					lock();
-				}
-			}
-		};
-	}() );
-
-}( jQuery ));
-
-
-/* 
- *************************************
- * Get all attributes of an element using jQuery
- *
- * @return {array}                        - Returns a new array.
- * @usage:
- 
-	$( '#demo' ).attr();  // { "data-a": "1", "id": "b" }
-
- *************************************
- */
-( function( old ) {
-	$.fn.attr = function() {
-		if ( arguments.length === 0 ) {
-
-			if ( this.length === 0 ) {
-				return null;
-			}
-
-			var obj = {};
-			$.each( this[0].attributes, function() {
-				if( this.specified ) {
-					obj[this.name] = this.value;
-				}
-			});
-
-			return obj;
-
-		}
-
-		return old.apply(this, arguments);
-	};
-} )( $.fn.attr );
-
-
-/* 
- *************************************
- * jQuery hashchange event - v1.3 - 7/21/2010
- * http://benalman.com/projects/jquery-hashchange-plugin/
- * 
- * Copyright (c) 2010 "Cowboy" Ben Alman
- * Dual licensed under the MIT and GPL licenses.
- * http://benalman.com/about/license/
- * 
- *************************************
- */
-
-(function($, window, undefined) {
-    '$:nomunge';
-    var str_hashchange = 'hashchange',
-    doc = document,
-    fake_onhashchange, special = $.event.special,
-    doc_mode = doc.documentMode,
-    supports_onhashchange = 'on' + str_hashchange in window && (doc_mode === undefined || doc_mode > 7);
-    function get_fragment(url) {
-        url = url || location.href;
-        return '#' + url.replace(/^[^#]*#?(.*)$/, '$1');
-    };
-    $.fn[str_hashchange] = function(fn) {
-        return fn ? this.bind(str_hashchange, fn) : this.trigger(str_hashchange);
-    };
-    $.fn[str_hashchange].delay = 50;
-    special[str_hashchange] = $.extend(special[str_hashchange], {
-        setup: function() {
-            if (supports_onhashchange) {
-                return false;
-            }
-            $(fake_onhashchange.start);
-        },
-        teardown: function() {
-            if (supports_onhashchange) {
-                return false;
-            }
-            $(fake_onhashchange.stop);
-        }
-    });
-    fake_onhashchange = (function() {
-        var self = {},
-        timeout_id, last_hash = get_fragment(),
-        fn_retval = function(val) {
-            return val;
-        },
-        history_set = fn_retval,
-        history_get = fn_retval;
-        self.start = function() {
-            timeout_id || poll();
-        };
-        self.stop = function() {
-            timeout_id && clearTimeout(timeout_id);
-            timeout_id = undefined;
-        };
-        function poll() {
-            var hash = get_fragment(),
-            history_hash = history_get(last_hash);
-            if (hash !== last_hash) {
-                history_set(last_hash = hash, history_hash);
-                $(window).trigger(str_hashchange);
-            } else if (history_hash !== last_hash) {
-                location.href = location.href.replace(/#.*/, '') + history_hash;
-            }
-            timeout_id = setTimeout(poll, $.fn[str_hashchange].delay);
-        };
-        $.browser.msie && !supports_onhashchange && (function() {
-            var iframe, iframe_src;
-            self.start = function() {
-                if (!iframe) {
-                    iframe_src = $.fn[str_hashchange].src;
-                    iframe_src = iframe_src && iframe_src + get_fragment();
-                    iframe = $('<iframe tabindex="-1" title="empty"/>').hide().one('load',
-                    function() {
-                        iframe_src || history_set(get_fragment());
-                        poll();
-                    }).attr('src', iframe_src || 'javascript:0').insertAfter('body')[0].contentWindow;
-                    doc.onpropertychange = function() {
-                        try {
-                            if (event.propertyName === 'title') {
-                                iframe.document.title = doc.title;
-                            }
-                        } catch(e) {}
-                    };
-                }
-            };
-            self.stop = fn_retval;
-            history_get = function() {
-                return get_fragment(iframe.location.href);
-            };
-            history_set = function(hash, history_hash) {
-                var iframe_doc = iframe.document,
-                domain = $.fn[str_hashchange].domain;
-                if (hash !== history_hash) {
-                    iframe_doc.title = doc.title;
-                    iframe_doc.open();
-                    domain && iframe_doc.write('<script>document.domain="' + domain + '"</script>');
-                    iframe_doc.close();
-                    iframe.location.hash = hash;
-                }
-            };
-        })();
-        return self;
-    })();
-})(jQuery, this);
-
-/*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
- * @version 1.3.4
- *
- * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
- * @see http://php.net/manual/en/function.date.php
- *
- * For more JQuery plugins visit http://plugins.krajee.com
- * For more Yii related demos visit http://demos.krajee.com
- */var DateFormatter;!function(){"use strict";var t,e,r,n,a,u,i;u=864e5,i=3600,t=function(t,e){return"string"==typeof t&&"string"==typeof e&&t.toLowerCase()===e.toLowerCase()},e=function(t,r,n){var a=n||"0",u=t.toString();return u.length<r?e(a+u,r):u},r=function(t){var e,n;for(t=t||{},e=1;e<arguments.length;e++)if(n=arguments[e])for(var a in n)n.hasOwnProperty(a)&&("object"==typeof n[a]?r(t[a],n[a]):t[a]=n[a]);return t},n=function(t,e){for(var r=0;r<e.length;r++)if(e[r].toLowerCase()===t.toLowerCase())return r;return-1},a={dateSettings:{days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],daysShort:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],months:["January","February","March","April","May","June","July","August","September","October","November","December"],monthsShort:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],meridiem:["AM","PM"],ordinal:function(t){var e=t%10,r={1:"st",2:"nd",3:"rd"};return 1!==Math.floor(t%100/10)&&r[e]?r[e]:"th"}},separators:/[ \-+\/\.T:@]/g,validParts:/[dDjlNSwzWFmMntLoYyaABgGhHisueTIOPZcrU]/g,intParts:/[djwNzmnyYhHgGis]/g,tzParts:/\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,tzClip:/[^-+\dA-Z]/g},DateFormatter=function(t){var e=this,n=r(a,t);e.dateSettings=n.dateSettings,e.separators=n.separators,e.validParts=n.validParts,e.intParts=n.intParts,e.tzParts=n.tzParts,e.tzClip=n.tzClip},DateFormatter.prototype={constructor:DateFormatter,getMonth:function(t){var e,r=this;return e=n(t,r.dateSettings.monthsShort)+1,0===e&&(e=n(t,r.dateSettings.months)+1),e},parseDate:function(e,r){var n,a,u,i,s,o,c,f,l,h,d=this,g=!1,m=!1,p=d.dateSettings,y={date:null,year:null,month:null,day:null,hour:0,min:0,sec:0};if(!e)return null;if(e instanceof Date)return e;if("U"===r)return u=parseInt(e),u?new Date(1e3*u):e;switch(typeof e){case"number":return new Date(e);case"string":break;default:return null}if(n=r.match(d.validParts),!n||0===n.length)throw new Error("Invalid date format definition.");for(a=e.replace(d.separators,"\x00").split("\x00"),u=0;u<a.length;u++)switch(i=a[u],s=parseInt(i),n[u]){case"y":case"Y":if(!s)return null;l=i.length,y.year=2===l?parseInt((70>s?"20":"19")+i):s,g=!0;break;case"m":case"n":case"M":case"F":if(isNaN(s)){if(o=d.getMonth(i),!(o>0))return null;y.month=o}else{if(!(s>=1&&12>=s))return null;y.month=s}g=!0;break;case"d":case"j":if(!(s>=1&&31>=s))return null;y.day=s,g=!0;break;case"g":case"h":if(c=n.indexOf("a")>-1?n.indexOf("a"):n.indexOf("A")>-1?n.indexOf("A"):-1,h=a[c],c>-1)f=t(h,p.meridiem[0])?0:t(h,p.meridiem[1])?12:-1,s>=1&&12>=s&&f>-1?y.hour=s+f-1:s>=0&&23>=s&&(y.hour=s);else{if(!(s>=0&&23>=s))return null;y.hour=s}m=!0;break;case"G":case"H":if(!(s>=0&&23>=s))return null;y.hour=s,m=!0;break;case"i":if(!(s>=0&&59>=s))return null;y.min=s,m=!0;break;case"s":if(!(s>=0&&59>=s))return null;y.sec=s,m=!0}if(g===!0&&y.year&&y.month&&y.day)y.date=new Date(y.year,y.month-1,y.day,y.hour,y.min,y.sec,0);else{if(m!==!0)return null;y.date=new Date(0,0,0,y.hour,y.min,y.sec,0)}return y.date},guessDate:function(t,e){if("string"!=typeof t)return t;var r,n,a,u,i,s,o=this,c=t.replace(o.separators,"\x00").split("\x00"),f=/^[djmn]/g,l=e.match(o.validParts),h=new Date,d=0;if(!f.test(l[0]))return t;for(a=0;a<c.length;a++){if(d=2,i=c[a],s=parseInt(i.substr(0,2)),isNaN(s))return null;switch(a){case 0:"m"===l[0]||"n"===l[0]?h.setMonth(s-1):h.setDate(s);break;case 1:"m"===l[0]||"n"===l[0]?h.setDate(s):h.setMonth(s-1);break;case 2:if(n=h.getFullYear(),r=i.length,d=4>r?r:4,n=parseInt(4>r?n.toString().substr(0,4-r)+i:i.substr(0,4)),!n)return null;h.setFullYear(n);break;case 3:h.setHours(s);break;case 4:h.setMinutes(s);break;case 5:h.setSeconds(s)}u=i.substr(d),u.length>0&&c.splice(a+1,0,u)}return h},parseFormat:function(t,r){var n,a=this,s=a.dateSettings,o=/\\?(.?)/gi,c=function(t,e){return n[t]?n[t]():e};return n={d:function(){return e(n.j(),2)},D:function(){return s.daysShort[n.w()]},j:function(){return r.getDate()},l:function(){return s.days[n.w()]},N:function(){return n.w()||7},w:function(){return r.getDay()},z:function(){var t=new Date(n.Y(),n.n()-1,n.j()),e=new Date(n.Y(),0,1);return Math.round((t-e)/u)},W:function(){var t=new Date(n.Y(),n.n()-1,n.j()-n.N()+3),r=new Date(t.getFullYear(),0,4);return e(1+Math.round((t-r)/u/7),2)},F:function(){return s.months[r.getMonth()]},m:function(){return e(n.n(),2)},M:function(){return s.monthsShort[r.getMonth()]},n:function(){return r.getMonth()+1},t:function(){return new Date(n.Y(),n.n(),0).getDate()},L:function(){var t=n.Y();return t%4===0&&t%100!==0||t%400===0?1:0},o:function(){var t=n.n(),e=n.W(),r=n.Y();return r+(12===t&&9>e?1:1===t&&e>9?-1:0)},Y:function(){return r.getFullYear()},y:function(){return n.Y().toString().slice(-2)},a:function(){return n.A().toLowerCase()},A:function(){var t=n.G()<12?0:1;return s.meridiem[t]},B:function(){var t=r.getUTCHours()*i,n=60*r.getUTCMinutes(),a=r.getUTCSeconds();return e(Math.floor((t+n+a+i)/86.4)%1e3,3)},g:function(){return n.G()%12||12},G:function(){return r.getHours()},h:function(){return e(n.g(),2)},H:function(){return e(n.G(),2)},i:function(){return e(r.getMinutes(),2)},s:function(){return e(r.getSeconds(),2)},u:function(){return e(1e3*r.getMilliseconds(),6)},e:function(){var t=/\((.*)\)/.exec(String(r))[1];return t||"Coordinated Universal Time"},I:function(){var t=new Date(n.Y(),0),e=Date.UTC(n.Y(),0),r=new Date(n.Y(),6),a=Date.UTC(n.Y(),6);return t-e!==r-a?1:0},O:function(){var t=r.getTimezoneOffset(),n=Math.abs(t);return(t>0?"-":"+")+e(100*Math.floor(n/60)+n%60,4)},P:function(){var t=n.O();return t.substr(0,3)+":"+t.substr(3,2)},T:function(){var t=(String(r).match(a.tzParts)||[""]).pop().replace(a.tzClip,"");return t||"UTC"},Z:function(){return 60*-r.getTimezoneOffset()},c:function(){return"Y-m-d\\TH:i:sP".replace(o,c)},r:function(){return"D, d M Y H:i:s O".replace(o,c)},U:function(){return r.getTime()/1e3||0}},c(t,t)},formatDate:function(t,e){var r,n,a,u,i,s=this,o="",c="\\";if("string"==typeof t&&(t=s.parseDate(t,e),!t))return null;if(t instanceof Date){for(a=e.length,r=0;a>r;r++)i=e.charAt(r),"S"!==i&&i!==c&&(r>0&&e.charAt(r-1)===c?o+=i:(u=s.parseFormat(i,t),r!==a-1&&s.intParts.test(i)&&"S"===e.charAt(r+1)&&(n=parseInt(u)||0,u+=s.dateSettings.ordinal(n)),o+=u));return o}return""}}}();/**
- * @preserve jQuery DateTimePicker
- * @homepage http://xdsoft.net/jqplugins/datetimepicker/
- * @author Chupurnov Valeriy (<chupurnov@gmail.com>)
- */
-
-/**
- * @param {jQuery} $
- */
-var datetimepickerFactory = function ($) {
-	'use strict';
-
-	var default_options  = {
-		i18n: {
-			ar: { // Arabic
-				months: [
-					"كانون الثاني", "شباط", "آذار", "نيسان", "مايو", "حزيران", "تموز", "آب", "أيلول", "تشرين الأول", "تشرين الثاني", "كانون الأول"
-				],
-				dayOfWeekShort: [
-					"ن", "ث", "ع", "خ", "ج", "س", "ح"
-				],
-				dayOfWeek: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
-			},
-			ro: { // Romanian
-				months: [
-					"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"
-				],
-				dayOfWeekShort: [
-					"Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sâ"
-				],
-				dayOfWeek: ["Duminică", "Luni", "Marţi", "Miercuri", "Joi", "Vineri", "Sâmbătă"]
-			},
-			id: { // Indonesian
-				months: [
-					"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-				],
-				dayOfWeekShort: [
-					"Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"
-				],
-				dayOfWeek: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-			},
-			is: { // Icelandic
-				months: [
-					"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí", "Ágúst", "September", "Október", "Nóvember", "Desember"
-				],
-				dayOfWeekShort: [
-					"Sun", "Mán", "Þrið", "Mið", "Fim", "Fös", "Lau"
-				],
-				dayOfWeek: ["Sunnudagur", "Mánudagur", "Þriðjudagur", "Miðvikudagur", "Fimmtudagur", "Föstudagur", "Laugardagur"]
-			},
-			bg: { // Bulgarian
-				months: [
-					"Януари", "Февруари", "Март", "Април", "Май", "Юни", "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"
-				],
-				dayOfWeekShort: [
-					"Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"
-				],
-				dayOfWeek: ["Неделя", "Понеделник", "Вторник", "Сряда", "Четвъртък", "Петък", "Събота"]
-			},
-			fa: { // Persian/Farsi
-				months: [
-					'فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'
-				],
-				dayOfWeekShort: [
-					'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'
-				],
-				dayOfWeek: ["یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه", "یک‌شنبه"]
-			},
-			ru: { // Russian
-				months: [
-					'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-				],
-				dayOfWeekShort: [
-					"Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"
-				],
-				dayOfWeek: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
-			},
-			uk: { // Ukrainian
-				months: [
-					'Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'
-				],
-				dayOfWeekShort: [
-					"Ндл", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Сбт"
-				],
-				dayOfWeek: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
-			},
-			en: { // English
-				months: [
-					"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-				],
-				dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-			},
-			el: { // Ελληνικά
-				months: [
-					"Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"
-				],
-				dayOfWeekShort: [
-					"Κυρ", "Δευ", "Τρι", "Τετ", "Πεμ", "Παρ", "Σαβ"
-				],
-				dayOfWeek: ["Κυριακή", "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο"]
-			},
-			de: { // German
-				months: [
-					'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
-				],
-				dayOfWeekShort: [
-					"So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"
-				],
-				dayOfWeek: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]
-			},
-			nl: { // Dutch
-				months: [
-					"januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"
-				],
-				dayOfWeekShort: [
-					"zo", "ma", "di", "wo", "do", "vr", "za"
-				],
-				dayOfWeek: ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"]
-			},
-			tr: { // Turkish
-				months: [
-					"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
-				],
-				dayOfWeekShort: [
-					"Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"
-				],
-				dayOfWeek: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"]
-			},
-			fr: { //French
-				months: [
-					"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-				],
-				dayOfWeekShort: [
-					"Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"
-				],
-				dayOfWeek: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"]
-			},
-			es: { // Spanish
-				months: [
-					"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-				],
-				dayOfWeekShort: [
-					"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"
-				],
-				dayOfWeek: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
-			},
-			th: { // Thai
-				months: [
-					'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
-				],
-				dayOfWeekShort: [
-					'อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'
-				],
-				dayOfWeek: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-			},
-			pl: { // Polish
-				months: [
-					"styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"
-				],
-				dayOfWeekShort: [
-					"nd", "pn", "wt", "śr", "cz", "pt", "sb"
-				],
-				dayOfWeek: ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"]
-			},
-			pt: { // Portuguese
-				months: [
-					"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-				],
-				dayOfWeekShort: [
-					"Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"
-				],
-				dayOfWeek: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
-			},
-			ch: { // Simplified Chinese
-				months: [
-					"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
-				],
-				dayOfWeekShort: [
-					"日", "一", "二", "三", "四", "五", "六"
-				]
-			},
-			se: { // Swedish
-				months: [
-					"Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September",  "Oktober", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"
-				]
-			},
-			km: { // Khmer (ភាសាខ្មែរ)
-				months: [
-					"មករា​", "កុម្ភៈ", "មិនា​", "មេសា​", "ឧសភា​", "មិថុនា​", "កក្កដា​", "សីហា​", "កញ្ញា​", "តុលា​", "វិច្ឆិកា", "ធ្នូ​"
-				],
-				dayOfWeekShort: ["អាទិ​", "ច័ន្ទ​", "អង្គារ​", "ពុធ​", "ព្រហ​​", "សុក្រ​", "សៅរ៍"],
-				dayOfWeek: ["អាទិត្យ​", "ច័ន្ទ​", "អង្គារ​", "ពុធ​", "ព្រហស្បតិ៍​", "សុក្រ​", "សៅរ៍"]
-			},
-			kr: { // Korean
-				months: [
-					"1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"
-				],
-				dayOfWeekShort: [
-					"일", "월", "화", "수", "목", "금", "토"
-				],
-				dayOfWeek: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
-			},
-			it: { // Italian
-				months: [
-					"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
-				],
-				dayOfWeekShort: [
-					"Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"
-				],
-				dayOfWeek: ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
-			},
-			da: { // Dansk
-				months: [
-					"Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"
-				],
-				dayOfWeek: ["søndag", "mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag"]
-			},
-			no: { // Norwegian
-				months: [
-					"Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"
-				],
-				dayOfWeekShort: [
-					"Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"
-				],
-				dayOfWeek: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag']
-			},
-			ja: { // Japanese
-				months: [
-					"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"
-				],
-				dayOfWeekShort: [
-					"日", "月", "火", "水", "木", "金", "土"
-				],
-				dayOfWeek: ["日曜", "月曜", "火曜", "水曜", "木曜", "金曜", "土曜"]
-			},
-			vi: { // Vietnamese
-				months: [
-					"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
-				],
-				dayOfWeekShort: [
-					"CN", "T2", "T3", "T4", "T5", "T6", "T7"
-				],
-				dayOfWeek: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"]
-			},
-			sl: { // Slovenščina
-				months: [
-					"Januar", "Februar", "Marec", "April", "Maj", "Junij", "Julij", "Avgust", "September", "Oktober", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Ned", "Pon", "Tor", "Sre", "Čet", "Pet", "Sob"
-				],
-				dayOfWeek: ["Nedelja", "Ponedeljek", "Torek", "Sreda", "Četrtek", "Petek", "Sobota"]
-			},
-			cs: { // Čeština
-				months: [
-					"Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"
-				],
-				dayOfWeekShort: [
-					"Ne", "Po", "Út", "St", "Čt", "Pá", "So"
-				]
-			},
-			hu: { // Hungarian
-				months: [
-					"Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Va", "Hé", "Ke", "Sze", "Cs", "Pé", "Szo"
-				],
-				dayOfWeek: ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"]
-			},
-			az: { //Azerbaijanian (Azeri)
-				months: [
-					"Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"
-				],
-				dayOfWeekShort: [
-					"B", "Be", "Ça", "Ç", "Ca", "C", "Ş"
-				],
-				dayOfWeek: ["Bazar", "Bazar ertəsi", "Çərşənbə axşamı", "Çərşənbə", "Cümə axşamı", "Cümə", "Şənbə"]
-			},
-			bs: { //Bosanski
-				months: [
-					"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"
-				],
-				dayOfWeekShort: [
-					"Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"
-				],
-				dayOfWeek: ["Nedjelja","Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"]
-			},
-			ca: { //Català
-				months: [
-					"Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"
-				],
-				dayOfWeekShort: [
-					"Dg", "Dl", "Dt", "Dc", "Dj", "Dv", "Ds"
-				],
-				dayOfWeek: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"]
-			},
-			'en-GB': { //English (British)
-				months: [
-					"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-				],
-				dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-			},
-			et: { //"Eesti"
-				months: [
-					"Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"
-				],
-				dayOfWeekShort: [
-					"P", "E", "T", "K", "N", "R", "L"
-				],
-				dayOfWeek: ["Pühapäev", "Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev"]
-			},
-			eu: { //Euskara
-				months: [
-					"Urtarrila", "Otsaila", "Martxoa", "Apirila", "Maiatza", "Ekaina", "Uztaila", "Abuztua", "Iraila", "Urria", "Azaroa", "Abendua"
-				],
-				dayOfWeekShort: [
-					"Ig.", "Al.", "Ar.", "Az.", "Og.", "Or.", "La."
-				],
-				dayOfWeek: ['Igandea', 'Astelehena', 'Asteartea', 'Asteazkena', 'Osteguna', 'Ostirala', 'Larunbata']
-			},
-			fi: { //Finnish (Suomi)
-				months: [
-					"Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"
-				],
-				dayOfWeekShort: [
-					"Su", "Ma", "Ti", "Ke", "To", "Pe", "La"
-				],
-				dayOfWeek: ["sunnuntai", "maanantai", "tiistai", "keskiviikko", "torstai", "perjantai", "lauantai"]
-			},
-			gl: { //Galego
-				months: [
-					"Xan", "Feb", "Maz", "Abr", "Mai", "Xun", "Xul", "Ago", "Set", "Out", "Nov", "Dec"
-				],
-				dayOfWeekShort: [
-					"Dom", "Lun", "Mar", "Mer", "Xov", "Ven", "Sab"
-				],
-				dayOfWeek: ["Domingo", "Luns", "Martes", "Mércores", "Xoves", "Venres", "Sábado"]
-			},
-			hr: { //Hrvatski
-				months: [
-					"Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"
-				],
-				dayOfWeekShort: [
-					"Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"
-				],
-				dayOfWeek: ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"]
-			},
-			ko: { //Korean (한국어)
-				months: [
-					"1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"
-				],
-				dayOfWeekShort: [
-					"일", "월", "화", "수", "목", "금", "토"
-				],
-				dayOfWeek: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
-			},
-			lt: { //Lithuanian (lietuvių)
-				months: [
-					"Sausio", "Vasario", "Kovo", "Balandžio", "Gegužės", "Birželio", "Liepos", "Rugpjūčio", "Rugsėjo", "Spalio", "Lapkričio", "Gruodžio"
-				],
-				dayOfWeekShort: [
-					"Sek", "Pir", "Ant", "Tre", "Ket", "Pen", "Šeš"
-				],
-				dayOfWeek: ["Sekmadienis", "Pirmadienis", "Antradienis", "Trečiadienis", "Ketvirtadienis", "Penktadienis", "Šeštadienis"]
-			},
-			lv: { //Latvian (Latviešu)
-				months: [
-					"Janvāris", "Februāris", "Marts", "Aprīlis ", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"
-				],
-				dayOfWeekShort: [
-					"Sv", "Pr", "Ot", "Tr", "Ct", "Pk", "St"
-				],
-				dayOfWeek: ["Svētdiena", "Pirmdiena", "Otrdiena", "Trešdiena", "Ceturtdiena", "Piektdiena", "Sestdiena"]
-			},
-			mk: { //Macedonian (Македонски)
-				months: [
-					"јануари", "февруари", "март", "април", "мај", "јуни", "јули", "август", "септември", "октомври", "ноември", "декември"
-				],
-				dayOfWeekShort: [
-					"нед", "пон", "вто", "сре", "чет", "пет", "саб"
-				],
-				dayOfWeek: ["Недела", "Понеделник", "Вторник", "Среда", "Четврток", "Петок", "Сабота"]
-			},
-			mn: { //Mongolian (Монгол)
-				months: [
-					"1-р сар", "2-р сар", "3-р сар", "4-р сар", "5-р сар", "6-р сар", "7-р сар", "8-р сар", "9-р сар", "10-р сар", "11-р сар", "12-р сар"
-				],
-				dayOfWeekShort: [
-					"Дав", "Мяг", "Лха", "Пүр", "Бсн", "Бям", "Ням"
-				],
-				dayOfWeek: ["Даваа", "Мягмар", "Лхагва", "Пүрэв", "Баасан", "Бямба", "Ням"]
-			},
-			'pt-BR': { //Português(Brasil)
-				months: [
-					"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-				],
-				dayOfWeekShort: [
-					"Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"
-				],
-				dayOfWeek: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
-			},
-			sk: { //Slovenčina
-				months: [
-					"Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Ne", "Po", "Ut", "St", "Št", "Pi", "So"
-				],
-				dayOfWeek: ["Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"]
-			},
-			sq: { //Albanian (Shqip)
-				months: [
-					"Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"
-				],
-				dayOfWeekShort: [
-					"Die", "Hën", "Mar", "Mër", "Enj", "Pre", "Shtu"
-				],
-				dayOfWeek: ["E Diel", "E Hënë", "E Martē", "E Mërkurë", "E Enjte", "E Premte", "E Shtunë"]
-			},
-			'sr-YU': { //Serbian (Srpski)
-				months: [
-					"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"
-				],
-				dayOfWeekShort: [
-					"Ned", "Pon", "Uto", "Sre", "čet", "Pet", "Sub"
-				],
-				dayOfWeek: ["Nedelja","Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota"]
-			},
-			sr: { //Serbian Cyrillic (Српски)
-				months: [
-					"јануар", "фебруар", "март", "април", "мај", "јун", "јул", "август", "септембар", "октобар", "новембар", "децембар"
-				],
-				dayOfWeekShort: [
-					"нед", "пон", "уто", "сре", "чет", "пет", "суб"
-				],
-				dayOfWeek: ["Недеља","Понедељак", "Уторак", "Среда", "Четвртак", "Петак", "Субота"]
-			},
-			sv: { //Svenska
-				months: [
-					"Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"
-				],
-				dayOfWeek: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"]
-			},
-			'zh-TW': { //Traditional Chinese (繁體中文)
-				months: [
-					"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
-				],
-				dayOfWeekShort: [
-					"日", "一", "二", "三", "四", "五", "六"
-				],
-				dayOfWeek: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
-			},
-			zh: { //Simplified Chinese (简体中文)
-				months: [
-					"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
-				],
-				dayOfWeekShort: [
-					"日", "一", "二", "三", "四", "五", "六"
-				],
-				dayOfWeek: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
-			},
-			ug:{ // Uyghur(ئۇيغۇرچە)
-				months: [
-					"1-ئاي","2-ئاي","3-ئاي","4-ئاي","5-ئاي","6-ئاي","7-ئاي","8-ئاي","9-ئاي","10-ئاي","11-ئاي","12-ئاي"
-				],
-				dayOfWeek: [
-					"يەكشەنبە", "دۈشەنبە","سەيشەنبە","چارشەنبە","پەيشەنبە","جۈمە","شەنبە"
-				]
-			},
-			he: { //Hebrew (עברית)
-				months: [
-					'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'
-				],
-				dayOfWeekShort: [
-					'א\'', 'ב\'', 'ג\'', 'ד\'', 'ה\'', 'ו\'', 'שבת'
-				],
-				dayOfWeek: ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת", "ראשון"]
-			},
-			hy: { // Armenian
-				months: [
-					"Հունվար", "Փետրվար", "Մարտ", "Ապրիլ", "Մայիս", "Հունիս", "Հուլիս", "Օգոստոս", "Սեպտեմբեր", "Հոկտեմբեր", "Նոյեմբեր", "Դեկտեմբեր"
-				],
-				dayOfWeekShort: [
-					"Կի", "Երկ", "Երք", "Չոր", "Հնգ", "Ուրբ", "Շբթ"
-				],
-				dayOfWeek: ["Կիրակի", "Երկուշաբթի", "Երեքշաբթի", "Չորեքշաբթի", "Հինգշաբթի", "Ուրբաթ", "Շաբաթ"]
-			},
-			kg: { // Kyrgyz
-				months: [
-					'Үчтүн айы', 'Бирдин айы', 'Жалган Куран', 'Чын Куран', 'Бугу', 'Кулжа', 'Теке', 'Баш Оона', 'Аяк Оона', 'Тогуздун айы', 'Жетинин айы', 'Бештин айы'
-				],
-				dayOfWeekShort: [
-					"Жек", "Дүй", "Шей", "Шар", "Бей", "Жум", "Ише"
-				],
-				dayOfWeek: [
-					"Жекшемб", "Дүйшөмб", "Шейшемб", "Шаршемб", "Бейшемби", "Жума", "Ишенб"
-				]
-			},
-			rm: { // Romansh
-				months: [
-					"Schaner", "Favrer", "Mars", "Avrigl", "Matg", "Zercladur", "Fanadur", "Avust", "Settember", "October", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Du", "Gli", "Ma", "Me", "Gie", "Ve", "So"
-				],
-				dayOfWeek: [
-					"Dumengia", "Glindesdi", "Mardi", "Mesemna", "Gievgia", "Venderdi", "Sonda"
-				]
-			},
-			ka: { // Georgian
-				months: [
-					'იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
-				],
-				dayOfWeekShort: [
-					"კვ", "ორშ", "სამშ", "ოთხ", "ხუთ", "პარ", "შაბ"
-				],
-				dayOfWeek: ["კვირა", "ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი"]
-			}
-		},
-
-		ownerDocument: document,
-		contentWindow: window,
-
-		value: '',
-		rtl: false,
-
-		format:	'Y/m/d H:i',
-		formatTime:	'H:i',
-		formatDate:	'Y/m/d',
-
-		startDate:	false, // new Date(), '1986/12/08', '-1970/01/05','-1970/01/05',
-		step: 60,
-		monthChangeSpinner: true,
-
-		closeOnDateSelect: false,
-		closeOnTimeSelect: true,
-		closeOnWithoutClick: true,
-		closeOnInputClick: true,
-		openOnFocus: true,
-
-		timepicker: true,
-		datepicker: true,
-		weeks: false,
-
-		defaultTime: false,	// use formatTime format (ex. '10:00' for formatTime:	'H:i')
-		defaultDate: false,	// use formatDate format (ex new Date() or '1986/12/08' or '-1970/01/05' or '-1970/01/05')
-
-		minDate: false,
-		maxDate: false,
-		minTime: false,
-		maxTime: false,
-		minDateTime: false,
-		maxDateTime: false,
-
-		allowTimes: [],
-		opened: false,
-		initTime: true,
-		inline: false,
-		theme: '',
-		touchMovedThreshold: 5,
-
-		onSelectDate: function () {},
-		onSelectTime: function () {},
-		onChangeMonth: function () {},
-		onGetWeekOfYear: function () {},
-		onChangeYear: function () {},
-		onChangeDateTime: function () {},
-		onShow: function () {},
-		onClose: function () {},
-		onGenerate: function () {},
-
-		withoutCopyright: true,
-		inverseButton: false,
-		hours12: false,
-		next: 'xdsoft_next',
-		prev : 'xdsoft_prev',
-		dayOfWeekStart: 0,
-		parentID: 'body',
-		timeHeightInTimePicker: 25,
-		timepickerScrollbar: true,
-		todayButton: true,
-		prevButton: true,
-		nextButton: true,
-		defaultSelect: true,
-
-		scrollMonth: true,
-		scrollTime: true,
-		scrollInput: true,
-
-		lazyInit: false,
-		mask: false,
-		validateOnBlur: true,
-		allowBlank: true,
-		yearStart: 1950,
-		yearEnd: 2050,
-		monthStart: 0,
-		monthEnd: 11,
-		style: '',
-		id: '',
-		fixed: false,
-		roundTime: 'round', // ceil, floor
-		className: '',
-		weekends: [],
-		highlightedDates: [],
-		highlightedPeriods: [],
-		allowDates : [],
-		allowDateRe : null,
-		disabledDates : [],
-		disabledWeekDays: [],
-		yearOffset: 0,
-		beforeShowDay: null,
-
-		enterLikeTab: true,
-        showApplyButton: false,
-        insideParent: false,
-	};
-
-	var dateHelper = null,
-		defaultDateHelper = null,
-		globalLocaleDefault = 'en',
-		globalLocale = 'en';
-
-	var dateFormatterOptionsDefault = {
-		meridiem: ['AM', 'PM']
-	};
-
-	var initDateFormatter = function(){
-		var locale = default_options.i18n[globalLocale],
-			opts = {
-				days: locale.dayOfWeek,
-				daysShort: locale.dayOfWeekShort,
-				months: locale.months,
-				monthsShort: $.map(locale.months, function(n){ return n.substring(0, 3) })
-			};
-
-		if (typeof DateFormatter === 'function') {
-			dateHelper = defaultDateHelper = new DateFormatter({
-				dateSettings: $.extend({}, dateFormatterOptionsDefault, opts)
-			});
-		}
-	};
-
-	var dateFormatters = {
-		moment: {
-			default_options:{
-				format: 'YYYY/MM/DD HH:mm',
-				formatDate: 'YYYY/MM/DD',
-				formatTime: 'HH:mm',
-			},
-			formatter: {
-				parseDate: function (date, format) {
-					if(isFormatStandard(format)){
-						return defaultDateHelper.parseDate(date, format);
-					} 
-					var d = moment(date, format);
-					return d.isValid() ? d.toDate() : false;
-				},
-
-				formatDate: function (date, format) {
-					if(isFormatStandard(format)){
-						return defaultDateHelper.formatDate(date, format);
-					} 
-					return moment(date).format(format);
-				},
-
-				formatMask: function(format){
-					return format
-						.replace(/Y{4}/g, '9999')
-						.replace(/Y{2}/g, '99')
-						.replace(/M{2}/g, '19')
-						.replace(/D{2}/g, '39')
-						.replace(/H{2}/g, '29')
-						.replace(/m{2}/g, '59')
-						.replace(/s{2}/g, '59');
-				},
-			}
-		}
-	}
-
-	// for locale settings
-	$.datetimepicker = {
-		setLocale: function(locale){
-			var newLocale = default_options.i18n[locale] ? locale : globalLocaleDefault;
-			if (globalLocale !== newLocale) {
-				globalLocale = newLocale;
-				// reinit date formatter
-				initDateFormatter();
-			}
-		},
-
-		setDateFormatter: function(dateFormatter) {
-			if(typeof dateFormatter === 'string' && dateFormatters.hasOwnProperty(dateFormatter)){
-				var df = dateFormatters[dateFormatter];
-				$.extend(default_options, df.default_options);
-				dateHelper = df.formatter; 
-			}
-			else {
-				dateHelper = dateFormatter;
-			}
-		},
-	};
-
-	var standardFormats = {
-		RFC_2822: 'D, d M Y H:i:s O',
-		ATOM: 'Y-m-d\TH:i:sP',
-		ISO_8601: 'Y-m-d\TH:i:sO',
-		RFC_822: 'D, d M y H:i:s O',
-		RFC_850: 'l, d-M-y H:i:s T',
-		RFC_1036: 'D, d M y H:i:s O',
-		RFC_1123: 'D, d M Y H:i:s O',
-		RSS: 'D, d M Y H:i:s O',
-		W3C: 'Y-m-d\TH:i:sP'
-	}
-
-	var isFormatStandard = function(format){
-		return Object.values(standardFormats).indexOf(format) === -1 ? false : true;
-	}
-
-	$.extend($.datetimepicker, standardFormats);
-
-	// first init date formatter
-	initDateFormatter();
-
-	// fix for ie8
-	if (!window.getComputedStyle) {
-		window.getComputedStyle = function (el) {
-			this.el = el;
-			this.getPropertyValue = function (prop) {
-				var re = /(-([a-z]))/g;
-				if (prop === 'float') {
-					prop = 'styleFloat';
-				}
-				if (re.test(prop)) {
-					prop = prop.replace(re, function (a, b, c) {
-						return c.toUpperCase();
-					});
-				}
-				return el.currentStyle[prop] || null;
-			};
-			return this;
-		};
-	}
-	if (!Array.prototype.indexOf) {
-		Array.prototype.indexOf = function (obj, start) {
-			var i, j;
-			for (i = (start || 0), j = this.length; i < j; i += 1) {
-				if (this[i] === obj) { return i; }
-			}
-			return -1;
-		};
-	}
-
-	Date.prototype.countDaysInMonth = function () {
-		return new Date(this.getFullYear(), this.getMonth() + 1, 0).getDate();
-	};
-
-	$.fn.xdsoftScroller = function (options, percent) {
-		return this.each(function () {
-			var timeboxparent = $(this),
-				pointerEventToXY = function (e) {
-					var out = {x: 0, y: 0},
-						touch;
-					if (e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend' || e.type === 'touchcancel') {
-						touch  = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-						out.x = touch.clientX;
-						out.y = touch.clientY;
-					} else if (e.type === 'mousedown' || e.type === 'mouseup' || e.type === 'mousemove' || e.type === 'mouseover' || e.type === 'mouseout' || e.type === 'mouseenter' || e.type === 'mouseleave') {
-						out.x = e.clientX;
-						out.y = e.clientY;
-					}
-					return out;
-				},
-				timebox,
-				parentHeight,
-				height,
-				scrollbar,
-				scroller,
-				maximumOffset = 100,
-				start = false,
-				startY = 0,
-				startTop = 0,
-				h1 = 0,
-				touchStart = false,
-				startTopScroll = 0,
-				calcOffset = function () {};
-
-			if (percent === 'hide') {
-				timeboxparent.find('.xdsoft_scrollbar').hide();
-				return;
-			}
-
-			if (!$(this).hasClass('xdsoft_scroller_box')) {
-				timebox = timeboxparent.children().eq(0);
-				parentHeight = timeboxparent[0].clientHeight;
-				height = timebox[0].offsetHeight;
-				scrollbar = $('<div class="xdsoft_scrollbar"></div>');
-				scroller = $('<div class="xdsoft_scroller"></div>');
-				scrollbar.append(scroller);
-
-				timeboxparent.addClass('xdsoft_scroller_box').append(scrollbar);
-				calcOffset = function calcOffset(event) {
-					var offset = pointerEventToXY(event).y - startY + startTopScroll;
-					if (offset < 0) {
-						offset = 0;
-					}
-					if (offset + scroller[0].offsetHeight > h1) {
-						offset = h1 - scroller[0].offsetHeight;
-					}
-					timeboxparent.trigger('scroll_element.xdsoft_scroller', [maximumOffset ? offset / maximumOffset : 0]);
-				};
-
-				scroller
-					.on('touchstart.xdsoft_scroller mousedown.xdsoft_scroller', function (event) {
-						if (!parentHeight) {
-							timeboxparent.trigger('resize_scroll.xdsoft_scroller', [percent]);
-						}
-
-						startY = pointerEventToXY(event).y;
-						startTopScroll = parseInt(scroller.css('margin-top'), 10);
-						h1 = scrollbar[0].offsetHeight;
-
-						if (event.type === 'mousedown' || event.type === 'touchstart') {
-							if (options.ownerDocument) {
-								$(options.ownerDocument.body).addClass('xdsoft_noselect');
-							}
-							$([options.ownerDocument.body, options.contentWindow]).on('touchend mouseup.xdsoft_scroller', function arguments_callee() {
-								$([options.ownerDocument.body, options.contentWindow]).off('touchend mouseup.xdsoft_scroller', arguments_callee)
-									.off('mousemove.xdsoft_scroller', calcOffset)
-									.removeClass('xdsoft_noselect');
-							});
-							$(options.ownerDocument.body).on('mousemove.xdsoft_scroller', calcOffset);
-						} else {
-							touchStart = true;
-							event.stopPropagation();
-							event.preventDefault();
-						}
-					})
-					.on('touchmove', function (event) {
-						if (touchStart) {
-							event.preventDefault();
-							calcOffset(event);
-						}
-					})
-					.on('touchend touchcancel', function () {
-						touchStart =  false;
-						startTopScroll = 0;
-					});
-
-				timeboxparent
-					.on('scroll_element.xdsoft_scroller', function (event, percentage) {
-						if (!parentHeight) {
-							timeboxparent.trigger('resize_scroll.xdsoft_scroller', [percentage, true]);
-						}
-						percentage = percentage > 1 ? 1 : (percentage < 0 || isNaN(percentage)) ? 0 : percentage;
-
-						scroller.css('margin-top', maximumOffset * percentage);
-
-						setTimeout(function () {
-							timebox.css('marginTop', -parseInt((timebox[0].offsetHeight - parentHeight) * percentage, 10));
-						}, 10);
-					})
-					.on('resize_scroll.xdsoft_scroller', function (event, percentage, noTriggerScroll) {
-						var percent, sh;
-						parentHeight = timeboxparent[0].clientHeight;
-						height = timebox[0].offsetHeight;
-						percent = parentHeight / height;
-						sh = percent * scrollbar[0].offsetHeight;
-						if (percent > 1) {
-							scroller.hide();
-						} else {
-							scroller.show();
-							scroller.css('height', parseInt(sh > 10 ? sh : 10, 10));
-							maximumOffset = scrollbar[0].offsetHeight - scroller[0].offsetHeight;
-							if (noTriggerScroll !== true) {
-								timeboxparent.trigger('scroll_element.xdsoft_scroller', [percentage || Math.abs(parseInt(timebox.css('marginTop'), 10)) / (height - parentHeight)]);
-							}
-						}
-					});
-
-				timeboxparent.on('mousewheel', function (event) {
-					var top = Math.abs(parseInt(timebox.css('marginTop'), 10));
-
-					top = top - (event.deltaY * 20);
-					if (top < 0) {
-						top = 0;
-					}
-
-					timeboxparent.trigger('scroll_element.xdsoft_scroller', [top / (height - parentHeight)]);
-					event.stopPropagation();
-					return false;
-				});
-
-				timeboxparent.on('touchstart', function (event) {
-					start = pointerEventToXY(event);
-					startTop = Math.abs(parseInt(timebox.css('marginTop'), 10));
-				});
-
-				timeboxparent.on('touchmove', function (event) {
-					if (start) {
-						event.preventDefault();
-						var coord = pointerEventToXY(event);
-						timeboxparent.trigger('scroll_element.xdsoft_scroller', [(startTop - (coord.y - start.y)) / (height - parentHeight)]);
-					}
-				});
-
-				timeboxparent.on('touchend touchcancel', function () {
-					start = false;
-					startTop = 0;
-				});
-			}
-			timeboxparent.trigger('resize_scroll.xdsoft_scroller', [percent]);
-		});
-	};
-
-	$.fn.datetimepicker = function (opt, opt2) {
-		var result = this,
-			KEY0 = 48,
-			KEY9 = 57,
-			_KEY0 = 96,
-			_KEY9 = 105,
-            CTRLKEY = 17,
-            CMDKEY = 91,
-			DEL = 46,
-			ENTER = 13,
-			ESC = 27,
-			BACKSPACE = 8,
-			ARROWLEFT = 37,
-			ARROWUP = 38,
-			ARROWRIGHT = 39,
-			ARROWDOWN = 40,
-			TAB = 9,
-			F5 = 116,
-			AKEY = 65,
-			CKEY = 67,
-			VKEY = 86,
-			ZKEY = 90,
-			YKEY = 89,
-            ctrlDown	=	false,
-            cmdDown = false,
-			options = ($.isPlainObject(opt) || !opt) ? $.extend(true, {}, default_options, opt) : $.extend(true, {}, default_options),
-
-			lazyInitTimer = 0,
-			createDateTimePicker,
-			destroyDateTimePicker,
-
-			lazyInit = function (input) {
-				input
-					.on('open.xdsoft focusin.xdsoft mousedown.xdsoft touchstart', function initOnActionCallback() {
-						if (input.is(':disabled') || input.data('xdsoft_datetimepicker')) {
-							return;
-						}
-						clearTimeout(lazyInitTimer);
-						lazyInitTimer = setTimeout(function () {
-
-							if (!input.data('xdsoft_datetimepicker')) {
-								createDateTimePicker(input);
-							}
-							input
-								.off('open.xdsoft focusin.xdsoft mousedown.xdsoft touchstart', initOnActionCallback)
-								.trigger('open.xdsoft');
-						}, 100);
-					});
-			};
-
-		createDateTimePicker = function (input) {
-			var datetimepicker = $('<div class="xdsoft_datetimepicker xdsoft_noselect"></div>'),
-				xdsoft_copyright = $('<div class="xdsoft_copyright"><a target="_blank" href="http://xdsoft.net/jqplugins/datetimepicker/">xdsoft.net</a></div>'),
-				datepicker = $('<div class="xdsoft_datepicker active"></div>'),
-				month_picker = $('<div class="xdsoft_monthpicker"><button type="button" class="xdsoft_prev"></button><button type="button" class="xdsoft_today_button"></button>' +
-					'<div class="xdsoft_label xdsoft_month"><span></span><i></i></div>' +
-					'<div class="xdsoft_label xdsoft_year"><span></span><i></i></div>' +
-					'<button type="button" class="xdsoft_next"></button></div>'),
-				calendar = $('<div class="xdsoft_calendar"></div>'),
-				timepicker = $('<div class="xdsoft_timepicker active"><button type="button" class="xdsoft_prev"></button><div class="xdsoft_time_box"></div><button type="button" class="xdsoft_next"></button></div>'),
-				timeboxparent = timepicker.find('.xdsoft_time_box').eq(0),
-				timebox = $('<div class="xdsoft_time_variant"></div>'),
-				applyButton = $('<button type="button" class="xdsoft_save_selected blue-gradient-button">Save Selected</button>'),
-
-				monthselect = $('<div class="xdsoft_select xdsoft_monthselect"><div></div></div>'),
-				yearselect = $('<div class="xdsoft_select xdsoft_yearselect"><div></div></div>'),
-				triggerAfterOpen = false,
-				XDSoft_datetime,
-
-				xchangeTimer,
-				timerclick,
-				current_time_index,
-				setPos,
-				timer = 0,
-				_xdsoft_datetime,
-				forEachAncestorOf;
-
-			if (options.id) {
-				datetimepicker.attr('id', options.id);
-			}
-			if (options.style) {
-				datetimepicker.attr('style', options.style);
-			}
-			if (options.weeks) {
-				datetimepicker.addClass('xdsoft_showweeks');
-			}
-			if (options.rtl) {
-				datetimepicker.addClass('xdsoft_rtl');
-			}
-
-			datetimepicker.addClass('xdsoft_' + options.theme);
-			datetimepicker.addClass(options.className);
-
-			month_picker
-				.find('.xdsoft_month span')
-				.after(monthselect);
-			month_picker
-				.find('.xdsoft_year span')
-				.after(yearselect);
-
-			month_picker
-				.find('.xdsoft_month,.xdsoft_year')
-				.on('touchstart mousedown.xdsoft', function (event) {
-					var select = $(this).find('.xdsoft_select').eq(0),
-						val = 0,
-						top = 0,
-						visible = select.is(':visible'),
-						items,
-						i;
-
-					month_picker
-						.find('.xdsoft_select')
-						.hide();
-					if (_xdsoft_datetime.currentTime) {
-						val = _xdsoft_datetime.currentTime[$(this).hasClass('xdsoft_month') ? 'getMonth' : 'getFullYear']();
-					}
-
-					select[visible ? 'hide' : 'show']();
-					for (items = select.find('div.xdsoft_option'), i = 0; i < items.length; i += 1) {
-						if (items.eq(i).data('value') === val) {
-							break;
-						} else {
-							top += items[0].offsetHeight;
-						}
-					}
-
-					select.xdsoftScroller(options, top / (select.children()[0].offsetHeight - (select[0].clientHeight)));
-					event.stopPropagation();
-					return false;
-				});
-
-			var handleTouchMoved = function (event) {
-				var evt = event.originalEvent;
-				var touchPosition = evt.touches ? evt.touches[0] : evt;
-				this.touchStartPosition = this.touchStartPosition || touchPosition;
-				var xMovement = Math.abs(this.touchStartPosition.clientX - touchPosition.clientX);
-				var yMovement = Math.abs(this.touchStartPosition.clientY - touchPosition.clientY);
-				var distance = Math.sqrt(xMovement * xMovement + yMovement * yMovement);
-				if(distance > options.touchMovedThreshold) {
-					this.touchMoved = true;
-				}
-			}
-
-			month_picker
-				.find('.xdsoft_select')
-				.xdsoftScroller(options)
-				.on('touchstart mousedown.xdsoft', function (event) {
-					var evt = event.originalEvent;
-					this.touchMoved = false;
-					this.touchStartPosition = evt.touches ? evt.touches[0] : evt;
-					event.stopPropagation();
-					event.preventDefault();
-				})
-				.on('touchmove', '.xdsoft_option', handleTouchMoved)
-				.on('touchend mousedown.xdsoft', '.xdsoft_option', function () {
-					if (!this.touchMoved) {
-						if (_xdsoft_datetime.currentTime === undefined || _xdsoft_datetime.currentTime === null) {
-							_xdsoft_datetime.currentTime = _xdsoft_datetime.now();
-						}
-
-						var year = _xdsoft_datetime.currentTime.getFullYear();
-						if (_xdsoft_datetime && _xdsoft_datetime.currentTime) {
-							_xdsoft_datetime.currentTime[$(this).parent().parent().hasClass('xdsoft_monthselect') ? 'setMonth' : 'setFullYear']($(this).data('value'));
-						}
-
-						$(this).parent().parent().hide();
-
-						datetimepicker.trigger('xchange.xdsoft');
-						if (options.onChangeMonth && $.isFunction(options.onChangeMonth)) {
-							options.onChangeMonth.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
-						}
-
-						if (year !== _xdsoft_datetime.currentTime.getFullYear() && $.isFunction(options.onChangeYear)) {
-							options.onChangeYear.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
-						}
-					}
-				});
-
-			datetimepicker.getValue = function () {
-				return _xdsoft_datetime.getCurrentTime();
-			};
-
-			datetimepicker.setOptions = function (_options) {
-				var highlightedDates = {};
-
-				options = $.extend(true, {}, options, _options);
-
-				if (_options.allowTimes && $.isArray(_options.allowTimes) && _options.allowTimes.length) {
-					options.allowTimes = $.extend(true, [], _options.allowTimes);
-				}
-
-				if (_options.weekends && $.isArray(_options.weekends) && _options.weekends.length) {
-					options.weekends = $.extend(true, [], _options.weekends);
-				}
-
-				if (_options.allowDates && $.isArray(_options.allowDates) && _options.allowDates.length) {
-					options.allowDates = $.extend(true, [], _options.allowDates);
-				}
-
-				if (_options.allowDateRe && Object.prototype.toString.call(_options.allowDateRe)==="[object String]") {
-					options.allowDateRe = new RegExp(_options.allowDateRe);
-				}
-
-				if (_options.highlightedDates && $.isArray(_options.highlightedDates) && _options.highlightedDates.length) {
-					$.each(_options.highlightedDates, function (index, value) {
-						var splitData = $.map(value.split(','), $.trim),
-							exDesc,
-							hDate = new HighlightedDate(dateHelper.parseDate(splitData[0], options.formatDate), splitData[1], splitData[2]), // date, desc, style
-							keyDate = dateHelper.formatDate(hDate.date, options.formatDate);
-						if (highlightedDates[keyDate] !== undefined) {
-							exDesc = highlightedDates[keyDate].desc;
-							if (exDesc && exDesc.length && hDate.desc && hDate.desc.length) {
-								highlightedDates[keyDate].desc = exDesc + "\n" + hDate.desc;
-							}
-						} else {
-							highlightedDates[keyDate] = hDate;
-						}
-					});
-
-					options.highlightedDates = $.extend(true, [], highlightedDates);
-				}
-
-				if (_options.highlightedPeriods && $.isArray(_options.highlightedPeriods) && _options.highlightedPeriods.length) {
-					highlightedDates = $.extend(true, [], options.highlightedDates);
-					$.each(_options.highlightedPeriods, function (index, value) {
-						var dateTest, // start date
-							dateEnd,
-							desc,
-							hDate,
-							keyDate,
-							exDesc,
-							style;
-						if ($.isArray(value)) {
-							dateTest = value[0];
-							dateEnd = value[1];
-							desc = value[2];
-							style = value[3];
-						}
-						else {
-							var splitData = $.map(value.split(','), $.trim);
-							dateTest = dateHelper.parseDate(splitData[0], options.formatDate);
-							dateEnd = dateHelper.parseDate(splitData[1], options.formatDate);
-							desc = splitData[2];
-							style = splitData[3];
-						}
-
-						while (dateTest <= dateEnd) {
-							hDate = new HighlightedDate(dateTest, desc, style);
-							keyDate = dateHelper.formatDate(dateTest, options.formatDate);
-							dateTest.setDate(dateTest.getDate() + 1);
-							if (highlightedDates[keyDate] !== undefined) {
-								exDesc = highlightedDates[keyDate].desc;
-								if (exDesc && exDesc.length && hDate.desc && hDate.desc.length) {
-									highlightedDates[keyDate].desc = exDesc + "\n" + hDate.desc;
-								}
-							} else {
-								highlightedDates[keyDate] = hDate;
-							}
-						}
-					});
-
-					options.highlightedDates = $.extend(true, [], highlightedDates);
-				}
-
-				if (_options.disabledDates && $.isArray(_options.disabledDates) && _options.disabledDates.length) {
-					options.disabledDates = $.extend(true, [], _options.disabledDates);
-				}
-
-				if (_options.disabledWeekDays && $.isArray(_options.disabledWeekDays) && _options.disabledWeekDays.length) {
-					options.disabledWeekDays = $.extend(true, [], _options.disabledWeekDays);
-				}
-
-				if ((options.open || options.opened) && (!options.inline)) {
-					input.trigger('open.xdsoft');
-				}
-
-				if (options.inline) {
-					triggerAfterOpen = true;
-					datetimepicker.addClass('xdsoft_inline');
-					input.after(datetimepicker).hide();
-				}
-
-				if (options.inverseButton) {
-					options.next = 'xdsoft_prev';
-					options.prev = 'xdsoft_next';
-				}
-
-				if (options.datepicker) {
-					datepicker.addClass('active');
-				} else {
-					datepicker.removeClass('active');
-				}
-
-				if (options.timepicker) {
-					timepicker.addClass('active');
-				} else {
-					timepicker.removeClass('active');
-				}
-
-				if (options.value) {
-					_xdsoft_datetime.setCurrentTime(options.value);
-					if (input && input.val) {
-						input.val(_xdsoft_datetime.str);
-					}
-				}
-
-				if (isNaN(options.dayOfWeekStart)) {
-					options.dayOfWeekStart = 0;
-				} else {
-					options.dayOfWeekStart = parseInt(options.dayOfWeekStart, 10) % 7;
-				}
-
-				if (!options.timepickerScrollbar) {
-					timeboxparent.xdsoftScroller(options, 'hide');
-				}
-
-				if (options.minDate && /^[\+\-](.*)$/.test(options.minDate)) {
-					options.minDate = dateHelper.formatDate(_xdsoft_datetime.strToDateTime(options.minDate), options.formatDate);
-				}
-
-				if (options.maxDate &&  /^[\+\-](.*)$/.test(options.maxDate)) {
-					options.maxDate = dateHelper.formatDate(_xdsoft_datetime.strToDateTime(options.maxDate), options.formatDate);
-				}
-
-                if (options.minDateTime &&  /^\+(.*)$/.test(options.minDateTime)) {
-                	options.minDateTime = _xdsoft_datetime.strToDateTime(options.minDateTime).dateFormat(options.formatDate);
-                }
-
-                if (options.maxDateTime &&  /^\+(.*)$/.test(options.maxDateTime)) {
-                	options.maxDateTime = _xdsoft_datetime.strToDateTime(options.maxDateTime).dateFormat(options.formatDate);
-                }
-
-				applyButton.toggle(options.showApplyButton);
-
-				month_picker
-					.find('.xdsoft_today_button')
-					.css('visibility', !options.todayButton ? 'hidden' : 'visible');
-
-				month_picker
-					.find('.' + options.prev)
-					.css('visibility', !options.prevButton ? 'hidden' : 'visible');
-
-				month_picker
-					.find('.' + options.next)
-					.css('visibility', !options.nextButton ? 'hidden' : 'visible');
-
-				setMask(options);
-
-				if (options.validateOnBlur) {
-					input
-						.off('blur.xdsoft')
-						.on('blur.xdsoft', function () {
-							if (options.allowBlank && (!$.trim($(this).val()).length ||
-									(typeof options.mask === "string" && $.trim($(this).val()) === options.mask.replace(/[0-9]/g, '_')))) {
-								$(this).val(null);
-								datetimepicker.data('xdsoft_datetime').empty();
-							} else {
-								var d = dateHelper.parseDate($(this).val(), options.format);
-								if (d) { // parseDate() may skip some invalid parts like date or time, so make it clear for user: show parsed date/time
-									$(this).val(dateHelper.formatDate(d, options.format));
-								} else {
-									var splittedHours   = +([$(this).val()[0], $(this).val()[1]].join('')),
-										splittedMinutes = +([$(this).val()[2], $(this).val()[3]].join(''));
-
-									// parse the numbers as 0312 => 03:12
-									if (!options.datepicker && options.timepicker && splittedHours >= 0 && splittedHours < 24 && splittedMinutes >= 0 && splittedMinutes < 60) {
-										$(this).val([splittedHours, splittedMinutes].map(function (item) {
-											return item > 9 ? item : '0' + item;
-										}).join(':'));
-									} else {
-										$(this).val(dateHelper.formatDate(_xdsoft_datetime.now(), options.format));
-									}
-								}
-								datetimepicker.data('xdsoft_datetime').setCurrentTime($(this).val());
-							}
-
-							datetimepicker.trigger('changedatetime.xdsoft');
-							datetimepicker.trigger('close.xdsoft');
-						});
-				}
-				options.dayOfWeekStartPrev = (options.dayOfWeekStart === 0) ? 6 : options.dayOfWeekStart - 1;
-
-				datetimepicker
-					.trigger('xchange.xdsoft')
-					.trigger('afterOpen.xdsoft');
-			};
-
-			datetimepicker
-				.data('options', options)
-				.on('touchstart mousedown.xdsoft', function (event) {
-					event.stopPropagation();
-					event.preventDefault();
-					yearselect.hide();
-					monthselect.hide();
-					return false;
-				});
-
-			//scroll_element = timepicker.find('.xdsoft_time_box');
-			timeboxparent.append(timebox);
-			timeboxparent.xdsoftScroller(options);
-
-			datetimepicker.on('afterOpen.xdsoft', function () {
-				timeboxparent.xdsoftScroller(options);
-			});
-
-			datetimepicker
-				.append(datepicker)
-				.append(timepicker);
-
-			if (options.withoutCopyright !== true) {
-				datetimepicker
-					.append(xdsoft_copyright);
-			}
-
-			datepicker
-				.append(month_picker)
-				.append(calendar)
-				.append(applyButton);
-
-            if (options.insideParent) {
-                $(input).parent().append(datetimepicker);
-            } else {
-                $(options.parentID).append(datetimepicker);
-            }
-
-			XDSoft_datetime = function () {
-				var _this = this;
-				_this.now = function (norecursion) {
-					var d = new Date(),
-						date,
-						time;
-
-					if (!norecursion && options.defaultDate) {
-						date = _this.strToDateTime(options.defaultDate);
-						d.setFullYear(date.getFullYear());
-						d.setMonth(date.getMonth());
-						d.setDate(date.getDate());
-					}
-
-					d.setFullYear(d.getFullYear());
-
-					if (!norecursion && options.defaultTime) {
-						time = _this.strtotime(options.defaultTime);
-						d.setHours(time.getHours());
-						d.setMinutes(time.getMinutes());
-						d.setSeconds(time.getSeconds());
-						d.setMilliseconds(time.getMilliseconds());
-					}
-					return d;
-				};
-
-				_this.isValidDate = function (d) {
-					if (Object.prototype.toString.call(d) !== "[object Date]") {
-						return false;
-					}
-					return !isNaN(d.getTime());
-				};
-
-				_this.setCurrentTime = function (dTime, requireValidDate) {
-					if (typeof dTime === 'string') {
-						_this.currentTime = _this.strToDateTime(dTime);
-					}
-					else if (_this.isValidDate(dTime)) {
-						_this.currentTime = dTime;
-					}
-					else if (!dTime && !requireValidDate && options.allowBlank && !options.inline) {
-						_this.currentTime = null;
-					}
-					else {
-						_this.currentTime = _this.now();
-					}
-
-					datetimepicker.trigger('xchange.xdsoft');
-				};
-
-				_this.empty = function () {
-					_this.currentTime = null;
-				};
-
-				_this.getCurrentTime = function () {
-					return _this.currentTime;
-				};
-
-				_this.nextMonth = function () {
-
-					if (_this.currentTime === undefined || _this.currentTime === null) {
-						_this.currentTime = _this.now();
-					}
-
-					var month = _this.currentTime.getMonth() + 1,
-						year;
-					if (month === 12) {
-						_this.currentTime.setFullYear(_this.currentTime.getFullYear() + 1);
-						month = 0;
-					}
-
-					year = _this.currentTime.getFullYear();
-
-					_this.currentTime.setDate(
-						Math.min(
-							new Date(_this.currentTime.getFullYear(), month + 1, 0).getDate(),
-							_this.currentTime.getDate()
-						)
-					);
-					_this.currentTime.setMonth(month);
-
-					if (options.onChangeMonth && $.isFunction(options.onChangeMonth)) {
-						options.onChangeMonth.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
-					}
-
-					if (year !== _this.currentTime.getFullYear() && $.isFunction(options.onChangeYear)) {
-						options.onChangeYear.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
-					}
-
-					datetimepicker.trigger('xchange.xdsoft');
-					return month;
-				};
-
-				_this.prevMonth = function () {
-
-					if (_this.currentTime === undefined || _this.currentTime === null) {
-						_this.currentTime = _this.now();
-					}
-
-					var month = _this.currentTime.getMonth() - 1;
-					if (month === -1) {
-						_this.currentTime.setFullYear(_this.currentTime.getFullYear() - 1);
-						month = 11;
-					}
-					_this.currentTime.setDate(
-						Math.min(
-							new Date(_this.currentTime.getFullYear(), month + 1, 0).getDate(),
-							_this.currentTime.getDate()
-						)
-					);
-					_this.currentTime.setMonth(month);
-					if (options.onChangeMonth && $.isFunction(options.onChangeMonth)) {
-						options.onChangeMonth.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
-					}
-					datetimepicker.trigger('xchange.xdsoft');
-					return month;
-				};
-
-				_this.getWeekOfYear = function (datetime) {
-					if (options.onGetWeekOfYear && $.isFunction(options.onGetWeekOfYear)) {
-						var week = options.onGetWeekOfYear.call(datetimepicker, datetime);
-						if (typeof week !== 'undefined') {
-							return week;
-						}
-					}
-					var onejan = new Date(datetime.getFullYear(), 0, 1);
-
-					//First week of the year is th one with the first Thursday according to ISO8601
-					if (onejan.getDay() !== 4) {
-						onejan.setMonth(0, 1 + ((4 - onejan.getDay()+ 7) % 7));
-					}
-
-					return Math.ceil((((datetime - onejan) / 86400000) + onejan.getDay() + 1) / 7);
-				};
-
-				_this.strToDateTime = function (sDateTime) {
-					var tmpDate = [], timeOffset, currentTime;
-
-					if (sDateTime && sDateTime instanceof Date && _this.isValidDate(sDateTime)) {
-						return sDateTime;
-					}
-
-					tmpDate = /^([+-]{1})(.*)$/.exec(sDateTime);
-
-					if (tmpDate) {
-						tmpDate[2] = dateHelper.parseDate(tmpDate[2], options.formatDate);
-					}
-
-					if (tmpDate  && tmpDate[2]) {
-						timeOffset = tmpDate[2].getTime() - (tmpDate[2].getTimezoneOffset()) * 60000;
-						currentTime = new Date((_this.now(true)).getTime() + parseInt(tmpDate[1] + '1', 10) * timeOffset);
-					} else {
-						currentTime = sDateTime ? dateHelper.parseDate(sDateTime, options.format) : _this.now();
-					}
-
-					if (!_this.isValidDate(currentTime)) {
-						currentTime = _this.now();
-					}
-
-					return currentTime;
-				};
-
-				_this.strToDate = function (sDate) {
-					if (sDate && sDate instanceof Date && _this.isValidDate(sDate)) {
-						return sDate;
-					}
-
-					var currentTime = sDate ? dateHelper.parseDate(sDate, options.formatDate) : _this.now(true);
-					if (!_this.isValidDate(currentTime)) {
-						currentTime = _this.now(true);
-					}
-					return currentTime;
-				};
-
-				_this.strtotime = function (sTime) {
-					if (sTime && sTime instanceof Date && _this.isValidDate(sTime)) {
-						return sTime;
-					}
-					var currentTime = sTime ? dateHelper.parseDate(sTime, options.formatTime) : _this.now(true);
-					if (!_this.isValidDate(currentTime)) {
-						currentTime = _this.now(true);
-					}
-					return currentTime;
-				};
-
-				_this.str = function () {
-					var format = options.format;
-					if (options.yearOffset) {
-						format = format.replace('Y', _this.currentTime.getFullYear() + options.yearOffset);
-						format = format.replace('y', String(_this.currentTime.getFullYear() + options.yearOffset).substring(2, 4));
-					}
-					return dateHelper.formatDate(_this.currentTime, format);
-				};
-				_this.currentTime = this.now();
-			};
-
-			_xdsoft_datetime = new XDSoft_datetime();
-
-			applyButton.on('touchend click', function (e) {//pathbrite
-				e.preventDefault();
-				datetimepicker.data('changed', true);
-				_xdsoft_datetime.setCurrentTime(getCurrentValue());
-				input.val(_xdsoft_datetime.str());
-				datetimepicker.trigger('close.xdsoft');
-			});
-			month_picker
-				.find('.xdsoft_today_button')
-				.on('touchend mousedown.xdsoft', function () {
-					datetimepicker.data('changed', true);
-					_xdsoft_datetime.setCurrentTime(0, true);
-					datetimepicker.trigger('afterOpen.xdsoft');
-				}).on('dblclick.xdsoft', function () {
-				var currentDate = _xdsoft_datetime.getCurrentTime(), minDate, maxDate;
-				currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-				minDate = _xdsoft_datetime.strToDate(options.minDate);
-				minDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
-				if (currentDate < minDate) {
-					return;
-				}
-				maxDate = _xdsoft_datetime.strToDate(options.maxDate);
-				maxDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate());
-				if (currentDate > maxDate) {
-					return;
-				}
-				input.val(_xdsoft_datetime.str());
-				input.trigger('change');
-				datetimepicker.trigger('close.xdsoft');
-			});
-			month_picker
-				.find('.xdsoft_prev,.xdsoft_next')
-				.on('touchend mousedown.xdsoft', function () {
-					var $this = $(this),
-						timer = 0,
-						stop = false;
-
-					(function arguments_callee1(v) {
-						if ($this.hasClass(options.next)) {
-							_xdsoft_datetime.nextMonth();
-						} else if ($this.hasClass(options.prev)) {
-							_xdsoft_datetime.prevMonth();
-						}
-						if (options.monthChangeSpinner) {
-							if (!stop) {
-								timer = setTimeout(arguments_callee1, v || 100);
-							}
-						}
-					}(500));
-
-					$([options.ownerDocument.body, options.contentWindow]).on('touchend mouseup.xdsoft', function arguments_callee2() {
-						clearTimeout(timer);
-						stop = true;
-						$([options.ownerDocument.body, options.contentWindow]).off('touchend mouseup.xdsoft', arguments_callee2);
-					});
-				});
-
-			timepicker
-				.find('.xdsoft_prev,.xdsoft_next')
-				.on('touchend mousedown.xdsoft', function () {
-					var $this = $(this),
-						timer = 0,
-						stop = false,
-						period = 110;
-					(function arguments_callee4(v) {
-						var pheight = timeboxparent[0].clientHeight,
-							height = timebox[0].offsetHeight,
-							top = Math.abs(parseInt(timebox.css('marginTop'), 10));
-						if ($this.hasClass(options.next) && (height - pheight) - options.timeHeightInTimePicker >= top) {
-							timebox.css('marginTop', '-' + (top + options.timeHeightInTimePicker) + 'px');
-						} else if ($this.hasClass(options.prev) && top - options.timeHeightInTimePicker >= 0) {
-							timebox.css('marginTop', '-' + (top - options.timeHeightInTimePicker) + 'px');
-						}
-						/**
-						 * Fixed bug:
-						 * When using css3 transition, it will cause a bug that you cannot scroll the timepicker list.
-						 * The reason is that the transition-duration time, if you set it to 0, all things fine, otherwise, this
-						 * would cause a bug when you use jquery.css method.
-						 * Let's say: * { transition: all .5s ease; }
-						 * jquery timebox.css('marginTop') will return the original value which is before you clicking the next/prev button,
-						 * meanwhile the timebox[0].style.marginTop will return the right value which is after you clicking the
-						 * next/prev button.
-						 *
-						 * What we should do:
-						 * Replace timebox.css('marginTop') with timebox[0].style.marginTop.
-						 */
-						timeboxparent.trigger('scroll_element.xdsoft_scroller', [Math.abs(parseInt(timebox[0].style.marginTop, 10) / (height - pheight))]);
-						period = (period > 10) ? 10 : period - 10;
-						if (!stop) {
-							timer = setTimeout(arguments_callee4, v || period);
-						}
-					}(500));
-					$([options.ownerDocument.body, options.contentWindow]).on('touchend mouseup.xdsoft', function arguments_callee5() {
-						clearTimeout(timer);
-						stop = true;
-						$([options.ownerDocument.body, options.contentWindow])
-							.off('touchend mouseup.xdsoft', arguments_callee5);
-					});
-				});
-
-			xchangeTimer = 0;
-			// base handler - generating a calendar and timepicker
-			datetimepicker
-				.on('xchange.xdsoft', function (event) {
-					clearTimeout(xchangeTimer);
-					xchangeTimer = setTimeout(function () {
-
-						if (_xdsoft_datetime.currentTime === undefined || _xdsoft_datetime.currentTime === null) {
-							_xdsoft_datetime.currentTime = _xdsoft_datetime.now();
-						}
-
-						var table =	'',
-							start = new Date(_xdsoft_datetime.currentTime.getFullYear(), _xdsoft_datetime.currentTime.getMonth(), 1, 12, 0, 0),
-							i = 0,
-							j,
-							today = _xdsoft_datetime.now(),
-							maxDate = false,
-							minDate = false,
-							minDateTime = false,
-							maxDateTime = false,
-							hDate,
-							day,
-							d,
-							y,
-							m,
-							w,
-							classes = [],
-							customDateSettings,
-							newRow = true,
-							time = '',
-							h,
-							line_time,
-							description;
-
-						while (start.getDay() !== options.dayOfWeekStart) {
-							start.setDate(start.getDate() - 1);
-						}
-
-						table += '<table><thead><tr>';
-
-						if (options.weeks) {
-							table += '<th></th>';
-						}
-
-						for (j = 0; j < 7; j += 1) {
-							table += '<th>' + options.i18n[globalLocale].dayOfWeekShort[(j + options.dayOfWeekStart) % 7] + '</th>';
-						}
-
-						table += '</tr></thead>';
-						table += '<tbody>';
-
-						if (options.maxDate !== false) {
-							maxDate = _xdsoft_datetime.strToDate(options.maxDate);
-							maxDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate(), 23, 59, 59, 999);
-						}
-
-						if (options.minDate !== false) {
-							minDate = _xdsoft_datetime.strToDate(options.minDate);
-							minDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
-						}
-
-                        if (options.minDateTime !== false) {
-							minDateTime = _xdsoft_datetime.strToDate(options.minDateTime);
-							minDateTime = new Date(minDateTime.getFullYear(), minDateTime.getMonth(), minDateTime.getDate(), minDateTime.getHours(), minDateTime.getMinutes(), minDateTime.getSeconds());
-						}
-
-                        if (options.maxDateTime !== false) {
-							maxDateTime = _xdsoft_datetime.strToDate(options.maxDateTime);
-							maxDateTime = new Date(maxDateTime.getFullYear(), maxDateTime.getMonth(), maxDateTime.getDate(), maxDateTime.getHours(), maxDateTime.getMinutes(), maxDateTime.getSeconds());
-						}
-
-						var maxDateTimeDay;
-						if (maxDateTime !== false) {
-							maxDateTimeDay = ((maxDateTime.getFullYear() * 12) + maxDateTime.getMonth()) * 31 + maxDateTime.getDate();
-						}
-
-						while (i < _xdsoft_datetime.currentTime.countDaysInMonth() || start.getDay() !== options.dayOfWeekStart || _xdsoft_datetime.currentTime.getMonth() === start.getMonth()) {
-							classes = [];
-							i += 1;
-
-							day = start.getDay();
-							d = start.getDate();
-							y = start.getFullYear();
-							m = start.getMonth();
-							w = _xdsoft_datetime.getWeekOfYear(start);
-							description = '';
-
-							classes.push('xdsoft_date');
-
-							if (options.beforeShowDay && $.isFunction(options.beforeShowDay.call)) {
-								customDateSettings = options.beforeShowDay.call(datetimepicker, start);
-							} else {
-								customDateSettings = null;
-							}
-
-							if(options.allowDateRe && Object.prototype.toString.call(options.allowDateRe) === "[object RegExp]"){
-								if(!options.allowDateRe.test(dateHelper.formatDate(start, options.formatDate))){
-									classes.push('xdsoft_disabled');
-								}
-							}
-							
-							if(options.allowDates && options.allowDates.length>0){
-								if(options.allowDates.indexOf(dateHelper.formatDate(start, options.formatDate)) === -1){
-									classes.push('xdsoft_disabled');
-								}
-							}
-							
-							var currentDay = ((start.getFullYear() * 12) + start.getMonth()) * 31 + start.getDate();
-							if ((maxDate !== false && start > maxDate) || (minDateTime !== false && start < minDateTime)  || (minDate !== false && start < minDate) || (maxDateTime !== false && currentDay > maxDateTimeDay) || (customDateSettings && customDateSettings[0] === false)) {
-								classes.push('xdsoft_disabled');
-							}
-							
-							if (options.disabledDates.indexOf(dateHelper.formatDate(start, options.formatDate)) !== -1) {
-								classes.push('xdsoft_disabled');
-							}
-							
-							if (options.disabledWeekDays.indexOf(day) !== -1) {
-								classes.push('xdsoft_disabled');
-							}
-							
-							if (input.is('[disabled]')) {
-								classes.push('xdsoft_disabled');
-							}
-
-							if (customDateSettings && customDateSettings[1] !== "") {
-								classes.push(customDateSettings[1]);
-							}
-
-							if (_xdsoft_datetime.currentTime.getMonth() !== m) {
-								classes.push('xdsoft_other_month');
-							}
-
-							if ((options.defaultSelect || datetimepicker.data('changed')) && dateHelper.formatDate(_xdsoft_datetime.currentTime, options.formatDate) === dateHelper.formatDate(start, options.formatDate)) {
-								classes.push('xdsoft_current');
-							}
-
-							if (dateHelper.formatDate(today, options.formatDate) === dateHelper.formatDate(start, options.formatDate)) {
-								classes.push('xdsoft_today');
-							}
-
-							if (start.getDay() === 0 || start.getDay() === 6 || options.weekends.indexOf(dateHelper.formatDate(start, options.formatDate)) !== -1) {
-								classes.push('xdsoft_weekend');
-							}
-
-							if (options.highlightedDates[dateHelper.formatDate(start, options.formatDate)] !== undefined) {
-								hDate = options.highlightedDates[dateHelper.formatDate(start, options.formatDate)];
-								classes.push(hDate.style === undefined ? 'xdsoft_highlighted_default' : hDate.style);
-								description = hDate.desc === undefined ? '' : hDate.desc;
-							}
-
-							if (options.beforeShowDay && $.isFunction(options.beforeShowDay)) {
-								classes.push(options.beforeShowDay(start));
-							}
-
-							if (newRow) {
-								table += '<tr>';
-								newRow = false;
-								if (options.weeks) {
-									table += '<th>' + w + '</th>';
-								}
-							}
-
-							table += '<td data-date="' + d + '" data-month="' + m + '" data-year="' + y + '"' + ' class="xdsoft_date xdsoft_day_of_week' + start.getDay() + ' ' + classes.join(' ') + '" title="' + description + '">' +
-								'<div>' + d + '</div>' +
-								'</td>';
-
-							if (start.getDay() === options.dayOfWeekStartPrev) {
-								table += '</tr>';
-								newRow = true;
-							}
-
-							start.setDate(d + 1);
-						}
-						table += '</tbody></table>';
-
-						calendar.html(table);
-
-						month_picker.find('.xdsoft_label span').eq(0).text(options.i18n[globalLocale].months[_xdsoft_datetime.currentTime.getMonth()]);
-						month_picker.find('.xdsoft_label span').eq(1).text(_xdsoft_datetime.currentTime.getFullYear() + options.yearOffset);
-
-						// generate timebox
-						time = '';
-						h = '';
-						m = '';
-
-						var minTimeMinutesOfDay = 0;
-						if (options.minTime !== false) {
-						    var t = _xdsoft_datetime.strtotime(options.minTime);
-						    minTimeMinutesOfDay = 60 * t.getHours() + t.getMinutes();
-						}
-						var maxTimeMinutesOfDay = 24 * 60;
-						if (options.maxTime !== false) {
-						    var t = _xdsoft_datetime.strtotime(options.maxTime);
-						    maxTimeMinutesOfDay = 60 * t.getHours() + t.getMinutes();
-						}
-
-						if (options.minDateTime !== false) {
-							var t = _xdsoft_datetime.strToDateTime(options.minDateTime);
-						        var currentDayIsMinDateTimeDay = dateHelper.formatDate(_xdsoft_datetime.currentTime, options.formatDate) === dateHelper.formatDate(t, options.formatDate);
-							if (currentDayIsMinDateTimeDay) {
-								var m = 60 * t.getHours() + t.getMinutes();
-								if (m > minTimeMinutesOfDay) minTimeMinutesOfDay = m;
-							}
-						}
-
-						if (options.maxDateTime !== false) {
-							var t = _xdsoft_datetime.strToDateTime(options.maxDateTime);
-						        var currentDayIsMaxDateTimeDay = dateHelper.formatDate(_xdsoft_datetime.currentTime, options.formatDate) === dateHelper.formatDate(t, options.formatDate);
-							if (currentDayIsMaxDateTimeDay) {
-								var m = 60 * t.getHours() + t.getMinutes();
-								if (m < maxTimeMinutesOfDay) maxTimeMinutesOfDay = m;
-							}
-						}
-
-						line_time = function line_time(h, m) {
-							var now = _xdsoft_datetime.now(), current_time,
-								isALlowTimesInit = options.allowTimes && $.isArray(options.allowTimes) && options.allowTimes.length;
-							now.setHours(h);
-							h = parseInt(now.getHours(), 10);
-							now.setMinutes(m);
-							m = parseInt(now.getMinutes(), 10);
-							classes = [];
-							var currentMinutesOfDay = 60 * h + m;
-							if (input.is('[disabled]') || (currentMinutesOfDay >= maxTimeMinutesOfDay) || (currentMinutesOfDay < minTimeMinutesOfDay)) {
-								classes.push('xdsoft_disabled');
-							}
-
-							current_time = new Date(_xdsoft_datetime.currentTime);
-							current_time.setHours(parseInt(_xdsoft_datetime.currentTime.getHours(), 10));
-
-							if (!isALlowTimesInit) {
-								current_time.setMinutes(Math[options.roundTime](_xdsoft_datetime.currentTime.getMinutes() / options.step) * options.step);
-							}
-
-							if ((options.initTime || options.defaultSelect || datetimepicker.data('changed')) && current_time.getHours() === parseInt(h, 10) && ((!isALlowTimesInit && options.step > 59) || current_time.getMinutes() === parseInt(m, 10))) {
-								if (options.defaultSelect || datetimepicker.data('changed')) {
-									classes.push('xdsoft_current');
-								} else if (options.initTime) {
-									classes.push('xdsoft_init_time');
-								}
-							}
-							if (parseInt(today.getHours(), 10) === parseInt(h, 10) && parseInt(today.getMinutes(), 10) === parseInt(m, 10)) {
-								classes.push('xdsoft_today');
-							}
-							time += '<div class="xdsoft_time ' + classes.join(' ') + '" data-hour="' + h + '" data-minute="' + m + '">' + dateHelper.formatDate(now, options.formatTime) + '</div>';
-						};
-
-						if (!options.allowTimes || !$.isArray(options.allowTimes) || !options.allowTimes.length) {
-							for (i = 0, j = 0; i < (options.hours12 ? 12 : 24); i += 1) {
-								for (j = 0; j < 60; j += options.step) {
-								        var currentMinutesOfDay = i * 60 + j;
-								        if (currentMinutesOfDay < minTimeMinutesOfDay) continue;
-								        if (currentMinutesOfDay >= maxTimeMinutesOfDay) continue;
-									h = (i < 10 ? '0' : '') + i;
-									m = (j < 10 ? '0' : '') + j;
-									line_time(h, m);
-								}
-							}
-						} else {
-							for (i = 0; i < options.allowTimes.length; i += 1) {
-								h = _xdsoft_datetime.strtotime(options.allowTimes[i]).getHours();
-								m = _xdsoft_datetime.strtotime(options.allowTimes[i]).getMinutes();
-								line_time(h, m);
-							}
-						}
-
-						timebox.html(time);
-
-						opt = '';
-
-						for (i = parseInt(options.yearStart, 10); i <= parseInt(options.yearEnd, 10); i += 1) {
-							opt += '<div class="xdsoft_option ' + (_xdsoft_datetime.currentTime.getFullYear() === i ? 'xdsoft_current' : '') + '" data-value="' + i + '">' + (i + options.yearOffset) + '</div>';
-						}
-						yearselect.children().eq(0)
-							.html(opt);
-
-						for (i = parseInt(options.monthStart, 10), opt = ''; i <= parseInt(options.monthEnd, 10); i += 1) {
-							opt += '<div class="xdsoft_option ' + (_xdsoft_datetime.currentTime.getMonth() === i ? 'xdsoft_current' : '') + '" data-value="' + i + '">' + options.i18n[globalLocale].months[i] + '</div>';
-						}
-						monthselect.children().eq(0).html(opt);
-						$(datetimepicker)
-							.trigger('generate.xdsoft');
-					}, 10);
-					event.stopPropagation();
-				})
-				.on('afterOpen.xdsoft', function () {
-					if (options.timepicker) {
-						var classType, pheight, height, top;
-						if (timebox.find('.xdsoft_current').length) {
-							classType = '.xdsoft_current';
-						} else if (timebox.find('.xdsoft_init_time').length) {
-							classType = '.xdsoft_init_time';
-						}
-						if (classType) {
-							pheight = timeboxparent[0].clientHeight;
-							height = timebox[0].offsetHeight;
-							top = timebox.find(classType).index() * options.timeHeightInTimePicker + 1;
-							if ((height - pheight) < top) {
-								top = height - pheight;
-							}
-							timeboxparent.trigger('scroll_element.xdsoft_scroller', [parseInt(top, 10) / (height - pheight)]);
-						} else {
-							timeboxparent.trigger('scroll_element.xdsoft_scroller', [0]);
-						}
-					}
-				});
-
-			timerclick = 0;
-			calendar
-				.on('touchend click.xdsoft', 'td', function (xdevent) {
-					xdevent.stopPropagation();  // Prevents closing of Pop-ups, Modals and Flyouts in Bootstrap
-					timerclick += 1;
-					var $this = $(this),
-						currentTime = _xdsoft_datetime.currentTime;
-
-					if (currentTime === undefined || currentTime === null) {
-						_xdsoft_datetime.currentTime = _xdsoft_datetime.now();
-						currentTime = _xdsoft_datetime.currentTime;
-					}
-
-					if ($this.hasClass('xdsoft_disabled')) {
-						return false;
-					}
-
-					currentTime.setDate(1);
-					currentTime.setFullYear($this.data('year'));
-					currentTime.setMonth($this.data('month'));
-					currentTime.setDate($this.data('date'));
-
-					datetimepicker.trigger('select.xdsoft', [currentTime]);
-
-					input.val(_xdsoft_datetime.str());
-
-					if (options.onSelectDate &&	$.isFunction(options.onSelectDate)) {
-						options.onSelectDate.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), xdevent);
-					}
-
-					datetimepicker.data('changed', true);
-					datetimepicker.trigger('xchange.xdsoft');
-					datetimepicker.trigger('changedatetime.xdsoft');
-					if ((timerclick > 1 || (options.closeOnDateSelect === true || (options.closeOnDateSelect === false && !options.timepicker))) && !options.inline) {
-						datetimepicker.trigger('close.xdsoft');
-					}
-					setTimeout(function () {
-						timerclick = 0;
-					}, 200);
-				});
-
-			timebox
-				.on('touchstart', 'div', function (xdevent) {
-					this.touchMoved = false;
-				})
-				.on('touchmove', 'div', handleTouchMoved)
-				.on('touchend click.xdsoft', 'div', function (xdevent) {
-					if (!this.touchMoved) {
-						xdevent.stopPropagation();
-						var $this = $(this),
-							currentTime = _xdsoft_datetime.currentTime;
-
-						if (currentTime === undefined || currentTime === null) {
-							_xdsoft_datetime.currentTime = _xdsoft_datetime.now();
-							currentTime = _xdsoft_datetime.currentTime;
-						}
-
-						if ($this.hasClass('xdsoft_disabled')) {
-							return false;
-						}
-						currentTime.setHours($this.data('hour'));
-						currentTime.setMinutes($this.data('minute'));
-						datetimepicker.trigger('select.xdsoft', [currentTime]);
-
-						datetimepicker.data('input').val(_xdsoft_datetime.str());
-
-						if (options.onSelectTime && $.isFunction(options.onSelectTime)) {
-							options.onSelectTime.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), xdevent);
-						}
-						datetimepicker.data('changed', true);
-						datetimepicker.trigger('xchange.xdsoft');
-						datetimepicker.trigger('changedatetime.xdsoft');
-						if (options.inline !== true && options.closeOnTimeSelect === true) {
-							datetimepicker.trigger('close.xdsoft');
-						}
-					}
-				});
-
-			datepicker
-				.on('mousewheel.xdsoft', function (event) {
-					if (!options.scrollMonth) {
-						return true;
-					}
-					if (event.deltaY < 0) {
-						_xdsoft_datetime.nextMonth();
-					} else {
-						_xdsoft_datetime.prevMonth();
-					}
-					return false;
-				});
-
-			input
-				.on('mousewheel.xdsoft', function (event) {
-					if (!options.scrollInput) {
-						return true;
-					}
-					if (!options.datepicker && options.timepicker) {
-						current_time_index = timebox.find('.xdsoft_current').length ? timebox.find('.xdsoft_current').eq(0).index() : 0;
-						if (current_time_index + event.deltaY >= 0 && current_time_index + event.deltaY < timebox.children().length) {
-							current_time_index += event.deltaY;
-						}
-						if (timebox.children().eq(current_time_index).length) {
-							timebox.children().eq(current_time_index).trigger('mousedown');
-						}
-						return false;
-					}
-					if (options.datepicker && !options.timepicker) {
-						datepicker.trigger(event, [event.deltaY, event.deltaX, event.deltaY]);
-						if (input.val) {
-							input.val(_xdsoft_datetime.str());
-						}
-						datetimepicker.trigger('changedatetime.xdsoft');
-						return false;
-					}
-				});
-
-			datetimepicker
-				.on('changedatetime.xdsoft', function (event) {
-					if (options.onChangeDateTime && $.isFunction(options.onChangeDateTime)) {
-						var $input = datetimepicker.data('input');
-						options.onChangeDateTime.call(datetimepicker, _xdsoft_datetime.currentTime, $input, event);
-						delete options.value;
-						$input.trigger('change');
-					}
-				})
-				.on('generate.xdsoft', function () {
-					if (options.onGenerate && $.isFunction(options.onGenerate)) {
-						options.onGenerate.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'));
-					}
-					if (triggerAfterOpen) {
-						datetimepicker.trigger('afterOpen.xdsoft');
-						triggerAfterOpen = false;
-					}
-				})
-				.on('click.xdsoft', function (xdevent) {
-					xdevent.stopPropagation();
-				});
-
-			current_time_index = 0;
-
-			/**
-			 * Runs the callback for each of the specified node's ancestors.
-			 *
-			 * Return FALSE from the callback to stop ascending.
-			 *
-			 * @param {DOMNode} node
-			 * @param {Function} callback
-			 * @returns {undefined}
-			 */
-			forEachAncestorOf = function (node, callback) {
-				do {
-					node = node.parentNode;
-
-					if (!node || callback(node) === false) {
-						break;
-					}
-				} while (node.nodeName !== 'HTML');
-			};
-
-			/**
-			 * Sets the position of the picker.
-			 *
-			 * @returns {undefined}
-			 */
-			setPos = function () {
-				var dateInputOffset,
-					dateInputElem,
-					verticalPosition,
-					left,
-					position,
-					datetimepickerElem,
-					dateInputHasFixedAncestor,
-					$dateInput,
-					windowWidth,
-					verticalAnchorEdge,
-					datetimepickerCss,
-					windowHeight,
-					windowScrollTop;
-
-				$dateInput = datetimepicker.data('input');
-				dateInputOffset = $dateInput.offset();
-				dateInputElem = $dateInput[0];
-
-				verticalAnchorEdge = 'top';
-				verticalPosition = (dateInputOffset.top + dateInputElem.offsetHeight) - 1;
-				left = dateInputOffset.left;
-				position = "absolute";
-
-				windowWidth = $(options.contentWindow).width();
-				windowHeight = $(options.contentWindow).height();
-				windowScrollTop = $(options.contentWindow).scrollTop();
-
-				if ((options.ownerDocument.documentElement.clientWidth - dateInputOffset.left) < datepicker.parent().outerWidth(true)) {
-					var diff = datepicker.parent().outerWidth(true) - dateInputElem.offsetWidth;
-					left = left - diff;
-				}
-
-				if ($dateInput.parent().css('direction') === 'rtl') {
-					left -= (datetimepicker.outerWidth() - $dateInput.outerWidth());
-				}
-
-				if (options.fixed) {
-					verticalPosition -= windowScrollTop;
-					left -= $(options.contentWindow).scrollLeft();
-					position = "fixed";
-				} else {
-					dateInputHasFixedAncestor = false;
-
-					forEachAncestorOf(dateInputElem, function (ancestorNode) {
-						if (ancestorNode === null) {
-							return false;
-						}
-
-						if (options.contentWindow.getComputedStyle(ancestorNode).getPropertyValue('position') === 'fixed') {
-							dateInputHasFixedAncestor = true;
-							return false;
-						}
-					});
-
-					if (dateInputHasFixedAncestor && !options.insideParent) {
-						position = 'fixed';
-
-						//If the picker won't fit entirely within the viewport then display it above the date input.
-						if (verticalPosition + datetimepicker.outerHeight() > windowHeight + windowScrollTop) {
-							verticalAnchorEdge = 'bottom';
-							verticalPosition = (windowHeight + windowScrollTop) - dateInputOffset.top;
-						} else {
-							verticalPosition -= windowScrollTop;
-						}
-					} else {
-						if (verticalPosition + datetimepicker[0].offsetHeight > windowHeight + windowScrollTop) {
-							verticalPosition = dateInputOffset.top - datetimepicker[0].offsetHeight + 1;
-						}
-					}
-
-					if (verticalPosition < 0) {
-						verticalPosition = 0;
-					}
-
-					if (left + dateInputElem.offsetWidth > windowWidth) {
-						left = windowWidth - dateInputElem.offsetWidth;
-					}
-				}
-
-				datetimepickerElem = datetimepicker[0];
-
-				forEachAncestorOf(datetimepickerElem, function (ancestorNode) {
-					var ancestorNodePosition;
-
-					ancestorNodePosition = options.contentWindow.getComputedStyle(ancestorNode).getPropertyValue('position');
-
-					if (ancestorNodePosition === 'relative' && windowWidth >= ancestorNode.offsetWidth) {
-						left = left - ((windowWidth - ancestorNode.offsetWidth) / 2);
-						return false;
-					}
-				});
-
-				datetimepickerCss = {
-					position: position,
-					left: options.insideParent ? dateInputElem.offsetLeft : left,
-					top: '',  //Initialize to prevent previous values interfering with new ones.
-					bottom: ''  //Initialize to prevent previous values interfering with new ones.
-				};
-
-				if (options.insideParent) {
-                    datetimepickerCss[verticalAnchorEdge] = dateInputElem.offsetTop + dateInputElem.offsetHeight;
-                } else {
-                    datetimepickerCss[verticalAnchorEdge] = verticalPosition;
-                }
-
-				datetimepicker.css(datetimepickerCss);
-			};
-
-			datetimepicker
-				.on('open.xdsoft', function (event) {
-					var onShow = true;
-					if (options.onShow && $.isFunction(options.onShow)) {
-						onShow = options.onShow.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), event);
-					}
-					if (onShow !== false) {
-						datetimepicker.show();
-						setPos();
-						$(options.contentWindow)
-							.off('resize.xdsoft', setPos)
-							.on('resize.xdsoft', setPos);
-
-						if (options.closeOnWithoutClick) {
-							$([options.ownerDocument.body, options.contentWindow]).on('touchstart mousedown.xdsoft', function arguments_callee6() {
-								datetimepicker.trigger('close.xdsoft');
-								$([options.ownerDocument.body, options.contentWindow]).off('touchstart mousedown.xdsoft', arguments_callee6);
-							});
-						}
-					}
-				})
-				.on('close.xdsoft', function (event) {
-					var onClose = true;
-					month_picker
-						.find('.xdsoft_month,.xdsoft_year')
-						.find('.xdsoft_select')
-						.hide();
-					if (options.onClose && $.isFunction(options.onClose)) {
-						onClose = options.onClose.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), event);
-					}
-					if (onClose !== false && !options.opened && !options.inline) {
-						datetimepicker.hide();
-					}
-					event.stopPropagation();
-				})
-				.on('toggle.xdsoft', function () {
-					if (datetimepicker.is(':visible')) {
-						datetimepicker.trigger('close.xdsoft');
-					} else {
-						datetimepicker.trigger('open.xdsoft');
-					}
-				})
-				.data('input', input);
-
-			timer = 0;
-
-			datetimepicker.data('xdsoft_datetime', _xdsoft_datetime);
-			datetimepicker.setOptions(options);
-
-			function getCurrentValue() {
-				var ct = false, time;
-
-				if (options.startDate) {
-					ct = _xdsoft_datetime.strToDate(options.startDate);
-				} else {
-					ct = options.value || ((input && input.val && input.val()) ? input.val() : '');
-					if (ct) {
-						ct = _xdsoft_datetime.strToDateTime(ct);
-						if (options.yearOffset) {
-							ct = new Date(ct.getFullYear() - options.yearOffset, ct.getMonth(), ct.getDate(), ct.getHours(), ct.getMinutes(), ct.getSeconds(), ct.getMilliseconds());
-						}
-					} else if (options.defaultDate) {
-						ct = _xdsoft_datetime.strToDateTime(options.defaultDate);
-						if (options.defaultTime) {
-							time = _xdsoft_datetime.strtotime(options.defaultTime);
-							ct.setHours(time.getHours());
-							ct.setMinutes(time.getMinutes());
-						}
-					}
-				}
-
-				if (ct && _xdsoft_datetime.isValidDate(ct)) {
-					datetimepicker.data('changed', true);
-				} else {
-					ct = '';
-				}
-
-				return ct || 0;
-			}
-
-			function setMask(options) {
-
-				var isValidValue = function (mask, value) {
-						var reg = mask
-							.replace(/([\[\]\/\{\}\(\)\-\.\+]{1})/g, '\\$1')
-							.replace(/_/g, '{digit+}')
-							.replace(/([0-9]{1})/g, '{digit$1}')
-							.replace(/\{digit([0-9]{1})\}/g, '[0-$1_]{1}')
-							.replace(/\{digit[\+]\}/g, '[0-9_]{1}');
-						return (new RegExp(reg)).test(value);
-					},
-					getCaretPos = function (input) {
-						try {
-							if (options.ownerDocument.selection && options.ownerDocument.selection.createRange) {
-								var range = options.ownerDocument.selection.createRange();
-								return range.getBookmark().charCodeAt(2) - 2;
-							}
-							if (input.setSelectionRange) {
-								return input.selectionStart;
-							}
-						} catch (e) {
-							return 0;
-						}
-					},
-					setCaretPos = function (node, pos) {
-						node = (typeof node === "string" || node instanceof String) ? options.ownerDocument.getElementById(node) : node;
-						if (!node) {
-							return false;
-						}
-						if (node.createTextRange) {
-							var textRange = node.createTextRange();
-							textRange.collapse(true);
-							textRange.moveEnd('character', pos);
-							textRange.moveStart('character', pos);
-							textRange.select();
-							return true;
-						}
-						if (node.setSelectionRange) {
-							node.setSelectionRange(pos, pos);
-							return true;
-						}
-						return false;
-					};
-
-				if(options.mask) {
-					input.off('keydown.xdsoft');
-				}
-
-				if (options.mask === true) {
-					if (dateHelper.formatMask) {
-						options.mask = dateHelper.formatMask(options.format)
-					} else {
-						options.mask = options.format
-							.replace(/Y/g, '9999')
-							.replace(/F/g, '9999')
-							.replace(/m/g, '19')
-							.replace(/d/g, '39')
-							.replace(/H/g, '29')
-							.replace(/i/g, '59')
-							.replace(/s/g, '59');
-					}
-				}
-
-				if ($.type(options.mask) === 'string') {
-					if (!isValidValue(options.mask, input.val())) {
-						input.val(options.mask.replace(/[0-9]/g, '_'));
-						setCaretPos(input[0], 0);
-					}
-
-					input.on('paste.xdsoft', function (event) {
-					    // couple options here
-					    // 1. return false - tell them they can't paste
-					    // 2. insert over current characters - minimal validation
-					    // 3. full fledged parsing and validation
-					    // let's go option 2 for now
-
-					    // fires multiple times for some reason
-
-					    // https://stackoverflow.com/a/30496488/1366033
-					    var clipboardData = event.clipboardData || event.originalEvent.clipboardData || window.clipboardData,
-						pastedData = clipboardData.getData('text'),
-						val = this.value,
-						pos = this.selectionStart
-
-					    var valueBeforeCursor = val.substr(0, pos);
-					    var valueAfterPaste = val.substr(pos + pastedData.length);
-
-					    val = valueBeforeCursor + pastedData + valueAfterPaste;           
-					    pos += pastedData.length;
-
-					    if (isValidValue(options.mask, val)) {
-						this.value = val;
-						setCaretPos(this, pos);
-					    } else if ($.trim(val) === '') {
-						this.value = options.mask.replace(/[0-9]/g, '_');
-					    } else {
-						input.trigger('error_input.xdsoft');
-					    }
-
-					    event.preventDefault();
-					    return false;
-					  });
-
-					  input.on('keydown.xdsoft', function (event) {
-					    var val = this.value,
-						key = event.which,
-						pos = this.selectionStart,
-						selEnd = this.selectionEnd,
-						hasSel = pos !== selEnd,
-						digit;
-
-					    // only alow these characters
-					    if (((key >=  KEY0 && key <=  KEY9)  ||
-						 (key >= _KEY0 && key <= _KEY9)) || 
-						 (key === BACKSPACE || key === DEL)) {
-
-					      // get char to insert which is new character or placeholder ('_')
-					      digit = (key === BACKSPACE || key === DEL) ? '_' :
-							  String.fromCharCode((_KEY0 <= key && key <= _KEY9) ? key - KEY0 : key);
-
-						// we're deleting something, we're not at the start, and have normal cursor, move back one
-						// if we have a selection length, cursor actually sits behind deletable char, not in front
-						if (key === BACKSPACE && pos && !hasSel) {
-						    pos -= 1;
-						}
-
-						// don't stop on a separator, continue whatever direction you were going
-						//   value char - keep incrementing position while on separator char and we still have room
-						//   del char   - keep decrementing position while on separator char and we still have room
-						while (true) {
-						  var maskValueAtCurPos = options.mask.substr(pos, 1);
-						  var posShorterThanMaskLength = pos < options.mask.length;
-						  var posGreaterThanZero = pos > 0;
-						  var notNumberOrPlaceholder = /[^0-9_]/;
-						  var curPosOnSep = notNumberOrPlaceholder.test(maskValueAtCurPos);
-						  var continueMovingPosition = curPosOnSep && posShorterThanMaskLength && posGreaterThanZero
-
-						  // if we hit a real char, stay where we are
-						  if (!continueMovingPosition) break;
-
-						  // hitting backspace in a selection, you can possibly go back any further - go forward
-						  pos += (key === BACKSPACE && !hasSel) ? -1 : 1;
-
-                        }
-                        
-                        if (event.metaKey) {    // cmd has been pressed
-                            pos = 0;
-                            hasSel = true;
-                        }
-
-						if (hasSel) {
-						  // pos might have moved so re-calc length
-						  var selLength = selEnd - pos
-
-						  // if we have a selection length we will wipe out entire selection and replace with default template for that range
-						  var defaultBlank = options.mask.replace(/[0-9]/g, '_');
-						  var defaultBlankSelectionReplacement = defaultBlank.substr(pos, selLength); 
-						  var selReplacementRemainder = defaultBlankSelectionReplacement.substr(1) // might be empty
-
-						  var valueBeforeSel = val.substr(0, pos);
-						  var insertChars = digit + selReplacementRemainder;
-						  var charsAfterSelection = val.substr(pos + selLength);
-
-						  val = valueBeforeSel + insertChars + charsAfterSelection
-
-						} else {
-						  var valueBeforeCursor = val.substr(0, pos);
-						  var insertChar = digit;
-						  var valueAfterNextChar = val.substr(pos + 1);
-
-						  val = valueBeforeCursor + insertChar + valueAfterNextChar
-						}
-
-						if ($.trim(val) === '') {
-						  // if empty, set to default
-						    val = defaultBlank
-						} else {
-						  // if at the last character don't need to do anything
-						    if (pos === options.mask.length) {
-							event.preventDefault();
-							return false;
-						    }
-						}
-
-						// resume cursor location
-						pos += (key === BACKSPACE) ? 0 : 1;
-						// don't stop on a separator, continue whatever direction you were going
-						while (/[^0-9_]/.test(options.mask.substr(pos, 1)) && pos < options.mask.length && pos > 0) {
-						    pos += (key === BACKSPACE) ? 0 : 1;
-						}
-
-						if (isValidValue(options.mask, val)) {
-						    this.value = val;
-						    setCaretPos(this, pos);
-						} else if ($.trim(val) === '') {
-						    this.value = options.mask.replace(/[0-9]/g, '_');
-						} else {
-						    input.trigger('error_input.xdsoft');
-						}
-					    } else {
-						if (([AKEY, CKEY, VKEY, ZKEY, YKEY].indexOf(key) !== -1 && ctrlDown) || [ESC, ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT, F5, CTRLKEY, TAB, ENTER].indexOf(key) !== -1) {
-						    return true;
-						}
-					    }
-
-					    event.preventDefault();
-					    return false;
-					  });
-				}
-			}
-
-			_xdsoft_datetime.setCurrentTime(getCurrentValue());
-
-			input
-				.data('xdsoft_datetimepicker', datetimepicker)
-				.on('open.xdsoft focusin.xdsoft mousedown.xdsoft touchstart', function () {
-					if (input.is(':disabled') || (input.data('xdsoft_datetimepicker').is(':visible') && options.closeOnInputClick)) {
-						return;
-					}
-					if (!options.openOnFocus) {
-						return;
-					}
-					clearTimeout(timer);
-					timer = setTimeout(function () {
-						if (input.is(':disabled')) {
-							return;
-						}
-
-						triggerAfterOpen = true;
-						_xdsoft_datetime.setCurrentTime(getCurrentValue(), true);
-						if(options.mask) {
-							setMask(options);
-						}
-						datetimepicker.trigger('open.xdsoft');
-					}, 100);
-				})
-				.on('keydown.xdsoft', function (event) {
-					var elementSelector,
-						key = event.which;
-					if ([ENTER].indexOf(key) !== -1 && options.enterLikeTab) {
-						elementSelector = $("input:visible,textarea:visible,button:visible,a:visible");
-						datetimepicker.trigger('close.xdsoft');
-						elementSelector.eq(elementSelector.index(this) + 1).focus();
-						return false;
-					}
-					if ([TAB].indexOf(key) !== -1) {
-						datetimepicker.trigger('close.xdsoft');
-						return true;
-					}
-				})
-				.on('blur.xdsoft', function () {
-					datetimepicker.trigger('close.xdsoft');
-				});
-		};
-		destroyDateTimePicker = function (input) {
-			var datetimepicker = input.data('xdsoft_datetimepicker');
-			if (datetimepicker) {
-				datetimepicker.data('xdsoft_datetime', null);
-				datetimepicker.remove();
-				input
-					.data('xdsoft_datetimepicker', null)
-					.off('.xdsoft');
-				$(options.contentWindow).off('resize.xdsoft');
-				$([options.contentWindow, options.ownerDocument.body]).off('mousedown.xdsoft touchstart');
-				if (input.unmousewheel) {
-					input.unmousewheel();
-				}
-			}
-		};
-		$(options.ownerDocument)
-            .off('keydown.xdsoftctrl keyup.xdsoftctrl')
-            .off('keydown.xdsoftcmd keyup.xdsoftcmd')
-			.on('keydown.xdsoftctrl', function (e) {
-				if (e.keyCode === CTRLKEY) {
-					ctrlDown = true;
-                }
-			})
-			.on('keyup.xdsoftctrl', function (e) {
-				if (e.keyCode === CTRLKEY) {
-					ctrlDown = false;
-                }
-            })
-            .on('keydown.xdsoftcmd', function (e) {
-                if (e.keyCode === CMDKEY) {
-                    cmdDown = true;
-                }
-			})
-			.on('keyup.xdsoftcmd', function (e) {
-                if (e.keyCode === CMDKEY) {
-                    cmdDown = false;
-                }
-			});
-
-		this.each(function () {
-			var datetimepicker = $(this).data('xdsoft_datetimepicker'), $input;
-			if (datetimepicker) {
-				if ($.type(opt) === 'string') {
-					switch (opt) {
-						case 'show':
-							$(this).select().focus();
-							datetimepicker.trigger('open.xdsoft');
-							break;
-						case 'hide':
-							datetimepicker.trigger('close.xdsoft');
-							break;
-						case 'toggle':
-							datetimepicker.trigger('toggle.xdsoft');
-							break;
-						case 'destroy':
-							destroyDateTimePicker($(this));
-							break;
-						case 'reset':
-							this.value = this.defaultValue;
-							if (!this.value || !datetimepicker.data('xdsoft_datetime').isValidDate(dateHelper.parseDate(this.value, options.format))) {
-								datetimepicker.data('changed', false);
-							}
-							datetimepicker.data('xdsoft_datetime').setCurrentTime(this.value);
-							break;
-						case 'validate':
-							$input = datetimepicker.data('input');
-							$input.trigger('blur.xdsoft');
-							break;
-						default:
-							if (datetimepicker[opt] && $.isFunction(datetimepicker[opt])) {
-								result = datetimepicker[opt](opt2);
-							}
-					}
-				} else {
-					datetimepicker
-						.setOptions(opt);
-				}
-				return 0;
-			}
-			if ($.type(opt) !== 'string') {
-				if (!options.lazyInit || options.open || options.inline) {
-					createDateTimePicker($(this));
-				} else {
-					lazyInit($(this));
-				}
-			}
-		});
-
-		return result;
-	};
-
-	$.fn.datetimepicker.defaults = default_options;
-
-	function HighlightedDate(date, desc, style) {
-		"use strict";
-		this.date = date;
-		this.desc = desc;
-		this.style = style;
-	}
-};
-;(function (factory) {
-	if ( typeof define === 'function' && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define(['jquery', 'jquery-mousewheel'], factory);
-	} else if (typeof exports === 'object') {
-		// Node/CommonJS style for Browserify
-		module.exports = factory(require('jquery'));;
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-}(datetimepickerFactory));
-
-
-/*!
- * jQuery Mousewheel 3.1.13
- *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- */
-
-(function (factory) {
-    if ( typeof define === 'function' && define.amd ) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node/CommonJS style for Browserify
-        module.exports = factory;
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var toFix  = ['wheel', 'mousewheel', 'DOMMouseScroll', 'MozMousePixelScroll'],
-        toBind = ( 'onwheel' in document || document.documentMode >= 9 ) ?
-                    ['wheel'] : ['mousewheel', 'DomMouseScroll', 'MozMousePixelScroll'],
-        slice  = Array.prototype.slice,
-        nullLowestDeltaTimeout, lowestDelta;
-
-    if ( $.event.fixHooks ) {
-        for ( var i = toFix.length; i; ) {
-            $.event.fixHooks[ toFix[--i] ] = $.event.mouseHooks;
-        }
-    }
-
-    var special = $.event.special.mousewheel = {
-        version: '3.1.12',
-
-        setup: function() {
-            if ( this.addEventListener ) {
-                for ( var i = toBind.length; i; ) {
-                    this.addEventListener( toBind[--i], handler, false );
-                }
-            } else {
-                this.onmousewheel = handler;
-            }
-            // Store the line height and page height for this particular element
-            $.data(this, 'mousewheel-line-height', special.getLineHeight(this));
-            $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
-        },
-
-        teardown: function() {
-            if ( this.removeEventListener ) {
-                for ( var i = toBind.length; i; ) {
-                    this.removeEventListener( toBind[--i], handler, false );
-                }
-            } else {
-                this.onmousewheel = null;
-            }
-            // Clean up the data we added to the element
-            $.removeData(this, 'mousewheel-line-height');
-            $.removeData(this, 'mousewheel-page-height');
-        },
-
-        getLineHeight: function(elem) {
-            var $elem = $(elem),
-                $parent = $elem['offsetParent' in $.fn ? 'offsetParent' : 'parent']();
-            if (!$parent.length) {
-                $parent = $('body');
-            }
-            return parseInt($parent.css('fontSize'), 10) || parseInt($elem.css('fontSize'), 10) || 16;
-        },
-
-        getPageHeight: function(elem) {
-            return $(elem).height();
-        },
-
-        settings: {
-            adjustOldDeltas: true, // see shouldAdjustOldDeltas() below
-            normalizeOffset: true  // calls getBoundingClientRect for each event
-        }
-    };
-
-    $.fn.extend({
-        mousewheel: function(fn) {
-            return fn ? this.bind('mousewheel', fn) : this.trigger('mousewheel');
-        },
-
-        unmousewheel: function(fn) {
-            return this.unbind('mousewheel', fn);
-        }
-    });
-
-
-    function handler(event) {
-        var orgEvent   = event || window.event,
-            args       = slice.call(arguments, 1),
-            delta      = 0,
-            deltaX     = 0,
-            deltaY     = 0,
-            absDelta   = 0,
-            offsetX    = 0,
-            offsetY    = 0;
-        event = $.event.fix(orgEvent);
-        event.type = 'mousewheel';
-
-        // Old school scrollwheel delta
-        if ( 'detail'      in orgEvent ) { deltaY = orgEvent.detail * -1;      }
-        if ( 'wheelDelta'  in orgEvent ) { deltaY = orgEvent.wheelDelta;       }
-        if ( 'wheelDeltaY' in orgEvent ) { deltaY = orgEvent.wheelDeltaY;      }
-        if ( 'wheelDeltaX' in orgEvent ) { deltaX = orgEvent.wheelDeltaX * -1; }
-
-        // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
-        if ( 'axis' in orgEvent && orgEvent.axis === orgEvent.HORIZONTAL_AXIS ) {
-            deltaX = deltaY * -1;
-            deltaY = 0;
-        }
-
-        // Set delta to be deltaY or deltaX if deltaY is 0 for backwards compatabilitiy
-        delta = deltaY === 0 ? deltaX : deltaY;
-
-        // New school wheel delta (wheel event)
-        if ( 'deltaY' in orgEvent ) {
-            deltaY = orgEvent.deltaY * -1;
-            delta  = deltaY;
-        }
-        if ( 'deltaX' in orgEvent ) {
-            deltaX = orgEvent.deltaX;
-            if ( deltaY === 0 ) { delta  = deltaX * -1; }
-        }
-
-        // No change actually happened, no reason to go any further
-        if ( deltaY === 0 && deltaX === 0 ) { return; }
-
-        // Need to convert lines and pages to pixels if we aren't already in pixels
-        // There are three delta modes:
-        //   * deltaMode 0 is by pixels, nothing to do
-        //   * deltaMode 1 is by lines
-        //   * deltaMode 2 is by pages
-        if ( orgEvent.deltaMode === 1 ) {
-            var lineHeight = $.data(this, 'mousewheel-line-height');
-            delta  *= lineHeight;
-            deltaY *= lineHeight;
-            deltaX *= lineHeight;
-        } else if ( orgEvent.deltaMode === 2 ) {
-            var pageHeight = $.data(this, 'mousewheel-page-height');
-            delta  *= pageHeight;
-            deltaY *= pageHeight;
-            deltaX *= pageHeight;
-        }
-
-        // Store lowest absolute delta to normalize the delta values
-        absDelta = Math.max( Math.abs(deltaY), Math.abs(deltaX) );
-
-        if ( !lowestDelta || absDelta < lowestDelta ) {
-            lowestDelta = absDelta;
-
-            // Adjust older deltas if necessary
-            if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
-                lowestDelta /= 40;
-            }
-        }
-
-        // Adjust older deltas if necessary
-        if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
-            // Divide all the things by 40!
-            delta  /= 40;
-            deltaX /= 40;
-            deltaY /= 40;
-        }
-
-        // Get a whole, normalized value for the deltas
-        delta  = Math[ delta  >= 1 ? 'floor' : 'ceil' ](delta  / lowestDelta);
-        deltaX = Math[ deltaX >= 1 ? 'floor' : 'ceil' ](deltaX / lowestDelta);
-        deltaY = Math[ deltaY >= 1 ? 'floor' : 'ceil' ](deltaY / lowestDelta);
-
-        // Normalise offsetX and offsetY properties
-        if ( special.settings.normalizeOffset && this.getBoundingClientRect ) {
-            var boundingRect = this.getBoundingClientRect();
-            offsetX = event.clientX - boundingRect.left;
-            offsetY = event.clientY - boundingRect.top;
-        }
-
-        // Add information to the event object
-        event.deltaX = deltaX;
-        event.deltaY = deltaY;
-        event.deltaFactor = lowestDelta;
-        event.offsetX = offsetX;
-        event.offsetY = offsetY;
-        // Go ahead and set deltaMode to 0 since we converted to pixels
-        // Although this is a little odd since we overwrite the deltaX/Y
-        // properties with normalized deltas.
-        event.deltaMode = 0;
-
-        // Add event and delta to the front of the arguments
-        args.unshift(event, delta, deltaX, deltaY);
-
-        // Clearout lowestDelta after sometime to better
-        // handle multiple device types that give different
-        // a different lowestDelta
-        // Ex: trackpad = 3 and mouse wheel = 120
-        if (nullLowestDeltaTimeout) { clearTimeout(nullLowestDeltaTimeout); }
-        nullLowestDeltaTimeout = setTimeout(nullLowestDelta, 200);
-
-        return ($.event.dispatch || $.event.handle).apply(this, args);
-    }
-
-    function nullLowestDelta() {
-        lowestDelta = null;
-    }
-
-    function shouldAdjustOldDeltas(orgEvent, absDelta) {
-        // If this is an older event and the delta is divisable by 120,
-        // then we are assuming that the browser is treating this as an
-        // older mouse wheel event and that we should divide the deltas
-        // by 40 to try and get a more usable deltaFactor.
-        // Side note, this actually impacts the reported scroll distance
-        // in older browsers and can cause scrolling to be slower than native.
-        // Turn this off by setting $.event.special.mousewheel.settings.adjustOldDeltas to false.
-        return special.settings.adjustOldDeltas && orgEvent.type === 'mousewheel' && absDelta % 120 === 0;
-    }
-
-}));
-
-/*
- * jQuery FlexSlider v2.7.0
- * Copyright 2012 WooThemes
- * Contributing Author: Tyler Smith
- */
-(function ($) {
-
-  var focused = true;
-
-  //FlexSlider: Object Instance
-  $.flexslider = function(el, options) {
-    var slider = $(el);
-
-    // making variables public
-
-    //if rtl value was not passed and html is in rtl..enable it by default.
-  	if(typeof options.rtl=='undefined' && $('html').attr('dir')=='rtl'){
-  		options.rtl=true;
-    }
-    slider.vars = $.extend({}, $.flexslider.defaults, options);
-
-    var namespace = slider.vars.namespace,
-        msGesture = window.navigator && window.navigator.msPointerEnabled && window.MSGesture,
-        touch = (( "ontouchstart" in window ) || msGesture || window.DocumentTouch && document instanceof DocumentTouch) && slider.vars.touch,
-        // deprecating this idea, as devices are being released with both of these events
-        eventType = "click touchend MSPointerUp keyup",
-        watchedEvent = "",
-        watchedEventClearTimer,
-        vertical = slider.vars.direction === "vertical",
-        reverse = slider.vars.reverse,
-        carousel = (slider.vars.itemWidth > 0),
-        fade = slider.vars.animation === "fade",
-        asNav = slider.vars.asNavFor !== "",
-        methods = {};
-
-    // Store a reference to the slider object
-    $.data(el, "flexslider", slider);
-
-    // Private slider methods
-    methods = {
-      init: function() {
-        slider.animating = false;
-        // Get current slide and make sure it is a number
-        slider.currentSlide = parseInt( ( slider.vars.startAt ? slider.vars.startAt : 0), 10 );
-        if ( isNaN( slider.currentSlide ) ) { slider.currentSlide = 0; }
-        slider.animatingTo = slider.currentSlide;
-        slider.atEnd = (slider.currentSlide === 0 || slider.currentSlide === slider.last);
-        slider.containerSelector = slider.vars.selector.substr(0,slider.vars.selector.search(' '));
-        slider.slides = $(slider.vars.selector, slider);
-        slider.container = $(slider.containerSelector, slider);
-        slider.count = slider.slides.length;
-        // SYNC:
-        slider.syncExists = $(slider.vars.sync).length > 0;
-        // SLIDE:
-        if (slider.vars.animation === "slide") { slider.vars.animation = "swing"; }
-        slider.prop = (vertical) ? "top" : ( slider.vars.rtl ? "marginRight" : "marginLeft" );
-        slider.args = {};
-        // SLIDESHOW:
-        slider.manualPause = false;
-        slider.stopped = false;
-        //PAUSE WHEN INVISIBLE
-        slider.started = false;
-        slider.startTimeout = null;
-        // TOUCH/USECSS:
-        slider.transitions = !slider.vars.video && !fade && slider.vars.useCSS && (function() {
-          var obj = document.createElement('div'),
-              props = ['perspectiveProperty', 'WebkitPerspective', 'MozPerspective', 'OPerspective', 'msPerspective'];
-          for (var i in props) {
-            if ( obj.style[ props[i] ] !== undefined ) {
-              slider.pfx = props[i].replace('Perspective','').toLowerCase();
-              slider.prop = "-" + slider.pfx + "-transform";
-              return true;
-            }
-          }
-          return false;
-        }());
-        slider.ensureAnimationEnd = '';
-        // CONTROLSCONTAINER:
-        if (slider.vars.controlsContainer !== "") slider.controlsContainer = $(slider.vars.controlsContainer).length > 0 && $(slider.vars.controlsContainer);
-        // MANUAL:
-        if (slider.vars.manualControls !== "") slider.manualControls = $(slider.vars.manualControls).length > 0 && $(slider.vars.manualControls);
-
-        // CUSTOM DIRECTION NAV:
-        if (slider.vars.customDirectionNav !== "") slider.customDirectionNav = $(slider.vars.customDirectionNav).length === 2 && $(slider.vars.customDirectionNav);
-
-        // RANDOMIZE:
-        if (slider.vars.randomize) {
-          slider.slides.sort(function() { return (Math.round(Math.random())-0.5); });
-          slider.container.empty().append(slider.slides);
-        }
-
-        slider.doMath();
-
-        // INIT
-        slider.setup("init");
-
-        // CONTROLNAV:
-        if (slider.vars.controlNav) { methods.controlNav.setup(); }
-
-        // DIRECTIONNAV:
-        if (slider.vars.directionNav) { methods.directionNav.setup(); }
-
-        // KEYBOARD:
-        if (slider.vars.keyboard && ($(slider.containerSelector).length === 1 || slider.vars.multipleKeyboard)) {
-          $(document).bind('keyup', function(event) {
-            var keycode = event.keyCode;
-            if (!slider.animating && (keycode === 39 || keycode === 37)) {
-              var target = (slider.vars.rtl?
-                                ((keycode === 37) ? slider.getTarget('next') :
-                                (keycode === 39) ? slider.getTarget('prev') : false)
-                                :
-                                ((keycode === 39) ? slider.getTarget('next') :
-                                (keycode === 37) ? slider.getTarget('prev') : false)
-                                )
-                                ;
-              slider.flexAnimate(target, slider.vars.pauseOnAction);
-            }
-          });
-        }
-        // MOUSEWHEEL:
-        if (slider.vars.mousewheel) {
-          slider.bind('mousewheel', function(event, delta, deltaX, deltaY) {
-            event.preventDefault();
-            var target = (delta < 0) ? slider.getTarget('next') : slider.getTarget('prev');
-            slider.flexAnimate(target, slider.vars.pauseOnAction);
-          });
-        }
-
-        // PAUSEPLAY
-        if (slider.vars.pausePlay) { methods.pausePlay.setup(); }
-
-        //PAUSE WHEN INVISIBLE
-        if (slider.vars.slideshow && slider.vars.pauseInvisible) { methods.pauseInvisible.init(); }
-
-        // SLIDSESHOW
-        if (slider.vars.slideshow) {
-          if (slider.vars.pauseOnHover) {
-            slider.hover(function() {
-              if (!slider.manualPlay && !slider.manualPause) { slider.pause(); }
-            }, function() {
-              if (!slider.manualPause && !slider.manualPlay && !slider.stopped) { slider.play(); }
-            });
-          }
-          // initialize animation
-          //If we're visible, or we don't use PageVisibility API
-          if(!slider.vars.pauseInvisible || !methods.pauseInvisible.isHidden()) {
-            (slider.vars.initDelay > 0) ? slider.startTimeout = setTimeout(slider.play, slider.vars.initDelay) : slider.play();
-          }
-        }
-
-        // ASNAV:
-        if (asNav) { methods.asNav.setup(); }
-
-        // TOUCH
-        if (touch && slider.vars.touch) { methods.touch(); }
-
-        // FADE&&SMOOTHHEIGHT || SLIDE:
-        if (!fade || (fade && slider.vars.smoothHeight)) { $(window).bind("resize orientationchange focus", methods.resize); }
-
-        slider.find("img").attr("draggable", "false");
-
-        // API: start() Callback
-        setTimeout(function(){
-          slider.vars.start(slider);
-        }, 200);
-      },
-      asNav: {
-        setup: function() {
-          slider.asNav = true;
-          slider.animatingTo = Math.floor(slider.currentSlide/slider.move);
-          slider.currentItem = slider.currentSlide;
-          slider.slides.removeClass(namespace + "active-slide").eq(slider.currentItem).addClass(namespace + "active-slide");
-          if(!msGesture){
-              slider.slides.on(eventType, function(e){
-                e.preventDefault();
-                var $slide = $(this),
-                    target = $slide.index();
-        				var posFromX;
-                if(slider.vars.rtl){
-        					posFromX = -1*($slide.offset().right - $(slider).scrollLeft()); // Find position of slide relative to right of slider container
-        				}
-        				else
-        				{
-        					posFromX = $slide.offset().left - $(slider).scrollLeft(); // Find position of slide relative to left of slider container
-        				}
-                if( posFromX <= 0 && $slide.hasClass( namespace + 'active-slide' ) ) {
-                  slider.flexAnimate(slider.getTarget("prev"), true);
-                } else if (!$(slider.vars.asNavFor).data('flexslider').animating && !$slide.hasClass(namespace + "active-slide")) {
-                  slider.direction = (slider.currentItem < target) ? "next" : "prev";
-                  slider.flexAnimate(target, slider.vars.pauseOnAction, false, true, true);
-                }
-              });
-          }else{
-              el._slider = slider;
-              slider.slides.each(function (){
-                  var that = this;
-                  that._gesture = new MSGesture();
-                  that._gesture.target = that;
-                  that.addEventListener("MSPointerDown", function (e){
-                      e.preventDefault();
-                      if(e.currentTarget._gesture) {
-                        e.currentTarget._gesture.addPointer(e.pointerId);
-                      }
-                  }, false);
-                  that.addEventListener("MSGestureTap", function (e){
-                      e.preventDefault();
-                      var $slide = $(this),
-                          target = $slide.index();
-                      if (!$(slider.vars.asNavFor).data('flexslider').animating && !$slide.hasClass('active')) {
-                          slider.direction = (slider.currentItem < target) ? "next" : "prev";
-                          slider.flexAnimate(target, slider.vars.pauseOnAction, false, true, true);
-                      }
-                  });
-              });
-          }
-        }
-      },
-      controlNav: {
-        setup: function() {
-          if (!slider.manualControls) {
-            methods.controlNav.setupPaging();
-          } else { // MANUALCONTROLS:
-            methods.controlNav.setupManual();
-          }
-        },
-        setupPaging: function() {
-          var type = (slider.vars.controlNav === "thumbnails") ? 'control-thumbs' : 'control-paging',
-              j = 1,
-              item,
-              slide;
-
-          slider.controlNavScaffold = $('<ol class="'+ namespace + 'control-nav ' + namespace + type + '"></ol>');
-
-          if (slider.pagingCount > 1) {
-            for (var i = 0; i < slider.pagingCount; i++) {
-              slide = slider.slides.eq(i);
-              if ( undefined === slide.attr( 'data-thumb-alt' ) ) { slide.attr( 'data-thumb-alt', '' ); }
-              var altText = ( '' !== slide.attr( 'data-thumb-alt' ) ) ? altText = ' alt="' + slide.attr( 'data-thumb-alt' ) + '"' : '';
-              item = (slider.vars.controlNav === "thumbnails") ? '<img src="' + slide.attr( 'data-thumb' ) + '"' + altText + '/>' : '<a href="#">' + j + '</a>';
-              if ( 'thumbnails' === slider.vars.controlNav && true === slider.vars.thumbCaptions ) {
-                var captn = slide.attr( 'data-thumbcaption' );
-                if ( '' !== captn && undefined !== captn ) { item += '<span class="' + namespace + 'caption">' + captn + '</span>'; }
-              }
-              slider.controlNavScaffold.append('<li>' + item + '</li>');
-              j++;
-            }
-          }
-
-          // CONTROLSCONTAINER:
-          (slider.controlsContainer) ? $(slider.controlsContainer).append(slider.controlNavScaffold) : slider.append(slider.controlNavScaffold);
-          methods.controlNav.set();
-
-          methods.controlNav.active();
-
-          slider.controlNavScaffold.delegate('a, img', eventType, function(event) {
-            event.preventDefault();
-
-            if (watchedEvent === "" || watchedEvent === event.type) {
-              var $this = $(this),
-                  target = slider.controlNav.index($this);
-
-              if (!$this.hasClass(namespace + 'active')) {
-                slider.direction = (target > slider.currentSlide) ? "next" : "prev";
-                slider.flexAnimate(target, slider.vars.pauseOnAction);
-              }
-            }
-
-            // setup flags to prevent event duplication
-            if (watchedEvent === "") {
-              watchedEvent = event.type;
-            }
-            methods.setToClearWatchedEvent();
-
-          });
-        },
-        setupManual: function() {
-          slider.controlNav = slider.manualControls;
-          methods.controlNav.active();
-
-          slider.controlNav.bind(eventType, function(event) {
-            event.preventDefault();
-
-            if (watchedEvent === "" || watchedEvent === event.type) {
-              var $this = $(this),
-                  target = slider.controlNav.index($this);
-
-              if (!$this.hasClass(namespace + 'active')) {
-                (target > slider.currentSlide) ? slider.direction = "next" : slider.direction = "prev";
-                slider.flexAnimate(target, slider.vars.pauseOnAction);
-              }
-            }
-
-            // setup flags to prevent event duplication
-            if (watchedEvent === "") {
-              watchedEvent = event.type;
-            }
-            methods.setToClearWatchedEvent();
-          });
-        },
-        set: function() {
-          var selector = (slider.vars.controlNav === "thumbnails") ? 'img' : 'a';
-          slider.controlNav = $('.' + namespace + 'control-nav li ' + selector, (slider.controlsContainer) ? slider.controlsContainer : slider);
-        },
-        active: function() {
-          slider.controlNav.removeClass(namespace + "active").eq(slider.animatingTo).addClass(namespace + "active");
-        },
-        update: function(action, pos) {
-          if (slider.pagingCount > 1 && action === "add") {
-            slider.controlNavScaffold.append($('<li><a href="#">' + slider.count + '</a></li>'));
-          } else if (slider.pagingCount === 1) {
-            slider.controlNavScaffold.find('li').remove();
-          } else {
-            slider.controlNav.eq(pos).closest('li').remove();
-          }
-          methods.controlNav.set();
-          (slider.pagingCount > 1 && slider.pagingCount !== slider.controlNav.length) ? slider.update(pos, action) : methods.controlNav.active();
-        }
-      },
-      directionNav: {
-        setup: function() {
-          var directionNavScaffold = $('<ul class="' + namespace + 'direction-nav"><li class="' + namespace + 'nav-prev"><a class="' + namespace + 'prev" href="#">' + slider.vars.prevText + '</a></li><li class="' + namespace + 'nav-next"><a class="' + namespace + 'next" href="#">' + slider.vars.nextText + '</a></li></ul>');
-
-          // CUSTOM DIRECTION NAV:
-          if (slider.customDirectionNav) {
-            slider.directionNav = slider.customDirectionNav;
-          // CONTROLSCONTAINER:
-          } else if (slider.controlsContainer) {
-            $(slider.controlsContainer).append(directionNavScaffold);
-            slider.directionNav = $('.' + namespace + 'direction-nav li a', slider.controlsContainer);
-          } else {
-            slider.append(directionNavScaffold);
-            slider.directionNav = $('.' + namespace + 'direction-nav li a', slider);
-          }
-
-          methods.directionNav.update();
-
-          slider.directionNav.bind(eventType, function(event) {
-            event.preventDefault();
-            var target;
-
-            if (watchedEvent === "" || watchedEvent === event.type) {
-              target = ($(this).hasClass(namespace + 'next')) ? slider.getTarget('next') : slider.getTarget('prev');
-              slider.flexAnimate(target, slider.vars.pauseOnAction);
-            }
-
-            // setup flags to prevent event duplication
-            if (watchedEvent === "") {
-              watchedEvent = event.type;
-            }
-            methods.setToClearWatchedEvent();
-          });
-        },
-        update: function() {
-          var disabledClass = namespace + 'disabled';
-          if (slider.pagingCount === 1) {
-            slider.directionNav.addClass(disabledClass).attr('tabindex', '-1');
-          } else if (!slider.vars.animationLoop) {
-            if (slider.animatingTo === 0) {
-              slider.directionNav.removeClass(disabledClass).filter('.' + namespace + "prev").addClass(disabledClass).attr('tabindex', '-1');
-            } else if (slider.animatingTo === slider.last) {
-              slider.directionNav.removeClass(disabledClass).filter('.' + namespace + "next").addClass(disabledClass).attr('tabindex', '-1');
-            } else {
-              slider.directionNav.removeClass(disabledClass).removeAttr('tabindex');
-            }
-          } else {
-            slider.directionNav.removeClass(disabledClass).removeAttr('tabindex');
-          }
-        }
-      },
-      pausePlay: {
-        setup: function() {
-          var pausePlayScaffold = $('<div class="' + namespace + 'pauseplay"><a href="#"></a></div>');
-
-          // CONTROLSCONTAINER:
-          if (slider.controlsContainer) {
-            slider.controlsContainer.append(pausePlayScaffold);
-            slider.pausePlay = $('.' + namespace + 'pauseplay a', slider.controlsContainer);
-          } else {
-            slider.append(pausePlayScaffold);
-            slider.pausePlay = $('.' + namespace + 'pauseplay a', slider);
-          }
-
-          methods.pausePlay.update((slider.vars.slideshow) ? namespace + 'pause' : namespace + 'play');
-
-          slider.pausePlay.bind(eventType, function(event) {
-            event.preventDefault();
-
-            if (watchedEvent === "" || watchedEvent === event.type) {
-              if ($(this).hasClass(namespace + 'pause')) {
-                slider.manualPause = true;
-                slider.manualPlay = false;
-                slider.pause();
-              } else {
-                slider.manualPause = false;
-                slider.manualPlay = true;
-                slider.play();
-              }
-            }
-
-            // setup flags to prevent event duplication
-            if (watchedEvent === "") {
-              watchedEvent = event.type;
-            }
-            methods.setToClearWatchedEvent();
-          });
-        },
-        update: function(state) {
-          (state === "play") ? slider.pausePlay.removeClass(namespace + 'pause').addClass(namespace + 'play').html(slider.vars.playText) : slider.pausePlay.removeClass(namespace + 'play').addClass(namespace + 'pause').html(slider.vars.pauseText);
-        }
-      },
-      touch: function() {
-        var startX,
-          startY,
-          offset,
-          cwidth,
-          dx,
-          startT,
-          onTouchStart,
-          onTouchMove,
-          onTouchEnd,
-          scrolling = false,
-          localX = 0,
-          localY = 0,
-          accDx = 0;
-
-        if(!msGesture){
-            onTouchStart = function(e) {
-              if (slider.animating) {
-                e.preventDefault();
-              } else if ( ( window.navigator.msPointerEnabled ) || e.touches.length === 1 ) {
-                slider.pause();
-                // CAROUSEL:
-                cwidth = (vertical) ? slider.h : slider. w;
-                startT = Number(new Date());
-                // CAROUSEL:
-
-                // Local vars for X and Y points.
-                localX = e.touches[0].pageX;
-                localY = e.touches[0].pageY;
-
-                offset = (carousel && reverse && slider.animatingTo === slider.last) ? 0 :
-                         (carousel && reverse) ? slider.limit - (((slider.itemW + slider.vars.itemMargin) * slider.move) * slider.animatingTo) :
-                         (carousel && slider.currentSlide === slider.last) ? slider.limit :
-                         (carousel) ? ((slider.itemW + slider.vars.itemMargin) * slider.move) * slider.currentSlide :
-                         (reverse) ? (slider.last - slider.currentSlide + slider.cloneOffset) * cwidth : (slider.currentSlide + slider.cloneOffset) * cwidth;
-                startX = (vertical) ? localY : localX;
-                startY = (vertical) ? localX : localY;
-                el.addEventListener('touchmove', onTouchMove, false);
-                el.addEventListener('touchend', onTouchEnd, false);
-              }
-            };
-
-            onTouchMove = function(e) {
-              // Local vars for X and Y points.
-
-              localX = e.touches[0].pageX;
-              localY = e.touches[0].pageY;
-
-              dx = (vertical) ? startX - localY : (slider.vars.rtl?-1:1)*(startX - localX);
-              scrolling = (vertical) ? (Math.abs(dx) < Math.abs(localX - startY)) : (Math.abs(dx) < Math.abs(localY - startY));
-              var fxms = 500;
-
-              if ( ! scrolling || Number( new Date() ) - startT > fxms ) {
-                e.preventDefault();
-                if (!fade && slider.transitions) {
-                  if (!slider.vars.animationLoop) {
-                    dx = dx/((slider.currentSlide === 0 && dx < 0 || slider.currentSlide === slider.last && dx > 0) ? (Math.abs(dx)/cwidth+2) : 1);
-                  }
-                  slider.setProps(offset + dx, "setTouch");
-                }
-              }
-            };
-
-            onTouchEnd = function(e) {
-              // finish the touch by undoing the touch session
-              el.removeEventListener('touchmove', onTouchMove, false);
-
-              if (slider.animatingTo === slider.currentSlide && !scrolling && !(dx === null)) {
-                var updateDx = (reverse) ? -dx : dx,
-                    target = (updateDx > 0) ? slider.getTarget('next') : slider.getTarget('prev');
-
-                if (slider.canAdvance(target) && (Number(new Date()) - startT < 550 && Math.abs(updateDx) > 50 || Math.abs(updateDx) > cwidth/2)) {
-                  slider.flexAnimate(target, slider.vars.pauseOnAction);
-                } else {
-                  if (!fade) { slider.flexAnimate(slider.currentSlide, slider.vars.pauseOnAction, true); }
-                }
-              }
-              el.removeEventListener('touchend', onTouchEnd, false);
-
-              startX = null;
-              startY = null;
-              dx = null;
-              offset = null;
-            };
-
-            el.addEventListener('touchstart', onTouchStart, false);
-        }else{
-            el.style.msTouchAction = "none";
-            el._gesture = new MSGesture();
-            el._gesture.target = el;
-            el.addEventListener("MSPointerDown", onMSPointerDown, false);
-            el._slider = slider;
-            el.addEventListener("MSGestureChange", onMSGestureChange, false);
-            el.addEventListener("MSGestureEnd", onMSGestureEnd, false);
-
-            function onMSPointerDown(e){
-                e.stopPropagation();
-                if (slider.animating) {
-                    e.preventDefault();
-                }else{
-                    slider.pause();
-                    el._gesture.addPointer(e.pointerId);
-                    accDx = 0;
-                    cwidth = (vertical) ? slider.h : slider. w;
-                    startT = Number(new Date());
-                    // CAROUSEL:
-
-                    offset = (carousel && reverse && slider.animatingTo === slider.last) ? 0 :
-                        (carousel && reverse) ? slider.limit - (((slider.itemW + slider.vars.itemMargin) * slider.move) * slider.animatingTo) :
-                            (carousel && slider.currentSlide === slider.last) ? slider.limit :
-                                (carousel) ? ((slider.itemW + slider.vars.itemMargin) * slider.move) * slider.currentSlide :
-                                    (reverse) ? (slider.last - slider.currentSlide + slider.cloneOffset) * cwidth : (slider.currentSlide + slider.cloneOffset) * cwidth;
-                }
-            }
-
-            function onMSGestureChange(e) {
-                e.stopPropagation();
-                var slider = e.target._slider;
-                if(!slider){
-                    return;
-                }
-                var transX = -e.translationX,
-                    transY = -e.translationY;
-
-                //Accumulate translations.
-                accDx = accDx + ((vertical) ? transY : transX);
-                dx = (slider.vars.rtl?-1:1)*accDx;
-                scrolling = (vertical) ? (Math.abs(accDx) < Math.abs(-transX)) : (Math.abs(accDx) < Math.abs(-transY));
-
-                if(e.detail === e.MSGESTURE_FLAG_INERTIA){
-                    setImmediate(function (){
-                        el._gesture.stop();
-                    });
-
-                    return;
-                }
-
-                if (!scrolling || Number(new Date()) - startT > 500) {
-                    e.preventDefault();
-                    if (!fade && slider.transitions) {
-                        if (!slider.vars.animationLoop) {
-                            dx = accDx / ((slider.currentSlide === 0 && accDx < 0 || slider.currentSlide === slider.last && accDx > 0) ? (Math.abs(accDx) / cwidth + 2) : 1);
-                        }
-                        slider.setProps(offset + dx, "setTouch");
-                    }
-                }
-            }
-
-            function onMSGestureEnd(e) {
-                e.stopPropagation();
-                var slider = e.target._slider;
-                if(!slider){
-                    return;
-                }
-                if (slider.animatingTo === slider.currentSlide && !scrolling && !(dx === null)) {
-                    var updateDx = (reverse) ? -dx : dx,
-                        target = (updateDx > 0) ? slider.getTarget('next') : slider.getTarget('prev');
-
-                    if (slider.canAdvance(target) && (Number(new Date()) - startT < 550 && Math.abs(updateDx) > 50 || Math.abs(updateDx) > cwidth/2)) {
-                        slider.flexAnimate(target, slider.vars.pauseOnAction);
-                    } else {
-                        if (!fade) { slider.flexAnimate(slider.currentSlide, slider.vars.pauseOnAction, true); }
-                    }
-                }
-
-                startX = null;
-                startY = null;
-                dx = null;
-                offset = null;
-                accDx = 0;
-            }
-        }
-      },
-      resize: function() {
-        if (!slider.animating && slider.is(':visible')) {
-          if (!carousel) { slider.doMath(); }
-
-          if (fade) {
-            // SMOOTH HEIGHT:
-            methods.smoothHeight();
-          } else if (carousel) { //CAROUSEL:
-            slider.slides.width(slider.computedW);
-            slider.update(slider.pagingCount);
-            slider.setProps();
-          }
-          else if (vertical) { //VERTICAL:
-            slider.viewport.height(slider.h);
-            slider.setProps(slider.h, "setTotal");
-          } else {
-            // SMOOTH HEIGHT:
-            if (slider.vars.smoothHeight) { methods.smoothHeight(); }
-            slider.newSlides.width(slider.computedW);
-            slider.setProps(slider.computedW, "setTotal");
-          }
-        }
-      },
-      smoothHeight: function(dur) {
-        if (!vertical || fade) {
-          var $obj = (fade) ? slider : slider.viewport;
-          (dur) ? $obj.animate({"height": slider.slides.eq(slider.animatingTo).innerHeight()}, dur) : $obj.innerHeight(slider.slides.eq(slider.animatingTo).innerHeight());
-        }
-      },
-      sync: function(action) {
-        var $obj = $(slider.vars.sync).data("flexslider"),
-            target = slider.animatingTo;
-
-        switch (action) {
-          case "animate": $obj.flexAnimate(target, slider.vars.pauseOnAction, false, true); break;
-          case "play": if (!$obj.playing && !$obj.asNav) { $obj.play(); } break;
-          case "pause": $obj.pause(); break;
-        }
-      },
-      uniqueID: function($clone) {
-        // Append _clone to current level and children elements with id attributes
-        $clone.filter( '[id]' ).add($clone.find( '[id]' )).each( function() {
-          var $this = $(this);
-          $this.attr( 'id', $this.attr( 'id' ) + '_clone' );
-        });
-        return $clone;
-      },
-      pauseInvisible: {
-        visProp: null,
-        init: function() {
-          var visProp = methods.pauseInvisible.getHiddenProp();
-          if (visProp) {
-            var evtname = visProp.replace(/[H|h]idden/,'') + 'visibilitychange';
-            document.addEventListener(evtname, function() {
-              if (methods.pauseInvisible.isHidden()) {
-                if(slider.startTimeout) {
-                  clearTimeout(slider.startTimeout); //If clock is ticking, stop timer and prevent from starting while invisible
-                } else {
-                  slider.pause(); //Or just pause
-                }
-              }
-              else {
-                if(slider.started) {
-                  slider.play(); //Initiated before, just play
-                } else {
-                  if (slider.vars.initDelay > 0) {
-                    setTimeout(slider.play, slider.vars.initDelay);
-                  } else {
-                    slider.play(); //Didn't init before: simply init or wait for it
-                  }
-                }
-              }
-            });
-          }
-        },
-        isHidden: function() {
-          var prop = methods.pauseInvisible.getHiddenProp();
-          if (!prop) {
-            return false;
-          }
-          return document[prop];
-        },
-        getHiddenProp: function() {
-          var prefixes = ['webkit','moz','ms','o'];
-          // if 'hidden' is natively supported just return it
-          if ('hidden' in document) {
-            return 'hidden';
-          }
-          // otherwise loop over all the known prefixes until we find one
-          for ( var i = 0; i < prefixes.length; i++ ) {
-              if ((prefixes[i] + 'Hidden') in document) {
-                return prefixes[i] + 'Hidden';
-              }
-          }
-          // otherwise it's not supported
-          return null;
-        }
-      },
-      setToClearWatchedEvent: function() {
-        clearTimeout(watchedEventClearTimer);
-        watchedEventClearTimer = setTimeout(function() {
-          watchedEvent = "";
-        }, 3000);
-      }
-    };
-
-    // public methods
-    slider.flexAnimate = function(target, pause, override, withSync, fromNav) {
-      if (!slider.vars.animationLoop && target !== slider.currentSlide) {
-        slider.direction = (target > slider.currentSlide) ? "next" : "prev";
-      }
-
-      if (asNav && slider.pagingCount === 1) slider.direction = (slider.currentItem < target) ? "next" : "prev";
-
-      if (!slider.animating && (slider.canAdvance(target, fromNav) || override) && slider.is(":visible")) {
-        if (asNav && withSync) {
-          var master = $(slider.vars.asNavFor).data('flexslider');
-          slider.atEnd = target === 0 || target === slider.count - 1;
-          master.flexAnimate(target, true, false, true, fromNav);
-          slider.direction = (slider.currentItem < target) ? "next" : "prev";
-          master.direction = slider.direction;
-
-          if (Math.ceil((target + 1)/slider.visible) - 1 !== slider.currentSlide && target !== 0) {
-            slider.currentItem = target;
-            slider.slides.removeClass(namespace + "active-slide").eq(target).addClass(namespace + "active-slide");
-            target = Math.floor(target/slider.visible);
-          } else {
-            slider.currentItem = target;
-            slider.slides.removeClass(namespace + "active-slide").eq(target).addClass(namespace + "active-slide");
-            return false;
-          }
-        }
-
-        slider.animating = true;
-        slider.animatingTo = target;
-
-        // SLIDESHOW:
-        if (pause) { slider.pause(); }
-
-        // API: before() animation Callback
-        slider.vars.before(slider);
-
-        // SYNC:
-        if (slider.syncExists && !fromNav) { methods.sync("animate"); }
-
-        // CONTROLNAV
-        if (slider.vars.controlNav) { methods.controlNav.active(); }
-
-        // !CAROUSEL:
-        // CANDIDATE: slide active class (for add/remove slide)
-        if (!carousel) { slider.slides.removeClass(namespace + 'active-slide').eq(target).addClass(namespace + 'active-slide'); }
-
-        // INFINITE LOOP:
-        // CANDIDATE: atEnd
-        slider.atEnd = target === 0 || target === slider.last;
-
-        // DIRECTIONNAV:
-        if (slider.vars.directionNav) { methods.directionNav.update(); }
-
-        if (target === slider.last) {
-          // API: end() of cycle Callback
-          slider.vars.end(slider);
-          // SLIDESHOW && !INFINITE LOOP:
-          if (!slider.vars.animationLoop) { slider.pause(); }
-        }
-
-        // SLIDE:
-        if (!fade) {
-          var dimension = (vertical) ? slider.slides.filter(':first').height() : slider.computedW,
-              margin, slideString, calcNext;
-
-          // INFINITE LOOP / REVERSE:
-          if (carousel) {
-            margin = slider.vars.itemMargin;
-            calcNext = ((slider.itemW + margin) * slider.move) * slider.animatingTo;
-            slideString = (calcNext > slider.limit && slider.visible !== 1) ? slider.limit : calcNext;
-          } else if (slider.currentSlide === 0 && target === slider.count - 1 && slider.vars.animationLoop && slider.direction !== "next") {
-            slideString = (reverse) ? (slider.count + slider.cloneOffset) * dimension : 0;
-          } else if (slider.currentSlide === slider.last && target === 0 && slider.vars.animationLoop && slider.direction !== "prev") {
-            slideString = (reverse) ? 0 : (slider.count + 1) * dimension;
-          } else {
-            slideString = (reverse) ? ((slider.count - 1) - target + slider.cloneOffset) * dimension : (target + slider.cloneOffset) * dimension;
-          }
-          slider.setProps(slideString, "", slider.vars.animationSpeed);
-          if (slider.transitions) {
-            if (!slider.vars.animationLoop || !slider.atEnd) {
-              slider.animating = false;
-              slider.currentSlide = slider.animatingTo;
-            }
-
-            // Unbind previous transitionEnd events and re-bind new transitionEnd event
-            slider.container.unbind("webkitTransitionEnd transitionend");
-            slider.container.bind("webkitTransitionEnd transitionend", function() {
-              clearTimeout(slider.ensureAnimationEnd);
-              slider.wrapup(dimension);
-            });
-
-            // Insurance for the ever-so-fickle transitionEnd event
-            clearTimeout(slider.ensureAnimationEnd);
-            slider.ensureAnimationEnd = setTimeout(function() {
-              slider.wrapup(dimension);
-            }, slider.vars.animationSpeed + 100);
-
-          } else {
-            slider.container.animate(slider.args, slider.vars.animationSpeed, slider.vars.easing, function(){
-              slider.wrapup(dimension);
-            });
-          }
-        } else { // FADE:
-          if (!touch) {
-            slider.slides.eq(slider.currentSlide).css({"zIndex": 1}).animate({"opacity": 0}, slider.vars.animationSpeed, slider.vars.easing);
-            slider.slides.eq(target).css({"zIndex": 2}).animate({"opacity": 1}, slider.vars.animationSpeed, slider.vars.easing, slider.wrapup);
-          } else {
-            slider.slides.eq(slider.currentSlide).css({ "opacity": 0, "zIndex": 1 });
-            slider.slides.eq(target).css({ "opacity": 1, "zIndex": 2 });
-            slider.wrapup(dimension);
-          }
-        }
-        // SMOOTH HEIGHT:
-        if (slider.vars.smoothHeight) { methods.smoothHeight(slider.vars.animationSpeed); }
-      }
-    };
-    slider.wrapup = function(dimension) {
-      // SLIDE:
-      if (!fade && !carousel) {
-        if (slider.currentSlide === 0 && slider.animatingTo === slider.last && slider.vars.animationLoop) {
-          slider.setProps(dimension, "jumpEnd");
-        } else if (slider.currentSlide === slider.last && slider.animatingTo === 0 && slider.vars.animationLoop) {
-          slider.setProps(dimension, "jumpStart");
-        }
-      }
-      slider.animating = false;
-      slider.currentSlide = slider.animatingTo;
-      // API: after() animation Callback
-      slider.vars.after(slider);
-    };
-
-    // SLIDESHOW:
-    slider.animateSlides = function() {
-      if (!slider.animating && focused ) { slider.flexAnimate(slider.getTarget("next")); }
-    };
-    // SLIDESHOW:
-    slider.pause = function() {
-      clearInterval(slider.animatedSlides);
-      slider.animatedSlides = null;
-      slider.playing = false;
-      // PAUSEPLAY:
-      if (slider.vars.pausePlay) { methods.pausePlay.update("play"); }
-      // SYNC:
-      if (slider.syncExists) { methods.sync("pause"); }
-    };
-    // SLIDESHOW:
-    slider.play = function() {
-      if (slider.playing) { clearInterval(slider.animatedSlides); }
-      slider.animatedSlides = slider.animatedSlides || setInterval(slider.animateSlides, slider.vars.slideshowSpeed);
-      slider.started = slider.playing = true;
-      // PAUSEPLAY:
-      if (slider.vars.pausePlay) { methods.pausePlay.update("pause"); }
-      // SYNC:
-      if (slider.syncExists) { methods.sync("play"); }
-    };
-    // STOP:
-    slider.stop = function () {
-      slider.pause();
-      slider.stopped = true;
-    };
-    slider.canAdvance = function(target, fromNav) {
-      // ASNAV:
-      var last = (asNav) ? slider.pagingCount - 1 : slider.last;
-      return (fromNav) ? true :
-             (asNav && slider.currentItem === slider.count - 1 && target === 0 && slider.direction === "prev") ? true :
-             (asNav && slider.currentItem === 0 && target === slider.pagingCount - 1 && slider.direction !== "next") ? false :
-             (target === slider.currentSlide && !asNav) ? false :
-             (slider.vars.animationLoop) ? true :
-             (slider.atEnd && slider.currentSlide === 0 && target === last && slider.direction !== "next") ? false :
-             (slider.atEnd && slider.currentSlide === last && target === 0 && slider.direction === "next") ? false :
-             true;
-    };
-    slider.getTarget = function(dir) {
-      slider.direction = dir;
-      if (dir === "next") {
-        return (slider.currentSlide === slider.last) ? 0 : slider.currentSlide + 1;
-      } else {
-        return (slider.currentSlide === 0) ? slider.last : slider.currentSlide - 1;
-      }
-    };
-
-    // SLIDE:
-    slider.setProps = function(pos, special, dur) {
-      var target = (function() {
-        var posCheck = (pos) ? pos : ((slider.itemW + slider.vars.itemMargin) * slider.move) * slider.animatingTo,
-            posCalc = (function() {
-              if (carousel) {
-                return (special === "setTouch") ? pos :
-                       (reverse && slider.animatingTo === slider.last) ? 0 :
-                       (reverse) ? slider.limit - (((slider.itemW + slider.vars.itemMargin) * slider.move) * slider.animatingTo) :
-                       (slider.animatingTo === slider.last) ? slider.limit : posCheck;
-              } else {
-                switch (special) {
-                  case "setTotal": return (reverse) ? ((slider.count - 1) - slider.currentSlide + slider.cloneOffset) * pos : (slider.currentSlide + slider.cloneOffset) * pos;
-                  case "setTouch": return (reverse) ? pos : pos;
-                  case "jumpEnd": return (reverse) ? pos : slider.count * pos;
-                  case "jumpStart": return (reverse) ? slider.count * pos : pos;
-                  default: return pos;
-                }
-              }
-            }());
-
-            return (posCalc * ((slider.vars.rtl)?1:-1)) + "px";
-          }());
-
-      if (slider.transitions) {
-        target = (vertical) ? "translate3d(0," + target + ",0)" : "translate3d(" + ((slider.vars.rtl?-1:1)*parseInt(target)+'px') + ",0,0)";
-        dur = (dur !== undefined) ? (dur/1000) + "s" : "0s";
-        slider.container.css("-" + slider.pfx + "-transition-duration", dur);
-         slider.container.css("transition-duration", dur);
-      }
-
-      slider.args[slider.prop] = target;
-      if (slider.transitions || dur === undefined) { slider.container.css(slider.args); }
-
-      slider.container.css('transform',target);
-    };
-
-    slider.setup = function(type) {
-      // SLIDE:
-      if (!fade) {
-        var sliderOffset, arr;
-
-        if (type === "init") {
-          slider.viewport = $('<div class="' + namespace + 'viewport"></div>').css({"overflow": "hidden", "position": "relative"}).appendTo(slider).append(slider.container);
-          // INFINITE LOOP:
-          slider.cloneCount = 0;
-          slider.cloneOffset = 0;
-          // REVERSE:
-          if (reverse) {
-            arr = $.makeArray(slider.slides).reverse();
-            slider.slides = $(arr);
-            slider.container.empty().append(slider.slides);
-          }
-        }
-        // INFINITE LOOP && !CAROUSEL:
-        if (slider.vars.animationLoop && !carousel) {
-          slider.cloneCount = 2;
-          slider.cloneOffset = 1;
-          // clear out old clones
-          if (type !== "init") { slider.container.find('.clone').remove(); }
-          slider.container.append(methods.uniqueID(slider.slides.first().clone().addClass('clone')).attr('aria-hidden', 'true'))
-                          .prepend(methods.uniqueID(slider.slides.last().clone().addClass('clone')).attr('aria-hidden', 'true'));
-        }
-        slider.newSlides = $(slider.vars.selector, slider);
-
-        sliderOffset = (reverse) ? slider.count - 1 - slider.currentSlide + slider.cloneOffset : slider.currentSlide + slider.cloneOffset;
-        // VERTICAL:
-        if (vertical && !carousel) {
-          slider.container.height((slider.count + slider.cloneCount) * 200 + "%").css("position", "absolute").width("100%");
-          setTimeout(function(){
-            slider.newSlides.css({"display": "block"});
-            slider.doMath();
-            slider.viewport.height(slider.h);
-            slider.setProps(sliderOffset * slider.h, "init");
-          }, (type === "init") ? 100 : 0);
-        } else {
-          slider.container.width((slider.count + slider.cloneCount) * 200 + "%");
-          slider.setProps(sliderOffset * slider.computedW, "init");
-          setTimeout(function(){
-            slider.doMath();
-          if(slider.vars.rtl){
-              slider.newSlides.css({"width": slider.computedW, "marginRight" : slider.computedM, "float": "left", "display": "block"});
-           }
-            else{
-              slider.newSlides.css({"width": slider.computedW, "marginRight" : slider.computedM, "float": "left", "display": "block"});
-            }
-            // SMOOTH HEIGHT:
-            if (slider.vars.smoothHeight) { methods.smoothHeight(); }
-          }, (type === "init") ? 100 : 0);
-        }
-      } else { // FADE:
-        if(slider.vars.rtl){
-          slider.slides.css({"width": "100%", "float": 'right', "marginLeft": "-100%", "position": "relative"});
-        }
-        else{
-          slider.slides.css({"width": "100%", "float": 'left', "marginRight": "-100%", "position": "relative"});
-        }
-        if (type === "init") {
-          if (!touch) {
-            //slider.slides.eq(slider.currentSlide).fadeIn(slider.vars.animationSpeed, slider.vars.easing);
-            if (slider.vars.fadeFirstSlide == false) {
-              slider.slides.css({ "opacity": 0, "display": "block", "zIndex": 1 }).eq(slider.currentSlide).css({"zIndex": 2}).css({"opacity": 1});
-            } else {
-              slider.slides.css({ "opacity": 0, "display": "block", "zIndex": 1 }).eq(slider.currentSlide).css({"zIndex": 2}).animate({"opacity": 1},slider.vars.animationSpeed,slider.vars.easing);
-            }
-          } else {
-            slider.slides.css({ "opacity": 0, "display": "block", "webkitTransition": "opacity " + slider.vars.animationSpeed / 1000 + "s ease", "zIndex": 1 }).eq(slider.currentSlide).css({ "opacity": 1, "zIndex": 2});
-          }
-        }
-        // SMOOTH HEIGHT:
-        if (slider.vars.smoothHeight) { methods.smoothHeight(); }
-      }
-      // !CAROUSEL:
-      // CANDIDATE: active slide
-      if (!carousel) { slider.slides.removeClass(namespace + "active-slide").eq(slider.currentSlide).addClass(namespace + "active-slide"); }
-
-      //FlexSlider: init() Callback
-      slider.vars.init(slider);
-    };
-
-    slider.doMath = function() {
-      var slide = slider.slides.first(),
-          slideMargin = slider.vars.itemMargin,
-          minItems = slider.vars.minItems,
-          maxItems = slider.vars.maxItems;
-
-      slider.w = (slider.viewport===undefined) ? slider.width() : slider.viewport.width();
-      slider.h = slide.height();
-      slider.boxPadding = slide.outerWidth() - slide.width();
-
-      // CAROUSEL:
-      if (carousel) {
-        slider.itemT = slider.vars.itemWidth + slideMargin;
-        slider.itemM = slideMargin;
-        slider.minW = (minItems) ? minItems * slider.itemT : slider.w;
-        slider.maxW = (maxItems) ? (maxItems * slider.itemT) - slideMargin : slider.w;
-        slider.itemW = (slider.minW > slider.w) ? (slider.w - (slideMargin * (minItems - 1)))/minItems :
-                       (slider.maxW < slider.w) ? (slider.w - (slideMargin * (maxItems - 1)))/maxItems :
-                       (slider.vars.itemWidth > slider.w) ? slider.w : slider.vars.itemWidth;
-
-        slider.visible = Math.floor(slider.w/(slider.itemW));
-        slider.move = (slider.vars.move > 0 && slider.vars.move < slider.visible ) ? slider.vars.move : slider.visible;
-        slider.pagingCount = Math.ceil(((slider.count - slider.visible)/slider.move) + 1);
-        slider.last =  slider.pagingCount - 1;
-        slider.limit = (slider.pagingCount === 1) ? 0 :
-                       (slider.vars.itemWidth > slider.w) ? (slider.itemW * (slider.count - 1)) + (slideMargin * (slider.count - 1)) : ((slider.itemW + slideMargin) * slider.count) - slider.w - slideMargin;
-      } else {
-        slider.itemW = slider.w;
-        slider.itemM = slideMargin;
-        slider.pagingCount = slider.count;
-        slider.last = slider.count - 1;
-      }
-      slider.computedW = slider.itemW - slider.boxPadding;
-      slider.computedM = slider.itemM;
-    };
-
-    slider.update = function(pos, action) {
-      slider.doMath();
-
-      // update currentSlide and slider.animatingTo if necessary
-      if (!carousel) {
-        if (pos < slider.currentSlide) {
-          slider.currentSlide += 1;
-        } else if (pos <= slider.currentSlide && pos !== 0) {
-          slider.currentSlide -= 1;
-        }
-        slider.animatingTo = slider.currentSlide;
-      }
-
-      // update controlNav
-      if (slider.vars.controlNav && !slider.manualControls) {
-        if ((action === "add" && !carousel) || slider.pagingCount > slider.controlNav.length) {
-          methods.controlNav.update("add");
-        } else if ((action === "remove" && !carousel) || slider.pagingCount < slider.controlNav.length) {
-          if (carousel && slider.currentSlide > slider.last) {
-            slider.currentSlide -= 1;
-            slider.animatingTo -= 1;
-          }
-          methods.controlNav.update("remove", slider.last);
-        }
-      }
-      // update directionNav
-      if (slider.vars.directionNav) { methods.directionNav.update(); }
-
-    };
-
-    slider.addSlide = function(obj, pos) {
-      var $obj = $(obj);
-
-      slider.count += 1;
-      slider.last = slider.count - 1;
-
-      // append new slide
-      if (vertical && reverse) {
-        (pos !== undefined) ? slider.slides.eq(slider.count - pos).after($obj) : slider.container.prepend($obj);
-      } else {
-        (pos !== undefined) ? slider.slides.eq(pos).before($obj) : slider.container.append($obj);
-      }
-
-      // update currentSlide, animatingTo, controlNav, and directionNav
-      slider.update(pos, "add");
-
-      // update slider.slides
-      slider.slides = $(slider.vars.selector + ':not(.clone)', slider);
-      // re-setup the slider to accomdate new slide
-      slider.setup();
-
-      //FlexSlider: added() Callback
-      slider.vars.added(slider);
-    };
-    slider.removeSlide = function(obj) {
-      var pos = (isNaN(obj)) ? slider.slides.index($(obj)) : obj;
-
-      // update count
-      slider.count -= 1;
-      slider.last = slider.count - 1;
-
-      // remove slide
-      if (isNaN(obj)) {
-        $(obj, slider.slides).remove();
-      } else {
-        (vertical && reverse) ? slider.slides.eq(slider.last).remove() : slider.slides.eq(obj).remove();
-      }
-
-      // update currentSlide, animatingTo, controlNav, and directionNav
-      slider.doMath();
-      slider.update(pos, "remove");
-
-      // update slider.slides
-      slider.slides = $(slider.vars.selector + ':not(.clone)', slider);
-      // re-setup the slider to accomdate new slide
-      slider.setup();
-
-      // FlexSlider: removed() Callback
-      slider.vars.removed(slider);
-    };
-
-    //FlexSlider: Initialize
-    methods.init();
-  };
-
-  // Ensure the slider isn't focussed if the window loses focus.
-  $( window ).blur( function ( e ) {
-    focused = false;
-  }).focus( function ( e ) {
-    focused = true;
-  });
-
-  //FlexSlider: Default Settings
-  $.flexslider.defaults = {
-    namespace: "flex-",             //{NEW} String: Prefix string attached to the class of every element generated by the plugin
-    selector: ".slides > li",       //{NEW} Selector: Must match a simple pattern. '{container} > {slide}' -- Ignore pattern at your own peril
-    animation: "fade",              //String: Select your animation type, "fade" or "slide"
-    easing: "swing",                //{NEW} String: Determines the easing method used in jQuery transitions. jQuery easing plugin is supported!
-    direction: "horizontal",        //String: Select the sliding direction, "horizontal" or "vertical"
-    reverse: false,                 //{NEW} Boolean: Reverse the animation direction
-    animationLoop: true,            //Boolean: Should the animation loop? If false, directionNav will received "disable" classes at either end
-    smoothHeight: false,            //{NEW} Boolean: Allow height of the slider to animate smoothly in horizontal mode
-    startAt: 0,                     //Integer: The slide that the slider should start on. Array notation (0 = first slide)
-    slideshow: true,                //Boolean: Animate slider automatically
-    slideshowSpeed: 7000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
-    animationSpeed: 600,            //Integer: Set the speed of animations, in milliseconds
-    initDelay: 0,                   //{NEW} Integer: Set an initialization delay, in milliseconds
-    randomize: false,               //Boolean: Randomize slide order
-    fadeFirstSlide: true,           //Boolean: Fade in the first slide when animation type is "fade"
-    thumbCaptions: false,           //Boolean: Whether or not to put captions on thumbnails when using the "thumbnails" controlNav.
-
-    // Usability features
-    pauseOnAction: true,            //Boolean: Pause the slideshow when interacting with control elements, highly recommended.
-    pauseOnHover: false,            //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
-    pauseInvisible: true,   		//{NEW} Boolean: Pause the slideshow when tab is invisible, resume when visible. Provides better UX, lower CPU usage.
-    useCSS: true,                   //{NEW} Boolean: Slider will use CSS3 transitions if available
-    touch: true,                    //{NEW} Boolean: Allow touch swipe navigation of the slider on touch-enabled devices
-    video: false,                   //{NEW} Boolean: If using video in the slider, will prevent CSS3 3D Transforms to avoid graphical glitches
-
-    // Primary Controls
-    controlNav: true,               //Boolean: Create navigation for paging control of each slide? Note: Leave true for manualControls usage
-    directionNav: true,             //Boolean: Create navigation for previous/next navigation? (true/false)
-    prevText: "Previous",           //String: Set the text for the "previous" directionNav item
-    nextText: "Next",               //String: Set the text for the "next" directionNav item
-
-    // Secondary Navigation
-    keyboard: true,                 //Boolean: Allow slider navigating via keyboard left/right keys
-    multipleKeyboard: false,        //{NEW} Boolean: Allow keyboard navigation to affect multiple sliders. Default behavior cuts out keyboard navigation with more than one slider present.
-    mousewheel: false,              //{UPDATED} Boolean: Requires jquery.mousewheel.js (https://github.com/brandonaaron/jquery-mousewheel) - Allows slider navigating via mousewheel
-    pausePlay: false,               //Boolean: Create pause/play dynamic element
-    pauseText: "Pause",             //String: Set the text for the "pause" pausePlay item
-    playText: "Play",               //String: Set the text for the "play" pausePlay item
-
-    // Special properties
-    controlsContainer: "",          //{UPDATED} jQuery Object/Selector: Declare which container the navigation elements should be appended too. Default container is the FlexSlider element. Example use would be $(".flexslider-container"). Property is ignored if given element is not found.
-    manualControls: "",             //{UPDATED} jQuery Object/Selector: Declare custom control navigation. Examples would be $(".flex-control-nav li") or "#tabs-nav li img", etc. The number of elements in your controlNav should match the number of slides/tabs.
-    customDirectionNav: "",         //{NEW} jQuery Object/Selector: Custom prev / next button. Must be two jQuery elements. In order to make the events work they have to have the classes "prev" and "next" (plus namespace)
-    sync: "",                       //{NEW} Selector: Mirror the actions performed on this slider with another slider. Use with care.
-    asNavFor: "",                   //{NEW} Selector: Internal property exposed for turning the slider into a thumbnail navigation for another slider
-
-    // Carousel Options
-    itemWidth: 0,                   //{NEW} Integer: Box-model width of individual carousel items, including horizontal borders and padding.
-    itemMargin: 0,                  //{NEW} Integer: Margin between carousel items.
-    minItems: 1,                    //{NEW} Integer: Minimum number of carousel items that should be visible. Items will resize fluidly when below this.
-    maxItems: 0,                    //{NEW} Integer: Maxmimum number of carousel items that should be visible. Items will resize fluidly when above this limit.
-    move: 0,                        //{NEW} Integer: Number of carousel items that should move on animation. If 0, slider will move all visible items.
-    allowOneSlide: true,           //{NEW} Boolean: Whether or not to allow a slider comprised of a single slide
-
-    // Callback API
-    start: function(){},            //Callback: function(slider) - Fires when the slider loads the first slide
-    before: function(){},           //Callback: function(slider) - Fires asynchronously with each slider animation
-    after: function(){},            //Callback: function(slider) - Fires after each slider animation completes
-    end: function(){},              //Callback: function(slider) - Fires when the slider reaches the last slide (asynchronous)
-    added: function(){},            //{NEW} Callback: function(slider) - Fires after a slide is added
-    removed: function(){},           //{NEW} Callback: function(slider) - Fires after a slide is removed
-    init: function() {},             //{NEW} Callback: function(slider) - Fires after the slider is initially setup
-	rtl: false             //{NEW} Boolean: Whether or not to enable RTL mode
-  };
-
-  //FlexSlider: Plugin Function
-  $.fn.flexslider = function(options) {
-    if (options === undefined) { options = {}; }
-
-    if (typeof options === "object") {
-      return this.each( function() {
-        var $this = $(this),
-            selector = (options.selector) ? options.selector : ".slides > li",
-            $slides = $this.find(selector);
-
-      if ( ( $slides.length === 1 && options.allowOneSlide === false ) || $slides.length === 0 ) {
-          $slides.fadeIn(400);
-          if (options.start) { options.start($this); }
-        } else if ($this.data('flexslider') === undefined) {
-          new $.flexslider(this, options);
-        }
-      });
-    } else {
-      // Helper strings to quickly perform functions on the slider
-      var $slider = $(this).data('flexslider');
-      switch (options) {
-        case "play": $slider.play(); break;
-        case "pause": $slider.pause(); break;
-        case "stop": $slider.stop(); break;
-        case "next": $slider.flexAnimate($slider.getTarget("next"), true); break;
-        case "prev":
-        case "previous": $slider.flexAnimate($slider.getTarget("prev"), true); break;
-        default: if (typeof options === "number") { $slider.flexAnimate(options, true); }
-      }
-    }
-  };
-})(jQuery);
-/*!
- * VERSION: 1.5.3
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var _numExp = /(\d|\.)+/g,
-		_relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		_hue = function(h, m1, m2) {
-			h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
-			return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
-		},
-		/**
-		 * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if toHSL parameter is true, it will populate the array with hue, saturation, and lightness values. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
-		 * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
-		 * @param {(boolean)} toHSL If true, an hsl() or hsla() value will be returned instead of rgb() or rgba()
-		 * @return {Array.<number>} An array containing red, green, and blue (and optionally alpha) in that order, or if the toHSL parameter was true, the array will contain hue, saturation and lightness (and optionally alpha) in that order. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and toHSL is true.
-		 */
-		_parseColor = function(v, toHSL) {
-			var a, r, g, b, h, s, l, max, min, d, wasHSL;
-			if (!v) {
-				a = _colorLookup.black;
-			} else if (typeof(v) === "number") {
-				a = [v >> 16, (v >> 8) & 255, v & 255];
-			} else {
-				if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
-					v = v.substr(0, v.length - 1);
-				}
-				if (_colorLookup[v]) {
-					a = _colorLookup[v];
-				} else if (v.charAt(0) === "#") {
-					if (v.length === 4) { //for shorthand like #9F0
-						r = v.charAt(1);
-						g = v.charAt(2);
-						b = v.charAt(3);
-						v = "#" + r + r + g + g + b + b;
-					}
-					v = parseInt(v.substr(1), 16);
-					a = [v >> 16, (v >> 8) & 255, v & 255];
-				} else if (v.substr(0, 3) === "hsl") {
-					a = wasHSL = v.match(_numExp);
-					if (!toHSL) {
-						h = (Number(a[0]) % 360) / 360;
-						s = Number(a[1]) / 100;
-						l = Number(a[2]) / 100;
-						g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
-						r = l * 2 - g;
-						if (a.length > 3) {
-							a[3] = Number(a[3]);
-						}
-						a[0] = _hue(h + 1 / 3, r, g);
-						a[1] = _hue(h, r, g);
-						a[2] = _hue(h - 1 / 3, r, g);
-					} else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
-						return v.match(_relNumExp);
-					}
-				} else {
-					a = v.match(_numExp) || _colorLookup.transparent;
-				}
-				a[0] = Number(a[0]);
-				a[1] = Number(a[1]);
-				a[2] = Number(a[2]);
-				if (a.length > 3) {
-					a[3] = Number(a[3]);
-				}
-			}
-			if (toHSL && !wasHSL) {
-				r = a[0] / 255;
-				g = a[1] / 255;
-				b = a[2] / 255;
-				max = Math.max(r, g, b);
-				min = Math.min(r, g, b);
-				l = (max + min) / 2;
-				if (max === min) {
-					h = s = 0;
-				} else {
-					d = max - min;
-					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-					h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
-					h *= 60;
-				}
-				a[0] = (h + 0.5) | 0;
-				a[1] = (s * 100 + 0.5) | 0;
-				a[2] = (l * 100 + 0.5) | 0;
-			}
-			return a;
-		},
-		_formatColors = function(s, toHSL) {
-			var colors = (s + "").match(_colorExp) || [],
-				charIndex = 0,
-				parsed = "",
-				i, color, temp;
-			if (!colors.length) {
-				return s;
-			}
-			for (i = 0; i < colors.length; i++) {
-				color = colors[i];
-				temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
-				charIndex += temp.length + color.length;
-				color = _parseColor(color, toHSL);
-				if (color.length === 3) {
-					color.push(1);
-				}
-				parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
-			}
-			return parsed + s.substr(charIndex);
-		}, p, _colorStringFilter,
-		TweenLite = (_gsScope.GreenSockGlobals || _gsScope).TweenLite,
-		_colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b", //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
-
-		ColorPropsPlugin = _gsScope._gsDefine.plugin({
-			propName: "colorProps",
-			version: "1.5.3",
-			priority: -1,
-			API: 2,
-			global: true,
-
-			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-			init: function(target, value, tween, index) {
-				var p, proxy, pt, val;
-				this._target = target;
-				this._proxy = proxy = ((value.format + "").toUpperCase() === "NUMBER") ? {} : 0;
-				for (p in value) {
-					if (p !== "format") {
-						if (proxy) {
-							this._firstNumPT = pt = {_next:this._firstNumPT, t:target, p:p, f:(typeof(target[p]) === "function")};
-							proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]()).join(",") + ")";
-							val = value[p];
-							if (typeof(val) === "function") {
-								val = val(index, target);
-							}
-							this._addTween(proxy, p, "get", ((typeof(val) === "number") ? "rgb(" + _parseColor(val, false).join(",") + ")" : val), p, null, null, _colorStringFilter);
-						} else {
-							this._addTween(target, p, "get", value[p], p, null, null, _colorStringFilter, index);
-						}
-
-					}
-				}
-				return true;
-			},
-
-			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-			set: function(v) {
-				var pt = this._firstNumPT,
-					val;
-				this._super.setRatio.call(this, v);
-				while (pt) {
-					val = _parseColor(this._proxy[pt.p], false);
-					val = val[0] << 16 | val[1] << 8 | val[2];
-					if (pt.f) {
-						this._target[pt.p](val);
-					} else {
-						this._target[pt.p] = val;
-					}
-					pt = pt._next;
-				}
-			}
-		});
-
-	for (p in _colorLookup) {
-		_colorExp += "|" + p + "\\b";
-	}
-	_colorExp = new RegExp(_colorExp+")", "gi");
-	ColorPropsPlugin.colorStringFilter = _colorStringFilter = function(a) {
-		var combined = a[0] + " " + a[1],
-			toHSL;
-		_colorExp.lastIndex = 0;
-		if (_colorExp.test(combined)) {
-			toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
-			a[0] = _formatColors(a[0], toHSL);
-			a[1] = _formatColors(a[1], toHSL);
-		}
-	};
-
-	if (!TweenLite.defaultStringFilter) {
-		TweenLite.defaultStringFilter = ColorPropsPlugin.colorStringFilter;
-	}
-
-	ColorPropsPlugin.parseColor = _parseColor;
-	p = ColorPropsPlugin.prototype;
-	p._firstNumPT = null;
-	p._kill = function(lookup) {
-		var pt = this._firstNumPT,
-			prev;
-		while (pt) {
-			if (pt.p in lookup) {
-				if (pt === p._firstNumPT) {
-					this._firstNumPT = pt._next;
-				}
-				if (prev) {
-					prev._next = pt._next;
-				}
-			} else {
-				prev = pt;
-			}
-			pt = pt._next;
-		}
-		return this._super._kill(lookup);
-	};
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("ColorPropsPlugin"));
-/*!
- * VERSION: 0.6.6
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	_gsScope._gsDefine("plugins.CSSRulePlugin", ["plugins.TweenPlugin","TweenLite","plugins.CSSPlugin"], function(TweenPlugin, TweenLite, CSSPlugin) {
-
-		/** @constructor **/
-		var CSSRulePlugin = function() {
-				TweenPlugin.call(this, "cssRule");
-				this._overwriteProps.length = 0;
-			},
-			_doc = _gsScope.document,
-			_superSetRatio = CSSPlugin.prototype.setRatio,
-			p = CSSRulePlugin.prototype = new CSSPlugin();
-
-		p._propName = "cssRule";
-		p.constructor = CSSRulePlugin;
-		CSSRulePlugin.version = "0.6.6";
-		CSSRulePlugin.API = 2;
-
-		/**
-		 * Searches the style sheets in the document for a particular selector like ".myClass" or "a" or "a:hover" or ":after" and
-		 * returns a reference to that style sheet (or an array of them in the case of a pseudo selector like ":after"). Then you
-		 * can animate the individual properties of the style sheet.
-		 *
-		 * @param {!string} selector a string describing the selector, like ".myClass" or "a" or "a:hover" or ":after"
-		 * @return a reference to the style sheet (or an array of them in the case of a pseudo selector). If none was found, null is returned (or an empty array for a pseudo selector)
-		 */
-		CSSRulePlugin.getRule = function(selector) {
-			var ruleProp = _doc.all ? "rules" : "cssRules",
-				ss = _doc.styleSheets,
-				i = ss.length,
-				pseudo = (selector.charAt(0) === ":"),
-				j, curSS, cs, a;
-			selector = (pseudo ? "" : ",") + selector.split("::").join(":").toLowerCase() + ","; //note: old versions of IE report tag name selectors as upper case, so we just change everything to lowercase.
-			if (pseudo) {
-				a = [];
-			}
-			while (--i > -1) {
-				//Firefox may throw insecure operation errors when css is loaded from other domains, so try/catch.
-				try {
-					curSS = ss[i][ruleProp];
-					if (!curSS) {
-						continue;
-					}
-					j = curSS.length;
-				} catch (e) {
-					console.log(e);
-					continue;
-				}
-				while (--j > -1) {
-					cs = curSS[j];
-					if (cs.selectorText && ("," + cs.selectorText.split("::").join(":").toLowerCase() + ",").indexOf(selector) !== -1) { //note: IE adds an extra ":" to pseudo selectors, so .myClass:after becomes .myClass::after, so we need to strip the extra one out.
-						if (pseudo) {
-							a.push(cs.style);
-						} else {
-							return cs.style;
-						}
-					}
-				}
-			}
-			return a;
-		};
-							
-		
-		// @private gets called when the tween renders for the first time. This kicks everything off, recording start/end values, etc.
-		p._onInitTween = function(target, value, tween) {
-			if (target.cssText === undefined) {
-				return false;
-			}
-			var div = target._gsProxy = target._gsProxy || _doc.createElement("div");
-			this._ss = target;
-			this._proxy = div.style;
-			div.style.cssText = target.cssText;
-			CSSPlugin.prototype._onInitTween.call(this, div, value, tween); //we just offload all the work to the regular CSSPlugin and then copy the cssText back over to the rule in the setRatio() method. This allows us to have all of the updates to CSSPlugin automatically flow through to CSSRulePlugin instead of having to maintain both
-			return true;
-		};
-
-		
-		
-		// @private gets called every time the tween updates, passing the new ratio (typically a value between 0 and 1, but not always (for example, if an Elastic.easeOut is used, the value can jump above 1 mid-tween). It will always start and 0 and end at 1.
-		p.setRatio = function(v) {
-			_superSetRatio.call(this, v);
-			this._ss.cssText = this._proxy.cssText;
-		};
-		
-		
-		TweenPlugin.activate([CSSRulePlugin]);
-		return CSSRulePlugin;
-		
-	}, true);
-	
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("CSSRulePlugin"));
-/*!
- * VERSION: 0.2.2
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var _numExp = /(\d|\.)+/g,
-		_ColorFilter, _ColorMatrixFilter,
-		_colorProps = ["redMultiplier","greenMultiplier","blueMultiplier","alphaMultiplier","redOffset","greenOffset","blueOffset","alphaOffset"],
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		_parseColor = function(color) {
-			if (color === "" || color == null || color === "none") {
-				return _colorLookup.transparent;
-			} else if (_colorLookup[color]) {
-				return _colorLookup[color];
-			} else if (typeof(color) === "number") {
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			} else if (color.charAt(0) === "#") {
-				if (color.length === 4) { //for shorthand like #9F0
-					color = "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
-				}
-				color = parseInt(color.substr(1), 16);
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			}
-			return color.match(_numExp) || _colorLookup.transparent;
-		},
-		_parseColorFilter = function(t, v, pg) {
-			if (!_ColorFilter) {
-				_ColorFilter = (_gsScope.ColorFilter || _gsScope.createjs.ColorFilter);
-				if (!_ColorFilter) {
-					throw("EaselPlugin error: The EaselJS ColorFilter JavaScript file wasn't loaded.");
-				}
-			}
-			var filters = t.filters || [],
-				i = filters.length,
-				c, s, e, a, p;
-			while (--i > -1) {
-				if (filters[i] instanceof _ColorFilter) {
-					s = filters[i];
-					break;
-				}
-			}
-			if (!s) {
-				s = new _ColorFilter();
-				filters.push(s);
-				t.filters = filters;
-			}
-			e = s.clone();
-			if (v.tint != null) {
-				c = _parseColor(v.tint);
-				a = (v.tintAmount != null) ? Number(v.tintAmount) : 1;
-				e.redOffset = Number(c[0]) * a;
-				e.greenOffset = Number(c[1]) * a;
-				e.blueOffset = Number(c[2]) * a;
-				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1 - a;
-			} else {
-				for (p in v) {
-					if (p !== "exposure") if (p !== "brightness") {
-						e[p] = Number(v[p]);
-					}
-				}
-			}
-			if (v.exposure != null) {
-				e.redOffset = e.greenOffset = e.blueOffset = 255 * (Number(v.exposure) - 1);
-				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1;
-			} else if (v.brightness != null) {
-				a = Number(v.brightness) - 1;
-				e.redOffset = e.greenOffset = e.blueOffset = (a > 0) ? a * 255 : 0;
-				e.redMultiplier = e.greenMultiplier = e.blueMultiplier = 1 - Math.abs(a);
-			}
-			i = 8;
-			while (--i > -1) {
-				p = _colorProps[i];
-				if (s[p] !== e[p]) {
-					pg._addTween(s, p, s[p], e[p], "easel_colorFilter");
-				}
-			}
-			pg._overwriteProps.push("easel_colorFilter");
-			if (!t.cacheID) {
-				throw("EaselPlugin warning: for filters to display in EaselJS, you must call the object's cache() method first. " + t);
-			}
-		},
-
-		_idMatrix = [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0],
-		_lumR = 0.212671,
-		_lumG = 0.715160,
-		_lumB = 0.072169,
-
-		_applyMatrix = function(m, m2) {
-			if (!(m instanceof Array) || !(m2 instanceof Array)) {
-				return m2;
-			}
-			var temp = [],
-				i = 0,
-				z = 0,
-				y, x;
-			for (y = 0; y < 4; y++) {
-				for (x = 0; x < 5; x++) {
-					z = (x === 4) ? m[i + 4] : 0;
-					temp[i + x] = m[i]   * m2[x] + m[i+1] * m2[x + 5] +	m[i+2] * m2[x + 10] + m[i+3] * m2[x + 15] +	z;
-				}
-				i += 5;
-			}
-			return temp;
-		},
-
-		_setSaturation = function(m, n) {
-			if (isNaN(n)) {
-				return m;
-			}
-			var inv = 1 - n,
-				r = inv * _lumR,
-				g = inv * _lumG,
-				b = inv * _lumB;
-			return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_colorize = function(m, color, amount) {
-			if (isNaN(amount)) {
-				amount = 1;
-			}
-			var c = _parseColor(color),
-				r = c[0] / 255,
-				g = c[1] / 255,
-				b = c[2] / 255,
-				inv = 1 - amount;
-			return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_setHue = function(m, n) {
-			if (isNaN(n)) {
-				return m;
-			}
-			n *= Math.PI / 180;
-			var c = Math.cos(n),
-				s = Math.sin(n);
-			return _applyMatrix([(_lumR + (c * (1 - _lumR))) + (s * (-_lumR)), (_lumG + (c * (-_lumG))) + (s * (-_lumG)), (_lumB + (c * (-_lumB))) + (s * (1 - _lumB)), 0, 0, (_lumR + (c * (-_lumR))) + (s * 0.143), (_lumG + (c * (1 - _lumG))) + (s * 0.14), (_lumB + (c * (-_lumB))) + (s * -0.283), 0, 0, (_lumR + (c * (-_lumR))) + (s * (-(1 - _lumR))), (_lumG + (c * (-_lumG))) + (s * _lumG), (_lumB + (c * (1 - _lumB))) + (s * _lumB), 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
-		},
-
-		_setContrast = function(m, n) {
-			if (isNaN(n)) {
-				return m;
-			}
-			n += 0.01;
-			return _applyMatrix([n,0,0,0,128 * (1 - n), 0,n,0,0,128 * (1 - n), 0,0,n,0,128 * (1 - n), 0,0,0,1,0], m);
-		},
-
-		_parseColorMatrixFilter = function(t, v, pg) {
-			if (!_ColorMatrixFilter) {
-				_ColorMatrixFilter = (_gsScope.ColorMatrixFilter || _gsScope.createjs.ColorMatrixFilter);
-				if (!_ColorMatrixFilter) {
-					throw("EaselPlugin error: The EaselJS ColorMatrixFilter JavaScript file wasn't loaded.");
-				}
-			}
-			var filters = t.filters || [],
-				i = filters.length,
-				matrix, startMatrix, s;
-			while (--i > -1) {
-				if (filters[i] instanceof _ColorMatrixFilter) {
-					s = filters[i];
-					break;
-				}
-			}
-			if (!s) {
-				s = new _ColorMatrixFilter(_idMatrix.slice());
-				filters.push(s);
-				t.filters = filters;
-			}
-			startMatrix = s.matrix;
-			matrix = _idMatrix.slice();
-			if (v.colorize != null) {
-				matrix = _colorize(matrix, v.colorize, Number(v.colorizeAmount));
-			}
-			if (v.contrast != null) {
-				matrix = _setContrast(matrix, Number(v.contrast));
-			}
-			if (v.hue != null) {
-				matrix = _setHue(matrix, Number(v.hue));
-			}
-			if (v.saturation != null) {
-				matrix = _setSaturation(matrix, Number(v.saturation));
-			}
-
-			i = matrix.length;
-			while (--i > -1) {
-				if (matrix[i] !== startMatrix[i]) {
-					pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "easel_colorMatrixFilter");
-				}
-			}
-
-			pg._overwriteProps.push("easel_colorMatrixFilter");
-			if (!t.cacheID) {
-				throw("EaselPlugin warning: for filters to display in EaselJS, you must call the object's cache() method first. " + t);
-			}
-
-			pg._matrix = startMatrix;
-		};
-
-
-	_gsScope._gsDefine.plugin({
-		propName: "easel",
-		priority: -1,
-		version: "0.2.2",
-		API: 2,
-
-		//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-		init: function(target, value, tween, index) {
-			this._target = target;
-			var p, pt, tint, colorMatrix, end, labels, i;
-			for (p in value) {
-
-				end = value[p];
-				if (typeof(end) === "function") {
-					end = end(index, target);
-				}
-				if (p === "colorFilter" || p === "tint" || p === "tintAmount" || p === "exposure" || p === "brightness") {
-					if (!tint) {
-						_parseColorFilter(target, value.colorFilter || value, this);
-						tint = true;
-					}
-
-				} else if (p === "saturation" || p === "contrast" || p === "hue" || p === "colorize" || p === "colorizeAmount") {
-					if (!colorMatrix) {
-						_parseColorMatrixFilter(target, value.colorMatrixFilter || value, this);
-						colorMatrix = true;
-					}
-
-				} else if (p === "frame") {
-					this._firstPT = pt = {_next:this._firstPT, t:target, p:"gotoAndStop", s:target.currentFrame, f:true, n:"frame", pr:0, type:0, m:Math.round};
-					if (typeof(end) === "string" && end.charAt(1) !== "=" && (labels = target.labels)) {
-						for (i = 0; i < labels.length; i++) {
-							if (labels[i].label === end) {
-								end = labels[i].position;
-							}
-						}
-					}
-					pt.c = (typeof(end) === "number") ? end - pt.s : parseFloat((end+"").split("=").join(""));
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-
-				} else if (target[p] != null) {
-					this._firstPT = pt = {_next:this._firstPT, t:target, p:p, f:(typeof(target[p]) === "function"), n:p, pr:0, type:0};
-					pt.s = (!pt.f) ? parseFloat(target[p]) : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]();
-					pt.c = (typeof(end) === "number") ? end - pt.s : (typeof(end) === "string") ? parseFloat(end.split("=").join("")) : 0;
-
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-				}
-
-			}
-			return true;
-		},
-
-		//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-		set: function(v) {
-			var pt = this._firstPT,
-				min = 0.000001,
-				val;
-			while (pt) {
-				val = pt.c * v + pt.s;
-				if (pt.m) {
-					val = pt.m(val, pt.t);
-				} else if (val < min && val > -min) {
-					val = 0;
-				}
-				if (pt.f) {
-					pt.t[pt.p](val);
-				} else {
-					pt.t[pt.p] = val;
-				}
-				pt = pt._next;
-			}
-			if (this._target.cacheID) {
-				this._target.updateCache();
-			}
-		}
-
-	});
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("EaselPlugin"));
-/*!
- * VERSION: 0.1.3
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-	
-	"use strict";
-
-	_gsScope._gsDefine.plugin({
-		propName: "endArray",
-		API: 2,
-		version: "0.1.3",
-
-		//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-		init: function(target, value, tween) {
-			var i = value.length,
-				a = this.a = [],
-				start, end;
-			this.target = target;
-			this._mod = 0;
-			if (!i) {
-				return false;
-			}
-			while (--i > -1) {
-				start = target[i];
-				end = value[i];
-				if (start !== end) {
-					a.push({i:i, s:start, c:end - start});
-				}
-			}
-			return true;
-		},
-
-		mod: function(lookup) {
-			if (typeof(lookup.endArray) === "function") {
-				this._mod = lookup.endArray;
-			}
-		},
-
-		//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-		set: function(ratio) {
-			var target = this.target,
-				a = this.a,
-				i = a.length,
-				mod = this._mod,
-				e, val;
-			if (mod) {
-				while (--i > -1) {
-					e = a[i];
-					target[e.i] = mod(e.s + e.c * ratio, target);
-				}
-			} else {
-				while (--i > -1) {
-					e = a[i];
-					val = e.s + e.c * ratio;
-					target[e.i] = (val < 0.000001 && val > -0.000001) ? 0 : val;
-				}
-			}
-		}
-
-	});
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-/*!
- * VERSION: 0.0.3
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-	
-	"use strict";
-
-		var _cssRatioSetter = function(pt, cssp, mod) { //Takes an individual CSSPropTween and converts it into a type:2 that has a setRatio that does everything the regular CSSPlugin.setRatio() method does but applying the mod() too. We do this to keep the main CSSPlugin.setRatio() as fast as possible (the vast majority of times, no mod() will be necessary)
-				var type = pt.type,
-					oldSetRatio = pt.setRatio,
-					tween = cssp._tween,
-					target = cssp._target;
-				pt.type = 2;
-				pt.m = mod;
-				pt.setRatio = function(v) {
-					var min = 0.000001,
-						val, str, i;
-					if (v === 1 && (tween._time === tween._duration || tween._time === 0)) {
-
-						if (type !== 2) {
-							if (pt.r && type !== -1) {
-								val = Math.round(pt.s + pt.c);
-								if (!type) {
-									pt.t[pt.p] = mod(val + pt.xs0, target);
-								} else if (type === 1) {
-									str = pt.xs0 + val + pt.xs1;
-									for (i = 1; i < pt.l; i++) {
-										str += pt["xn"+i] + pt["xs"+(i+1)];
-									}
-									pt.t[pt.p] = mod(str, target);
-								}
-							} else {
-								pt.t[pt.p] = mod(pt.e, target);
-							}
-						} else {
-							oldSetRatio.call(pt, v);
-						}
-
-					} else if (v || !(tween._time === tween._duration || tween._time === 0) || tween._rawPrevTime === -0.000001) {
-						val = pt.c * v + pt.s;
-						if (pt.r) {
-							val = Math.round(val);
-						} else if (val < min) if (val > -min) {
-							val = 0;
-						}
-						if (!type) {
-							pt.t[pt.p] = mod(val + pt.xs0, target);
-						} else if (type === 1) {
-							str = pt.xs0 + val + pt.xs1;
-							for (i = 1; i < pt.l; i++) {
-								str += pt["xn"+i] + pt["xs"+(i+1)];
-							}
-							pt.t[pt.p] = mod(str, target);
-
-						} else if (type === -1) { //non-tweening value
-							pt.t[pt.p] = mod(pt.xs0, target);
-
-						} else if (oldSetRatio) {
-							oldSetRatio.call(pt, v);
-						}
-
-					} else {
-						if (type !== 2) {
-							pt.t[pt.p] = mod(pt.b, target);
-						} else {
-							oldSetRatio.call(pt, v);
-						}
-					}
-				};
-			},
-			_modCSS = function(lookup, cssp) {
-				var pt = cssp._firstPT,
-					hasBezier = (lookup.rotation && cssp._overwriteProps.join("").indexOf("bezier") !== -1); //when a Bezier tween is applying autoRotation, it's a very special case we need to handle differently.
-				while (pt) {
-					if (typeof(lookup[pt.p]) === "function") {
-						_cssRatioSetter(pt, cssp, lookup[pt.p]);
-					} else if (hasBezier && pt.n === "bezier" && pt.plugin._overwriteProps.join("").indexOf("rotation") !== -1) {
-						pt.data.mod = lookup.rotation;
-					}
-					pt = pt._next;
-				}
-			},
-
-			ModifiersPlugin = _gsScope._gsDefine.plugin({
-				propName: "modifiers",
-				version: "0.0.3",
-				API: 2,
-
-				//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-				init: function(target, value, tween) {
-					this._tween = tween;
-					this._vars = value;
-					return true;
-				},
-
-				initAll: function() {
-					var tween = this._tween,
-						lookup = this._vars,
-						mpt = this,
-						pt = tween._firstPT,
-						val, next;
-					while (pt) {
-						next = pt._next; //record here, because it may get removed
-						val = lookup[pt.n];
-						if (pt.pg) {
-							if (pt.t._propName === "css") { //handle CSSPlugin uniquely (for performance, due to the fact that the values almost always are a concatenation of numbers and strings, like suffixes, and we don't want to slow down the regular CSSPlugin setRatio() performance with conditional checks for if the value needs to be modded, so we pull any modding prop out and change it to a type:2 one that simply calls a setRatio() method where we encapsulate the modding and update all together. That way, it says in the main CSSProp linked list and just has some custom logic applied to it inside its setRatio())
-								_modCSS(lookup, pt.t);
-							} else if (pt.t !== mpt) { //don't run modProps on modProps :)
-								val = lookup[pt.t._propName];
-								pt.t._mod((typeof(val) === "object") ? val : lookup);
-							}
-						} else if (typeof(val) === "function") {
-							if (pt.f === 2 && pt.t) { //a blob (text containing multiple numeric values)
-								pt.t._applyPT.m = val;
-							} else {
-								this._add(pt.t, pt.p, pt.s, pt.c, val);
-								//remove from linked list
-								if (next) {
-									next._prev = pt._prev;
-								}
-								if (pt._prev) {
-									pt._prev._next = next;
-								} else if (tween._firstPT === pt) {
-									tween._firstPT = next;
-								}
-								pt._next = pt._prev = null;
-								tween._propLookup[pt.n] = mpt;
-							}
-						}
-						pt = next;
-					}
-					return false;
-				}
-
-			}),
-			p = ModifiersPlugin.prototype;
-
-		p._add = function(target, p, s, c, mod) {
-			this._addTween(target, p, s, s + c, p, mod);
-			this._overwriteProps.push(p);
-		};
-
-	p = _gsScope._gsDefine.globals.TweenLite.version.split(".");
-	if (Number(p[0]) <= 1 && Number(p[1]) < 19 && _gsScope.console) {
-		console.log("ModifiersPlugin requires GSAP 1.19.0 or later.");
-	}
-
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("ModifiersPlugin"));
-/*!
- * VERSION: 0.2.1
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * PixiPlugin is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- *
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof module !== "undefined" && module.exports && typeof global !== "undefined") ? global : this || window;
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push(function () {
-    "use strict";
-
-    var _numExp = /(\d|\.)+/g,
-		_relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		_hue = function(h, m1, m2) {
-			h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
-			return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
-		},
-		/**
-		 * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if "format" parameter is "hsl", it will populate the array with hue, saturation, and lightness values. Or if "format" is "number", it'll return a number like 0xFF0000 instead of an array. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
-		 * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
-		 * @param {(string)} format If "hsl", an hsl() or hsla() value will be returned instead of rgb() or rgba(). Or if "number", then a numeric value will be returned, like 0xFF0000. Default is rgb.
-		 * @return {(array|number)} An array containing red, green, and blue (and optionally alpha) in that order, or if the format parameter was "hsl", the array will contain hue, saturation and lightness (and optionally alpha) in that order. Or if "format" is defined as "number", it'll return a number like 0xFF0000. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and "format" is "hsl".
-		 */
-		_parseColor = function(v, format) {
-			var toHSL = (format === "hsl"),
-				a, r, g, b, h, s, l, max, min, d, wasHSL;
-			if (!v) {
-				a = _colorLookup.black;
-			} else if (typeof(v) === "number") {
-				a = [v >> 16, (v >> 8) & 255, v & 255];
-			} else {
-				if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
-					v = v.substr(0, v.length - 1);
-				}
-				if (_colorLookup[v]) {
-					a = _colorLookup[v];
-				} else if (v.charAt(0) === "#") {
-					if (v.length === 4) { //for shorthand like #9F0
-						r = v.charAt(1);
-						g = v.charAt(2);
-						b = v.charAt(3);
-						v = "#" + r + r + g + g + b + b;
-					}
-					v = parseInt(v.substr(1), 16);
-					a = [v >> 16, (v >> 8) & 255, v & 255];
-				} else if (v.substr(0, 3) === "hsl") {
-					a = wasHSL = v.match(_numExp);
-					if (!toHSL) {
-						h = (Number(a[0]) % 360) / 360;
-						s = Number(a[1]) / 100;
-						l = Number(a[2]) / 100;
-						g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
-						r = l * 2 - g;
-						if (a.length > 3) {
-							a[3] = Number(v[3]);
-						}
-						a[0] = _hue(h + 1 / 3, r, g);
-						a[1] = _hue(h, r, g);
-						a[2] = _hue(h - 1 / 3, r, g);
-					} else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
-						return v.match(_relNumExp);
-					}
-				} else {
-					a = v.match(_numExp) || _colorLookup.transparent;
-				}
-				a[0] = Number(a[0]);
-				a[1] = Number(a[1]);
-				a[2] = Number(a[2]);
-				if (a.length > 3) {
-					a[3] = Number(a[3]);
-				}
-			}
-			if (toHSL && !wasHSL) {
-				r = a[0] / 255;
-				g = a[1] / 255;
-				b = a[2] / 255;
-				max = Math.max(r, g, b);
-				min = Math.min(r, g, b);
-				l = (max + min) / 2;
-				if (max === min) {
-					h = s = 0;
-				} else {
-					d = max - min;
-					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-					h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
-					h *= 60;
-				}
-				a[0] = (h + 0.5) | 0;
-				a[1] = (s * 100 + 0.5) | 0;
-				a[2] = (l * 100 + 0.5) | 0;
-			}
-			return (format === "number") ? (a[0] << 16 | a[1] << 8 | a[2]) : a;
-		},
-		_formatColors = function(s, toHSL) {
-			var colors = (s + "").match(_colorExp) || [],
-				charIndex = 0,
-				parsed = "",
-				i, color, temp;
-			if (!colors.length) {
-				return s;
-			}
-			for (i = 0; i < colors.length; i++) {
-				color = colors[i];
-				temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
-				charIndex += temp.length + color.length;
-				color = _parseColor(color, (toHSL ? "hsl" : "rgb"));
-				if (color.length === 3) {
-					color.push(1);
-				}
-				parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
-			}
-			return parsed + s.substr(charIndex);
-		}, _colorStringFilter,
-		TweenLite = (_gsScope.GreenSockGlobals || _gsScope).TweenLite,
-		_colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b", //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
-
-		_idMatrix = [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0],
-		_lumR = 0.212671,
-		_lumG = 0.715160,
-		_lumB = 0.072169,
-
-		_applyMatrix = function(m, m2) {
-			var temp = [],
-				i = 0,
-				z = 0,
-				y, x;
-			for (y = 0; y < 4; y++) {
-				for (x = 0; x < 5; x++) {
-					z = (x === 4) ? m[i + 4] : 0;
-					temp[i + x] = m[i]   * m2[x] + m[i+1] * m2[x + 5] +	m[i+2] * m2[x + 10] + m[i+3] * m2[x + 15] +	z;
-				}
-				i += 5;
-			}
-			return temp;
-		},
-
-		_setSaturation = function(m, n) {
-			var inv = 1 - n,
-				r = inv * _lumR,
-				g = inv * _lumG,
-				b = inv * _lumB;
-			return _applyMatrix([r + n, g, b, 0, 0, r, g + n, b, 0, 0, r, g, b + n, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_colorize = function(m, color, amount) {
-			var c = _parseColor(color),
-				r = c[0] / 255,
-				g = c[1] / 255,
-				b = c[2] / 255,
-				inv = 1 - amount;
-			return _applyMatrix([inv + amount * r * _lumR, amount * r * _lumG, amount * r * _lumB, 0, 0, amount * g * _lumR, inv + amount * g * _lumG, amount * g * _lumB, 0, 0, amount * b * _lumR, amount * b * _lumG, inv + amount * b * _lumB, 0, 0, 0, 0, 0, 1, 0], m);
-		},
-
-		_setHue = function(m, n) {
-			n *= Math.PI / 180;
-			var c = Math.cos(n),
-				s = Math.sin(n);
-			return _applyMatrix([(_lumR + (c * (1 - _lumR))) + (s * (-_lumR)), (_lumG + (c * (-_lumG))) + (s * (-_lumG)), (_lumB + (c * (-_lumB))) + (s * (1 - _lumB)), 0, 0, (_lumR + (c * (-_lumR))) + (s * 0.143), (_lumG + (c * (1 - _lumG))) + (s * 0.14), (_lumB + (c * (-_lumB))) + (s * -0.283), 0, 0, (_lumR + (c * (-_lumR))) + (s * (-(1 - _lumR))), (_lumG + (c * (-_lumG))) + (s * _lumG), (_lumB + (c * (1 - _lumB))) + (s * _lumB), 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], m);
-		},
-
-		_setContrast = function(m, n) {
-			return _applyMatrix([n,0,0,0,0.5 * (1 - n), 0,n,0,0,0.5 * (1 - n), 0,0,n,0,0.5 * (1 - n), 0,0,0,1,0], m);
-		},
-
-		_getFilter = function(t, type) {
-			var filterClass = _gsScope.PIXI.filters[type],
-				filters = t.filters || [],
-				i = filters.length,
-				filter;
-			if (!filterClass) {
-				throw("PixiPlugin error: " + type + " isn't present.");
-			}
-			while (--i > -1) {
-				if (filters[i] instanceof filterClass) {
-					return filters[i];
-				}
-			}
-			filter = new filterClass();
-			if (type === "BlurFilter") {
-				filter.blur = 0;
-			}
-			filters.push(filter);
-			t.filters = filters;
-			return filter;
-		},
-
-		_addColorMatrixFilterCacheTween = function(p, pg, cache, vars) { //we cache the ColorMatrixFilter components in a _gsColorMatrixFilter object attached to the target object so that it's easy to grab the current value at any time.
-			pg._addTween(cache, p, cache[p], vars[p], p);
-			pg._overwriteProps.push(p);
-		},
-
-		_applyBrightnessToMatrix = function(brightness, matrix) {
-			var temp = new _gsScope.PIXI.filters.ColorMatrixFilter();
-			temp.matrix = matrix;
-			temp.brightness(brightness, true);
-			return temp.matrix;
-		},
-
-		_CMFdefaults = {contrast:1, saturation:1, colorizeAmount:0, colorize:"rgb(255,255,255)", hue:0, brightness:1},
-
-		_parseColorMatrixFilter = function(t, v, pg) {
-			var filter = _getFilter(t, "ColorMatrixFilter"),
-				cache = t._gsColorMatrixFilter = t._gsColorMatrixFilter || {contrast:1, saturation:1, colorizeAmount:0, colorize:"rgb(255,255,255)", hue:0, brightness:1},
-				combine = v.combineCMF && !("colorMatrixFilter" in v && !v.colorMatrixFilter),
-				i, matrix, startMatrix;
-			startMatrix = filter.matrix;
-			if (v.resolution) {
-				filter.resolution = v.resolution;
-			}
-			if (v.matrix && v.matrix.length === startMatrix.length) {
-				matrix = v.matrix;
-				if (cache.contrast !== 1) {
-					_addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
-				}
-				if (cache.hue) {
-					_addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
-				}
-				if (cache.brightness !== 1) {
-					_addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
-				}
-				if (cache.colorizeAmount) {
-					_addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
-					_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
-				}
-				if (cache.saturation !== 1) {
-					_addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
-				}
-
-			} else {
-				matrix = _idMatrix.slice();
-				if (v.contrast != null) {
-					matrix = _setContrast(matrix, Number(v.contrast));
-					_addColorMatrixFilterCacheTween("contrast", pg, cache, v);
-				} else if (cache.contrast !== 1) {
-					if (combine) {
-						matrix = _setContrast(matrix, cache.contrast);
-					} else {
-						_addColorMatrixFilterCacheTween("contrast", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.hue != null) {
-					matrix = _setHue(matrix, Number(v.hue));
-					_addColorMatrixFilterCacheTween("hue", pg, cache, v);
-				} else if (cache.hue) {
-					if (combine) {
-						matrix = _setHue(matrix, cache.hue);
-					} else {
-						_addColorMatrixFilterCacheTween("hue", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.brightness != null) {
-					matrix = _applyBrightnessToMatrix(Number(v.brightness), matrix);
-					_addColorMatrixFilterCacheTween("brightness", pg, cache, v);
-				} else if (cache.brightness !== 1) {
-					if (combine) {
-						matrix = _applyBrightnessToMatrix(cache.brightness, matrix);
-					} else {
-						_addColorMatrixFilterCacheTween("brightness", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.colorize != null) {
-					v.colorizeAmount = ("colorizeAmount" in v) ? Number(v.colorizeAmount) : 1;
-					matrix = _colorize(matrix, v.colorize, v.colorizeAmount);
-					_addColorMatrixFilterCacheTween("colorize", pg, cache, v);
-					_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, v);
-				} else if (cache.colorizeAmount) {
-					if (combine) {
-						matrix = _colorize(matrix, cache.colorize, cache.colorizeAmount);
-					} else {
-						_addColorMatrixFilterCacheTween("colorize", pg, cache, _CMFdefaults);
-						_addColorMatrixFilterCacheTween("colorizeAmount", pg, cache, _CMFdefaults);
-					}
-				}
-				if (v.saturation != null) {
-					matrix = _setSaturation(matrix, Number(v.saturation));
-					_addColorMatrixFilterCacheTween("saturation", pg, cache, v);
-				} else if (cache.saturation !== 1) {
-					if (combine) {
-						matrix = _setSaturation(matrix, cache.saturation);
-					} else {
-						_addColorMatrixFilterCacheTween("saturation", pg, cache, _CMFdefaults);
-					}
-				}
-			}
-			i = matrix.length;
-			while (--i > -1) {
-				if (matrix[i] !== startMatrix[i]) {
-					pg._addTween(startMatrix, i, startMatrix[i], matrix[i], "colorMatrixFilter");
-				}
-			}
-			pg._overwriteProps.push("colorMatrixFilter");
-		},
-
-		_addColorTween = function(target, p, value, colorSetter, plugin) {
-			var pt = colorSetter._firstPT = {_next:colorSetter._firstPT, t:target, p:p, proxy:{}, f:(typeof(target[p]) === "function")};
-			pt.proxy[p] = "rgb(" + _parseColor(!pt.f ? target[p] : target[ ((p.indexOf("set") || typeof(target["get" + p.substr(3)]) !== "function") ? p : "get" + p.substr(3)) ]()).join(",") + ")";
-			plugin._addTween(pt.proxy, p, "get", ((typeof(value) === "number") ? "rgb(" + _parseColor(value, false).join(",") + ")" : value), p, null, null, _colorStringFilter);
-		},
-
-		//to improve performance, when a color is sensed, we hijack the setRatio() method of the plugin instance with a new function that this method spits back. This is a special method that handles parsing color values on-the-fly and turns them into numeric values which PixiJS requires. In other words, instead of "rgb(255, 0, 0)", PixiJS wants 0xFF0000. This also works with hsl() values.
-		_buildColorSetter = function(tween, plugin) {
-			var setRatio = plugin.setRatio, //save the original (super) setRatio() function
-				func = function(v) {
-					var pt = func._firstPT,
-						val;
-					setRatio.call(plugin, v);
-					while (pt) {
-						val = _parseColor(pt.proxy[pt.p], "number");
-						if (pt.f) {
-							pt.t[pt.p](val);
-						} else {
-							pt.t[pt.p] = val;
-						}
-						pt = pt._next;
-					}
-					if (func.graphics) { //in order for PixiJS to actually redraw GraphicsData, we've gotta increment the "dirty" and "clearDirty" values. If we don't do this, the values will be tween properly, but not rendered.
-						func.graphics.dirty++;
-						func.graphics.clearDirty++;
-					}
-				};
-			plugin.setRatio = func;
-			return func;
-		},
-
-
-		_colorProps = {tint:1, lineColor:1, fillColor:1},
-		_xyContexts = "position,scale,skew,pivot,anchor,tilePosition,tileScale".split(","),
-		_contexts = {x:"position", y:"position", tileX:"tilePosition", tileY:"tilePosition"},
-		_colorMatrixFilterProps = {colorMatrixFilter:1, saturation:1, contrast:1, hue:1, colorize:1, colorizeAmount:1, brightness:1, combineCMF:1},
-		_DEG2RAD = Math.PI / 180,
-        _degreesToRadians = function(value) {
-			return (typeof(value) === "string" && value.charAt(1) === "=") ? value.substr(0, 2) + (parseFloat(value.substr(2)) * _DEG2RAD) : value * _DEG2RAD;
-        }, i, p;
-
-	//context setup...
-	for (i = 0; i < _xyContexts.length; i++) {
-		p = _xyContexts[i];
-		_contexts[p + "X"] = p;
-		_contexts[p + "Y"] = p;
-    }
-
-    //color parsing setup...
-	for (p in _colorLookup) {
-		_colorExp += "|" + p + "\\b";
-	}
-	_colorExp = new RegExp(_colorExp+")", "gi");
-	_colorStringFilter = function(a) {
-		var combined = a[0] + " " + a[1],
-			toHSL;
-		_colorExp.lastIndex = 0;
-		if (_colorExp.test(combined)) {
-			toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
-			a[0] = _formatColors(a[0], toHSL);
-			a[1] = _formatColors(a[1], toHSL);
-		}
-	};
-
-	if (!TweenLite.defaultStringFilter) {
-		TweenLite.defaultStringFilter = _colorStringFilter;
-	}
-
-    var PixiPlugin = _gsScope._gsDefine.plugin({
-        propName: "pixi",
-        priority: 0,
-        API: 2,
-		global: true,
-        version: "0.2.1",
-
-        init: function (target, values, tween, index) {
-            if (!target instanceof _gsScope.PIXI.DisplayObject) {
-                return false;
-            }
-            var context, axis, value, colorMatrix, filter, p, padding, colorSetter, i, data, pt;
-            for (p in values) {
-                context = _contexts[p];
-                value = values[p];
-                if (typeof(value) === "function") {
-                    value = value(index || 0, target);
-                }
-                if (context) {
-                    axis = (p.charAt(p.length-1).toLowerCase().indexOf("x") !== -1) ? "x" : "y";
-					this._addTween(target[context], axis, target[context][axis], (context === "skew") ? _degreesToRadians(value) : value, p);
-                } else if (p === "scale" || p === "anchor" || p === "pivot" || p === "tileScale") {
-					this._addTween(target[p], "x", target[p].x, value, p + "X");
-					this._addTween(target[p], "y", target[p].y, value, p + "Y");
-                } else if (p === "rotation") { //PIXI expects rotation in radians, but as a convenience we let folks define it in degrees and we do the conversion.
-					this._addTween(target, p, target.rotation, _degreesToRadians(value), p);
-
-                } else if (_colorMatrixFilterProps[p]) {
-					if (!colorMatrix) {
-						_parseColorMatrixFilter(target, values.colorMatrixFilter || values, this);
-						colorMatrix = true;
-					}
-                } else if (p === "blur" || p === "blurX" || p === "blurY" || p === "blurPadding") {
-					filter = _getFilter(target, "BlurFilter");
-					this._addTween(filter, p, filter[p], value, p);
-					if (values.blurPadding !== 0) {
-						padding = values.blurPadding || Math.max(filter[p], value) * 2;
-						i = target.filters.length;
-						while (--i > -1) {
-							target.filters[i].padding = Math.max(target.filters[i].padding, padding); //if we don't expand the padding on all the filters, it can look clipped.
-						}
-					}
-                } else if (_colorProps[p]) {
-					if (!colorSetter) {
-						colorSetter = _buildColorSetter(tween, this);
-					}
-					if ((p === "lineColor" || p === "fillColor") && target instanceof _gsScope.PIXI.Graphics) {
-						data = target.graphicsData;
-						i = data.length;
-						while (--i > -1) {
-							_addColorTween(data[i], p, value, colorSetter, this);
-						}
-						colorSetter.graphics = target;
-					} else {
-						_addColorTween(target, p, value, colorSetter, this);
-					}
-                } else if (p === "autoAlpha") {
-					this._firstPT = pt = {t: {setRatio:function() { target.visible = !!target.alpha; }}, p: "setRatio", s: 0, c: 1, f: 1, pg: 0, n: "visible", pr: 0, m: 0, _next:this._firstPT};
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-					this._addTween(target, "alpha", target.alpha, value, "alpha");
-					this._overwriteProps.push("alpha", "visible");
-                } else {
-					this._addTween(target, p, target[p], value, p);
-                }
-				this._overwriteProps.push(p);
-            }
-            return true;
-        }
-    });
-
-	PixiPlugin.colorProps = _colorProps;
-	PixiPlugin.parseColor = _parseColor;
-	PixiPlugin.formatColors = _formatColors;
-	PixiPlugin.colorStringFilter = _colorStringFilter;
-
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("PixiPlugin"));
-/*!
- * VERSION: 0.2.2
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var	_NaNExp = /[^\d\-\.]/g,
-		_DEG2RAD = Math.PI / 180,
-		_numExp = /(\d|\.)+/g,
-		_colorLookup = {aqua:[0,255,255],
-			lime:[0,255,0],
-			silver:[192,192,192],
-			black:[0,0,0],
-			maroon:[128,0,0],
-			teal:[0,128,128],
-			blue:[0,0,255],
-			navy:[0,0,128],
-			white:[255,255,255],
-			fuchsia:[255,0,255],
-			olive:[128,128,0],
-			yellow:[255,255,0],
-			orange:[255,165,0],
-			gray:[128,128,128],
-			purple:[128,0,128],
-			green:[0,128,0],
-			red:[255,0,0],
-			pink:[255,192,203],
-			cyan:[0,255,255],
-			transparent:[255,255,255,0]},
-		//parses a color (like #9F0, #FF9900, or rgb(255,51,153)) into an array with 3 elements for red, green, and blue. Also handles rgba() values (splits into array of 4 elements of course)
-		_parseColor = function(color) {
-			if (typeof(color) === "number") {
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			} else if (color === "" || color == null || color === "none" || typeof(color) !== "string") {
-				return _colorLookup.transparent;
-			} else if (_colorLookup[color]) {
-				return _colorLookup[color];
-			} else if (color.charAt(0) === "#") {
-				if (color.length === 4) { //for shorthand like #9F0
-					color = "#" + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
-				}
-				color = parseInt(color.substr(1), 16);
-				return [color >> 16, (color >> 8) & 255, color & 255];
-			}
-			return color.match(_numExp) || _colorLookup.transparent;
-		},
-
-		_transformMap = {scaleX:1, scaleY:1, tx:1, ty:1, rotation:1, shortRotation:1, skewX:1, skewY:1, scale:1},
-
-		//parses the transform values for an element, returning an object with x, y, scaleX, scaleY, rotation, skewX, and skewY properties. Note: by default (for performance reasons), all skewing is combined into skewX and rotation but skewY still has a place in the transform object so that we can record how much of the skew is attributed to skewX vs skewY. Remember, a skewY of 10 looks the same as a rotation of 10 and skewX of -10.
-		_getTransform = function(t, rec) {
-			var s = t.matrix,
-				min = 0.000001,
-				a = s.a,
-				b = s.b,
-				c = s.c,
-				d = s.d,
-				m = rec ? t._gsTransform || {skewY:0} : {skewY:0},
-				invX = (m.scaleX < 0); //in order to interpret things properly, we need to know if the user applied a negative scaleX previously so that we can adjust the rotation and skewX accordingly. Otherwise, if we always interpret a flipped matrix as affecting scaleY and the user only wants to tween the scaleX on multiple sequential tweens, it would keep the negative scaleY without that being the user's intent.
-
-			m.tx = s.e - (m.ox || 0); //ox is the offset x that we record in setRatio() whenever we apply a custom transform that might use a pivot point. Remember, s.e and s.f get affected by things like scale. For example, imagine an object whose top left corner is at 100,100 and then we scale it up to 300% using the center as the pivot point - that corner would now be very different even though to the user, they didn't intend to change/tween the x/y position per se. Therefore, we record whatever offsets we make so that we can compensate when reading the values back.
-			m.ty = s.f - (m.oy || 0); //oy is the offset y (see note above)
-			m.scaleX = Math.sqrt(a * a + b * b);
-			m.scaleY = Math.sqrt(d * d + c * c);
-			m.rotation = (a || b) ? Math.atan2(b, a) : m.rotation || 0; //note: if scaleX is 0, we cannot accurately measure rotation. Same for skewX with a scaleY of 0. Therefore, we default to the previously recorded value (or zero if that doesn't exist).
-			m.skewX = (c || d) ? Math.atan2(c, d) + m.rotation : m.skewX || 0;
-			if (Math.abs(m.skewX) > Math.PI / 2) {
-				if (invX) {
-					m.scaleX *= -1;
-					m.skewX += (m.rotation <= 0) ? Math.PI : -Math.PI;
-					m.rotation += (m.rotation <= 0) ? Math.PI : -Math.PI;
-				} else {
-					m.scaleY *= -1;
-					m.skewX += (m.skewX <= 0) ? Math.PI : -Math.PI;
-				}
-			}
-			//some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases. The conditional logic here is faster than calling Math.abs().
-			if (m.rotation < min) if (m.rotation > -min) if (a || b) {
-				m.rotation = 0;
-			}
-			if (m.skewX < min) if (m.skewX > -min) if (b || c) {
-				m.skewX = 0;
-			}
-			if (rec) {
-				t._gsTransform = m; //record to the object's _gsTransform which we use so that tweens can control individual properties independently (we need all the properties to accurately recompose the matrix in the setRatio() method)
-			}
-			return m;
-		},
-
-		//takes a value and a default number, checks if the value is relative, null, or numeric and spits back a normalized number accordingly. Primarily used in the _parseTransform() function.
-		_parseVal = function(v, d) {
-			return (v == null) ? d : (typeof(v) === "string" && v.indexOf("=") === 1) ? parseInt(v.charAt(0)+"1", 10) * Number(v.substr(2)) + d : Number(v);
-		},
-
-		//translates strings like "40deg" or "40" or 40rad" or "+=40deg" to a numeric radian angle, optionally relative to a default value (if "+=" or "-=" prefix is found)
-		_parseAngle = function(v, d) {
-			var m = (v.indexOf("rad") === -1) ? _DEG2RAD : 1,
-				r = (v.indexOf("=") === 1);
-			v = Number(v.replace(_NaNExp, "")) * m;
-			return r ? v + d : v;
-		},
-
-
-		RaphaelPlugin = _gsScope._gsDefine.plugin({
-			propName: "raphael",
-			version: "0.2.2",
-			API: 2,
-
-			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-			init: function(target, value, tween) {
-				if (!target.attr) { //raphael must have attr() method
-					return false;
-				}
-				this._target = target;
-				this._tween = tween;
-				this._props = target._gsProps = target._gsProps || {};
-				var p, s, v, pt, clr1, clr2, rel;
-
-				for (p in value) {
-
-					v = value[p];
-
-					if (p === "transform") {
-						this._parseTransform(target, v);
-						continue;
-					} else if (_transformMap[p] || p === "pivot") {
-						this._parseTransform(target, value);
-						continue;
-					}
-
-					s = target.attr(p);
-
-					//Some of these properties are in place in order to conform with the standard PropTweens in TweenPlugins so that overwriting and roundProps occur properly. For example, f and r may seem unnecessary here, but they enable other functionality.
-					//_next:*	next linked list node		[object]
-					//t: 	*	target 						[object]
-					//p:	*	property (camelCase)		[string]
-					//s: 	*	starting value				[number]
-					//c:	*	change value				[number]
-					//f:	* 	is function					[boolean]
-					//n:	*	name (for overwriting)		[string]
-					//b:		beginning value				[string]
-					//i:		intermediate value			[string]
-					//e: 		ending value				[string]
-					//r:	*	round						[boolean]
-					//type:		0=normal, 1=color, 2=rgba, -1=non-tweening prop	[number]
-					this._firstPT = pt = {_next:this._firstPT,
-						t:this._props,
-						p:p,
-						b:s,
-						f:false,
-						n:"raphael_" + p,
-						r:false,
-						type:0};
-
-					//color values must be split apart into their R, G, B (and sometimes alpha) values and tweened independently.
-					if (p === "fill" || p === "stroke") {
-						clr1 = _parseColor(s);
-						clr2 = _parseColor(v);
-						pt.e = v;
-						pt.s = Number(clr1[0]);				//red starting value
-						pt.c = Number(clr2[0]) - pt.s;		//red change
-						pt.gs = Number(clr1[1]);			//green starting value
-						pt.gc = Number(clr2[1]) - pt.gs;	//green change
-						pt.bs = Number(clr1[2]);			//blue starting value
-						pt.bc = Number(clr2[2]) - pt.bs;	//blue change
-						if (clr1.length > 3 || clr2.length > 3) { //detect an rgba() value
-							pt.as = (clr1.length < 4) ? 1 : Number(clr1[3]);
-							pt.ac = ((clr2.length < 4) ? 1 : Number(clr2[3])) - pt.as;
-							pt.type = 2; //2 = rgba() tween
-						} else {
-							pt.type = 1; //1 = color tween, -1 = no tween, just set the value at the end because there's no changes
-						}
-
-					} else {
-
-						s = (typeof(s) === "string") ? parseFloat(s.replace(_NaNExp, "")) : Number(s);
-
-						if (typeof(v) === "string") {
-							rel = (v.charAt(1) === "=");
-							v = parseFloat(v.replace(_NaNExp, ""));
-						} else {
-							rel = false;
-						}
-
-						pt.e = (v || v === 0) ? (rel ? v + s : v) : value[p]; //ensures that any += or -= prefixes are taken care of.
-
-						if ((s || s === 0) && (v || v === 0) && (pt.c = (rel ? v : v - s))) { //faster than isNaN(). Also, we set pt.c (change) here because if it's 0, we'll just treat it like a non-tweening value. can't do (v !== start) because if it's a relative value and the CHANGE is identical to the START, the condition will fail unnecessarily.
-							pt.s = s;
-						} else {
-							pt.type = -1;
-							pt.i = value[p]; //intermediate value is typically the same as the end value.
-							pt.s = pt.c = 0;
-						}
-
-					}
-
-					this._overwriteProps.push("raphael_" + p);
-					if (pt._next) {
-						pt._next._prev = pt;
-					}
-				}
-
-				return true;
-			},
-
-			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-			set: function(v) {
-				var pt = this._firstPT, val;
-
-				while (pt) {
-					val = pt.c * v + pt.s;
-					if (pt.r) {
-						val = Math.round(val);
-					}
-					if (!pt.type) {
-						pt.t[pt.p] = val;
-					} else if (pt.type === 1) { //rgb()
-						pt.t[pt.p] = "rgb(" + (val >> 0) + ", " + ((pt.gs + (v * pt.gc)) >> 0) + ", " + ((pt.bs + (v * pt.bc)) >> 0) + ")";
-					} else if (pt.type === 2) { //rgba()
-						pt.t[pt.p] = "rgba(" + (val >> 0) + ", " + ((pt.gs + (v * pt.gc)) >> 0) + ", " + ((pt.bs + (v * pt.bc)) >> 0) + ", " + (pt.as + (v * pt.ac)) + ")";
-					} else if (pt.type === -1) { //non-tweening
-						pt.t[pt.p] = pt.i;
-					}
-					pt = pt._next;
-				}
-
-				this._target.attr(this._props);
-
-				//apply transform values like x, y, scaleX, scaleY, rotation, skewX, or skewY. We do these after looping through all the PropTweens because those are where the changes are made to scaleX/scaleY/rotation/skewX/skewY/x/y.
-				if (this._transform) {
-					pt = this._transform; //to improve speed and reduce size, reuse the pt variable as an alias to the _transform property
-					var ang = pt.rotation,
-						skew = ang - pt.skewX,
-						a = Math.cos(ang) * pt.scaleX,
-						b = Math.sin(ang) * pt.scaleX,
-						c = Math.sin(skew) * -pt.scaleY,
-						d = Math.cos(skew) * pt.scaleY,
-						min = 0.000001,
-						pxl = this._pxl,
-						pyl = this._pyl;
-
-					//some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases for both b and c. The conditional logic here is faster than calling Math.abs().
-					if (b < min) if (b > -min) {
-						b = 0;
-					}
-					if (c < min) if (c > -min) {
-						c = 0;
-					}
-					pt.ox = this._pxg - (pxl * a + pyl * c); //we must record the offset x/y that we're making from the regular tx/ty (matrix.e and f) so that we can correctly interpret positional data in _getTransform(). See note there on tx and ox.
-					pt.oy = this._pyg - (pxl * b + pyl * d);
-					this._target.transform("m" + a + "," + b + "," + c + "," + d + "," + (pt.tx + pt.ox) + "," + (pt.ty + pt.oy));
-				}
-
-			}
-
-		}),
-		p = RaphaelPlugin.prototype;
-
-	//compares the beginning x, y, scaleX, scaleY, rotation, and skewX properties with the ending ones and adds PropTweens accordingly wherever necessary. We must tween them individually (rather than just tweening the matrix values) so that elgant overwriting can occur, like if one tween is controlling scaleX, scaleY, and rotation and then another one starts mid-tween that is trying to control the scaleX only - this tween should continue tweening scaleY and rotation.
-	p._parseTransform = function(t, v) {
-		if (this._transform) { return; } //only need to parse the transform once, and only if the browser supports it.
-
-		var m1 = this._transform = _getTransform(t, true),
-			min = 0.000001,
-			m2, skewY, p, pt, copy, dx, dy, mtx, pivot;
-
-		if (typeof(v) === "object") { //for values like scaleX, scaleY, rotation, x, y, skewX, and skewY or transform:{...} (object)
-
-			m2 = {scaleX:_parseVal((v.scaleX != null) ? v.scaleX : v.scale, m1.scaleX),
-				  scaleY:_parseVal((v.scaleY != null) ? v.scaleY : v.scale, m1.scaleY),
-				  tx:_parseVal(v.tx, m1.tx),
-				  ty:_parseVal(v.ty, m1.ty)};
-
-			if (v.shortRotation != null) {
-				m2.rotation = (typeof(v.shortRotation) === "number") ? v.shortRotation * _DEG2RAD : _parseAngle(v.shortRotation, m1.rotation);
-				var dif = (m2.rotation - m1.rotation) % (Math.PI * 2);
-				if (dif !== dif % Math.PI) {
-					dif += Math.PI * ((dif < 0) ? 2 : -2);
-				}
-				m2.rotation = m1.rotation + dif;
-
-			} else {
-				m2.rotation = (v.rotation == null) ? m1.rotation : (typeof(v.rotation) === "number") ? v.rotation * _DEG2RAD : _parseAngle(v.rotation, m1.rotation);
-			}
-			m2.skewX = (v.skewX == null) ? m1.skewX : (typeof(v.skewX) === "number") ? v.skewX * _DEG2RAD : _parseAngle(v.skewX, m1.skewX);
-
-			//note: for performance reasons, we combine all skewing into the skewX and rotation values, ignoring skewY but we must still record it so that we can discern how much of the overall skew is attributed to skewX vs. skewY. Otherwise, if the skewY would always act relative (tween skewY to 10deg, for example, multiple times and if we always combine things into skewX, we can't remember that skewY was 10 from last time). Remember, a skewY of 10 degrees looks the same as a rotation of 10 degrees plus a skewX of -10 degrees.
-			m2.skewY = (v.skewY == null) ? m1.skewY : (typeof(v.skewY) === "number") ? v.skewY * _DEG2RAD : _parseAngle(v.skewY, m1.skewY);
-			if ((skewY = m2.skewY - m1.skewY)) {
-				m2.skewX += skewY;
-				m2.rotation += skewY;
-			}
-			//don't allow rotation/skew values to be a SUPER small decimal because when they're translated back to strings for setting the css property, the browser reports them in a funky way, like 1-e7. Of course we could use toFixed() to resolve that issue but that hurts performance quite a bit with all those function calls on every frame, plus it is virtually impossible to discern values that small visually (nobody will notice changing a rotation of 0.0000001 to 0, so the performance improvement is well worth it).
-			if (m2.skewY < min) if (m2.skewY > -min) {
-				m2.skewY = 0;
-			}
-			if (m2.skewX < min) if (m2.skewX > -min) {
-				m2.skewX = 0;
-			}
-			if (m2.rotation < min) if (m2.rotation > -min) {
-				m2.rotation = 0;
-			}
-
-			pivot = v.localPivot || v.globalPivot;
-
-			if (typeof(pivot) === "string") {
-				copy = pivot.split(",");
-				dx = Number(copy[0]);
-				dy = Number(copy[1]);
-			} else if (typeof(pivot) === "object") {
-				dx = Number(pivot.x);
-				dy = Number(pivot.y);
-			} else if (v.localPivot) {
-				copy = t.getBBox(true);
-				dx = copy.width / 2;
-				dy = copy.height / 2;
-			} else {
-				copy = t.getBBox();
-				dx = copy.x + copy.width / 2;
-				dy = copy.y + copy.height / 2;
-			}
-
-			if (v.localPivot) {
-				mtx = t.matrix;
-				dx += t.attr("x");
-				dy += t.attr("y");
-				this._pxl = dx;
-				this._pyl = dy;
-				this._pxg = dx * mtx.a + dy * mtx.c + mtx.e - m1.tx;
-				this._pyg = dx * mtx.b + dy * mtx.d + mtx.f - m1.ty;
-			} else {
-				mtx = t.matrix.invert();
-				this._pxl = dx * mtx.a + dy * mtx.c + mtx.e;
-				this._pyl = dx * mtx.b + dy * mtx.d + mtx.f;
-				this._pxg = dx - m1.tx;
-				this._pyg = dy - m1.ty;
-			}
-
-		} else if (typeof(v) === "string") { //for values like transform:"rotate(60deg) scale(0.5, 0.8)"
-			copy = this._target.transform();
-			t.transform(v);
-			m2 = _getTransform(t, false);
-			t.transform(copy);
-		} else {
-			return;
-		}
-
-		for (p in _transformMap) {
-			if (m1[p] !== m2[p]) if (p !== "shortRotation") if (p !== "scale") {
-				this._firstPT = pt = {_next:this._firstPT, t:m1, p:p, s:m1[p], c:m2[p] - m1[p], n:p, f:false, r:false, b:m1[p], e:m2[p], type:0};
-				if (pt._next) {
-					pt._next._prev = pt;
-				}
-				this._overwriteProps.push("raphael_" + p);
-			}
-		}
-	};
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-/*!
- * VERSION: 1.9.0
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-	var _doc = (_gsScope.document || {}).documentElement,
-		_window = _gsScope,
-		_max = function(element, axis) {
-			var dim = (axis === "x") ? "Width" : "Height",
-				scroll = "scroll" + dim,
-				client = "client" + dim,
-				body = document.body;
-			return (element === _window || element === _doc || element === body) ? Math.max(_doc[scroll], body[scroll]) - (_window["inner" + dim] || _doc[client] || body[client]) : element[scroll] - element["offset" + dim];
-		},
-		_unwrapElement = function(value) {
-			if (typeof(value) === "string") {
-				value = TweenLite.selector(value);
-			}
-			if (value.length && value !== _window && value[0] && value[0].style && !value.nodeType) {
-				value = value[0];
-			}
-			return (value === _window || (value.nodeType && value.style)) ? value : null;
-		},
-		_buildGetter = function(e, axis) { //pass in an element and an axis ("x" or "y") and it'll return a getter function for the scroll position of that element (like scrollTop or scrollLeft, although if the element is the window, it'll use the pageXOffset/pageYOffset or the documentElement's scrollTop/scrollLeft or document.body's. Basically this streamlines things and makes a very fast getter across browsers.
-			var p = "scroll" + ((axis === "x") ? "Left" : "Top");
-			if (e === _window) {
-				if (e.pageXOffset != null) {
-					p = "page" + axis.toUpperCase() + "Offset";
-				} else if (_doc[p] != null) {
-					e = _doc;
-				} else {
-					e = document.body;
-				}
-			}
-			return function() {
-				return e[p];
-			};
-		},
-		_getOffset = function(element, container) {
-			var rect = _unwrapElement(element).getBoundingClientRect(),
-				isRoot = (!container || container === _window || container === document.body),
-				cRect = (isRoot ? _doc : container).getBoundingClientRect(),
-				offsets = {x: rect.left - cRect.left, y: rect.top - cRect.top};
-			if (!isRoot && container) { //only add the current scroll position if it's not the window/body.
-				offsets.x += _buildGetter(container, "x")();
-				offsets.y += _buildGetter(container, "y")();
-			}
-			return offsets;
-		},
-		_parseVal = function(value, target, axis) {
-			var type = typeof(value);
-			return !isNaN(value) ? parseFloat(value) : (type === "number" || (type === "string" && value.charAt(1) === "=")) ? value : (value === "max") ? _max(target, axis) : Math.min(_max(target, axis), _getOffset(value, target)[axis]);
-		},
-
-		ScrollToPlugin = _gsScope._gsDefine.plugin({
-			propName: "scrollTo",
-			API: 2,
-			global: true,
-			version:"1.9.0",
-
-			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-			init: function(target, value, tween) {
-				this._wdw = (target === _window);
-				this._target = target;
-				this._tween = tween;
-				if (typeof(value) !== "object") {
-					value = {y:value}; //if we don't receive an object as the parameter, assume the user intends "y".
-					if (typeof(value.y) === "string" && value.y !== "max" && value.y.charAt(1) !== "=") {
-						value.x = value.y;
-					}
-				} else if (value.nodeType) {
-					value = {y:value, x:value};
-				}
-				this.vars = value;
-				this._autoKill = (value.autoKill !== false);
-				this.getX = _buildGetter(target, "x");
-				this.getY = _buildGetter(target, "y");
-				this.x = this.xPrev = this.getX();
-				this.y = this.yPrev = this.getY();
-				if (value.x != null) {
-					this._addTween(this, "x", this.x, _parseVal(value.x, target, "x") - (value.offsetX || 0), "scrollTo_x", true);
-					this._overwriteProps.push("scrollTo_x");
-				} else {
-					this.skipX = true;
-				}
-				if (value.y != null) {
-					this._addTween(this, "y", this.y, _parseVal(value.y, target, "y") - (value.offsetY || 0), "scrollTo_y", true);
-					this._overwriteProps.push("scrollTo_y");
-				} else {
-					this.skipY = true;
-				}
-				return true;
-			},
-
-			//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-			set: function(v) {
-				this._super.setRatio.call(this, v);
-
-				var x = (this._wdw || !this.skipX) ? this.getX() : this.xPrev,
-					y = (this._wdw || !this.skipY) ? this.getY() : this.yPrev,
-					yDif = y - this.yPrev,
-					xDif = x - this.xPrev,
-					threshold = ScrollToPlugin.autoKillThreshold;
-
-				if (this.x < 0) { //can't scroll to a position less than 0! Might happen if someone uses a Back.easeOut or Elastic.easeOut when scrolling back to the top of the page (for example)
-					this.x = 0;
-				}
-				if (this.y < 0) {
-					this.y = 0;
-				}
-				if (this._autoKill) {
-					//note: iOS has a bug that throws off the scroll by several pixels, so we need to check if it's within 7 pixels of the previous one that we set instead of just looking for an exact match.
-					if (!this.skipX && (xDif > threshold || xDif < -threshold) && x < _max(this._target, "x")) {
-						this.skipX = true; //if the user scrolls separately, we should stop tweening!
-					}
-					if (!this.skipY && (yDif > threshold || yDif < -threshold) && y < _max(this._target, "y")) {
-						this.skipY = true; //if the user scrolls separately, we should stop tweening!
-					}
-					if (this.skipX && this.skipY) {
-						this._tween.kill();
-						if (this.vars.onAutoKill) {
-							this.vars.onAutoKill.apply(this.vars.onAutoKillScope || this._tween, this.vars.onAutoKillParams || []);
-						}
-					}
-				}
-				if (this._wdw) {
-					_window.scrollTo((!this.skipX) ? this.x : x, (!this.skipY) ? this.y : y);
-				} else {
-					if (!this.skipY) {
-						this._target.scrollTop = this.y;
-					}
-					if (!this.skipX) {
-						this._target.scrollLeft = this.x;
-					}
-				}
-				this.xPrev = this.x;
-				this.yPrev = this.y;
-			}
-
-		}),
-		p = ScrollToPlugin.prototype;
-
-	ScrollToPlugin.max = _max;
-	ScrollToPlugin.getOffset = _getOffset;
-	ScrollToPlugin.buildGetter = _buildGetter;
-	ScrollToPlugin.autoKillThreshold = 7;
-
-	p._kill = function(lookup) {
-		if (lookup.scrollTo_x) {
-			this.skipX = true;
-		}
-		if (lookup.scrollTo_y) {
-			this.skipY = true;
-		}
-		return this._super._kill.call(this, lookup);
-	};
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("ScrollToPlugin"));
-/*!
- * VERSION: 1.2.0
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- * 
- * This file is to be used as a simple template for writing your own plugin. See the 
- * TweenPlugin docs for more details.
- *
- * You can start by doing a search for "yourCustomProperty" and replace it with whatever the name
- * of your property is. This way of defining a plugin was introduced in version 1.9.0 - previous versions
- * of TweenLite won't work with this.
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- * 
- * @author: Jack Doyle, jack@greensock.com
- **/
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-	//ignore the line above this and at the very end - those are for ensuring things load in the proper order
-	"use strict";
-
-	_gsScope._gsDefine.plugin({
-		propName: "yourCustomProperty", //the name of the property that will get intercepted and handled by this plugin (obviously change it to whatever you want, typically it is camelCase starting with lowercase).
-		priority: 0, //the priority in the rendering pipeline (0 by default). A priority of -1 would mean this plugin will run after all those with 0 or greater. A priority of 1 would get run before 0, etc. This only matters when a plugin relies on other plugins finishing their work before it runs (or visa-versa)
-		API: 2, //the API should stay 2 - it just gives us a way to know the method/property structure so that if in the future we change to a different TweenPlugin architecture, we can identify this plugin's structure.
-		version: "1.0.0", //your plugin's version number
-		overwriteProps: ["yourCustomProperty"], //an array of property names whose tweens should be overwritten by this plugin. For example, if you create a "scale" plugin that handles both "scaleX" and "scaleY", the overwriteProps would be ["scaleX","scaleY"] so that if there's a scaleX or scaleY tween in-progress when a new "scale" tween starts (using this plugin), it would overwrite the scaleX or scaleY tween.
-
-		/*
-		 * The init function is called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run. It receives 3 parameters:
-		 *   1) target [object] - the target of the tween. In cases where the tween's original target is an array (or jQuery object), this target will be the individual object inside that array (a new plugin instance is created for each target in the array). For example, TweenLite.to([obj1, obj2, obj3], 1, {x:100}) the target will be obj1 or obj2 or obj3 rather than the array containing them.
-		 *   2) value [*] - whatever value is passed as the special property value. For example, TweenLite.to(element, 1, {yourCustomProperty:3}) the value would be 3. Or for TweenLite.to(element, 1, {yourCustomProperty:{subProp1:3, subProp2:"whatever"}});, value would be {subProp1:3, subProp2:"whatever"}.
-		 *   3) tween [TweenLite] - the TweenLite (or TweenMax) instance that is managing this plugin instance. This can be useful if you need to check certain state-related properties on the tween (maybe in the set method) like its duration or time. Most of the time, however, you don't need to do anything with the tween. It is provided just in case you want to reference it.
-		 *   4) index [integer] - the index number of the target in the tween. For example, if an array is passed in as the target (or selector text), this would be 0 for the first one, 1 for the second, 2 for the third, etc. This was introduced in GSAP 1.19.0
-		 *
-		 * This function should return true unless you want to have TweenLite/Max skip the plugin altogether and instead treat the property/value like a normal tween (as if the plugin wasn't activated). This is rarely useful, so you should almost always return true.
-		 */
-		init: function(target, value, tween, index) {
-			this._target = target; //we record the target so that we can refer to it in the set method when doing updates.
-
-			/* Next, we create a property tween for "scaleX" and "scaleY" properties of our target
-			 * (we're just using them as a examples of how to set up a property tween with a name, start, and end value).
-			 * the _addTween() method accepts the following parameters:
-			 *   1) target [object] - target object whose property this tween will control.
-			 *   2) property [string] - the name of the property, like "scaleX" or "scaleY"
-			 *   3) start [number] - The starting value of the property. For example, if you're tweening from 0 to 100, start would be 0.
-			 *   4) end [number] - the ending value of the property. For example, if you're tweening from 0 to 100, end would be 100.
-			 *   5) overwriteProperty [string] - the name that gets registered as the overwrite property so that if another concurrent tween of the same target gets created and it is tweening a property with this name, this one will be overwritten. Typically this is the same as "property".
-			 *   6) round [boolean] - if true, the updated value on each update will be rounded to the nearest integer. [false by default]
-			 * You do NOT need to use _addTween() at all. It is merely a convenience. You can record your own values internally or whatever you want.
-			 */
-			this._addTween(target, "scaleX", target.scaleX, value, "scaleX", false);
-			this._addTween(target, "scaleY", target.scaleY, value, "scaleY", false);
-
-			//now, just for kicks, we'll record the starting "alpha" value and amount of change so that we can manage this manually rather than _addTween() (again, totally fictitious, just for an example)
-			this._alphaStart = target.alpha;
-			this._alphaChange = value.alpha - target.alpha;
-
-			//always return true unless we want to scrap the plugin and have the value treated as a normal property tween (very uncommon)
-			return true;
-		},
-
-		//[optional] - called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.). If you're using this._super._addTween() for all your tweens and you don't need to do anything special on each frame besides updating those values, you can omit this "set" function altogether.
-		set: function(ratio) {
-			//since we used _addTween() inside init function, it created some property tweens that we'll update by calling the parent prototype's setRatio() (otherwise, the property tweens wouldn't get their values updated). this._super refers to the TweenPlugin prototype from which the plugin inherits (not that you need to worry about that).
-			this._super.setRatio.call(this, ratio);
-
-			//now manually set the alpha
-			this._target.alpha = this._alphaStart + this._alphaChange * ratio;
-		}
-
-	});
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-/*!
- * VERSION: 0.6.2
- * DATE: 2018-02-15
- * UPDATES AND DOCS AT: http://greensock.com
- *
- * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
- * This work is subject to the terms at http://greensock.com/standard-license or for
- * Club GreenSock members, the software agreement that was issued with your membership.
- *
- * @author: Jack Doyle, jack@greensock.com
- */
-var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
-(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
-
-	"use strict";
-
-		var _getText = function(e) {
-				var type = e.nodeType,
-					result = "";
-				if (type === 1 || type === 9 || type === 11) {
-					if (typeof(e.textContent) === "string") {
-						return e.textContent;
-					} else {
-						for ( e = e.firstChild; e; e = e.nextSibling ) {
-							result += _getText(e);
-						}
-					}
-				} else if (type === 3 || type === 4) {
-					return e.nodeValue;
-				}
-				return result;
-			},
-			_emoji = "[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D]|[\uD800-\uDBFF][\uDC00-\uDFFF]",
-			_emojiExp = new RegExp(_emoji),
-			_emojiAndCharsExp = new RegExp(_emoji + "|.", "g"),
-			_emojiSafeSplit = function(text, delimiter) {
-				return ((delimiter === "" || !delimiter) && _emojiExp.test(text)) ? text.match(_emojiAndCharsExp) : text.split(delimiter || "");
-			},
-			/* //previous emoji-related splitting. New method above is faster and more concise.
-			_emojiStart = 0xD800,
-			_emojiEnd = 0xDBFF,
-			_emojiLowStart = 0xDC00,
-			_emojiRegionStart = 0x1F1E6,
-			_emojiRegionEnd = 0x1F1FF,
-			_emojiModStart = 0x1f3fb,
-			_emojiModEnd = 0x1f3ff,
-			_emojiPairCode = function(s) {
-				return ((s.charCodeAt(0) - _emojiStart) << 10) + (s.charCodeAt(1) - _emojiLowStart) + 0x10000;
-			},
-			_emojiSafeSplit = function(text, delimiter) { //like calling String.split(delimiter) except that it keeps emoji characters together.
-				if (delimiter !== "") {
-					return text.split(delimiter);
-				}
-				var l = text.length,
-					a = [],
-					character, i, emojiPair1, emojiPair2, j;
-				for (i = 0; i < l; i++) {
-					character = text.charAt(i);
-					if ((character.charCodeAt(0) >= _emojiStart && character.charCodeAt(0) <= _emojiEnd) || (text.charCodeAt(i+1) >= 0xFE00 && text.charCodeAt(i+1) <= 0xFE0F)) { //special emoji characters use 2 or 4 unicode characters that we must keep together.
-						emojiPair1 = _emojiPairCode(text.substr(i, 2));
-						emojiPair2 = _emojiPairCode(text.substr(i + 2, 2));
-						j = ((emojiPair1 >= _emojiRegionStart && emojiPair1 <= _emojiRegionEnd && emojiPair2 >= _emojiRegionStart && emojiPair2 <= _emojiRegionEnd) || (emojiPair2 >= _emojiModStart && emojiPair2 <= _emojiModEnd)) ? 4 : 2;
-						a.push(text.substr(i, j));
-						i += j - 1;
-					} else {
-						a.push(character);
-					}
-				}
-				return a;
-			},
-			*/
-			TextPlugin = _gsScope._gsDefine.plugin({
-				propName: "text",
-				API: 2,
-				version:"0.6.2",
-
-				//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
-				init: function(target, value, tween, index) {
-					var i = target.nodeName.toUpperCase(),
-						shrt;
-					if (typeof(value) === "function") {
-						value = value(index, target);
-					}
-					this._svg = (target.getBBox && (i === "TEXT" || i === "TSPAN"));
-					if (!("innerHTML" in target) && !this._svg) {
-						return false;
-					}
-					this._target = target;
-					if (typeof(value) !== "object") {
-						value = {value:value};
-					}
-					if (value.value === undefined) {
-						this._text = this._original = [""];
-						return true;
-					}
-					this._delimiter = value.delimiter || "";
-					this._original = _emojiSafeSplit(_getText(target).replace(/\s+/g, " "), this._delimiter);
-					this._text = _emojiSafeSplit(value.value.replace(/\s+/g, " "), this._delimiter);
-					this._runBackwards = (tween.vars.runBackwards === true);
-					if (this._runBackwards) {
-						i = this._original;
-						this._original = this._text;
-						this._text = i;
-					}
-					if (typeof(value.newClass) === "string") {
-						this._newClass = value.newClass;
-						this._hasClass = true;
-					}
-					if (typeof(value.oldClass) === "string") {
-						this._oldClass = value.oldClass;
-						this._hasClass = true;
-					}
-					i = this._original.length - this._text.length;
-					shrt = (i < 0) ? this._original : this._text;
-					this._fillChar = value.fillChar || (value.padSpace ? "&nbsp;" : "");
-					if (i < 0) {
-						i = -i;
-					}
-					while (--i > -1) {
-						shrt.push(this._fillChar);
-					}
-					return true;
-				},
-
-				//called each time the values should be updated, and the ratio gets passed as the only parameter (typically it's a value between 0 and 1, but it can exceed those when using an ease like Elastic.easeOut or Back.easeOut, etc.)
-				set: function(ratio) {
-					if (ratio > 1) {
-						ratio = 1;
-					} else if (ratio < 0) {
-						ratio = 0;
-					}
-					if (this._runBackwards) {
-						ratio = 1 - ratio;
-					}
-					var l = this._text.length,
-						i = (ratio * l + 0.5) | 0,
-						applyNew, applyOld, str;
-					if (this._hasClass) {
-						applyNew = (this._newClass && i !== 0);
-						applyOld = (this._oldClass && i !== l);
-						str = (applyNew ? "<span class='" + this._newClass + "'>" : "") + this._text.slice(0, i).join(this._delimiter) + (applyNew ? "</span>" : "") + (applyOld ? "<span class='" + this._oldClass + "'>" : "") + this._delimiter + this._original.slice(i).join(this._delimiter) + (applyOld ? "</span>" : "");
-					} else {
-						str = this._text.slice(0, i).join(this._delimiter) + this._delimiter + this._original.slice(i).join(this._delimiter);
-					}
-					if (this._svg) { //SVG text elements don't have an "innerHTML" in Microsoft browsers.
-						this._target.textContent = str;
-					} else {
-						this._target.innerHTML = (this._fillChar === "&nbsp;" && str.indexOf("  ") !== -1) ? str.split("  ").join("&nbsp;&nbsp;") : str;
-					}
-				}
-
-			}),
-			p = TextPlugin.prototype;
-
-		p._newClass = p._oldClass = p._delimiter = "";
-
-}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
-
-//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
-(function(name) {
-	"use strict";
-	var getGlobal = function() {
-		return (_gsScope.GreenSockGlobals || _gsScope)[name];
-	};
-	if (typeof(module) !== "undefined" && module.exports) { //node
-		require("../TweenLite.js");
-		module.exports = getGlobal();
-	} else if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	}
-}("TextPlugin"));
-/**
- * Based on http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
- * @author mrdoob / http://mrdoob.com/
- * @author yomotsu / https://yomotsu.net/
- */
-
-THREE.CSS3DObject = function ( element ) {
-
-	THREE.Object3D.call( this );
-
-	this.element = element;
-	this.element.style.position = 'absolute';
-
-	this.addEventListener( 'removed', function () {
-
-		if ( this.element.parentNode !== null ) {
-
-			this.element.parentNode.removeChild( this.element );
-
-		}
-
-	} );
-
-};
-
-THREE.CSS3DObject.prototype = Object.create( THREE.Object3D.prototype );
-THREE.CSS3DObject.prototype.constructor = THREE.CSS3DObject;
-
-THREE.CSS3DSprite = function ( element ) {
-
-	THREE.CSS3DObject.call( this, element );
-
-};
-
-THREE.CSS3DSprite.prototype = Object.create( THREE.CSS3DObject.prototype );
-THREE.CSS3DSprite.prototype.constructor = THREE.CSS3DSprite;
-
-//
-
-THREE.CSS3DRenderer = function () {
-
-	console.log( 'THREE.CSS3DRenderer', THREE.REVISION );
-
-	var _width, _height;
-	var _widthHalf, _heightHalf;
-
-	var matrix = new THREE.Matrix4();
-
-	var cache = {
-		camera: { fov: 0, style: '' },
-		objects: new WeakMap()
-	};
-
-	var domElement = document.createElement( 'div' );
-	domElement.style.overflow = 'hidden';
-
-	this.domElement = domElement;
-
-	var cameraElement = document.createElement( 'div' );
-
-	cameraElement.style.WebkitTransformStyle = 'preserve-3d';
-	cameraElement.style.transformStyle = 'preserve-3d';
-
-	domElement.appendChild( cameraElement );
-
-	var isIE = /Trident/i.test( navigator.userAgent );
-
-	this.getSize = function () {
-
-		return {
-			width: _width,
-			height: _height
-		};
-
-	};
-
-	this.setSize = function ( width, height ) {
-
-		_width = width;
-		_height = height;
-		_widthHalf = _width / 2;
-		_heightHalf = _height / 2;
-
-		domElement.style.width = width + 'px';
-		domElement.style.height = height + 'px';
-
-		cameraElement.style.width = width + 'px';
-		cameraElement.style.height = height + 'px';
-
-	};
-
-	function epsilon( value ) {
-
-		return Math.abs( value ) < 1e-10 ? 0 : value;
-
-	}
-
-	function getCameraCSSMatrix( matrix ) {
-
-		var elements = matrix.elements;
-
-		return 'matrix3d(' +
-			epsilon( elements[ 0 ] ) + ',' +
-			epsilon( - elements[ 1 ] ) + ',' +
-			epsilon( elements[ 2 ] ) + ',' +
-			epsilon( elements[ 3 ] ) + ',' +
-			epsilon( elements[ 4 ] ) + ',' +
-			epsilon( - elements[ 5 ] ) + ',' +
-			epsilon( elements[ 6 ] ) + ',' +
-			epsilon( elements[ 7 ] ) + ',' +
-			epsilon( elements[ 8 ] ) + ',' +
-			epsilon( - elements[ 9 ] ) + ',' +
-			epsilon( elements[ 10 ] ) + ',' +
-			epsilon( elements[ 11 ] ) + ',' +
-			epsilon( elements[ 12 ] ) + ',' +
-			epsilon( - elements[ 13 ] ) + ',' +
-			epsilon( elements[ 14 ] ) + ',' +
-			epsilon( elements[ 15 ] ) +
-		')';
-
-	}
-
-	function getObjectCSSMatrix( matrix, cameraCSSMatrix ) {
-
-		var elements = matrix.elements;
-		var matrix3d = 'matrix3d(' +
-			epsilon( elements[ 0 ] ) + ',' +
-			epsilon( elements[ 1 ] ) + ',' +
-			epsilon( elements[ 2 ] ) + ',' +
-			epsilon( elements[ 3 ] ) + ',' +
-			epsilon( - elements[ 4 ] ) + ',' +
-			epsilon( - elements[ 5 ] ) + ',' +
-			epsilon( - elements[ 6 ] ) + ',' +
-			epsilon( - elements[ 7 ] ) + ',' +
-			epsilon( elements[ 8 ] ) + ',' +
-			epsilon( elements[ 9 ] ) + ',' +
-			epsilon( elements[ 10 ] ) + ',' +
-			epsilon( elements[ 11 ] ) + ',' +
-			epsilon( elements[ 12 ] ) + ',' +
-			epsilon( elements[ 13 ] ) + ',' +
-			epsilon( elements[ 14 ] ) + ',' +
-			epsilon( elements[ 15 ] ) +
-		')';
-
-		if ( isIE ) {
-
-			return 'translate(-50%,-50%)' +
-				'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)' +
-				cameraCSSMatrix +
-				matrix3d;
-
-		}
-
-		return 'translate(-50%,-50%)' + matrix3d;
-
-	}
-
-	function renderObject( object, camera, cameraCSSMatrix ) {
-
-		if ( object instanceof THREE.CSS3DObject ) {
-
-			var style;
-
-			if ( object instanceof THREE.CSS3DSprite ) {
-
-				// http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
-
-				matrix.copy( camera.matrixWorldInverse );
-				matrix.transpose();
-				matrix.copyPosition( object.matrixWorld );
-				matrix.scale( object.scale );
-
-				matrix.elements[ 3 ] = 0;
-				matrix.elements[ 7 ] = 0;
-				matrix.elements[ 11 ] = 0;
-				matrix.elements[ 15 ] = 1;
-
-				style = getObjectCSSMatrix( matrix, cameraCSSMatrix );
-
-			} else {
-
-				style = getObjectCSSMatrix( object.matrixWorld, cameraCSSMatrix );
-
-			}
-
-			var element = object.element;
-			var cachedStyle = cache.objects.get( object );
-
-			if ( cachedStyle === undefined || cachedStyle !== style ) {
-
-				element.style.WebkitTransform = style;
-				element.style.transform = style;
-
-				var objectData = { style: style };
-
-				if ( isIE ) {
-
-					objectData.distanceToCameraSquared = getDistanceToSquared( camera, object );
-
-				}
-
-				cache.objects.set( object, objectData );
-
-			}
-
-			if ( element.parentNode !== cameraElement ) {
-
-				cameraElement.appendChild( element );
-
-			}
-
-		}
-
-		for ( var i = 0, l = object.children.length; i < l; i ++ ) {
-
-			renderObject( object.children[ i ], camera, cameraCSSMatrix );
-
-		}
-
-	}
-
-	var getDistanceToSquared = function () {
-
-		var a = new THREE.Vector3();
-		var b = new THREE.Vector3();
-
-		return function ( object1, object2 ) {
-
-			a.setFromMatrixPosition( object1.matrixWorld );
-			b.setFromMatrixPosition( object2.matrixWorld );
-
-			return a.distanceToSquared( b );
-
-		};
-
-	}();
-
-	function filterAndFlatten( scene ) {
-
-		var result = [];
-
-		scene.traverse( function ( object ) {
-
-			if ( object instanceof THREE.CSS3DObject ) result.push( object );
-
-		} );
-
-		return result;
-
-	}
-
-	function zOrder( scene ) {
-
-		var sorted = filterAndFlatten( scene ).sort( function ( a, b ) {
-
-			var distanceA = cache.objects.get( a ).distanceToCameraSquared;
-			var distanceB = cache.objects.get( b ).distanceToCameraSquared;
-
-			return distanceA - distanceB;
-
-		} );
-
-		var zMax = sorted.length;
-
-		for ( var i = 0, l = sorted.length; i < l; i ++ ) {
-
-			sorted[ i ].element.style.zIndex = zMax - i;
-
-		}
-
-	}
-
-	this.render = function ( scene, camera ) {
-
-		var fov = camera.projectionMatrix.elements[ 5 ] * _heightHalf;
-
-		if ( cache.camera.fov !== fov ) {
-
-			if ( camera.isPerspectiveCamera ) {
-
-				domElement.style.WebkitPerspective = fov + 'px';
-				domElement.style.perspective = fov + 'px';
-
-			}
-
-			cache.camera.fov = fov;
-
-		}
-
-		scene.updateMatrixWorld();
-
-		if ( camera.parent === null ) camera.updateMatrixWorld();
-
-		var cameraCSSMatrix = camera.isOrthographicCamera ?
-			'scale(' + fov + ')' + getCameraCSSMatrix( camera.matrixWorldInverse ) :
-			'translateZ(' + fov + 'px)' + getCameraCSSMatrix( camera.matrixWorldInverse );
-
-		var style = cameraCSSMatrix +
-			'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)';
-
-		if ( cache.camera.style !== style && ! isIE ) {
-
-			cameraElement.style.WebkitTransform = style;
-			cameraElement.style.transform = style;
-
-			cache.camera.style = style;
-
-		}
-
-		renderObject( scene, camera, cameraCSSMatrix );
-
-		if ( isIE ) {
-
-			// IE10 and 11 does not support 'preserve-3d'.
-			// Thus, z-order in 3D will not work.
-			// We have to calc z-order manually and set CSS z-index for IE.
-			// FYI: z-index can't handle object intersection
-			zOrder( scene );
-
-		}
-
-	};
-
-};
-
-/**
- * @author qiao / https://github.com/qiao
- * @author mrdoob / http://mrdoob.com
- * @author alteredq / http://alteredqualia.com/
- * @author WestLangley / http://github.com/WestLangley
- * @author erich666 / http://erichaines.com
- */
-
-// This set of controls performs orbiting, dollying (zooming), and panning.
-// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
-//
-//    Orbit - left mouse / touch: one-finger move
-//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
-//    Pan - right mouse, or arrow keys / touch: two-finger move
-
-THREE.OrbitControls = function ( object, domElement ) {
-
-	this.object = object;
-
-	this.domElement = ( domElement !== undefined ) ? domElement : document;
-
-	// Set to false to disable this control
-	this.enabled = true;
-
-	// "target" sets the location of focus, where the object orbits around
-	this.target = new THREE.Vector3();
-
-	// How far you can dolly in and out ( PerspectiveCamera only )
-	this.minDistance = 0;
-	this.maxDistance = Infinity;
-
-	// How far you can zoom in and out ( OrthographicCamera only )
-	this.minZoom = 0;
-	this.maxZoom = Infinity;
-
-	// How far you can orbit vertically, upper and lower limits.
-	// Range is 0 to Math.PI radians.
-	this.minPolarAngle = 0; // radians
-	this.maxPolarAngle = Math.PI; // radians
-
-	// How far you can orbit horizontally, upper and lower limits.
-	// If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
-	this.minAzimuthAngle = - Infinity; // radians
-	this.maxAzimuthAngle = Infinity; // radians
-
-	// Set to true to enable damping (inertia)
-	// If damping is enabled, you must call controls.update() in your animation loop
-	this.enableDamping = false;
-	this.dampingFactor = 0.25;
-
-	// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
-	// Set to false to disable zooming
-	this.enableZoom = true;
-	this.zoomSpeed = 1.0;
-
-	// Set to false to disable rotating
-	this.enableRotate = true;
-	this.rotateSpeed = 1.0;
-
-	// Set to false to disable panning
-	this.enablePan = true;
-	this.panSpeed = 1.0;
-	this.screenSpacePanning = false; // if true, pan in screen-space
-	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
-
-	// Set to true to automatically rotate around the target
-	// If auto-rotate is enabled, you must call controls.update() in your animation loop
-	this.autoRotate = false;
-	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
-
-	// Set to false to disable use of the keys
-	this.enableKeys = true;
-
-	// The four arrow keys
-	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
-
-	// Mouse buttons
-	this.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
-
-	// for reset
-	this.target0 = this.target.clone();
-	this.position0 = this.object.position.clone();
-	this.zoom0 = this.object.zoom;
-
-	//
-	// public methods
-	//
-
-	this.getPolarAngle = function () {
-
-		return spherical.phi;
-
-	};
-
-	this.getAzimuthalAngle = function () {
-
-		return spherical.theta;
-
-	};
-
-	this.saveState = function () {
-
-		scope.target0.copy( scope.target );
-		scope.position0.copy( scope.object.position );
-		scope.zoom0 = scope.object.zoom;
-
-	};
-
-	this.reset = function () {
-
-		scope.target.copy( scope.target0 );
-		scope.object.position.copy( scope.position0 );
-		scope.object.zoom = scope.zoom0;
-
-		scope.object.updateProjectionMatrix();
-		scope.dispatchEvent( changeEvent );
-
-		scope.update();
-
-		state = STATE.NONE;
-
-	};
-
-	// this method is exposed, but perhaps it would be better if we can make it private...
-	this.update = function () {
-
-		var offset = new THREE.Vector3();
-
-		// so camera.up is the orbit axis
-		var quat = new THREE.Quaternion().setFromUnitVectors( object.up, new THREE.Vector3( 0, 1, 0 ) );
-		var quatInverse = quat.clone().inverse();
-
-		var lastPosition = new THREE.Vector3();
-		var lastQuaternion = new THREE.Quaternion();
-
-		return function update() {
-
-			var position = scope.object.position;
-
-			offset.copy( position ).sub( scope.target );
-
-			// rotate offset to "y-axis-is-up" space
-			offset.applyQuaternion( quat );
-
-			// angle from z-axis around y-axis
-			spherical.setFromVector3( offset );
-
-			if ( scope.autoRotate && state === STATE.NONE ) {
-
-				rotateLeft( getAutoRotationAngle() );
-
-			}
-
-			spherical.theta += sphericalDelta.theta;
-			spherical.phi += sphericalDelta.phi;
-
-			// restrict theta to be between desired limits
-			spherical.theta = Math.max( scope.minAzimuthAngle, Math.min( scope.maxAzimuthAngle, spherical.theta ) );
-
-			// restrict phi to be between desired limits
-			spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
-
-			spherical.makeSafe();
-
-
-			spherical.radius *= scale;
-
-			// restrict radius to be between desired limits
-			spherical.radius = Math.max( scope.minDistance, Math.min( scope.maxDistance, spherical.radius ) );
-
-			// move target to panned location
-			scope.target.add( panOffset );
-
-			offset.setFromSpherical( spherical );
-
-			// rotate offset back to "camera-up-vector-is-up" space
-			offset.applyQuaternion( quatInverse );
-
-			position.copy( scope.target ).add( offset );
-
-			scope.object.lookAt( scope.target );
-
-			if ( scope.enableDamping === true ) {
-
-				sphericalDelta.theta *= ( 1 - scope.dampingFactor );
-				sphericalDelta.phi *= ( 1 - scope.dampingFactor );
-
-				panOffset.multiplyScalar( 1 - scope.dampingFactor );
-
-			} else {
-
-				sphericalDelta.set( 0, 0, 0 );
-
-				panOffset.set( 0, 0, 0 );
-
-			}
-
-			scale = 1;
-
-			// update condition is:
-			// min(camera displacement, camera rotation in radians)^2 > EPS
-			// using small-angle approximation cos(x/2) = 1 - x^2 / 8
-
-			if ( zoomChanged ||
-				lastPosition.distanceToSquared( scope.object.position ) > EPS ||
-				8 * ( 1 - lastQuaternion.dot( scope.object.quaternion ) ) > EPS ) {
-
-				scope.dispatchEvent( changeEvent );
-
-				lastPosition.copy( scope.object.position );
-				lastQuaternion.copy( scope.object.quaternion );
-				zoomChanged = false;
-
-				return true;
-
-			}
-
-			return false;
-
-		};
-
-	}();
-
-	this.dispose = function () {
-
-		scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
-		scope.domElement.removeEventListener( 'mousedown', onMouseDown, false );
-		scope.domElement.removeEventListener( 'wheel', onMouseWheel, false );
-
-		scope.domElement.removeEventListener( 'touchstart', onTouchStart, false );
-		scope.domElement.removeEventListener( 'touchend', onTouchEnd, false );
-		scope.domElement.removeEventListener( 'touchmove', onTouchMove, false );
-
-		document.removeEventListener( 'mousemove', onMouseMove, false );
-		document.removeEventListener( 'mouseup', onMouseUp, false );
-
-		window.removeEventListener( 'keydown', onKeyDown, false );
-
-		//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
-
-	};
-
-	//
-	// internals
-	//
-
-	var scope = this;
-
-	var changeEvent = { type: 'change' };
-	var startEvent = { type: 'start' };
-	var endEvent = { type: 'end' };
-
-	var STATE = { NONE: - 1, ROTATE: 0, DOLLY: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_DOLLY_PAN: 4 };
-
-	var state = STATE.NONE;
-
-	var EPS = 0.000001;
-
-	// current position in spherical coordinates
-	var spherical = new THREE.Spherical();
-	var sphericalDelta = new THREE.Spherical();
-
-	var scale = 1;
-	var panOffset = new THREE.Vector3();
-	var zoomChanged = false;
-
-	var rotateStart = new THREE.Vector2();
-	var rotateEnd = new THREE.Vector2();
-	var rotateDelta = new THREE.Vector2();
-
-	var panStart = new THREE.Vector2();
-	var panEnd = new THREE.Vector2();
-	var panDelta = new THREE.Vector2();
-
-	var dollyStart = new THREE.Vector2();
-	var dollyEnd = new THREE.Vector2();
-	var dollyDelta = new THREE.Vector2();
-
-	function getAutoRotationAngle() {
-
-		return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
-
-	}
-
-	function getZoomScale() {
-
-		return Math.pow( 0.95, scope.zoomSpeed );
-
-	}
-
-	function rotateLeft( angle ) {
-
-		sphericalDelta.theta -= angle;
-
-	}
-
-	function rotateUp( angle ) {
-
-		sphericalDelta.phi -= angle;
-
-	}
-
-	var panLeft = function () {
-
-		var v = new THREE.Vector3();
-
-		return function panLeft( distance, objectMatrix ) {
-
-			v.setFromMatrixColumn( objectMatrix, 0 ); // get X column of objectMatrix
-			v.multiplyScalar( - distance );
-
-			panOffset.add( v );
-
-		};
-
-	}();
-
-	var panUp = function () {
-
-		var v = new THREE.Vector3();
-
-		return function panUp( distance, objectMatrix ) {
-
-			if ( scope.screenSpacePanning === true ) {
-
-				v.setFromMatrixColumn( objectMatrix, 1 );
-
-			} else {
-
-				v.setFromMatrixColumn( objectMatrix, 0 );
-				v.crossVectors( scope.object.up, v );
-
-			}
-
-			v.multiplyScalar( distance );
-
-			panOffset.add( v );
-
-		};
-
-	}();
-
-	// deltaX and deltaY are in pixels; right and down are positive
-	var pan = function () {
-
-		var offset = new THREE.Vector3();
-
-		return function pan( deltaX, deltaY ) {
-
-			var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-			if ( scope.object.isPerspectiveCamera ) {
-
-				// perspective
-				var position = scope.object.position;
-				offset.copy( position ).sub( scope.target );
-				var targetDistance = offset.length();
-
-				// half of the fov is center to top of screen
-				targetDistance *= Math.tan( ( scope.object.fov / 2 ) * Math.PI / 180.0 );
-
-				// we use only clientHeight here so aspect ratio does not distort speed
-				panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
-				panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
-
-			} else if ( scope.object.isOrthographicCamera ) {
-
-				// orthographic
-				panLeft( deltaX * ( scope.object.right - scope.object.left ) / scope.object.zoom / element.clientWidth, scope.object.matrix );
-				panUp( deltaY * ( scope.object.top - scope.object.bottom ) / scope.object.zoom / element.clientHeight, scope.object.matrix );
-
-			} else {
-
-				// camera neither orthographic nor perspective
-				console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.' );
-				scope.enablePan = false;
-
-			}
-
-		};
-
-	}();
-
-	function dollyIn( dollyScale ) {
-
-		if ( scope.object.isPerspectiveCamera ) {
-
-			scale /= dollyScale;
-
-		} else if ( scope.object.isOrthographicCamera ) {
-
-			scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom * dollyScale ) );
-			scope.object.updateProjectionMatrix();
-			zoomChanged = true;
-
-		} else {
-
-			console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
-			scope.enableZoom = false;
-
-		}
-
-	}
-
-	function dollyOut( dollyScale ) {
-
-		if ( scope.object.isPerspectiveCamera ) {
-
-			scale *= dollyScale;
-
-		} else if ( scope.object.isOrthographicCamera ) {
-
-			scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom / dollyScale ) );
-			scope.object.updateProjectionMatrix();
-			zoomChanged = true;
-
-		} else {
-
-			console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
-			scope.enableZoom = false;
-
-		}
-
-	}
-
-	//
-	// event callbacks - update the object state
-	//
-
-	function handleMouseDownRotate( event ) {
-
-		//console.log( 'handleMouseDownRotate' );
-
-		rotateStart.set( event.clientX, event.clientY );
-
-	}
-
-	function handleMouseDownDolly( event ) {
-
-		//console.log( 'handleMouseDownDolly' );
-
-		dollyStart.set( event.clientX, event.clientY );
-
-	}
-
-	function handleMouseDownPan( event ) {
-
-		//console.log( 'handleMouseDownPan' );
-
-		panStart.set( event.clientX, event.clientY );
-
-	}
-
-	function handleMouseMoveRotate( event ) {
-
-		//console.log( 'handleMouseMoveRotate' );
-
-		rotateEnd.set( event.clientX, event.clientY );
-
-		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
-
-		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-		// rotating across whole screen goes 360 degrees around
-		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth );
-
-		// rotating up and down along whole screen attempts to go 360, but limited to 180
-		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
-
-		rotateStart.copy( rotateEnd );
-
-		scope.update();
-
-	}
-
-	function handleMouseMoveDolly( event ) {
-
-		//console.log( 'handleMouseMoveDolly' );
-
-		dollyEnd.set( event.clientX, event.clientY );
-
-		dollyDelta.subVectors( dollyEnd, dollyStart );
-
-		if ( dollyDelta.y > 0 ) {
-
-			dollyIn( getZoomScale() );
-
-		} else if ( dollyDelta.y < 0 ) {
-
-			dollyOut( getZoomScale() );
-
-		}
-
-		dollyStart.copy( dollyEnd );
-
-		scope.update();
-
-	}
-
-	function handleMouseMovePan( event ) {
-
-		//console.log( 'handleMouseMovePan' );
-
-		panEnd.set( event.clientX, event.clientY );
-
-		panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
-
-		pan( panDelta.x, panDelta.y );
-
-		panStart.copy( panEnd );
-
-		scope.update();
-
-	}
-
-	function handleMouseUp( event ) {
-
-		// console.log( 'handleMouseUp' );
-
-	}
-
-	function handleMouseWheel( event ) {
-
-		// console.log( 'handleMouseWheel' );
-
-		if ( event.deltaY < 0 ) {
-
-			dollyOut( getZoomScale() );
-
-		} else if ( event.deltaY > 0 ) {
-
-			dollyIn( getZoomScale() );
-
-		}
-
-		scope.update();
-
-	}
-
-	function handleKeyDown( event ) {
-
-		//console.log( 'handleKeyDown' );
-
-		switch ( event.keyCode ) {
-
-			case scope.keys.UP:
-				pan( 0, scope.keyPanSpeed );
-				scope.update();
-				break;
-
-			case scope.keys.BOTTOM:
-				pan( 0, - scope.keyPanSpeed );
-				scope.update();
-				break;
-
-			case scope.keys.LEFT:
-				pan( scope.keyPanSpeed, 0 );
-				scope.update();
-				break;
-
-			case scope.keys.RIGHT:
-				pan( - scope.keyPanSpeed, 0 );
-				scope.update();
-				break;
-
-		}
-
-	}
-
-	function handleTouchStartRotate( event ) {
-
-		//console.log( 'handleTouchStartRotate' );
-
-		rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-	}
-
-	function handleTouchStartDollyPan( event ) {
-
-		//console.log( 'handleTouchStartDollyPan' );
-
-		if ( scope.enableZoom ) {
-
-			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-
-			var distance = Math.sqrt( dx * dx + dy * dy );
-
-			dollyStart.set( 0, distance );
-
-		}
-
-		if ( scope.enablePan ) {
-
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
-
-			panStart.set( x, y );
-
-		}
-
-	}
-
-	function handleTouchMoveRotate( event ) {
-
-		//console.log( 'handleTouchMoveRotate' );
-
-		rotateEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
-
-		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-		// rotating across whole screen goes 360 degrees around
-		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth );
-
-		// rotating up and down along whole screen attempts to go 360, but limited to 180
-		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
-
-		rotateStart.copy( rotateEnd );
-
-		scope.update();
-
-	}
-
-	function handleTouchMoveDollyPan( event ) {
-
-		//console.log( 'handleTouchMoveDollyPan' );
-
-		if ( scope.enableZoom ) {
-
-			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-
-			var distance = Math.sqrt( dx * dx + dy * dy );
-
-			dollyEnd.set( 0, distance );
-
-			dollyDelta.set( 0, Math.pow( dollyEnd.y / dollyStart.y, scope.zoomSpeed ) );
-
-			dollyIn( dollyDelta.y );
-
-			dollyStart.copy( dollyEnd );
-
-		}
-
-		if ( scope.enablePan ) {
-
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
-
-			panEnd.set( x, y );
-
-			panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
-
-			pan( panDelta.x, panDelta.y );
-
-			panStart.copy( panEnd );
-
-		}
-
-		scope.update();
-
-	}
-
-	function handleTouchEnd( event ) {
-
-		//console.log( 'handleTouchEnd' );
-
-	}
-
-	//
-	// event handlers - FSM: listen for events and reset state
-	//
-
-	function onMouseDown( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-		switch ( event.button ) {
-
-			case scope.mouseButtons.ORBIT:
-
-				if ( scope.enableRotate === false ) return;
-
-				handleMouseDownRotate( event );
-
-				state = STATE.ROTATE;
-
-				break;
-
-			case scope.mouseButtons.ZOOM:
-
-				if ( scope.enableZoom === false ) return;
-
-				handleMouseDownDolly( event );
-
-				state = STATE.DOLLY;
-
-				break;
-
-			case scope.mouseButtons.PAN:
-
-				if ( scope.enablePan === false ) return;
-
-				handleMouseDownPan( event );
-
-				state = STATE.PAN;
-
-				break;
-
-		}
-
-		if ( state !== STATE.NONE ) {
-
-			document.addEventListener( 'mousemove', onMouseMove, false );
-			document.addEventListener( 'mouseup', onMouseUp, false );
-
-			scope.dispatchEvent( startEvent );
-
-		}
-
-	}
-
-	function onMouseMove( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-		switch ( state ) {
-
-			case STATE.ROTATE:
-
-				if ( scope.enableRotate === false ) return;
-
-				handleMouseMoveRotate( event );
-
-				break;
-
-			case STATE.DOLLY:
-
-				if ( scope.enableZoom === false ) return;
-
-				handleMouseMoveDolly( event );
-
-				break;
-
-			case STATE.PAN:
-
-				if ( scope.enablePan === false ) return;
-
-				handleMouseMovePan( event );
-
-				break;
-
-		}
-
-	}
-
-	function onMouseUp( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		handleMouseUp( event );
-
-		document.removeEventListener( 'mousemove', onMouseMove, false );
-		document.removeEventListener( 'mouseup', onMouseUp, false );
-
-		scope.dispatchEvent( endEvent );
-
-		state = STATE.NONE;
-
-	}
-
-	function onMouseWheel( event ) {
-
-		if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
-
-		event.preventDefault();
-		event.stopPropagation();
-
-		scope.dispatchEvent( startEvent );
-
-		handleMouseWheel( event );
-
-		scope.dispatchEvent( endEvent );
-
-	}
-
-	function onKeyDown( event ) {
-
-		if ( scope.enabled === false || scope.enableKeys === false || scope.enablePan === false ) return;
-
-		handleKeyDown( event );
-
-	}
-
-	function onTouchStart( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-		switch ( event.touches.length ) {
-
-			case 1:	// one-fingered touch: rotate
-
-				if ( scope.enableRotate === false ) return;
-
-				handleTouchStartRotate( event );
-
-				state = STATE.TOUCH_ROTATE;
-
-				break;
-
-			case 2:	// two-fingered touch: dolly-pan
-
-				if ( scope.enableZoom === false && scope.enablePan === false ) return;
-
-				handleTouchStartDollyPan( event );
-
-				state = STATE.TOUCH_DOLLY_PAN;
-
-				break;
-
-			default:
-
-				state = STATE.NONE;
-
-		}
-
-		if ( state !== STATE.NONE ) {
-
-			scope.dispatchEvent( startEvent );
-
-		}
-
-	}
-
-	function onTouchMove( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-		event.stopPropagation();
-
-		switch ( event.touches.length ) {
-
-			case 1: // one-fingered touch: rotate
-
-				if ( scope.enableRotate === false ) return;
-				if ( state !== STATE.TOUCH_ROTATE ) return; // is this needed?
-
-				handleTouchMoveRotate( event );
-
-				break;
-
-			case 2: // two-fingered touch: dolly-pan
-
-				if ( scope.enableZoom === false && scope.enablePan === false ) return;
-				if ( state !== STATE.TOUCH_DOLLY_PAN ) return; // is this needed?
-
-				handleTouchMoveDollyPan( event );
-
-				break;
-
-			default:
-
-				state = STATE.NONE;
-
-		}
-
-	}
-
-	function onTouchEnd( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		handleTouchEnd( event );
-
-		scope.dispatchEvent( endEvent );
-
-		state = STATE.NONE;
-
-	}
-
-	function onContextMenu( event ) {
-
-		if ( scope.enabled === false ) return;
-
-		event.preventDefault();
-
-	}
-
-	//
-
-	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
-
-	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
-	scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
-
-	scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
-	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
-	scope.domElement.addEventListener( 'touchmove', onTouchMove, false );
-
-	window.addEventListener( 'keydown', onKeyDown, false );
-
-	// force an update at start
-
-	this.update();
-
-};
-
-THREE.OrbitControls.prototype = Object.create( THREE.EventDispatcher.prototype );
-THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
-
-Object.defineProperties( THREE.OrbitControls.prototype, {
-
-	center: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .center has been renamed to .target' );
-			return this.target;
-
-		}
-
-	},
-
-	// backward compatibility
-
-	noZoom: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
-			return ! this.enableZoom;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
-			this.enableZoom = ! value;
-
-		}
-
-	},
-
-	noRotate: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
-			return ! this.enableRotate;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
-			this.enableRotate = ! value;
-
-		}
-
-	},
-
-	noPan: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
-			return ! this.enablePan;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
-			this.enablePan = ! value;
-
-		}
-
-	},
-
-	noKeys: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
-			return ! this.enableKeys;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
-			this.enableKeys = ! value;
-
-		}
-
-	},
-
-	staticMoving: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
-			return ! this.enableDamping;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
-			this.enableDamping = ! value;
-
-		}
-
-	},
-
-	dynamicDampingFactor: {
-
-		get: function () {
-
-			console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
-			return this.dampingFactor;
-
-		},
-
-		set: function ( value ) {
-
-			console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
-			this.dampingFactor = value;
-
-		}
-
-	}
-
-} );
-
-/**
- * @author alteredq / http://alteredqualia.com/
- *
- * Full-screen textured quad shader
- */
-
-THREE.CopyShader = {
-
-	uniforms: {
-
-		"tDiffuse": { value: null },
-		"opacity":  { value: 1.0 }
-
-	},
-
-	vertexShader: [
-
-		"varying vec2 vUv;",
-
-		"void main() {",
-
-			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
-
-		"}"
-
-	].join( "\n" ),
-
-	fragmentShader: [
-
-		"uniform float opacity;",
-
-		"uniform sampler2D tDiffuse;",
-
-		"varying vec2 vUv;",
-
-		"void main() {",
-
-			"vec4 texel = texture2D( tDiffuse, vUv );",
-			"gl_FragColor = opacity * texel;",
-
-		"}"
-
-	].join( "\n" )
-
-};
-
-/**
- * @author alteredq / http://alteredqualia.com/
- *
- * Convolution shader
- * ported from o3d sample to WebGL / GLSL
- * http://o3d.googlecode.com/svn/trunk/samples/convolution.html
- */
-
-THREE.ConvolutionShader = {
-
-	defines: {
-
-		"KERNEL_SIZE_FLOAT": "25.0",
-		"KERNEL_SIZE_INT": "25"
-
-	},
-
-	uniforms: {
-
-		"tDiffuse": { value: null },
-		"uImageIncrement": { value: new THREE.Vector2( 0.001953125, 0.0 ) },
-		"cKernel": { value: [] }
-
-	},
-
-	vertexShader: [
-
-		"uniform vec2 uImageIncrement;",
-
-		"varying vec2 vUv;",
-
-		"void main() {",
-
-			"vUv = uv - ( ( KERNEL_SIZE_FLOAT - 1.0 ) / 2.0 ) * uImageIncrement;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
-
-		"}"
-
-	].join( "\n" ),
-
-	fragmentShader: [
-
-		"uniform float cKernel[ KERNEL_SIZE_INT ];",
-
-		"uniform sampler2D tDiffuse;",
-		"uniform vec2 uImageIncrement;",
-
-		"varying vec2 vUv;",
-
-		"void main() {",
-
-			"vec2 imageCoord = vUv;",
-			"vec4 sum = vec4( 0.0, 0.0, 0.0, 0.0 );",
-
-			"for( int i = 0; i < KERNEL_SIZE_INT; i ++ ) {",
-
-				"sum += texture2D( tDiffuse, imageCoord ) * cKernel[ i ];",
-				"imageCoord += uImageIncrement;",
-
-			"}",
-
-			"gl_FragColor = sum;",
-
-		"}"
-
-
-	].join( "\n" ),
-
-	buildKernel: function ( sigma ) {
-
-		// We lop off the sqrt(2 * pi) * sigma term, since we're going to normalize anyway.
-
-		function gauss( x, sigma ) {
-
-			return Math.exp( - ( x * x ) / ( 2.0 * sigma * sigma ) );
-
-		}
-
-		var i, values, sum, halfWidth, kMaxKernelSize = 25, kernelSize = 2 * Math.ceil( sigma * 3.0 ) + 1;
-
-		if ( kernelSize > kMaxKernelSize ) kernelSize = kMaxKernelSize;
-		halfWidth = ( kernelSize - 1 ) * 0.5;
-
-		values = new Array( kernelSize );
-		sum = 0.0;
-		for ( i = 0; i < kernelSize; ++ i ) {
-
-			values[ i ] = gauss( i - halfWidth, sigma );
-			sum += values[ i ];
-
-		}
-
-		// normalize the kernel
-
-		for ( i = 0; i < kernelSize; ++ i ) values[ i ] /= sum;
-
-		return values;
-
-	}
-
-};
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.EffectComposer = function ( renderer, renderTarget ) {
-
-	this.renderer = renderer;
-
-	if ( renderTarget === undefined ) {
-
-		var parameters = {
-			minFilter: THREE.LinearFilter,
-			magFilter: THREE.LinearFilter,
-			format: THREE.RGBAFormat,
-			stencilBuffer: false
-		};
-
-		var size = renderer.getDrawingBufferSize( new THREE.Vector2() );
-		renderTarget = new THREE.WebGLRenderTarget( size.width, size.height, parameters );
-		renderTarget.texture.name = 'EffectComposer.rt1';
-
-	}
-
-	this.renderTarget1 = renderTarget;
-	this.renderTarget2 = renderTarget.clone();
-	this.renderTarget2.texture.name = 'EffectComposer.rt2';
-
-	this.writeBuffer = this.renderTarget1;
-	this.readBuffer = this.renderTarget2;
-
-	this.renderToScreen = true;
-
-	this.passes = [];
-
-	// dependencies
-
-	if ( THREE.CopyShader === undefined ) {
-
-		console.error( 'THREE.EffectComposer relies on THREE.CopyShader' );
-
-	}
-
-	if ( THREE.ShaderPass === undefined ) {
-
-		console.error( 'THREE.EffectComposer relies on THREE.ShaderPass' );
-
-	}
-
-	this.copyPass = new THREE.ShaderPass( THREE.CopyShader );
-
-	this._previousFrameTime = Date.now();
-
-};
-
-Object.assign( THREE.EffectComposer.prototype, {
-
-	swapBuffers: function () {
-
-		var tmp = this.readBuffer;
-		this.readBuffer = this.writeBuffer;
-		this.writeBuffer = tmp;
-
-	},
-
-	addPass: function ( pass ) {
-
-		this.passes.push( pass );
-
-		var size = this.renderer.getDrawingBufferSize( new THREE.Vector2() );
-		pass.setSize( size.width, size.height );
-
-	},
-
-	insertPass: function ( pass, index ) {
-
-		this.passes.splice( index, 0, pass );
-
-	},
-
-	isLastEnabledPass: function ( passIndex ) {
-
-		for ( var i = passIndex + 1; i < this.passes.length; i ++ ) {
-
-			if ( this.passes[ i ].enabled ) {
-
-				return false;
-
-			}
-
-		}
-
-		return true;
-
-	},
-
-	render: function ( deltaTime ) {
-
-		// deltaTime value is in seconds
-
-		if ( deltaTime === undefined ) {
-
-			deltaTime = ( Date.now() - this._previousFrameTime ) * 0.001;
-
-		}
-
-		this._previousFrameTime = Date.now();
-
-		var currentRenderTarget = this.renderer.getRenderTarget();
-
-		var maskActive = false;
-
-		var pass, i, il = this.passes.length;
-
-		for ( i = 0; i < il; i ++ ) {
-
-			pass = this.passes[ i ];
-
-			if ( pass.enabled === false ) continue;
-
-			pass.renderToScreen = ( this.renderToScreen && this.isLastEnabledPass( i ) );
-			pass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime, maskActive );
-
-			if ( pass.needsSwap ) {
-
-				if ( maskActive ) {
-
-					var context = this.renderer.context;
-
-					context.stencilFunc( context.NOTEQUAL, 1, 0xffffffff );
-
-					this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime );
-
-					context.stencilFunc( context.EQUAL, 1, 0xffffffff );
-
-				}
-
-				this.swapBuffers();
-
-			}
-
-			if ( THREE.MaskPass !== undefined ) {
-
-				if ( pass instanceof THREE.MaskPass ) {
-
-					maskActive = true;
-
-				} else if ( pass instanceof THREE.ClearMaskPass ) {
-
-					maskActive = false;
-
-				}
-
-			}
-
-		}
-
-		this.renderer.setRenderTarget( currentRenderTarget );
-
-	},
-
-	reset: function ( renderTarget ) {
-
-		if ( renderTarget === undefined ) {
-
-			var size = this.renderer.getDrawingBufferSize( new THREE.Vector2() );
-
-			renderTarget = this.renderTarget1.clone();
-			renderTarget.setSize( size.width, size.height );
-
-		}
-
-		this.renderTarget1.dispose();
-		this.renderTarget2.dispose();
-		this.renderTarget1 = renderTarget;
-		this.renderTarget2 = renderTarget.clone();
-
-		this.writeBuffer = this.renderTarget1;
-		this.readBuffer = this.renderTarget2;
-
-	},
-
-	setSize: function ( width, height ) {
-
-		this.renderTarget1.setSize( width, height );
-		this.renderTarget2.setSize( width, height );
-
-		for ( var i = 0; i < this.passes.length; i ++ ) {
-
-			this.passes[ i ].setSize( width, height );
-
-		}
-
-	}
-
-} );
-
-
-THREE.Pass = function () {
-
-	// if set to true, the pass is processed by the composer
-	this.enabled = true;
-
-	// if set to true, the pass indicates to swap read and write buffer after rendering
-	this.needsSwap = true;
-
-	// if set to true, the pass clears its buffer before rendering
-	this.clear = false;
-
-	// if set to true, the result of the pass is rendered to screen. This is set automatically by EffectComposer.
-	this.renderToScreen = false;
-
-};
-
-Object.assign( THREE.Pass.prototype, {
-
-	setSize: function ( width, height ) {},
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		console.error( 'THREE.Pass: .render() must be implemented in derived pass.' );
-
-	}
-
-} );
-
-// Helper for passes that need to fill the viewport with a single quad.
-THREE.Pass.FullScreenQuad = ( function () {
-
-	var camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
-	var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
-
-	var FullScreenQuad = function ( material ) {
-
-		this._mesh = new THREE.Mesh( geometry, material );
-
-	};
-
-	Object.defineProperty( FullScreenQuad.prototype, 'material', {
-
-		get: function () {
-
-			return this._mesh.material;
-
-		},
-
-		set: function ( value ) {
-
-			this._mesh.material = value;
-
-		}
-
-	} );
-
-	Object.assign( FullScreenQuad.prototype, {
-
-		render: function ( renderer ) {
-
-			renderer.render( this._mesh, camera );
-
-		}
-
-	} );
-
-	return FullScreenQuad;
-
-} )();
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
-
-	THREE.Pass.call( this );
-
-	strength = ( strength !== undefined ) ? strength : 1;
-	kernelSize = ( kernelSize !== undefined ) ? kernelSize : 25;
-	sigma = ( sigma !== undefined ) ? sigma : 4.0;
-	resolution = ( resolution !== undefined ) ? resolution : 256;
-
-	// render targets
-
-	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat };
-
-	this.renderTargetX = new THREE.WebGLRenderTarget( resolution, resolution, pars );
-	this.renderTargetX.texture.name = "BloomPass.x";
-	this.renderTargetY = new THREE.WebGLRenderTarget( resolution, resolution, pars );
-	this.renderTargetY.texture.name = "BloomPass.y";
-
-	// copy material
-
-	if ( THREE.CopyShader === undefined )
-		console.error( "THREE.BloomPass relies on THREE.CopyShader" );
-
-	var copyShader = THREE.CopyShader;
-
-	this.copyUniforms = THREE.UniformsUtils.clone( copyShader.uniforms );
-
-	this.copyUniforms[ "opacity" ].value = strength;
-
-	this.materialCopy = new THREE.ShaderMaterial( {
-
-		uniforms: this.copyUniforms,
-		vertexShader: copyShader.vertexShader,
-		fragmentShader: copyShader.fragmentShader,
-		blending: THREE.AdditiveBlending,
-		transparent: true
-
-	} );
-
-	// convolution material
-
-	if ( THREE.ConvolutionShader === undefined )
-		console.error( "THREE.BloomPass relies on THREE.ConvolutionShader" );
-
-	var convolutionShader = THREE.ConvolutionShader;
-
-	this.convolutionUniforms = THREE.UniformsUtils.clone( convolutionShader.uniforms );
-
-	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
-	this.convolutionUniforms[ "cKernel" ].value = THREE.ConvolutionShader.buildKernel( sigma );
-
-	this.materialConvolution = new THREE.ShaderMaterial( {
-
-		uniforms: this.convolutionUniforms,
-		vertexShader: convolutionShader.vertexShader,
-		fragmentShader: convolutionShader.fragmentShader,
-		defines: {
-			"KERNEL_SIZE_FLOAT": kernelSize.toFixed( 1 ),
-			"KERNEL_SIZE_INT": kernelSize.toFixed( 0 )
-		}
-
-	} );
-
-	this.needsSwap = false;
-
-	this.fsQuad = new THREE.Pass.FullScreenQuad( null );
-
-};
-
-THREE.BloomPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.BloomPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		if ( maskActive ) renderer.context.disable( renderer.context.STENCIL_TEST );
-
-		// Render quad with blured scene into texture (convolution pass 1)
-
-		this.fsQuad.material = this.materialConvolution;
-
-		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer.texture;
-		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
-
-		renderer.setRenderTarget( this.renderTargetX );
-		renderer.clear();
-		this.fsQuad.render( renderer );
-
-
-		// Render quad with blured scene into texture (convolution pass 2)
-
-		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX.texture;
-		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurY;
-
-		renderer.setRenderTarget( this.renderTargetY );
-		renderer.clear();
-		this.fsQuad.render( renderer );
-
-		// Render original scene with superimposed blur to texture
-
-		this.fsQuad.material = this.materialCopy;
-
-		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY.texture;
-
-		if ( maskActive ) renderer.context.enable( renderer.context.STENCIL_TEST );
-
-		renderer.setRenderTarget( readBuffer );
-		if ( this.clear ) renderer.clear();
-		this.fsQuad.render( renderer );
-
-	}
-
-} );
-
-THREE.BloomPass.blurX = new THREE.Vector2( 0.001953125, 0.0 );
-THREE.BloomPass.blurY = new THREE.Vector2( 0.0, 0.001953125 );
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.MaskPass = function ( scene, camera ) {
-
-	THREE.Pass.call( this );
-
-	this.scene = scene;
-	this.camera = camera;
-
-	this.clear = true;
-	this.needsSwap = false;
-
-	this.inverse = false;
-
-};
-
-THREE.MaskPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.MaskPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		var context = renderer.context;
-		var state = renderer.state;
-
-		// don't update color or depth
-
-		state.buffers.color.setMask( false );
-		state.buffers.depth.setMask( false );
-
-		// lock buffers
-
-		state.buffers.color.setLocked( true );
-		state.buffers.depth.setLocked( true );
-
-		// set up stencil
-
-		var writeValue, clearValue;
-
-		if ( this.inverse ) {
-
-			writeValue = 0;
-			clearValue = 1;
-
-		} else {
-
-			writeValue = 1;
-			clearValue = 0;
-
-		}
-
-		state.buffers.stencil.setTest( true );
-		state.buffers.stencil.setOp( context.REPLACE, context.REPLACE, context.REPLACE );
-		state.buffers.stencil.setFunc( context.ALWAYS, writeValue, 0xffffffff );
-		state.buffers.stencil.setClear( clearValue );
-
-		// draw into the stencil buffer
-
-		renderer.setRenderTarget( readBuffer );
-		if ( this.clear ) renderer.clear();
-		renderer.render( this.scene, this.camera );
-
-		renderer.setRenderTarget( writeBuffer );
-		if ( this.clear ) renderer.clear();
-		renderer.render( this.scene, this.camera );
-
-		// unlock color and depth buffer for subsequent rendering
-
-		state.buffers.color.setLocked( false );
-		state.buffers.depth.setLocked( false );
-
-		// only render where stencil is set to 1
-
-		state.buffers.stencil.setFunc( context.EQUAL, 1, 0xffffffff ); // draw if == 1
-		state.buffers.stencil.setOp( context.KEEP, context.KEEP, context.KEEP );
-
-	}
-
-} );
-
-
-THREE.ClearMaskPass = function () {
-
-	THREE.Pass.call( this );
-
-	this.needsSwap = false;
-
-};
-
-THREE.ClearMaskPass.prototype = Object.create( THREE.Pass.prototype );
-
-Object.assign( THREE.ClearMaskPass.prototype, {
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		renderer.state.buffers.stencil.setTest( false );
-
-	}
-
-} );
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.TexturePass = function ( map, opacity ) {
-
-	THREE.Pass.call( this );
-
-	if ( THREE.CopyShader === undefined )
-		console.error( "THREE.TexturePass relies on THREE.CopyShader" );
-
-	var shader = THREE.CopyShader;
-
-	this.map = map;
-	this.opacity = ( opacity !== undefined ) ? opacity : 1.0;
-
-	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-
-	this.material = new THREE.ShaderMaterial( {
-
-		uniforms: this.uniforms,
-		vertexShader: shader.vertexShader,
-		fragmentShader: shader.fragmentShader,
-		depthTest: false,
-		depthWrite: false
-
-	} );
-
-	this.needsSwap = false;
-
-	this.fsQuad = new THREE.Pass.FullScreenQuad( null );
-
-};
-
-THREE.TexturePass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.TexturePass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		var oldAutoClear = renderer.autoClear;
-		renderer.autoClear = false;
-
-		this.fsQuad.material = this.material;
-
-		this.uniforms[ "opacity" ].value = this.opacity;
-		this.uniforms[ "tDiffuse" ].value = this.map;
-		this.material.transparent = ( this.opacity < 1.0 );
-
-		renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
-		if ( this.clear ) renderer.clear();
-		this.fsQuad.render( renderer );
-
-		renderer.autoClear = oldAutoClear;
-	}
-
-} );
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.ShaderPass = function ( shader, textureID ) {
-
-	THREE.Pass.call( this );
-
-	this.textureID = ( textureID !== undefined ) ? textureID : "tDiffuse";
-
-	if ( shader instanceof THREE.ShaderMaterial ) {
-
-		this.uniforms = shader.uniforms;
-
-		this.material = shader;
-
-	} else if ( shader ) {
-
-		this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-
-		this.material = new THREE.ShaderMaterial( {
-
-			defines: Object.assign( {}, shader.defines ),
-			uniforms: this.uniforms,
-			vertexShader: shader.vertexShader,
-			fragmentShader: shader.fragmentShader
-
-		} );
-
-	}
-
-	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
-};
-
-THREE.ShaderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.ShaderPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		if ( this.uniforms[ this.textureID ] ) {
-
-			this.uniforms[ this.textureID ].value = readBuffer.texture;
-
-		}
-
-		this.fsQuad.material = this.material;
-
-		if ( this.renderToScreen ) {
-
-			renderer.setRenderTarget( null );
-			this.fsQuad.render( renderer );
-
-		} else {
-
-			renderer.setRenderTarget( writeBuffer );
-			// TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
-			if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
-			this.fsQuad.render( renderer );
-
-		}
-
-	}
-
-} );
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.RenderPass = function ( scene, camera, overrideMaterial, clearColor, clearAlpha ) {
-
-	THREE.Pass.call( this );
-
-	this.scene = scene;
-	this.camera = camera;
-
-	this.overrideMaterial = overrideMaterial;
-
-	this.clearColor = clearColor;
-	this.clearAlpha = ( clearAlpha !== undefined ) ? clearAlpha : 0;
-
-	this.clear = true;
-	this.clearDepth = false;
-	this.needsSwap = false;
-
-};
-
-THREE.RenderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.RenderPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		var oldAutoClear = renderer.autoClear;
-		renderer.autoClear = false;
-
-		this.scene.overrideMaterial = this.overrideMaterial;
-
-		var oldClearColor, oldClearAlpha;
-
-		if ( this.clearColor ) {
-
-			oldClearColor = renderer.getClearColor().getHex();
-			oldClearAlpha = renderer.getClearAlpha();
-
-			renderer.setClearColor( this.clearColor, this.clearAlpha );
-
-		}
-
-		if ( this.clearDepth ) {
-
-			renderer.clearDepth();
-
-		}
-
-		renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
-
-		// TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
-		if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
-		renderer.render( this.scene, this.camera );
-
-		if ( this.clearColor ) {
-
-			renderer.setClearColor( oldClearColor, oldClearAlpha );
-
-		}
-
-		this.scene.overrideMaterial = null;
-		renderer.autoClear = oldAutoClear;
-
-	}
-
-} );
-
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
-THREE.ClearPass = function ( clearColor, clearAlpha ) {
-
-	THREE.Pass.call( this );
-
-	this.needsSwap = false;
-
-	this.clearColor = ( clearColor !== undefined ) ? clearColor : 0x000000;
-	this.clearAlpha = ( clearAlpha !== undefined ) ? clearAlpha : 0;
-
-};
-
-THREE.ClearPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.ClearPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		var oldClearColor, oldClearAlpha;
-
-		if ( this.clearColor ) {
-
-			oldClearColor = renderer.getClearColor().getHex();
-			oldClearAlpha = renderer.getClearAlpha();
-
-			renderer.setClearColor( this.clearColor, this.clearAlpha );
-
-		}
-
-		renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
-		renderer.clear();
-
-		if ( this.clearColor ) {
-
-			renderer.setClearColor( oldClearColor, oldClearAlpha );
-
-		}
-
-	}
-
-} );
-
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define('three.TessellateModifier', ['three'], factory);
-    }
-    else if ('undefined' !== typeof exports && 'undefined' !== typeof module) {
-        module.exports = factory(require('three'));
-    }
-    else {
-        factory(root.THREE);
-    }
-}(this, function(THREE) {
-
-/**
- * Break faces with edges longer than maxEdgeLength
- * - not recursive
- *
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.TessellateModifier = function ( maxEdgeLength ) {
-
-	this.maxEdgeLength = maxEdgeLength;
-
-};
-
-THREE.TessellateModifier.prototype.modify = function ( geometry ) {
-
-	var edge;
-
-	var faces = [];
-	var faceVertexUvs = [];
-	var maxEdgeLengthSquared = this.maxEdgeLength * this.maxEdgeLength;
-
-	for ( var i = 0, il = geometry.faceVertexUvs.length; i < il; i ++ ) {
-
-		faceVertexUvs[ i ] = [];
-
-	}
-
-	for ( var i = 0, il = geometry.faces.length; i < il; i ++ ) {
-
-		var face = geometry.faces[ i ];
-
-		if ( face instanceof THREE.Face3 ) {
-
-			var a = face.a;
-			var b = face.b;
-			var c = face.c;
-
-			var va = geometry.vertices[ a ];
-			var vb = geometry.vertices[ b ];
-			var vc = geometry.vertices[ c ];
-
-			var dab = va.distanceToSquared( vb );
-			var dbc = vb.distanceToSquared( vc );
-			var dac = va.distanceToSquared( vc );
-
-			if ( dab > maxEdgeLengthSquared || dbc > maxEdgeLengthSquared || dac > maxEdgeLengthSquared ) {
-
-				var m = geometry.vertices.length;
-
-				var triA = face.clone();
-				var triB = face.clone();
-
-				if ( dab >= dbc && dab >= dac ) {
-
-					var vm = va.clone();
-					vm.lerp( vb, 0.5 );
-
-					triA.a = a;
-					triA.b = m;
-					triA.c = c;
-
-					triB.a = m;
-					triB.b = b;
-					triB.c = c;
-
-					if ( face.vertexNormals.length === 3 ) {
-
-						var vnm = face.vertexNormals[ 0 ].clone();
-						vnm.lerp( face.vertexNormals[ 1 ], 0.5 );
-
-						triA.vertexNormals[ 1 ].copy( vnm );
-						triB.vertexNormals[ 0 ].copy( vnm );
-
-					}
-
-					if ( face.vertexColors.length === 3 ) {
-
-						var vcm = face.vertexColors[ 0 ].clone();
-						vcm.lerp( face.vertexColors[ 1 ], 0.5 );
-
-						triA.vertexColors[ 1 ].copy( vcm );
-						triB.vertexColors[ 0 ].copy( vcm );
-
-					}
-
-					edge = 0;
-
-				} else if ( dbc >= dab && dbc >= dac ) {
-
-					var vm = vb.clone();
-					vm.lerp( vc, 0.5 );
-
-					triA.a = a;
-					triA.b = b;
-					triA.c = m;
-
-					triB.a = m;
-					triB.b = c;
-					triB.c = a;
-
-					if ( face.vertexNormals.length === 3 ) {
-
-						var vnm = face.vertexNormals[ 1 ].clone();
-						vnm.lerp( face.vertexNormals[ 2 ], 0.5 );
-
-						triA.vertexNormals[ 2 ].copy( vnm );
-
-						triB.vertexNormals[ 0 ].copy( vnm );
-						triB.vertexNormals[ 1 ].copy( face.vertexNormals[ 2 ] );
-						triB.vertexNormals[ 2 ].copy( face.vertexNormals[ 0 ] );
-
-					}
-
-					if ( face.vertexColors.length === 3 ) {
-
-						var vcm = face.vertexColors[ 1 ].clone();
-						vcm.lerp( face.vertexColors[ 2 ], 0.5 );
-
-						triA.vertexColors[ 2 ].copy( vcm );
-
-						triB.vertexColors[ 0 ].copy( vcm );
-						triB.vertexColors[ 1 ].copy( face.vertexColors[ 2 ] );
-						triB.vertexColors[ 2 ].copy( face.vertexColors[ 0 ] );
-
-					}
-
-					edge = 1;
-
-				} else {
-
-					var vm = va.clone();
-					vm.lerp( vc, 0.5 );
-
-					triA.a = a;
-					triA.b = b;
-					triA.c = m;
-
-					triB.a = m;
-					triB.b = b;
-					triB.c = c;
-
-					if ( face.vertexNormals.length === 3 ) {
-
-						var vnm = face.vertexNormals[ 0 ].clone();
-						vnm.lerp( face.vertexNormals[ 2 ], 0.5 );
-
-						triA.vertexNormals[ 2 ].copy( vnm );
-						triB.vertexNormals[ 0 ].copy( vnm );
-
-					}
-
-					if ( face.vertexColors.length === 3 ) {
-
-						var vcm = face.vertexColors[ 0 ].clone();
-						vcm.lerp( face.vertexColors[ 2 ], 0.5 );
-
-						triA.vertexColors[ 2 ].copy( vcm );
-						triB.vertexColors[ 0 ].copy( vcm );
-
-					}
-
-					edge = 2;
-
-				}
-
-				faces.push( triA, triB );
-				geometry.vertices.push( vm );
-
-				for ( var j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
-
-					if ( geometry.faceVertexUvs[ j ].length ) {
-
-						var uvs = geometry.faceVertexUvs[ j ][ i ];
-
-						var uvA = uvs[ 0 ];
-						var uvB = uvs[ 1 ];
-						var uvC = uvs[ 2 ];
-
-						// AB
-
-						if ( edge === 0 ) {
-
-							var uvM = uvA.clone();
-							uvM.lerp( uvB, 0.5 );
-
-							var uvsTriA = [ uvA.clone(), uvM.clone(), uvC.clone() ];
-							var uvsTriB = [ uvM.clone(), uvB.clone(), uvC.clone() ];
-
-						// BC
-
-						} else if ( edge === 1 ) {
-
-							var uvM = uvB.clone();
-							uvM.lerp( uvC, 0.5 );
-
-							var uvsTriA = [ uvA.clone(), uvB.clone(), uvM.clone() ];
-							var uvsTriB = [ uvM.clone(), uvC.clone(), uvA.clone() ];
-
-						// AC
-
-						} else {
-
-							var uvM = uvA.clone();
-							uvM.lerp( uvC, 0.5 );
-
-							var uvsTriA = [ uvA.clone(), uvB.clone(), uvM.clone() ];
-							var uvsTriB = [ uvM.clone(), uvB.clone(), uvC.clone() ];
-
-						}
-
-						faceVertexUvs[ j ].push( uvsTriA, uvsTriB );
-
-					}
-
-				}
-
-			} else {
-
-				faces.push( face );
-
-				for ( var j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
-
-					faceVertexUvs[ j ].push( geometry.faceVertexUvs[ j ][ i ] );
-
-				}
-
-			}
-
-		}
-
-	}
-
-	geometry.faces = faces;
-	geometry.faceVertexUvs = faceVertexUvs;
-
-};
-}));
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define('three.ExplodeModifier', ['three'], factory);
-    }
-    else if ('undefined' !== typeof exports && 'undefined' !== typeof module) {
-        module.exports = factory(require('three'));
-    }
-    else {
-        factory(root.THREE);
-    }
-}(this, function(THREE) {
-
-/**
- * Make all faces use unique vertices
- * so that each face can be separated from others
- *
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.ExplodeModifier = function () {
-
-};
-
-THREE.ExplodeModifier.prototype.modify = function ( geometry ) {
-
-	var vertices = [];
-
-	for ( var i = 0, il = geometry.faces.length; i < il; i ++ ) {
-
-		var n = vertices.length;
-
-		var face = geometry.faces[ i ];
-
-		var a = face.a;
-		var b = face.b;
-		var c = face.c;
-
-		var va = geometry.vertices[ a ];
-		var vb = geometry.vertices[ b ];
-		var vc = geometry.vertices[ c ];
-
-		vertices.push( va.clone() );
-		vertices.push( vb.clone() );
-		vertices.push( vc.clone() );
-
-		face.a = n;
-		face.b = n + 1;
-		face.c = n + 2;
-
-	}
-
-	geometry.vertices = vertices;
-
-};
-}));
-var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
-
-function ShaderRuntime() {}
-
-ShaderRuntime.prototype = {
-    mainCamera: null,
-    cubeCameras: {},
-    reserved: {
-        time: null,
-        cameraPosition: null
-    },
-    umap: {
-        float: {
-            type: 'f',
-            value: 0
-        },
-        int: {
-            type: 'i',
-            value: 0
-        },
-        vec2: {
-            type: 'v2',
-            value: function value() {
-                return new THREE.Vector2();
-            }
-        },
-        vec3: {
-            type: 'v3',
-            value: function value() {
-                return new THREE.Vector3();
-            }
-        },
-        vec4: {
-            type: 'v4',
-            value: function value() {
-                return new THREE.Vector4();
-            }
-        },
-        samplerCube: {
-            type: 't'
-        },
-        sampler2D: {
-            type: 't'
-        }
-    },
-    getUmap: function getUmap(type) {
-        var value = this.umap[type].value;
-        return typeof value === 'function' ? value() : value;
-    },
-    load: function load(sourceOrSources, callback) {
-        var _this = this;
-
-        var sources = sourceOrSources,
-        onlyOneSource = typeof sourceOrSources === 'string';
-
-        if (onlyOneSource) {
-            sources = [sourceOrSources];
-        }
-
-        var loadedShaders = new Array(sources.length),
-        itemsLoaded = 0;
-
-        var loadSource = function loadSource(index, source) {
-            var loader = new THREE.FileLoader();
-
-            loader.load(source, function(json) {
-                var parsed;
-
-                try {
-                    parsed = JSON.parse(json);
-                    delete parsed.id; // Errors if passed to rawshadermaterial :(
-                } catch(e) {
-                    throw new Error('Could not parse shader' + source + '! Please verify the URL is correct.');
-                }
-				
-                _this.add(parsed.name, parsed);
-
-                loadedShaders[index] = parsed;
-
-                if (++itemsLoaded === sources.length) {
-                    callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
-                }
-            });
-        };
-
-        for (var x = 0; x < sources.length; x++) {
-            loadSource(x, sources[x]);
-        }
-    },
-	
-	//Load json code directly
-    loadJSON: function load(sourceOrSources, callback) {
-        var _this = this;
-
-        var sources = sourceOrSources,
-        onlyOneSource = typeof sourceOrSources === 'string';
-
-        if (onlyOneSource) {
-            sources = [sourceOrSources];
-        }
-
-        var loadedShaders = new Array(sources.length),
-        itemsLoaded = 0;
-
-        var loadJSONCode = function loadJSONCode(index, source) {
-			
-			var parsed;
-
-			parsed = source;
-			delete parsed.id; // Errors if passed to rawshadermaterial :(
-			
-
-			_this.add(parsed.name, parsed);
-
-			loadedShaders[index] = parsed;
-
-			if (++itemsLoaded === sources.length) {
-				callback(onlyOneSource ? loadedShaders[0] : loadedShaders);
-			}
-			
-			
-        };
-
-        for (var x = 0; x < sources.length; x++) {
-            loadJSONCode(x, sources[x]);
-        }
-    },
-    registerCamera: function registerCamera(camera) {
-        if (! (camera instanceof THREE.Camera)) {
-            throw new Error('Cannot register a non-camera as a camera!');
-        }
-
-        this.mainCamera = camera;
-    },
-    registerCubeCamera: function registerCubeCamera(name, camera) {
-        if (!camera.renderTarget) {
-            throw new Error('Cannot register a non-camera as a camera!');
-        }
-
-        this.cubeCameras[name] = camera;
-    },
-    unregisterCamera: function unregisterCamera(name) {
-        if (name in this.cubeCameras) {
-            delete this.cubeCameras[name];
-        } else if (name === this.mainCamera) {
-            delete this.mainCamera;
-        } else {
-            throw new Error('You never registered camera ' + name);
-        }
-    },
-    updateSource: function updateSource(identifier, config, findBy) {
-        findBy = findBy || 'name';
-
-        if (!this.shaderTypes[identifier]) {
-            throw new Error('Runtime Error: Cannot update shader ' + identifier + ' because it has not been added.');
-        }
-
-        var newShaderData = this.add(identifier, config),
-        shader,
-        x;
-
-        for (x = 0; shader = this.runningShaders[x++];) {
-            if (shader[findBy] === identifier) {
-                extend(shader.material, omit(newShaderData, 'id'));
-                shader.material.needsUpdate = true;
-            }
-        }
-    },
-    renameShader: function renameShader(oldName, newName) {
-        var x, shader;
-
-        if (! (oldName in this.shaderTypes)) {
-            throw new Error('Could not rename shader ' + oldName + ' to ' + newName + '. It does not exist.');
-        }
-
-        this.shaderTypes[newName] = this.shaderTypes[oldName];
-        delete this.shaderTypes[oldName];
-
-        for (x = 0; shader = this.runningShaders[x++];) {
-            if (shader.name === oldName) {
-                shader.name = newName;
-            }
-        }
-    },
-    get: function get(identifier) {
-        var shaderType = this.shaderTypes[identifier];
-
-        if (!shaderType.initted) {
-            this.create(identifier);
-        }
-
-        return shaderType.material;
-    },
-    add: function add(shaderName, config) {
-        var newData = clone(config),
-        uniform;
-        newData.fragmentShader = config.fragment;
-        newData.vertexShader = config.vertex;
-        delete newData.fragment;
-        delete newData.vertex;
-
-        for (var uniformName in newData.uniforms) {
-            uniform = newData.uniforms[uniformName];
-
-            if (uniform.value === null) {
-                newData.uniforms[uniformName].value = this.getUmap(uniform.glslType);
-            }
-        }
-
-        if (shaderName in this.shaderTypes) {
-            // maybe not needed? too sleepy, need document
-            extend(this.shaderTypes[shaderName], newData);
-        } else {
-            this.shaderTypes[shaderName] = newData;
-        }
-
-        return newData;
-    },
-    create: function create(identifier) {
-        var shaderType = this.shaderTypes[identifier];
-        var keys = Object.keys(shaderType); // Three's shadermaterial id is not assignable, so filter it out
-        var withoutId = {};
-
-        for (var i = 0; i < keys.length; i++) {
-            if (keys[i] !== 'id') {
-                withoutId[keys[i]] = shaderType[keys[i]];
-            }
-        }
-
-        shaderType.material = new THREE.RawShaderMaterial(withoutId);
-        this.runningShaders.push(shaderType);
-        shaderType.init && shaderType.init(shaderType.material);
-        shaderType.material.needsUpdate = true;
-        shaderType.initted = true;
-        return shaderType.material;
-    },
-    updateRuntime: function updateRuntime(identifier, data, findBy) {
-        findBy = findBy || 'name';
-        var shader, x, uniformName, uniform; // This loop does not appear to be a slowdown culprit
-        for (x = 0; shader = this.runningShaders[x++];) {
-            if (shader[findBy] === identifier) {
-                for (uniformName in data.uniforms) {
-                    if (uniformName in this.reserved) {
-                        continue;
-                    }
-
-                    if (uniformName in shader.material.uniforms) {
-                        uniform = data.uniforms[uniformName]; // this is nasty, since the shader serializes
-                        // CubeCamera model to string. Maybe not update it at
-                        // all?
-                        if (uniform.type === 't' && typeof uniform.value === 'string') {
-                            uniform.value = this.cubeCameras[uniform.value].renderTarget;
-                        }
-
-                        shader.material.uniforms[uniformName].value = data.uniforms[uniformName].value;
-                    }
-                }
-            }
-        }
-    },
-    // Update global shader uniform values
-    updateShaders: function updateShaders(time, obj) {
-        var shader, x;
-        obj = obj || {};
-
-        for (x = 0; shader = this.runningShaders[x++];) {
-            for (var uniform in obj.uniforms) {
-                if (uniform in shader.material.uniforms) {
-                    shader.material.uniforms[uniform].value = obj.uniforms[uniform];
-                }
-            }
-
-            if ('cameraPosition' in shader.material.uniforms && this.mainCamera) {
-                shader.material.uniforms.cameraPosition.value = this.mainCamera.position.clone();
-            }
-
-            if ('viewMatrix' in shader.material.uniforms && this.mainCamera) {
-                shader.material.uniforms.viewMatrix.value = this.mainCamera.matrixWorldInverse;
-            }
-
-            if ('time' in shader.material.uniforms) {
-                shader.material.uniforms.time.value = time;
-            }
-        }
-    },
-    shaderTypes: {},
-    runningShaders: []
-}; // Convenience methods so we don't have to include underscore
-function extend() {
-    var length = arguments.length,
-    obj = arguments[0];
-
-    if (length < 2) {
-        return obj;
-    }
-
-    for (var index = 1; index < length; index++) {
-        var source = arguments[index],
-        keys = Object.keys(source || {}),
-        l = keys.length;
-
-        for (var i = 0; i < l; i++) {
-            var key = keys[i];
-            obj[key] = source[key];
-        }
-    }
-
-    return obj;
-}
-
-function clone(obj) {
-    return extend({},
-    obj);
-}
-
-function omit(obj) {
-    var cloned = clone(obj),
-    x,
-    key;
-
-    for (x = 0; key = (_ref = x+++1, _ref < 1 || arguments.length <= _ref ? undefined: arguments[_ref]);) {
-        var _ref;
-
-        delete cloned[key];
-    }
-
-    return cloned;
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
-function d3threeD(exports) {
-
-    var DEGS_TO_RADS = Math.PI / 180;
-    var DIGIT_0 = 48,
-    DIGIT_9 = 57,
-    COMMA = 44,
-    SPACE = 32,
-    PERIOD = 46,
-    MINUS = 45;
-
-    exports.transformSVGPath = function transformSVGPath(pathStr) {
-
-        var path = new THREE.ShapePath();
-
-        var idx = 1,
-        len = pathStr.length,
-        activeCmd, x = 0,
-        y = 0,
-        nx = 0,
-        ny = 0,
-        firstX = null,
-        firstY = null,
-        x1 = 0,
-        x2 = 0,
-        y1 = 0,
-        y2 = 0,
-        rx = 0,
-        ry = 0,
-        xar = 0,
-        laf = 0,
-        sf = 0,
-        cx, cy;
-
-        function eatNum() {
-
-            var sidx, c, isFloat = false,
-            s;
-
-            // eat delims
-            while (idx < len) {
-
-                c = pathStr.charCodeAt(idx);
-
-                if (c !== COMMA && c !== SPACE) break;
-
-                idx++;
-
-            }
-
-            if (c === MINUS) {
-
-                sidx = idx++;
-
-            } else {
-
-                sidx = idx;
-
-            }
-
-            // eat number
-            while (idx < len) {
-
-                c = pathStr.charCodeAt(idx);
-
-                if (DIGIT_0 <= c && c <= DIGIT_9) {
-
-                    idx++;
-                    continue;
-
-                } else if (c === PERIOD) {
-
-                    idx++;
-                    isFloat = true;
-                    continue;
-
-                }
-
-                s = pathStr.substring(sidx, idx);
-                return isFloat ? parseFloat(s) : parseInt(s);
-
-            }
-
-            s = pathStr.substring(sidx);
-            return isFloat ? parseFloat(s) : parseInt(s);
-
-        }
-
-        function nextIsNum() {
-
-            var c;
-
-            // do permanently eat any delims...
-            while (idx < len) {
-
-                c = pathStr.charCodeAt(idx);
-
-                if (c !== COMMA && c !== SPACE) break;
-
-                idx++;
-
-            }
-
-            c = pathStr.charCodeAt(idx);
-            return (c === MINUS || (DIGIT_0 <= c && c <= DIGIT_9));
-
-        }
-
-        var canRepeat;
-        activeCmd = pathStr[0];
-
-        while (idx <= len) {
-
-            canRepeat = true;
-
-            switch (activeCmd) {
-
-                // moveto commands, become lineto's if repeated
-            case 'M':
-                x = eatNum();
-                y = eatNum();
-                path.moveTo(x, y);
-                activeCmd = 'L';
-                firstX = x;
-                firstY = y;
-                break;
-
-            case 'm':
-                x += eatNum();
-                y += eatNum();
-                path.moveTo(x, y);
-                activeCmd = 'l';
-                firstX = x;
-                firstY = y;
-                break;
-
-            case 'Z':
-            case 'z':
-                canRepeat = false;
-                if (x !== firstX || y !== firstY) path.lineTo(firstX, firstY);
-                break;
-
-                // - lines!
-            case 'L':
-            case 'H':
-            case 'V':
-                nx = (activeCmd === 'V') ? x: eatNum();
-                ny = (activeCmd === 'H') ? y: eatNum();
-                path.lineTo(nx, ny);
-                x = nx;
-                y = ny;
-                break;
-
-            case 'l':
-            case 'h':
-            case 'v':
-                nx = (activeCmd === 'v') ? x: (x + eatNum());
-                ny = (activeCmd === 'h') ? y: (y + eatNum());
-                path.lineTo(nx, ny);
-                x = nx;
-                y = ny;
-                break;
-
-                // - cubic bezier
-            case 'C':
-                x1 = eatNum();
-                y1 = eatNum();
-
-            case 'S':
-                if (activeCmd === 'S') {
-
-                    x1 = 2 * x - x2;
-                    y1 = 2 * y - y2;
-
-                }
-
-                x2 = eatNum();
-                y2 = eatNum();
-                nx = eatNum();
-                ny = eatNum();
-                path.bezierCurveTo(x1, y1, x2, y2, nx, ny);
-                x = nx;
-                y = ny;
-                break;
-
-            case 'c':
-                x1 = x + eatNum();
-                y1 = y + eatNum();
-
-            case 's':
-                if (activeCmd === 's') {
-
-                    x1 = 2 * x - x2;
-                    y1 = 2 * y - y2;
-
-                }
-
-                x2 = x + eatNum();
-                y2 = y + eatNum();
-                nx = x + eatNum();
-                ny = y + eatNum();
-                path.bezierCurveTo(x1, y1, x2, y2, nx, ny);
-                x = nx;
-                y = ny;
-                break;
-
-                // - quadratic bezier
-            case 'Q':
-                x1 = eatNum();
-                y1 = eatNum();
-
-            case 'T':
-                if (activeCmd === 'T') {
-
-                    x1 = 2 * x - x1;
-                    y1 = 2 * y - y1;
-
-                }
-                nx = eatNum();
-                ny = eatNum();
-                path.quadraticCurveTo(x1, y1, nx, ny);
-                x = nx;
-                y = ny;
-                break;
-
-            case 'q':
-                x1 = x + eatNum();
-                y1 = y + eatNum();
-
-            case 't':
-                if (activeCmd === 't') {
-
-                    x1 = 2 * x - x1;
-                    y1 = 2 * y - y1;
-
-                }
-
-                nx = x + eatNum();
-                ny = y + eatNum();
-                path.quadraticCurveTo(x1, y1, nx, ny);
-                x = nx;
-                y = ny;
-                break;
-
-                // - elliptical arc
-            case 'A':
-                rx = eatNum();
-                ry = eatNum();
-                xar = eatNum() * DEGS_TO_RADS;
-                laf = eatNum();
-                sf = eatNum();
-                nx = eatNum();
-                ny = eatNum();
-                if (rx !== ry) console.warn('Forcing elliptical arc to be a circular one:', rx, ry);
-
-                // SVG implementation notes does all the math for us! woo!
-                // http://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes
-                // step1, using x1 as x1'
-                x1 = Math.cos(xar) * (x - nx) / 2 + Math.sin(xar) * (y - ny) / 2;
-                y1 = -Math.sin(xar) * (x - nx) / 2 + Math.cos(xar) * (y - ny) / 2;
-
-                // step 2, using x2 as cx'
-                var norm = Math.sqrt((rx * rx * ry * ry - rx * rx * y1 * y1 - ry * ry * x1 * x1) / (rx * rx * y1 * y1 + ry * ry * x1 * x1));
-
-                if (laf === sf) norm = -norm;
-
-                x2 = norm * rx * y1 / ry;
-                y2 = norm * -ry * x1 / rx;
-
-                // step 3
-                cx = Math.cos(xar) * x2 - Math.sin(xar) * y2 + (x + nx) / 2;
-                cy = Math.sin(xar) * x2 + Math.cos(xar) * y2 + (y + ny) / 2;
-
-                var u = new THREE.Vector2(1, 0);
-                var v = new THREE.Vector2((x1 - x2) / rx, (y1 - y2) / ry);
-
-                var startAng = Math.acos(u.dot(v) / u.length() / v.length());
-
-                if (((u.x * v.y) - (u.y * v.x)) < 0) startAng = -startAng;
-
-                // we can reuse 'v' from start angle as our 'u' for delta angle
-                u.x = ( - x1 - x2) / rx;
-                u.y = ( - y1 - y2) / ry;
-
-                var deltaAng = Math.acos(v.dot(u) / v.length() / u.length());
-
-                // This normalization ends up making our curves fail to triangulate...
-                if (((v.x * u.y) - (v.y * u.x)) < 0) deltaAng = -deltaAng;
-                if (!sf && deltaAng > 0) deltaAng -= Math.PI * 2;
-                if (sf && deltaAng < 0) deltaAng += Math.PI * 2;
-
-                path.absarc(cx, cy, rx, startAng, startAng + deltaAng, sf);
-                x = nx;
-                y = ny;
-                break;
-
-            default:
-                throw new Error('Wrong path command: ' + activeCmd);
-
-            }
-
-            // just reissue the command
-            if (canRepeat && nextIsNum()) continue;
-
-            activeCmd = pathStr[idx++];
-
-        }
-
-        return path;
-
-    };
-
-}
-
-var $d3g = {};
-d3threeD($d3g);
-/*
- * A fast javascript implementation of simplex noise by Jonas Wagner
-
-Based on a speed-improved simplex noise algorithm for 2D, 3D and 4D in Java.
-Which is based on example code by Stefan Gustavson (stegu@itn.liu.se).
-With Optimisations by Peter Eastman (peastman@drizzle.stanford.edu).
-Better rank ordering method by Stefan Gustavson in 2012.
-
-
- Copyright (c) 2018 Jonas Wagner
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in all
- copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
- */
-(function() {
-  'use strict';
-
-  var F2 = 0.5 * (Math.sqrt(3.0) - 1.0);
-  var G2 = (3.0 - Math.sqrt(3.0)) / 6.0;
-  var F3 = 1.0 / 3.0;
-  var G3 = 1.0 / 6.0;
-  var F4 = (Math.sqrt(5.0) - 1.0) / 4.0;
-  var G4 = (5.0 - Math.sqrt(5.0)) / 20.0;
-
-  function SimplexNoise(randomOrSeed) {
-    var random;
-    if (typeof randomOrSeed == 'function') {
-      random = randomOrSeed;
-    }
-    else if (randomOrSeed) {
-      random = alea(randomOrSeed);
-    } else {
-      random = Math.random;
-    }
-    this.p = buildPermutationTable(random);
-    this.perm = new Uint8Array(512);
-    this.permMod12 = new Uint8Array(512);
-    for (var i = 0; i < 512; i++) {
-      this.perm[i] = this.p[i & 255];
-      this.permMod12[i] = this.perm[i] % 12;
-    }
-
-  }
-  SimplexNoise.prototype = {
-    grad3: new Float32Array([1, 1, 0,
-      -1, 1, 0,
-      1, -1, 0,
-
-      -1, -1, 0,
-      1, 0, 1,
-      -1, 0, 1,
-
-      1, 0, -1,
-      -1, 0, -1,
-      0, 1, 1,
-
-      0, -1, 1,
-      0, 1, -1,
-      0, -1, -1]),
-    grad4: new Float32Array([0, 1, 1, 1, 0, 1, 1, -1, 0, 1, -1, 1, 0, 1, -1, -1,
-      0, -1, 1, 1, 0, -1, 1, -1, 0, -1, -1, 1, 0, -1, -1, -1,
-      1, 0, 1, 1, 1, 0, 1, -1, 1, 0, -1, 1, 1, 0, -1, -1,
-      -1, 0, 1, 1, -1, 0, 1, -1, -1, 0, -1, 1, -1, 0, -1, -1,
-      1, 1, 0, 1, 1, 1, 0, -1, 1, -1, 0, 1, 1, -1, 0, -1,
-      -1, 1, 0, 1, -1, 1, 0, -1, -1, -1, 0, 1, -1, -1, 0, -1,
-      1, 1, 1, 0, 1, 1, -1, 0, 1, -1, 1, 0, 1, -1, -1, 0,
-      -1, 1, 1, 0, -1, 1, -1, 0, -1, -1, 1, 0, -1, -1, -1, 0]),
-    noise2D: function(xin, yin) {
-      var permMod12 = this.permMod12;
-      var perm = this.perm;
-      var grad3 = this.grad3;
-      var n0 = 0; // Noise contributions from the three corners
-      var n1 = 0;
-      var n2 = 0;
-      // Skew the input space to determine which simplex cell we're in
-      var s = (xin + yin) * F2; // Hairy factor for 2D
-      var i = Math.floor(xin + s);
-      var j = Math.floor(yin + s);
-      var t = (i + j) * G2;
-      var X0 = i - t; // Unskew the cell origin back to (x,y) space
-      var Y0 = j - t;
-      var x0 = xin - X0; // The x,y distances from the cell origin
-      var y0 = yin - Y0;
-      // For the 2D case, the simplex shape is an equilateral triangle.
-      // Determine which simplex we are in.
-      var i1, j1; // Offsets for second (middle) corner of simplex in (i,j) coords
-      if (x0 > y0) {
-        i1 = 1;
-        j1 = 0;
-      } // lower triangle, XY order: (0,0)->(1,0)->(1,1)
-      else {
-        i1 = 0;
-        j1 = 1;
-      } // upper triangle, YX order: (0,0)->(0,1)->(1,1)
-      // A step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and
-      // a step of (0,1) in (i,j) means a step of (-c,1-c) in (x,y), where
-      // c = (3-sqrt(3))/6
-      var x1 = x0 - i1 + G2; // Offsets for middle corner in (x,y) unskewed coords
-      var y1 = y0 - j1 + G2;
-      var x2 = x0 - 1.0 + 2.0 * G2; // Offsets for last corner in (x,y) unskewed coords
-      var y2 = y0 - 1.0 + 2.0 * G2;
-      // Work out the hashed gradient indices of the three simplex corners
-      var ii = i & 255;
-      var jj = j & 255;
-      // Calculate the contribution from the three corners
-      var t0 = 0.5 - x0 * x0 - y0 * y0;
-      if (t0 >= 0) {
-        var gi0 = permMod12[ii + perm[jj]] * 3;
-        t0 *= t0;
-        n0 = t0 * t0 * (grad3[gi0] * x0 + grad3[gi0 + 1] * y0); // (x,y) of grad3 used for 2D gradient
-      }
-      var t1 = 0.5 - x1 * x1 - y1 * y1;
-      if (t1 >= 0) {
-        var gi1 = permMod12[ii + i1 + perm[jj + j1]] * 3;
-        t1 *= t1;
-        n1 = t1 * t1 * (grad3[gi1] * x1 + grad3[gi1 + 1] * y1);
-      }
-      var t2 = 0.5 - x2 * x2 - y2 * y2;
-      if (t2 >= 0) {
-        var gi2 = permMod12[ii + 1 + perm[jj + 1]] * 3;
-        t2 *= t2;
-        n2 = t2 * t2 * (grad3[gi2] * x2 + grad3[gi2 + 1] * y2);
-      }
-      // Add contributions from each corner to get the final noise value.
-      // The result is scaled to return values in the interval [-1,1].
-      return 70.0 * (n0 + n1 + n2);
-    },
-    // 3D simplex noise
-    noise3D: function(xin, yin, zin) {
-      var permMod12 = this.permMod12;
-      var perm = this.perm;
-      var grad3 = this.grad3;
-      var n0, n1, n2, n3; // Noise contributions from the four corners
-      // Skew the input space to determine which simplex cell we're in
-      var s = (xin + yin + zin) * F3; // Very nice and simple skew factor for 3D
-      var i = Math.floor(xin + s);
-      var j = Math.floor(yin + s);
-      var k = Math.floor(zin + s);
-      var t = (i + j + k) * G3;
-      var X0 = i - t; // Unskew the cell origin back to (x,y,z) space
-      var Y0 = j - t;
-      var Z0 = k - t;
-      var x0 = xin - X0; // The x,y,z distances from the cell origin
-      var y0 = yin - Y0;
-      var z0 = zin - Z0;
-      // For the 3D case, the simplex shape is a slightly irregular tetrahedron.
-      // Determine which simplex we are in.
-      var i1, j1, k1; // Offsets for second corner of simplex in (i,j,k) coords
-      var i2, j2, k2; // Offsets for third corner of simplex in (i,j,k) coords
-      if (x0 >= y0) {
-        if (y0 >= z0) {
-          i1 = 1;
-          j1 = 0;
-          k1 = 0;
-          i2 = 1;
-          j2 = 1;
-          k2 = 0;
-        } // X Y Z order
-        else if (x0 >= z0) {
-          i1 = 1;
-          j1 = 0;
-          k1 = 0;
-          i2 = 1;
-          j2 = 0;
-          k2 = 1;
-        } // X Z Y order
-        else {
-          i1 = 0;
-          j1 = 0;
-          k1 = 1;
-          i2 = 1;
-          j2 = 0;
-          k2 = 1;
-        } // Z X Y order
-      }
-      else { // x0<y0
-        if (y0 < z0) {
-          i1 = 0;
-          j1 = 0;
-          k1 = 1;
-          i2 = 0;
-          j2 = 1;
-          k2 = 1;
-        } // Z Y X order
-        else if (x0 < z0) {
-          i1 = 0;
-          j1 = 1;
-          k1 = 0;
-          i2 = 0;
-          j2 = 1;
-          k2 = 1;
-        } // Y Z X order
-        else {
-          i1 = 0;
-          j1 = 1;
-          k1 = 0;
-          i2 = 1;
-          j2 = 1;
-          k2 = 0;
-        } // Y X Z order
-      }
-      // A step of (1,0,0) in (i,j,k) means a step of (1-c,-c,-c) in (x,y,z),
-      // a step of (0,1,0) in (i,j,k) means a step of (-c,1-c,-c) in (x,y,z), and
-      // a step of (0,0,1) in (i,j,k) means a step of (-c,-c,1-c) in (x,y,z), where
-      // c = 1/6.
-      var x1 = x0 - i1 + G3; // Offsets for second corner in (x,y,z) coords
-      var y1 = y0 - j1 + G3;
-      var z1 = z0 - k1 + G3;
-      var x2 = x0 - i2 + 2.0 * G3; // Offsets for third corner in (x,y,z) coords
-      var y2 = y0 - j2 + 2.0 * G3;
-      var z2 = z0 - k2 + 2.0 * G3;
-      var x3 = x0 - 1.0 + 3.0 * G3; // Offsets for last corner in (x,y,z) coords
-      var y3 = y0 - 1.0 + 3.0 * G3;
-      var z3 = z0 - 1.0 + 3.0 * G3;
-      // Work out the hashed gradient indices of the four simplex corners
-      var ii = i & 255;
-      var jj = j & 255;
-      var kk = k & 255;
-      // Calculate the contribution from the four corners
-      var t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
-      if (t0 < 0) n0 = 0.0;
-      else {
-        var gi0 = permMod12[ii + perm[jj + perm[kk]]] * 3;
-        t0 *= t0;
-        n0 = t0 * t0 * (grad3[gi0] * x0 + grad3[gi0 + 1] * y0 + grad3[gi0 + 2] * z0);
-      }
-      var t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
-      if (t1 < 0) n1 = 0.0;
-      else {
-        var gi1 = permMod12[ii + i1 + perm[jj + j1 + perm[kk + k1]]] * 3;
-        t1 *= t1;
-        n1 = t1 * t1 * (grad3[gi1] * x1 + grad3[gi1 + 1] * y1 + grad3[gi1 + 2] * z1);
-      }
-      var t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
-      if (t2 < 0) n2 = 0.0;
-      else {
-        var gi2 = permMod12[ii + i2 + perm[jj + j2 + perm[kk + k2]]] * 3;
-        t2 *= t2;
-        n2 = t2 * t2 * (grad3[gi2] * x2 + grad3[gi2 + 1] * y2 + grad3[gi2 + 2] * z2);
-      }
-      var t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
-      if (t3 < 0) n3 = 0.0;
-      else {
-        var gi3 = permMod12[ii + 1 + perm[jj + 1 + perm[kk + 1]]] * 3;
-        t3 *= t3;
-        n3 = t3 * t3 * (grad3[gi3] * x3 + grad3[gi3 + 1] * y3 + grad3[gi3 + 2] * z3);
-      }
-      // Add contributions from each corner to get the final noise value.
-      // The result is scaled to stay just inside [-1,1]
-      return 32.0 * (n0 + n1 + n2 + n3);
-    },
-    // 4D simplex noise, better simplex rank ordering method 2012-03-09
-    noise4D: function(x, y, z, w) {
-      var perm = this.perm;
-      var grad4 = this.grad4;
-
-      var n0, n1, n2, n3, n4; // Noise contributions from the five corners
-      // Skew the (x,y,z,w) space to determine which cell of 24 simplices we're in
-      var s = (x + y + z + w) * F4; // Factor for 4D skewing
-      var i = Math.floor(x + s);
-      var j = Math.floor(y + s);
-      var k = Math.floor(z + s);
-      var l = Math.floor(w + s);
-      var t = (i + j + k + l) * G4; // Factor for 4D unskewing
-      var X0 = i - t; // Unskew the cell origin back to (x,y,z,w) space
-      var Y0 = j - t;
-      var Z0 = k - t;
-      var W0 = l - t;
-      var x0 = x - X0; // The x,y,z,w distances from the cell origin
-      var y0 = y - Y0;
-      var z0 = z - Z0;
-      var w0 = w - W0;
-      // For the 4D case, the simplex is a 4D shape I won't even try to describe.
-      // To find out which of the 24 possible simplices we're in, we need to
-      // determine the magnitude ordering of x0, y0, z0 and w0.
-      // Six pair-wise comparisons are performed between each possible pair
-      // of the four coordinates, and the results are used to rank the numbers.
-      var rankx = 0;
-      var ranky = 0;
-      var rankz = 0;
-      var rankw = 0;
-      if (x0 > y0) rankx++;
-      else ranky++;
-      if (x0 > z0) rankx++;
-      else rankz++;
-      if (x0 > w0) rankx++;
-      else rankw++;
-      if (y0 > z0) ranky++;
-      else rankz++;
-      if (y0 > w0) ranky++;
-      else rankw++;
-      if (z0 > w0) rankz++;
-      else rankw++;
-      var i1, j1, k1, l1; // The integer offsets for the second simplex corner
-      var i2, j2, k2, l2; // The integer offsets for the third simplex corner
-      var i3, j3, k3, l3; // The integer offsets for the fourth simplex corner
-      // simplex[c] is a 4-vector with the numbers 0, 1, 2 and 3 in some order.
-      // Many values of c will never occur, since e.g. x>y>z>w makes x<z, y<w and x<w
-      // impossible. Only the 24 indices which have non-zero entries make any sense.
-      // We use a thresholding to set the coordinates in turn from the largest magnitude.
-      // Rank 3 denotes the largest coordinate.
-      i1 = rankx >= 3 ? 1 : 0;
-      j1 = ranky >= 3 ? 1 : 0;
-      k1 = rankz >= 3 ? 1 : 0;
-      l1 = rankw >= 3 ? 1 : 0;
-      // Rank 2 denotes the second largest coordinate.
-      i2 = rankx >= 2 ? 1 : 0;
-      j2 = ranky >= 2 ? 1 : 0;
-      k2 = rankz >= 2 ? 1 : 0;
-      l2 = rankw >= 2 ? 1 : 0;
-      // Rank 1 denotes the second smallest coordinate.
-      i3 = rankx >= 1 ? 1 : 0;
-      j3 = ranky >= 1 ? 1 : 0;
-      k3 = rankz >= 1 ? 1 : 0;
-      l3 = rankw >= 1 ? 1 : 0;
-      // The fifth corner has all coordinate offsets = 1, so no need to compute that.
-      var x1 = x0 - i1 + G4; // Offsets for second corner in (x,y,z,w) coords
-      var y1 = y0 - j1 + G4;
-      var z1 = z0 - k1 + G4;
-      var w1 = w0 - l1 + G4;
-      var x2 = x0 - i2 + 2.0 * G4; // Offsets for third corner in (x,y,z,w) coords
-      var y2 = y0 - j2 + 2.0 * G4;
-      var z2 = z0 - k2 + 2.0 * G4;
-      var w2 = w0 - l2 + 2.0 * G4;
-      var x3 = x0 - i3 + 3.0 * G4; // Offsets for fourth corner in (x,y,z,w) coords
-      var y3 = y0 - j3 + 3.0 * G4;
-      var z3 = z0 - k3 + 3.0 * G4;
-      var w3 = w0 - l3 + 3.0 * G4;
-      var x4 = x0 - 1.0 + 4.0 * G4; // Offsets for last corner in (x,y,z,w) coords
-      var y4 = y0 - 1.0 + 4.0 * G4;
-      var z4 = z0 - 1.0 + 4.0 * G4;
-      var w4 = w0 - 1.0 + 4.0 * G4;
-      // Work out the hashed gradient indices of the five simplex corners
-      var ii = i & 255;
-      var jj = j & 255;
-      var kk = k & 255;
-      var ll = l & 255;
-      // Calculate the contribution from the five corners
-      var t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
-      if (t0 < 0) n0 = 0.0;
-      else {
-        var gi0 = (perm[ii + perm[jj + perm[kk + perm[ll]]]] % 32) * 4;
-        t0 *= t0;
-        n0 = t0 * t0 * (grad4[gi0] * x0 + grad4[gi0 + 1] * y0 + grad4[gi0 + 2] * z0 + grad4[gi0 + 3] * w0);
-      }
-      var t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1 - w1 * w1;
-      if (t1 < 0) n1 = 0.0;
-      else {
-        var gi1 = (perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1]]]] % 32) * 4;
-        t1 *= t1;
-        n1 = t1 * t1 * (grad4[gi1] * x1 + grad4[gi1 + 1] * y1 + grad4[gi1 + 2] * z1 + grad4[gi1 + 3] * w1);
-      }
-      var t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
-      if (t2 < 0) n2 = 0.0;
-      else {
-        var gi2 = (perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2]]]] % 32) * 4;
-        t2 *= t2;
-        n2 = t2 * t2 * (grad4[gi2] * x2 + grad4[gi2 + 1] * y2 + grad4[gi2 + 2] * z2 + grad4[gi2 + 3] * w2);
-      }
-      var t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
-      if (t3 < 0) n3 = 0.0;
-      else {
-        var gi3 = (perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3]]]] % 32) * 4;
-        t3 *= t3;
-        n3 = t3 * t3 * (grad4[gi3] * x3 + grad4[gi3 + 1] * y3 + grad4[gi3 + 2] * z3 + grad4[gi3 + 3] * w3);
-      }
-      var t4 = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
-      if (t4 < 0) n4 = 0.0;
-      else {
-        var gi4 = (perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1]]]] % 32) * 4;
-        t4 *= t4;
-        n4 = t4 * t4 * (grad4[gi4] * x4 + grad4[gi4 + 1] * y4 + grad4[gi4 + 2] * z4 + grad4[gi4 + 3] * w4);
-      }
-      // Sum up and scale the result to cover the range [-1,1]
-      return 27.0 * (n0 + n1 + n2 + n3 + n4);
-    }
-  };
-
-  function buildPermutationTable(random) {
-    var i;
-    var p = new Uint8Array(256);
-    for (i = 0; i < 256; i++) {
-      p[i] = i;
-    }
-    for (i = 0; i < 255; i++) {
-      var r = i + ~~(random() * (256 - i));
-      var aux = p[i];
-      p[i] = p[r];
-      p[r] = aux;
-    }
-    return p;
-  }
-  SimplexNoise._buildPermutationTable = buildPermutationTable;
-
-  function alea() {
-    // Johannes Baagøe <baagoe@baagoe.com>, 2010
-    var s0 = 0;
-    var s1 = 0;
-    var s2 = 0;
-    var c = 1;
-
-    var mash = masher();
-    s0 = mash(' ');
-    s1 = mash(' ');
-    s2 = mash(' ');
-
-    for (var i = 0; i < arguments.length; i++) {
-      s0 -= mash(arguments[i]);
-      if (s0 < 0) {
-        s0 += 1;
-      }
-      s1 -= mash(arguments[i]);
-      if (s1 < 0) {
-        s1 += 1;
-      }
-      s2 -= mash(arguments[i]);
-      if (s2 < 0) {
-        s2 += 1;
-      }
-    }
-    mash = null;
-    return function() {
-      var t = 2091639 * s0 + c * 2.3283064365386963e-10; // 2^-32
-      s0 = s1;
-      s1 = s2;
-      return s2 = t - (c = t | 0);
-    };
-  }
-  function masher() {
-    var n = 0xefc8249d;
-    return function(data) {
-      data = data.toString();
-      for (var i = 0; i < data.length; i++) {
-        n += data.charCodeAt(i);
-        var h = 0.02519603282416938 * n;
-        n = h >>> 0;
-        h -= n;
-        h *= n;
-        n = h >>> 0;
-        h -= n;
-        n += h * 0x100000000; // 2^32
-      }
-      return (n >>> 0) * 2.3283064365386963e-10; // 2^-32
-    };
-  }
-
-  // amd
-  if (typeof define !== 'undefined' && define.amd) define(function() {return SimplexNoise;});
-  // common js
-  if (typeof exports !== 'undefined') exports.SimplexNoise = SimplexNoise;
-  // browser
-  else if (typeof window !== 'undefined') window.SimplexNoise = SimplexNoise;
-  // nodejs
-  if (typeof module !== 'undefined') {
-    module.exports = SimplexNoise;
-  }
-
-})();
-
-;(function() {
-
-"use strict";
-
-var root = this
-
-var has_require = typeof require !== 'undefined'
-
-var THREE = root.THREE || has_require && require('three')
-if( !THREE )
-	throw new Error( 'MeshLine requires three.js' )
-
-function MeshLine() {
-
-	this.positions = [];
-
-	this.previous = [];
-	this.next = [];
-	this.side = [];
-	this.width = [];
-	this.indices_array = [];
-	this.uvs = [];
-	this.counters = [];
-	this.geometry = new THREE.BufferGeometry();
-
-	this.widthCallback = null;
-
-}
-
-MeshLine.prototype.setGeometry = function( g, c ) {
-
-	this.widthCallback = c;
-
-	this.positions = [];
-	this.counters = [];
-
-	if( g instanceof THREE.Geometry ) {
-		for( var j = 0; j < g.vertices.length; j++ ) {
-			var v = g.vertices[ j ];
-			var c = j/g.vertices.length;
-			this.positions.push( v.x, v.y, v.z );
-			this.positions.push( v.x, v.y, v.z );
-			this.counters.push(c);
-			this.counters.push(c);
-		}
-	}
-
-	if( g instanceof THREE.BufferGeometry ) {
-		// read attribute positions ?
-	}
-
-	if( g instanceof Float32Array || g instanceof Array ) {
-		for( var j = 0; j < g.length; j += 3 ) {
-			var c = j/g.length;
-			this.positions.push( g[ j ], g[ j + 1 ], g[ j + 2 ] );
-			this.positions.push( g[ j ], g[ j + 1 ], g[ j + 2 ] );
-			this.counters.push(c);
-			this.counters.push(c);
-		}
-	}
-
-	this.process();
-
-}
-
-MeshLine.prototype.compareV3 = function( a, b ) {
-
-	var aa = a * 6;
-	var ab = b * 6;
-	return ( this.positions[ aa ] === this.positions[ ab ] ) && ( this.positions[ aa + 1 ] === this.positions[ ab + 1 ] ) && ( this.positions[ aa + 2 ] === this.positions[ ab + 2 ] );
-
-}
-
-MeshLine.prototype.copyV3 = function( a ) {
-
-	var aa = a * 6;
-	return [ this.positions[ aa ], this.positions[ aa + 1 ], this.positions[ aa + 2 ] ];
-
-}
-
-MeshLine.prototype.process = function() {
-
-	var l = this.positions.length / 6;
-
-	this.previous = [];
-	this.next = [];
-	this.side = [];
-	this.width = [];
-	this.indices_array = [];
-	this.uvs = [];
-
-	for( var j = 0; j < l; j++ ) {
-		this.side.push( 1 );
-		this.side.push( -1 );
-	}
-
-	var w;
-	for( var j = 0; j < l; j++ ) {
-		if( this.widthCallback ) w = this.widthCallback( j / ( l -1 ) );
-		else w = 1;
-		this.width.push( w );
-		this.width.push( w );
-	}
-
-	for( var j = 0; j < l; j++ ) {
-		this.uvs.push( j / ( l - 1 ), 0 );
-		this.uvs.push( j / ( l - 1 ), 1 );
-	}
-
-	var v;
-
-	if( this.compareV3( 0, l - 1 ) ){
-		v = this.copyV3( l - 2 );
-	} else {
-		v = this.copyV3( 0 );
-	}
-	this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-	this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-	for( var j = 0; j < l - 1; j++ ) {
-		v = this.copyV3( j );
-		this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-		this.previous.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-	}
-
-	for( var j = 1; j < l; j++ ) {
-		v = this.copyV3( j );
-		this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-		this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-	}
-
-	if( this.compareV3( l - 1, 0 ) ){
-		v = this.copyV3( 1 );
-	} else {
-		v = this.copyV3( l - 1 );
-	}
-	this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-	this.next.push( v[ 0 ], v[ 1 ], v[ 2 ] );
-
-	for( var j = 0; j < l - 1; j++ ) {
-		var n = j * 2;
-		this.indices_array.push( n, n + 1, n + 2 );
-		this.indices_array.push( n + 2, n + 1, n + 3 );
-	}
-
-	if (!this.attributes) {
-		this.attributes = {
-			position: new THREE.BufferAttribute( new Float32Array( this.positions ), 3 ),
-			previous: new THREE.BufferAttribute( new Float32Array( this.previous ), 3 ),
-			next: new THREE.BufferAttribute( new Float32Array( this.next ), 3 ),
-			side: new THREE.BufferAttribute( new Float32Array( this.side ), 1 ),
-			width: new THREE.BufferAttribute( new Float32Array( this.width ), 1 ),
-			uv: new THREE.BufferAttribute( new Float32Array( this.uvs ), 2 ),
-			index: new THREE.BufferAttribute( new Uint16Array( this.indices_array ), 1 ),
-			counters: new THREE.BufferAttribute( new Float32Array( this.counters ), 1 )
-		}
-	} else {
-		this.attributes.position.copyArray(new Float32Array(this.positions));
-		this.attributes.position.needsUpdate = true;
-		this.attributes.previous.copyArray(new Float32Array(this.previous));
-		this.attributes.previous.needsUpdate = true;
-		this.attributes.next.copyArray(new Float32Array(this.next));
-		this.attributes.next.needsUpdate = true;
-		this.attributes.side.copyArray(new Float32Array(this.side));
-		this.attributes.side.needsUpdate = true;
-		this.attributes.width.copyArray(new Float32Array(this.width));
-		this.attributes.width.needsUpdate = true;
-		this.attributes.uv.copyArray(new Float32Array(this.uvs));
-		this.attributes.uv.needsUpdate = true;
-		this.attributes.index.copyArray(new Uint16Array(this.indices_array));
-		this.attributes.index.needsUpdate = true;
-    }
-
-	this.geometry.setAttribute( 'position', this.attributes.position );
-	this.geometry.setAttribute( 'previous', this.attributes.previous );
-	this.geometry.setAttribute( 'next', this.attributes.next );
-	this.geometry.setAttribute( 'side', this.attributes.side );
-	this.geometry.setAttribute( 'width', this.attributes.width );
-	this.geometry.setAttribute( 'uv', this.attributes.uv );
-	this.geometry.setAttribute( 'counters', this.attributes.counters );
-
-	this.geometry.setIndex( this.attributes.index );
-
-}
-
-function memcpy (src, srcOffset, dst, dstOffset, length) {
-	var i
-
-	src = src.subarray || src.slice ? src : src.buffer
-	dst = dst.subarray || dst.slice ? dst : dst.buffer
-
-	src = srcOffset ? src.subarray ?
-	src.subarray(srcOffset, length && srcOffset + length) :
-	src.slice(srcOffset, length && srcOffset + length) : src
-
-	if (dst.set) {
-		dst.set(src, dstOffset)
-	} else {
-		for (i=0; i<src.length; i++) {
-			dst[i + dstOffset] = src[i]
-		}
-	}
-
-	return dst
-}
-
-/**
- * Fast method to advance the line by one position.  The oldest position is removed.
- * @param position
- */
-MeshLine.prototype.advance = function(position) {
-
-	var positions = this.attributes.position.array;
-	var previous = this.attributes.previous.array;
-	var next = this.attributes.next.array;
-	var l = positions.length;
-
-	// PREVIOUS
-	memcpy( positions, 0, previous, 0, l );
-
-	// POSITIONS
-	memcpy( positions, 6, positions, 0, l - 6 );
-
-	positions[l - 6] = position.x;
-	positions[l - 5] = position.y;
-	positions[l - 4] = position.z;
-	positions[l - 3] = position.x;
-	positions[l - 2] = position.y;
-	positions[l - 1] = position.z;
-
-    // NEXT
-	memcpy( positions, 6, next, 0, l - 6 );
-
-	next[l - 6]  = position.x;
-	next[l - 5]  = position.y;
-	next[l - 4]  = position.z;
-	next[l - 3]  = position.x;
-	next[l - 2]  = position.y;
-	next[l - 1]  = position.z;
-
-	this.attributes.position.needsUpdate = true;
-	this.attributes.previous.needsUpdate = true;
-	this.attributes.next.needsUpdate = true;
-
-};
-
-function MeshLineMaterial( parameters ) {
-
-	var vertexShaderSource = [
-'precision highp float;',
-'',
-'attribute vec3 position;',
-'attribute vec3 previous;',
-'attribute vec3 next;',
-'attribute float side;',
-'attribute float width;',
-'attribute vec2 uv;',
-'attribute float counters;',
-'',
-'uniform mat4 projectionMatrix;',
-'uniform mat4 modelViewMatrix;',
-'uniform vec2 resolution;',
-'uniform float lineWidth;',
-'uniform vec3 color;',
-'uniform float opacity;',
-'uniform float near;',
-'uniform float far;',
-'uniform float sizeAttenuation;',
-'',
-'varying vec2 vUV;',
-'varying vec4 vColor;',
-'varying float vCounters;',
-'',
-'vec2 fix( vec4 i, float aspect ) {',
-'',
-'    vec2 res = i.xy / i.w;',
-'    res.x *= aspect;',
-'	 vCounters = counters;',
-'    return res;',
-'',
-'}',
-'',
-'void main() {',
-'',
-'    float aspect = resolution.x / resolution.y;',
-'	 float pixelWidthRatio = 1. / (resolution.x * projectionMatrix[0][0]);',
-'',
-'    vColor = vec4( color, opacity );',
-'    vUV = uv;',
-'',
-'    mat4 m = projectionMatrix * modelViewMatrix;',
-'    vec4 finalPosition = m * vec4( position, 1.0 );',
-'    vec4 prevPos = m * vec4( previous, 1.0 );',
-'    vec4 nextPos = m * vec4( next, 1.0 );',
-'',
-'    vec2 currentP = fix( finalPosition, aspect );',
-'    vec2 prevP = fix( prevPos, aspect );',
-'    vec2 nextP = fix( nextPos, aspect );',
-'',
-'	 float pixelWidth = finalPosition.w * pixelWidthRatio;',
-'    float w = 1.8 * pixelWidth * lineWidth * width;',
-'',
-'    if( sizeAttenuation == 1. ) {',
-'        w = 1.8 * lineWidth * width;',
-'    }',
-'',
-'    vec2 dir;',
-'    if( nextP == currentP ) dir = normalize( currentP - prevP );',
-'    else if( prevP == currentP ) dir = normalize( nextP - currentP );',
-'    else {',
-'        vec2 dir1 = normalize( currentP - prevP );',
-'        vec2 dir2 = normalize( nextP - currentP );',
-'        dir = normalize( dir1 + dir2 );',
-'',
-'        vec2 perp = vec2( -dir1.y, dir1.x );',
-'        vec2 miter = vec2( -dir.y, dir.x );',
-'        //w = clamp( w / dot( miter, perp ), 0., 4. * lineWidth * width );',
-'',
-'    }',
-'',
-'    //vec2 normal = ( cross( vec3( dir, 0. ), vec3( 0., 0., 1. ) ) ).xy;',
-'    vec2 normal = vec2( -dir.y, dir.x );',
-'    normal.x /= aspect;',
-'    normal *= .5 * w;',
-'',
-'    vec4 offset = vec4( normal * side, 0.0, 1.0 );',
-'    finalPosition.xy += offset.xy;',
-'',
-'    gl_Position = finalPosition;',
-'',
-'}' ];
-
-	var fragmentShaderSource = [
-		'#extension GL_OES_standard_derivatives : enable',
-'precision mediump float;',
-'',
-'uniform sampler2D map;',
-'uniform sampler2D alphaMap;',
-'uniform float useMap;',
-'uniform float useAlphaMap;',
-'uniform float useDash;',
-'uniform float dashArray;',
-'uniform float dashOffset;',
-'uniform float dashRatio;',
-'uniform float visibility;',
-'uniform float alphaTest;',
-'uniform vec2 repeat;',
-'',
-'varying vec2 vUV;',
-'varying vec4 vColor;',
-'varying float vCounters;',
-'',
-'void main() {',
-'',
-'    vec4 c = vColor;',
-'    if( useMap == 1. ) c *= texture2D( map, vUV * repeat );',
-'    if( useAlphaMap == 1. ) c.a *= texture2D( alphaMap, vUV * repeat ).a;',
-'    if( c.a < alphaTest ) discard;',
-'    if( useDash == 1. ){',
-'        c.a *= ceil(mod(vCounters + dashOffset, dashArray) - (dashArray * dashRatio));',
-'    }',
-'    gl_FragColor = c;',
-'    gl_FragColor.a *= step(vCounters, visibility);',
-'}' ];
-
-	function check( v, d ) {
-		if( v === undefined ) return d;
-		return v;
-	}
-
-	THREE.Material.call( this );
-
-	parameters = parameters || {};
-
-	this.lineWidth = check( parameters.lineWidth, 1 );
-	this.map = check( parameters.map, null );
-	this.useMap = check( parameters.useMap, 0 );
-	this.alphaMap = check( parameters.alphaMap, null );
-	this.useAlphaMap = check( parameters.useAlphaMap, 0 );
-	this.color = check( parameters.color, new THREE.Color( 0xffffff ) );
-	this.opacity = check( parameters.opacity, 1 );
-	this.resolution = check( parameters.resolution, new THREE.Vector2( 1, 1 ) );
-	this.sizeAttenuation = check( parameters.sizeAttenuation, 1 );
-	this.near = check( parameters.near, 1 );
-	this.far = check( parameters.far, 1 );
-	this.dashArray = check( parameters.dashArray, 0 );
-	this.dashOffset = check( parameters.dashOffset, 0 );
-	this.dashRatio = check( parameters.dashRatio, 0.5 );
-	this.useDash = ( this.dashArray !== 0 ) ? 1 : 0;
-	this.visibility = check( parameters.visibility, 1 );
-	this.alphaTest = check( parameters.alphaTest, 0 );
-	this.repeat = check( parameters.repeat, new THREE.Vector2( 1, 1 ) );
-
-	var material = new THREE.RawShaderMaterial( {
-		uniforms:{
-			lineWidth: { type: 'f', value: this.lineWidth },
-			map: { type: 't', value: this.map },
-			useMap: { type: 'f', value: this.useMap },
-			alphaMap: { type: 't', value: this.alphaMap },
-			useAlphaMap: { type: 'f', value: this.useAlphaMap },
-			color: { type: 'c', value: this.color },
-			opacity: { type: 'f', value: this.opacity },
-			resolution: { type: 'v2', value: this.resolution },
-			sizeAttenuation: { type: 'f', value: this.sizeAttenuation },
-			near: { type: 'f', value: this.near },
-			far: { type: 'f', value: this.far },
-			dashArray: { type: 'f', value: this.dashArray },
-			dashOffset: { type: 'f', value: this.dashOffset },
-			dashRatio: { type: 'f', value: this.dashRatio },
-			useDash: { type: 'f', value: this.useDash },
-			visibility: {type: 'f', value: this.visibility},
-			alphaTest: {type: 'f', value: this.alphaTest},
-			repeat: { type: 'v2', value: this.repeat }
-		},
-		vertexShader: vertexShaderSource.join( '\r\n' ),
-		fragmentShader: fragmentShaderSource.join( '\r\n' )
-	});
-
-	delete parameters.lineWidth;
-	delete parameters.map;
-	delete parameters.useMap;
-	delete parameters.alphaMap;
-	delete parameters.useAlphaMap;
-	delete parameters.color;
-	delete parameters.opacity;
-	delete parameters.resolution;
-	delete parameters.sizeAttenuation;
-	delete parameters.near;
-	delete parameters.far;
-	delete parameters.dashArray;
-	delete parameters.dashOffset;
-	delete parameters.dashRatio;
-	delete parameters.visibility;
-	delete parameters.alphaTest;
-	delete parameters.repeat;
-
-	material.type = 'MeshLineMaterial';
-
-	material.setValues( parameters );
-
-	return material;
-
-};
-
-MeshLineMaterial.prototype = Object.create( THREE.Material.prototype );
-MeshLineMaterial.prototype.constructor = MeshLineMaterial;
-
-MeshLineMaterial.prototype.copy = function ( source ) {
-
-	THREE.Material.prototype.copy.call( this, source );
-
-	this.lineWidth = source.lineWidth;
-	this.map = source.map;
-	this.useMap = source.useMap;
-	this.alphaMap = source.alphaMap;
-	this.useAlphaMap = source.useAlphaMap;
-	this.color.copy( source.color );
-	this.opacity = source.opacity;
-	this.resolution.copy( source.resolution );
-	this.sizeAttenuation = source.sizeAttenuation;
-	this.near = source.near;
-	this.far = source.far;
-	this.dashArray.copy( source.dashArray );
-	this.dashOffset.copy( source.dashOffset );
-	this.dashRatio.copy( source.dashRatio );
-	this.useDash = source.useDash;
-	this.visibility = source.visibility;
-	this.alphaTest = source.alphaTest;
-	this.repeat.copy( source.repeat );
-
-	return this;
-
-};
-
-if( typeof exports !== 'undefined' ) {
-	if( typeof module !== 'undefined' && module.exports ) {
-		exports = module.exports = { MeshLine: MeshLine, MeshLineMaterial: MeshLineMaterial };
-	}
-	exports.MeshLine = MeshLine;
-	exports.MeshLineMaterial = MeshLineMaterial;
-}
-else {
-	root.MeshLine = MeshLine;
-	root.MeshLineMaterial = MeshLineMaterial;
-}
-
-}).call(this);
-
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
-THREE.OBJLoader = ( function () {
-
-	// o object_name | g group_name
-	var object_pattern = /^[og]\s*(.+)?/;
-	// mtllib file_reference
-	var material_library_pattern = /^mtllib /;
-	// usemtl material_name
-	var material_use_pattern = /^usemtl /;
-
-	function ParserState() {
-
-		var state = {
-			objects: [],
-			object: {},
-
-			vertices: [],
-			normals: [],
-			colors: [],
-			uvs: [],
-
-			materialLibraries: [],
-
-			startObject: function ( name, fromDeclaration ) {
-
-				// If the current object (initial from reset) is not from a g/o declaration in the parsed
-				// file. We need to use it for the first parsed g/o to keep things in sync.
-				if ( this.object && this.object.fromDeclaration === false ) {
-
-					this.object.name = name;
-					this.object.fromDeclaration = ( fromDeclaration !== false );
-					return;
-
-				}
-
-				var previousMaterial = ( this.object && typeof this.object.currentMaterial === 'function' ? this.object.currentMaterial() : undefined );
-
-				if ( this.object && typeof this.object._finalize === 'function' ) {
-
-					this.object._finalize( true );
-
-				}
-
-				this.object = {
-					name: name || '',
-					fromDeclaration: ( fromDeclaration !== false ),
-
-					geometry: {
-						vertices: [],
-						normals: [],
-						colors: [],
-						uvs: []
-					},
-					materials: [],
-					smooth: true,
-
-					startMaterial: function ( name, libraries ) {
-
-						var previous = this._finalize( false );
-
-						// New usemtl declaration overwrites an inherited material, except if faces were declared
-						// after the material, then it must be preserved for proper MultiMaterial continuation.
-						if ( previous && ( previous.inherited || previous.groupCount <= 0 ) ) {
-
-							this.materials.splice( previous.index, 1 );
-
-						}
-
-						var material = {
-							index: this.materials.length,
-							name: name || '',
-							mtllib: ( Array.isArray( libraries ) && libraries.length > 0 ? libraries[ libraries.length - 1 ] : '' ),
-							smooth: ( previous !== undefined ? previous.smooth : this.smooth ),
-							groupStart: ( previous !== undefined ? previous.groupEnd : 0 ),
-							groupEnd: - 1,
-							groupCount: - 1,
-							inherited: false,
-
-							clone: function ( index ) {
-
-								var cloned = {
-									index: ( typeof index === 'number' ? index : this.index ),
-									name: this.name,
-									mtllib: this.mtllib,
-									smooth: this.smooth,
-									groupStart: 0,
-									groupEnd: - 1,
-									groupCount: - 1,
-									inherited: false
-								};
-								cloned.clone = this.clone.bind( cloned );
-								return cloned;
-
-							}
-						};
-
-						this.materials.push( material );
-
-						return material;
-
-					},
-
-					currentMaterial: function () {
-
-						if ( this.materials.length > 0 ) {
-
-							return this.materials[ this.materials.length - 1 ];
-
-						}
-
-						return undefined;
-
-					},
-
-					_finalize: function ( end ) {
-
-						var lastMultiMaterial = this.currentMaterial();
-						if ( lastMultiMaterial && lastMultiMaterial.groupEnd === - 1 ) {
-
-							lastMultiMaterial.groupEnd = this.geometry.vertices.length / 3;
-							lastMultiMaterial.groupCount = lastMultiMaterial.groupEnd - lastMultiMaterial.groupStart;
-							lastMultiMaterial.inherited = false;
-
-						}
-
-						// Ignore objects tail materials if no face declarations followed them before a new o/g started.
-						if ( end && this.materials.length > 1 ) {
-
-							for ( var mi = this.materials.length - 1; mi >= 0; mi -- ) {
-
-								if ( this.materials[ mi ].groupCount <= 0 ) {
-
-									this.materials.splice( mi, 1 );
-
-								}
-
-							}
-
-						}
-
-						// Guarantee at least one empty material, this makes the creation later more straight forward.
-						if ( end && this.materials.length === 0 ) {
-
-							this.materials.push( {
-								name: '',
-								smooth: this.smooth
-							} );
-
-						}
-
-						return lastMultiMaterial;
-
-					}
-				};
-
-				// Inherit previous objects material.
-				// Spec tells us that a declared material must be set to all objects until a new material is declared.
-				// If a usemtl declaration is encountered while this new object is being parsed, it will
-				// overwrite the inherited material. Exception being that there was already face declarations
-				// to the inherited material, then it will be preserved for proper MultiMaterial continuation.
-
-				if ( previousMaterial && previousMaterial.name && typeof previousMaterial.clone === 'function' ) {
-
-					var declared = previousMaterial.clone( 0 );
-					declared.inherited = true;
-					this.object.materials.push( declared );
-
-				}
-
-				this.objects.push( this.object );
-
-			},
-
-			finalize: function () {
-
-				if ( this.object && typeof this.object._finalize === 'function' ) {
-
-					this.object._finalize( true );
-
-				}
-
-			},
-
-			parseVertexIndex: function ( value, len ) {
-
-				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
-
-			},
-
-			parseNormalIndex: function ( value, len ) {
-
-				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 3 ) * 3;
-
-			},
-
-			parseUVIndex: function ( value, len ) {
-
-				var index = parseInt( value, 10 );
-				return ( index >= 0 ? index - 1 : index + len / 2 ) * 2;
-
-			},
-
-			addVertex: function ( a, b, c ) {
-
-				var src = this.vertices;
-				var dst = this.object.geometry.vertices;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
-
-			},
-
-			addVertexPoint: function ( a ) {
-
-				var src = this.vertices;
-				var dst = this.object.geometry.vertices;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-
-			},
-
-			addVertexLine: function ( a ) {
-
-				var src = this.vertices;
-				var dst = this.object.geometry.vertices;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-
-			},
-
-			addNormal: function ( a, b, c ) {
-
-				var src = this.normals;
-				var dst = this.object.geometry.normals;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
-
-			},
-
-			addColor: function ( a, b, c ) {
-
-				var src = this.colors;
-				var dst = this.object.geometry.colors;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ], src[ a + 2 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ], src[ b + 2 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ], src[ c + 2 ] );
-
-			},
-
-			addUV: function ( a, b, c ) {
-
-				var src = this.uvs;
-				var dst = this.object.geometry.uvs;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ] );
-				dst.push( src[ b + 0 ], src[ b + 1 ] );
-				dst.push( src[ c + 0 ], src[ c + 1 ] );
-
-			},
-
-			addUVLine: function ( a ) {
-
-				var src = this.uvs;
-				var dst = this.object.geometry.uvs;
-
-				dst.push( src[ a + 0 ], src[ a + 1 ] );
-
-			},
-
-			addFace: function ( a, b, c, ua, ub, uc, na, nb, nc ) {
-
-				var vLen = this.vertices.length;
-
-				var ia = this.parseVertexIndex( a, vLen );
-				var ib = this.parseVertexIndex( b, vLen );
-				var ic = this.parseVertexIndex( c, vLen );
-
-				this.addVertex( ia, ib, ic );
-
-				if ( ua !== undefined && ua !== '' ) {
-
-					var uvLen = this.uvs.length;
-					ia = this.parseUVIndex( ua, uvLen );
-					ib = this.parseUVIndex( ub, uvLen );
-					ic = this.parseUVIndex( uc, uvLen );
-					this.addUV( ia, ib, ic );
-
-				}
-
-				if ( na !== undefined && na !== '' ) {
-
-					// Normals are many times the same. If so, skip function call and parseInt.
-					var nLen = this.normals.length;
-					ia = this.parseNormalIndex( na, nLen );
-
-					ib = na === nb ? ia : this.parseNormalIndex( nb, nLen );
-					ic = na === nc ? ia : this.parseNormalIndex( nc, nLen );
-
-					this.addNormal( ia, ib, ic );
-
-				}
-
-				if ( this.colors.length > 0 ) {
-
-					this.addColor( ia, ib, ic );
-
-				}
-
-			},
-
-			addPointGeometry: function ( vertices ) {
-
-				this.object.geometry.type = 'Points';
-
-				var vLen = this.vertices.length;
-
-				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
-
-					this.addVertexPoint( this.parseVertexIndex( vertices[ vi ], vLen ) );
-
-				}
-
-			},
-
-			addLineGeometry: function ( vertices, uvs ) {
-
-				this.object.geometry.type = 'Line';
-
-				var vLen = this.vertices.length;
-				var uvLen = this.uvs.length;
-
-				for ( var vi = 0, l = vertices.length; vi < l; vi ++ ) {
-
-					this.addVertexLine( this.parseVertexIndex( vertices[ vi ], vLen ) );
-
-				}
-
-				for ( var uvi = 0, l = uvs.length; uvi < l; uvi ++ ) {
-
-					this.addUVLine( this.parseUVIndex( uvs[ uvi ], uvLen ) );
-
-				}
-
-			}
-
-		};
-
-		state.startObject( '', false );
-
-		return state;
-
-	}
-
-	//
-
-	function OBJLoader( manager ) {
-
-		this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
-
-		this.materials = null;
-
-	}
-
-	OBJLoader.prototype = {
-
-		constructor: OBJLoader,
-
-		load: function ( url, onLoad, onProgress, onError ) {
-
-			var scope = this;
-
-			var loader = new THREE.FileLoader( scope.manager );
-			loader.setPath( this.path );
-			loader.load( url, function ( text ) {
-
-				onLoad( scope.parse( text ) );
-
-			}, onProgress, onError );
-
-		},
-
-		setPath: function ( value ) {
-
-			this.path = value;
-
-			return this;
-
-		},
-
-		setMaterials: function ( materials ) {
-
-			this.materials = materials;
-
-			return this;
-
-		},
-
-		parse: function ( text ) {
-
-			console.time( 'OBJLoader' );
-
-			var state = new ParserState();
-
-			if ( text.indexOf( '\r\n' ) !== - 1 ) {
-
-				// This is faster than String.split with regex that splits on both
-				text = text.replace( /\r\n/g, '\n' );
-
-			}
-
-			if ( text.indexOf( '\\\n' ) !== - 1 ) {
-
-				// join lines separated by a line continuation character (\)
-				text = text.replace( /\\\n/g, '' );
-
-			}
-
-			var lines = text.split( '\n' );
-			var line = '', lineFirstChar = '';
-			var lineLength = 0;
-			var result = [];
-
-			// Faster to just trim left side of the line. Use if available.
-			var trimLeft = ( typeof ''.trimLeft === 'function' );
-
-			for ( var i = 0, l = lines.length; i < l; i ++ ) {
-
-				line = lines[ i ];
-
-				line = trimLeft ? line.trimLeft() : line.trim();
-
-				lineLength = line.length;
-
-				if ( lineLength === 0 ) continue;
-
-				lineFirstChar = line.charAt( 0 );
-
-				// @todo invoke passed in handler if any
-				if ( lineFirstChar === '#' ) continue;
-
-				if ( lineFirstChar === 'v' ) {
-
-					var data = line.split( /\s+/ );
-
-					switch ( data[ 0 ] ) {
-
-						case 'v':
-							state.vertices.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] ),
-								parseFloat( data[ 3 ] )
-							);
-							if ( data.length === 8 ) {
-
-								state.colors.push(
-									parseFloat( data[ 4 ] ),
-									parseFloat( data[ 5 ] ),
-									parseFloat( data[ 6 ] )
-
-								);
-
-							}
-							break;
-						case 'vn':
-							state.normals.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] ),
-								parseFloat( data[ 3 ] )
-							);
-							break;
-						case 'vt':
-							state.uvs.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] )
-							);
-							break;
-
-					}
-
-				} else if ( lineFirstChar === 'f' ) {
-
-					var lineData = line.substr( 1 ).trim();
-					var vertexData = lineData.split( /\s+/ );
-					var faceVertices = [];
-
-					// Parse the face vertex data into an easy to work with format
-
-					for ( var j = 0, jl = vertexData.length; j < jl; j ++ ) {
-
-						var vertex = vertexData[ j ];
-
-						if ( vertex.length > 0 ) {
-
-							var vertexParts = vertex.split( '/' );
-							faceVertices.push( vertexParts );
-
-						}
-
-					}
-
-					// Draw an edge between the first vertex and all subsequent vertices to form an n-gon
-
-					var v1 = faceVertices[ 0 ];
-
-					for ( var j = 1, jl = faceVertices.length - 1; j < jl; j ++ ) {
-
-						var v2 = faceVertices[ j ];
-						var v3 = faceVertices[ j + 1 ];
-
-						state.addFace(
-							v1[ 0 ], v2[ 0 ], v3[ 0 ],
-							v1[ 1 ], v2[ 1 ], v3[ 1 ],
-							v1[ 2 ], v2[ 2 ], v3[ 2 ]
-						);
-
-					}
-
-				} else if ( lineFirstChar === 'l' ) {
-
-					var lineParts = line.substring( 1 ).trim().split( " " );
-					var lineVertices = [], lineUVs = [];
-
-					if ( line.indexOf( "/" ) === - 1 ) {
-
-						lineVertices = lineParts;
-
-					} else {
-
-						for ( var li = 0, llen = lineParts.length; li < llen; li ++ ) {
-
-							var parts = lineParts[ li ].split( "/" );
-
-							if ( parts[ 0 ] !== "" ) lineVertices.push( parts[ 0 ] );
-							if ( parts[ 1 ] !== "" ) lineUVs.push( parts[ 1 ] );
-
-						}
-
-					}
-					state.addLineGeometry( lineVertices, lineUVs );
-
-				} else if ( lineFirstChar === 'p' ) {
-
-					var lineData = line.substr( 1 ).trim();
-					var pointData = lineData.split( " " );
-
-					state.addPointGeometry( pointData );
-
-				} else if ( ( result = object_pattern.exec( line ) ) !== null ) {
-
-					// o object_name
-					// or
-					// g group_name
-
-					// WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
-					// var name = result[ 0 ].substr( 1 ).trim();
-					var name = ( " " + result[ 0 ].substr( 1 ).trim() ).substr( 1 );
-
-					state.startObject( name );
-
-				} else if ( material_use_pattern.test( line ) ) {
-
-					// material
-
-					state.object.startMaterial( line.substring( 7 ).trim(), state.materialLibraries );
-
-				} else if ( material_library_pattern.test( line ) ) {
-
-					// mtl file
-
-					state.materialLibraries.push( line.substring( 7 ).trim() );
-
-				} else if ( lineFirstChar === 's' ) {
-
-					result = line.split( ' ' );
-
-					// smooth shading
-
-					// @todo Handle files that have varying smooth values for a set of faces inside one geometry,
-					// but does not define a usemtl for each face set.
-					// This should be detected and a dummy material created (later MultiMaterial and geometry groups).
-					// This requires some care to not create extra material on each smooth value for "normal" obj files.
-					// where explicit usemtl defines geometry groups.
-					// Example asset: examples/models/obj/cerberus/Cerberus.obj
-
-					/*
-					 * http://paulbourke.net/dataformats/obj/
-					 * or
-					 * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
-					 *
-					 * From chapter "Grouping" Syntax explanation "s group_number":
-					 * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
-					 * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
-					 * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
-					 * than 0."
-					 */
-					if ( result.length > 1 ) {
-
-						var value = result[ 1 ].trim().toLowerCase();
-						state.object.smooth = ( value !== '0' && value !== 'off' );
-
-					} else {
-
-						// ZBrush can produce "s" lines #11707
-						state.object.smooth = true;
-
-					}
-					var material = state.object.currentMaterial();
-					if ( material ) material.smooth = state.object.smooth;
-
-				} else {
-
-					// Handle null terminated files without exception
-					if ( line === '\0' ) continue;
-
-					throw new Error( 'THREE.OBJLoader: Unexpected line: "' + line + '"' );
-
-				}
-
-			}
-
-			state.finalize();
-
-			var container = new THREE.Group();
-			container.materialLibraries = [].concat( state.materialLibraries );
-
-			for ( var i = 0, l = state.objects.length; i < l; i ++ ) {
-
-				var object = state.objects[ i ];
-				var geometry = object.geometry;
-				var materials = object.materials;
-				var isLine = ( geometry.type === 'Line' );
-				var isPoints = ( geometry.type === 'Points' );
-				var hasVertexColors = false;
-
-				// Skip o/g line declarations that did not follow with any faces
-				if ( geometry.vertices.length === 0 ) continue;
-
-				var buffergeometry = new THREE.BufferGeometry();
-
-				buffergeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( geometry.vertices, 3 ) );
-
-				if ( geometry.normals.length > 0 ) {
-
-					buffergeometry.setAttribute( 'normal', new THREE.Float32BufferAttribute( geometry.normals, 3 ) );
-
-				} else {
-
-					buffergeometry.computeVertexNormals();
-
-				}
-
-				if ( geometry.colors.length > 0 ) {
-
-					hasVertexColors = true;
-					buffergeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( geometry.colors, 3 ) );
-
-				}
-
-				if ( geometry.uvs.length > 0 ) {
-
-					buffergeometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( geometry.uvs, 2 ) );
-
-				}
-
-				// Create materials
-
-				var createdMaterials = [];
-
-				for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
-
-					var sourceMaterial = materials[ mi ];
-					var material = undefined;
-
-					if ( this.materials !== null ) {
-
-						material = this.materials.create( sourceMaterial.name );
-
-						// mtl etc. loaders probably can't create line materials correctly, copy properties to a line material.
-						if ( isLine && material && ! ( material instanceof THREE.LineBasicMaterial ) ) {
-
-							var materialLine = new THREE.LineBasicMaterial();
-							materialLine.copy( material );
-							materialLine.lights = false; // TOFIX
-							material = materialLine;
-
-						} else if ( isPoints && material && ! ( material instanceof THREE.PointsMaterial ) ) {
-
-							var materialPoints = new THREE.PointsMaterial( { size: 10, sizeAttenuation: false } );
-							materialLine.copy( material );
-							material = materialPoints;
-
-						}
-
-					}
-
-					if ( ! material ) {
-
-						if ( isLine ) {
-
-							material = new THREE.LineBasicMaterial();
-
-						} else if ( isPoints ) {
-
-							material = new THREE.PointsMaterial( { size: 1, sizeAttenuation: false } );
-
-						} else {
-
-							material = new THREE.MeshPhongMaterial();
-
-						}
-
-						material.name = sourceMaterial.name;
-
-					}
-
-					material.flatShading = sourceMaterial.smooth ? false : true;
-					material.vertexColors = hasVertexColors ? THREE.VertexColors : THREE.NoColors;
-
-					createdMaterials.push( material );
-
-				}
-
-				// Create mesh
-
-				var mesh;
-
-				if ( createdMaterials.length > 1 ) {
-
-					for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
-
-						var sourceMaterial = materials[ mi ];
-						buffergeometry.addGroup( sourceMaterial.groupStart, sourceMaterial.groupCount, mi );
-
-					}
-
-					if ( isLine ) {
-
-						mesh = new THREE.LineSegments( buffergeometry, createdMaterials );
-
-					} else if ( isPoints ) {
-
-						mesh = new THREE.Points( buffergeometry, createdMaterials );
-
-					} else {
-
-						mesh = new THREE.Mesh( buffergeometry, createdMaterials );
-
-					}
-
-				} else {
-
-					if ( isLine ) {
-
-						mesh = new THREE.LineSegments( buffergeometry, createdMaterials[ 0 ] );
-
-					} else if ( isPoints ) {
-
-						mesh = new THREE.Points( buffergeometry, createdMaterials[ 0 ] );
-
-					} else {
-
-						mesh = new THREE.Mesh( buffergeometry, createdMaterials[ 0 ] );
-
-					}
-
-				}
-
-				mesh.name = object.name;
-
-				container.add( mesh );
-
-			}
-
-			console.timeEnd( 'OBJLoader' );
-
-			return container;
-
-		}
-
-	};
-
-	return OBJLoader;
-
-} )();
-/**
- * @author alteredq / http://alteredqualia.com/
- *
- * Film grain & scanlines shader
- *
- * - ported from HLSL to WebGL / GLSL
- * http://www.truevision3d.com/forums/showcase/staticnoise_colorblackwhite_scanline_shaders-t18698.0.html
- *
- * Screen Space Static Postprocessor
- *
- * Produces an analogue noise overlay similar to a film grain / TV static
- *
- * Original implementation and noise algorithm
- * Pat 'Hawthorne' Shearon
- *
- * Optimized scanlines + noise version with intensity scaling
- * Georg 'Leviathan' Steinrohder
- *
- * This version is provided under a Creative Commons Attribution 3.0 License
- * http://creativecommons.org/licenses/by/3.0/
- */
-
-THREE.FilmShader = {
-
-	uniforms: {
-
-		"tDiffuse": { value: null },
-		"time": { value: 0.0 },
-		"nIntensity": { value: 0.5 },
-		"sIntensity": { value: 0.05 },
-		"sCount": { value: 4096 },
-		"grayscale": { value: 1 }
-
-	},
-
-	vertexShader: [
-
-		"varying vec2 vUv;",
-
-		"void main() {",
-
-			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
-
-		"}"
-
-	].join( "\n" ),
-
-	fragmentShader: [
-
-		"#include <common>",
-
-		// control parameter
-		"uniform float time;",
-
-		"uniform bool grayscale;",
-
-		// noise effect intensity value (0 = no effect, 1 = full effect)
-		"uniform float nIntensity;",
-
-		// scanlines effect intensity value (0 = no effect, 1 = full effect)
-		"uniform float sIntensity;",
-
-		// scanlines effect count value (0 = no effect, 4096 = full effect)
-		"uniform float sCount;",
-
-		"uniform sampler2D tDiffuse;",
-
-		"varying vec2 vUv;",
-
-		"void main() {",
-
-			// sample the source
-			"vec4 cTextureScreen = texture2D( tDiffuse, vUv );",
-
-			// make some noise
-			"float dx = rand( vUv + time );",
-
-			// add noise
-			"vec3 cResult = cTextureScreen.rgb + cTextureScreen.rgb * clamp( 0.1 + dx, 0.0, 1.0 );",
-
-			// get us a sine and cosine
-			"vec2 sc = vec2( sin( vUv.y * sCount ), cos( vUv.y * sCount ) );",
-
-			// add scanlines
-			"cResult += cTextureScreen.rgb * vec3( sc.x, sc.y, sc.x ) * sIntensity;",
-
-			// interpolate between source and result by intensity
-			"cResult = cTextureScreen.rgb + clamp( nIntensity, 0.0,1.0 ) * ( cResult - cTextureScreen.rgb );",
-
-			// convert to grayscale if desired
-			"if( grayscale ) {",
-
-				"cResult = vec3( cResult.r * 0.3 + cResult.g * 0.59 + cResult.b * 0.11 );",
-
-			"}",
-
-			"gl_FragColor =  vec4( cResult, cTextureScreen.a );",
-
-		"}"
-
-	].join( "\n" )
-
-};
-
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
-THREE.FilmPass = function ( noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale ) {
-
-	THREE.Pass.call( this );
-
-	if ( THREE.FilmShader === undefined )
-		console.error( "THREE.FilmPass relies on THREE.FilmShader" );
-
-	var shader = THREE.FilmShader;
-
-	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
-
-	this.material = new THREE.ShaderMaterial( {
-
-		uniforms: this.uniforms,
-		vertexShader: shader.vertexShader,
-		fragmentShader: shader.fragmentShader
-
-	} );
-
-	if ( grayscale !== undefined )	this.uniforms.grayscale.value = grayscale;
-	if ( noiseIntensity !== undefined ) this.uniforms.nIntensity.value = noiseIntensity;
-	if ( scanlinesIntensity !== undefined ) this.uniforms.sIntensity.value = scanlinesIntensity;
-	if ( scanlinesCount !== undefined ) this.uniforms.sCount.value = scanlinesCount;
-
-	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
-
-};
-
-THREE.FilmPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.FilmPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime /*, maskActive */ ) {
-
-		this.uniforms[ "tDiffuse" ].value = readBuffer.texture;
-		this.uniforms[ "time" ].value += deltaTime;
-
-		if ( this.renderToScreen ) {
-
-			renderer.setRenderTarget( null );
-			this.fsQuad.render( renderer );
-
-		} else {
-
-			renderer.setRenderTarget( writeBuffer );
-			if ( this.clear ) renderer.clear();
-			this.fsQuad.render( renderer );
-
-		}
-
-	}
-
-} );
-//# sourceMappingURL=uix-kit.concat.es5.3rd-party-plugins.js.map
+//# sourceMappingURL=uix-kit.js.map

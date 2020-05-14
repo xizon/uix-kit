@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 4.2.7 (May 14, 2020) =
+
+* Tweak: Restructure the file structure of the components directory.
+* Tweak: Simplified import of third-party plugins.
+
+
+
 #### = 4.2.6 (May 9, 2020) =
 
 * New: Added Hybrid Content Slider.
