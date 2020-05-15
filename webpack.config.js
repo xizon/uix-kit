@@ -565,24 +565,24 @@ server.listen( globs.port, "localhost", function (err, result) {
  * Process of processing files after compilation
  *************************************
  */
-const compilerDelayTimePer = 50; //The time it takes to load each js (ms)
+const compilerDelayTimePer = 166.666666666667; //The time it takes to load each js (ms)
 
 //
 const compilerCoreJSsFile = globs.pathCore + '/_app-load.js';
 if ( fs.existsSync( compilerCoreJSsFile ) ) {
     fs.readFile( compilerCoreJSsFile, 'utf8', function( err, content ) {
         if ( err ) throw err;
-        let compilerCoreJSsFileContent  = content.toString();
+        const compilerCoreJSsFileContent  = content.toString();
 
         
         //Calculate the number of JSs of imported modules
-        let strCount = (compilerCoreJSsFileContent.match(/import\s/g) || []).length;
+        const strCount = (compilerCoreJSsFileContent.match(/import\s/g) || []).length;
 
         const compilerDelayTimeTotal = strCount * compilerDelayTimePer; //The time it takes to load all js (ms)
 
         //---
         console.log(colors.fg.Yellow, `----------------------------------------------`, colors.Reset);
-        console.log(colors.fg.Yellow, `The time to wait for all module JS files to be processed: ${compilerDelayTimeTotal/1000}s`, colors.Reset);
+        console.log(colors.fg.Yellow, `The time to wait for ${strCount} modules' table of contents to be processed: ${Math.round( compilerDelayTimeTotal/1000 )}s`, colors.Reset);
 
         compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 
@@ -609,9 +609,11 @@ if ( fs.existsSync( compilerCoreJSsFile ) ) {
 
                             if ( err ) throw err;
 
+                            
                             const curCon  = content.toString(),
                                   newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
+                            
 
                             //is the matched group if found
                             if ( newtext && newtext.length > 0 ) {  

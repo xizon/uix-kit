@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.7
+ * ## Version             :  4.2.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 14, 2020
+ * ## Last Update         :  May 15, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "382e45a70e059e275803";
+/******/ 	var hotCurrentHash = "24e2868ba4d6fd428ecf";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -34097,32 +34097,32 @@ var overlay_scss_style = __webpack_require__(100);
 // EXTERNAL MODULE: ./src/components/ribbon/scss/_style.scss
 var ribbon_scss_style = __webpack_require__(101);
 
+// EXTERNAL MODULE: ./src/components/separator-of-rule-with-text/scss/_style.scss
+var separator_of_rule_with_text_scss_style = __webpack_require__(102);
+
 // EXTERNAL MODULE: ./src/components/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(102);
+var shape_animation_scss_style = __webpack_require__(103);
 
 // EXTERNAL MODULE: ./src/components/single-post/scss/_comments.scss
-var _comments = __webpack_require__(103);
+var _comments = __webpack_require__(104);
 
 // EXTERNAL MODULE: ./src/components/single-post/scss/_editing.scss
-var _editing = __webpack_require__(104);
+var _editing = __webpack_require__(105);
 
 // EXTERNAL MODULE: ./src/components/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(105);
+var striking_scss_style = __webpack_require__(106);
 
 // EXTERNAL MODULE: ./src/components/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(106);
+var team_fullwidth_scss_style = __webpack_require__(107);
 
 // EXTERNAL MODULE: ./src/components/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(107);
+var team_grid_scss_style = __webpack_require__(108);
 
 // EXTERNAL MODULE: ./src/components/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(108);
+var testimonials_scss_style = __webpack_require__(109);
 
 // EXTERNAL MODULE: ./src/components/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(109);
-
-// EXTERNAL MODULE: ./src/components/vertical-separator/scss/_style.scss
-var vertical_separator_scss_style = __webpack_require__(110);
+var tooltip_scss_style = __webpack_require__(110);
 
 // EXTERNAL MODULE: ./src/components/wave-background/scss/_style.scss
 var wave_background_scss_style = __webpack_require__(111);

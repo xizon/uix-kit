@@ -135,6 +135,7 @@ import '@uixkit/core/list-side-by-side-img/scss/_style.scss';
 import '@uixkit/core/mouse-animation-scroll/scss/_style.scss';
 import '@uixkit/core/overlay/scss/_style.scss';
 import '@uixkit/core/ribbon/scss/_style.scss';
+import '@uixkit/core/separator-of-rule-with-text/scss/_style.scss';
 import '@uixkit/core/shape-animation/scss/_style.scss';
 import '@uixkit/core/single-post/scss/_comments.scss';
 import '@uixkit/core/single-post/scss/_editing.scss';
@@ -143,7 +144,6 @@ import '@uixkit/core/team-fullwidth/scss/_style.scss';
 import '@uixkit/core/team-grid/scss/_style.scss';
 import '@uixkit/core/testimonials/scss/_style.scss';
 import '@uixkit/core/tooltip/scss/_style.scss';
-import '@uixkit/core/vertical-separator/scss/_style.scss';
 import '@uixkit/core/wave-background/scss/_style.scss';
 
 

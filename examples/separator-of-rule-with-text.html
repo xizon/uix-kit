@@ -2,7 +2,7 @@
 <html lang="en-US" dir="ltr">
 <head>
 	<meta charset="utf-8" />
-	<title>Vertical Separator - Uix Kit</title>	
+	<title>Separator of Rule With Text - Uix Kit</title>	
 		<!-- Mobile Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -43,11 +43,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=mTGM3VZIN8L4hqYUCHKm"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=RGe7wKdbwpIkITM4mFP1"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=mTGM3VZIN8L4hqYUCHKm" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=RGe7wKdbwpIkITM4mFP1" />
 	<![endif]-->
 
 
@@ -196,7 +196,7 @@
 														<li><a href="vertical-text.html">Vertical Text</a></li>
 														<li><a href="circle-text.html">Circle Text</a></li>
 														<li><a href="dots.html">Dots</a></li>
-														<li><a href="vertical-separator.html">Vertical Separator</a></li>
+														<li><a href="separator-of-rule-with-text.html">Separator of Rule With Text</a></li>
 														<li><a href="wave-background.html">Wave Background</a></li>
 												        <li><a href="shape-animation.html">Shape Animation</a></li>
 													    <li><a href="image-animation.html">Image Animation</a></li>
@@ -425,7 +425,6 @@
         </header>
         <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
-    
         
 		<main id="uix-maincontent">
 			
@@ -436,7 +435,6 @@
 					<div class="row">
 						<div class="col-12">
 							<h3>Vertical Separator</h3>
-							<hr>
 							
 							
 						</div>
@@ -460,7 +458,11 @@
 						<div class="row">
 							<div class="col-12">
 
-								<div class="uix-vertical-separator"><span>or</span></div>
+                                <div style="width: 320px;  height: 320px; border: 2px dashed #f5f5f5;">
+                                
+                                    <hr class="uix-separator-rwt uix-separator-rwt--v" data-content="Or">
+                                    
+                                </div>
 
 							</div>
 						</div>
@@ -472,6 +474,53 @@
 
 			</section>   
 
+            
+            
+			<!-- Content   
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Horizontal Separator</h3>
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+			
+			
+			
+		
+
+
+		   <!-- Content  
+			====================================================== -->
+			<section class="uix-spacing--s">
+				<div class="container uix-t-c">
+						<div class="row">
+							<div class="col-12">
+
+                                <div style="width: 320px; height: 100px; border: 2px dashed #f5f5f5;">
+                                
+                                    <hr class="uix-separator-rwt uix-separator-rwt--h" data-content="Or">
+                                    
+                                </div>
+                                
+
+							</div>
+						</div>
+						<!-- .row end -->
+
+
+				</div>
+				<!-- .container end -->
+
+			</section>   
 
 			
 		</main>
@@ -563,7 +612,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "4.2.7",
+		var REVISION     = "4.2.8",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -577,7 +626,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=mTGM3VZIN8L4hqYUCHKm"></script>
+    <script src="../dist/js/uix-kit.min.js?ver=RGe7wKdbwpIkITM4mFP1"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

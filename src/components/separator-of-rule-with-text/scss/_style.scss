@@ -1,0 +1,64 @@
+/* ======================================================
+   <!-- Separator of Rule With Text -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+$separator-color: #ddd;
+.uix-separator-rwt {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    position: relative;
+    text-align: center;
+    
+    
+    &::after {
+        background-color: #fff;
+        color: #333;
+        content: attr(data-content);
+        display: inline-block;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        padding: .5em;
+        position: relative;
+    }
+
+    
+    /* Horizontal */
+    &.uix-separator-rwt--h {
+        height: auto;
+
+        &::before {
+            background: $separator-color;
+            content: "";
+            height: 1px;
+            left: 0;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+        }     
+    }
+    
+    /* Vertical */
+    &.uix-separator-rwt--v {
+        height: 100%;
+        
+        &::after { 
+            top: 50%;
+            transform: translateY(-50%);     
+            margin-top: -2.5rem;
+        }
+
+        &::before {
+            background: $separator-color;
+            content: "";
+            height: 100%;
+            top: 0;
+            position: absolute;
+            left: 50%;
+            width: 1px;
+        }  
+    }
+    
+}

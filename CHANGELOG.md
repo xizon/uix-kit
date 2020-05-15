@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 4.2.8 (May 15, 2020) =
+
+* Tweak: Add Separator of Rule With Text.
+* Tweak: Remove Vertical Separator.
+* Tweak: Optimized the stability of packaged modules.
+
+
 #### = 4.2.7 (May 14, 2020) =
 
 * Tweak: Restructure the file structure of the components directory.
