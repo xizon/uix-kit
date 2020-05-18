@@ -15,9 +15,9 @@
 
 **Uix Kit is not a framework, just a UI toolkit based on some common libraries for building beautiful responsive website.**
 
-Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. 
+Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. It is a web dev build tool/scaffold that does not depend on any framework.  You can import any external libraries/frameworks or native ES Modules for production. 
 
-It can be used separately, or merge components and grid systems using bootstrap. Support JS, HTML and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. 
+The generated core file in the dist directory can be used separately in any website. Support JS, HTML, and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. 
 
 **Uix Kit is now in Long Term Support (LTS) mode.**
 
