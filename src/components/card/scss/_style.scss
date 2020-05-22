@@ -9,6 +9,7 @@
  * 2. Entire Background
  * 3. Separate Up and Down
  * 4. Separate Left and Right
+ * 5. Gallery Card
 */
 
 $card-radius: 8px;
@@ -20,6 +21,7 @@ $card-radius: 8px;
  */
 
 .uix-card--author {
+    box-sizing: border-box;
 	margin: 0 auto;
 	border: 1px solid #eaeaea;
 	position: relative;
@@ -69,18 +71,18 @@ $card-radius: 8px;
 				font-size: 0.75rem;
 			}
 		}
-		.uix-card--author__pic {
+		.uix-card--author__preview {
 			position: relative;
 			display: inline-block;
 			top: 0.175rem;
 			width: 100px;
 			height: 100px;
 
-			&.uix-card--author__pic--rounded {
+			&.uix-card--author__preview--rounded {
 				border-radius: $card-radius;
 			}
 
-			&.uix-card--author__pic--jumpOut {
+			&.uix-card--author__preview--jumpOut {
 				@include outer-shadow( 'regular' );
 				position: absolute;
 				transform: translateY(-2rem);
@@ -146,6 +148,7 @@ $card-radius: 8px;
  ---------------------------
  */
 .uix-card--entireBg {
+    box-sizing: border-box;
     position: relative;
     padding: 1.5rem;
     border-radius: $card-radius;
@@ -180,7 +183,7 @@ $card-radius: 8px;
 	}
 
 
-	.uix-card--entireBg__pic {
+	.uix-card--entireBg__preview {
 
 		img {
 			visibility: hidden;
@@ -206,6 +209,7 @@ $card-radius: 8px;
  ---------------------------
  */
 .uix-card--upDownBg {
+    box-sizing: border-box;
 	position: relative;
     border-radius: $card-radius;
     background-color: #fff;
@@ -234,7 +238,7 @@ $card-radius: 8px;
 		margin: 0;
 	}
 
-	.uix-card--upDownBg__pic {
+	.uix-card--upDownBg__preview {
 		border-top-left-radius: $card-radius;
 		border-top-right-radius: $card-radius;
 		background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
@@ -263,6 +267,7 @@ $card-radius: 8px;
  ---------------------------
  */
 .uix-card--leftRightBg {
+    box-sizing: border-box;
 	position: relative;
     border-radius: $card-radius;
     background-color: #fff;
@@ -292,7 +297,7 @@ $card-radius: 8px;
 
 
 
-	.uix-card--leftRightBg__pic {
+	.uix-card--leftRightBg__preview {
 		border-top-left-radius: $card-radius;
 		border-bottom-left-radius: $card-radius;
 		background-position: 50% 50%;
@@ -320,7 +325,7 @@ $card-radius: 8px;
 @media all and (max-width: 768px) {
 	.uix-card--leftRightBg {
 
-		.uix-card--leftRightBg__pic {
+		.uix-card--leftRightBg__preview {
 			border-bottom-left-radius: 0;
 		}
 
@@ -332,3 +337,75 @@ $card-radius: 8px;
 	}
 
 }
+
+/*
+ ---------------------------
+ 5. Gallery Card
+ ---------------------------
+ */
+.uix-card--gallery {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+
+    .uix-card--gallery__preview {
+        padding: 0;
+        border-radius: 0;
+        flex: 1;
+        padding: 0;
+        margin: 0 auto;
+        box-sizing: border-box;
+        position: relative;
+        @include transition-default(); 
+        overflow: visible;
+
+        /* Use a :before to show the selection outline so that the border doesn't
+        * affect the layout of the content within the preview. */
+        &::before {
+            content: '';
+            position: absolute;
+            inset-block-start: 0;
+            inset-inline-start: 0;
+            inline-size: 100%;
+            block-size: 100%;
+            box-sizing: border-box;
+            border-radius: inherit;
+            border: 1px solid transparent;
+        }
+        
+    }
+    
+    
+    .uix-card--gallery__header {
+        margin-top: .5rem;
+        display: flex;
+        align-items: baseline;
+    }
+    
+    .uix-card--gallery__action {
+        flex: 1;
+        align-self: center;
+        display: flex;
+        justify-content: flex-end;
+        
+        button {
+            background-color: rgba(0, 0, 0, 0);
+            border-color: rgba(0, 0, 0, 0);
+            color: rgb(75, 75, 75);  
+            
+            &:active {
+                background-color: rgb(225, 225, 225);
+                border-color: rgb(225, 225, 225);
+                color: rgb(44, 44, 44);
+                box-shadow: none;
+            }
+        }
+    }
+    
+
+}
+
+
+

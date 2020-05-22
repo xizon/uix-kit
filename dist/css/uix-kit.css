@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.8
+ * ## Version             :  4.2.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 15, 2020
+ * ## Last Update         :  May 22, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -97,9 +97,9 @@
     76.Button
     77.Cards
     78.Badges
-    79.Content Placeholder Animated
-    80.Dividing Line
-    81.Dots
+    79.Coach Mark
+    80.Content Placeholder Animated
+    81.Dividing Line
     82.Dotted Line
     83.Equal-width Columns
     84.Features
@@ -5413,6 +5413,10 @@ h3[data-counter-number] {
   background: #fff;
   padding: 0 .75rem;
   color: #AEAEAE;
+}
+
+.uix-dropdown-menu > ul li:hover {
+  background: #f9f9f9;
 }
 
 .uix-dropdown-menu > ul li a {
@@ -13236,6 +13240,7 @@ a.uix-lightbox__original__link {
 /*
  * 1. Generic
  * 2. Table Sorter
+ * 3. Row Dropzone
 */
 /*
  ---------------------------
@@ -13274,7 +13279,7 @@ table.uix-table td,
 
 table.uix-table thead,
 .uix-table table thead {
-  background: #f2f2f2;
+  background: #f9f9f9;
   vertical-align: bottom;
 }
 
@@ -13473,7 +13478,7 @@ table.uix-table--bottom-noborder td,
 
 table.uix-table--alternant-row tbody tr:nth-child(even),
 .uix-table--alternant-row table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
 }
 
 table.uix-table--alternant-col col:first-child,
@@ -13483,12 +13488,12 @@ table.uix-table--alternant-col col:first-child,
 
 table.uix-table--alternant-col col:nth-child(2n+3),
 .uix-table--alternant-col table col:nth-child(2n+3) {
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
 }
 
 table.uix-table--striped tr:nth-child(2n-1) td,
 .uix-table--striped table tr:nth-child(2n-1) td {
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
 }
 
 table.uix-table--per-line td,
@@ -13958,6 +13963,77 @@ table.is-horizontal th,
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/*
+ ---------------------------
+ 3. Row Dropzone
+ ---------------------------
+ */
+.uix-table-grid {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.uix-table-grid .uix-table-grid__head {
+  display: flex;
+}
+
+.uix-table-grid .uix-table-grid__head .uix-table-grid__head-cell {
+  flex: 1;
+  /* default value */
+  box-sizing: border-box;
+  text-align: start;
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 1.71428571429;
+  text-transform: uppercase;
+  outline: 0;
+  padding: .5rem 1rem;
+  color: #AEAEAE;
+}
+
+.uix-table-grid .uix-table-grid__body {
+  position: relative;
+  border: 1px #d6d5d5 solid;
+  border-radius: 3px;
+  overflow: auto;
+  vertical-align: middle;
+  background-color: #f9f9f9;
+  margin-top: 1rem;
+}
+
+.uix-table-grid .uix-table-grid__row {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px solid #d6d5d5;
+  transition: all 0.3s ease;
+  /* Helper for shared drop target overlay */
+}
+
+.uix-table-grid .uix-table-grid__row:focus {
+  outline: 0;
+}
+
+.uix-table-grid .uix-table-grid__row.is-drop-target {
+  border-radius: 3px;
+}
+
+.uix-table-grid .uix-table-grid__row.is-drop-target::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  box-shadow: inset 0 0 0 2px #378ef0;
+}
+
+.uix-table-grid .uix-table-grid__row .uix-table-grid__row-cell {
+  flex: 1;
+  /* default value */
+  font-size: 1rem;
+  padding: .5rem 1rem;
 }
 
 /* ======================================================
@@ -16944,6 +17020,7 @@ ul.edd_purchase_receipt_files li {
  * 2. Entire Background
  * 3. Separate Up and Down
  * 4. Separate Left and Right
+ * 5. Gallery Card
 */
 /*
  ---------------------------
@@ -16951,6 +17028,7 @@ ul.edd_purchase_receipt_files li {
  ---------------------------
  */
 .uix-card--author {
+  box-sizing: border-box;
   margin: 0 auto;
   border: 1px solid #eaeaea;
   position: relative;
@@ -17002,7 +17080,7 @@ ul.edd_purchase_receipt_files li {
   font-size: 0.75rem;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__pic {
+.uix-card--author .uix-card--author__headline .uix-card--author__preview {
   position: relative;
   display: inline-block;
   top: 0.175rem;
@@ -17010,17 +17088,17 @@ ul.edd_purchase_receipt_files li {
   height: 100px;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__pic.uix-card--author__pic--rounded {
+.uix-card--author .uix-card--author__headline .uix-card--author__preview.uix-card--author__preview--rounded {
   border-radius: 8px;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__pic.uix-card--author__pic--jumpOut {
+.uix-card--author .uix-card--author__headline .uix-card--author__preview.uix-card--author__preview--jumpOut {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
   position: absolute;
   transform: translateY(-2rem);
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__pic img {
+.uix-card--author .uix-card--author__headline .uix-card--author__preview img {
   width: 90px !important;
   height: 90px !important;
   margin: 0.3125rem 0 0 0.3125rem;
@@ -17072,6 +17150,7 @@ ul.edd_purchase_receipt_files li {
  ---------------------------
  */
 .uix-card--entireBg {
+  box-sizing: border-box;
   position: relative;
   padding: 1.5rem;
   border-radius: 8px;
@@ -17100,7 +17179,7 @@ ul.edd_purchase_receipt_files li {
   color: #fff;
 }
 
-.uix-card--entireBg .uix-card--entireBg__pic img {
+.uix-card--entireBg .uix-card--entireBg__preview img {
   visibility: hidden;
 }
 
@@ -17120,6 +17199,7 @@ ul.edd_purchase_receipt_files li {
  ---------------------------
  */
 .uix-card--upDownBg {
+  box-sizing: border-box;
   position: relative;
   border-radius: 8px;
   background-color: #fff;
@@ -17146,7 +17226,7 @@ ul.edd_purchase_receipt_files li {
   margin: 0;
 }
 
-.uix-card--upDownBg .uix-card--upDownBg__pic {
+.uix-card--upDownBg .uix-card--upDownBg__preview {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   background-image: -webkit-linear-gradient(270deg, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5));
@@ -17155,7 +17235,7 @@ ul.edd_purchase_receipt_files li {
   background-size: cover;
 }
 
-.uix-card--upDownBg .uix-card--upDownBg__pic img {
+.uix-card--upDownBg .uix-card--upDownBg__preview img {
   visibility: hidden;
 }
 
@@ -17169,6 +17249,7 @@ ul.edd_purchase_receipt_files li {
  ---------------------------
  */
 .uix-card--leftRightBg {
+  box-sizing: border-box;
   position: relative;
   border-radius: 8px;
   background-color: #fff;
@@ -17195,14 +17276,14 @@ ul.edd_purchase_receipt_files li {
   margin: 0;
 }
 
-.uix-card--leftRightBg .uix-card--leftRightBg__pic {
+.uix-card--leftRightBg .uix-card--leftRightBg__preview {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   background-position: 50% 50%;
   background-size: cover;
 }
 
-.uix-card--leftRightBg .uix-card--leftRightBg__pic img {
+.uix-card--leftRightBg .uix-card--leftRightBg__preview img {
   visibility: hidden;
 }
 
@@ -17215,12 +17296,76 @@ ul.edd_purchase_receipt_files li {
 }
 
 @media all and (max-width: 768px) {
-  .uix-card--leftRightBg .uix-card--leftRightBg__pic {
+  .uix-card--leftRightBg .uix-card--leftRightBg__preview {
     border-bottom-left-radius: 0;
   }
   .uix-card--leftRightBg .uix-card--leftRightBg__content {
     padding: 1.5rem 1.5rem 0 1.5rem;
   }
+}
+
+/*
+ ---------------------------
+ 5. Gallery Card
+ ---------------------------
+ */
+.uix-card--gallery {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.uix-card--gallery .uix-card--gallery__preview {
+  padding: 0;
+  border-radius: 0;
+  flex: 1;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: visible;
+  /* Use a :before to show the selection outline so that the border doesn't
+        * affect the layout of the content within the preview. */
+}
+
+.uix-card--gallery .uix-card--gallery__preview::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  box-sizing: border-box;
+  border-radius: inherit;
+  border: 1px solid transparent;
+}
+
+.uix-card--gallery .uix-card--gallery__header {
+  margin-top: .5rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.uix-card--gallery .uix-card--gallery__action {
+  flex: 1;
+  align-self: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.uix-card--gallery .uix-card--gallery__action button {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+  color: #4b4b4b;
+}
+
+.uix-card--gallery .uix-card--gallery__action button:active {
+  background-color: #e1e1e1;
+  border-color: #e1e1e1;
+  color: #2c2c2c;
+  box-shadow: none;
 }
 
 /* ======================================================
@@ -17250,6 +17395,122 @@ ul.edd_purchase_receipt_files li {
 
 .uix-circle-text circle-text textPath {
   fill: currentColor;
+}
+
+/* ======================================================
+   <!-- Coach Mark -->
+/* ====================================================== */
+/*
+ * 1. Ripple effect 1
+ * 2. Ripple Effect 2
+*/
+.uix-coach-mark-indicator-ripple {
+  position: relative;
+  display: inline-block;
+  background: #CE3A3E;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  /*
+	 ---------------------------
+	 1. Ripple effect 1
+	 ---------------------------
+	 */
+  /*
+	 ---------------------------
+	 2. Ripple Effect 2
+	 ---------------------------
+	 */
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--line:before, .uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--line:after {
+  position: absolute;
+  content: '';
+  border-radius: inherit;
+  height: 0px;
+  width: 0px;
+  box-shadow: 0 0 0 2px #CE3A3E;
+  left: 10px;
+  top: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--line:after {
+  height: 7px;
+  width: 7px;
+  box-shadow: 0 0 0 2px #DE510E;
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--line:not(.is-animating):before {
+  position: absolute;
+  content: '';
+  border-radius: inherit;
+  height: 30px;
+  width: 30px;
+  box-shadow: 0 0 0 2px #CE3A3E;
+  left: 10px;
+  top: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--line.is-animating:before {
+  animation: uix-cssAnim--dotPulseInner 2s infinite ease-out;
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--line.is-animating:after {
+  animation: uix-cssAnim--dotPpulseOuter 2s infinite ease-out;
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--bg {
+  box-shadow: 0 0 0 5px rgba(206, 58, 62, 0.4), 0 0 0 10px rgba(206, 58, 62, 0.1);
+}
+
+.uix-coach-mark-indicator-ripple.uix-coach-mark-indicator-ripple--bg.is-animating {
+  animation: uix-cssAnim--dotRipple 2s linear infinite;
+}
+
+@keyframes uix-cssAnim--dotPulseInner {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  95% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes uix-cssAnim--dotPpulseOuter {
+  0% {
+    height: 7px;
+    width: 7px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    height: 60px;
+    width: 60px;
+    opacity: 0.25;
+  }
+}
+
+@keyframes uix-cssAnim--dotRipple {
+  0% {
+    box-shadow: 0 0 0 5px rgba(206, 58, 62, 0.4), 0 0 0 10px rgba(206, 58, 62, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 25px rgba(206, 58, 62, 0), 0 0 0 30px rgba(206, 58, 62, 0);
+  }
 }
 
 /* ======================================================
@@ -17423,122 +17684,6 @@ ul.edd_purchase_receipt_files li {
 
 .uix-separator-shadow.uix-separator-shadow--black span i {
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-}
-
-/* ======================================================
-   <!-- Dots -->
-/* ====================================================== */
-/*
- * 1. Ripple effect 1
- * 2. Ripple Effect 2
-*/
-.uix-dot-ripple {
-  position: relative;
-  display: inline-block;
-  background: #CE3A3E;
-  height: 20px;
-  width: 20px;
-  border-radius: 100%;
-  /*
-	 ---------------------------
-	 1. Ripple effect 1
-	 ---------------------------
-	 */
-  /*
-	 ---------------------------
-	 2. Ripple Effect 2
-	 ---------------------------
-	 */
-}
-
-.uix-dot-ripple.uix-dot-ripple--line:before, .uix-dot-ripple.uix-dot-ripple--line:after {
-  position: absolute;
-  content: '';
-  border-radius: inherit;
-  height: 0px;
-  width: 0px;
-  box-shadow: 0 0 0 2px #CE3A3E;
-  left: 10px;
-  top: 10px;
-  transform: translate(-50%, -50%);
-}
-
-.uix-dot-ripple.uix-dot-ripple--line:after {
-  height: 7px;
-  width: 7px;
-  box-shadow: 0 0 0 2px #DE510E;
-}
-
-.uix-dot-ripple.uix-dot-ripple--line:not(.is-animating):before {
-  position: absolute;
-  content: '';
-  border-radius: inherit;
-  height: 30px;
-  width: 30px;
-  box-shadow: 0 0 0 2px #CE3A3E;
-  left: 10px;
-  top: 10px;
-  transform: translate(-50%, -50%);
-}
-
-.uix-dot-ripple.uix-dot-ripple--line.is-animating:before {
-  animation: uix-cssAnim--dotPulseInner 2s infinite ease-out;
-}
-
-.uix-dot-ripple.uix-dot-ripple--line.is-animating:after {
-  animation: uix-cssAnim--dotPpulseOuter 2s infinite ease-out;
-}
-
-.uix-dot-ripple.uix-dot-ripple--bg {
-  box-shadow: 0 0 0 5px rgba(206, 58, 62, 0.4), 0 0 0 10px rgba(206, 58, 62, 0.1);
-}
-
-.uix-dot-ripple.uix-dot-ripple--bg.is-animating {
-  animation: uix-cssAnim--dotRipple 2s linear infinite;
-}
-
-@keyframes uix-cssAnim--dotPulseInner {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  95% {
-    height: 40px;
-    width: 40px;
-    opacity: 0.25;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes uix-cssAnim--dotPpulseOuter {
-  0% {
-    height: 7px;
-    width: 7px;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    height: 60px;
-    width: 60px;
-    opacity: 0.25;
-  }
-}
-
-@keyframes uix-cssAnim--dotRipple {
-  0% {
-    box-shadow: 0 0 0 5px rgba(206, 58, 62, 0.4), 0 0 0 10px rgba(206, 58, 62, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 0 25px rgba(206, 58, 62, 0), 0 0 0 30px rgba(206, 58, 62, 0);
-  }
 }
 
 /* ======================================================

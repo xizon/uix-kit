@@ -1,6 +1,14 @@
 # Changelog
 
 
+#### = 4.2.9 (May 21, 2020) =
+
+* New: Add a gallery card for an image.
+* New: Add Row Dropzone of Table.
+* Tweak: Rename "Dots" to "Coach Mark".
+
+ 
+
 #### = 4.2.8 (May 15, 2020) =
 
 * Tweak: Add Separator of Rule With Text.

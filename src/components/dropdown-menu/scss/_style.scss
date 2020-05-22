@@ -44,6 +44,10 @@
 			background: #fff;
 			padding: 0 .75rem;
 			color: $sub-text-color;
+            
+            &:hover {
+                background: #f9f9f9;
+            }
 
 			a {
 				display: block;

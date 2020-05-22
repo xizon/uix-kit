@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.8
+ * ## Version             :  4.2.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 15, 2020
+ * ## Last Update         :  May 22, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "24e2868ba4d6fd428ecf";
+/******/ 	var hotCurrentHash = "8705fc564e2557402758";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -34046,14 +34046,14 @@ var card_scss_style = __webpack_require__(83);
 // EXTERNAL MODULE: ./src/components/circle-text/scss/_style.scss
 var circle_text_scss_style = __webpack_require__(84);
 
+// EXTERNAL MODULE: ./src/components/coach-mark/scss/_style.scss
+var coach_mark_scss_style = __webpack_require__(85);
+
 // EXTERNAL MODULE: ./src/components/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(85);
+var content_placeholder_animated_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(86);
-
-// EXTERNAL MODULE: ./src/components/dots/scss/_style.scss
-var dots_scss_style = __webpack_require__(87);
+var dividing_line_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/dotted-line/scss/_style.scss
 var dotted_line_scss_style = __webpack_require__(88);

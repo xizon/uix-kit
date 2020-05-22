@@ -6,6 +6,7 @@
 /*
  * 1. Generic
  * 2. Table Sorter
+ * 3. Row Dropzone
 */
 
 
@@ -15,8 +16,8 @@
  ---------------------------
  */
 $table-border-color: #d6d5d5;
-$table-border-headerbg: #f2f2f2;
-$table-alternant-bg: #f2f2f2;
+$table-border-headerbg: #f9f9f9;
+$table-alternant-bg: #f9f9f9;
 
 table.uix-table,
 .uix-table table {
@@ -402,3 +403,88 @@ table.is-horizontal,
 		transform: translateX(0);
 	}
 }
+
+
+
+/*
+ ---------------------------
+ 3. Row Dropzone
+ ---------------------------
+ */
+
+
+.uix-table-grid {
+    border-collapse: separate;
+    border-spacing: 0;
+    
+    .uix-table-grid__head {
+        display: flex;
+
+        .uix-table-grid__head-cell {
+            flex: 1; /* default value */
+            box-sizing: border-box;
+            text-align: start;
+            font-size: 0.875rem;
+            font-weight: bold;
+            line-height: 1.71428571429;
+            text-transform: uppercase;
+            outline: 0;
+            padding: .5rem 1rem;
+            color: $sub-text-color;
+
+        }
+ 
+    }
+    
+    
+    .uix-table-grid__body {
+        position: relative;
+        border: 1px $table-border-color solid;
+        border-radius: 3px;
+        overflow: auto;
+        vertical-align: middle;
+        background-color: $table-alternant-bg;
+        margin-top: 1rem;
+    }
+    
+
+    .uix-table-grid__row {
+        display: flex;
+        position: relative;
+        cursor: pointer;
+        border-bottom: 1px solid $table-border-color;
+        @include transition-default(); 
+
+        
+        
+        &:focus {
+            outline: 0;
+        }
+        
+        /* Helper for shared drop target overlay */
+        &.is-drop-target {
+            border-radius: 3px;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+                box-shadow: inset 0 0 0 2px rgb(55, 142, 240);
+            }
+        }
+        
+        
+        .uix-table-grid__row-cell {
+            flex: 1; /* default value */
+            font-size: 1rem;
+            padding: .5rem 1rem;
+        }
+    }
+    
+    
+}
+
+
+
