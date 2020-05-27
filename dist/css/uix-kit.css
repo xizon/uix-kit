@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.9
+ * ## Version             :  4.3.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 22, 2020
+ * ## Last Update         :  May 27, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -5416,7 +5416,7 @@ h3[data-counter-number] {
 }
 
 .uix-dropdown-menu > ul li:hover {
-  background: #f9f9f9;
+  background: #FAFAFA;
 }
 
 .uix-dropdown-menu > ul li a {
@@ -13254,9 +13254,9 @@ table.uix-table,
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-  border: 1px solid #d6d5d5;
+  border: 1px solid #EEEEEE;
   width: 100%;
-  border-color: #d6d5d5;
+  border-color: #EEEEEE;
 }
 
 table.uix-table caption,
@@ -13268,8 +13268,8 @@ table.uix-table th,
 table.uix-table td,
 .uix-table table th,
 .uix-table table td {
-  border-color: #d6d5d5;
-  border-left: 1px solid #d6d5d5;
+  border-color: #EEEEEE;
+  border-left: 1px solid #EEEEEE;
   border-width: 0 0 0 1px;
   margin: 0;
   overflow: visible;
@@ -13279,7 +13279,7 @@ table.uix-table td,
 
 table.uix-table thead,
 .uix-table table thead {
-  background: #f9f9f9;
+  background: #FAFAFA;
   vertical-align: bottom;
 }
 
@@ -13321,7 +13321,7 @@ table.uix-table thead th.uix-t-c,
 
 table.uix-table tfoot,
 .uix-table table tfoot {
-  border: 1px solid #d6d5d5;
+  border: 1px solid #EEEEEE;
 }
 
 table.uix-table td,
@@ -13366,7 +13366,7 @@ table.uix-table td,
     float: left;
     width: 40%;
     font-weight: bold;
-    border-right: 1px solid #d6d5d5;
+    border-right: 1px solid #EEEEEE;
     margin-right: 0.5rem;
   }
   table.uix-table.is-responsive tbody td::after,
@@ -13390,7 +13390,7 @@ table.uix-table td,
     display: block;
     float: left;
     width: 100px;
-    border-bottom: 1px solid #d6d5d5;
+    border-bottom: 1px solid #EEEEEE;
   }
   .js-uix-table--responsive-scrolled table thead th,
   table.js-uix-table--responsive-scrolled thead th {
@@ -13406,8 +13406,8 @@ table.uix-table td,
     display: block;
     float: left;
     overflow-x: scroll;
-    border-bottom: 1px solid #d6d5d5;
-    border-right: 1px solid #d6d5d5;
+    border-bottom: 1px solid #EEEEEE;
+    border-right: 1px solid #EEEEEE;
   }
   .js-uix-table--responsive-scrolled table thead tr,
   .js-uix-table--responsive-scrolled table tbody tr,
@@ -13448,7 +13448,7 @@ table.uix-table td,
 
 table.uix-table--bordered,
 .uix-table--bordered table {
-  border: 1px solid #d6d5d5;
+  border: 1px solid #EEEEEE;
   border-collapse: collapse;
   width: 100%;
 }
@@ -13457,7 +13457,7 @@ table.uix-table--bordered td,
 table.uix-table--bordered th,
 .uix-table--bordered table td,
 .uix-table--bordered table th {
-  border: 1px solid #d6d5d5;
+  border: 1px solid #EEEEEE;
   padding: 0.6875rem;
 }
 
@@ -13478,7 +13478,7 @@ table.uix-table--bottom-noborder td,
 
 table.uix-table--alternant-row tbody tr:nth-child(even),
 .uix-table--alternant-row table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #FAFAFA;
 }
 
 table.uix-table--alternant-col col:first-child,
@@ -13488,17 +13488,17 @@ table.uix-table--alternant-col col:first-child,
 
 table.uix-table--alternant-col col:nth-child(2n+3),
 .uix-table--alternant-col table col:nth-child(2n+3) {
-  background-color: #f9f9f9;
+  background-color: #FAFAFA;
 }
 
 table.uix-table--striped tr:nth-child(2n-1) td,
 .uix-table--striped table tr:nth-child(2n-1) td {
-  background-color: #f9f9f9;
+  background-color: #FAFAFA;
 }
 
 table.uix-table--per-line td,
 .uix-table--per-line table td {
-  border-bottom: 1px solid #d6d5d5;
+  border-bottom: 1px solid #EEEEEE;
   border-width: 0 0 1px;
 }
 
@@ -13509,7 +13509,7 @@ table.uix-table--per-line tbody tr:last-child td,
 
 table.is-horizontal td,
 .is-horizontal table td {
-  border-bottom: 1px solid #d6d5d5;
+  border-bottom: 1px solid #EEEEEE;
   border-width: 0 0 1px;
 }
 
@@ -13520,7 +13520,7 @@ table.is-horizontal tbody tr:last-child td,
 
 table.is-horizontal th,
 .is-horizontal table th {
-  border-bottom: 1px solid #d6d5d5;
+  border-bottom: 1px solid #EEEEEE;
 }
 
 @media all and (max-width: 768px) {
@@ -13995,11 +13995,11 @@ table.is-horizontal th,
 
 .uix-table-grid .uix-table-grid__body {
   position: relative;
-  border: 1px #d6d5d5 solid;
+  border: 1px #EEEEEE solid;
   border-radius: 3px;
   overflow: auto;
   vertical-align: middle;
-  background-color: #f9f9f9;
+  background-color: #FAFAFA;
   margin-top: 1rem;
 }
 
@@ -14007,7 +14007,7 @@ table.is-horizontal th,
   display: flex;
   position: relative;
   cursor: pointer;
-  border-bottom: 1px solid #d6d5d5;
+  border-bottom: 1px solid #EEEEEE;
   transition: all 0.3s ease;
   /* Helper for shared drop target overlay */
 }
@@ -16570,7 +16570,7 @@ ul.edd_purchase_receipt_files li {
 
 .uix-breadcrumbs ul li a::before {
   margin-left: 1px;
-  border-left-color: #d5d5d5;
+  border-left-color: #EEEEEE;
 }
 
 .uix-breadcrumbs ul li a::after {
@@ -16578,12 +16578,11 @@ ul.edd_purchase_receipt_files li {
 }
 
 .uix-breadcrumbs ul li a:hover {
-  background: #d5d5d5;
-  color: #fff;
+  background: #FAFAFA;
 }
 
 .uix-breadcrumbs ul li a:hover::after {
-  border-left-color: #d5d5d5;
+  border-left-color: #FAFAFA;
 }
 
 .uix-breadcrumbs ul li:first-child a {

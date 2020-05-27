@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.0.9';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.0';
     module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -135,8 +135,6 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             //+++++++++++++++++++++++++++++++++++++++++++++++++
             // Custom Functions
             //+++++++++++++++++++++++++++++++++++++++++++++++++
-            
-
             const scrolled    = scroller.y,
                   topSpacing  = ( window.innerWidth <= 768 ) ? 0 : $( '.uix-header__container' ).outerHeight( true ); //with margin 
 
@@ -144,29 +142,63 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             //--------------------------------- Scrollspy Animate -------------------------------	
             //----------------------------------------------------------------------------------   
 
-            const $targetEl = $( '#uix-scrollspy-animate' );
-
-            if ( $targetEl.length > 0 ) {
-                const elHeight      = $targetEl.height(),
-                      elOffsetTop   = $targetEl.offset().top - topSpacing;
-
-                const scale               = scrolled / elHeight,
-                      elScale             = 1 - scale * 0.1,
-                      elOpacity           = 1 - scale,
-                      scrollProgress      = ((scrolled - elOffsetTop) / (elHeight - windowHeight / 6));
-
-
-
-                // Transparency changes when scrolling
-                //-------------------------------------	
-                console.log( 'scrolled: ' + scrolled + ' | scrollProgress: ' + scrollProgress + ' | elOpacity: ' + elOpacity + ' | elScale: ' + elScale  );
-
+            
+            // Parallax 
+            //-------------------------------------	
+            $( '.uix-scrollspy-animate--parallax__wrapper' ).each( function()  {
+                const $wrapper = $( this );
+                const $target = $wrapper.find( '.uix-scrollspy-animate--parallax' );
+                const rect = $target[0].getBoundingClientRect();
+                const spyTop = rect.top;
+                const speed = -parseFloat( $wrapper.data( 'scrollspy-speed' ) );
                 
                 
+                //
+                $wrapper.css({
+                    'overflow': 'hidden',
+                    'height': rect.height - rect.height*0.3
+                });   
+                
+                
+                $target.css({
+                    'margin-top': -rect.height*0.15
+                }); 
 
-            }//endif $targetEl
+                //
+                TweenMax.set( $wrapper, {
+                    css:{ 
+                        'transform': 'matrix(1, 0, 0, 1, 0, '+( 0 - ( spyTop * speed ) )+')',
+                        'transition': 'none'
+                    }
+                });   
+                TweenMax.set( $target, {
+                    css:{ 
+                        'transform': 'matrix(1, 0, 0, 1, 0, '+( 0 - ( spyTop * (speed/2) ) )+')',
+                        'transition': 'none'
+                    }
+                });    
+            });
 
+            
+            // Transparency
+            //-------------------------------------	
+            $( '.uix-scrollspy-animate--transparency' ).each( function()  {
+                const $this = $( this );
+                const rect = $this[0].getBoundingClientRect();
+                const spyTop = rect.top;
+                const speed = -parseFloat( $this.data( 'scrollspy-speed' ) );
+
+                const scale               = ( 0 - ( spyTop * speed ) ) / rect.height,
+                      elOpacity           = scale;   
+                
+                TweenMax.set( $this, {
+                    alpha: ( $this.data( 'scrollspy-reverse' ) ? 1-elOpacity : elOpacity ) 
+                });    
+            });  
          
+            
+            
+
         
             
             //----------------------------------------------------------------------------------

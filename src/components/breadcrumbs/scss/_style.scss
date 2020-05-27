@@ -5,7 +5,7 @@
 
 
 $crumbs-back       : #fff;
-$crumbs-line-color : #d5d5d5;
+$crumbs-line-color : #EEEEEE;
 $crumbs-line-deg   : 2;
 $crumbs-size       : 27px;
 
@@ -66,11 +66,10 @@ $crumbs-size       : 27px;
 
 
 				&:hover {
-					background: $crumbs-line-color;
-					color: #fff;
+					background: #FAFAFA;
 
 					&::after {
-						border-left-color: $crumbs-line-color;
+						border-left-color: #FAFAFA;
 					}
 
 				}

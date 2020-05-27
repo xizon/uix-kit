@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.2.9
+ * ## Version             :  4.3.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 22, 2020
+ * ## Last Update         :  May 27, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8705fc564e2557402758";
+/******/ 	var hotCurrentHash = "1e21b31a83b1438bd3dd";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -24283,7 +24283,7 @@ function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.0.9';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.1.0';
 
   module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -24371,24 +24371,52 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       //----------------------------------------------------------------------------------
       //--------------------------------- Scrollspy Animate -------------------------------	
       //----------------------------------------------------------------------------------   
+      // Parallax 
+      //-------------------------------------	
 
-      var $targetEl = $('#uix-scrollspy-animate');
+      $('.uix-scrollspy-animate--parallax__wrapper').each(function () {
+        var $wrapper = $(this);
+        var $target = $wrapper.find('.uix-scrollspy-animate--parallax');
+        var rect = $target[0].getBoundingClientRect();
+        var spyTop = rect.top;
+        var speed = -parseFloat($wrapper.data('scrollspy-speed')); //
 
-      if ($targetEl.length > 0) {
-        var elHeight = $targetEl.height(),
-            elOffsetTop = $targetEl.offset().top - topSpacing;
-        var scale = scrolled / elHeight,
-            elScale = 1 - scale * 0.1,
-            elOpacity = 1 - scale,
-            scrollProgress = (scrolled - elOffsetTop) / (elHeight - windowHeight / 6); // Transparency changes when scrolling
-        //-------------------------------------	
+        $wrapper.css({
+          'overflow': 'hidden',
+          'height': rect.height - rect.height * 0.3
+        });
+        $target.css({
+          'margin-top': -rect.height * 0.15
+        }); //
 
-        console.log('scrolled: ' + scrolled + ' | scrollProgress: ' + scrollProgress + ' | elOpacity: ' + elOpacity + ' | elScale: ' + elScale);
-      } //endif $targetEl
-      //----------------------------------------------------------------------------------
+        TweenMax.set($wrapper, {
+          css: {
+            'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - spyTop * speed) + ')',
+            'transition': 'none'
+          }
+        });
+        TweenMax.set($target, {
+          css: {
+            'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - spyTop * (speed / 2)) + ')',
+            'transition': 'none'
+          }
+        });
+      }); // Transparency
+      //-------------------------------------	
+
+      $('.uix-scrollspy-animate--transparency').each(function () {
+        var $this = $(this);
+        var rect = $this[0].getBoundingClientRect();
+        var spyTop = rect.top;
+        var speed = -parseFloat($this.data('scrollspy-speed'));
+        var scale = (0 - spyTop * speed) / rect.height,
+            elOpacity = scale;
+        TweenMax.set($this, {
+          alpha: $this.data('scrollspy-reverse') ? 1 - elOpacity : elOpacity
+        });
+      }); //----------------------------------------------------------------------------------
       //---------------------------------------------------------------------------------	
       //----------------------------------------------------------------------------------  
-
     } //end scrollUpdate()
 
   };

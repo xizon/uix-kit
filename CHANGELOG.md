@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 4.3.0 (May 26, 2020) =
+
+* Tweak: Improved the parallax element presentation of Smooth Scrolling Page.
+* Tweak: Change the color of Table.
+
+
+
 #### = 4.2.9 (May 21, 2020) =
 
 * New: Add a gallery card for an image.
