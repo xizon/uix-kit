@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.0
+ * ## Version             :  4.3.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 27, 2020
+ * ## Last Update         :  May 28, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -1726,10 +1726,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
 }
 
 .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width .uix-core-grid__col {
-  -ms-flex-preferred-size: 0;
-  flex-basis: 0;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+  flex: 1;
   padding-right: 15px;
 }
 
@@ -3860,13 +3857,13 @@ h4 {
 
 h5 {
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.33333333333;
   font-weight: 600;
 }
 
 h6 {
   font-size: 0.75rem;
-  line-height: 2;
+  line-height: 1.5;
   font-weight: 600;
 }
 
@@ -3892,13 +3889,13 @@ h6 {
 
 .uix-typo--h5 {
   font-size: 1rem !important;
-  line-height: 1.5 !important;
+  line-height: 1.33333333333 !important;
   font-weight: 600 !important;
 }
 
 .uix-typo--h6 {
   font-size: 0.75rem !important;
-  line-height: 2 !important;
+  line-height: 1.5 !important;
   font-weight: 600 !important;
 }
 
@@ -7605,7 +7602,7 @@ select:-webkit-autofill:focus {
 }
 
 .uix-controls-layout .uix-controls-layout__content {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner {
@@ -7620,7 +7617,7 @@ select:-webkit-autofill:focus {
 }
 
 .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:last-child {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .uix-controls-layout .uix-controls-layout__icon {
@@ -13981,7 +13978,7 @@ table.is-horizontal th,
 
 .uix-table-grid .uix-table-grid__head .uix-table-grid__head-cell {
   flex: 1;
-  /* default value */
+  /* default value, this attribute can be specified in HTML */
   box-sizing: border-box;
   text-align: start;
   font-size: 0.875rem;
@@ -14031,7 +14028,7 @@ table.is-horizontal th,
 
 .uix-table-grid .uix-table-grid__row .uix-table-grid__row-cell {
   flex: 1;
-  /* default value */
+  /* default value, this attribute can be specified in HTML */
   font-size: 1rem;
   padding: .5rem 1rem;
 }
@@ -17016,10 +17013,9 @@ ul.edd_purchase_receipt_files li {
 /* ====================================================== */
 /*
  * 1. Author Card
- * 2. Entire Background
- * 3. Separate Up and Down
- * 4. Separate Left and Right
- * 5. Gallery Card
+ * 2. Gallery Card (via Flex)
+ * 3. Thumbnail Card (via Flex)
+
 */
 /*
  ---------------------------
@@ -17057,29 +17053,29 @@ ul.edd_purchase_receipt_files li {
   color: rgba(51, 51, 51, 0.4);
 }
 
-.uix-card--author .uix-card--author__headline {
+.uix-card--author .uix-card--author__header {
   min-height: 2.086538461rem;
   background: #fff;
   padding: 0.65625rem 1.75rem 0 1.75rem;
   border-radius: 8px 8px 0 0;
 }
 
-.uix-card--author .uix-card--author__headline h3 {
+.uix-card--author .uix-card--author__header h3 {
   margin: 0;
   padding: 0;
   font-size: 1.125rem;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__text {
+.uix-card--author .uix-card--author__header .uix-card--author__text {
   margin-top: 0.4375rem;
   width: calc(100% - 105px);
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__text a {
+.uix-card--author .uix-card--author__header .uix-card--author__text a {
   font-size: 0.75rem;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__preview {
+.uix-card--author .uix-card--author__header .uix-card--author__preview {
   position: relative;
   display: inline-block;
   top: 0.175rem;
@@ -17087,17 +17083,17 @@ ul.edd_purchase_receipt_files li {
   height: 100px;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__preview.uix-card--author__preview--rounded {
+.uix-card--author .uix-card--author__header .uix-card--author__preview.uix-card--author__preview--rounded {
   border-radius: 8px;
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__preview.uix-card--author__preview--jumpOut {
+.uix-card--author .uix-card--author__header .uix-card--author__preview.uix-card--author__preview--jumpOut {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
   position: absolute;
   transform: translateY(-2rem);
 }
 
-.uix-card--author .uix-card--author__headline .uix-card--author__preview img {
+.uix-card--author .uix-card--author__header .uix-card--author__preview img {
   width: 90px !important;
   height: 90px !important;
   margin: 0.3125rem 0 0 0.3125rem;
@@ -17145,167 +17141,7 @@ ul.edd_purchase_receipt_files li {
 
 /*
  ---------------------------
- 2. Entire Background
- ---------------------------
- */
-.uix-card--entireBg {
-  box-sizing: border-box;
-  position: relative;
-  padding: 1.5rem;
-  border-radius: 8px;
-  background-position: 50% 50%;
-  background-size: cover;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-}
-
-.uix-card--entireBg::before, .uix-card--entireBg::after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-
-.uix-card--entireBg .uix-card--entireBg__tagline {
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: rgba(51, 51, 51, 0.4);
-}
-
-.uix-card--entireBg .uix-card--entireBg__headline {
-  margin-top: 10px;
-  color: #fff;
-}
-
-.uix-card--entireBg .uix-card--entireBg__preview img {
-  visibility: hidden;
-}
-
-.uix-card--entireBg .uix-card--entireBg__content {
-  position: relative;
-}
-
-.uix-card--entireBg .uix-card--entireBg__content.uix-card--entireBg__content--overlay {
-  position: absolute;
-  bottom: 0;
-  padding-bottom: 1.5rem;
-}
-
-/*
- ---------------------------
- 3. Separate Up and Down
- ---------------------------
- */
-.uix-card--upDownBg {
-  box-sizing: border-box;
-  position: relative;
-  border-radius: 8px;
-  background-color: #fff;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-}
-
-.uix-card--upDownBg::before, .uix-card--upDownBg::after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-
-.uix-card--upDownBg .uix-card--upDownBg__tagline {
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: rgba(51, 51, 51, 0.4);
-}
-
-.uix-card--upDownBg .uix-card--upDownBg__headline {
-  margin-top: 10px;
-  margin: 0;
-}
-
-.uix-card--upDownBg .uix-card--upDownBg__preview {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  background-image: -webkit-linear-gradient(270deg, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5));
-  background-image: linear-gradient(180deg, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5));
-  background-position: 50% 50%;
-  background-size: cover;
-}
-
-.uix-card--upDownBg .uix-card--upDownBg__preview img {
-  visibility: hidden;
-}
-
-.uix-card--upDownBg .uix-card--upDownBg__content {
-  padding: 1rem 1.5rem;
-}
-
-/*
- ---------------------------
- 4. Separate Left and Right
- ---------------------------
- */
-.uix-card--leftRightBg {
-  box-sizing: border-box;
-  position: relative;
-  border-radius: 8px;
-  background-color: #fff;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-}
-
-.uix-card--leftRightBg::before, .uix-card--leftRightBg::after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-
-.uix-card--leftRightBg .uix-card--leftRightBg__tagline {
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: rgba(51, 51, 51, 0.4);
-}
-
-.uix-card--leftRightBg .uix-card--leftRightBg__headline {
-  margin-top: 10px;
-  margin: 0;
-}
-
-.uix-card--leftRightBg .uix-card--leftRightBg__preview {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  background-position: 50% 50%;
-  background-size: cover;
-}
-
-.uix-card--leftRightBg .uix-card--leftRightBg__preview img {
-  visibility: hidden;
-}
-
-.uix-card--leftRightBg .uix-card--leftRightBg__content {
-  padding: 1.5rem 3rem;
-}
-
-.uix-card--leftRightBg .uix-card--leftRightBg__title {
-  padding-bottom: 1.5rem;
-}
-
-@media all and (max-width: 768px) {
-  .uix-card--leftRightBg .uix-card--leftRightBg__preview {
-    border-bottom-left-radius: 0;
-  }
-  .uix-card--leftRightBg .uix-card--leftRightBg__content {
-    padding: 1.5rem 1.5rem 0 1.5rem;
-  }
-}
-
-/*
- ---------------------------
- 5. Gallery Card
+ 2. Gallery Card
  ---------------------------
  */
 .uix-card--gallery {
@@ -17313,20 +17149,40 @@ ul.edd_purchase_receipt_files li {
   position: relative;
   display: inline-flex;
   flex-direction: column;
+  max-width: 100%;
+  /* Prevent text overflow with no-wrap */
+  /* demo style */
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  border-radius: 8px;
+  /*-- horizontal layout --*/
+  /*-- overlay layout --*/
+  /*-- rxtra elements style --*/
+}
+
+.uix-card--gallery .uix-card--gallery__preview,
+.uix-card--gallery .uix-card--gallery__body {
+  display: flex;
+  /* nested flex container */
+  flex-direction: column;
+  /* vertical alignment of flex items */
+  justify-content: center;
+  /* center flex items vertically */
 }
 
 .uix-card--gallery .uix-card--gallery__preview {
+  align-items: center;
+  /* center flex items horizontally */
   padding: 0;
-  border-radius: 0;
-  flex: 1;
-  padding: 0;
-  margin: 0 auto;
+  /* default value, this attribute can be specified in HTML */
   box-sizing: border-box;
   position: relative;
-  transition: all 0.3s ease;
-  overflow: visible;
+  border-radius: 8px 8px 0 0;
   /* Use a :before to show the selection outline so that the border doesn't
         * affect the layout of the content within the preview. */
+}
+
+.uix-card--gallery .uix-card--gallery__preview img {
+  border-radius: 8px 8px 0 0;
 }
 
 .uix-card--gallery .uix-card--gallery__preview::before {
@@ -17342,25 +17198,208 @@ ul.edd_purchase_receipt_files li {
 }
 
 .uix-card--gallery .uix-card--gallery__header {
-  margin-top: .5rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  /* center flex items horizontally */
+}
+
+.uix-card--gallery .uix-card--gallery__header .uix-card--gallery__header__child {
+  display: flex;
+  flex: 1;
+  word-break: break-all;
+  align-items: center;
+  max-width: 100%;
+}
+
+.uix-card--gallery .uix-card--gallery__header .uix-card--gallery__header__child small {
+  white-space: nowrap;
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child .uix-card--gallery__content__child--left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  /* center flex items horizontally */
+  word-break: break-all;
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child .uix-card--gallery__content__child--left > div {
+  line-height: 1.25;
+  margin-left: .5rem;
+  width: 100%;
+}
+
+.uix-card--gallery .uix-card--gallery__content > .uix-card--gallery__content__child .uix-card--gallery__content__child--right {
+  min-width: 50px;
+  /* default value, this attribute can be specified in HTML */
+}
+
+.uix-card--gallery .uix-card--gallery__body {
+  flex: 1;
+  max-width: 100%;
+  /* Prevent text overflow with no-wrap when horizontal type is used  */
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
 }
 
 .uix-card--gallery .uix-card--gallery__action {
-  flex: 1;
-  align-self: center;
   display: flex;
+  flex: 1;
+  margin-left: 1rem;
   justify-content: flex-end;
+  /* end flex items vertically */
 }
 
-.uix-card--gallery .uix-card--gallery__action button {
+.uix-card--gallery.uix-card--gallery--horizontal {
+  flex-direction: row;
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__preview {
+  border-radius: 8px 0 0 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__preview img {
+  border-radius: 8px 0 0 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__header .uix-card--gallery__header__child {
+  display: block;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__preview {
+  border-radius: 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__preview img {
+  border-radius: 8px;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__body.uix-card--gallery__body--verticalCenter {
+  height: 100%;
+}
+
+.uix-card--gallery button {
   background-color: rgba(0, 0, 0, 0);
   border-color: rgba(0, 0, 0, 0);
   color: #4b4b4b;
 }
 
-.uix-card--gallery .uix-card--gallery__action button:active {
+.uix-card--gallery button:active {
+  background-color: #e1e1e1;
+  border-color: #e1e1e1;
+  color: #2c2c2c;
+  box-shadow: none;
+}
+
+@media all and (max-width: 768px) {
+  .uix-card--gallery {
+    /*-- horizontal layout --*/
+  }
+  .uix-card--gallery.uix-card--gallery--horizontal:not(.is-mobile-still) {
+    flex-direction: column;
+  }
+  .uix-card--gallery.uix-card--gallery--horizontal:not(.is-mobile-still) .uix-card--gallery__preview {
+    border-radius: 8px 8px 0 0;
+  }
+  .uix-card--gallery.uix-card--gallery--horizontal:not(.is-mobile-still) .uix-card--gallery__preview img {
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+/*
+ ---------------------------
+ 3. Thumbnail Card
+ ---------------------------
+ */
+.uix-card--thumb {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 100%;
+  /* Prevent text overflow with no-wrap */
+  /* demo style */
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  border-radius: 8px;
+  /*-- rxtra elements style --*/
+}
+
+.uix-card--thumb .uix-card--thumb__header {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  /* center flex items horizontally */
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__preview {
+  flex-basis: 50px;
+  /* default value, this attribute can be specified in HTML */
+  margin-right: 5px;
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content {
+  /* ----- Keep the width of the picture fixed -----  begin  */
+  flex: 1;
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+  /* ----- Keep the width of the picture fixed -----  end  */
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child {
+  display: flex;
+  flex-direction: row;
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child .uix-card--thumb__content__child--left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  /* center flex items horizontally */
+  word-break: break-all;
+  min-width: 0;
+  /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child .uix-card--thumb__content__child--left > div {
+  line-height: 1.25;
+  margin-left: .5rem;
+  width: 100%;
+}
+
+.uix-card--thumb .uix-card--thumb__header .uix-card--thumb__content > .uix-card--thumb__content__child .uix-card--thumb__content__child--right {
+  min-width: 50px;
+  /* default value, this attribute can be specified in HTML */
+}
+
+.uix-card--thumb .uix-card--thumb__body {
+  padding-top: .5rem;
+  line-height: 1.25;
+}
+
+.uix-card--thumb button {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+  color: #4b4b4b;
+}
+
+.uix-card--thumb button:active {
   background-color: #e1e1e1;
   border-color: #e1e1e1;
   color: #2c2c2c;

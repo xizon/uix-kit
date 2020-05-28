@@ -258,10 +258,7 @@
 					flex-wrap: wrap;
 					
 					.uix-core-grid__col {
-						-ms-flex-preferred-size: 0;
-						flex-basis: 0;
-						-ms-flex-positive: 1;
-						flex-grow: 1;
+						flex: 1;
 						padding-right: #{$pad};
 					}		
 					

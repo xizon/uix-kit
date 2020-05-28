@@ -99,13 +99,13 @@ h4 {
 
 h5 {
 	font-size: $font-size-h5;
-	line-height: 1.5;
+	line-height: 1.33333333333;
 	font-weight: 600;
 }
 
 h6 {
 	font-size: $font-size-h6;
-	line-height: 2;
+	line-height: 1.5;
 	font-weight: 600;
 }
 
@@ -131,13 +131,13 @@ h6 {
 
 .uix-typo--h5 {
 	font-size: $font-size-h5 !important;
-	line-height: 1.5 !important;
+	line-height: 1.33333333333 !important;
 	font-weight: 600 !important;
 }
 
 .uix-typo--h6 {
 	font-size: $font-size-h6 !important;
-	line-height: 2 !important;
+	line-height: 1.5 !important;
 	font-weight: 600 !important;
 }
 

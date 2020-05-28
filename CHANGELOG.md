@@ -1,11 +1,16 @@
 # Changelog
 
+#### = 4.3.1 (May 28, 2020) =
+
+* New: Added Thumbnail Card.
+* Tweak: Optimized modules using `flex`.
+* Tweak: Remove redundant card style.
+
 
 #### = 4.3.0 (May 26, 2020) =
 
 * Tweak: Improved the parallax element presentation of Smooth Scrolling Page.
 * Tweak: Change the color of Table.
-
 
 
 #### = 4.2.9 (May 21, 2020) =

@@ -11,7 +11,7 @@
     padding: #{$control-padding-height} 0;
     
     .uix-controls-layout__content {
-        flex-grow: 1;
+        flex: 1;
 
         .uix-controls-layout__content__inner {
             display: flex;
@@ -24,7 +24,7 @@
                     width: 150px;
                 }
                 &:last-child {
-                    flex-grow: 1;
+                    flex: 1;
                 }
             }
         }

@@ -6,10 +6,9 @@
 
 /*
  * 1. Author Card
- * 2. Entire Background
- * 3. Separate Up and Down
- * 4. Separate Left and Right
- * 5. Gallery Card
+ * 2. Gallery Card (via Flex)
+ * 3. Thumbnail Card (via Flex)
+
 */
 
 $card-radius: 8px;
@@ -51,7 +50,7 @@ $card-radius: 8px;
 	}
 
 
-	.uix-card--author__headline {
+	.uix-card--author__header {
 		min-height: 2.086538461rem;
 		background: #fff;
 		padding: 0.65625rem 1.75rem 0 1.75rem;
@@ -144,203 +143,7 @@ $card-radius: 8px;
 
 /*
  ---------------------------
- 2. Entire Background
- ---------------------------
- */
-.uix-card--entireBg {
-    box-sizing: border-box;
-    position: relative;
-    padding: 1.5rem;
-    border-radius: $card-radius;
-	background-position: 50% 50%;
-	background-size: cover;
-	margin-bottom: 1.5rem;
-    @include transition-default();
-	@include outer-shadow( 'regular' );
-
-
-
-	&::before,
-	&::after {
-		content: " ";
-		display: table;
-		clear: both;
-	}
-
-
-	.uix-card--entireBg__tagline {
-		font-size: 0.75rem;
-		font-weight: 500;
-		text-transform: uppercase;
-		color: rgba(51, 51, 51, .4);
-	}
-
-
-	.uix-card--entireBg__headline {
-		margin-top: 10px;
-		color: #fff;
-
-	}
-
-
-	.uix-card--entireBg__preview {
-
-		img {
-			visibility: hidden;
-		}
-	}
-
-	.uix-card--entireBg__content {
-		position: relative;
-
-		&.uix-card--entireBg__content--overlay {
-			position: absolute;
-			bottom: 0;
-			padding-bottom: 1.5rem;
-		}
-	}
-
-}
-
-
-/*
- ---------------------------
- 3. Separate Up and Down
- ---------------------------
- */
-.uix-card--upDownBg {
-    box-sizing: border-box;
-	position: relative;
-    border-radius: $card-radius;
-    background-color: #fff;
-	margin-bottom: 1.5rem;
-    @include transition-default();
-	@include outer-shadow( 'regular' );
-
-
-	&::before,
-	&::after {
-		content: " ";
-		display: table;
-		clear: both;
-	}
-
-	.uix-card--upDownBg__tagline {
-		font-size: 0.75rem;
-		font-weight: 500;
-		text-transform: uppercase;
-		color: rgba(51, 51, 51, .4);
-	}
-
-
-	.uix-card--upDownBg__headline {
-		margin-top: 10px;
-		margin: 0;
-	}
-
-	.uix-card--upDownBg__preview {
-		border-top-left-radius: $card-radius;
-		border-top-right-radius: $card-radius;
-		background-image: -webkit-linear-gradient(270deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
-		background-image: linear-gradient(180deg, hsla(0, 0%, 96%, .5), hsla(0, 0%, 96%, .5));
-		background-position: 50% 50%;
-		background-size: cover;
-
-		img {
-			visibility: hidden;
-		}
-
-	}
-
-	.uix-card--upDownBg__content {
-		padding: 1rem 1.5rem;
-	}
-
-
-
-}
-
-
-/*
- ---------------------------
- 4. Separate Left and Right
- ---------------------------
- */
-.uix-card--leftRightBg {
-    box-sizing: border-box;
-	position: relative;
-    border-radius: $card-radius;
-    background-color: #fff;
-	margin-bottom: 1.5rem;
-    @include transition-default();
-	@include outer-shadow( 'regular' );
-
-	&::before,
-	&::after {
-		content: " ";
-		display: table;
-		clear: both;
-	}
-
-
-	.uix-card--leftRightBg__tagline {
-		font-size: 0.75rem;
-		font-weight: 500;
-		text-transform: uppercase;
-		color: rgba(51, 51, 51, .4);
-	}
-
-	.uix-card--leftRightBg__headline {
-		margin-top: 10px;
-		margin: 0;
-	}
-
-
-
-	.uix-card--leftRightBg__preview {
-		border-top-left-radius: $card-radius;
-		border-bottom-left-radius: $card-radius;
-		background-position: 50% 50%;
-		background-size: cover;
-
-		img {
-			visibility: hidden;
-		}
-
-	}
-
-
-	.uix-card--leftRightBg__content {
-		padding: 1.5rem 3rem;
-	}
-
-	.uix-card--leftRightBg__title {
-		padding-bottom: 1.5rem;
-	}
-
-
-}
-
-
-@media all and (max-width: 768px) {
-	.uix-card--leftRightBg {
-
-		.uix-card--leftRightBg__preview {
-			border-bottom-left-radius: 0;
-		}
-
-		.uix-card--leftRightBg__content {
-			padding: 1.5rem 1.5rem 0 1.5rem;
-		}
-
-
-	}
-
-}
-
-/*
- ---------------------------
- 5. Gallery Card
+ 2. Gallery Card
  ---------------------------
  */
 .uix-card--gallery {
@@ -348,18 +151,30 @@ $card-radius: 8px;
     position: relative;
     display: inline-flex;
     flex-direction: column;
-
-
+    max-width: 100%; /* Prevent text overflow with no-wrap */
+    
+    /* demo style */
+    @include outer-shadow( 'regular' );
+    border-radius: $card-radius;
+   
+    
+    .uix-card--gallery__preview,
+    .uix-card--gallery__body {
+        display: flex;                 /* nested flex container */
+        flex-direction: column;        /* vertical alignment of flex items */
+        justify-content: center;       /* center flex items vertically */  
+    }
+    
     .uix-card--gallery__preview {
-        padding: 0;
-        border-radius: 0;
-        flex: 1;
-        padding: 0;
-        margin: 0 auto;
+        align-items: center; /* center flex items horizontally */
+        padding: 0;  /* default value, this attribute can be specified in HTML */
         box-sizing: border-box;
         position: relative;
-        @include transition-default(); 
-        overflow: visible;
+        border-radius: $card-radius $card-radius 0 0;
+        
+        img {
+            border-radius: $card-radius $card-radius 0 0;
+        }
 
         /* Use a :before to show the selection outline so that the border doesn't
         * affect the layout of the content within the preview. */
@@ -379,33 +194,257 @@ $card-radius: 8px;
     
     
     .uix-card--gallery__header {
-        margin-top: .5rem;
         display: flex;
-        align-items: baseline;
+        align-items: center; /* center flex items horizontally */
+        
+        .uix-card--gallery__header__child {
+            display: flex;
+            flex: 1;
+            word-break: break-all;
+            align-items: center;
+            max-width: 100%;
+ 
+            
+            small {
+                white-space: nowrap;
+            }
+        }      
+    }
+    
+    .uix-card--gallery__content {
+  
+        > .uix-card--gallery__content__child {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+
+            .uix-card--gallery__content__child--left {
+                display: flex;
+                flex-direction: row;
+                flex: 1;
+                align-items: center; /* center flex items horizontally */
+                word-break: break-all;
+                min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+
+                > div {
+                    line-height: 1.25;
+                    margin-left: .5rem;
+                    width: 100%;
+                }   
+
+            }
+
+
+            .uix-card--gallery__content__child--right {
+                min-width: 50px; /* default value, this attribute can be specified in HTML */
+            }   
+
+
+        }
+
+
+    }
+
+
+    
+    
+    .uix-card--gallery__body {
+        flex: 1;
+        max-width: 100%; /* Prevent text overflow with no-wrap when horizontal type is used  */
+        min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
     }
     
     .uix-card--gallery__action {
-        flex: 1;
-        align-self: center;
         display: flex;
-        justify-content: flex-end;
+        flex: 1;
+        margin-left: 1rem;
+        justify-content: flex-end; /* end flex items vertically */
+    }
+    
+  
+    /*-- horizontal layout --*/
+    &.uix-card--gallery--horizontal {
+        flex-direction: row;
         
-        button {
-            background-color: rgba(0, 0, 0, 0);
-            border-color: rgba(0, 0, 0, 0);
-            color: rgb(75, 75, 75);  
+
+        .uix-card--gallery__preview {
+            border-radius: $card-radius 0 0 $card-radius;
+        
+            img {
+                border-radius: $card-radius 0 0 $card-radius;
+            }  
             
-            &:active {
-                background-color: rgb(225, 225, 225);
-                border-color: rgb(225, 225, 225);
-                color: rgb(44, 44, 44);
-                box-shadow: none;
+        }
+        
+        .uix-card--gallery__header {
+            .uix-card--gallery__header__child {
+                display: block;
+            }      
+        }   
+        
+    }
+    
+    
+    /*-- overlay layout --*/
+    &.uix-card--gallery--overlay {
+        
+        .uix-card--gallery__preview {
+            border-radius: $card-radius;
+            img {
+                border-radius: $card-radius;
+            }
+        }
+
+        .uix-card--gallery__body {
+			position: absolute;
+			bottom: 0;
+            left: 0;
+            
+            &.uix-card--gallery__body--verticalCenter {
+                height: 100%;
             }
         }
     }
+
+    
+    
+    /*-- rxtra elements style --*/
+    button {
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+        color: rgb(75, 75, 75);  
+
+        &:active {
+            background-color: rgb(225, 225, 225);
+            border-color: rgb(225, 225, 225);
+            color: rgb(44, 44, 44);
+            box-shadow: none;
+        }
+    }
+
+    
     
 
 }
+
+@media all and (max-width: 768px) {
+	.uix-card--gallery {
+
+        
+        /*-- horizontal layout --*/
+        &.uix-card--gallery--horizontal:not(.is-mobile-still) {
+            flex-direction: column;
+            
+            .uix-card--gallery__preview {
+                border-radius: $card-radius $card-radius 0 0;
+                img {
+                    border-radius: $card-radius $card-radius 0 0;
+                }  
+            }  
+        }
+        
+		
+	}
+
+}
+
+/*
+ ---------------------------
+ 3. Thumbnail Card
+ ---------------------------
+ */
+.uix-card--thumb {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 100%; /* Prevent text overflow with no-wrap */
+    
+    /* demo style */
+    padding: 1rem;
+    @include outer-shadow( 'regular' );
+    border-radius: $card-radius;
+
+    .uix-card--thumb__header {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center; /* center flex items horizontally */
+        
+        
+        .uix-card--thumb__preview {
+            flex-basis: 50px; /* default value, this attribute can be specified in HTML */
+            margin-right: 5px;
+        }
+        
+        .uix-card--thumb__content {
+            /* ----- Keep the width of the picture fixed -----  begin  */
+            flex: 1;
+            min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+            /* ----- Keep the width of the picture fixed -----  end  */
+            
+            > .uix-card--thumb__content__child {
+                display: flex;
+                flex-direction: row;
+
+                
+                .uix-card--thumb__content__child--left {
+                    display: flex;
+                    flex-direction: row;
+                    flex: 1;
+                    align-items: center; /* center flex items horizontally */
+                    word-break: break-all;
+                    min-width: 0; /* prevents flex-boxes of becoming smaller than it's contents -- for rows */
+
+                    > div {
+                        line-height: 1.25;
+                        margin-left: .5rem;
+                        width: 100%;
+                    }   
+
+                }
+                
+
+                .uix-card--thumb__content__child--right {
+                    min-width: 50px; /* default value, this attribute can be specified in HTML */
+                }   
+
+                  
+            }
+           
+            
+        }
+
+
+    }
+    
+    
+    .uix-card--thumb__body {
+        padding-top: .5rem;
+        line-height: 1.25;
+    }
+
+
+    /*-- rxtra elements style --*/
+    button {
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+        color: rgb(75, 75, 75);  
+
+        &:active {
+            background-color: rgb(225, 225, 225);
+            border-color: rgb(225, 225, 225);
+            color: rgb(44, 44, 44);
+            box-shadow: none;
+        }
+    }
+
+    
+    
+}
+
+
+
 
 
 

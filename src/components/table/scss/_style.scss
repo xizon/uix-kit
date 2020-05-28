@@ -421,7 +421,7 @@ table.is-horizontal,
         display: flex;
 
         .uix-table-grid__head-cell {
-            flex: 1; /* default value */
+            flex: 1; /* default value, this attribute can be specified in HTML */
             box-sizing: border-box;
             text-align: start;
             font-size: 0.875rem;
@@ -477,7 +477,7 @@ table.is-horizontal,
         
         
         .uix-table-grid__row-cell {
-            flex: 1; /* default value */
+            flex: 1; /* default value, this attribute can be specified in HTML */
             font-size: 1rem;
             padding: .5rem 1rem;
         }
