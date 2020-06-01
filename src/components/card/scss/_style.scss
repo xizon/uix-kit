@@ -172,7 +172,12 @@ $card-radius: 8px;
         position: relative;
         border-radius: $card-radius $card-radius 0 0;
         
+        
         img {
+            object-fit: cover;
+            object-position: center;
+            height: 100%;
+            width: 100%;
             border-radius: $card-radius $card-radius 0 0;
         }
 
@@ -272,6 +277,7 @@ $card-radius: 8px;
             border-radius: $card-radius 0 0 $card-radius;
         
             img {
+                visibility: hidden;
                 border-radius: $card-radius 0 0 $card-radius;
             }  
             
@@ -306,6 +312,138 @@ $card-radius: 8px;
             }
         }
     }
+
+    
+    
+
+    /*-- Menu Group --*/
+    .uix-card--gallery__status {
+        position: absolute;
+        justify-content: center;
+        display: flex;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+
+
+        .uix-card--gallery__status__item {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+
+            svg {
+                width: 20px;
+                margin-right: .5rem;
+            }
+        }
+
+
+    }
+
+
+
+    .uix-card--gallery__menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 4px 4px;
+        padding: 0 25px;
+        z-index: 2;
+
+
+        .uix-card--gallery__menu__avatar {
+            display: flex;
+            align-items: center;
+
+            > span {
+                white-space: nowrap;
+            }
+
+            img {
+                width: 42px;
+                height: 42px;
+                object-fit: cover; /* required */
+                margin-right: 15px;
+            }
+
+
+        }
+
+
+        .uix-card--gallery__menu__items {
+            display: flex;
+            cursor: pointer;
+
+            > a {
+                padding: 20px;
+                transition: all 500ms ease-in-out;
+
+                &.is-active,
+                &:hover {
+                    border-bottom: 3px solid $highlight-color1;
+                    color: $highlight-color1;
+                }
+            }  
+        }
+
+
+        .uix-card--gallery__menu__action {
+            display: flex;
+
+            button {
+                border: 1px solid #dcdcdc;
+                color: #C9C9C9;
+                border-radius: 25px 0 0 25px;
+                padding: .5rem 1rem;
+                font-weight: 600;
+                font-size: 0.75rem;
+                cursor: pointer;
+                background-color: transparent;
+
+
+                &:last-child {
+                    border-radius: 0 25px 25px 0;
+                    margin-left: -1px;
+                }
+
+                &:hover {
+                    background-color: #FAFAFA;
+                }
+            }
+
+
+        }
+
+
+    }
+
+
+    /*
+     If you do not use "justify-content: space-between; ", 
+     you need to use the following to achieve the layout
+    */
+    /*
+    .uix-card--gallery__menu {
+        display: flex;
+        
+        .uix-card--gallery__menu__items {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .uix-card--gallery__menu__action {
+            display: flex;
+            margin-left: auto;
+        }
+    }
+    */
 
     
     
@@ -442,9 +580,4 @@ $card-radius: 8px;
     
     
 }
-
-
-
-
-
 

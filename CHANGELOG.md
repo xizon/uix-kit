@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 4.3.2 (June 1, 2020) =
+
+* Tweak: Enriched the layout of Gallery Card.
+
+
+
 #### = 4.3.1 (May 28, 2020) =
 
 * New: Added Thumbnail Card.

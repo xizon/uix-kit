@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.1
+ * ## Version             :  4.3.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 28, 2020
+ * ## Last Update         :  June 1, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -17156,6 +17156,26 @@ ul.edd_purchase_receipt_files li {
   border-radius: 8px;
   /*-- horizontal layout --*/
   /*-- overlay layout --*/
+  /*-- Menu Group --*/
+  /*
+     If you do not use "justify-content: space-between; ", 
+     you need to use the following to achieve the layout
+    */
+  /*
+    .uix-card--gallery__menu {
+        display: flex;
+        
+        .uix-card--gallery__menu__items {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .uix-card--gallery__menu__action {
+            display: flex;
+            margin-left: auto;
+        }
+    }
+    */
   /*-- rxtra elements style --*/
 }
 
@@ -17182,6 +17202,10 @@ ul.edd_purchase_receipt_files li {
 }
 
 .uix-card--gallery .uix-card--gallery__preview img {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
   border-radius: 8px 8px 0 0;
 }
 
@@ -17268,6 +17292,7 @@ ul.edd_purchase_receipt_files li {
 }
 
 .uix-card--gallery.uix-card--gallery--horizontal .uix-card--gallery__preview img {
+  visibility: hidden;
   border-radius: 8px 0 0 8px;
 }
 
@@ -17291,6 +17316,98 @@ ul.edd_purchase_receipt_files li {
 
 .uix-card--gallery.uix-card--gallery--overlay .uix-card--gallery__body.uix-card--gallery__body--verticalCenter {
   height: 100%;
+}
+
+.uix-card--gallery .uix-card--gallery__status {
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.uix-card--gallery .uix-card--gallery__status .uix-card--gallery__status__item {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.uix-card--gallery .uix-card--gallery__status .uix-card--gallery__status__item svg {
+  width: 20px;
+  margin-right: .5rem;
+}
+
+.uix-card--gallery .uix-card--gallery__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 4px 4px;
+  padding: 0 25px;
+  z-index: 2;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar {
+  display: flex;
+  align-items: center;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar > span {
+  white-space: nowrap;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__avatar img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  /* required */
+  margin-right: 15px;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items {
+  display: flex;
+  cursor: pointer;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items > a {
+  padding: 20px;
+  transition: all 500ms ease-in-out;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items > a.is-active, .uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__items > a:hover {
+  border-bottom: 3px solid #CE3A3E;
+  color: #CE3A3E;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action {
+  display: flex;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action button {
+  border: 1px solid #dcdcdc;
+  color: #C9C9C9;
+  border-radius: 25px 0 0 25px;
+  padding: .5rem 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action button:last-child {
+  border-radius: 0 25px 25px 0;
+  margin-left: -1px;
+}
+
+.uix-card--gallery .uix-card--gallery__menu .uix-card--gallery__menu__action button:hover {
+  background-color: #FAFAFA;
 }
 
 .uix-card--gallery button {
