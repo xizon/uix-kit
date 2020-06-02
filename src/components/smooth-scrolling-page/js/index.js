@@ -21,30 +21,35 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.0';
-    module.SMOOTH_SCROLLING_PAGE.documentReady = function( $ ) {
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.1';
+    module.SMOOTH_SCROLLING_PAGE.pageLoaded = function() {
 
 		//Prevent this module from loading in other pages
+        //--------------
 		if ( !$( 'body' ).hasClass( 'smooth-scrolling-page' ) ) return false;
-		
+
+        
+        // Core params
+        //--------------
         const $window          = $( window );
         let	windowWidth        = window.innerWidth,
             windowHeight       = window.innerHeight;
 
         const html = document.documentElement,
-            body = document.body,
-            scroller = {
-                target        : '#uix-scrollspy-area',
-                ease          : 0.05,
+              body = document.body,
+              scroller = {
+                  target        : '#uix-scrollspy-area',
+                  ease          : 0.05,
 
-                // <= scroll speed
-                endY          : 0,
-                y             : 0,
-                resizeRequest : 1,
-                scrollRequest : 0
-            }
+                  // <= scroll speed
+                  endY          : 0,
+                  y             : 0,
+                  resizeRequest : 1,
+                  scrollRequest : 0
+              };
         
         let requestId = null;
+        let lastScrollTop = 0; // Determine the direction of scrolling
 
         TweenMax.set( scroller.target, {
             rotation: 0.01,
@@ -55,6 +60,54 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 
         //Increase the viewport to display the visual area
         const elTop = $( scroller.target ).offset().top;
+		
+        
+
+        // Scrolling Progress
+        //--------------
+        const tlTarget1 = '#app-scrolling-progress1';
+        const tlTarget2 = '#app-scrolling-progress2';
+        const tlTarget3 = '#app-scrolling-progress3';
+        TweenMax.set( tlTarget1, {toAlpha: 1});
+        
+        // time should be adjusted relative to window width or height
+        // Animation progress has nothing to do with time
+
+        const time = 10;
+        const time02 = 2;
+        const timestop01 = time / 9.9999;
+        const timestop02 = time / 8.1;
+        
+        const tlAction = new TimelineMax({ paused: true })
+                            .to( tlTarget1, time, {
+                                height: ( $( scroller.target ).height() ) - windowHeight*2 - 200
+                            })
+                            .to( tlTarget1, time02, {
+                                height: ( $( scroller.target ).height() ) - windowHeight*2
+                            })
+                            .to( tlTarget1, time, {
+                                width: 15
+                            }, 0)
+
+                            .to( tlTarget2, 0.3, {
+                                rotation: -10,
+                                scale: 0.5, 
+                                transformOrigin: 'center'
+                            }, timestop01 )
+
+                            
+                            .to( tlTarget3, 0.3, {
+                                rotation: 1125,
+                                scale: 0.1, 
+                                transformOrigin: 'center'
+                            }, timestop02 );
+
+      
+        
+        
+        // Core Actions
+        //--------------
+        
         const initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
 
         if ( ! $( 'body' ).hasClass( initSmoothScrollingPageWrapper ) ) {
@@ -195,9 +248,24 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                     alpha: ( $this.data( 'scrollspy-reverse' ) ? 1-elOpacity : elOpacity ) 
                 });    
             });  
-         
+
             
             
+            //----------------------------------------------------------------------------------
+            //--------------------------------- Scrolling Progress -------------------------------	
+            //----------------------------------------------------------------------------------   
+
+            const scrollDistance = $( scroller.target ).height(),
+                  visibleAreaDistance = windowHeight,
+                  scrollPercent = scrolled / (scrollDistance - visibleAreaDistance);
+
+            const progressBlobs = scrollPercent * 1; // slower (= <) or faster and/or change height of 'scrollDistance'
+            const scrollDir =  ( scrolled > lastScrollTop ) ? 'down' : 'up';
+
+            TweenMax.to( tlAction, 1, {
+                progress: progressBlobs, 
+                ease: Sine.easeOut
+            });
 
         
             
@@ -205,14 +273,17 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             //---------------------------------------------------------------------------------	
             //----------------------------------------------------------------------------------  
             
+            
+            //
+            lastScrollTop = scrolled;
 
         }//end scrollUpdate()
 
 
 		
     };
-
-    module.components.documentReady.push( module.SMOOTH_SCROLLING_PAGE.documentReady );
+    
+    module.components.pageLoaded.push( module.SMOOTH_SCROLLING_PAGE.pageLoaded );
 
 	return class SMOOTH_SCROLLING_PAGE {
 		constructor() {

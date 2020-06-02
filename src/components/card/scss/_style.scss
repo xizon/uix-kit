@@ -482,6 +482,23 @@ $card-radius: 8px;
             }  
         }
         
+        
+
+        /*-- Menu Group --*/
+        .uix-card--gallery__menu {
+            flex-direction: column;
+
+            .uix-card--gallery__menu__avatar {
+                margin: 1rem;
+            }
+
+            .uix-card--gallery__menu__action {
+                margin: 1rem;
+            }
+
+        }
+
+        
 		
 	}
 

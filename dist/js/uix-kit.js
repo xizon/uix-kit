@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.2
+ * ## Version             :  4.3.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 1, 2020
+ * ## Last Update         :  June 2, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ecb1ecc451909835015c";
+/******/ 	var hotCurrentHash = "3f16a476fefb11e7c66b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -24283,11 +24283,14 @@ function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.1.0';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.1.1';
 
-  module.SMOOTH_SCROLLING_PAGE.documentReady = function ($) {
+  module.SMOOTH_SCROLLING_PAGE.pageLoaded = function () {
     //Prevent this module from loading in other pages
-    if (!$('body').hasClass('smooth-scrolling-page')) return false;
+    //--------------
+    if (!$('body').hasClass('smooth-scrolling-page')) return false; // Core params
+    //--------------
+
     var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
@@ -24303,12 +24306,47 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       scrollRequest: 0
     };
     var requestId = null;
+    var lastScrollTop = 0; // Determine the direction of scrolling
+
     TweenMax.set(scroller.target, {
       rotation: 0.01,
       force3D: true
     }); //Increase the viewport to display the visual area
 
-    var elTop = $(scroller.target).offset().top;
+    var elTop = $(scroller.target).offset().top; // Scrolling Progress
+    //--------------
+
+    var tlTarget1 = '#app-scrolling-progress1';
+    var tlTarget2 = '#app-scrolling-progress2';
+    var tlTarget3 = '#app-scrolling-progress3';
+    TweenMax.set(tlTarget1, {
+      toAlpha: 1
+    }); // time should be adjusted relative to window width or height
+    // Animation progress has nothing to do with time
+
+    var time = 10;
+    var time02 = 2;
+    var timestop01 = time / 9.9999;
+    var timestop02 = time / 8.1;
+    var tlAction = new TimelineMax({
+      paused: true
+    }).to(tlTarget1, time, {
+      height: $(scroller.target).height() - windowHeight * 2 - 200
+    }).to(tlTarget1, time02, {
+      height: $(scroller.target).height() - windowHeight * 2
+    }).to(tlTarget1, time, {
+      width: 15
+    }, 0).to(tlTarget2, 0.3, {
+      rotation: -10,
+      scale: 0.5,
+      transformOrigin: 'center'
+    }, timestop01).to(tlTarget3, 0.3, {
+      rotation: 1125,
+      scale: 0.1,
+      transformOrigin: 'center'
+    }, timestop02); // Core Actions
+    //--------------
+
     var initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
 
     if (!$('body').hasClass(initSmoothScrollingPageWrapper)) {
@@ -24415,13 +24453,29 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
           alpha: $this.data('scrollspy-reverse') ? 1 - elOpacity : elOpacity
         });
       }); //----------------------------------------------------------------------------------
+      //--------------------------------- Scrolling Progress -------------------------------	
+      //----------------------------------------------------------------------------------   
+
+      var scrollDistance = $(scroller.target).height(),
+          visibleAreaDistance = windowHeight,
+          scrollPercent = scrolled / (scrollDistance - visibleAreaDistance);
+      var progressBlobs = scrollPercent * 1; // slower (= <) or faster and/or change height of 'scrollDistance'
+
+      var scrollDir = scrolled > lastScrollTop ? 'down' : 'up';
+      TweenMax.to(tlAction, 1, {
+        progress: progressBlobs,
+        ease: Sine.easeOut
+      }); //----------------------------------------------------------------------------------
       //---------------------------------------------------------------------------------	
       //----------------------------------------------------------------------------------  
+      //
+
+      lastScrollTop = scrolled;
     } //end scrollUpdate()
 
   };
 
-  module.components.documentReady.push(module.SMOOTH_SCROLLING_PAGE.documentReady);
+  module.components.pageLoaded.push(module.SMOOTH_SCROLLING_PAGE.pageLoaded);
   return function SMOOTH_SCROLLING_PAGE() {
     smooth_scrolling_page_js_classCallCheck(this, SMOOTH_SCROLLING_PAGE);
 

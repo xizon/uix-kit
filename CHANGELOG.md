@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 4.3.3 (June 2, 2020) =
+
+* Tweak: Add timeline Scrolling Progress to Smooth Scrolling Page.
+* Tweak: Optimize the responsive effect of the card.
+
 
 #### = 4.3.2 (June 1, 2020) =
 
