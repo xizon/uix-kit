@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.3
+ * ## Version             :  4.3.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 2, 2020
+ * ## Last Update         :  July 9, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3f16a476fefb11e7c66b";
+/******/ 	var hotCurrentHash = "1eea346ca2b3eecd22b7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -9770,7 +9770,7 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.2.1';
+  module.ADVANCED_SLIDER.version = '0.2.2';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -10128,7 +10128,6 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
     function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-slider__item'),
-          $current = $items.eq(elementIndex),
           total = $items.length; //Prevent bubbling
 
       if (total == 1) {
@@ -10164,8 +10163,11 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
             $(arrowsID).find('.uix-advanced-slider__arrows--next').addClass('is-disabled');
           }
         }
-      } //Determine the direction and add class to switching direction indicator.
+      } // call the current item
+      //-------------------------------------
 
+
+      var $current = $items.eq(elementIndex); //Determine the direction and add class to switching direction indicator.
 
       var dirIndicatorClass = '';
       if (dir == 'prev') dirIndicatorClass = 'prev';
@@ -11074,7 +11076,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.3.0';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.1';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -12015,7 +12017,6 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
     function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
       var $items = slider.find('.uix-advanced-slider-sp__item'),
-          $current = $items.eq(elementIndex),
           total = $items.length; //Prevent bubbling
 
       if (total == 1) {
@@ -12052,9 +12053,12 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
             $(arrowsID).find('.uix-advanced-slider-sp__arrows--next').addClass('is-disabled');
           }
         }
-      } //Determine the direction and add class to switching direction indicator.
+      } // call the current item
       //-------------------------------------
 
+
+      var $current = $items.eq(elementIndex); //Determine the direction and add class to switching direction indicator.
+      //-------------------------------------
 
       var dirIndicatorClass = '';
       if (dir == 'prev') dirIndicatorClass = 'prev';

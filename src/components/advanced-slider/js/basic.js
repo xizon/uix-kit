@@ -24,7 +24,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.2.1';
+    module.ADVANCED_SLIDER.version       = '0.2.2';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		const $window          = $( window );
@@ -542,8 +542,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
         function sliderUpdates( elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 			
 			const $items                   = slider.find( '.uix-advanced-slider__item' ),
-				$current                 = $items.eq( elementIndex ),
-			    total                    = $items.length
+                  total                    = $items.length;
 			
 		
 		    //Prevent bubbling
@@ -586,6 +585,12 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 				
 			}
+            
+            
+            
+            // call the current item
+            //-------------------------------------
+            const $current = $items.eq( elementIndex );
 			
 			
 			//Determine the direction and add class to switching direction indicator.
@@ -638,6 +643,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 		 */
         function itemDefaultInit( slider, currentLlement ) {
 			
+
 			if ( currentLlement.find( 'video' ).length > 0 ) {
 
 				//Returns the dimensions (intrinsic height and width ) of the video
@@ -664,7 +670,6 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 					const img = new Image();
 
 					img.onload = function() {
-
 						slider.css( 'height', currentLlement.closest( '.uix-advanced-slider__outline' ).width()*(this.height/this.width) + 'px' );		
 
 					};

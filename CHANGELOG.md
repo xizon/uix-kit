@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 4.3.4 (July 9, 2020) =
+
+* Fix:Fixed issue with initialization height for Advanced Slider when click the next button.
+
+
+
 #### = 4.3.3 (June 2, 2020) =
 
 * Tweak: Add timeline Scrolling Progress to Smooth Scrolling Page.

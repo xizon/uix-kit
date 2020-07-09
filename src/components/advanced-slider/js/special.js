@@ -26,7 +26,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.3.0';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.3.1';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -1474,11 +1474,8 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
         function sliderUpdates( elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop ) {
 			
 			const $items                   = slider.find( '.uix-advanced-slider-sp__item' ),
-				  $current                 = $items.eq( elementIndex ),
 			      total                    = $items.length;
 			
-
-
 		
 		    //Prevent bubbling
 			if ( total == 1 ) {
@@ -1524,6 +1521,12 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 				
 			}
+            
+            
+            // call the current item
+            //-------------------------------------
+            const $current = $items.eq( elementIndex );
+            
 			
 			//Determine the direction and add class to switching direction indicator.
 			//-------------------------------------
