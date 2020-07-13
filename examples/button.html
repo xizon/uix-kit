@@ -3,24 +3,11 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Buttons - Uix Kit</title>	
-		<!-- Mobile Settings
+		<!-- Compatibility Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<!-- Mobile Settings end -->
-
-	<!-- Vendor
-	============================================= -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
-	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
-	<!-- Vendor  end -->
-
-
-	<!-- Compatibility
-	============================================= -->
-	<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- Compatibility  end -->
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Compatibility Settings end -->
 
 
 	<!-- Web Fonts
@@ -43,15 +30,24 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=0Flcr1EHT6jR0JoxICiA"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=HLFZLG8jFPV6rS1gYFn4"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=0Flcr1EHT6jR0JoxICiA" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=HLFZLG8jFPV6rS1gYFn4" />
 	<![endif]-->
 
 
 	<!-- Core & Theme CSS  end -->
+
+
+	<!-- Vendor
+	============================================= -->
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
+	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+    <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
+	<!-- Vendor  end -->
+
 
 
 	<!-- Break free from CSS prefix hell!
@@ -843,16 +839,16 @@
       
 
     <!-- Vendor -->
-	<script src="assets/js/min/axios.min.js?ver=0.19.2"></script>
-    <script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-    <script src="assets/js/min/video.min.js?ver=7.5.3"></script>
-    <script src="assets/js/min/template7.min.js?ver=1.4.2"></script>
-    <script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
-    <script src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
-    <script src="assets/js/min/three.min.js?ver=r114"></script>
-    <script src="assets/js/min/anime.min.js?ver=3.1"></script>
-    <script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-    <script src="assets/js/min/muuri.min.js?ver=0.8.0"></script>
+	<script defer src="assets/js/min/axios.min.js?ver=0.19.2"></script>
+    <script defer src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+    <script defer src="assets/js/min/video.min.js?ver=7.5.3"></script>
+    <script defer src="assets/js/min/template7.min.js?ver=1.4.2"></script>
+    <script defer src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
+    <script defer src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
+    <script defer src="assets/js/min/three.min.js?ver=r114"></script>
+    <script defer src="assets/js/min/anime.min.js?ver=3.1"></script>
+    <script defer src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
+    <script defer src="assets/js/min/muuri.min.js?ver=0.8.0"></script>
 
 
     
@@ -865,7 +861,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "4.3.4",
+		var REVISION     = "4.3.5",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -879,7 +875,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script src="../dist/js/uix-kit.min.js?ver=0Flcr1EHT6jR0JoxICiA"></script>
+    <script defer src="../dist/js/uix-kit.min.js?ver=HLFZLG8jFPV6rS1gYFn4"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 
@@ -887,7 +883,7 @@
 			/* Google analytics */
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			m=s.getElementsByTagName(o)[0];a.defer=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 			ga('create', 'UA-70658525-1', 'auto');

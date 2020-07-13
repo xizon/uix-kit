@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 4.3.5 (July 13, 2020) =
+
+* Tweak: Optimized the performance of external JS files.
+
+
+
 #### = 4.3.4 (July 9, 2020) =
 
 * Fix:Fixed issue with initialization height for Advanced Slider when click the next button.
