@@ -20,8 +20,7 @@ Uix Kit bundles the following third-party resources:
 
 - [jQuery](https://jquery.com/)
 - [Font Awesome](http://fontawesome.io)
-- [Flexslider](https://github.com/woocommerce/FlexSlider)
-- [Bootstrap v4](http://getbootstrap.com)
+- [Bootstrap](http://getbootstrap.com)
 - [waitForImages](https://github.com/alexanderdickson/waitForImages)
 - [modernizr](https://modernizr.com/)
 - [animejs](https://github.com/juliangarnier/anime)

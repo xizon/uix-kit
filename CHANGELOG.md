@@ -1,6 +1,14 @@
 # Changelog
 
 
+
+#### = 4.3.6 (July 28, 2020) =
+
+* Tweak: Minor adjustments to dynamic form functions.
+* Security: upgrade lodash to version 4.17.19 or later. 
+
+
+
 #### = 4.3.5 (July 13, 2020) =
 
 * Tweak: Optimized the performance of external JS files.

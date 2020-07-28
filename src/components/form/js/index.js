@@ -62,7 +62,7 @@ export const FORM = ( ( module, $, window, document ) => {
 	
 	
     module.FORM               = module.FORM || {};
-    module.FORM.version       = '0.1.75';
+    module.FORM.version       = '0.1.8';
     module.FORM.documentReady = function( $ ) {
 
 		
@@ -115,11 +115,12 @@ export const FORM = ( ( module, $, window, document ) => {
 			const $this            = $( this );
             
 			const $addButton       = $this.find( '.uix-controls__dynamic-fields__addbtn' ), //The add button
-				  removeButton     = '.uix-controls__dynamic-fields__removebtn', //The remove button selector ID or class
-				  $appendWrapper   = $this.find( '.uix-controls__dynamic-fields__append' ); //The field wrapper ID or class 
-				
+				  $appendWrapper   = $this.find( '.uix-controls__dynamic-fields__append' ), //The field wrapper ID or class 
+                  loopCls          = '.uix-controls__dynamic-fields__tmpl__wrapper',
+                  defaultItems     = $appendWrapper.find( loopCls ).length;
+                  
             
-			let	x                = 1,
+			let	x                = ( defaultItems == 0 ) ? 1 : defaultItems+1,
                 maxField         = $this.data( 'max-fields' ),
 				fieldHTML        = '';
 
@@ -133,7 +134,7 @@ export const FORM = ( ( module, $, window, document ) => {
 				
 				
 				//replace the index of field name
-				fieldCode = fieldCode.replace(/\{index\}/gi, x );
+				fieldCode = fieldCode.replace(/___GUID___/gi, UixGUID.create() );
 				
 				//hide add button
 				if ( x == maxField ) $addButton.hide();
@@ -153,40 +154,41 @@ export const FORM = ( ( module, $, window, document ) => {
 
 			};
 
-			addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );
-
-
+            // default item
+            if ( defaultItems == 0 ) {
+                addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );
+            }
+            
+			
 			//Prevent duplicate function assigned
 			$addButton.off( 'click' ).off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
 
+                
+                //template init
 				addOne( $this.find( '.uix-controls__dynamic-fields__tmpl' ).html() );
+                
+                //Remove per item
+                //Prevent duplicate function assigned
+                $this.find( '.uix-controls__dynamic-fields__removebtn' ).off( 'click' ).on( 'click', function( e ) {
+                    e.preventDefault();
+
+
+                    //display add button
+                    $addButton.show();
+
+
+                    //remove current item
+                    $( this ).closest( loopCls ).remove();
+
+
+                    x--;
+                });	   
+                
 				return false;
 			});
 
-			//Remove per item
 
-			//Prevent duplicate function assigned
-			$( document ).off( 'click.FORM_DYNAMIC_FIELDS' ).on( 'click.FORM_DYNAMIC_FIELDS', removeButton, function( e ) {
-				e.preventDefault();
-				
-					
-				//display add button
-				$addButton.show();
-
-
-				const $li = $( this ).closest( '.uix-controls__dynamic-fields__tmpl__wrapper' );
-
-				if ( $this.find( '.uix-controls__dynamic-fields .uix-controls__dynamic-fields__tmpl__wrapper' ).length == 1 ) {
-					$li.find( 'input, textarea' ).val( '' );
-					$li.hide();
-				} else {
-					$li.remove();
-				}
-
-
-				x--;
-			});	
 
 
 
