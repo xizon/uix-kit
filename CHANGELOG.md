@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 4.3.7 (July 31, 2020) =
+
+* Security: Upgrade elliptic to version 6.5.3 or later.
+* Security: Upgrade dot-prop to version 5.1.1 or later.
 
 
 #### = 4.3.6 (July 28, 2020) =

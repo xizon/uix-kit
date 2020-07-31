@@ -85,10 +85,11 @@
 
 // FONTS
 // ---------------------------
-// Files: 
+// @Files used: 
 // ./src/components/_global/scss/basic.scss
+// ./src/components/_global/scss/mobile-menu.scss
 // ./src/components/_global/scss/typography.scss
-// ./src/components/form/scss/_style.scss
+// ./src/components/form/scss/_basic.scss
 //
 //Default font-size for HTML
 $basic-font-size       : 16px;
@@ -108,8 +109,9 @@ $font-size-h6          : 0.75rem;
 
 // GLOBAL SPACING HIERARCHY WITH <section>
 // ---------------------------
-// Files: 
+// @Files used: 
 // ./src/components/_global/scss/spacing.scss
+// ./src/components/_global/scss/footer.scss
 //
 $spacing-large          : 11.375rem;
 $spacing-medium         : 6.5625rem;
@@ -121,7 +123,10 @@ $spacing-small-mobile   : $spacing-small/2;
 
 // COLOR PALETTE
 // ---------------------------
+// @Files used: 
+// ./src/components/*
 //
+
 //Placeholder Text Color
 $placeholder-text-color: #E6E6E8;
 
