@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 4.3.8 (August 17, 2020) =
+
+* New: Added an SVG Mask Slider module.
+* New: Add some demo of "Images".
+* Tweak: Modified the initialization asynchronous method of the module `Posts List With Ajax`.
+* Security: Upgrade serialize-javascript to version 3.1.0 or later. 
+
+
 #### = 4.3.7 (July 31, 2020) =
 
 * Security: Upgrade elliptic to version 6.5.3 or later.

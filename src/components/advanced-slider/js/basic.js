@@ -24,7 +24,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.2.2';
+    module.ADVANCED_SLIDER.version       = '0.2.3';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
 		const $window          = $( window );
@@ -112,9 +112,21 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 
 
 
+					//Get the duration of the animation from CSS/SCSS
+					//-------------------------------------	
                     animDelay = UixCssProperty.getTransitionDuration( $first[0] );
 
 
+					//Initialize the properties of each Item
+					//-------------------------------------	
+					$items.each( function( index )  {
+						const _item = $( this );
+						_item.delay( animDelay*index ).queue( 'fx', function() { 
+							$( this ).addClass( 'is-loaded' ).dequeue();
+						});
+					});
+
+					
 
                     //Initialize the first item container
                     //-------------------------------------		
@@ -609,7 +621,7 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
 			slider.find( '.uix-advanced-slider__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClass );
-			$items.eq( elementIndex ).addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
+			$current.addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			

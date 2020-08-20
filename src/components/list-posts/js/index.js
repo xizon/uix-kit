@@ -27,7 +27,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.6';
+    module.POST_LIST_AJAX.version       = '0.1.7';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
         
         
@@ -38,7 +38,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
             
 			const wrapperID        = 'refresh-all-waypoint-' + UixGUID.create();
             
-			let    curPage          = $this.data( 'ajax-list-page-now' ),
+			let curPage          = $this.data( 'ajax-list-page-now' ),
+				initCurPage      = curPage,
 				perShow          = $this.data( 'ajax-list-page-per' ),
 				totalPage        = $this.data( 'ajax-list-page-total' ),
 				method           = $this.data( 'ajax-list-method' ),
@@ -181,7 +182,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						  btnTop  = $button.offset().top;
 					
 					//Add default page number to the button
-					$button.attr( 'data-cur-page', 1 );
+					$button.attr( 'data-cur-page', initCurPage );
 
 					
 					//Hide the next button 
@@ -250,7 +251,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 							  nextTrigger = triggerStr[1].next;
 						
 						//Add default page number to the button
-						$( nextTrigger ).parent().attr( 'data-cur-page', 1 );
+						$( nextTrigger ).parent().attr( 'data-cur-page', initCurPage );
 
 
 						
@@ -347,7 +348,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 						
 						//----------------- More Button ----------------
 						//Add default page number to the button
-						$( trigger ).attr( 'data-cur-page', 1 );
+						$( trigger ).attr( 'data-cur-page', initCurPage );
 
 						//Hide the next button 
 						if ( totalPage == 1 ) {
@@ -538,11 +539,6 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
                             returnEmptyInfo();
 
                         }		
-
-                        if ( curPage == 1 ) {
-                            returnEmptyInfo();
-
-                        }			
 
 
                     } catch ( err ) {

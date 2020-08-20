@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.5
+ * ## Version             :  4.3.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 13, 2020
+ * ## Last Update         :  August 20, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0ab1cd0ed6cd61091da2";
+/******/ 	var hotCurrentHash = "559a00a8322c72279fb2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -805,7 +805,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(138)(__webpack_require__.s = 138);
+/******/ 	return hotCreateRequire(139)(__webpack_require__.s = 139);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -7017,6 +7017,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /***/ }),
 /* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -7075,12 +7081,6 @@ jQuery.fn.sortElements = function () {
 }();
 
 /***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7088,6 +7088,12 @@ jQuery.fn.sortElements = function () {
 
 /***/ }),
 /* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -7241,12 +7247,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
   };
 })(jQuery);
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 /* 75 */
@@ -7471,7 +7471,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 112 */,
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 113 */,
 /* 114 */,
 /* 115 */,
@@ -7497,7 +7502,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 135 */,
 /* 136 */,
 /* 137 */,
-/* 138 */
+/* 138 */,
+/* 139 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7574,32 +7580,33 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     57.Sticky Elements
     58.SVG Map (China)
     59.SVG Map (World)
-    60.3D Background 1 with three.js
-    61.3D Background 2 with three.js
-    62.3D Background 3 with three.js
-    63.3D Background
-    64.3D Carousel
-    65.3D Gallery with three.js
-    66.3D Image Transition with three.js
-    67.3D Model
-    68.3D Pages
-    69.3D Particle Effect
-    70.3D Sphere Rotation
-    71.3D Object Anim When Click
-    72.3D Mouse Interaction with three.js
+    60.SVG Mask Slider
+    61.3D Background 1 with three.js
+    62.3D Background 2 with three.js
+    63.3D Background 3 with three.js
+    64.3D Background
+    65.3D Carousel
+    66.3D Gallery with three.js
+    67.3D Image Transition with three.js
+    68.3D Model
+    69.3D Pages
+    70.3D Particle Effect
+    71.3D Sphere Rotation
+    72.3D Object Anim When Click
     73.3D Mouse Interaction with three.js
-    74.3D Shatter Slider
-    75.3D Explosive Particle Slider
-    76.3D Liquid Scrollspy Slider
-    77.3D Filmic Effects
-    78.Responsive Table
-    79.Table Sorter
-    80.Tabs
-    81.Team Focus
-    82.Text effect
-    83.Timeline
-    84.Vertical Menu
-    85.WordPress Core Scripts
+    74.3D Mouse Interaction with three.js
+    75.3D Shatter Slider
+    76.3D Explosive Particle Slider
+    77.3D Liquid Scrollspy Slider
+    78.3D Filmic Effects
+    79.Responsive Table
+    80.Table Sorter
+    81.Tabs
+    82.Team Focus
+    83.Text effect
+    84.Timeline
+    85.Vertical Menu
+    86.WordPress Core Scripts
 
 
 */
@@ -9770,7 +9777,7 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.2.2';
+  module.ADVANCED_SLIDER.version = '0.2.3';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -9826,8 +9833,19 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
           var playTimes; //A function called "timer" once every second (like a digital watch).
 
-          $this[0].animatedSlides;
-          animDelay = UixCssProperty.getTransitionDuration($first[0]); //Initialize the first item container
+          $this[0].animatedSlides; //Get the duration of the animation from CSS/SCSS
+          //-------------------------------------	
+
+          animDelay = UixCssProperty.getTransitionDuration($first[0]); //Initialize the properties of each Item
+          //-------------------------------------	
+
+          $items.each(function (index) {
+            var _item = $(this);
+
+            _item.delay(animDelay * index).queue('fx', function () {
+              $(this).addClass('is-loaded').dequeue();
+            });
+          }); //Initialize the first item container
           //-------------------------------------		
 
           $items.addClass('next');
@@ -10180,7 +10198,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       $items.removeClass('leave prev next');
       $items.addClass(dirIndicatorClass);
       slider.find('.uix-advanced-slider__item.is-active').removeClass('is-active').addClass('leave ' + dirIndicatorClass);
-      $items.eq(elementIndex).addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
+      $current.addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
       //-------------------------------------
 
       $(countTotalID).text(total);
@@ -11076,7 +11094,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.3.1';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.2';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -12073,7 +12091,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       $items.removeClass('leave prev next');
       $items.addClass(dirIndicatorClass);
       slider.find('.uix-advanced-slider-sp__item.is-active').removeClass('is-active').addClass('leave ' + dirIndicatorClass);
-      $items.eq(elementIndex).addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
+      $current.addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //Display counter
       //-------------------------------------
 
       $(countTotalID).text(total);
@@ -18773,7 +18791,7 @@ function form_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var FORM = function (module, $, window, document) {
   if (window.FORM === null) return false;
   module.FORM = module.FORM || {};
-  module.FORM.version = '0.1.75';
+  module.FORM.version = '0.1.8';
 
   module.FORM.documentReady = function ($) {
     /*
@@ -18828,11 +18846,11 @@ var FORM = function (module, $, window, document) {
       var $this = $(this);
       var $addButton = $this.find('.uix-controls__dynamic-fields__addbtn'),
           //The add button
-      removeButton = '.uix-controls__dynamic-fields__removebtn',
-          //The remove button selector ID or class
-      $appendWrapper = $this.find('.uix-controls__dynamic-fields__append'); //The field wrapper ID or class 
-
-      var x = 1,
+      $appendWrapper = $this.find('.uix-controls__dynamic-fields__append'),
+          //The field wrapper ID or class 
+      loopCls = '.uix-controls__dynamic-fields__tmpl__wrapper',
+          defaultItems = $appendWrapper.find(loopCls).length;
+      var x = defaultItems == 0 ? 1 : defaultItems + 1,
           maxField = $this.data('max-fields'),
           fieldHTML = ''; //Maximum number of forms added
 
@@ -18843,7 +18861,7 @@ var FORM = function (module, $, window, document) {
 
       var addOne = function addOne(fieldCode) {
         //replace the index of field name
-        fieldCode = fieldCode.replace(/\{index\}/gi, x); //hide add button
+        fieldCode = fieldCode.replace(/___GUID___/gi, UixGUID.create()); //hide add button
 
         if (x == maxField) $addButton.hide();
 
@@ -18855,31 +18873,29 @@ var FORM = function (module, $, window, document) {
           });
           x++;
         }
-      };
+      }; // default item
 
-      addOne($this.find('.uix-controls__dynamic-fields__tmpl').html()); //Prevent duplicate function assigned
+
+      if (defaultItems == 0) {
+        addOne($this.find('.uix-controls__dynamic-fields__tmpl').html());
+      } //Prevent duplicate function assigned
+
 
       $addButton.off('click').off('click').on('click', function (e) {
-        e.preventDefault();
-        addOne($this.find('.uix-controls__dynamic-fields__tmpl').html());
+        e.preventDefault(); //template init
+
+        addOne($this.find('.uix-controls__dynamic-fields__tmpl').html()); //Remove per item
+        //Prevent duplicate function assigned
+
+        $this.find('.uix-controls__dynamic-fields__removebtn').off('click').on('click', function (e) {
+          e.preventDefault(); //display add button
+
+          $addButton.show(); //remove current item
+
+          $(this).closest(loopCls).remove();
+          x--;
+        });
         return false;
-      }); //Remove per item
-      //Prevent duplicate function assigned
-
-      $(document).off('click.FORM_DYNAMIC_FIELDS').on('click.FORM_DYNAMIC_FIELDS', removeButton, function (e) {
-        e.preventDefault(); //display add button
-
-        $addButton.show();
-        var $li = $(this).closest('.uix-controls__dynamic-fields__tmpl__wrapper');
-
-        if ($this.find('.uix-controls__dynamic-fields .uix-controls__dynamic-fields__tmpl__wrapper').length == 1) {
-          $li.find('input, textarea').val('');
-          $li.hide();
-        } else {
-          $li.remove();
-        }
-
-        x--;
       });
     });
     /* 
@@ -20952,7 +20968,7 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.6';
+  module.POST_LIST_AJAX.version = '0.1.7';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $(window).off('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX');
@@ -20960,6 +20976,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
       var $this = $(this);
       var wrapperID = 'refresh-all-waypoint-' + UixGUID.create();
       var curPage = $this.data('ajax-list-page-now'),
+          initCurPage = curPage,
           perShow = $this.data('ajax-list-page-per'),
           totalPage = $this.data('ajax-list-page-total'),
           method = $this.data('ajax-list-method'),
@@ -21073,7 +21090,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
           var $button = $(trigger),
               btnTop = $button.offset().top; //Add default page number to the button
 
-          $button.attr('data-cur-page', 1); //Hide the next button 
+          $button.attr('data-cur-page', initCurPage); //Hide the next button 
 
           if (totalPage == 1) {
             $button.addClass('is-hide');
@@ -21123,7 +21140,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             var prevTrigger = triggerStr[0].prev,
                 nextTrigger = triggerStr[1].next; //Add default page number to the button
 
-            $(nextTrigger).parent().attr('data-cur-page', 1); //--------------- Next Button ------------------
+            $(nextTrigger).parent().attr('data-cur-page', initCurPage); //--------------- Next Button ------------------
             //Hide the next button 
 
             if (totalPage == 1) {
@@ -21184,7 +21201,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
           } else {
             //----------------- More Button ----------------
             //Add default page number to the button
-            $(trigger).attr('data-cur-page', 1); //Hide the next button 
+            $(trigger).attr('data-cur-page', initCurPage); //Hide the next button 
 
             if (totalPage == 1) {
               $(trigger).addClass('is-hide');
@@ -21312,10 +21329,6 @@ var POST_LIST_AJAX = function (module, $, window, document) {
             $button.removeClass(triggerActive); //--------- Hidden button when the page total number is set and does not equal -1 or 9999
 
             if (curPage == totalPage && totalPage != 9999 && totalPage != -1 && totalPage != 1) {
-              returnEmptyInfo();
-            }
-
-            if (curPage == 1) {
               returnEmptyInfo();
             }
           } catch (err) {
@@ -24799,6 +24812,614 @@ var SVG_MAP_WORLD = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// EXTERNAL MODULE: ./src/components/svg-mask-slider/scss/_style.scss
+var svg_mask_slider_scss_style = __webpack_require__(65);
+
+// CONCATENATED MODULE: ./src/components/svg-mask-slider/js/index.js
+function svg_mask_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function svg_mask_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { svg_mask_slider_js_typeof = function _typeof(obj) { return typeof obj; }; } else { svg_mask_slider_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return svg_mask_slider_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- SVG Mask Slider -->
+ *************************************
+ */
+
+
+var SVG_MASK_SLIDER = function (module, $, window, document) {
+  if (window.SVG_MASK_SLIDER === null) return false;
+  module.SVG_MASK_SLIDER = module.SVG_MASK_SLIDER || {};
+  module.SVG_MASK_SLIDER.version = '0.0.1';
+
+  module.SVG_MASK_SLIDER.pageLoaded = function () {
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight;
+    var animDelay = 0;
+    var animSpeed = 1000;
+    var $sliderWrapper = $('.uix-svgMask-slider');
+    var svgAnimating = false; //
+
+    sliderInit(false);
+    $window.on('resize', function () {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth;
+        sliderInit(true);
+      }
+    });
+    /*
+     * Initialize slideshow
+     *
+     * @param  {Boolean} resize            - Determine whether the window size changes.
+     * @return {Void}
+     */
+
+    function sliderInit(resize) {
+      $sliderWrapper.each(function () {
+        var $this = $(this);
+        var $items = $this.find('.uix-svgMask-slider__item'),
+            $first = $items.first(),
+            activated = $this.data('activated');
+        var nativeItemW, nativeItemH;
+
+        if (svg_mask_slider_js_typeof(activated) === ( true ? "undefined" : undefined) || activated === 0) {
+          //Get parameter configuration from the data-* attribute of HTML
+          var dataControlsPagination = $this.data('controls-pagination'),
+              dataControlsArrows = $this.data('controls-arrows'),
+              dataDraggable = $this.data('draggable'),
+              dataDraggableCursor = $this.data('draggable-cursor'),
+              dataCountTotal = $this.data('count-total'),
+              dataCountCur = $this.data('count-now'),
+              dataSpeed = $this.data('speed');
+          if (svg_mask_slider_js_typeof(dataControlsPagination) === ( true ? "undefined" : undefined)) dataControlsPagination = '.uix-svgMask-slider__pagination';
+          if (svg_mask_slider_js_typeof(dataControlsArrows) === ( true ? "undefined" : undefined) || dataControlsArrows == false) dataControlsArrows = '.uix-svgMask-slider__arrows';
+          if (svg_mask_slider_js_typeof(dataDraggable) === ( true ? "undefined" : undefined)) dataDraggable = false;
+          if (svg_mask_slider_js_typeof(dataDraggableCursor) === ( true ? "undefined" : undefined) || dataDraggableCursor == false) dataDraggableCursor = 'move';
+          if (svg_mask_slider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = 'p.count em.count';
+          if (svg_mask_slider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = 'p.count em.current'; //Autoplay parameters
+
+          var dataAuto = $this.data('auto'),
+              dataTiming = $this.data('timing'),
+              dataLoop = $this.data('loop');
+          if (svg_mask_slider_js_typeof(dataAuto) === ( true ? "undefined" : undefined)) dataAuto = false;
+          if (svg_mask_slider_js_typeof(dataTiming) === ( true ? "undefined" : undefined)) dataTiming = 10000;
+          if (svg_mask_slider_js_typeof(dataLoop) === ( true ? "undefined" : undefined)) dataLoop = false; //Autoplay times
+
+          var playTimes; //A function called "timer" once every second (like a digital watch).
+
+          $this[0].animatedSlides; //Get the animation speed
+          //-------------------------------------	
+
+          if (svg_mask_slider_js_typeof(dataSpeed) != ( true ? "undefined" : undefined) && dataSpeed != false) {
+            animSpeed = dataSpeed;
+          } //Get the duration of the animation
+          //-------------------------------------	
+
+
+          animDelay = animSpeed; //Get timeline elements
+          //-------------------------------------	
+
+          var txtTimeline = new TimelineMax({
+            delay: 0
+          });
+          var txtMaskTimeline = new TimelineMax({
+            delay: 0
+          });
+          txtTimeline.to($items.find('.uix-svgMask-slider__txt__content'), 0.1, {
+            opacity: 0
+          }).to($items.find('svg image'), 0.2, {
+            scale: 1.1
+          }, '-=0.1').to($this.find('.uix-svgMask-slider__inner'), 0.9, {
+            ease: Circ.easeOut,
+            scale: 0.85
+          }, '-=0.2').to($this.find('.uix-svgMask-slider__inner'), 0.75, {
+            ease: Elastic.easeOut.config(4, 1.5),
+            scale: 1
+          }).pause();
+          txtMaskTimeline.to($items.find('.uix-svgMask-slider__txt__mask'), 0.6, {
+            css: {
+              marginLeft: 0
+            }
+          }).to($items.find('.uix-svgMask-slider__txt__content'), 0.1, {
+            opacity: 1
+          }, "-=0.1").to($items.find('svg image'), 0.2, {
+            scale: 1
+          }, '-=0.1').to($items.find('.uix-svgMask-slider__txt__mask'), 0.6, {
+            css: {
+              marginLeft: '-100vw'
+            }
+          }); //Initialize the properties of each Item
+          //-------------------------------------	
+
+          $items.each(function (index) {
+            var _id = UixGUID.create();
+
+            var _item = $(this);
+
+            _item.find('clipPath').attr('id', _id + '-img');
+
+            _item.find('image').attr('clip-path', 'url(#' + _id + '-img)');
+
+            _item.delay(animDelay * index).queue('fx', function () {
+              $(this).addClass('is-loaded').dequeue();
+            });
+          }); //Initialize the first item container
+          //-------------------------------------		
+
+          $items.addClass('next');
+          setTimeout(function () {
+            $first.addClass('is-active');
+          }, animDelay); //
+
+          var imgURL = $first.find('img').attr('src');
+
+          if (svg_mask_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+            var img = new Image();
+
+            img.onload = function () {
+              $this.css('height', $this.width() * (this.height / this.width) + 'px');
+              nativeItemW = this.width;
+              nativeItemH = this.height; //Initialize all the items to the stage
+
+              addItemsToStage($this, nativeItemW, nativeItemH, dataControlsPagination, dataControlsArrows, dataLoop, dataDraggable, dataDraggableCursor, dataCountTotal, dataCountCur, txtTimeline, txtMaskTimeline);
+            };
+
+            img.src = imgURL;
+          } //Autoplay Slider
+          //-------------------------------------		
+
+
+          if (!resize) {
+            if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
+              sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              $this.on({
+                mouseenter: function mouseenter() {
+                  clearInterval($this[0].animatedSlides);
+                },
+                mouseleave: function mouseleave() {
+                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+                }
+              });
+            }
+          } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
+
+
+          $this.data('activated', 1);
+        } //endif activated
+
+      });
+    }
+    /*
+    * Trigger slider autoplay
+    *
+    * @param  {Function} playTimes            - Number of times.
+    * @param  {Number} timing                 - Autoplay interval.
+    * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+    * @param  {Element} slider                 - Selector of the slider .
+     * @param  {String} countTotalID           - Total number ID or class of counter.
+     * @param  {String} countCurID             - Current number ID or class of counter.
+     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+     * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+    * @return {Void}                          - The constructor.
+    */
+
+
+    function sliderAutoPlay(playTimes, timing, loop, slider, countTotalID, countCurID, paginationID, arrowsID) {
+      var items = slider.find('.uix-svgMask-slider__item'),
+          total = items.length;
+      slider[0].animatedSlides = setInterval(function () {
+        playTimes = parseFloat(items.filter('.is-active').index());
+        playTimes++;
+
+        if (!loop) {
+          if (playTimes < total && playTimes >= 0) sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+        } else {
+          if (playTimes == total) playTimes = 0;
+          if (playTimes < 0) playTimes = total - 1;
+          sliderUpdates(playTimes, slider, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
+        }
+      }, timing);
+    }
+    /*
+    * Initialize all the items to the stage
+    *
+    * @param  {Element} slider                 - Current selector of each slider.
+    * @param  {Number} nativeItemW            - Returns the intrinsic width of the image.
+    * @param  {Number} nativeItemH            - Returns the intrinsic height of the image.
+     * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+     * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+     * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop. 
+     * @param  {Boolean} draggable             - Allow drag and drop on the slider.
+     * @param  {String} draggableCursor        - Drag & Drop Change icon/cursor while dragging.
+     * @param  {String} countTotalID           - Total number ID or class of counter.
+     * @param  {String} countCurID             - Current number ID or class of counter.
+     * @param  {Function} tl1                  - Timeline animation of text field.
+     * @param  {Function} tl2                  - Timeline animation of text mask field.
+    * @return {Void}
+    */
+
+
+    function addItemsToStage(slider, nativeItemW, nativeItemH, paginationID, arrowsID, loop, draggable, draggableCursor, countTotalID, countCurID, tl1, tl2) {
+      var $this = slider,
+          $items = $this.find('.uix-svgMask-slider__item'),
+          $first = $items.first(),
+          itemTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
+      //and the drag and drop function will be activated.
+
+      if ($(arrowsID).length == 0) {
+        $('body').prepend('<div style="display:none;" class="uix-svgMask-slider__arrows ' + arrowsID.replace('#', '').replace('.', '') + '"><a href="#" class="uix-svgMask-slider__arrows--prev"></a><a href="#" class="uix-svgMask-slider__arrows--next"></a></div>');
+      } //Add identifiers for the first and last items
+
+
+      $items.last().addClass('last');
+      $items.first().addClass('first'); //Prevent bubbling
+
+      if (itemTotal == 1) {
+        $(paginationID).hide();
+        $(arrowsID).hide();
+      } //Pagination dots 
+      //-------------------------------------	
+
+
+      var _dot = '',
+          _dotActive = '';
+      _dot += '<ul>';
+
+      for (var i = 0; i < itemTotal; i++) {
+        _dotActive = i == 0 ? 'class="is-active"' : '';
+        _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
+      }
+
+      _dot += '</ul>';
+      if ($(paginationID).html() == '') $(paginationID).html(_dot);
+      $(paginationID).find('li a').off('click').on('click', function (e) {
+        e.preventDefault();
+        if (svgAnimating) return false; //Prevent buttons' events from firing multiple times
+
+        var $btn = $(this);
+        if ($btn.attr('aria-disabled') == 'true') return false;
+        $(paginationID).find('li a').attr('aria-disabled', 'true');
+        $(paginationID).find('li a').delay(animDelay).queue(function (next) {
+          $(paginationID).find('li a').attr('aria-disabled', 'false');
+          next();
+        }); //
+
+        if (!$(this).hasClass('is-active')) {
+          //Text animation from timeline
+          tl1.restart();
+          setTimeout(function () {
+            tl2.restart();
+          }, 1500); //Determine the direction
+
+          var curDir = 'prev';
+
+          if ($(this).attr('data-index') > parseFloat($items.filter('.is-active').index())) {
+            curDir = 'next';
+          }
+
+          sliderUpdates($(this).attr('data-index'), $this, curDir, countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
+
+          clearInterval($this[0].animatedSlides);
+        }
+      }); //Next/Prev buttons
+      //-------------------------------------		
+
+      var _prev = $(arrowsID).find('.uix-svgMask-slider__arrows--prev'),
+          _next = $(arrowsID).find('.uix-svgMask-slider__arrows--next');
+
+      $(arrowsID).find('a').attr('href', 'javascript:');
+      $(arrowsID).find('a').removeClass('is-disabled');
+
+      if (!loop) {
+        _prev.addClass('is-disabled');
+      }
+
+      _prev.off('click').on('click', function (e) {
+        e.preventDefault();
+        if (svgAnimating) return false; //Prevent buttons' events from firing multiple times
+
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(animDelay).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //Text animation from timeline
+
+        tl1.restart();
+        setTimeout(function () {
+          tl2.restart();
+        }, 1500); //
+
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides);
+      });
+
+      _next.off('click').on('click', function (e) {
+        e.preventDefault();
+        if (svgAnimating) return false; //Prevent buttons' events from firing multiple times
+
+        if ($(this).attr('aria-disabled') == 'true') return false;
+        $(this).attr('aria-disabled', 'true');
+        $(this).delay(animDelay).queue(function (next) {
+          $(this).attr('aria-disabled', 'false');
+          next();
+        }); //Text animation from timeline
+
+        tl1.restart();
+        setTimeout(function () {
+          tl2.restart();
+        }, 1500); //
+
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides);
+      }); //Added touch method to mobile device and desktop
+      //-------------------------------------	
+
+
+      var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
+
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
+
+      $dragDropTrigger.on('mousedown.SVG_MASK_SLIDER touchstart.SVG_MASK_SLIDER', function (e) {
+        //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
+        var touches = e.originalEvent.touches;
+        $(this).addClass('is-dragging');
+
+        if (touches && touches.length) {
+          $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
+          $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
+        } else {
+          if (draggable) {
+            $(this).data('origin_mouse_x', parseInt(e.pageX));
+            $(this).data('origin_mouse_y', parseInt(e.pageY));
+          }
+        }
+
+        $dragDropTrigger.on('mouseup.SVG_MASK_SLIDER touchmove.SVG_MASK_SLIDER', function (e) {
+          $(this).removeClass('is-dragging');
+          var touches = e.originalEvent.touches,
+              origin_mouse_x = $(this).data('origin_mouse_x'),
+              origin_mouse_y = $(this).data('origin_mouse_y');
+
+          if (touches && touches.length) {
+            var deltaX = origin_mouse_x - touches[0].pageX,
+                deltaY = origin_mouse_y - touches[0].pageY; //--- left
+
+            if (deltaX >= 50) {
+              if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
+            } //--- right
+
+
+            if (deltaX <= -50) {
+              if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
+            } //--- up
+
+
+            if (deltaY >= 50) {} //--- down
+
+
+            if (deltaY <= -50) {}
+
+            if (Math.abs(deltaX) >= 50 || Math.abs(deltaY) >= 50) {
+              $dragDropTrigger.off('touchmove.SVG_MASK_SLIDER');
+            }
+          } else {
+            if (draggable) {
+              //right
+              if (e.pageX > origin_mouse_x) {
+                if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
+              } //left
+
+
+              if (e.pageX < origin_mouse_x) {
+                if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
+              } //down
+
+
+              if (e.pageY > origin_mouse_y) {} //up
+
+
+              if (e.pageY < origin_mouse_y) {}
+
+              $dragDropTrigger.off('mouseup.SVG_MASK_SLIDER');
+            }
+          }
+        }); //end: mouseup.SVG_MASK_SLIDER touchmove.SVG_MASK_SLIDER
+      }); // end: mousedown.SVG_MASK_SLIDER touchstart.SVG_MASK_SLIDER
+    }
+    /*
+     * Transition Between Slides
+     *
+     * @param  {Number} elementIndex           - Index of current slider.
+     * @param  {Element} slider                 - Selector of the slider .
+     * @param  {String} dir                    - Switching direction indicator.
+           * @param  {String} countTotalID           - Total number ID or class of counter.
+           * @param  {String} countCurID             - Current number ID or class of counter.
+           * @param  {String} paginationID           - Navigation ID for paging control of each slide.
+           * @param  {String} arrowsID               - Previous/Next arrow navigation ID.
+           * @param  {Boolean} loop                  - Gives the slider a seamless infinite loop.
+     * @return {Void}
+     */
+
+
+    function sliderUpdates(elementIndex, slider, dir, countTotalID, countCurID, paginationID, arrowsID, loop) {
+      var $items = slider.find('.uix-svgMask-slider__item'),
+          total = $items.length; //Prevent bubbling
+
+      if (total == 1) {
+        $(paginationID).hide();
+        $(arrowsID).hide();
+        return false;
+      } //Transition Interception
+      //-------------------------------------
+
+
+      if (loop) {
+        if (elementIndex == total) elementIndex = 0;
+        if (elementIndex < 0) elementIndex = total - 1;
+      } else {
+        $(arrowsID).find('a').removeClass('is-disabled');
+        if (elementIndex == total - 1) $(arrowsID).find('.uix-svgMask-slider__arrows--next').addClass('is-disabled');
+        if (elementIndex == 0) $(arrowsID).find('.uix-svgMask-slider__arrows--prev').addClass('is-disabled');
+      } // To determine if it is a touch screen.
+
+
+      if (Modernizr.touchevents) {
+        if (elementIndex == total) elementIndex = total - 1;
+        if (elementIndex < 0) elementIndex = 0; //Prevent bubbling
+
+        if (!loop) {
+          //first item
+          if (elementIndex == 0) {
+            $(arrowsID).find('.uix-svgMask-slider__arrows--prev').addClass('is-disabled');
+          } //last item
+
+
+          if (elementIndex == total - 1) {
+            $(arrowsID).find('.uix-svgMask-slider__arrows--next').addClass('is-disabled');
+          }
+        }
+      } // call the current item
+      //-------------------------------------
+
+
+      var $current = $items.eq(elementIndex); //Determine the direction and add class to switching direction indicator.
+
+      var dirIndicatorClass = '';
+      if (dir == 'prev') dirIndicatorClass = 'prev';
+      if (dir == 'next') dirIndicatorClass = 'next'; //Add transition class to Controls Pagination
+
+      $(paginationID).find('li a').removeClass('leave');
+      $(paginationID).find('li a.is-active').removeClass('is-active').addClass('leave');
+      $(paginationID).find('li a[data-index="' + elementIndex + '"]').addClass('is-active').removeClass('leave'); //Add transition class to each item
+
+      $items.removeClass('leave prev next');
+      $items.addClass(dirIndicatorClass);
+      slider.find('.uix-svgMask-slider__item.is-active').removeClass('is-active').addClass('leave ' + dirIndicatorClass);
+      $current.addClass('is-active ' + dirIndicatorClass).removeClass('leave'); //SVG Animation
+      //-------------------------------------
+
+      if (!svgAnimating) {
+        //don't animate if already animating
+        svgAnimating = true;
+        var path1 = '1 0.5 1 540.5 1 1080.5 0 1080.5 4 1080.5 4 540.5 4 0.5 0 0.5 1 0.5',
+            path2 = '0.5 0.5 0.5 540.5 0.5 1080.5 1519.5 1080.5 1531.5 1080.5 1066.5 525.5 601.5 1.5 589.5 1.5 0.5 0.5',
+            path3 = '0.5 0.5 0.5 540.5 0.5 1080.5 960.5 1080.5 1920.5 1080.5 1920.5 540.5 1920.5 0.5 960.5 0.5 0.5 0.5';
+
+        if (dir == 'next') {
+          $current.find('polygon').css({
+            'transform-origin': 'center',
+            'transform': 'rotate(180deg)'
+          });
+        } else {
+          $current.find('polygon').css({
+            'transform-origin': 'center',
+            'transform': 'rotate(0)'
+          });
+        } //----
+        //@required: MorphSVGPlugin
+
+        /*
+        TweenMax.set( $current.find('polygon')[0], {
+        	attr: {
+        			  points: path1
+        		  },
+        	onComplete: function() {
+        			TweenMax.to( this.target, animSpeed/1000, {
+        			morphSVG: path2,
+        			delay: 0,
+        			ease: Power2.easeOut,
+        			onComplete: function() {
+        					TweenMax.to( this.target, animSpeed/1000, {
+        					morphSVG: path3,
+        					delay: 0,
+        					ease: Power2.easeInOut,
+        					onComplete: function() {
+        						svgAnimating = false;
+        					}
+        				});	
+        					}
+        		});	
+        		}
+        });
+        */
+
+
+        TweenMax.set($current.find('polygon')[0], {
+          attr: {
+            points: path1
+          },
+          onComplete: function onComplete() {
+            anime.timeline({
+              loop: false
+            }).add({
+              targets: $current.find('polygon')[0],
+              points: [{
+                value: path2
+              }],
+              duration: animSpeed,
+              easing: "easeOutExpo"
+            }).add({
+              targets: $current.find('polygon')[0],
+              points: [{
+                value: path3
+              }],
+              duration: animSpeed,
+              easing: "easeOutExpo",
+              complete: function complete() {
+                svgAnimating = false;
+              }
+            });
+          }
+        });
+      } //endif svgAnimating
+      //Display counter
+      //-------------------------------------
+
+
+      $(countTotalID).text(total);
+      $(countCurID).text(parseFloat(elementIndex) + 1); //Reset the default height of item
+      //-------------------------------------	
+
+      itemDefaultInit(slider, $current);
+    }
+    /*
+     * Initialize the default height of item
+     *
+           * @param  {Element} slider                 - Selector of the slider .
+     * @param  {Element} currentLlement         - Current selector of each slider.
+     * @return {Void}
+     */
+
+
+    function itemDefaultInit(slider, currentLlement) {
+      //
+      var imgURL = currentLlement.find('img').attr('src');
+
+      if (svg_mask_slider_js_typeof(imgURL) != ( true ? "undefined" : undefined)) {
+        var img = new Image();
+
+        img.onload = function () {
+          slider.css('height', currentLlement.closest('.uix-svgMask-slider__outline').width() * (this.height / this.width) + 'px');
+        };
+
+        img.src = imgURL;
+      }
+    }
+  };
+
+  module.components.pageLoaded.push(module.SVG_MASK_SLIDER.pageLoaded);
+  return function SVG_MASK_SLIDER() {
+    svg_mask_slider_js_classCallCheck(this, SVG_MASK_SLIDER);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // CONCATENATED MODULE: ./src/third-party-plugins/esm/THREE/extensions/ShaderRuntime.custom.js
 var defaultThreeUniforms = ['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix'];
 
@@ -25704,7 +26325,7 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/simple-3D-background/scss/_style.scss
-var simple_3D_background_scss_style = __webpack_require__(65);
+var simple_3D_background_scss_style = __webpack_require__(66);
 
 // CONCATENATED MODULE: ./src/components/simple-3D-background/js/index.js
 function simple_3D_background_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25866,7 +26487,7 @@ var THREE_BACKGROUND = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/simple-3D-carousel/scss/_style.scss
-var simple_3D_carousel_scss_style = __webpack_require__(66);
+var simple_3D_carousel_scss_style = __webpack_require__(67);
 
 // CONCATENATED MODULE: ./src/components/simple-3D-carousel/js/index.js
 function simple_3D_carousel_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30142,7 +30763,7 @@ THREE.ExplodeModifier.prototype.modify = function (geometry) {
 
 /* harmony default export */ var ExplodeModifier = (THREE.ExplodeModifier);
 // EXTERNAL MODULE: ./src/components/simple-3D-shatter-slider/scss/_style.scss
-var simple_3D_shatter_slider_scss_style = __webpack_require__(67);
+var simple_3D_shatter_slider_scss_style = __webpack_require__(68);
 
 // CONCATENATED MODULE: ./src/components/simple-3D-shatter-slider/js/index.js
 function simple_3D_shatter_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30843,7 +31464,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/simple-3D-explosive-particle-slider/scss/_style.scss
-var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(68);
+var simple_3D_explosive_particle_slider_scss_style = __webpack_require__(69);
 
 // CONCATENATED MODULE: ./src/components/simple-3D-explosive-particle-slider/js/index.js
 function simple_3D_explosive_particle_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31519,7 +32140,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
 /* harmony default export */ var js_shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 // EXTERNAL MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/scss/_style.scss
-var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(69);
+var simple_3D_liquid_scrollspy_slider_scss_style = __webpack_require__(70);
 
 // CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/index.js
 function simple_3D_liquid_scrollspy_slider_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33254,7 +33875,7 @@ var TABLE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/table/js/fn/sort-elements.js
-var sort_elements = __webpack_require__(70);
+var sort_elements = __webpack_require__(71);
 
 // CONCATENATED MODULE: ./src/components/table/js/sorter.js
 function sorter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33337,7 +33958,7 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/tabs/scss/_style.scss
-var tabs_scss_style = __webpack_require__(71);
+var tabs_scss_style = __webpack_require__(72);
 
 // CONCATENATED MODULE: ./src/components/tabs/js/index.js
 function tabs_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33514,7 +34135,7 @@ var TABS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/team-focus/scss/_style.scss
-var team_focus_scss_style = __webpack_require__(72);
+var team_focus_scss_style = __webpack_require__(73);
 
 // CONCATENATED MODULE: ./src/components/team-focus/js/index.js
 function team_focus_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33677,10 +34298,10 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(73);
+var text_anime = __webpack_require__(74);
 
 // EXTERNAL MODULE: ./src/components/text-effect/scss/_style.scss
-var text_effect_scss_style = __webpack_require__(74);
+var text_effect_scss_style = __webpack_require__(75);
 
 // CONCATENATED MODULE: ./src/components/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33729,7 +34350,7 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/timeline/scss/_style.scss
-var timeline_scss_style = __webpack_require__(75);
+var timeline_scss_style = __webpack_require__(76);
 
 // CONCATENATED MODULE: ./src/components/timeline/js/index.js
 function timeline_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33911,7 +34532,7 @@ var TIMELINE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/vertical-menu/scss/_style.scss
-var vertical_menu_scss_style = __webpack_require__(76);
+var vertical_menu_scss_style = __webpack_require__(77);
 
 // CONCATENATED MODULE: ./src/components/vertical-menu/js/index.js
 function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34060,10 +34681,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/wordpress/scss/_wp_core.scss
-var _wp_core = __webpack_require__(77);
+var _wp_core = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./src/components/wordpress/scss/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(78);
+var _3rd_party_plugins = __webpack_require__(79);
 
 // CONCATENATED MODULE: ./src/components/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34115,103 +34736,103 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(79);
+var badges_scss_style = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./src/components/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(80);
+var blended_grid_layout_scss_style = __webpack_require__(81);
 
 // EXTERNAL MODULE: ./src/components/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(81);
+var breadcrumbs_scss_style = __webpack_require__(82);
 
 // EXTERNAL MODULE: ./src/components/button/scss/_style.scss
-var button_scss_style = __webpack_require__(82);
+var button_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/card/scss/_style.scss
-var card_scss_style = __webpack_require__(83);
+var card_scss_style = __webpack_require__(84);
 
 // EXTERNAL MODULE: ./src/components/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(84);
+var circle_text_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/coach-mark/scss/_style.scss
-var coach_mark_scss_style = __webpack_require__(85);
+var coach_mark_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(86);
+var content_placeholder_animated_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(87);
+var dividing_line_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(88);
+var dotted_line_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(89);
+var equal_width_columns_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/features/scss/_style.scss
-var features_scss_style = __webpack_require__(90);
+var features_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(91);
+var footer_templates_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/gallery-grid-layout/scss/_style.scss
-var gallery_grid_layout_scss_style = __webpack_require__(92);
+var gallery_grid_layout_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(93);
+var heading_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(94);
+var image_animation_scss_style = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(95);
+var list_brands_scss_style = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(96);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(97);
+var list_side_by_side_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(98);
+var list_side_by_side_img_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(99);
+var mouse_animation_scroll_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(100);
+var overlay_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(101);
+var ribbon_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/separator-of-rule-with-text/scss/_style.scss
-var separator_of_rule_with_text_scss_style = __webpack_require__(102);
+var separator_of_rule_with_text_scss_style = __webpack_require__(103);
 
 // EXTERNAL MODULE: ./src/components/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(103);
+var shape_animation_scss_style = __webpack_require__(104);
 
 // EXTERNAL MODULE: ./src/components/single-post/scss/_comments.scss
-var _comments = __webpack_require__(104);
+var _comments = __webpack_require__(105);
 
 // EXTERNAL MODULE: ./src/components/single-post/scss/_editing.scss
-var _editing = __webpack_require__(105);
+var _editing = __webpack_require__(106);
 
 // EXTERNAL MODULE: ./src/components/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(106);
+var striking_scss_style = __webpack_require__(107);
 
 // EXTERNAL MODULE: ./src/components/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(107);
+var team_fullwidth_scss_style = __webpack_require__(108);
 
 // EXTERNAL MODULE: ./src/components/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(108);
+var team_grid_scss_style = __webpack_require__(109);
 
 // EXTERNAL MODULE: ./src/components/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(109);
+var testimonials_scss_style = __webpack_require__(110);
 
 // EXTERNAL MODULE: ./src/components/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(110);
+var tooltip_scss_style = __webpack_require__(111);
 
 // EXTERNAL MODULE: ./src/components/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(111);
+var wave_background_scss_style = __webpack_require__(112);
 
 // CONCATENATED MODULE: ./src/components/_app-load.js
 /*
@@ -34246,6 +34867,7 @@ var wave_background_scss_style = __webpack_require__(111);
 /******/
 
 /* pages */
+
 
 
 

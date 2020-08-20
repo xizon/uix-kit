@@ -78,6 +78,7 @@ import SMOOTH_SCROLLING_PAGE from '@uixkit/core/smooth-scrolling-page/js';
 import STICKY_EL from '@uixkit/core/sticky-elements/js';
 import SVG_MAP_CHINA from '@uixkit/core/svg-map/js/china';
 import SVG_MAP_WORLD from '@uixkit/core/svg-map/js/world';
+import SVG_MASK_SLIDER from '@uixkit/core/svg-mask-slider/js';
 import THREE_BACKGROUND_THREE from '@uixkit/core/simple-3D-background-three/js';
 import THREE_BACKGROUND_THREE2 from '@uixkit/core/simple-3D-background-three2/js';
 import THREE_BACKGROUND_THREE3 from '@uixkit/core/simple-3D-background-three3/js';

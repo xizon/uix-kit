@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.5
+ * ## Version             :  4.3.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 13, 2020
+ * ## Last Update         :  August 20, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,52 +78,53 @@
     57.Show More Less
     58.Sticky Elements
     59.SVG Map
-    60.3D Background
-    61.3D Carousel
-    62.3D Shatter Slider
-    63.3D Explosive Particle Slider
-    64.3D Liquid Scrollspy Slider
-    65.Table
-    66.Tabs
-    67.Team Focus
-    68.Text effect
-    69.Timeline
-    70.Vertical Menu
-    71.WordPress Core ( Do not use prefix "uix-" )
-    72.3rd Party Plugins
-    73.Badges
-    74.Blended Grid Layout
-    75.Breadcrumbs
-    76.Button
-    77.Cards
-    78.Badges
-    79.Coach Mark
-    80.Content Placeholder Animated
-    81.Dividing Line
-    82.Dotted Line
-    83.Equal-width Columns
-    84.Features
-    85.Footer Templates
-    86.Gallery Grid Layout
-    87.Heading
-    88.Image Animation
-    89.Brands List
-    90.Maintain Aspect Ratio List
-    91.Side by Side List
-    92.Side by Side List With Photo
-    93.Mouse Animation Scroll
-    94.Overlay
-    95.Ribbon
-    96.Separator of Rule With Text
-    97.Shape Animation
-    98.Comments ( Synchronize to WordPress's class name )
-    99.Editing Component
-    100.Striking
-    101.Team Fullwidth (Style using the Side by Side List With Photo module)
-    102.Team Gird
-    103.Testimonials Carousel
-    104.ToolTip
-    105.Wave Background
+    60.SVG Mask Slider
+    61.3D Background
+    62.3D Carousel
+    63.3D Shatter Slider
+    64.3D Explosive Particle Slider
+    65.3D Liquid Scrollspy Slider
+    66.Table
+    67.Tabs
+    68.Team Focus
+    69.Text effect
+    70.Timeline
+    71.Vertical Menu
+    72.WordPress Core ( Do not use prefix "uix-" )
+    73.3rd Party Plugins
+    74.Badges
+    75.Blended Grid Layout
+    76.Breadcrumbs
+    77.Button
+    78.Cards
+    79.Badges
+    80.Coach Mark
+    81.Content Placeholder Animated
+    82.Dividing Line
+    83.Dotted Line
+    84.Equal-width Columns
+    85.Features
+    86.Footer Templates
+    87.Gallery Grid Layout
+    88.Heading
+    89.Image Animation
+    90.Brands List
+    91.Maintain Aspect Ratio List
+    92.Side by Side List
+    93.Side by Side List With Photo
+    94.Mouse Animation Scroll
+    95.Overlay
+    96.Ribbon
+    97.Separator of Rule With Text
+    98.Shape Animation
+    99.Comments ( Synchronize to WordPress's class name )
+    100.Editing Component
+    101.Striking
+    102.Team Fullwidth (Style using the Side by Side List With Photo module)
+    103.Team Gird
+    104.Testimonials Carousel
+    105.ToolTip
+    106.Wave Background
 
 
 */
@@ -4614,6 +4615,7 @@ h6 {
   animation: uix-cssAnim--slideLeft 1.2s ease 1 forwards;
 }
 
+/* --------------------------- */
 @keyframes uix-cssAnim--slideRightLeave {
   0% {
     transform: translateX(0);
@@ -12619,6 +12621,278 @@ a.uix-lightbox__original__link {
   100% {
     stroke-width: 5;
   }
+}
+
+/* ======================================================
+   <!-- SVG Mask Slider -->
+/* ====================================================== */
+/*
+ * 1. Initialize the slider style
+ * 2. Pagination dots
+ * 3. Next/Prev buttons
+*/
+/*
+ ---------------------------
+ 1. Initialize the slider style
+ ---------------------------
+ */
+.uix-svgMask-slider__wrapper {
+  position: relative;
+}
+
+/* Prevent content overflow */
+.uix-svgMask-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  /* New XL container for Bootstrap 4.x */
+  /* New XL container for Bootstrap 4.x */
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) !important;
+  z-index: 15;
+  overflow: hidden;
+  transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt h3 {
+  margin-bottom: 0;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt {
+  width: 1140px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: 15px;
+  padding-right: 15px;
+  /* Prevent layers from hiding the underlying elements */
+  pointer-events: none;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt > div {
+  pointer-events: auto;
+}
+
+@media all and (max-width: 1141px) {
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt {
+    width: calc( 100% - 15px);
+  }
+}
+
+@media all and (min-width: 1430px) {
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt {
+    width: 1278px;
+  }
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt__content {
+  opacity: 0;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt__mask {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  transform-origin: left;
+  margin-left: -100vw;
+  background-color: #fff;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt__mask {
+  width: 1140px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: 15px;
+  padding-right: 15px;
+  /* Prevent layers from hiding the underlying elements */
+  pointer-events: none;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt__mask > div {
+  pointer-events: auto;
+}
+
+@media all and (max-width: 1141px) {
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt__mask {
+    width: calc( 100% - 15px);
+  }
+}
+
+@media all and (min-width: 1430px) {
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt__mask {
+    width: 1278px;
+  }
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: .3s ease-in-out;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item svg image {
+  width: 100%;
+  height: auto;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item img {
+  width: 100%;
+  visibility: hidden;
+  /* save SVG space */
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item.leave {
+  z-index: 2;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item.is-active {
+  /* Allow button clicks */
+  z-index: 3;
+}
+
+.uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item.is-loaded svg {
+  opacity: 1;
+}
+
+@media all and (max-width: 768px) {
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt h3 {
+    font-size: 1rem;
+  }
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt p {
+    font-size: 0.875rem;
+  }
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt h3,
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt p {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 1.2;
+  }
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt [class*='uix-core-grid__col-'] {
+    width: 100%;
+  }
+  .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt .uix-btn {
+    margin-top: .3rem;
+    padding: .3rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+/*
+ ---------------------------
+ 2. Pagination dots
+ ---------------------------
+ */
+.uix-svgMask-slider__pagination {
+  position: relative;
+  transform: translateY(-40px);
+  z-index: 2;
+}
+
+.uix-svgMask-slider__pagination ul {
+  list-style: none;
+  left: 0;
+  bottom: 0;
+  font-size: 0;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: block;
+  width: 100%;
+  text-align: center;
+  /*require*/
+  position: relative;
+  transform: translateY(0.5rem);
+}
+
+.uix-svgMask-slider__pagination ul li {
+  font-size: 1rem;
+  /*Fighting the Space Between Inline Block Elements*/
+  display: inline-block;
+  /*require*/
+  margin: 0 .2rem;
+}
+
+.uix-svgMask-slider__pagination ul li a {
+  width: 12px;
+  height: 12px;
+  display: block;
+  box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  text-indent: -9999px;
+  border-radius: 20px;
+}
+
+.uix-svgMask-slider__pagination ul li a:hover, .uix-svgMask-slider__pagination ul li a.is-active {
+  background: white;
+  width: 25px;
+}
+
+/*
+ ---------------------------
+ 3. Next/Prev buttons
+ ---------------------------
+ */
+.uix-svgMask-slider__arrows {
+  position: relative;
+  transform: translateY(-65px);
+  z-index: 3;
+}
+
+.uix-svgMask-slider__arrows a {
+  box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  transition: .3s ease-in-out;
+  line-height: 50px;
+  text-align: center;
+  background: #fff;
+}
+
+.uix-svgMask-slider__arrows .uix-svgMask-slider__arrows--prev {
+  left: 15px;
+}
+
+.uix-svgMask-slider__arrows .uix-svgMask-slider__arrows--prev.is-disabled {
+  visibility: hidden;
+}
+
+.uix-svgMask-slider__arrows .uix-svgMask-slider__arrows--next {
+  right: 15px;
+}
+
+.uix-svgMask-slider__arrows .uix-svgMask-slider__arrows--next.is-disabled {
+  visibility: hidden;
 }
 
 /* ======================================================

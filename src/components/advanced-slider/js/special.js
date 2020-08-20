@@ -26,7 +26,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.3.1';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.3.2';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -1548,7 +1548,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			$items.removeClass( 'leave prev next' );
 			$items.addClass( dirIndicatorClass );
 			slider.find( '.uix-advanced-slider-sp__item.is-active' ).removeClass( 'is-active' ).addClass( 'leave ' + dirIndicatorClass );
-			$items.eq( elementIndex ).addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
+			$current.addClass( 'is-active ' + dirIndicatorClass ).removeClass( 'leave' );
 
 			
 			
