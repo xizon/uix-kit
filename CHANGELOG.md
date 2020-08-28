@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 4.3.9 (August 27, 2020) =
+
+* Tweak: Optimized timeline for Smooth Scrolling Page.
+
+
+
 #### = 4.3.8 (August 17, 2020) =
 
 * New: Added an SVG Mask Slider module.

@@ -21,7 +21,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.1';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.3';
     module.SMOOTH_SCROLLING_PAGE.pageLoaded = function() {
 
 		//Prevent this module from loading in other pages
@@ -73,6 +73,8 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
         // time should be adjusted relative to window width or height
         // Animation progress has nothing to do with time
 
+		//
+		//
         const time = 10;
         const time02 = 2;
         const timestop01 = time / 9.9999;
@@ -103,7 +105,22 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                             }, timestop02 );
 
       
-        
+		//
+		//
+		let scene2_progress = 0;
+		const scene2Action = new TimelineMax({ paused: true })
+							.to( '#app-scene-2 p', 0.3, {
+								x: 100
+							}, 0);
+		
+		//
+		//
+		let scene3_progress = 0;
+		const scene3Action = new TimelineMax({ paused: true })
+							.to( '#app-scene-3 p', 0.3, {
+								x: 200
+							}, 0);
+		
         
         // Core Actions
         //--------------
@@ -258,6 +275,9 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             const scrollDistance = $( scroller.target ).height(),
                   visibleAreaDistance = windowHeight,
                   scrollPercent = scrolled / (scrollDistance - visibleAreaDistance);
+			
+			//
+			console.log( 'Body progress: ' + scrollPercent );
 
             const progressBlobs = scrollPercent * 1; // slower (= <) or faster and/or change height of 'scrollDistance'
             const scrollDir =  ( scrolled > lastScrollTop ) ? 'down' : 'up';
@@ -266,9 +286,53 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
                 progress: progressBlobs, 
                 ease: Sine.easeOut
             });
+			
+			
+			
+			
+            //----------------------------------------------------------------------------------
+            //---------------------- SCROLLING PROGRESS HELPER ----------------------------------	
+            //----------------------------------------------------------------------------------   
+			const triggerViewport = 0.5;
 
-        
-            
+		
+			//Scene 2 progress
+			//-----------------
+			const scene2_height = $( '#app-scene-2' ).outerHeight( true ), // do not use .height()
+				  scene2_spyTop = $( '#app-scene-2' )[0].getBoundingClientRect().top;
+			
+			const scene2_scrollPercent = parseFloat( scene2_spyTop / scene2_height ) - triggerViewport;
+
+			if ( scene2_scrollPercent <= 0 && scene2_scrollPercent >= -1 ) {
+				console.log( 'Scene 2 progress: ' + Math.abs( scene2_scrollPercent ) );
+				scene2_progress = Math.abs( scene2_scrollPercent );
+			}
+
+
+			TweenMax.to( scene2Action, 1, {
+				progress: scene2_progress
+			});
+
+		
+			
+			//Scene 3 progress
+			//-----------------
+			const scene3_height = $( '#app-scene-3' ).outerHeight( true ), // do not use .height()
+				  scene3_spyTop = $( '#app-scene-3' )[0].getBoundingClientRect().top;
+			
+			const scene3_scrollPercent = parseFloat( scene3_spyTop / scene3_height ) - triggerViewport;
+			
+			
+			if ( scene3_scrollPercent <= 0 && scene3_scrollPercent >= -1 ) {
+				console.log( 'Scene 3 progress: ' + Math.abs( scene3_scrollPercent ) );
+				scene3_progress = Math.abs( scene3_scrollPercent );
+			}
+			
+			TweenMax.to( scene3Action, 1, {
+				progress: scene3_progress
+			});
+			
+			
             //----------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------	
             //----------------------------------------------------------------------------------  

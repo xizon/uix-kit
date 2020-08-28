@@ -182,6 +182,7 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 	<!-- Mobile Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Mobile Settings end -->
 	
 	<!-- Vendor

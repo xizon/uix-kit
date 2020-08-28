@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.8
+ * ## Version             :  4.3.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 20, 2020
+ * ## Last Update         :  August 27, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "559a00a8322c72279fb2";
+/******/ 	var hotCurrentHash = "09d56ef53b80aa7fbd34";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -24300,7 +24300,7 @@ function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.1.1';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.1.3';
 
   module.SMOOTH_SCROLLING_PAGE.pageLoaded = function () {
     //Prevent this module from loading in other pages
@@ -24340,6 +24340,8 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       toAlpha: 1
     }); // time should be adjusted relative to window width or height
     // Animation progress has nothing to do with time
+    //
+    //
 
     var time = 10;
     var time02 = 2;
@@ -24361,7 +24363,23 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       rotation: 1125,
       scale: 0.1,
       transformOrigin: 'center'
-    }, timestop02); // Core Actions
+    }, timestop02); //
+    //
+
+    var scene2_progress = 0;
+    var scene2Action = new TimelineMax({
+      paused: true
+    }).to('#app-scene-2 p', 0.3, {
+      x: 100
+    }, 0); //
+    //
+
+    var scene3_progress = 0;
+    var scene3Action = new TimelineMax({
+      paused: true
+    }).to('#app-scene-3 p', 0.3, {
+      x: 200
+    }, 0); // Core Actions
     //--------------
 
     var initSmoothScrollingPageWrapper = 'js-uix-smooth-scrolling-page-wrapper';
@@ -24475,13 +24493,49 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
 
       var scrollDistance = $(scroller.target).height(),
           visibleAreaDistance = windowHeight,
-          scrollPercent = scrolled / (scrollDistance - visibleAreaDistance);
+          scrollPercent = scrolled / (scrollDistance - visibleAreaDistance); //
+
+      console.log('Body progress: ' + scrollPercent);
       var progressBlobs = scrollPercent * 1; // slower (= <) or faster and/or change height of 'scrollDistance'
 
       var scrollDir = scrolled > lastScrollTop ? 'down' : 'up';
       TweenMax.to(tlAction, 1, {
         progress: progressBlobs,
         ease: Sine.easeOut
+      }); //----------------------------------------------------------------------------------
+      //---------------------- SCROLLING PROGRESS HELPER ----------------------------------	
+      //----------------------------------------------------------------------------------   
+
+      var triggerViewport = 0.5; //Scene 2 progress
+      //-----------------
+
+      var scene2_height = $('#app-scene-2').outerHeight(true),
+          // do not use .height()
+      scene2_spyTop = $('#app-scene-2')[0].getBoundingClientRect().top;
+      var scene2_scrollPercent = parseFloat(scene2_spyTop / scene2_height) - triggerViewport;
+
+      if (scene2_scrollPercent <= 0 && scene2_scrollPercent >= -1) {
+        console.log('Scene 2 progress: ' + Math.abs(scene2_scrollPercent));
+        scene2_progress = Math.abs(scene2_scrollPercent);
+      }
+
+      TweenMax.to(scene2Action, 1, {
+        progress: scene2_progress
+      }); //Scene 3 progress
+      //-----------------
+
+      var scene3_height = $('#app-scene-3').outerHeight(true),
+          // do not use .height()
+      scene3_spyTop = $('#app-scene-3')[0].getBoundingClientRect().top;
+      var scene3_scrollPercent = parseFloat(scene3_spyTop / scene3_height) - triggerViewport;
+
+      if (scene3_scrollPercent <= 0 && scene3_scrollPercent >= -1) {
+        console.log('Scene 3 progress: ' + Math.abs(scene3_scrollPercent));
+        scene3_progress = Math.abs(scene3_scrollPercent);
+      }
+
+      TweenMax.to(scene3Action, 1, {
+        progress: scene3_progress
       }); //----------------------------------------------------------------------------------
       //---------------------------------------------------------------------------------	
       //----------------------------------------------------------------------------------  
