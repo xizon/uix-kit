@@ -178,44 +178,49 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 <html dir="ltr" lang="en-US">
 <head>
 	<meta charset="utf-8" />
-	<title></title>
-	<!-- Mobile Settings
+	<title>Web Site Title</title>
+	
+	<!-- Compatibility Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- Mobile Settings end -->
-	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Compatibility Settings end -->
+
+	<!-- Core & Theme CSS
+	============================================= -->
+
+	<!-- Basic  -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
+	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
+
+
+	<!-- Icons  -->
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
+
+
+	<!-- Theme  -->
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0"/>
+
+
+	<!--[if lt IE 10]>
+	<link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" />
+	<![endif]-->
+
+
+	<!-- Core & Theme CSS  end -->
 	<!-- Vendor
 	============================================= -->
 	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
 	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+    <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
 	<!-- Vendor  end -->
-	
-	<!-- Compatibility
-	============================================= -->
-	<script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- Compatibility  end -->
-	
-	<!-- Core & Theme CSS
-	============================================= -->
-	<!-- Basic  -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all" />
-	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all" />
-	<!-- Icons  -->
-	<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
-	<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
-	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0" media="all" />
-	<!--[if lt IE 10]>
-           <link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" media="all" />
-        <![endif]-->
-	<!-- Core & Theme CSS  end -->
-	
+
 	<!-- Break free from CSS prefix hell!
 	============================================= -->
 	<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
-</head>
+
+</head> 
 
 <body> 
 	
