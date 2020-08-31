@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.3.9
+ * ## Version             :  4.4.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 27, 2020
+ * ## Last Update         :  August 31, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -37,7 +37,7 @@
     16.Cards
     17.Content Placeholder Animated
     18.Dropdown Menu
-    19.Flexslider
+    19.Flexslider (Third-party plugin)
     20.Form
     21.Form ( Layout )-
     22.Form  ( Material Design Theme )
@@ -990,7 +990,7 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
 }
 
 /* ======================================================
-   <!-- Flexslider -->
+   <!-- Flexslider (Third-party plugin) -->
 /* ====================================================== */
 .flexslider,
 .uix-flexslider {

@@ -2,7 +2,7 @@
 <html lang="en-US" dir="ltr">
 <head>
 	<meta charset="utf-8" />
-	<title>Flexslider Fullscreen - Uix Kit</title>	
+	<title>Swiper - Uix Kit</title>	
 		<!-- Compatibility Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -30,11 +30,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=NZIqXXFtmv6lo7MgsWvC"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=dTz8t7RomSNl6dJR0DjQ"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=NZIqXXFtmv6lo7MgsWvC" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=dTz8t7RomSNl6dJR0DjQ" />
 	<![endif]-->
 
 
@@ -224,8 +224,8 @@
 														<li><a href="image-shapes.html">Image Shapes</a></li>
 														<li><a href="rotating-elements.html">Rotating Elements</a></li>
 														<li><a href="dotted-line.html">Dotted Line</a></li>
-														<li><a href="flexslider.html">Flexslider</a></li>
-														<li><a href="flexslider2.html">Flexslider Fullscreen</a></li>
+														<li><a href="flexslider.html">Flexslider<small style="font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;">Third-party plugin</small></a></li>
+														<li><a href="swiper.html">Swiper<small style="font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;">Third-party plugin</small></a></li>
 														<li><a href="advanced-slider.html">Advanced Slider (Basic)</a></li>
 														<li><a href="advanced-slider-brightness.html">Advanced Slider Brightness</a></li>
 														<li><a href="advanced-slider-liquid.html">Advanced Slider Liquid</a></li>
@@ -416,7 +416,6 @@
                         
                         
                         
-                        
                   </div>
                   <!-- .container end -->
                   
@@ -426,144 +425,203 @@
         </header>
         <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
-      
 		<main id="uix-maincontent">
 			
-			
-			<!-- Title
-			====================================================== -->
-			<section class="uix-spacing--s">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<h3>Full Screen Slider</h3>
-							<p>You need add an attribute <code>data-slider-bg</code> to <code>.uix-flexslider__item</code>. Simultaneously, use the <code>.is-fullscreen</code> class on your <code>.uix-flexslider--primary</code> div </p>
-							<hr>
-							
-							
-						</div>
-					</div>
-					<!-- .row end -->
-
-				</div>
-				<!-- .container end -->
-
-			</section>
-		
-
-		   <!-- Slideshow
-			====================================================== -->
-			<div role="slider" class="uix-flexslider uix-flexslider--primary is-fullscreen" 
-				 data-draggable="true" 
-				 data-my-nav-thumbs="false"
-				 data-my-prev-next-thumbs="false"
-				 data-my-nav-timeline="false"
-				 data-my-controls="false"
-				 data-my-multiple-items="false"
-				 data-my-multiple-items-move="1"
-				 data-my-count-total="false"
-				 data-my-count-now="false"
-				 data-my-parallax="false"
-				 data-my-sync="false"
-				 data-wheel="false"
-				 data-speed="600" 
-				 data-timing="10000" 
-				 data-loop="false" 
-				 data-paging="true" 
-				 data-arrows="true" 
-				 data-animation="slide" 
-				 data-auto="true" 
-				 data-prev="<i class='fa fa-chevron-left uix-flexslider--primary-prev'></i>" 
-				 data-next="<i class='fa fa-chevron-right uix-flexslider--primary-next'></i>">
+			<section>
+				 <div class="container">
+						<div class="row">
+							<div class="col-12">
 
 
-				<div class="uix-flexslider__inner">
+										<div class="uix-swiper">
 
-					<div class="uix-flexslider__item" data-slider-bg="assets/images/demo/test-img-big-1.jpg">
-						<img src="assets/images/demo/test-img-big-1.jpg" alt="Title 1" />
 
-						<div class="uix-flexslider__desc">
+											<!-- Title
+											====================================================== -->
+											<section class="uix-spacing--s">
+												<div class="container">
+													<div class="row">
+														<div class="col-12">
+															<h3>Synchronize multiple objects</h3>
+															<p>For different responsive breakpoints (screen sizes) and custom buttons.</p>
+															<hr>
 
-							<div class="container uix-t-c">
-									<div class="row">
-										<div class="col-12">
-											<h2 class="uix-flexslider__el-level uix-flexslider__el-level-1">Beautiful Free &amp; Premium Responsive WordPress Themes</h2>
-											<p class="uix-typo--h5 uix-typo--style-normal uix-flexslider__el-level uix-flexslider__el-level-2">Uix Responsive Web UI Frameworks</p>
+
+														</div>
+													</div>
+													<!-- .row end -->
+
+												</div>
+												<!-- .container end -->
+
+											</section>
+
+
+
+										   <!-- Slideshow
+											====================================================== -->
+											<div role="slider" class="swiper-container" id="app-slider1">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide">Slide One 1</div>
+													<div class="swiper-slide">Slide One 2</div>
+													<div class="swiper-slide">Slide One 3</div>
+													<div class="swiper-slide">Slide One 4</div>
+													<div class="swiper-slide">Slide One 5</div>
+													<div class="swiper-slide">Slide One 6</div>
+													<div class="swiper-slide">Slide One 7</div>
+													<div class="swiper-slide">Slide One 8</div>
+													<div class="swiper-slide">Slide One 9</div>
+													<div class="swiper-slide">Slide One 10</div>
+												</div>
+												<!-- Add Pagination -->
+												<div class="swiper-pagination"></div>
+												<!-- Add Arrows -->
+												<div class="swiper-button-prev">
+
+													<svg viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+												</div>
+												<div class="swiper-button-next">
+													<svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+												</div>
+											</div>	
+											<!-- /.swiper-container -->
+
+
+
+											<div role="slider" class="swiper-container" id="app-slider2" style="margin-top: 30px;">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide">Slide Two 1</div>
+													<div class="swiper-slide">Slide Two 2</div>
+													<div class="swiper-slide">Slide Two 3</div>
+													<div class="swiper-slide">Slide Two 4</div>
+													<div class="swiper-slide">Slide Two 5</div>
+													<div class="swiper-slide">Slide Two 6</div>
+													<div class="swiper-slide">Slide Two 7</div>
+													<div class="swiper-slide">Slide Two 8</div>
+													<div class="swiper-slide">Slide Two 9</div>
+													<div class="swiper-slide">Slide Two 10</div>
+												</div>
+											</div>	
+											<!-- /.swiper-container -->
+
+
+
+											<!-- Title
+											====================================================== -->
+											<section class="uix-spacing--s">
+												<div class="container">
+													<div class="row">
+														<div class="col-12">
+															<h3>Parallax Effect</h3>
+															<p>Custom slides transform effect and custom buttons..</p>
+															<hr>
+
+
+														</div>
+													</div>
+													<!-- .row end -->
+
+												</div>
+												<!-- .container end -->
+
+											</section>
+
+
+
+										   <!-- Slideshow
+											====================================================== -->
+											<div role="slider" class="swiper-container" id="app-slider3" style="margin-top: 30px;">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide"><span>Slide Three 1</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-1.jpg)"></div></div>
+													<div class="swiper-slide"><span>Slide Three 2</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-2.jpg)"></div></div>
+													<div class="swiper-slide"><span>Slide Three 3</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-3.jpg)"></div></div>
+												</div>
+												<!-- Add Pagination -->
+												<div class="swiper-pagination"></div>
+												<!-- Add Arrows -->
+												<div class="swiper-button-prev">
+
+													<svg viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+												</div>
+												<div class="swiper-button-next">
+													<svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+												</div>
+											</div>	
+											<!-- /.swiper-container -->				
+
+
+
+
+
+											<!-- Title
+											====================================================== -->
+											<section class="uix-spacing--s">
+												<div class="container">
+													<div class="row">
+														<div class="col-12">
+															<h3>Scale Effect without left/right swipe</h3>
+															<p>Custom slides transform effect and custom buttons..</p>
+															<hr>
+
+
+														</div>
+													</div>
+													<!-- .row end -->
+
+												</div>
+												<!-- .container end -->
+
+											</section>
+
+
+
+
+
+										   <!-- Slideshow
+											====================================================== -->
+											<div role="slider" class="swiper-container" id="app-slider4" style="margin-top: 30px;">
+												<div class="swiper-wrapper">
+													<div class="swiper-slide"><span>Slide Three 1</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-1.jpg)"></div></div>
+													<div class="swiper-slide"><span>Slide Three 2</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-2.jpg)"></div></div>
+													<div class="swiper-slide"><span>Slide Three 3</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-3.jpg)"></div></div>
+												</div>
+												<!-- Add Pagination -->
+												<div class="swiper-pagination"></div>
+												<!-- Add Arrows -->
+												<div class="swiper-button-prev">
+
+													<svg viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+												</div>
+												<div class="swiper-button-next">
+													<svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+												</div>
+											</div>	
+											<!-- /.swiper-container -->					
+
+
 
 										</div>
-									</div>
-									<!-- .row end -->
+										<!-- /.uix-swiper -->
+	
+								
+								
+
 							</div>
-
-
 						</div>
-						<!-- .uix-flexslider__desc  end -->   
-
-					</div>
-
-					<div class="uix-flexslider__item" data-slider-bg="assets/images/demo/test-img-big-2.jpg">
-						<img src="assets/images/demo/test-img-big-2.jpg" alt="Title 2" />
-
-						<div class="uix-flexslider__desc">
-
-							<div class="container uix-t-c">
-									<div class="row">
-										<div class="col-12">
-
-											<h2 class="uix-flexslider__el-level uix-flexslider__el-level-1">Hello World</h2>
-											<p class="uix-typo--h5 uix-typo--style-normal uix-flexslider__el-level uix-flexslider__el-level-2">UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-											<a class="uix-btn uix-btn__border--medium uix-btn__size--s uix-flexslider__el-level uix-flexslider__el-level-3" href="#">View Demo</a>
+				  </div>    
 
 
-										</div>
-									</div>
-									<!-- .row end -->
-							</div>
+		  </section>
 
 
-						</div>
-						<!-- .uix-flexslider__desc  end -->
-
-					</div>
 
 
-					<div class="uix-flexslider__item" data-slider-bg="assets/images/demo/test-img-big-3.jpg">
-						<img src="assets/images/demo/test-img-big-3.jpg" alt="Title 3" />
-
-						<div class="uix-flexslider__desc">
-
-							<div class="container uix-t-c">
-									<div class="row">
-										<div class="col-12">
-
-											<h2 class="uix-flexslider__el-level uix-flexslider__el-level-1">Title 3</h2>
-											<p class="uix-typo--h5 uix-typo--style-normal uix-flexslider__el-level uix-flexslider__el-level-2">UIUX Lab carefully crafts original design assets and publishes articles about UI/UX trends!</p>
-											<a class="uix-btn uix-btn__border--medium uix-btn__size--s uix-flexslider__el-level uix-flexslider__el-level-3" href="#">View Demo</a>
-
-
-										</div>
-									</div>
-									<!-- .row end -->
-							</div>
-
-
-						</div>
-						<!-- .uix-flexslider__desc  end --> 
-
-					</div>
-
-
-				</div>
-				<!-- .uix-flexslider__inner end -->
-			</div>
-			<!-- .uix-flexslider end -->
 
 			
 		</main>
-		
-
-          
-                                          
+     
+			
+                               
                                 
                 <!-- Footer
         ============================================= -->    
@@ -647,7 +705,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "4.3.9",
+		var REVISION     = "4.4.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -661,7 +719,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script defer src="../dist/js/uix-kit.min.js?ver=NZIqXXFtmv6lo7MgsWvC"></script>
+    <script defer src="../dist/js/uix-kit.min.js?ver=dTz8t7RomSNl6dJR0DjQ"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

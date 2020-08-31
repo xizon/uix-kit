@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 4.4.0 (August 31, 2020) =
+
+* New: Add a new demo "Swiper (Third-party plugin)".
+
 
 #### = 4.3.9 (August 27, 2020) =
 

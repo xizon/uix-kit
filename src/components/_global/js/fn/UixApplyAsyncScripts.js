@@ -79,7 +79,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.GET_CUSTOM_ATTRS )             UixModuleInstance.GET_CUSTOM_ATTRS.documentReady($); //Get all custom attributes of an element like "data-*"
 			if ( UixModuleInstance.PAGINATION )                   UixModuleInstance.PAGINATION.documentReady($); //Pagination
 			if ( UixModuleInstance.FORM )                         UixModuleInstance.FORM.documentReady($); //Form
-			if ( UixModuleInstance.FLEXSLIDER )                   UixModuleInstance.FLEXSLIDER.documentReady($); //Flexslider
+			if ( UixModuleInstance.FLEXSLIDER )                   UixModuleInstance.FLEXSLIDER.documentReady($); //Flexslider (Third-party plugin)
 			if ( UixModuleInstance.RETINA )                       UixModuleInstance.RETINA.documentReady($); //Retina Graphics for Website
 			if ( UixModuleInstance.SHOW_MORELESS )                UixModuleInstance.SHOW_MORELESS.documentReady($); //Show More Less
 			if ( UixModuleInstance.DROPDOWN_MENU )                UixModuleInstance.DROPDOWN_MENU.documentReady($); //Dropdown Menu
@@ -93,6 +93,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 			if ( UixModuleInstance.PROGRESS_LINE )                 UixModuleInstance.PROGRESS_LINE.documentReady($); //Progress Line
 			if ( UixModuleInstance.ROTATING_EL )                  UixModuleInstance.ROTATING_EL.documentReady($); //Rotating Elements
 			if ( UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK )  UixModuleInstance.SMOOTH_SCROLLING_ANCHORLINK.documentReady($); //Smooth Scrolling When Clicking An Anchor Link
+			if ( UixModuleInstance.SWIPER )                       UixModuleInstance.SWIPER.documentReady($); //SWIPER (Third-party plugin)
 			if ( UixModuleInstance.TABS )                         UixModuleInstance.TABS.documentReady($); //Tabs
 			if ( UixModuleInstance.TEAM_FOCUS )                   UixModuleInstance.TEAM_FOCUS.documentReady($); //Team Focus
 			if ( UixModuleInstance.LAVA_LAMP_STYLE_MENU )         UixModuleInstance.LAVA_LAMP_STYLE_MENU.documentReady($); //Lava-Lamp Style Menu

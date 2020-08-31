@@ -1,0 +1,124 @@
+/* ======================================================
+    <!-- Swiper -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+@import './third-party/swiper-bundle.scss';
+
+/*
+ * 1. General
+ * 2. Custom pagination & prev/next buttons
+ * 3. Swiper custom slides transform effect
+*/
+
+
+
+/*
+ ---------------------------
+ 1. General
+ ---------------------------
+ */
+.swiper-container {
+    width: 100%;
+    height: 300px;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #ECECED;
+	/* Center slide text vertically */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/*
+ ---------------------------
+ 2. Custom pagination & prev/next buttons
+ ---------------------------
+ */
+/* Custom pagination */
+.swiper-pagination-bullet {
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+	color: #000;
+	opacity: 1;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+	color: #fff;
+	background: red;
+}
+
+
+/* Custom prev/next buttons */
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev,
+.swiper-button-prev, 
+.swiper-container-rtl .swiper-button-next{
+
+	&::after {
+		display: none;
+	}
+
+	svg {
+		width: 44px;
+
+		path {
+			fill: red;
+		}
+	}
+
+	&.swiper-button-disabled {
+		opacity: .35;
+		cursor: auto;
+		pointer-events: none;
+	}
+}	
+
+
+/*
+ ---------------------------
+ 3. Swiper custom slides transform effect
+ ---------------------------
+ */
+#app-slider3,
+#app-slider4 {
+	
+	.swiper-slide {
+		overflow: hidden; /* required */
+		
+		> .slide-inner {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background-size: cover;
+			background-position: center;
+			z-index: 2;
+		}
+		
+		> span {
+			display: inline-block;
+			position: absolute;
+			z-index: 3;
+			left: 50px;
+			top: 50px;
+			background: #333;
+			color: #fff;
+			font-size: 20px;
+			padding: .5rem 1rem;
+		}
+		
+	}
+	
+
+}
+
