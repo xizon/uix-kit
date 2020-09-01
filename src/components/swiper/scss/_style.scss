@@ -9,6 +9,7 @@
  * 1. General
  * 2. Custom pagination & prev/next buttons
  * 3. Swiper custom slides transform effect
+ * 4. Entered active
 */
 
 
@@ -121,4 +122,26 @@
 	
 
 }
+
+
+/*
+ ---------------------------
+ 4. Entered active
+ ---------------------------
+ */
+#app-slider5 {
+	
+	.swiper-slide {
+		opacity: .7;
+		transform: scale(.8);
+		transition: .1s ease-in-out;
+		
+		&.swiper-slide-active {
+			transform: scale(1);
+			opacity: 1;
+		}
+
+	}
+}
+
 

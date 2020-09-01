@@ -1,8 +1,9 @@
 # Changelog
 
-#### = 4.4.0 (August 31, 2020) =
+#### = 4.4.1 (September 1, 2020) =
 
 * New: Add a new demo "Swiper (Third-party plugin)".
+* Tweak: Change the navigation menu.
 
 
 #### = 4.3.9 (August 27, 2020) =

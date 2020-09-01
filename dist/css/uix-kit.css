@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.0
+ * ## Version             :  4.4.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 31, 2020
+ * ## Last Update         :  September 1, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -13524,6 +13524,7 @@ button.swiper-pagination-bullet {
  * 1. General
  * 2. Custom pagination & prev/next buttons
  * 3. Swiper custom slides transform effect
+ * 4. Entered active
 */
 /*
  ---------------------------
@@ -13632,6 +13633,22 @@ button.swiper-pagination-bullet {
   color: #fff;
   font-size: 20px;
   padding: .5rem 1rem;
+}
+
+/*
+ ---------------------------
+ 4. Entered active
+ ---------------------------
+ */
+#app-slider5 .swiper-slide {
+  opacity: .7;
+  transform: scale(0.8);
+  transition: .1s ease-in-out;
+}
+
+#app-slider5 .swiper-slide.swiper-slide-active {
+  transform: scale(1);
+  opacity: 1;
 }
 
 /* ======================================================

@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.0
+ * ## Version             :  4.4.1
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 31, 2020
+ * ## Last Update         :  September 1, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a5fee678a03b1bfb36e5";
+/******/ 	var hotCurrentHash = "d6afc36c035cd8c32fc1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -34792,7 +34792,7 @@ function swiper_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol ==
 var SWIPER = function (module, $, window, document) {
   if (window.SWIPER === null) return false;
   module.SWIPER = module.SWIPER || {};
-  module.SWIPER.version = '0.0.1';
+  module.SWIPER.version = '0.0.2';
 
   module.SWIPER.documentReady = function ($) {
     $('.uix-swiper').each(function () {
@@ -34900,8 +34900,6 @@ var SWIPER = function (module, $, window, document) {
         swiper3.autoplay.start(); //swiper3.autoplay.stop();		
         //Swiper custom slides transform effect (Scale Effect without left/right swipe)
         //------------------------------------------
-        //Swiper custom slides transform effect
-        //------------
 
         var swiper4 = new swiper_bundle_default.a('#app-slider4', {
           slidesPerView: 1,
@@ -35024,7 +35022,27 @@ var SWIPER = function (module, $, window, document) {
         }); //AutoPlay
 
         swiper4.autoplay.start(); //swiper4.autoplay.stop();			
-        //------------------------------------------
+        //Centered Slides
+        //------------------------------------------		
+
+        var swiper5 = new swiper_bundle_default.a('#app-slider5', {
+          slidesPerView: 3,
+          spaceBetween: 30,
+          loop: true,
+          speed: 1000,
+          centeredSlides: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function renderBullet(index, className) {
+              return '<span class="' + className + '">' + (index + 1) + '</span>';
+            }
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        }); //------------------------------------------
         //Prevents front-end javascripts that are activated in the background to repeat loading.
 
         $el.data('activated', 1);

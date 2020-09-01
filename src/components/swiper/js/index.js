@@ -26,7 +26,7 @@ export const SWIPER = ( ( module, $, window, document ) => {
 	
 	
     module.SWIPER               = module.SWIPER || {};
-    module.SWIPER.version       = '0.0.1';
+    module.SWIPER.version       = '0.0.2';
     module.SWIPER.documentReady = function( $ ) {
 		
 		$( '.uix-swiper' ).each( function()  {
@@ -151,11 +151,6 @@ export const SWIPER = ( ( module, $, window, document ) => {
 				
 				//Swiper custom slides transform effect (Scale Effect without left/right swipe)
 				//------------------------------------------
-				
-
-
-				//Swiper custom slides transform effect
-				//------------
 				const swiper4 = new Swiper('#app-slider4', {
 					slidesPerView: 1,
 					spaceBetween: 0,
@@ -293,8 +288,29 @@ export const SWIPER = ( ( module, $, window, document ) => {
 
 
 				
-				
-				
+				//Centered Slides
+				//------------------------------------------		
+				const swiper5 = new Swiper('#app-slider5', {
+					slidesPerView: 3,
+					spaceBetween: 30,
+					loop: true,
+					speed: 1000,
+					centeredSlides: true,
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true,
+						renderBullet: function (index, className) {
+							return '<span class="' + className + '">' + (index + 1) + '</span>';
+						},	
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					}
+
+				});
+
+		
 				
 				
 				
