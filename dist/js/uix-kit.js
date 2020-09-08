@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.1
+ * ## Version             :  4.4.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 1, 2020
+ * ## Last Update         :  September 8, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d6afc36c035cd8c32fc1";
+/******/ 	var hotCurrentHash = "6ae69635d465e0fdc312";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -171,6 +171,7 @@
 /******/ 			_declinedDependencies: {},
 /******/ 			_selfAccepted: false,
 /******/ 			_selfDeclined: false,
+/******/ 			_selfInvalidated: false,
 /******/ 			_disposeHandlers: [],
 /******/ 			_main: hotCurrentChildModule !== moduleId,
 /******/
@@ -200,6 +201,29 @@
 /******/ 			removeDisposeHandler: function(callback) {
 /******/ 				var idx = hot._disposeHandlers.indexOf(callback);
 /******/ 				if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 			},
+/******/ 			invalidate: function() {
+/******/ 				this._selfInvalidated = true;
+/******/ 				switch (hotStatus) {
+/******/ 					case "idle":
+/******/ 						hotUpdate = {};
+/******/ 						hotUpdate[moduleId] = modules[moduleId];
+/******/ 						hotSetStatus("ready");
+/******/ 						break;
+/******/ 					case "ready":
+/******/ 						hotApplyInvalidatedModule(moduleId);
+/******/ 						break;
+/******/ 					case "prepare":
+/******/ 					case "check":
+/******/ 					case "dispose":
+/******/ 					case "apply":
+/******/ 						(hotQueuedInvalidatedModules =
+/******/ 							hotQueuedInvalidatedModules || []).push(moduleId);
+/******/ 						break;
+/******/ 					default:
+/******/ 						// ignore requests in error states
+/******/ 						break;
+/******/ 				}
 /******/ 			},
 /******/
 /******/ 			// Management API
@@ -242,7 +266,7 @@
 /******/ 	var hotDeferred;
 /******/
 /******/ 	// The update info
-/******/ 	var hotUpdate, hotUpdateNewHash;
+/******/ 	var hotUpdate, hotUpdateNewHash, hotQueuedInvalidatedModules;
 /******/
 /******/ 	function toModuleId(id) {
 /******/ 		var isNumber = +id + "" === id;
@@ -257,7 +281,7 @@
 /******/ 		hotSetStatus("check");
 /******/ 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
 /******/ 			if (!update) {
-/******/ 				hotSetStatus("idle");
+/******/ 				hotSetStatus(hotApplyInvalidatedModules() ? "ready" : "idle");
 /******/ 				return null;
 /******/ 			}
 /******/ 			hotRequestedFilesMap = {};
@@ -350,6 +374,11 @@
 /******/ 		if (hotStatus !== "ready")
 /******/ 			throw new Error("apply() is only allowed in ready status");
 /******/ 		options = options || {};
+/******/ 		return hotApplyInternal(options);
+/******/ 	}
+/******/
+/******/ 	function hotApplyInternal(options) {
+/******/ 		hotApplyInvalidatedModules();
 /******/
 /******/ 		var cb;
 /******/ 		var i;
@@ -372,7 +401,11 @@
 /******/ 				var moduleId = queueItem.id;
 /******/ 				var chain = queueItem.chain;
 /******/ 				module = installedModules[moduleId];
-/******/ 				if (!module || module.hot._selfAccepted) continue;
+/******/ 				if (
+/******/ 					!module ||
+/******/ 					(module.hot._selfAccepted && !module.hot._selfInvalidated)
+/******/ 				)
+/******/ 					continue;
 /******/ 				if (module.hot._selfDeclined) {
 /******/ 					return {
 /******/ 						type: "self-declined",
@@ -540,10 +573,13 @@
 /******/ 				installedModules[moduleId] &&
 /******/ 				installedModules[moduleId].hot._selfAccepted &&
 /******/ 				// removed self-accepted modules should not be required
-/******/ 				appliedUpdate[moduleId] !== warnUnexpectedRequire
+/******/ 				appliedUpdate[moduleId] !== warnUnexpectedRequire &&
+/******/ 				// when called invalidate self-accepting is not possible
+/******/ 				!installedModules[moduleId].hot._selfInvalidated
 /******/ 			) {
 /******/ 				outdatedSelfAcceptedModules.push({
 /******/ 					module: moduleId,
+/******/ 					parents: installedModules[moduleId].parents.slice(),
 /******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
 /******/ 				});
 /******/ 			}
@@ -616,7 +652,11 @@
 /******/ 		// Now in "apply" phase
 /******/ 		hotSetStatus("apply");
 /******/
-/******/ 		hotCurrentHash = hotUpdateNewHash;
+/******/ 		if (hotUpdateNewHash !== undefined) {
+/******/ 			hotCurrentHash = hotUpdateNewHash;
+/******/ 			hotUpdateNewHash = undefined;
+/******/ 		}
+/******/ 		hotUpdate = undefined;
 /******/
 /******/ 		// insert new code
 /******/ 		for (moduleId in appliedUpdate) {
@@ -669,7 +709,8 @@
 /******/ 		for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {
 /******/ 			var item = outdatedSelfAcceptedModules[i];
 /******/ 			moduleId = item.module;
-/******/ 			hotCurrentParents = [moduleId];
+/******/ 			hotCurrentParents = item.parents;
+/******/ 			hotCurrentChildModule = moduleId;
 /******/ 			try {
 /******/ 				__webpack_require__(moduleId);
 /******/ 			} catch (err) {
@@ -711,10 +752,33 @@
 /******/ 			return Promise.reject(error);
 /******/ 		}
 /******/
+/******/ 		if (hotQueuedInvalidatedModules) {
+/******/ 			return hotApplyInternal(options).then(function(list) {
+/******/ 				outdatedModules.forEach(function(moduleId) {
+/******/ 					if (list.indexOf(moduleId) < 0) list.push(moduleId);
+/******/ 				});
+/******/ 				return list;
+/******/ 			});
+/******/ 		}
+/******/
 /******/ 		hotSetStatus("idle");
 /******/ 		return new Promise(function(resolve) {
 /******/ 			resolve(outdatedModules);
 /******/ 		});
+/******/ 	}
+/******/
+/******/ 	function hotApplyInvalidatedModules() {
+/******/ 		if (hotQueuedInvalidatedModules) {
+/******/ 			if (!hotUpdate) hotUpdate = {};
+/******/ 			hotQueuedInvalidatedModules.forEach(hotApplyInvalidatedModule);
+/******/ 			hotQueuedInvalidatedModules = undefined;
+/******/ 			return true;
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotApplyInvalidatedModule(moduleId) {
+/******/ 		if (!Object.prototype.hasOwnProperty.call(hotUpdate, moduleId))
+/******/ 			hotUpdate[moduleId] = modules[moduleId];
 /******/ 	}
 /******/
 /******/ 	// The module cache
@@ -3704,9 +3768,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
     });
   }
 
-  var Dom7 =
-  /*#__PURE__*/
-  function (_Array) {
+  var Dom7 = /*#__PURE__*/function (_Array) {
     _inheritsLoose(Dom7, _Array);
 
     function Dom7(items) {
@@ -3718,9 +3780,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
     }
 
     return Dom7;
-  }(
-  /*#__PURE__*/
-  _wrapNativeSuper(Array));
+  }( /*#__PURE__*/_wrapNativeSuper(Array));
 
   function arrayFlat(arr) {
     if (arr === void 0) {
@@ -7981,9 +8041,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
   };
   var extendedDefaults = {};
 
-  var Swiper =
-  /*#__PURE__*/
-  function () {
+  var Swiper = /*#__PURE__*/function () {
     function Swiper() {
       var el;
       var params;
@@ -8881,7 +8939,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
   function isEventSupported() {
     var document = getDocument();
     var eventName = 'onwheel';
-    var isSupported = eventName in document;
+    var isSupported = (eventName in document);
 
     if (!isSupported) {
       var element = document.createElement('div');
@@ -12861,6 +12919,7 @@ module.exports = g;
     // This is the easiest way to have default options.
     var settings = $.extend({
       speed: 0.25,
+      offsetTop: 0,
       transition: 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
       bg: {
         enable: true,
@@ -12871,6 +12930,7 @@ module.exports = g;
       var bgEff = settings.bg,
           $this = $(this),
           bgXpos = '50%',
+          offsetTop = parseFloat(settings.offsetTop),
           speed = -parseFloat(settings.speed);
 
       if (bgEff) {
@@ -12890,7 +12950,7 @@ module.exports = g;
       if (bgEff) {
         //background parallax
         TweenMax.set($this, {
-          backgroundPosition: bgXpos + ' ' + -$this.offset().top * speed + 'px'
+          backgroundPosition: bgXpos + ' ' + (-$this[0].getBoundingClientRect().top * speed + -offsetTop) + 'px'
         });
       } else {
         //element parallax
@@ -12906,7 +12966,7 @@ module.exports = g;
           //background parallax
           TweenMax.set($this, {
             css: {
-              'background-position': bgXpos + ' ' + (0 - spyTop * speed) + 'px',
+              'background-position': bgXpos + ' ' + (0 - (spyTop * speed + offsetTop)) + 'px',
               'transition': settings.transition
             }
           });
@@ -12914,7 +12974,7 @@ module.exports = g;
           //element parallax
           TweenMax.set($this, {
             css: {
-              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - spyTop * speed) + ')',
+              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - (spyTop * speed + offsetTop)) + ')',
               'transition': settings.transition
             }
           });
@@ -16799,6 +16859,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./src/components/_global/scss/_style.scss
@@ -18246,7 +18307,7 @@ function set_background_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symb
 var SET_BG = function (module, $, window, document) {
   if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
-  module.SET_BG.version = '0.0.6';
+  module.SET_BG.version = '0.0.7';
 
   module.SET_BG.documentReady = function ($) {
     var $window = $(window);
@@ -18283,6 +18344,7 @@ var SET_BG = function (module, $, window, document) {
             "position": "top left",
             "size": "cover",
             "repeat": "no-repeat",
+            "offsetTop": 0,
             "fill": false,
             "parallax": 0,
             "transition": "none 0s ease 0s",
@@ -18297,11 +18359,13 @@ var SET_BG = function (module, $, window, document) {
               dataSize = config.size,
               dataRepeat = config.repeat,
               dataEasing = config.transition,
+              dataOffsetTop = config.offsetTop,
               dataParallax = config.parallax,
               dataMove = config.move;
           if (set_background_typeof(dataPos) === ( true ? "undefined" : undefined)) dataPos = 'top left';
           if (set_background_typeof(dataSize) === ( true ? "undefined" : undefined)) dataSize = 'cover';
           if (set_background_typeof(dataRepeat) === ( true ? "undefined" : undefined)) dataRepeat = 'no-repeat';
+          if (set_background_typeof(dataOffsetTop) === ( true ? "undefined" : undefined)) dataOffsetTop = 0;
           if (set_background_typeof(dataEasing) === ( true ? "undefined" : undefined)) dataEasing = 'none 0s ease 0s';
           if (set_background_typeof(dataMove) === ( true ? "undefined" : undefined)) dataMove = false; //Using parallax
 
@@ -18385,7 +18449,8 @@ var SET_BG = function (module, $, window, document) {
             if (dataParallax && set_background_typeof(dataParallax) != ( true ? "undefined" : undefined) && dataParallax != 0) {
               $this.UixParallax({
                 'speed': dataParallax,
-                transition: dataEasing,
+                'transition': dataEasing,
+                'offsetTop': dataOffsetTop,
                 'bg': {
                   enable: true,
                   xPos: '50%'
@@ -29589,18 +29654,18 @@ function lava_lamp_style_menu_js_classCallCheck(instance, Constructor) { if (!(i
 var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
   if (window.LAVA_LAMP_STYLE_MENU === null) return false;
   module.LAVA_LAMP_STYLE_MENU = module.LAVA_LAMP_STYLE_MENU || {};
-  module.LAVA_LAMP_STYLE_MENU.version = '0.0.2';
+  module.LAVA_LAMP_STYLE_MENU.version = '0.0.3';
 
   module.LAVA_LAMP_STYLE_MENU.documentReady = function ($) {
     var $menuContainer = $('.uix-lavalamp-menu__container'),
         menu = 'ul.uix-lavalamp-menu',
-        line = menu + ' .uix-lavalamp-menu__slide-line'; //Prevent this module from loading in other pages
+        followEl = menu + ' .uix-lavalamp-menu__slide-line'; //Prevent this module from loading in other pages
 
     if ($menuContainer.length == 0) return false; // adds sliding underline HTML
 
-    $(menu).append('<span class="uix-lavalamp-menu__slide-line"></span>'); // set initial position of slide line
+    $(menu).append('<span class="uix-lavalamp-menu__slide-line"></span>'); // set initial position of element
 
-    TweenMax.set(line, {
+    TweenMax.set(followEl, {
       css: {
         width: 0,
         x: 0,
@@ -29608,7 +29673,7 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
       }
     });
 
-    function nemuLineGo(index) {
+    function mouseFollowEv(index) {
       var $this = $(menu + ' > li').eq(index).find('a'),
           offset = $this.offset(),
           offsetBody = $('.uix-lavalamp-menu__container').offset(); //find the offset of the wrapping div  
@@ -29617,20 +29682,20 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
       $(menu + ' > li').removeClass('is-active');
       $this.parent().addClass('is-active'); // GSAP animate to clicked menu item
 
-      TweenMax.to(line, 1, {
+      TweenMax.to(followEl, 1, {
         css: {
           width: parseFloat($this.outerWidth() + 0) + 'px',
           x: offset.left - offsetBody.left + 'px'
         },
         ease: Elastic.easeOut.config(1, 0.5)
       });
-    } // animate slide-line on click
+    } //!import: Please do not try `$( document ).on( MOUSE_EVENT )` to improve performance
 
 
-    $(document).on('mouseover', menu + ' > li a', function () {
-      nemuLineGo($(this).parent().index());
+    $(menu + ' > li a').on('mouseover', function () {
+      mouseFollowEv($(this).parent().index());
     });
-    nemuLineGo(0);
+    mouseFollowEv(0);
   };
 
   module.components.documentReady.push(module.LAVA_LAMP_STYLE_MENU.documentReady);
@@ -32508,7 +32573,7 @@ function parallax_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var PARALLAX = function (module, $, window, document) {
   if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
-  module.PARALLAX.version = '0.0.6';
+  module.PARALLAX.version = '0.0.7';
 
   module.PARALLAX.documentReady = function ($) {
     var $window = $(window);
@@ -32567,6 +32632,7 @@ var PARALLAX = function (module, $, window, document) {
             dataOverlay = $this.data('overlay-bg'),
             dataFullyVisible = $this.data('fully-visible'),
             dataXPos = $this.data('xpos'),
+            dataOffsetTop = parseFloat($this.data('offset-top')),
             curImgH = null,
             curImgW = null,
             curSize = 'cover';
@@ -32586,6 +32652,10 @@ var PARALLAX = function (module, $, window, document) {
 
         if (parallax_js_typeof(dataXPos) === ( true ? "undefined" : undefined)) {
           dataXPos = '50%';
+        }
+
+        if (parallax_js_typeof(dataOffsetTop) === ( true ? "undefined" : undefined)) {
+          dataOffsetTop = 0;
         }
 
         if (parallax_js_typeof(dataFullyVisible) === ( true ? "undefined" : undefined)) {
@@ -32651,12 +32721,12 @@ var PARALLAX = function (module, $, window, document) {
             if (Modernizr.cssanimations) {
               // supported
               $this.css({
-                'background': 'linear-gradient(' + dataOverlay + ', ' + dataOverlay + '), url(' + dataImg + ') ' + dataXPos + ' 0/' + curSize + ' no-repeat fixed'
+                'background': 'linear-gradient(' + dataOverlay + ', ' + dataOverlay + '), url(' + dataImg + ') ' + dataXPos + ' ' + dataOffsetTop + 'px/' + curSize + ' no-repeat fixed'
               });
             } else {
               // not-supported
               $this.css({
-                'background': 'url(' + dataImg + ') ' + dataXPos + ' 0/' + curSize + ' no-repeat fixed'
+                'background': 'url(' + dataImg + ') ' + dataXPos + ' ' + dataOffsetTop + 'px/' + curSize + ' no-repeat fixed'
               });
             }
           } //Apply tilt effect
@@ -32672,7 +32742,8 @@ var PARALLAX = function (module, $, window, document) {
 
           $this.UixParallax({
             'speed': dataSpeed,
-            transition: dataEasing,
+            'transition': dataEasing,
+            'offsetTop': dataOffsetTop,
             'bg': {
               enable: true,
               xPos: dataXPos
@@ -34792,7 +34863,7 @@ function swiper_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol ==
 var SWIPER = function (module, $, window, document) {
   if (window.SWIPER === null) return false;
   module.SWIPER = module.SWIPER || {};
-  module.SWIPER.version = '0.0.2';
+  module.SWIPER.version = '0.0.3';
 
   module.SWIPER.documentReady = function ($) {
     $('.uix-swiper').each(function () {
@@ -35041,6 +35112,82 @@ var SWIPER = function (module, $, window, document) {
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
+          }
+        }); //Display half on both sides
+        //------------------------------------------		
+
+        var swiper6 = new swiper_bundle_default.a('#app-slider6', {
+          slidesPerView: 'auto',
+          //Number of slides per view, and it must be "auto"!
+          spaceBetween: 30,
+          loop: true,
+          speed: 1000,
+          centeredSlides: true,
+          //If true, then active slide will be centered, not always on the left side.
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function renderBullet(index, className) {
+              return '<span class="' + className + '">' + (index + 1) + '</span>';
+            }
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        }); //Custom Progress Bar
+        //------------------------------------------
+
+        var cusProgressBar = function cusProgressBar(speed, length, curIndex) {
+          TweenMax.set('#app-slider7__progress', {
+            width: 0,
+            onComplete: function onComplete() {
+              TweenMax.to('#app-slider7__progress', speed / 1000, {
+                width: '100%'
+              });
+            }
+          });
+          TweenMax.set('#app-slider7__progress2', {
+            width: 100 / length * curIndex + '%',
+            onComplete: function onComplete() {
+              TweenMax.to('#app-slider7__progress2', speed / 1000, {
+                width: 100 / length * (curIndex + 1) + '%'
+              });
+            }
+          });
+        };
+
+        var swiper7 = new swiper_bundle_default.a('#app-slider7', {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: false,
+          speed: 3500,
+          grabCursor: false,
+          watchSlidesProgress: true,
+          mousewheelControl: false,
+          keyboardControl: false,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function renderBullet(index, className) {
+              return '<span class="' + className + '">' + (index + 1) + '</span>';
+            }
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
+          on: {
+            init: function init(e) {
+              var thisSwiper = this;
+              console.log('current index: ' + thisSwiper.activeIndex);
+              cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
+            },
+            slideChange: function slideChange(e) {
+              var thisSwiper = this;
+              console.log('current index: ' + thisSwiper.activeIndex);
+              cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
+            }
           }
         }); //------------------------------------------
         //Prevents front-end javascripts that are activated in the background to repeat loading.
@@ -36808,8 +36955,8 @@ THREE.OrbitControls = function (object, domElement) {
     scope.update();
   }
 
-  function handleTouchEnd(event) {} //console.log( 'handleTouchEnd' );
-  //
+  function handleTouchEnd(event) {//console.log( 'handleTouchEnd' );
+  } //
   // event handlers - FSM: listen for events and reset state
   //
 

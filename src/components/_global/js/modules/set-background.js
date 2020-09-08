@@ -23,7 +23,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	
 	
 	module.SET_BG               = module.SET_BG || {};
-    module.SET_BG.version       = '0.0.6';
+    module.SET_BG.version       = '0.0.7';
 	module.SET_BG.documentReady = function( $ ) {
 
 
@@ -71,6 +71,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						"position"   : "top left",
 						"size"       : "cover",
 						"repeat"     : "no-repeat",
+						"offsetTop"  : 0,
 						"fill"       : false,
 						"parallax"   : 0,
                         "transition" : "none 0s ease 0s",
@@ -84,13 +85,15 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						dataPos       = config.position,
 						dataSize      = config.size,
 						dataRepeat    = config.repeat,
-                        dataEasing    = config.transition,
+						dataEasing    = config.transition,
+                        dataOffsetTop = config.offsetTop,
 						dataParallax  = config.parallax,
                         dataMove      = config.move;
 
 					if ( typeof dataPos === typeof undefined ) dataPos = 'top left';
 					if ( typeof dataSize === typeof undefined ) dataSize = 'cover';
 					if ( typeof dataRepeat === typeof undefined ) dataRepeat = 'no-repeat';
+					if ( typeof dataOffsetTop === typeof undefined ) dataOffsetTop = 0;
                     if ( typeof dataEasing === typeof undefined ) dataEasing = 'none 0s ease 0s';
                     if ( typeof dataMove === typeof undefined ) dataMove = false;
 
@@ -198,7 +201,7 @@ export const SET_BG = ( ( module, $, window, document ) => {
 						//Using parallax
 						if ( dataParallax && typeof dataParallax != typeof undefined && dataParallax != 0 ) {
 
-							$this.UixParallax( { 'speed': dataParallax, transition : dataEasing, 'bg': { enable: true, xPos: '50%' } } );
+							$this.UixParallax( { 'speed': dataParallax, 'transition' : dataEasing, 'offsetTop': dataOffsetTop, 'bg': { enable: true, xPos: '50%' } } );
 						}
 
 

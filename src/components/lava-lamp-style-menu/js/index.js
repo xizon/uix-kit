@@ -25,14 +25,14 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.LAVA_LAMP_STYLE_MENU               = module.LAVA_LAMP_STYLE_MENU || {};
-    module.LAVA_LAMP_STYLE_MENU.version       = '0.0.2';
+    module.LAVA_LAMP_STYLE_MENU.version       = '0.0.3';
     module.LAVA_LAMP_STYLE_MENU.documentReady = function( $ ) {
 
 
 		
 		const $menuContainer = $( '.uix-lavalamp-menu__container' ),
 		      menu           = 'ul.uix-lavalamp-menu',
-			  line           = menu + ' .uix-lavalamp-menu__slide-line';
+			  followEl       = menu + ' .uix-lavalamp-menu__slide-line';
 		
 		
 		//Prevent this module from loading in other pages
@@ -43,8 +43,8 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 		// adds sliding underline HTML
 		$( menu ).append('<span class="uix-lavalamp-menu__slide-line"></span>');
 
-		// set initial position of slide line
-		TweenMax.set( line, {
+		// set initial position of element
+		TweenMax.set( followEl, {
 			css: {
 				width: 0,
 				x: 0,
@@ -53,7 +53,7 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 		});
 		
 		
-		function nemuLineGo( index ) {
+		function mouseFollowEv( index ) {
 			
 			const $this      = $( menu + ' > li' ).eq( index ).find( 'a' ),
 			      offset     = $this.offset(),
@@ -65,7 +65,7 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 			$this.parent().addClass( 'is-active' );
 			
 			// GSAP animate to clicked menu item
-			TweenMax.to( line, 1, {
+			TweenMax.to( followEl, 1, {
 				css: {
 					width  : parseFloat( $this.outerWidth() + 0 ) + 'px',
 					x      : ( offset.left - offsetBody.left ) + 'px'
@@ -78,16 +78,15 @@ export const LAVA_LAMP_STYLE_MENU = ( ( module, $, window, document ) => {
 	
 		}
 
-		// animate slide-line on click
-		$( document ).on( 'mouseover', menu + ' > li a', function() {
-
-			nemuLineGo( $( this ).parent().index() );
-
+		
+		//!import: Please do not try `$( document ).on( MOUSE_EVENT )` to improve performance
+		$( menu + ' > li a' ).on( 'mouseover', function() {
+			mouseFollowEv( $( this ).parent().index() );
 		});
 		
 
 		
-		nemuLineGo( 0 );
+		mouseFollowEv( 0 );
 		
 
 

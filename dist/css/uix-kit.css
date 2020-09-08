@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.1
+ * ## Version             :  4.4.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 1, 2020
+ * ## Last Update         :  September 8, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -13524,7 +13524,9 @@ button.swiper-pagination-bullet {
  * 1. General
  * 2. Custom pagination & prev/next buttons
  * 3. Swiper custom slides transform effect
- * 4. Entered active
+ * 4. Entered active 
+ * 5. Display half on both sides
+ * 6. Custom Progress Bar 
 */
 /*
  ---------------------------
@@ -13649,6 +13651,47 @@ button.swiper-pagination-bullet {
 #app-slider5 .swiper-slide.swiper-slide-active {
   transform: scale(1);
   opacity: 1;
+}
+
+/*
+ ---------------------------
+ 5. Display half on both sides
+ ---------------------------
+ */
+#app-slider6 .swiper-slide {
+  width: 60%;
+  padding: 0 2rem !important;
+}
+
+/*
+ ---------------------------
+ 6. Custom Progress Bar
+ ---------------------------
+ */
+#app-slider7 {
+  position: relative;
+}
+
+#app-slider7 #app-slider7__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: blue;
+  height: 3px;
+  width: 0;
+  z-index: 100;
+}
+
+#app-slider7 #app-slider7__progress2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3px;
+  width: 0;
+  background-color: yellow;
+  height: 3px;
+  z-index: 100;
 }
 
 /* ======================================================

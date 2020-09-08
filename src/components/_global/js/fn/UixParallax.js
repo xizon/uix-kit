@@ -17,9 +17,10 @@
  
         // This is the easiest way to have default options.
         const settings = $.extend({
-			speed    : 0.25,
+			speed      : 0.25,
+			offsetTop  : 0,
             transition : 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
-			bg       : { enable: true, xPos: '50%' }
+			bg         : { enable: true, xPos: '50%' }
         }, options );
         
         this.each( function() {
@@ -27,6 +28,7 @@
 			let bgEff      = settings.bg,
 				$this      = $( this ),
 				bgXpos     = '50%',
+				offsetTop  = parseFloat( settings.offsetTop ),
 				speed      = -parseFloat( settings.speed );
 			
 		
@@ -51,7 +53,7 @@
 			if ( bgEff ) {
 				//background parallax
 				TweenMax.set( $this, {
-					backgroundPosition: bgXpos + ' ' + (-$this.offset().top*speed) + 'px'
+					backgroundPosition: bgXpos + ' ' + (-$this[0].getBoundingClientRect().top*speed + (-offsetTop)) + 'px'
 				});
 			} else {
 				//element parallax
@@ -68,7 +70,7 @@
 					//background parallax
 					TweenMax.set( $this, {
                         css:{ 
-                            'background-position': bgXpos + ' ' + ( 0 - ( spyTop * speed ) ) + 'px',
+                            'background-position': bgXpos + ' ' + ( 0 - ( spyTop * speed + offsetTop ) ) + 'px',
                             'transition': settings.transition
                         }
 					});
@@ -76,7 +78,7 @@
 					//element parallax
 					TweenMax.set( $this, {
                         css:{ 
-                            'transform': 'matrix(1, 0, 0, 1, 0, '+( 0 - ( spyTop * speed ) )+')',
+                            'transform': 'matrix(1, 0, 0, 1, 0, '+( 0 - ( spyTop * speed + offsetTop ) )+')',
                             'transition': settings.transition
                         }
 					});

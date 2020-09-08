@@ -1,5 +1,17 @@
 # Changelog
 
+
+#### = 4.4.2 (September 8, 2020) =
+
+* New: Add some new demos for "Swiper (Third-party plugin)".
+* Tweak: Optimized the performance of the mouse following module.
+* Tweak: Added the `offsetTop` attribute of the UixParallax function, which is convenient for adjusting the top position of the image.
+* Security: Upgrade http-proxy to version 1.18.1 or later.
+* Security: Upgrade yargs-parser to version 13.1.2 or later.
+* Security: Upgrade node-sass to version 4.13.1 or later.
+
+
+
 #### = 4.4.1 (September 1, 2020) =
 
 * New: Add a new demo "Swiper (Third-party plugin)".

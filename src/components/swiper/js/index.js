@@ -26,7 +26,7 @@ export const SWIPER = ( ( module, $, window, document ) => {
 	
 	
     module.SWIPER               = module.SWIPER || {};
-    module.SWIPER.version       = '0.0.2';
+    module.SWIPER.version       = '0.0.3';
     module.SWIPER.documentReady = function( $ ) {
 		
 		$( '.uix-swiper' ).each( function()  {
@@ -313,6 +313,92 @@ export const SWIPER = ( ( module, $, window, document ) => {
 		
 				
 				
+				//Display half on both sides
+				//------------------------------------------		
+				const swiper6 = new Swiper('#app-slider6', {
+					slidesPerView: 'auto',//Number of slides per view, and it must be "auto"!
+					spaceBetween: 30,
+					loop: true,
+					speed: 1000,
+					centeredSlides: true, //If true, then active slide will be centered, not always on the left side.
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true,
+						renderBullet: function (index, className) {
+							return '<span class="' + className + '">' + (index + 1) + '</span>';
+						},	
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					}
+
+				});
+				
+				
+				
+				
+				//Custom Progress Bar
+				//------------------------------------------
+				const cusProgressBar = function( speed, length, curIndex ) {
+					TweenMax.set( '#app-slider7__progress', {
+						width: 0,
+						onComplete: function() {
+							TweenMax.to( '#app-slider7__progress', speed/1000, {
+								width: '100%'
+							});	
+						}
+					});
+
+
+					TweenMax.set( '#app-slider7__progress2', {
+						width: 100/length * (curIndex) + '%',
+						onComplete: function() {
+							TweenMax.to( '#app-slider7__progress2', speed/1000, {
+								width: 100/length * (curIndex+1) + '%'
+							});	
+						}
+					});
+				};
+				
+				const swiper7 = new Swiper('#app-slider7', {
+					slidesPerView: 1,
+					spaceBetween: 0,
+					loop: false,
+					speed: 3500,
+					grabCursor: false,
+					watchSlidesProgress: true,
+					mousewheelControl: false,
+					keyboardControl: false,
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true,
+						renderBullet: function (index, className) {
+							return '<span class="' + className + '">' + (index + 1) + '</span>';
+						},	
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+					on: {
+						init: function( e ) {
+							const thisSwiper = this;
+							console.log( 'current index: ' + thisSwiper.activeIndex );
+							cusProgressBar( e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex );
+
+						},
+						slideChange: function( e ) {
+							const thisSwiper = this;
+							console.log( 'current index: ' + 	thisSwiper.activeIndex );
+							cusProgressBar( e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex );
+
+						}	
+
+					}
+
+				});
+
 				
 				
 				//------------------------------------------

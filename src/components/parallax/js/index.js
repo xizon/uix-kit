@@ -27,7 +27,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 	
 	
 	module.PARALLAX               = module.PARALLAX || {};
-    module.PARALLAX.version       = '0.0.6';
+    module.PARALLAX.version       = '0.0.7';
 	module.PARALLAX.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -97,6 +97,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 					dataOverlay      = $this.data( 'overlay-bg' ),
 					dataFullyVisible = $this.data( 'fully-visible' ),
                     dataXPos         = $this.data( 'xpos' ),
+					dataOffsetTop    = parseFloat( $this.data( 'offset-top' ) ),
 					curImgH          = null,
 					curImgW          = null,
 					curSize          = 'cover';
@@ -121,6 +122,11 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 				if ( typeof dataXPos === typeof undefined ) {
 					dataXPos = '50%';
 				} 	
+				
+				if ( typeof dataOffsetTop === typeof undefined ) {
+					dataOffsetTop = 0;
+				} 	
+				
 				if ( typeof dataFullyVisible === typeof undefined ) {
 					dataFullyVisible = false;
 				}	
@@ -208,13 +214,13 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 							// supported
 
 							$this.css( {
-								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') '+dataXPos+' 0/'+curSize+' no-repeat fixed'
+								'background' : 'linear-gradient('+dataOverlay+', '+dataOverlay+'), url(' + dataImg + ') '+dataXPos+' '+dataOffsetTop+'px/'+curSize+' no-repeat fixed'
 							} );
 						} else {
 							// not-supported
 
 							$this.css( {
-								'background' : 'url(' + dataImg + ') '+dataXPos+' 0/'+curSize+' no-repeat fixed'
+								'background' : 'url(' + dataImg + ') '+dataXPos+' '+dataOffsetTop+'px/'+curSize+' no-repeat fixed'
 							} );
 						}
 
@@ -233,7 +239,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 
 
 					//Use parallax to background
-					$this.UixParallax( { 'speed': dataSpeed, transition : dataEasing, 'bg': { enable: true, xPos: dataXPos } } );
+					$this.UixParallax( { 'speed': dataSpeed, 'transition' : dataEasing, 'offsetTop': dataOffsetTop, 'bg': { enable: true, xPos: dataXPos } } );
 
 
 					

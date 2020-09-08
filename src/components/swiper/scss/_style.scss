@@ -9,7 +9,9 @@
  * 1. General
  * 2. Custom pagination & prev/next buttons
  * 3. Swiper custom slides transform effect
- * 4. Entered active
+ * 4. Entered active 
+ * 5. Display half on both sides
+ * 6. Custom Progress Bar 
 */
 
 
@@ -144,4 +146,50 @@
 	}
 }
 
+
+
+/*
+ ---------------------------
+ 5. Display half on both sides
+ ---------------------------
+ */
+#app-slider6 {
+	.swiper-slide {
+		width: 60%;
+		padding:0 2rem !important;
+	}
+	
+}
+
+/*
+ ---------------------------
+ 6. Custom Progress Bar
+ ---------------------------
+ */
+#app-slider7 {
+	
+	position: relative;
+
+	#app-slider7__progress {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		background-color: blue;
+		height: 3px;
+		width: 0;
+		z-index: 100;
+	}
+	#app-slider7__progress2 {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 3px;
+		width: 0;
+		background-color: yellow;
+		height: 3px;
+		z-index: 100;
+	}
+	
+}
 
