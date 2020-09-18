@@ -92,6 +92,9 @@
 // ./src/components/form/scss/_basic.scss
 //
 //Default font-size for HTML
+//English (compatible with Chinese)  --> 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+//Chinese  --> -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+
 $basic-font-size       : 16px;
 $font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
 $font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;

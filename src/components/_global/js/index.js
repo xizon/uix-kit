@@ -14,6 +14,7 @@
  * <!-- Base -->
  *************************************
  */
+/* !!! To build a table of contents (TOC), you need to import this scss file into JS */
 import '../scss/_style.scss';
 
 

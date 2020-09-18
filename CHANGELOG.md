@@ -1,6 +1,15 @@
 # Changelog
 
 
+#### = 4.4.3 (September 17, 2020) =
+
+* Fix:Fixed an issue for "Full Width Column to Edge".
+* Tweak: Modified some comments of SCSS and JS files.
+* Tweak: Optimized Swiper demos.
+* Security: Upgrade node-forge to version 0.10.0 or later. 
+* Tweak:Added image transition method to Scroll Reveal module.
+
+
 #### = 4.4.2 (September 8, 2020) =
 
 * New: Add some new demos for "Swiper (Third-party plugin)".

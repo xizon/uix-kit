@@ -21,7 +21,7 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLL_REVEAL               = module.SCROLL_REVEAL || {};
-    module.SCROLL_REVEAL.version       = '0.1.4';
+    module.SCROLL_REVEAL.version       = '0.1.5';
     module.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
@@ -121,8 +121,19 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
                                 $( this ).addClass( toCSS ).dequeue();
                             });
 
+
                         } else {
                             $el[0].animation.play();
+							
+							
+							//Other animation
+							//------------------------
+							
+							
+							//Image transition
+							spyImageTrans( 'show' );
+	
+							
                         }  
 
                         
@@ -145,6 +156,16 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
                             $el.removeClass( toCSS );
                         } else {
                             $el[0].animation.reverse();
+							
+							
+							//Other animation
+							//------------------------
+							
+							
+							//Image transition
+							spyImageTrans( 'hide' );
+							
+							
                         }  
  
                         $el.removeData( 'activated' );
@@ -162,6 +183,54 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
             $( window ).on( 'scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function( event ) {
                  scrollUpdate();
             });
+			
+			
+            
+             /*
+             * The transition effect of each group of images
+             *
+             * @return {Void}
+			 * #Usage: 
+			 
+				<ul data-uix-anim='{"viewport":"90%","from":{"y":0},"to":{"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.2,"infinite":true}' data-img-ids='["[data-imgshow]"]'>
+					<li data-imgshow="1"><img src="logo-1.jpg" alt=""></li>
+					<li data-imgshow="1"><img src="logo-2.jpg" alt=""></li>
+					<li data-imgshow="1"><img src="logo-3.jpg" alt=""></li>
+					<li data-imgshow="1"><img src="logo-4.jpg" alt=""></li>
+				<ul>
+ 
+			 
+             */ 
+			function spyImageTrans( type ) {
+				
+				const _imgIds = $el.data( 'img-ids' );
+				
+				if ( typeof _imgIds !== typeof undefined ) {
+					//add
+					if ( type == 'show' ) {
+						_imgIds.forEach( function( element ) {
+							$( element ).each( function( index )  {
+								$( this ).delay( 50*index ).queue( 'fx', function() { 
+									$( this ).addClass( 'is-active' );
+									$( this ).dequeue();
+								});
+							});
+						});
+						
+					} else {
+						//remove 
+						_imgIds.forEach( function( element ) {
+							$( element ).removeClass( 'is-active' );
+						});
+					}
+	
+				} 
+				
+			}
+				
+			
+			
+			
 
 
 

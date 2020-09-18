@@ -25,45 +25,36 @@ export const FULL_WIDTH_COLUMN_TO_EDGE = ( ( module, $, window, document ) => {
 	if ( window.FULL_WIDTH_COLUMN_TO_EDGE === null ) return false;
 	
 	
-	
-
     module.FULL_WIDTH_COLUMN_TO_EDGE               = module.FULL_WIDTH_COLUMN_TO_EDGE || {};
-    module.FULL_WIDTH_COLUMN_TO_EDGE.version       = '0.0.1';
+    module.FULL_WIDTH_COLUMN_TO_EDGE.version       = '0.0.2';
     module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded    = function() {
 
-		const $window          = $( window );
-		let	windowWidth        = window.innerWidth,
-			windowHeight       = window.innerHeight;
-        
-		
-		fullwidthColumnToEdgeInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( window.innerWidth != windowWidth ) {
+		$( '.js-uix-fullwidth-column-to-edge--extend-right' ).each( function()  {
+			const $el = $( this );
+			const actived = $el.data( 'activated' );
+			if( typeof actived === typeof undefined ) {
 
-				// Update the window width for next time
-				windowWidth = window.innerWidth;
+				fullwidthToDir( $( this ), 'right', window.innerWidth );
 
-				// Do stuff here
-                fullwidthColumnToEdgeInit( windowWidth );
-
-
-
-			}
+				//Prevents front-end javascripts that are activated in the background to repeat loading.
+				$el.data( 'activated', 1 );
+			}//endif actived
 		});
-        
-        function fullwidthColumnToEdgeInit( w ) {
-            
-            $( '.js-uix-fullwidth-column-to-edge--extend-right' ).each( function()  {
-                fullwidthToDir( $( this ), 'right', w );
-            });
 
-            $( '.js-uix-fullwidth-column-to-edge--extend-left' ).each( function()  {
-                fullwidthToDir( $( this ), 'left', w );
-            });
+		$( '.js-uix-fullwidth-column-to-edge--extend-left' ).each( function()  {
+			const $el = $( this );
+			const actived = $el.data( 'activated' );
+			if( typeof actived === typeof undefined ) {
 
-        }
+				fullwidthToDir( $( this ), 'left', window.innerWidth );
+
+				//Prevents front-end javascripts that are activated in the background to repeat loading.
+				$el.data( 'activated', 1 );
+
+			}//endif actived
+
+
+		});
 		
 		
         function fullwidthToDir( obj, dir, w ) {

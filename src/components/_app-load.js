@@ -15,6 +15,7 @@ import UixApplyAsyncAllScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncAll
 /******/
 /******/
 /* base */
+/* Note: The CSS style file has been included by JavaScript files */
 import BODY_AND_HEADER from '@uixkit/core/_global/js/modules/body-and-header';
 import COMMON_HEIGHT from '@uixkit/core/_global/js/modules/common-height';
 import GET_CUSTOM_ATTRS from '@uixkit/core/_global/js/modules/custom-data-attrs';
@@ -29,6 +30,7 @@ import VIDEOS from '@uixkit/core/_global/js/modules/videos';
 /******/
 /******/
 /* pages */	
+/* Note: The CSS style file has been included by JavaScript files */
 import MAIN from '@uixkit/core/_main/js';
 import ACCORDION_BG from '@uixkit/core/accordion-img/js';
 import ACCORDION from '@uixkit/core/accordion/js';
@@ -113,7 +115,7 @@ import WP_CORE from '@uixkit/core/wordpress/js';
 /******/
 /******/
 /* pages */	
-/* These modules do not contain JavaScript */
+/* Note: These modules do not contain JavaScript */
 import '@uixkit/core/badges/scss/_style.scss';
 import '@uixkit/core/blended-grid-layout/scss/_style.scss';
 import '@uixkit/core/breadcrumbs/scss/_style.scss';
