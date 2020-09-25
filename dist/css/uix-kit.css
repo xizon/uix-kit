@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.2
+ * ## Version             :  4.4.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 8, 2020
+ * ## Last Update         :  September 25, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -989,7 +989,7 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
  * 8. Vertically or Horizontally Aligned Blocks
  * 9. Specifies Whether To Clip Content
  * 10. Specifies a Default Height
- * 11. Hidden The Element on Mobile Device
+ * 11. Hidden The Element on Mobile or Desktop Device
  * 12. Tip Bubble
  * 13. Image Hover Overlay Effects
  * 14. Position
@@ -1281,19 +1281,18 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 
 /* 
  ---------------------------
- 11. Hidden The Element on Mobile Device
+ 11. Hidden The Element on Mobile or Desktop Device
  ---------------------------
  */
-.uix-mobile-el {
-  display: none;
+@media all and (max-width: 768px) {
+  .uix-hide-mobile {
+    display: none !important;
+  }
 }
 
-@media all and (max-width: 768px) {
-  .uix-mobile-el {
-    display: block;
-  }
-  .is-mobile-hide {
-    display: none;
+@media all and (min-width: 769px) {
+  .uix-hide-pc {
+    display: none !important;
   }
 }
 
@@ -1423,12 +1422,12 @@ img.uix-filter-hover--color:hover,
   opacity: 0;
 }
 
-.uix-el--zoom {
+.uix-el--scale {
   transform: scale(0);
 }
 
 .uix-el--skew {
-  transform: skew(0deg, -2deg);
+  transform: skew(0deg, -5deg);
 }
 
 /* 

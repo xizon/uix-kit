@@ -13,7 +13,7 @@
  * 8. Vertically or Horizontally Aligned Blocks
  * 9. Specifies Whether To Clip Content
  * 10. Specifies a Default Height
- * 11. Hidden The Element on Mobile Device
+ * 11. Hidden The Element on Mobile or Desktop Device
  * 12. Tip Bubble
  * 13. Image Hover Overlay Effects
  * 14. Position
@@ -331,24 +331,22 @@
 
 /* 
  ---------------------------
- 11. Hidden The Element on Mobile Device
+ 11. Hidden The Element on Mobile or Desktop Device
  ---------------------------
  */ 
-
-
-.uix-mobile-el {
-	display: none;
-}
 @media all and (max-width: 768px) {
-	.uix-mobile-el {
-		display: block;
-	}
-	
-	.is-mobile-hide {
-		display: none;
-	}
-
+    .uix-hide-mobile {
+        display: none !important;
+    }
 }
+
+
+@media all and (min-width: 769px) {
+    .uix-hide-pc {
+        display: none !important;
+    }
+}
+
 
 
 /* 
@@ -474,11 +472,11 @@ img.uix-filter-hover--color,
 .uix-el--transparent {
 	opacity: 0;
 }
-.uix-el--zoom {
+.uix-el--scale {
 	transform: scale(0);
 }
 .uix-el--skew {
-    transform: skew(0deg, -2deg);	
+    transform: skew(0deg, -5deg);	
 }
 
 /* 

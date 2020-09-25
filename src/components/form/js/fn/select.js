@@ -43,7 +43,7 @@
 
 					template  = '<div class="' + classes + ' js-uix-new">';
 					template += '<span class="uix-controls__select-trigger">' + $this.find( 'select' ).attr( 'placeholder' ) + '</span><ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>';
-					template += '<div class="uix-controls__select__option-container">';
+					template += '<div role="presentation" class="uix-controls__select__option-container">';
 
 					$this.find( 'select option' ).each( function( index ) {
 
@@ -53,7 +53,7 @@
 							selected = 'is-active';
 						}
 
-						template += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+						template += '<span role="option" class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 					});
 					template += '</div></div>';
 
@@ -155,7 +155,7 @@
 						selected = 'is-active';
 					}
 
-					newOptions += '<span class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
+					newOptions += '<span role="option" class="uix-controls__select__option '+selected+'" data-value="' + $( this ).attr( 'value' ) + '">' + $( this ).html() + '</span>';
 				});
 
 

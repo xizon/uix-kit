@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.2
+ * ## Version             :  4.4.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 8, 2020
+ * ## Last Update         :  September 25, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6ae69635d465e0fdc312";
+/******/ 	var hotCurrentHash = "38371489f9e020e8cb4a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -13025,7 +13025,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (_typeof(dataExist) === ( true ? "undefined" : undefined) && dataExist != 1) {
           template = '<div class="' + classes + ' js-uix-new">';
           template += '<span class="uix-controls__select-trigger">' + $this.find('select').attr('placeholder') + '</span><ins class="uix-controls__bar"></ins><ins class="uix-controls__basic-bar"></ins>';
-          template += '<div class="uix-controls__select__option-container">';
+          template += '<div role="presentation" class="uix-controls__select__option-container">';
           $this.find('select option').each(function (index) {
             var selected = '';
 
@@ -13033,7 +13033,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               selected = 'is-active';
             }
 
-            template += '<span class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
+            template += '<span role="option" class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
           });
           template += '</div></div>';
 
@@ -13098,7 +13098,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             selected = 'is-active';
           }
 
-          newOptions += '<span class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
+          newOptions += '<span role="option" class="uix-controls__select__option ' + selected + '" data-value="' + $(this).attr('value') + '">' + $(this).html() + '</span>';
         });
         $cusSelect.find(settings.itemsWrapper).html('<div>' + newOptions + '</div>'); //Set the default selector text
 
@@ -16970,6 +16970,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
  * <!-- Base -->
  *************************************
  */
+
+/* !!! To build a table of contents (TOC), you need to import this scss file into JS */
 
 /*
  * Global variables from front pages
@@ -30736,6 +30738,8 @@ var fullwidth_column_to_edge_scss_style = __webpack_require__(55);
 // CONCATENATED MODULE: ./src/components/fullwidth-column-to-edge/js/index.js
 function fullwidth_column_to_edge_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function fullwidth_column_to_edge_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { fullwidth_column_to_edge_js_typeof = function _typeof(obj) { return typeof obj; }; } else { fullwidth_column_to_edge_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return fullwidth_column_to_edge_js_typeof(obj); }
+
 /* 
  *************************************
  * <!-- Full Width Column to Edge -->
@@ -30746,31 +30750,31 @@ function fullwidth_column_to_edge_js_classCallCheck(instance, Constructor) { if 
 var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
   if (window.FULL_WIDTH_COLUMN_TO_EDGE === null) return false;
   module.FULL_WIDTH_COLUMN_TO_EDGE = module.FULL_WIDTH_COLUMN_TO_EDGE || {};
-  module.FULL_WIDTH_COLUMN_TO_EDGE.version = '0.0.1';
+  module.FULL_WIDTH_COLUMN_TO_EDGE.version = '0.0.2';
 
   module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded = function () {
-    var $window = $(window);
-    var windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight;
-    fullwidthColumnToEdgeInit(windowWidth);
-    $window.on('resize', function () {
-      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-      if (window.innerWidth != windowWidth) {
-        // Update the window width for next time
-        windowWidth = window.innerWidth; // Do stuff here
+    $('.js-uix-fullwidth-column-to-edge--extend-right').each(function () {
+      var $el = $(this);
+      var actived = $el.data('activated');
 
-        fullwidthColumnToEdgeInit(windowWidth);
-      }
+      if (fullwidth_column_to_edge_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+        fullwidthToDir($(this), 'right', window.innerWidth); //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+        $el.data('activated', 1);
+      } //endif actived
+
     });
+    $('.js-uix-fullwidth-column-to-edge--extend-left').each(function () {
+      var $el = $(this);
+      var actived = $el.data('activated');
 
-    function fullwidthColumnToEdgeInit(w) {
-      $('.js-uix-fullwidth-column-to-edge--extend-right').each(function () {
-        fullwidthToDir($(this), 'right', w);
-      });
-      $('.js-uix-fullwidth-column-to-edge--extend-left').each(function () {
-        fullwidthToDir($(this), 'left', w);
-      });
-    }
+      if (fullwidth_column_to_edge_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+        fullwidthToDir($(this), 'left', window.innerWidth); //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+        $el.data('activated', 1);
+      } //endif actived
+
+    });
 
     function fullwidthToDir(obj, dir, w) {
       var dividerPosition = obj.offset();
@@ -33192,7 +33196,7 @@ function scroll_reveal_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
 var SCROLL_REVEAL = function (module, $, window, document) {
   if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
-  module.SCROLL_REVEAL.version = '0.1.4';
+  module.SCROLL_REVEAL.version = '0.1.5';
 
   module.SCROLL_REVEAL.documentReady = function ($) {
     //From JSON config in data attribute in HTML
@@ -33276,7 +33280,11 @@ var SCROLL_REVEAL = function (module, $, window, document) {
                 $(this).addClass(toCSS).dequeue();
               });
             } else {
-              $el[0].animation.play();
+              $el[0].animation.play(); //Other animation
+              //------------------------
+              //Image transition
+
+              spyImageTrans('show');
             } //Prevents front-end javascripts that are activated in the background to repeat loading.
 
 
@@ -33289,7 +33297,11 @@ var SCROLL_REVEAL = function (module, $, window, document) {
               //Add class when element becomes visible
               $el.removeClass(toCSS);
             } else {
-              $el[0].animation.reverse();
+              $el[0].animation.reverse(); //Other animation
+              //------------------------
+              //Image transition
+
+              spyImageTrans('hide');
             }
 
             $el.removeData('activated');
@@ -33303,6 +33315,41 @@ var SCROLL_REVEAL = function (module, $, window, document) {
       $(window).on('scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function (event) {
         scrollUpdate();
       });
+      /*
+      * The transition effect of each group of images
+      *
+      * @return {Void}
+      * #Usage: 
+      <ul data-uix-anim='{"viewport":"90%","from":{"y":0},"to":{"y":0},"ease":"Power2.easeOut","duration":0.8,"delay":0.2,"infinite":true}' data-img-ids='["[data-imgshow]"]'>
+      <li data-imgshow="1"><img src="logo-1.jpg" alt=""></li>
+      <li data-imgshow="1"><img src="logo-2.jpg" alt=""></li>
+      <li data-imgshow="1"><img src="logo-3.jpg" alt=""></li>
+      <li data-imgshow="1"><img src="logo-4.jpg" alt=""></li>
+      <ul>
+             */
+
+      function spyImageTrans(type) {
+        var _imgIds = $el.data('img-ids');
+
+        if (scroll_reveal_js_typeof(_imgIds) !== ( true ? "undefined" : undefined)) {
+          //add
+          if (type == 'show') {
+            _imgIds.forEach(function (element) {
+              $(element).each(function (index) {
+                $(this).delay(50 * index).queue('fx', function () {
+                  $(this).addClass('is-active');
+                  $(this).dequeue();
+                });
+              });
+            });
+          } else {
+            //remove 
+            _imgIds.forEach(function (element) {
+              $(element).removeClass('is-active');
+            });
+          }
+        }
+      }
     }); //end each        
   };
 
@@ -34863,7 +34910,7 @@ function swiper_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol ==
 var SWIPER = function (module, $, window, document) {
   if (window.SWIPER === null) return false;
   module.SWIPER = module.SWIPER || {};
-  module.SWIPER.version = '0.0.3';
+  module.SWIPER.version = '0.0.5';
 
   module.SWIPER.documentReady = function ($) {
     $('.uix-swiper').each(function () {
@@ -34871,326 +34918,340 @@ var SWIPER = function (module, $, window, document) {
       var actived = $el.data('activated');
 
       if (swiper_js_typeof(actived) === ( true ? "undefined" : undefined)) {
-        var swiper2 = new swiper_bundle_default.a('#app-slider2', {
-          slidesPerView: 5,
-          spaceBetween: 10,
-          allowTouchMove: false
-        });
-        var swiper = new swiper_bundle_default.a('#app-slider1', {
-          slidesPerView: 1,
-          spaceBetween: 10,
-          speed: 1000,
-          // init: false,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function renderBullet(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + '</span>';
-            }
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          },
-          breakpoints: {
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20
+        if ($el.find('#app-slider1').length > 0) {
+          var swiper2 = new swiper_bundle_default.a('#app-slider2', {
+            slidesPerView: 5,
+            spaceBetween: 10,
+            allowTouchMove: false
+          });
+          var swiper = new swiper_bundle_default.a('#app-slider1', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            speed: 1000,
+            // init: false,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
             },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
             },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50
+            breakpoints: {
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20
+              },
+              768: {
+                slidesPerView: 4,
+                spaceBetween: 40
+              },
+              1024: {
+                slidesPerView: 5,
+                spaceBetween: 50
+              }
             }
-          }
-        }); //Sync three swiper slider
+          }); //Sync three swiper slider
+
+          swiper.on('slideChange', function () {
+            var index = this.activeIndex;
+            swiper2.slideTo(index, 1000, false);
+          });
+        } //Swiper custom slides transform effect (Parallax effect)
         //------------------------------------------
 
-        swiper.on('slideChange', function () {
-          var index = this.activeIndex + 1; //同步运行其它swiper
 
-          swiper2.slideTo(index, 1000, false);
-        }); //Swiper custom slides transform effect (Parallax effect)
+        if ($el.find('#app-slider3').length > 0) {
+          var interleaveOffset = 0.5;
+          var swiper3 = new swiper_bundle_default.a('#app-slider3', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            speed: 1000,
+            grabCursor: false,
+            watchSlidesProgress: true,
+            mousewheelControl: false,
+            keyboardControl: false,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            },
+            on: {
+              progress: function progress(e) {
+                var thisSwiper = this;
+
+                for (var i = 0; i < thisSwiper.slides.length; i++) {
+                  var slideProgress = thisSwiper.slides[i].progress;
+                  var innerOffset = thisSwiper.width * interleaveOffset;
+                  var innerTranslate = slideProgress * innerOffset;
+                  thisSwiper.slides[i].querySelector(".slide-inner").style.transform = "translate3d(" + innerTranslate + "px, 0, 0)"; //console.log( e.passedParams );
+                }
+              },
+              touchStart: function touchStart(e) {
+                var passedParams = e.passedParams;
+                var thisSwiper = this;
+
+                for (var i = 0; i < thisSwiper.slides.length; i++) {
+                  thisSwiper.slides[i].style.transition = "";
+                }
+              },
+              setTransition: function setTransition(e) {
+                var passedParams = e.passedParams;
+                var thisSwiper = this;
+
+                for (var i = 0; i < thisSwiper.slides.length; i++) {
+                  thisSwiper.slides[i].style.transition = passedParams.speed + "ms";
+                  thisSwiper.slides[i].querySelector(".slide-inner").style.transition = passedParams.speed + "ms";
+                }
+              }
+            }
+          }); //AutoPlay
+
+          swiper3.autoplay.start(); //swiper3.autoplay.stop();			
+        } //Swiper custom slides transform effect (Scale Effect without left/right swipe)
         //------------------------------------------
 
-        var interleaveOffset = 0.5;
-        var swiper3 = new swiper_bundle_default.a('#app-slider3', {
-          slidesPerView: 1,
-          spaceBetween: 0,
-          loop: false,
-          speed: 1000,
-          grabCursor: false,
-          watchSlidesProgress: true,
-          mousewheelControl: false,
-          keyboardControl: false,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function renderBullet(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + '</span>';
-            }
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          },
-          on: {
-            progress: function progress(e) {
-              var thisSwiper = this;
 
-              for (var i = 0; i < thisSwiper.slides.length; i++) {
-                var slideProgress = thisSwiper.slides[i].progress;
-                var innerOffset = thisSwiper.width * interleaveOffset;
-                var innerTranslate = slideProgress * innerOffset;
-                thisSwiper.slides[i].querySelector(".slide-inner").style.transform = "translate3d(" + innerTranslate + "px, 0, 0)"; //console.log( e.passedParams );
+        if ($el.find('#app-slider4').length > 0) {
+          var swiper4 = new swiper_bundle_default.a('#app-slider4', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            speed: 1000,
+            grabCursor: false,
+            watchSlidesProgress: true,
+            mousewheelControl: false,
+            keyboardControl: false,
+            virtualTranslate: true,
+
+            /* Required */
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
               }
             },
-            touchStart: function touchStart(e) {
-              var passedParams = e.passedParams;
-              var thisSwiper = this;
-
-              for (var i = 0; i < thisSwiper.slides.length; i++) {
-                thisSwiper.slides[i].style.transition = "";
-              }
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
             },
-            setTransition: function setTransition(e) {
-              var passedParams = e.passedParams;
-              var thisSwiper = this;
+            on: {
+              progress: function progress(translate) {
+                var thisSwiper = this;
 
-              for (var i = 0; i < thisSwiper.slides.length; i++) {
-                thisSwiper.slides[i].style.transition = passedParams.speed + "ms";
-                thisSwiper.slides[i].querySelector(".slide-inner").style.transition = passedParams.speed + "ms";
-              }
-            }
-          }
-        }); //AutoPlay
-
-        swiper3.autoplay.start(); //swiper3.autoplay.stop();		
-        //Swiper custom slides transform effect (Scale Effect without left/right swipe)
-        //------------------------------------------
-
-        var swiper4 = new swiper_bundle_default.a('#app-slider4', {
-          slidesPerView: 1,
-          spaceBetween: 0,
-          loop: false,
-          speed: 1000,
-          grabCursor: false,
-          watchSlidesProgress: true,
-          mousewheelControl: false,
-          keyboardControl: false,
-          virtualTranslate: true,
-
-          /* Required */
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function renderBullet(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + '</span>';
-            }
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          },
-          on: {
-            progress: function progress(translate) {
-              var thisSwiper = this;
-
-              for (var i = 0; i < thisSwiper.slides.length; i++) {
-                var slideProgress = thisSwiper.slides[i].progress;
-                console.log(translate.params);
-              }
-            },
-            touchStart: function touchStart(translate) {
-              var params = translate.params;
-              var thisSwiper = this;
-            },
-            setTransition: function setTransition(translate) {
-              var params = translate.params;
-              var thisSwiper = this;
-            },
-            setTranslate: function setTranslate(translate) {
-              var params = translate.params;
-              var thisSwiper = this;
-              /*
-              A weird way to find this out but I've found no other.
-              Checks if the progress on the active slide is 1 or -1 which happens when swiper navigates to next/previous slide on click and keybord navigation.
-              If not then the slider is being dragged, so we get the right index by finding the startTranslate from touchEvents in array of transitions the swiper snaps to.
-              The startTranslate doesn't exist on initial load so we use the initialSlide index instead.
-              */
-
-              var getActiveIndexBeforeTransitionStart = function getActiveIndexBeforeTransitionStart(curSwiper, curSlides) {
-                var isDragging = !Math.abs(curSlides[curSwiper.activeIndex].progress === 1);
-
-                if (isDragging) {
-                  return curSwiper.slidesGrid.indexOf(-curSwiper.touchEventsData.startTranslate || curSwiper.params.initialSlide);
-                } else {
-                  return curSwiper.activeIndex;
+                for (var i = 0; i < thisSwiper.slides.length; i++) {
+                  var slideProgress = thisSwiper.slides[i].progress;
+                  console.log(translate.params);
                 }
-              };
+              },
+              touchStart: function touchStart(translate) {
+                var params = translate.params;
+                var thisSwiper = this;
+              },
+              setTransition: function setTransition(translate) {
+                var params = translate.params;
+                var thisSwiper = this;
+              },
+              setTranslate: function setTranslate(translate) {
+                var params = translate.params;
+                var thisSwiper = this;
+                /*
+                A weird way to find this out but I've found no other.
+                Checks if the progress on the active slide is 1 or -1 which happens when swiper navigates to next/previous slide on click and keybord navigation.
+                If not then the slider is being dragged, so we get the right index by finding the startTranslate from touchEvents in array of transitions the swiper snaps to.
+                The startTranslate doesn't exist on initial load so we use the initialSlide index instead.
+                */
 
-              var getDirection = function getDirection(animationProgress) {
-                if (animationProgress === 0) {
-                  return "NONE";
-                } else if (animationProgress > 0) {
-                  return "NEXT";
-                } else {
-                  return "BACK";
-                }
-              };
+                var getActiveIndexBeforeTransitionStart = function getActiveIndexBeforeTransitionStart(curSwiper, curSlides) {
+                  var isDragging = !Math.abs(curSlides[curSwiper.activeIndex].progress === 1);
 
-              var durationInSeconds = params.speed / 1000; // convert slides object to plain array
-
-              var slides = thisSwiper.slides; // get the index of the slide active before transition start (activeIndex changes halfway when dragging)
-
-              var originIndex = getActiveIndexBeforeTransitionStart(thisSwiper, slides); // get information about animation progress from the active slide - the active slide's value is always -1 to 1.
-
-              /* 
-              every slide has a progress attribute equal to the "distance" from the current active index.
-              */
-
-              var animationProgress = slides[originIndex].progress; // you can then get the drag direction like so:
-
-              var direction = getDirection(animationProgress); // console.log(direction);
-              // do magic with each slide
-
-              slides.map(function (perSlide, index) {
-                // to put the slides behind each other we have to set their CSS translate accordingly since by default they are arranged in line.
-                var offset = perSlide.swiperSlideOffset;
-                var x = -offset;
-                if (!thisSwiper.params.virtualTranslate) x -= thisSwiper.translate;
-                var y = 0;
-
-                if (!thisSwiper.isHorizontal()) {
-                  y = x;
-                  x = 0;
-                }
-
-                TweenMax.set(perSlide, {
-                  x: x,
-                  y: y
-                }); // do our animation stuff!
-
-                var clip = function clip(val, min, max) {
-                  return Math.max(min, Math.min(val, max));
+                  if (isDragging) {
+                    return curSwiper.slidesGrid.indexOf(-curSwiper.touchEventsData.startTranslate || curSwiper.params.initialSlide);
+                  } else {
+                    return curSwiper.activeIndex;
+                  }
                 };
 
-                var ZOOM_FACTOR = 0.05;
-                var opacity = Math.max(1 - Math.abs(perSlide.progress), 0);
-                var clippedProgress = clip(perSlide.progress, -1, 1);
-                var scale = 1 - ZOOM_FACTOR * clippedProgress; // you can do your CSS animation instead of using tweening.
+                var getDirection = function getDirection(animationProgress) {
+                  if (animationProgress === 0) {
+                    return "NONE";
+                  } else if (animationProgress > 0) {
+                    return "NEXT";
+                  } else {
+                    return "BACK";
+                  }
+                };
 
-                TweenMax.to(perSlide, durationInSeconds, {
-                  scale: scale,
-                  opacity: opacity
+                var durationInSeconds = params.speed / 1000; // convert slides object to plain array
+
+                var slides = thisSwiper.slides; // get the index of the slide active before transition start (activeIndex changes halfway when dragging)
+
+                var originIndex = getActiveIndexBeforeTransitionStart(thisSwiper, slides); // get information about animation progress from the active slide - the active slide's value is always -1 to 1.
+
+                /* 
+                every slide has a progress attribute equal to the "distance" from the current active index.
+                */
+
+                var animationProgress = slides[originIndex].progress; // you can then get the drag direction like so:
+
+                var direction = getDirection(animationProgress); // console.log(direction);
+                // do magic with each slide
+
+                slides.map(function (perSlide, index) {
+                  // to put the slides behind each other we have to set their CSS translate accordingly since by default they are arranged in line.
+                  var offset = perSlide.swiperSlideOffset;
+                  var x = -offset;
+                  if (!thisSwiper.params.virtualTranslate) x -= thisSwiper.translate;
+                  var y = 0;
+
+                  if (!thisSwiper.isHorizontal()) {
+                    y = x;
+                    x = 0;
+                  }
+
+                  TweenMax.set(perSlide, {
+                    x: x,
+                    y: y
+                  }); // do our animation stuff!
+
+                  var clip = function clip(val, min, max) {
+                    return Math.max(min, Math.min(val, max));
+                  };
+
+                  var ZOOM_FACTOR = 0.05;
+                  var opacity = Math.max(1 - Math.abs(perSlide.progress), 0);
+                  var clippedProgress = clip(perSlide.progress, -1, 1);
+                  var scale = 1 - ZOOM_FACTOR * clippedProgress; // you can do your CSS animation instead of using tweening.
+
+                  TweenMax.to(perSlide, durationInSeconds, {
+                    scale: scale,
+                    opacity: opacity
+                  });
                 });
-              });
+              }
             }
-          }
-        }); //AutoPlay
+          }); //AutoPlay
 
-        swiper4.autoplay.start(); //swiper4.autoplay.stop();			
-        //Centered Slides
+          swiper4.autoplay.start(); //swiper4.autoplay.stop();			
+        } //Centered Slides
+        //------------------------------------------	
+
+
+        if ($el.find('#app-slider5').length > 0) {
+          var swiper5 = new swiper_bundle_default.a('#app-slider5', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            loop: true,
+            speed: 1000,
+            centeredSlides: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }
+          });
+        } //Display half on both sides
         //------------------------------------------		
 
-        var swiper5 = new swiper_bundle_default.a('#app-slider5', {
-          slidesPerView: 3,
-          spaceBetween: 30,
-          loop: true,
-          speed: 1000,
-          centeredSlides: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function renderBullet(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + '</span>';
-            }
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
-        }); //Display half on both sides
-        //------------------------------------------		
 
-        var swiper6 = new swiper_bundle_default.a('#app-slider6', {
-          slidesPerView: 'auto',
-          //Number of slides per view, and it must be "auto"!
-          spaceBetween: 30,
-          loop: true,
-          speed: 1000,
-          centeredSlides: true,
-          //If true, then active slide will be centered, not always on the left side.
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function renderBullet(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + '</span>';
+        if ($el.find('#app-slider6').length > 0) {
+          var swiper6 = new swiper_bundle_default.a('#app-slider6', {
+            slidesPerView: 'auto',
+            //Number of slides per view, and it must be "auto"!
+            spaceBetween: 30,
+            loop: true,
+            speed: 1000,
+            centeredSlides: true,
+            //If true, then active slide will be centered, not always on the left side.
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
             }
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
-        }); //Custom Progress Bar
+          });
+        } //Custom Progress Bar
         //------------------------------------------
 
-        var cusProgressBar = function cusProgressBar(speed, length, curIndex) {
-          TweenMax.set('#app-slider7__progress', {
-            width: 0,
-            onComplete: function onComplete() {
-              TweenMax.to('#app-slider7__progress', speed / 1000, {
-                width: '100%'
-              });
-            }
-          });
-          TweenMax.set('#app-slider7__progress2', {
-            width: 100 / length * curIndex + '%',
-            onComplete: function onComplete() {
-              TweenMax.to('#app-slider7__progress2', speed / 1000, {
-                width: 100 / length * (curIndex + 1) + '%'
-              });
-            }
-          });
-        };
 
-        var swiper7 = new swiper_bundle_default.a('#app-slider7', {
-          slidesPerView: 1,
-          spaceBetween: 0,
-          loop: false,
-          speed: 3500,
-          grabCursor: false,
-          watchSlidesProgress: true,
-          mousewheelControl: false,
-          keyboardControl: false,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function renderBullet(index, className) {
-              return '<span class="' + className + '">' + (index + 1) + '</span>';
-            }
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          },
-          on: {
-            init: function init(e) {
-              var thisSwiper = this;
-              console.log('current index: ' + thisSwiper.activeIndex);
-              cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
+        if ($el.find('#app-slider7').length > 0) {
+          var cusProgressBar = function cusProgressBar(speed, length, curIndex) {
+            TweenMax.set('#app-slider7__progress', {
+              width: 0,
+              onComplete: function onComplete() {
+                TweenMax.to('#app-slider7__progress', speed / 1000, {
+                  width: '100%'
+                });
+              }
+            });
+            TweenMax.set('#app-slider7__progress2', {
+              width: 100 / length * curIndex + '%',
+              onComplete: function onComplete() {
+                TweenMax.to('#app-slider7__progress2', speed / 1000, {
+                  width: 100 / length * (curIndex + 1) + '%'
+                });
+              }
+            });
+          };
+
+          var swiper7 = new swiper_bundle_default.a('#app-slider7', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            speed: 3500,
+            grabCursor: false,
+            watchSlidesProgress: true,
+            mousewheelControl: false,
+            keyboardControl: false,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
             },
-            slideChange: function slideChange(e) {
-              var thisSwiper = this;
-              console.log('current index: ' + thisSwiper.activeIndex);
-              cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            },
+            on: {
+              init: function init(e) {
+                var thisSwiper = this;
+                console.log('current index: ' + thisSwiper.activeIndex);
+                cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
+              },
+              slideChange: function slideChange(e) {
+                var thisSwiper = this;
+                console.log('current index: ' + thisSwiper.activeIndex);
+                cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
+              }
             }
-          }
-        }); //------------------------------------------
+          });
+        } //------------------------------------------
         //Prevents front-end javascripts that are activated in the background to repeat loading.
+
 
         $el.data('activated', 1);
       } //endif actived
@@ -44638,88 +44699,7 @@ var wave_background_scss_style = __webpack_require__(114);
 
 /* base */
 
-
-
-
-
-
-
-
-
-
-/******/
-
-/******/
-
-/* pages */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Note: The CSS style file has been included by JavaScript files */
 
 
 
@@ -44736,7 +44716,92 @@ var wave_background_scss_style = __webpack_require__(114);
 
 /* pages */
 
-/* These modules do not contain JavaScript */
+/* Note: The CSS style file has been included by JavaScript files */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******/
+
+/******/
+
+/* pages */
+
+/* Note: These modules do not contain JavaScript */
 
 
 

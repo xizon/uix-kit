@@ -30,11 +30,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=fy6YVcaVKnFlqkOjUD2C"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=3sMLB4yIKbbLZjo5jFPU"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=fy6YVcaVKnFlqkOjUD2C" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=3sMLB4yIKbbLZjo5jFPU" />
 	<![endif]-->
 
 
@@ -672,7 +672,7 @@
 												<tr>
 													<th>Specifies Whether To Clip Content</th>
 													<th>Specifies a Default Height <span class="uix-typo--style-normal uix-typo--color-sub">(unit: vh)</span>.</th>
-													<th>Hidden The Element on Mobile Device</th>
+													<th>Hidden Element on Mobile/Desktop</th>
 												</tr>
 											</thead>
 
@@ -706,26 +706,20 @@
 
 
 													<td>
-														<code>.uix-mobile-el</code>
+														<code>.uix-hide-mobile</code>
 														<div class="uix-tooltip">
 															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
-															<div class="uix-t-l">Display element on mobile devices. By default, the PC devices does not display.</div>
+															<div class="uix-t-l">Only display element on desktop devices.</div>
 														</div>
 														<br> 
 
-														<code>.is-mobile-hide</code>
+														
+														<code>.uix-hide-pc</code>
 														<div class="uix-tooltip">
 															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
-															<div class="uix-t-l">Hide element on mobile devices</div>
+															<div class="uix-t-l">Only display element on mobile devices.</div>
 														</div>
-														<br>
-
-														<code>.is-mobile-still</code>
-														<div class="uix-tooltip">
-															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
-															<div class="uix-t-l">Keep the same effect as the PC on mobile devices, it can be used with <code>.uix-height--*</code></div>
-														</div>
-														<br>
+														<br> 
 
 
 
@@ -798,9 +792,26 @@
 
 													<td>
 
-														<code>.uix-el--transparent</code><br> 
-														<code>.uix-el--zoom</code><br> 
+														<code>.uix-el--transparent</code>
+														<div class="uix-tooltip">
+															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
+															<div class="uix-t-l">Set the transparency of the element to 0.</div>
+														</div>
+														<br> 
+														
+														<code>.uix-el--scale</code>
+														<div class="uix-tooltip">
+															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
+															<div class="uix-t-l">Set the scale of the element to 0.</div>
+														</div>
+														<br> 
+														
+														
 														<code>.uix-el--skew</code>
+														<div class="uix-tooltip">
+															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
+															<div class="uix-t-l">Tilt the element a certain degree to the upper right.</div>
+														</div>
 
 													</td>
 
@@ -820,6 +831,7 @@
 															<span data-microtip-position="top" data-microtip-size="large" role="tooltip"><i class="fa fa-question-circle uix-typo--color-sub" aria-hidden="true"></i></span>
 															<div class="uix-t-l">Make a circle image with <code>&lt;img&gt;</code> only.</div>
 														</div>	
+														<br> 
 
 														
 														<code>.uix-border--rounded.uix-border--rounded-img</code>
@@ -951,7 +963,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "4.4.2",
+		var REVISION     = "4.4.4",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -965,7 +977,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script defer src="../dist/js/uix-kit.min.js?ver=fy6YVcaVKnFlqkOjUD2C"></script>
+    <script defer src="../dist/js/uix-kit.min.js?ver=3sMLB4yIKbbLZjo5jFPU"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 
