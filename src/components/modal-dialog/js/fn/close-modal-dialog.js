@@ -18,11 +18,7 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
 		
  
         this.each( function() {
-			
-			
-			
-			//Remove class for body
-			$( 'body' ).removeClass( 'has-modal' );	
+		
 
 			//Enable mask to close the window.
 			$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );
@@ -40,6 +36,10 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
 			
 			// Unlocks the page
 			$.scrollLock( false );
+			
+			//Remove class for body
+			//When scrollLock is used, scrollTop value will change
+			$( 'body' ).removeClass( 'scrollLock' );		
 			
 			
 			//Prevent automatic close from affecting new fire effects

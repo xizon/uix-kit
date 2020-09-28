@@ -27,7 +27,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.2.1';
+    module.LIGHTBOX.version       = '0.2.2';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -161,6 +161,10 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			// Locks the page
 			if ( !$( wrapperEl ).hasClass( 'js-uix-no-fixed' ) ) {
 				$.scrollLock( true );
+				
+				//Add class for body
+				//When scrollLock is used, scrollTop value will change
+				$( 'body' ).addClass( 'scrollLock' );
 			}
 			
 			
@@ -768,6 +772,10 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 			
 			// Unlocks the page
 			$.scrollLock( false );
+			
+			//Remove class for body
+			//When scrollLock is used, scrollTop value will change
+			$( 'body' ).removeClass( 'scrollLock' );	
 	
 			
 		}

@@ -37,9 +37,7 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
         this.each( function() {
 
 			if ( settings.id == '' ) return false;
-			
-			//Add class for body
-			$( 'body' ).addClass( 'has-modal' );
+
 			
 			//Add modal mask to stage
 			if ( $( '.uix-modal-mask' ).length == 0 ) {
@@ -80,6 +78,11 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
 					// Locks the page
 					$.scrollLock( true );
 
+			
+					//Add class for body
+					//When scrollLock is used, scrollTop value will change
+					$( 'body' ).addClass( 'scrollLock' );
+					
 
 					if ( typeof dataH != typeof undefined && dataH != '' && dataH ) {
 						$obj.css( {'height': dataH } );

@@ -25,7 +25,7 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 	
 	
     module.SOURCE_CODE_VIEW               = module.SOURCE_CODE_VIEW || {};
-    module.SOURCE_CODE_VIEW.version       = '0.0.1';
+    module.SOURCE_CODE_VIEW.version       = '0.0.2';
     module.SOURCE_CODE_VIEW.documentReady = function( $ ) {
 
 		//Add view source code to body
@@ -34,10 +34,17 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 
 		//View source button event
 		$( '#uix-view-source' ).on( 'click', function() {
+
 			// Locks the page
 			$.scrollLock( true );
-			$( '#uix-source-code' ).show();
 			
+			//Add class for body
+			//When scrollLock is used, scrollTop value will change
+			$( 'body' ).addClass( 'scrollLock' );
+			
+			
+			//
+			$( '#uix-source-code' ).show();
 
 			
 		});
@@ -46,12 +53,19 @@ export const SOURCE_CODE_VIEW = ( ( module, $, window, document ) => {
 			// Unlocks the page
 			$.scrollLock( false );
 			
+			
+			//Remove class for body
+			//When scrollLock is used, scrollTop value will change
+			$( 'body' ).removeClass( 'scrollLock' );	
+			
+			//
 			const uri = window.location.toString();
 			if ( uri.indexOf( '#' ) > 0 ) {
 				const clean_uri = uri.substring(0, uri.indexOf( '#' ) );
 				window.history.replaceState({}, document.title, clean_uri );
 			}
 			$( '#uix-source-code' ).hide();
+
 			
 		});
 		

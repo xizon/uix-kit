@@ -2,9 +2,10 @@
 
 
 
-#### = 4.4.5 (October 1, 2020) =
+#### = 4.4.6 (September 28, 2020) =
 
-* Tweak: Added body helper class to activate Modal Dialog module.
+* Tweak: Added body helper class to activate `scrollLock()`.
+
 
 
 #### = 4.4.4 (September 26, 2020) =
