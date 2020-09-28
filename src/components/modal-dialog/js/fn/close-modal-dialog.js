@@ -18,6 +18,11 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
 		
  
         this.each( function() {
+			
+			
+			
+			//Remove class for body
+			$( 'body' ).removeClass( 'has-modal' );	
 
 			//Enable mask to close the window.
 			$( '.uix-modal-mask' ).removeClass( 'js-uix-disabled' );

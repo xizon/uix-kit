@@ -1,6 +1,13 @@
 # Changelog
 
-#### = 4.4.4 (October 1, 2020) =
+
+
+#### = 4.4.5 (October 1, 2020) =
+
+* Tweak: Added body helper class to activate Modal Dialog module.
+
+
+#### = 4.4.4 (September 26, 2020) =
 
 * Tweak: Enhanced the semantics of HTML tags of forms.
 * Tweak: Update the separate display classes of Helper Classes for mobile and desktop

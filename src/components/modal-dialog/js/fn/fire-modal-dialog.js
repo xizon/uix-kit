@@ -38,6 +38,9 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
 
 			if ( settings.id == '' ) return false;
 			
+			//Add class for body
+			$( 'body' ).addClass( 'has-modal' );
+			
 			//Add modal mask to stage
 			if ( $( '.uix-modal-mask' ).length == 0 ) {
 				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );
