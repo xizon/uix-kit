@@ -433,7 +433,6 @@ export const FORM = ( ( module, $, window, document ) => {
 
 
 		$( document ).off( 'click.FORM_NORMAL_RADIO' ).on( 'click.FORM_NORMAL_RADIO', normalRadioItem, function( e ) {
-			e.preventDefault();
 
 			const $selector     = $( this ).parent(),
 				$option       = $( this ),
