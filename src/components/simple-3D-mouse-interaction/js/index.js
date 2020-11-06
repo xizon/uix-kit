@@ -22,7 +22,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION               = module.THREE_MOUSE_INTERACTION || {};
-    module.THREE_MOUSE_INTERACTION.version       = '0.0.3';
+    module.THREE_MOUSE_INTERACTION.version       = '0.0.4';
     module.THREE_MOUSE_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -64,11 +64,16 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 
 
 			function init() {
+				
+				//=================
 				//camera
 				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
 				camera.position.set(0, 0, 1300);
 
+				
+				
 
+				//=================
 				//controls
 				controls = new THREE.OrbitControls( camera );
 				controls.autoRotate = false;
@@ -89,9 +94,12 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 
 
 
+				//=================
 				//Scene
 				scene = new THREE.Scene();
 
+				
+				//=================
 				//HemisphereLight
 				scene.add( new THREE.AmbientLight( 0x555555 ) );
 
@@ -101,6 +109,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 
 
 
+				//=================
 				//WebGL Renderer	
 				renderer = new THREE.WebGLRenderer( { 
 										canvas   : document.getElementById( rendererCanvasID ), //canvas
@@ -110,14 +119,19 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 				renderer.setSize( windowWidth, windowHeight );
 
 
+				//=================
 				// Immediately use the texture for material creation
 				generateGeometry( 'poly', 15 );
 
 
+				
+				//=================
 				// Fires when the window changes
 				window.addEventListener( 'resize', onWindowResize, false );
 
 
+				
+				//=================
 				// When the mouse moves, call the given function
 				raycaster = new THREE.Raycaster();
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -139,6 +153,9 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 				renderer.setClearColor( 0x000000 );	
 
 
+						
+				//++++++++++++++++++++++++++++++++++++++
+				//++++++++++++++++++++++++++++++++++++++
 				//Mouse interactions
 				raycaster.setFromCamera( mouseVector, camera );
 				intersects = raycaster.intersectObjects( atoms );
@@ -216,6 +233,10 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 
 				clickEnable = true;
 
+				
+				
+				//++++++++++++++++++++++++++++++++++++++
+				//++++++++++++++++++++++++++++++++++++++
 				//Mouse interactions
 				raycaster.setFromCamera( mouseVector, camera );
 				intersects = raycaster.intersectObjects( atoms );

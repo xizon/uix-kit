@@ -2,6 +2,12 @@
 
 
 
+#### = 4.4.7 (November 6, 2020) =
+
+* Tweak: Replace the demo loader related to the 3D model with GLTFLoader to improve performance.
+* Tweak: Removed event.preventDefault() of radio.
+
+
 #### = 4.4.6 (September 28, 2020) =
 
 * Tweak: Added body helper class to activate `scrollLock()`.

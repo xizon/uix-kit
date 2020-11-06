@@ -14,8 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
-import OBJLoader from '@uixkit/plugins/THREE/loaders/OBJLoader';
+import GLTFLoader from '@uixkit/plugins/THREE/loaders/GLTFLoader';
 
 
 export const THREE_MODEL = ( ( module, $, window, document ) => {
@@ -24,7 +23,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};
-    module.THREE_MODEL.version       = '0.0.3';
+    module.THREE_MODEL.version       = '0.0.4';
     module.THREE_MODEL.documentReady = function( $ ) {
 
 		
@@ -47,61 +46,54 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 			// Generate one plane geometries mesh to scene
 			//-------------------------------------	
 			let camera,
-				controls,
 				scene,
-				light,
+				lights = [],
 				renderer,
 				displacementSprite,
-				radius       = 100,
-				theta        = 0,
-				clickEnable   = false;
-
-			const mouseVector = new THREE.Vector2();
-            
-			let	INTERSECTED,
-				INTERSECTED_CLICK,
-				raycaster;
+				theta        = 0;
 
 
+			
+			let mixerGLTF;
+			const radius = 600;
+			let prevTime = Date.now();
+			
+			
 
 			function init() {
+				
+				
+				//=================
 				//camera
 				camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
-				camera.position.set(0, 0, -1000);
+				camera.position.set( 0, 0, 100 );
+				camera.target = new THREE.Vector3( 0, 150, 0 );
 
+	
 
-
-				//controls
-				controls = new THREE.OrbitControls( camera );
-				controls.autoRotate = true;
-				controls.autoRotateSpeed = 0.5;
-				controls.rotateSpeed = 0.5;
-				controls.zoomSpeed = 1.2;
-				controls.panSpeed = 0.8;
-				controls.enableZoom = true;
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-				controls.dampingFactor = 0.25;
-				controls.screenSpacePanning = false;
-				controls.minDistance = 100;
-				controls.maxDistance = 500;
-				controls.maxPolarAngle = Math.PI / 2;
-
-				controls.target.set( 30, 167, 81 );
-				controls.update();			
-
-
+				//=================
 				//Scene
 				scene = new THREE.Scene();
 
-				//HemisphereLight
-				scene.add( new THREE.AmbientLight( 0xcccccc, 0.4 ) );
+				//=================
+				//Lights
+				lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+				lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+				lights[ 2 ] = new THREE.DirectionalLight( 0xffffff );
 
-				light = new THREE.SpotLight( 0xffffff, 1.5 );
-				light.position.set( 0, 500, 2000 );
-				scene.add( light );
+				lights[ 0 ].position.set( 0, 200, 0 );
+				lights[ 1 ].position.set( 100, 200, 100 );
+				lights[ 2 ].position.set( 120, 200, 0 );
+				lights[ 2 ].intensity = 0.6;
+
+				scene.add( lights[ 0 ] );
+				scene.add( lights[ 1 ] );
+				scene.add( lights[ 2 ] );
+				
 
 
 
+				//=================
 				//WebGL Renderer	
 				renderer = new THREE.WebGLRenderer( { 
 										canvas   : document.getElementById( rendererCanvasID ), //canvas
@@ -111,7 +103,9 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 				renderer.setSize( windowWidth, windowHeight );
 
 
-				// Immediately use the texture for material creation
+				
+				//=================
+                displacementSprite = new THREE.Object3D();
 				const manager = new THREE.LoadingManager();
 				manager.onProgress = function ( item, loaded, total ) {
 
@@ -119,8 +113,8 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 				};
 
-				const textureURL = ( typeof $( '#' + rendererCanvasID ).data( 'texture-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'texture-src' ) : templateUrl + '/assets/models/obj/project.png';
-				const objURL = ( typeof $( '#' + rendererCanvasID ).data( 'model-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'model-src' ) : templateUrl + '/assets/models/obj/project.obj';
+				const textureURL = ( typeof $( '#' + rendererCanvasID ).data( 'texture-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'texture-src' ) : templateUrl + '/assets/models/gltf/project.jpg';
+				const objURL = ( typeof $( '#' + rendererCanvasID ).data( 'model-src' ) != typeof undefined ) ? $( '#' + rendererCanvasID ).data( 'model-src' ) : templateUrl + '/assets/models/gltf/project.glb';
 				
 				const textureLoader = new THREE.TextureLoader( manager ),
 					texture       = textureLoader.load( textureURL ),
@@ -133,45 +127,97 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 					onError       = function ( xhr ) { };
 
 
-				const loader        = new THREE.OBJLoader( manager );
+				const loader        = new THREE.GLTFLoader( manager );
+                loader.crossOrigin = 'anonymous';
 				loader.load( objURL, function ( object ) {
 
-					object.traverse( function ( child ) {
+					
+					const gltfMesh = object.scene.children[ 0 ];
+					object.scene.children[ 0 ].traverse( function( child ) {            
+					   if ( ( child instanceof THREE.Mesh ) ) { 
+						   console.log( child );
 
-						if ( child instanceof THREE.Mesh ) {
 
-                            child.material = new THREE.MeshPhongMaterial( {
-                                                color: 0x2194CE,
-                                                wireframe: false,
-                                                map: texture,
-                                                side: THREE.DoubleSide
-
-                                            } );
-                            
+						    child.material.emissive = new THREE.Color( 0xff6600 );  // -> color
+						    child.material.normalMap = texture; // -> map
+						    child.material.shadowSide = THREE.DoubleSide; // -> side
+						    child.material.wireframe = false; // -> wireframe
+						    child.material.emissiveIntensity = 0.5;  // -> shininess
+						   
+						   //Excluding objects from fog
+						    child.material.fog = false; // -> fog
+						   
+	
+							// set castShadow to object
+							child.castShadow = true;
 
 						}
+					});
+					
+					
+					
+					/*
+					If you can not use `object.scene.children[ 0 ]`, use the following code:
+					
 
-					} );
+					const gltfMesh = object.scene;
+					object.scene.traverse( function( child ) {            
+					   if ( ( child instanceof THREE.Mesh ) ) { 
 
-					object.scale.set( 165, 165, 165 );
-					object.position.y = 100;
-					scene.add( object );
+
+							child.material = new THREE.MeshPhongMaterial( {
+												color: 0xdddddd,
+												shininess: 80,
+												wireframe: true,
+												map: mainSceneImgTexture,
+												side: THREE.DoubleSide,
+												fog : false //Excluding objects from fog
+											} );
+
+							// set castShadow to object
+							child.castShadow = true;
+
+						}
+					});
+
+					
+					*/
+					
+					displacementSprite.add( gltfMesh );
+				
+					displacementSprite.scale.set( 1.2, 1.2, 1.2 );
+					displacementSprite.position.y = 100;
+					scene.add( displacementSprite );
+					
+					
+					
+
+                    // set the original position
+                    displacementSprite.origPos	= {
+                        x: displacementSprite.position.x,
+                        y: displacementSprite.position.y,
+                        z: displacementSprite.position.z,
+                        rx: displacementSprite.rotation.x,
+                        ry: displacementSprite.rotation.y,
+                        rz: displacementSprite.rotation.z
+                    };
+
+					
+
+					//
+					
+					mixerGLTF = new THREE.AnimationMixer( displacementSprite );
+					mixerGLTF.clipAction( object.animations[ 0 ] ).setDuration( 1 ).play();		
+						
+					
 
 				}, onProgress, onError );
 
 
 
-
+				//=================
 				// Fires when the window changes
 				window.addEventListener( 'resize', onWindowResize, false );
-
-
-				// When the mouse moves, call the given function
-				raycaster = new THREE.Raycaster();
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-
 
 
 			}
@@ -181,31 +227,24 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 				theta += 0.1;
 
+				camera.position.x = radius * Math.sin( getRadian( theta ) );
+				camera.position.z = radius * Math.cos( getRadian( theta ) );
 
+				camera.lookAt( camera.target );
+				
+				
+				if ( mixerGLTF ) {
+
+					const time = Date.now();
+					mixerGLTF.update( ( time - prevTime ) * 0.001 );
+					prevTime = time;
+
+				}
+				
+				
 
 				//To set a background color.
 				//renderer.setClearColor( 0x000000 );	
-
-
-				//Mouse interactions
-				raycaster.setFromCamera( mouseVector, camera );
-				const intersects = raycaster.intersectObjects( scene.children );
-				if ( intersects.length > 0 ) {
-					if ( INTERSECTED != intersects[ 0 ].object ) {
-
-						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-						INTERSECTED = intersects[ 0 ].object;
-						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-						INTERSECTED.material.emissive.setHex( 0xffcc00 );
-					}
-				} else {
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-					INTERSECTED = null;
-				}
-
-
-				//update camera and controls
-				controls.update();
 
 
                 //push objects
@@ -242,65 +281,21 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 				renderer.setSize( window.innerWidth, window.innerHeight );
 			}
 
-
-			function onDocumentMouseMove( event ) {
-				event.preventDefault();
-				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			}
-
-
-			function onDocumentMouseDown( event ) {
-				event.preventDefault();
-				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-				clickEnable = true;
-
-				//Mouse interactions
-				raycaster.setFromCamera( mouseVector, camera );
-				const intersects = raycaster.intersectObjects( scene.children );
-				if ( intersects.length > 0 ) {
-					if ( INTERSECTED_CLICK != intersects[ 0 ].object ) {
-
-						INTERSECTED_CLICK = intersects[ 0 ].object;
-
-						TweenMax.to( INTERSECTED_CLICK.scale, 1, {
-							x: '+=' + ( 200 - INTERSECTED_CLICK.scale.x ) * 0.05,
-							y: '+=' + ( 200 - INTERSECTED_CLICK.scale.y ) * 0.05,
-							z: '+=' + ( 200 - INTERSECTED_CLICK.scale.z ) * 0.05
-						});	
-
-
-						INTERSECTED_CLICK.updateMatrix();	
-
-					}
-				} else {
-					INTERSECTED_CLICK = null;
-				}
-				/*
-				// Parse all the faces
-				for ( let i in intersects ) {
-
-					intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-				}
-				*/		
-
-
-
-
-			}
-			function onDocumentMouseUp( event ) {
-				event.preventDefault();
-				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-				theta = 0;
-				clickEnable = false;
-
-			}
-
+            
+            /*
+             * Returns the radian degree .
+             *
+             * @return {Number} deg - Value of degree.
+             * @return {Number}
+             * @usage: 
+                
+                rad = Math.PI / 180 * 30 ;
+             */
+            function getRadian( deg ) {
+                return deg * Math.PI / 180;
+            }
+			
+			
 			// 
 			//-------------------------------------	
 			return {
