@@ -23,7 +23,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};
-    module.THREE_MODEL.version       = '0.0.4';
+    module.THREE_MODEL.version       = '0.0.5';
     module.THREE_MODEL.documentReady = function( $ ) {
 
 		
@@ -204,11 +204,30 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 					
 
-					//
-					
+					// set animation
 					mixerGLTF = new THREE.AnimationMixer( displacementSprite );
-					mixerGLTF.clipAction( object.animations[ 0 ] ).setDuration( 1 ).play();		
+					console.log(mixerGLTF);
+					object.animations.forEach((el) => {
+
+						const thisAction = mixerGLTF.clipAction( el );
+						thisAction.setDuration( 1 );
+
 						
+						if(thisAction.time === 0) {
+							thisAction.time = thisAction.getClip().duration;
+						}
+
+						//console.log( 'thisAction.time: ' + thisAction.time );
+						console.log( thisAction );
+
+						thisAction.paused = false;
+						//thisAction.timeScale = -1; //Reverse Keyframe animation
+						thisAction.play();
+
+
+					});
+					
+					
 					
 
 				}, onProgress, onError );
@@ -238,6 +257,11 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 					const time = Date.now();
 					mixerGLTF.update( ( time - prevTime ) * 0.001 );
 					prevTime = time;
+					
+					//
+					//const delta  clock.getDelta();
+					//mixerGLTF.update( delta );
+					
 
 				}
 				

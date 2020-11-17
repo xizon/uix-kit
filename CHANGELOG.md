@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 4.4.72 (November 17, 2020) =
+
+* New: Added the features module of the dividing line.
+* Tweak: Upgraded 3D model demo.
 
 
 #### = 4.4.7 (November 6, 2020) =

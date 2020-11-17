@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.7
+ * ## Version             :  4.4.72
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 6, 2020
+ * ## Last Update         :  November 17, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5a3f48305542ae50591a";
+/******/ 	var hotCurrentHash = "bf2775f61bf4f3b25352";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -39995,7 +39995,7 @@ function simple_3D_model_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var THREE_MODEL = function (module, $, window, document) {
   if (window.THREE_MODEL === null) return false;
   module.THREE_MODEL = module.THREE_MODEL || {};
-  module.THREE_MODEL.version = '0.0.4';
+  module.THREE_MODEL.version = '0.0.5';
 
   module.THREE_MODEL.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -40127,10 +40127,24 @@ var THREE_MODEL = function (module, $, window, document) {
             rx: displacementSprite.rotation.x,
             ry: displacementSprite.rotation.y,
             rz: displacementSprite.rotation.z
-          }; //
+          }; // set animation
 
           mixerGLTF = new THREE.AnimationMixer(displacementSprite);
-          mixerGLTF.clipAction(object.animations[0]).setDuration(1).play();
+          console.log(mixerGLTF);
+          object.animations.forEach(function (el) {
+            var thisAction = mixerGLTF.clipAction(el);
+            thisAction.setDuration(1);
+
+            if (thisAction.time === 0) {
+              thisAction.time = thisAction.getClip().duration;
+            } //console.log( 'thisAction.time: ' + thisAction.time );
+
+
+            console.log(thisAction);
+            thisAction.paused = false; //thisAction.timeScale = -1; //Reverse Keyframe animation
+
+            thisAction.play();
+          });
         }, onProgress, onError); //=================
         // Fires when the window changes
 
@@ -40147,7 +40161,9 @@ var THREE_MODEL = function (module, $, window, document) {
         if (mixerGLTF) {
           var time = Date.now();
           mixerGLTF.update((time - prevTime) * 0.001);
-          prevTime = time;
+          prevTime = time; //
+          //const delta  clock.getDelta();
+          //mixerGLTF.update( delta );
         } //To set a background color.
         //renderer.setClearColor( 0x000000 );	
         //push objects

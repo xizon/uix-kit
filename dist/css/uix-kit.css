@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.7
+ * ## Version             :  4.4.72
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 6, 2020
+ * ## Last Update         :  November 17, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -19065,6 +19065,16 @@ ul.edd_purchase_receipt_files li {
 /* ======================================================
    <!-- Features -->
 /* ====================================================== */
+/*
+ * 1. Features with Grid System
+ * 2. Features with Dividing Line
+
+*/
+/*
+ ---------------------------
+ 1. Features with Grid System
+ ---------------------------
+ */
 .uix-feature {
   /* Horizontal Icons */
   /* Vertical Icons */
@@ -19199,6 +19209,70 @@ ul.edd_purchase_receipt_files li {
 
 .uix-typo--color-white .uix-feature .uix-feature__icon--side.is-bordered::before {
   border-color: #fff;
+}
+
+/*
+ ---------------------------
+ 2. Features with Dividing Line
+ ---------------------------
+ */
+.uix-feature.uix-feature--line {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box {
+  border: 1px solid #e3e3ec;
+  flex: 0 0 33.3333%;
+  width: 33.3333%;
+  padding-left: 35px;
+  padding-right: 35px;
+  transition: box-shadow .3s ease-out;
+  margin-top: -1px;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box > div {
+  padding: 1.5rem;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box:hover {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
+  border: 1px solid #e3e3ec;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box:nth-child(3n+1) {
+  border-left: 1px solid transparent;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box:nth-child(3n+2) {
+  margin-left: -1px;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box:first-child, .uix-feature.uix-feature--line .uix-feature--line__box:nth-child(2), .uix-feature.uix-feature--line .uix-feature--line__box:nth-child(3) {
+  border-top: 1px solid transparent;
+  margin-top: 0;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box:nth-child(3n) {
+  border-right: 1px solid transparent;
+  margin-left: -1px;
+}
+
+.uix-feature.uix-feature--line .uix-feature--line__box:last-child, .uix-feature.uix-feature--line .uix-feature--line__box:nth-last-child(2), .uix-feature.uix-feature--line .uix-feature--line__box:nth-last-child(3) {
+  border-bottom: 1px solid transparent;
+}
+
+@media all and (max-width: 768px) {
+  .uix-feature.uix-feature--line .uix-feature--line__box {
+    border: none;
+    border-bottom: 1px solid #e3e3ec;
+    flex: none;
+    width: 100%;
+  }
+  .uix-feature.uix-feature--line .uix-feature--line__box:last-child, .uix-feature.uix-feature--line .uix-feature--line__box:nth-last-child(2), .uix-feature.uix-feature--line .uix-feature--line__box:nth-last-child(3) {
+    border-bottom: 1px solid #e3e3ec;
+  }
 }
 
 /* ======================================================

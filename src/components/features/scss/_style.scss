@@ -3,7 +3,21 @@
 /* ====================================================== */
 @import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
 
+/*
+ * 1. Features with Grid System
+ * 2. Features with Dividing Line
 
+*/
+
+
+/*
+ ---------------------------
+ 1. Features with Grid System
+ ---------------------------
+ */
+
+
+$card-radius: 8px;
 $features-icon-size: 1.5rem;
 
 .uix-feature {
@@ -184,3 +198,104 @@ $features-icon-size: 1.5rem;
 	}
 
 }
+
+
+
+/*
+ ---------------------------
+ 2. Features with Dividing Line
+ ---------------------------
+ */
+.uix-feature {
+	&.uix-feature--line {
+		display: flex;
+		flex-wrap: wrap;	
+		
+		
+		.uix-feature--line__box {
+			
+			border: 1px solid #e3e3ec;
+			flex: 0 0 33.3333%;
+			width: 33.3333%;
+			padding-left: 35px;
+			padding-right: 35px;
+			transition: box-shadow .3s ease-out;
+			margin-top: -1px;
+			
+			> div {
+				padding: 1.5rem;
+			}
+			
+			&:hover {
+				background: #fff;
+				@include outer-shadow( 'regular' );
+				border: 1px solid #e3e3ec;
+			}	
+			
+			
+			&:nth-child(3n+1) {
+				border-left: 1px solid transparent;
+			}
+			
+			&:nth-child(3n+2) {
+				margin-left: -1px;
+			}		
+			
+			&:first-child, 
+			&:nth-child(2), 
+			&:nth-child(3) {
+				border-top: 1px solid transparent;
+				margin-top: 0;
+			}	
+			
+
+			&:nth-child(3n) {
+				border-right: 1px solid transparent;
+				margin-left: -1px;
+			}
+			
+			
+			&:last-child, 
+			&:nth-last-child(2), 
+			&:nth-last-child(3) {
+				border-bottom: 1px solid transparent;
+			}
+			
+			
+		}
+		
+
+	}
+	
+}
+
+@media all and (max-width: 768px) {
+
+	.uix-feature {
+		&.uix-feature--line {
+			.uix-feature--line__box {
+				border: none;
+				border-bottom: 1px solid #e3e3ec;
+				flex: none;
+				width: 100%;
+
+
+				&:last-child, 
+				&:nth-last-child(2), 
+				&:nth-last-child(3) {
+					border-bottom: 1px solid #e3e3ec;
+				}	
+
+				
+			}
+
+
+		}
+
+	}	
+}
+
+
+
+
+
