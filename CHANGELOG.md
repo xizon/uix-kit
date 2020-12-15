@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 4.4.75 (December 15, 2020) =
+
+* New: Add some new demos for "Swiper (Third-party plugin)".
+* New: Add a new module "Simulate HTML Layout" with threejs.
+
+
+
 #### = 4.4.72 (November 17, 2020) =
 
 * New: Added the features module of the dividing line.

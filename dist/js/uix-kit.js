@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.72
+ * ## Version             :  4.4.75
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 17, 2020
+ * ## Last Update         :  December 15, 2020
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bf2775f61bf4f3b25352";
+/******/ 	var hotCurrentHash = "ddabf839753c1f5d406b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -16953,14 +16953,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     77.3D Explosive Particle Slider
     78.3D Liquid Scrollspy Slider
     79.3D Filmic Effects
-    80.Responsive Table
-    81.Table Sorter
-    82.Tabs
-    83.Team Focus
-    84.Text effect
-    85.Timeline
-    86.Vertical Menu
-    87.WordPress Core Scripts
+    80.Simulate HTML Layout with threejs
+    81.Responsive Table
+    82.Table Sorter
+    83.Tabs
+    84.Team Focus
+    85.Text effect
+    86.Timeline
+    87.Vertical Menu
+    88.WordPress Core Scripts
 
 
 */
@@ -34908,6 +34909,8 @@ var swiper_scss_style = __webpack_require__(67);
 // CONCATENATED MODULE: ./src/components/swiper/js/index.js
 function swiper_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function swiper_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { swiper_js_typeof = function _typeof(obj) { return typeof obj; }; } else { swiper_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return swiper_js_typeof(obj); }
 
 /* 
@@ -34921,7 +34924,7 @@ function swiper_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol ==
 var SWIPER = function (module, $, window, document) {
   if (window.SWIPER === null) return false;
   module.SWIPER = module.SWIPER || {};
-  module.SWIPER.version = '0.0.5';
+  module.SWIPER.version = '0.0.6';
 
   module.SWIPER.documentReady = function ($) {
     $('.uix-swiper').each(function () {
@@ -34929,17 +34932,18 @@ var SWIPER = function (module, $, window, document) {
       var actived = $el.data('activated');
 
       if (swiper_js_typeof(actived) === ( true ? "undefined" : undefined)) {
+        //Synchronize multiple objects
+        //------------------------------------------
         if ($el.find('#app-slider1').length > 0) {
           var swiper2 = new swiper_bundle_default.a('#app-slider2', {
             slidesPerView: 5,
             spaceBetween: 10,
             allowTouchMove: false
           });
-          var swiper = new swiper_bundle_default.a('#app-slider1', {
+          var swiper1 = new swiper_bundle_default.a('#app-slider1', {
             slidesPerView: 1,
             spaceBetween: 10,
             speed: 1000,
-            // init: false,
             pagination: {
               el: '.swiper-pagination',
               clickable: true,
@@ -34965,9 +34969,9 @@ var SWIPER = function (module, $, window, document) {
                 spaceBetween: 50
               }
             }
-          }); //Sync three swiper slider
+          }); //Sync swiper slider
 
-          swiper.on('slideChange', function () {
+          swiper1.on('slideChange', function () {
             var index = this.activeIndex;
             swiper2.slideTo(index, 1000, false);
           });
@@ -35259,6 +35263,124 @@ var SWIPER = function (module, $, window, document) {
                 cusProgressBar(e.passedParams.speed, thisSwiper.slides.length, thisSwiper.activeIndex);
               }
             }
+          });
+        } //Gallery with center thumbs automatically
+        //------------------------------------------
+
+
+        if ($el.find('#app-slider8').length > 0) {
+          var swiper8 = new swiper_bundle_default.a('#app-slider8', {
+            spaceBetween: 10,
+            grabCursor: false,
+            loop: true,
+            loopedSlides: 4,
+            autoplay: {
+              delay: 5000
+            },
+            // other parameters
+            on: {
+              click: function click() {
+                /* do something */
+              }
+            },
+            keyboard: {
+              enabled: true,
+              onlyInViewport: false
+            },
+            autoHeight: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            },
+            speed: 1000
+          });
+          /* thumbs */
+
+          var swiper8Thumbs = new swiper_bundle_default.a('#app-slider8-thumbs', {
+            spaceBetween: 10,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            //If you use it with "auto" value and along with loop: true then you need to specify loopedSlides parameter with amount of slides to loop (duplicate)
+            touchRatio: 0.4,
+            slideToClickedSlide: true,
+            loop: true,
+            loopedSlides: 4,
+            keyboard: {
+              enabled: true,
+              onlyInViewport: false
+            },
+            speed: 1000
+          });
+          /* set conteoller  */
+
+          swiper8.controller.control = swiper8Thumbs;
+          swiper8Thumbs.controller.control = swiper8;
+        } //Gallery with manual triggers
+        //------------------------------------------
+
+
+        if ($el.find('#app-slider9').length > 0) {
+          var swiper9BTN = function swiper9BTN(index, init) {
+            var _btns = $('#app-slider9-triggers > div');
+
+            _btns.removeClass('is-active');
+
+            _btns.eq(index).addClass('is-active');
+
+            if (!init) {
+              swiper9.slideTo(index, 1000);
+            }
+          };
+
+          var swiper9 = new swiper_bundle_default.a('#app-slider9', _defineProperty({
+            spaceBetween: 10,
+            grabCursor: false,
+            autoplay: {
+              delay: 5000
+            },
+            // other parameters
+            on: {
+              click: function click() {
+                /* do something */
+              }
+            },
+            keyboard: {
+              enabled: true,
+              onlyInViewport: false
+            },
+            autoHeight: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              renderBullet: function renderBullet(index, className) {
+                return '<span class="' + className + '">' + (index + 1) + '</span>';
+              }
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            },
+            speed: 1000
+          }, "on", {
+            init: function init(e) {
+              var thisSwiper = this;
+              swiper9BTN(thisSwiper.activeIndex, true);
+            }
+          })); //Sync swiper slider
+
+          swiper9.on('slideChange', function () {
+            var index = this.activeIndex;
+            swiper9BTN(index, false);
+          });
+          $('#app-slider9-triggers > div').on('click', function () {
+            swiper9BTN($(this).index(), false);
           });
         } //------------------------------------------
         //Prevents front-end javascripts that are activated in the background to repeat loading.
@@ -45387,6 +45509,379 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
+// CONCATENATED MODULE: ./src/components/simple-3D-simulate-html-layout/js/index.js
+function simple_3D_simulate_html_layout_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function simple_3D_simulate_html_layout_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { simple_3D_simulate_html_layout_js_typeof = function _typeof(obj) { return typeof obj; }; } else { simple_3D_simulate_html_layout_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return simple_3D_simulate_html_layout_js_typeof(obj); }
+
+/* 
+ *************************************
+ * <!-- Simulate HTML Layout with threejs -->
+ *************************************
+ */
+
+var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
+  if (window.THREE_SIMULATE_HTML_LAYOUT === null) return false;
+  module.THREE_SIMULATE_HTML_LAYOUT = module.THREE_SIMULATE_HTML_LAYOUT || {};
+  module.THREE_SIMULATE_HTML_LAYOUT.version = '0.0.1';
+
+  module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function ($) {
+    //Prevent this module from loading in other pages
+    if ($('#app-3D-page-container').length == 0 || !Modernizr.webgl) return false; //=====================================================================================
+    //=====================================================================================
+    //==============================THREE.js===============================================
+    //=====================================================================================
+    //=====================================================================================
+    //=====================================================================================
+
+    var $window = $(window);
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight; //scroll spy
+
+    var scrollY = 0;
+    var touchStartY = 0;
+    var _event = {
+      y: 0,
+      deltaY: 0
+    };
+    var scrollTrigger = document.getElementById('app-3D-page-container');
+    var maxHeight = (scrollTrigger.clientHeight || scrollTrigger.offsetHeight) - window.innerHeight; // THREE PARAMS
+    //-------------------------------------	
+
+    var camera = null,
+        scene = null,
+        renderer;
+    var clock = new THREE.Clock(),
+        time = 0;
+    var dataBGSources = []; // Loader manager
+
+    var loadingManager = new THREE.LoadingManager();
+
+    loadingManager.onLoad = function () {//console.log( '▶▶▶▶▶ Loading complete! ◀◀◀◀◀◀' );
+    };
+
+    loadingManager.onProgress = function (item, loaded, total) {//console.log( '▶▶▶▶▶ LoadingManager ◀◀◀◀◀◀ ( item: '+item+', loaded: '+loaded+', total: '+total+')' );
+    };
+
+    loadingManager.onError = function (url) {
+      console.log('▶▶▶▶▶ There was an error loading ◀◀◀◀◀◀  ' + url);
+    };
+
+    var loaderImage = new THREE.TextureLoader(loadingManager);
+    loaderImage.crossOrigin = 'anonymous';
+
+    function SubStageInit($rendererInnerCanvas, wrapperHeight, wrapperWidth, offsetLeft) {
+      console.log('wrapperHeight: ' + wrapperHeight); //=================
+      //camera
+
+      camera = new THREE.OrthographicCamera(-wrapperWidth / wrapperHeight / 2, wrapperWidth / wrapperHeight / 2, 1 / 2, -1 / 2, -0.1, 0.1);
+      camera.position.set(0, 0, 0);
+      camera.lookAt(new THREE.Vector3(0, 0, 0)); //=================
+      //Scene
+
+      scene = new THREE.Scene(); //=================
+      //WebGL Renderer		
+
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true
+      });
+      renderer.setSize(wrapperWidth, wrapperHeight);
+      renderer.shadowMap = true;
+      renderer.shadowMapSoft = true;
+      $rendererInnerCanvas[0].appendChild(renderer.domElement); //=================
+      // Immediately use the texture for material creation
+
+      var i = 0; //update image data
+
+      document.querySelectorAll('.app-coverWebgl ~ img').forEach(function (thisImg) {
+        dataBGSources.forEach(function (item, i) {
+          if (item.url.indexOf(thisImg.src) >= 0 || thisImg.src == item.url) {
+            item.visibleWidth = thisImg.width;
+            item.visibleHeight = thisImg.height;
+            item.top = thisImg.getBoundingClientRect().top;
+            item.left = thisImg.getBoundingClientRect().left;
+          }
+        });
+      });
+      console.log(dataBGSources);
+      document.querySelectorAll('.app-coverWebgl').forEach(function (thisImg) {
+        var _curURL = thisImg.getAttribute('data-url');
+
+        var ratio; //
+
+        (function (index) {
+          window['tex' + i] = loaderImage.load(_curURL);
+          window['tex' + i].anisotropy = renderer.capabilities.getMaxAnisotropy();
+        })(i); //
+
+
+        dataBGSources.forEach(function (item, i) {
+          if (item.url.indexOf(_curURL) >= 0 || _curURL == item.url) {
+            ratio = wrapperWidth / wrapperHeight;
+
+            var _offsetLeft = offsetLeft / wrapperWidth * ratio;
+
+            window['geometry' + i] = new THREE.BoxBufferGeometry(item.visibleWidth / wrapperHeight, item.visibleHeight / wrapperHeight, 40 / wrapperHeight);
+            window['tex' + i].wrapS = window['tex' + i].wrapT = THREE.RepeatWrapping;
+            window['materiel' + i] = new THREE.MeshBasicMaterial({
+              map: window['tex' + i]
+            });
+            window['materiel' + i].map.minFilter = THREE.LinearFilter;
+            window['mesh' + i] = new THREE.Mesh(window['geometry' + i], window['materiel' + i]);
+            window['mesh' + i].material.transparent = true;
+            window['mesh' + i].position.y = -(item.top + item.visibleHeight / 2) / wrapperHeight + 0.5; // car origine repere est au centre du view
+
+            window['mesh' + i].position.x = (item.left * ratio + item.visibleWidth * ratio / 2) / wrapperWidth - 0.5 * ratio - _offsetLeft; // car origine repere est au centre du view
+            //
+
+            scene.add(window['mesh' + i]); //console.log( window['mesh' + i] );
+          }
+        });
+        i++;
+      }); //=================
+      // Fires when the window changes
+
+      window.addEventListener('resize', function () {
+        onWindowResize(wrapperWidth, wrapperHeight);
+      }, false); //=================
+      // Fires scroll animation
+
+      scrollTrigger.addEventListener('scroll', onScroll, {
+        passive: false
+      });
+      /*
+      mobile example
+      scrollTrigger.addEventListener('touchstart', onTouchStart, { passive: false });
+      scrollTrigger.addEventListener('touchmove', onTouchMove, { passive: false });*/
+    }
+
+    function SubStageRender() {
+      requestAnimationFrame(SubStageRender); //To set a background color.
+      //renderer.setClearColor( 0x000000 );	
+
+      var delta = clock.getDelta(); //objects animation
+
+      dataBGSources.forEach(function (item, i) {
+        window['mesh' + i].rotation.y = 0.01 * scrollY;
+        window['mesh' + i].rotation.x = 0.004 * scrollY;
+      }); //render the scene to display our scene through the camera's eye.
+
+      renderer.render(scene, camera);
+    }
+
+    function onWindowResize(w, h) {
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    } //Destroy the 3D rendering process
+
+
+    function destroy3DScene() {
+      console.log('Destroy the 3D rendering process!'); //Clear the animations and scenes
+      //------
+
+      cancelAnimationFrame(SubStageRender);
+      scene.remove(); //Clear the renderer cache, no need to use in this demo
+      //------
+
+      renderer.dispose();
+      renderer.forceContextLoss();
+      renderer.content = null;
+      renderer.domElement = null; //Clear the cache of the current obj object
+      //------
+
+      var cleanMaterial = function cleanMaterial(material) {
+        //console.log('dispose material!')
+        material.dispose(); // dispose textures
+
+        for (var _i = 0, _Object$keys = Object.keys(material); _i < _Object$keys.length; _i++) {
+          var key = _Object$keys[_i];
+          var value = material[key];
+
+          if (value && simple_3D_simulate_html_layout_js_typeof(value) === 'object' && 'minFilter' in value) {
+            //console.log('dispose texture!')
+            value.dispose();
+          }
+        }
+      };
+
+      scene.traverse(function (object) {
+        if (!object.isMesh) return; //console.log('dispose geometry!');
+
+        object.geometry.dispose();
+
+        if (object.material.isMaterial) {
+          cleanMaterial(object.material);
+        } else {
+          // an array of materials
+          var _iterator = _createForOfIteratorHelper(object.material),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var material = _step.value;
+              cleanMaterial(material);
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+        }
+      });
+    } //=====================================================================================
+    //=====================================================================================
+    //===================================SCROLL ANIMATION==================================
+    //=====================================================================================
+    //=====================================================================================
+    //=====================================================================================
+
+
+    function onScroll(e) {
+      scrollY = scrollTrigger.scrollTop;
+      console.log(scrollTrigger.scrollTop);
+    }
+
+    ;
+    /*
+    mobile example
+    function onTouchStart (e) {
+    	var t = (e.targetTouches) ? e.targetTouches[0] : e;
+    	touchStartY = t.pageY;
+    };
+    	function onTouchMove (e) {
+    	var evt = _event;
+    	var t = (e.targetTouches) ? e.targetTouches[0] : e;
+    	evt.deltaY = (t.pageY - touchStartY) * 5;
+    	touchStartY = t.pageY;
+    			scroll(e)
+    };*/
+    //=====================================================================================
+    //=====================================================================================
+    //===================================IMAGES LOADER====================================
+    //=====================================================================================
+    //=====================================================================================
+    //=====================================================================================
+
+    var sources = []; //Push all images from page
+
+    $('section').find('img').each(function () {
+      sources.push({
+        "url": this.src,
+        "type": 'img'
+      }); //
+
+      dataBGSources.push({
+        w: 0,
+        h: 0,
+        visibleWidth: 0,
+        visibleHeight: 0,
+        top: 0,
+        left: 0,
+        url: this.src
+      });
+    }); //===========
+
+    var loadImages = function loadImages() {
+      var promises = [];
+
+      var _loop = function _loop(i) {
+        if (sources[i].type == 'img') {
+          ///////////
+          // IMAGE //
+          ///////////   
+          promises.push(new Promise(function (resolve, reject) {
+            var img = new Image();
+            img.crossOrigin = "anonymous";
+            img.src = sources[i].url;
+
+            img.onload = function (image) {
+              //Compatible with safari and firefox
+              if (simple_3D_simulate_html_layout_js_typeof(image.path) === ( true ? "undefined" : undefined)) {
+                return resolve({
+                  w: 0,
+                  h: 0,
+                  url: image.target.currentSrc
+                });
+              } else {
+                return resolve({
+                  w: image.path[0].naturalWidth,
+                  h: image.path[0].naturalHeight,
+                  url: image.path[0].currentSrc
+                });
+              }
+            };
+          }).then(textureLoaded));
+        }
+      };
+
+      for (var i = 0; i < sources.length; i++) {
+        _loop(i);
+      }
+
+      return Promise.all(promises);
+    };
+
+    var k = 0;
+
+    var textureLoaded = function textureLoaded(data) {
+      //console.log( data );
+      var _curURL = data.url;
+      var _curW = data.w;
+      var _curH = data.h; //update image data
+
+      dataBGSources.forEach(function (item, i) {
+        if (_curURL.indexOf(item.url) >= 0 || _curURL == item.url) {
+          item.w = _curW;
+          item.h = _curH;
+        }
+      });
+      k++;
+      return k;
+    }; //============
+    //images loaded
+    //Must be placed behind the loadImages()
+
+
+    loadImages().then(function (images) {
+      console.log('------images loaded!------'); //in order to calculate a correct height for all images
+
+      setTimeout(function () {
+        //Run 3D rendering process
+        var $innerCanvas = $('#app-3D-page-container').find('.app-innerCanvas');
+        var canvasPosOffsetX = 15;
+        var canvasPosOffsetY = -$('#app-3D-page-container')[0].getBoundingClientRect().top;
+        $innerCanvas.css({
+          'position': 'absolute',
+          'z-index': '-1',
+          'left': 0,
+          'top': canvasPosOffsetY
+        });
+
+        if ($innerCanvas.length > 0) {
+          SubStageInit($innerCanvas, $('#app-3D-page-container').find('.app-work-detail__wrapper').outerHeight(true), $('#app-3D-page-container').find('.app-work-detail__wrapper').outerWidth(true), $('#app-3D-page-container').find('.app-work-detail__wrapper').offset().left - canvasPosOffsetX);
+          SubStageRender();
+        }
+
+        $('#app-3D-page-container').css('overflow-y', 'auto');
+      }, 500);
+    });
+  };
+
+  module.components.documentReady.push(module.THREE_SIMULATE_HTML_LAYOUT.documentReady);
+  return function THREE_SIMULATE_HTML_LAYOUT() {
+    simple_3D_simulate_html_layout_js_classCallCheck(this, THREE_SIMULATE_HTML_LAYOUT);
+
+    this.module = module;
+  };
+}(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/table/scss/_style.scss
 var table_scss_style = __webpack_require__(9);
 
@@ -46480,6 +46975,7 @@ var wave_background_scss_style = __webpack_require__(114);
 /* pages */
 
 /* Note: The CSS style file has been included by JavaScript files */
+
 
 
 

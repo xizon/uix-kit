@@ -2,7 +2,7 @@
 <html lang="en-US" dir="ltr">
 <head>
 	<meta charset="utf-8" />
-	<title>Text Effect - Uix Kit</title>	
+	<title>Simulate HTML Layout with threejs - Uix Kit</title>	
 		<!-- Compatibility Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -76,7 +76,7 @@
 </head>  
 
      
-  <body class="page">
+  <body class="page uix-hidden-scrollbar">
   
   
           
@@ -422,9 +422,11 @@
              </div>
         
         </header>
-        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+		<div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
       
+		
 		<main id="uix-maincontent">
+			
 			
 			<!-- Content 
 			====================================================== -->
@@ -432,12 +434,8 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12">
-							<h3>Text Effect</h3>
-							<p>Add attributes <code>data-text-eff="letters-eff-{EFF}-{INDEX}"</code> and <code>data-text-eff-speed="800"</code> to any HTML tag. 
-									<br>
-									The value of <code>{EFF}</code> are: <em>fadeInRight</em>, <em>zoomInDown</em>, <em>flyInOut</em>, <em>fading</em>, <em>floatingUp</em>, <em>scaleIn</em>.
-									<br>
-									The value of <code>{INDEX}</code> can be any different character.</p>
+							<h3>Simulate HTML Layout with threejs</h3>
+							<p>Simulate Page Images Position & Ratio-calculation.</p>
 							<hr>
 							
 							
@@ -448,73 +446,171 @@
 				</div>
 				<!-- .container end -->
 
-			</section>	
-			
-		
+			</section>
 
 
-		   <!-- Content 
+			<!-- Content 
 			====================================================== -->
-			<section class="uix-spacing--s">
-				<div class="container">
-						<div class="row">
-							<div class="col-12">
+			<section id="app-3D-page-container" style="overflow-y: hidden; height: 100vh;">
 
-								<h4 data-text-eff="letters-eff-fadeInRight-001" data-text-eff-speed="5500">FadeInRight effect is used on the same page at the same time (Speed: 5500ms)</h4>
+				<div class="container uix-t-c">
+					<div class="row">
+						<div class="col-12">
 
-								<h4 data-text-eff="letters-eff-fadeInRight-002" data-text-eff-speed="1500">FadeInRight effect is used on the same page at the same time (Speed: 1500ms)</h4>
+							<div class="uix-t-c"><h2>Title Here</h2></div>
 
-								<h4 data-text-eff="letters-eff-fadeInRight-003" data-text-eff-speed="100">FadeInRight effect is used on the same page at the same time (Speed: 100ms)</h4>
+							<div class="app-work-detail__wrapper">
 
-								<hr>					
-
-                                <br><br><br><br>
-								<h4 data-text-eff="letters-eff-zoomInDown-001" data-text-eff-speed="1500">ZoomInDown Text Effect Here</h4>
-
-								<hr>
-
-								<h4 data-text-eff="letters-eff-flyInOut-001" data-text-eff-speed="1500">FlyInOut Text Effect Here</h4>
-
-								<hr>	
+								<div class="app-innerCanvas"></div>
 
 
-                                 
-								<h4 data-text-eff="letters-eff-fading-001" data-text-eff-speed="1500">Fading Text Effect Here</h4>
+								<!-- //////////////////////////////// -->
 
-								<hr>					
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>
 
-                                
-                                <br><br><br><br>
-								<h4 data-text-eff="letters-eff-floatingUp-001" data-text-eff-speed="1500">FloatingUp Text Effect Here</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>										
 
-								<hr>					
+								<div class="row">
+									<div class="col-6">
+
+										<p style="padding: 50px 0;">
+											<span class="app-coverWebgl" data-url="https://placekitten.com/1024/378"></span>
+											<img style="box-shadow: 0 3px 23px #f00; opacity: 0.3" src="https://placekitten.com/1024/378" alt="null">
+										</p>
 
 
-								<h4 data-text-eff="letters-eff-scaleIn-001" data-text-eff-speed="5000">ScaleIn Text Effect Here</h4>
+									</div>
+									<div class="col-6">
 
-								<hr>					
+										<p style="padding: 50px 0;">Content here...</p>
+
+									</div>
+
+
+									<div class="col-6">
+										<p style="padding: 50px 0; text-align: right">Content here...</p>
+
+									</div>
+									<div class="col-6">
+
+										<p style="padding: 50px 0;">
+											<span class="app-coverWebgl" data-url="https://placekitten.com/1024/342"></span>
+											<img style="box-shadow: 0 3px 23px #f00; opacity: 0.3" src="https://placekitten.com/1024/342" alt="null">
+										</p>
+
+
+									</div>
+
+
+									<div class="col-6">
+
+										<p style="padding: 50px 0;">
+											<span class="app-coverWebgl" data-url="https://placekitten.com/800/600"></span>
+											<img style="box-shadow: 0 3px 23px #f00; opacity: 0.3" src="https://placekitten.com/800/600" alt="null">
+										</p>
+
+									</div>
+									<div class="col-6">
+
+										<p style="padding: 50px 0;">Content here...</p>
+
+									</div>
+
+
+									<div class="col-12">
+
+										<p style="padding: 50px 0;">
+											<span class="app-coverWebgl" data-url="https://placekitten.com/1120/400"></span>
+											<img style="box-shadow: 0 3px 23px #f00; opacity: 0.3" src="https://placekitten.com/1120/400" width="100%" alt="null">
+										</p>
+
+									</div>
+
+
+									<div class="col-12">
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>			
+
+									</div>												
+
+									<div class="col-6">
+
+										<p style="padding: 50px 0;">
+											<span class="app-coverWebgl" data-url="https://placekitten.com/600/300"></span>
+											<img style="box-shadow: 0 3px 23px #f00; opacity: 0.3" src="https://placekitten.com/600/300" alt="null">
+										</p>
+
+									</div>
+									<div class="col-6">
+
+										<p style="padding: 50px 0;">Content here...</p>
+
+									</div>	
+
+
+									<div class="col-12">
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>			
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>	
+										
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>			
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>
+
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a mi ac diam varius commodo sit amet a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		</p>								
+								
+										
+										<p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p>
+										
+										
+									</div>	
+
+
+								</div>	
 
 
 
-							</div>
+								<!-- //////////////////////////////// -->
+
+							</div>    
+
+
+
 						</div>
-						<!-- .row end -->
-
+					</div>
+					<!-- .row end -->
 
 				</div>
 				<!-- .container end -->
 
+			</section>         
 
-			</section>
-
-
+			
 			
 		</main>
-      
-			
-        
-       
-        
+		
+		
+		   
+		
                 <!-- Footer
         ============================================= -->    
         <footer class="uix-footer__container">

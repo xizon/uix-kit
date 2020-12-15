@@ -100,6 +100,7 @@ import THREE_SHATTER_SLIDER from '@uixkit/core/simple-3D-shatter-slider/js';
 import THREE_EXP_PARTICLE_SLIDER from '@uixkit/core/simple-3D-explosive-particle-slider/js';
 import THREE_LIQUID_SCROLLSPY_SLIDER from '@uixkit/core/simple-3D-liquid-scrollspy-slider/js';
 import THREE_FILMIC_EFF from '@uixkit/core/simple-3D-filmic-effects/js';
+import THREE_SIMULATE_HTML_LAYOUT from '@uixkit/core/simple-3D-simulate-html-layout/js';
 import TABLE from '@uixkit/core/table/js/basic';
 import TABLE_SORTER from '@uixkit/core/table/js/sorter';	
 import TABS from '@uixkit/core/tabs/js';

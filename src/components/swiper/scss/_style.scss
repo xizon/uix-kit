@@ -12,6 +12,8 @@
  * 4. Entered active 
  * 5. Display half on both sides
  * 6. Custom Progress Bar 
+ * 7. Gallery with center thumbs automatically
+ * 8. Gallery with manual triggers
 */
 
 
@@ -193,3 +195,85 @@
 	
 }
 
+
+/*
+ ---------------------------
+ 7. Gallery with center thumbs automatically
+ ---------------------------
+ */
+
+#app-slider8 {
+	height: auto;
+	
+	img {
+		width: 100%;
+	}
+}
+
+#app-slider8-thumbs {
+	
+	height: auto;
+	margin-top: 15px;
+	
+	
+	.swiper-slide {
+		width: auto;
+		opacity: 0.3;
+		filter: grayscale(100%);
+		
+		&.swiper-slide-active {
+			opacity: 1;
+			filter: initial;
+		}
+		
+		img {
+			cursor: pointer;
+			width: auto;
+			height: 100px;
+		}	
+		
+	}
+}
+
+
+
+/*
+ ---------------------------
+ 8. Gallery with manual triggers
+ ---------------------------
+ */
+
+#app-slider9 {
+	height: auto;
+	
+	img {
+		width: 100%;
+	}
+}
+
+
+#app-slider9-triggers {
+	
+	height: auto;
+	margin-top: 15px;
+	
+	
+	> div {
+		display: inline-block;
+		width: auto;
+		opacity: 0.3;
+		filter: grayscale(100%);
+		
+		&.is-active {
+			opacity: 1;
+			filter: initial;
+		}
+		
+		img {
+			cursor: pointer;
+			width: auto;
+			height: 60px;
+		}	
+		
+	}
+}

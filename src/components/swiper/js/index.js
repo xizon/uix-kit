@@ -26,7 +26,7 @@ export const SWIPER = ( ( module, $, window, document ) => {
 	
 	
     module.SWIPER               = module.SWIPER || {};
-    module.SWIPER.version       = '0.0.5';
+    module.SWIPER.version       = '0.0.6';
     module.SWIPER.documentReady = function( $ ) {
 		
 		$( '.uix-swiper' ).each( function()  {
@@ -36,7 +36,10 @@ export const SWIPER = ( ( module, $, window, document ) => {
 			if( typeof actived === typeof undefined ) {
 
 				
-				
+
+
+				//Synchronize multiple objects
+				//------------------------------------------
 				if ( $el.find( '#app-slider1' ).length > 0 ) {
 					const swiper2 = new Swiper('#app-slider2', {
 						slidesPerView: 5,
@@ -44,11 +47,10 @@ export const SWIPER = ( ( module, $, window, document ) => {
 						allowTouchMove: false
 					});
 
-					const swiper = new Swiper('#app-slider1', {
+					const swiper1 = new Swiper('#app-slider1', {
 						slidesPerView: 1,
 						spaceBetween: 10,
 						speed: 1000,
-						// init: false,
 						pagination: {
 							el: '.swiper-pagination',
 							clickable: true,
@@ -76,8 +78,8 @@ export const SWIPER = ( ( module, $, window, document ) => {
 						},
 					});
 					
-					//Sync three swiper slider
-					swiper.on( 'slideChange', function() {
+					//Sync swiper slider
+					swiper1.on( 'slideChange', function() {
 
 						const index = this.activeIndex;
 						swiper2.slideTo( index, 1000, false );
@@ -426,9 +428,144 @@ export const SWIPER = ( ( module, $, window, document ) => {
 					});	
 				}
 				
+	
+				//Gallery with center thumbs automatically
+				//------------------------------------------
+				if ( $el.find( '#app-slider8' ).length > 0 ) {
+					const swiper8 = new Swiper('#app-slider8', {
+						spaceBetween: 10,
+						grabCursor: false,
+						loop: true,
+						loopedSlides: 4,
+						autoplay: {
+							delay: 5000
+						},
+						// other parameters
+						on: {
+							click: function() {
+								/* do something */
+							}
+						},
+						keyboard: {
+							enabled: true,
+							onlyInViewport: false
+						},
+						autoHeight: true,
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true,
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '">' + (index + 1) + '</span>';
+							},	
+						},
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						},
+						speed: 1000
+					});
+					
 
+					/* thumbs */
+					const swiper8Thumbs = new Swiper( '#app-slider8-thumbs', {
+						spaceBetween: 10,
+						centeredSlides: true,
+						slidesPerView: "auto", //If you use it with "auto" value and along with loop: true then you need to specify loopedSlides parameter with amount of slides to loop (duplicate)
+						touchRatio: 0.4,
+						slideToClickedSlide: true,
+						loop: true,
+						loopedSlides: 4,
+						keyboard: {
+							enabled: true,
+							onlyInViewport: false
+						},
+						speed: 1000
+					});
 
+					/* set conteoller  */
+					swiper8.controller.control = swiper8Thumbs;
+					swiper8Thumbs.controller.control = swiper8;
+
+	
+				}
 				
+				
+				
+	
+				//Gallery with manual triggers
+				//------------------------------------------
+				if ( $el.find( '#app-slider9' ).length > 0 ) {
+					const swiper9 = new Swiper('#app-slider9', {
+						spaceBetween: 10,
+						grabCursor: false,
+						autoplay: {
+							delay: 5000
+						},
+						// other parameters
+						on: {
+							click: function() {
+								/* do something */
+							}
+						},
+						keyboard: {
+							enabled: true,
+							onlyInViewport: false
+						},
+						autoHeight: true,
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true,
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '">' + (index + 1) + '</span>';
+							},	
+						},
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						},
+						speed: 1000,
+						on: {
+							init: function( e ) {
+								const thisSwiper = this;
+								swiper9BTN( thisSwiper.activeIndex, true );
+
+							}	
+
+						}
+					});
+					
+					
+					//Sync swiper slider
+					swiper9.on( 'slideChange', function() {
+
+						const index = this.activeIndex;
+						swiper9BTN( index, false );
+
+					});
+	
+
+					$( '#app-slider9-triggers > div' ).on( 'click', function() {
+						swiper9BTN( $( this ).index(), false );
+					});
+
+					
+					function swiper9BTN( index, init ) {
+						const _btns = $( '#app-slider9-triggers > div' );
+						_btns.removeClass( 'is-active' );
+						_btns.eq( index ).addClass( 'is-active' );
+						
+						if ( !init ) {
+							swiper9.slideTo( index, 1000 );
+						}
+						
+					}
+					
+					
+
+	
+				}
+				
+
 				
 				//------------------------------------------
 
