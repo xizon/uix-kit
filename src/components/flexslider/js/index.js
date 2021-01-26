@@ -28,17 +28,20 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.FLEXSLIDER               = module.FLEXSLIDER || {};
-    module.FLEXSLIDER.version       = '0.1.8';
+    module.FLEXSLIDER.version       = '0.1.9';
     module.FLEXSLIDER.documentReady = function( $ ) {
 
 		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
-        
+		
+
         
 		let	flexslider         = {
 						           vars: {}
 					              };
+		
+		const pluginNamespace = 'uix-flexslider__';
 		
 		
 		/*
@@ -62,16 +65,15 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 */
         function initslides( sliderWrapper, thisSlider, fireState ) {
 			
-			const prefix            = 'uix-flexslider__';
-			
-			if ( thisSlider.find( '.'+prefix+'item' ).length == 0 ) return false;
+	
+			if ( thisSlider.find( '.'+pluginNamespace+'item' ).length == 0 ) return false;
 
 			let curIndex          = thisSlider.currentSlide,
 				count             = thisSlider.count,
-				activeClass       = prefix + 'item--active',
+				activeClass       = pluginNamespace + 'item--active',
 				prevClass         = activeClass + '-prev',
 				nextClass         = activeClass + '-next',
-				$items            = thisSlider.find( '.'+prefix+'item' ),
+				$items            = thisSlider.find( '.'+pluginNamespace+'item' ),
 				$current          = thisSlider.slides.eq( curIndex ),
 				$prev             = thisSlider.slides.eq( curIndex - 1 ),
 				$next             = thisSlider.slides.eq( thisSlider.animatingTo ),
@@ -84,7 +86,8 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				dataCountCur      = thisSlider.data( 'my-count-now' ),
 				dataShowItems     = thisSlider.data( 'my-multiple-items' ),
 				dataShowItemsMove = thisSlider.data( 'my-multiple-items-move' ),
-				dataParallax      = thisSlider.data( 'my-parallax' );
+				dataParallax      = thisSlider.data( 'my-parallax' ),
+				dataCustomConID   = thisSlider.data( 'my-controls' );
 			
 			
 			if ( typeof dataPNThumbs === typeof undefined ) dataPNThumbs = false;
@@ -94,6 +97,31 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			if ( typeof dataParallax === typeof undefined ) dataParallax = false;
 			if ( typeof dataShowItemsMove === typeof undefined ) dataShowItemsMove = 1;
 			
+			
+			
+			//Add disabled class to custom navigation 
+			if ( typeof dataCustomConID != typeof undefined && dataCustomConID != '' && dataCustomConID != false ) {
+				const myCustomDirectionNav = $( '.uix-flexslider__mycontrols'+dataCustomConID+' a' );	
+				const disabledClass = pluginNamespace + 'disabled';
+				if (thisSlider.pagingCount === 1) {
+					myCustomDirectionNav.addClass(disabledClass).attr( 'tabindex', '-1' );
+				} else if (!thisSlider.vars.animationLoop) {
+					if ( thisSlider.animatingTo === 0 ) {
+						myCustomDirectionNav.removeClass(disabledClass);
+						myCustomDirectionNav.first().addClass(disabledClass).attr( 'tabindex', '-1' );
+					} else if ( thisSlider.animatingTo === thisSlider.last ) {
+						myCustomDirectionNav.removeClass(disabledClass);
+						myCustomDirectionNav.last().addClass(disabledClass).attr( 'tabindex', '-1' );
+					} else {
+						myCustomDirectionNav.removeClass(disabledClass).removeAttr( 'tabindex' );
+					}
+				} else {
+					myCustomDirectionNav.removeClass(disabledClass).removeAttr( 'tabindex' );
+				}
+
+			}
+			
+
 			
 			//Total counter selector
 			//Current counter selector.
@@ -108,7 +136,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				
 				//Remove the slider loading
 				//-------------------------------------
-				thisSlider.removeClass( prefix+'-flexslider-loading' );
+				thisSlider.removeClass( pluginNamespace+'-flexslider-loading' );
 				
 
 				
@@ -167,7 +195,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 						if ( typeof nimg != typeof undefined ) $plinkNext.attr( 'data-goto', nextIndex ).find( '> span' ).html('<img src="'+nimg+'" alt="">');		
 
 
-						$plink.off( 'click' ).off( 'click' ).on( 'click', function( e ) {
+						$plink.off( 'click' ).on( 'click', function( e ) {
 							e.preventDefault();
 
 							thisSlider.flexslider( parseInt( $( this ).attr( 'data-goto' ) ) );
@@ -819,7 +847,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		const $sliderDefault = $( '.uix-flexslider' );
 		$sliderDefault.each( function()  {
 			const $this             = $( this );
-            
+	
 			let	dataSpeed         = $this.data( 'speed' ),
 				dataDrag          = $this.data( 'draggable' ),
 				dataWheel         = $this.data( 'wheel' ),
@@ -855,6 +883,11 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			} else {
 				myControlsContainer  = $( '.uix-flexslider__mycontrols'+customConID+' .uix-flexslider__mycontrols__control-paging' );
 				myCustomDirectionNav = $( '.uix-flexslider__mycontrols'+customConID+' a' );	
+				
+				
+				//Change the class naming of the page up and down buttons to support trigger events
+				myCustomDirectionNav.first().addClass( pluginNamespace + 'prev' );
+				myCustomDirectionNav.last().addClass( pluginNamespace + 'next' );
 			}
 
 			
@@ -935,9 +968,8 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 			});
 
 
-			
 			$this.flexslider({
-				namespace	      : 'uix-flexslider__',
+				namespace	      : pluginNamespace,
 				animation         : dataAnim,
 				selector          : '.uix-flexslider__inner > div.uix-flexslider__item',
 				controlNav        : dataPaging,
@@ -1040,7 +1072,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		});
 		
     };
-
+	
     module.components.documentReady.push( module.FLEXSLIDER.documentReady );
 	
 

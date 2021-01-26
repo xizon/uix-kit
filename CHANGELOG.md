@@ -1,6 +1,15 @@
 # Changelog
 
 
+#### = 4.4.78 (January 25, 2021) =
+
+* Fix: Fixed the compatibility issue of `hashchange.js` under high version WordPress.
+* Tweak: Optimized the repeat event of `Periodical Scroll`.
+* Tweak: Optimize the direction attribute of the module `Accordion`.
+* Tweak: Solved the problem that the custom button of Flexslider was not disabled.
+
+
+
 #### = 4.4.75 (December 15, 2020) =
 
 * New: Add some new demos for "Swiper (Third-party plugin)".

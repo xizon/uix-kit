@@ -25,7 +25,7 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 	
 	
     module.ACCORDION_BG               = module.ACCORDION_BG || {};
-    module.ACCORDION_BG.version       = '0.0.6';
+    module.ACCORDION_BG.version       = '0.0.7';
     module.ACCORDION_BG.documentReady = function( $ ) {
 		
 		
@@ -43,9 +43,10 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 			let	aEvent          = $this.data( 'event' ),
 				outReset        = $this.data( 'out-reset' ),
 				activeIndex     = $this.data( 'actived-item' ),
-				widthShow       = $this.data( 'width-show' ),
+				offsetVal       = $this.data( 'offset' ),
+				dir             = $this.data( 'direction' ),
 				closeBtn        = $this.data( 'close-btn' ),
-				$li             = $this.find( 'ul' ).children( 'li' ),
+				$li             = $this.find( '> ul' ).children( 'li' ),
 				total           = $li.length;
 			
 			
@@ -62,11 +63,11 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 				outReset = true;
 			}	
 			
-			if ( typeof widthShow === typeof undefined ) {
-				widthShow = '60%';
+			if ( typeof offsetVal === typeof undefined ) {
+				offsetVal = '60%';
 			}		
 			
-			//Initialize the width of each item
+			//Initialize the width or height of each item
 			itemInit();
 			
 			
@@ -77,7 +78,7 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 			
 				
 				//Apply click method to outer div but not inner div
-				if ( e.target.className == 'uix-accordion-img__content' ) {
+				if ( e.target.className == 'uix-accordion-img__content__info' || e.target.className == 'uix-accordion-img__content' ) {
 					
 					if ( $( this ).hasClass( 'is-active' ) ) {
 						$( this ).addClass( 'is-active' );
@@ -88,8 +89,16 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 						$( this ).addClass( 'is-active' );
 						$( this ).siblings().removeClass( 'is-active' );
 
-						$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-						$( this ).css( 'width', widthShow );
+						if ( dir == 'verticle' ) {
+							$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
+							$( this ).css( 'height', offsetVal );	
+						} else {
+							$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
+							$( this ).css( 'width', offsetVal );	
+						}
+						
+						
+
 
 					}	
 				}
@@ -119,8 +128,16 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 			function itemActiveItem( index ) {
 				
 				if ( index >= 0 ) {
-					$li.css( 'width', ( 100 - parseFloat( widthShow ) )/(total - 1) + '%' );
-					$li.eq( index ).css( 'width', widthShow ).addClass( 'is-active' );	
+					
+
+					if ( dir == 'verticle' ) {
+						$li.css( 'height', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
+						$li.eq( index ).css( 'height', offsetVal ).addClass( 'is-active' );	
+					} else {
+						$li.css( 'width', ( 100 - parseFloat( offsetVal ) )/(total - 1) + '%' );
+						$li.eq( index ).css( 'width', offsetVal ).addClass( 'is-active' );	
+					}
+
 				}
 
 			}
@@ -130,12 +147,19 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 			
 	
 			/*
-			 * Initialize the width of each item
+			 * Initialize the width or height of each item
 			 *
 			 * @return {Void}
 			 */
 			function itemInit() {
-				$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
+				
+
+				if ( dir == 'verticle' ) {
+					$li.removeClass( 'is-active active-sub' ).css( 'height', 100/total + '%' );
+				} else {
+					$li.removeClass( 'is-active active-sub' ).css( 'width', 100/total + '%' );
+				}
+				
 			}
 			
 			
@@ -144,6 +168,9 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
 		});
 		
 	
+		
+
+		
 		
     };
 

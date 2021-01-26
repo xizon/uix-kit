@@ -13,7 +13,7 @@ $accordion-img-height: 250px;
 	height: $accordion-img-height;
 	overflow: hidden;
 
-	ul {
+	> ul {
 
 		width: 100%;
 		display: table;
@@ -22,7 +22,7 @@ $accordion-img-height: 250px;
 		padding: 0;
 		font-size: 0; /*Fighting the Space Between Inline Block Elements*/
 
-		li {
+		> li {
 			display: table-cell;
 			vertical-align: bottom;
 			position:  relative;
@@ -115,11 +115,11 @@ $accordion-img-height: 250px;
 
 		height: auto;
 
-		ul,
-		ul:hover {
+		> ul,
+		> ul:hover {
 
-			li,
-			li:hover {
+			> li,
+			> li:hover {
 
 				position: relative;
 				display: table;

@@ -212,6 +212,7 @@ ul.uix-flexslider__direction-nav {
 
 				&.uix-flexslider__disabled {
 					visibility: hidden;
+					pointer-events: none;
 				}
 
 			}
@@ -221,6 +222,7 @@ ul.uix-flexslider__direction-nav {
 
 				&.uix-flexslider__disabled {
 					visibility: hidden;
+					pointer-events: none;
 				}
 
 			}
@@ -360,6 +362,7 @@ ol.uix-flexslider__control-paging {
 
 			&.uix-flexslider__disabled {
 				visibility: hidden;
+				pointer-events: none;
 
 			}
 		}
@@ -371,6 +374,7 @@ ol.uix-flexslider__control-paging {
 
 			&.uix-flexslider__disabled {
 				visibility: hidden;
+				pointer-events: none;
 			}
 
 		}

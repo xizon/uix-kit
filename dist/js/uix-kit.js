@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.75
+ * ## Version             :  4.4.78
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 15, 2020
+ * ## Last Update         :  January 26, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ddabf839753c1f5d406b";
+/******/ 	var hotCurrentHash = "749a21482df734bbb76c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -13114,6 +13114,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 7 */
 /***/ (function(module, exports) {
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* 
  *************************************
  * jQuery hashchange event - v1.3 - 7/21/2010
@@ -13127,6 +13129,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
  */
 (function ($, window, undefined) {
   '$:nomunge';
+
+  if (_typeof($.browser) === _typeof(undefined)) {
+    jQuery.browser = {};
+
+    (function () {
+      jQuery.browser.msie = false;
+      jQuery.browser.version = 0;
+
+      if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+      }
+    })();
+  }
 
   var str_hashchange = 'hashchange',
       doc = document,
@@ -18933,7 +18949,7 @@ function js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "func
 var ACCORDION_BG = function (module, $, window, document) {
   if (window.ACCORDION_BG === null) return false;
   module.ACCORDION_BG = module.ACCORDION_BG || {};
-  module.ACCORDION_BG.version = '0.0.6';
+  module.ACCORDION_BG.version = '0.0.7';
 
   module.ACCORDION_BG.documentReady = function ($) {
     var $window = $(window);
@@ -18945,9 +18961,10 @@ var ACCORDION_BG = function (module, $, window, document) {
       var aEvent = $this.data('event'),
           outReset = $this.data('out-reset'),
           activeIndex = $this.data('actived-item'),
-          widthShow = $this.data('width-show'),
+          offsetVal = $this.data('offset'),
+          dir = $this.data('direction'),
           closeBtn = $this.data('close-btn'),
-          $li = $this.find('ul').children('li'),
+          $li = $this.find('> ul').children('li'),
           total = $li.length;
 
       if (js_typeof(activeIndex) === ( true ? "undefined" : undefined)) {
@@ -18962,9 +18979,9 @@ var ACCORDION_BG = function (module, $, window, document) {
         outReset = true;
       }
 
-      if (js_typeof(widthShow) === ( true ? "undefined" : undefined)) {
-        widthShow = '60%';
-      } //Initialize the width of each item
+      if (js_typeof(offsetVal) === ( true ? "undefined" : undefined)) {
+        offsetVal = '60%';
+      } //Initialize the width or height of each item
 
 
       itemInit();
@@ -18972,15 +18989,21 @@ var ACCORDION_BG = function (module, $, window, document) {
         //Prevents further propagation of the current event in the capturing and bubbling phases.
         e.stopPropagation(); //Apply click method to outer div but not inner div
 
-        if (e.target.className == 'uix-accordion-img__content') {
+        if (e.target.className == 'uix-accordion-img__content__info' || e.target.className == 'uix-accordion-img__content') {
           if ($(this).hasClass('is-active')) {
             $(this).addClass('is-active');
           } else {
             $li.addClass('active-sub');
             $(this).addClass('is-active');
             $(this).siblings().removeClass('is-active');
-            $li.css('width', (100 - parseFloat(widthShow)) / (total - 1) + '%');
-            $(this).css('width', widthShow);
+
+            if (dir == 'verticle') {
+              $li.css('height', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+              $(this).css('height', offsetVal);
+            } else {
+              $li.css('width', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+              $(this).css('width', offsetVal);
+            }
           }
         }
       });
@@ -19007,20 +19030,29 @@ var ACCORDION_BG = function (module, $, window, document) {
 
       function itemActiveItem(index) {
         if (index >= 0) {
-          $li.css('width', (100 - parseFloat(widthShow)) / (total - 1) + '%');
-          $li.eq(index).css('width', widthShow).addClass('is-active');
+          if (dir == 'verticle') {
+            $li.css('height', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+            $li.eq(index).css('height', offsetVal).addClass('is-active');
+          } else {
+            $li.css('width', (100 - parseFloat(offsetVal)) / (total - 1) + '%');
+            $li.eq(index).css('width', offsetVal).addClass('is-active');
+          }
         }
       }
 
       itemActiveItem(parseFloat(activeIndex));
       /*
-       * Initialize the width of each item
+       * Initialize the width or height of each item
        *
        * @return {Void}
        */
 
       function itemInit() {
-        $li.removeClass('is-active active-sub').css('width', 100 / total + '%');
+        if (dir == 'verticle') {
+          $li.removeClass('is-active active-sub').css('height', 100 / total + '%');
+        } else {
+          $li.removeClass('is-active active-sub').css('width', 100 / total + '%');
+        }
       }
     });
   };
@@ -24219,7 +24251,7 @@ function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var FLEXSLIDER = function (module, $, window, document) {
   if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
-  module.FLEXSLIDER.version = '0.1.8';
+  module.FLEXSLIDER.version = '0.1.9';
 
   module.FLEXSLIDER.documentReady = function ($) {
     var $window = $(window);
@@ -24228,6 +24260,7 @@ var FLEXSLIDER = function (module, $, window, document) {
     var flexslider = {
       vars: {}
     };
+    var pluginNamespace = 'uix-flexslider__';
     /*
      * Tiny helper function to add breakpoints.
      *
@@ -24249,14 +24282,13 @@ var FLEXSLIDER = function (module, $, window, document) {
 
 
     function initslides(sliderWrapper, thisSlider, fireState) {
-      var prefix = 'uix-flexslider__';
-      if (thisSlider.find('.' + prefix + 'item').length == 0) return false;
+      if (thisSlider.find('.' + pluginNamespace + 'item').length == 0) return false;
       var curIndex = thisSlider.currentSlide,
           count = thisSlider.count,
-          activeClass = prefix + 'item--active',
+          activeClass = pluginNamespace + 'item--active',
           prevClass = activeClass + '-prev',
           nextClass = activeClass + '-next',
-          $items = thisSlider.find('.' + prefix + 'item'),
+          $items = thisSlider.find('.' + pluginNamespace + 'item'),
           $current = thisSlider.slides.eq(curIndex),
           $prev = thisSlider.slides.eq(curIndex - 1),
           $next = thisSlider.slides.eq(thisSlider.animatingTo),
@@ -24269,14 +24301,37 @@ var FLEXSLIDER = function (module, $, window, document) {
           dataCountCur = thisSlider.data('my-count-now'),
           dataShowItems = thisSlider.data('my-multiple-items'),
           dataShowItemsMove = thisSlider.data('my-multiple-items-move'),
-          dataParallax = thisSlider.data('my-parallax');
+          dataParallax = thisSlider.data('my-parallax'),
+          dataCustomConID = thisSlider.data('my-controls');
       if (flexslider_js_typeof(dataPNThumbs) === ( true ? "undefined" : undefined)) dataPNThumbs = false;
       if (flexslider_js_typeof(dataTimeline) === ( true ? "undefined" : undefined)) dataTimeline = false;
       if (flexslider_js_typeof(dataCountTotal) === ( true ? "undefined" : undefined)) dataCountTotal = false;
       if (flexslider_js_typeof(dataCountCur) === ( true ? "undefined" : undefined)) dataCountCur = false;
       if (flexslider_js_typeof(dataParallax) === ( true ? "undefined" : undefined)) dataParallax = false;
-      if (flexslider_js_typeof(dataShowItemsMove) === ( true ? "undefined" : undefined)) dataShowItemsMove = 1; //Total counter selector
+      if (flexslider_js_typeof(dataShowItemsMove) === ( true ? "undefined" : undefined)) dataShowItemsMove = 1; //Add disabled class to custom navigation 
+
+      if (flexslider_js_typeof(dataCustomConID) != ( true ? "undefined" : undefined) && dataCustomConID != '' && dataCustomConID != false) {
+        var myCustomDirectionNav = $('.uix-flexslider__mycontrols' + dataCustomConID + ' a');
+        var disabledClass = pluginNamespace + 'disabled';
+
+        if (thisSlider.pagingCount === 1) {
+          myCustomDirectionNav.addClass(disabledClass).attr('tabindex', '-1');
+        } else if (!thisSlider.vars.animationLoop) {
+          if (thisSlider.animatingTo === 0) {
+            myCustomDirectionNav.removeClass(disabledClass);
+            myCustomDirectionNav.first().addClass(disabledClass).attr('tabindex', '-1');
+          } else if (thisSlider.animatingTo === thisSlider.last) {
+            myCustomDirectionNav.removeClass(disabledClass);
+            myCustomDirectionNav.last().addClass(disabledClass).attr('tabindex', '-1');
+          } else {
+            myCustomDirectionNav.removeClass(disabledClass).removeAttr('tabindex');
+          }
+        } else {
+          myCustomDirectionNav.removeClass(disabledClass).removeAttr('tabindex');
+        }
+      } //Total counter selector
       //Current counter selector.
+
 
       var countTotalSelector = dataCountTotal ? $(dataCountTotal) : $('.uix-flexslider__mycontrols__count em.count'),
           countCurSelector = dataCountCur ? $(dataCountCur) : $('.uix-flexslider__mycontrols__count em.current'); // Fires when the slider loads the first slide.
@@ -24285,7 +24340,7 @@ var FLEXSLIDER = function (module, $, window, document) {
       if (fireState == 'start' || fireState == 'after') {
         //Remove the slider loading
         //-------------------------------------
-        thisSlider.removeClass(prefix + '-flexslider-loading'); //With Timeline
+        thisSlider.removeClass(pluginNamespace + '-flexslider-loading'); //With Timeline
         //-------------------------------------	
 
         if (dataTimeline && dataTimeline != '') {
@@ -24328,7 +24383,7 @@ var FLEXSLIDER = function (module, $, window, document) {
             $plink.attr('href', 'javascript:void(0);');
             if (flexslider_js_typeof(pimg) != ( true ? "undefined" : undefined)) $plinkPrev.attr('data-goto', prevIndex).find('> span').html('<img src="' + pimg + '" alt="">');
             if (flexslider_js_typeof(nimg) != ( true ? "undefined" : undefined)) $plinkNext.attr('data-goto', nextIndex).find('> span').html('<img src="' + nimg + '" alt="">');
-            $plink.off('click').off('click').on('click', function (e) {
+            $plink.off('click').on('click', function (e) {
               e.preventDefault();
               thisSlider.flexslider(parseInt($(this).attr('data-goto')));
             });
@@ -24840,7 +24895,10 @@ var FLEXSLIDER = function (module, $, window, document) {
         myCustomDirectionNav = '';
       } else {
         myControlsContainer = $('.uix-flexslider__mycontrols' + customConID + ' .uix-flexslider__mycontrols__control-paging');
-        myCustomDirectionNav = $('.uix-flexslider__mycontrols' + customConID + ' a');
+        myCustomDirectionNav = $('.uix-flexslider__mycontrols' + customConID + ' a'); //Change the class naming of the page up and down buttons to support trigger events
+
+        myCustomDirectionNav.first().addClass(pluginNamespace + 'prev');
+        myCustomDirectionNav.last().addClass(pluginNamespace + 'next');
       } // If there is no data-xxx, save current source to it
 
 
@@ -24903,7 +24961,7 @@ var FLEXSLIDER = function (module, $, window, document) {
         }
       });
       $this.flexslider({
-        namespace: 'uix-flexslider__',
+        namespace: pluginNamespace,
         animation: dataAnim,
         selector: '.uix-flexslider__inner > div.uix-flexslider__item',
         controlNav: dataPaging,
@@ -32797,7 +32855,7 @@ function periodical_scroll_js_typeof(obj) { "@babel/helpers - typeof"; if (typeo
 var PERIODICAL_SCROLL = function (module, $, window, document) {
   if (window.PERIODICAL_SCROLL === null) return false;
   module.PERIODICAL_SCROLL = module.PERIODICAL_SCROLL || {};
-  module.PERIODICAL_SCROLL.version = '0.0.3';
+  module.PERIODICAL_SCROLL.version = '0.0.5';
 
   module.PERIODICAL_SCROLL.documentReady = function ($) {
     $('.uix-periodical-scroll').each(function () {
@@ -32806,6 +32864,10 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
           timing = $this.data('timing');
       var $list = $this.find('> ul');
       var itemHeight = $list.find('li:first').height();
+      $this.css({
+        'height': itemHeight + 'px',
+        'overflow': 'hidden'
+      });
 
       if (periodical_scroll_js_typeof(speed) === ( true ? "undefined" : undefined)) {
         speed = 600;
@@ -32813,21 +32875,29 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
 
       if (periodical_scroll_js_typeof(timing) === ( true ? "undefined" : undefined)) {
         timing = 2000;
-      }
+      } //If there is only one item, add one to complete the seamless loop effect
 
+
+      if ($list.find('li').length == 1) {
+        $list.prepend($list.find('li:first').clone());
+      } //
+
+
+      var eachItemAnimOKDelay = 150;
       var $item = $list.find('> li');
-      var moveY = itemHeight * 2;
+      var moveY = itemHeight * 2; //Prevent repetition of animation events
+
+      TweenMax.killTweensOf($item); //
+
       var tl = new TimelineMax({
-        onComplete: function onComplete() {
-          TweenMax.set($item.first(), {
-            opacity: 0,
-            y: moveY
-          });
-          setTimeout(function () {
-            tl.restart();
-          }, timing);
-        }
-      });
+        repeat: -1,
+        repeatDelay: eachItemAnimOKDelay / 1000
+      }); //pauses wherever the playhead currently is:
+
+      tl.pause();
+      setTimeout(function () {
+        tl.play();
+      }, speed);
       tl.add(TweenMax.staggerFromTo($item, speed / 1000, {
         opacity: 0,
         y: moveY
@@ -32837,12 +32907,26 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
       }, timing / 1000)).add(TweenMax.staggerTo($item, speed / 1000, {
         delay: timing / 1000,
         opacity: 0,
-        y: -moveY
+        y: -moveY,
+        onComplete: function onComplete() {
+          TweenMax.set(this.target, {
+            delay: eachItemAnimOKDelay / 1000,
+            opacity: 0,
+            y: moveY
+          });
+        }
       }, timing / 1000), 0);
-      $list.on('mouseenter', function () {
+      $item.on('mouseenter', function () {
         tl.pause();
       }).on('mouseleave', function () {
         tl.play();
+
+        if ($(this).index() > 0) {
+          TweenMax.set($item.first(), {
+            opacity: 0,
+            y: moveY
+          });
+        }
       });
     });
   };

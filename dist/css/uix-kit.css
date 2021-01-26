@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.75
+ * ## Version             :  4.4.78
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  December 15, 2020
+ * ## Last Update         :  January 26, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -4054,7 +4054,7 @@ h6 {
 
 .uix-typo--color-white {
   color: white !important;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .uix-typo--color-white p,
@@ -4071,7 +4071,7 @@ h6 {
 .uix-typo--color-white .uix-typo--h5,
 .uix-typo--color-white .uix-typo--h6 {
   color: white;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 /* 
@@ -4267,7 +4267,7 @@ h6 {
   overflow: hidden;
 }
 
-.uix-accordion-img ul {
+.uix-accordion-img > ul {
   width: 100%;
   display: table;
   table-layout: fixed;
@@ -4277,7 +4277,7 @@ h6 {
   /*Fighting the Space Between Inline Block Elements*/
 }
 
-.uix-accordion-img ul li {
+.uix-accordion-img > ul > li {
   display: table-cell;
   vertical-align: bottom;
   position: relative;
@@ -4291,13 +4291,13 @@ h6 {
   transition: all 0.3s ease;
 }
 
-.uix-accordion-img ul li > img {
+.uix-accordion-img > ul > li > img {
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.uix-accordion-img ul li > .uix-accordion-img__content {
+.uix-accordion-img > ul > li > .uix-accordion-img__content {
   display: block;
   height: 250px;
   width: 100%;
@@ -4309,14 +4309,14 @@ h6 {
   transition: all 0.3s ease;
 }
 
-.uix-accordion-img ul li > .uix-accordion-img__content h3,
-.uix-accordion-img ul li > .uix-accordion-img__content p {
+.uix-accordion-img > ul > li > .uix-accordion-img__content h3,
+.uix-accordion-img > ul > li > .uix-accordion-img__content p {
   position: relative;
   z-index: -1;
   word-break: break-all;
 }
 
-.uix-accordion-img ul li > .uix-accordion-img__content .uix-accordion-img__close {
+.uix-accordion-img > ul > li > .uix-accordion-img__content .uix-accordion-img__close {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -4330,12 +4330,12 @@ h6 {
   padding: 0 1rem;
 }
 
-.uix-accordion-img ul li.is-active {
+.uix-accordion-img > ul > li.is-active {
   width: 60%;
 }
 
-.uix-accordion-img ul li.is-active.active-sub > .outer h3,
-.uix-accordion-img ul li.is-active.active-sub > .outer p {
+.uix-accordion-img > ul > li.is-active.active-sub > .outer h3,
+.uix-accordion-img > ul > li.is-active.active-sub > .outer p {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -4346,10 +4346,10 @@ h6 {
   .uix-accordion-img {
     height: auto;
   }
-  .uix-accordion-img ul li,
-  .uix-accordion-img ul li:hover,
-  .uix-accordion-img ul:hover li,
-  .uix-accordion-img ul:hover li:hover {
+  .uix-accordion-img > ul > li,
+  .uix-accordion-img > ul > li:hover,
+  .uix-accordion-img > ul:hover > li,
+  .uix-accordion-img > ul:hover > li:hover {
     position: relative;
     display: table;
     table-layout: fixed;
@@ -5709,6 +5709,7 @@ ul.uix-flexslider__direction-nav li a.uix-flexslider__prev {
 
 ul.uix-flexslider__direction-nav li a.uix-flexslider__prev.uix-flexslider__disabled {
   visibility: hidden;
+  pointer-events: none;
 }
 
 ul.uix-flexslider__direction-nav li a.uix-flexslider__next {
@@ -5718,6 +5719,7 @@ ul.uix-flexslider__direction-nav li a.uix-flexslider__next {
 
 ul.uix-flexslider__direction-nav li a.uix-flexslider__next.uix-flexslider__disabled {
   visibility: hidden;
+  pointer-events: none;
 }
 
 .uix-flexslider:hover a.uix-flexslider__prev {
@@ -5842,6 +5844,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 
 .uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__prev.uix-flexslider__disabled {
   visibility: hidden;
+  pointer-events: none;
 }
 
 .uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__next::after {
@@ -5850,6 +5853,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
 
 .uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__next.uix-flexslider__disabled {
   visibility: hidden;
+  pointer-events: none;
 }
 
 .uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol {
@@ -9046,7 +9050,7 @@ select:-webkit-autofill:focus {
   content: "\f00d";
   color: #fff;
   font-size: 2rem;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .uix-lightbox__close > button:focus {
@@ -9925,7 +9929,7 @@ a.uix-lightbox__original__link {
   content: "\f110";
   color: #fff;
   font-size: 2rem;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
   display: inline-block;
   animation: fa-spin 2s infinite linear;
 }
