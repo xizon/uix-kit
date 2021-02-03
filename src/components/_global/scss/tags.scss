@@ -4,6 +4,13 @@
 
 .uix-tags-box {
 	
+	&::before {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	
 	> a {
 		font-size: 0.875rem;
 		padding: 0.04375rem 0.109375rem;

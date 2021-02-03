@@ -1,0 +1,43 @@
+/* ====================================================== 
+   <!-- WordPress Blocks ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/* Note: Contains Gutenberg's block style correction. */
+
+/*
+
+    Used to style blocks in the Front-end pages.
+	
+	TABLE OF CONTENTS
+	---------------------------
+	
+	2. Cover 
+    4. Latest Posts     
+*/
+
+/* 
+ ---------------------------
+ 2. Cover 
+ ---------------------------
+ */ 
+@media only screen and (min-width: 482px) {
+
+	.wp-block-cover.alignleft {
+		margin-right: 0;
+	}
+
+	.wp-block-cover.alignright {
+		margin-left: 0;
+	}
+}
+
+
+
+/* ====================================================== 
+   4. Latest Posts                                 
+/* ====================================================== */
+.wp-block-latest-posts.is-grid li {
+    margin: 0 0 0 16px;
+}
+

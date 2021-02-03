@@ -1,0 +1,171 @@
+/* ====================================================== 
+   <!-- WordPress Blocks ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+
+/* Note: Contains Gutenberg's block style correction. */
+
+
+
+
+/*
+
+    Used to style blocks in the Front-end pages.
+	
+	TABLE OF CONTENTS
+	---------------------------
+	
+	1. List
+	2. Cover
+	3. Gallery
+	4. Latest Posts  
+    5. Images   
+    6. Buttons  
+*/
+
+/* ====================================================== 
+   1. List                               
+/* ====================================================== */
+ul[class^="wp-block-"].aligncenter {
+    text-align: center;
+    list-style: none;
+}
+
+ul[class^="wp-block-"].aligncenter ul {
+    list-style: none;
+}
+
+
+/* ====================================================== 
+   2. Cover                               
+/* ====================================================== */
+.wp-block-cover-image.alignright,
+.wp-block-cover.alignright,
+.wp-block-cover-image.alignleft,
+.wp-block-cover.alignleft,
+.wp-block-cover-image.aligncenter,
+.wp-block-cover.aligncenter {
+	display: flex !important;
+}
+
+@media only screen and (min-width: 482px) {
+
+	.wp-block-cover.alignleft {
+		max-width: 290px;
+		margin-right: 2em; /*!rtl:end:ignore*/
+	}
+
+	.wp-block-cover.alignright {
+		max-width: 290px;
+		margin-left: 2em; /*!rtl:end:ignore*/
+	}
+	
+	
+	.rtl .wp-block-cover.alignleft {
+		margin-right: 0;
+	}
+
+	.rtl .wp-block-cover.alignright {
+		margin-left: 0;
+	}
+	
+}
+
+.wp-block-cover {
+	color: #fff;
+}
+
+.wp-block-cover-image .wp-block-subhead, 
+.wp-block-cover-image h1, 
+.wp-block-cover-image h2, 
+.wp-block-cover-image h3, 
+.wp-block-cover-image h4, 
+.wp-block-cover-image h5, 
+.wp-block-cover-image h6, 
+.wp-block-cover-image p, 
+.wp-block-cover .wp-block-subhead, 
+.wp-block-cover h1, 
+.wp-block-cover h2, 
+.wp-block-cover h3, 
+.wp-block-cover h4, 
+.wp-block-cover h5, 
+.wp-block-cover h6, 
+.wp-block-cover p {
+    color: #fff;
+	max-width: 580px;
+	padding: .44em;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+.wp-block-cover .has-huge-font-size,
+.wp-block-cover .has-large-font-size,
+.wp-block-cover .has-regular-font-size,
+.wp-block-cover .has-small-font-size,
+.wp-block-cover .has-normal-font-size,
+.wp-block-cover .has-medium-font-size {
+    font-size: 2em;
+    line-height: 1.25;
+}
+
+
+
+
+
+/* ====================================================== 
+   3. Gallery                               
+/* ====================================================== */
+
+.blocks-gallery-grid {
+    display: flex !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-wrap: wrap !important;
+}
+
+
+
+/* ====================================================== 
+   4. Latest Posts                                 
+/* ====================================================== */
+
+.wp-block-latest-posts.wp-block-latest-posts__list {
+    padding: 0;
+    margin: 0 auto;  
+}
+
+.wp-block-latest-posts.is-grid li {
+    margin: 0 16px 0 0;
+}
+
+
+.rtl .wp-block-latest-posts.is-grid li {
+    margin: 0 0 0 16px;
+}
+
+
+/* ====================================================== 
+   5. Images    
+/* ====================================================== */
+.wp-block-image img {
+    height: auto;
+}
+
+
+/* ====================================================== 
+   6. Buttons  
+/* ====================================================== */
+.wp-block-button {
+    margin-right: .5em;
+    margin-bottom: .5em;
+	display: block;
+}
+
+.wp-block-buttons .wp-block-button {
+	display: inline-block;
+}
+
+.wp-block-button.is-style-squared .wp-block-button__link {
+	border-radius: 0;
+}

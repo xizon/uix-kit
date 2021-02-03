@@ -96,6 +96,10 @@
 	    height: auto !important;
 	}
 	
+	ul li img {
+		height: inherit !important; /* Used for Gallery grid */
+	}
+	
 	iframe {
 	    max-width: 100% !important;
 	}

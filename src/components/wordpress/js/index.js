@@ -17,6 +17,7 @@ import {
 
 
 import '../scss/_wp_core.scss';
+import '../scss/_wp_blocks.scss';
 import '../scss/_3rd_party_plugins.scss';
 
 export const WP_CORE = ( ( module, $, window, document ) => {

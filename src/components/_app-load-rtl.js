@@ -41,4 +41,6 @@ import '@uixkit/core/table/scss-rtl/_style.scss';
 import '@uixkit/core/tooltip/scss-rtl/_style.scss';
 import '@uixkit/core/vertical-menu/scss-rtl/_style.scss';
 import '@uixkit/core/wordpress/scss-rtl/_wp_core.scss';
+import '@uixkit/core/wordpress/scss-rtl/_wp_blocks.scss';
+
 

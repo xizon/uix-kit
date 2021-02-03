@@ -1,6 +1,11 @@
 # Changelog
 
 
+#### = 4.4.8 (January 29, 2021) =
+
+* Tweak: Updated the default style to match WordPress
+
+
 #### = 4.4.78 (January 25, 2021) =
 
 * Fix: Fixed the compatibility issue of `hashchange.js` under high version WordPress.

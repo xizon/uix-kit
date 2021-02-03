@@ -3,10 +3,13 @@
 /* ====================================================== */
 @import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
 
+/* Note: Contains Gutenberg's block style correction. */
+
 /*
  * 1. General
  * 2. Text meant only for screen readers.
- * 3. Galleries for block
+ * 3. Galleries (for block)
+ * 4. Cover Image (for block)
 */
 
 
@@ -75,7 +78,7 @@ a img {
 
 /* 
  ---------------------------
- 3. Galleries for block
+ 3. Galleries (for block)
  ---------------------------
  */ 
 ul.wp-block-gallery {
@@ -281,4 +284,22 @@ ul.wp-block-gallery.alignleft, ul.wp-block-gallery.aligncenter, ul.wp-block-gall
 
 ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
     justify-content: center;
+}
+
+
+
+/* 
+ ---------------------------
+ 4. Cover Image  (for block)
+ ---------------------------
+ */ 
+@media only screen and (min-width: 482px) {
+
+	.wp-block-cover.alignleft {
+		margin-right: 0;
+	}
+
+	.wp-block-cover.alignright {
+		margin-left: 0;
+	}
 }
