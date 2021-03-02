@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.78
+ * ## Version             :  4.4.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 26, 2021
+ * ## Last Update         :  March 2, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -56,6 +56,7 @@
     35.ToolTip
     36.Vertical Menu (RTL)
     37.WordPress Core ( Do not use prefix "uix-" )
+    38.WordPress Blocks ( Do not use prefix "uix-" )
 
 
 */
@@ -331,6 +332,50 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
 
 .uix-t-l {
   text-align: right;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+  .uix-t-r--sm {
+    text-align: left;
+  }
+  .uix-t-l--sm {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .uix-t-r--md {
+    text-align: left;
+  }
+  .uix-t-l--md {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .uix-t-r--lg {
+    text-align: left;
+  }
+  .uix-t-l--lg {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .uix-t-r--xl {
+    text-align: left;
+  }
+  .uix-t-l--xl {
+    text-align: right;
+  }
 }
 
 /* 
@@ -1751,6 +1796,18 @@ table.uix-table td,
   border-right: 1px solid #d6d5d5;
 }
 
+table.uix-table thead th,
+.uix-table table thead th {
+  /* The breakpoint is the same as bootstrap 4 */
+  /*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+}
+
 table.uix-table thead th.uix-t-r,
 .uix-table table thead th.uix-t-r {
   text-align: left;
@@ -1761,14 +1818,47 @@ table.uix-table thead th.uix-t-l,
   text-align: right;
 }
 
-@media all and (max-width: 768px) {
-  table.uix-table thead th.uix-mobile-tl,
-  .uix-table table thead th.uix-mobile-tl {
+@media all and (max-width: 576px) {
+  table.uix-table thead th.uix-t-r--sm,
+  .uix-table table thead th.uix-t-r--sm {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-l--sm,
+  .uix-table table thead th.uix-t-l--sm {
     text-align: right;
   }
-  table.uix-table thead th.uix-mobile-tr,
-  .uix-table table thead th.uix-mobile-tr {
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table thead th.uix-t-r--md,
+  .uix-table table thead th.uix-t-r--md {
     text-align: left;
+  }
+  table.uix-table thead th.uix-t-l--md,
+  .uix-table table thead th.uix-t-l--md {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 992px) {
+  table.uix-table thead th.uix-t-r--lg,
+  .uix-table table thead th.uix-t-r--lg {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-l--lg,
+  .uix-table table thead th.uix-t-l--lg {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  table.uix-table thead th.uix-t-r--xl,
+  .uix-table table thead th.uix-t-r--xl {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-l--xl,
+  .uix-table table thead th.uix-t-l--xl {
+    text-align: right;
   }
 }
 
@@ -1946,10 +2036,12 @@ table.uix-table thead th.uix-t-l,
 /* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
+/* Note: Contains Gutenberg's block style correction. */
 /*
  * 1. General
  * 2. Text meant only for screen readers.
- * 3. Galleries for block
+ * 3. Galleries (for block)
+ * 4. Cover Image (for block)
 */
 /* 
  ---------------------------
@@ -2004,7 +2096,7 @@ a img.alignleft {
 
 /* 
  ---------------------------
- 3. Galleries for block
+ 3. Galleries (for block)
  ---------------------------
  */
 ul.wp-block-gallery {
@@ -2197,6 +2289,55 @@ ul.wp-block-gallery.alignleft, ul.wp-block-gallery.aligncenter, ul.wp-block-gall
 
 ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
   justify-content: center;
+}
+
+/* 
+ ---------------------------
+ 4. Cover Image  (for block)
+ ---------------------------
+ */
+@media only screen and (min-width: 482px) {
+  .wp-block-cover.alignleft {
+    margin-right: 0;
+  }
+  .wp-block-cover.alignright {
+    margin-left: 0;
+  }
+}
+
+/* ====================================================== 
+   <!-- WordPress Blocks ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+/* Note: Contains Gutenberg's block style correction. */
+/*
+
+    Used to style blocks in the Front-end pages.
+	
+	TABLE OF CONTENTS
+	---------------------------
+	
+	2. Cover 
+    4. Latest Posts     
+*/
+/* 
+ ---------------------------
+ 2. Cover 
+ ---------------------------
+ */
+@media only screen and (min-width: 482px) {
+  .wp-block-cover.alignleft {
+    margin-right: 0;
+  }
+  .wp-block-cover.alignright {
+    margin-left: 0;
+  }
+}
+
+/* ====================================================== 
+   4. Latest Posts                                 
+/* ====================================================== */
+.wp-block-latest-posts.is-grid li {
+  margin: 0 0 0 16px;
 }
 
 

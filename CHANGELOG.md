@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 4.4.9 (March 2, 2021) =
+
+* New: Added helper classes for alignment breakpoint which is the same as bootstrap 4.
+* Tweak: Optimization of a few common styles.
+
 
 #### = 4.4.8 (January 29, 2021) =
 

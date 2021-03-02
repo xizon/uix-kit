@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.78
+ * ## Version             :  4.4.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 26, 2021
+ * ## Last Update         :  March 2, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -92,40 +92,41 @@
     71.Timeline
     72.Vertical Menu
     73.WordPress Core ( Do not use prefix "uix-" )
-    74.3rd Party Plugins
-    75.Badges
-    76.Blended Grid Layout
-    77.Breadcrumbs
-    78.Button
-    79.Cards
-    80.Badges
-    81.Coach Mark
-    82.Content Placeholder Animated
-    83.Dividing Line
-    84.Dotted Line
-    85.Equal-width Columns
-    86.Features
-    87.Footer Templates
-    88.Gallery Grid Layout
-    89.Heading
-    90.Image Animation
-    91.Brands List
-    92.Maintain Aspect Ratio List
-    93.Side by Side List
-    94.Side by Side List With Photo
-    95.Mouse Animation Scroll
-    96.Overlay
-    97.Ribbon
-    98.Separator of Rule With Text
-    99.Shape Animation
-    100.Comments ( Synchronize to WordPress's class name )
-    101.Editing Component
-    102.Striking
-    103.Team Fullwidth (Style using the Side by Side List With Photo module)
-    104.Team Gird
-    105.Testimonials Carousel
-    106.ToolTip
-    107.Wave Background
+    74.WordPress Blocks ( Do not use prefix "uix-" )
+    75.3rd Party Plugins
+    76.Badges
+    77.Blended Grid Layout
+    78.Breadcrumbs
+    79.Button
+    80.Cards
+    81.Badges
+    82.Coach Mark
+    83.Content Placeholder Animated
+    84.Dividing Line
+    85.Dotted Line
+    86.Equal-width Columns
+    87.Features
+    88.Footer Templates
+    89.Gallery Grid Layout
+    90.Heading
+    91.Image Animation
+    92.Brands List
+    93.Maintain Aspect Ratio List
+    94.Side by Side List
+    95.Side by Side List With Photo
+    96.Mouse Animation Scroll
+    97.Overlay
+    98.Ribbon
+    99.Separator of Rule With Text
+    100.Shape Animation
+    101.Comments ( Synchronize to WordPress's class name )
+    102.Editing Component
+    103.Striking
+    104.Team Fullwidth (Style using the Side by Side List With Photo module)
+    105.Team Gird
+    106.Testimonials Carousel
+    107.ToolTip
+    108.Wave Background
 
 
 */
@@ -257,8 +258,8 @@ code {
   background-color: #f9f2f4;
   border-radius: 3px;
   display: inline-block;
-  margin: 0 .2rem .2rem .2rem;
-  padding: .1rem .4rem;
+  margin: 0 .2rem;
+  padding: 0 .4rem;
   white-space: nowrap;
   font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 }
@@ -768,6 +769,11 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
   height: auto !important;
 }
 
+.uix-entry__content ul li img {
+  height: inherit !important;
+  /* Used for Gallery grid */
+}
+
 .uix-entry__content iframe {
   max-width: 100% !important;
 }
@@ -1118,15 +1124,59 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   text-align: center;
 }
 
-@media all and (max-width: 768px) {
-  .uix-mobile-tc {
-    text-align: center;
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+  .uix-t-r--sm {
+    text-align: right;
   }
-  .uix-mobile-tl {
+  .uix-t-l--sm {
     text-align: left;
   }
-  .uix-mobile-tr {
+  .uix-t-c--sm {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .uix-t-r--md {
     text-align: right;
+  }
+  .uix-t-l--md {
+    text-align: left;
+  }
+  .uix-t-c--md {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .uix-t-r--lg {
+    text-align: right;
+  }
+  .uix-t-l--lg {
+    text-align: left;
+  }
+  .uix-t-c--lg {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .uix-t-r--xl {
+    text-align: right;
+  }
+  .uix-t-l--xl {
+    text-align: left;
+  }
+  .uix-t-c--xl {
+    text-align: center;
   }
 }
 
@@ -3740,6 +3790,12 @@ details.uix-details-reset > summary::-webkit-details-marker {
 /* ====================================================== 
    <!-- Tags -->      
 /* ====================================================== */
+.uix-tags-box::before {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 .uix-tags-box > a {
   font-size: 0.875rem;
   padding: 0.04375rem 0.109375rem;
@@ -14433,6 +14489,14 @@ table.uix-table thead th,
 .uix-table table thead th {
   text-align: inherit;
   /* Required */
+  /* The breakpoint is the same as bootstrap 4 */
+  /*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
 }
 
 table.uix-table thead th.uix-t-r,
@@ -14450,18 +14514,63 @@ table.uix-table thead th.uix-t-c,
   text-align: center;
 }
 
-@media all and (max-width: 768px) {
-  table.uix-table thead th.uix-mobile-tc,
-  .uix-table table thead th.uix-mobile-tc {
-    text-align: center;
+@media all and (max-width: 576px) {
+  table.uix-table thead th.uix-t-r--sm,
+  .uix-table table thead th.uix-t-r--sm {
+    text-align: right;
   }
-  table.uix-table thead th.uix-mobile-tl,
-  .uix-table table thead th.uix-mobile-tl {
+  table.uix-table thead th.uix-t-l--sm,
+  .uix-table table thead th.uix-t-l--sm {
     text-align: left;
   }
-  table.uix-table thead th.uix-mobile-tr,
-  .uix-table table thead th.uix-mobile-tr {
+  table.uix-table thead th.uix-t-c--sm,
+  .uix-table table thead th.uix-t-c--sm {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 768px) {
+  table.uix-table thead th.uix-t-r--md,
+  .uix-table table thead th.uix-t-r--md {
     text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--md,
+  .uix-table table thead th.uix-t-l--md {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--md,
+  .uix-table table thead th.uix-t-c--md {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 992px) {
+  table.uix-table thead th.uix-t-r--lg,
+  .uix-table table thead th.uix-t-r--lg {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--lg,
+  .uix-table table thead th.uix-t-l--lg {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-c--lg,
+  .uix-table table thead th.uix-t-c--lg {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  table.uix-table thead th.uix-t-r--xl,
+  .uix-table table thead th.uix-t-r--xl {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--xl,
+  .uix-table table thead th.uix-t-l--xl {
+    text-align: left;
+  }
+  table.uix-table thead th .uix-t-c--xl,
+  .uix-table table thead th .uix-t-c--xl {
+    text-align: center;
   }
 }
 
@@ -16427,200 +16536,6 @@ a img.aligncenter {
   display: none;
 }
 
-/* Galleries for block */
-ul.wp-block-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-ul.wp-block-gallery .blocks-gallery-image,
-ul.wp-block-gallery .blocks-gallery-item {
-  margin: 0 16px 16px 0;
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-ul.wp-block-gallery .blocks-gallery-image figure,
-ul.wp-block-gallery .blocks-gallery-item figure {
-  margin: 0;
-  height: 100%;
-}
-
-@supports (position: -webkit-sticky) or (position: sticky) {
-  ul.wp-block-gallery .blocks-gallery-image figure,
-  ul.wp-block-gallery .blocks-gallery-item figure {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
-}
-
-ul.wp-block-gallery .blocks-gallery-image img,
-ul.wp-block-gallery .blocks-gallery-item img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-ul.wp-block-gallery .blocks-gallery-image img,
-ul.wp-block-gallery .blocks-gallery-item img {
-  width: 100%;
-}
-
-@supports (position: -webkit-sticky) or (position: sticky) {
-  ul.wp-block-gallery .blocks-gallery-image img,
-  ul.wp-block-gallery .blocks-gallery-item img {
-    width: auto;
-  }
-}
-
-ul.wp-block-gallery .blocks-gallery-image figcaption,
-ul.wp-block-gallery .blocks-gallery-item figcaption {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  max-height: 100%;
-  overflow: auto;
-  padding: 40px 10px 5px;
-  color: #fff;
-  text-align: center;
-  font-size: 13px;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 60%, transparent);
-}
-
-ul.wp-block-gallery .blocks-gallery-image figcaption img,
-ul.wp-block-gallery .blocks-gallery-item figcaption img {
-  display: inline;
-}
-
-ul.wp-block-gallery.is-cropped .blocks-gallery-image a,
-ul.wp-block-gallery.is-cropped .blocks-gallery-image img,
-ul.wp-block-gallery.is-cropped .blocks-gallery-item a,
-ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
-  width: 100%;
-}
-
-@supports (position: -webkit-sticky) or (position: sticky) {
-  ul.wp-block-gallery.is-cropped .blocks-gallery-image a,
-  ul.wp-block-gallery.is-cropped .blocks-gallery-image img,
-  ul.wp-block-gallery.is-cropped .blocks-gallery-item a,
-  ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
-    height: 100% !important;
-    flex: 1;
-    -o-object-fit: cover;
-    object-fit: cover;
-  }
-}
-
-ul.wp-block-gallery .blocks-gallery-image,
-ul.wp-block-gallery .blocks-gallery-item {
-  width: calc((100% - 16px) / 2);
-}
-
-ul.wp-block-gallery .blocks-gallery-image:nth-of-type(even),
-ul.wp-block-gallery .blocks-gallery-item:nth-of-type(even) {
-  margin-right: 0;
-}
-
-ul.wp-block-gallery.columns-1 .blocks-gallery-image,
-ul.wp-block-gallery.columns-1 .blocks-gallery-item {
-  width: 100%;
-  margin-right: 0;
-}
-
-@media (min-width: 600px) {
-  ul.wp-block-gallery.columns-3 .blocks-gallery-image,
-  ul.wp-block-gallery.columns-3 .blocks-gallery-item {
-    width: calc((100% - 16px * 2) / 3);
-    margin-right: 16px;
-  }
-  ul.wp-block-gallery.columns-4 .blocks-gallery-image,
-  ul.wp-block-gallery.columns-4 .blocks-gallery-item {
-    width: calc((100% - 16px * 3) / 4);
-    margin-right: 16px;
-  }
-  ul.wp-block-gallery.columns-5 .blocks-gallery-image,
-  ul.wp-block-gallery.columns-5 .blocks-gallery-item {
-    width: calc((100% - 16px * 4) / 5);
-    margin-right: 16px;
-  }
-  ul.wp-block-gallery.columns-6 .blocks-gallery-image,
-  ul.wp-block-gallery.columns-6 .blocks-gallery-item {
-    width: calc((100% - 16px * 5) / 6);
-    margin-right: 16px;
-  }
-  ul.wp-block-gallery.columns-7 .blocks-gallery-image,
-  ul.wp-block-gallery.columns-7 .blocks-gallery-item {
-    width: calc((100% - 16px * 6) / 7);
-    margin-right: 16px;
-  }
-  ul.wp-block-gallery.columns-8 .blocks-gallery-image,
-  ul.wp-block-gallery.columns-8 .blocks-gallery-item {
-    width: calc((100% - 16px * 7) / 8);
-    margin-right: 16px;
-  }
-  ul.wp-block-gallery.columns-1 .blocks-gallery-image:nth-of-type(1n),
-  ul.wp-block-gallery.columns-1 .blocks-gallery-item:nth-of-type(1n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-2 .blocks-gallery-image:nth-of-type(2n),
-  ul.wp-block-gallery.columns-2 .blocks-gallery-item:nth-of-type(2n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-3 .blocks-gallery-image:nth-of-type(3n),
-  ul.wp-block-gallery.columns-3 .blocks-gallery-item:nth-of-type(3n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-4 .blocks-gallery-image:nth-of-type(4n),
-  ul.wp-block-gallery.columns-4 .blocks-gallery-item:nth-of-type(4n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-5 .blocks-gallery-image:nth-of-type(5n),
-  ul.wp-block-gallery.columns-5 .blocks-gallery-item:nth-of-type(5n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-6 .blocks-gallery-image:nth-of-type(6n),
-  ul.wp-block-gallery.columns-6 .blocks-gallery-item:nth-of-type(6n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-7 .blocks-gallery-image:nth-of-type(7n),
-  ul.wp-block-gallery.columns-7 .blocks-gallery-item:nth-of-type(7n) {
-    margin-right: 0;
-  }
-  ul.wp-block-gallery.columns-8 .blocks-gallery-image:nth-of-type(8n),
-  ul.wp-block-gallery.columns-8 .blocks-gallery-item:nth-of-type(8n) {
-    margin-right: 0;
-  }
-}
-
-ul.wp-block-gallery .blocks-gallery-image:last-child,
-ul.wp-block-gallery .blocks-gallery-item:last-child {
-  margin-right: 0;
-}
-
-ul.wp-block-gallery .blocks-gallery-item.has-add-item-button {
-  width: 100%;
-}
-
-ul.wp-block-gallery.alignleft, ul.wp-block-gallery.alignright {
-  max-width: 305px;
-  width: 100%;
-}
-
-ul.wp-block-gallery.alignleft, ul.wp-block-gallery.aligncenter, ul.wp-block-gallery.alignright {
-  display: flex;
-}
-
-ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
-  justify-content: center;
-}
-
 /* 
  ---------------------------
  4. Sticky
@@ -16628,6 +16543,154 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
  */
 .sticky {
   z-index: inherit;
+}
+
+/* ====================================================== 
+   <!-- WordPress Blocks ( Do not use prefix "uix-" ) -->              
+/* ====================================================== */
+/* Note: Contains Gutenberg's block style correction. */
+/*
+
+    Used to style blocks in the Front-end pages.
+	
+	TABLE OF CONTENTS
+	---------------------------
+	
+	1. List
+	2. Cover
+	3. Gallery
+	4. Latest Posts  
+    5. Images   
+    6. Buttons  
+*/
+/* ====================================================== 
+   1. List                               
+/* ====================================================== */
+ul[class^="wp-block-"].aligncenter {
+  text-align: center;
+  list-style: none;
+}
+
+ul[class^="wp-block-"].aligncenter ul {
+  list-style: none;
+}
+
+/* ====================================================== 
+   2. Cover                               
+/* ====================================================== */
+.wp-block-cover-image.alignright,
+.wp-block-cover.alignright,
+.wp-block-cover-image.alignleft,
+.wp-block-cover.alignleft,
+.wp-block-cover-image.aligncenter,
+.wp-block-cover.aligncenter {
+  display: flex !important;
+}
+
+@media only screen and (min-width: 482px) {
+  .wp-block-cover.alignleft {
+    max-width: 290px;
+    margin-right: 2em;
+    /*!rtl:end:ignore*/
+  }
+  .wp-block-cover.alignright {
+    max-width: 290px;
+    margin-left: 2em;
+    /*!rtl:end:ignore*/
+  }
+  .rtl .wp-block-cover.alignleft {
+    margin-right: 0;
+  }
+  .rtl .wp-block-cover.alignright {
+    margin-left: 0;
+  }
+}
+
+.wp-block-cover {
+  color: #fff;
+}
+
+.wp-block-cover-image .wp-block-subhead,
+.wp-block-cover-image h1,
+.wp-block-cover-image h2,
+.wp-block-cover-image h3,
+.wp-block-cover-image h4,
+.wp-block-cover-image h5,
+.wp-block-cover-image h6,
+.wp-block-cover-image p,
+.wp-block-cover .wp-block-subhead,
+.wp-block-cover h1,
+.wp-block-cover h2,
+.wp-block-cover h3,
+.wp-block-cover h4,
+.wp-block-cover h5,
+.wp-block-cover h6,
+.wp-block-cover p {
+  color: #fff;
+  max-width: 580px;
+  padding: .44em;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.wp-block-cover .has-huge-font-size,
+.wp-block-cover .has-large-font-size,
+.wp-block-cover .has-regular-font-size,
+.wp-block-cover .has-small-font-size,
+.wp-block-cover .has-normal-font-size,
+.wp-block-cover .has-medium-font-size {
+  font-size: 2em;
+  line-height: 1.25;
+}
+
+/* ====================================================== 
+   3. Gallery                               
+/* ====================================================== */
+.blocks-gallery-grid {
+  display: flex !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-wrap: wrap !important;
+}
+
+/* ====================================================== 
+   4. Latest Posts                                 
+/* ====================================================== */
+.wp-block-latest-posts.wp-block-latest-posts__list {
+  padding: 0;
+  margin: 0 auto;
+}
+
+.wp-block-latest-posts.is-grid li {
+  margin: 0 16px 0 0;
+}
+
+.rtl .wp-block-latest-posts.is-grid li {
+  margin: 0 0 0 16px;
+}
+
+/* ====================================================== 
+   5. Images    
+/* ====================================================== */
+.wp-block-image img {
+  height: auto;
+}
+
+/* ====================================================== 
+   6. Buttons  
+/* ====================================================== */
+.wp-block-button {
+  margin-right: .5em;
+  margin-bottom: .5em;
+  display: block;
+}
+
+.wp-block-buttons .wp-block-button {
+  display: inline-block;
+}
+
+.wp-block-button.is-style-squared .wp-block-button__link {
+  border-radius: 0;
 }
 
 /* ====================================================== 

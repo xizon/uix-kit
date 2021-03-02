@@ -40,17 +40,55 @@ table.uix-table,
 			}
 
 
-			@media all and (max-width: 768px) {
-
-				&.uix-mobile-tl {
-					text-align: right;
-				}
-
-				&.uix-mobile-tr {
+			/* The breakpoint is the same as bootstrap 4 */
+			/*
+			--breakpoint-xs:0;
+			--breakpoint-sm:576px;
+			--breakpoint-md:768px;
+			--breakpoint-lg:992px;
+			--breakpoint-xl:1200px;
+			*/
+			@media all and (max-width: 576px) {
+				&.uix-t-r--sm {
 					text-align: left;
 				}
 
+				&.uix-t-l--sm {
+					text-align: right;
+				}
 			}
+
+			@media all and (max-width: 768px) {
+				&.uix-t-r--md {
+					text-align: left;
+				}
+
+				&.uix-t-l--md {
+					text-align: right;
+				}
+			}
+
+			@media all and (max-width: 992px) {
+				&.uix-t-r--lg {
+					text-align: left;
+				}
+
+				&.uix-t-l--lg {
+					text-align: right;
+				}
+			}
+
+
+			@media all and (max-width: 1200px) {
+				&.uix-t-r--xl {
+					text-align: left;
+				}
+
+				&.uix-t-l--xl {
+					text-align: right;
+				}
+			}
+
 
 		}
 	}

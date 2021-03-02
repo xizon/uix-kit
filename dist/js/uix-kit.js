@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.78
+ * ## Version             :  4.4.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 26, 2021
+ * ## Last Update         :  March 2, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "749a21482df734bbb76c";
+/******/ 	var hotCurrentHash = "8f96aa40fedad72d2e55";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -869,7 +869,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(141)(__webpack_require__.s = 141);
+/******/ 	return hotCreateRequire(143)(__webpack_require__.s = 143);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -16845,7 +16845,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 115 */,
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
 /* 116 */,
 /* 117 */,
 /* 118 */,
@@ -16871,7 +16876,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* 138 */,
 /* 139 */,
 /* 140 */,
-/* 141 */
+/* 141 */,
+/* 142 */,
+/* 143 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46871,8 +46878,11 @@ var VERTICAL_MENU = function (module, $, window, document) {
 // EXTERNAL MODULE: ./src/components/wordpress/scss/_wp_core.scss
 var _wp_core = __webpack_require__(80);
 
+// EXTERNAL MODULE: ./src/components/wordpress/scss/_wp_blocks.scss
+var _wp_blocks = __webpack_require__(81);
+
 // EXTERNAL MODULE: ./src/components/wordpress/scss/_3rd_party_plugins.scss
-var _3rd_party_plugins = __webpack_require__(81);
+var _3rd_party_plugins = __webpack_require__(82);
 
 // CONCATENATED MODULE: ./src/components/wordpress/js/index.js
 function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46882,6 +46892,7 @@ function wordpress_js_classCallCheck(instance, Constructor) { if (!(instance ins
  * <!-- WordPress Core Scripts -->
  *************************************
  */
+
 
 
 
@@ -46924,103 +46935,103 @@ var WP_CORE = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/badges/scss/_style.scss
-var badges_scss_style = __webpack_require__(82);
+var badges_scss_style = __webpack_require__(83);
 
 // EXTERNAL MODULE: ./src/components/blended-grid-layout/scss/_style.scss
-var blended_grid_layout_scss_style = __webpack_require__(83);
+var blended_grid_layout_scss_style = __webpack_require__(84);
 
 // EXTERNAL MODULE: ./src/components/breadcrumbs/scss/_style.scss
-var breadcrumbs_scss_style = __webpack_require__(84);
+var breadcrumbs_scss_style = __webpack_require__(85);
 
 // EXTERNAL MODULE: ./src/components/button/scss/_style.scss
-var button_scss_style = __webpack_require__(85);
+var button_scss_style = __webpack_require__(86);
 
 // EXTERNAL MODULE: ./src/components/card/scss/_style.scss
-var card_scss_style = __webpack_require__(86);
+var card_scss_style = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/components/circle-text/scss/_style.scss
-var circle_text_scss_style = __webpack_require__(87);
+var circle_text_scss_style = __webpack_require__(88);
 
 // EXTERNAL MODULE: ./src/components/coach-mark/scss/_style.scss
-var coach_mark_scss_style = __webpack_require__(88);
+var coach_mark_scss_style = __webpack_require__(89);
 
 // EXTERNAL MODULE: ./src/components/content-placeholder-animated/scss/_style.scss
-var content_placeholder_animated_scss_style = __webpack_require__(89);
+var content_placeholder_animated_scss_style = __webpack_require__(90);
 
 // EXTERNAL MODULE: ./src/components/dividing-line/scss/_style.scss
-var dividing_line_scss_style = __webpack_require__(90);
+var dividing_line_scss_style = __webpack_require__(91);
 
 // EXTERNAL MODULE: ./src/components/dotted-line/scss/_style.scss
-var dotted_line_scss_style = __webpack_require__(91);
+var dotted_line_scss_style = __webpack_require__(92);
 
 // EXTERNAL MODULE: ./src/components/equal-width-columns/scss/_style.scss
-var equal_width_columns_scss_style = __webpack_require__(92);
+var equal_width_columns_scss_style = __webpack_require__(93);
 
 // EXTERNAL MODULE: ./src/components/features/scss/_style.scss
-var features_scss_style = __webpack_require__(93);
+var features_scss_style = __webpack_require__(94);
 
 // EXTERNAL MODULE: ./src/components/footer-templates/scss/_style.scss
-var footer_templates_scss_style = __webpack_require__(94);
+var footer_templates_scss_style = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./src/components/gallery-grid-layout/scss/_style.scss
-var gallery_grid_layout_scss_style = __webpack_require__(95);
+var gallery_grid_layout_scss_style = __webpack_require__(96);
 
 // EXTERNAL MODULE: ./src/components/heading/scss/_style.scss
-var heading_scss_style = __webpack_require__(96);
+var heading_scss_style = __webpack_require__(97);
 
 // EXTERNAL MODULE: ./src/components/image-animation/scss/_style.scss
-var image_animation_scss_style = __webpack_require__(97);
+var image_animation_scss_style = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./src/components/list-brands/scss/_style.scss
-var list_brands_scss_style = __webpack_require__(98);
+var list_brands_scss_style = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./src/components/list-maintain-aspect-ratio/scss/_style.scss
-var list_maintain_aspect_ratio_scss_style = __webpack_require__(99);
+var list_maintain_aspect_ratio_scss_style = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./src/components/list-side-by-side/scss/_style.scss
-var list_side_by_side_scss_style = __webpack_require__(100);
+var list_side_by_side_scss_style = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./src/components/list-side-by-side-img/scss/_style.scss
-var list_side_by_side_img_scss_style = __webpack_require__(101);
+var list_side_by_side_img_scss_style = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./src/components/mouse-animation-scroll/scss/_style.scss
-var mouse_animation_scroll_scss_style = __webpack_require__(102);
+var mouse_animation_scroll_scss_style = __webpack_require__(103);
 
 // EXTERNAL MODULE: ./src/components/overlay/scss/_style.scss
-var overlay_scss_style = __webpack_require__(103);
+var overlay_scss_style = __webpack_require__(104);
 
 // EXTERNAL MODULE: ./src/components/ribbon/scss/_style.scss
-var ribbon_scss_style = __webpack_require__(104);
+var ribbon_scss_style = __webpack_require__(105);
 
 // EXTERNAL MODULE: ./src/components/separator-of-rule-with-text/scss/_style.scss
-var separator_of_rule_with_text_scss_style = __webpack_require__(105);
+var separator_of_rule_with_text_scss_style = __webpack_require__(106);
 
 // EXTERNAL MODULE: ./src/components/shape-animation/scss/_style.scss
-var shape_animation_scss_style = __webpack_require__(106);
+var shape_animation_scss_style = __webpack_require__(107);
 
 // EXTERNAL MODULE: ./src/components/single-post/scss/_comments.scss
-var _comments = __webpack_require__(107);
+var _comments = __webpack_require__(108);
 
 // EXTERNAL MODULE: ./src/components/single-post/scss/_editing.scss
-var _editing = __webpack_require__(108);
+var _editing = __webpack_require__(109);
 
 // EXTERNAL MODULE: ./src/components/striking/scss/_style.scss
-var striking_scss_style = __webpack_require__(109);
+var striking_scss_style = __webpack_require__(110);
 
 // EXTERNAL MODULE: ./src/components/team-fullwidth/scss/_style.scss
-var team_fullwidth_scss_style = __webpack_require__(110);
+var team_fullwidth_scss_style = __webpack_require__(111);
 
 // EXTERNAL MODULE: ./src/components/team-grid/scss/_style.scss
-var team_grid_scss_style = __webpack_require__(111);
+var team_grid_scss_style = __webpack_require__(112);
 
 // EXTERNAL MODULE: ./src/components/testimonials/scss/_style.scss
-var testimonials_scss_style = __webpack_require__(112);
+var testimonials_scss_style = __webpack_require__(113);
 
 // EXTERNAL MODULE: ./src/components/tooltip/scss/_style.scss
-var tooltip_scss_style = __webpack_require__(113);
+var tooltip_scss_style = __webpack_require__(114);
 
 // EXTERNAL MODULE: ./src/components/wave-background/scss/_style.scss
-var wave_background_scss_style = __webpack_require__(114);
+var wave_background_scss_style = __webpack_require__(115);
 
 // CONCATENATED MODULE: ./src/components/_app-load.js
 /*
