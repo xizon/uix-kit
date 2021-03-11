@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 4.4.92 (March 11, 2021) =
+
+* Tweak: Optimization of Equal-height Columns.
+* Security: Upgrade elliptic to version 6.5.4 or later.
+
+
 #### = 4.4.9 (March 2, 2021) =
 
 * New: Added helper classes for alignment breakpoint which is the same as bootstrap 4.
