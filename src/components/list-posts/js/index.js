@@ -27,7 +27,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.7';
+    module.POST_LIST_AJAX.version       = '0.1.8';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
         
         
@@ -424,9 +424,53 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 		
 		function ajaxLoadInit( ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo ) {
 
-			const $divRoot         = ajaxWrapper,
-				  template         = document.getElementById( template7ID ).innerHTML,
-				  compiledTemplate = Template7.compile( template ),
+			const $divRoot         = ajaxWrapper;
+			let	  template         = document.getElementById( template7ID ).innerHTML;
+			
+			
+			// Register partial
+			// Recursive Partials
+			// We can even use partials to make recursive templates, like nested comments:
+			// The root node of JSON, which can be `items` or `comments` by default
+			/*
+			compiledTemplate({
+				comments: [
+					{
+						author: 'John Doe',
+						text: 'Lorem ipsum dolor',
+						comments: [
+							{
+								author: 'Mike Doe',
+								text: 'Aliquam erat volutpat'
+							},
+							{
+								author: 'Kate Doe',
+								text: 'Donec eget fringilla turpis'
+							}
+						]
+					},
+					{
+						author: 'Jane Doe',
+						text: 'Donec sodales euismod augue'
+					}
+				]
+			});
+			*/
+			if ( $divRoot.hasClass( 'js-ajax-comments' ) ) {	
+				const recursivePartialsTemplate_Comments = template;
+				Template7.registerPartial(
+					'comments',
+					recursivePartialsTemplate_Comments
+				);  
+
+				//update new template code
+				template = '{{> "comments"}}';
+			}
+
+			
+			
+			//
+			const compiledTemplate = Template7.compile( template ),
 				  $button          = $( trigger );
 
 			
@@ -479,13 +523,20 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
          
 
                 //If the data is empty
-                if ( jsonData && ( jsonData == null || Object.prototype.toString.call( jsonData.items )=='[object String]' ) ) {
-                    returnEmptyInfo();
-                }
+				// The root node of JSON, which can be `items` or `comments` by default
+				if ( ( jsonData && ( jsonData == null || Object.prototype.toString.call( jsonData.items )=='[object String]' ) ) ||
+					 ( jsonData && ( jsonData == null || Object.prototype.toString.call( jsonData.comments )=='[object String]' ) )
+				   ) {
+				  returnEmptyInfo();
+				}
 
 
                 //Check if a key exists inside a json object
-                if ( jsonData && jsonData.hasOwnProperty( 'items' ) && Object.prototype.toString.call( jsonData.items )=='[object Array]' ) {
+				// The root node of JSON, which can be `items` or `comments` by default
+				if ( 
+					( jsonData && jsonData.hasOwnProperty( 'items' ) && Object.prototype.toString.call( jsonData.items )=='[object Array]' ) ||
+					( jsonData && jsonData.hasOwnProperty( 'comments' ) && Object.prototype.toString.call( jsonData.comments )=='[object Array]' )
+				) {
 
 
                     //Data overflow may occur when the total number of pages is not posted

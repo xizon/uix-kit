@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 4.4.93 (March 26, 2021) =
+
+* New: Added `Posts List With Ajax` module Tree traversal of template.
+
 
 #### = 4.4.92 (March 11, 2021) =
 
