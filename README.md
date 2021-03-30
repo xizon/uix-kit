@@ -164,6 +164,14 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 }
 ```
 
+**d) If you upgrade the version of Node, please execute the following code:**
+
+```sh
+$ sudo npm install
+$ sudo npm rebuild node-sass
+```
+
+
 
 
 * * *

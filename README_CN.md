@@ -162,10 +162,42 @@ http://localhost:8080/examples/
 
 ### FAQ:
  
-如果出现nodejs的环境或权限问题，可以使用下面的命令解决，注意把{username}换成你自己的设备里的名字。
+ **a) ERROR: npm update check failed.**
+ 
+如果出现如上错误，表示nodejs的环境或权限问题，可以使用下面的命令解决，注意把{username}换成你自己的设备里的名字。
 
 ```sh
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
+```
+
+**b) 如何使用模块?**
+
+您可以在`src/components/_app-load.js` and `src/components/_app-load-rtl.js`中自定义要导入的模块。如果模块导入过多，因此您至少需要等待5.5秒（默认值，根据模块数量自动计算), 您可以根据需要导入相应的模块，在`webpack.config.js`中可以设置编译等待时间。
+
+
+**c) 网站配置修改**
+
+修改`package.json`文件即可：
+
+```json
+{
+  "author": "UIUX Lab",
+  "name": "uix-kit",
+  "email": "uiuxlab@gmail.com",
+  "version": "1.0.0",
+  "projectName": "Uix Kit",
+  "createdInfo": "UIUX Lab (https://uiux.cc)",
+  "projectURL": "https://uiux.cc",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
+  ...
+}
+```
+
+**d) 如果升级Node版本，请执行以下代码:**
+
+```sh
+$ sudo npm install
+$ sudo npm rebuild node-sass
 ```
 
 
