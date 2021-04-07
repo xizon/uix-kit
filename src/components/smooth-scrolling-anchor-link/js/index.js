@@ -15,7 +15,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import ScrollToPlugin from '@uixkit/plugins/GSAP/ScrollToPlugin';
+import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';
 
 export const SMOOTH_SCROLLING_ANCHORLINK = ( ( module, $, window, document ) => {
 	if ( window.SMOOTH_SCROLLING_ANCHORLINK === null ) return false;

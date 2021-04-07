@@ -21,8 +21,8 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
-import CSS3DRenderer from '@uixkit/plugins/THREE/renderers/CSS3DRenderer';
+import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import CSS3DRenderer from '@uixkit/plugins/THREE/esm/renderers/CSS3DRenderer';
 
 
 export const THREE_PAGES = ( ( module, $, window, document ) => {

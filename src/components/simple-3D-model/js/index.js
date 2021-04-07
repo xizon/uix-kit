@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import GLTFLoader from '@uixkit/plugins/THREE/loaders/GLTFLoader';
+import GLTFLoader from '@uixkit/plugins/THREE/esm/loaders/GLTFLoader';
 
 
 export const THREE_MODEL = ( ( module, $, window, document ) => {

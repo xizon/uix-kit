@@ -314,12 +314,12 @@ uix-kit/
 │   ├── screenshots/  --------------------- # Screenshots
 │   └── grid/ ----------------------------- # PSD grid system
 ├── src/
-│   ├── third-party-plugins/  ------------------------- # Third-party plugins
 │   ├── components/
 │   │   ├── _app-load.js  ------------- # Import your modules to be used
 │   │   ├── _app-load-rtl.js  --------- # Import your RTL modules to be used
 │   │   ├── _global/ ------------------ # Generic modules
 │   │   ├── _main/  ------------------- # Customization site file directory (for secondary or new website development)
+│   │   ├── _third-party-plugins/  ---- # Third-party plugins
 │   │   └── */  ----------------------- # Core functional modules
 ├── examples/                                
 │   ├── *.html  --------------------------- # HTML templates

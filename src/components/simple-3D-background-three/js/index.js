@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import ShaderRuntime from '@uixkit/plugins/THREE/extensions/ShaderRuntime.custom';
+import ShaderRuntime from '@uixkit/plugins/THREE/esm/extensions/ShaderRuntime.custom';
 
 export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 	if ( window.THREE_BACKGROUND_THREE === null ) return false;

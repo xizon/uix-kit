@@ -35,7 +35,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 import UixFormProgressToNext from '@uixkit/core/form-progress/js/fn/form-progress-to-next';
-import ScrollToPlugin from '@uixkit/plugins/GSAP/ScrollToPlugin';
+import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';
 
 import '../scss/_style.scss';
 

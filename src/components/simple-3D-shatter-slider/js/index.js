@@ -22,8 +22,8 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
-import ExplodeModifier from '@uixkit/plugins/THREE/modifiers/ExplodeModifier';
+import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import ExplodeModifier from '@uixkit/plugins/THREE/esm/modifiers/ExplodeModifier';
 
 
 import '../scss/_style.scss';

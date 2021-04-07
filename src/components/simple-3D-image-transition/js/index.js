@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
+import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 import fragment from "./shader/fragment-custom.glsl";
 import vertex from "./shader/vertex-custom.glsl";

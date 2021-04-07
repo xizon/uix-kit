@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
+import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 export const THREE_GALLERY = ( ( module, $, window, document ) => {
 	if ( window.THREE_GALLERY === null ) return false;

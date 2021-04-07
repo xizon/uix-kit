@@ -1,5 +1,14 @@
 # Changelog
 
+
+
+#### = 4.4.95 (April 6, 2021) =
+
+* New: Add esm/GSAP/TweenMax.
+* Tweak: Restructure the Third-party plugins structure of the components directory.
+
+
+
 #### = 4.4.93 (March 26, 2021) =
 
 * New: Added `Posts List With Ajax` module Tree traversal of template.

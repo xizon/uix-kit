@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import ModifiersPlugin from '@uixkit/plugins/GSAP/ModifiersPlugin';
+import ModifiersPlugin from '@uixkit/plugins/GSAP/esm/ModifiersPlugin';
 
 import '../scss/_style.scss';
 

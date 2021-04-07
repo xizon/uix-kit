@@ -22,7 +22,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
+import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 	if ( window.THREE_SPHERE_THREE === null ) return false;

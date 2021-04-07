@@ -55,7 +55,7 @@ let globs = {
 	build                 : 'src',
 	dist                  : 'dist',
 	pathCore              : './src/components',
-	pathThirdPartyPlugins : './src/third-party-plugins/esm',
+	pathThirdPartyPlugins : './src/components/_third-party-plugins',
 };
 
 

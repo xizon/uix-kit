@@ -17,25 +17,25 @@ import {
 
 //filter basic
 //---------------------
-import EffectComposer from '@uixkit/plugins/THREE/postprocessing/EffectComposer';
-import MaskPass from '@uixkit/plugins/THREE/postprocessing/MaskPass';
-import TexturePass from '@uixkit/plugins/THREE/postprocessing/TexturePass';
-import ShaderPass from '@uixkit/plugins/THREE/postprocessing/ShaderPass';
-import RenderPass from '@uixkit/plugins/THREE/postprocessing/RenderPass';
-import ClearPass from '@uixkit/plugins/THREE/postprocessing/ClearPass';
-import CopyShader from '@uixkit/plugins/THREE/shaders/CopyShader';
-import ConvolutionShader from '@uixkit/plugins/THREE/shaders/ConvolutionShader';
+import EffectComposer from '@uixkit/plugins/THREE/esm/postprocessing/EffectComposer';
+import MaskPass from '@uixkit/plugins/THREE/esm/postprocessing/MaskPass';
+import TexturePass from '@uixkit/plugins/THREE/esm/postprocessing/TexturePass';
+import ShaderPass from '@uixkit/plugins/THREE/esm/postprocessing/ShaderPass';
+import RenderPass from '@uixkit/plugins/THREE/esm/postprocessing/RenderPass';
+import ClearPass from '@uixkit/plugins/THREE/esm/postprocessing/ClearPass';
+import CopyShader from '@uixkit/plugins/THREE/esm/shaders/CopyShader';
+import ConvolutionShader from '@uixkit/plugins/THREE/esm/shaders/ConvolutionShader';
 
 
 //Extra filter -- film
 //---------------------
-import BloomPass from '@uixkit/plugins/THREE/postprocessing/BloomPass';
+import BloomPass from '@uixkit/plugins/THREE/esm/postprocessing/BloomPass';
 
 
 //Extra filter -- film
 //---------------------
-import FilmPass from '@uixkit/plugins/THREE/postprocessing/FilmPass';
-import FilmShader from '@uixkit/plugins/THREE/shaders/FilmShader';
+import FilmPass from '@uixkit/plugins/THREE/esm/postprocessing/FilmPass';
+import FilmShader from '@uixkit/plugins/THREE/esm/shaders/FilmShader';
 
 
 export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {

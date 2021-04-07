@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import ScrollToPlugin from '@uixkit/plugins/GSAP/ScrollToPlugin';
+import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';
 
 import '../scss/_style.scss';
 

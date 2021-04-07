@@ -14,7 +14,7 @@ import {
     UixCssProperty
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/controls/OrbitControls';
+import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 
 export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {

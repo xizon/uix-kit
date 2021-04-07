@@ -16,7 +16,7 @@ import {
 } from '@uixkit/core/_global/js';
 
 
-import PixiPlugin from '@uixkit/plugins/GSAP/PixiPlugin';
+import PixiPlugin from '@uixkit/plugins/GSAP/esm/PixiPlugin';
 
 import '../scss/_special.scss';
 
