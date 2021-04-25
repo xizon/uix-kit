@@ -48,7 +48,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 				renderer,
 				displacementSprite,
 				theta         = 0,
-				clickEnable   = false;
+				clickEnabled   = false;
 
 
 			// controls
@@ -200,7 +200,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-				clickEnable = true;
+				clickEnabled = true;
 
 				//Mouse interactions
 				raycaster.setFromCamera( mouseVector, camera );
@@ -271,7 +271,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
 				theta = 0;
-				clickEnable = false;
+				clickEnabled = false;
 
 			}
 

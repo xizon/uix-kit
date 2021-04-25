@@ -85,7 +85,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
             
             
             //scroll spy
-            let scrollspyEnable,
+            let scrollspyEnabled,
                 scrollspyConfigAutoAnim,
                 scrollspyConfigItems, 
                 scrollspyConfigCountTotal, 
@@ -158,7 +158,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                         
                         
                         //scroll spy config
-                        scrollspyEnable = dataScrollspy;
+                        scrollspyEnabled = dataScrollspy;
                         scrollspyConfigAutoAnim = $this[0].animatedSlides;
                         scrollspyConfigItems = $items;
                         scrollspyConfigCountTotal = dataCountTotal;
@@ -777,7 +777,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                 
                 //-----
               
-                if ( scrollspyEnable ) {
+                if ( scrollspyEnabled ) {
                     
                     const slideCurId = scrollspyConfigItems.filter( '.is-active' ).index();
                     let slideNextId;

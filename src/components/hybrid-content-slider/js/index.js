@@ -795,13 +795,13 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			/*
 			 * Use the button to trigger the transition between the two sliders
 			 *
-			 * @param  {Boolean} paginationEnable   - Determine whether it is triggered by pagination
+			 * @param  {Boolean} paginationEnabled   - Determine whether it is triggered by pagination
 			 * @param  {Element} $btn               - The button that currently triggers the move.
              * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
              * @param  {String} type                - Move next or previous.
 			 * @return {Void}
 			 */
-            function movePositionWithButton( paginationEnable, $btn, event, type ) {
+            function movePositionWithButton( paginationEnabled, $btn, event, type ) {
    				const $curWrapper = $( event.data[0] ),
 					  //Protection button is not triggered multiple times.
                       btnDisabled = $btn.data( 'disabled' ),
@@ -814,7 +814,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 let moveX = eachItemNewWidth,
                     moveY = ( typeof eachItemNewHeight[tIndex-1] === typeof undefined ) ? 0 : eachItemNewHeight[tIndex-1];   
                 
-                if ( paginationEnable ) {
+                if ( paginationEnabled ) {
                     
                     //--
                     moveX = eachItemNewWidth * tIndex;

@@ -51,7 +51,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 				displacementSprite,
 				radius       = 100,
 				theta        = 0,
-				clickEnable   = false;
+				clickEnabled   = false;
 
 
 			const mouseVector = new THREE.Vector2();
@@ -231,7 +231,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 				mouseVector.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-				clickEnable = true;
+				clickEnabled = true;
 
 				
 				
@@ -307,7 +307,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 				mouseVector.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
 				theta = 0;
-				clickEnable = false;
+				clickEnabled = false;
 
 			}
 
