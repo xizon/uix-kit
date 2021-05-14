@@ -21,6 +21,10 @@ The generated core file in the dist directory can be used separately in any webs
 
 **Uix Kit is now in Long Term Support (LTS) mode.**
 
+---
+
+- [React Version](https://github.com/xizon/uix-kit-react)
+
 
 ---
 

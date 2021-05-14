@@ -24,49 +24,49 @@ export const TABLE = ( ( module, $, window, document ) => {
 	
 	
     module.TABLE               = module.TABLE || {};
-    module.TABLE.version       = '0.0.3';
+    module.TABLE.version       = '0.0.4';
     module.TABLE.documentReady = function( $ ) {
 
-        const $window          = $( window );
-        let	windowWidth        = window.innerWidth,
-            windowHeight       = window.innerHeight;
-		
+		const $window          = $( window );
+		let	windowWidth        = window.innerWidth,
+			windowHeight       = window.innerHeight;
+
 		/* 
 		 ---------------------------
 		 Duplicate title
 		 ---------------------------
 		 */
-					
-		const $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-			  $thead    = $resTable.find( 'thead' ),
-			  $tbody    = $resTable.find( 'tbody' );
+		$( '.js-uix-table--responsive' ).each(function( index ) {
+			const $this = $( this );
+			
+			$this.find( ' thead th' ).each(function( index ) {
+				const data = $( this ).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
+				if( typeof( $( this ).attr( 'data-table' ) ) === typeof undefined ) {
+					$( this ).attr( 'data-table', data );
+				}
+			});
 
-        $thead.find( 'th' ).each(function() {
-            const data = $( this ).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
-            if ( !$( this ).attr( 'data-table' ) ) {
-                $( this ).attr( 'data-table', data );
-            }
-        });
+			$this.find( ' tbody tr' ).each(function( index ) {
+				$( this ).find( '> td' ).each( function( index ) {
+					const data = $this.find( ' thead th' ).eq(index).attr( 'data-table' );
+					$( this ).attr( 'data-table', data );
 
-        $tbody.find( 'td' ).each(function() {
-            const index = $(this).index();
-            const data = $thead.find( 'th:eq(' + index + ')' ).attr( 'data-table' );
-            $( this ).attr( 'data-table', data );
-        });
-		
-	
+				});
+
+			});
+
+		});
+
+
 		/* 
 		 ---------------------------
 		 With scroll bars
 		 ---------------------------
 		 */
-		const resTableSCrolled = '.js-uix-table--responsive-scrolled',
-			  columns          = $( resTableSCrolled + ' tr').length,
-			  rows             = $( resTableSCrolled + ' th').length;
-		
+
 		tableDataScrolledInit( windowWidth );
-		
-		$window.on( 'resize', function() {
+
+		$window.off( 'resize' ).on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
 
@@ -75,36 +75,57 @@ export const TABLE = ( ( module, $, window, document ) => {
 
 				// Do stuff here
 				tableDataScrolledInit( windowWidth );
-		
+
 
 			}
 		});
-		
-		
+
+
 		function tableDataScrolledInit( w ) {
-			
+
+
+
+			//Add an identifier so that the mobile terminal can compare by row
+			$( '.js-uix-table--responsive-scrolled' ).each(function( index ) {
+				const $this = $( this );
+				$this.find( ' tbody tr' ).each(function( index ) {
+					$( this ).find( '> td' ).each( function( index ) {
+						$this.find( ' thead th' ).eq(index).attr( 'data-table-row', index );
+						$( this ).attr( 'data-table-row', index );
+					});
+				});
+			});
+
+
 			if ( w <= 768 ) {
-				for ( let i = 0; i < rows; i++ ) {
-					const maxHeight = $( resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
-					for ( let j = 0; j < columns; j++ ) {
-						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
-							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
-						}
-						if ($( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight') > $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight()) {
-							maxHeight = $( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop( 'scrollHeight' );
-						}
+
+
+
+				//get maxHeight of per row
+				$( '.js-uix-table--responsive-scrolled' ).each(function( index ) {
+
+					const $this = $( this );
+					const len = $this.find( ' tbody tr' ).length;
+					for (let i=0; i<len; i++ ) {
+						
+						let	_heights = [];
+						$this.find( ' [data-table-row="'+i+'"]' ).each( function( index ) {
+							const tempheight = $( this ).outerHeight();
+							_heights.push( tempheight );
+						} );
+
+						const maxHeight = Math.max.apply( Math, _heights );
+						$this.find( ' [data-table-row="'+i+'"]' ).css({'height': maxHeight + 'px'});
+						
 					}
-					for (let j = 0; j < columns; j++ ) {
-						$( resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').css( 'height', maxHeight );
-						$( resTableSCrolled + ' th:nth-child(' + i + ')').css( 'height', maxHeight );
-					}
-				}
+				});
+
+
 			} else {
-				$( resTableSCrolled + ' td, '+resTableSCrolled+' th').removeAttr( 'style') ;
+				$( '.js-uix-table--responsive-scrolled tbody td, .js-uix-table--responsive-scrolled thead th' ).removeAttr( 'style') ;
 			}
-			
-		}
-		
+
+		}	
 
 		
 		

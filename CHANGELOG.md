@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 4.4.96 (May 14, 2021) =
+
+* Tweak: Optimized the Form controls and its presentation.
+* Tweak: Optimized the Responsive Table scripts.
+* Security: Fixed security vulnerabilities in your dependencies.
+* Security: Upgrade serialize-javascript to version 4.0.0 or later.
 
 
 #### = 4.4.95 (April 6, 2021) =

@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.9
+ * ## Version             :  4.4.96
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 2, 2021
+ * ## Last Update         :  May 14, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  * 	
@@ -78,7 +78,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8f96aa40fedad72d2e55";
+/******/ 	var hotCurrentHash = "7eecf5aeecb8ce0ff0e3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -19853,7 +19853,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
   };
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/_third-party-plugins/GSAP/esm/TweenLite.js
-var GSAP_TweenLite = __webpack_require__(0);
+var esm_TweenLite = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./src/components/_third-party-plugins/GSAP/esm/PixiPlugin.js
 /*!
@@ -20029,7 +20029,7 @@ _parseColor = function _parseColor(v, format) {
   return parsed + s.substr(charIndex);
 },
     _colorStringFilter,
-    PixiPlugin_TweenLite = (GSAP_TweenLite["a" /* _gsScope */].GreenSockGlobals || GSAP_TweenLite["a" /* _gsScope */]).TweenLite,
+    PixiPlugin_TweenLite = (esm_TweenLite["a" /* _gsScope */].GreenSockGlobals || esm_TweenLite["a" /* _gsScope */]).TweenLite,
     _colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b",
     //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
 _idMatrix = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
@@ -20080,7 +20080,7 @@ _idMatrix = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
   return _applyMatrix([n, 0, 0, 0, 0.5 * (1 - n), 0, n, 0, 0, 0.5 * (1 - n), 0, 0, n, 0, 0.5 * (1 - n), 0, 0, 0, 1, 0], m);
 },
     PixiPlugin_getFilter = function _getFilter(t, type) {
-  var filterClass = GSAP_TweenLite["a" /* _gsScope */].PIXI.filters[type],
+  var filterClass = esm_TweenLite["a" /* _gsScope */].PIXI.filters[type],
       filters = t.filters || [],
       i = filters.length,
       filter;
@@ -20112,7 +20112,7 @@ _idMatrix = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
   pg._overwriteProps.push(p);
 },
     PixiPlugin_applyBrightnessToMatrix = function _applyBrightnessToMatrix(brightness, matrix) {
-  var temp = new GSAP_TweenLite["a" /* _gsScope */].PIXI.filters.ColorMatrixFilter();
+  var temp = new esm_TweenLite["a" /* _gsScope */].PIXI.filters.ColorMatrixFilter();
   temp.matrix = matrix;
   temp.brightness(brightness, true);
   return temp.matrix;
@@ -20351,18 +20351,18 @@ if (!PixiPlugin_TweenLite.defaultStringFilter) {
   PixiPlugin_TweenLite.defaultStringFilter = _colorStringFilter;
 }
 
-var PixiPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
+var PixiPlugin = esm_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
   propName: "pixi",
   priority: 0,
   API: 2,
   global: true,
   version: "0.3.0",
   init: function init(target, values, tween, index) {
-    if (!target instanceof GSAP_TweenLite["a" /* _gsScope */].PIXI.DisplayObject) {
+    if (!target instanceof esm_TweenLite["a" /* _gsScope */].PIXI.DisplayObject) {
       return false;
     }
 
-    var isV4 = GSAP_TweenLite["a" /* _gsScope */].PIXI.VERSION.charAt(0) === "4",
+    var isV4 = esm_TweenLite["a" /* _gsScope */].PIXI.VERSION.charAt(0) === "4",
         context,
         axis,
         value,
@@ -20418,7 +20418,7 @@ var PixiPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
           colorSetter = _buildColorSetter(tween, this);
         }
 
-        if ((p === "lineColor" || p === "fillColor") && target instanceof GSAP_TweenLite["a" /* _gsScope */].PIXI.Graphics) {
+        if ((p === "lineColor" || p === "fillColor") && target instanceof esm_TweenLite["a" /* _gsScope */].PIXI.Graphics) {
           data = (target.geometry || target).graphicsData; //"geometry" was introduced in PIXI version 5
 
           i = data.length;
@@ -20473,7 +20473,7 @@ PixiPlugin.formatColors = _formatColors;
 PixiPlugin.colorStringFilter = _colorStringFilter;
 
 PixiPlugin.registerPIXI = function (PIXI) {
-  GSAP_TweenLite["a" /* _gsScope */].PIXI = PIXI;
+  esm_TweenLite["a" /* _gsScope */].PIXI = PIXI;
 };
 
 
@@ -23410,8 +23410,8 @@ function ScrollToPlugin_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symb
 /* eslint-disable */
 
 
-var _doc = (GSAP_TweenLite["a" /* _gsScope */].document || {}).documentElement,
-    _window = GSAP_TweenLite["a" /* _gsScope */],
+var _doc = (esm_TweenLite["a" /* _gsScope */].document || {}).documentElement,
+    _window = esm_TweenLite["a" /* _gsScope */],
     _max = function _max(element, axis) {
   var dim = axis === "x" ? "Width" : "Height",
       scroll = "scroll" + dim,
@@ -23485,7 +23485,7 @@ var _doc = (GSAP_TweenLite["a" /* _gsScope */].document || {}).documentElement,
 
   return !isNaN(value) ? parseFloat(value) : type === "string" && value.charAt(1) === "=" ? parseInt(value.charAt(0) + "1", 10) * parseFloat(value.substr(2)) + currentVal : value === "max" ? _max(target, axis) : Math.min(_max(target, axis), _getOffset(value, target)[axis]);
 },
-    ScrollToPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
+    ScrollToPlugin = esm_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
   propName: "scrollTo",
   API: 2,
   global: true,
@@ -28079,29 +28079,29 @@ function datepicker_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
         $(settings.controls).each(function () {
           var $this = $(this);
           var dateFormat = $this.data('picker-format'),
-              timeEnable = $this.data('picker-timepicker'),
+              timeEnabled = $this.data('picker-timepicker'),
               lang = $this.data('picker-lang'),
               myminDate = $this.data('picker-min-date'),
               mymaxDate = $this.data('picker-max-date'),
-              rtlEnable = false; // If there is no data-xxx, save current source to it
+              rtlEnabled = false; // If there is no data-xxx, save current source to it
 
           if (datepicker_typeof(dateFormat) === ( true ? "undefined" : undefined)) dateFormat = 'M d, Y'; //Y-m-d H:i:s
 
-          if (datepicker_typeof(timeEnable) === ( true ? "undefined" : undefined)) timeEnable = false;
+          if (datepicker_typeof(timeEnabled) === ( true ? "undefined" : undefined)) timeEnabled = false;
           if (datepicker_typeof(lang) === ( true ? "undefined" : undefined)) lang = 'en';
           if (datepicker_typeof(myminDate) === ( true ? "undefined" : undefined)) myminDate = false; //yesterday is minimum date(for today use 0 or -1970/01/01)
 
           if (datepicker_typeof(mymaxDate) === ( true ? "undefined" : undefined)) mymaxDate = false; //tomorrow is maximum date calendar, such as '+2050/01/01'
 
-          if (datepicker_typeof(rtlEnable) === ( true ? "undefined" : undefined)) rtlEnable = false;
+          if (datepicker_typeof(rtlEnabled) === ( true ? "undefined" : undefined)) rtlEnabled = false;
           $.datetimepicker.setLocale(lang); //RTL 
 
           if ($('body').hasClass('rtl')) {
-            rtlEnable = true;
+            rtlEnabled = true;
           } //hide or display time selector
 
 
-          if (timeEnable) {
+          if (timeEnabled) {
             $(document).on('mouseenter', 'td.xdsoft_date[data-date]', function () {
               if ($(this).hasClass('xdsoft_disabled')) {
                 $(this).closest('.xdsoft_datepicker').next('.xdsoft_timepicker.active').hide();
@@ -28112,8 +28112,8 @@ function datepicker_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
           }
 
           $this.datetimepicker({
-            rtl: rtlEnable,
-            timepicker: timeEnable,
+            rtl: rtlEnabled,
+            timepicker: timeEnabled,
             format: dateFormat,
             formatTime: 'H:i',
             formatDate: 'Y/m/d',
@@ -29282,7 +29282,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
       /*
        * Use the button to trigger the transition between the two sliders
        *
-       * @param  {Boolean} paginationEnable   - Determine whether it is triggered by pagination
+       * @param  {Boolean} paginationEnabled   - Determine whether it is triggered by pagination
        * @param  {Element} $btn               - The button that currently triggers the move.
                 * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
                 * @param  {String} type                - Move next or previous.
@@ -29290,7 +29290,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
        */
 
 
-      function movePositionWithButton(paginationEnable, $btn, event, type) {
+      function movePositionWithButton(paginationEnabled, $btn, event, type) {
         var $curWrapper = $(event.data[0]),
             //Protection button is not triggered multiple times.
         btnDisabled = $btn.data('disabled'),
@@ -29300,7 +29300,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         var moveX = eachItemNewWidth,
             moveY = hybrid_content_slider_js_typeof(eachItemNewHeight[tIndex - 1]) === ( true ? "undefined" : undefined) ? 0 : eachItemNewHeight[tIndex - 1];
 
-        if (paginationEnable) {
+        if (paginationEnabled) {
           //--
           moveX = eachItemNewWidth * tIndex; //--
 
@@ -30401,7 +30401,7 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.7';
+  module.POST_LIST_AJAX.version = '0.1.8';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
     $(window).off('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX');
@@ -30685,9 +30685,46 @@ var POST_LIST_AJAX = function (module, $, window, document) {
      */
 
     function ajaxLoadInit(ajaxWrapper, defaultPostData, trigger, curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo) {
-      var $divRoot = ajaxWrapper,
-          template = document.getElementById(template7ID).innerHTML,
-          compiledTemplate = Template7.compile(template),
+      var $divRoot = ajaxWrapper;
+      var template = document.getElementById(template7ID).innerHTML; // Register partial
+      // Recursive Partials
+      // We can even use partials to make recursive templates, like nested comments:
+      // The root node of JSON, which can be `items` or `comments` by default
+
+      /*
+      compiledTemplate({
+      	comments: [
+      		{
+      			author: 'John Doe',
+      			text: 'Lorem ipsum dolor',
+      			comments: [
+      				{
+      					author: 'Mike Doe',
+      					text: 'Aliquam erat volutpat'
+      				},
+      				{
+      					author: 'Kate Doe',
+      					text: 'Donec eget fringilla turpis'
+      				}
+      			]
+      		},
+      		{
+      			author: 'Jane Doe',
+      			text: 'Donec sodales euismod augue'
+      		}
+      	]
+      });
+      */
+
+      if ($divRoot.hasClass('js-ajax-comments')) {
+        var recursivePartialsTemplate_Comments = template;
+        Template7.registerPartial('comments', recursivePartialsTemplate_Comments); //update new template code
+
+        template = '{{> "comments"}}';
+      } //
+
+
+      var compiledTemplate = Template7.compile(template),
           $button = $(trigger); //hide the button and callback the information
 
       var returnEmptyInfo = function returnEmptyInfo() {
@@ -30724,13 +30761,15 @@ var POST_LIST_AJAX = function (module, $, window, document) {
         responseType: 'json'
       }).then(function (response) {
         var jsonData = response.data; //If the data is empty
+        // The root node of JSON, which can be `items` or `comments` by default
 
-        if (jsonData && (jsonData == null || Object.prototype.toString.call(jsonData.items) == '[object String]')) {
+        if (jsonData && (jsonData == null || Object.prototype.toString.call(jsonData.items) == '[object String]') || jsonData && (jsonData == null || Object.prototype.toString.call(jsonData.comments) == '[object String]')) {
           returnEmptyInfo();
         } //Check if a key exists inside a json object
+        // The root node of JSON, which can be `items` or `comments` by default
 
 
-        if (jsonData && jsonData.hasOwnProperty('items') && Object.prototype.toString.call(jsonData.items) == '[object Array]') {
+        if (jsonData && jsonData.hasOwnProperty('items') && Object.prototype.toString.call(jsonData.items) == '[object Array]' || jsonData && jsonData.hasOwnProperty('comments') && Object.prototype.toString.call(jsonData.comments) == '[object Array]') {
           //Data overflow may occur when the total number of pages is not posted
           try {
             var html = compiledTemplate(jsonData),
@@ -31440,7 +31479,7 @@ var _cssRatioSetter = function _cssRatioSetter(pt, cssp, mod) {
     pt = pt._next;
   }
 },
-    ModifiersPlugin = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
+    ModifiersPlugin = esm_TweenLite["a" /* _gsScope */]._gsDefine.plugin({
   propName: "modifiers",
   version: "0.0.4",
   API: 2,
@@ -31518,9 +31557,9 @@ ModifiersPlugin_p._add = function (target, p, s, c, mod) {
   this._overwriteProps.push(p);
 };
 
-ModifiersPlugin_p = GSAP_TweenLite["a" /* _gsScope */]._gsDefine.globals.TweenLite.version.split(".");
+ModifiersPlugin_p = esm_TweenLite["a" /* _gsScope */]._gsDefine.globals.TweenLite.version.split(".");
 
-if (Number(ModifiersPlugin_p[0]) <= 1 && Number(ModifiersPlugin_p[1]) < 19 && GSAP_TweenLite["a" /* _gsScope */].console) {
+if (Number(ModifiersPlugin_p[0]) <= 1 && Number(ModifiersPlugin_p[1]) < 19 && esm_TweenLite["a" /* _gsScope */].console) {
   console.log("ModifiersPlugin requires GSAP 1.19.0 or later.");
 }
 
@@ -41706,7 +41745,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
           displacementSprite,
           radius = 100,
           theta = 0,
-          clickEnable = false;
+          clickEnabled = false;
       var mouseVector = new THREE.Vector2();
       var raycaster,
           intersects,
@@ -41834,7 +41873,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         event.preventDefault();
         mouseVector.x = event.clientX / window.innerWidth * 2 - 1;
         mouseVector.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        clickEnable = true; //++++++++++++++++++++++++++++++++++++++
+        clickEnabled = true; //++++++++++++++++++++++++++++++++++++++
         //++++++++++++++++++++++++++++++++++++++
         //Mouse interactions
 
@@ -41901,7 +41940,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
         mouseVector.x = event.clientX / window.innerWidth * 2 - 1;
         mouseVector.y = -(event.clientY / window.innerHeight) * 2 + 1;
         theta = 0;
-        clickEnable = false;
+        clickEnabled = false;
       }
       /*
        * Batch generation of geometry
@@ -42123,7 +42162,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
           renderer,
           displacementSprite,
           theta = 0,
-          clickEnable = false; // controls
+          clickEnabled = false; // controls
 
       var scroller = new CameraScroller({
         direction: "y"
@@ -42229,7 +42268,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         event.preventDefault();
         mouseVector.x = event.clientX / window.innerWidth * 2 - 1;
         mouseVector.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        clickEnable = true; //Mouse interactions
+        clickEnabled = true; //Mouse interactions
 
         raycaster.setFromCamera(mouseVector, camera);
         intersects = raycaster.intersectObjects(atoms); //intersects = raycaster.intersectObjects( scene.children );
@@ -42288,7 +42327,7 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
         mouseVector.x = event.clientX / window.innerWidth * 2 - 1;
         mouseVector.y = -(event.clientY / window.innerHeight) * 2 + 1;
         theta = 0;
-        clickEnable = false;
+        clickEnabled = false;
       }
       /*
        * Batch generation of geometry
@@ -44020,7 +44059,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
       var sources = [];
       var isAnimating = false; //scroll spy
 
-      var scrollspyEnable, scrollspyConfigAutoAnim, scrollspyConfigItems, scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop; // constants
+      var scrollspyEnabled, scrollspyConfigAutoAnim, scrollspyConfigItems, scrollspyConfigCountTotal, scrollspyConfigCountCur, scrollspyConfigControlsPagination, scrollspyConfigControlsArrows, scrollspyConfigLoop; // constants
 
       var activeSlider = 0;
 
@@ -44064,7 +44103,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
 
             $this[0].animatedSlides; //scroll spy config
 
-            scrollspyEnable = dataScrollspy;
+            scrollspyEnabled = dataScrollspy;
             scrollspyConfigAutoAnim = $this[0].animatedSlides;
             scrollspyConfigItems = $items;
             scrollspyConfigCountTotal = dataCountTotal;
@@ -44501,7 +44540,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
         } //-----
 
 
-        if (scrollspyEnable) {
+        if (scrollspyEnabled) {
           var slideCurId = scrollspyConfigItems.filter('.is-active').index();
           var slideNextId;
 
@@ -45603,7 +45642,7 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
 // CONCATENATED MODULE: ./src/components/simple-3D-simulate-html-layout/js/index.js
 function simple_3D_simulate_html_layout_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -45979,6 +46018,8 @@ var table_scss_style = __webpack_require__(9);
 // CONCATENATED MODULE: ./src/components/table/js/basic.js
 function js_basic_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function js_basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { js_basic_typeof = function _typeof(obj) { return typeof obj; }; } else { js_basic_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return js_basic_typeof(obj); }
+
 /* 
  *************************************
  * <!-- Responsive Table -->
@@ -45989,7 +46030,7 @@ function js_basic_classCallCheck(instance, Constructor) { if (!(instance instanc
 var TABLE = function (module, $, window, document) {
   if (window.TABLE === null) return false;
   module.TABLE = module.TABLE || {};
-  module.TABLE.version = '0.0.3';
+  module.TABLE.version = '0.0.4';
 
   module.TABLE.documentReady = function ($) {
     var $window = $(window);
@@ -46001,20 +46042,21 @@ var TABLE = function (module, $, window, document) {
      ---------------------------
      */
 
-    var $resTable = $('table.uix-table.is-responsive, .uix-table.is-responsive table'),
-        $thead = $resTable.find('thead'),
-        $tbody = $resTable.find('tbody');
-    $thead.find('th').each(function () {
-      var data = $(this).html().replace(/<span\s+class=(\"|\')js-uix-table-responsive__hidden(\"|\')(([\s\S])*?)<\/span>/g, '');
+    $('.js-uix-table--responsive').each(function (index) {
+      var $this = $(this);
+      $this.find(' thead th').each(function (index) {
+        var data = $(this).html().replace(/<span[^>]*>[\s\S]+<\/span>/g, '');
 
-      if (!$(this).attr('data-table')) {
-        $(this).attr('data-table', data);
-      }
-    });
-    $tbody.find('td').each(function () {
-      var index = $(this).index();
-      var data = $thead.find('th:eq(' + index + ')').attr('data-table');
-      $(this).attr('data-table', data);
+        if (js_basic_typeof($(this).attr('data-table')) === ( true ? "undefined" : undefined)) {
+          $(this).attr('data-table', data);
+        }
+      });
+      $this.find(' tbody tr').each(function (index) {
+        $(this).find('> td').each(function (index) {
+          var data = $this.find(' thead th').eq(index).attr('data-table');
+          $(this).attr('data-table', data);
+        });
+      });
     });
     /* 
      ---------------------------
@@ -46022,11 +46064,8 @@ var TABLE = function (module, $, window, document) {
      ---------------------------
      */
 
-    var resTableSCrolled = '.js-uix-table--responsive-scrolled',
-        columns = $(resTableSCrolled + ' tr').length,
-        rows = $(resTableSCrolled + ' th').length;
     tableDataScrolledInit(windowWidth);
-    $window.on('resize', function () {
+    $window.off('resize').on('resize', function () {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -46037,27 +46076,42 @@ var TABLE = function (module, $, window, document) {
     });
 
     function tableDataScrolledInit(w) {
+      //Add an identifier so that the mobile terminal can compare by row
+      $('.js-uix-table--responsive-scrolled').each(function (index) {
+        var $this = $(this);
+        $this.find(' tbody tr').each(function (index) {
+          $(this).find('> td').each(function (index) {
+            $this.find(' thead th').eq(index).attr('data-table-row', index);
+            $(this).attr('data-table-row', index);
+          });
+        });
+      });
+
       if (w <= 768) {
-        for (var i = 0; i < rows; i++) {
-          var maxHeight = $(resTableSCrolled + ' th:nth-child(' + i + ')').outerHeight();
+        //get maxHeight of per row
+        $('.js-uix-table--responsive-scrolled').each(function (index) {
+          var $this = $(this);
+          var len = $this.find(' tbody tr').length;
 
-          for (var j = 0; j < columns; j++) {
-            if ($(resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight() > maxHeight) {
-              maxHeight = $(resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight();
-            }
+          var _loop = function _loop(i) {
+            var _heights = [];
+            $this.find(' [data-table-row="' + i + '"]').each(function (index) {
+              var tempheight = $(this).outerHeight();
 
-            if ($(resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight') > $(resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').outerHeight()) {
-              maxHeight = $(resTableSCrolled + ' tr:nth-child(' + j + ') td:nth-child(' + i + ')').prop('scrollHeight');
-            }
+              _heights.push(tempheight);
+            });
+            var maxHeight = Math.max.apply(Math, _heights);
+            $this.find(' [data-table-row="' + i + '"]').css({
+              'height': maxHeight + 'px'
+            });
+          };
+
+          for (var i = 0; i < len; i++) {
+            _loop(i);
           }
-
-          for (var _j = 0; _j < columns; _j++) {
-            $(resTableSCrolled + ' tr:nth-child(' + _j + ') td:nth-child(' + i + ')').css('height', maxHeight);
-            $(resTableSCrolled + ' th:nth-child(' + i + ')').css('height', maxHeight);
-          }
-        }
+        });
       } else {
-        $(resTableSCrolled + ' td, ' + resTableSCrolled + ' th').removeAttr('style');
+        $('.js-uix-table--responsive-scrolled tbody td, .js-uix-table--responsive-scrolled thead th').removeAttr('style');
       }
     }
   };
