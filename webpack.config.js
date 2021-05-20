@@ -278,33 +278,32 @@ const webpackConfig = {
 				
 				test: /\.(sa|sc|c)ss$/,
 				include: path.resolve( __dirname, './' + globs.build ),
-				use: [
+				use: process.env.NODE_ENV !== 'production' ? [{ loader: "css-loader" }, { loader: 'sass-loader' }] :
+					[
 
-					// fallback to style-loader in development
-					{
-						loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )
-						options: {
-							// you can specify a publicPath here
-							// by default it use publicPath in webpackOptions.output
-							publicPath: path.resolve(__dirname, './' + globs.dist )
-                            
-						}
-					},
-                    
-                    {
-                        loader: "css-loader" // translates CSS into CommonJS ( Step 2 )
-                    },
-                    {
-                        loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
-                        options: {
-                            /* (nested | expanded | compact | compressed) */
-                            outputStyle: 'expanded',
-                        }
-                       
-                    },
+						// fallback to style-loader in development
+						{
+							loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )
+							options: {
+								// you can specify a publicPath here
+								// by default it use publicPath in webpackOptions.output
+								publicPath: path.resolve(__dirname, './' + globs.dist )
 
-					
-				]
+							}
+						},
+
+						{
+							loader: "css-loader" // translates CSS into CommonJS ( Step 2 )
+						},
+						{
+							loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
+							options: {
+								/* (nested | expanded | compact | compressed) */
+								outputStyle: 'expanded',
+							}
+
+						},
+					]
 			},
 			
 			{

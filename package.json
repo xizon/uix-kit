@@ -2,7 +2,7 @@
   "author": "UIUX Lab",
   "name": "uix-kit",
   "email": "uiuxlab@gmail.com",
-  "version": "4.4.96",
+  "version": "4.4.97",
   "projectName": "Uix Kit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
@@ -13,8 +13,8 @@
   },
   "scripts": {
     "watch": "webpack --watch",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
+    "dev": "cross-env NODE_ENV=development webpack --progress --mode development",
+    "build": "cross-env NODE_ENV=production webpack --progress --mode production",
     "prettier": "prettier \"./dist/css/uix-kit.css\"",
     "prettier-rtl": "prettier \"./dist/css/uix-kit-rtl.css\""
   },
@@ -47,6 +47,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^2.0.1",
     "glslify-loader": "^2.0.0",
     "html-loader": "^0.5.5",
