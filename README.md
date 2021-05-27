@@ -56,7 +56,6 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * [Changelog](#changelog)
 * [Browser Support](#browser-support)
 * [Licensing](#licensing)
-* [Buy Me a Coffee](#buy-me-a-coffee)
 
 
 
@@ -604,9 +603,4 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
 
 
-
-## Buy Me a Coffee
-Donations would be more than welcome :)
-
-[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PYZLU7UZNQ6CE)
 
