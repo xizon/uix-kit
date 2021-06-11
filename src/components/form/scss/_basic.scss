@@ -40,6 +40,21 @@ select:-webkit-autofill:focus {
 }
 
 
+/* Remove default text/placeholder present in html5 input element of type=date and type=datetime-local */
+input[type="date"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit {
+	color: transparent !important;
+}
+
+input[type="date"]:focus::-webkit-datetime-edit,
+input[type="datetime-local"]:focus::-webkit-datetime-edit,
+input[type="date"].is-active::-webkit-datetime-edit,
+input[type="datetime-local"].is-active::-webkit-datetime-edit {
+	color: $control-text-color !important;
+}
+
+
+
 /* Required field marker */
 .uix-controls__im {
 	color: red;
@@ -843,6 +858,12 @@ $controls-merge-button-width: 20%;
 
 	}
 
+	&.is-disabled {
+		pointer-events: none;
+		user-select: none;	
+	}
+	
+	
 	&:not(.uix-controls--line).is-disabled {
 
 		/* Mask used to prohibit selection */
@@ -1317,6 +1338,7 @@ $controls-merge-button-width: 20%;
 	}
 
 
+	
 	.uix-controls__number__btn {
 		position: absolute;
 		height: calc(50% - 1px);
@@ -1348,6 +1370,15 @@ $controls-merge-button-width: 20%;
 		}
 
 	}
+	
+
+	&.is-disabled .uix-controls__number__btn {
+		pointer-events: none;
+		user-select: none;	
+		opacity: .6;
+	}
+	
+	
 
 }
 

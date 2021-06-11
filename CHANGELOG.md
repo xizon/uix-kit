@@ -1,5 +1,10 @@
 # Changelog
 
+#### = 4.4.98 (June 8, 2021) =
+
+* Tweak: Optimization of the form style, synchronized with `Uix Kit React`.
+
+
 
 #### = 4.4.97 (May 20, 2021) =
 
