@@ -80,10 +80,7 @@ export const TABLE = ( ( module, $, window, document ) => {
 			}
 		});
 
-
 		function tableDataScrolledInit( w ) {
-
-
 
 			//Add an identifier so that the mobile terminal can compare by row
 			$( '.js-uix-table--responsive-scrolled' ).each(function( index ) {

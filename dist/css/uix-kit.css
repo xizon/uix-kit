@@ -2,16 +2,16 @@
  * 
  * DO NOT OVERRIDE THIS FILE.
  * Generated with "npm run build"
- * 
+ *
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.4.97
+ * ## Version             :  4.5.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  May 20, 2021
+ * ## Last Update         :  August 9, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
- * 	
+ *
  */
 /**
 
@@ -6419,6 +6419,19 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+/* Remove default text/placeholder present in html5 input element of type=date and type=datetime-local */
+input[type="date"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit {
+  color: transparent !important;
+}
+
+input[type="date"]:focus::-webkit-datetime-edit,
+input[type="datetime-local"]:focus::-webkit-datetime-edit,
+input[type="date"].is-active::-webkit-datetime-edit,
+input[type="datetime-local"].is-active::-webkit-datetime-edit {
+  color: #888 !important;
+}
+
 /* Required field marker */
 .uix-controls__im {
   color: red;
@@ -7045,6 +7058,11 @@ select:-webkit-autofill:focus {
   width: 100% !important;
 }
 
+.uix-controls__select-wrapper.is-disabled {
+  pointer-events: none;
+  user-select: none;
+}
+
 .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled {
   /* Mask used to prohibit selection */
 }
@@ -7498,6 +7516,12 @@ select:-webkit-autofill:focus {
   border-radius: 0 0 4px 0;
 }
 
+.uix-controls__number.is-disabled .uix-controls__number__btn {
+  pointer-events: none;
+  user-select: none;
+  opacity: .6;
+}
+
 /*
  ---------------------------
  7. Multiple Selector
@@ -7678,6 +7702,10 @@ select:-webkit-autofill:focus {
   align-items: center;
   display: flex;
   padding: 0.54688rem 0;
+}
+
+.uix-controls-layout .uix-controls {
+  margin: 0 !important;
 }
 
 .uix-controls-layout .uix-controls-layout__content {

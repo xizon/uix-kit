@@ -138,18 +138,13 @@ http://localhost:8080/examples/
 
 ### Note:
  
-**a) ERROR: npm update check failed.**
 
-```sh
-$ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
-```
-
-**b) How to use modules?**
+**a) How to use modules?**
 
 You could custom modules of what to import in `src/components/_app-load.js` and `src/components/_app-load-rtl.js`. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the `webpack.config.js` according to the imported modules you want.
 
 
-**c) Site Info Configuration**
+**b) Site Info Configuration**
 
 You can update the Placeholders in Templates by modifying the Site Info configuration of `package.json`. Like this:
 
@@ -167,7 +162,25 @@ You can update the Placeholders in Templates by modifying the Site Info configur
 }
 ```
 
-**d) If you upgrade the version of Node, please execute the following code:**
+
+**c) ERROR: npm update check failed.**
+
+Solution:
+
+```sh
+$ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
+```
+
+**d) ERROR: Node sass version 6.x.x is not compatible with ^ 4.x.x.**
+
+Solution:
+
+```sh
+$ npm install node-sass@4.14.1
+```
+
+
+**e) If you upgrade the version of Node, please execute the following code:**
 
 ```sh
 $ sudo npm install

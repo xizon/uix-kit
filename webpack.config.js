@@ -4,9 +4,9 @@ const webpack                    = require('webpack');
 const express                    = require('express');
 const fs                         = require('fs');
 const path                       = require('path');
-const UglifyJsPlugin             = require('uglifyjs-webpack-plugin');
+const TerserPlugin               = require("terser-webpack-plugin");
 const MiniCssExtractPlugin       = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin    = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin         = require("css-minimizer-webpack-plugin");
 const CleanWebpackPlugin         = require('clean-webpack-plugin');
 const glob                       = require('glob');
 const randomString               = require('random-string');
@@ -16,7 +16,7 @@ const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const webpackDevMiddleware       = require('webpack-dev-middleware');
 const ConcatPlugin               = require('webpack-concat-plugin');
-const UglifyJS                   = require("uglify-js");
+
 const colors = {
     Reset: "\x1b[0m",
     Bright: "\x1b[1m",
@@ -119,7 +119,6 @@ const targetFilesNameArrays = [
 const targetAllWatchFilesName = [].concat(...targetFilesNameArrays);
 
 
-
 // String replacement for page templates
 class ReplacePlaceholderForFile {
 	constructor( options ) {
@@ -189,16 +188,19 @@ class ReplacePlaceholderForFile {
  *  Main configuration
  *************************************
  */
+const devMode = process.env.NODE_ENV !== 'production';
 const webpackConfig = {
-	devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false,
+	devtool: devMode ? 'source-map' : false,
     performance: {
-        hints: process.env.NODE_ENV === 'production' ? "warning" : false
+        hints: !devMode ? "warning" : false
     },
     mode: 'production',
 	watch: true,
-	node: { fs: 'empty' },
     resolve: {
-        extensions: ['.js', '.es6', '.vue', '.jsx' ],
+		fallback: {
+			fs: false
+		},
+        extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', 'tsx' ],
 		alias: {
 			
 			// Uix Kit specific mappings.
@@ -226,11 +228,11 @@ const webpackConfig = {
     },
 
 	optimization: {
+		minimize: true,
 	    minimizer: [
 
-			new UglifyJsPlugin({
-				sourceMap: true,
-				test: /\.min\.js$/i,
+			new TerserPlugin({
+				test: /\.min\.js$/i
 			}),
 			
 			new MiniCssExtractPlugin({
@@ -238,13 +240,20 @@ const webpackConfig = {
 				// both options are optional
 				filename: '../css/[name].css'
 			}),
-			new OptimizeCssAssetsPlugin({
-				assetNameRegExp: /\.min\.css$/g,
-				cssProcessorPluginOptions: {
-				    preset: ['default', { discardComments: { removeAll: false } }],
-				},
-				canPrint: true
-			}),
+
+            new CssMinimizerPlugin({
+                test: /\.min\.css$/i,
+                parallel: true,
+                minimizerOptions: {
+                    preset: [
+                        "default",
+                        {
+                            discardComments: { removeAll: true },
+                        },
+                    ],
+                },
+            }),
+	
 	
 		],
 		
@@ -267,7 +276,7 @@ const webpackConfig = {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude: path.resolve( __dirname, 'node_modules' ),
-                query: {  
+                options: {  
 				  'presets': [
 					  '@babel/preset-env', 
 					  '@babel/preset-react'
@@ -278,32 +287,34 @@ const webpackConfig = {
 				
 				test: /\.(sa|sc|c)ss$/,
 				include: path.resolve( __dirname, './' + globs.build ),
-				use: process.env.NODE_ENV !== 'production' ? [{ loader: "css-loader" }, { loader: 'sass-loader' }] :
-					[
+				use: [
+					// fallback to style-loader in development
+					{
+						loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )
+						options: {
+							// you can specify a publicPath here
+							// by default it use publicPath in webpackOptions.output
+							publicPath: path.resolve(__dirname, './' + globs.dist )
 
-						// fallback to style-loader in development
-						{
-							loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )
-							options: {
-								// you can specify a publicPath here
-								// by default it use publicPath in webpackOptions.output
-								publicPath: path.resolve(__dirname, './' + globs.dist )
+						}
+					},
 
-							}
-						},
+					{
+						loader: "css-loader",  // interprets @import and url() and will resolve them. ( Step 2 )
+						options: {
+							sourceMap: true
+						}
+					},
+					{
+						loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
+						options: {
+							sourceMap: true,
+							/* (nested | expanded | compact | compressed) */
+							outputStyle: 'expanded',
+						}
 
-						{
-							loader: "css-loader" // translates CSS into CommonJS ( Step 2 )
-						},
-						{
-							loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
-							options: {
-								/* (nested | expanded | compact | compressed) */
-								outputStyle: 'expanded',
-							}
-
-						},
-					]
+					},
+				]
 			},
 			
 			{
@@ -320,7 +331,54 @@ const webpackConfig = {
 				]
 			},
 			
-		
+			{
+				test: /\.(png|jpe?g|gif|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+			   loader: 'file-loader', 
+			   options: {
+				 esModule: false, //change the css path via output
+				 outputPath: (url, resourcePath, context) => { //the files from `./src/...` will copy to `./dist/`
+					 
+					//original name: path.basename(resourcePath)
+					
+					//fonts
+					if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
+						return '../fonts/' + url;
+					}
+					 
+					//imags
+					if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
+						return '../images/' + url;
+					} 
+					 
+						
+					return '../misc/' + url;
+				   
+				 },
+				 publicPath: (url, resourcePath, context) => { //the css path of output 
+
+					// If the file is in the root directory, you can leave it empty. If in another directory, 
+					// you can write: "/blog". (but no trailing slash)
+					const websiteRootDir = '';
+					
+					//fonts
+					if ( resourcePath.indexOf( 'webfonts/' ) >= 0 || resourcePath.indexOf( 'fonts/' ) >= 0 ) {
+						return `${websiteRootDir}/${globs.dist}/fonts/${url}`;
+					}
+				   
+					//imags
+					if ( resourcePath.indexOf( 'images/' ) >= 0 || resourcePath.indexOf( 'img/' ) >= 0 ) {
+						return `${websiteRootDir}/${globs.dist}/images/${url}`;
+					} 
+					 
+						
+					return `${websiteRootDir}/${globs.dist}/misc/${url}`;
+					 
+				   
+				 }
+			   }
+		   }
+
+
 			/*
 			{
 				test: /\.scss$/,
@@ -410,7 +468,7 @@ targetTempFilesName.map( ( event ) => {
 // Add .min.css files souce map
 webpackConfig.plugins.push(
 	new webpack.SourceMapDevToolPlugin({
-	  filename: '../css/[name].css.map',
+		filename: '../js/[file].map'
 	})
 );
 
@@ -458,28 +516,6 @@ const instance = webpackDevMiddleware( compiler );
 app.use( instance );
 
 
-/*
-app.listen(globs.port, function() {
-    console.log(colors.fg.Yellow, 'Express server listening on port ' + globs.port, colors.Reset);
-});
-
-
-const router = express.Router();
-app.use(router);
-
-// Serving static files in Express
-app.use('/', express.static(path.join(__dirname, 'examples')));
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
-
-*/
-
-
-
-
-//Provides a way to customize how progress is reported during a compilation.
-new webpack.ProgressPlugin().apply(compiler);
-
-
 //Watch for Files Changes in Node.js
 require('log-timestamp');
 
@@ -493,32 +529,24 @@ targetAllWatchFilesName.map( ( event ) => {
 		
 		// After a short delay the configuration is changed and a banner plugin is added
 		// to the config
-		compiler.apply(
-
-			new CleanWebpackPlugin([
-				globs.build + '/**/*.css'
-			])
-
-		);
+		new CleanWebpackPlugin([
+			globs.build + '/**/*.css'
+		]).apply(compiler);
 	
 		targetTempFilesName.map( ( event ) => {
 
-			compiler.apply(
+			new IncludeFileWebpackPlugin({
+				directory: '',
+				input: `${event[0]}`,
+				output: `./${globs.examples}/${event[1]}`,
+				processIncludeContents: function(html) {
+					return html;
+				}
+			}).apply(compiler);
 
-				new IncludeFileWebpackPlugin({
-					directory: '',
-					input: `${event[0]}`,
-					output: `./${globs.examples}/${event[1]}`,
-					processIncludeContents: function(html) {
-						return html;
-					}
-				}),
-
-				new ReplacePlaceholderForFile({
-					filepath: `./${globs.examples}/${event[1]}`
-				})
-				
-			);
+			new ReplacePlaceholderForFile({
+				filepath: `./${globs.examples}/${event[1]}`
+			}).apply(compiler);
 
 		
 
@@ -564,108 +592,88 @@ server.listen( globs.port, "localhost", function (err, result) {
  * Process of processing files after compilation
  *************************************
  */
-const compilerDelayTimePer = 166.666666666667; //The time it takes to load each js (ms)
-
-//
 const compilerCoreJSsFile = globs.pathCore + '/_app-load.js';
 if ( fs.existsSync( compilerCoreJSsFile ) ) {
     fs.readFile( compilerCoreJSsFile, 'utf8', function( err, content ) {
         if ( err ) throw err;
-        const compilerCoreJSsFileContent  = content.toString();
-
-        
-        //Calculate the number of JSs of imported modules
-        const strCount = (compilerCoreJSsFileContent.match(/import\s/g) || []).length;
-
-        const compilerDelayTimeTotal = strCount * compilerDelayTimePer; //The time it takes to load all js (ms)
 
         //---
         console.log(colors.fg.Yellow, `----------------------------------------------`, colors.Reset);
-        console.log(colors.fg.Yellow, `The time to wait for ${strCount} modules' table of contents to be processed: ${Math.round( compilerDelayTimeTotal/1000 )}s`, colors.Reset);
 
         compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 
 
-            const targetJSFile                 = './'+globs.dist+'/js/uix-kit.js',
-                  targetJSMinFile              = './'+globs.dist+'/js/uix-kit.min.js';
+            const targetJSFile = './'+globs.dist+'/js/uix-kit.js';
 
             //
             const tocBuildedFiles = ['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ];
             const tocBuildedTotal = tocBuildedFiles.length;
             let tocBuildedIndex = 1;
             
+			// Read all core css and js files and build a table of contents
+			//---------------------------------------------------------------------
+			// Build a table of contents (TOC)
+			tocBuildedFiles.map( ( filepath ) => {
 
-            setTimeout ( () => {
-                
-                // Read all core css and js files and build a table of contents
-                //---------------------------------------------------------------------
-                // Build a table of contents (TOC)
-                tocBuildedFiles.map( ( filepath ) => {
+				if ( fs.existsSync( filepath ) ) {
 
-                    if ( fs.existsSync( filepath ) ) {
+					fs.readFile( filepath, 'utf8', function( err, content ) {
 
-                        fs.readFile( filepath, 'utf8', function( err, content ) {
+						if ( err ) throw err;
 
-                            if ( err ) throw err;
+						
+						const curCon  = content.toString(),
+								newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
-                            
-                            const curCon  = content.toString(),
-                                  newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+						
 
-                            
+						//is the matched group if found
+						if ( newtext && newtext.length > 0 ) {  
 
-                            //is the matched group if found
-                            if ( newtext && newtext.length > 0 ) {  
+							let curToc = '';
 
-                                let curToc = '';
+							for ( let p = 0; p < newtext.length; p++ ) {
 
-                                for ( let p = 0; p < newtext.length; p++ ) {
+								let curIndex = p + 1,
+									newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
 
-                                    let curIndex = p + 1,
-                                        newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+								if ( p > 0 ) {
+									curToc += '    ' + curIndex + '.' + newStr + '\n';
+								} else {
+									curToc +=  curIndex + '.' + newStr + '\n';
+								}
 
-                                    if ( p > 0 ) {
-                                        curToc += '    ' + curIndex + '.' + newStr + '\n';
-                                    } else {
-                                        curToc +=  curIndex + '.' + newStr + '\n';
-                                    }
+							}
 
-                                }
+							//Replace a string in a file with nodejs
+							const resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
 
-                                //Replace a string in a file with nodejs
-                                const resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+							fs.writeFile( filepath, resultData, 'utf8', function (err) {
 
-                                fs.writeFile( filepath, resultData, 'utf8', function (err) {
+								if ( err ) {
+									console.log(colors.fg.Red, err, colors.Reset);
+									return;
+								}
+								//file written successfully	
+								console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${tocBuildedTotal})`, colors.Reset);
 
-                                    if ( err ) {
-                                        console.log(colors.fg.Red, err, colors.Reset);
-                                        return;
-                                    }
-                                    //file written successfully	
-                                    console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${tocBuildedTotal})`, colors.Reset);
-
-                                    tocBuildedIndex++;
+								tocBuildedIndex++;
 
 
-                                });
+							});
 
 
-                            }
+						}
 
 
-                        });// fs.readFile( filepath ...
+					});// fs.readFile( filepath ...
 
 
-                    }//endif fs.existsSync( filepath ) 
+				}//endif fs.existsSync( filepath ) 
 
 
-                });	//.map( ( filepath )...
+			});	//.map( ( filepath )...
 
-
-
-            //The more modules, the longer the time, the default 5500ms 
-            //can guarantee the time-consuming compilation of 150 modules.
-            }, compilerDelayTimeTotal );
 
 
         });
