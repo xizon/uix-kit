@@ -200,7 +200,7 @@ const webpackConfig = {
 		fallback: {
 			fs: false
 		},
-        extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', '.tsx' ],
+        extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', '.tsx', '.scss', '.sass' ],
 		alias: {
 			
 			// Uix Kit specific mappings.

@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 4.5.0 (August 8, 2021) =
+#### = 4.5.1 (August 8, 2021) =
 
 * New: Upgrade webpack 4 to 5. Compilation speed and performance are greatly improved.
 * New: Update and compatible debugging of Node related dependencies
