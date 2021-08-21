@@ -12700,7 +12700,6 @@ a.uix-lightbox__original__link {
   pointer-events: none;
   transition: all 0.3s ease;
   position: relative;
-  filter: drop-shadow(-5px -5px 5px #000);
 }
 
 .uix-svgmap--china circle,
