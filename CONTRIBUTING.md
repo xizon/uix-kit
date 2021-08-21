@@ -18,6 +18,9 @@ Hi, there!
 
 Uix Kit bundles the following third-party resources:
 
+
+Default Vendor:
+
 - [jQuery](https://jquery.com/)
 - [Font Awesome](http://fontawesome.io)
 - [Bootstrap](http://getbootstrap.com)
@@ -29,12 +32,17 @@ Uix Kit bundles the following third-party resources:
 - [template7](http://www.idangero.us/template7/)
 - [pixi](https://github.com/GoodBoyDigital/pixi.js)
 - [GSAP - Standard "No Charge" GreenSock License](https://greensock.com)
-- [three.js](https://github.com/mrdoob/three.js/)
 - [Hammer.JS](http://hammerjs.github.io/)
 - [Muuri](https://github.com/haltu/muuri)
 - [axios](https://github.com/axios/axios)
+- [Three.js](https://threejs.org/)
 
 
+
+Plugins(Optional):
+
+- [Swiper](https://swiperjs.com/)
+- [FlexSlider](http://flexslider.woothemes.com/)
 
 
 
