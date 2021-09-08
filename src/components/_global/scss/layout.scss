@@ -210,7 +210,8 @@
 		width: 100%;
 	}
 }
-	
+
+
 
 
 @mixin uixCoreGridGenerate( $classname: '.uix-core-grid', $pad: 15px ) {
@@ -305,32 +306,6 @@
 
 		
 
-		@media all and (max-width: 991px) {
-
-			#{$classname} {
-
-
-				/* 2 columns */
-				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
-				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
-				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
-					width: 50%;
-					float: left;
-				}
-
-				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
-				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
-				.uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
-					padding-right: #{$pad};
-					clear: both;
-
-				}
-
-
-			}
-
-		}
-
 
 		@media all and (max-width: 768px) {
 
@@ -353,7 +328,7 @@
 					
 				}
 				
-				.uix-core-grid__row.uix-core-grid__row--nobreaking {
+				.uix-core-grid__row.uix-core-grid__row--no-breaking {
 					/* Auto width, for automatic widths such as 5 columns */
 					&.uix-core-grid__row--auto-width {
 						display: flex;	
@@ -362,7 +337,7 @@
 					
 				}		
 
-				.uix-core-grid__row:not(.uix-core-grid__row--nobreaking) {
+				.uix-core-grid__row:not(.uix-core-grid__row--no-breaking) {
 					&.uix-core-grid__row--no-gutter {
 						width: calc(100% + #{$pad});
 					}	
@@ -376,36 +351,6 @@
 
 					}
 
-					/* 2 columns */
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-2,
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-3,
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
-						width: 50%;
-						float: left;
-
-					}
-
-					&.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-2,
-					&.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-3,
-					&.uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-4 {
-						width: calc(50% - #{$pad/2});
-					}
-
-
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
-						clear: both;
-
-					}
-
-
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
-					&.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
-						padding-right: #{$pad};
-
-					}
 					
 				}
 
@@ -419,12 +364,84 @@
 		}
 
 
+
+
+
 	}
+	
 	
 }
 
 
+@mixin uixCoreGridColumnBreakpoint( $classname: '.uix-core-grid', $pad: 15px, $size: 'md', $breakpoint: 768px ) {
+    @if ( $classname != '' and $size != '' and $breakpoint != '' ) {
+        #{$classname} {
+            @media all and (max-width: #{$breakpoint}) {
+
+                .uix-core-grid__col-3--#{$size},
+                .uix-core-grid__col-4--#{$size},
+                .uix-core-grid__col-6--#{$size} {
+                    float: left !important;
+                    padding-right: #{$pad} !important;
+                }
+                
+                .uix-core-grid__col-3--#{$size} {
+                    width: 25% !important;
+                }
+                
+                .uix-core-grid__col-4--#{$size} {
+                    width: 33.333333333333% !important;
+                }
+                
+                .uix-core-grid__col-6--#{$size} {
+                    width: 50% !important;
+                }
+                
+                .uix-core-grid__row--no-gutter {
+                    .uix-core-grid__col-3--#{$size} {
+                        width: calc(25% - #{$pad/4}) !important;
+                    }
+                    .uix-core-grid__col-4--#{$size} {
+                        width: calc(33.333333333333% - #{$pad/3}) !important;
+                    }
+                    .uix-core-grid__col-6--#{$size} {
+                        width: calc(50% - #{$pad/2}) !important;
+                    }
+                }
+
+                .uix-core-grid__row--loop {
+                    .uix-core-grid__col-3--#{$size}:nth-child(4n+1),
+                    .uix-core-grid__col-4--#{$size}:nth-child(3n+1),
+                    .uix-core-grid__col-6--#{$size}:nth-child(2n+1) {
+                        clear: both;
+                    }
+                }
+
+
+            }
+
+        }
+
+    }
+}
+
+
+
 @include uixCoreGridGenerate( '.uix-core-grid', 15px );
+
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'sm', '576px' );	
+@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'md', '768px' );	
+@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'lg', '992px' );	
+@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'xl', '1200px' );	
 
 
 

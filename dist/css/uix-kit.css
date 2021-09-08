@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.0
+ * ## Version             :  4.5.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 9, 2021
+ * ## Last Update         :  September 8, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -1804,24 +1804,6 @@ details.uix-details-reset > summary::-webkit-details-marker {
   clear: both;
 }
 
-@media all and (max-width: 991px) {
-  .uix-core-grid {
-    /* 2 columns */
-  }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
-    width: 50%;
-    float: left;
-  }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
-    padding-right: 15px;
-    clear: both;
-  }
-}
-
 @media all and (max-width: 768px) {
   .uix-core-grid .uix-core-grid__row {
     /* Auto width, for automatic widths such as 5 columns */
@@ -1832,44 +1814,156 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter .uix-core-grid__col {
     padding-right: 15px;
   }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--nobreaking {
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-breaking {
     /* Auto width, for automatic widths such as 5 columns */
   }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--nobreaking.uix-core-grid__row--auto-width {
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-breaking.uix-core-grid__row--auto-width {
     display: flex;
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking) {
-    /* 2 columns */
-  }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--no-gutter {
+  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--no-breaking).uix-core-grid__row--no-gutter {
     width: calc(100% + 15px);
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking) [class*='uix-core-grid__col-'] {
+  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--no-breaking) [class*='uix-core-grid__col-'] {
     float: none;
     width: calc(100% - 15px);
     padding-left: 0;
     padding-right: 0;
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-2,
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-3,
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-4 {
-    width: 50%;
-    float: left;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+  .uix-core-grid .uix-core-grid__col-3--sm,
+  .uix-core-grid .uix-core-grid__col-4--sm,
+  .uix-core-grid .uix-core-grid__col-6--sm {
+    float: left !important;
+    padding-right: 15px !important;
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-2,
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-3,
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2.uix-core-grid__row--no-gutter .uix-core-grid__col-4 {
-    width: calc(50% - 7.5px);
+  .uix-core-grid .uix-core-grid__col-3--sm {
+    width: 25% !important;
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
+  .uix-core-grid .uix-core-grid__col-4--sm {
+    width: 33.333333333333% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-6--sm {
+    width: 50% !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--sm {
+    width: calc(25% - 3.75px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--sm {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--sm {
+    width: calc(50% - 7.5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--sm:nth-child(4n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-4--sm:nth-child(3n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-6--sm:nth-child(2n+1) {
     clear: both;
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--nobreaking).uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
-    padding-right: 15px;
+}
+
+@media all and (max-width: 768px) {
+  .uix-core-grid .uix-core-grid__col-3--md,
+  .uix-core-grid .uix-core-grid__col-4--md,
+  .uix-core-grid .uix-core-grid__col-6--md {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .uix-core-grid .uix-core-grid__col-3--md {
+    width: 25% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-4--md {
+    width: 33.333333333333% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-6--md {
+    width: 50% !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--md {
+    width: calc(25% - 3.75px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--md {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--md {
+    width: calc(50% - 7.5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--md:nth-child(4n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-4--md:nth-child(3n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-6--md:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .uix-core-grid .uix-core-grid__col-3--lg,
+  .uix-core-grid .uix-core-grid__col-4--lg,
+  .uix-core-grid .uix-core-grid__col-6--lg {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .uix-core-grid .uix-core-grid__col-3--lg {
+    width: 25% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-4--lg {
+    width: 33.333333333333% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-6--lg {
+    width: 50% !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--lg {
+    width: calc(25% - 3.75px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--lg {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--lg {
+    width: calc(50% - 7.5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--lg:nth-child(4n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-4--lg:nth-child(3n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-6--lg:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .uix-core-grid .uix-core-grid__col-3--xl,
+  .uix-core-grid .uix-core-grid__col-4--xl,
+  .uix-core-grid .uix-core-grid__col-6--xl {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .uix-core-grid .uix-core-grid__col-3--xl {
+    width: 25% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-4--xl {
+    width: 33.333333333333% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-6--xl {
+    width: 50% !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--xl {
+    width: calc(25% - 3.75px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--xl {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--xl {
+    width: calc(50% - 7.5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--xl:nth-child(4n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-4--xl:nth-child(3n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-6--xl:nth-child(2n+1) {
+    clear: both;
   }
 }
 

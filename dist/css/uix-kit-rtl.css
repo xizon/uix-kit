@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.0
+ * ## Version             :  4.5.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  August 9, 2021
+ * ## Last Update         :  September 8, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -452,38 +452,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
 
 .uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type {
   padding-left: 0;
-}
-
-@media all and (max-width: 991px) {
-  .uix-core-grid {
-    /* 2 columns */
-  }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
-    float: right;
-  }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+1),
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+1),
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+1) {
-    padding-left: 15px;
-  }
-}
-
-@media all and (max-width: 768px) {
-  .uix-core-grid {
-    /* 2 columns */
-  }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2,
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3,
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4 {
-    float: right;
-  }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-2:nth-child(2n+0),
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-3:nth-child(2n+0),
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--col-2 .uix-core-grid__col-4:nth-child(2n+0) {
-    padding-left: 15px;
-  }
 }
 
 /* ====================================================== 
