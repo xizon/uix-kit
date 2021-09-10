@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.2
+ * ## Version             :  4.5.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 8, 2021
+ * ## Last Update         :  September 10, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -1596,7 +1596,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
   margin-right: 0;
 }
 
-.uix-container__bg.uix-container__bg--no-gutter {
+.uix-container__bg.uix-container__bg--no-gutters {
   padding-left: 0;
   padding-right: 0;
 }
@@ -1763,11 +1763,11 @@ details.uix-details-reset > summary::-webkit-details-marker {
   position: relative;
 }
 
-.uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-gutter {
+.uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-gutters {
   width: 100%;
 }
 
-.uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-gutter [class*='uix-core-grid__col-'] {
+.uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-gutters [class*='uix-core-grid__col-'] {
   padding-right: 0 !important;
 }
 
@@ -1781,7 +1781,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
   padding-right: 15px;
 }
 
-.uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter .uix-core-grid__col {
+.uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutters .uix-core-grid__col {
   padding-right: 0;
 }
 
@@ -1811,19 +1811,19 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width {
     display: block;
   }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter .uix-core-grid__col {
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutters .uix-core-grid__col {
     padding-right: 15px;
   }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-breaking {
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-break {
     /* Auto width, for automatic widths such as 5 columns */
   }
-  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-breaking.uix-core-grid__row--auto-width {
+  .uix-core-grid .uix-core-grid__row.uix-core-grid__row--no-break.uix-core-grid__row--auto-width {
     display: flex;
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--no-breaking).uix-core-grid__row--no-gutter {
+  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--no-break).uix-core-grid__row--no-gutters {
     width: calc(100% + 15px);
   }
-  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--no-breaking) [class*='uix-core-grid__col-'] {
+  .uix-core-grid .uix-core-grid__row:not(.uix-core-grid__row--no-break) [class*='uix-core-grid__col-'] {
     float: none;
     width: calc(100% - 15px);
     padding-left: 0;
@@ -1855,13 +1855,13 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__col-6--sm {
     width: 50% !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--sm {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-3--sm {
     width: calc(25% - 3.75px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--sm {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-4--sm {
     width: calc(33.333333333333% - 5px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--sm {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-6--sm {
     width: calc(50% - 7.5px) !important;
   }
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--sm:nth-child(4n+1),
@@ -1887,13 +1887,13 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__col-6--md {
     width: 50% !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--md {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-3--md {
     width: calc(25% - 3.75px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--md {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-4--md {
     width: calc(33.333333333333% - 5px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--md {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-6--md {
     width: calc(50% - 7.5px) !important;
   }
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--md:nth-child(4n+1),
@@ -1919,13 +1919,13 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__col-6--lg {
     width: 50% !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--lg {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-3--lg {
     width: calc(25% - 3.75px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--lg {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-4--lg {
     width: calc(33.333333333333% - 5px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--lg {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-6--lg {
     width: calc(50% - 7.5px) !important;
   }
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--lg:nth-child(4n+1),
@@ -1951,13 +1951,13 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__col-6--xl {
     width: 50% !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-3--xl {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-3--xl {
     width: calc(25% - 3.75px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-4--xl {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-4--xl {
     width: calc(33.333333333333% - 5px) !important;
   }
-  .uix-core-grid .uix-core-grid__row--no-gutter .uix-core-grid__col-6--xl {
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-6--xl {
     width: calc(50% - 7.5px) !important;
   }
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--xl:nth-child(4n+1),
@@ -19324,18 +19324,18 @@ ul.edd_purchase_receipt_files li {
 }
 
 @media all and (max-width: 768px) {
-  .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul {
+  .uix-equal-width-divs:not(.uix-equal-width-divs--no-break) ul {
     display: block;
   }
-  .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul li {
+  .uix-equal-width-divs:not(.uix-equal-width-divs--no-break) ul li {
     display: inline-block;
     width: 50%;
     margin-bottom: .5rem;
   }
-  .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul li:nth-child(2n+0) {
+  .uix-equal-width-divs:not(.uix-equal-width-divs--no-break) ul li:nth-child(2n+0) {
     box-shadow: none;
   }
-  .uix-equal-width-divs:not(.uix-equal-width-divs--nobreak) ul li span {
+  .uix-equal-width-divs:not(.uix-equal-width-divs--no-break) ul li span {
     padding-bottom: 1rem;
   }
 }

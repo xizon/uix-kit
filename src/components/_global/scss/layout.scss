@@ -46,7 +46,7 @@
 		margin-right: 0;
 	}
 	
-	&.uix-container__bg--no-gutter {
+	&.uix-container__bg--no-gutters {
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -241,7 +241,7 @@
 				}
 
 				
-				&.uix-core-grid__row--no-gutter {
+				&.uix-core-grid__row--no-gutters {
 
 					width: 100%;
 
@@ -265,7 +265,7 @@
 					
 
 				}
-				&.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter {
+				&.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutters {
 					.uix-core-grid__col {
 						padding-right: 0;
 					}		
@@ -318,7 +318,7 @@
 						display: block;		
 					}	
 
-					&.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutter {
+					&.uix-core-grid__row--auto-width.uix-core-grid__row--no-gutters {
 						.uix-core-grid__col {
 							padding-right: #{$pad};
 						}		
@@ -328,7 +328,7 @@
 					
 				}
 				
-				.uix-core-grid__row.uix-core-grid__row--no-breaking {
+				.uix-core-grid__row.uix-core-grid__row--no-break {
 					/* Auto width, for automatic widths such as 5 columns */
 					&.uix-core-grid__row--auto-width {
 						display: flex;	
@@ -337,8 +337,8 @@
 					
 				}		
 
-				.uix-core-grid__row:not(.uix-core-grid__row--no-breaking) {
-					&.uix-core-grid__row--no-gutter {
+				.uix-core-grid__row:not(.uix-core-grid__row--no-break) {
+					&.uix-core-grid__row--no-gutters {
 						width: calc(100% + #{$pad});
 					}	
 					
@@ -397,7 +397,7 @@
                     width: 50% !important;
                 }
                 
-                .uix-core-grid__row--no-gutter {
+                .uix-core-grid__row--no-gutters {
                     .uix-core-grid__col-3--#{$size} {
                         width: calc(25% - #{$pad/4}) !important;
                     }

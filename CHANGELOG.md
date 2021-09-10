@@ -1,9 +1,10 @@
 # Changelog
 
-#### = 4.5.2 (September 7, 2021) =
+#### = 4.5.3 (September 10, 2021) =
 
 * Tweak: Optimized the multi-terminal adaptation breakpoint of Uix Grid.
 * Tweak: Update `Svg Map` shadow.
+* Tweak: Modified the compound naming of some styles.
 
 
 #### = 4.5.1 (August 8, 2021) =
