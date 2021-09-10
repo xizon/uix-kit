@@ -107,7 +107,7 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 				template7ID = '';
 			}	
 			if( typeof triggerActive === typeof undefined ) {
-				triggerActive = 'wait';
+				triggerActive = 'is-waiting';
 			}		
 			
 			if( typeof method === typeof undefined ) {

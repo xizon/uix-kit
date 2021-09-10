@@ -28535,7 +28535,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
       }
 
       if (list_posts_js_typeof(triggerActive) === ( true ? "undefined" : 0)) {
-        triggerActive = 'wait';
+        triggerActive = 'is-waiting';
       }
 
       if (list_posts_js_typeof(method) === ( true ? "undefined" : 0)) {

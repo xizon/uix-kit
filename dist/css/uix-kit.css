@@ -18025,7 +18025,7 @@ ul.edd_purchase_receipt_files li {
   color: #474747 !important;
 }
 
-.uix-btn.wait {
+.uix-btn.is-waiting {
   background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) !important;
   background-size: 30px 30px !important;
   animation: uix-cssAnim--moveWaitingStripes 0.5s linear infinite !important;
