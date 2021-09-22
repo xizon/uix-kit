@@ -3,15 +3,15 @@
  *************************************
  * Count To
  *
- * @param  {Number} fixed              - formats a number using fixed-point notation.
+ * @param  {Number} fixed                - formats a number using fixed-point notation.
  * @param  {Number} from                 - the number the element should start at
- * @param  {Number} number               - the number the element should end at
- * @param  {Number} duration             - how long it should take to count between the target numbers
+ * @param  {Number} to                   - the number the element should end at
+ * @param  {Number} speed                - how long it should take to count between the target numbers
  * @param  {Number} refreshInterval      - how often the element should be updated
  * @param  {Boolean} dilimiter           - the number of decimal places to show
+ * @param  {Boolean} doubleDigits        - two digits are used by default
  * @param  {Function} onUpdate           - callback method for every time the element is updated
  * @param  {Function} onComplete         - callback method for when the element finishes updating,
- * @param  {Boolean} doubleDigits        - two digits are used by default
  * @return {Void}
  *
  *************************************
@@ -29,7 +29,9 @@
 				speed           : $( this ).data( 'counter-duration' ),
 				refreshInterval : $( this ).data( 'counter-refresh-interval' ),
 				dilimiter       : $( this ).data( 'counter-dilimiter' ),
-				doubleDigits    : $( this ).data( 'counter-double-digits' )
+				doubleDigits    : $( this ).data( 'counter-double-digits' ),
+				onUpdate        : null,   
+				onComplete      : null
 			}, options);
             
             
@@ -101,16 +103,17 @@
 	};
 	
 	$.fn.UixCountTo.defaults = {
-        fixed          : 0,           // formats a number using fixed-point notation.
-		from           : 0,            // the number the element should start at
-		number         : 0,            // the number the element should end at
-		duration       : 500,         // how long it should take to count between the target numbers
-		refreshInterval: 1,           // how often the element should be updated
-		dilimiter      : true,        // the number of decimal places to show
-		onUpdate       : null,        // callback method for every time the element is updated
-		onComplete     : null,       // callback method for when the element finishes updating,
-		doubleDigits   : false       // two digits are used by default
+		from           : 0,       
+		to             : 0,      
+		fixed          : 0,      
+		speed          : 500,       
+		refreshInterval: 1,       
+		dilimiter      : true,    
+		doubleDigits   : false, 
+		onUpdate       : null,    
+		onComplete     : null  
+		
 	};
-	
+
 	
 }(jQuery));
