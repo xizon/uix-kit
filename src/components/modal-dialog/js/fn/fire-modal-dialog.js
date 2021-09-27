@@ -38,7 +38,9 @@ import '@uixkit/plugins/Miscellaneous/scrollLock';
 
 			if ( settings.id == '' ) return false;
 
-			
+			//Prevent automatic close from affecting new fire effects
+			clearTimeout( window.setCloseModalDialog );	
+
 			//Add modal mask to stage
 			if ( $( '.uix-modal-mask' ).length == 0 ) {
 				$( 'body' ).prepend( '<div class="uix-modal-mask"></div>' );

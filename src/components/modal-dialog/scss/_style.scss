@@ -181,6 +181,7 @@ $modal-box-radius: 8px;
         opacity: 1;
 
 		.uix-modal-box__video-container {
+			video,
 			 > div.video-js,
 			iframe {
 				pointer-events: auto;
