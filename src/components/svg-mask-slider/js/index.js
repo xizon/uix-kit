@@ -24,7 +24,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.SVG_MASK_SLIDER               = module.SVG_MASK_SLIDER || {};
-    module.SVG_MASK_SLIDER.version       = '0.0.1';
+    module.SVG_MASK_SLIDER.version       = '0.0.2';
     module.SVG_MASK_SLIDER.pageLoaded    = function() {
 
 		const $window          = $( window );
@@ -380,7 +380,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 			//Next/Prev buttons
 			//-------------------------------------		
 			const _prev = $( arrowsID ).find( '.uix-svgMask-slider__arrows--prev' ),
-				_next = $( arrowsID ).find( '.uix-svgMask-slider__arrows--next' );
+				  _next = $( arrowsID ).find( '.uix-svgMask-slider__arrows--next' );
 
 			$( arrowsID ).find( 'a' ).attr( 'href', 'javascript:' );
 
@@ -389,20 +389,29 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 				_prev.addClass( 'is-disabled' );
 			}
 
-
 			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
-				
+				prevMove();
+			});
+
+			_next.off( 'click' ).on( 'click', function( e ) {
+				e.preventDefault();
+				nextMove();
+			});
+
+			function prevMove() {
 				if ( svgAnimating ) return false;
 
                 //Prevent buttons' events from firing multiple times
-                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( this ).attr( 'aria-disabled', 'true' );
+                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                _prev.attr( 'aria-disabled', 'true' );
 
-                $( this )
+                _prev
                     .delay(animDelay)
-                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+                    .queue(function(next) { _prev.attr( 'aria-disabled', 'false' ); next(); });                
                 
+				//
+				if ( _prev.hasClass( 'is-disabled' ) ) return false;					
 				
 				//Text animation from timeline
 				tl1.restart();
@@ -417,23 +426,22 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 
 				//Pause the auto play event
 				clearInterval( $this[0].animatedSlides );
-
-			});
-
-			_next.off( 'click' ).on( 'click', function( e ) {
-				e.preventDefault();
-				
+			}
+			
+			function nextMove() {
 				if ( svgAnimating ) return false;
                 
                 //Prevent buttons' events from firing multiple times
-                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( this ).attr( 'aria-disabled', 'true' );
+                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                _next.attr( 'aria-disabled', 'true' );
 
-                $( this )
+                _next
                     .delay(animDelay)
-                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+                    .queue(function(next) { _next.attr( 'aria-disabled', 'false' ); next(); });                
                 
 				
+				//
+				if ( _next.hasClass( 'is-disabled' ) ) return false;
 				
 				//Text animation from timeline
 				tl1.restart();
@@ -448,127 +456,115 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 
 
 				//Pause the auto play event
-				clearInterval( $this[0].animatedSlides );
-
-
-			});
-
-
-
+				clearInterval( $this[0].animatedSlides );   
+			} 
+			
 			//Added touch method to mobile device and desktop
 			//-------------------------------------	
-			const $dragDropTrigger = $items;
+			const $dragTrigger = $this.find( '.uix-svgMask-slider__inner' );
+			let mouseX, mouseY;
+			let isMoving = false;
 			
-
+			//Avoid images causing mouseup to fail
+			$dragTrigger.find( 'img' ).css({
+				'pointer-events': 'none',
+				'user-select': 'none'
+			});
+			
+			
 			//Make the cursor a move icon when a user hovers over an item
-			if ( draggable && draggableCursor != '' && draggableCursor != false ) $dragDropTrigger.css( 'cursor', draggableCursor );
-
-
-			//Mouse event
-			$dragDropTrigger.on( 'mousedown.SVG_MASK_SLIDER touchstart.SVG_MASK_SLIDER', function( e ) {
-				
+			if ( draggable && draggableCursor != '' && draggableCursor != false ) $dragTrigger.css( 'cursor', draggableCursor );
+			
+			
+			$dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+			document.removeEventListener( 'mouseup', dragEnd );
+			
+			$dragTrigger[0].removeEventListener( 'touchstart', dragStart );
+			document.removeEventListener( 'touchend', dragEnd );
+			
+			
+			//
+			$dragTrigger[0].addEventListener( 'mousedown', dragStart );
+			$dragTrigger[0].addEventListener( 'touchstart', dragStart );
+			
+			
+			function dragStart(e) {
 				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
-
-				const touches = e.originalEvent.touches;
-
-				$( this ).addClass( 'is-dragging' );
-
-
+				const touches = e.touches;
+			
 				if ( touches && touches.length ) {	
-					$( this ).data( 'origin_mouse_x', parseInt( touches[0].pageX ) );
-					$( this ).data( 'origin_mouse_y', parseInt( touches[0].pageY ) );
-
+					mouseX = touches[0].clientX;
+					mouseY = touches[0].clientY;
 				} else {
-
-					if ( draggable ) {
-						$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-						$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );	
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+				} 
+			
+				document.addEventListener( 'mouseup', dragEnd );
+				document.addEventListener( 'mousemove', dragProcess );
+			
+				document.addEventListener( 'touchend', dragEnd );
+				document.addEventListener( 'touchmove', dragProcess ); 
+			
+			}
+			
+			function dragProcess(e) {
+			
+				const touches = e.touches;
+				let offsetX, offsetY;
+			
+			
+				if ( touches && touches.length ) {	
+					offsetX = mouseX - touches[0].clientX,
+					offsetY = mouseY - touches[0].clientY;
+				} else {
+					offsetX = mouseX - e.clientX,
+					offsetY = mouseY - e.clientY;
+				} 
+			
+			
+				//--- left
+				if ( offsetX >= 50) {
+					if ( draggable || ( touches && touches.length ) ) {
+						if ( !isMoving ) {
+							isMoving = true;
+							nextMove();
+						}
 					}
-
-
 				}
-
-				$dragDropTrigger.on( 'mouseup.SVG_MASK_SLIDER touchmove.SVG_MASK_SLIDER', function( e ) {
-					
-
-					$( this ).removeClass( 'is-dragging' );
-					let touches        = e.originalEvent.touches,
-						origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-						origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-
-					if ( touches && touches.length ) {
-
-						let deltaX = origin_mouse_x - touches[0].pageX,
-							deltaY = origin_mouse_y - touches[0].pageY;
-
-						//--- left
-						if ( deltaX >= 50) {
-							if ( $items.filter( '.is-active' ).index() < itemTotal - 1 ) _next.trigger( 'click' );
+			
+				//--- right
+				if ( offsetX <= -50) {
+					if ( draggable || ( touches && touches.length ) ) {
+						if ( !isMoving ) {
+							isMoving = true;
+							prevMove();
 						}
-						
-						//--- right
-						if ( deltaX <= -50) {
-							if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
-						}
-						
-						//--- up
-						if ( deltaY >= 50) {
-							
-
-						}
-						
-						//--- down
-						if ( deltaY <= -50) {
-							
-
-						}
-						
-
-						if ( Math.abs( deltaX ) >= 50 || Math.abs( deltaY ) >= 50 ) {
-							$dragDropTrigger.off( 'touchmove.SVG_MASK_SLIDER' );
-						}	
-
-
-					} else {
-
-						
-						if ( draggable ) {
-							//right
-							if ( e.pageX > origin_mouse_x ) {				
-								if ( $items.filter( '.is-active' ).index() > 0 ) _prev.trigger( 'click' );
-							}
-
-							//left
-							if ( e.pageX < origin_mouse_x ) {
-								if ( $items.filter( '.is-active' ).index() < itemTotal - 1 ) _next.trigger( 'click' );
-							}
-
-							//down
-							if ( e.pageY > origin_mouse_y ) {
-
-							}
-
-							//up
-							if ( e.pageY < origin_mouse_y ) {
-
-							}	
-
-							$dragDropTrigger.off( 'mouseup.SVG_MASK_SLIDER' );
-
-						}	
-
-
-
 					}
+				}
+			
+				//--- up
+				if ( offsetY >= 50) { 
+			
+				}
+			
+				//--- down
+				if ( offsetY <= -50) {
+			
+				}
+			}
+			
+			function dragEnd(e) {
+				document.removeEventListener( 'mousemove', dragProcess);
+				document.removeEventListener( 'touchmove', dragProcess);
+			
+				//restore move action status
+				setTimeout( function() {
+					isMoving = false;
+				}, animDelay);
+			}
 
 
-
-				} );//end: mouseup.SVG_MASK_SLIDER touchmove.SVG_MASK_SLIDER
-
-
-
-
-			} );// end: mousedown.SVG_MASK_SLIDER touchstart.SVG_MASK_SLIDER
 			
 		}
 		

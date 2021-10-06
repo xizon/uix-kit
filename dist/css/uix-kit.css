@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.3
+ * ## Version             :  4.5.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 10, 2021
+ * ## Last Update         :  October 6, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -10227,6 +10227,7 @@ a.uix-lightbox__original__link {
   opacity: 1;
 }
 
+.uix-modal-box.is-fullscreen.is-video.is-active .uix-modal-box__video-container video,
 .uix-modal-box.is-fullscreen.is-video.is-active .uix-modal-box__video-container > div.video-js,
 .uix-modal-box.is-fullscreen.is-video.is-active .uix-modal-box__video-container iframe {
   pointer-events: auto;

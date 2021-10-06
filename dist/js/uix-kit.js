@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.3
+ * ## Version             :  4.5.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 10, 2021
+ * ## Last Update         :  October 6, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -2972,15 +2972,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
  *************************************
  * Count To
  *
- * @param  {Number} fixed              - formats a number using fixed-point notation.
+ * @param  {Number} fixed                - formats a number using fixed-point notation.
  * @param  {Number} from                 - the number the element should start at
- * @param  {Number} number               - the number the element should end at
- * @param  {Number} duration             - how long it should take to count between the target numbers
+ * @param  {Number} to                   - the number the element should end at
+ * @param  {Number} speed                - how long it should take to count between the target numbers
  * @param  {Number} refreshInterval      - how often the element should be updated
  * @param  {Boolean} dilimiter           - the number of decimal places to show
+ * @param  {Boolean} doubleDigits        - two digits are used by default
  * @param  {Function} onUpdate           - callback method for every time the element is updated
  * @param  {Function} onComplete         - callback method for when the element finishes updating,
- * @param  {Boolean} doubleDigits        - two digits are used by default
  * @return {Void}
  *
  *************************************
@@ -2997,7 +2997,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         speed: $(this).data('counter-duration'),
         refreshInterval: $(this).data('counter-refresh-interval'),
         dilimiter: $(this).data('counter-dilimiter'),
-        doubleDigits: $(this).data('counter-double-digits')
+        doubleDigits: $(this).data('counter-double-digits'),
+        onUpdate: null,
+        onComplete: null
       }, options); // how many times to update the value, and how much to increment the value on each update
 
       var loops = Math.ceil(settings.speed / settings.refreshInterval),
@@ -3058,24 +3060,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   };
 
   $.fn.UixCountTo.defaults = {
-    fixed: 0,
-    // formats a number using fixed-point notation.
     from: 0,
-    // the number the element should start at
-    number: 0,
-    // the number the element should end at
-    duration: 500,
-    // how long it should take to count between the target numbers
+    to: 0,
+    fixed: 0,
+    speed: 500,
     refreshInterval: 1,
-    // how often the element should be updated
     dilimiter: true,
-    // the number of decimal places to show
+    doubleDigits: false,
     onUpdate: null,
-    // callback method for every time the element is updated
-    onComplete: null,
-    // callback method for when the element finishes updating,
-    doubleDigits: false // two digits are used by default
-
+    onComplete: null
   };
 })(jQuery);
 
@@ -17330,7 +17323,7 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.2.3';
+  module.ADVANCED_SLIDER.version = '0.2.4';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -17580,107 +17573,138 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+        e.preventDefault();
+        prevMove();
+      });
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(animDelay).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+      _next.off('click').on('click', function (e) {
+        e.preventDefault();
+        nextMove();
+      });
+
+      function prevMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        _prev.delay(animDelay).queue(function (next) {
+          _prev.attr('aria-disabled', 'false');
+
           next();
         }); //
+
+
+        if (_prev.hasClass('is-disabled')) return false; //
 
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
-      });
+      }
 
-      _next.off('click').on('click', function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+      function nextMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_next.attr('aria-disabled') == 'true') return false;
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(animDelay).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+        _next.attr('aria-disabled', 'true');
+
+        _next.delay(animDelay).queue(function (next) {
+          _next.attr('aria-disabled', 'false');
+
           next();
         }); //
+
+
+        if (_next.hasClass('is-disabled')) return false; //
 
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
-      }); //Added touch method to mobile device and desktop
+      } //Added touch method to mobile device and desktop
       //-------------------------------------	
 
 
-      var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
+      var $dragTrigger = $this.find('.uix-advanced-slider__inner');
+      var mouseX, mouseY;
+      var isMoving = false; //Avoid images causing mouseup to fail
 
-      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
+      $dragTrigger.find('img').css({
+        'pointer-events': 'none',
+        'user-select': 'none'
+      }); //Make the cursor a move icon when a user hovers over an item
 
-      $dragDropTrigger.on('mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER', function (e) {
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor);
+      $dragTrigger[0].removeEventListener('mousedown', dragStart);
+      document.removeEventListener('mouseup', dragEnd);
+      $dragTrigger[0].removeEventListener('touchstart', dragStart);
+      document.removeEventListener('touchend', dragEnd); //
+
+      $dragTrigger[0].addEventListener('mousedown', dragStart);
+      $dragTrigger[0].addEventListener('touchstart', dragStart);
+
+      function dragStart(e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
-        var touches = e.originalEvent.touches;
-        $(this).addClass('is-dragging');
+        var touches = e.touches;
 
         if (touches && touches.length) {
-          $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
-          $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
+          mouseX = touches[0].clientX;
+          mouseY = touches[0].clientY;
         } else {
-          if (draggable) {
-            $(this).data('origin_mouse_x', parseInt(e.pageX));
-            $(this).data('origin_mouse_y', parseInt(e.pageY));
-          }
+          mouseX = e.clientX;
+          mouseY = e.clientY;
         }
 
-        $dragDropTrigger.on('mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER', function (e) {
-          $(this).removeClass('is-dragging');
-          var touches = e.originalEvent.touches,
-              origin_mouse_x = $(this).data('origin_mouse_x'),
-              origin_mouse_y = $(this).data('origin_mouse_y');
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('mousemove', dragProcess);
+        document.addEventListener('touchend', dragEnd);
+        document.addEventListener('touchmove', dragProcess);
+      }
 
-          if (touches && touches.length) {
-            var deltaX = origin_mouse_x - touches[0].pageX,
-                deltaY = origin_mouse_y - touches[0].pageY; //--- left
+      function dragProcess(e) {
+        var touches = e.touches;
+        var offsetX, offsetY;
 
-            if (deltaX >= 50) {
-              if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
-            } //--- right
-
-
-            if (deltaX <= -50) {
-              if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
-            } //--- up
+        if (touches && touches.length) {
+          offsetX = mouseX - touches[0].clientX, offsetY = mouseY - touches[0].clientY;
+        } else {
+          offsetX = mouseX - e.clientX, offsetY = mouseY - e.clientY;
+        } //--- left
 
 
-            if (deltaY >= 50) {} //--- down
-
-
-            if (deltaY <= -50) {}
-
-            if (Math.abs(deltaX) >= 50 || Math.abs(deltaY) >= 50) {
-              $dragDropTrigger.off('touchmove.ADVANCED_SLIDER');
-            }
-          } else {
-            if (draggable) {
-              //right
-              if (e.pageX > origin_mouse_x) {
-                if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
-              } //left
-
-
-              if (e.pageX < origin_mouse_x) {
-                if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
-              } //down
-
-
-              if (e.pageY > origin_mouse_y) {} //up
-
-
-              if (e.pageY < origin_mouse_y) {}
-
-              $dragDropTrigger.off('mouseup.ADVANCED_SLIDER');
+        if (offsetX >= 50) {
+          if (draggable || touches && touches.length) {
+            if (!isMoving) {
+              isMoving = true;
+              nextMove();
             }
           }
-        }); //end: mouseup.ADVANCED_SLIDER touchmove.ADVANCED_SLIDER
-      }); // end: mousedown.ADVANCED_SLIDER touchstart.ADVANCED_SLIDER
+        } //--- right
+
+
+        if (offsetX <= -50) {
+          if (draggable || touches && touches.length) {
+            if (!isMoving) {
+              isMoving = true;
+              prevMove();
+            }
+          }
+        } //--- up
+
+
+        if (offsetY >= 50) {} //--- down
+
+
+        if (offsetY <= -50) {}
+      }
+
+      function dragEnd(e) {
+        document.removeEventListener('mousemove', dragProcess);
+        document.removeEventListener('touchmove', dragProcess); //restore move action status
+
+        setTimeout(function () {
+          isMoving = false;
+        }, animDelay);
+      }
     }
     /*
      * Transition Between Slides
@@ -18643,7 +18667,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.3.2';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.3';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -19460,112 +19484,142 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+        e.preventDefault();
+        prevMove();
+      });
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(animSpeed).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+      _next.off('click').on('click', function (e) {
+        e.preventDefault();
+        nextMove();
+      });
+
+      function prevMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        _prev.delay(animSpeed).queue(function (next) {
+          _prev.attr('aria-disabled', 'false');
+
           next();
-        }); //Canvas Interactions
+        }); //
+
+
+        if (_prev.hasClass('is-disabled')) return false; //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
 
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
-      });
+      }
 
-      _next.off('click').on('click', function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+      function nextMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_next.attr('aria-disabled') == 'true') return false;
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(animSpeed).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+        _next.attr('aria-disabled', 'true');
+
+        _next.delay(animSpeed).queue(function (next) {
+          _next.attr('aria-disabled', 'false');
+
           next();
         }); //
-        //Canvas Interactions
+
+
+        if (_next.hasClass('is-disabled')) return false; //Canvas Interactions
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
 
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
-      }); //Added touch method to mobile device and desktop
+      } //Added touch method to mobile device and desktop
       //-------------------------------------	
 
 
-      var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
+      var $dragTrigger = $this.find('.uix-advanced-slider-sp__inner');
+      var mouseX, mouseY;
+      var isMoving = false; //Avoid images causing mouseup to fail
 
-      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
+      $dragTrigger.find('img').css({
+        'pointer-events': 'none',
+        'user-select': 'none'
+      }); //Make the cursor a move icon when a user hovers over an item
 
-      $dragDropTrigger.on('mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER', function (e) {
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor);
+      $dragTrigger[0].removeEventListener('mousedown', dragStart);
+      document.removeEventListener('mouseup', dragEnd);
+      $dragTrigger[0].removeEventListener('touchstart', dragStart);
+      document.removeEventListener('touchend', dragEnd); //
+
+      $dragTrigger[0].addEventListener('mousedown', dragStart);
+      $dragTrigger[0].addEventListener('touchstart', dragStart);
+
+      function dragStart(e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
-        var touches = e.originalEvent.touches;
-        $(this).addClass('is-dragging');
+        var touches = e.touches;
 
         if (touches && touches.length) {
-          $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
-          $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
+          mouseX = touches[0].clientX;
+          mouseY = touches[0].clientY;
         } else {
-          if (draggable) {
-            $(this).data('origin_mouse_x', parseInt(e.pageX));
-            $(this).data('origin_mouse_y', parseInt(e.pageY));
-          }
+          mouseX = e.clientX;
+          mouseY = e.clientY;
         }
 
-        $dragDropTrigger.on('mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER', function (e) {
-          $(this).removeClass('is-dragging');
-          var touches = e.originalEvent.touches,
-              origin_mouse_x = $(this).data('origin_mouse_x'),
-              origin_mouse_y = $(this).data('origin_mouse_y');
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('mousemove', dragProcess);
+        document.addEventListener('touchend', dragEnd);
+        document.addEventListener('touchmove', dragProcess);
+      }
 
-          if (touches && touches.length) {
-            var deltaX = origin_mouse_x - touches[0].pageX,
-                deltaY = origin_mouse_y - touches[0].pageY; //--- left
+      function dragProcess(e) {
+        var touches = e.touches;
+        var offsetX, offsetY;
 
-            if (deltaX >= 50) {
-              if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
-            } //--- right
-
-
-            if (deltaX <= -50) {
-              if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
-            } //--- up
+        if (touches && touches.length) {
+          offsetX = mouseX - touches[0].clientX, offsetY = mouseY - touches[0].clientY;
+        } else {
+          offsetX = mouseX - e.clientX, offsetY = mouseY - e.clientY;
+        } //--- left
 
 
-            if (deltaY >= 50) {} //--- down
-
-
-            if (deltaY <= -50) {}
-
-            if (Math.abs(deltaX) >= 50 || Math.abs(deltaY) >= 50) {
-              $dragDropTrigger.off('touchmove.ADVANCED_SLIDER_FILTER');
-            }
-          } else {
-            if (draggable) {
-              //right
-              if (e.pageX > origin_mouse_x) {
-                if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
-              } //left
-
-
-              if (e.pageX < origin_mouse_x) {
-                if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
-              } //down
-
-
-              if (e.pageY > origin_mouse_y) {} //up
-
-
-              if (e.pageY < origin_mouse_y) {}
-
-              $dragDropTrigger.off('mouseup.ADVANCED_SLIDER_FILTER');
+        if (offsetX >= 50) {
+          if (draggable || touches && touches.length) {
+            if (!isMoving) {
+              isMoving = true;
+              nextMove();
             }
           }
-        }); //end: mouseup.ADVANCED_SLIDER_FILTER touchmove.ADVANCED_SLIDER_FILTER
-      }); // end: mousedown.ADVANCED_SLIDER_FILTER touchstart.ADVANCED_SLIDER_FILTER
+        } //--- right
+
+
+        if (offsetX <= -50) {
+          if (draggable || touches && touches.length) {
+            if (!isMoving) {
+              isMoving = true;
+              prevMove();
+            }
+          }
+        } //--- up
+
+
+        if (offsetY >= 50) {} //--- down
+
+
+        if (offsetY <= -50) {}
+      }
+
+      function dragEnd(e) {
+        document.removeEventListener('mousemove', dragProcess);
+        document.removeEventListener('touchmove', dragProcess); //restore move action status
+
+        setTimeout(function () {
+          isMoving = false;
+        }, animSpeed);
+      }
     }
     /*
      * Transition Between Slides
@@ -22381,7 +22435,7 @@ function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var FLEXSLIDER = function (module, $, window, document) {
   if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
-  module.FLEXSLIDER.version = '0.1.9';
+  module.FLEXSLIDER.version = '0.2.0';
 
   module.FLEXSLIDER.documentReady = function ($) {
     var $window = $(window);
@@ -22848,54 +22902,90 @@ var FLEXSLIDER = function (module, $, window, document) {
      */
 
 
-    function slidesExDraggable($obj) {
-      var $dragDropTrigger = $obj.find('.uix-flexslider__inner > div.uix-flexslider__item'); //Make the cursor a move icon when a user hovers over an item
+    function slidesExDraggable($obj, animDelay) {
+      function prevMove() {
+        $obj.flexslider('prev');
+      }
 
-      $dragDropTrigger.css('cursor', 'move'); //Mouse event
+      function nextMove() {
+        $obj.flexslider('next');
+      } //Added touch method to mobile device and desktop
+      //-------------------------------------	
 
-      $dragDropTrigger.on('mousedown', function (e) {
-        e.preventDefault();
 
+      var $dragTrigger = $obj.find('.uix-flexslider__inner');
+      var mouseX, mouseY;
+      var isMoving = false; //Avoid images causing mouseup to fail
+
+      $dragTrigger.find('img').css({
+        'pointer-events': 'none',
+        'user-select': 'none'
+      }); //Make the cursor a move icon when a user hovers over an item
+
+      $dragTrigger.css('cursor', 'move');
+      $dragTrigger[0].removeEventListener('mousedown', dragStart);
+      document.removeEventListener('mouseup', dragEnd); //
+
+      $dragTrigger[0].addEventListener('mousedown', dragStart);
+
+      function dragStart(e) {
         if ($obj.data('flexslider').animating) {
           return;
-        }
+        } //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
 
-        $(this).addClass('is-dragging');
-        $(this).data('origin_mouse_x', parseInt(e.pageX));
-        $(this).data('origin_mouse_y', parseInt(e.pageY));
-      }).on('mouseup', function (e) {
-        e.preventDefault();
 
-        if ($obj.data('flexslider').animating) {
-          return;
-        }
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('mousemove', dragProcess);
+      }
 
-        $(this).removeClass('is-dragging');
-        var origin_mouse_x = $(this).data('origin_mouse_x'),
-            origin_mouse_y = $(this).data('origin_mouse_y');
+      function dragProcess(e) {
+        var offsetX, offsetY;
+        offsetX = mouseX - e.clientX, offsetY = mouseY - e.clientY;
 
         if ('horizontal' === $obj.data('flexslider').vars.direction) {
-          //right
-          if (e.pageX > origin_mouse_x) {
-            $obj.flexslider('prev');
-          } //left
+          //--- left
+          if (offsetX >= 50) {
+            if (!isMoving) {
+              isMoving = true;
+              nextMove();
+            }
+          } //--- right
 
 
-          if (e.pageX < origin_mouse_x) {
-            $obj.flexslider('next');
+          if (offsetX <= -50) {
+            if (!isMoving) {
+              isMoving = true;
+              prevMove();
+            }
           }
         } else {
-          //down
-          if (e.pageY > origin_mouse_y) {
-            $obj.flexslider('prev');
-          } //up
+          //--- up
+          if (offsetY >= 50) {
+            if (!isMoving) {
+              isMoving = true;
+              nextMove();
+            }
+          } //--- down
 
 
-          if (e.pageY < origin_mouse_y) {
-            $obj.flexslider('next');
+          if (offsetY <= -50) {
+            if (!isMoving) {
+              isMoving = true;
+              prevMove();
+            }
           }
         }
-      });
+      }
+
+      function dragEnd(e) {
+        document.removeEventListener('mousemove', dragProcess); //restore move action status
+
+        setTimeout(function () {
+          isMoving = false;
+        }, animDelay);
+      }
     }
     /*
      *  Scroll The Slider With Mousewheel
@@ -23051,7 +23141,7 @@ var FLEXSLIDER = function (module, $, window, document) {
       if (flexslider_js_typeof(dataParallax) === ( true ? "undefined" : 0)) dataParallax = false;
       if (flexslider_js_typeof(dataShowItemsMove) === ( true ? "undefined" : 0)) dataShowItemsMove = 1; //Make slider image draggable 
 
-      if (dataDrag) slidesExDraggable($this); //Scroll The Slider With Mousewheel
+      if (dataDrag) slidesExDraggable($this, dataSpeed); //Scroll The Slider With Mousewheel
 
       if (dataWheel) slidesExMousewheel($this); //With Thumbnail ControlNav Pattern
 
@@ -29077,7 +29167,9 @@ function fire_modal_dialog_typeof(obj) { "@babel/helpers - typeof"; if (typeof S
       closeOnlyBtn: false
     }, options);
     this.each(function () {
-      if (settings.id == '') return false; //Add modal mask to stage
+      if (settings.id == '') return false; //Prevent automatic close from affecting new fire effects
+
+      clearTimeout(window.setCloseModalDialog); //Add modal mask to stage
 
       if ($('.uix-modal-mask').length == 0) {
         $('body').prepend('<div class="uix-modal-mask"></div>');
@@ -29219,7 +29311,7 @@ function modal_dialog_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.7';
+  module.MODAL_DIALOG.version = '0.1.8';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -32465,7 +32557,7 @@ function svg_mask_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var SVG_MASK_SLIDER = function (module, $, window, document) {
   if (window.SVG_MASK_SLIDER === null) return false;
   module.SVG_MASK_SLIDER = module.SVG_MASK_SLIDER || {};
-  module.SVG_MASK_SLIDER.version = '0.0.1';
+  module.SVG_MASK_SLIDER.version = '0.0.2';
 
   module.SVG_MASK_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -32754,14 +32846,29 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
 
       _prev.off('click').on('click', function (e) {
         e.preventDefault();
+        prevMove();
+      });
+
+      _next.off('click').on('click', function (e) {
+        e.preventDefault();
+        nextMove();
+      });
+
+      function prevMove() {
         if (svgAnimating) return false; //Prevent buttons' events from firing multiple times
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(animDelay).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        _prev.delay(animDelay).queue(function (next) {
+          _prev.attr('aria-disabled', 'false');
+
           next();
-        }); //Text animation from timeline
+        }); //
+
+
+        if (_prev.hasClass('is-disabled')) return false; //Text animation from timeline
 
         tl1.restart();
         setTimeout(function () {
@@ -32771,18 +32878,23 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
         sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
-      });
+      }
 
-      _next.off('click').on('click', function (e) {
-        e.preventDefault();
+      function nextMove() {
         if (svgAnimating) return false; //Prevent buttons' events from firing multiple times
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(animDelay).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        _next.delay(animDelay).queue(function (next) {
+          _next.attr('aria-disabled', 'false');
+
           next();
-        }); //Text animation from timeline
+        }); //
+
+
+        if (_next.hasClass('is-disabled')) return false; //Text animation from timeline
 
         tl1.restart();
         setTimeout(function () {
@@ -32792,80 +32904,91 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
         sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
 
         clearInterval($this[0].animatedSlides);
-      }); //Added touch method to mobile device and desktop
+      } //Added touch method to mobile device and desktop
       //-------------------------------------	
 
 
-      var $dragDropTrigger = $items; //Make the cursor a move icon when a user hovers over an item
+      var $dragTrigger = $this.find('.uix-svgMask-slider__inner');
+      var mouseX, mouseY;
+      var isMoving = false; //Avoid images causing mouseup to fail
 
-      if (draggable && draggableCursor != '' && draggableCursor != false) $dragDropTrigger.css('cursor', draggableCursor); //Mouse event
+      $dragTrigger.find('img').css({
+        'pointer-events': 'none',
+        'user-select': 'none'
+      }); //Make the cursor a move icon when a user hovers over an item
 
-      $dragDropTrigger.on('mousedown.SVG_MASK_SLIDER touchstart.SVG_MASK_SLIDER', function (e) {
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor);
+      $dragTrigger[0].removeEventListener('mousedown', dragStart);
+      document.removeEventListener('mouseup', dragEnd);
+      $dragTrigger[0].removeEventListener('touchstart', dragStart);
+      document.removeEventListener('touchend', dragEnd); //
+
+      $dragTrigger[0].addEventListener('mousedown', dragStart);
+      $dragTrigger[0].addEventListener('touchstart', dragStart);
+
+      function dragStart(e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
-        var touches = e.originalEvent.touches;
-        $(this).addClass('is-dragging');
+        var touches = e.touches;
 
         if (touches && touches.length) {
-          $(this).data('origin_mouse_x', parseInt(touches[0].pageX));
-          $(this).data('origin_mouse_y', parseInt(touches[0].pageY));
+          mouseX = touches[0].clientX;
+          mouseY = touches[0].clientY;
         } else {
-          if (draggable) {
-            $(this).data('origin_mouse_x', parseInt(e.pageX));
-            $(this).data('origin_mouse_y', parseInt(e.pageY));
-          }
+          mouseX = e.clientX;
+          mouseY = e.clientY;
         }
 
-        $dragDropTrigger.on('mouseup.SVG_MASK_SLIDER touchmove.SVG_MASK_SLIDER', function (e) {
-          $(this).removeClass('is-dragging');
-          var touches = e.originalEvent.touches,
-              origin_mouse_x = $(this).data('origin_mouse_x'),
-              origin_mouse_y = $(this).data('origin_mouse_y');
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('mousemove', dragProcess);
+        document.addEventListener('touchend', dragEnd);
+        document.addEventListener('touchmove', dragProcess);
+      }
 
-          if (touches && touches.length) {
-            var deltaX = origin_mouse_x - touches[0].pageX,
-                deltaY = origin_mouse_y - touches[0].pageY; //--- left
+      function dragProcess(e) {
+        var touches = e.touches;
+        var offsetX, offsetY;
 
-            if (deltaX >= 50) {
-              if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
-            } //--- right
-
-
-            if (deltaX <= -50) {
-              if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
-            } //--- up
+        if (touches && touches.length) {
+          offsetX = mouseX - touches[0].clientX, offsetY = mouseY - touches[0].clientY;
+        } else {
+          offsetX = mouseX - e.clientX, offsetY = mouseY - e.clientY;
+        } //--- left
 
 
-            if (deltaY >= 50) {} //--- down
-
-
-            if (deltaY <= -50) {}
-
-            if (Math.abs(deltaX) >= 50 || Math.abs(deltaY) >= 50) {
-              $dragDropTrigger.off('touchmove.SVG_MASK_SLIDER');
-            }
-          } else {
-            if (draggable) {
-              //right
-              if (e.pageX > origin_mouse_x) {
-                if ($items.filter('.is-active').index() > 0) _prev.trigger('click');
-              } //left
-
-
-              if (e.pageX < origin_mouse_x) {
-                if ($items.filter('.is-active').index() < itemTotal - 1) _next.trigger('click');
-              } //down
-
-
-              if (e.pageY > origin_mouse_y) {} //up
-
-
-              if (e.pageY < origin_mouse_y) {}
-
-              $dragDropTrigger.off('mouseup.SVG_MASK_SLIDER');
+        if (offsetX >= 50) {
+          if (draggable || touches && touches.length) {
+            if (!isMoving) {
+              isMoving = true;
+              nextMove();
             }
           }
-        }); //end: mouseup.SVG_MASK_SLIDER touchmove.SVG_MASK_SLIDER
-      }); // end: mousedown.SVG_MASK_SLIDER touchstart.SVG_MASK_SLIDER
+        } //--- right
+
+
+        if (offsetX <= -50) {
+          if (draggable || touches && touches.length) {
+            if (!isMoving) {
+              isMoving = true;
+              prevMove();
+            }
+          }
+        } //--- up
+
+
+        if (offsetY >= 50) {} //--- down
+
+
+        if (offsetY <= -50) {}
+      }
+
+      function dragEnd(e) {
+        document.removeEventListener('mousemove', dragProcess);
+        document.removeEventListener('touchmove', dragProcess); //restore move action status
+
+        setTimeout(function () {
+          isMoving = false;
+        }, animDelay);
+      }
     }
     /*
      * Transition Between Slides

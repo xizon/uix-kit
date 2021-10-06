@@ -28,7 +28,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.FLEXSLIDER               = module.FLEXSLIDER || {};
-    module.FLEXSLIDER.version       = '0.1.9';
+    module.FLEXSLIDER.version       = '0.2.0';
     module.FLEXSLIDER.documentReady = function( $ ) {
 
 		const $window          = $( window );
@@ -669,64 +669,115 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 		 * @param  {Element} $obj             - The current FlexSlider setup using custom selector.
 		 * @return {Void}
 		 */
-        function slidesExDraggable( $obj ) {
+        function slidesExDraggable( $obj, animDelay ) {
+
+
+			function prevMove() {
+				$obj.flexslider( 'prev' );
+			}
 			
-			const $dragDropTrigger = $obj.find( '.uix-flexslider__inner > div.uix-flexslider__item' );
+			function nextMove() {
+				$obj.flexslider( 'next' );
+			} 
+			
+			//Added touch method to mobile device and desktop
+			//-------------------------------------	
+			const $dragTrigger = $obj.find( '.uix-flexslider__inner' );
+			let mouseX, mouseY;
+			let isMoving = false;
+			
+			//Avoid images causing mouseup to fail
+			$dragTrigger.find( 'img' ).css({
+				'pointer-events': 'none',
+				'user-select': 'none'
+			});
+			
 			
 			//Make the cursor a move icon when a user hovers over an item
-			$dragDropTrigger.css( 'cursor', 'move' );
+			$dragTrigger.css( 'cursor', 'move' );
 			
+			
+			$dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+			document.removeEventListener( 'mouseup', dragEnd );
+			
+			
+			//
+			$dragTrigger[0].addEventListener( 'mousedown', dragStart );
+			
+			
+			function dragStart(e) {
 
-			//Mouse event
-			$dragDropTrigger.on( 'mousedown', function( e ) {
-				e.preventDefault();
-				
 				if ( $obj.data( 'flexslider' ).animating ) {
 					return;
 				}
 
-				$( this ).addClass( 'is-dragging' );
-				$( this ).data( 'origin_mouse_x', parseInt( e.pageX ) );
-				$( this ).data( 'origin_mouse_y', parseInt( e.pageY ) );
-				
-			} ).on( 'mouseup', function( e ) {
-				e.preventDefault();
-				
-				if ( $obj.data('flexslider').animating ) {
-					return;
-				}
-
-				$( this ).removeClass( 'is-dragging' );
-				let origin_mouse_x = $( this ).data( 'origin_mouse_x' ),
-					origin_mouse_y = $( this ).data( 'origin_mouse_y' );
-				
-				
+				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+			
+				document.addEventListener( 'mouseup', dragEnd );
+				document.addEventListener( 'mousemove', dragProcess );
+			
+			}
+			
+			function dragProcess(e) {
+			
+				let offsetX, offsetY;
+			
+				offsetX = mouseX - e.clientX,
+				offsetY = mouseY - e.clientY;
+			
 				if ( 'horizontal' === $obj.data( 'flexslider' ).vars.direction ) {
 					
-					//right
-					if ( e.pageX > origin_mouse_x ) {
-						$obj.flexslider( 'prev' );
+					//--- left
+					if ( offsetX >= 50) {
+						if ( !isMoving ) {
+							isMoving = true;
+							nextMove();
+						}
 					}
-					
-					//left
-					if ( e.pageX < origin_mouse_x ) {
-						$obj.flexslider( 'next' );
+				
+					//--- right
+					if ( offsetX <= -50) {
+						if ( !isMoving ) {
+							isMoving = true;
+							prevMove();
+						}
 					}
 					
 				} else {
 
-					//down
-					if ( e.pageY > origin_mouse_y ) {
-						$obj.flexslider( 'prev' );
+					//--- up
+					if ( offsetY >= 50) { 
+						if ( !isMoving ) {
+							isMoving = true;
+							nextMove();
+						}
 					}
-					
-					//up
-					if ( e.pageY < origin_mouse_y ) {
-						$obj.flexslider( 'next' );
+				
+					//--- down
+					if ( offsetY <= -50) {
+						if ( !isMoving ) {
+							isMoving = true;
+							prevMove();
+						}
 					}
 					
 				}
-			} );
+
+			
+
+			}
+			
+			function dragEnd(e) {
+				document.removeEventListener( 'mousemove', dragProcess);
+			
+				//restore move action status
+				setTimeout( function() {
+					isMoving = false;
+				}, animDelay);
+			}
+
 			
 			
         }
@@ -915,7 +966,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 
 			
 			//Make slider image draggable 
-			if ( dataDrag ) slidesExDraggable( $this );
+			if ( dataDrag ) slidesExDraggable( $this, dataSpeed );
 
 			//Scroll The Slider With Mousewheel
 			if ( dataWheel ) slidesExMousewheel( $this );

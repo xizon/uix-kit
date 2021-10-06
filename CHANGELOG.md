@@ -1,5 +1,14 @@
 # Changelog
 
+#### = 4.5.5 (October 6, 2021) =
+
+* Fix: Fixed the automatic closing of Modal Dialog
+* Tweak: Optimized the performance and dragging method of the slideshow component.
+* Tweak: Other minor style adjustments and optimizations.
+* Tweak: Update script of counter.
+* Tweak: Corrected the attribute name of the accordion slider.
+
+
 #### = 4.5.4 (September 10, 2021) =
 
 * Tweak: Optimized the multi-terminal adaptation breakpoint of Uix Grid.
