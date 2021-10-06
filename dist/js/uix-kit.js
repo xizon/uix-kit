@@ -6,7 +6,7 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.5
+ * ## Version             :  4.5.6
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  October 6, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -17323,7 +17323,7 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.2.4';
+  module.ADVANCED_SLIDER.version = '0.2.5';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -17435,14 +17435,23 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
           if (!resize) {
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
               sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-              $this.on({
-                mouseenter: function mouseenter() {
-                  clearInterval($this[0].animatedSlides);
-                },
-                mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-                }
-              });
+
+              var autoplayEnter = function autoplayEnter() {
+                clearInterval($this[0].animatedSlides);
+              };
+
+              var autoplayLeave = function autoplayLeave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+              $this.on('mouseenter', autoplayEnter);
+              $this.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+              if (Modernizr.touchevents) {
+                $this.on('pointerenter', autoplayEnter);
+                $this.on('pointerleave', autoplayLeave);
+              }
             }
           } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
 
@@ -17573,12 +17582,18 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides); //Move animation
+
         prevMove();
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides); //Move animation
+
         nextMove();
       });
 
@@ -17597,9 +17612,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
         if (_prev.hasClass('is-disabled')) return false; //
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
-
-        clearInterval($this[0].animatedSlides);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
       }
 
       function nextMove() {
@@ -17617,9 +17630,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
         if (_next.hasClass('is-disabled')) return false; //
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
-
-        clearInterval($this[0].animatedSlides);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
       } //Added touch method to mobile device and desktop
       //-------------------------------------	
 
@@ -18667,7 +18678,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.3.3';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.4';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -18807,14 +18818,23 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           if (!resize) {
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
               sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-              $this.on({
-                mouseenter: function mouseenter() {
-                  clearInterval($this[0].animatedSlides);
-                },
-                mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-                }
-              });
+
+              var autoplayEnter = function autoplayEnter() {
+                clearInterval($this[0].animatedSlides);
+              };
+
+              var autoplayLeave = function autoplayLeave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+              $this.on('mouseenter', autoplayEnter);
+              $this.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+              if (Modernizr.touchevents) {
+                $this.on('pointerenter', autoplayEnter);
+                $this.on('pointerleave', autoplayLeave);
+              }
             }
           } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
 
@@ -19484,12 +19504,18 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides); //Move animation
+
         prevMove();
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides); //Move animation
+
         nextMove();
       });
 
@@ -19510,9 +19536,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'prev'); //Update the current and previous items
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
-
-        clearInterval($this[0].animatedSlides);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
       }
 
       function nextMove() {
@@ -19532,9 +19556,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
         transitionInteractions($items.filter('.is-active').index(), $items.filter('.leave').index(), $this, 'out', 'next'); //Update the current and next items
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
-
-        clearInterval($this[0].animatedSlides);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
       } //Added touch method to mobile device and desktop
       //-------------------------------------	
 
@@ -26871,7 +26893,7 @@ function hybrid_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (t
 var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
   if (window.HYBRID_CONTENT_SLIDER === null) return false;
   module.HYBRID_CONTENT_SLIDER = module.HYBRID_CONTENT_SLIDER || {};
-  module.HYBRID_CONTENT_SLIDER.version = '0.0.95';
+  module.HYBRID_CONTENT_SLIDER.version = '0.1.0';
 
   module.HYBRID_CONTENT_SLIDER.pageLoaded = function () {
     $('.uix-hybrid-content-slider').each(function () {
@@ -27253,14 +27275,23 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
       if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
         sliderAutoPlay(playTimes, dataTiming, dataLoop);
-        $carouselWrapper.on({
-          mouseenter: function mouseenter() {
-            clearInterval($carouselWrapper[0].animatedSlides);
-          },
-          mouseleave: function mouseleave() {
-            sliderAutoPlay(playTimes, dataTiming, dataLoop);
-          }
-        });
+
+        var autoplayEnter = function autoplayEnter() {
+          clearInterval($carouselWrapper[0].animatedSlides);
+        };
+
+        var autoplayLeave = function autoplayLeave() {
+          sliderAutoPlay(playTimes, dataTiming, dataLoop);
+        }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+        $carouselWrapper.on('mouseenter', autoplayEnter);
+        $carouselWrapper.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+        if (Modernizr.touchevents) {
+          $carouselWrapper.on('pointerenter', autoplayEnter);
+          $carouselWrapper.on('pointerleave', autoplayLeave);
+        }
       }
       /*
        * Trigger slider autoplay
@@ -32557,7 +32588,7 @@ function svg_mask_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var SVG_MASK_SLIDER = function (module, $, window, document) {
   if (window.SVG_MASK_SLIDER === null) return false;
   module.SVG_MASK_SLIDER = module.SVG_MASK_SLIDER || {};
-  module.SVG_MASK_SLIDER.version = '0.0.2';
+  module.SVG_MASK_SLIDER.version = '0.0.3';
 
   module.SVG_MASK_SLIDER.pageLoaded = function () {
     var $window = $(window);
@@ -32702,14 +32733,23 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
           if (!resize) {
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
               sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-              $this.on({
-                mouseenter: function mouseenter() {
-                  clearInterval($this[0].animatedSlides);
-                },
-                mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-                }
-              });
+
+              var autoplayEnter = function autoplayEnter() {
+                clearInterval($this[0].animatedSlides);
+              };
+
+              var autoplayLeave = function autoplayLeave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+              $this.on('mouseenter', autoplayEnter);
+              $this.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+              if (Modernizr.touchevents) {
+                $this.on('pointerenter', autoplayEnter);
+                $this.on('pointerleave', autoplayLeave);
+              }
             }
           } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
 
@@ -32845,12 +32885,18 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
       }
 
       _prev.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides); //Move animation
+
         prevMove();
       });
 
       _next.off('click').on('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //Pause the auto play event
+
+        clearInterval($this[0].animatedSlides); //Move animation
+
         nextMove();
       });
 
@@ -32875,9 +32921,7 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
           tl2.restart();
         }, 1500); //
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
-
-        clearInterval($this[0].animatedSlides);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop);
       }
 
       function nextMove() {
@@ -32901,9 +32945,7 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
           tl2.restart();
         }, 1500); //
 
-        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop); //Pause the auto play event
-
-        clearInterval($this[0].animatedSlides);
+        sliderUpdates(parseFloat($items.filter('.is-active').index()) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop);
       } //Added touch method to mobile device and desktop
       //-------------------------------------	
 
@@ -40786,7 +40828,7 @@ function simple_3D_shatter_slider_js_typeof(obj) { "@babel/helpers - typeof"; if
 var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   if (window.THREE_SHATTER_SLIDER === null) return false;
   module.THREE_SHATTER_SLIDER = module.THREE_SHATTER_SLIDER || {};
-  module.THREE_SHATTER_SLIDER.version = '0.0.9';
+  module.THREE_SHATTER_SLIDER.version = '0.1.0';
 
   module.THREE_SHATTER_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -41021,14 +41063,23 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
 
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
               sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-              $this.on({
-                mouseenter: function mouseenter() {
-                  clearInterval($this[0].animatedSlides);
-                },
-                mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-                }
-              });
+
+              var autoplayEnter = function autoplayEnter() {
+                clearInterval($this[0].animatedSlides);
+              };
+
+              var autoplayLeave = function autoplayLeave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+              $this.on('mouseenter', autoplayEnter);
+              $this.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+              if (Modernizr.touchevents) {
+                $this.on('pointerenter', autoplayEnter);
+                $this.on('pointerleave', autoplayLeave);
+              }
             } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
 
 
@@ -41476,7 +41527,7 @@ function simple_3D_explosive_particle_slider_js_typeof(obj) { "@babel/helpers - 
 var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   if (window.THREE_EXP_PARTICLE_SLIDER === null) return false;
   module.THREE_EXP_PARTICLE_SLIDER = module.THREE_EXP_PARTICLE_SLIDER || {};
-  module.THREE_EXP_PARTICLE_SLIDER.version = '0.0.9';
+  module.THREE_EXP_PARTICLE_SLIDER.version = '0.1.0';
 
   module.THREE_EXP_PARTICLE_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -41717,14 +41768,23 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
 
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
               sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-              $this.on({
-                mouseenter: function mouseenter() {
-                  clearInterval($this[0].animatedSlides);
-                },
-                mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-                }
-              });
+
+              var autoplayEnter = function autoplayEnter() {
+                clearInterval($this[0].animatedSlides);
+              };
+
+              var autoplayLeave = function autoplayLeave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+              $this.on('mouseenter', autoplayEnter);
+              $this.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+              if (Modernizr.touchevents) {
+                $this.on('pointerenter', autoplayEnter);
+                $this.on('pointerleave', autoplayLeave);
+              }
             } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
 
 
@@ -42150,7 +42210,7 @@ function simple_3D_liquid_scrollspy_slider_js_typeof(obj) { "@babel/helpers - ty
 var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   if (window.THREE_LIQUID_SCROLLSPY_SLIDER === null) return false;
   module.THREE_LIQUID_SCROLLSPY_SLIDER = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.1.3';
+  module.THREE_LIQUID_SCROLLSPY_SLIDER.version = '0.1.4';
 
   module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -42402,14 +42462,23 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
 
             if (dataAuto && !isNaN(parseFloat(dataTiming)) && isFinite(dataTiming)) {
               sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-              $this.on({
-                mouseenter: function mouseenter() {
-                  clearInterval($this[0].animatedSlides);
-                },
-                mouseleave: function mouseleave() {
-                  sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
-                }
-              });
+
+              var autoplayEnter = function autoplayEnter() {
+                clearInterval($this[0].animatedSlides);
+              };
+
+              var autoplayLeave = function autoplayLeave() {
+                sliderAutoPlay(playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows);
+              }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+
+
+              $this.on('mouseenter', autoplayEnter);
+              $this.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+
+              if (Modernizr.touchevents) {
+                $this.on('pointerenter', autoplayEnter);
+                $this.on('pointerleave', autoplayLeave);
+              }
             } //Prevents front-end javascripts that are activated with AJAX to repeat loading.
 
 

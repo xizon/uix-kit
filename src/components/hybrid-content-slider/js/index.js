@@ -25,7 +25,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.HYBRID_CONTENT_SLIDER               = module.HYBRID_CONTENT_SLIDER || {};
-    module.HYBRID_CONTENT_SLIDER.version       = '0.0.95';
+    module.HYBRID_CONTENT_SLIDER.version       = '0.1.0';
     module.HYBRID_CONTENT_SLIDER.pageLoaded    = function() {
 
 		$( '.uix-hybrid-content-slider' ).each( function()  {
@@ -519,14 +519,26 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                 sliderAutoPlay( playTimes, dataTiming, dataLoop );
 
-                $carouselWrapper.on({
-                    mouseenter: function() {
-                        clearInterval( $carouselWrapper[0].animatedSlides );
-                    },
-                    mouseleave: function() {
-                        sliderAutoPlay( playTimes, dataTiming, dataLoop );
-                    }
-                });	
+                const autoplayEnter = function() {
+                    clearInterval( $carouselWrapper[0].animatedSlides );
+                };
+
+                const autoplayLeave = function() {
+                    sliderAutoPlay( playTimes, dataTiming, dataLoop );
+                };
+
+
+                // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+                $carouselWrapper.on( 'mouseenter', autoplayEnter );
+                $carouselWrapper.on( 'mouseleave', autoplayLeave );  
+
+                // To determine if it is a touch screen.
+                if (Modernizr.touchevents) {
+                    $carouselWrapper.on( 'pointerenter', autoplayEnter );
+                    $carouselWrapper.on( 'pointerleave', autoplayLeave );  
+                }
+
+
 
             }
             

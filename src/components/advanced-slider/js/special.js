@@ -26,7 +26,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.3.3';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.3.4';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -243,15 +243,24 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
                             sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
 
-                            $this.on({
-                                mouseenter: function() {
-                                    clearInterval( $this[0].animatedSlides );
-                                },
-                                mouseleave: function() {
-                                    sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
-                                }
-                            });	
+							const autoplayEnter = function() {
+								clearInterval( $this[0].animatedSlides );
+							};
+		
+							const autoplayLeave = function() {
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+							};
+		
+							// Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+							$this.on( 'mouseenter', autoplayEnter );
+							$this.on( 'mouseleave', autoplayLeave );  
 
+							// To determine if it is a touch screen.
+							if (Modernizr.touchevents) {
+								$this.on( 'pointerenter', autoplayEnter );
+								$this.on( 'pointerleave', autoplayLeave );  
+							}
+		
                         }
 
 
@@ -1288,11 +1297,21 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+
+				//Pause the auto play event
+				clearInterval( $this[0].animatedSlides );   
+
+				//Move animation
 				prevMove();
 			});
 
 			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+
+				//Pause the auto play event
+				clearInterval( $this[0].animatedSlides );   
+
+				//Move animation
 				nextMove();
 			});
 
@@ -1316,8 +1335,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				//Update the current and previous items
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 
-				//Pause the auto play event
-				clearInterval( $this[0].animatedSlides );
+
 			}
 			
 			function nextMove() {
@@ -1339,9 +1357,6 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 				//Update the current and next items
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 
-
-				//Pause the auto play event
-				clearInterval( $this[0].animatedSlides );  
 			} 
 			
 			//Added touch method to mobile device and desktop

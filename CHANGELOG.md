@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 4.5.6 (October 6, 2021) =
+
+* Fix: Fixed the issue of triggering touch events on the mobile terminal of some components.
+
+
 #### = 4.5.5 (October 6, 2021) =
 
 * Fix: Fixed the automatic closing of Modal Dialog

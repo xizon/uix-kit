@@ -34,7 +34,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SHATTER_SLIDER               = module.THREE_SHATTER_SLIDER || {};
-    module.THREE_SHATTER_SLIDER.version       = '0.0.9';
+    module.THREE_SHATTER_SLIDER.version       = '0.1.0';
     module.THREE_SHATTER_SLIDER.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -326,7 +326,6 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
 
-
                             //Pause the auto play event
                             clearInterval( $this[0].animatedSlides );
 
@@ -365,15 +364,24 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
                             sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
 
-                            $this.on({
-                                mouseenter: function() {
-                                    clearInterval( $this[0].animatedSlides );
-                                },
-                                mouseleave: function() {
-                                    sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
-                                }
-                            });	
+							const autoplayEnter = function() {
+								clearInterval( $this[0].animatedSlides );
+							};
+		
+							const autoplayLeave = function() {
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+							};
+		
+							// Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+							$this.on( 'mouseenter', autoplayEnter );
+							$this.on( 'mouseleave', autoplayLeave );  
 
+							// To determine if it is a touch screen.
+							if (Modernizr.touchevents) {
+								$this.on( 'pointerenter', autoplayEnter );
+								$this.on( 'pointerleave', autoplayLeave );  
+							}
+		
                         } 
                         
 

@@ -24,7 +24,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.SVG_MASK_SLIDER               = module.SVG_MASK_SLIDER || {};
-    module.SVG_MASK_SLIDER.version       = '0.0.2';
+    module.SVG_MASK_SLIDER.version       = '0.0.3';
     module.SVG_MASK_SLIDER.pageLoaded    = function() {
 
 		const $window          = $( window );
@@ -203,14 +203,24 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 
                             sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
 
-                            $this.on({
-                                mouseenter: function() {
-                                    clearInterval( $this[0].animatedSlides );
-                                },
-                                mouseleave: function() {
-                                    sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
-                                }
-                            });	
+							const autoplayEnter = function() {
+								clearInterval( $this[0].animatedSlides );
+							};
+		
+							const autoplayLeave = function() {
+								sliderAutoPlay( playTimes, dataTiming, dataLoop, $this, dataCountTotal, dataCountCur, dataControlsPagination, dataControlsArrows );
+							};
+		
+							// Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
+							$this.on( 'mouseenter', autoplayEnter );
+							$this.on( 'mouseleave', autoplayLeave );  
+
+							// To determine if it is a touch screen.
+							if (Modernizr.touchevents) {
+								$this.on( 'pointerenter', autoplayEnter );
+								$this.on( 'pointerleave', autoplayLeave );  
+							}
+		
 
                         }
 
@@ -391,11 +401,21 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 
 			_prev.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+
+				//Pause the auto play event
+				clearInterval( $this[0].animatedSlides );   
+
+				//Move animation
 				prevMove();
 			});
 
 			_next.off( 'click' ).on( 'click', function( e ) {
 				e.preventDefault();
+
+				//Pause the auto play event
+				clearInterval( $this[0].animatedSlides );   
+
+				//Move animation
 				nextMove();
 			});
 
@@ -424,8 +444,6 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
                 //
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) - 1, $this, 'prev', countTotalID, countCurID, paginationID, arrowsID, loop );
 
-				//Pause the auto play event
-				clearInterval( $this[0].animatedSlides );
 			}
 			
 			function nextMove() {
@@ -454,9 +472,6 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
                 //
 				sliderUpdates( parseFloat( $items.filter( '.is-active' ).index() ) + 1, $this, 'next', countTotalID, countCurID, paginationID, arrowsID, loop );
 
-
-				//Pause the auto play event
-				clearInterval( $this[0].animatedSlides );   
 			} 
 			
 			//Added touch method to mobile device and desktop
