@@ -24,18 +24,20 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 	
 	
 	module.MEGA_MENU               = module.MEGA_MENU || {};
-    module.MEGA_MENU.version       = '0.0.3';
+    module.MEGA_MENU.version       = '0.0.4';
 	module.MEGA_MENU.pageLoaded = function() {
 
 		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 
+
 		// Using delay is for more accurate calculation
 		setTimeout( function() {
 			megaMenuInit( windowWidth );
 		}, 500 );
 		
+
 		
 		$window.on( 'resize', function() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
@@ -72,9 +74,9 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 			
 			// Remove the html tag for mega menu item
 			$menuWrap.find( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
-				const mega_old_item = $( this ).html();
-				if ( mega_old_item != '' ) {
-					$( this ).html( mega_old_item.replace(/<[^>]+>/g, '' ) );
+				const megaOldItem = $( this ).html();
+				if ( megaOldItem != '' ) {
+					$( this ).html( megaOldItem.replace(/<[^>]+>/g, '' ) );
 				}
 			});
 			
@@ -82,51 +84,57 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 			if ( w > 768 ){
 
 				$menuWrap.find( 'li.multi-column' ).each( function( index ) {
-					let root_li          = $( this ),
-						col_total        = root_li.find( '> ul > li' ).length,
-						mega_div         = root_li.find( ' > ul.sub-menu' ),
-						mega_div_w       = mega_div.width(),
-						mega_single_w    = null,
-						root_li_left     = null;
+					const $rootLi         = $( this ),
+						  colTotal        = $rootLi.find( '> ul > li' ).length,
+						  itemWidth       = $rootLi.find( '> ul > li' ).first().width(),
+						  $megaDiv        = $rootLi.find( '> ul.sub-menu' );
+
+					let megaPerWidth    = null,
+						rootLiLeft      = null;
 					
+
+					// Get width or other style data of element when Not Visible (Display: None)
+					let megaDivWidth = $megaDiv.width();
+
+
 					
 					// Add mega arrow
-					if ( root_li.find( '.uix-menu__arrow-mega' ).length < 1 ) root_li.prepend( '<span class="uix-menu__arrow-mega"></span>' );
+					if ( $rootLi.find( '.uix-menu__arrow-mega' ).length < 1 ) $rootLi.prepend( '<span class="uix-menu__arrow-mega"></span>' );
 					
 
 					// Detecting if the right or left of the div is touching the browser window edge.
-					if ( col_total > 0 ) {
+					if ( colTotal > 0 ) {
 
-						root_li_left = UixCssProperty.getAbsoluteCoordinates( mega_div[0] ).left;
+						rootLiLeft = UixCssProperty.getAbsoluteCoordinates( $megaDiv[0] ).left;
 						
 						
 						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
 						if ( maxWidth > w ) maxWidth = w;
 						
 						
-						if ( parseFloat(mega_div_w + 20) > maxWidth ) {
+						if ( (megaDivWidth + 20) > maxWidth ) {
 
-							mega_div_w       = maxWidth;
-							mega_single_w    = maxWidth/col_total - 2.888;
+							megaDivWidth    = maxWidth;
+							megaPerWidth    = maxWidth/colTotal - 2.888;
 							
 							//Resetting the width of each column
-							mega_div.find( '> li' ).css( {
-								'width' : mega_single_w + 'px'
+							$megaDiv.find( '> li' ).css( {
+								'width' : megaPerWidth + 'px'
 							} );
 							
 							//Resetting the width of each <li> tag
-							mega_div.find( '> li ul li' ).css( {
-								'width' : mega_single_w + 'px'
+							$megaDiv.find( '> li ul li' ).css( {
+								'width' : megaPerWidth + 'px'
 							} );
 							
 							
 							if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-								mega_div.css( {
-									'margin-left' : ( - root_li_left ) + ( ( w - mega_div_w )/2 ) + 'px'
+								$megaDiv.css( {
+									'margin-left' : ( -rootLiLeft ) + ( ( w - megaDivWidth )/2 ) + 'px'
 								} );
 							} else {
-								mega_div.css( {
-									'margin-right' : ( - root_li_left ) + ( ( w - mega_div_w )/2 ) + 'px'
+								$megaDiv.css( {
+									'margin-right' : ( -rootLiLeft ) + ( ( w - megaDivWidth )/2 ) + 'px'
 								} );
 							}
 
@@ -136,42 +144,42 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 						} else {
 							
 							//Resetting the width of each column
-							mega_div.find( '> li' ).css( {
+							$megaDiv.find( '> li' ).css( {
 								'width' : perDefaultW + 'px'
 							} );	
 							
 							//Resetting the width of each <li> tag
-							mega_div.find( '> li ul li' ).css( {
+							$megaDiv.find( '> li ul li' ).css( {
 								'width' : perDefaultW + 'px'
 							} );
 								
 							
 							
-							const chkWidth = parseFloat( root_li_left  + mega_div_w );
+							const chkWidth = ( rootLiLeft  + megaDivWidth );
 
 
 							if ( chkWidth > w ) {
 								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-									mega_div.css( {
+									$megaDiv.css( {
 										'margin-left' : - ( chkWidth - w ) + 'px'
 									} );
 								} else {
-									mega_div.css( {
+									$megaDiv.css( {
 										'margin-right' : - ( chkWidth - w ) + 'px'
 									} );
 								}	
 								
 								
 								//If the CSS sets the offset of ul::before
-//								const mega_div_offset = mega_div_w/2 - 0;
+//								const $megaDiv_offset = megaDivWidth/2 - 0;
 //								
 //								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-//									mega_div.css( {
-//										'margin-left' : - ( chkWidth - w ) + mega_div_offset + 'px'
+//									$megaDiv.css( {
+//										'margin-left' : - ( chkWidth - w ) + $megaDiv_offset + 'px'
 //									} );
 //								} else {
-//									mega_div.css( {
-//										'margin-right' : - ( chkWidth - w ) + mega_div_offset + 'px'
+//									$megaDiv.css( {
+//										'margin-right' : - ( chkWidth - w ) + $megaDiv_offset + 'px'
 //									} );
 //								}	
 								
