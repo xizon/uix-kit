@@ -19,7 +19,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -39,7 +41,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 
 
-            const $window          = $( window );
+            
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
 

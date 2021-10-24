@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -20,13 +22,10 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 	if ( window.VIDEOS === null ) return false;
 	
 	
-	
-	
 	module.VIDEOS               = module.VIDEOS || {};
     module.VIDEOS.version       = '0.1.3';
 	module.VIDEOS.documentReady = function( $ ) {
 
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 		

@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixCountTo from '@uixkit/core/counter/js/fn/count-to';
 
@@ -25,17 +27,14 @@ export const COUNTER = ( ( module, $, window, document ) => {
 	
 	
     module.COUNTER               = module.COUNTER || {};
-    module.COUNTER.version       = '0.0.4';
+    module.COUNTER.version       = '0.0.5';
     module.COUNTER.documentReady = function( $ ) {
 
 		
 		const $scrollElements = $( '[data-counter-number]' );
       
-        $( window ).off( 'scroll.COUNTER touchmove.COUNTER' );
-        
         $scrollElements.each( function()  {
 
-            
             const viewport = 1;
             const $el = $( this );
            
@@ -67,13 +66,14 @@ export const COUNTER = ( ( module, $, window, document ) => {
                 }
             };
             
-            
-            scrollUpdate();
-            
-            // Please do not use scroll's off method in each
-            $( window ).on( 'scroll.COUNTER touchmove.COUNTER', function( event ) {
-                 scrollUpdate();
-            });
+
+            // Add function to the element that should be used as the scrollable area.
+            const throttleFunc = UixThrottle(scrollUpdate, 5);
+            window.removeEventListener('scroll', throttleFunc);
+            window.removeEventListener('touchmove', throttleFunc);
+            window.addEventListener('scroll', throttleFunc);
+            window.addEventListener('touchmove', throttleFunc);
+            throttleFunc();
 
 
 

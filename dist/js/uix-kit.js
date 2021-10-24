@@ -6,103 +6,15 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.6
+ * ## Version             :  4.5.7
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 6, 2021
+ * ## Last Update         :  October 24, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
  */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
-
-/***/ 485:
-/***/ (() => {
-
-/* 
- *************************************
- * Parallax Effect
- *
- * @param  {Number} speed       - The speed of movement between elements.
- * @param  {String} transition  - Transition time can simulate easing effect.
- * @param  {Object} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
- * @return {Void}
- *
- *************************************
- */
-(function ($) {
-  'use strict';
-
-  $.fn.UixParallax = function (options) {
-    // This is the easiest way to have default options.
-    var settings = $.extend({
-      speed: 0.25,
-      offsetTop: 0,
-      transition: 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
-      bg: {
-        enable: true,
-        xPos: '50%'
-      }
-    }, options);
-    this.each(function () {
-      var bgEff = settings.bg,
-          $this = $(this),
-          bgXpos = '50%',
-          offsetTop = parseFloat(settings.offsetTop),
-          speed = -parseFloat(settings.speed);
-
-      if (bgEff) {
-        bgEff = settings.bg.enable;
-        bgXpos = settings.bg.xPos;
-      } //Prohibit transition delay
-
-
-      $this.css({
-        'transition': 'none'
-      }); // Please do not use scroll's off method in each
-
-      $(window).on('scroll.UixParallax touchmove.UixParallax', function (e) {
-        scrollUpdate();
-      }); //Initialize the position of the background
-
-      if (bgEff) {
-        //background parallax
-        TweenMax.set($this, {
-          backgroundPosition: bgXpos + ' ' + (-$this[0].getBoundingClientRect().top * speed + -offsetTop) + 'px'
-        });
-      } else {
-        //element parallax
-        TweenMax.set($this, {
-          y: 0
-        });
-      }
-
-      function scrollUpdate() {
-        var spyTop = $this[0].getBoundingClientRect().top;
-
-        if (bgEff) {
-          //background parallax
-          TweenMax.set($this, {
-            css: {
-              'background-position': bgXpos + ' ' + (0 - (spyTop * speed + offsetTop)) + 'px',
-              'transition': settings.transition
-            }
-          });
-        } else {
-          //element parallax
-          TweenMax.set($this, {
-            css: {
-              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - (spyTop * speed + offsetTop)) + ')',
-              'transition': settings.transition
-            }
-          });
-        }
-      }
-    });
-  };
-})(jQuery);
-
-/***/ }),
 
 /***/ 696:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
@@ -14795,163 +14707,6 @@ jQuery.fn.sortElements = function () {
   };
 }();
 
-/***/ }),
-
-/***/ 601:
-/***/ (() => {
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-/*
- * Text Animation
- *
- * @param  {String} selectors                - Text wrapper ID or class name.
- * @return {Void}
- */
-(function ($) {
-  $.fn.UixTextEff = function (options) {
-    // This is the easiest way to have default options.
-    var settings = $.extend({
-      selectors: '.letters-eff-fadeInRight',
-      scrollSpy: false
-    }, options);
-    this.each(function () {
-      var customControls = settings.selectors;
-      var scrollSpy = settings.scrollSpy;
-      var $this = $(customControls);
-      var speed = $this.data('text-eff-speed'),
-          txtEff;
-
-      if (_typeof(speed) === ( true ? "undefined" : 0)) {
-        speed = 1200;
-      } //The data-text-eff attribute must be unique, otherwise it will not execute correctly.
-
-
-      if ($this.length > 1) return false;
-      $this.html($this.text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>")); //--------------
-
-      if (customControls.indexOf('fadeInRight') >= 0) {
-        txtEff = anime.timeline({
-          loop: false
-        }).add({
-          targets: customControls + ' .uix-letter',
-          translateX: [40, 0],
-          translateZ: 0,
-          opacity: [0, 1],
-          easing: "easeOutExpo",
-          duration: speed,
-          delay: function delay(el, i) {
-            return 500 + 30 * i;
-          }
-        });
-      } //--------------
-
-
-      if (customControls.indexOf('zoomInDown') >= 0) {
-        txtEff = anime.timeline({
-          loop: false
-        }).add({
-          targets: customControls + ' .uix-letter',
-          scale: [0, 1],
-          duration: speed,
-          elasticity: 600,
-          delay: function delay(el, i) {
-            return 45 * (i + 1);
-          }
-        });
-      } //--------------
-
-
-      if (customControls.indexOf('flyInOut') >= 0) {
-        txtEff = anime.timeline({
-          loop: false
-        }).add({
-          targets: customControls + ' .uix-letter',
-          translateX: [40, 0],
-          translateZ: 0,
-          opacity: [0, 1],
-          easing: "easeOutExpo",
-          duration: speed,
-          delay: function delay(el, i) {
-            return 500 + 30 * i;
-          }
-        });
-      } //--------------
-
-
-      if (customControls.indexOf('fading') >= 0) {
-        txtEff = anime.timeline({
-          loop: false
-        }).add({
-          targets: customControls + ' .uix-letter',
-          opacity: [0, 1],
-          easing: "easeInOutQuad",
-          duration: speed,
-          delay: function delay(el, i) {
-            return 150 * (i + 1);
-          }
-        });
-      } //--------------
-
-
-      if (customControls.indexOf('floatingUp') >= 0) {
-        txtEff = anime.timeline({
-          loop: false
-        }).add({
-          targets: customControls + ' .uix-letter',
-          translateY: ["1.1em", 0],
-          translateZ: 0,
-          duration: speed,
-          delay: function delay(el, i) {
-            return 50 * i;
-          }
-        });
-      } //--------------
-
-
-      if (customControls.indexOf('scaleIn') >= 0) {
-        txtEff = anime.timeline({
-          loop: false
-        }).add({
-          targets: customControls + ' .uix-letter',
-          opacity: [0, 1],
-          scale: [3.5, 1],
-          duration: speed
-        });
-      }
-
-      txtEff.pause();
-
-      if (!scrollSpy) {
-        txtEff.play();
-      } else {
-        var viewport = 1; //
-
-        var scrollUpdate = function scrollUpdate() {
-          var spyTop = $this[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
-
-          var actived = $this.data('activated');
-
-          if (spyTop < window.innerHeight * viewport) {
-            if (_typeof(actived) === ( true ? "undefined" : 0)) {
-              txtEff.play(); //Prevents front-end javascripts that are activated in the background to repeat loading.
-
-              $this.data('activated', 1);
-            } //endif actived
-
-          }
-        };
-
-        scrollUpdate(); // Please do not use scroll's off method in each
-
-        $(window).on('scroll.UixTextEff touchmove.UixTextEff', function (event) {
-          scrollUpdate();
-        });
-      }
-    });
-  };
-})(jQuery);
-
 /***/ })
 
 /******/ 	});
@@ -15399,6 +15154,48 @@ var UixCssProperty = UixCssProperty || function () {
   }, //
   t;
 }();
+/*
+* Throttle
+*
+* @param  {Function} fn    - A function to be executed within the time limit.
+* @param  {Number} limit   - Waiting time.
+* @return {Void}    
+*/
+
+var UixThrottle = function UixThrottle(fn) {
+  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
+  var waiting = false;
+  return function () {
+    if (!waiting) {
+      fn.apply(this, arguments);
+      waiting = true;
+      setTimeout(function () {
+        waiting = false;
+      }, limit);
+    }
+  };
+};
+/*
+* Debounce
+*
+* @param  {Function} fn    - A function to be executed within the time limit.
+* @param  {Number} limit   - Waiting time.
+* @return {Void}    
+*/
+
+var UixDebounce = function UixDebounce(fn) {
+  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
+  var timer;
+  return function () {
+    //Every time this returned function is called, the timer is cleared to ensure that fn is not executed
+    clearTimeout(timer); // When the returned function is called for the last time (that is the user stops a continuous operation)
+    // Execute fn after another delay milliseconds
+
+    timer = setTimeout(function () {
+      fn.apply(this, arguments);
+    }, limit);
+  };
+};
 ;// CONCATENATED MODULE: ./src/components/_global/js/fn/UixModuleFilter.js
 function UixModuleFilter_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { UixModuleFilter_typeof = function _typeof(obj) { return typeof obj; }; } else { UixModuleFilter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return UixModuleFilter_typeof(obj); }
 
@@ -15762,25 +15559,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var BODY_AND_HEADER = function (module, $, window, document) {
   if (window.BODY_AND_HEADER === null) return false;
   module.BODY_AND_HEADER = module.BODY_AND_HEADER || {};
-  module.BODY_AND_HEADER.version = '0.0.7';
+  module.BODY_AND_HEADER.version = '0.0.8';
 
   module.BODY_AND_HEADER.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('body').hasClass('onepage')) return false;
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //-------- Header initialize
 
     headerInit(windowWidth);
-    $window.on('resize', function () {
-      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-      if (window.innerWidth != windowWidth) {
-        // Update the window width for next time
-        windowWidth = window.innerWidth; // Do stuff here
-
-        headerInit(windowWidth);
-      }
-    });
 
     function headerInit(w) {
       var $headerPlaceholder = $('.uix-header__placeholder.js-uix-header__placeholder-autoheight');
@@ -15792,13 +15579,27 @@ var BODY_AND_HEADER = function (module, $, window, document) {
         $headerPlaceholder.css('height', 0);
         $('body').addClass('is-mobile');
       }
-    } //-------- Sticky header area
-    //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
+    }
 
+    function windowUpdate() {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
+
+        headerInit(windowWidth);
+      }
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow); //-------- Sticky header area
 
     var $el = $('.uix-header__container, .uix-header__placeholder');
-    $window.off('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER').on('scroll.BODY_AND_HEADER touchmove.BODY_AND_HEADER', function () {
-      var scrolled = $(this).scrollTop(),
+
+    function scrollUpdate() {
+      var scrolled = $(window).scrollTop(),
           spyTop = 220;
 
       if (scrolled >= spyTop) {
@@ -15806,7 +15607,15 @@ var BODY_AND_HEADER = function (module, $, window, document) {
       } else {
         $el.removeClass('is-fixed');
       }
-    });
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc();
   };
 
   module.components.documentReady.push(module.BODY_AND_HEADER.documentReady);
@@ -15835,14 +15644,14 @@ function common_height_classCallCheck(instance, Constructor) { if (!(instance in
 var COMMON_HEIGHT = function (module, $, window, document) {
   if (window.COMMON_HEIGHT === null) return false;
   module.COMMON_HEIGHT = module.COMMON_HEIGHT || {};
-  module.COMMON_HEIGHT.version = '0.0.3';
+  module.COMMON_HEIGHT.version = '0.0.4';
 
   module.COMMON_HEIGHT.pageLoaded = function () {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     commonHeightInit(windowWidth);
-    $window.on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -15850,7 +15659,12 @@ var COMMON_HEIGHT = function (module, $, window, document) {
 
         commonHeightInit(windowWidth);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
 
     function commonHeightInit(w) {
       $('.js-uix-common-height').each(function () {
@@ -16104,189 +15918,129 @@ function mega_menu_classCallCheck(instance, Constructor) { if (!(instance instan
 var MEGA_MENU = function (module, $, window, document) {
   if (window.MEGA_MENU === null) return false;
   module.MEGA_MENU = module.MEGA_MENU || {};
-  module.MEGA_MENU.version = '0.0.4';
+  module.MEGA_MENU.version = '0.0.5';
 
   module.MEGA_MENU.pageLoaded = function () {
-  
+    var windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight; // Using delay is for more accurate calculation
 
-		const $window          = $( window );
-		let	windowWidth        = window.innerWidth,
-			windowHeight       = window.innerHeight;
+    setTimeout(function () {
+      megaMenuInit(windowWidth);
+    }, 500);
 
+    function windowUpdate() {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
 
-		// Using delay is for more accurate calculation
-		setTimeout( function() {
-			megaMenuInit( windowWidth );
-		}, 500 );
-		
-
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( window.innerWidth != windowWidth ) {
-
-				// Update the window width for next time
-				windowWidth = window.innerWidth;
-
-				// Do stuff here
-				megaMenuInit( windowWidth );
-		
-			}
-		});
-		
-		
-
-		
-		// Initialize mega menu
-		function megaMenuInit( w ) {
-			let $menuWrap  = $( '.uix-menu__container:not(.is-mobile)' ),
-				maxWidth     = 1140, //The maximum width of the mega menu wrapper
-				
-				//This value is equal to the $nav-mega-li-w variable in the SCSS
-			    perDefaultW  = 270; //Default width of each column
-
-			
-			//New XL container for Bootstrap 4.x
-			if ( w > 1430 ) maxWidth = 1278;
-			
-			//Full width container
-			maxWidth = windowWidth - 15;
-			
-			
-			
-			// Remove the html tag for mega menu item
-			$menuWrap.find( 'li.multi-column  > ul .multi-column-title' ).each( function()  {
-				const megaOldItem = $( this ).html();
-				if ( megaOldItem != '' ) {
-					$( this ).html( megaOldItem.replace(/<[^>]+>/g, '' ) );
-				}
-			});
-			
-			
-			if ( w > 768 ){
-
-				$menuWrap.find( 'li.multi-column' ).each( function( index ) {
-					const $rootLi         = $( this ),
-						  colTotal        = $rootLi.find( '> ul > li' ).length,
-						  itemWidth       = $rootLi.find( '> ul > li' ).first().width(),
-						  $megaDiv        = $rootLi.find( '> ul.sub-menu' );
-
-					let megaPerWidth    = null,
-						rootLiLeft      = null;
-					
-
-					// Get width or other style data of element when Not Visible (Display: None)
-					let megaDivWidth = $megaDiv.width();
+        megaMenuInit(windowWidth);
+      }
+    } // Add function to the window that should be resized
 
 
-	
-					// Add mega arrow
-					if ( $rootLi.find( '.uix-menu__arrow-mega' ).length < 1 ) $rootLi.prepend( '<span class="uix-menu__arrow-mega"></span>' );
-					
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow); // Initialize mega menu
 
-					// Detecting if the right or left of the div is touching the browser window edge.
-					if ( colTotal > 0 ) {
+    function megaMenuInit(w) {
+      var $menuWrap = $('.uix-menu__container:not(.is-mobile)'),
+          maxWidth = 1140,
+          //The maximum width of the mega menu wrapper
+      //This value is equal to the $nav-mega-li-w variable in the SCSS
+      perDefaultW = 270; //Default width of each column
+      //New XL container for Bootstrap 4.x
 
-						rootLiLeft = UixCssProperty.getAbsoluteCoordinates( $megaDiv[0] ).left;
-						
-						
-						//Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
-						if ( maxWidth > w ) maxWidth = w;
-						
-						
-						if ( (megaDivWidth + 20) > maxWidth ) {
+      if (w > 1430) maxWidth = 1278; //Full width container
 
-							megaDivWidth    = maxWidth;
-							megaPerWidth    = maxWidth/colTotal - 2.888;
-							
-							//Resetting the width of each column
-							$megaDiv.find( '> li' ).css( {
-								'width' : megaPerWidth + 'px'
-							} );
-							
-							//Resetting the width of each <li> tag
-							$megaDiv.find( '> li ul li' ).css( {
-								'width' : megaPerWidth + 'px'
-							} );
-							
-							
-							if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-								$megaDiv.css( {
-									'margin-left' : ( -rootLiLeft ) + ( ( w - megaDivWidth )/2 ) + 'px'
-								} );
-							} else {
-								$megaDiv.css( {
-									'margin-right' : ( -rootLiLeft ) + ( ( w - megaDivWidth )/2 ) + 'px'
-								} );
-							}
+      maxWidth = windowWidth - 15; // Remove the html tag for mega menu item
 
-							
-							
-							
-						} else {
-							
-							//Resetting the width of each column
-							$megaDiv.find( '> li' ).css( {
-								'width' : perDefaultW + 'px'
-							} );	
-							
-							//Resetting the width of each <li> tag
-							$megaDiv.find( '> li ul li' ).css( {
-								'width' : perDefaultW + 'px'
-							} );
-								
-							
-							
-							const chkWidth = ( rootLiLeft  + megaDivWidth );
+      $menuWrap.find('li.multi-column  > ul .multi-column-title').each(function () {
+        var megaOldItem = $(this).html();
 
+        if (megaOldItem != '') {
+          $(this).html(megaOldItem.replace(/<[^>]+>/g, ''));
+        }
+      });
 
-							if ( chkWidth > w ) {
-								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-									$megaDiv.css( {
-										'margin-left' : - ( chkWidth - w ) + 'px'
-									} );
-								} else {
-									$megaDiv.css( {
-										'margin-right' : - ( chkWidth - w ) + 'px'
-									} );
-								}	
-								
-								
-								//If the CSS sets the offset of ul::before
-//								const $megaDiv_offset = megaDivWidth/2 - 0;
-//								
-//								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
-//									$megaDiv.css( {
-//										'margin-left' : - ( chkWidth - w ) + $megaDiv_offset + 'px'
-//									} );
-//								} else {
-//									$megaDiv.css( {
-//										'margin-right' : - ( chkWidth - w ) + $megaDiv_offset + 'px'
-//									} );
-//								}	
-								
-								
-								
+      if (w > 768) {
+        $menuWrap.find('li.multi-column').each(function (index) {
+          var $rootLi = $(this),
+              colTotal = $rootLi.find('> ul > li').length,
+              itemWidth = $rootLi.find('> ul > li').first().width(),
+              $megaDiv = $rootLi.find('> ul.sub-menu');
+          var megaPerWidth = null,
+              rootLiLeft = null; // Get width or other style data of element when Not Visible (Display: None)
 
-							}	
-							
-								
-							
-						}
-						
-					
-		
-					}
+          var megaDivWidth = $megaDiv.width(); // Add mega arrow
 
+          if ($rootLi.find('.uix-menu__arrow-mega').length < 1) $rootLi.prepend('<span class="uix-menu__arrow-mega"></span>'); // Detecting if the right or left of the div is touching the browser window edge.
 
-				} );	
+          if (colTotal > 0) {
+            rootLiLeft = UixCssProperty.getAbsoluteCoordinates($megaDiv[0]).left; //Determine the mega menu wrapper within document width, in order to limit the width of each column for mega menu
 
-			}
-		}		
+            if (maxWidth > w) maxWidth = w;
 
+            if (megaDivWidth + 20 > maxWidth) {
+              megaDivWidth = maxWidth;
+              megaPerWidth = maxWidth / colTotal - 2.888; //Resetting the width of each column
 
+              $megaDiv.find('> li').css({
+                'width': megaPerWidth + 'px'
+              }); //Resetting the width of each <li> tag
 
-    
+              $megaDiv.find('> li ul li').css({
+                'width': megaPerWidth + 'px'
+              });
+
+              if (!$('body').hasClass('rtl')) {
+                $megaDiv.css({
+                  'margin-left': -rootLiLeft + (w - megaDivWidth) / 2 + 'px'
+                });
+              } else {
+                $megaDiv.css({
+                  'margin-right': -rootLiLeft + (w - megaDivWidth) / 2 + 'px'
+                });
+              }
+            } else {
+              //Resetting the width of each column
+              $megaDiv.find('> li').css({
+                'width': perDefaultW + 'px'
+              }); //Resetting the width of each <li> tag
+
+              $megaDiv.find('> li ul li').css({
+                'width': perDefaultW + 'px'
+              });
+              var chkWidth = rootLiLeft + megaDivWidth;
+
+              if (chkWidth > w) {
+                if (!$('body').hasClass('rtl')) {
+                  $megaDiv.css({
+                    'margin-left': -(chkWidth - w) + 'px'
+                  });
+                } else {
+                  $megaDiv.css({
+                    'margin-right': -(chkWidth - w) + 'px'
+                  });
+                } //If the CSS sets the offset of ul::before
+                //								const $megaDiv_offset = megaDivWidth/2 - 0;
+                //								
+                //								if ( ! $( 'body' ).hasClass( 'rtl' ) ) {
+                //									$megaDiv.css( {
+                //										'margin-left' : - ( chkWidth - w ) + $megaDiv_offset + 'px'
+                //									} );
+                //								} else {
+                //									$megaDiv.css( {
+                //										'margin-right' : - ( chkWidth - w ) + $megaDiv_offset + 'px'
+                //									} );
+                //								}	
+
+              }
+            }
+          }
+        });
+      }
+    }
   };
 
   module.components.pageLoaded.push(module.MEGA_MENU.pageLoaded);
@@ -16310,17 +16064,16 @@ function mobile_menu_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var MOBILE_MENU = function (module, $, window, document) {
   if (window.MOBILE_MENU === null) return false;
   module.MOBILE_MENU = module.MOBILE_MENU || {};
-  module.MOBILE_MENU.version = '0.0.8';
+  module.MOBILE_MENU.version = '0.0.9';
 
   module.MOBILE_MENU.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //-------- Show Toolbar when viewing site for WordPress
-    //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.admin-bar .uix-menu-mobile__toggle');
-    $window.off('scroll.MOBILE_MENU touchmove.MOBILE_MENU').on('scroll.MOBILE_MENU touchmove.MOBILE_MENU', function () {
-      var scrolled = $(this).scrollTop(),
+
+    function scrollUpdate() {
+      var scrolled = $(window).scrollTop(),
           spyTop = 46;
 
       if (scrolled >= spyTop) {
@@ -16328,7 +16081,15 @@ var MOBILE_MENU = function (module, $, window, document) {
       } else {
         $el.removeClass('is-fixed');
       }
-    }); //-------- Mobile Menu
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc(); //-------- Mobile Menu
 
     var $toggle = $('.uix-menu-mobile__toggle'),
         $toggleBody = $('body'); //-------- Add mobile menu to your website
@@ -16340,9 +16101,9 @@ var MOBILE_MENU = function (module, $, window, document) {
         e.preventDefault(); //Prevents further propagation of the current event in the capturing and bubbling phases.
 
         e.stopPropagation();
-        $(this).toggleClass('is-opened');
+        $(this).toggleClass('is-active');
 
-        if ($(this).hasClass('is-opened')) {
+        if ($(this).hasClass('is-active')) {
           //Add mobile brand
           var logoURL = $('.uix-brand--mobile img').attr('src');
 
@@ -16358,7 +16119,7 @@ var MOBILE_MENU = function (module, $, window, document) {
       }); //Mobile menu mask event
 
       $('.uix-menu-mobile__mask').on('click', function () {
-        $toggle.removeClass('is-opened');
+        $toggle.removeClass('is-active');
         $toggleBody.removeClass('js-uix-menu-opened');
       }); // Fires drop-menu event 
 
@@ -16406,19 +16167,24 @@ var MOBILE_MENU = function (module, $, window, document) {
           return false;
         }
       });
-      mobileMenuInit(windowWidth); // Close the menu on window change
+      mobileMenuInit(windowWidth);
 
-      $window.on('resize', function () {
+      function windowUpdate() {
         // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
         if (window.innerWidth != windowWidth) {
           // Update the window width for next time
           windowWidth = window.innerWidth; // Do stuff here
 
           $toggleBody.removeClass('js-uix-menu-opened');
-          $toggle.removeClass('is-opened');
+          $toggle.removeClass('is-active');
           mobileMenuInit(windowWidth);
         }
-      });
+      } // Add function to the window that should be resized
+
+
+      var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+      window.removeEventListener('resize', debounceFuncWindow);
+      window.addEventListener('resize', debounceFuncWindow);
     });
     /*
      * Initialize mobile menu
@@ -16461,12 +16227,9 @@ function navigation_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
 var NAVIGATION = function (module, $, window, document) {
   if (window.NAVIGATION === null) return false;
   module.NAVIGATION = module.NAVIGATION || {};
-  module.NAVIGATION.version = '0.0.9';
+  module.NAVIGATION.version = '0.1.0';
 
   module.NAVIGATION.documentReady = function ($) {
-    var $window = $(window);
-    var windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight;
     var ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu'; //-------- Menu selected (if it exists "data-current" property in <ul>)
 
     var curMenuIndex = $(ulForDesktop).data('current');
@@ -16517,11 +16280,11 @@ var NAVIGATION = function (module, $, window, document) {
         $(this).prepend('<span class="uix-menu__arrow"></span>');
       }
     }); //-------- Sticky primary navigation
-    //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 
     var $el = $('.uix-menu__container:not(.is-mobile)');
-    $window.off('scroll.NAVIGATION touchmove.NAVIGATION').on('scroll.NAVIGATION touchmove.NAVIGATION', function () {
-      var scrolled = $(this).scrollTop(),
+
+    function scrollUpdate() {
+      var scrolled = $(window).scrollTop(),
           spyTop = 220;
 
       if (scrolled >= spyTop) {
@@ -16529,7 +16292,15 @@ var NAVIGATION = function (module, $, window, document) {
       } else {
         $el.removeClass('is-fixed');
       }
-    });
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc();
   };
 
   module.components.documentReady.push(module.NAVIGATION.documentReady);
@@ -16539,8 +16310,104 @@ var NAVIGATION = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/_global/js/fn/UixParallax.js
-var UixParallax = __webpack_require__(485);
+;// CONCATENATED MODULE: ./src/components/_global/js/fn/UixParallax.js
+/* 
+ *************************************
+ * Parallax Effect
+ *
+ * @param  {Number} speed       - The speed of movement between elements.
+ * @param  {String} transition  - Transition time can simulate easing effect.
+ * @param  {Object} bg            - Specify the background display. Default value: { enable: true, xPos: '50%' }
+ * @return {Void}
+ *
+ *************************************
+ */
+
+
+(function ($) {
+  'use strict';
+
+  $.fn.UixParallax = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      speed: 0.25,
+      offsetTop: 0,
+      transition: 'all 0.4s cubic-bezier(0, 0, 0.34, 0.96) 0s',
+      bg: {
+        enable: true,
+        xPos: '50%'
+      }
+    }, options);
+    this.each(function () {
+      var bgEff = settings.bg,
+          $this = $(this),
+          bgXpos = '50%',
+          offsetTop = parseFloat(settings.offsetTop),
+          speed = -parseFloat(settings.speed);
+
+      if (bgEff) {
+        bgEff = settings.bg.enable;
+        bgXpos = settings.bg.xPos;
+      } //Prohibit transition delay
+
+
+      $this.css({
+        'transition': 'none'
+      }); //Initialize the position of the background
+
+      if (bgEff) {
+        //background parallax
+        TweenMax.set($this, {
+          backgroundPosition: bgXpos + ' ' + (-$this[0].getBoundingClientRect().top * speed + -offsetTop) + 'px'
+        });
+      } else {
+        //element parallax
+        TweenMax.set($this, {
+          y: 0
+        });
+      }
+
+      function scrollUpdate() {
+        var spyTop = $this[0].getBoundingClientRect().top;
+
+        if (bgEff) {
+          //background parallax
+          TweenMax.set($this, {
+            css: {
+              'background-position': bgXpos + ' ' + (0 - (spyTop * speed + offsetTop)) + 'px',
+              'transition': settings.transition
+            }
+          });
+        } else {
+          //element parallax
+          TweenMax.set($this, {
+            css: {
+              'transform': 'matrix(1, 0, 0, 1, 0, ' + (0 - (spyTop * speed + offsetTop)) + ')',
+              'transition': settings.transition
+            }
+          });
+        }
+      } // Add function to the element that should be used as the scrollable area.
+
+
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      window.removeEventListener('scroll', throttleFunc);
+      window.removeEventListener('touchmove', throttleFunc);
+      window.addEventListener('scroll', throttleFunc);
+      window.addEventListener('touchmove', throttleFunc); // Prevent calculation errors caused by unloaded completion
+
+      if (document.readyState != 'loading') {
+        throttleFunc();
+      } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', throttleFunc);
+      } else {
+        document.attachEvent('onreadystatechange', function () {
+          if (document.readyState != 'loading') throttleFunc();
+        });
+      }
+    });
+  };
+})(jQuery);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/set-background.js
 function set_background_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -16556,33 +16423,35 @@ function set_background_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symb
 var SET_BG = function (module, $, window, document) {
   if (window.SET_BG === null) return false;
   module.SET_BG = module.SET_BG || {};
-  module.SET_BG.version = '0.0.7';
+  module.SET_BG.version = '0.0.8';
 
   module.SET_BG.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //  Initialize
 
-    setBGInit(windowWidth, windowHeight);
-    $window.on('resize', function () {
+    setBGInit();
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight; // Do stuff here
+        windowWidth = window.innerWidth; // Do stuff here
 
-        setBGInit(windowWidth, windowHeight);
+        setBGInit();
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize background using "data-bg" attribute.
      *
-     * @param  {Number} w         - Returns width of browser viewport
-     * @param  {Number} h         - Returns height of browser viewport
      * @return {Void}
      */
 
-    function setBGInit(w, h) {
+    function setBGInit() {
       $('[data-bg]').each(function () {
         var $this = $(this);
         var config = $this.data('bg');
@@ -16736,7 +16605,6 @@ var VIDEOS = function (module, $, window, document) {
   module.VIDEOS.version = '0.1.3';
 
   module.VIDEOS.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     /* 
@@ -17176,7 +17044,6 @@ var ACCORDION_BG = function (module, $, window, document) {
   module.ACCORDION_BG.version = '0.0.7';
 
   module.ACCORDION_BG.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     if (windowWidth <= 768) return false;
@@ -17390,23 +17257,29 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.2.5';
+  module.ADVANCED_SLIDER.version = '0.2.6';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var animDelay = 0;
     var $sliderWrapper = $('.uix-advanced-slider');
     sliderInit(false);
-    $window.on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
+        windowWidth = window.innerWidth; // Do stuff here
+
         sliderInit(true);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize slideshow
      *
@@ -18745,12 +18618,11 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.3.4';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.5';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
     PIXI.utils.skipHello();
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var animSpeed = 1000;
@@ -18769,14 +18641,21 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         displacementSprite,
         displacementFilter;
     sliderInit(false);
-    $window.on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
+        windowWidth = window.innerWidth; // Do stuff here
+
         sliderInit(true);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize slideshow
      *
@@ -21082,10 +20961,9 @@ function AJAX_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var AJAX_PAGE_LOADER = function (module, $, window, document) {
   if (window.AJAX_PAGE_LOADER === null) return false;
   module.AJAX_PAGE_LOADER = module.AJAX_PAGE_LOADER || {};
-  module.AJAX_PAGE_LOADER.version = '0.1.9';
+  module.AJAX_PAGE_LOADER.version = '0.2.1';
 
   module.AJAX_PAGE_LOADER.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //all images from pages
 
@@ -21150,10 +21028,21 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
     }
 
     ajaxInit();
-    $window.on('resize', function () {
-      windowWidth = window.innerWidth;
-      ajaxInit();
-    });
+
+    function windowUpdate() {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
+
+        ajaxInit();
+      }
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Call AJAX on click event for "single pages links"
      *
@@ -21911,19 +21800,18 @@ function back_to_top_js_classCallCheck(instance, Constructor) { if (!(instance i
 var BACK_TO_TOP = function (module, $, window, document) {
   if (window.BACK_TO_TOP === null) return false;
   module.BACK_TO_TOP = module.BACK_TO_TOP || {};
-  module.BACK_TO_TOP.version = '0.0.9';
+  module.BACK_TO_TOP.version = '0.1.0';
 
   module.BACK_TO_TOP.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     $('<a href="#" id="uix-to-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>').appendTo('body');
     $.when($('#uix-to-top').length > 0).then(function () {
       //-------- Sticky button of back to top 
-      //Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
       var $el = $('#uix-to-top');
-      $window.off('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP').on('scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function () {
-        var scrolled = $(this).scrollTop(),
+
+      function scrollUpdate() {
+        var scrolled = $(window).scrollTop(),
             spyTop = windowHeight / 2;
 
         if (scrolled >= spyTop) {
@@ -21931,7 +21819,15 @@ var BACK_TO_TOP = function (module, $, window, document) {
         } else {
           $el.removeClass('is-active');
         }
-      }); //-------- Click event of back button
+      } // Add function to the element that should be used as the scrollable area.
+
+
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      window.removeEventListener('scroll', throttleFunc);
+      window.removeEventListener('touchmove', throttleFunc);
+      window.addEventListener('scroll', throttleFunc);
+      window.addEventListener('touchmove', throttleFunc);
+      throttleFunc(); //-------- Click event of back button
 
       $el.off('click').on('click', function (e) {
         e.preventDefault();
@@ -22060,11 +21956,10 @@ function counter_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
 var COUNTER = function (module, $, window, document) {
   if (window.COUNTER === null) return false;
   module.COUNTER = module.COUNTER || {};
-  module.COUNTER.version = '0.0.4';
+  module.COUNTER.version = '0.0.5';
 
   module.COUNTER.documentReady = function ($) {
     var $scrollElements = $('[data-counter-number]');
-    $(window).off('scroll.COUNTER touchmove.COUNTER');
     $scrollElements.each(function () {
       var viewport = 1;
       var $el = $(this); //
@@ -22082,13 +21977,15 @@ var COUNTER = function (module, $, window, document) {
           } //endif actived
 
         }
-      };
+      }; // Add function to the element that should be used as the scrollable area.
 
-      scrollUpdate(); // Please do not use scroll's off method in each
 
-      $(window).on('scroll.COUNTER touchmove.COUNTER', function (event) {
-        scrollUpdate();
-      });
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      window.removeEventListener('scroll', throttleFunc);
+      window.removeEventListener('touchmove', throttleFunc);
+      window.addEventListener('scroll', throttleFunc);
+      window.addEventListener('touchmove', throttleFunc);
+      throttleFunc();
     }); //end each        
   };
 
@@ -22524,10 +22421,9 @@ function flexslider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var FLEXSLIDER = function (module, $, window, document) {
   if (window.FLEXSLIDER === null) return false;
   module.FLEXSLIDER = module.FLEXSLIDER || {};
-  module.FLEXSLIDER.version = '0.2.0';
+  module.FLEXSLIDER.version = '0.2.1';
 
   module.FLEXSLIDER.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var flexslider = {
@@ -23324,11 +23220,12 @@ var FLEXSLIDER = function (module, $, window, document) {
      ---------------------------
      */
 
-    $window.on('resize', function () {
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
+        windowWidth = window.innerWidth; // Do stuff here
+
         $sliderDefault.each(function () {
           if ($(this).length > 0) {
             // check grid size on resize event
@@ -23344,7 +23241,12 @@ var FLEXSLIDER = function (module, $, window, document) {
           }
         });
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
   };
 
   module.components.documentReady.push(module.FLEXSLIDER.documentReady);
@@ -23367,7 +23269,7 @@ function floating_side_element_js_classCallCheck(instance, Constructor) { if (!(
 var FLOATING_SIDE_EL = function (module, $, window, document) {
   if (window.FLOATING_SIDE_EL === null) return false;
   module.FLOATING_SIDE_EL = module.FLOATING_SIDE_EL || {};
-  module.FLOATING_SIDE_EL.version = '0.0.6';
+  module.FLOATING_SIDE_EL.version = '0.0.7';
 
   module.FLOATING_SIDE_EL.documentReady = function ($) {
     var documentHeight = 0,
@@ -23382,9 +23284,10 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
         marginTop: -floatingOffset.top + ($(window).height() - $floatingSideEl.height()) / 2
       }
     });
-    $(window).off('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL').on('scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function () {
+
+    function scrollUpdate() {
       var sideBarHeight = $floatingSideEl.height(),
-          scrolled = $(this).scrollTop();
+          scrolled = $(window).scrollTop();
       documentHeight = $(document).height();
 
       if (scrolled > floatingOffset.top) {
@@ -23407,7 +23310,15 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
           }
         });
       }
-    });
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc();
   };
 
   module.components.documentReady.push(module.FLOATING_SIDE_EL.documentReady);
@@ -27807,15 +27718,15 @@ function image_shapes_js_classCallCheck(instance, Constructor) { if (!(instance 
 var IMAGE_SHAPES = function (module, $, window, document) {
   if (window.IMAGE_SHAPES === null) return false;
   module.IMAGE_SHAPES = module.IMAGE_SHAPES || {};
-  module.IMAGE_SHAPES.version = '0.0.1';
+  module.IMAGE_SHAPES.version = '0.0.2';
 
   module.IMAGE_SHAPES.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //  Initialize
 
     shapesInit(windowWidth);
-    $window.on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -27823,7 +27734,12 @@ var IMAGE_SHAPES = function (module, $, window, document) {
 
         shapesInit(windowWidth);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize Shapes
      *
@@ -28655,10 +28571,9 @@ function list_posts_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbo
 var POST_LIST_AJAX = function (module, $, window, document) {
   if (window.POST_LIST_AJAX === null) return false;
   module.POST_LIST_AJAX = module.POST_LIST_AJAX || {};
-  module.POST_LIST_AJAX.version = '0.1.8';
+  module.POST_LIST_AJAX.version = '0.1.9';
 
   module.POST_LIST_AJAX.documentReady = function ($) {
-    $(window).off('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX');
     $('[data-ajax-list-json]').each(function () {
       var $this = $(this);
       var wrapperID = 'refresh-all-waypoint-' + UixGUID.create();
@@ -28769,22 +28684,7 @@ var POST_LIST_AJAX = function (module, $, window, document) {
         }
 
         if (infinitescroll) {
-          /* 
-           ---------------------------
-           Infinite scroll
-           ---------------------------
-           */
-          var $button = $(trigger),
-              btnTop = $button.offset().top; //Add default page number to the button
-
-          $button.attr('data-cur-page', initCurPage); //Hide the next button 
-
-          if (totalPage == 1) {
-            $button.addClass('is-hide');
-          } // Please do not use scroll's off method in each
-
-
-          $(window).on('scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function () {
+          var scrollUpdate = function scrollUpdate() {
             var spyTop = parseFloat($button[0].getBoundingClientRect().top + $button.outerHeight(true));
 
             if (spyTop < window.innerHeight && !$button.hasClass(triggerActive)) {
@@ -28807,7 +28707,29 @@ var POST_LIST_AJAX = function (module, $, window, document) {
 
               ajaxLoadInit($this, defaultPostData, $button, _curPage, totalPage, perShow, template7ID, jsonFile, triggerActive, pushContainer, method, render, noneInfo);
             }
-          });
+          }; // Add function to the element that should be used as the scrollable area.
+
+
+          /* 
+           ---------------------------
+           Infinite scroll
+           ---------------------------
+           */
+          var $button = $(trigger),
+              btnTop = $button.offset().top; //Add default page number to the button
+
+          $button.attr('data-cur-page', initCurPage); //Hide the next button 
+
+          if (totalPage == 1) {
+            $button.addClass('is-hide');
+          }
+
+          var throttleFunc = UixThrottle(scrollUpdate, 5);
+          window.removeEventListener('scroll', throttleFunc);
+          window.removeEventListener('touchmove', throttleFunc);
+          window.addEventListener('scroll', throttleFunc);
+          window.addEventListener('touchmove', throttleFunc);
+          throttleFunc();
         } else {
           /* 
            ---------------------------
@@ -30249,10 +30171,9 @@ function one_page_js_classCallCheck(instance, Constructor) { if (!(instance inst
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.0.9';
+  module.ONEPAGE.version = '0.1.0';
 
   module.ONEPAGE.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
@@ -30469,8 +30390,9 @@ var ONEPAGE = function (module, $, window, document) {
 
     var navMinTop = $sidefixedMenu.length > 0 ? $sidefixedMenu.offset().top : 0,
         navMaxTop = parseFloat($(document).height() - $('.uix-footer__container').height()) - windowHeight / 3;
-    $window.off('scroll.ONEPAGE touchmove.ONEPAGE').on('scroll.ONEPAGE touchmove.ONEPAGE', function () {
-      var scrolled = $(this).scrollTop(),
+
+    function scrollUpdate() {
+      var scrolled = $(window).scrollTop(),
           spyTop = parseFloat(scrolled + topSpacing),
           minTop = $('[data-highlight-section="true"]').first().offset().top,
           maxTop = $('[data-highlight-section="true"]').last().offset().top + $('[data-highlight-section="true"]').last().height();
@@ -30501,7 +30423,15 @@ var ONEPAGE = function (module, $, window, document) {
       } else {
         $sidefixedMenu.addClass('is-fixed');
       }
-    });
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc();
     /* 
      ====================================================
      *  Mouse Wheel & Touch Method
@@ -30588,7 +30518,6 @@ var ONEPAGE2 = function (module, $, window, document) {
   module.ONEPAGE2.version = '0.0.7';
 
   module.ONEPAGE2.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //Determine the direction of a jQuery scroll event
     //Fix an issue for mousewheel event is too fast.
@@ -30933,33 +30862,36 @@ function parallax_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol 
 var PARALLAX = function (module, $, window, document) {
   if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
-  module.PARALLAX.version = '0.0.7';
+  module.PARALLAX.version = '0.0.8';
 
   module.PARALLAX.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //  Initialize
 
-    parallaxInit(windowWidth, windowHeight);
-    $window.on('resize', function () {
+    parallaxInit(windowWidth);
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight; // Do stuff here
+        windowWidth = window.innerWidth; // Do stuff here
 
-        parallaxInit(windowWidth, windowHeight);
+        parallaxInit(windowWidth);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize parallx settings
      *
      * @param  {Number} w         - Returns width of browser viewport
-     * @param  {Number} h         - Returns height of browser viewport
      * @return {Void}
      */
 
-    function parallaxInit(w, h) {
+    function parallaxInit(w) {
       /* Pure parallax scrolling effect without other embedded HTML elements */
       $('.uix-parallax--el').each(function () {
         var $this = $(this);
@@ -31234,15 +31166,15 @@ function pricing_js_classCallCheck(instance, Constructor) { if (!(instance insta
 var PRICING = function (module, $, window, document) {
   if (window.PRICING === null) return false;
   module.PRICING = module.PRICING || {};
-  module.PRICING.version = '0.0.2';
+  module.PRICING.version = '0.0.3';
 
   module.PRICING.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight; //-------- Pricing initialize
 
     pricingInit(windowWidth);
-    $window.on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -31250,7 +31182,12 @@ var PRICING = function (module, $, window, document) {
 
         pricingInit(windowWidth);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
 
     function pricingInit(w) {
       //Initialize the height
@@ -31320,11 +31257,10 @@ function progress_bar_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sym
 var PROGRESS_BAR = function (module, $, window, document) {
   if (window.PROGRESS_BAR === null) return false;
   module.PROGRESS_BAR = module.PROGRESS_BAR || {};
-  module.PROGRESS_BAR.version = '0.0.6';
+  module.PROGRESS_BAR.version = '0.0.7';
 
   module.PROGRESS_BAR.documentReady = function ($) {
     var $scrollElements = $('[data-progressbar-percent]');
-    $(window).off('scroll.PROGRESS_BAR touchmove.PROGRESS_BAR');
     $scrollElements.each(function () {
       var viewport = 1;
       var $el = $(this); //
@@ -31364,13 +31300,15 @@ var PROGRESS_BAR = function (module, $, window, document) {
           } //endif actived
 
         }
-      };
+      }; // Add function to the element that should be used as the scrollable area.
 
-      scrollUpdate(); // Please do not use scroll's off method in each
 
-      $(window).on('scroll.PROGRESS_BAR touchmove.PROGRESS_BAR', function (event) {
-        scrollUpdate();
-      });
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      window.removeEventListener('scroll', throttleFunc);
+      window.removeEventListener('touchmove', throttleFunc);
+      window.addEventListener('scroll', throttleFunc);
+      window.addEventListener('touchmove', throttleFunc);
+      throttleFunc();
     }); //end each        
   };
 
@@ -31566,12 +31504,11 @@ function scroll_reveal_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Sy
 var SCROLL_REVEAL = function (module, $, window, document) {
   if (window.SCROLL_REVEAL === null) return false;
   module.SCROLL_REVEAL = module.SCROLL_REVEAL || {};
-  module.SCROLL_REVEAL.version = '0.1.5';
+  module.SCROLL_REVEAL.version = '0.1.6';
 
   module.SCROLL_REVEAL.documentReady = function ($) {
     //From JSON config in data attribute in HTML
     var $scrollElements = $('[data-uix-anim]');
-    $(window).off('scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL');
     $scrollElements.each(function () {
       var viewport;
       var $el = $(this);
@@ -31678,13 +31615,15 @@ var SCROLL_REVEAL = function (module, $, window, document) {
           } //endif actived
 
         }
-      };
+      }; // Add function to the element that should be used as the scrollable area.
 
-      scrollUpdate(); // Please do not use scroll's off method in each
 
-      $(window).on('scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function (event) {
-        scrollUpdate();
-      });
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      window.removeEventListener('scroll', throttleFunc);
+      window.removeEventListener('touchmove', throttleFunc);
+      window.addEventListener('scroll', throttleFunc);
+      window.addEventListener('touchmove', throttleFunc);
+      throttleFunc();
       /*
       * The transition effect of each group of images
       *
@@ -31742,7 +31681,7 @@ function scrollspy_animate_js_classCallCheck(instance, Constructor) { if (!(inst
 var SCROLLSPY_ANIM = function (module, $, window, document) {
   if (window.SCROLLSPY_ANIM === null) return false;
   module.SCROLLSPY_ANIM = module.SCROLLSPY_ANIM || {};
-  module.SCROLLSPY_ANIM.version = '0.0.6';
+  module.SCROLLSPY_ANIM.version = '0.0.7';
 
   module.SCROLLSPY_ANIM.documentReady = function ($) {
     // Remove pixi.js banner from the console
@@ -31751,7 +31690,6 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
         panelHeight = 0; //Prevent this module from loading in other pages
 
     if ($el.length == 0) return false;
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var curSprite;
@@ -31813,10 +31751,10 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
       });
     }
 
-    $window.off('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM').on('scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function (event) {
+    function scrollUpdate() {
       var elHeight = $el.height(),
           elOffsetTop = $el.offset().top - panelHeight;
-      var scrolled = $(this).scrollTop(),
+      var scrolled = $(window).scrollTop(),
           translateTitle = scrolled / 2,
           translateBackground = scrolled / 3,
           scale = scrolled / elHeight,
@@ -31847,7 +31785,15 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
           x: windowHeight * scrollProgress
         });
       }
-    });
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc();
   };
 
   module.components.documentReady.push(module.SCROLLSPY_ANIM.documentReady);
@@ -32080,7 +32026,7 @@ function smooth_scrolling_page_js_classCallCheck(instance, Constructor) { if (!(
 var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   if (window.SMOOTH_SCROLLING_PAGE === null) return false;
   module.SMOOTH_SCROLLING_PAGE = module.SMOOTH_SCROLLING_PAGE || {};
-  module.SMOOTH_SCROLLING_PAGE.version = '0.1.3';
+  module.SMOOTH_SCROLLING_PAGE.version = '0.1.4';
 
   module.SMOOTH_SCROLLING_PAGE.pageLoaded = function () {
     //Prevent this module from loading in other pages
@@ -32088,7 +32034,6 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
     if (!$('body').hasClass('smooth-scrolling-page')) return false; // Core params
     //--------------
 
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var html = document.documentElement,
@@ -32169,29 +32114,7 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       $(scroller.target).wrap('<div id="uix-scrollspy-area__wrapper" style="overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;right:0;bottom:0;"></div>').css('margin-top', elTop + 'px');
     }
 
-    $(window).on('resize', function () {
-      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-      if (window.innerWidth != windowWidth) {
-        // Update the window width for next time
-        windowWidth = window.innerWidth; // Do stuff here
-
-        scroller.resizeRequest++;
-
-        if (!requestId) {
-          requestId = requestAnimationFrame(scrollUpdate);
-        }
-      }
-    });
-    $(window).off('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE').on('scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function () {
-      scroller.scrollRequest++;
-
-      if (!requestId) {
-        requestId = requestAnimationFrame(scrollUpdate);
-      }
-    });
-    scrollUpdate();
-
-    function scrollUpdate() {
+    function scrollAnimate() {
       var resized = scroller.resizeRequest > 0;
 
       if (resized) {
@@ -32214,8 +32137,9 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
         onComplete: function onComplete() {//-----Spy scrollTop and elements of page
           //your code here...
         }
-      });
-      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(scrollUpdate) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
+      }); // update requestId
+
+      requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(scrollAnimate) : null; //+++++++++++++++++++++++++++++++++++++++++++++++++
       // Custom Functions
       //+++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -32322,8 +32246,43 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
       //
 
       lastScrollTop = scrolled;
-    } //end scrollUpdate()
+    } //end scrollAnimate()
 
+
+    function scrollUpdate() {
+      scroller.scrollRequest++;
+
+      if (!requestId) {
+        requestId = requestAnimationFrame(scrollAnimate);
+      }
+    } // Add function to the element that should be used as the scrollable area.
+
+
+    var throttleFunc = UixThrottle(scrollUpdate, 5);
+    window.removeEventListener('scroll', throttleFunc);
+    window.removeEventListener('touchmove', throttleFunc);
+    window.addEventListener('scroll', throttleFunc);
+    window.addEventListener('touchmove', throttleFunc);
+    throttleFunc();
+
+    function windowUpdate() {
+      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerWidth != windowWidth) {
+        // Update the window width for next time
+        windowWidth = window.innerWidth; // Do stuff here
+
+        scroller.resizeRequest++;
+
+        if (!requestId) {
+          requestId = requestAnimationFrame(scrollAnimate);
+        }
+      }
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
   };
 
   module.components.pageLoaded.push(module.SMOOTH_SCROLLING_PAGE.pageLoaded);
@@ -32348,10 +32307,9 @@ function sticky_elements_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var STICKY_EL = function (module, $, window, document) {
   if (window.STICKY_EL === null) return false;
   module.STICKY_EL = module.STICKY_EL || {};
-  module.STICKY_EL.version = '0.0.7';
+  module.STICKY_EL.version = '0.0.8';
 
   module.STICKY_EL.pageLoaded = function () {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var topSpacing = windowWidth <= 768 ? 0 : $('.uix-header__container').outerHeight(true); //with margin
@@ -32375,37 +32333,40 @@ var STICKY_EL = function (module, $, window, document) {
       }
     }); //  Initialize
 
-    stickyInit(windowWidth, windowHeight);
-    $window.on('resize', function () {
+    stickyInit(windowWidth);
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight; // Do stuff here
+        windowWidth = window.innerWidth; // Do stuff here
 
-        stickyInit(windowWidth, windowHeight);
+        stickyInit(windowWidth);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize Sticky Elements settings
      *
      * @param  {Number} w         - Returns width of browser viewport
-     * @param  {Number} h         - Returns height of browser viewport
      * @return {Void}
      */
 
-    function stickyInit(w, h) {
+    function stickyInit(w) {
       if (w > 768) {
-        $(window).off('scroll.STICKY_EL touchmove.STICKY_EL');
         $('.js-uix-sticky-el').each(function () {
           var $el = $(this),
               elTop = $el.offset().top,
               oWidth = $el.width(),
               clsID = $el.data('sticky-id'),
-              $ph = $('[data-sticky-id="' + clsID + '"].is-placeholder'); // Please do not use scroll's off method in each
+              $ph = $('[data-sticky-id="' + clsID + '"].is-placeholder');
 
-          $window.on('scroll.STICKY_EL touchmove.STICKY_EL', function () {
-            var scrolled = $(this).scrollTop(),
+          function scrollUpdate() {
+            var scrolled = $(window).scrollTop(),
                 spyTop = parseFloat(scrolled + window.innerHeight); //------
 
             if (parseFloat(scrolled + topSpacing) > elTop) {
@@ -32438,7 +32399,15 @@ var STICKY_EL = function (module, $, window, document) {
                 }
               }
             }
-          }); //endif scroll.STICKY_EL touchmove.STICKY_EL
+          } // Add function to the element that should be used as the scrollable area.
+
+
+          var throttleFunc = UixThrottle(scrollUpdate, 5);
+          window.removeEventListener('scroll', throttleFunc);
+          window.removeEventListener('touchmove', throttleFunc);
+          window.addEventListener('scroll', throttleFunc);
+          window.addEventListener('touchmove', throttleFunc);
+          throttleFunc();
         }); //endif $( '.js-uix-sticky-el' )
       } else {
         $('.js-uix-sticky-el').removeClass('is-active');
@@ -32655,10 +32624,9 @@ function svg_mask_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var SVG_MASK_SLIDER = function (module, $, window, document) {
   if (window.SVG_MASK_SLIDER === null) return false;
   module.SVG_MASK_SLIDER = module.SVG_MASK_SLIDER || {};
-  module.SVG_MASK_SLIDER.version = '0.0.3';
+  module.SVG_MASK_SLIDER.version = '0.0.4';
 
   module.SVG_MASK_SLIDER.pageLoaded = function () {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var animDelay = 0;
@@ -32667,14 +32635,21 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
     var svgAnimating = false; //
 
     sliderInit(false);
-    $window.on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
-        windowWidth = window.innerWidth;
+        windowWidth = window.innerWidth; // Do stuff here
+
         sliderInit(true);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Initialize slideshow
      *
@@ -34131,7 +34106,6 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-background-three-canvas'; // Generate one plane geometries mesh to scene
@@ -34398,7 +34372,6 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-background-three-canvas2'; // Generate one plane geometries mesh to scene
@@ -34561,7 +34534,6 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-background-three-canvas3'; // Generate one plane geometries mesh to scene
@@ -35775,7 +35747,7 @@ function simple_3D_gallery_js_typeof(obj) { "@babel/helpers - typeof"; if (typeo
 var THREE_GALLERY = function (module, $, window, document) {
   if (window.THREE_GALLERY === null) return false;
   module.THREE_GALLERY = module.THREE_GALLERY || {};
-  module.THREE_GALLERY.version = '0.0.4';
+  module.THREE_GALLERY.version = '0.0.5';
 
   module.THREE_GALLERY.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -35783,7 +35755,6 @@ var THREE_GALLERY = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-gallery-three-canvas'; // Generate one plane geometries mesh to scene
@@ -35863,9 +35834,18 @@ var THREE_GALLERY = function (module, $, window, document) {
 
         imgs.forEach(function (element, index) {
           loadImage(loader, element, index, offsetWidth, offsetHeight, imgTotal, eachItemAngleToRad, galleryRadius, $('#3D-gallery-three-canvas__loader'));
-        }); // Fires when the window changes
+        }); // Add function to the window that should be resized
 
-        window.addEventListener('resize', onWindowResize, false);
+        var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+        window.removeEventListener('resize', debounceFuncWindow);
+        window.addEventListener('resize', debounceFuncWindow); // Add function to the element that should be used as the scrollable area.
+
+        var throttleFunc = UixThrottle(scrollUpdate, 5);
+        window.removeEventListener('scroll', throttleFunc);
+        window.removeEventListener('touchmove', throttleFunc);
+        window.addEventListener('scroll', throttleFunc);
+        window.addEventListener('touchmove', throttleFunc);
+        throttleFunc();
       }
 
       function render() {
@@ -35916,18 +35896,17 @@ var THREE_GALLERY = function (module, $, window, document) {
         renderer.render(scene, camera);
       }
 
-      function onWindowResize() {
+      function windowUpdate() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-      } // listen to scroll
+      }
 
-
-      window.addEventListener('scroll', function (e) {
+      function scrollUpdate() {
         lastScrollValue = scrollValue;
         scrollValue = window.pageYOffset;
         console.log('lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue);
-      });
+      }
       /*
        * Load Image
        *
@@ -35942,6 +35921,7 @@ var THREE_GALLERY = function (module, $, window, document) {
        * @param  {Element|String} loading         - Progress bar display control.
        * @return {Void}
        */
+
 
       function loadImage(imgLoader, src, index, w, h, total, itemRadAngle, radius, loading) {
         // load a resource
@@ -36036,7 +36016,6 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-imagetransition-three-canvas'; // Generate one plane geometries mesh to scene
@@ -38503,7 +38482,6 @@ var THREE_MODEL = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-model-canvas'; // Generate one plane geometries mesh to scene
@@ -38968,7 +38946,6 @@ var THREE_PAGES = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var viewRenderer = '3D-renderer'; // Generate one plane geometries mesh to scene
@@ -39124,7 +39101,6 @@ var THREE_PARTICLE = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-particle-effect-canvas';
@@ -39621,7 +39597,6 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-sphere-three-canvas'; // Generate one plane geometries mesh to scene
@@ -39771,7 +39746,6 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-object-buttonevent-canvas';
@@ -39979,7 +39953,6 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-mouseinteraction-three-canvas'; // Generate one plane geometries mesh to scene
@@ -40398,7 +40371,6 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-mouseinteraction2-three-canvas'; // Generate one plane geometries mesh to scene
@@ -40903,7 +40875,6 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var $sliderWrapper = $('.uix-3d-slider--shatter'),
@@ -41602,7 +41573,6 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var $sliderWrapper = $('.uix-3d-slider--expParticle'),
@@ -42285,7 +42255,6 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var $sliderWrapper = $('.uix-3d-slider--liquid-scrollspy'),
@@ -43721,7 +43690,6 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
     var sceneSubjects = []; // Import objects and animations dynamically
 
     var MainStage = function () {
-      var $window = $(window);
       var windowWidth = window.innerWidth,
           windowHeight = window.innerHeight;
       var rendererCanvasID = '3D-filmic-effects-canvas'; // Generate one plane geometries mesh to scene
@@ -43925,7 +43893,7 @@ function simple_3D_simulate_html_layout_js_typeof(obj) { "@babel/helpers - typeo
 var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
   if (window.THREE_SIMULATE_HTML_LAYOUT === null) return false;
   module.THREE_SIMULATE_HTML_LAYOUT = module.THREE_SIMULATE_HTML_LAYOUT || {};
-  module.THREE_SIMULATE_HTML_LAYOUT.version = '0.0.1';
+  module.THREE_SIMULATE_HTML_LAYOUT.version = '0.0.2';
 
   module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function ($) {
     //Prevent this module from loading in other pages
@@ -43935,10 +43903,7 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
     //=====================================================================================
     //=====================================================================================
     //=====================================================================================
-
-    var $window = $(window);
-    var windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight; //scroll spy
+    //scroll spy
 
     var scrollY = 0;
     var touchStartY = 0;
@@ -44042,20 +44007,26 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
         });
         i++;
       }); //=================
-      // Fires when the window changes
+      // Add function to the window that should be resized
 
-      window.addEventListener('resize', function () {
-        onWindowResize(wrapperWidth, wrapperHeight);
-      }, false); //=================
-      // Fires scroll animation
+      var debounceFuncWindow = UixDebounce(function () {
+        windowUpdate(wrapperWidth, wrapperHeight);
+      }, 50);
+      window.removeEventListener('resize', debounceFuncWindow);
+      window.addEventListener('resize', debounceFuncWindow); //=================
+      // Add function to the element that should be used as the scrollable area.
 
-      scrollTrigger.addEventListener('scroll', onScroll, {
-        passive: false
-      });
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      scrollTrigger.removeEventListener('scroll', throttleFunc);
+      scrollTrigger.removeEventListener('touchmove', throttleFunc);
+      scrollTrigger.addEventListener('scroll', throttleFunc);
+      scrollTrigger.addEventListener('touchmove', throttleFunc);
+      throttleFunc();
       /*
-      mobile example
-      scrollTrigger.addEventListener('touchstart', onTouchStart, { passive: false });
-      scrollTrigger.addEventListener('touchmove', onTouchMove, { passive: false });*/
+      mobile example:
+      scrollTrigger.addEventListener('touchstart', onTouchStart);
+      scrollTrigger.addEventListener('touchmove', onTouchMove);
+      */
     }
 
     function SubStageRender() {
@@ -44072,7 +44043,7 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
       renderer.render(scene, camera);
     }
 
-    function onWindowResize(w, h) {
+    function windowUpdate(w, h) {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -44140,7 +44111,7 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
     //=====================================================================================
 
 
-    function onScroll(e) {
+    function scrollUpdate(e) {
       scrollY = scrollTrigger.scrollTop;
       console.log(scrollTrigger.scrollTop);
     }
@@ -44157,8 +44128,7 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
     	var t = (e.targetTouches) ? e.targetTouches[0] : e;
     	evt.deltaY = (t.pageY - touchStartY) * 5;
     	touchStartY = t.pageY;
-    			scroll(e)
-    };*/
+    	};*/
     //=====================================================================================
     //=====================================================================================
     //===================================IMAGES LOADER====================================
@@ -44293,10 +44263,9 @@ function js_basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol ===
 var TABLE = function (module, $, window, document) {
   if (window.TABLE === null) return false;
   module.TABLE = module.TABLE || {};
-  module.TABLE.version = '0.0.4';
+  module.TABLE.version = '0.0.5';
 
   module.TABLE.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     /* 
@@ -44328,7 +44297,8 @@ var TABLE = function (module, $, window, document) {
      */
 
     tableDataScrolledInit(windowWidth);
-    $window.off('resize').on('resize', function () {
+
+    function windowUpdate() {
       // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
       if (window.innerWidth != windowWidth) {
         // Update the window width for next time
@@ -44336,7 +44306,12 @@ var TABLE = function (module, $, window, document) {
 
         tableDataScrolledInit(windowWidth);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
 
     function tableDataScrolledInit(w) {
       //Add an identifier so that the mobile terminal can compare by row
@@ -44486,247 +44461,178 @@ var TABS = function (module, $, window, document) {
   module.TABS.version = '0.1.5';
 
   module.TABS.documentReady = function ($) {
+    $('.uix-tabs').each(function (id) {
+      var $this = $(this);
+      var $li = $this.find('.uix-tabs__nav ul > li'),
+          liWidth = $li.first().outerWidth(),
+          liHeight = $li.first().outerHeight(),
+          liNum = $li.length,
+          $contentbox = $this.find('.uix-tabs__content'),
+          tabBoxID = id;
+      var fullwidth = $this.data('fullwidth'),
+          rotation = $this.data('rotation'),
+          rotationRadius = $this.data('rotation-radius'),
+          rotationWapperDeg = $this.data('rotation-wrapper-angle'),
+          rotationDisplay = $this.data('rotation-display');
 
-		$( '.uix-tabs' ).each( function( id ) {
-			const $this             = $( this );
-            
-			const $li               = $this.find( '.uix-tabs__nav ul > li' ),
-				  liWidth           = $li.first().outerWidth(),
-				  liHeight          = $li.first().outerHeight(),
-				  liNum             = $li.length,
-				  $contentbox       = $this.find( '.uix-tabs__content' ),
-                  tabBoxID          = id;
-            
-			let	fullwidth         = $this.data( 'fullwidth' ),
-				rotation          = $this.data( 'rotation' ),
-				rotationRadius    = $this.data( 'rotation-radius' ),
-				rotationWapperDeg = $this.data( 'rotation-wrapper-angle' ),
-				rotationDisplay   = $this.data( 'rotation-display' );
-            
-			
-			if ( typeof fullwidth != typeof undefined && fullwidth == 1 ) {
-				$li.css( 'width', ( 100 / liNum ) + '%' );
-			}
-			
-			if ( typeof rotation === typeof undefined ) {
-				rotation = false;
-			}	
-			
-			
-			if ( typeof rotationWapperDeg === typeof undefined ) {
-				rotationWapperDeg = 0;
-			}	
-			
-			if ( typeof rotationDisplay === typeof undefined ) {
-				rotationDisplay = 5;
-			}		
-			
-			
-			
-			$li.each( function( index ) {
-				index = index + 1;
-				$( this ).attr( 'href', 'javascript:' );
-				$( this ).attr( 'data-tab', tabBoxID + '-tabs-show' + index );
-			});
-			$( $contentbox ).each( function( index ) {
-				index = index + 1;
-				$( this ).attr( 'id', tabBoxID + '-tabs-show' + index );
-			});
-			
+      if (tabs_js_typeof(fullwidth) != ( true ? "undefined" : 0) && fullwidth == 1) {
+        $li.css('width', 100 / liNum + '%');
+      }
 
-			
-			// Tab Sliding Effext
-			if ( $this.find( '.uix-tabs__nav ul > li:first .uix-tabs__marker' ).length == 0 ) {
-				$this.find( '.uix-tabs__nav ul > li:first' ).prepend( '<div class="uix-tabs__marker"></div>' );
-			}
-			
-			/*
-			////////////////////////////////////////////////////////////
-			////////////////   Rotation Effect   //////////////////
-			////////////////////////////////////////////////////////////
-			*/
-			// angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
-			// rad = Math.PI / 180 * 30 ;
-			if ( rotation ) {
-		
-				$this.find( '.uix-tabs__nav' ).css( {
-					'width'      : rotationRadius * 2 + 'px'
-				} );
+      if (tabs_js_typeof(rotation) === ( true ? "undefined" : 0)) {
+        rotation = false;
+      }
 
-		
-				$this.find( '.uix-tabs__nav ul' ).css( {
-					'width'     : rotationRadius * 2 + 'px',
-					'height'    : rotationRadius * 2 + 'px',
-					'transform' : 'rotate('+parseFloat(rotationWapperDeg)+'deg)'
-				} );
+      if (tabs_js_typeof(rotationWapperDeg) === ( true ? "undefined" : 0)) {
+        rotationWapperDeg = 0;
+      }
 
-				
+      if (tabs_js_typeof(rotationDisplay) === ( true ? "undefined" : 0)) {
+        rotationDisplay = 5;
+      }
 
-				//Layout components in a circle layout
-				const step            = 2 * Math.PI / rotationDisplay,
-					  pad             = $this.find( '.uix-tabs__nav ul' ).width();
+      $li.each(function (index) {
+        index = index + 1;
+        $(this).attr('href', 'javascript:');
+        $(this).attr('data-tab', tabBoxID + '-tabs-show' + index);
+      });
+      $($contentbox).each(function (index) {
+        index = index + 1;
+        $(this).attr('id', tabBoxID + '-tabs-show' + index);
+      }); // Tab Sliding Effext
 
-                let angle             = 0,
-                    transitionDelay   = 0;
-                
-
-				$this.find( '.uix-tabs__nav ul > li' ).each( function() { //Can'nt use arrow function here!!!
-					// 'this' works differently with arrow fucntions
-					const el          = $( this ),
-						  x           = rotationRadius * Math.cos(angle) - liWidth / 2,
-						  y           = rotationRadius * Math.sin(angle) - liHeight / 2;
+      if ($this.find('.uix-tabs__nav ul > li:first .uix-tabs__marker').length == 0) {
+        $this.find('.uix-tabs__nav ul > li:first').prepend('<div class="uix-tabs__marker"></div>');
+      }
+      /*
+      ////////////////////////////////////////////////////////////
+      ////////////////   Rotation Effect   //////////////////
+      ////////////////////////////////////////////////////////////
+      */
+      // angle = rad / ( Math.PI / 180 )  = rad * ( 180/Math.PI );
+      // rad = Math.PI / 180 * 30 ;
 
 
-					el.css({
-						'transform'        : 'translate('+parseFloat( x )+'px,'+parseFloat( pad/2 + y )+'px)',
-						'transition-delay' : transitionDelay + "s"
-					})
-					.find( '> a' )
-					.css({
-						'transform'        : 'rotate('+parseFloat(-rotationWapperDeg)+'deg)'
-					});
+      if (rotation) {
+        $this.find('.uix-tabs__nav').css({
+          'width': rotationRadius * 2 + 'px'
+        });
+        $this.find('.uix-tabs__nav ul').css({
+          'width': rotationRadius * 2 + 'px',
+          'height': rotationRadius * 2 + 'px',
+          'transform': 'rotate(' + parseFloat(rotationWapperDeg) + 'deg)'
+        }); //Layout components in a circle layout
+
+        var step = 2 * Math.PI / rotationDisplay,
+            pad = $this.find('.uix-tabs__nav ul').width();
+        var angle = 0,
+            transitionDelay = 0;
+        $this.find('.uix-tabs__nav ul > li').each(function () {
+          //Can'nt use arrow function here!!!
+          // 'this' works differently with arrow fucntions
+          var el = $(this),
+              x = rotationRadius * Math.cos(angle) - liWidth / 2,
+              y = rotationRadius * Math.sin(angle) - liHeight / 2;
+          el.css({
+            'transform': 'translate(' + parseFloat(x) + 'px,' + parseFloat(pad / 2 + y) + 'px)',
+            'transition-delay': transitionDelay + "s"
+          }).find('> a').css({
+            'transform': 'rotate(' + parseFloat(-rotationWapperDeg) + 'deg)'
+          });
+          angle += step;
+          transitionDelay += 0.15;
+        }); //Click on the rotation effect
+
+        $this.off('click').on('click', '.uix-tabs__nav ul > li', function (e) {
+          var tabID = $(this).attr('data-tab'),
+              currentIndex = $(this).index(); // the style of the active item
+
+          $this.find('.uix-tabs__nav ul > li').removeClass('is-active');
+          $this.find('.uix-tabs__content').removeClass('is-active');
+          $(this).addClass('is-active');
+          $('#' + tabID).addClass('is-active'); // rotation animation
+
+          var increase = Math.PI * 2 / rotationDisplay,
+              endAngle = currentIndex % rotationDisplay * increase;
+
+          (function turn() {
+            if (Math.abs(endAngle - angle) > 1 / 8) {
+              var sign = endAngle > angle ? 1 : -1;
+              angle = angle + sign / 8;
+              setTimeout(turn, 20);
+            } else {
+              angle = endAngle;
+            }
+
+            $this.find('.uix-tabs__nav ul > li').each(function (index) {
+              var x2 = Math.cos(-Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
+                  y2 = Math.sin(-Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
+              $(this).css({
+                'transform': 'translate(' + parseFloat(x2) + 'px,' + parseFloat(y2) + 'px)',
+                'transition': 'none',
+                'transition-delay': 0
+              }).find('> a').css({
+                'transform': 'rotate(' + parseFloat(-rotationWapperDeg) + 'deg)'
+              });
+            });
+          })();
+        });
+      }
+      /*
+      ////////////////////////////////////////////////////////////
+      ////////////////////   Default Events   ////////////////////
+      ////////////////////////////////////////////////////////////
+      */
 
 
-					angle += step;
-					transitionDelay += 0.15;
-					
-				
-					
-				});	
+      if (!rotation) {
+        $this.off('click').on('click', '.uix-tabs__nav ul > li', function (e) {
+          var tabID = $(this).attr('data-tab'),
+              currentIndex = $(this).index(); // the style of the active item
+
+          $this.find('.uix-tabs__nav ul > li').removeClass('is-active');
+          $this.find('.uix-tabs__content').removeClass('is-active');
+          $(this).addClass('is-active');
+          $('#' + tabID).addClass('is-active'); //sliding marker
+
+          var translateX = currentIndex * 100,
+              liHeight = $this.find('.uix-tabs__nav ul > li:first').outerHeight(),
+              translateY = currentIndex * liHeight;
+
+          if (window.innerWidth <= 768) {
+            $this.find('.uix-tabs__marker').css({
+              'transform': 'translateY( ' + translateY + 'px )'
+            });
+          } else {
+            $this.find('.uix-tabs__marker').css({
+              'transform': 'translateX( ' + translateX + '% )'
+            });
+          }
+
+          return false;
+        });
+      }
+      /*
+      ////////////////////////////////////////////////////////////
+      ////////////////////////   Init Items  /////////////////////
+      ////////////////////////////////////////////////////////////
+      */
 
 
-				//Click on the rotation effect
-				$this.off( 'click' ).on( 'click', '.uix-tabs__nav ul > li', function( e ) {
-					
-					const tabID = $( this ).attr( 'data-tab' ),
-					      currentIndex = $( this ).index(); 
+      $this.find('.uix-tabs__nav ul > li.is-active').trigger('click'); //Active current tab
 
-					// the style of the active item
-					$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'is-active' );
-					$this.find( '.uix-tabs__content' ).removeClass( 'is-active' );
-			
-					$( this ).addClass( 'is-active' );
-					$( '#' + tabID ).addClass( 'is-active' );
-					
+      var url = window.location.href,
+          locArr,
+          loc,
+          curTab;
 
-
-					// rotation animation
-					const increase     = Math.PI * 2 / rotationDisplay,
-						  endAngle     = currentIndex % rotationDisplay * increase; 
-
-
-					( function turn() {
-						if (Math.abs(endAngle - angle) > 1 / 8) {
-							const sign = endAngle > angle ? 1 : -1;
-							angle = angle + sign / 8;
-							setTimeout(turn, 20);
-						} else {
-							angle = endAngle;
-						}
-						
-					
-						$this.find( '.uix-tabs__nav ul > li' ).each( function( index ) {
-							const x2           = Math.cos( - Math.PI / 2 + index * increase - angle) * rotationRadius - liWidth / 2,
-									y2           = Math.sin( - Math.PI / 2 + index * increase - angle) * rotationRadius + liHeight;
-
-						
-							$( this ).css({
-								'transform'        : 'translate('+parseFloat( x2 )+'px,'+parseFloat( y2 )+'px)',
-								'transition'       : 'none',
-								'transition-delay' : 0
-							})
-							.find( '> a' )
-							.css({
-								'transform'        : 'rotate('+parseFloat(-rotationWapperDeg)+'deg)'
-							});
-
-						});
-
-														
-					})();	
-					
-				});
-
-
-				
-			}
-			
-
-			/*
-			////////////////////////////////////////////////////////////
-			////////////////////   Default Events   ////////////////////
-			////////////////////////////////////////////////////////////
-			*/
-			if ( !rotation ) {
-
-				$this.off( 'click' ).on( 'click', '.uix-tabs__nav ul > li', function( e ) {
-					
-					const tabID = $( this ).attr( 'data-tab' ),
-						  currentIndex = $( this ).index();
-					
-					
-					// the style of the active item
-					$this.find( '.uix-tabs__nav ul > li' ).removeClass( 'is-active' );
-					$this.find( '.uix-tabs__content' ).removeClass( 'is-active' );
-			
-					$( this ).addClass( 'is-active' );
-					$( '#' + tabID ).addClass( 'is-active' );
-					
-
-					//sliding marker
-					const translateX = currentIndex * 100,
-						liHeight   = $this.find( '.uix-tabs__nav ul > li:first' ).outerHeight(),
-						translateY = currentIndex * liHeight;
-					
-					if ( window.innerWidth <= 768 ) {
-						$this.find( '.uix-tabs__marker' ).css({
-							'transform'          : 'translateY( '+translateY+'px )'	
-						});	
-					} else {
-						$this.find( '.uix-tabs__marker' ).css({
-							'transform'          : 'translateX( '+translateX+'% )'	
-						});	
-					}
-
-			
-					
-					return false;
-					
-					
-				});
-			
-
-			}
-
-
-			/*
-			////////////////////////////////////////////////////////////
-			////////////////////////   Init Items  /////////////////////
-			////////////////////////////////////////////////////////////
-			*/
-
-			$this.find( '.uix-tabs__nav ul > li.is-active' ).trigger( 'click' );
-			
-			//Active current tab
-			let url    = window.location.href,
-				locArr,
-			    loc, 
-				curTab;
-			
-			if ( url.indexOf( '#' ) >= 0 ) {
-				
-				locArr = url.split( '#' );
-			    loc    = locArr[1];
-				curTab = $( '.uix-tabs' ).find( 'ul > li:eq('+loc+')' );
-				curTab.trigger( 'click' );	
-			}
-				
-			
-				
-			
-		});
-
-
+      if (url.indexOf('#') >= 0) {
+        locArr = url.split('#');
+        loc = locArr[1];
+        curTab = $('.uix-tabs').find('ul > li:eq(' + loc + ')');
+        curTab.trigger('click');
+      }
+    });
   };
 
   module.components.documentReady.push(module.TABS.documentReady);
@@ -44896,8 +44802,171 @@ var TEAM_FOCUS = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/text-effect/js/fn/text-anime.js
-var text_anime = __webpack_require__(601);
+;// CONCATENATED MODULE: ./src/components/text-effect/js/fn/text-anime.js
+function text_anime_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { text_anime_typeof = function _typeof(obj) { return typeof obj; }; } else { text_anime_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return text_anime_typeof(obj); }
+
+/*
+ * Text Animation
+ *
+ * @param  {String} selectors                - Text wrapper ID or class name.
+ * @return {Void}
+ */
+
+
+(function ($) {
+  $.fn.UixTextEff = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      selectors: '.letters-eff-fadeInRight',
+      scrollSpy: false
+    }, options);
+    this.each(function () {
+      var customControls = settings.selectors;
+      var scrollSpy = settings.scrollSpy;
+      var $this = $(customControls);
+      var speed = $this.data('text-eff-speed'),
+          txtEff;
+
+      if (text_anime_typeof(speed) === ( true ? "undefined" : 0)) {
+        speed = 1200;
+      } //The data-text-eff attribute must be unique, otherwise it will not execute correctly.
+
+
+      if ($this.length > 1) return false;
+      $this.html($this.text().replace(/([^\x00-\x80]|\w|((?=[\x21-\x7e]+)[^A-Za-z0-9]))/g, "<span class='uix-letter'>$&</span>")); //--------------
+
+      if (customControls.indexOf('fadeInRight') >= 0) {
+        txtEff = anime.timeline({
+          loop: false
+        }).add({
+          targets: customControls + ' .uix-letter',
+          translateX: [40, 0],
+          translateZ: 0,
+          opacity: [0, 1],
+          easing: "easeOutExpo",
+          duration: speed,
+          delay: function delay(el, i) {
+            return 500 + 30 * i;
+          }
+        });
+      } //--------------
+
+
+      if (customControls.indexOf('zoomInDown') >= 0) {
+        txtEff = anime.timeline({
+          loop: false
+        }).add({
+          targets: customControls + ' .uix-letter',
+          scale: [0, 1],
+          duration: speed,
+          elasticity: 600,
+          delay: function delay(el, i) {
+            return 45 * (i + 1);
+          }
+        });
+      } //--------------
+
+
+      if (customControls.indexOf('flyInOut') >= 0) {
+        txtEff = anime.timeline({
+          loop: false
+        }).add({
+          targets: customControls + ' .uix-letter',
+          translateX: [40, 0],
+          translateZ: 0,
+          opacity: [0, 1],
+          easing: "easeOutExpo",
+          duration: speed,
+          delay: function delay(el, i) {
+            return 500 + 30 * i;
+          }
+        });
+      } //--------------
+
+
+      if (customControls.indexOf('fading') >= 0) {
+        txtEff = anime.timeline({
+          loop: false
+        }).add({
+          targets: customControls + ' .uix-letter',
+          opacity: [0, 1],
+          easing: "easeInOutQuad",
+          duration: speed,
+          delay: function delay(el, i) {
+            return 150 * (i + 1);
+          }
+        });
+      } //--------------
+
+
+      if (customControls.indexOf('floatingUp') >= 0) {
+        txtEff = anime.timeline({
+          loop: false
+        }).add({
+          targets: customControls + ' .uix-letter',
+          translateY: ["1.1em", 0],
+          translateZ: 0,
+          duration: speed,
+          delay: function delay(el, i) {
+            return 50 * i;
+          }
+        });
+      } //--------------
+
+
+      if (customControls.indexOf('scaleIn') >= 0) {
+        txtEff = anime.timeline({
+          loop: false
+        }).add({
+          targets: customControls + ' .uix-letter',
+          opacity: [0, 1],
+          scale: [3.5, 1],
+          duration: speed
+        });
+      }
+
+      txtEff.pause();
+
+      if (!scrollSpy) {
+        txtEff.play();
+      } else {
+        var viewport = 1; //
+
+        var scrollUpdate = function scrollUpdate() {
+          var spyTop = $this[0].getBoundingClientRect().top; //Prevent asynchronous loading of repeated calls
+
+          var actived = $this.data('activated');
+
+          if (spyTop < window.innerHeight * viewport) {
+            if (text_anime_typeof(actived) === ( true ? "undefined" : 0)) {
+              txtEff.play(); //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+              $this.data('activated', 1);
+            } //endif actived
+
+          }
+        }; // Add function to the element that should be used as the scrollable area.
+
+
+        var throttleFunc = UixThrottle(scrollUpdate, 5);
+        window.removeEventListener('scroll', throttleFunc);
+        window.removeEventListener('touchmove', throttleFunc);
+        window.addEventListener('scroll', throttleFunc);
+        window.addEventListener('touchmove', throttleFunc); // Prevent calculation errors caused by unloaded completion
+
+        if (document.readyState != 'loading') {
+          throttleFunc();
+        } else if (document.addEventListener) {
+          document.addEventListener('DOMContentLoaded', throttleFunc);
+        } else {
+          document.attachEvent('onreadystatechange', function () {
+            if (document.readyState != 'loading') throttleFunc();
+          });
+        }
+      }
+    });
+  };
+})(jQuery);
 ;// CONCATENATED MODULE: ./src/components/text-effect/js/index.js
 function text_effect_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44962,7 +45031,6 @@ var TIMELINE = function (module, $, window, document) {
   module.TIMELINE.version = '0.1.8';
 
   module.TIMELINE.pageLoaded = function () {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     /*! 
@@ -45136,10 +45204,9 @@ function vertical_menu_js_classCallCheck(instance, Constructor) { if (!(instance
 var VERTICAL_MENU = function (module, $, window, document) {
   if (window.VERTICAL_MENU === null) return false;
   module.VERTICAL_MENU = module.VERTICAL_MENU || {};
-  module.VERTICAL_MENU.version = '0.0.5';
+  module.VERTICAL_MENU.version = '0.0.6';
 
   module.VERTICAL_MENU.documentReady = function ($) {
-    var $window = $(window);
     var windowWidth = window.innerWidth,
         windowHeight = window.innerHeight;
     var ulForDesktop = '.uix-v-menu__container:not(.is-mobile) ul.uix-menu'; // Menu Hover
@@ -45194,26 +45261,30 @@ var VERTICAL_MENU = function (module, $, window, document) {
       }
     }); //Monitor the maximum height of the vertical navigation
 
-    menuWrapInit(windowWidth, windowHeight);
-    $window.on('resize', function () {
-      // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-      if (window.innerWidth != windowWidth) {
-        // Update the window width for next time
-        windowWidth = window.innerWidth;
+    menuWrapInit(windowHeight);
+
+    function windowUpdate() {
+      // Check window height has actually changed and it's not just iOS triggering a resize event on scroll
+      if (window.innerHeight != windowHeight) {
+        // Update the window height for next time
         windowHeight = window.innerHeight; // Do stuff here
 
-        menuWrapInit(windowWidth, windowHeight);
+        menuWrapInit(windowHeight);
       }
-    });
+    } // Add function to the window that should be resized
+
+
+    var debounceFuncWindow = UixDebounce(windowUpdate, 50);
+    window.removeEventListener('resize', debounceFuncWindow);
+    window.addEventListener('resize', debounceFuncWindow);
     /*
      * Monitor the maximum height of the vertical navigation
      *
-     * @param  {Number} w         - Returns width of browser viewport
      * @param  {Number} h         - Returns height of browser viewport
      * @return {Void}
      */
 
-    function menuWrapInit(w, h) {
+    function menuWrapInit(h) {
       var $menuWrap = $('.uix-v-menu__container:not(.is-mobile)'),
           vMenuTop = 0; //This value is equal to the $vertical-menu-top variable in the SCSS
 
@@ -45228,9 +45299,10 @@ var VERTICAL_MENU = function (module, $, window, document) {
         height: winHeight + 'px',
         marginTop: 0
       });
-      $window.off('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU').on('scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function () {
+
+      function scrollUpdate() {
         var curULHeight = $('ul.uix-menu').height(),
-            scrolled = $(this).scrollTop();
+            scrolled = $(window).scrollTop();
 
         if (curULHeight > winHeight) {
           $menuWrap.css({
@@ -45258,7 +45330,15 @@ var VERTICAL_MENU = function (module, $, window, document) {
             marginTop: 0
           });
         }
-      });
+      } // Add function to the element that should be used as the scrollable area.
+
+
+      var throttleFunc = UixThrottle(scrollUpdate, 5);
+      window.removeEventListener('scroll', throttleFunc);
+      window.removeEventListener('touchmove', throttleFunc);
+      window.addEventListener('scroll', throttleFunc);
+      window.addEventListener('touchmove', throttleFunc);
+      throttleFunc();
     }
   };
 

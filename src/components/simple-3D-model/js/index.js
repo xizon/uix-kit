@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import GLTFLoader from '@uixkit/plugins/THREE/esm/loaders/GLTFLoader';
@@ -34,7 +36,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
         let sceneSubjects = []; // Import objects and animations dynamically
 		const MainStage = function() {
 
-            const $window          = $( window );
+            
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
 

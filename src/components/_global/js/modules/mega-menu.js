@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -20,14 +22,12 @@ import {
 export const MEGA_MENU = ( ( module, $, window, document ) => {
 	if ( window.MEGA_MENU === null ) return false;
 	
-	
-	
-	
+
 	module.MEGA_MENU               = module.MEGA_MENU || {};
-    module.MEGA_MENU.version       = '0.0.4';
+    module.MEGA_MENU.version       = '0.0.5';
 	module.MEGA_MENU.pageLoaded = function() {
 
-		const $window          = $( window );
+		
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 
@@ -38,21 +38,25 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 		}, 500 );
 		
 
-		
-		$window.on( 'resize', function() {
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
 				windowWidth = window.innerWidth;
-
+		
 				// Do stuff here
 				megaMenuInit( windowWidth );
 		
+		
 			}
-		});
+		}
 		
-		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
+
 
 		
 		// Initialize mega menu

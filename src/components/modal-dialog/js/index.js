@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixFireModalDialog from '@uixkit/core/modal-dialog/js/fn/fire-modal-dialog';
 import UixCloseModalDialog from '@uixkit/core/modal-dialog/js/fn/close-modal-dialog';

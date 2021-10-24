@@ -13,7 +13,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixParallax from '@uixkit/core/_global/js/fn/UixParallax';
 
@@ -24,44 +26,44 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 	if ( window.PARALLAX === null ) return false;
 	
 	
-	
-	
 	module.PARALLAX               = module.PARALLAX || {};
-    module.PARALLAX.version       = '0.0.7';
+    module.PARALLAX.version       = '0.0.8';
 	module.PARALLAX.documentReady = function( $ ) {
 
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 
       
 		//  Initialize
-		parallaxInit( windowWidth, windowHeight );
-		
-		$window.on( 'resize', function() {
+		parallaxInit( windowWidth );
+	
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
-				windowWidth  = window.innerWidth;
-				windowHeight = window.innerHeight;
-
+				windowWidth = window.innerWidth;
+		
 				// Do stuff here
-				parallaxInit( windowWidth, windowHeight );
+				parallaxInit( windowWidth );
 		
-
+		
 			}
-		});
+		}
 		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
+
 	
 		/*
 		 * Initialize parallx settings
 		 *
 		 * @param  {Number} w         - Returns width of browser viewport
-		 * @param  {Number} h         - Returns height of browser viewport
 		 * @return {Void}
 		 */
-		function parallaxInit( w, h ) {
+		function parallaxInit( w ) {
 			
 			/* Pure parallax scrolling effect without other embedded HTML elements */
 			$( '.uix-parallax--el' ).each( function() {

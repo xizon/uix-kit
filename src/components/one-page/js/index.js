@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';
@@ -23,10 +25,9 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE               = module.ONEPAGE || {};
-    module.ONEPAGE.version       = '0.0.9';
+    module.ONEPAGE.version       = '0.1.0';
     module.ONEPAGE.documentReady = function( $ ) {
 
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 		
@@ -298,8 +299,9 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 		const navMinTop      = ( $sidefixedMenu.length > 0 ) ? $sidefixedMenu.offset().top : 0,
 			  navMaxTop      = parseFloat( $( document ).height() - $( '.uix-footer__container' ).height() ) - windowHeight/3;
 
-		$window.off( 'scroll.ONEPAGE touchmove.ONEPAGE' ).on( 'scroll.ONEPAGE touchmove.ONEPAGE', function() {
-			const scrolled  = $( this ).scrollTop(),
+		
+		function scrollUpdate() {
+			const scrolled  = $( window ).scrollTop(),
 				  spyTop    = parseFloat( scrolled + topSpacing ),
 				  minTop    = $( '[data-highlight-section="true"]' ).first().offset().top,
 				  maxTop    = $( '[data-highlight-section="true"]' ).last().offset().top + $( '[data-highlight-section="true"]' ).last().height();
@@ -340,10 +342,15 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 			} else {
 				$sidefixedMenu.addClass( 'is-fixed' );
 			}	
-
-
-		});	
-	
+		}
+		
+		// Add function to the element that should be used as the scrollable area.
+		const throttleFunc = UixThrottle(scrollUpdate, 5);
+		window.removeEventListener('scroll', throttleFunc);
+		window.removeEventListener('touchmove', throttleFunc);
+		window.addEventListener('scroll', throttleFunc);
+		window.addEventListener('touchmove', throttleFunc);
+		throttleFunc();
 		
 
 		/* 

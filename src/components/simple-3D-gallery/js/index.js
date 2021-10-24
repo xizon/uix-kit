@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
@@ -22,7 +24,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_GALLERY               = module.THREE_GALLERY || {};
-    module.THREE_GALLERY.version       = '0.0.4';
+    module.THREE_GALLERY.version       = '0.0.5';
     module.THREE_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -32,7 +34,6 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
         let sceneSubjects = []; // Import objects and animations dynamically
 		const MainStage = function() {
 
-            const $window          = $( window );
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
             
@@ -152,9 +153,20 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 				});
 
 
-				// Fires when the window changes
-				window.addEventListener( 'resize', onWindowResize, false );
-
+				// Add function to the window that should be resized
+				const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+				window.removeEventListener('resize', debounceFuncWindow);
+				window.addEventListener('resize', debounceFuncWindow);
+				
+				
+				// Add function to the element that should be used as the scrollable area.
+				const throttleFunc = UixThrottle(scrollUpdate, 5);
+				window.removeEventListener('scroll', throttleFunc);
+				window.removeEventListener('touchmove', throttleFunc);
+				window.addEventListener('scroll', throttleFunc);
+				window.addEventListener('touchmove', throttleFunc);
+				throttleFunc();
+				
 
 			}
 
@@ -224,20 +236,20 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 			}
 
 
-			function onWindowResize() {
+			function windowUpdate() {
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 			}
 
 
-			// listen to scroll
-			window.addEventListener( 'scroll', function(e) {
+		
+			function scrollUpdate() {
 				lastScrollValue = scrollValue;
 				scrollValue = window.pageYOffset;
 
 				console.log( 'lastScrollValue: ' + lastScrollValue + ', scrollValue: ' + scrollValue );
-			});
+			}
 
 
 

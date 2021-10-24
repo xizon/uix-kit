@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixRenderCustomSelect from '@uixkit/core/form/js/fn/select';
 

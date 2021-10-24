@@ -1,4 +1,3 @@
-
 /* 
  *************************************
  * Parallax Effect
@@ -10,6 +9,7 @@
  *
  *************************************
  */
+ import { UixThrottle } from '@uixkit/core/_global/js';
 
 ( function ( $ ) {
 	'use strict';
@@ -43,11 +43,6 @@
 				'transition': 'none'
 			} );
 
-            // Please do not use scroll's off method in each
-		    $( window ).on( 'scroll.UixParallax touchmove.UixParallax', function( e ){
-				scrollUpdate();
-			});
-			
 			
 			//Initialize the position of the background
 			if ( bgEff ) {
@@ -88,6 +83,24 @@
 				
 			}
 
+
+			// Add function to the element that should be used as the scrollable area.
+			const throttleFunc = UixThrottle(scrollUpdate, 5);
+			window.removeEventListener('scroll', throttleFunc);
+			window.removeEventListener('touchmove', throttleFunc);
+			window.addEventListener('scroll', throttleFunc);
+			window.addEventListener('touchmove', throttleFunc);
+
+			// Prevent calculation errors caused by unloaded completion
+			if (document.readyState != 'loading') {
+				throttleFunc();
+			} else if (document.addEventListener) {
+				document.addEventListener('DOMContentLoaded', throttleFunc);
+			} else {
+				document.attachEvent('onreadystatechange', function () {
+					if (document.readyState != 'loading') throttleFunc();
+				});
+			}
 			
 			
 		});

@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixParallax from '@uixkit/core/_global/js/fn/UixParallax';
 
@@ -20,44 +22,43 @@ export const SET_BG = ( ( module, $, window, document ) => {
 	if ( window.SET_BG === null ) return false;
 	
 	
-	
-	
 	module.SET_BG               = module.SET_BG || {};
-    module.SET_BG.version       = '0.0.7';
+    module.SET_BG.version       = '0.0.8';
 	module.SET_BG.documentReady = function( $ ) {
 
 
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
         
 		//  Initialize
-		setBGInit( windowWidth, windowHeight );
+		setBGInit();
 		
-		$window.on( 'resize', function() {
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
-				windowWidth  = window.innerWidth;
-				windowHeight = window.innerHeight;
-
-				// Do stuff here
-				setBGInit( windowWidth, windowHeight );
+				windowWidth = window.innerWidth;
 		
-
+				// Do stuff here
+				setBGInit();
+		
+		
 			}
-		});
+		}
+		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
 		
 	
 		/*
 		 * Initialize background using "data-bg" attribute.
 		 *
-		 * @param  {Number} w         - Returns width of browser viewport
-		 * @param  {Number} h         - Returns height of browser viewport
 		 * @return {Void}
 		 */
-		function setBGInit( w, h ) {
+		function setBGInit() {
 			
 			$( '[data-bg]' ).each( function() {
 				const $this    = $( this );

@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -28,10 +30,10 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.FLEXSLIDER               = module.FLEXSLIDER || {};
-    module.FLEXSLIDER.version       = '0.2.0';
+    module.FLEXSLIDER.version       = '0.2.1';
     module.FLEXSLIDER.documentReady = function( $ ) {
 
-		const $window          = $( window );
+		
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 		
@@ -1089,13 +1091,14 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
          Check grid size on resize event
 		 ---------------------------
 		 */
-		$window.on( 'resize', function() {
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
 				windowWidth = window.innerWidth;
-
+		
+				// Do stuff here
 				$sliderDefault.each( function() {
 					
 					if ( $( this ).length > 0 ) {
@@ -1116,11 +1119,16 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 					}			
 					
 				});
-				
-			
-				
+		
+		
 			}
-		});
+		}
+		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
+
 		
     };
 	

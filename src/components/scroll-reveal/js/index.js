@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -21,21 +23,17 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 	
 	
     module.SCROLL_REVEAL               = module.SCROLL_REVEAL || {};
-    module.SCROLL_REVEAL.version       = '0.1.5';
+    module.SCROLL_REVEAL.version       = '0.1.6';
     module.SCROLL_REVEAL.documentReady = function( $ ) {
 
 		
 		//From JSON config in data attribute in HTML
 		const $scrollElements = $( '[data-uix-anim]' );
     
-        $( window ).off( 'scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL' );
-        
+
         $scrollElements.each( function()  {
 
-            
             let viewport;
-            
-            
             const $el = $( this );
             const tl = new TimelineMax({paused: true});
             
@@ -175,15 +173,16 @@ export const SCROLL_REVEAL = ( ( module, $, window, document ) => {
 
                 }  
             };
+
+
+            // Add function to the element that should be used as the scrollable area.
+            const throttleFunc = UixThrottle(scrollUpdate, 5);
+            window.removeEventListener('scroll', throttleFunc);
+            window.removeEventListener('touchmove', throttleFunc);
+            window.addEventListener('scroll', throttleFunc);
+            window.addEventListener('touchmove', throttleFunc);
+            throttleFunc();
             
-            
-            scrollUpdate();
-            
-            // Please do not use scroll's off method in each
-            $( window ).on( 'scroll.SCROLL_REVEAL touchmove.SCROLL_REVEAL', function( event ) {
-                 scrollUpdate();
-            });
-			
 			
             
              /*

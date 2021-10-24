@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 import '@uixkit/plugins/Miscellaneous/attrExt';
@@ -27,11 +29,10 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 	
 	
     module.POST_LIST_AJAX               = module.POST_LIST_AJAX || {};
-    module.POST_LIST_AJAX.version       = '0.1.8';
+    module.POST_LIST_AJAX.version       = '0.1.9';
     module.POST_LIST_AJAX.documentReady = function( $ ) {
         
         
-        $( window ).off( 'scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX' );
         
 		$( '[data-ajax-list-json]' ).each( function() {
 			const $this            = $( this );
@@ -191,12 +192,8 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 					}
 					
 				
-						
-                    // Please do not use scroll's off method in each
-					$( window ).on( 'scroll.POST_LIST_AJAX touchmove.POST_LIST_AJAX', function() {
-						
-                        
-                        const spyTop = parseFloat( $button[0].getBoundingClientRect().top + $button.outerHeight( true ) );
+					function scrollUpdate() {
+						const spyTop = parseFloat( $button[0].getBoundingClientRect().top + $button.outerHeight( true ) );
 					
                         if ( spyTop < window.innerHeight && !$button.hasClass( triggerActive ) ) {
                             
@@ -225,8 +222,18 @@ export const POST_LIST_AJAX = ( ( module, $, window, document ) => {
 
 							
 						}
-						
-					});	
+					}
+					
+					// Add function to the element that should be used as the scrollable area.
+					const throttleFunc = UixThrottle(scrollUpdate, 5);
+					window.removeEventListener('scroll', throttleFunc);
+					window.removeEventListener('touchmove', throttleFunc);
+					window.addEventListener('scroll', throttleFunc);
+					window.addEventListener('touchmove', throttleFunc);
+					throttleFunc();
+					
+
+
 					
 				} else {
 					/* 

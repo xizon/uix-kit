@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
@@ -33,7 +35,7 @@ export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
         let sceneSubjects = []; // Import objects and animations dynamically
 		const MainStage = function() {
 
-            const $window          = $( window );
+            
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
             

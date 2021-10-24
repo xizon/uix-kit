@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
@@ -24,10 +26,10 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 	
 	
     module.AJAX_PAGE_LOADER               = module.AJAX_PAGE_LOADER || {};
-    module.AJAX_PAGE_LOADER.version       = '0.1.9';
+    module.AJAX_PAGE_LOADER.version       = '0.2.1';
     module.AJAX_PAGE_LOADER.documentReady = function( $ ) {
 
-		const $window          = $( window );
+		
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
         
@@ -104,13 +106,24 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		}
 			
 		ajaxInit();
-		$window.on( 'resize', function() {
-			windowWidth = window.innerWidth;
-			ajaxInit();
-		} );	
 
+		function windowUpdate() {
+			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( window.innerWidth != windowWidth ) {
+				
+				// Update the window width for next time
+				windowWidth = window.innerWidth;
 		
-
+				// Do stuff here
+				ajaxInit();
+		
+			}
+		}
+		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
 		
 		/*
 		 * Call AJAX on click event for "single pages links"

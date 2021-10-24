@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import '@uixkit/plugins/Miscellaneous/hashchange';
@@ -26,7 +28,7 @@ export const ONEPAGE2 = ( ( module, $, window, document ) => {
     module.ONEPAGE2.version       = '0.0.7';
     module.ONEPAGE2.documentReady = function( $ ) {
 
-		const $window          = $( window );
+		
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 

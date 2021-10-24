@@ -19,7 +19,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
@@ -40,7 +42,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 		const MainStage = function() {
 
 
-            const $window          = $( window );
+            
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
             

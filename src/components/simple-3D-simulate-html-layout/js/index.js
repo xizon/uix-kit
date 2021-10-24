@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -21,7 +23,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SIMULATE_HTML_LAYOUT               = module.THREE_SIMULATE_HTML_LAYOUT || {};
-    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.1';
+    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.2';
     module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function( $ ) {
 
 		
@@ -30,20 +32,12 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 		
 		
       
-
 		//=====================================================================================
 		//=====================================================================================
 		//==============================THREE.js===============================================
 		//=====================================================================================
 		//=====================================================================================
 		//=====================================================================================
-
-
-		const $window                 = $( window );
-		let	windowWidth               = window.innerWidth,
-			windowHeight              = window.innerHeight;
-
-
 
 		//scroll spy
 		let scrollY = 0;
@@ -192,20 +186,30 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 
 
 			//=================
-			// Fires when the window changes
-			window.addEventListener( 'resize', function(){
-			   onWindowResize(wrapperWidth,wrapperHeight);
-		   }, false );
+			// Add function to the window that should be resized
+			const debounceFuncWindow = UixDebounce(function(){
+				windowUpdate(wrapperWidth,wrapperHeight);
+			}, 50);
+			window.removeEventListener('resize', debounceFuncWindow);
+			window.addEventListener('resize', debounceFuncWindow);
+
 
 			//=================
-			// Fires scroll animation
-			scrollTrigger.addEventListener('scroll', onScroll, {
-				passive: false
-			});
+			// Add function to the element that should be used as the scrollable area.
+			const throttleFunc = UixThrottle(scrollUpdate, 5);
+			scrollTrigger.removeEventListener('scroll', throttleFunc);
+			scrollTrigger.removeEventListener('touchmove', throttleFunc);
+			scrollTrigger.addEventListener('scroll', throttleFunc);
+			scrollTrigger.addEventListener('touchmove', throttleFunc);
+			throttleFunc();
+			
+
+
 			/*
-			mobile example
-			scrollTrigger.addEventListener('touchstart', onTouchStart, { passive: false });
-			scrollTrigger.addEventListener('touchmove', onTouchMove, { passive: false });*/	
+			mobile example:
+			scrollTrigger.addEventListener('touchstart', onTouchStart);
+			scrollTrigger.addEventListener('touchmove', onTouchMove);
+			*/	
 
 		}
 
@@ -233,7 +237,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 		}
 
 
-		function onWindowResize(w,h) {
+		function windowUpdate(w,h) {
 			camera.aspect = w / h;
 			camera.updateProjectionMatrix();
 			renderer.setSize( w, h );
@@ -297,8 +301,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 		//=====================================================================================
 		//=====================================================================================
 		//=====================================================================================
-		function onScroll(e) {
-
+		function scrollUpdate(e) {
 			scrollY = scrollTrigger.scrollTop;
 			console.log(scrollTrigger.scrollTop);
 		};
@@ -317,10 +320,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 			evt.deltaY = (t.pageY - touchStartY) * 5;
 			touchStartY = t.pageY;
 
-				scroll(e)
 		};*/
-
-
 
 
 

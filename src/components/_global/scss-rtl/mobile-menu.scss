@@ -12,14 +12,17 @@
         right: 12px;
     }
 	
-    &.is-opened {
-	    span {
-		    right: 7px;
-	    } 
-	  
-    }	
 	
 }
+
+body.js-uix-menu-opened {
+	.uix-menu-mobile__toggle {
+	    span {
+		    right: 7px;
+	    }
+	}
+}
+
 
 
 /* Mobile Menu Container */

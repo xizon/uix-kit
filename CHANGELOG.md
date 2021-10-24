@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 4.5.7 (October 24, 2021) =
+
+* Tweak: Optimized some module scripts.
+* Tweak: Added part of the demo code.
+* Tweak: Optimize the performance of scroll listening.
+* Tweak: Use throttle and debounce functions to optimize module performance.
+
+
 
 #### = 4.5.6 (October 6, 2021) =
 

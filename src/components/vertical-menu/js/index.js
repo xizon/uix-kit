@@ -13,7 +13,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -26,10 +28,10 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 	
 	
     module.VERTICAL_MENU               = module.VERTICAL_MENU || {};
-    module.VERTICAL_MENU.version       = '0.0.5';
+    module.VERTICAL_MENU.version       = '0.0.6';
     module.VERTICAL_MENU.documentReady = function( $ ) {
 
-        const $window          = $( window );
+        
         let	windowWidth        = window.innerWidth,
             windowHeight       = window.innerHeight;
         
@@ -119,32 +121,35 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 		
 		
 		//Monitor the maximum height of the vertical navigation
-		menuWrapInit( windowWidth, windowHeight );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( window.innerWidth != windowWidth ) {
+		menuWrapInit( windowHeight );
 
-				// Update the window width for next time
-				windowWidth  = window.innerWidth;
+		function windowUpdate() {
+			// Check window height has actually changed and it's not just iOS triggering a resize event on scroll
+			if ( window.innerHeight != windowHeight ) {
+				
+				// Update the window height for next time
 				windowHeight = window.innerHeight;
-
-				// Do stuff here
-				menuWrapInit( windowWidth, windowHeight );
 		
-
+				// Do stuff here
+				menuWrapInit( windowHeight );
+		
+		
 			}
-		});
+		}
+		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
 		
 	
 		/*
 		 * Monitor the maximum height of the vertical navigation
 		 *
-		 * @param  {Number} w         - Returns width of browser viewport
 		 * @param  {Number} h         - Returns height of browser viewport
 		 * @return {Void}
 		 */
-		function menuWrapInit( w, h ) {
+		function menuWrapInit( h ) {
 			
 			const $menuWrap  = $( '.uix-v-menu__container:not(.is-mobile)' ),
 				  vMenuTop   = 0; //This value is equal to the $vertical-menu-top variable in the SCSS
@@ -163,10 +168,10 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 				marginTop : 0
 			});	
 
-			$window.off( 'scroll.VERTICAL_MENU touchmove.VERTICAL_MENU' ).on( 'scroll.VERTICAL_MENU touchmove.VERTICAL_MENU', function() {
 
+			function scrollUpdate() {
 				const curULHeight = $( 'ul.uix-menu' ).height(),
-					  scrolled    = $( this ).scrollTop();
+					  scrolled    = $( window ).scrollTop();
 
 				if ( curULHeight > winHeight ) {
 					$menuWrap.css({
@@ -195,9 +200,17 @@ export const VERTICAL_MENU = ( ( module, $, window, document ) => {
 						marginTop : 0
 					});		
 				}
+			}
+			
+			// Add function to the element that should be used as the scrollable area.
+			const throttleFunc = UixThrottle(scrollUpdate, 5);
+			window.removeEventListener('scroll', throttleFunc);
+			window.removeEventListener('touchmove', throttleFunc);
+			window.addEventListener('scroll', throttleFunc);
+			window.addEventListener('touchmove', throttleFunc);
+			throttleFunc();
+			
 
-
-			});	
 			
 		}
 			

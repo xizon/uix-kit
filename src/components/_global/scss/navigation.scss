@@ -19,6 +19,11 @@ $nav-mega-li-w    : 270px;
 	float: right;
 	padding-top: 1.25rem;
 
+	/*
+	Do not use `position:relative`, it may cause the width calculation script 
+	matching problem of the mega menu
+	*/
+
 
 	&.is-fixed {
 		padding-bottom: 0;

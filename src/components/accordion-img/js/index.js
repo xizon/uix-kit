@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -29,7 +31,7 @@ export const ACCORDION_BG = ( ( module, $, window, document ) => {
     module.ACCORDION_BG.documentReady = function( $ ) {
 		
 		
-		const $window          = $( window );
+		
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 		

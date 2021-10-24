@@ -88,8 +88,14 @@
 
     }
 	
-	
-    &.is-opened {
+
+  	
+}
+
+
+
+body.js-uix-menu-opened {
+	.uix-menu-mobile__toggle {
 	    span {
 		    left: 16px;
 		  
@@ -104,8 +110,7 @@
 		    }	  
 		  
 	    }
-    }
-  	
+	}
 }
 
 

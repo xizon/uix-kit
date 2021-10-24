@@ -13,7 +13,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -29,7 +31,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
     module.TIMELINE.version       = '0.1.8';
     module.TIMELINE.pageLoaded    = function() {
 
-        const $window          = $( window );
+        
         let	windowWidth        = window.innerWidth,
             windowHeight       = window.innerHeight;
 				

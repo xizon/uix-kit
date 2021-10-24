@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -24,10 +26,9 @@ export const TABLE = ( ( module, $, window, document ) => {
 	
 	
     module.TABLE               = module.TABLE || {};
-    module.TABLE.version       = '0.0.4';
+    module.TABLE.version       = '0.0.5';
     module.TABLE.documentReady = function( $ ) {
 
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 
@@ -66,19 +67,25 @@ export const TABLE = ( ( module, $, window, document ) => {
 
 		tableDataScrolledInit( windowWidth );
 
-		$window.off( 'resize' ).on( 'resize', function() {
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
 				windowWidth = window.innerWidth;
-
+		
 				// Do stuff here
 				tableDataScrolledInit( windowWidth );
-
-
+		
+		
 			}
-		});
+		}
+		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
+
 
 		function tableDataScrolledInit( w ) {
 

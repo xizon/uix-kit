@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -20,17 +22,11 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 	if ( window.NAVIGATION === null ) return false;
 	
 	
-	
-	
 	module.NAVIGATION               = module.NAVIGATION || {};
-    module.NAVIGATION.version       = '0.0.9';
+    module.NAVIGATION.version       = '0.1.0';
 	module.NAVIGATION.documentReady = function( $ ) {
 
 
-		const $window          = $( window );
-		let	windowWidth        = window.innerWidth,
-			windowHeight       = window.innerHeight;
-        
 		const ulForDesktop = '.uix-menu__container:not(.is-mobile) ul.uix-menu';
 
 
@@ -109,11 +105,9 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 
 
 		//-------- Sticky primary navigation
-		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 		const $el = $( '.uix-menu__container:not(.is-mobile)' );
-		$window.off( 'scroll.NAVIGATION touchmove.NAVIGATION' ).on( 'scroll.NAVIGATION touchmove.NAVIGATION', function() {
-
-			const scrolled = $( this ).scrollTop(),
+		function scrollUpdate() {
+			const scrolled = $( window ).scrollTop(),
 				  spyTop   = 220;
 			
 			if ( scrolled >= spyTop ) {
@@ -121,8 +115,15 @@ export const NAVIGATION = ( ( module, $, window, document ) => {
 			} else {
 				$el.removeClass( 'is-fixed' );	
 			}
-			
-		});
+		}
+		
+		// Add function to the element that should be used as the scrollable area.
+		const throttleFunc = UixThrottle(scrollUpdate, 5);
+		window.removeEventListener('scroll', throttleFunc);
+		window.removeEventListener('touchmove', throttleFunc);
+		window.addEventListener('scroll', throttleFunc);
+		window.addEventListener('touchmove', throttleFunc);
+		throttleFunc();
 		
 
 

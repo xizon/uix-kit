@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -26,14 +28,13 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.3.4';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.3.5';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
 		// Remove pixi.js banner from the console
 		PIXI.utils.skipHello();		
 	
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
         
@@ -63,20 +64,25 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 		
 		sliderInit( false );
-		
-		$window.on( 'resize', function() {
+	
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
 				windowWidth = window.innerWidth;
-
-				sliderInit( true );
-				
-			}
-		});
 		
-
+				// Do stuff here
+				sliderInit( true );
+		
+		
+			}
+		}
+		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
 		
 
 		/*

@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -20,9 +22,8 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 	if ( window.SCROLLSPY_ANIM === null ) return false;
 	
 	
-	
     module.SCROLLSPY_ANIM               = module.SCROLLSPY_ANIM || {};
-    module.SCROLLSPY_ANIM.version       = '0.0.6';
+    module.SCROLLSPY_ANIM.version       = '0.0.7';
     module.SCROLLSPY_ANIM.documentReady = function( $ ) {
 
 		// Remove pixi.js banner from the console
@@ -37,7 +38,6 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		if ( $el.length == 0 ) return false;
 		
         
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
         
@@ -126,14 +126,12 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 		}
 
 
-        $window.off( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM' ).on( 'scroll.SCROLLSPY_ANIM touchmove.SCROLLSPY_ANIM', function( event ) {
-		
-            
+        function scrollUpdate() {
             const elHeight      = $el.height(),
                   elOffsetTop   = $el.offset().top - panelHeight; 
             
 
-            const scrolled            = $( this ).scrollTop(),
+            const scrolled            = $( window ).scrollTop(),
 				  translateTitle      = scrolled / 2,
 				  translateBackground = scrolled / 3,
 				  scale               = scrolled / elHeight,
@@ -171,13 +169,16 @@ export const SCROLLSPY_ANIM = ( ( module, $, window, document ) => {
 				});
 	
 			}
-
-			
-			
-			
-        });
-
-
+        }
+        
+        // Add function to the element that should be used as the scrollable area.
+        const throttleFunc = UixThrottle(scrollUpdate, 5);
+        window.removeEventListener('scroll', throttleFunc);
+        window.removeEventListener('touchmove', throttleFunc);
+        window.addEventListener('scroll', throttleFunc);
+        window.addEventListener('touchmove', throttleFunc);
+        throttleFunc();
+        
 		
 
 

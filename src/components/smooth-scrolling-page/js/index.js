@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
@@ -21,7 +23,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
 	
 	
     module.SMOOTH_SCROLLING_PAGE               = module.SMOOTH_SCROLLING_PAGE || {};
-    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.3';
+    module.SMOOTH_SCROLLING_PAGE.version       = '0.1.4';
     module.SMOOTH_SCROLLING_PAGE.pageLoaded = function() {
 
 		//Prevent this module from loading in other pages
@@ -31,7 +33,6 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
         
         // Core params
         //--------------
-        const $window          = $( window );
         let	windowWidth        = window.innerWidth,
             windowHeight       = window.innerHeight;
 
@@ -135,36 +136,7 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
         }
 
 
-
-        $( window ).on( 'resize', function() {
-            // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-            if ( window.innerWidth != windowWidth ) {
-
-                // Update the window width for next time
-                windowWidth = window.innerWidth;
-
-                // Do stuff here
-                scroller.resizeRequest++;
-                if (!requestId) {
-                    requestId = requestAnimationFrame(scrollUpdate);
-                }
-
-            }
-        });
-
-        $( window ).off( 'scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE' ).on( 'scroll.SMOOTH_SCROLLING_PAGE touchmove.SMOOTH_SCROLLING_PAGE', function() {
-            scroller.scrollRequest++;
-            if (!requestId) {
-                requestId = requestAnimationFrame(scrollUpdate);
-            }
-     
-        });
-        
-
-
-        scrollUpdate();
-
-        function scrollUpdate() {
+        function scrollAnimate() {
 
             const resized = scroller.resizeRequest > 0;
 
@@ -199,7 +171,8 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             });
 
 
-            requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(scrollUpdate) : null;
+            // update requestId
+            requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(scrollAnimate) : null;
 
 
             //+++++++++++++++++++++++++++++++++++++++++++++++++
@@ -341,7 +314,50 @@ export const SMOOTH_SCROLLING_PAGE = ( ( module, $, window, document ) => {
             //
             lastScrollTop = scrolled;
 
-        }//end scrollUpdate()
+        }//end scrollAnimate()
+
+
+
+        function scrollUpdate() {
+            scroller.scrollRequest++;
+            if (!requestId) {
+                requestId = requestAnimationFrame(scrollAnimate);
+            }
+        }
+        
+        // Add function to the element that should be used as the scrollable area.
+        const throttleFunc = UixThrottle(scrollUpdate, 5);
+        window.removeEventListener('scroll', throttleFunc);
+        window.removeEventListener('touchmove', throttleFunc);
+        window.addEventListener('scroll', throttleFunc);
+        window.addEventListener('touchmove', throttleFunc);
+        throttleFunc();
+        
+
+
+        function windowUpdate() {
+            // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+            if ( window.innerWidth != windowWidth ) {
+                
+                // Update the window width for next time
+                windowWidth = window.innerWidth;
+        
+                // Do stuff here
+                scroller.resizeRequest++;
+                if (!requestId) {
+                    requestId = requestAnimationFrame(scrollAnimate);
+                }
+        
+        
+            }
+        }
+        
+        // Add function to the window that should be resized
+        const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+        window.removeEventListener('resize', debounceFuncWindow);
+        window.addEventListener('resize', debounceFuncWindow);
+
+
 
 
 		

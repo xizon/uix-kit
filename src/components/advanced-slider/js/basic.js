@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -24,10 +26,10 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.ADVANCED_SLIDER               = module.ADVANCED_SLIDER || {};
-    module.ADVANCED_SLIDER.version       = '0.2.5';
+    module.ADVANCED_SLIDER.version       = '0.2.6';
     module.ADVANCED_SLIDER.pageLoaded    = function() {
 
-		const $window          = $( window );
+
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
         
@@ -38,20 +40,25 @@ export const ADVANCED_SLIDER = ( ( module, $, window, document ) => {
         
 			
 		sliderInit( false );
-		
-		$window.on( 'resize', function() {
+
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
 				windowWidth = window.innerWidth;
-
+		
+				// Do stuff here
 				sliderInit( true );
-				
+		
+		
 			}
-		});
+		}
 		
-		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
 		
 		/*
 		 * Initialize slideshow

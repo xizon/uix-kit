@@ -11,15 +11,14 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
 export const LOADER = ( ( module, $, window, document ) => {
 	if ( window.LOADER === null ) return false;
-	
-	
-	
 	
 	module.LOADER               = module.LOADER || {};
     module.LOADER.version       = '0.0.5';

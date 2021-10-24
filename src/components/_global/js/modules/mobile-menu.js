@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -20,26 +22,20 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 	if ( window.MOBILE_MENU === null ) return false;
 	
 	
-	
-	
 	module.MOBILE_MENU               = module.MOBILE_MENU || {};
-    module.MOBILE_MENU.version       = '0.0.8';
+    module.MOBILE_MENU.version       = '0.0.9';
 	module.MOBILE_MENU.documentReady = function( $ ) {
 
 
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 
 
 
-
 		//-------- Show Toolbar when viewing site for WordPress
-		//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 		const $el = $( '.admin-bar .uix-menu-mobile__toggle' );
-		$window.off( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU' ).on( 'scroll.MOBILE_MENU touchmove.MOBILE_MENU', function() {
-
-			const scrolled = $( this ).scrollTop(),
+		function scrollUpdate() {
+			const scrolled = $( window ).scrollTop(),
 				  spyTop    = 46;
 			
 			if ( scrolled >= spyTop ) {
@@ -47,8 +43,17 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 			} else {
 				$el.removeClass( 'is-fixed' );	
 			}
-			
-		});
+		}
+		
+		// Add function to the element that should be used as the scrollable area.
+		const throttleFunc = UixThrottle(scrollUpdate, 5);
+		window.removeEventListener('scroll', throttleFunc);
+		window.removeEventListener('touchmove', throttleFunc);
+		window.addEventListener('scroll', throttleFunc);
+		window.addEventListener('touchmove', throttleFunc);
+		throttleFunc();
+		
+
 
 
 
@@ -70,8 +75,8 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 				//Prevents further propagation of the current event in the capturing and bubbling phases.
 				e.stopPropagation(); 
 
-				$( this ).toggleClass( 'is-opened' );
-				if ( $( this ).hasClass( 'is-opened' ) ) {
+				$( this ).toggleClass( 'is-active' );
+				if ( $( this ).hasClass( 'is-active' ) ) {
 
 					//Add mobile brand
 					const logoURL = $( '.uix-brand--mobile img' ).attr( 'src' );
@@ -89,7 +94,7 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 
 			//Mobile menu mask event
 			$( '.uix-menu-mobile__mask' ).on( 'click', function() {
-				$toggle.removeClass( 'is-opened' );
+				$toggle.removeClass( 'is-active' );
 				$toggleBody.removeClass( 'js-uix-menu-opened' );
 			});
 
@@ -156,23 +161,28 @@ export const MOBILE_MENU = ( ( module, $, window, document ) => {
 			
 			
 			mobileMenuInit( windowWidth ); 
-
-			// Close the menu on window change
-			$window.on( 'resize', function() {
+			
+			function windowUpdate() {
 				// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 				if ( window.innerWidth != windowWidth ) {
-
+					
 					// Update the window width for next time
 					windowWidth = window.innerWidth;
-
+			
 					// Do stuff here
 					$toggleBody.removeClass( 'js-uix-menu-opened' );
-					$toggle.removeClass( 'is-opened' );
+					$toggle.removeClass( 'is-active' );
 					mobileMenuInit( windowWidth );
-
-
+			
+			
 				}
-			});
+			}
+			
+			// Add function to the window that should be resized
+			const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+			window.removeEventListener('resize', debounceFuncWindow);
+			window.addEventListener('resize', debounceFuncWindow);
+
 
 
 		});

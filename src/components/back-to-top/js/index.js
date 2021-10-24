@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';
@@ -25,11 +27,10 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 	
 	
     module.BACK_TO_TOP               = module.BACK_TO_TOP || {};
-    module.BACK_TO_TOP.version       = '0.0.9';
+    module.BACK_TO_TOP.version       = '0.1.0';
     module.BACK_TO_TOP.documentReady = function( $ ) {
 
 		
-		const $window          = $( window );
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
 		
@@ -37,12 +38,9 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 		$.when( $( '#uix-to-top' ).length > 0).then( function() {
 			
 			//-------- Sticky button of back to top 
-			//Note: Don't use Waypoint, because the Offset is wrong on calculating height of fixed element
 			const $el = $( '#uix-to-top' );
-			
-			$window.off( 'scroll.BACK_TO_TOP touchmove.BACK_TO_TOP' ).on( 'scroll.BACK_TO_TOP touchmove.BACK_TO_TOP', function() {
-
-				const scrolled = $( this ).scrollTop(),
+			function scrollUpdate() {
+				const scrolled = $( window ).scrollTop(),
 					  spyTop   = windowHeight/2;
 
 
@@ -51,10 +49,16 @@ export const BACK_TO_TOP = ( ( module, $, window, document ) => {
 				} else {
 					$el.removeClass( 'is-active' );	
 				}
-
-			});
-
+			}
 			
+			// Add function to the element that should be used as the scrollable area.
+			const throttleFunc = UixThrottle(scrollUpdate, 5);
+			window.removeEventListener('scroll', throttleFunc);
+			window.removeEventListener('touchmove', throttleFunc);
+			window.addEventListener('scroll', throttleFunc);
+			window.addEventListener('touchmove', throttleFunc);
+			throttleFunc();
+
 
 			//-------- Click event of back button
 			$el.off( 'click' ).on( 'click', function( e ) {

@@ -19,7 +19,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -27,33 +29,36 @@ export const COMMON_HEIGHT = ( ( module, $, window, document ) => {
 	if ( window.COMMON_HEIGHT === null ) return false;
 	
 	
-	
-	
 	module.COMMON_HEIGHT               = module.COMMON_HEIGHT || {};
-    module.COMMON_HEIGHT.version       = '0.0.3';
+    module.COMMON_HEIGHT.version       = '0.0.4';
 	module.COMMON_HEIGHT.pageLoaded = function() {
 
-        
-        
-		const $window          = $( window );
+
 		let	windowWidth        = window.innerWidth,
 			windowHeight       = window.innerHeight;
         
 		
 		commonHeightInit( windowWidth );
-		
-		$window.on( 'resize', function() {
-			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-			if ( window.innerWidth != windowWidth ) {
 
-				// Update the window width for next time
-				windowWidth = window.innerWidth;
-
-				// Do stuff here
+        function windowUpdate() {
+            // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+            if ( window.innerWidth != windowWidth ) {
+                
+                // Update the window width for next time
+                windowWidth = window.innerWidth;
+        
+                // Do stuff here
                 commonHeightInit( windowWidth );
+        
+        
+            }
+        }
+        
+        // Add function to the window that should be resized
+        const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+        window.removeEventListener('resize', debounceFuncWindow);
+        window.addEventListener('resize', debounceFuncWindow);
 
-			}
-		});
         
         function commonHeightInit( w ) {
             

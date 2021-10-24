@@ -12,15 +12,15 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import '@uixkit/plugins/Miscellaneous/attrExt';
 
 export const GET_CUSTOM_ATTRS = ( ( module, $, window, document ) => {
 	if ( window.GET_CUSTOM_ATTRS === null ) return false;
-	
-	
 	
 	
 	module.GET_CUSTOM_ATTRS               = module.GET_CUSTOM_ATTRS || {};

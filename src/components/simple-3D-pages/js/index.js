@@ -18,7 +18,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
@@ -27,8 +29,6 @@ import CSS3DRenderer from '@uixkit/plugins/THREE/esm/renderers/CSS3DRenderer';
 
 export const THREE_PAGES = ( ( module, $, window, document ) => {
 	if ( window.THREE_PAGES === null ) return false;
-	
-	
 	
 	
 	module.THREE_PAGES               = module.THREE_PAGES || {};
@@ -44,7 +44,7 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 		const MainStage = function() {
 
 
-            const $window          = $( window );
+            
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
             

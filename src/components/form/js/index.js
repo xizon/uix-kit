@@ -34,7 +34,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixRenderNormalRadio from '@uixkit/core/form/js/fn/normal-radio';
 import UixRenderDatePicker from '@uixkit/core/form/js/fn/datepicker';

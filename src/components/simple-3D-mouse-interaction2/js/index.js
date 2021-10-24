@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -32,7 +34,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
         let sceneSubjects = []; // Import objects and animations dynamically
 		const MainStage = function() {
 
-            const $window          = $( window );
+            
             let	windowWidth        = window.innerWidth,
                 windowHeight       = window.innerHeight;
 

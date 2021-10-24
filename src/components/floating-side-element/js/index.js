@@ -12,7 +12,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -25,7 +27,7 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 	
 	
     module.FLOATING_SIDE_EL               = module.FLOATING_SIDE_EL || {};
-    module.FLOATING_SIDE_EL.version       = '0.0.6';
+    module.FLOATING_SIDE_EL.version       = '0.0.7';
     module.FLOATING_SIDE_EL.documentReady = function( $ ) {
 
 
@@ -48,9 +50,9 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 		});	
 		
 
-		$( window ).off( 'scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL' ).on( 'scroll.FLOATING_SIDE_EL touchmove.FLOATING_SIDE_EL', function() {
+		function scrollUpdate() {
 			let sideBarHeight = $floatingSideEl.height(),
-				scrolled      = $( this ).scrollTop();
+				scrolled      = $( window ).scrollTop();
             
             documentHeight = $( document ).height();
 
@@ -74,8 +76,16 @@ export const FLOATING_SIDE_EL = ( ( module, $, window, document ) => {
 					}
 				});	
 			}
-		});
-
+		}
+		
+		// Add function to the element that should be used as the scrollable area.
+		const throttleFunc = UixThrottle(scrollUpdate, 5);
+		window.removeEventListener('scroll', throttleFunc);
+		window.removeEventListener('touchmove', throttleFunc);
+		window.addEventListener('scroll', throttleFunc);
+		window.addEventListener('touchmove', throttleFunc);
+		throttleFunc();
+		
 
 		
     };

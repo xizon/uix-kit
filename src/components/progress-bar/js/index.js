@@ -11,7 +11,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -24,13 +26,12 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
 	
 	
     module.PROGRESS_BAR               = module.PROGRESS_BAR || {};
-    module.PROGRESS_BAR.version       = '0.0.6';
+    module.PROGRESS_BAR.version       = '0.0.7';
     module.PROGRESS_BAR.documentReady = function( $ ) {
 
 		
 		const $scrollElements = $( '[data-progressbar-percent]' );
        
-        $( window ).off( 'scroll.PROGRESS_BAR touchmove.PROGRESS_BAR' );
         
         $scrollElements.each( function()  {
 
@@ -90,14 +91,14 @@ export const PROGRESS_BAR = ( ( module, $, window, document ) => {
             };
             
             
-            scrollUpdate();
-            
-            // Please do not use scroll's off method in each
-            $( window ).on( 'scroll.PROGRESS_BAR touchmove.PROGRESS_BAR', function( event ) {
-                 scrollUpdate();
-            });
-
-
+            // Add function to the element that should be used as the scrollable area.
+            const throttleFunc = UixThrottle(scrollUpdate, 5);
+            window.removeEventListener('scroll', throttleFunc);
+            window.removeEventListener('touchmove', throttleFunc);
+            window.addEventListener('scroll', throttleFunc);
+            window.addEventListener('touchmove', throttleFunc);
+            throttleFunc();
+  
 
         });//end each        
 		

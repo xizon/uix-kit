@@ -13,7 +13,9 @@ import {
     UixModuleInstance,
     UixGUID,
     UixMath,
-    UixCssProperty
+    UixCssProperty,
+    UixDebounce,
+    UixThrottle
 } from '@uixkit/core/_global/js';
 
 
@@ -25,10 +27,10 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 	
 	
     module.STICKY_EL               = module.STICKY_EL || {};
-    module.STICKY_EL.version       = '0.0.7';
+    module.STICKY_EL.version       = '0.0.8';
     module.STICKY_EL.pageLoaded    = function() {
 
-        const $window          = $( window );
+
         let	windowWidth        = window.innerWidth,
             windowHeight       = window.innerHeight;
         
@@ -61,39 +63,39 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 		});
 		
 		//  Initialize
-		stickyInit( windowWidth, windowHeight );
-		
-		$window.on( 'resize', function() {
+		stickyInit( windowWidth );
+
+		function windowUpdate() {
 			// Check window width has actually changed and it's not just iOS triggering a resize event on scroll
 			if ( window.innerWidth != windowWidth ) {
-
+				
 				// Update the window width for next time
-				windowWidth  = window.innerWidth;
-				windowHeight = window.innerHeight;
-
+				windowWidth = window.innerWidth;
+		
 				// Do stuff here
-				stickyInit( windowWidth, windowHeight );
+				stickyInit( windowWidth );
 		
-
+		
 			}
-		});
+		}
 		
+		// Add function to the window that should be resized
+		const debounceFuncWindow = UixDebounce(windowUpdate, 50);
+		window.removeEventListener('resize', debounceFuncWindow);
+		window.addEventListener('resize', debounceFuncWindow);
 		
 	
 		/*
 		 * Initialize Sticky Elements settings
 		 *
 		 * @param  {Number} w         - Returns width of browser viewport
-		 * @param  {Number} h         - Returns height of browser viewport
 		 * @return {Void}
 		 */
-		function stickyInit( w, h ) {
+		function stickyInit( w ) {
 		
 			
 			if ( w > 768 ) {
-				
-                $( window ).off( 'scroll.STICKY_EL touchmove.STICKY_EL' );
-                
+		
 				$( '.js-uix-sticky-el' ).each( function()  {
 					const $el      = $( this ),
 						  elTop    = $el.offset().top,
@@ -101,13 +103,10 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 						  clsID    = $el.data( 'sticky-id' ),
 						  $ph      = $( '[data-sticky-id="'+clsID+'"].is-placeholder' );
 					
-					
-                    
-					
-					// Please do not use scroll's off method in each
-					$window.on( 'scroll.STICKY_EL touchmove.STICKY_EL', function() {
+		
 
-						const scrolled   = $( this ).scrollTop(),
+					function scrollUpdate() {
+						const scrolled   = $( window ).scrollTop(),
 							  spyTop  = parseFloat( scrolled + window.innerHeight );
 
 
@@ -158,8 +157,16 @@ export const STICKY_EL = ( ( module, $, window, document ) => {
 							}
 						}	
 
-
-					});//endif scroll.STICKY_EL touchmove.STICKY_EL
+					}
+					
+					// Add function to the element that should be used as the scrollable area.
+					const throttleFunc = UixThrottle(scrollUpdate, 5);
+					window.removeEventListener('scroll', throttleFunc);
+					window.removeEventListener('touchmove', throttleFunc);
+					window.addEventListener('scroll', throttleFunc);
+					window.addEventListener('touchmove', throttleFunc);
+					throttleFunc();
+					
 					
 					
 
