@@ -25,7 +25,7 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.MOUSEWHEEL_INTERACTION               = module.MOUSEWHEEL_INTERACTION || {};
-    module.MOUSEWHEEL_INTERACTION.version       = '0.0.3';
+    module.MOUSEWHEEL_INTERACTION.version       = '0.0.4';
     module.MOUSEWHEEL_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -66,11 +66,11 @@ export const MOUSEWHEEL_INTERACTION = ( ( module, $, window, document ) => {
 		
 			if ( mobileDeltaY != null ) {
 				
-				if ( mobileDeltaY >= 50 ) {
+				if ( mobileDeltaY >= 10 ) {
 					//--- swipe up
 				    dir = 'up';
 				}
-				if ( mobileDeltaY <= -50 ) {
+				if ( mobileDeltaY <= -10 ) {
 					//--- swipe down
 					dir = 'down';
 				

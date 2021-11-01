@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### = 4.5.8 (November 1, 2021) =
+
+* Tweak: Optimized the mobile terminal event of Mousewheel Interaction.
+* Tweak: Enhanced Wave Background demo.
+* Tweak: Update Node's dependency package to enhance security.
+
+
+
 #### = 4.5.7 (October 24, 2021) =
 
 * Tweak: Optimized some module scripts.

@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.7
+ * ## Version             :  4.5.8
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  October 24, 2021
+ * ## Last Update         :  November 1, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -21407,6 +21407,16 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 /* ======================================================
    <!-- Wave Background -->
 /* ====================================================== */
+/*
+ * 1. Wave Mask
+ * 2. Pure Svg
+
+*/
+/*
+ ---------------------------
+ 1. Wave Mask
+ ---------------------------
+ */
 .uix-wave-bg__container {
   position: relative;
   height: 50px;
@@ -21436,6 +21446,42 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   }
   100% {
     transform: translate(80px, -50%);
+  }
+}
+
+/*
+ ---------------------------
+ 2. Pure Svg
+ ---------------------------
+ */
+.uix-wave-bg__pureSvg {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+.uix-wave-bg__pureSvg .uix-wave-bg__parallax > use {
+  animation: uix-cssAnim--wave2 14s linear infinite;
+}
+
+.uix-wave-bg__pureSvg .uix-wave-bg__parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+  fill-opacity: .2;
+}
+
+.uix-wave-bg__pureSvg .uix-wave-bg__parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 12s;
+  fill-opacity: 1;
+}
+
+@keyframes uix-cssAnim--wave2 {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
   }
 }
 
