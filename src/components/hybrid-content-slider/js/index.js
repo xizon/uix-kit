@@ -27,38 +27,38 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.HYBRID_CONTENT_SLIDER               = module.HYBRID_CONTENT_SLIDER || {};
-    module.HYBRID_CONTENT_SLIDER.version       = '0.1.0';
+    module.HYBRID_CONTENT_SLIDER.version       = '0.1.1';
     module.HYBRID_CONTENT_SLIDER.pageLoaded    = function() {
 
 		$( '.uix-hybrid-content-slider' ).each( function()  {
 
-			let $carouselWrapper        = $( this ),
-				$carousel               = $carouselWrapper.find( '.uix-hybrid-content-slider__items' ),
-				$carouselItem           = $carouselWrapper.find( '.uix-hybrid-content-slider__items > div' ),
-				itemTotal               = $carouselItem.length,
-				amountVisible           = 1,
-				carouselDir             = $carouselWrapper.data( 'dir' ),
-				carouselSpeed           = $carouselWrapper.data( 'speed' ),
-				carouselNext            = $carouselWrapper.data( 'next' ),
-				carouselPrev            = $carouselWrapper.data( 'prev' ),
-                carouselPagination      = $carouselWrapper.data( 'pagination' ),
-				carouseDraggable        = $carouselWrapper.data( 'draggable' ),
-				carouseDraggableCursor  = $carouselWrapper.data( 'draggable-cursor' );
+			let $sliderWrapper        = $( this ),
+				$slider               = $sliderWrapper.find( '.uix-hybrid-content-slider__items' ),
+				$sliderItem           = $sliderWrapper.find( '.uix-hybrid-content-slider__items > div' ),
+				itemsTotal             = $sliderItem.length,
+				amountVisible         = 1,
+				sliderDir             = $sliderWrapper.data( 'dir' ),
+				sliderSpeed           = $sliderWrapper.data( 'speed' ),
+				sliderNext            = $sliderWrapper.data( 'next' ),
+				sliderPrev            = $sliderWrapper.data( 'prev' ),
+                sliderPagination      = $sliderWrapper.data( 'pagination' ),
+				carouseDraggable        = $sliderWrapper.data( 'draggable' ),
+				carouseDraggableCursor  = $sliderWrapper.data( 'draggable-cursor' );
 
 			
-			if ( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
-			if ( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
-			if ( typeof carouselNext === typeof undefined ) carouselNext = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--next';
-			if ( typeof carouselPrev === typeof undefined ) carouselPrev = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--prev';
-            if ( typeof carouselPagination === typeof undefined ) carouselPagination = '#uix-hybrid-content-slider__pagination-123';
+			if ( typeof sliderDir === typeof undefined ) sliderDir = 'horizontal';
+			if ( typeof sliderSpeed === typeof undefined ) sliderSpeed = 250;
+			if ( typeof sliderNext === typeof undefined ) sliderNext = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--next';
+			if ( typeof sliderPrev === typeof undefined ) sliderPrev = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--prev';
+            if ( typeof sliderPagination === typeof undefined ) sliderPagination = '#uix-hybrid-content-slider__pagination-123';
 			if ( typeof carouseDraggable === typeof undefined ) carouseDraggable = false;
 			if ( typeof carouseDraggableCursor === typeof undefined ) carouseDraggableCursor = 'move';
 
             
             //Autoplay parameters
-            let dataAuto                   = $carouselWrapper.data( 'auto' ),
-                dataTiming                 = $carouselWrapper.data( 'timing' ),
-                dataLoop                   = $carouselWrapper.data( 'loop' );  
+            let dataAuto                   = $sliderWrapper.data( 'auto' ),
+                dataTiming                 = $sliderWrapper.data( 'timing' ),
+                dataLoop                   = $sliderWrapper.data( 'loop' );  
 
             if ( typeof dataAuto === typeof undefined ) dataAuto = false;	
             if ( typeof dataTiming === typeof undefined ) dataTiming = 10000;
@@ -69,7 +69,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             //Autoplay times
             let playTimes;
             //A function called "timer" once every second (like a digital watch).
-            $carouselWrapper[0].animatedSlides;
+            $sliderWrapper[0].animatedSlides;
             
             
             //Store the latest position (X,Y) in a temporary variable
@@ -86,7 +86,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
             
             // Get the width and height of each item
-            $carouselItem.each( function( index ) {
+            $sliderItem.each( function( index ) {
                 const _height = $( this ).height();
                 eachItemNewHeight.push( _height );
                 $( this ).attr({
@@ -100,17 +100,17 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             let totalItemsHeight = 0;
             for (let i = 0; i < eachItemNewHeight.length; i++ ) {
                 totalItemsHeight += eachItemNewHeight[i];
-                if ( (i+1) == (itemTotal - amountVisible) ) break;
+                if ( (i+1) == (itemsTotal - amountVisible) ) break;
             }
                    
-            //Set target index of the carousel buttons
-            setButtonTargetIndex( $( carouselNext ), $( carouselPrev ), 'init', null );
+            //Set target index of the slider buttons
+            setButtonTargetIndex( $( sliderNext ), $( sliderPrev ), 'init', null );
             
 
             
             //set actived item & initialize the height of container
             setContainerSize( 0 );    
-            $carouselItem.addClass( 'js-is-ready' ); 
+            $sliderItem.addClass( 'js-is-ready' ); 
             
             
             // Activate the current item from carouse
@@ -119,25 +119,25 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
 			/* 
 			 ---------------------------
-			 Initialize carousel
+			 Initialize slider
 			 ---------------------------
 			 */  
-			const eachItemOldWidth  = $carousel.width()/amountVisible;
+			const eachItemOldWidth  = $slider.width()/amountVisible;
 
-            eachItemNewWidth = ( $carouselWrapper.width() / amountVisible );
+            eachItemNewWidth = ( $sliderWrapper.width() / amountVisible );
             
-            if ( carouselDir == 'horizontal' ) {
-                $carousel.css( 'width', itemTotal * eachItemOldWidth );
+            if ( sliderDir === 'horizontal' ) {
+                $slider.css( 'width', itemsTotal * eachItemOldWidth );
             }
 
             
 			// Re-order all items
-			carouselReOrder();
+			sliderReOrder();
 
 
 
 			//default button status
-			$( carouselPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );	
+			$( sliderPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );	
 
 			/* 
 			 ---------------------------
@@ -145,13 +145,13 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			 ---------------------------
 			 */ 
 			
-			function carouselReOrder() {
+			function sliderReOrder() {
 
 				
                 //Initialize the width and height of each item
-				if ( carouselDir == 'horizontal' ) {
+				if ( sliderDir === 'horizontal' ) {
                     const boxWidth = eachItemNewWidth;
-                    TweenMax.set($carouselItem, {
+                    TweenMax.set($sliderItem, {
                         width: boxWidth,
                         height: function(i, target) {
                             return eachItemNewHeight[i];
@@ -163,7 +163,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
 				} else {
                     
-                    TweenMax.set($carouselItem, {
+                    TweenMax.set($sliderItem, {
                         height: function(i, target) {
                             return eachItemNewHeight[i];
                         },
@@ -184,58 +184,62 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
 			}
 
-
-			
 			/* 
 			 ---------------------------
-			 Move left/up
+			 Next/Prev buttons
 			 ---------------------------
 			 */ 
-			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-				e.preventDefault();
-                
-                //Prevent buttons' events from firing multiple times
-                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( this ).attr( 'aria-disabled', 'true' );
+            const _prev = $( sliderPrev ),
+                  _next = $( sliderNext );
 
-                $( this )
-                    .delay(carouselSpeed)
-                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });                
+
+            _next.off('click').on('click', $sliderWrapper, function (e) {
+                e.preventDefault();
+                btnNextMove();
+            });
+
+            _prev.off('click').on('click', $sliderWrapper, function (e) {
+                e.preventDefault();
+                btnPrevMove();
+            });
+
+            
+            // (right/down)
+            function btnPrevMove() {
+                //Prevent buttons' events from firing multiple times
+                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                _prev.attr( 'aria-disabled', 'true' );
+
+                _prev
+                    .delay(sliderSpeed)
+                    .queue(function(next) { _prev.attr( 'aria-disabled', 'false' ); next(); });
                 
                 //
-                movePositionWithButton( false, $( this ), e, 'next' );
-
+                movePositionWithButton( false, _prev, 'prev' );
+                
                 //Pause the auto play event
-                clearInterval( $carouselWrapper[0].animatedSlides );	 
+                clearInterval( $sliderWrapper[0].animatedSlides );
 
-                
-			});
+            }
 
-			
-			/* 
-			 ---------------------------
-			 Move right/down
-			 ---------------------------
-			 */ 
-           
-			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-				e.preventDefault();
-                
+            // (left/up)
+            function btnNextMove() {
                 //Prevent buttons' events from firing multiple times
-                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( this ).attr( 'aria-disabled', 'true' );
+                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                _next.attr( 'aria-disabled', 'true' );
 
-                $( this )
-                    .delay(carouselSpeed)
-                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });
+                _next
+                    .delay(sliderSpeed)
+                    .queue(function(next) { _next.attr( 'aria-disabled', 'false' ); next(); });                
                 
                 //
-                movePositionWithButton( false, $( this ), e, 'prev' );
-                
+                movePositionWithButton( false, _next, 'next' );
+
                 //Pause the auto play event
-                clearInterval( $carouselWrapper[0].animatedSlides );
+                clearInterval( $sliderWrapper[0].animatedSlides );	 
                 
-			});
+            } 
+
 		
 
 			/* 
@@ -243,16 +247,16 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			 Pagination
 			 ---------------------------
 			 */ 
-            if ( $( carouselPagination ).length > 0 && $( carouselPagination ).html().length == 0 ) {
+            if ( $( sliderPagination ).length > 0 && $( sliderPagination ).html().length == 0 ) {
                 //Button to add pagination automatically
                 let _dot       = '';
                 _dot += '<ul class="uix-hybrid-content-slider__pagination--default">';
-                for ( let i = 0; i < itemTotal; i++ ) {
+                for ( let i = 0; i < itemsTotal; i++ ) {
                     _dot += '<li><a data-target-index="'+i+'" href="javascript:void(0);"></a></li>';
                 }
                 _dot += '</ul>';
 
-                $( carouselPagination ).html( _dot ).promise().done( function(){
+                $( sliderPagination ).html( _dot ).promise().done( function(){
                     // Activate the currently selected Pagination
                     setPaginationState( 0 );
                 });	
@@ -262,25 +266,25 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             }
 
             
-			$( carouselPagination ).find( 'li a' ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
+			$( sliderPagination ).find( 'li a' ).off( 'click' ).on( 'click', $sliderWrapper, function( e ) {
 				e.preventDefault();
                 
                 //Prevent buttons' events from firing multiple times
                 if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( carouselPagination ).find( 'li a' ).attr( 'aria-disabled', 'true' );
+                $( sliderPagination ).find( 'li a' ).attr( 'aria-disabled', 'true' );
                 
-                $( carouselPagination ).find( 'li a' )
-                    .delay(carouselSpeed)
-                    .queue(function(next) { $( carouselPagination ).find( 'li a' ).attr( 'aria-disabled', 'false' ); next(); }); 
+                $( sliderPagination ).find( 'li a' )
+                    .delay(sliderSpeed)
+                    .queue(function(next) { $( sliderPagination ).find( 'li a' ).attr( 'aria-disabled', 'false' ); next(); }); 
                 
                 
                 //
                 if ( !$( this ).parent().hasClass( 'is-active' ) ) {
                     
-                    movePositionWithButton( true, $( this ), e, 'next' );
+                    movePositionWithButton( true, $( this ), 'next' );
 
                     //Pause the auto play event
-                    clearInterval( $carouselWrapper[0].animatedSlides );	
+                    clearInterval( $sliderWrapper[0].animatedSlides );	
                 }
 
 			});		
@@ -288,7 +292,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             
 			//Drag and Drop
 			//-------------------------------------	
-			const $dragDropTrigger = $carouselWrapper;
+			const $dragDropTrigger = $sliderWrapper;
             let hammerProps      = {};
 
 			//Make the cursor a move icon when a user hovers over an item
@@ -354,9 +358,9 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 
                 //Determine whether it is the first or the last    
                 let currentIsFirstOrLast = false;
-                const firstItemOffset = ( carouselDir == 'horizontal' ) ? $carousel.find( '[data-index="0"]' )[0]._gsTransform.x : $carousel.find( '[data-index="0"]' )[0]._gsTransform.y;
+                const firstItemOffset = ( sliderDir === 'horizontal' ) ? $slider.find( '[data-index="0"]' )[0]._gsTransform.x : $slider.find( '[data-index="0"]' )[0]._gsTransform.y;
                 
-                const maxMoveOffset = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth*(itemTotal-amountVisible) : -totalItemsHeight;
+                const maxMoveOffset = ( sliderDir === 'horizontal' ) ? -eachItemNewWidth*(itemsTotal-amountVisible) : -totalItemsHeight;
 
                 
                 //
@@ -375,15 +379,15 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 //!important -> Please do not use multiple case conditions, 
                 //otherwise it may cause vertical data problems
 
-                if ( carouselDir == 'horizontal' ) {
+                if ( sliderDir === 'horizontal' ) {
                     switch ( direction ) {
                         case 'panleft':
 
                             if ( ev.deltaX > -eachItemNewWidth/4 && ev.deltaX < 0 ) {
                                 elAnim = false;  
                                 
-                                const simulationButtonNext = $( carouselNext );
-                                itemUpdates( $carouselWrapper, simulationButtonNext, ev.deltaX, 0.1, true, targetIndex, allHeightStr );
+                                const simulationButtonNext = $( sliderNext );
+                                itemUpdates( $sliderWrapper, simulationButtonNext, ev.deltaX, 0.1, true, targetIndex, allHeightStr );
                             } else {
                                 elAnim = ( currentIsFirstOrLast ) ? false : true;
                             }
@@ -395,8 +399,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                             if ( ev.deltaX < eachItemNewWidth/4 && ev.deltaX > 0 ) {
                                 elAnim = false;  
                                 
-                                const simulationButtonPrev = $( carouselPrev );
-                                itemUpdates( $carouselWrapper, simulationButtonPrev, ev.deltaX, 0.1, true, targetIndex, allHeightStr );
+                                const simulationButtonPrev = $( sliderPrev );
+                                itemUpdates( $sliderWrapper, simulationButtonPrev, ev.deltaX, 0.1, true, targetIndex, allHeightStr );
                             } else {
                                 elAnim = ( currentIsFirstOrLast ) ? false : true;
                             }
@@ -417,8 +421,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                             if ( ev.deltaY > -draggingItemHeight/4 && ev.deltaY < 0 ) {
                                 elAnim = false;  
                                 
-                                const simulationButtonNext = $( carouselNext );
-                                itemUpdates( $carouselWrapper, simulationButtonNext, ev.deltaY, 0.1, true, targetIndex, allHeightStr );
+                                const simulationButtonNext = $( sliderNext );
+                                itemUpdates( $sliderWrapper, simulationButtonNext, ev.deltaY, 0.1, true, targetIndex, allHeightStr );
                             } else {
                                 elAnim = ( currentIsFirstOrLast ) ? false : true;
                             }
@@ -431,8 +435,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                             if ( ev.deltaY < draggingItemHeight/4 && ev.deltaY > 0 ) {
                                 elAnim = false;  
                                 
-                                const simulationButtonPrev = $( carouselPrev );
-                                itemUpdates( $carouselWrapper, simulationButtonPrev, ev.deltaY, 0.1, true, targetIndex, allHeightStr );
+                                const simulationButtonPrev = $( sliderPrev );
+                                itemUpdates( $sliderWrapper, simulationButtonPrev, ev.deltaY, 0.1, true, targetIndex, allHeightStr );
                             } else {
                                 elAnim = ( currentIsFirstOrLast ) ? false : true;
                             }
@@ -460,22 +464,14 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     //!important -> Please do not use multiple case conditions, 
                     //otherwise it may cause vertical data problems
                     
-                    if ( carouselDir == 'horizontal' ) {
+                    if ( sliderDir === 'horizontal' ) {
                         switch ( direction ) {
                             case 'panleft':
-
-                                const deltaNext = -eachItemNewWidth;
-                                const simulationButtonNext = $( carouselNext );
-                                itemUpdates( $carouselWrapper, simulationButtonNext, deltaNext, null, false, targetIndex, allHeightStr );
-
+                                btnNextMove();
                                 break;
 
                             case 'panright':
-
-                                const deltaPrev = eachItemNewWidth;
-                                const simulationButtonPrev = $( carouselPrev );
-                                itemUpdates( $carouselWrapper, simulationButtonPrev, deltaPrev, null, false, targetIndex, allHeightStr );
-
+                                btnPrevMove();
                                 break;                 
 
                         }  
@@ -483,19 +479,11 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                     } else {
                         switch ( direction ) {
                             case 'panup':
-
-                                const deltaNext = -1;
-                                const simulationButtonNext = $( carouselNext );
-                                itemUpdates( $carouselWrapper, simulationButtonNext, deltaNext, null, false, targetIndex, allHeightStr );
-
+                                btnNextMove();
                                 break;
 
                             case 'pandown':
-
-                                const deltaPrev = -1;
-                                const simulationButtonPrev = $( carouselPrev );
-                                itemUpdates( $carouselWrapper, simulationButtonPrev, deltaPrev, null, false, targetIndex, allHeightStr );
-
+                                btnPrevMove();
                                 break;                 
 
                         }     
@@ -505,11 +493,11 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 } else {    
                     
                     //Rebound effect of drag offset 
-                    itemUpdates( $carouselWrapper, null, tempItemsPos, null, false, targetIndex, allHeightStr);
+                    itemUpdates( $sliderWrapper, false, tempItemsPos, null, false, targetIndex, allHeightStr);
                 }
                 
                 //Pause the auto play event
-                clearInterval( $carouselWrapper[0].animatedSlides );
+                clearInterval( $sliderWrapper[0].animatedSlides );
 
 			});	
             
@@ -522,7 +510,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 sliderAutoPlay( playTimes, dataTiming, dataLoop );
 
                 const autoplayEnter = function() {
-                    clearInterval( $carouselWrapper[0].animatedSlides );
+                    clearInterval( $sliderWrapper[0].animatedSlides );
                 };
 
                 const autoplayLeave = function() {
@@ -531,13 +519,13 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
 
                 // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
-                $carouselWrapper.on( 'mouseenter', autoplayEnter );
-                $carouselWrapper.on( 'mouseleave', autoplayLeave );  
+                $sliderWrapper.on( 'mouseenter', autoplayEnter );
+                $sliderWrapper.on( 'mouseleave', autoplayLeave );  
 
                 // To determine if it is a touch screen.
                 if (Modernizr.touchevents) {
-                    $carouselWrapper.on( 'pointerenter', autoplayEnter );
-                    $carouselWrapper.on( 'pointerleave', autoplayLeave );  
+                    $sliderWrapper.on( 'pointerenter', autoplayEnter );
+                    $sliderWrapper.on( 'pointerleave', autoplayLeave );  
                 }
 
 
@@ -555,7 +543,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
              */
             function sliderAutoPlay( playTimes, timing, loop ) {	
 
-                $carouselWrapper[0].animatedSlides = setInterval( function() {
+                $sliderWrapper[0].animatedSlides = setInterval( function() {
 
                     const autoMove = function( indexGo ) {
 
@@ -571,23 +559,23 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                         const moveY = moveYIncrement;
 
                         //
-                        const delta = ( carouselDir == 'horizontal' ) ? -moveX : -moveY;
+                        const delta = ( sliderDir === 'horizontal' ) ? -moveX : -moveY;
 
                         //
-                        itemUpdates( $carouselWrapper, 'auto', delta, null, false, indexGo, eachItemNewHeight );    
+                        itemUpdates( $sliderWrapper, 'auto', delta, null, false, indexGo, eachItemNewHeight );    
                     }; 
                     
-                    playTimes = parseFloat( $carouselItem.filter( '.is-active' ).index() );
+                    playTimes = parseFloat( $sliderItem.filter( '.is-active' ).index() );
                     playTimes++;
                     
                     
                     if ( !loop ) {
-                        if ( playTimes < itemTotal && playTimes >= 0 ) {
+                        if ( playTimes < itemsTotal && playTimes >= 0 ) {
                             autoMove( playTimes );
                         }
                     } else {
-                        if ( playTimes == itemTotal ) playTimes = 0;
-                        if ( playTimes < 0 ) playTimes = itemTotal-1;		
+                        if ( playTimes == itemsTotal ) playTimes = 0;
+                        if ( playTimes < 0 ) playTimes = itemsTotal-1;		
                         
                         autoMove( playTimes );
                     }
@@ -601,21 +589,23 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			/*
 			 * Transition Between Items
 			 *
-			 * @param  {Element} wrapper            - Wrapper of carousel.
-			 * @param  {?Element|String} curBtn     - The button that currently triggers the move.
-             * @param  {Number|Array} delta         - The value returned will need to be adjusted according to the offset rate.
-             * @param  {?Number} speed              - Sliding speed. Please set to 0 when rebounding.
-             * @param  {Boolean} dragging           - Determine if the object is being dragged.
-             * @param  {!Number} indexGo            - The target item index.
-             * @param  {String|Array} itemsHeight   - Return all items height.
+			 * @param  {Element} wrapper                  - Wrapper of slider.
+			 * @param  {?Element|String|Boolean} curBtn   - The button that currently triggers the move.
+             * @param  {Number|Array} delta               - The value returned will need to be adjusted according 
+             *                                              to the offset  * rate.
+             * @param  {?Number} speed                     - Sliding speed. Please set to 0 when rebounding.
+             * @param  {Boolean} dragging                  - Determine if the object is being dragged.
+             * @param  {!Number} indexGo                   - The target item index.
+             * @param  {String|Array} itemsHeight          - Return all items height (the string type is 
+             *                                               used when a drag event is triggered).
 			 * @return {Void}
 			 */
 			function itemUpdates( wrapper, curBtn, delta, speed, dragging, indexGo, itemsHeight ) {
                 
-                if ( speed == null ) speed = carouselSpeed/1000;
+                if ( speed == null ) speed = sliderSpeed/1000;
                 
-				let $curWrapper = wrapper.children( '.uix-hybrid-content-slider__items' ),  //Default: $carousel
-					$curItems   = $curWrapper.find( '> div' ); //Default: $carouselItem
+				let $curWrapper = wrapper.children( '.uix-hybrid-content-slider__items' ),  //Default: $slider
+					$curItems   = $curWrapper.find( '> div' ); //Default: $sliderItem
            
                 
                 //Get height constant
@@ -628,7 +618,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 
                 //Check next or previous event
                 let btnType = 'init';
-                if ( curBtn != null && curBtn != 'auto' ) {
+                if ( curBtn !== false && curBtn !== 'auto' ) {
                     if ( typeof curBtn.attr( 'class' ) !== typeof undefined ) {
                         btnType = ( curBtn.attr( 'class' ).indexOf( '--next' ) >=0 ) ? 'next' : 'prev';
                     } else {
@@ -638,11 +628,11 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 }
                 
                 //Check next or previous event ( Autoplay )
-                if ( curBtn == 'auto' ) btnType = 'next';;
+                if ( curBtn === 'auto' ) btnType = 'next';;
 
             
 				//Clone the first element to the last position
-				if ( carouselDir == 'horizontal' ) {
+				if ( sliderDir === 'horizontal' ) {
 
                     const boxWidth = eachItemNewWidth;
                     
@@ -651,7 +641,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                             let xIncrement = 0;
 
-                            for (let k = 0; k < itemTotal; k++ ) {    
+                            for (let k = 0; k < itemsTotal; k++ ) {    
                                 const tempX = ( k == 0 ) ? 0 : boxWidth;
                                 xIncrement += tempX;
                                 if ( k == i ) break;
@@ -672,7 +662,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 
                                     let curWidthIncrement = 0;
                                     
-                                    for (let m= 0; m < itemTotal; m++ ) {    
+                                    for (let m= 0; m < itemsTotal; m++ ) {    
                                         const tempW = ( m == 0 ) ? 0 : boxWidth;
                                         curWidthIncrement += tempW;
                                         if ( m == ( btnType == 'next' ? indexGo : indexGo-1 ) ) break;
@@ -702,8 +692,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                                 currentIndex = Math.round( $curItems.first()[0]._gsTransform.x/boxWidth );
                                 setContainerSize( currentIndex );  	 
 
-                                //Set target index of the carousel buttons
-                                setButtonTargetIndex( $( carouselNext ), $( carouselPrev ), btnType, ( btnType == 'next' ? Math.abs( currentIndex ) : Math.abs( currentIndex ) + 1 ) );   
+                                //Set target index of the slider buttons
+                                setButtonTargetIndex( $( sliderNext ), $( sliderPrev ), btnType, ( btnType == 'next' ? Math.abs( currentIndex ) : Math.abs( currentIndex ) + 1 ) );   
                                 
                                 // Activate the currently selected Pagination
                                 setPaginationState( Math.abs( currentIndex ) );
@@ -775,8 +765,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                                 //The state of the control button
                                 setButtonState( $curItems.first()[0]._gsTransform.y, totalItemsHeight );   
 
-                                //Set target index of the carousel buttons
-                                setButtonTargetIndex( $( carouselNext ), $( carouselPrev ), btnType, indexGo ); 
+                                //Set target index of the slider buttons
+                                setButtonTargetIndex( $( sliderNext ), $( sliderPrev ), btnType, indexGo ); 
 
                                 //set actived item & initialize the height of container
                                 setContainerSize( ( btnType == 'next' ? indexGo : indexGo-1 ) );
@@ -811,13 +801,11 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			 *
 			 * @param  {Boolean} paginationEnabled   - Determine whether it is triggered by pagination
 			 * @param  {Element} $btn               - The button that currently triggers the move.
-             * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
              * @param  {String} type                - Move next or previous.
 			 * @return {Void}
 			 */
-            function movePositionWithButton( paginationEnabled, $btn, event, type ) {
-   				const $curWrapper = $( event.data[0] ),
-					  //Protection button is not triggered multiple times.
+            function movePositionWithButton( paginationEnabled, $btn, type ) {
+   				const //Protection button is not triggered multiple times.
                       btnDisabled = $btn.data( 'disabled' ),
                       
                       //Get current button index
@@ -849,14 +837,14 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 //
                 let delta;
                 if ( type == 'next' ) {
-                    delta = ( carouselDir == 'horizontal' ) ? -moveX : -moveY;
+                    delta = ( sliderDir === 'horizontal' ) ? -moveX : -moveY;
                 } else {
-                    delta = ( carouselDir == 'horizontal' ) ? moveX : moveY;
+                    delta = ( sliderDir === 'horizontal' ) ? moveX : moveY;
                 }
                 
                
 				if ( typeof btnDisabled === typeof undefined ) {	
-					itemUpdates( $curWrapper, $btn, delta, null, false, tIndex, eachItemNewHeight );
+					itemUpdates( $sliderWrapper, $btn, delta, null, false, tIndex, eachItemNewHeight );
                     
 				}    
             }  
@@ -870,8 +858,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			 * @return {Void}
 			 */
             function setPaginationState( index ) {
-                $( carouselPagination ).find( 'li' ).removeClass( 'is-active' );
-                $( carouselPagination ).find( 'li a[data-target-index="'+index+'"]' ).parent().addClass( 'is-active' );   
+                $( sliderPagination ).find( 'li' ).removeClass( 'is-active' );
+                $( sliderPagination ).find( 'li a[data-target-index="'+index+'"]' ).parent().addClass( 'is-active' );   
             }   
                  
 			/*
@@ -881,8 +869,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
 			 * @return {Void}
 			 */
             function setItemState( index ) {
-                $carouselItem.removeClass( 'is-active' );
-                $carouselItem.eq( index ).addClass( 'is-active' );   
+                $sliderItem.removeClass( 'is-active' );
+                $sliderItem.eq( index ).addClass( 'is-active' );   
             }      
             
 			/*
@@ -893,8 +881,8 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             function createStoreLatestPosition() {
                 const pos = [];
                 // Retrieve the temporary variable of each item.
-                $carouselItem.each( function() {
-                    pos.push( ( carouselDir == 'horizontal' ? $( this )[0]._gsTransform.x : $( this )[0]._gsTransform.y ) );
+                $sliderItem.each( function() {
+                    pos.push( ( sliderDir === 'horizontal' ? $( this )[0]._gsTransform.x : $( this )[0]._gsTransform.y ) );
                 }); 
                 return pos;
             }  
@@ -910,7 +898,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
                 
                 const _h = eachItemNewHeight[Math.abs( index )];
                 if ( typeof _h !== typeof undefined ) {
-                    TweenMax.to( $carousel, 0.2, { 
+                    TweenMax.to( $slider, 0.2, { 
                         height: eachItemNewHeight[Math.abs( index )]
                     } );	    
                 }
@@ -921,7 +909,7 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             
    
 			/*
-			 * Set target index of the carousel buttons
+			 * Set target index of the slider buttons
 			 *
 			 * @param  {Element} nextBtn      - The next move button.
 			 * @param  {Element} prevBtn      - The previous move button.
@@ -991,14 +979,14 @@ export const HYBRID_CONTENT_SLIDER = ( ( module, $, window, document ) => {
             function setButtonState( firstOffset, lastOffset ) {
                 
                 if ( Math.abs( firstOffset ) == lastOffset ) {
-                    $( carouselNext ).addClass( 'is-disabled' ).data( 'disabled', 1 );
-                    $( carouselPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderNext ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+                    $( sliderPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
                 } else if ( Math.round( firstOffset ) == 0 ) {
-                    $( carouselNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
-                    $( carouselPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+                    $( sliderNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
                 } else {
-                    $( carouselNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
-                    $( carouselPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
                 }
             }   
       

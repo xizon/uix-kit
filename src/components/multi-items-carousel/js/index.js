@@ -27,32 +27,32 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 	
 	
     module.MULTI_ITEMS_CAROUSEL               = module.MULTI_ITEMS_CAROUSEL || {};
-    module.MULTI_ITEMS_CAROUSEL.version       = '0.0.5';
+    module.MULTI_ITEMS_CAROUSEL.version       = '0.0.6';
     module.MULTI_ITEMS_CAROUSEL.documentReady = function( $ ) {
 
 		$( '.uix-multi-carousel' ).each( function()  {
 
-			let $carouselWrapper        = $( this ),
-				$carousel               = $carouselWrapper.find( '.uix-multi-carousel__items' ),
-				$carouselItem           = $carouselWrapper.find( '.uix-multi-carousel__items > div' ),
-				itemTotal               = $carouselItem.length,
-				amountVisible           = $carouselWrapper.data( 'show' ),
-				carouselDir             = $carouselWrapper.data( 'dir' ),
-				carouselLoop            = $carouselWrapper.data( 'loop' ),
-				carouselSpeed           = $carouselWrapper.data( 'speed' ),
-				carouselNext            = $carouselWrapper.data( 'next' ),
-				carouselPrev            = $carouselWrapper.data( 'prev' ),
-				carouseDraggable        = $carouselWrapper.data( 'draggable' ),
-				carouseDraggableCursor  = $carouselWrapper.data( 'draggable-cursor' );
+			let $sliderWrapper        = $( this ),
+				$slider               = $sliderWrapper.find( '.uix-multi-carousel__items' ),
+				$sliderItem           = $sliderWrapper.find( '.uix-multi-carousel__items > div' ),
+				itemsTotal             = $sliderItem.length,
+				amountVisible         = $sliderWrapper.data( 'show' ),
+				sliderDir             = $sliderWrapper.data( 'dir' ),
+				sliderLoop            = $sliderWrapper.data( 'loop' ),
+				sliderSpeed           = $sliderWrapper.data( 'speed' ),
+				sliderNext            = $sliderWrapper.data( 'next' ),
+				sliderPrev            = $sliderWrapper.data( 'prev' ),
+				carouseDraggable      = $sliderWrapper.data( 'draggable' ),
+				carouseDraggableCursor= $sliderWrapper.data( 'draggable-cursor' );
 
 			
 			
-			if ( typeof carouselDir === typeof undefined ) carouselDir = 'horizontal';
-			if ( typeof carouselLoop === typeof undefined ) carouselLoop = false;
+			if ( typeof sliderDir === typeof undefined ) sliderDir = 'horizontal';
+			if ( typeof sliderLoop === typeof undefined ) sliderLoop = false;
 			if ( typeof amountVisible === typeof undefined ) amountVisible = 3;
-			if ( typeof carouselSpeed === typeof undefined ) carouselSpeed = 250;
-			if ( typeof carouselNext === typeof undefined ) carouselNext = '.uix-multi-carousel__controls--next';
-			if ( typeof carouselPrev === typeof undefined ) carouselPrev = '.uix-multi-carousel__controls--prev';
+			if ( typeof sliderSpeed === typeof undefined ) sliderSpeed = 250;
+			if ( typeof sliderNext === typeof undefined ) sliderNext = '.uix-multi-carousel__controls--next';
+			if ( typeof sliderPrev === typeof undefined ) sliderPrev = '.uix-multi-carousel__controls--prev';
 			if ( typeof carouseDraggable === typeof undefined ) carouseDraggable = false;
 			if ( typeof carouseDraggableCursor === typeof undefined ) carouseDraggableCursor = 'move';
 
@@ -67,30 +67,30 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 			/* 
 			 ---------------------------
-			 Initialize carousel
+			 Initialize slider
 			 ---------------------------
 			 */  
 			let eachItemNewWidth, eachItemNewHeight;
-			const eachItemOldWidth  = $carousel.width()/amountVisible;
-			const eachItemOldHeight = $carousel.height()/amountVisible;
+			const eachItemOldWidth  = $slider.width()/amountVisible;
+			const eachItemOldHeight = $slider.height()/amountVisible;
 
-			if ( carouselDir == 'horizontal' ) { 
-				eachItemNewWidth = ( $carouselWrapper.width() / amountVisible );
-				$carousel.css( 'width', itemTotal * eachItemOldWidth );
+			if ( sliderDir === 'horizontal' ) { 
+				eachItemNewWidth = ( $sliderWrapper.width() / amountVisible );
+				$slider.css( 'width', itemsTotal * eachItemOldWidth );
 			} else {
-				eachItemNewHeight = ( $carouselWrapper.height() / amountVisible );
-				$carousel.css( 'height', itemTotal * eachItemOldHeight );
+				eachItemNewHeight = ( $sliderWrapper.height() / amountVisible );
+				$slider.css( 'height', itemsTotal * eachItemOldHeight );
 			}
 
 
 			// Re-order all items
-			carouselReOrder();
+			sliderReOrder();
 
 
 
 			//default button status
-			if ( !carouselLoop ) {
-				$( carouselPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+			if ( !sliderLoop ) {
+				$( sliderPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
 			}	
 
 			/* 
@@ -99,21 +99,21 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 ---------------------------
 			 */ 
 			
-			function carouselReOrder() {
+			function sliderReOrder() {
 				
-				if ( carouselDir == 'horizontal' ) {
+				if ( sliderDir === 'horizontal' ) {
                     const boxWidth = eachItemNewWidth;
-                    TweenMax.set($carouselItem, {
+                    TweenMax.set($sliderItem, {
                         width: boxWidth,
                         x: function(i, target) {
 
                             //Active the center item
-                            if( i === midIndex && carouselLoop ) {
+                            if( i === midIndex && sliderLoop ) {
                                 TweenMax.set( target, {className:"+=is-active"});
                             }
                             
                             //Add index to each item
-                            $carouselItem.eq(i).attr( 'data-index', i );
+                            $sliderItem.eq(i).attr( 'data-index', i );
 
                             return i * boxWidth;
                         }
@@ -122,17 +122,17 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 				} else {
                     
                     const boxHeight = eachItemNewHeight;
-                    TweenMax.set($carouselItem, {
+                    TweenMax.set($sliderItem, {
                         height: boxHeight,
                         y: function(i, target) {
 
                             //Active the center item
-                            if( i === midIndex && carouselLoop ) {
+                            if( i === midIndex && sliderLoop ) {
                                 TweenMax.set( target, {className:"+=is-active"});
                             }
                             
                             //Add index to each item
-                            $carouselItem.eq(i).attr( 'data-index', i );   
+                            $sliderItem.eq(i).attr( 'data-index', i );   
 
                             return i * boxHeight;
                         }
@@ -143,55 +143,63 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 
 			}
 
-			
-			
+
+
+
 			/* 
 			 ---------------------------
-			 Move left/up
+			 Next/Prev buttons
 			 ---------------------------
 			 */ 
-			$( carouselNext ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-				e.preventDefault();
-                
+             const _prev = $( sliderPrev ),
+                   _next = $( sliderNext );
+
+
+            _next.off('click').on('click', $sliderWrapper, function (e) {
+                e.preventDefault();
+                btnNextMove();
+            });
+
+            _prev.off('click').on('click', $sliderWrapper, function (e) {
+                e.preventDefault();
+                btnPrevMove();
+            });
+
+            
+            // (right/down)
+            function btnPrevMove() {
                 //Prevent buttons' events from firing multiple times
-                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( this ).attr( 'aria-disabled', 'true' );
-                $( this )
-                    .delay(carouselSpeed)
-                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });
+                if ( _prev.attr( 'aria-disabled' ) == 'true' ) return false;
+                _prev.attr( 'aria-disabled', 'true' );
+                _prev
+                    .delay(sliderSpeed)
+                    .queue(function(next) { _prev.attr( 'aria-disabled', 'false' ); next(); });  
+                
+                //
+                movePositionWithButton( _prev, 'prev' );
+
+            }
+
+            // (left/up)
+            function btnNextMove() {
+                //Prevent buttons' events from firing multiple times
+                if ( _next.attr( 'aria-disabled' ) == 'true' ) return false;
+                _next.attr( 'aria-disabled', 'true' );
+                _next
+                    .delay(sliderSpeed)
+                    .queue(function(next) { _next.attr( 'aria-disabled', 'false' ); next(); });
  
                 
                 //
-                movePositionWithButton( $( this ), e, 'next' );
-			});
-
+                movePositionWithButton( _next, 'next' );
+                
+            } 
+                    
 			
-            
-			/* 
-			 ---------------------------
-			 Move right/down
-			 ---------------------------
-			 */ 
-			$( carouselPrev ).off( 'click' ).on( 'click', $carouselWrapper, function( e ) {
-				e.preventDefault();
-                
-                //Prevent buttons' events from firing multiple times
-                if ( $( this ).attr( 'aria-disabled' ) == 'true' ) return false;
-                $( this ).attr( 'aria-disabled', 'true' );
-                $( this )
-                    .delay(carouselSpeed)
-                    .queue(function(next) { $( this ).attr( 'aria-disabled', 'false' ); next(); });  
-                
-                //
-                movePositionWithButton( $( this ), e, 'prev' );
-			});
-		
-
-            	
 			
 			//Drag and Drop
 			//-------------------------------------	
-			const $dragDropTrigger = $carouselWrapper;
+			const $dragDropTrigger = $sliderWrapper;
             let hammerProps      = {};
 
 			//Make the cursor a move icon when a user hovers over an item
@@ -222,10 +230,10 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                 
                 //Determine whether it is the first or the last    
                 let currentIsFirstOrLast = false;
-                if ( ! carouselLoop ) {
-                    const firstItemOffset = ( carouselDir == 'horizontal' ) ? $carousel.find( '[data-index="0"]' )[0]._gsTransform.x : $carousel.find( '[data-index="0"]' )[0]._gsTransform.y;
+                if ( ! sliderLoop ) {
+                    const firstItemOffset = ( sliderDir === 'horizontal' ) ? $slider.find( '[data-index="0"]' )[0]._gsTransform.x : $slider.find( '[data-index="0"]' )[0]._gsTransform.y;
                     
-                    const maxMoveOffset = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth*(itemTotal-amountVisible) : -eachItemNewHeight*(itemTotal-amountVisible);
+                    const maxMoveOffset = ( sliderDir === 'horizontal' ) ? -eachItemNewWidth*(itemsTotal-amountVisible) : -eachItemNewHeight*(itemsTotal-amountVisible);
                     
                     if ( ( direction == 'panright' || direction == 'pandown' ) && firstItemOffset >= 0 ) { //first item
                         currentIsFirstOrLast = true;
@@ -244,7 +252,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                         
                         if ( ev.deltaX > -eachItemNewWidth/4 && ev.deltaX < 0 ) {
                             elAnim = false;  
-                            itemUpdates( $carouselWrapper, ev.deltaX, 0.1, true );
+                            itemUpdates( $sliderWrapper, ev.deltaX, 0.1, true );
                         } else {
                             elAnim = ( currentIsFirstOrLast ) ? false : true;
                         }
@@ -256,7 +264,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                         
                         if ( ev.deltaY > -eachItemNewHeight/4 && ev.deltaY < 0 ) {
                             elAnim = false;  
-                            itemUpdates( $carouselWrapper, ev.deltaY, 0.1, true );
+                            itemUpdates( $sliderWrapper, ev.deltaY, 0.1, true );
                         } else {
                             elAnim = ( currentIsFirstOrLast ) ? false : true;
                         }
@@ -268,7 +276,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                         
                         if ( ev.deltaX < eachItemNewWidth/4 && ev.deltaX > 0 ) {
                             elAnim = false;  
-                            itemUpdates( $carouselWrapper, ev.deltaX, 0.1, true );
+                            itemUpdates( $sliderWrapper, ev.deltaX, 0.1, true );
                         } else {
                             elAnim = ( currentIsFirstOrLast ) ? false : true;
                         }
@@ -279,7 +287,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                     case 'pandown':
                         if ( ev.deltaY < eachItemNewHeight/4 && ev.deltaY > 0 ) {
                             elAnim = false;  
-                            itemUpdates( $carouselWrapper, ev.deltaY, 0.1, true );
+                            itemUpdates( $sliderWrapper, ev.deltaY, 0.1, true );
                         } else {
                             elAnim = ( currentIsFirstOrLast ) ? false : true;
                         }
@@ -307,23 +315,23 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                         case 'panleft':
                         case 'panup':
 
-                            const delta1 = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth : -eachItemNewHeight;
-                            itemUpdates( $carouselWrapper, delta1, null, false );
+                            const delta1 = ( sliderDir === 'horizontal' ) ? -eachItemNewWidth : -eachItemNewHeight;
+                            itemUpdates( $sliderWrapper, delta1, null, false );
                             
                             break;
 
                         case 'panright':
                         case 'pandown':
                           
-                            const delta2 = ( carouselDir == 'horizontal' ) ? eachItemNewWidth : eachItemNewHeight;
-                            itemUpdates( $carouselWrapper, delta2, null, false );
+                            const delta2 = ( sliderDir === 'horizontal' ) ? eachItemNewWidth : eachItemNewHeight;
+                            itemUpdates( $sliderWrapper, delta2, null, false );
                             
                             break;                 
                             
                     }
                     		    
                 } else {    
-                    itemUpdates( $carouselWrapper, 0, null, false );
+                    itemUpdates( $sliderWrapper, 0, null, false );
                 }
 
 			});	
@@ -332,7 +340,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			/*
 			 * Transition Between Items
 			 *
-			 * @param  {Element} wrapper        - Wrapper of carousel.
+			 * @param  {Element} wrapper        - Wrapper of slider.
              * @param  {Number} delta           - The value returned will need to be adjusted according to the offset rate.
              * @param  {?Number} speed          - Sliding speed. Please set to 0 when rebounding.
              * @param  {Boolean} dragging       - Determine if the object is being dragged.
@@ -340,16 +348,16 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 */
 			function itemUpdates( wrapper, delta, speed, dragging ) {
 
-                if ( speed == null ) speed = carouselSpeed/1000;
+                if ( speed == null ) speed = sliderSpeed/1000;
              
                 
-				let $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $carousel
-					$curItems   = $curWrapper.find( '> div' ); //Default: $carouselItem
+				let $curWrapper = wrapper.children( '.uix-multi-carousel__items' ),  //Default: $slider
+					$curItems   = $curWrapper.find( '> div' ); //Default: $sliderItem
 		
 
             
 				//Clone the first element to the last position
-				if ( carouselDir == 'horizontal' ) {
+				if ( sliderDir === 'horizontal' ) {
 
                     const boxWidth = eachItemNewWidth;
                     const wrapWidth = ($curItems.length - 1) * boxWidth; 
@@ -362,7 +370,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                         modifiers: {
                             x: function(x, target) {
                                 
-                                if ( carouselLoop ) {
+                                if ( sliderLoop ) {
                                     //Active the center item
                                     if( x === midIndex*boxWidth ) {
                                         TweenMax.set( target, {className:"+=is-active"});
@@ -407,7 +415,7 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
                             y: function(y, target) {
                                 
                                 
-                                if ( carouselLoop ) {
+                                if ( sliderLoop ) {
                                     //Active the center item
                                     if( y === midIndex*boxHeight ) {
                                         TweenMax.set( target, {className:"+=is-active"});
@@ -445,24 +453,22 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 * Move function with buttons
 			 *
 			 * @param  {Element} $btn               - The button that currently triggers the move.
-             * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
              * @param  {String} type                - Move next or previous.
 			 * @return {Void}
 			 */
-            function movePositionWithButton( $btn, event, type ) {
-   				const $curWrapper = $( event.data[0] ),
-					  //Protection button is not triggered multiple times.
+            function movePositionWithButton( $btn, type ) {
+   				const //Protection button is not triggered multiple times.
                       btnDisabled = $btn.data( 'disabled' );
                 
                 let delta;
                 if ( type == 'next' ) {
-                    delta = ( carouselDir == 'horizontal' ) ? -eachItemNewWidth : -eachItemNewHeight;
+                    delta = ( sliderDir === 'horizontal' ) ? -eachItemNewWidth : -eachItemNewHeight;
                 } else {
-                    delta = ( carouselDir == 'horizontal' ) ? eachItemNewWidth : eachItemNewHeight;
+                    delta = ( sliderDir === 'horizontal' ) ? eachItemNewWidth : eachItemNewHeight;
                 }
                 
 				if ( typeof btnDisabled === typeof undefined ) {	
-					itemUpdates( $curWrapper, delta, null, false );
+					itemUpdates( $sliderWrapper, delta, null, false );
 				} 
             }  
             
@@ -476,17 +482,17 @@ export const MULTI_ITEMS_CAROUSEL = ( ( module, $, window, document ) => {
 			 */
             function setButtonState( firstOffset, lastOffset ) {
                 
-                if ( carouselLoop ) return false;
+                if ( sliderLoop ) return false;
                
                 if ( Math.abs( firstOffset ) == lastOffset ) {
-                    $( carouselNext ).addClass( 'is-disabled' ).data( 'disabled', 1 );
-                    $( carouselPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderNext ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+                    $( sliderPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
                 } else if ( Math.round( firstOffset ) == 0 ) {
-                    $( carouselNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
-                    $( carouselPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
+                    $( sliderNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderPrev ).addClass( 'is-disabled' ).data( 'disabled', 1 );
                 } else {
-                    $( carouselNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
-                    $( carouselPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderNext ).removeClass( 'is-disabled' ).removeData( 'disabled' );
+                    $( sliderPrev ).removeClass( 'is-disabled' ).removeData( 'disabled' );
                 }
             }   
             

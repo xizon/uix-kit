@@ -69,8 +69,6 @@ export const browser = {
 };
 
 
-
-
 /*
  * Core scripts for current site
  *

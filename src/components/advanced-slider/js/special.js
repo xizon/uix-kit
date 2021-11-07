@@ -28,7 +28,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 	
 
     module.ADVANCED_SLIDER_FILTER               = module.ADVANCED_SLIDER_FILTER || {};
-    module.ADVANCED_SLIDER_FILTER.version       = '0.3.5';
+    module.ADVANCED_SLIDER_FILTER.version       = '0.3.6';
     module.ADVANCED_SLIDER_FILTER.pageLoaded    = function() {
 
 		
@@ -359,7 +359,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			const $this                    = slider,
 				$items                   = $this.find( '.uix-advanced-slider-sp__item' ),
 				$first                   = $items.first(),
-				itemTotal               = $items.length;
+				itemsTotal               = $items.length;
 	
 			
 			
@@ -376,7 +376,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			
         
 		    //Prevent bubbling
-			if ( itemTotal == 1 ) {
+			if ( itemsTotal == 1 ) {
 				$( paginationID ).hide();
 				$( arrowsID ).hide();
 			}
@@ -422,7 +422,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 							newH = curH*(newW/curW);
 
 							//Save different canvas heights as an array
-							if ( canvasHeights.length < itemTotal ) {
+							if ( canvasHeights.length < itemsTotal ) {
 								canvasHeights.push( newH );
 							}
 					
@@ -453,7 +453,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 							
 							//Save different canvas heights as an array
-							if ( canvasHeights.length < itemTotal ) {
+							if ( canvasHeights.length < itemsTotal ) {
 								canvasHeights.push( newH_img );
 							}
 
@@ -1218,7 +1218,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 				//Canvas Interactions
 				//-------------------------------------
-				transitionInteractions( 0, itemTotal-1, $this, 'in', 'next' );
+				transitionInteractions( 0, itemsTotal-1, $this, 'in', 'next' );
 				
 				
 				
@@ -1236,7 +1236,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			let _dot       = '',
 				_dotActive = '';
 			_dot += '<ul>';
-			for ( let i = 0; i < itemTotal; i++ ) {
+			for ( let i = 0; i < itemsTotal; i++ ) {
 
 				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -1381,17 +1381,24 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			//Make the cursor a move icon when a user hovers over an item
 			if ( draggable && draggableCursor != '' && draggableCursor != false ) $dragTrigger.css( 'cursor', draggableCursor );
 			
-			
-			$dragTrigger[0].removeEventListener( 'mousedown', dragStart );
-			document.removeEventListener( 'mouseup', dragEnd );
-			
-			$dragTrigger[0].removeEventListener( 'touchstart', dragStart );
-			document.removeEventListener( 'touchend', dragEnd );
-			
-			
-			//
-			$dragTrigger[0].addEventListener( 'mousedown', dragStart );
-			$dragTrigger[0].addEventListener( 'touchstart', dragStart );
+			//draggable for touch devices
+			if (Modernizr.touchevents) draggable = true;
+
+			if ( draggable ) {
+
+				$dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+				document.removeEventListener( 'mouseup', dragEnd );
+				
+				$dragTrigger[0].removeEventListener( 'touchstart', dragStart );
+				document.removeEventListener( 'touchend', dragEnd );
+				
+				
+				//
+				$dragTrigger[0].addEventListener( 'mousedown', dragStart );
+				$dragTrigger[0].addEventListener( 'touchstart', dragStart );
+			}
+
+
 			
 			
 			function dragStart(e) {
@@ -1431,21 +1438,17 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 			
 				//--- left
 				if ( offsetX >= 50) {
-					if ( draggable || ( touches && touches.length ) ) {
-						if ( !isMoving ) {
-							isMoving = true;
-							nextMove();
-						}
+					if ( !isMoving ) {
+						isMoving = true;
+						nextMove();
 					}
 				}
 			
 				//--- right
 				if ( offsetX <= -50) {
-					if ( draggable || ( touches && touches.length ) ) {
-						if ( !isMoving ) {
-							isMoving = true;
-							prevMove();
-						}
+					if ( !isMoving ) {
+						isMoving = true;
+						prevMove();
 					}
 				}
 			
@@ -1519,7 +1522,7 @@ export const ADVANCED_SLIDER_FILTER = ( ( module, $, window, document ) => {
 
 			// To determine if it is a touch screen.
 			//-------------------------------------
-			if ( Modernizr.touchevents ) {
+			if (Modernizr.touchevents) {
 				if ( elementIndex == total ) elementIndex = total-1;
 				if ( elementIndex < 0 ) elementIndex = 0;	
 				

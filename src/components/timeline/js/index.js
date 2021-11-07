@@ -87,7 +87,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 
 
             // for reversed timeline
-            if ( dir == 'horizontal' && $this.hasClass( 'is-reversed' ) && windowWidth > 768 ) {
+            if ( dir === 'horizontal' && $this.hasClass( 'is-reversed' ) && windowWidth > 768 ) {
 
                 // Set equal heights
                 const setEqualHeights = function( el ) {
@@ -137,7 +137,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 		 * @return {Void}
 		 */
 		function timelineUpdate( obj, iscur, showEle, prev, dir ) {
-			const itemTotal  = obj.find( '.uix-timeline__item' ).length,
+			const itemsTotal  = obj.find( '.uix-timeline__item' ).length,
 				  tNav       = obj.find( '.uix-timeline__item' ),
 				  tLoop      = false;
 			
@@ -154,7 +154,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 				if ( prev ) {
 					tarIndex = ( curIndex >= 0  ) ? curIndex-1 : 0;
 				} else {
-					tarIndex = ( curIndex < itemTotal  ) ? curIndex+1 : itemTotal-1;
+					tarIndex = ( curIndex < itemsTotal  ) ? curIndex+1 : itemsTotal-1;
 				}
 				
 			}
@@ -169,7 +169,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 				
 				//Previous
 				if ( tLoop ) {
-					if ( tarIndex < 0 ) tarIndex = itemTotal-1;
+					if ( tarIndex < 0 ) tarIndex = itemsTotal-1;
 				} else {
 					if ( tarIndex < 0 ) tarIndex = 0;
 					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
@@ -180,10 +180,10 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 				
 				//Next
 				if ( tLoop ) {
-					if ( tarIndex == itemTotal ) tarIndex = 0;
+					if ( tarIndex == itemsTotal ) tarIndex = 0;
 				} else {
-					if ( tarIndex > itemTotal-1 ) tarIndex = itemTotal-1;
-					if ( tarIndex > itemTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'is-disabled' );
+					if ( tarIndex > itemsTotal-1 ) tarIndex = itemsTotal-1;
+					if ( tarIndex > itemsTotal-2 ) obj.find( '.uix-timeline__btn--next' ).addClass( 'is-disabled' );
 					if ( tarIndex == 0 ) obj.find( '.uix-timeline__btn--prev' ).addClass( 'is-disabled' );
 				}
 			}
@@ -194,7 +194,7 @@ export const TIMELINE = ( ( module, $, window, document ) => {
 			obj.find( '.uix-timeline__item:eq('+tarIndex+')' ).addClass( 'is-active' );
 
 			//scroll left
-            if ( dir == 'horizontal' ) {
+            if ( dir === 'horizontal' ) {
                 let moveWidth = 0;
                 for ( let i = 0; i < tarIndex; i++ ) {
                     moveWidth += obj.find( '.uix-timeline__item:eq('+i+')' ).width();

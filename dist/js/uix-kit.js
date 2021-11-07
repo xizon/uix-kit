@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.8
+ * ## Version             :  4.5.9
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 1, 2021
+ * ## Last Update         :  November 7, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -17257,7 +17257,7 @@ function basic_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "f
 var ADVANCED_SLIDER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER === null) return false;
   module.ADVANCED_SLIDER = module.ADVANCED_SLIDER || {};
-  module.ADVANCED_SLIDER.version = '0.2.6';
+  module.ADVANCED_SLIDER.version = '0.2.7';
 
   module.ADVANCED_SLIDER.pageLoaded = function () {
     var windowWidth = window.innerWidth,
@@ -17453,7 +17453,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider__item'),
           $first = $items.first(),
-          itemTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
       if ($(arrowsID).length == 0) {
@@ -17464,7 +17464,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
       $items.last().addClass('last');
       $items.first().addClass('first'); //Prevent bubbling
 
-      if (itemTotal == 1) {
+      if (itemsTotal == 1) {
         $(paginationID).hide();
         $(arrowsID).hide();
       } // Fires local videos asynchronously with slider switch.
@@ -17478,7 +17478,7 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
           _dotActive = '';
       _dot += '<ul>';
 
-      for (var i = 0; i < itemTotal; i++) {
+      for (var i = 0; i < itemsTotal; i++) {
         _dotActive = i == 0 ? 'class="is-active"' : '';
         _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
       }
@@ -17584,14 +17584,19 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
         'user-select': 'none'
       }); //Make the cursor a move icon when a user hovers over an item
 
-      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor);
-      $dragTrigger[0].removeEventListener('mousedown', dragStart);
-      document.removeEventListener('mouseup', dragEnd);
-      $dragTrigger[0].removeEventListener('touchstart', dragStart);
-      document.removeEventListener('touchend', dragEnd); //
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor); //draggable for touch devices
 
-      $dragTrigger[0].addEventListener('mousedown', dragStart);
-      $dragTrigger[0].addEventListener('touchstart', dragStart);
+      if (Modernizr.touchevents) draggable = true;
+
+      if (draggable) {
+        $dragTrigger[0].removeEventListener('mousedown', dragStart);
+        document.removeEventListener('mouseup', dragEnd);
+        $dragTrigger[0].removeEventListener('touchstart', dragStart);
+        document.removeEventListener('touchend', dragEnd); //
+
+        $dragTrigger[0].addEventListener('mousedown', dragStart);
+        $dragTrigger[0].addEventListener('touchstart', dragStart);
+      }
 
       function dragStart(e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -17623,21 +17628,17 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
 
 
         if (offsetX >= 50) {
-          if (draggable || touches && touches.length) {
-            if (!isMoving) {
-              isMoving = true;
-              nextMove();
-            }
+          if (!isMoving) {
+            isMoving = true;
+            nextMove();
           }
         } //--- right
 
 
         if (offsetX <= -50) {
-          if (draggable || touches && touches.length) {
-            if (!isMoving) {
-              isMoving = true;
-              prevMove();
-            }
+          if (!isMoving) {
+            isMoving = true;
+            prevMove();
           }
         } //--- up
 
@@ -18618,7 +18619,7 @@ function special_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   if (window.ADVANCED_SLIDER_FILTER === null) return false;
   module.ADVANCED_SLIDER_FILTER = module.ADVANCED_SLIDER_FILTER || {};
-  module.ADVANCED_SLIDER_FILTER.version = '0.3.5';
+  module.ADVANCED_SLIDER_FILTER.version = '0.3.6';
 
   module.ADVANCED_SLIDER_FILTER.pageLoaded = function () {
     // Remove pixi.js banner from the console
@@ -18848,7 +18849,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       var $this = slider,
           $items = $this.find('.uix-advanced-slider-sp__item'),
           $first = $items.first(),
-          itemTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
       if ($(arrowsID).length == 0) {
@@ -18859,7 +18860,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
       $items.last().addClass('last');
       $items.first().addClass('first'); //Prevent bubbling
 
-      if (itemTotal == 1) {
+      if (itemsTotal == 1) {
         $(paginationID).hide();
         $(arrowsID).hide();
       }
@@ -18890,7 +18891,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
               newH = curH * (newW / curW); //Save different canvas heights as an array
 
-              if (canvasHeights.length < itemTotal) {
+              if (canvasHeights.length < itemsTotal) {
                 canvasHeights.push(newH);
               }
             }, false);
@@ -18908,7 +18909,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
               newH_img = curH_img * (newW_img / curW_img); //Save different canvas heights as an array
 
-              if (canvasHeights.length < itemTotal) {
+              if (canvasHeights.length < itemsTotal) {
                 canvasHeights.push(newH_img);
               }
             };
@@ -19391,7 +19392,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         //-------------------------------------
 
 
-        transitionInteractions(0, itemTotal - 1, $this, 'in', 'next');
+        transitionInteractions(0, itemsTotal - 1, $this, 'in', 'next');
       } // Fires local videos asynchronously with slider switch.
       //-------------------------------------
 
@@ -19403,7 +19404,7 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
           _dotActive = '';
       _dot += '<ul>';
 
-      for (var i = 0; i < itemTotal; i++) {
+      for (var i = 0; i < itemsTotal; i++) {
         _dotActive = i == 0 ? 'class="is-active"' : '';
         _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
       }
@@ -19516,14 +19517,19 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
         'user-select': 'none'
       }); //Make the cursor a move icon when a user hovers over an item
 
-      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor);
-      $dragTrigger[0].removeEventListener('mousedown', dragStart);
-      document.removeEventListener('mouseup', dragEnd);
-      $dragTrigger[0].removeEventListener('touchstart', dragStart);
-      document.removeEventListener('touchend', dragEnd); //
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor); //draggable for touch devices
 
-      $dragTrigger[0].addEventListener('mousedown', dragStart);
-      $dragTrigger[0].addEventListener('touchstart', dragStart);
+      if (Modernizr.touchevents) draggable = true;
+
+      if (draggable) {
+        $dragTrigger[0].removeEventListener('mousedown', dragStart);
+        document.removeEventListener('mouseup', dragEnd);
+        $dragTrigger[0].removeEventListener('touchstart', dragStart);
+        document.removeEventListener('touchend', dragEnd); //
+
+        $dragTrigger[0].addEventListener('mousedown', dragStart);
+        $dragTrigger[0].addEventListener('touchstart', dragStart);
+      }
 
       function dragStart(e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -19555,21 +19561,17 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
 
 
         if (offsetX >= 50) {
-          if (draggable || touches && touches.length) {
-            if (!isMoving) {
-              isMoving = true;
-              nextMove();
-            }
+          if (!isMoving) {
+            isMoving = true;
+            nextMove();
           }
         } //--- right
 
 
         if (offsetX <= -50) {
-          if (draggable || touches && touches.length) {
-            if (!isMoving) {
-              isMoving = true;
-              prevMove();
-            }
+          if (!isMoving) {
+            isMoving = true;
+            prevMove();
           }
         } //--- up
 
@@ -26871,40 +26873,40 @@ function hybrid_content_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (t
 var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
   if (window.HYBRID_CONTENT_SLIDER === null) return false;
   module.HYBRID_CONTENT_SLIDER = module.HYBRID_CONTENT_SLIDER || {};
-  module.HYBRID_CONTENT_SLIDER.version = '0.1.0';
+  module.HYBRID_CONTENT_SLIDER.version = '0.1.1';
 
   module.HYBRID_CONTENT_SLIDER.pageLoaded = function () {
     $('.uix-hybrid-content-slider').each(function () {
-      var $carouselWrapper = $(this),
-          $carousel = $carouselWrapper.find('.uix-hybrid-content-slider__items'),
-          $carouselItem = $carouselWrapper.find('.uix-hybrid-content-slider__items > div'),
-          itemTotal = $carouselItem.length,
+      var $sliderWrapper = $(this),
+          $slider = $sliderWrapper.find('.uix-hybrid-content-slider__items'),
+          $sliderItem = $sliderWrapper.find('.uix-hybrid-content-slider__items > div'),
+          itemsTotal = $sliderItem.length,
           amountVisible = 1,
-          carouselDir = $carouselWrapper.data('dir'),
-          carouselSpeed = $carouselWrapper.data('speed'),
-          carouselNext = $carouselWrapper.data('next'),
-          carouselPrev = $carouselWrapper.data('prev'),
-          carouselPagination = $carouselWrapper.data('pagination'),
-          carouseDraggable = $carouselWrapper.data('draggable'),
-          carouseDraggableCursor = $carouselWrapper.data('draggable-cursor');
-      if (hybrid_content_slider_js_typeof(carouselDir) === ( true ? "undefined" : 0)) carouselDir = 'horizontal';
-      if (hybrid_content_slider_js_typeof(carouselSpeed) === ( true ? "undefined" : 0)) carouselSpeed = 250;
-      if (hybrid_content_slider_js_typeof(carouselNext) === ( true ? "undefined" : 0)) carouselNext = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--next';
-      if (hybrid_content_slider_js_typeof(carouselPrev) === ( true ? "undefined" : 0)) carouselPrev = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--prev';
-      if (hybrid_content_slider_js_typeof(carouselPagination) === ( true ? "undefined" : 0)) carouselPagination = '#uix-hybrid-content-slider__pagination-123';
+          sliderDir = $sliderWrapper.data('dir'),
+          sliderSpeed = $sliderWrapper.data('speed'),
+          sliderNext = $sliderWrapper.data('next'),
+          sliderPrev = $sliderWrapper.data('prev'),
+          sliderPagination = $sliderWrapper.data('pagination'),
+          carouseDraggable = $sliderWrapper.data('draggable'),
+          carouseDraggableCursor = $sliderWrapper.data('draggable-cursor');
+      if (hybrid_content_slider_js_typeof(sliderDir) === ( true ? "undefined" : 0)) sliderDir = 'horizontal';
+      if (hybrid_content_slider_js_typeof(sliderSpeed) === ( true ? "undefined" : 0)) sliderSpeed = 250;
+      if (hybrid_content_slider_js_typeof(sliderNext) === ( true ? "undefined" : 0)) sliderNext = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--next';
+      if (hybrid_content_slider_js_typeof(sliderPrev) === ( true ? "undefined" : 0)) sliderPrev = '#uix-hybrid-content-slider__controls-123 .uix-hybrid-content-slider__controls--prev';
+      if (hybrid_content_slider_js_typeof(sliderPagination) === ( true ? "undefined" : 0)) sliderPagination = '#uix-hybrid-content-slider__pagination-123';
       if (hybrid_content_slider_js_typeof(carouseDraggable) === ( true ? "undefined" : 0)) carouseDraggable = false;
       if (hybrid_content_slider_js_typeof(carouseDraggableCursor) === ( true ? "undefined" : 0)) carouseDraggableCursor = 'move'; //Autoplay parameters
 
-      var dataAuto = $carouselWrapper.data('auto'),
-          dataTiming = $carouselWrapper.data('timing'),
-          dataLoop = $carouselWrapper.data('loop');
+      var dataAuto = $sliderWrapper.data('auto'),
+          dataTiming = $sliderWrapper.data('timing'),
+          dataLoop = $sliderWrapper.data('loop');
       if (hybrid_content_slider_js_typeof(dataAuto) === ( true ? "undefined" : 0)) dataAuto = false;
       if (hybrid_content_slider_js_typeof(dataTiming) === ( true ? "undefined" : 0)) dataTiming = 10000;
       if (hybrid_content_slider_js_typeof(dataLoop) === ( true ? "undefined" : 0)) dataLoop = false; //Autoplay times
 
       var playTimes; //A function called "timer" once every second (like a digital watch).
 
-      $carouselWrapper[0].animatedSlides; //Store the latest position (X,Y) in a temporary variable
+      $sliderWrapper[0].animatedSlides; //Store the latest position (X,Y) in a temporary variable
 
       var tempItemsPos = []; //each item width and height
 
@@ -26913,7 +26915,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
       var midIndex = 0; // Get the width and height of each item
 
-      $carouselItem.each(function (index) {
+      $sliderItem.each(function (index) {
         var _height = $(this).height();
 
         eachItemNewHeight.push(_height);
@@ -26927,44 +26929,44 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
       for (var i = 0; i < eachItemNewHeight.length; i++) {
         totalItemsHeight += eachItemNewHeight[i];
-        if (i + 1 == itemTotal - amountVisible) break;
-      } //Set target index of the carousel buttons
+        if (i + 1 == itemsTotal - amountVisible) break;
+      } //Set target index of the slider buttons
 
 
-      setButtonTargetIndex($(carouselNext), $(carouselPrev), 'init', null); //set actived item & initialize the height of container
+      setButtonTargetIndex($(sliderNext), $(sliderPrev), 'init', null); //set actived item & initialize the height of container
 
       setContainerSize(0);
-      $carouselItem.addClass('js-is-ready'); // Activate the current item from carouse
+      $sliderItem.addClass('js-is-ready'); // Activate the current item from carouse
 
       setItemState(0);
       /* 
        ---------------------------
-       Initialize carousel
+       Initialize slider
        ---------------------------
        */
 
-      var eachItemOldWidth = $carousel.width() / amountVisible;
-      eachItemNewWidth = $carouselWrapper.width() / amountVisible;
+      var eachItemOldWidth = $slider.width() / amountVisible;
+      eachItemNewWidth = $sliderWrapper.width() / amountVisible;
 
-      if (carouselDir == 'horizontal') {
-        $carousel.css('width', itemTotal * eachItemOldWidth);
+      if (sliderDir === 'horizontal') {
+        $slider.css('width', itemsTotal * eachItemOldWidth);
       } // Re-order all items
 
 
-      carouselReOrder(); //default button status
+      sliderReOrder(); //default button status
 
-      $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+      $(sliderPrev).addClass('is-disabled').data('disabled', 1);
       /* 
        ---------------------------
        Re-order all items
        ---------------------------
        */
 
-      function carouselReOrder() {
+      function sliderReOrder() {
         //Initialize the width and height of each item
-        if (carouselDir == 'horizontal') {
+        if (sliderDir === 'horizontal') {
           var boxWidth = eachItemNewWidth;
-          TweenMax.set($carouselItem, {
+          TweenMax.set($sliderItem, {
             width: boxWidth,
             height: function height(i, target) {
               return eachItemNewHeight[i];
@@ -26974,7 +26976,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
             }
           });
         } else {
-          TweenMax.set($carouselItem, {
+          TweenMax.set($sliderItem, {
             height: function height(i, target) {
               return eachItemNewHeight[i];
             },
@@ -26994,62 +26996,79 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
       }
       /* 
        ---------------------------
-       Move left/up
+       Next/Prev buttons
        ---------------------------
        */
 
 
-      $(carouselNext).off('click').on('click', $carouselWrapper, function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+      var _prev = $(sliderPrev),
+          _next = $(sliderNext);
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(carouselSpeed).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+      _next.off('click').on('click', $sliderWrapper, function (e) {
+        e.preventDefault();
+        btnNextMove();
+      });
+
+      _prev.off('click').on('click', $sliderWrapper, function (e) {
+        e.preventDefault();
+        btnPrevMove();
+      }); // (right/down)
+
+
+      function btnPrevMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        _prev.delay(sliderSpeed).queue(function (next) {
+          _prev.attr('aria-disabled', 'false');
+
           next();
         }); //
 
-        movePositionWithButton(false, $(this), e, 'next'); //Pause the auto play event
 
-        clearInterval($carouselWrapper[0].animatedSlides);
-      });
-      /* 
-       ---------------------------
-       Move right/down
-       ---------------------------
-       */
+        movePositionWithButton(false, _prev, 'prev'); //Pause the auto play event
 
-      $(carouselPrev).off('click').on('click', $carouselWrapper, function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+        clearInterval($sliderWrapper[0].animatedSlides);
+      } // (left/up)
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(carouselSpeed).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+
+      function btnNextMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        _next.delay(sliderSpeed).queue(function (next) {
+          _next.attr('aria-disabled', 'false');
+
           next();
         }); //
 
-        movePositionWithButton(false, $(this), e, 'prev'); //Pause the auto play event
 
-        clearInterval($carouselWrapper[0].animatedSlides);
-      });
+        movePositionWithButton(false, _next, 'next'); //Pause the auto play event
+
+        clearInterval($sliderWrapper[0].animatedSlides);
+      }
       /* 
        ---------------------------
        Pagination
        ---------------------------
        */
 
-      if ($(carouselPagination).length > 0 && $(carouselPagination).html().length == 0) {
+
+      if ($(sliderPagination).length > 0 && $(sliderPagination).html().length == 0) {
         //Button to add pagination automatically
         var _dot = '';
         _dot += '<ul class="uix-hybrid-content-slider__pagination--default">';
 
-        for (var _i = 0; _i < itemTotal; _i++) {
+        for (var _i = 0; _i < itemsTotal; _i++) {
           _dot += '<li><a data-target-index="' + _i + '" href="javascript:void(0);"></a></li>';
         }
 
         _dot += '</ul>';
-        $(carouselPagination).html(_dot).promise().done(function () {
+        $(sliderPagination).html(_dot).promise().done(function () {
           // Activate the currently selected Pagination
           setPaginationState(0);
         });
@@ -27058,25 +27077,25 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         setPaginationState(0);
       }
 
-      $(carouselPagination).find('li a').off('click').on('click', $carouselWrapper, function (e) {
+      $(sliderPagination).find('li a').off('click').on('click', $sliderWrapper, function (e) {
         e.preventDefault(); //Prevent buttons' events from firing multiple times
 
         if ($(this).attr('aria-disabled') == 'true') return false;
-        $(carouselPagination).find('li a').attr('aria-disabled', 'true');
-        $(carouselPagination).find('li a').delay(carouselSpeed).queue(function (next) {
-          $(carouselPagination).find('li a').attr('aria-disabled', 'false');
+        $(sliderPagination).find('li a').attr('aria-disabled', 'true');
+        $(sliderPagination).find('li a').delay(sliderSpeed).queue(function (next) {
+          $(sliderPagination).find('li a').attr('aria-disabled', 'false');
           next();
         }); //
 
         if (!$(this).parent().hasClass('is-active')) {
-          movePositionWithButton(true, $(this), e, 'next'); //Pause the auto play event
+          movePositionWithButton(true, $(this), 'next'); //Pause the auto play event
 
-          clearInterval($carouselWrapper[0].animatedSlides);
+          clearInterval($sliderWrapper[0].animatedSlides);
         }
       }); //Drag and Drop
       //-------------------------------------	
 
-      var $dragDropTrigger = $carouselWrapper;
+      var $dragDropTrigger = $sliderWrapper;
       var hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
 
       if (carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false) $dragDropTrigger.css('cursor', carouseDraggableCursor);
@@ -27127,8 +27146,8 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
 
         var currentIsFirstOrLast = false;
-        var firstItemOffset = carouselDir == 'horizontal' ? $carousel.find('[data-index="0"]')[0]._gsTransform.x : $carousel.find('[data-index="0"]')[0]._gsTransform.y;
-        var maxMoveOffset = carouselDir == 'horizontal' ? -eachItemNewWidth * (itemTotal - amountVisible) : -totalItemsHeight; //
+        var firstItemOffset = sliderDir === 'horizontal' ? $slider.find('[data-index="0"]')[0]._gsTransform.x : $slider.find('[data-index="0"]')[0]._gsTransform.y;
+        var maxMoveOffset = sliderDir === 'horizontal' ? -eachItemNewWidth * (itemsTotal - amountVisible) : -totalItemsHeight; //
 
         if ((direction == 'panright' || direction == 'pandown') && firstItemOffset >= 0) {
           //first item
@@ -27144,13 +27163,13 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         //otherwise it may cause vertical data problems
 
 
-        if (carouselDir == 'horizontal') {
+        if (sliderDir === 'horizontal') {
           switch (direction) {
             case 'panleft':
               if (ev.deltaX > -eachItemNewWidth / 4 && ev.deltaX < 0) {
                 elAnim = false;
-                var simulationButtonNext = $(carouselNext);
-                itemUpdates($carouselWrapper, simulationButtonNext, ev.deltaX, 0.1, true, targetIndex, allHeightStr);
+                var simulationButtonNext = $(sliderNext);
+                itemUpdates($sliderWrapper, simulationButtonNext, ev.deltaX, 0.1, true, targetIndex, allHeightStr);
               } else {
                 elAnim = currentIsFirstOrLast ? false : true;
               }
@@ -27160,8 +27179,8 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
             case 'panright':
               if (ev.deltaX < eachItemNewWidth / 4 && ev.deltaX > 0) {
                 elAnim = false;
-                var simulationButtonPrev = $(carouselPrev);
-                itemUpdates($carouselWrapper, simulationButtonPrev, ev.deltaX, 0.1, true, targetIndex, allHeightStr);
+                var simulationButtonPrev = $(sliderPrev);
+                itemUpdates($sliderWrapper, simulationButtonPrev, ev.deltaX, 0.1, true, targetIndex, allHeightStr);
               } else {
                 elAnim = currentIsFirstOrLast ? false : true;
               }
@@ -27176,9 +27195,9 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
               if (ev.deltaY > -draggingItemHeight / 4 && ev.deltaY < 0) {
                 elAnim = false;
 
-                var _simulationButtonNext = $(carouselNext);
+                var _simulationButtonNext = $(sliderNext);
 
-                itemUpdates($carouselWrapper, _simulationButtonNext, ev.deltaY, 0.1, true, targetIndex, allHeightStr);
+                itemUpdates($sliderWrapper, _simulationButtonNext, ev.deltaY, 0.1, true, targetIndex, allHeightStr);
               } else {
                 elAnim = currentIsFirstOrLast ? false : true;
               }
@@ -27189,9 +27208,9 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
               if (ev.deltaY < draggingItemHeight / 4 && ev.deltaY > 0) {
                 elAnim = false;
 
-                var _simulationButtonPrev = $(carouselPrev);
+                var _simulationButtonPrev = $(sliderPrev);
 
-                itemUpdates($carouselWrapper, _simulationButtonPrev, ev.deltaY, 0.1, true, targetIndex, allHeightStr);
+                itemUpdates($sliderWrapper, _simulationButtonPrev, ev.deltaY, 0.1, true, targetIndex, allHeightStr);
               } else {
                 elAnim = currentIsFirstOrLast ? false : true;
               }
@@ -27208,46 +27227,34 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
           //
           //!important -> Please do not use multiple case conditions, 
           //otherwise it may cause vertical data problems
-          if (carouselDir == 'horizontal') {
+          if (sliderDir === 'horizontal') {
             switch (direction) {
               case 'panleft':
-                var deltaNext = -eachItemNewWidth;
-                var simulationButtonNext = $(carouselNext);
-                itemUpdates($carouselWrapper, simulationButtonNext, deltaNext, null, false, targetIndex, allHeightStr);
+                btnNextMove();
                 break;
 
               case 'panright':
-                var deltaPrev = eachItemNewWidth;
-                var simulationButtonPrev = $(carouselPrev);
-                itemUpdates($carouselWrapper, simulationButtonPrev, deltaPrev, null, false, targetIndex, allHeightStr);
+                btnPrevMove();
                 break;
             }
           } else {
             switch (direction) {
               case 'panup':
-                var _deltaNext = -1;
-
-                var _simulationButtonNext2 = $(carouselNext);
-
-                itemUpdates($carouselWrapper, _simulationButtonNext2, _deltaNext, null, false, targetIndex, allHeightStr);
+                btnNextMove();
                 break;
 
               case 'pandown':
-                var _deltaPrev = -1;
-
-                var _simulationButtonPrev2 = $(carouselPrev);
-
-                itemUpdates($carouselWrapper, _simulationButtonPrev2, _deltaPrev, null, false, targetIndex, allHeightStr);
+                btnPrevMove();
                 break;
             }
           }
         } else {
           //Rebound effect of drag offset 
-          itemUpdates($carouselWrapper, null, tempItemsPos, null, false, targetIndex, allHeightStr);
+          itemUpdates($sliderWrapper, false, tempItemsPos, null, false, targetIndex, allHeightStr);
         } //Pause the auto play event
 
 
-        clearInterval($carouselWrapper[0].animatedSlides);
+        clearInterval($sliderWrapper[0].animatedSlides);
       }); //Autoplay Slider
       //-------------------------------------		
 
@@ -27255,7 +27262,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         sliderAutoPlay(playTimes, dataTiming, dataLoop);
 
         var autoplayEnter = function autoplayEnter() {
-          clearInterval($carouselWrapper[0].animatedSlides);
+          clearInterval($sliderWrapper[0].animatedSlides);
         };
 
         var autoplayLeave = function autoplayLeave() {
@@ -27263,12 +27270,12 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         }; // Do not use the `off()` method, otherwise it will cause the second mouseenter to be invalid
 
 
-        $carouselWrapper.on('mouseenter', autoplayEnter);
-        $carouselWrapper.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
+        $sliderWrapper.on('mouseenter', autoplayEnter);
+        $sliderWrapper.on('mouseleave', autoplayLeave); // To determine if it is a touch screen.
 
         if (Modernizr.touchevents) {
-          $carouselWrapper.on('pointerenter', autoplayEnter);
-          $carouselWrapper.on('pointerleave', autoplayLeave);
+          $sliderWrapper.on('pointerenter', autoplayEnter);
+          $sliderWrapper.on('pointerleave', autoplayLeave);
         }
       }
       /*
@@ -27282,7 +27289,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
 
       function sliderAutoPlay(playTimes, timing, loop) {
-        $carouselWrapper[0].animatedSlides = setInterval(function () {
+        $sliderWrapper[0].animatedSlides = setInterval(function () {
           var autoMove = function autoMove(indexGo) {
             // Retrieve the position (X,Y) of an element 
             var moveX = eachItemNewWidth * indexGo;
@@ -27296,21 +27303,21 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
             var moveY = moveYIncrement; //
 
-            var delta = carouselDir == 'horizontal' ? -moveX : -moveY; //
+            var delta = sliderDir === 'horizontal' ? -moveX : -moveY; //
 
-            itemUpdates($carouselWrapper, 'auto', delta, null, false, indexGo, eachItemNewHeight);
+            itemUpdates($sliderWrapper, 'auto', delta, null, false, indexGo, eachItemNewHeight);
           };
 
-          playTimes = parseFloat($carouselItem.filter('.is-active').index());
+          playTimes = parseFloat($sliderItem.filter('.is-active').index());
           playTimes++;
 
           if (!loop) {
-            if (playTimes < itemTotal && playTimes >= 0) {
+            if (playTimes < itemsTotal && playTimes >= 0) {
               autoMove(playTimes);
             }
           } else {
-            if (playTimes == itemTotal) playTimes = 0;
-            if (playTimes < 0) playTimes = itemTotal - 1;
+            if (playTimes == itemsTotal) playTimes = 0;
+            if (playTimes < 0) playTimes = itemsTotal - 1;
             autoMove(playTimes);
           }
         }, timing);
@@ -27318,22 +27325,24 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
       /*
        * Transition Between Items
        *
-       * @param  {Element} wrapper            - Wrapper of carousel.
-       * @param  {?Element|String} curBtn     - The button that currently triggers the move.
-                * @param  {Number|Array} delta         - The value returned will need to be adjusted according to the offset rate.
-                * @param  {?Number} speed              - Sliding speed. Please set to 0 when rebounding.
-                * @param  {Boolean} dragging           - Determine if the object is being dragged.
-                * @param  {!Number} indexGo            - The target item index.
-                * @param  {String|Array} itemsHeight   - Return all items height.
+       * @param  {Element} wrapper                  - Wrapper of slider.
+       * @param  {?Element|String|Boolean} curBtn   - The button that currently triggers the move.
+                * @param  {Number|Array} delta               - The value returned will need to be adjusted according 
+                *                                              to the offset  * rate.
+                * @param  {?Number} speed                     - Sliding speed. Please set to 0 when rebounding.
+                * @param  {Boolean} dragging                  - Determine if the object is being dragged.
+                * @param  {!Number} indexGo                   - The target item index.
+                * @param  {String|Array} itemsHeight          - Return all items height (the string type is 
+                *                                               used when a drag event is triggered).
        * @return {Void}
        */
 
 
       function itemUpdates(wrapper, curBtn, delta, speed, dragging, indexGo, itemsHeight) {
-        if (speed == null) speed = carouselSpeed / 1000;
+        if (speed == null) speed = sliderSpeed / 1000;
         var $curWrapper = wrapper.children('.uix-hybrid-content-slider__items'),
-            //Default: $carousel
-        $curItems = $curWrapper.find('> div'); //Default: $carouselItem
+            //Default: $slider
+        $curItems = $curWrapper.find('> div'); //Default: $sliderItem
         //Get height constant
 
         var itemsHeightArr = [];
@@ -27347,7 +27356,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
         var btnType = 'init';
 
-        if (curBtn != null && curBtn != 'auto') {
+        if (curBtn !== false && curBtn !== 'auto') {
           if (hybrid_content_slider_js_typeof(curBtn.attr('class')) !== ( true ? "undefined" : 0)) {
             btnType = curBtn.attr('class').indexOf('--next') >= 0 ? 'next' : 'prev';
           } else {
@@ -27356,16 +27365,16 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         } //Check next or previous event ( Autoplay )
 
 
-        if (curBtn == 'auto') btnType = 'next';
+        if (curBtn === 'auto') btnType = 'next';
         ; //Clone the first element to the last position
 
-        if (carouselDir == 'horizontal') {
+        if (sliderDir === 'horizontal') {
           var boxWidth = eachItemNewWidth;
           TweenMax.to($curItems, speed, {
             x: function x(i, target) {
               var xIncrement = 0;
 
-              for (var k = 0; k < itemTotal; k++) {
+              for (var k = 0; k < itemsTotal; k++) {
                 var tempX = k == 0 ? 0 : boxWidth;
                 xIncrement += tempX;
                 if (k == i) break;
@@ -27379,7 +27388,7 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
                   //console.log( 'btnType: ' + btnType + ' indexGo: ' + indexGo );
                   var curWidthIncrement = 0;
 
-                  for (var m = 0; m < itemTotal; m++) {
+                  for (var m = 0; m < itemsTotal; m++) {
                     var tempW = m == 0 ? 0 : boxWidth;
                     curWidthIncrement += tempW;
                     if (m == (btnType == 'next' ? indexGo : indexGo - 1)) break;
@@ -27401,9 +27410,9 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
                 setButtonState(Math.round($curItems.first()[0]._gsTransform.x), Math.round(($curItems.length - amountVisible) * boxWidth)); //Initialize the height of container
 
                 currentIndex = Math.round($curItems.first()[0]._gsTransform.x / boxWidth);
-                setContainerSize(currentIndex); //Set target index of the carousel buttons
+                setContainerSize(currentIndex); //Set target index of the slider buttons
 
-                setButtonTargetIndex($(carouselNext), $(carouselPrev), btnType, btnType == 'next' ? Math.abs(currentIndex) : Math.abs(currentIndex) + 1); // Activate the currently selected Pagination
+                setButtonTargetIndex($(sliderNext), $(sliderPrev), btnType, btnType == 'next' ? Math.abs(currentIndex) : Math.abs(currentIndex) + 1); // Activate the currently selected Pagination
 
                 setPaginationState(Math.abs(currentIndex)); // Activate the current item from carouse
 
@@ -27450,9 +27459,9 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
             onComplete: function onComplete() {
               if (!dragging && !Array.isArray(delta)) {
                 //The state of the control button
-                setButtonState($curItems.first()[0]._gsTransform.y, totalItemsHeight); //Set target index of the carousel buttons
+                setButtonState($curItems.first()[0]._gsTransform.y, totalItemsHeight); //Set target index of the slider buttons
 
-                setButtonTargetIndex($(carouselNext), $(carouselPrev), btnType, indexGo); //set actived item & initialize the height of container
+                setButtonTargetIndex($(sliderNext), $(sliderPrev), btnType, indexGo); //set actived item & initialize the height of container
 
                 setContainerSize(btnType == 'next' ? indexGo : indexGo - 1); // Activate the currently selected Pagination
 
@@ -27471,15 +27480,13 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
        *
        * @param  {Boolean} paginationEnabled   - Determine whether it is triggered by pagination
        * @param  {Element} $btn               - The button that currently triggers the move.
-                * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
                 * @param  {String} type                - Move next or previous.
        * @return {Void}
        */
 
 
-      function movePositionWithButton(paginationEnabled, $btn, event, type) {
-        var $curWrapper = $(event.data[0]),
-            //Protection button is not triggered multiple times.
+      function movePositionWithButton(paginationEnabled, $btn, type) {
+        var //Protection button is not triggered multiple times.
         btnDisabled = $btn.data('disabled'),
             //Get current button index
         tIndex = parseFloat($btn.attr('data-target-index')); // Retrieve the position (X,Y) of an element 
@@ -27506,13 +27513,13 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         var delta;
 
         if (type == 'next') {
-          delta = carouselDir == 'horizontal' ? -moveX : -moveY;
+          delta = sliderDir === 'horizontal' ? -moveX : -moveY;
         } else {
-          delta = carouselDir == 'horizontal' ? moveX : moveY;
+          delta = sliderDir === 'horizontal' ? moveX : moveY;
         }
 
         if (hybrid_content_slider_js_typeof(btnDisabled) === ( true ? "undefined" : 0)) {
-          itemUpdates($curWrapper, $btn, delta, null, false, tIndex, eachItemNewHeight);
+          itemUpdates($sliderWrapper, $btn, delta, null, false, tIndex, eachItemNewHeight);
         }
       }
       /*
@@ -27524,8 +27531,8 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
 
       function setPaginationState(index) {
-        $(carouselPagination).find('li').removeClass('is-active');
-        $(carouselPagination).find('li a[data-target-index="' + index + '"]').parent().addClass('is-active');
+        $(sliderPagination).find('li').removeClass('is-active');
+        $(sliderPagination).find('li a[data-target-index="' + index + '"]').parent().addClass('is-active');
       }
       /*
        * Activate the current item from carouse
@@ -27536,8 +27543,8 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
 
       function setItemState(index) {
-        $carouselItem.removeClass('is-active');
-        $carouselItem.eq(index).addClass('is-active');
+        $sliderItem.removeClass('is-active');
+        $sliderItem.eq(index).addClass('is-active');
       }
       /*
        * Store the latest position (X,Y) in a temporary variable
@@ -27549,8 +27556,8 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
       function createStoreLatestPosition() {
         var pos = []; // Retrieve the temporary variable of each item.
 
-        $carouselItem.each(function () {
-          pos.push(carouselDir == 'horizontal' ? $(this)[0]._gsTransform.x : $(this)[0]._gsTransform.y);
+        $sliderItem.each(function () {
+          pos.push(sliderDir === 'horizontal' ? $(this)[0]._gsTransform.x : $(this)[0]._gsTransform.y);
         });
         return pos;
       }
@@ -27566,13 +27573,13 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
         var _h = eachItemNewHeight[Math.abs(index)];
 
         if (hybrid_content_slider_js_typeof(_h) !== ( true ? "undefined" : 0)) {
-          TweenMax.to($carousel, 0.2, {
+          TweenMax.to($slider, 0.2, {
             height: eachItemNewHeight[Math.abs(index)]
           });
         }
       }
       /*
-       * Set target index of the carousel buttons
+       * Set target index of the slider buttons
        *
        * @param  {Element} nextBtn      - The next move button.
        * @param  {Element} prevBtn      - The previous move button.
@@ -27639,14 +27646,14 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
 
       function setButtonState(firstOffset, lastOffset) {
         if (Math.abs(firstOffset) == lastOffset) {
-          $(carouselNext).addClass('is-disabled').data('disabled', 1);
-          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+          $(sliderNext).addClass('is-disabled').data('disabled', 1);
+          $(sliderPrev).removeClass('is-disabled').removeData('disabled');
         } else if (Math.round(firstOffset) == 0) {
-          $(carouselNext).removeClass('is-disabled').removeData('disabled');
-          $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+          $(sliderNext).removeClass('is-disabled').removeData('disabled');
+          $(sliderPrev).addClass('is-disabled').data('disabled', 1);
         } else {
-          $(carouselNext).removeClass('is-disabled').removeData('disabled');
-          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+          $(sliderNext).removeClass('is-disabled').removeData('disabled');
+          $(sliderPrev).removeClass('is-disabled').removeData('disabled');
         }
       }
     });
@@ -29749,28 +29756,28 @@ function multi_items_carousel_js_typeof(obj) { "@babel/helpers - typeof"; if (ty
 var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
   if (window.MULTI_ITEMS_CAROUSEL === null) return false;
   module.MULTI_ITEMS_CAROUSEL = module.MULTI_ITEMS_CAROUSEL || {};
-  module.MULTI_ITEMS_CAROUSEL.version = '0.0.5';
+  module.MULTI_ITEMS_CAROUSEL.version = '0.0.6';
 
   module.MULTI_ITEMS_CAROUSEL.documentReady = function ($) {
     $('.uix-multi-carousel').each(function () {
-      var $carouselWrapper = $(this),
-          $carousel = $carouselWrapper.find('.uix-multi-carousel__items'),
-          $carouselItem = $carouselWrapper.find('.uix-multi-carousel__items > div'),
-          itemTotal = $carouselItem.length,
-          amountVisible = $carouselWrapper.data('show'),
-          carouselDir = $carouselWrapper.data('dir'),
-          carouselLoop = $carouselWrapper.data('loop'),
-          carouselSpeed = $carouselWrapper.data('speed'),
-          carouselNext = $carouselWrapper.data('next'),
-          carouselPrev = $carouselWrapper.data('prev'),
-          carouseDraggable = $carouselWrapper.data('draggable'),
-          carouseDraggableCursor = $carouselWrapper.data('draggable-cursor');
-      if (multi_items_carousel_js_typeof(carouselDir) === ( true ? "undefined" : 0)) carouselDir = 'horizontal';
-      if (multi_items_carousel_js_typeof(carouselLoop) === ( true ? "undefined" : 0)) carouselLoop = false;
+      var $sliderWrapper = $(this),
+          $slider = $sliderWrapper.find('.uix-multi-carousel__items'),
+          $sliderItem = $sliderWrapper.find('.uix-multi-carousel__items > div'),
+          itemsTotal = $sliderItem.length,
+          amountVisible = $sliderWrapper.data('show'),
+          sliderDir = $sliderWrapper.data('dir'),
+          sliderLoop = $sliderWrapper.data('loop'),
+          sliderSpeed = $sliderWrapper.data('speed'),
+          sliderNext = $sliderWrapper.data('next'),
+          sliderPrev = $sliderWrapper.data('prev'),
+          carouseDraggable = $sliderWrapper.data('draggable'),
+          carouseDraggableCursor = $sliderWrapper.data('draggable-cursor');
+      if (multi_items_carousel_js_typeof(sliderDir) === ( true ? "undefined" : 0)) sliderDir = 'horizontal';
+      if (multi_items_carousel_js_typeof(sliderLoop) === ( true ? "undefined" : 0)) sliderLoop = false;
       if (multi_items_carousel_js_typeof(amountVisible) === ( true ? "undefined" : 0)) amountVisible = 3;
-      if (multi_items_carousel_js_typeof(carouselSpeed) === ( true ? "undefined" : 0)) carouselSpeed = 250;
-      if (multi_items_carousel_js_typeof(carouselNext) === ( true ? "undefined" : 0)) carouselNext = '.uix-multi-carousel__controls--next';
-      if (multi_items_carousel_js_typeof(carouselPrev) === ( true ? "undefined" : 0)) carouselPrev = '.uix-multi-carousel__controls--prev';
+      if (multi_items_carousel_js_typeof(sliderSpeed) === ( true ? "undefined" : 0)) sliderSpeed = 250;
+      if (multi_items_carousel_js_typeof(sliderNext) === ( true ? "undefined" : 0)) sliderNext = '.uix-multi-carousel__controls--next';
+      if (multi_items_carousel_js_typeof(sliderPrev) === ( true ? "undefined" : 0)) sliderPrev = '.uix-multi-carousel__controls--prev';
       if (multi_items_carousel_js_typeof(carouseDraggable) === ( true ? "undefined" : 0)) carouseDraggable = false;
       if (multi_items_carousel_js_typeof(carouseDraggableCursor) === ( true ? "undefined" : 0)) carouseDraggableCursor = 'move';
       if (window.innerWidth <= 768) amountVisible = 3; // Returns the value of a number rounded to the nearest integer.
@@ -29778,27 +29785,27 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       var midIndex = Math.round(amountVisible / 2) - 1;
       /* 
        ---------------------------
-       Initialize carousel
+       Initialize slider
        ---------------------------
        */
 
       var eachItemNewWidth, eachItemNewHeight;
-      var eachItemOldWidth = $carousel.width() / amountVisible;
-      var eachItemOldHeight = $carousel.height() / amountVisible;
+      var eachItemOldWidth = $slider.width() / amountVisible;
+      var eachItemOldHeight = $slider.height() / amountVisible;
 
-      if (carouselDir == 'horizontal') {
-        eachItemNewWidth = $carouselWrapper.width() / amountVisible;
-        $carousel.css('width', itemTotal * eachItemOldWidth);
+      if (sliderDir === 'horizontal') {
+        eachItemNewWidth = $sliderWrapper.width() / amountVisible;
+        $slider.css('width', itemsTotal * eachItemOldWidth);
       } else {
-        eachItemNewHeight = $carouselWrapper.height() / amountVisible;
-        $carousel.css('height', itemTotal * eachItemOldHeight);
+        eachItemNewHeight = $sliderWrapper.height() / amountVisible;
+        $slider.css('height', itemsTotal * eachItemOldHeight);
       } // Re-order all items
 
 
-      carouselReOrder(); //default button status
+      sliderReOrder(); //default button status
 
-      if (!carouselLoop) {
-        $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+      if (!sliderLoop) {
+        $(sliderPrev).addClass('is-disabled').data('disabled', 1);
       }
       /* 
        ---------------------------
@@ -29807,38 +29814,38 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        */
 
 
-      function carouselReOrder() {
-        if (carouselDir == 'horizontal') {
+      function sliderReOrder() {
+        if (sliderDir === 'horizontal') {
           var boxWidth = eachItemNewWidth;
-          TweenMax.set($carouselItem, {
+          TweenMax.set($sliderItem, {
             width: boxWidth,
             x: function x(i, target) {
               //Active the center item
-              if (i === midIndex && carouselLoop) {
+              if (i === midIndex && sliderLoop) {
                 TweenMax.set(target, {
                   className: "+=is-active"
                 });
               } //Add index to each item
 
 
-              $carouselItem.eq(i).attr('data-index', i);
+              $sliderItem.eq(i).attr('data-index', i);
               return i * boxWidth;
             }
           });
         } else {
           var boxHeight = eachItemNewHeight;
-          TweenMax.set($carouselItem, {
+          TweenMax.set($sliderItem, {
             height: boxHeight,
             y: function y(i, target) {
               //Active the center item
-              if (i === midIndex && carouselLoop) {
+              if (i === midIndex && sliderLoop) {
                 TweenMax.set(target, {
                   className: "+=is-active"
                 });
               } //Add index to each item
 
 
-              $carouselItem.eq(i).attr('data-index', i);
+              $sliderItem.eq(i).attr('data-index', i);
               return i * boxHeight;
             }
           });
@@ -29846,44 +29853,61 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
       }
       /* 
        ---------------------------
-       Move left/up
+       Next/Prev buttons
        ---------------------------
        */
 
 
-      $(carouselNext).off('click').on('click', $carouselWrapper, function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+      var _prev = $(sliderPrev),
+          _next = $(sliderNext);
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(carouselSpeed).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
-          next();
-        }); //
-
-        movePositionWithButton($(this), e, 'next');
+      _next.off('click').on('click', $sliderWrapper, function (e) {
+        e.preventDefault();
+        btnNextMove();
       });
-      /* 
-       ---------------------------
-       Move right/down
-       ---------------------------
-       */
 
-      $(carouselPrev).off('click').on('click', $carouselWrapper, function (e) {
-        e.preventDefault(); //Prevent buttons' events from firing multiple times
+      _prev.off('click').on('click', $sliderWrapper, function (e) {
+        e.preventDefault();
+        btnPrevMove();
+      }); // (right/down)
 
-        if ($(this).attr('aria-disabled') == 'true') return false;
-        $(this).attr('aria-disabled', 'true');
-        $(this).delay(carouselSpeed).queue(function (next) {
-          $(this).attr('aria-disabled', 'false');
+
+      function btnPrevMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_prev.attr('aria-disabled') == 'true') return false;
+
+        _prev.attr('aria-disabled', 'true');
+
+        _prev.delay(sliderSpeed).queue(function (next) {
+          _prev.attr('aria-disabled', 'false');
+
           next();
         }); //
 
-        movePositionWithButton($(this), e, 'prev');
-      }); //Drag and Drop
+
+        movePositionWithButton(_prev, 'prev');
+      } // (left/up)
+
+
+      function btnNextMove() {
+        //Prevent buttons' events from firing multiple times
+        if (_next.attr('aria-disabled') == 'true') return false;
+
+        _next.attr('aria-disabled', 'true');
+
+        _next.delay(sliderSpeed).queue(function (next) {
+          _next.attr('aria-disabled', 'false');
+
+          next();
+        }); //
+
+
+        movePositionWithButton(_next, 'next');
+      } //Drag and Drop
       //-------------------------------------	
 
-      var $dragDropTrigger = $carouselWrapper;
+
+      var $dragDropTrigger = $sliderWrapper;
       var hammerProps = {}; //Make the cursor a move icon when a user hovers over an item
 
       if (carouseDraggable && carouseDraggableCursor != '' && carouseDraggableCursor != false) $dragDropTrigger.css('cursor', carouseDraggableCursor);
@@ -29911,9 +29935,9 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 
         var currentIsFirstOrLast = false;
 
-        if (!carouselLoop) {
-          var firstItemOffset = carouselDir == 'horizontal' ? $carousel.find('[data-index="0"]')[0]._gsTransform.x : $carousel.find('[data-index="0"]')[0]._gsTransform.y;
-          var maxMoveOffset = carouselDir == 'horizontal' ? -eachItemNewWidth * (itemTotal - amountVisible) : -eachItemNewHeight * (itemTotal - amountVisible);
+        if (!sliderLoop) {
+          var firstItemOffset = sliderDir === 'horizontal' ? $slider.find('[data-index="0"]')[0]._gsTransform.x : $slider.find('[data-index="0"]')[0]._gsTransform.y;
+          var maxMoveOffset = sliderDir === 'horizontal' ? -eachItemNewWidth * (itemsTotal - amountVisible) : -eachItemNewHeight * (itemsTotal - amountVisible);
 
           if ((direction == 'panright' || direction == 'pandown') && firstItemOffset >= 0) {
             //first item
@@ -29931,7 +29955,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
           case 'panleft':
             if (ev.deltaX > -eachItemNewWidth / 4 && ev.deltaX < 0) {
               elAnim = false;
-              itemUpdates($carouselWrapper, ev.deltaX, 0.1, true);
+              itemUpdates($sliderWrapper, ev.deltaX, 0.1, true);
             } else {
               elAnim = currentIsFirstOrLast ? false : true;
             }
@@ -29941,7 +29965,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
           case 'panup':
             if (ev.deltaY > -eachItemNewHeight / 4 && ev.deltaY < 0) {
               elAnim = false;
-              itemUpdates($carouselWrapper, ev.deltaY, 0.1, true);
+              itemUpdates($sliderWrapper, ev.deltaY, 0.1, true);
             } else {
               elAnim = currentIsFirstOrLast ? false : true;
             }
@@ -29951,7 +29975,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
           case 'panright':
             if (ev.deltaX < eachItemNewWidth / 4 && ev.deltaX > 0) {
               elAnim = false;
-              itemUpdates($carouselWrapper, ev.deltaX, 0.1, true);
+              itemUpdates($sliderWrapper, ev.deltaX, 0.1, true);
             } else {
               elAnim = currentIsFirstOrLast ? false : true;
             }
@@ -29961,7 +29985,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
           case 'pandown':
             if (ev.deltaY < eachItemNewHeight / 4 && ev.deltaY > 0) {
               elAnim = false;
-              itemUpdates($carouselWrapper, ev.deltaY, 0.1, true);
+              itemUpdates($sliderWrapper, ev.deltaY, 0.1, true);
             } else {
               elAnim = currentIsFirstOrLast ? false : true;
             }
@@ -29977,24 +30001,24 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
           switch (direction) {
             case 'panleft':
             case 'panup':
-              var delta1 = carouselDir == 'horizontal' ? -eachItemNewWidth : -eachItemNewHeight;
-              itemUpdates($carouselWrapper, delta1, null, false);
+              var delta1 = sliderDir === 'horizontal' ? -eachItemNewWidth : -eachItemNewHeight;
+              itemUpdates($sliderWrapper, delta1, null, false);
               break;
 
             case 'panright':
             case 'pandown':
-              var delta2 = carouselDir == 'horizontal' ? eachItemNewWidth : eachItemNewHeight;
-              itemUpdates($carouselWrapper, delta2, null, false);
+              var delta2 = sliderDir === 'horizontal' ? eachItemNewWidth : eachItemNewHeight;
+              itemUpdates($sliderWrapper, delta2, null, false);
               break;
           }
         } else {
-          itemUpdates($carouselWrapper, 0, null, false);
+          itemUpdates($sliderWrapper, 0, null, false);
         }
       });
       /*
        * Transition Between Items
        *
-       * @param  {Element} wrapper        - Wrapper of carousel.
+       * @param  {Element} wrapper        - Wrapper of slider.
                 * @param  {Number} delta           - The value returned will need to be adjusted according to the offset rate.
                 * @param  {?Number} speed          - Sliding speed. Please set to 0 when rebounding.
                 * @param  {Boolean} dragging       - Determine if the object is being dragged.
@@ -30002,13 +30026,13 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        */
 
       function itemUpdates(wrapper, delta, speed, dragging) {
-        if (speed == null) speed = carouselSpeed / 1000;
+        if (speed == null) speed = sliderSpeed / 1000;
         var $curWrapper = wrapper.children('.uix-multi-carousel__items'),
-            //Default: $carousel
-        $curItems = $curWrapper.find('> div'); //Default: $carouselItem
+            //Default: $slider
+        $curItems = $curWrapper.find('> div'); //Default: $sliderItem
         //Clone the first element to the last position
 
-        if (carouselDir == 'horizontal') {
+        if (sliderDir === 'horizontal') {
           var boxWidth = eachItemNewWidth;
           var wrapWidth = ($curItems.length - 1) * boxWidth;
           TweenMax.to($curItems, speed, {
@@ -30018,7 +30042,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
             },
             modifiers: {
               x: function x(_x, target) {
-                if (carouselLoop) {
+                if (sliderLoop) {
                   //Active the center item
                   if (_x === midIndex * boxWidth) {
                     TweenMax.set(target, {
@@ -30053,7 +30077,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
             },
             modifiers: {
               y: function y(_y, target) {
-                if (carouselLoop) {
+                if (sliderLoop) {
                   //Active the center item
                   if (_y === midIndex * boxHeight) {
                     TweenMax.set(target, {
@@ -30084,26 +30108,24 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
        * Move function with buttons
        *
        * @param  {Element} $btn               - The button that currently triggers the move.
-                * @param  {Object} event               - Bind an event handler to the "click" JavaScript event,
                 * @param  {String} type                - Move next or previous.
        * @return {Void}
        */
 
 
-      function movePositionWithButton($btn, event, type) {
-        var $curWrapper = $(event.data[0]),
-            //Protection button is not triggered multiple times.
+      function movePositionWithButton($btn, type) {
+        var //Protection button is not triggered multiple times.
         btnDisabled = $btn.data('disabled');
         var delta;
 
         if (type == 'next') {
-          delta = carouselDir == 'horizontal' ? -eachItemNewWidth : -eachItemNewHeight;
+          delta = sliderDir === 'horizontal' ? -eachItemNewWidth : -eachItemNewHeight;
         } else {
-          delta = carouselDir == 'horizontal' ? eachItemNewWidth : eachItemNewHeight;
+          delta = sliderDir === 'horizontal' ? eachItemNewWidth : eachItemNewHeight;
         }
 
         if (multi_items_carousel_js_typeof(btnDisabled) === ( true ? "undefined" : 0)) {
-          itemUpdates($curWrapper, delta, null, false);
+          itemUpdates($sliderWrapper, delta, null, false);
         }
       }
       /*
@@ -30116,17 +30138,17 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 
 
       function setButtonState(firstOffset, lastOffset) {
-        if (carouselLoop) return false;
+        if (sliderLoop) return false;
 
         if (Math.abs(firstOffset) == lastOffset) {
-          $(carouselNext).addClass('is-disabled').data('disabled', 1);
-          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+          $(sliderNext).addClass('is-disabled').data('disabled', 1);
+          $(sliderPrev).removeClass('is-disabled').removeData('disabled');
         } else if (Math.round(firstOffset) == 0) {
-          $(carouselNext).removeClass('is-disabled').removeData('disabled');
-          $(carouselPrev).addClass('is-disabled').data('disabled', 1);
+          $(sliderNext).removeClass('is-disabled').removeData('disabled');
+          $(sliderPrev).addClass('is-disabled').data('disabled', 1);
         } else {
-          $(carouselNext).removeClass('is-disabled').removeData('disabled');
-          $(carouselPrev).removeClass('is-disabled').removeData('disabled');
+          $(sliderNext).removeClass('is-disabled').removeData('disabled');
+          $(sliderPrev).removeClass('is-disabled').removeData('disabled');
         }
       }
       /*
@@ -32624,7 +32646,7 @@ function svg_mask_slider_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof 
 var SVG_MASK_SLIDER = function (module, $, window, document) {
   if (window.SVG_MASK_SLIDER === null) return false;
   module.SVG_MASK_SLIDER = module.SVG_MASK_SLIDER || {};
-  module.SVG_MASK_SLIDER.version = '0.0.4';
+  module.SVG_MASK_SLIDER.version = '0.0.5';
 
   module.SVG_MASK_SLIDER.pageLoaded = function () {
     var windowWidth = window.innerWidth,
@@ -32855,7 +32877,7 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
       var $this = slider,
           $items = $this.find('.uix-svgMask-slider__item'),
           $first = $items.first(),
-          itemTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
+          itemsTotal = $items.length; //If arrows does not exist on the page, it will be added by default, 
       //and the drag and drop function will be activated.
 
       if ($(arrowsID).length == 0) {
@@ -32866,7 +32888,7 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
       $items.last().addClass('last');
       $items.first().addClass('first'); //Prevent bubbling
 
-      if (itemTotal == 1) {
+      if (itemsTotal == 1) {
         $(paginationID).hide();
         $(arrowsID).hide();
       } //Pagination dots 
@@ -32877,7 +32899,7 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
           _dotActive = '';
       _dot += '<ul>';
 
-      for (var i = 0; i < itemTotal; i++) {
+      for (var i = 0; i < itemsTotal; i++) {
         _dotActive = i == 0 ? 'class="is-active"' : '';
         _dot += '<li><a ' + _dotActive + ' data-index="' + i + '" href="javascript:"></a></li>';
       }
@@ -33001,14 +33023,19 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
         'user-select': 'none'
       }); //Make the cursor a move icon when a user hovers over an item
 
-      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor);
-      $dragTrigger[0].removeEventListener('mousedown', dragStart);
-      document.removeEventListener('mouseup', dragEnd);
-      $dragTrigger[0].removeEventListener('touchstart', dragStart);
-      document.removeEventListener('touchend', dragEnd); //
+      if (draggable && draggableCursor != '' && draggableCursor != false) $dragTrigger.css('cursor', draggableCursor); //draggable for touch devices
 
-      $dragTrigger[0].addEventListener('mousedown', dragStart);
-      $dragTrigger[0].addEventListener('touchstart', dragStart);
+      if (Modernizr.touchevents) draggable = true;
+
+      if (draggable) {
+        $dragTrigger[0].removeEventListener('mousedown', dragStart);
+        document.removeEventListener('mouseup', dragEnd);
+        $dragTrigger[0].removeEventListener('touchstart', dragStart);
+        document.removeEventListener('touchend', dragEnd); //
+
+        $dragTrigger[0].addEventListener('mousedown', dragStart);
+        $dragTrigger[0].addEventListener('touchstart', dragStart);
+      }
 
       function dragStart(e) {
         //Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -33040,21 +33067,17 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
 
 
         if (offsetX >= 50) {
-          if (draggable || touches && touches.length) {
-            if (!isMoving) {
-              isMoving = true;
-              nextMove();
-            }
+          if (!isMoving) {
+            isMoving = true;
+            nextMove();
           }
         } //--- right
 
 
         if (offsetX <= -50) {
-          if (draggable || touches && touches.length) {
-            if (!isMoving) {
-              isMoving = true;
-              prevMove();
-            }
+          if (!isMoving) {
+            isMoving = true;
+            prevMove();
           }
         } //--- up
 
@@ -40910,7 +40933,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
           var $this = $(this);
           var $items = $this.find('.uix-3d-slider--shatter__item'),
               $first = $items.first(),
-              itemTotal = $items.length,
+              itemsTotal = $items.length,
               activated = $this.data('activated');
 
           if (simple_3D_shatter_slider_js_typeof(activated) === ( true ? "undefined" : 0) || activated === 0) {
@@ -40947,7 +40970,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
             } //Prevent bubbling
 
 
-            if (itemTotal == 1) {
+            if (itemsTotal == 1) {
               $(dataControlsPagination).hide();
               $(dataControlsArrows).hide();
             } //Initialize the controlers classes
@@ -41016,7 +41039,7 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
                 _dotActive = '';
             _dot += '<ul>';
 
-            for (var i = 0; i < itemTotal; i++) {
+            for (var i = 0; i < itemsTotal; i++) {
               _dotActive = i == 0 ? 'class="is-active"' : '';
               _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
@@ -41613,7 +41636,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
           var $this = $(this);
           var $items = $this.find('.uix-3d-slider--expParticle__item'),
               $first = $items.first(),
-              itemTotal = $items.length,
+              itemsTotal = $items.length,
               activated = $this.data('activated');
 
           if (simple_3D_explosive_particle_slider_js_typeof(activated) === ( true ? "undefined" : 0) || activated === 0) {
@@ -41651,7 +41674,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
             } //Prevent bubbling
 
 
-            if (itemTotal == 1) {
+            if (itemsTotal == 1) {
               $(dataControlsPagination).hide();
               $(dataControlsArrows).hide();
             } //Initialize the controlers classes
@@ -41720,7 +41743,7 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
                 _dotActive = '';
             _dot += '<ul>';
 
-            for (var i = 0; i < itemTotal; i++) {
+            for (var i = 0; i < itemsTotal; i++) {
               _dotActive = i == 0 ? 'class="is-active"' : '';
               _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
@@ -42294,7 +42317,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
           var $this = $(this);
           var $items = $this.find('.uix-3d-slider--liquid-scrollspy__item'),
               $first = $items.first(),
-              itemTotal = $items.length,
+              itemsTotal = $items.length,
               activated = $this.data('activated');
 
           if (simple_3D_liquid_scrollspy_slider_js_typeof(activated) === ( true ? "undefined" : 0) || activated === 0) {
@@ -42344,7 +42367,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
             } //Prevent bubbling
 
 
-            if (itemTotal == 1) {
+            if (itemsTotal == 1) {
               $(dataControlsPagination).hide();
               $(dataControlsArrows).hide();
             } //Initialize the controlers classes
@@ -42413,7 +42436,7 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
                 _dotActive = '';
             _dot += '<ul>';
 
-            for (var i = 0; i < itemTotal; i++) {
+            for (var i = 0; i < itemsTotal; i++) {
               _dotActive = i == 0 ? 'class="is-active"' : '';
               _dot += '<li ' + _dotActive + ' data-index="' + i + '"><a href="javascript:"></a></li>';
             }
@@ -45073,7 +45096,7 @@ var TIMELINE = function (module, $, window, document) {
       } // for reversed timeline
 
 
-      if (dir == 'horizontal' && $this.hasClass('is-reversed') && windowWidth > 768) {
+      if (dir === 'horizontal' && $this.hasClass('is-reversed') && windowWidth > 768) {
         // Set equal heights
         var setEqualHeights = function setEqualHeights(el) {
           var counter = 0;
@@ -45112,7 +45135,7 @@ var TIMELINE = function (module, $, window, document) {
      */
 
     function timelineUpdate(obj, iscur, showEle, prev, dir) {
-      var itemTotal = obj.find('.uix-timeline__item').length,
+      var itemsTotal = obj.find('.uix-timeline__item').length,
           tNav = obj.find('.uix-timeline__item'),
           tLoop = false;
       var curIndex = obj.find('.uix-timeline__item.is-active').index(),
@@ -45125,7 +45148,7 @@ var TIMELINE = function (module, $, window, document) {
         if (prev) {
           tarIndex = curIndex >= 0 ? curIndex - 1 : 0;
         } else {
-          tarIndex = curIndex < itemTotal ? curIndex + 1 : itemTotal - 1;
+          tarIndex = curIndex < itemsTotal ? curIndex + 1 : itemsTotal - 1;
         }
       } //loop the items
 
@@ -45135,7 +45158,7 @@ var TIMELINE = function (module, $, window, document) {
       if (prev) {
         //Previous
         if (tLoop) {
-          if (tarIndex < 0) tarIndex = itemTotal - 1;
+          if (tarIndex < 0) tarIndex = itemsTotal - 1;
         } else {
           if (tarIndex < 0) tarIndex = 0;
           if (tarIndex == 0) obj.find('.uix-timeline__btn--prev').addClass('is-disabled');
@@ -45143,10 +45166,10 @@ var TIMELINE = function (module, $, window, document) {
       } else {
         //Next
         if (tLoop) {
-          if (tarIndex == itemTotal) tarIndex = 0;
+          if (tarIndex == itemsTotal) tarIndex = 0;
         } else {
-          if (tarIndex > itemTotal - 1) tarIndex = itemTotal - 1;
-          if (tarIndex > itemTotal - 2) obj.find('.uix-timeline__btn--next').addClass('is-disabled');
+          if (tarIndex > itemsTotal - 1) tarIndex = itemsTotal - 1;
+          if (tarIndex > itemsTotal - 2) obj.find('.uix-timeline__btn--next').addClass('is-disabled');
           if (tarIndex == 0) obj.find('.uix-timeline__btn--prev').addClass('is-disabled');
         }
       }
@@ -45154,7 +45177,7 @@ var TIMELINE = function (module, $, window, document) {
       tNav.removeClass('is-active');
       obj.find('.uix-timeline__item:eq(' + tarIndex + ')').addClass('is-active'); //scroll left
 
-      if (dir == 'horizontal') {
+      if (dir === 'horizontal') {
         var moveWidth = 0;
 
         for (var i = 0; i < tarIndex; i++) {

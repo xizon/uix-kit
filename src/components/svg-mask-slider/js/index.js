@@ -26,7 +26,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 	
     
     module.SVG_MASK_SLIDER               = module.SVG_MASK_SLIDER || {};
-    module.SVG_MASK_SLIDER.version       = '0.0.4';
+    module.SVG_MASK_SLIDER.version       = '0.0.5';
     module.SVG_MASK_SLIDER.pageLoaded    = function() {
 
 		
@@ -312,7 +312,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 			const $this                  = slider,
 				$items                   = $this.find( '.uix-svgMask-slider__item' ),
 				$first                   = $items.first(),
-				itemTotal                = $items.length;
+				itemsTotal                = $items.length;
 	
 
 			//If arrows does not exist on the page, it will be added by default, 
@@ -328,7 +328,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 
 			
 		    //Prevent bubbling
-			if ( itemTotal == 1 ) {
+			if ( itemsTotal == 1 ) {
 				$( paginationID ).hide();
 				$( arrowsID ).hide();
 			}
@@ -340,7 +340,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 			let _dot       = '',
 				_dotActive = '';
 			_dot += '<ul>';
-			for ( let i = 0; i < itemTotal; i++ ) {
+			for ( let i = 0; i < itemsTotal; i++ ) {
 
 				_dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 
@@ -498,18 +498,24 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 			//Make the cursor a move icon when a user hovers over an item
 			if ( draggable && draggableCursor != '' && draggableCursor != false ) $dragTrigger.css( 'cursor', draggableCursor );
 			
+			//draggable for touch devices
+			if (Modernizr.touchevents) draggable = true;
+
+			if ( draggable ) {
+
+				$dragTrigger[0].removeEventListener( 'mousedown', dragStart );
+				document.removeEventListener( 'mouseup', dragEnd );
+				
+				$dragTrigger[0].removeEventListener( 'touchstart', dragStart );
+				document.removeEventListener( 'touchend', dragEnd );
+				
+				
+				//
+				$dragTrigger[0].addEventListener( 'mousedown', dragStart );
+				$dragTrigger[0].addEventListener( 'touchstart', dragStart );
+			}
 			
-			$dragTrigger[0].removeEventListener( 'mousedown', dragStart );
-			document.removeEventListener( 'mouseup', dragEnd );
-			
-			$dragTrigger[0].removeEventListener( 'touchstart', dragStart );
-			document.removeEventListener( 'touchend', dragEnd );
-			
-			
-			//
-			$dragTrigger[0].addEventListener( 'mousedown', dragStart );
-			$dragTrigger[0].addEventListener( 'touchstart', dragStart );
-			
+
 			
 			function dragStart(e) {
 				//Do not use "e.preventDefault()" to avoid prevention page scroll on drag in IOS and Android
@@ -548,21 +554,17 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 			
 				//--- left
 				if ( offsetX >= 50) {
-					if ( draggable || ( touches && touches.length ) ) {
-						if ( !isMoving ) {
-							isMoving = true;
-							nextMove();
-						}
+					if ( !isMoving ) {
+						isMoving = true;
+						nextMove();
 					}
 				}
 			
 				//--- right
 				if ( offsetX <= -50) {
-					if ( draggable || ( touches && touches.length ) ) {
-						if ( !isMoving ) {
-							isMoving = true;
-							prevMove();
-						}
+					if ( !isMoving ) {
+						isMoving = true;
+						prevMove();
 					}
 				}
 			
@@ -634,7 +636,7 @@ export const SVG_MASK_SLIDER = ( ( module, $, window, document ) => {
 			}
 
 			// To determine if it is a touch screen.
-			if ( Modernizr.touchevents ) {
+			if (Modernizr.touchevents) {
 				if ( elementIndex == total ) elementIndex = total-1;
 				if ( elementIndex < 0 ) elementIndex = 0;	
 				

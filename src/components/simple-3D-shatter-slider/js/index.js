@@ -95,7 +95,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                     
 					const $items                   = $this.find( '.uix-3d-slider--shatter__item' ),
 						  $first                   = $items.first(),
-						  itemTotal                = $items.length,
+						  itemsTotal                = $items.length,
                           activated                = $this.data( 'activated' ); 
 				
                     
@@ -147,7 +147,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
 
 
                         //Prevent bubbling
-                        if ( itemTotal == 1 ) {
+                        if ( itemsTotal == 1 ) {
                             $( dataControlsPagination ).hide();
                             $( dataControlsArrows ).hide();
                         }
@@ -247,7 +247,7 @@ export const THREE_SHATTER_SLIDER = ( ( module, $, window, document ) => {
                         let _dot       = '',
                             _dotActive = '';
                         _dot += '<ul>';
-                        for ( let i = 0; i < itemTotal; i++ ) {
+                        for ( let i = 0; i < itemsTotal; i++ ) {
 
                             _dotActive = ( i == 0 ) ? 'class="is-active"' : '';
 

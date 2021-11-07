@@ -1,6 +1,12 @@
 # Changelog
 
 
+#### = 4.5.9 (November 7, 2021) =
+
+* Tweak: Optimized the scripts of all sliders and carousels.
+* Tweak: Modified some inaccurate variable naming.
+
+
 #### = 4.5.8 (November 1, 2021) =
 
 * Tweak: Optimized the mobile terminal event of Mousewheel Interaction.
