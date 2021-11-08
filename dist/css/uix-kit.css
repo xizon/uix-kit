@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.9
+ * ## Version             :  4.6.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 7, 2021
+ * ## Last Update         :  November 8, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -47,86 +47,85 @@
     26.Ajax Page Loader (Loading A Page via Ajax Into Div)
     27.Back to Top
     28.Circle Layout
-    29.Counter
-    30.Dropdown Menu
-    31.Dropdown Menu 2 (Multi-level drop-down navigation)
-    32.Flexslider (Third-party plugin)
-    33.Floating Side Element
-    34.Form Progress
-    35.Form
-    36.Form ( Layout )-
-    37.Form  ( Material Design Theme )
-    38.Form ( 3rd Party Plugin )
-    39.Gallery
-    40.Hybrid Content Slider
-    41.Image Shapes
-    42.Infinite Scrolling Element
-    43.Lava-Lamp Style Menu
-    44.Cutom Light Box
-    45.Bulleted List
-    46.List of Posts
-    47.List of Split Posts
-    48.Full Width Column to Edge
-    49.Login Templates
-    50.Modal Dialog
-    51.Multiple Items Carousel
-    52.Parallax
-    53.Periodical Scroll
-    54.Pricing
-    55.Progress Bar
-    56.Progress Line
-    57.Show More Less
-    58.Sticky Elements
-    59.SVG Map
-    60.SVG Mask Slider
-    61.Swiper
-    62.3D Background
-    63.3D Carousel
-    64.3D Shatter Slider
-    65.3D Explosive Particle Slider
-    66.3D Liquid Scrollspy Slider
-    67.Table
-    68.Tabs
-    69.Team Focus
-    70.Text effect
-    71.Timeline
-    72.Vertical Menu
-    73.WordPress Core ( Do not use prefix "uix-" )
-    74.WordPress Blocks ( Do not use prefix "uix-" )
-    75.3rd Party Plugins
-    76.Badges
-    77.Blended Grid Layout
-    78.Breadcrumbs
-    79.Button
-    80.Cards
-    81.Badges
-    82.Coach Mark
-    83.Content Placeholder Animated
-    84.Dividing Line
-    85.Dotted Line
-    86.Equal-width Columns
-    87.Features
-    88.Footer Templates
-    89.Gallery Grid Layout
-    90.Heading
-    91.Image Animation
-    92.Brands List
-    93.Maintain Aspect Ratio List
-    94.Side by Side List
-    95.Side by Side List With Photo
-    96.Mouse Animation Scroll
-    97.Overlay
-    98.Ribbon
-    99.Separator of Rule With Text
-    100.Shape Animation
-    101.Comments ( Synchronize to WordPress's class name )
-    102.Editing Component
-    103.Striking
-    104.Team Fullwidth (Style using the Side by Side List With Photo module)
-    105.Team Gird
-    106.Testimonials Carousel
-    107.ToolTip
-    108.Wave Background
+    29.Dropdown Menu
+    30.Dropdown Menu 2 (Multi-level drop-down navigation)
+    31.Flexslider (Third-party plugin)
+    32.Floating Side Element
+    33.Form Progress
+    34.Form
+    35.Form ( Layout )-
+    36.Form  ( Material Design Theme )
+    37.Form ( 3rd Party Plugin )
+    38.Gallery
+    39.Hybrid Content Slider
+    40.Image Shapes
+    41.Infinite Scrolling Element
+    42.Lava-Lamp Style Menu
+    43.Cutom Light Box
+    44.Bulleted List
+    45.List of Posts
+    46.List of Split Posts
+    47.Full Width Column to Edge
+    48.Login Templates
+    49.Modal Dialog
+    50.Multiple Items Carousel
+    51.Parallax
+    52.Periodical Scroll
+    53.Pricing
+    54.Progress Bar
+    55.Progress Line
+    56.Show More Less
+    57.Sticky Elements
+    58.SVG Map
+    59.SVG Mask Slider
+    60.Swiper
+    61.3D Background
+    62.3D Carousel
+    63.3D Shatter Slider
+    64.3D Explosive Particle Slider
+    65.3D Liquid Scrollspy Slider
+    66.Table
+    67.Tabs
+    68.Team Focus
+    69.Text effect
+    70.Timeline
+    71.Vertical Menu
+    72.WordPress Core ( Do not use prefix "uix-" )
+    73.WordPress Blocks ( Do not use prefix "uix-" )
+    74.3rd Party Plugins
+    75.Badges
+    76.Blended Grid Layout
+    77.Breadcrumbs
+    78.Button
+    79.Cards
+    80.Badges
+    81.Coach Mark
+    82.Content Placeholder Animated
+    83.Dividing Line
+    84.Dotted Line
+    85.Equal-width Columns
+    86.Features
+    87.Footer Templates
+    88.Gallery Grid Layout
+    89.Heading
+    90.Image Animation
+    91.Brands List
+    92.Maintain Aspect Ratio List
+    93.Side by Side List
+    94.Side by Side List With Photo
+    95.Mouse Animation Scroll
+    96.Overlay
+    97.Ribbon
+    98.Separator of Rule With Text
+    99.Shape Animation
+    100.Comments ( Synchronize to WordPress's class name )
+    101.Editing Component
+    102.Striking
+    103.Team Fullwidth (Style using the Side by Side List With Photo module)
+    104.Team Gird
+    105.Testimonials Carousel
+    106.ToolTip
+    107.Wave Background
 
 
 */
@@ -5517,13 +5516,6 @@ h6 {
 }
 
 /* ======================================================
-       <!-- Counter -->
-/* ====================================================== */
-h3[data-counter-number] {
-  padding: 2rem;
-}
-
-/* ======================================================
    <!-- Dropdown Menu -->
 /* ====================================================== */
 /* Do not use <a> tag */
@@ -9123,25 +9115,12 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 .uix-infinite-scrolling {
   position: relative;
   width: auto;
-  height: 30px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-}
-
-.uix-infinite-scrolling ul {
-  position: relative;
-  display: inline-block;
-}
-
-.uix-infinite-scrolling ul.cloned {
-  position: absolute;
-  top: 0px;
-  left: 0px;
 }
 
 .uix-infinite-scrolling ul li {
-  float: left;
-  padding-left: 20px;
+  position: absolute;
+  transition: none;
 }
 
 /* ======================================================
@@ -12772,7 +12751,7 @@ a.uix-lightbox__original__link {
 }
 
 .uix-svgmap--china text {
-  font-size: 7px;
+  font-size: 5px;
   fill: #212121;
   display: none;
   transition: all 0.3s ease;

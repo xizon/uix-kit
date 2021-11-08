@@ -26,40 +26,80 @@ export const INFINITE_SCROLLING_EL = ( ( module, $, window, document ) => {
 	
 	
     module.INFINITE_SCROLLING_EL               = module.INFINITE_SCROLLING_EL || {};
-    module.INFINITE_SCROLLING_EL.version       = '0.0.2';
+    module.INFINITE_SCROLLING_EL.version       = '0.0.3';
     module.INFINITE_SCROLLING_EL.documentReady = function( $ ) {
 
 		$( '.uix-infinite-scrolling' ).each( function() {
 
-			const $this       = $( this );
-            
-			let	speed       = $this.data( 'speed' );
-            
-			if ( typeof speed === typeof undefined ) {
-				speed = 3000;
-			}
+			const $this = $( this );
+			let	speed = $this.data( 'speed' ),
+                gap = $this.data( 'gap' );
+			if ( typeof speed === typeof undefined ) speed = 3000;
+            if ( typeof gap === typeof undefined ) gap = 20;
 
-            
-			const $list = $this.find( '> ul' );
-            const $clonedList = $list.clone();
-            
-            
-            //Calculate the total width
-            let listWidth = $list.find( 'li:first' ).width();
 
-            $list.find( 'li' ).each(function(i) {
-                listWidth += $(this, i).width();
+            const root = $this[0];
+            const wrapperWidth = root.clientWidth;
+            const $list = root.firstElementChild; // whitespace nodes might interfere with using `firstChild`
+            const $itemsOriginal = $list.children;
+            const itemsTotal = $itemsOriginal.length;
+            
+            //original width (including: padding)
+            //------------------------------------------
+            const itemsWidthOriginal = [];
+            Array.prototype.forEach.call($list.children, function (node, index) {
+              itemsWidthOriginal.push(node.clientWidth + gap); 
+            });
+            const allWidthOriginal = itemsWidthOriginal.reduce(function (previousValue, currentValue, currentIndex, array) {
+              let newVal = previousValue + currentValue;
+              return newVal;
             });
             
             
-            // Set the width of the outer container to match the width of the content
-            $this.css( 'width', listWidth + 'px' );
-        
+            //clone elements in order to complement content area
+            //------------------------------------------
+            const loopTimes = Math.ceil(wrapperWidth/allWidthOriginal);
             
-            //
-            $list.add( $clonedList );
-
-            $clonedList.addClass( 'cloned' ).appendTo( $this );
+            for (let i = 0; i < loopTimes; i++ ) {
+              const $clonedItems = $list.cloneNode(true).querySelectorAll( 'li' ); //do not use `children`
+              Array.prototype.some.call($clonedItems, function (node, index) {
+                $list.appendChild( node );
+                if ( index === itemsTotal-1 ) return true;
+              });
+            }
+            
+            
+            //calculate the total width
+            //------------------------------------------
+            const $items = root.getElementsByTagName( 'li' );
+            const itemsWidth = [];
+            const itemPos = [];
+            Array.prototype.forEach.call($items, function (node, index) {
+              itemsWidth.push(node.clientWidth + gap);
+            });
+            
+            
+            itemPos.push(0, itemsWidth[0]);
+            const allWidth = itemsWidth.reduce(function (previousValue, currentValue, currentIndex, array) {
+              let newVal = previousValue + currentValue;
+              itemPos.push(newVal)
+              return newVal;
+            });
+            itemPos.pop();
+            
+            // console.log('itemsWidth: ', itemsWidth);
+            // console.log('itemPos: ', itemPos);
+            // console.log('allWidth: ', allWidth);
+            
+            
+            //initially colorize each box and position in a row
+            //------------------------------------------
+            TweenMax.set($items, {
+              x: function (i) {
+                return itemPos[i];
+              }
+            });
+            
 
             //TimelineMax
             const tl = new TimelineMax({
@@ -67,46 +107,16 @@ export const INFINITE_SCROLLING_EL = ( ( module, $, window, document ) => {
                 paused: true
             });
 
-            const time = speed/1000;
-
-            tl.fromTo($list, time, {
-                rotation: 0.01,
-                x: 0
-            },{
-                force3D: true,
-                x: -listWidth,
-                ease: Linear.easeNone
-            },0)
-
-            .fromTo($clonedList, time, {
-                rotation: 0.01,
-                x: listWidth
-            },{
-                force3D: true,
-                x: 0,
-                ease: Linear.easeNone
-            },0)
             
-            .set($list, {
-                force3D: true,
-                rotation: 0.01,
-                x: listWidth
+            tl.to($items, speed/1000, {
+              ease: Linear.easeNone,
+              x: "-=" + allWidthOriginal, //move each box "allWidthOriginal" to left
+              modifiers: {
+                x: function(x, target) {
+                  return x % allWidth; //force x value to be between 0 and "allWidth" using modulus
+                }
+              }
             })
-            
-            .to($clonedList, time, {
-                force3D: true,
-                rotation: 0.01,
-                x: -listWidth,
-                ease: Linear.easeNone
-            },time)
-            
-            .to($list, time, {
-                force3D: true,
-                rotation: 0.01,
-                x: 0,
-                ease: Linear.easeNone
-            },time)
-            
             .progress(1)
             .progress(0)
             .play();

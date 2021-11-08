@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.5.9
+ * ## Version             :  4.6.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 7, 2021
+ * ## Last Update         :  November 8, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -21954,11 +21954,10 @@ function counter_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol =
  */
 
 
-
 var COUNTER = function (module, $, window, document) {
   if (window.COUNTER === null) return false;
   module.COUNTER = module.COUNTER || {};
-  module.COUNTER.version = '0.0.5';
+  module.COUNTER.version = '0.0.6';
 
   module.COUNTER.documentReady = function ($) {
     var $scrollElements = $('[data-counter-number]');
@@ -27824,64 +27823,84 @@ function infinite_scrolling_element_js_typeof(obj) { "@babel/helpers - typeof"; 
 var INFINITE_SCROLLING_EL = function (module, $, window, document) {
   if (window.INFINITE_SCROLLING_EL === null) return false;
   module.INFINITE_SCROLLING_EL = module.INFINITE_SCROLLING_EL || {};
-  module.INFINITE_SCROLLING_EL.version = '0.0.2';
+  module.INFINITE_SCROLLING_EL.version = '0.0.3';
 
   module.INFINITE_SCROLLING_EL.documentReady = function ($) {
     $('.uix-infinite-scrolling').each(function () {
       var $this = $(this);
-      var speed = $this.data('speed');
+      var speed = $this.data('speed'),
+          gap = $this.data('gap');
+      if (infinite_scrolling_element_js_typeof(speed) === ( true ? "undefined" : 0)) speed = 3000;
+      if (infinite_scrolling_element_js_typeof(gap) === ( true ? "undefined" : 0)) gap = 20;
+      var root = $this[0];
+      var wrapperWidth = root.clientWidth;
+      var $list = root.firstElementChild; // whitespace nodes might interfere with using `firstChild`
 
-      if (infinite_scrolling_element_js_typeof(speed) === ( true ? "undefined" : 0)) {
-        speed = 3000;
-      }
+      var $itemsOriginal = $list.children;
+      var itemsTotal = $itemsOriginal.length; //original width (including: padding)
+      //------------------------------------------
 
-      var $list = $this.find('> ul');
-      var $clonedList = $list.clone(); //Calculate the total width
+      var itemsWidthOriginal = [];
+      Array.prototype.forEach.call($list.children, function (node, index) {
+        itemsWidthOriginal.push(node.clientWidth + gap);
+      });
+      var allWidthOriginal = itemsWidthOriginal.reduce(function (previousValue, currentValue, currentIndex, array) {
+        var newVal = previousValue + currentValue;
+        return newVal;
+      }); //clone elements in order to complement content area
+      //------------------------------------------
 
-      var listWidth = $list.find('li:first').width();
-      $list.find('li').each(function (i) {
-        listWidth += $(this, i).width();
-      }); // Set the width of the outer container to match the width of the content
+      var loopTimes = Math.ceil(wrapperWidth / allWidthOriginal);
 
-      $this.css('width', listWidth + 'px'); //
+      for (var i = 0; i < loopTimes; i++) {
+        var $clonedItems = $list.cloneNode(true).querySelectorAll('li'); //do not use `children`
 
-      $list.add($clonedList);
-      $clonedList.addClass('cloned').appendTo($this); //TimelineMax
+        Array.prototype.some.call($clonedItems, function (node, index) {
+          $list.appendChild(node);
+          if (index === itemsTotal - 1) return true;
+        });
+      } //calculate the total width
+      //------------------------------------------
+
+
+      var $items = root.getElementsByTagName('li');
+      var itemsWidth = [];
+      var itemPos = [];
+      Array.prototype.forEach.call($items, function (node, index) {
+        itemsWidth.push(node.clientWidth + gap);
+      });
+      itemPos.push(0, itemsWidth[0]);
+      var allWidth = itemsWidth.reduce(function (previousValue, currentValue, currentIndex, array) {
+        var newVal = previousValue + currentValue;
+        itemPos.push(newVal);
+        return newVal;
+      });
+      itemPos.pop(); // console.log('itemsWidth: ', itemsWidth);
+      // console.log('itemPos: ', itemPos);
+      // console.log('allWidth: ', allWidth);
+      //initially colorize each box and position in a row
+      //------------------------------------------
+
+      TweenMax.set($items, {
+        x: function x(i) {
+          return itemPos[i];
+        }
+      }); //TimelineMax
 
       var tl = new TimelineMax({
         repeat: -1,
         paused: true
       });
-      var time = speed / 1000;
-      tl.fromTo($list, time, {
-        rotation: 0.01,
-        x: 0
-      }, {
-        force3D: true,
-        x: -listWidth,
-        ease: Linear.easeNone
-      }, 0).fromTo($clonedList, time, {
-        rotation: 0.01,
-        x: listWidth
-      }, {
-        force3D: true,
-        x: 0,
-        ease: Linear.easeNone
-      }, 0).set($list, {
-        force3D: true,
-        rotation: 0.01,
-        x: listWidth
-      }).to($clonedList, time, {
-        force3D: true,
-        rotation: 0.01,
-        x: -listWidth,
-        ease: Linear.easeNone
-      }, time).to($list, time, {
-        force3D: true,
-        rotation: 0.01,
-        x: 0,
-        ease: Linear.easeNone
-      }, time).progress(1).progress(0).play(); //Pause/Play		
+      tl.to($items, speed / 1000, {
+        ease: Linear.easeNone,
+        x: "-=" + allWidthOriginal,
+        //move each box "allWidthOriginal" to left
+        modifiers: {
+          x: function x(_x, target) {
+            return _x % allWidth; //force x value to be between 0 and "allWidth" using modulus
+          }
+        }
+      }).progress(1).progress(0).play(); //Pause/Play		
 
       $this.on('mouseenter', function () {
         tl.pause();

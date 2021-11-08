@@ -5,27 +5,15 @@
 
 
 .uix-infinite-scrolling {
-  
     position: relative;
     width: auto;
-    height: 30px;
     overflow: hidden;
-    @include outer-shadow( 'regular' );
-    
-    
+
 	ul {
-        position: relative;
-        display: inline-block;
-        
-        &.cloned {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-        }
 
 		li {
-            float: left;
-            padding-left: 20px;
+            position: absolute;
+            transition: none;
 		}
 	}
 }

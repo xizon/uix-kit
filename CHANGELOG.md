@@ -1,5 +1,9 @@
 # Changelog
 
+#### = 4.6.0 (November 8, 2021) =
+
+* Tweak: Optimized some component algorithms to improve performance.
+
 
 #### = 4.5.9 (November 7, 2021) =
 

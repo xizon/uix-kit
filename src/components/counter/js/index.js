@@ -18,8 +18,6 @@ import {
 } from '@uixkit/core/_global/js';
 import UixCountTo from '@uixkit/core/counter/js/fn/count-to';
 
-import '../scss/_style.scss';
-
 
 export const COUNTER = ( ( module, $, window, document ) => {
 	if ( window.COUNTER === null ) return false;
@@ -27,7 +25,7 @@ export const COUNTER = ( ( module, $, window, document ) => {
 	
 	
     module.COUNTER               = module.COUNTER || {};
-    module.COUNTER.version       = '0.0.5';
+    module.COUNTER.version       = '0.0.6';
     module.COUNTER.documentReady = function( $ ) {
 
 		
