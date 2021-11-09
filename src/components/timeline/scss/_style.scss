@@ -872,6 +872,13 @@ $horizontal-container-width: 1000px;
         }
         
     }
+
+	&.is-vertical.js-uix-timeline.is-reversed {
+		.uix-timeline__btn {
+			left: 50%;
+			transform: translateX(-50%);	
+		}
+	}
     
     
     &.is-horizontal {
