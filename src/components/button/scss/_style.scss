@@ -235,6 +235,34 @@ $button-class-margin-b: 1rem;
 	}
 
 
+	&.uix-btn__size--l {
+		> span {
+			i {
+				transform: translateY(10%);
+			}
+		}	
+	}
+
+
+	&.uix-btn__size--m {
+		> span {
+			i {
+				transform: translateY(-20%);
+			}
+		}	
+	}
+
+
+	&.uix-btn__size--t {
+		> span {
+			i {
+				transform: translateY(-85%);
+			}
+		}	
+	}
+	
+
+
 	&.uix-btn__icon--left {
 
 		> span {

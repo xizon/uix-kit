@@ -325,6 +325,12 @@
 
                     }
 
+                    &:nth-child(odd) .uix-timeline__item__img {
+						.uix-timeline__item__date {
+							transform: translate(-50%, -135%);
+						}	
+                    }
+
                     &:nth-child(even) .uix-timeline__item__info {
                         float: right;
                         margin-right: 10px;
@@ -618,13 +624,12 @@ $horizontal-container-width: 1000px;
 						position: relative;
 						margin-top: 0;
 					}
+					
 
 					.uix-timeline__item__info {
 						position: absolute;
 
 					}
-
-
 
 
 				}//.uix-timeline__item end
@@ -651,7 +656,6 @@ $horizontal-container-width: 1000px;
 
 
 					}
-
 
 
 				}//.uix-timeline__item end
