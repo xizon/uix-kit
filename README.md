@@ -23,7 +23,7 @@ The generated core file in the dist directory can be used separately in any webs
 
 ---
 
-- [React Version](https://github.com/xizon/uix-kit-react)
+- [React Version](https://github.com/xizon/poemkit)
 
 
 ---

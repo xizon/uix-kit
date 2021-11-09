@@ -1,5 +1,13 @@
 # Changelog
 
+
+#### = 4.6.1 (November 10, 2021) =
+
+* Tweak: Added adjustment styles for button and timeline.
+* Tweak: Change link for react version.
+
+
+
 #### = 4.6.0 (November 8, 2021) =
 
 * Tweak: Optimized some component algorithms to improve performance.
