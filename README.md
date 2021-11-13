@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/xizon/uix-kit">
-	  <img src="https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/logo-colorful.png"  alt="Uix Kit"  width="180" >
+	  <img src="misc/screenshots/logo-colorful.png"  alt="Uix Kit"  width="180" >
   </a>
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
@@ -89,9 +89,9 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 ## Installation And Test
 
-![quick overview 1](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-1.gif)
+![quick overview 1](misc/screenshots/quick-overview-1.gif)
 
-![quick overview 2](https://raw.githubusercontent.com/xizon/uix-kit/master/misc/screenshots/quick-overview-2.gif)
+![quick overview 2](misc/screenshots/quick-overview-2.gif)
 
 You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./examples/*.html`.
 
