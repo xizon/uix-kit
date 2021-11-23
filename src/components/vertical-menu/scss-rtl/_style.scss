@@ -58,31 +58,11 @@ $vertical-menu-top          : 0;
 			 3. Multi-level Sub Menu Position
 			 ---------------------------
 			 */
-			ul {
-				right: #{$vertical-menu-w + $vertical-menu-sub-w*1};
-				ul {
-					right: #{$vertical-menu-w + $vertical-menu-sub-w*2};
-					ul {
-						right: #{$vertical-menu-w + $vertical-menu-sub-w*3};
-						ul {
-							right: #{$vertical-menu-w + $vertical-menu-sub-w*4};
-							ul {
-								right: #{$vertical-menu-w + $vertical-menu-sub-w*5};
-								ul {
-									right: #{$vertical-menu-w + $vertical-menu-sub-w*6};
-									ul {
-										right: #{$vertical-menu-w + $vertical-menu-sub-w*7};
-										ul {
-											right: #{$vertical-menu-w + $vertical-menu-sub-w*8};
-											ul {
-												right: #{$vertical-menu-w + $vertical-menu-sub-w*9};
-											}
-										}
-									}
-								}
-							}
-						}
-					}
+			 @for $i from 1 through 10 {
+				$sel: if($i == 1, "ul", selector-nest($sel, "ul")) !global;
+			
+				#{$sel} {
+					right: #{$vertical-menu-w + $vertical-menu-sub-w * $i};
 				}
 			}
 
