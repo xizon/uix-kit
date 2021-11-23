@@ -1,6 +1,6 @@
 
 /*
- * Disabled Controls Status
+ * Disabled Controls
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}

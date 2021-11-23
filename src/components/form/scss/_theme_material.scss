@@ -10,6 +10,7 @@
  * 6. Custom Input Number
  * 7. Multiple Selector
  * 8. Single Selector
+ * 11. Tag Input
 */
 
 /*
@@ -464,5 +465,24 @@
 	}
 
 }
+
+
+
+
+/*
+ ---------------------------
+ 11. Tag Input
+ ---------------------------
+ */
+ .uix-controls__tags-wrapper {
+	&.uix-controls--line > div {
+		border-radius: 0;
+		border-top-color: transparent !important;
+		border-left-color: transparent !important;
+		border-right-color: transparent !important;
+		border-bottom-color: $control-sub-color !important;
+
+	}
+ }
 
 

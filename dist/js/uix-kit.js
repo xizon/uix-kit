@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.0
+ * ## Version             :  4.6.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 8, 2021
+ * ## Last Update         :  November 23, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -4578,7 +4578,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (() => {
 
 /*
- * Disabled Controls Status
+ * Disabled Controls
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
@@ -4771,8 +4771,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ 392:
 /***/ (() => {
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /*
- * Render Multiple Selector Status
+ * Render Multiple Selector
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
@@ -4787,15 +4789,53 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }, options);
     this.each(function () {
       $(settings.controls).each(function () {
-        $(this).find('> span').each(function () {
-          var targetID = '#' + $(this).parent().attr('data-targetid');
+        var $this = $(this);
+        var actived = $this.data('activated');
 
-          if ($(targetID).val().indexOf($(this).data('value')) >= 0) {
-            $(this).addClass('is-active').attr('aria-checked', true);
-          } else {
-            $(this).removeClass('is-active').attr('aria-checked', false);
-          }
-        });
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Initialize status
+          //------------------------------------------
+          $(this).find('> span').each(function () {
+            var targetID = '#' + $(this).parent().attr('data-targetid');
+
+            if ($(targetID).val().indexOf($(this).data('value')) >= 0) {
+              $(this).addClass('is-active').attr('aria-checked', true);
+            } else {
+              $(this).removeClass('is-active').attr('aria-checked', false);
+            }
+          }); // Click Event of Multiple Selector
+          //------------------------------------------
+
+          var multiSel = '.uix-controls__multi-sel',
+              multiSelItem = multiSel + ' > span';
+          $(document).off('click.FORM_MULTI_SEL').on('click.FORM_MULTI_SEL', multiSelItem, function (e) {
+            e.preventDefault();
+            var $selector = $(this).parent(),
+                $option = $(this),
+                targetID = '#' + $selector.data("targetid"),
+                curVal = $option.data('value'),
+                tarVal = $(targetID).val() + ',',
+                resVal = '';
+            $option.toggleClass('is-active').attr('aria-checked', function (index, attr) {
+              return attr == 'true' ? false : true;
+            });
+
+            if (tarVal.indexOf(curVal + ',') < 0) {
+              resVal = tarVal + curVal + ',';
+            } else {
+              resVal = tarVal.replace(curVal + ',', '');
+            }
+
+            resVal = resVal.replace(/,\s*$/, '').replace(/^,/, '');
+            $(targetID).val(resVal); //Dynamic listening for the latest value
+
+            $(targetID).focus().blur();
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+          $this.data('activated', 1);
+        } //endif actived			
+
       });
     });
   };
@@ -4809,7 +4849,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
- * Render Normal Radio Status
+ * Render Normal Radio
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
@@ -4824,7 +4864,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }, options);
     this.each(function () {
       $(settings.controls).each(function () {
-        $(this).find('> label').each(function () {
+        var $this = $(this); // Initialize status
+        //------------------------------------------
+
+        $this.find('> label').each(function () {
           var targetID = '#' + $(this).parent().attr("data-targetid");
           var switchIDs = ''; //add switch IDs
 
@@ -4842,7 +4885,134 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               $(this).removeClass('is-active').find('[type="radio"]').prop('checked', false);
             }
           }
+        }); // Mouse events
+        //------------------------------------------
+
+        var normalRadioItem = settings.controls + ' > label';
+        /*
+        * Initialize single switch
+        *
+        * @param  {Element} obj                 - Radio controls. 
+        * @return {Void}
+        */
+
+        var hideAllNormalRadioItems = function hideAllNormalRadioItems(obj) {
+          obj.each(function (index) {
+            var $sel = $(this),
+                defaultValue = $('#' + $sel.attr("data-targetid")).val(),
+                deffaultSwitchIndex = 0; //get default selected switch index
+
+            $sel.find('> label').each(function (index) {
+              if (defaultValue == $(this).data('value')) {
+                deffaultSwitchIndex = index;
+              }
+            });
+
+            if (_typeof($sel.data('switchids')) != ( true ? "undefined" : 0) && $sel.data('switchids') != '') {
+              var _switchIDsArr = $sel.data('switchids').split(',');
+
+              _switchIDsArr.forEach(function (element, index) {
+                if (deffaultSwitchIndex != index) {
+                  $('#' + element).hide();
+                } else {
+                  $('#' + element).show();
+                }
+              });
+            }
+          });
+        };
+
+        hideAllNormalRadioItems($(settings.controls));
+        $(document).off('click.FORM_NORMAL_RADIO').on('click.FORM_NORMAL_RADIO', normalRadioItem, function (e) {
+          var $selector = $(this).parent(),
+              $option = $(this),
+              targetID = '#' + $selector.data("targetid"),
+              switchID = '#' + $option.data("switchid"),
+              curVal = $option.data('value'); //Radio Selector
+
+          $selector.find('> label').removeClass('is-active').find('[type="radio"]').prop('checked', false);
+          $(targetID).val(curVal);
+          $option.addClass('is-active').find('[type="radio"]').prop('checked', true); //Switch some options
+
+          if (_typeof($option.data("switchid")) != ( true ? "undefined" : 0)) {
+            hideAllNormalRadioItems($selector);
+            $(switchID).show();
+          } //Dynamic listening for the latest value
+
+
+          $(targetID).focus().blur();
         });
+      });
+    });
+  };
+})(jQuery);
+
+/***/ }),
+
+/***/ 838:
+/***/ (() => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*
+ * Render Number Input
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+(function ($) {
+  'use strict';
+
+  $.fn.UixRenderNumberInput = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      controls: '.uix-controls__number'
+    }, options);
+    this.each(function () {
+      $(settings.controls).each(function () {
+        var $this = $(this);
+        var actived = $this.data('activated');
+
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Mouse events
+          //------------------------------------------
+          $(document).off('click.FORM_NUMBER_BTN_ADD').on('click.FORM_NUMBER_BTN_ADD', settings.controls + ' .uix-controls__number__btn--add', function (e) {
+            var step = parseFloat($(this).data('step')),
+                decimals = $(this).data('decimals'),
+                $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
+                numberInputVal = parseFloat($numberInput.val()),
+                max = $numberInput.attr('max');
+            if (_typeof(step) === ( true ? "undefined" : 0) || isNaN(step)) step = 1;
+            if (_typeof(decimals) === ( true ? "undefined" : 0)) decimals = 0;
+
+            if (_typeof(max) != ( true ? "undefined" : 0) && parseFloat(numberInputVal + step) > max) {
+              step = 0;
+            }
+
+            numberInputVal = parseFloat(numberInputVal + step);
+            $numberInput.val(numberInputVal.toFixed(decimals));
+          });
+          $(document).off('click.FORM_NUMBER_BTN_REMOVE').on('click.FORM_NUMBER_BTN_REMOVE', settings.controls + ' .uix-controls__number__btn--remove', function (e) {
+            var step = $(this).data('step'),
+                decimals = $(this).data('decimals'),
+                $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
+                numberInputVal = parseFloat($numberInput.val()),
+                min = $numberInput.attr('min');
+            if (_typeof(step) === ( true ? "undefined" : 0) || isNaN(step)) step = 1;
+            if (_typeof(decimals) === ( true ? "undefined" : 0)) decimals = 0;
+
+            if (_typeof(min) != ( true ? "undefined" : 0) && parseFloat(numberInputVal - step) < min) {
+              step = 0;
+            }
+
+            numberInputVal -= step;
+            $numberInput.val(numberInputVal.toFixed(decimals));
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+          $this.data('activated', 1);
+        } //endif actived			
+
       });
     });
   };
@@ -4874,62 +5044,127 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       checkboxWrapper: '.uix-controls__checkbox'
     }, options);
     this.each(function () {
-      var $this = $(this);
-      var customRadio = settings.radioWrapper,
-          customToggle = settings.toggle,
-          customCheckbox = settings.checkboxWrapper;
-      $(customRadio).find('input[type="radio"]').each(function () {
-        var dataExist = $(this).data('exist');
+      $(settings.checkboxWrapper).each(function () {
+        var $this = $(this);
+        var actived = $this.data('activated');
 
-        if (_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
-          $('<span class="uix-controls__radio-trigger"></span>').insertAfter($(this)); //Prevent the form from being initialized again
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Initialize status
+          //------------------------------------------  
+          $(settings.checkboxWrapper).find('input[type="checkbox"]').each(function () {
+            var dataExist = $(this).data('exist'),
+                $obj = $(this).closest('.uix-controls');
 
-          $(this).data('exist', 1);
-        }
+            if (_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
+              $('<span class="uix-controls__checkbox-trigger"></span>').insertAfter($(this)); //hide or display a associated div
+
+              var targetID = '#' + $obj.attr('data-targetid');
+
+              if ($(this).is(':checked')) {
+                $obj.addClass('is-active').attr('aria-checked', true);
+                $(targetID).show();
+              } else {
+                $obj.removeClass('is-active').attr('aria-checked', false);
+                $(targetID).hide();
+              } //Prevent the form from being initialized again
+
+
+              $(this).data('exist', 1);
+            }
+          }); // Mouse events
+          //------------------------------------------
+
+          $(document).on('change', settings.toggle + ' [type="checkbox"]', function (e) {
+            //hide or display a associated div
+            var $obj = $(this).closest('.uix-controls'),
+                targetID = '#' + $obj.attr('data-targetid');
+
+            if (this.checked) {
+              $obj.addClass('is-active').attr('aria-checked', true);
+              $(targetID).show();
+            } else {
+              $obj.removeClass('is-active').attr('aria-checked', false);
+              $(targetID).hide();
+            }
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+          $this.data('activated', 1);
+        } //endif actived			
+
       });
-      $(customToggle).find('input[type="checkbox"]').each(function () {
-        var dataExist = $(this).data('exist'),
-            $obj = $(this).closest('.uix-controls'),
-            offText = $obj.data('off-text'),
-            onText = $obj.data('on-text');
+      $(settings.toggle).each(function () {
+        var $this = $(this);
+        var actived = $this.data('activated');
 
-        if (_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
-          $('<span class="uix-controls__toggle-trigger" data-off-text="' + offText + '" data-on-text="' + onText + '"></span>').insertAfter($(this)); //hide or display a associated div
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Initialize status
+          //------------------------------------------  
+          $(settings.toggle).find('input[type="checkbox"]').each(function () {
+            var dataExist = $(this).data('exist'),
+                $obj = $(this).closest('.uix-controls'),
+                offText = $obj.data('off-text'),
+                onText = $obj.data('on-text');
 
-          var targetID = '#' + $obj.attr('data-targetid');
+            if (_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
+              $('<span class="uix-controls__toggle-trigger" data-off-text="' + offText + '" data-on-text="' + onText + '"></span>').insertAfter($(this)); //hide or display a associated div
 
-          if ($(this).is(':checked')) {
-            $obj.addClass('is-active').attr('aria-checked', true);
-            $(targetID).show();
-          } else {
-            $obj.removeClass('is-active').attr('aria-checked', false);
-            $(targetID).hide();
-          } //Prevent the form from being initialized again
+              var targetID = '#' + $obj.attr('data-targetid');
+
+              if ($(this).is(':checked')) {
+                $obj.addClass('is-active').attr('aria-checked', true);
+                $(targetID).show();
+              } else {
+                $obj.removeClass('is-active').attr('aria-checked', false);
+                $(targetID).hide();
+              } //Prevent the form from being initialized again
 
 
-          $(this).data('exist', 1);
-        }
+              $(this).data('exist', 1);
+            }
+          }); // Mouse events
+          //------------------------------------------
+
+          $(document).on('change', settings.checkboxWrapper + ' [type="checkbox"]', function (e) {
+            //hide or display a associated div
+            var $obj = $(this).closest('.uix-controls'),
+                targetID = '#' + $obj.attr('data-targetid');
+
+            if (this.checked) {
+              $obj.addClass('is-active').attr('aria-checked', true);
+              $(targetID).show();
+            } else {
+              $obj.removeClass('is-active').attr('aria-checked', false);
+              $(targetID).hide();
+            }
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+          $this.data('activated', 1);
+        } //endif actived			
+
       });
-      $(customCheckbox).find('input[type="checkbox"]').each(function () {
-        var dataExist = $(this).data('exist'),
-            $obj = $(this).closest('.uix-controls');
+      $(settings.radioWrapper).each(function () {
+        var $this = $(this);
+        var actived = $this.data('activated');
 
-        if (_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
-          $('<span class="uix-controls__checkbox-trigger"></span>').insertAfter($(this)); //hide or display a associated div
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Initialize status
+          //------------------------------------------  
+          $(settings.radioWrapper).find('input[type="radio"]').each(function () {
+            var dataExist = $(this).data('exist');
 
-          var targetID = '#' + $obj.attr('data-targetid');
+            if (_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
+              $('<span class="uix-controls__radio-trigger"></span>').insertAfter($(this)); //Prevent the form from being initialized again
 
-          if ($(this).is(':checked')) {
-            $obj.addClass('is-active').attr('aria-checked', true);
-            $(targetID).show();
-          } else {
-            $obj.removeClass('is-active').attr('aria-checked', false);
-            $(targetID).hide();
-          } //Prevent the form from being initialized again
+              $(this).data('exist', 1);
+            }
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
 
+          $this.data('activated', 1);
+        } //endif actived			
 
-          $(this).data('exist', 1);
-        }
       });
     });
   };
@@ -5070,7 +5305,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
- * Render Single Selector Status
+ * Render Single Selector
  *
  * @param  {String} controls                 - Wrapper of controls.
  * @return {Void}
@@ -5085,23 +5320,261 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }, options);
     this.each(function () {
       $(settings.controls).each(function () {
-        $(this).find('> span').each(function () {
-          var targetID = '#' + $(this).parent().attr('data-targetid');
-          var switchIDs = ''; //add switch IDs
+        var $this = $(this);
+        var actived = $this.data('activated');
 
-          $(this).parent().find('> span').each(function () {
-            if (_typeof($(this).data("switchid")) != ( true ? "undefined" : 0)) {
-              switchIDs += $(this).data("switchid") + ',';
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Initialize status
+          //------------------------------------------
+          $(this).find('> span').each(function () {
+            var targetID = '#' + $(this).parent().attr('data-targetid');
+            var switchIDs = ''; //add switch IDs
+
+            $(this).parent().find('> span').each(function () {
+              if (_typeof($(this).data("switchid")) != ( true ? "undefined" : 0)) {
+                switchIDs += $(this).data("switchid") + ',';
+              }
+            });
+            $(this).parent().attr("data-switchids", switchIDs.replace(/,\s*$/, '')); //Set actived style from their values
+
+            if ($(targetID).val() == $(this).data('value')) {
+              $(this).addClass('is-active').attr('aria-checked', true);
+            } else {
+              $(this).removeClass('is-active').attr('aria-checked', false);
+            }
+          }); // Mouse events
+          //------------------------------------------
+
+          var singleSelItem = settings.controls + ' > span';
+          /*
+          * Initialize single switch
+          *
+          * @param  {Element} obj                 - Radio controls. 
+          * @return {Void}
+          */
+
+          var hideAllSingleSelItems = function hideAllSingleSelItems(obj) {
+            obj.each(function (index) {
+              var $sel = $(this),
+                  defaultValue = $('#' + $sel.attr('data-targetid')).val(),
+                  deffaultSwitchIndex = 0; //get default selected switch index
+
+              $sel.find('> span').each(function (index) {
+                if (defaultValue == $(this).data('value')) {
+                  deffaultSwitchIndex = index;
+                }
+              });
+
+              if (_typeof($sel.data('switchids')) != ( true ? "undefined" : 0) && $sel.data('switchids') != '') {
+                var _switchIDsArr = $sel.data('switchids').split(',');
+
+                _switchIDsArr.forEach(function (element, index) {
+                  if (deffaultSwitchIndex != index) {
+                    $('#' + element).hide();
+                  } else {
+                    $('#' + element).show();
+                  }
+                });
+              }
+            });
+          };
+
+          hideAllSingleSelItems($this);
+          $(document).off('click.FORM_SINGLE_SEL').on('click.FORM_SINGLE_SEL', singleSelItem, function (e) {
+            e.preventDefault();
+            var $selector = $(this).parent(),
+                $option = $(this),
+                targetID = '#' + $selector.data("targetid"),
+                switchID = '#' + $option.data("switchid"),
+                curVal = $option.data('value'); //Radio Selector
+
+            $selector.find('> span').removeClass('is-active').attr('aria-checked', false);
+            $(targetID).val(curVal);
+            $option.addClass('is-active').attr('aria-checked', true); //Switch some options
+
+            if (_typeof($option.data("switchid")) != ( true ? "undefined" : 0)) {
+              hideAllSingleSelItems($selector);
+              $(switchID).show();
+            } //Dynamic listening for the latest value
+
+
+            $(targetID).focus().blur();
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+          $this.data('activated', 1);
+        } //endif actived			
+
+      });
+      $(settings.controls).each(function () {});
+    });
+  };
+})(jQuery);
+
+/***/ }),
+
+/***/ 292:
+/***/ (() => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*
+ * Render Tag Input
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+(function ($) {
+  'use strict';
+
+  $.fn.UixRenderTagInput = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      controls: '.uix-controls__tags-wrapper'
+    }, options);
+    this.each(function () {
+      $(settings.controls).each(function () {
+        var $this = $(this);
+        var actived = $this.data('activated');
+
+        if (_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Initialize status
+          //------------------------------------------
+          var taginputTip = $this.data('placeholder');
+          var $tagInputUserArea = $("<div><ul class=\"uix-controls__tags__list\"></ul><div class=\"uix-controls__tags\"><input type=\"text\" autoComplete=\"off\" placeholder=\"".concat(taginputTip, "\" value=\"\"></div></div>")); //init tag input
+
+          $this.append($tagInputUserArea); //
+
+          var lastId = -1;
+          var defaultTagsVal = [];
+          var maxTags = _typeof($this.data('max-tags')) != ( true ? "undefined" : 0) ? $this.data('max-tags') : 10;
+          var dVal = $this.find('> input').attr('type', 'hidden').val(); //get default value
+
+          if (dVal) {
+            dVal.trim().replace(/^\,|\,$/g, '').split(',').forEach(function (item, index) {
+              defaultTagsVal.push({
+                content: item,
+                id: index
+              });
+            });
+          } //
+          // What the user has entered
+
+
+          var defaultItems = dVal !== '' && dVal !== null ? defaultTagsVal : []; //init data
+
+          $this.data({
+            'data': defaultItems,
+            'user-input': '',
+            'already-in-items': false,
+            'max': maxTags
+          });
+
+          var updateTagResult = function updateTagResult(el, data) {
+            var tagList = '';
+            var resArr = [];
+            data.forEach(function (listitem, index) {
+              resArr.push(listitem.content);
+              tagList += "<li data-item=\"".concat(listitem.id, "\">").concat(listitem.content, "</li>");
+            }); //update value
+
+            el.find('> input').val(resArr.join(',')); //create list
+
+            el.find('.uix-controls__tags__list').html(tagList);
+          };
+
+          updateTagResult($this, defaultItems); // Mouse events
+          //------------------------------------------
+
+          $(document).off('click.FORM_TAG_INPUT_DELETE').on('click.FORM_TAG_INPUT_DELETE', settings.controls + ' .uix-controls__tags__list > li', function (e) {
+            var $obj = $(this).closest(settings.controls);
+            var currentItems = $obj.data('data');
+            var idToRemove = Number(e.target.dataset["item"]);
+            var newArray = currentItems.filter(function (listitem) {
+              return listitem.id !== idToRemove;
+            });
+            currentItems = newArray; //update data
+
+            $obj.data({
+              'data': currentItems
+            }); //
+
+            updateTagResult($obj, currentItems);
+          });
+          $(document).on('change input', settings.controls + ' .uix-controls__tags input', function (e) {
+            var $obj = $(this).closest(settings.controls);
+            var currentItems = $obj.data('data');
+            var _userInput = e.currentTarget.value;
+            var _alreadyInItems = false;
+
+            if (currentItems && currentItems.length > 0) {
+              var alreadyIn = currentItems.some(function (obj) {
+                return obj.content.toLowerCase() == _userInput.toLowerCase();
+              });
+
+              if (alreadyIn) {
+                _alreadyInItems = true;
+              } else {
+                _alreadyInItems = false;
+              }
+            } //update data
+
+
+            $obj.data({
+              'user-input': e.currentTarget.value,
+              'already-in-items': _alreadyInItems
+            });
+          });
+          $(document).on('keypress', settings.controls + ' .uix-controls__tags input', function (e) {
+            var $obj = $(this).closest(settings.controls);
+            var currentItems = $obj.data('data');
+            var userInput = $obj.data('user-input');
+            var alreadyInItems = $obj.data('already-in-items');
+
+            if (e.which == 13) {
+              e.preventDefault();
+              if (alreadyInItems) return false; //
+
+              var newArray = currentItems;
+              var currentcontent = userInput.trim();
+
+              if (!currentcontent) {
+                return;
+              } //Limit the total number of tags added
+
+
+              if ($obj.data('max') - 1 < newArray.length) {
+                return;
+              }
+
+              newArray.push({
+                content: currentcontent,
+                id: ++lastId
+              });
+              currentItems = newArray; //update data
+
+              $obj.data({
+                'data': currentItems,
+                'user-input': ''
+              }); //
+
+              $(this).val('');
+              updateTagResult($obj, currentItems);
             }
           });
-          $(this).parent().attr("data-switchids", switchIDs.replace(/,\s*$/, '')); //Set actived style from their values
+          $(document).on('focus', settings.controls + ' .uix-controls__tags input', function (e) {
+            var $obj = $(this).closest(settings.controls);
+            $obj.addClass('is-active');
+          });
+          $(document).on('blur', settings.controls + ' .uix-controls__tags input', function (e) {
+            var $obj = $(this).closest(settings.controls);
+            $obj.removeClass('is-active');
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
 
-          if ($(targetID).val() == $(this).data('value')) {
-            $(this).addClass('is-active').attr('aria-checked', true);
-          } else {
-            $(this).removeClass('is-active').attr('aria-checked', false);
-          }
-        });
+          $this.data('activated', 1);
+        } //endif actived			
+
       });
     });
   };
@@ -26353,10 +26826,101 @@ var controls_disable = __webpack_require__(260);
 var controls_line = __webpack_require__(599);
 // EXTERNAL MODULE: ./src/components/form/js/fn/radio-and-checkbox.js
 var radio_and_checkbox = __webpack_require__(895);
+// EXTERNAL MODULE: ./src/components/form/js/fn/tag-input.js
+var tag_input = __webpack_require__(292);
+;// CONCATENATED MODULE: ./src/components/form/js/fn/dynamic-fields.js
+function dynamic_fields_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dynamic_fields_typeof = function _typeof(obj) { return typeof obj; }; } else { dynamic_fields_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dynamic_fields_typeof(obj); }
+
+
+/*
+ * Render Dynamic Fields
+ *
+ * @param  {String} controls                 - Wrapper of controls.
+ * @return {Void}
+ */
+
+(function ($) {
+  'use strict';
+
+  $.fn.UixRenderDynamicFields = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({
+      controls: '.uix-controls__dynamic-fields-container'
+    }, options);
+    this.each(function () {
+      $(settings.controls).each(function () {
+        var $this = $(this);
+        var actived = $this.data('activated');
+
+        if (dynamic_fields_typeof(actived) === ( true ? "undefined" : 0)) {
+          // Mouse events
+          //------------------------------------------
+          var $addButton = $this.find('.uix-controls__dynamic-fields__addbtn'),
+              //The add button
+          $appendWrapper = $this.find('.uix-controls__dynamic-fields__append'),
+              //The field wrapper ID or class 
+          loopCls = '.uix-controls__dynamic-fields__tmpl__wrapper',
+              defaultItems = $appendWrapper.find(loopCls).length;
+          var x = defaultItems == 0 ? 1 : defaultItems + 1,
+              maxField = $this.data('max-fields'),
+              fieldHTML = ''; //Maximum number of forms added
+
+          if (dynamic_fields_typeof(maxField) === ( true ? "undefined" : 0)) {
+            maxField = 5;
+          } //Add a field
+
+
+          var addOne = function addOne(fieldCode) {
+            //replace the index of field name
+            fieldCode = fieldCode.replace(/___GUID___/gi, UixGUID.create()); //hide add button
+
+            if (x == maxField) $addButton.hide();
+
+            if (x <= maxField) {
+              $appendWrapper.append(fieldCode);
+              $.when($appendWrapper.length > 0).then(function () {
+                //Initialize Form
+                customSpecialFormsInit();
+              });
+              x++;
+            }
+          }; // default item
+
+
+          if (defaultItems == 0) {
+            addOne($this.find('.uix-controls__dynamic-fields__tmpl').html());
+          } //Prevent duplicate function assigned
+
+
+          $addButton.off('click').off('click').on('click', function (e) {
+            e.preventDefault(); //template init
+
+            addOne($this.find('.uix-controls__dynamic-fields__tmpl').html()); //Remove per item
+            //Prevent duplicate function assigned
+
+            $this.find('.uix-controls__dynamic-fields__removebtn').off('click').on('click', function (e) {
+              e.preventDefault(); //display add button
+
+              $addButton.show(); //remove current item
+
+              $(this).closest(loopCls).remove();
+              x--;
+            });
+            return false;
+          }); //------------------------------------------
+          //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+          $this.data('activated', 1);
+        } //endif actived			
+
+      });
+    });
+  };
+})(jQuery);
+// EXTERNAL MODULE: ./src/components/form/js/fn/number-input.js
+var number_input = __webpack_require__(838);
 ;// CONCATENATED MODULE: ./src/components/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function form_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { form_js_typeof = function _typeof(obj) { return typeof obj; }; } else { form_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return form_js_typeof(obj); }
 
 /* 
  *************************************
@@ -26370,21 +26934,13 @@ function form_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === 
 	If you use the "change" event to asynchronously change a custom control of select, radio or checkbox, 
 	you need add a callback function that initializes the style:
 	
-
-	$( document ).UixRenderCustomSelect(); //Render Custom Select
-	$( document ).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
-	$( document ).UixRenderControlsLineEff(); //Create Line Effect on Click
-	$( document ).UixRenderControlsDisable(); //Disabled Controls Status
-	$( document ).UixRenderCustomFile(); //Render Custom File Type
-	$( document ).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
-	$( document ).UixRenderControlsHover(); //Hover Effect
-	$( document ).UixRenderCustomMultiSel(); //Render Multiple Selector Status
-	$( document ).UixRenderCustomSingleSel(); //Render Single Selector Status
-	$( document ).UixRenderNormalRadio(); //Render Normal Radio Status
-	$( document ).UixRenderDatePicker(); //Render Date Picker
+	$( document ).UixRenderXXXXXXXXX();
 
 	
 */
+
+
+
 
 
 
@@ -26414,31 +26970,34 @@ var FORM = function (module, $, window, document) {
      *
      * @return {Void}
      */
-    var customSpecialFormsInit = function customSpecialFormsInit() {
-      $(document).UixRenderCustomSelect(); //Render Custom Select
+    $(document).UixRenderCustomSelect(); //Render Custom Select
 
-      $(document).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
+    $(document).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
 
-      $(document).UixRenderControlsLineEff(); //Create Line Effect on Click
+    $(document).UixRenderControlsLineEff(); //Create Line Effect on Click
 
-      $(document).UixRenderControlsDisable(); //Disabled Controls Status
+    $(document).UixRenderControlsDisable(); //Disabled Controls
 
-      $(document).UixRenderCustomFile(); //Render Custom File Type
+    $(document).UixRenderCustomFile(); //Render Custom File Type
 
-      $(document).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
+    $(document).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
 
-      $(document).UixRenderControlsHover(); //Hover Effect
+    $(document).UixRenderControlsHover(); //Hover Effect
 
-      $(document).UixRenderCustomMultiSel(); //Render Multiple Selector Status
+    $(document).UixRenderCustomMultiSel(); //Render Multiple Selector
 
-      $(document).UixRenderCustomSingleSel(); //Render Single Selector Status
+    $(document).UixRenderCustomSingleSel(); //Render Single Selector
 
-      $(document).UixRenderNormalRadio(); //Render Normal Radio Status
+    $(document).UixRenderNormalRadio(); //Render Normal Radio
 
-      $(document).UixRenderDatePicker(); //Render Date Picker	
-    };
+    $(document).UixRenderDatePicker(); //Render Date Picker	
 
-    customSpecialFormsInit();
+    $(document).UixRenderTagInput(); //Render Tag Input
+
+    $(document).UixRenderDynamicFields(); //Render Dynamic Fields
+
+    $(document).UixRenderNumberInput(); //Render Number Input
+
     /* 
      ---------------------------
      Click Event of Submit Button
@@ -26448,280 +27007,6 @@ var FORM = function (module, $, window, document) {
 
     $('.uix-search-box__submit').off('click').on('click', function () {
       $(this).closest('form').submit();
-    });
-    /* 
-     ---------------------------
-     Click Event of add / remove input field dynamically
-     ---------------------------
-     */
-
-    $('.uix-controls__dynamic-fields-container').each(function () {
-      var $this = $(this);
-      var $addButton = $this.find('.uix-controls__dynamic-fields__addbtn'),
-          //The add button
-      $appendWrapper = $this.find('.uix-controls__dynamic-fields__append'),
-          //The field wrapper ID or class 
-      loopCls = '.uix-controls__dynamic-fields__tmpl__wrapper',
-          defaultItems = $appendWrapper.find(loopCls).length;
-      var x = defaultItems == 0 ? 1 : defaultItems + 1,
-          maxField = $this.data('max-fields'),
-          fieldHTML = ''; //Maximum number of forms added
-
-      if (form_js_typeof(maxField) === ( true ? "undefined" : 0)) {
-        maxField = 5;
-      } //Add a field
-
-
-      var addOne = function addOne(fieldCode) {
-        //replace the index of field name
-        fieldCode = fieldCode.replace(/___GUID___/gi, UixGUID.create()); //hide add button
-
-        if (x == maxField) $addButton.hide();
-
-        if (x <= maxField) {
-          $appendWrapper.append(fieldCode);
-          $.when($appendWrapper.length > 0).then(function () {
-            //Initialize Form
-            customSpecialFormsInit();
-          });
-          x++;
-        }
-      }; // default item
-
-
-      if (defaultItems == 0) {
-        addOne($this.find('.uix-controls__dynamic-fields__tmpl').html());
-      } //Prevent duplicate function assigned
-
-
-      $addButton.off('click').off('click').on('click', function (e) {
-        e.preventDefault(); //template init
-
-        addOne($this.find('.uix-controls__dynamic-fields__tmpl').html()); //Remove per item
-        //Prevent duplicate function assigned
-
-        $this.find('.uix-controls__dynamic-fields__removebtn').off('click').on('click', function (e) {
-          e.preventDefault(); //display add button
-
-          $addButton.show(); //remove current item
-
-          $(this).closest(loopCls).remove();
-          x--;
-        });
-        return false;
-      });
-    });
-    /* 
-     ---------------------------
-     Click Event of Custom Input Number 
-     ---------------------------
-     */
-
-    $(document).off('click.FORM_NUMBER_BTN_ADD').on('click.FORM_NUMBER_BTN_ADD', '.uix-controls__number__btn--add', function (e) {
-      var step = parseFloat($(this).data('step')),
-          decimals = $(this).data('decimals'),
-          $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
-          numberInputVal = parseFloat($numberInput.val()),
-          max = $numberInput.attr('max');
-      if (form_js_typeof(step) === ( true ? "undefined" : 0) || isNaN(step)) step = 1;
-      if (form_js_typeof(decimals) === ( true ? "undefined" : 0)) decimals = 0;
-
-      if (form_js_typeof(max) != ( true ? "undefined" : 0) && parseFloat(numberInputVal + step) > max) {
-        step = 0;
-      }
-
-      numberInputVal = parseFloat(numberInputVal + step);
-      $numberInput.val(numberInputVal.toFixed(decimals));
-    });
-    $(document).off('click.FORM_NUMBER_BTN_REMOVE').on('click.FORM_NUMBER_BTN_REMOVE', '.uix-controls__number__btn--remove', function (e) {
-      var step = $(this).data('step'),
-          decimals = $(this).data('decimals'),
-          $numberInput = $(this).closest('.uix-controls__number').find('input[type="number"]'),
-          numberInputVal = parseFloat($numberInput.val()),
-          min = $numberInput.attr('min');
-      if (form_js_typeof(step) === ( true ? "undefined" : 0) || isNaN(step)) step = 1;
-      if (form_js_typeof(decimals) === ( true ? "undefined" : 0)) decimals = 0;
-
-      if (form_js_typeof(min) != ( true ? "undefined" : 0) && parseFloat(numberInputVal - step) < min) {
-        step = 0;
-      }
-
-      numberInputVal -= step;
-      $numberInput.val(numberInputVal.toFixed(decimals));
-    });
-    /* 
-     ---------------------------
-     Click Event of Multiple Selector
-     ---------------------------
-     */
-
-    var multiSel = '.uix-controls__multi-sel',
-        multiSelItem = multiSel + ' > span';
-    $(document).off('click.FORM_MULTI_SEL').on('click.FORM_MULTI_SEL', multiSelItem, function (e) {
-      e.preventDefault();
-      var $selector = $(this).parent(),
-          $option = $(this),
-          targetID = '#' + $selector.data("targetid"),
-          curVal = $option.data('value'),
-          tarVal = $(targetID).val() + ',',
-          resVal = '';
-      $option.toggleClass('is-active').attr('aria-checked', function (index, attr) {
-        return attr == 'true' ? false : true;
-      });
-
-      if (tarVal.indexOf(curVal + ',') < 0) {
-        resVal = tarVal + curVal + ',';
-      } else {
-        resVal = tarVal.replace(curVal + ',', '');
-      }
-
-      resVal = resVal.replace(/,\s*$/, '').replace(/^,/, '');
-      $(targetID).val(resVal); //Dynamic listening for the latest value
-
-      $(targetID).focus().blur();
-    });
-    /* 
-     ---------------------------
-     Click Event of Single Selector
-     ---------------------------
-     */
-
-    var singleSel = '.uix-controls__single-sel',
-        singleSelItem = singleSel + ' > span';
-    /*
-     * Initialize single switch
-     *
-     * @param  {Element} obj                 - Radio controls. 
-     * @return {Void}
-     */
-
-    var hideAllSingleSelItems = function hideAllSingleSelItems(obj) {
-      obj.each(function (index) {
-        var $sel = $(this),
-            defaultValue = $('#' + $sel.attr('data-targetid')).val(),
-            deffaultSwitchIndex = 0; //get default selected switch index
-
-        $sel.find('> span').each(function (index) {
-          if (defaultValue == $(this).data('value')) {
-            deffaultSwitchIndex = index;
-          }
-        });
-
-        if (form_js_typeof($sel.data('switchids')) != ( true ? "undefined" : 0) && $sel.data('switchids') != '') {
-          var _switchIDsArr = $sel.data('switchids').split(',');
-
-          _switchIDsArr.forEach(function (element, index) {
-            if (deffaultSwitchIndex != index) {
-              $('#' + element).hide();
-            } else {
-              $('#' + element).show();
-            }
-          });
-        }
-      });
-    };
-
-    hideAllSingleSelItems($(singleSel));
-    $(document).off('click.FORM_SINGLE_SEL').on('click.FORM_SINGLE_SEL', singleSelItem, function (e) {
-      e.preventDefault();
-      var $selector = $(this).parent(),
-          $option = $(this),
-          targetID = '#' + $selector.data("targetid"),
-          switchID = '#' + $option.data("switchid"),
-          curVal = $option.data('value'); //Radio Selector
-
-      $selector.find('> span').removeClass('is-active').attr('aria-checked', false);
-      $(targetID).val(curVal);
-      $option.addClass('is-active').attr('aria-checked', true); //Switch some options
-
-      if (form_js_typeof($option.data("switchid")) != ( true ? "undefined" : 0)) {
-        hideAllSingleSelItems($selector);
-        $(switchID).show();
-      } //Dynamic listening for the latest value
-
-
-      $(targetID).focus().blur();
-    });
-    /* 
-     ---------------------------
-     Click Event of Normal Radio
-     ---------------------------
-     */
-
-    var normalRadio = '.uix-controls__radio',
-        normalRadioItem = normalRadio + ' > label';
-    /*
-     * Initialize single switch
-     *
-     * @param  {Element} obj                 - Radio controls. 
-     * @return {Void}
-     */
-
-    var hideAllNormalRadioItems = function hideAllNormalRadioItems(obj) {
-      obj.each(function (index) {
-        var $sel = $(this),
-            defaultValue = $('#' + $sel.attr("data-targetid")).val(),
-            deffaultSwitchIndex = 0; //get default selected switch index
-
-        $sel.find('> label').each(function (index) {
-          if (defaultValue == $(this).data('value')) {
-            deffaultSwitchIndex = index;
-          }
-        });
-
-        if (form_js_typeof($sel.data('switchids')) != ( true ? "undefined" : 0) && $sel.data('switchids') != '') {
-          var _switchIDsArr = $sel.data('switchids').split(',');
-
-          _switchIDsArr.forEach(function (element, index) {
-            if (deffaultSwitchIndex != index) {
-              $('#' + element).hide();
-            } else {
-              $('#' + element).show();
-            }
-          });
-        }
-      });
-    };
-
-    hideAllNormalRadioItems($(normalRadio));
-    $(document).off('click.FORM_NORMAL_RADIO').on('click.FORM_NORMAL_RADIO', normalRadioItem, function (e) {
-      var $selector = $(this).parent(),
-          $option = $(this),
-          targetID = '#' + $selector.data("targetid"),
-          switchID = '#' + $option.data("switchid"),
-          curVal = $option.data('value'); //Radio Selector
-
-      $selector.find('> label').removeClass('is-active').find('[type="radio"]').prop('checked', false);
-      $(targetID).val(curVal);
-      $option.addClass('is-active').find('[type="radio"]').prop('checked', true); //Switch some options
-
-      if (form_js_typeof($option.data("switchid")) != ( true ? "undefined" : 0)) {
-        hideAllNormalRadioItems($selector);
-        $(switchID).show();
-      } //Dynamic listening for the latest value
-
-
-      $(targetID).focus().blur();
-    });
-    /* 
-     ---------------------------
-     Click Event of Checkbox and Toggle 
-     ---------------------------
-     */
-
-    var checkboxSel = '.uix-controls__toggle [type="checkbox"], .uix-controls__checkbox [type="checkbox"]';
-    $(document).on('change', checkboxSel, function (e) {
-      //hide or display a associated div
-      var $obj = $(this).closest('.uix-controls'),
-          targetID = '#' + $obj.attr('data-targetid');
-
-      if (this.checked) {
-        $obj.addClass('is-active').attr('aria-checked', true);
-        $(targetID).show();
-      } else {
-        $obj.removeClass('is-active').attr('aria-checked', false);
-        $(targetID).hide();
-      }
     });
   };
 
@@ -34716,140 +35001,136 @@ function simple_3D_background_js_typeof(obj) { "@babel/helpers - typeof"; if (ty
 var THREE_BACKGROUND = function (module, $, window, document) {
   if (window.THREE_BACKGROUND === null) return false;
   module.THREE_BACKGROUND = module.THREE_BACKGROUND || {};
-  module.THREE_BACKGROUND.version = '0.0.3';
+  module.THREE_BACKGROUND.version = '0.0.4';
 
   module.THREE_BACKGROUND.documentReady = function ($) {
     //grab each 3dAnimate element and pass it into the animate function along with the config data
     $('[data-3d-animate]').each(function (index, element) {
-      var config = $(element).data('3d-animate');
+      var dataConfig = $(element).data('3d-animate');
 
-      if (simple_3D_background_js_typeof(config) === ( true ? "undefined" : 0)) {
-        config = false;
+      if (simple_3D_background_js_typeof(dataConfig) === ( true ? "undefined" : 0)) {
+        dataConfig = false;
       }
 
-      if (config) {
-        if (Object.prototype.toString.call(config.offset) == '[object Array]') {
-          animate3dMultiElement(config.offset[0], config.offset[1], element, config.reset);
-        } else {
-          animate3dElement(config.offset, element, config.reset);
-        }
+      if (dataConfig) {
+        element.removeEventListener('mousemove', handleMove);
+        element.removeEventListener('touchmove', handleMove);
+        element.addEventListener('mousemove', handleMove);
+        element.addEventListener('touchmove', handleMove); //
+
+        element.removeEventListener('mouseleave', handleMoveEnd);
+        element.removeEventListener('touchend', handleMoveEnd);
+        element.addEventListener('mouseleave', handleMoveEnd);
+        element.addEventListener('touchend', handleMoveEnd); //pass arguments to addEventListener listener
+
+        element.obj = element;
+        element.itemsTotal = element.children.length;
+        element.config = dataConfig;
       }
     });
-    /*
-     * Sets an animation for each element
-     *
-     * @param  {Number} base           - Base offset value.
-     * @param  {String} obj            - An HTML element.
-     * @param  {Boolean} reset         - Reset block on mouse leave
-     * @return {Void}
-     */
 
-    function animate3dElement(base, obj, reset) {
-      var $el = $(obj),
-          w = $el.innerWidth(),
-          h = $el.innerHeight(); //			TweenMax.set( $el, {
-      //				perspective    : 500,
-      //				transformStyle : "preserve-3d"
-      //			});
-      // mouse move on block
+    function handleMove(e) {
+      var el = e.currentTarget.obj;
+      var itemsTotal = e.currentTarget.itemsTotal;
+      var offsetRes = e.currentTarget.config.offset;
+      var w = el.clientWidth; //including: padding
 
-      $(obj).on('mousemove touchmove', function (e) {
-        var mX, mY, rmX, rmY;
-        var touches = e.originalEvent.touches;
+      var h = el.clientHeight; //including: padding
 
-        if (touches && touches.length) {
-          mX = touches[0].pageX;
-          mY = touches[0].pageY;
+      var base = 0; //Base offset value.
+
+      var multiple = 0; //The power of target number.
+
+      if (offsetRes) {
+        if (itemsTotal === 1) {
+          base = Math.pow(offsetRes[0], offsetRes[1]);
         } else {
-          mX = e.pageX;
-          mY = e.pageY;
-        } //Find mouse position relative to element
+          base = offsetRes[0];
+          multiple = offsetRes[1];
+        }
+      }
+
+      var mouseX, mouseY, offsetX, offsetY;
+      var touches = e.touches; //get the absolute position of a mouse
+      //!!! Important: If you do not use window.pageXOffset or window.pageYOffset, 
+      //              the mouse coordinates are relative to the parent element
+
+      if (touches && touches.length) {
+        mouseX = touches[0].clientX + window.pageXOffset;
+        mouseY = touches[0].clientY + window.pageYOffset;
+      } else {
+        mouseX = e.clientX + window.pageXOffset;
+        mouseY = e.clientY + window.pageYOffset;
+      } //Find mouse position relative to element
+      //!!! Important: Using `el.offsetTop` or `el.offsetLeft` is relative, the value may be 0
 
 
-        rmX = mX - $(this).offset().left;
-        rmY = mY - $(this).offset().top; //console.log('X: ' + rmX + ' Y: ' + rmY );
+      offsetX = mouseX - $(el).offset().left;
+      offsetY = mouseY - $(el).offset().top; //console.log('mouseX: ', mouseX, ' mouseY: ', mouseY, 'el.offsetLeft: ', $(el).offset().left, ' el.offsetTop: ', $(el).offset().top );
+
+      if (itemsTotal === 1) {
+        /*
+        ////////////////////////////////////////////////////////////
+        ////////////////////////  Only One   ///////////////////////
+        ////////////////////////////////////////////////////////////
+        */
         // function to run matrix3D effect on block
+        var targetX = mousePosition(offsetX, w, base),
+            targetY = mousePosition(offsetY, h, base);
+        el.style.transform = "rotateX(".concat(targetY, "deg) rotateY(").concat(targetX, "deg)");
+      } else {
+        /*
+        ////////////////////////////////////////////////////////////
+        ////////////////////  Multiple Images   ////////////////////
+        ////////////////////////////////////////////////////////////
+        */
+        // function to run matrix3D effect on block
+        var _targetX = offsetX / w,
+            _targetY = offsetY / h;
 
-        var tX = mousePosition(rmX, w),
-            tY = mousePosition(rmY, h);
-        TweenMax.to($(this), 0.2, {
-          rotationY: tX,
-          rotationX: tY,
-          backgroundPosition: tX + 120 + "% 50%"
+        var $items = el.children;
+        Array.prototype.forEach.call($items, function (node, index) {
+          var x = _targetX * (base * Math.pow(multiple, index)),
+              y = _targetY * (base * Math.pow(multiple, index)),
+              z = 0,
+              deg = _targetY * (180 / Math.PI),
+              rotateDeg = deg - 35;
+
+          node.style.transform = "translate(".concat(x, "px ,").concat(y, "px) rotate3d( -1, 1, 0, ").concat(rotateDeg, "deg )");
         });
-      });
-
-      if (reset) {
-        $(obj).on('mouseleave touchcancel', function () {
-          TweenMax.to($(this), 0.5, {
-            rotationY: 0,
-            rotationX: 0,
-            backgroundPosition: "120% 50%"
-          });
-        });
-      } // make some calculations for mouse position
-
-
-      function mousePosition(mousePos, dimension) {
-        return Math.floor(mousePos / dimension * (base * 2)) - base;
       }
     }
-    /*
-     * Sets an animation with parallax for each element
-     *
-     * @param  {Number} base           - Base offset value.
-     * @param  {Number} multiple       - The power of target number.
-     * @param  {String} obj            - An HTML element.
-     * @param  {Boolean} reset         - Reset block on mouse leave
-     * @return {Void}
-     */
 
+    function handleMoveEnd(e) {
+      var el = e.currentTarget.obj;
+      var itemsTotal = e.currentTarget.itemsTotal;
+      var resetRes = e.currentTarget.config.reset;
 
-    function animate3dMultiElement(base, multiple, obj, reset) {
-      //get the specs of the element
-      var divOffset = $(obj).offset(),
-          divTop = divOffset.top,
-          divLeft = divOffset.left,
-          divWidth = $(obj).innerWidth(),
-          divHeight = $(obj).innerHeight(); //set an onmousemove event on the element
-
-      $(obj).on('mousemove touchmove', function (e) {
-        var pctX, pctY;
-        var touches = e.originalEvent.touches;
-
-        if (touches && touches.length) {
-          pctX = (touches[0].pageX - divLeft) / divWidth;
-          pctY = (touches[0].pageY - divTop) / divHeight;
+      if (resetRes) {
+        if (itemsTotal === 1) {
+          /*
+          ////////////////////////////////////////////////////////////
+          ////////////////////////  Only One   ///////////////////////
+          ////////////////////////////////////////////////////////////
+          */
+          el.style.transform = "rotateX(0deg) rotateY(0deg)";
         } else {
-          pctX = (e.pageX - divLeft) / divWidth;
-          pctY = (e.pageY - divTop) / divHeight;
+          /*
+          ////////////////////////////////////////////////////////////
+          ////////////////////  Multiple Images   ////////////////////
+          ////////////////////////////////////////////////////////////
+          */
+          var $items = el.children;
+          Array.prototype.forEach.call($items, function (node, index) {
+            node.style.transform = "translate(0,0) rotate3d( -1, 1, 0, 0deg )";
+          });
         }
-
-        $(this).children().each(function (index, elementSub) {
-          var x = pctX * (base * Math.pow(multiple, index)),
-              y = pctY * (base * Math.pow(multiple, index)),
-              z = 0,
-              deg = pctY * (180 / Math.PI),
-              rotateDeg = parseFloat(deg - 35);
-          TweenMax.to($(elementSub), 0.2, {
-            css: {
-              'transform': 'translate(' + x + 'px ,' + y + 'px) rotate3d( -1, 1, 0, ' + rotateDeg + 'deg )'
-            }
-          });
-        });
-      });
-
-      if (reset) {
-        $(obj).on('mouseleave touchcancel', function () {
-          $(this).children().each(function (index, elementSub) {
-            TweenMax.to($(elementSub), 0.5, {
-              css: {
-                'transform': 'translate(0,0) rotate3d( -1, 1, 0, 0deg )'
-              }
-            });
-          });
-        });
       }
+    } // make some calculations for mouse position
+
+
+    function mousePosition(mousePos, dimension, base) {
+      return Math.floor(mousePos / dimension * (base * 2)) - base;
     }
   };
 

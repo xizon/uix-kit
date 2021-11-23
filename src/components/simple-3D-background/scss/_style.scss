@@ -9,8 +9,13 @@
 	/* Require more than 500, compatible firefox height */
 	perspective: 700px;
 
-	> span {
+	> div {
+		@include transition-default(); 
 		display: inline-block;
+	}
+
+	img {
+		@include transition-default(); 
 	}
 
 }

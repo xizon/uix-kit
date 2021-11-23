@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.0
+ * ## Version             :  4.6.2
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 8, 2021
+ * ## Last Update         :  November 23, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -1029,6 +1029,123 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
 /* Clip child elements */
 .uix-relative--inline-clip {
   overflow: hidden;
+}
+
+/*----*/
+.uix-display-none {
+  display: none !important;
+}
+
+.uix-display-inline {
+  display: inline !important;
+}
+
+.uix-display-inline-block {
+  display: inline-block !important;
+}
+
+.uix-display-block {
+  display: block !important;
+}
+
+.uix-display-flex {
+  display: flex !important;
+}
+
+.uix-display-inline-flex {
+  display: inline-flex !important;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+  .uix-display-none--sm {
+    display: none !important;
+  }
+  .uix-display-inline--sm {
+    display: inline !important;
+  }
+  .uix-display-inline-block--sm {
+    display: inline-block !important;
+  }
+  .uix-display-block--sm {
+    display: block !important;
+  }
+  .uix-display-flex--sm {
+    display: flex !important;
+  }
+  .uix-display-inline-flex--sm {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .uix-display-none--md {
+    display: none !important;
+  }
+  .uix-display-inline--md {
+    display: inline !important;
+  }
+  .uix-display-inline-block--md {
+    display: inline-block !important;
+  }
+  .uix-display-block--md {
+    display: block !important;
+  }
+  .uix-display-flex--md {
+    display: flex !important;
+  }
+  .uix-display-inline-flex--md {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .uix-display-none--lg {
+    display: none !important;
+  }
+  .uix-display-inline--lg {
+    display: inline !important;
+  }
+  .uix-display-inline-block--lg {
+    display: inline-block !important;
+  }
+  .uix-display-block--lg {
+    display: block !important;
+  }
+  .uix-display-flex--lg {
+    display: flex !important;
+  }
+  .uix-display-inline-flex--lg {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .uix-display-none--xl {
+    display: none !important;
+  }
+  .uix-display-inline--xl {
+    display: inline !important;
+  }
+  .uix-display-inline-block--xl {
+    display: inline-block !important;
+  }
+  .uix-display-block--xl {
+    display: block !important;
+  }
+  .uix-display-flex--xl {
+    display: flex !important;
+  }
+  .uix-display-inline-flex--xl {
+    display: inline-flex !important;
+  }
 }
 
 /* 
@@ -6475,6 +6592,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
   }
 }
 
+@charset "UTF-8";
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
@@ -6489,6 +6607,7 @@ ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging 
  * 8. Single Selector
  * 9. Search of Widget
  * 10. Add / remove input field dynamically
+ * 11. Tag Input
 */
 /*
  ---------------------------
@@ -7686,9 +7805,8 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 }
 
 .uix-controls__single-sel > span:hover, .uix-controls__multi-sel.uix-controls__single-sel > span.is-active {
-  border-color: #CE3A3E;
-  background: #CE3A3E;
-  background: linear-gradient(to bottom, #CE3A3E 0%, #DE510E 100%);
+  border-color: #d7d7d7;
+  background: #EEEEEE;
 }
 
 .uix-controls__single-sel > span.is-active {
@@ -7785,6 +7903,95 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
   display: none;
 }
 
+/*
+ ---------------------------
+ 11. Tag Input
+ ---------------------------
+ */
+.uix-controls__tags-wrapper {
+  display: flex;
+}
+
+.uix-controls__tags-wrapper ul, .uix-controls__tags-wrapper li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.uix-controls__tags-wrapper > input {
+  display: none;
+}
+
+.uix-controls__tags-wrapper > div {
+  transition: all 0.3s ease;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #dce4e8;
+}
+
+.uix-controls__tags-wrapper.is-pill > div {
+  border-radius: 50px;
+}
+
+.uix-controls__tags-wrapper.is-rounded > div {
+  border-radius: 4px;
+}
+
+.uix-controls__tags-wrapper.is-fullwidth > div {
+  width: 100%;
+}
+
+.uix-controls__tags-wrapper.is-active > div {
+  outline: none;
+  border-color: #212121;
+}
+
+.uix-controls__tags-wrapper .uix-controls__tags {
+  position: relative;
+}
+
+.uix-controls__tags-wrapper .uix-controls__tags input {
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: .5rem .5rem 0 .5rem;
+  box-sizing: content-box;
+  color: #888;
+  border: none;
+  transform: translateY(-0.2rem);
+}
+
+.uix-controls__tags-wrapper .uix-controls__tags input:focus {
+  outline: none;
+}
+
+.uix-controls__tags-wrapper ul.uix-controls__tags__list li {
+  display: inline-block;
+  margin: 5px;
+  margin-bottom: 0;
+  padding: .1rem 1.5rem .1rem 1rem;
+  font-size: 0.75rem;
+  background: #efefef;
+  border-radius: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.uix-controls__tags-wrapper ul.uix-controls__tags__list li::after {
+  content: " ×";
+  color: #333;
+  font-weight: 400;
+  opacity: .6;
+  font-size: 18px;
+  line-height: 20px;
+  position: absolute;
+  right: 8px;
+  top: 0;
+  cursor: pointer;
+}
+
 /* ======================================================
     <!-- Form ( Layout )- -->
 /* ====================================================== */
@@ -7838,6 +8045,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
  * 6. Custom Input Number
  * 7. Multiple Selector
  * 8. Single Selector
+ * 11. Tag Input
 */
 /*
  ---------------------------
@@ -8152,6 +8360,19 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 .uix-controls__single-sel.uix-controls--line > span:hover .uix-controls__bar {
   width: 100% !important;
   bottom: -1px !important;
+}
+
+/*
+ ---------------------------
+ 11. Tag Input
+ ---------------------------
+ */
+.uix-controls__tags-wrapper.uix-controls--line > div {
+  border-radius: 0;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: #dce4e8 !important;
 }
 
 /* ======================================================
@@ -13956,8 +14177,13 @@ button.swiper-pagination-bullet {
   perspective: 700px;
 }
 
-.uix-3d-bg > span {
+.uix-3d-bg > div {
+  transition: all 0.3s ease;
   display: inline-block;
+}
+
+.uix-3d-bg img {
+  transition: all 0.3s ease;
 }
 
 /* ======================================================
@@ -15887,6 +16113,9 @@ table.is-horizontal th,
   .uix-timeline__container-wrapper.is-vertical.is-reversed .uix-timeline__container .uix-timeline .uix-timeline__item .uix-timeline__item__info .uix-timeline__item__date {
     left: 122%;
   }
+  .uix-timeline__container-wrapper.is-vertical.is-reversed .uix-timeline__container .uix-timeline .uix-timeline__item:nth-child(odd) .uix-timeline__item__img .uix-timeline__item__date {
+    transform: translate(-50%, -135%);
+  }
   .uix-timeline__container-wrapper.is-vertical.is-reversed .uix-timeline__container .uix-timeline .uix-timeline__item:nth-child(even) .uix-timeline__item__info {
     float: right;
     margin-right: 10px;
@@ -16210,6 +16439,11 @@ table.is-horizontal th,
 
 .uix-timeline__container-wrapper.is-vertical .uix-timeline__btn.uix-timeline__btn--next:hover {
   margin-bottom: -0.3125rem;
+}
+
+.uix-timeline__container-wrapper.is-vertical.js-uix-timeline.is-reversed .uix-timeline__btn {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .uix-timeline__container-wrapper.is-horizontal .uix-timeline__btn {
@@ -18164,6 +18398,18 @@ ul.edd_purchase_receipt_files li {
   position: relative;
   margin-top: 50%;
   transform: translateY(-50%);
+}
+
+.uix-btn__icon.uix-btn__size--l > span i {
+  transform: translateY(10%);
+}
+
+.uix-btn__icon.uix-btn__size--m > span i {
+  transform: translateY(-20%);
+}
+
+.uix-btn__icon.uix-btn__size--t > span i {
+  transform: translateY(-85%);
 }
 
 .uix-btn__icon.uix-btn__icon--left > span {

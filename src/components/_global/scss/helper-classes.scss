@@ -59,6 +59,146 @@
   overflow: hidden;
 }
 
+
+/*----*/
+.uix-display-none {
+    display: none !important;
+}
+
+.uix-display-inline {
+    display: inline !important;
+}
+
+.uix-display-inline-block {
+    display: inline-block !important;
+}
+
+.uix-display-block {
+    display: block !important;
+}
+
+.uix-display-flex {
+    display: flex !important;
+}
+
+.uix-display-inline-flex {
+    display: inline-flex !important;
+}
+
+/* The breakpoint is the same as bootstrap 4 */
+/*
+--breakpoint-xs:0;
+--breakpoint-sm:576px;
+--breakpoint-md:768px;
+--breakpoint-lg:992px;
+--breakpoint-xl:1200px;
+*/
+@media all and (max-width: 576px) {
+    .uix-display-none--sm  {
+        display: none !important;
+    }
+    
+    .uix-display-inline--sm  {
+        display: inline !important;
+    }
+    
+    .uix-display-inline-block--sm  {
+        display: inline-block !important;
+    }
+    
+    .uix-display-block--sm  {
+        display: block !important;
+    }
+    
+    .uix-display-flex--sm  {
+        display: flex !important;
+    }
+    
+    .uix-display-inline-flex--sm  {
+        display: inline-flex !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .uix-display-none--md  {
+        display: none !important;
+    }
+    
+    .uix-display-inline--md  {
+        display: inline !important;
+    }
+    
+    .uix-display-inline-block--md  {
+        display: inline-block !important;
+    }
+    
+    .uix-display-block--md  {
+        display: block !important;
+    }
+    
+    .uix-display-flex--md  {
+        display: flex !important;
+    }
+    
+    .uix-display-inline-flex--md  {
+        display: inline-flex !important;
+    }
+}
+
+@media all and (max-width: 992px) {
+    .uix-display-none--lg  {
+        display: none !important;
+    }
+    
+    .uix-display-inline--lg  {
+        display: inline !important;
+    }
+    
+    .uix-display-inline-block--lg  {
+        display: inline-block !important;
+    }
+    
+    .uix-display-block--lg  {
+        display: block !important;
+    }
+    
+    .uix-display-flex--lg  {
+        display: flex !important;
+    }
+    
+    .uix-display-inline-flex--lg  {
+        display: inline-flex !important;
+    }
+}
+
+
+@media all and (max-width: 1200px) {
+    .uix-display-none--xl  {
+        display: none !important;
+    }
+    
+    .uix-display-inline--xl  {
+        display: inline !important;
+    }
+    
+    .uix-display-inline-block--xl  {
+        display: inline-block !important;
+    }
+    
+    .uix-display-block--xl  {
+        display: block !important;
+    }
+    
+    .uix-display-flex--xl  {
+        display: flex !important;
+    }
+    
+    .uix-display-inline-flex--xl  {
+        display: inline-flex !important;
+    }
+}
+
+
 /* 
  ---------------------------
  2. Elements after a floating element will flow around it. 

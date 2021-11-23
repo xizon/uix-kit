@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 4.6.2 (November 23, 2021) =
+
+* New: Add a form type of Tag Input.
+* Tweak: Added some helper styles.
+* Tweak: Optimized the scripts of some modules.
+* Tweak: Optimized the form script.
+
 
 #### = 4.6.1 (November 10, 2021) =
 

@@ -15,6 +15,7 @@
  * 8. Single Selector
  * 9. Search of Widget
  * 10. Add / remove input field dynamically
+ * 11. Tag Input
 */
 
 
@@ -1486,8 +1487,8 @@ $controls-merge-button-width: 20%;
 		}
 
 		&:hover {
-			border-color: $highlight-color1;
-			@include bg-gradient( 'to bottom' );
+			border-color: #d7d7d7;
+			background: #EEEEEE;
 		}
 
 		&.is-active {
@@ -1602,3 +1603,98 @@ $controls-merge-button-width: 20%;
 	}
 }
 
+
+
+/*
+ ---------------------------
+ 11. Tag Input
+ ---------------------------
+ */
+ .uix-controls__tags-wrapper {
+	display: flex;
+
+	ul, li {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	> input {
+		display: none;
+	}
+
+	> div {
+		@include transition-default();
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		border: 1px solid $control-sub-color;
+	}
+
+	&.is-pill > div {
+		border-radius: 50px;
+	}
+	&.is-rounded > div {
+		border-radius: 4px;
+	}
+
+	&.is-fullwidth > div {
+		width: 100%;
+	}
+
+	&.is-active > div {
+		outline: none;
+		border-color: $control-focus-bordercolor;
+	}
+	
+	.uix-controls__tags {
+		position: relative;
+
+		input {
+			@include transition-default();
+			font-size: $font-size-form;
+			font-weight: 600;
+			margin: .5rem .5rem 0 .5rem;
+			box-sizing: content-box;
+			color: $control-text-color;
+			border: none;
+			transform: translateY(-0.2rem);
+	
+			&:focus {
+				outline: none;
+			}
+		}
+
+	}
+
+	ul.uix-controls__tags__list {
+		li {
+			display: inline-block;
+			margin: 5px;
+			margin-bottom: 0;
+			padding: .1rem 1.5rem .1rem 1rem;
+			font-size: 0.75rem;
+			background: #efefef;
+			border-radius: 30px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			position: relative;
+			
+			&::after {
+				content: " ×";
+				color: #333;
+				font-weight: 400;
+				opacity: .6;
+				font-size: 18px;
+				line-height: 20px;
+				position: absolute;
+				right: 8px;
+				top: 0;
+				cursor: pointer;
+			}
+
+		}
+
+	}
+
+ }
