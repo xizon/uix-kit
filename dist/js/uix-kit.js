@@ -6,7 +6,7 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.2
+ * ## Version             :  4.6.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
  * ## Last Update         :  November 23, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
@@ -26828,8 +26828,23 @@ var controls_line = __webpack_require__(599);
 var radio_and_checkbox = __webpack_require__(895);
 // EXTERNAL MODULE: ./src/components/form/js/fn/tag-input.js
 var tag_input = __webpack_require__(292);
+// EXTERNAL MODULE: ./src/components/form/js/fn/number-input.js
+var number_input = __webpack_require__(838);
 ;// CONCATENATED MODULE: ./src/components/form/js/fn/dynamic-fields.js
 function dynamic_fields_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dynamic_fields_typeof = function _typeof(obj) { return typeof obj; }; } else { dynamic_fields_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dynamic_fields_typeof(obj); }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -26877,11 +26892,34 @@ function dynamic_fields_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symb
             if (x == maxField) $addButton.hide();
 
             if (x <= maxField) {
-              $appendWrapper.append(fieldCode);
-              $.when($appendWrapper.length > 0).then(function () {
-                //Initialize Form
-                customSpecialFormsInit();
-              });
+              $appendWrapper.append(fieldCode); //Initialize Form
+
+              $(document).UixRenderCustomSelect(); //Render Custom Select
+
+              $(document).UixRenderCustomRadioCheckbox(); //Render Custom Radio, Toggle And Checkbox
+
+              $(document).UixRenderControlsLineEff(); //Create Line Effect on Click
+
+              $(document).UixRenderControlsDisable(); //Disabled Controls
+
+              $(document).UixRenderCustomFile(); //Render Custom File Type
+
+              $(document).UixRenderCustomFileDropzone(); //Render Custom File Dropzone
+
+              $(document).UixRenderControlsHover(); //Hover Effect
+
+              $(document).UixRenderCustomMultiSel(); //Render Multiple Selector
+
+              $(document).UixRenderCustomSingleSel(); //Render Single Selector
+
+              $(document).UixRenderNormalRadio(); //Render Normal Radio
+
+              $(document).UixRenderDatePicker(); //Render Date Picker	
+
+              $(document).UixRenderTagInput(); //Render Tag Input
+
+              $(document).UixRenderNumberInput(); //Render Number Input
+
               x++;
             }
           }; // default item
@@ -26917,8 +26955,6 @@ function dynamic_fields_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symb
     });
   };
 })(jQuery);
-// EXTERNAL MODULE: ./src/components/form/js/fn/number-input.js
-var number_input = __webpack_require__(838);
 ;// CONCATENATED MODULE: ./src/components/form/js/index.js
 function form_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
