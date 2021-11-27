@@ -20,11 +20,16 @@ import DirectionalRotationPlugin from "./DirectionalRotationPlugin.js";
 import TimelineLite from "./TimelineLite.js";
 import TimelineMax from "./TimelineMax.js";
 import BezierPlugin from "./BezierPlugin.js";
+import ScrollToPlugin from "./ScrollToPlugin.js";
+import ModifiersPlugin from "./ModifiersPlugin.js";
 import { Back, Elastic, Bounce, RoughEase, SlowMo, SteppedEase, Circ, Expo, Sine, ExpoScaleEase } from "./EasePack.js";
 
 //the following two lines are designed to prevent tree shaking of the classes that were historically included with TweenMax (otherwise, folks would have to reference CSSPlugin, for example, to ensure their CSS-related animations worked)
 export var TweenMax = TweenMaxBase;
-TweenMax._autoActivated = [TimelineLite, TimelineMax, CSSPlugin, AttrPlugin, BezierPlugin, RoundPropsPlugin, DirectionalRotationPlugin, Back, Elastic, Bounce, RoughEase, SlowMo, SteppedEase, Circ, Expo, Sine, ExpoScaleEase];
 
+//plugins
+TweenMax._autoActivated = [TimelineLite, TimelineMax, CSSPlugin, AttrPlugin, BezierPlugin, RoundPropsPlugin, DirectionalRotationPlugin, Back, Elastic, Bounce, RoughEase, SlowMo, SteppedEase, Circ, Expo, Sine, ExpoScaleEase, ScrollToPlugin, ModifiersPlugin];
+
+//
 export { TweenMax as default };
 export { TweenLite, TimelineLite, TimelineMax, CSSPlugin, AttrPlugin, BezierPlugin, DirectionalRotationPlugin, RoundPropsPlugin, TweenPlugin, Ease, Power0, Power1, Power2, Power3, Power4, Linear, Back, Elastic, Bounce, RoughEase, SlowMo, SteppedEase, Circ, Expo, Sine, ExpoScaleEase };
