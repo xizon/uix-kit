@@ -7,7 +7,7 @@
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
   "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
-  "main": "webpack.config.js",
+  "main": "dist/js/uix-kit.js",
   "directories": {
     "example": "examples"
   },
