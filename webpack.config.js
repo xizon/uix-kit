@@ -15,7 +15,7 @@ const moment                     = require('moment');
 const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const webpackDevMiddleware       = require('webpack-dev-middleware');
-const ConcatPlugin               = require('webpack-concat-plugin');
+const WebpackConcatPlugin        = require('webpack-concat-files-plugin');
 
 const colors = {
     Reset: "\x1b[0m",
@@ -476,31 +476,28 @@ webpackConfig.plugins.push(
 
 // Create vendor.js from all third-party generic script library
 
-//webpackConfig.plugins.push(
-//	
-//	new ConcatPlugin({
-//		uglify: false,
-//		sourceMap: false,
-//		name: 'result',
-//		outputPath: '',
-//		fileName: 'vendor.js',
-//		filesToConcat: [
-//			'./vendor/files/axios.min.js',
-//			'./vendor/files/jquery.waitforimages.min.js',
-//			'./vendor/files/video.min.js',
-//			'./vendor/files/template7.min.js',
-//			'./vendor/files/TweenMax.min.js',
-//			'./vendor/files/pixi.min.js',
-//			'./vendor/files/three.min.js',
-//			'./vendor/files/anime.min.js',
-//			'./vendor/files/hammer.min.js',
-//			'./vendor/files/muuri.min.js',
-//		],
-//		attributes: {
-//			async: true
-//		}
-//	})
-//);
+// webpackConfig.plugins.push(
+
+// 	new WebpackConcatPlugin({
+// 		bundles: [
+// 			{
+// 				dest: './' + globs.dist + '/js/vendor.js',
+// 				src: [
+// 					'./vendor/files/axios.min.js',
+// 					'./vendor/files/jquery.waitforimages.min.js',
+// 					'./vendor/files/video.min.js',
+// 					'./vendor/files/template7.min.js',
+// 					'./vendor/files/TweenMax.min.js',
+// 					'./vendor/files/pixi.min.js',
+// 					'./vendor/files/three.min.js',
+// 					'./vendor/files/anime.min.js',
+// 					'./vendor/files/hammer.min.js',
+// 					'./vendor/files/muuri.min.js',
+// 				],
+// 			},
+// 		],
+// 	})
+// );
 
 
 
