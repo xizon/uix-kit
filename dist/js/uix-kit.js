@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.3
+ * ## Version             :  4.6.4
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 23, 2021
+ * ## Last Update         :  December 31, 2021
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -15305,7 +15305,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     20.Counter
     21.Dropdown Menu
     22.Dropdown Menu 2 (Multi-level drop-down navigation)
-    23.Dynamic Drop Down List from JSON
+    23.Cascading DropDown List
     24.Flexslider (Third-party plugin)
     25.Floating Side Element
     26.Form Progress
@@ -15796,7 +15796,7 @@ window.MAIN = null;
  *                                           load asynchronous information
  * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to
  *                                           load asynchronous information
- * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
+ * @param  {Boolean} ajaxDDList            - Run script of module "Cascading DropDown List".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
  * @return {Void}
  *
@@ -15836,7 +15836,7 @@ window.MAIN = null;
       ajaxPostList: true,
       // @from ./src/components/list-posts
       ajaxDDList: true,
-      // @from ./src/components/dynamic-dropdown-list-json
+      // @from ./src/components/cascading-dropdown-list
       counterAnim: true,
       // @from ./src/components/counter
       lightBox: true // @from ./src/components/lightbox
@@ -15941,11 +15941,11 @@ window.MAIN = null;
 
       if (settings.ajaxPostList) {
         if (UixModuleInstance.POST_LIST_AJAX) UixModuleInstance.POST_LIST_AJAX.documentReady($);
-      } //Dynamic Drop Down List from JSON
+      } //Cascading DropDown List
 
 
       if (settings.ajaxDDList) {
-        if (UixModuleInstance.DYNAMIC_DD_LIST) UixModuleInstance.DYNAMIC_DD_LIST.documentReady($);
+        if (UixModuleInstance.CASCADING_DD_LIST) UixModuleInstance.CASCADING_DD_LIST.documentReady($);
       } //Counter
 
 
@@ -22617,262 +22617,370 @@ var DROPDOWN_MENU2 = function (module, $, window, document) {
     this.module = module;
   };
 }(UixModuleInstance, jQuery, window, document);
-// EXTERNAL MODULE: ./src/components/form/js/fn/select.js
-var fn_select = __webpack_require__(616);
-;// CONCATENATED MODULE: ./src/components/dynamic-dropdown-list-json/js/index.js
-function dynamic_dropdown_list_json_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+;// CONCATENATED MODULE: ./src/components/cascading-dropdown-list/js/index.js
+function cascading_dropdown_list_js_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function dynamic_dropdown_list_json_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return typeof obj; }; } else { dynamic_dropdown_list_json_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dynamic_dropdown_list_json_js_typeof(obj); }
+function cascading_dropdown_list_js_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { cascading_dropdown_list_js_typeof = function _typeof(obj) { return typeof obj; }; } else { cascading_dropdown_list_js_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return cascading_dropdown_list_js_typeof(obj); }
 
 /* 
  *************************************
- * <!-- Dynamic Drop Down List from JSON -->
+ * <!-- Cascading DropDown List -->
  *************************************
  */
 
 
-var DYNAMIC_DD_LIST = function (module, $, window, document) {
-  if (window.DYNAMIC_DD_LIST === null) return false;
-  module.DYNAMIC_DD_LIST = module.DYNAMIC_DD_LIST || {};
-  module.DYNAMIC_DD_LIST.version = '0.1.1';
+var CASCADING_DD_LIST = function (module, $, window, document) {
+  if (window.CASCADING_DD_LIST === null) return false;
+  module.CASCADING_DD_LIST = module.CASCADING_DD_LIST || {};
+  module.CASCADING_DD_LIST.version = '0.2.1';
 
-  module.DYNAMIC_DD_LIST.documentReady = function ($) {
-    $('[data-ajax-dynamic-dd-json]').each(function () {
-      var $this = $(this);
-      var ranID = 'dynamic-dd-control-' + UixGUID.create(),
-          ID = $this.attr('id');
-      var jsonFile = $this.data('ajax-dynamic-dd-json'),
-          dataType = $this.data('ajax-dynamic-dd-datatype'),
-          method = $this.data('ajax-dynamic-dd-method'),
-          paramsWithJson = $this.data('ajax-dynamic-dd-data'),
-          placeholderStrArr = $this.data('ajax-dynamic-dd-placeholder-str'),
-          controlIDsArr = $this.data('ajax-dynamic-dd-control-ids'),
-          appendTemp = $this.data('ajax-dynamic-dd-append-temp'),
-          curID;
-      if (dynamic_dropdown_list_json_js_typeof(placeholderStrArr) === ( true ? "undefined" : 0)) placeholderStrArr = [];
-      if (dynamic_dropdown_list_json_js_typeof(controlIDsArr) === ( true ? "undefined" : 0)) controlIDsArr = [];
-      if (dynamic_dropdown_list_json_js_typeof(jsonFile) === ( true ? "undefined" : 0)) jsonFile = '';
-      if (dynamic_dropdown_list_json_js_typeof(paramsWithJson) === ( true ? "undefined" : 0)) paramsWithJson = {};
-      if (dynamic_dropdown_list_json_js_typeof(method) === ( true ? "undefined" : 0)) method = 'POST';
-      if (dynamic_dropdown_list_json_js_typeof(appendTemp) === ( true ? "undefined" : 0)) appendTemp = '';
-      if (dynamic_dropdown_list_json_js_typeof(ID) === ( true ? "undefined" : 0)) $this.attr('id', ranID);
-      if (dynamic_dropdown_list_json_js_typeof(dataType) === ( true ? "undefined" : 0)) dataType = 'category'; // options: category, place
+  module.CASCADING_DD_LIST.documentReady = function ($) {
+    var curControls = '.uix-cascading-dropdown-list';
+    var wrapperDepth = $(curControls).length === 0 ? 1 : $(curControls).length + 1;
+    $(curControls).each(function () {
+      wrapperDepth--;
+      var cid = UixGUID.create();
+      var $control = $(this);
+      var actived = $control.data('activated');
+      $control.attr('id', 'app-' + cid); //
 
-      curID = $this.attr('id'); //Parse the JSON data
+      var ajaxURL = $control.data('cascading-dd-json'),
+          ajaxMethod = $control.data('cascading-dd-method'),
+          loadingTmpl = $control.data('cascading-dd-loading-tmpl');
+      if (cascading_dropdown_list_js_typeof(ajaxURL) === ( true ? "undefined" : 0)) ajaxURL = '';
+      if (cascading_dropdown_list_js_typeof(ajaxMethod) === ( true ? "undefined" : 0)) ajaxMethod = 'POST';
+      if (cascading_dropdown_list_js_typeof(loadingTmpl) === ( true ? "undefined" : 0)) loadingTmpl = '<div>loading...</div>';
 
-      if (jsonFile != '') {
-        //Initialize dependent/chained dropdown list
-        var dataExist = $this.data('exist');
+      if (cascading_dropdown_list_js_typeof(actived) === ( true ? "undefined" : 0)) {
+        // Methods
+        //------------------------------------------
+        var loadingAnim = function loadingAnim() {
+          var $loadingWrapper = $control.find('.uix-cascading-dropdown-list__loading__wrapper');
 
-        if (dynamic_dropdown_list_json_js_typeof(dataExist) === ( true ? "undefined" : 0) && dataExist != 1) {
-          // Add a request or response interceptor
-          var axiosInterceptor = axios.interceptors.request.use(function (config) {
-            // Do something before request is sent
-            //
-            return config;
-          }, function (error) {
-            return Promise.reject(error);
-          }); // To send data in the application/x-www-form-urlencoded format instead
-
-          var formData = new FormData();
-          var defaultPostData = paramsWithJson;
-
-          for (var k in defaultPostData) {
-            formData.append(k, defaultPostData[k]);
-          } // Create a request event
+          if ($control.data('loading')) {
+            $loadingWrapper.html(loadingTmpl);
+          } else {
+            $loadingWrapper.html('');
+          }
+        }; //
 
 
-          axios({
-            timeout: 15000,
-            method: method,
-            url: jsonFile,
-            data: formData,
-            responseType: 'json'
-          }).then(function (response) {
-            var jsonData = response.data; //Recursive and initialized functions
-            //------------------------------------
+        var handleInitControl = function handleInitControl() {
+          var firstLevelItems = [];
+          $control.data('ajaxOptions').forEach(function (item) {
+            firstLevelItems.push({
+              "id": item.id,
+              "name": item.name
+            });
+          }); //
 
-            var initSelectControls = function initSelectControls(selectIndex, nodeName, $select, arr, allControlsLength) {
-              //-- Hide or display controls
-              var controlView = function controlView() {
-                for (var p = 0; p < controlIDsArr.length; p++) {
-                  var data = controlIDsArr[p];
-                  var curSelInputID = data != null ? controlIDsArr[p].replace('#', '') : data;
-                  var curSelWrapperID = curSelInputID + '----select';
-                  var isCustomSel = $('#' + curSelWrapperID).hasClass('uix-controls__select');
-                  var $curSelWrapper = isCustomSel ? $('#' + curSelWrapperID).parent('.uix-controls__select-wrapper') : $('#' + curSelWrapperID); //hide/display select wrapper
+          $control.data({
+            'data': [$control.data('ajaxOptions')],
+            'firstLevelItems': [firstLevelItems]
+          }); // update result to input
 
-                  if ($('#' + curSelWrapperID).find('select option').length == 0) {
-                    $curSelWrapper.hide();
-                  } else {
-                    $curSelWrapper.show();
-                  } //Render the custom select
+          $resInput.val('');
+        }; //
 
 
-                  if (isCustomSel) $(document).UixRenderCustomSelect();
-                }
-              }; //-- Clear the select controls behind       
+        var queryResultOfJSON = function queryResultOfJSON(data, targetVal, returnType) {
+          var callbackValueNested = [];
+          var lastFirstLevelName = '';
+          var loop = true;
+          var resDepth = 0;
 
-
-              var clearAllSelControls = function clearAllSelControls() {
-                if (allControlsLength > selectIndex) {
-                  for (var i = allControlsLength; i > selectIndex; i--) {
-                    var $targetClearSel = $this.find('select').eq(i - 1);
-                    var tid = $targetClearSel.closest('.uix-controls').attr('id');
-                    var curSelInputID = tid != null ? tid.replace('----select', '') : tid; //Remove options
-
-                    $targetClearSel.empty(); //update a empty value
-
-                    $('#' + curSelInputID).val(''); //Hide or display controls
-
-                    controlView();
-                  }
-                }
-              };
-
-              clearAllSelControls(); //-- Json Infinite Recursion
-
-              if (arr == '') return false; //Empty data sent when the change event is triggered
-
-              if (arr) {
-                /*
-                console.log( '--------' );
-                console.log( '-> target select ID: ' + $select.closest( '.uix-controls' ).attr( 'id' ) );
-                console.log( '-> target select data: ' );
-                console.log( arr );
-                */
-                //add empty option
-                var emptyOption = '<option value="">' + placeholderStrArr[selectIndex] + '</option>';
-                $select.append(emptyOption); //
-
-                for (var i = 0; i < arr.length; i++) {
-                  if (arr[i]) {
-                    ///////////////////////////////////////
-                    //////////////// category /////////////
-                    ///////////////////////////////////////
-                    if (dataType == 'category') {
-                      var _name = arr[i].name;
-                      $select.append('<option data-index="' + i + '" value="' + _name + '">' + _name + '</option>');
-                    } // endif dataType
-                    ///////////////////////////////////////
-                    //////////////// place ////////////////
-                    /////////////////////////////////////// 
-
-
-                    if (dataType == 'place') {
-                      var _name2 = arr[i].name;
-
-                      if (dynamic_dropdown_list_json_js_typeof(_name2) === ( true ? "undefined" : 0)) {
-                        $select.append('<option data-index="' + i + '" value="' + arr[i] + '">' + arr[i] + '</option>');
-                      } else {
-                        $select.append('<option data-index="' + i + '" value="' + _name2 + '">' + _name2 + '</option>');
-                      }
-                    } // endif dataType     
-
-                  }
-                } //end for arr  
-
-              } //endif arr
-              //-- Hide or display controls
-
-
-              controlView(); //-- Change Event
-
-              $select.off('change.DYNAMIC_DD_LIST').on('change.DYNAMIC_DD_LIST', function () {
-                var curDeep = $(this).find('option:selected').data('index');
-                var curVal = $(this[this.selectedIndex]).val();
-                var $targetSel = $this.find('select').eq(selectIndex + 1); //update a new value
-
-                var tid = $(this).closest('.uix-controls').attr('id');
-                $('#' + (tid != null ? tid.replace('----select', '') : tid)).val(curVal); //Remove options
-
-                if (curVal == '' || curVal == null) {
-                  $targetSel.empty();
-                } //Hide or display controls
-
-
-                controlView(); //send new JSON data
-
-                var sendData = arr[curDeep] ? arr[curDeep][nodeName] : '';
-                initSelectControls(selectIndex + 1, 'list', $targetSel, sendData, allControlsLength);
-              });
-            }; // Append the default select control to the container
-            //------------------------------------
-
-
-            for (var p = 0; p < controlIDsArr.length; p++) {
-              var data = controlIDsArr[p];
-              var curSelInputID = data != null ? controlIDsArr[p].replace('#', '') : data;
-              var curSelWrapperID = curSelInputID + '----select';
-
-              if ($('#' + curSelWrapperID).length == 0) {
-                $($.parseHTML(appendTemp)).attr('id', curSelWrapperID).appendTo($this);
+          var getIndexOf = function getIndexOf(arr, val) {
+            for (var i = 0; i < arr.length; i++) {
+              if (arr[i].id.toString() === val.toString()) {
+                return i;
               }
-            } //endfor controlIDsArr 
-            // Initialize the selection box
-            //------------------------------------
+            }
+
+            return -1;
+          };
+
+          var searchJsonStr = function searchJsonStr(list, depth) {
+            // `depth` is very important, it is used to accurately judge the final result
+            if (typeof depth === 'undefined') {
+              depth = 0;
+            } else {
+              depth++;
+            } //    
 
 
-            var lastData = controlIDsArr[controlIDsArr.length - 1];
-            var lastSelInputID = lastData != null ? lastData.replace('#', '') : lastData;
-            var lastSelWrapperID = lastSelInputID + '-select';
-            $.when($('#' + lastSelWrapperID).length > 0).then(function () {
-              initSelectControls(0, 'list', $this.find('select').first(), jsonData, controlIDsArr.length); //-- Reset default value and select style
+            for (var i = 0; i < list.length; i++) {
+              var row = list[i];
+              var callbackValue = returnType === 'key' ? row.id.toString() : row.name.toString();
 
-              for (var _p = 0; _p < controlIDsArr.length; _p++) {
-                var _data = controlIDsArr[_p];
-
-                var _curSelInputID = _data != null ? controlIDsArr[_p].replace('#', '') : _data;
-
-                var _curSelWrapperID = _curSelInputID + '----select';
-
-                var isCustomSel = $('#' + _curSelWrapperID).hasClass('uix-controls__select');
-                var $curSelWrapper = isCustomSel ? $('#' + _curSelWrapperID).parent('.uix-controls__select-wrapper') : $('#' + _curSelWrapperID); //update a new value to select control when the default is not empty
-
-                var defaultVal = $('#' + _curSelInputID).data('default-value');
-
-                if (defaultVal != '' && defaultVal != null) {
-                  $('#' + _curSelInputID).val(defaultVal);
-                  $curSelWrapper.find('select').val(defaultVal).attr('selected', 'selected').change();
-                } //Render the custom select
+              if (loop) {
+                // get first-level item
+                if (getIndexOf(data, row.id) !== -1) {
+                  callbackValueNested.push(callbackValue);
+                  lastFirstLevelName = callbackValue;
+                } // get child-level item
 
 
-                if (isCustomSel) {
-                  $(document).UixRenderCustomSelect();
-                  $curSelWrapper.find('select').attr('selected', 'selected').change();
+                if (row.children) {
+                  callbackValueNested.push(callbackValue);
                 }
+              } //check the value
+
+
+              if (row.id.toString() === targetVal.toString()) {
+                callbackValueNested.push(callbackValue);
+                loop = false;
+                resDepth = depth;
+                break;
+              } // Note: Recursion must be placed here
+
+
+              if (loop) {
+                if (row.children) {
+                  searchJsonStr(row.children, depth);
+                }
+              }
+            }
+          };
+
+          searchJsonStr(data); // (1) Remove duplicate values
+          //------------------------------------------
+
+          callbackValueNested = callbackValueNested.filter(function (item, index, arr) {
+            return arr.indexOf(item, 0) === index;
+          }); // (2) Delete needless first-level
+          //------------------------------------------
+
+          var resAll = callbackValueNested.slice(callbackValueNested.indexOf(lastFirstLevelName), callbackValueNested.length); // (3) Returns result
+          //------------------------------------------
+
+          if (resAll.length > 1) {
+            // Get first-level item
+            resAll.splice(1); // Get child-level item
+
+            var resChild = callbackValueNested.slice(-resDepth); // Get the last elements in reverse
+            // Combine
+
+            resAll = resAll.concat(resChild);
+          }
+
+          return resAll;
+        }; //
+
+
+        var setValue = function setValue(arr, targetVal) {
+          // update result to input
+          $resInput.val(targetVal); //search JSON key that contains specific string
+
+          $control.data({
+            'selectedData': {
+              labels: queryResultOfJSON(arr, targetVal, 'value'),
+              values: queryResultOfJSON(arr, targetVal, 'key')
+            }
+          });
+        }; //
+
+
+        var handleClickItem = function handleClickItem(resValue, index, level) {
+          console.log('resValue: ', resValue, ' | index: ', index, ' | level: ', level); // update value
+
+          setValue($control.data('ajaxOptions'), resValue.id); // active the selected item
+
+          var markCurrent = function markCurrent(arr, index) {
+            for (var i = 0; i < arr.length; i++) {
+              if (i === index) {
+                arr[i].current = true;
+              } else {
+                arr[i].current = false;
+              }
+            }
+          }; // deactivate all items
+
+
+          var markAllItems = function markAllItems(arr) {
+            for (var i = 0; i < arr.length; i++) {
+              arr[i].current = false;
+            }
+          }; //
+
+
+          var newData = $control.data('data'); // such as: [Array(6), Array(3)]
+          //console.log( 'newData: ', newData );
+          // All the elements from start(array.length - start) to the end of the array will be deleted.
+
+          newData.splice(level + 1);
+
+          if (resValue.children) {
+            var childList = resValue.children;
+            markAllItems(childList);
+            newData[level + 1] = childList;
+          } //
+
+
+          $control.data({
+            'data': newData
+          });
+          markCurrent(newData[level], index);
+        }; //
+
+
+        var handleDisplayOptions = function handleDisplayOptions(e) {
+          e.preventDefault();
+          $control.data({
+            'isShow': !$control.data('isShow')
+          });
+        }; // If clicked on outside of element
+
+
+        var handleClickOutside = function handleClickOutside(event) {
+          if (event.target.className != '' && event.target.className.indexOf('uix-cascading-dropdown-list__trigger') < 0 && event.target.className.indexOf('uix-cascading-dropdown-list__items') < 0 && event.target.className.indexOf('uix-cascading-dropdown-list__opt') < 0) {
+            $control.data({
+              'isShow': false
+            });
+          }
+        }; // Rendering component
+
+
+        var render = function render() {
+          var isShow = $control.data('isShow');
+          var data = $control.data('data'); //for wrapper
+
+          if (isShow) {
+            var items = '';
+            data.map(function (item, level) {
+              var options = '';
+              item.map(function (option, optionIndex) {
+                options += '<div class="' + (option.current ? 'uix-cascading-dropdown-list__opt is-active' : 'uix-cascading-dropdown-list__opt') + '" data-level="' + level + '" data-value=\'' + JSON.stringify(option) + '\' data-index="' + optionIndex + '">' + option.name + '</div>';
+              });
+              items += '<li>' + options + '</li>';
+            });
+            $listWrapper.html("\n                        <div class=\"uix-cascading-dropdown-list__items\">\n                            <ul>\n                                " + items + "\n                            </ul>\n            \n                        </div>\n                        ");
+          } else {
+            $listWrapper.html('');
+          } //for options
+
+
+          var selectedData = $control.data('selectedData');
+          var displayInfo = '';
+
+          if (selectedData.labels) {
+            selectedData.labels.map(function (item, i, arr) {
+              var _input = '<input name="' + fieldName + '-node[]" type="hidden" value="' + selectedData.values[i] + '"/>';
+
+              if (arr.length - 1 === i) {
+                displayInfo += '<span>' + item + '' + _input + '</span>';
+              } else {
+                displayInfo += '<span>' + item + '' + _input + '</span><svg viewBox="0 0 22 22" width="8"><path d="m345.44 248.29l-194.29 194.28c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744l171.91-171.91-171.91-171.9c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.29 194.28c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373" transform="matrix(.03541-.00013.00013.03541 2.98 3.02)" fill="#a5a5a5"/></svg>';
               }
             });
-          })["catch"](function (error) {
-            if (error.response) {
-              // The request was made and the server responded with a status code
-              // that falls out of the range of 2xx
-              var status = error.response.status;
-              console.log(status);
-            } else if (error.request) {
-              // The request was made but no response was received
-              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-              // http.ClientRequest in node.js
-              console.log(error.request);
-            } else {
-              // If there was a problem, we need to
-              // dispatch the error condition
-              console.log(error.message);
-            }
-          }); // Remove an interceptor later
+          }
 
-          axios.interceptors.request.eject(axiosInterceptor); //Prevent the form from being initialized again
+          $eachResWrapper.html(displayInfo);
+        }; // Initialize status
+        //------------------------------------------
 
-          $this.data('exist', 1);
+
+        //Initialize HTML structure
+        $control.append("\n                    <em class=\"uix-cascading-dropdown-list__result\"></em>\n                    <span class=\"uix-cascading-dropdown-list__items__wrapper\"></span>\n                    <span class=\"uix-cascading-dropdown-list__loading__wrapper\"></span>    \n                "); //
+
+        var $listWrapper = $control.find('.uix-cascading-dropdown-list__items__wrapper');
+        var $resInput = $control.find('input.uix-cascading-dropdown-list__res');
+        var $eachResWrapper = $control.find('.uix-cascading-dropdown-list__result');
+        var fieldName = typeof $resInput.attr('name') === 'undefined' ? 'auto-name-' + cid : $resInput.attr('name');
+        var defaultVal = $resInput.val(); //the default value is STRING
+
+        /*
+        // If the final result is a comma separated string, like this: `value1,value2`
+        if (defaultVal) {
+            defaultVal.trim().replace(/^\,|\,$/g, '').split(',').forEach((item, index) => {
+                 // do something
+            });
         }
-      } // end of jsonFile
+        */
+        //init data
+
+        $control.data({
+          'ajaxOptions': [],
+          'firstLevelItems': [],
+          'loading': true,
+          //for variable field
+          'data': [],
+          'selectedData': {
+            labels: [],
+            values: []
+          },
+          'isShow': false
+        }); //loading
+
+        loadingAnim(); //Initialize input
+
+        $resInput.attr({
+          'type': 'hidden',
+          'name': fieldName
+        }); //Initialize wrapper depth
+
+        $control.css('z-index', wrapperDepth); // Get data of asynchronous request
+        //------------------------------------------
+
+        var req = ajaxMethod.toLowerCase() === 'get' ? axios.get(ajaxURL) : axios.post(ajaxURL);
+        var allData = null;
+        req.then(function (res) {
+          allData = res.data;
+          $control.data({
+            'loading': false
+          }); //loading
+
+          loadingAnim();
+
+          if (allData !== undefined) {
+            $control.data({
+              'ajaxOptions': allData
+            }); //Initialize options 
+
+            handleInitControl(); //Set a default value
+
+            if (defaultVal) setValue(allData, defaultVal); //Rendering component
+
+            render();
+          }
+        }); // Mouse Events
+        //------------------------------------------
+        //Trigger event 
+
+        $(document).off('click.CASCADING_DROPDOWNLIST_TRIGGER' + cid).on('click.CASCADING_DROPDOWNLIST_TRIGGER' + cid, "#".concat('app-' + cid, " .uix-cascading-dropdown-list__trigger"), function (e) {
+          handleDisplayOptions(e); //Rendering component
+
+          render();
+        }); //Options event
+
+        $(document).off('click.CASCADING_DROPDOWNLIST_OPTIONS_OPEN' + cid).on('click.CASCADING_DROPDOWNLIST_OPTIONS_OPEN' + cid, "#".concat('app-' + cid, " .uix-cascading-dropdown-list__opt"), function (e) {
+          var _level = $(this).data('level');
+
+          var _value = $(this).data('value');
+
+          var _index = $(this).data('index');
+
+          handleClickItem(_value, _index, _level); //Rendering component
+
+          render();
+        }); //Hide options event
+        //Do not add off() to this
+
+        $(document).on('click.CASCADING_DROPDOWNLIST_CLOSE', function (e) {
+          handleClickOutside(e); //Rendering component
+
+          render();
+        }); //------------------------------------------
+        //Prevents front-end javascripts that are activated in the background to repeat loading.
+
+        $control.data('activated', 1);
+      } //endif actived			
 
     });
   };
 
-  module.components.documentReady.push(module.DYNAMIC_DD_LIST.documentReady);
-  return function DYNAMIC_DD_LIST() {
-    dynamic_dropdown_list_json_js_classCallCheck(this, DYNAMIC_DD_LIST);
+  module.components.documentReady.push(module.CASCADING_DD_LIST.documentReady);
+  return function CASCADING_DD_LIST() {
+    cascading_dropdown_list_js_classCallCheck(this, CASCADING_DD_LIST);
 
     this.module = module;
   };
@@ -26826,6 +26934,8 @@ var controls_disable = __webpack_require__(260);
 var controls_line = __webpack_require__(599);
 // EXTERNAL MODULE: ./src/components/form/js/fn/radio-and-checkbox.js
 var radio_and_checkbox = __webpack_require__(895);
+// EXTERNAL MODULE: ./src/components/form/js/fn/select.js
+var fn_select = __webpack_require__(616);
 // EXTERNAL MODULE: ./src/components/form/js/fn/tag-input.js
 var tag_input = __webpack_require__(292);
 // EXTERNAL MODULE: ./src/components/form/js/fn/number-input.js

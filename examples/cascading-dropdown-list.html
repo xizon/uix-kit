@@ -2,7 +2,7 @@
 <html lang="en-US" dir="ltr">
 <head>
 	<meta charset="utf-8" />
-	<title>Dynamic Drop Down List - Uix Kit</title>	
+	<title>Cascading DropDown List - Uix Kit</title>	
 		<!-- Compatibility Settings
 	============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -30,11 +30,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=2VG9S9tnZ7d2ikAQSB8V"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=N5VWsEZ3fzaXa7j4uwYy"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=2VG9S9tnZ7d2ikAQSB8V" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=N5VWsEZ3fzaXa7j4uwYy" />
 	<![endif]-->
 
 
@@ -290,6 +290,7 @@
 														<li><a href="circle-layout.html">Circle Layout</a></li>
 														<li><a href="3D-carousel.html">3D Carousel</a></li>
 														<li><a href="3D-gallery.html">3D Gallery (threejs)</a></li>
+														<li><a href="cascading-dropdown-list.html">Cascading DropDown List</a><span class="uix-bubble">new</span></li>
 														
 														
 													</ul>
@@ -312,7 +313,6 @@
 														<li><a href="show-more-less.html">Show More Less</a></li>
 														<li><a href="mousewheel-interaction.html">Mousewheel Interaction</a></li>
 														<li><a href="hover-delay-interaction.html">Hover Delay Interaction</a></li>
-														<li><a href="dynamic-dropdown-list-json.html">Dynamic Drop Down List</a></li>
 														<li><a href="one-page.html">Full Page/One Page</a></li>
 														<li><a href="one-page2.html">Full Page/One Page 2</a></li>
 														<li><a href="ajax-page-loader.html">Ajax Page Loader</a></li>
@@ -428,9 +428,8 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12">
-							<h3>Dynamic Drop Down List from JSON</h3>
+							<h3>Cascading DropDown List</h3>
 							<p>Create a dynamic dropdown form that loads its data from a JSON file. Support infinite recursion.</p>
-								<p class="uix-striking-msg uix-striking-msg--info"><strong>Callback:</strong> <span id="dynamic-callback">-</span></p>
 							<hr>
 							
 							
@@ -456,26 +455,18 @@
                                 
                                     <h4>Empty value</h4>
 
-                                    <div data-ajax-dynamic-dd-datatype="category"
-                                         data-ajax-dynamic-dd-json="assets/json/catgories.json"
-                                         data-ajax-dynamic-dd-method="POST"
-                                         data-ajax-dynamic-dd-data='{}' 
-                                         data-ajax-dynamic-dd-placeholder-str='["- Sort -","- Child Sort 1 -","- Child Sort 2 -"]'
-                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-sort","dynamic-dd-sort--child","dynamic-dd-sort--child-child"]'
-                                         data-ajax-dynamic-dd-append-temp='
-                                            <div class="uix-controls uix-controls__normal-select">
-                                                <span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-                                                <select></select>
-                                            </div>			                                
-                                        '>
+                                    <!-- control begin -->
+                                    <div 
+                                        class="uix-cascading-dropdown-list" 
+                                        data-cascading-dd-json="assets/json/dropdown-list.json" 
+                                        data-cascading-dd-method="GET"
+										data-cascading-dd-loading-tmpl="<div>loading...</div>"
+                                    >
+                                        <input class="uix-cascading-dropdown-list__res" name="myname1" type="hidden" value=""/>
+                                        <a role="button" href="#" class="uix-cascading-dropdown-list__trigger" style="border: 1px solid #dadcdf;padding: 0.25rem 1rem;border-radius: 25px;font-size: .875rem;">Select</a>
                                     </div>
+                                    <!-- control end -->
                                     
-                                    <!-- default value here -->
-                                    <input type="hidden" name="myname1" id="dynamic-dd-sort" data-default-value="">
-                                    <input type="hidden" name="myname2" id="dynamic-dd-sort--child" data-default-value="">
-                                    <input type="hidden" name="myname3" id="dynamic-dd-sort--child-child" data-default-value="">
-
-
 								
 							</div>
 							<!-- .col-12 end -->
@@ -500,24 +491,17 @@
                                 
                                     <h4>The default value is specified</h4>
 
-                                    <div data-ajax-dynamic-dd-datatype="category"
-                                         data-ajax-dynamic-dd-json="assets/json/catgories.json"
-                                         data-ajax-dynamic-dd-method="POST"
-                                         data-ajax-dynamic-dd-data='{}' 
-                                         data-ajax-dynamic-dd-placeholder-str='["- Sort -","- Child Sort 1 -"]'
-                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-sort2","dynamic-dd-sort2--child"]'
-                                         data-ajax-dynamic-dd-append-temp='
-                                            <div class="uix-controls uix-controls__normal-select">
-                                                <span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-                                                <select></select>
-                                            </div>			                                
-                                        '>
+                                    <!-- control begin -->
+                                    <div 
+                                        class="uix-cascading-dropdown-list" 
+                                        data-cascading-dd-json="assets/json/dropdown-list.json" 
+                                        data-cascading-dd-method="GET"
+										data-cascading-dd-loading-tmpl="<div>loading...</div>"
+                                    >
+                                        <input class="uix-cascading-dropdown-list__res" name="myname2" type="hidden" value="1_2"/>
+                                        <a role="button" href="#" class="uix-cascading-dropdown-list__trigger" style="border: 1px solid #dadcdf;padding: 0.25rem 1rem;border-radius: 25px;font-size: .875rem;">Select</a>
                                     </div>
-                                    
-                                    <!-- default value here -->
-                                    <input type="hidden" name="myname4" id="dynamic-dd-sort2" data-default-value="Level-1 | 2">
-                                    <input type="hidden" name="myname5" id="dynamic-dd-sort2--child" data-default-value="Level-2 | 2_1">
-
+                                    <!-- control end -->
 
 								
 							</div>
@@ -535,49 +519,7 @@
             
             
             
-		   <!-- Content 
-			====================================================== -->
-			<section class="uix-spacing--s">
-				<div class="container">
-						<div class="row">
-							<div class="col-12">
-                                
-                                    <h4>Using custom theme for the select control</h4>
-
-                                    <div data-ajax-dynamic-dd-datatype="category"
-                                         data-ajax-dynamic-dd-json="assets/json/catgories.json"
-                                         data-ajax-dynamic-dd-method="POST"
-                                         data-ajax-dynamic-dd-data='{}' 
-                                         data-ajax-dynamic-dd-placeholder-str='["- Sort -","- Child Sort 1 -","- Child Sort 2 -"]'
-                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-sort3","dynamic-dd-sort3--child","dynamic-dd-sort3--child-child"]'
-                                         data-ajax-dynamic-dd-append-temp='
-                                            <div class="uix-controls uix-controls__select uix-controls__select--top">
-                                                <label>
-                                                    <select></select>
-                                                </label>
-                                            </div>			                                
-                                        '>
-                                    </div>
-                                    
-                                    <!-- default value here -->
-                                    <input type="hidden" name="myname6" id="dynamic-dd-sort3" data-default-value="Level-1 | 2">
-                                    <input type="hidden" name="myname7" id="dynamic-dd-sort3--child" data-default-value="">
-                                    <input type="hidden" name="myname8" id="dynamic-dd-sort3--child-child" data-default-value="">
-
-
-								
-							</div>
-							<!-- .col-12 end -->
-						</div>
-						<!-- .row end -->
-
-
-				</div>
-				<!-- .container end -->
-
-
-			</section>
-            
+		
 
 		   <!-- Content 
 			====================================================== -->
@@ -587,26 +529,20 @@
 							<div class="col-12">
                                 
                                     <h4>Show city list of China as per state select in dropdown select box</h4>
-
-                                    <div data-ajax-dynamic-dd-datatype="place"
-                                         data-ajax-dynamic-dd-json="assets/json/china.json"
-                                         data-ajax-dynamic-dd-method="POST"
-                                         data-ajax-dynamic-dd-data='{}' 
-                                         data-ajax-dynamic-dd-placeholder-str='["- Province -","- City -","- District -"]'
-                                         data-ajax-dynamic-dd-control-ids='["dynamic-dd-place","dynamic-dd-place--child","dynamic-dd-place--child-child"]'
-                                         data-ajax-dynamic-dd-append-temp='
-                                            <div class="uix-controls uix-controls__normal-select">
-                                                <span class="uix-controls__arrow"><i class="fa fa-sort"></i></span>
-                                                <select></select>
-                                            </div>			                                
-                                        '>
+									
+                                    <!-- control begin -->
+                                    <div 
+                                        class="uix-cascading-dropdown-list" 
+                                        data-cascading-dd-json="assets/json/province-city-china-level.json" 
+                                        data-cascading-dd-method="GET"
+										data-cascading-dd-loading-tmpl="<div>loading...</div>"
+                                    >
+                                        <input class="uix-cascading-dropdown-list__res" name="myname3" type="hidden" value=""/>
+                                        <a role="button" href="#" class="uix-cascading-dropdown-list__trigger" style="border: 1px solid #dadcdf;padding: 0.25rem 1rem;border-radius: 25px;font-size: .875rem;">Select Province</a>
                                     </div>
-                                    
-                                    <!-- default value here -->
-                                    <input type="hidden" name="myplace1" id="dynamic-dd-place" data-default-value="">
-                                    <input type="hidden" name="myplace2" id="dynamic-dd-place--child" data-default-value="">
-                                    <input type="hidden" name="myplace3" id="dynamic-dd-place--child-child" data-default-value="">
+                                    <!-- control end --> 
 
+                                    <br><br><br><br><br><br>
 
 								
 							</div>
@@ -689,44 +625,7 @@
        
 		
 
-	<script>
-	( function( $ ) {
-	"use strict";
-
-		$( function() {
-			/* 
-			 ---------------------------
-			 Callback Data
-			 ---------------------------
-			 */ 
-			$( document ).on( 'change.DYNAMIC_DD_LIST', 'select', function( e ) {
-
-				e.preventDefault();
-
-				var $this        = $( this[ this.selectedIndex ] ),
-					curVal       = $this.val(),
-					curContents  = '';
-
-				$( '#dynamic-callback').html( curVal );
-				
-				return false;
-
-			});		
-
-
-			
-		} );
-
-	} ) ( jQuery );
-
-
-	</script>
-
-
-	  
        
-
-	  
        
       
 
@@ -753,7 +652,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "4.6.2",
+		var REVISION     = "4.6.4",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -767,7 +666,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script defer src="../dist/js/uix-kit.min.js?ver=2VG9S9tnZ7d2ikAQSB8V"></script>
+    <script defer src="../dist/js/uix-kit.min.js?ver=N5VWsEZ3fzaXa7j4uwYy"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

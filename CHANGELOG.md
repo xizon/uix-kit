@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 4.6.4 (December 31, 2021) =
+
+* Tweak: Rename `Dynamic Drop Down List` to `Cascading DropDown List`.
+* Tweak: Refactored `Cascading DropDown List`, using algorithms to enhance performance.
+
+
 #### = 4.6.3 (November 23, 2021) =
 
 * New: Add a form type of Tag Input.

@@ -43,7 +43,7 @@ import CIRCLE_LAYOUT from '@uixkit/core/circle-layout/js';
 import COUNTER from '@uixkit/core/counter/js';
 import DROPDOWN_MENU from '@uixkit/core/dropdown-menu/js';
 import DROPDOWN_MENU2 from '@uixkit/core/dropdown-menu2/js';
-import DYNAMIC_DD_LIST from '@uixkit/core/dynamic-dropdown-list-json/js';
+import CASCADING_DD_LIST from '@uixkit/core/cascading-dropdown-list/js';
 import FLEXSLIDER from '@uixkit/core/flexslider/js';
 import FLOATING_SIDE_EL from '@uixkit/core/floating-side-element/js';
 import FORM_PROGRESS from '@uixkit/core/form-progress/js';

@@ -8,7 +8,7 @@
  *                                           load asynchronous information
  * @param  {Boolean} ajaxPostList          - Run script of module "Posts List With Ajax". a page commonly used to
  *                                           load asynchronous information
- * @param  {Boolean} ajaxDDList            - Run script of module "Dynamic Drop Down List from JSON".
+ * @param  {Boolean} ajaxDDList            - Run script of module "Cascading DropDown List".
  * @param  {Boolean} counterAnim           - Run script of module "Counter".
  * @return {Void}
  *
@@ -45,7 +45,7 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 		const settings = $.extend({
 			scrollReveal    : true, // @from ./src/components/scroll-reveal
 			ajaxPostList    : true, // @from ./src/components/list-posts
-			ajaxDDList      : true, // @from ./src/components/dynamic-dropdown-list-json
+			ajaxDDList      : true, // @from ./src/components/cascading-dropdown-list
 			counterAnim     : true, // @from ./src/components/counter
 			lightBox        : true  // @from ./src/components/lightbox
 		}, options );
@@ -116,9 +116,9 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 				if ( UixModuleInstance.POST_LIST_AJAX ) UixModuleInstance.POST_LIST_AJAX.documentReady($);
 			}
 
-			//Dynamic Drop Down List from JSON
+			//Cascading DropDown List
 			if ( settings.ajaxDDList ) {
-				if ( UixModuleInstance.DYNAMIC_DD_LIST ) UixModuleInstance.DYNAMIC_DD_LIST.documentReady($);
+				if ( UixModuleInstance.CASCADING_DD_LIST ) UixModuleInstance.CASCADING_DD_LIST.documentReady($);
 			}
 
 
