@@ -200,7 +200,7 @@ const webpackConfig = {
 		fallback: {
 			fs: false
 		},
-        extensions: ['.js', '.es6', '.vue', '.jsx', '.ts', '.tsx', '.scss', '.sass' ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.sass'],
 		alias: {
 			
 			// Uix Kit specific mappings.
@@ -262,7 +262,7 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.(glsl|vs|fs|vert|frag)$/,
-                exclude: path.resolve( __dirname, 'node_modules' ),
+                exclude: path.resolve(__dirname, './node_modules'),
                 use: [
                     'raw-loader',
                     'glslify-loader'
@@ -275,7 +275,7 @@ const webpackConfig = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
-                exclude: path.resolve( __dirname, 'node_modules' ),
+                exclude: path.resolve(__dirname, './node_modules'),
                 options: {  
 				  'presets': [
 					  '@babel/preset-env', 
@@ -288,13 +288,16 @@ const webpackConfig = {
 				test: /\.(sa|sc|c)ss$/,
 				include: path.resolve( __dirname, './' + globs.build ),
 				use: [
-					// fallback to style-loader in development
+					/**
+					 * Note:
+					 * You can use `style-loader` to inject CSS into the DOM to generate a final js file
+					 */
 					{
 						loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )
 						options: {
 							// you can specify a publicPath here
 							// by default it use publicPath in webpackOptions.output
-							publicPath: path.resolve(__dirname, './' + globs.dist )
+							publicPath: `../../${globs.dist}/js/`
 
 						}
 					},
@@ -331,6 +334,10 @@ const webpackConfig = {
 				]
 			},
 			
+			// Note:
+			// 1) Compatible with node-sass(4+) and sass-loader(7+)
+			// 2) The versions of node-sass (7+) and sass-loader (12+) 
+			//    are matched to extract files without `file-loader`
 			{
 				test: /\.(png|jpe?g|gif|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
 			   loader: 'file-loader', 

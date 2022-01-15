@@ -70,7 +70,6 @@
     "style-loader": "^0.23.1",
     "tar": "^4.4.19",
     "terser-webpack-plugin": "^5.1.4",
-    "uglify-js": "^3.6.0",
     "webpack": "^5.49.0",
     "webpack-cli": "^3.3.12",
     "webpack-concat-files-plugin": "^0.5.2",
