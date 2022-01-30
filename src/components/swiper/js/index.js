@@ -17,9 +17,27 @@ import {
     UixThrottle
 } from '@uixkit/core/_global/js';
 
-
-import Swiper from '@uixkit/core/swiper/js/third-party/swiper-bundle.js';
 import '../scss/_style.scss';
+
+
+import '../third-party/Swiper/src/swiper.scss';
+
+//IMPORT_COMPONENTS
+import "../third-party/Swiper/src/components/zoom/zoom.scss";
+import "../third-party/Swiper/src/components/thumbs/thumbs.scss";
+import "../third-party/Swiper/src/components/scrollbar/scrollbar.scss";
+import "../third-party/Swiper/src/components/pagination/pagination.scss";
+import "../third-party/Swiper/src/components/navigation/navigation.scss";
+import "../third-party/Swiper/src/components/lazy/lazy.scss";
+import "../third-party/Swiper/src/components/effect-flip/effect-flip.scss";
+import "../third-party/Swiper/src/components/effect-fade/effect-fade.scss";
+import "../third-party/Swiper/src/components/effect-cube/effect-cube.scss";
+import "../third-party/Swiper/src/components/effect-coverflow/effect-coverflow.scss";
+import "../third-party/Swiper/src/components/core/core.scss";
+import "../third-party/Swiper/src/components/controller/controller.scss";
+import "../third-party/Swiper/src/components/a11y/a11y.scss";
+
+import Swiper from '../third-party/Swiper/src/swiper.js';
 
 
 export const SWIPER = ( ( module, $, window, document ) => {

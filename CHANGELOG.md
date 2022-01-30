@@ -1,6 +1,13 @@
 # Changelog
 
 
+#### = 4.6.5 (January 30, 2022) =
+
+* Tweak: Optimized scaffolding to better support TypeScript and React.
+* Tweak: Optimized structure for on-demand loading.
+* Remove: Remove some unnecessary plugins.
+
+
 #### = 4.6.4 (December 31, 2021) =
 
 * Tweak: Rename `Dynamic Drop Down List` to `Cascading DropDown List`.

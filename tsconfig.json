@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "declaration": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "incremental": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "jsx": "react",
+    "paths": {
+      "@uixkit/core/*": ["components/*"],
+      "@uixkit/plugins/*": ["components/_third-party-plugins/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts", "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+

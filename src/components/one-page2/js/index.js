@@ -16,9 +16,6 @@ import {
     UixThrottle
 } from '@uixkit/core/_global/js';
 
-import '@uixkit/plugins/Miscellaneous/hashchange';
-
-
 export const ONEPAGE2 = ( ( module, $, window, document ) => {
 	if ( window.ONEPAGE2 === null ) return false;
 	

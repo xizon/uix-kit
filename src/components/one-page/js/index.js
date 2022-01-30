@@ -17,8 +17,6 @@ import {
 } from '@uixkit/core/_global/js';
 
 import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';
-import '@uixkit/plugins/Miscellaneous/hashchange';
-
 
 export const ONEPAGE = ( ( module, $, window, document ) => {
 	if ( window.ONEPAGE === null ) return false;

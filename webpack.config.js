@@ -12,7 +12,6 @@ const glob                       = require('glob');
 const randomString               = require('random-string');
 const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
 const moment                     = require('moment');
-const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const webpackDevMiddleware       = require('webpack-dev-middleware');
 const WebpackConcatPlugin        = require('webpack-concat-files-plugin');
@@ -183,6 +182,115 @@ class ReplacePlaceholderForFile {
 }
 
 
+
+/*! 
+ *************************************
+ *  Run command after webpack build
+ *************************************
+ */
+	
+ class MyPluginCompiledFunction {
+	// Define `apply` as its prototype method which is supplied with compiler as its argument
+	apply(compiler) {
+		// Specify the event hook to attach to
+		compiler.hooks.done.tap('MyPluginCompiledFunction', (compilation) => {
+
+			const coreJSsFile = globs.pathCore + '/_app-load.js';
+			if ( fs.existsSync( coreJSsFile ) ) {
+				fs.readFile( coreJSsFile, 'utf8', function( err, content ) {
+					if ( err ) throw err;
+			
+					//---
+					console.log(colors.fg.Yellow, `----------------------------------------------`, colors.Reset);
+			
+					const targetJSFile = './'+globs.dist+'/js/uix-kit.js';
+		
+					//
+					const tocBuildedFiles = [
+						'./'+globs.dist+'/css/uix-kit.css', 
+						'./'+globs.dist+'/css/uix-kit-rtl.css', 
+						targetJSFile 
+					];
+
+					const tocBuildedTotal = tocBuildedFiles.length;
+					let tocBuildedIndex = 1;
+					
+					// Read all core css and js files and build a table of contents
+					//---------------------------------------------------------------------
+					// Build a table of contents (TOC)
+					tocBuildedFiles.forEach( ( filepath ) => {
+		
+						if ( fs.existsSync( filepath ) ) {
+		
+							fs.readFile( filepath, 'utf8', function( err, content ) {
+		
+								if ( err ) throw err;
+		
+								
+								const curCon  = content.toString(),
+										newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
+		
+								
+		
+								//is the matched group if found
+								if ( newtext && newtext.length > 0 ) {  
+		
+									let curToc = '';
+		
+									for ( let p = 0; p < newtext.length; p++ ) {
+		
+										let curIndex = p + 1,
+											newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+		
+										if ( p > 0 ) {
+											curToc += '    ' + curIndex + '.' + newStr + '\n';
+										} else {
+											curToc +=  curIndex + '.' + newStr + '\n';
+										}
+		
+									}
+		
+									//Replace a string in a file with nodejs
+									const resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
+		
+									fs.writeFile( filepath, resultData, 'utf8', function (err) {
+		
+										if ( err ) {
+											console.log(colors.fg.Red, err, colors.Reset);
+											return;
+										}
+										//file written successfully	
+										console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${tocBuildedTotal})`, colors.Reset);
+		
+										tocBuildedIndex++;
+		
+		
+									});
+		
+		
+								}
+		
+		
+							});// fs.readFile( filepath ...
+		
+		
+						}//endif fs.existsSync( filepath ) 
+		
+		
+					});	//.map( ( filepath )...
+					
+					
+				});
+			
+			}
+
+			
+		});
+	}
+}
+  
+
+
 /*! 
  *************************************
  *  Main configuration
@@ -203,7 +311,13 @@ const webpackConfig = {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.sass'],
 		alias: {
 			
-			// Uix Kit specific mappings.
+			// specific mappings.
+			// Supports directories and custom aliases for specific files when the express server is running, 
+			// you need to configure the following files at the same time:
+			// 1) `babel.config.js`    --> "plugins": [["module-resolver", {"alias": {...}} ]]
+			//  2) `tsconfig.json`      --> "compilerOptions": { "paths": {...} }
+			//  3) `package.json`       --> "jest": { "moduleNameMapper": {...} }
+			
 			'@uixkit/core': path.resolve(__dirname, globs.pathCore ),
 			'@uixkit/plugins': path.resolve(__dirname, globs.pathThirdPartyPlugins ),
 		}
@@ -273,13 +387,19 @@ const webpackConfig = {
 				use: 'json-loader'
 			},
             {
-                test: /\.(js|jsx)$/,
+				test: /\.(js|jsx|ts|tsx)$/,
                 loader: 'babel-loader',
-                exclude: path.resolve(__dirname, './node_modules'),
+                exclude: path.resolve(__dirname, './node_modules' ),
                 options: {  
 				  'presets': [
-					  '@babel/preset-env', 
-					  '@babel/preset-react'
+					  '@babel/preset-env',
+					  '@babel/preset-react',
+					  '@babel/preset-typescript',
+					  {
+						plugins: [
+						  '@babel/plugin-proposal-class-properties'
+						]
+					  }	
 				  ]
                 }
 			},
@@ -423,7 +543,7 @@ const webpackConfig = {
 
     },
 	plugins: [
-		
+		new MyPluginCompiledFunction()
 	]
 	
 	
@@ -518,6 +638,7 @@ const compiler = webpack( webpackConfig );
 const app = express();
 const instance = webpackDevMiddleware( compiler );
 app.use( instance );
+app.use(express.static( './' ));
 
 
 //Watch for Files Changes in Node.js
@@ -552,8 +673,6 @@ targetAllWatchFilesName.map( ( event ) => {
 				filepath: `./${globs.examples}/${event[1]}`
 			}).apply(compiler);
 
-		
-
 		});
 
 		// Recompile the bundle with plugins:
@@ -562,135 +681,35 @@ targetAllWatchFilesName.map( ( event ) => {
 	
 });
 
-
-
-
 /*! 
  *************************************
  *  Listen the server
  *************************************
  */
 
+app.listen(globs.port, () => console.log(`Frontend service listening on port: ${globs.port}, access http://localhost:${globs.port} in the web browser`));
+
+
+/*
+const WebpackDevServer = require('webpack-dev-server');
 const server = new WebpackDevServer( compiler, {
 					contentBase: [
 						path.resolve(__dirname, './' )
 					],
 	                hot: true,
 					watchContentBase: true,
-	
 				});
 
 server.listen( globs.port, "localhost", function (err, result) {
 	if (err) {
 	    return console.log(colors.fg.Red, err, colors.Reset);
 	}
-
-
 	console.log(colors.fg.Yellow, 'Listening at http://localhost:' + globs.port, colors.Reset);
-})
+});
+*/
 
-
-
-/*! 
- *************************************
- * Process of processing files after compilation
- *************************************
- */
-const compilerCoreJSsFile = globs.pathCore + '/_app-load.js';
-if ( fs.existsSync( compilerCoreJSsFile ) ) {
-    fs.readFile( compilerCoreJSsFile, 'utf8', function( err, content ) {
-        if ( err ) throw err;
-
-        //---
-        console.log(colors.fg.Yellow, `----------------------------------------------`, colors.Reset);
-
-        compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
-
-
-            const targetJSFile = './'+globs.dist+'/js/uix-kit.js';
-
-            //
-            const tocBuildedFiles = ['./'+globs.dist+'/css/uix-kit.css', './'+globs.dist+'/css/uix-kit-rtl.css', targetJSFile ];
-            const tocBuildedTotal = tocBuildedFiles.length;
-            let tocBuildedIndex = 1;
-            
-			// Read all core css and js files and build a table of contents
-			//---------------------------------------------------------------------
-			// Build a table of contents (TOC)
-			tocBuildedFiles.map( ( filepath ) => {
-
-				if ( fs.existsSync( filepath ) ) {
-
-					fs.readFile( filepath, 'utf8', function( err, content ) {
-
-						if ( err ) throw err;
 
 						
-						const curCon  = content.toString(),
-								newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
-
-						
-
-						//is the matched group if found
-						if ( newtext && newtext.length > 0 ) {  
-
-							let curToc = '';
-
-							for ( let p = 0; p < newtext.length; p++ ) {
-
-								let curIndex = p + 1,
-									newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
-
-								if ( p > 0 ) {
-									curToc += '    ' + curIndex + '.' + newStr + '\n';
-								} else {
-									curToc +=  curIndex + '.' + newStr + '\n';
-								}
-
-							}
-
-							//Replace a string in a file with nodejs
-							const resultData = curCon.replace(/\$\{\{TOC\}\}/gi, curToc );
-
-							fs.writeFile( filepath, resultData, 'utf8', function (err) {
-
-								if ( err ) {
-									console.log(colors.fg.Red, err, colors.Reset);
-									return;
-								}
-								//file written successfully	
-								console.log(colors.fg.Green, `${filepath}'s table of contents generated successfully! (${tocBuildedIndex}/${tocBuildedTotal})`, colors.Reset);
-
-								tocBuildedIndex++;
-
-
-							});
-
-
-						}
-
-
-					});// fs.readFile( filepath ...
-
-
-				}//endif fs.existsSync( filepath ) 
-
-
-			});	//.map( ( filepath )...
-
-
-
-        });
-  
-        
-        
-    });
-
-}
-
-				
-									
-									
 /*! 
  *************************************
  *  Exporting webpack module
