@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  4.6.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 30, 2022
+ * ## Last Update         :  January 31, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -13397,256 +13397,6 @@ a.uix-lightbox__original__link {
   visibility: hidden;
 }
 
-/* ======================================================
-    <!-- Swiper -->
-/* ====================================================== */
-/*
- * 1. General
- * 2. Custom pagination & prev/next buttons
- * 3. Swiper custom slides transform effect
- * 4. Entered active 
- * 5. Display half on both sides
- * 6. Custom Progress Bar 
- * 7. Gallery with center thumbs automatically
- * 8. Gallery with manual triggers
-*/
-/*
- ---------------------------
- 1. General
- ---------------------------
- */
-.swiper-container {
-  width: 100%;
-  height: 300px;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #ECECED;
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/*
- ---------------------------
- 2. Custom pagination & prev/next buttons
- ---------------------------
- */
-/* Custom pagination */
-.swiper-pagination-bullet {
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  line-height: 20px;
-  font-size: 12px;
-  color: #000;
-  opacity: 1;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.swiper-pagination-bullet-active {
-  color: #fff;
-  background: red;
-}
-
-/* Custom prev/next buttons */
-.swiper-button-next::after,
-.swiper-container-rtl .swiper-button-prev::after,
-.swiper-button-prev::after,
-.swiper-container-rtl .swiper-button-next::after {
-  display: none;
-}
-
-.swiper-button-next svg,
-.swiper-container-rtl .swiper-button-prev svg,
-.swiper-button-prev svg,
-.swiper-container-rtl .swiper-button-next svg {
-  width: 44px;
-}
-
-.swiper-button-next svg path,
-.swiper-container-rtl .swiper-button-prev svg path,
-.swiper-button-prev svg path,
-.swiper-container-rtl .swiper-button-next svg path {
-  fill: red;
-}
-
-.swiper-button-next.swiper-button-disabled,
-.swiper-container-rtl .swiper-button-prev.swiper-button-disabled,
-.swiper-button-prev.swiper-button-disabled,
-.swiper-container-rtl .swiper-button-next.swiper-button-disabled {
-  opacity: .35;
-  cursor: auto;
-  pointer-events: none;
-}
-
-/*
- ---------------------------
- 3. Swiper custom slides transform effect
- ---------------------------
- */
-#app-slider3 .swiper-slide,
-#app-slider4 .swiper-slide {
-  overflow: hidden;
-  /* required */
-}
-
-#app-slider3 .swiper-slide > .slide-inner,
-#app-slider4 .swiper-slide > .slide-inner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 2;
-}
-
-#app-slider3 .swiper-slide > span,
-#app-slider4 .swiper-slide > span {
-  display: inline-block;
-  position: absolute;
-  z-index: 3;
-  left: 50px;
-  top: 50px;
-  background: #333;
-  color: #fff;
-  font-size: 20px;
-  padding: .5rem 1rem;
-}
-
-/*
- ---------------------------
- 4. Entered active
- ---------------------------
- */
-#app-slider5 .swiper-slide {
-  opacity: .7;
-  transform: scale(0.8);
-  transition: .1s ease-in-out;
-}
-
-#app-slider5 .swiper-slide.swiper-slide-active {
-  transform: scale(1);
-  opacity: 1;
-}
-
-/*
- ---------------------------
- 5. Display half on both sides
- ---------------------------
- */
-#app-slider6 .swiper-slide {
-  width: 60%;
-  padding: 0 2rem !important;
-}
-
-/*
- ---------------------------
- 6. Custom Progress Bar
- ---------------------------
- */
-#app-slider7 {
-  position: relative;
-}
-
-#app-slider7 #app-slider7__progress {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  background-color: blue;
-  height: 3px;
-  width: 0;
-  z-index: 100;
-}
-
-#app-slider7 #app-slider7__progress2 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 3px;
-  width: 0;
-  background-color: yellow;
-  height: 3px;
-  z-index: 100;
-}
-
-/*
- ---------------------------
- 7. Gallery with center thumbs automatically
- ---------------------------
- */
-#app-slider8 {
-  height: auto;
-}
-
-#app-slider8 img {
-  width: 100%;
-}
-
-#app-slider8-thumbs {
-  height: auto;
-  margin-top: 15px;
-}
-
-#app-slider8-thumbs .swiper-slide {
-  width: auto;
-  opacity: 0.3;
-  filter: grayscale(100%);
-}
-
-#app-slider8-thumbs .swiper-slide.swiper-slide-active {
-  opacity: 1;
-  filter: initial;
-}
-
-#app-slider8-thumbs .swiper-slide img {
-  cursor: pointer;
-  width: auto;
-  height: 100px;
-}
-
-/*
- ---------------------------
- 8. Gallery with manual triggers
- ---------------------------
- */
-#app-slider9 {
-  height: auto;
-}
-
-#app-slider9 img {
-  width: 100%;
-}
-
-#app-slider9-triggers {
-  height: auto;
-  margin-top: 15px;
-}
-
-#app-slider9-triggers > div {
-  display: inline-block;
-  width: auto;
-  opacity: 0.3;
-  filter: grayscale(100%);
-}
-
-#app-slider9-triggers > div.is-active {
-  opacity: 1;
-  filter: initial;
-}
-
-#app-slider9-triggers > div img {
-  cursor: pointer;
-  width: auto;
-  height: 60px;
-}
-
 @font-face {
   font-family: 'swiper-icons';
   src: url("data:application/font-woff;charset=utf-8;base64, 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") format("woff");
@@ -14427,6 +14177,256 @@ button.swiper-pagination-bullet {
   pointer-events: none;
   opacity: 0;
   z-index: -1000;
+}
+
+/* ======================================================
+    <!-- Swiper -->
+/* ====================================================== */
+/*
+ * 1. General
+ * 2. Custom pagination & prev/next buttons
+ * 3. Swiper custom slides transform effect
+ * 4. Entered active 
+ * 5. Display half on both sides
+ * 6. Custom Progress Bar 
+ * 7. Gallery with center thumbs automatically
+ * 8. Gallery with manual triggers
+*/
+/*
+ ---------------------------
+ 1. General
+ ---------------------------
+ */
+.swiper-container {
+  width: 100%;
+  height: 300px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #ECECED;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+ ---------------------------
+ 2. Custom pagination & prev/next buttons
+ ---------------------------
+ */
+/* Custom pagination */
+.swiper-pagination-bullet {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #000;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: red;
+}
+
+/* Custom prev/next buttons */
+.swiper-button-next::after,
+.swiper-container-rtl .swiper-button-prev::after,
+.swiper-button-prev::after,
+.swiper-container-rtl .swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-next svg,
+.swiper-container-rtl .swiper-button-prev svg,
+.swiper-button-prev svg,
+.swiper-container-rtl .swiper-button-next svg {
+  width: 44px;
+}
+
+.swiper-button-next svg path,
+.swiper-container-rtl .swiper-button-prev svg path,
+.swiper-button-prev svg path,
+.swiper-container-rtl .swiper-button-next svg path {
+  fill: red;
+}
+
+.swiper-button-next.swiper-button-disabled,
+.swiper-container-rtl .swiper-button-prev.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled,
+.swiper-container-rtl .swiper-button-next.swiper-button-disabled {
+  opacity: .35;
+  cursor: auto;
+  pointer-events: none;
+}
+
+/*
+ ---------------------------
+ 3. Swiper custom slides transform effect
+ ---------------------------
+ */
+#app-slider3 .swiper-slide,
+#app-slider4 .swiper-slide {
+  overflow: hidden;
+  /* required */
+}
+
+#app-slider3 .swiper-slide > .slide-inner,
+#app-slider4 .swiper-slide > .slide-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+#app-slider3 .swiper-slide > span,
+#app-slider4 .swiper-slide > span {
+  display: inline-block;
+  position: absolute;
+  z-index: 3;
+  left: 50px;
+  top: 50px;
+  background: #333;
+  color: #fff;
+  font-size: 20px;
+  padding: .5rem 1rem;
+}
+
+/*
+ ---------------------------
+ 4. Entered active
+ ---------------------------
+ */
+#app-slider5 .swiper-slide {
+  opacity: .7;
+  transform: scale(0.8);
+  transition: .1s ease-in-out;
+}
+
+#app-slider5 .swiper-slide.swiper-slide-active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/*
+ ---------------------------
+ 5. Display half on both sides
+ ---------------------------
+ */
+#app-slider6 .swiper-slide {
+  width: 60%;
+  padding: 0 2rem !important;
+}
+
+/*
+ ---------------------------
+ 6. Custom Progress Bar
+ ---------------------------
+ */
+#app-slider7 {
+  position: relative;
+}
+
+#app-slider7 #app-slider7__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: blue;
+  height: 3px;
+  width: 0;
+  z-index: 100;
+}
+
+#app-slider7 #app-slider7__progress2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3px;
+  width: 0;
+  background-color: yellow;
+  height: 3px;
+  z-index: 100;
+}
+
+/*
+ ---------------------------
+ 7. Gallery with center thumbs automatically
+ ---------------------------
+ */
+#app-slider8 {
+  height: auto;
+}
+
+#app-slider8 img {
+  width: 100%;
+}
+
+#app-slider8-thumbs {
+  height: auto;
+  margin-top: 15px;
+}
+
+#app-slider8-thumbs .swiper-slide {
+  width: auto;
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+#app-slider8-thumbs .swiper-slide.swiper-slide-active {
+  opacity: 1;
+  filter: initial;
+}
+
+#app-slider8-thumbs .swiper-slide img {
+  cursor: pointer;
+  width: auto;
+  height: 100px;
+}
+
+/*
+ ---------------------------
+ 8. Gallery with manual triggers
+ ---------------------------
+ */
+#app-slider9 {
+  height: auto;
+}
+
+#app-slider9 img {
+  width: 100%;
+}
+
+#app-slider9-triggers {
+  height: auto;
+  margin-top: 15px;
+}
+
+#app-slider9-triggers > div {
+  display: inline-block;
+  width: auto;
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+#app-slider9-triggers > div.is-active {
+  opacity: 1;
+  filter: initial;
+}
+
+#app-slider9-triggers > div img {
+  cursor: pointer;
+  width: auto;
+  height: 60px;
 }
 
 /* ======================================================

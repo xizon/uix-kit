@@ -17,9 +17,7 @@ import {
     UixThrottle
 } from '@uixkit/core/_global/js';
 
-import '../scss/_style.scss';
-
-
+//IMPORT_DEFAULT
 import '../third-party/Swiper/src/swiper.scss';
 
 //IMPORT_COMPONENTS
@@ -38,6 +36,10 @@ import "../third-party/Swiper/src/components/controller/controller.scss";
 import "../third-party/Swiper/src/components/a11y/a11y.scss";
 
 import Swiper from '../third-party/Swiper/src/swiper.js';
+
+
+//
+import '../scss/_style.scss';
 
 
 export const SWIPER = ( ( module, $, window, document ) => {
