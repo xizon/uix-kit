@@ -85,13 +85,14 @@
     display: inline-flex !important;
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
     .uix-display-none--sm  {
@@ -194,6 +195,32 @@
     }
     
     .uix-display-inline-flex--xl  {
+        display: inline-flex !important;
+    }
+}
+
+@media all and (max-width: 1400px) {
+    .uix-display-none--xxl  {
+        display: none !important;
+    }
+    
+    .uix-display-inline--xxl  {
+        display: inline !important;
+    }
+    
+    .uix-display-inline-block--xxl  {
+        display: inline-block !important;
+    }
+    
+    .uix-display-block--xxl  {
+        display: block !important;
+    }
+    
+    .uix-display-flex--xxl  {
+        display: flex !important;
+    }
+    
+    .uix-display-inline-flex--xxl  {
         display: inline-flex !important;
     }
 }
@@ -301,13 +328,14 @@
 }
 
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
 	.uix-t-r--sm {
@@ -358,6 +386,19 @@
 		text-align: left;
 	}
 	.uix-t-c--xl {
+		text-align: center;
+	}
+}
+
+@media all and (max-width: 1400px) {
+	.uix-t-r--xxl {
+		text-align: right;
+	}
+
+	.uix-t-l--xxl {
+		text-align: left;
+	}
+	.uix-t-c--xxl {
 		text-align: center;
 	}
 }

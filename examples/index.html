@@ -19,7 +19,7 @@
 	============================================= -->
 
 	<!-- Basic  -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=5.0.2" media="all"/>
 	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
 
 
@@ -30,11 +30,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=Xus98W8Xzk1QVZQtLF6Q"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=lr4gRyElxuTeiIL31SQ8"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=Xus98W8Xzk1QVZQtLF6Q" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=lr4gRyElxuTeiIL31SQ8" />
 	<![endif]-->
 
 
@@ -43,8 +43,7 @@
 
 	<!-- Vendor
 	============================================= -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
-	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.6.1"></script>
     <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
 	<!-- Vendor  end -->
 
@@ -58,7 +57,7 @@
 
 	<!-- SEO
 	============================================= -->
-	<meta name="description" content="A free web kits for fast web design and development, compatible with Bootstrap v4.">
+	<meta name="description" content="A free web kits for fast web design and development, compatible with Bootstrap v5.">
 	<meta name="generator" content="Uix Kit" />  
 	<meta name="author" content="UIUX Lab"> 
 	<!-- SEO  end -->
@@ -435,7 +434,7 @@
 							<div class="row">
 								<div class="col-md-6 offset-md-3">
 
-									<h3 class="uix-typo--h5 uix-typo--style-normal" data-text-eff="letters-eff-flyInOut-001" data-text-eff-speed="800">Free Web Kits For Fast Web Design And Development, Compatible With Bootstrap 4</h3>
+									<h3 class="uix-typo--h5 uix-typo--style-normal" data-text-eff="letters-eff-flyInOut-001" data-text-eff-speed="800">Free Web Kits For Fast Web Design And Development, Compatible With Bootstrap 5</h3>
 
 									<div class="uix-btn__group uix-btn__margin--b">
 										<a href="https://github.com/xizon/uix-kit" target="_blank" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill">Download</a>
@@ -494,14 +493,23 @@
 								<pre class="uix-precode"><label>$</label><code>cd /{your_directory}/uix-kit</code></pre>
 
 								<p><strong>Step 3.</strong> Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.</p>
-								<pre class="uix-precode"><label>$</label><code>sudo npm install --only=dev --unsafe-perm --production</code></pre>
+								<pre class="uix-precode"><label>$</label><code>sudo npm install</code></pre>
 
 								<p><strong>Step 4.</strong> When you’re ready to deploy to production, create a minified bundle with:</p>
 								<pre class="uix-precode"><label>$</label><code>npm run build</code></pre>
 
-								<p><strong>Step 5.</strong> When you have done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+								<p>When you have done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+
+								<p><strong>Step 5.</strong> To preview the page without compiling and packaging, please run the following command:</p>
+								<pre class="uix-precode"><label>$</label><code>npm run preview</code></pre>
                                 
-                                
+                                <p>All pages can be previewed via <code>http://localhost:3000</code> </p>
+								<blockquote>
+								But there is no way to run PHP or get AJAX request on the pages. You need to visit the link on your server, or build a server via MAMP. Then visit a similar URL: <strong>http://localhost:{port}/uix-kit/examples/</strong>
+								</blockquote>
+								
+
+
                              
 
 							</div>
@@ -533,7 +541,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 uix-t-l uix-t-c--md">
 
-							Copyright &copy; Uix Kit 2019.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
+							Copyright &copy; Uix Kit 2022.  |  All rights reserved. Created by <a href="https://uiux.cc">UIUX Lab</a>.
 						</div>
 						<div class="col-lg-6 col-md-6 uix-t-r uix-t-c--md">
 							<div class="uix-footer__menu">
@@ -604,7 +612,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "4.6.5",
+		var REVISION     = "4.7.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -618,7 +626,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script defer src="../dist/js/uix-kit.min.js?ver=Xus98W8Xzk1QVZQtLF6Q"></script>
+    <script defer src="../dist/js/uix-kit.min.js?ver=lr4gRyElxuTeiIL31SQ8"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

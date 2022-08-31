@@ -6,7 +6,7 @@
 
   <p align="center">超过<strong>120+</strong>基础模块，快速搭建你的响应式网站!</p>
   <p align="center">
-      <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://img.shields.io/travis/xizon/uix-kit/master?style=for-the-badge"/></a>
+     <a href="https://app.travis-ci.com/github/xizon/uix-kit" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/uix-kit?style=for-the-badge"/></a>
       <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F" title="w3c"><img src="https://img.shields.io/w3c-validation/html?style=for-the-badge&targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F"/></a>
 	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://img.shields.io/npm/v/uix-kit?style=for-the-badge"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
@@ -41,7 +41,23 @@ GitHub pages只提供静态内容访问，AJAX和PHP请求无法预览效果，�
 [https://uiux.cc/uix-kit](https://uiux.cc/uix-kit) 
 
 
-## 为何使用它？
+## 目录
+
+* [为何使用它?](#为何使用它)
+* [目录结构](#目录结构)
+* [开发者基本操作](#开发者基本操作)
+* [入门指引](#入门指引)
+* [HTML模版](#html模版)
+* [如何创建一个新的自定义模块? &#128293;](#如何创建一个新的自定义模块)
+* [兼容性](#兼容性)
+* [支持的开发环境](#支持的开发环境)
+* [许可证](#许可证)
+
+
+
+
+
+## 为何使用它?
 
 * 它不是可重用的组件结构
 * 它不是一个JavaScript框架
@@ -53,14 +69,14 @@ GitHub pages只提供静态内容访问，AJAX和PHP请求无法预览效果，�
 * 自动为每个模块的名称注释生成目录
 * 每个模块均包含SASS/SCSS，JavaScript和HTML文件
 * 为React架构提供开发环境配置
-* 与Bootstrap 4.x兼容
+* 与Bootstrap 5.x兼容 (你也可以移除Bootstrap的样式表)
 * 提供常见的网页组件和布局，提高开发效率和页面质量标准
 * 使用ES6导入或导出多个模块，第三方插件可以采用纯文件合并的方式不进行导入和导出
 * 完整的示例目录可以在没有Node.js开发环境的情况下独立开发响应式网站
 
 
 
-## 核心目录结构:
+## 目录结构
 
 
 ```sh
@@ -71,6 +87,7 @@ uix-kit/
 ├── CONTRIBUTING.md   --------------------- # 引用资源
 ├── LICENSE     --------------------------- # 许可证
 ├── webpack.config.js  -------------------- # webpack脚手架配置
+├── server.js  ---------------------------- # 本地服务端配置
 ├── package.json  ------------------------- # 项目配置文件【网站编译生成的注释信息可以在此修改】
 ├── package-lock.json
 ├── dist/
@@ -117,7 +134,7 @@ uix-kit/
 ```
 
 
-## 开发者基本操作:
+## 开发者基本操作
 
 
 1. 配置你电脑的Node.js环境
@@ -132,7 +149,7 @@ uix-kit/
 
 
 
-## 命令使用方法:
+## 入门指引
 
 
 ![quick overview 1](misc/screenshots/quick-overview-1.gif)
@@ -140,34 +157,73 @@ uix-kit/
 ![quick overview 2](misc/screenshots/quick-overview-2.gif)
 
 
-**Step 1.** 使用命令进入 `uix-kit/` 目录, {your_directory}换成你的目录路径
+
+**Step 1.** 使用 NPM（找到您当前的项目目录，然后输入以下命令）, 或从 [Github]（https://github.com/xizon/uix-kit）下载最新版本。
+
+```sh
+$ sudo npm install uix-kit
+```
+
+Or clone the repo to get all source files including build scripts: 
+
+```sh
+$ git clone git://github.com/xizon/uix-kit.git
+```
+
+
+**Step 2.** 使用命令进入 `uix-kit/` 目录, {your_directory}换成你的目录路径
 
 ```sh
 $ cd /{your_directory}/uix-kit
 ```
 
 
-**Step 2.** 如果没有`node_modules`文件夹，则需要运行下面的代码来安装开发环境
+**Step 3.** 安装开发环境
 
+```sh
+$ sudo npm install
+```
+or 
 ```sh
 $ sudo npm install --only=dev --unsafe-perm --production
 ```
 
 
-**Step 3.** 运行下面的代码来实时开发项目，修改模块功能
+
+**Step 4.** 运行下面的代码来实时开发项目，修改模块功能
 
 ```sh
 $ npm run build
 ```
 
-**Step 4.** 可以使用下面的网址来访问，建议使用本地服务器来访问，因为下面的网址是静态访问，不会执行AJAX请求，一些模块需要异步来测试效果
+使用 `Ctrl + C` 停止打包。
+
+可以使用 `http://localhost:8080/examples/` 网址直接访问，建议使用本地服务器来访问，因为下面的网址是静态访问，不会执行AJAX请求，一些模块需要异步来测试效果。
+
+**Step 5.** 预览页面而不编译打包，请运行下面命令:
 
 ```sh
-http://localhost:8080/examples/
+$ npm run preview
+```
+
+通过 `http://localhost:3000` 可以预览所有页面。
+
+<blockquote>
+但是没有办法在页面上运行 PHP 或获取 AJAX 请求。 您需要访问服务器上的链接，或通过 MAMP 构建服务器。然后可以访问类似的网址: <strong>http://localhost:{port}/uix-kit/examples/</strong>
+</blockquote>
+
+
+
+**(Optional)** 调试应用程序, 它可以用来单独检查TypeScript类型的文件而不进行编译和打包操作，便于提高开发效率，专注整体代码的编写。
+
+```sh
+$ npm run check
 ```
 
 
-### FAQ:
+
+
+### 常见问题:
  
 
 **a) 如何使用模块?**
@@ -188,7 +244,7 @@ http://localhost:8080/examples/
   "projectName": "Uix Kit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v5.",
   ...
 }
 ```
@@ -218,6 +274,116 @@ $ npm install node-sass@4.14.1
 $ sudo npm install
 $ sudo npm rebuild node-sass
 ```
+
+
+
+
+## HTML模版
+
+### 1\. 静态HTML代码
+
+```html
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>Web Site Title</title>
+	
+	<!-- Compatibility Settings
+	============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Compatibility Settings end -->
+
+	<!-- Core & Theme CSS
+	============================================= -->
+
+	<!-- Basic  -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=5.0.2" media="all"/>
+	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
+
+
+	<!-- Icons  -->
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/all.min.css?ver=5.7.0">
+	<link rel="stylesheet" href="assets/fonts/fontawesome/css/v4-shims.min.css?ver=5.7.0">
+
+
+	<!-- Theme  -->
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0"/>
+
+
+	<!--[if lt IE 10]>
+	<link rel="stylesheet" href="assets/css/IE.css?ver=1.0.0" />
+	<![endif]-->
+
+
+	<!-- Core & Theme CSS  end -->
+	<!-- Vendor
+	============================================= -->
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.6.1"></script>
+    <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
+	<!-- Vendor  end -->
+
+	<!-- Break free from CSS prefix hell!
+	============================================= -->
+	<script src="assets/js/min/prefixfree.min.js?ver=1.0.7"></script>
+
+</head> 
+
+<body> 
+	
+	{your_html_codes_here}
+	
+	
+	<!-- Vendor -->
+    <script src="assets/js/min/axios.min.js?ver=0.19.2"></script>
+	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
+	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
+	<script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
+	<script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
+	<script src="assets/js/min/three.min.js?ver=r99"></script>
+	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
+	<script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
+	<script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
+
+	<!-- Your Plugins & Theme Scripts
+	============================================= -->
+	<script>
+        /*
+        * Some global vars. DO NOT change these variables names. 
+        * These variables are being used in `uix-kit.min.js`.
+        *    
+        */ 
+		var REVISION     = "1.0.0",
+			APP_ROOTPATH = {
+				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
+				"homeUrl"     : "",  //Eg. https://uiux.cc
+				"ajaxUrl"     : ""   //Eg. https://uiux.cc/wp-admin/admin-ajax.php
+			};
+        
+
+        /*
+        * Fixed a bug that Cannot read property 'fn' of undefined for jQuery 1.xx.x.
+        *    
+        */
+        window.$ = window.jQuery;
+	</script>
+	<script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
+	
+</body>
+
+</html>
+
+```
+
+### 2\. PSD网格模版
+
+您可以使用相应的`.PSD`网格示范文件。
+
+*   `misc/grid/bootstrap3_1170_grid_web.psd` (Default Container: 1170px)
+*   `misc/grid/bootstrap3_1278_grid_web.psd` (XL Container: 1278px)
+*   `misc/grid/bootstrap3_1410_grid_web.psd` (XXL Container: 1410px)
 
 
 
@@ -450,6 +616,26 @@ if ( UixModuleInstance.DEMO_MODULE ) UixModuleInstance.DEMO_MODULE.documentReady
 **由于Uix Kit不是JavaScript框架，因此您可以使用任何第三方库以最直观的方式构建自定义模块样式和动画脚本。**
 
 
+
+## 兼容性
+
+| Chrome | Firefox | Edge | IE| Safari |Opera | iOS  | Android
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| >= 49 | >= 45 | >=14 | >=11 | >= 9 | >= 30 | >=10 | >=4.4 |
+
+
+## 支持的开发环境
+
+- React 17 +
+- TypeScript 4.x.x + 
+- Babel 7.x.x + 
+- Webpack 5.x.x
+- Express 4.x.x
+
+
+## 许可证
+
+基于 [MIT](https://opensource.org/licenses/MIT).
 
 
 

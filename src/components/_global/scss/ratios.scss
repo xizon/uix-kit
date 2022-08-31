@@ -1,0 +1,46 @@
+/* ====================================================== 
+   <!-- Ratios -->      
+/* ====================================================== */
+
+.uix-ratio {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+
+.uix-ratio::before {
+	display: block;
+	content: "";
+}
+
+.uix-ratio .uix-ratio-item,
+.uix-ratio iframe,
+.uix-ratio embed,
+.uix-ratio object,
+.uix-ratio video {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.uix-ratio-21x9::before {
+	padding-top: 42.857143%;
+}
+
+.uix-ratio-16x9::before {
+	padding-top: 56.25%;
+}
+
+.uix-ratio-3x4::before {
+	padding-top: 133.333333%;
+}
+
+.uix-ratio-1x1::before {
+	padding-top: 100%;
+}

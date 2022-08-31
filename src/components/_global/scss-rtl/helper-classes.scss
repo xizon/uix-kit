@@ -38,13 +38,14 @@
     text-align: right;
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
 	.uix-t-r--sm {
@@ -86,6 +87,18 @@
 		text-align: right;
 	}
 }
+
+@media all and (max-width: 1400px) {
+	.uix-t-r--xxl {
+		text-align: left;
+	}
+
+	.uix-t-l--xxl {
+		text-align: right;
+	}
+}
+
+
 
 
 /* 

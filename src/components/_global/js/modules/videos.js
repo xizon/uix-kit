@@ -267,7 +267,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 				
 				if ( $this.find( '[data-video-iframe]' ).length > 0 && videoSrcIfm != '' ) {
 					//If iframe
-					v += '<div id="'+videoContainerVid+'" class="embed-responsive embed-responsive-16by9">';
+					v += '<div id="'+videoContainerVid+'" class="ratio ratio-16x9">';
 					v += videoSrcIfm;
 					v += '</div>';			
 
@@ -371,7 +371,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 					if ( windowWidth <= 768 ) {
 						$ifm.css({
 							'top'    : 0
-						}).parent( '.embed-responsive' ).css({
+						}).parent( '.ratio' ).css({
 							'top'    : ( newMaxH - newH )/2 + 'px'
 						});		
 

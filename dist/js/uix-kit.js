@@ -4,11 +4,11 @@
  * Generated with "npm run build"
  *
  * ## Project Name        :  Uix Kit
- * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
+ * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.5
+ * ## Version             :  4.7.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 31, 2022
+ * ## Last Update         :  August 31, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -3311,17 +3311,11 @@ jQuery.fn.sortElements = function () {
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 /***/ })
@@ -4154,6 +4148,25 @@ window.MAIN = null;
     });
   };
 })(jQuery);
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -4161,6 +4174,7 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/body-and-header.js
+
 
 
 /* 
@@ -4232,13 +4246,14 @@ var BODY_AND_HEADER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.BODY_AND_HEADER.documentReady);
-  return function BODY_AND_HEADER() {
+  return /*#__PURE__*/_createClass(function BODY_AND_HEADER() {
     _classCallCheck(this, BODY_AND_HEADER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/common-height.js
+
 
 
 /* 
@@ -4323,15 +4338,16 @@ var COMMON_HEIGHT = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.COMMON_HEIGHT.pageLoaded);
-  return function COMMON_HEIGHT() {
+  return /*#__PURE__*/_createClass(function COMMON_HEIGHT() {
     _classCallCheck(this, COMMON_HEIGHT);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/_third-party-plugins/Miscellaneous/attrExt.js
 var attrExt = __webpack_require__(319);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/custom-data-attrs.js
+
 
 
 /* 
@@ -4362,13 +4378,14 @@ var GET_CUSTOM_ATTRS = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.GET_CUSTOM_ATTRS.documentReady);
-  return function GET_CUSTOM_ATTRS() {
+  return /*#__PURE__*/_createClass(function GET_CUSTOM_ATTRS() {
     _classCallCheck(this, GET_CUSTOM_ATTRS);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/loader.js
+
 
 
 
@@ -4512,13 +4529,14 @@ var LOADER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.LOADER.documentReady);
-  return function LOADER() {
+  return /*#__PURE__*/_createClass(function LOADER() {
     _classCallCheck(this, LOADER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/mega-menu.js
+
 
 
 /* 
@@ -4561,7 +4579,7 @@ var MEGA_MENU = function (module, $, window, document) {
           //The maximum width of the mega menu wrapper
       //This value is equal to the $nav-mega-li-w variable in the SCSS
       perDefaultW = 270; //Default width of each column
-      //New XL container for Bootstrap 4.x
+      //New XL container for Bootstrap 5.x
 
       if (w > 1430) maxWidth = 1278; //Full width container
 
@@ -4656,13 +4674,14 @@ var MEGA_MENU = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.MEGA_MENU.pageLoaded);
-  return function MEGA_MENU() {
+  return /*#__PURE__*/_createClass(function MEGA_MENU() {
     _classCallCheck(this, MEGA_MENU);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/mobile-menu.js
+
 
 
 
@@ -4818,13 +4837,14 @@ var MOBILE_MENU = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.MOBILE_MENU.documentReady);
-  return function MOBILE_MENU() {
+  return /*#__PURE__*/_createClass(function MOBILE_MENU() {
     _classCallCheck(this, MOBILE_MENU);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/navigation.js
+
 
 
 
@@ -4914,11 +4934,11 @@ var NAVIGATION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.NAVIGATION.documentReady);
-  return function NAVIGATION() {
+  return /*#__PURE__*/_createClass(function NAVIGATION() {
     _classCallCheck(this, NAVIGATION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/fn/UixParallax.js
 /* 
@@ -5019,6 +5039,7 @@ var NAVIGATION = function (module, $, window, document) {
   };
 })(jQuery);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/set-background.js
+
 
 
 
@@ -5191,13 +5212,14 @@ var SET_BG = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SET_BG.documentReady);
-  return function SET_BG() {
+  return /*#__PURE__*/_createClass(function SET_BG() {
     _classCallCheck(this, SET_BG);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_global/js/modules/videos.js
+
 
 
 
@@ -5404,7 +5426,7 @@ var VIDEOS = function (module, $, window, document) {
 
         if ($this.find('[data-video-iframe]').length > 0 && videoSrcIfm != '') {
           //If iframe
-          v += '<div id="' + videoContainerVid + '" class="embed-responsive embed-responsive-16by9">';
+          v += '<div id="' + videoContainerVid + '" class="ratio ratio-16x9">';
           v += videoSrcIfm;
           v += '</div>';
         } else {
@@ -5481,7 +5503,7 @@ var VIDEOS = function (module, $, window, document) {
           if (windowWidth <= 768) {
             $ifm.css({
               'top': 0
-            }).parent('.embed-responsive').css({
+            }).parent('.ratio').css({
               'top': (newMaxH - newH) / 2 + 'px'
             });
           }
@@ -5587,13 +5609,14 @@ var VIDEOS = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.VIDEOS.documentReady);
-  return function VIDEOS() {
+  return /*#__PURE__*/_createClass(function VIDEOS() {
     _classCallCheck(this, VIDEOS);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_main/js/index.js
+
 
 
 /* 
@@ -5628,13 +5651,14 @@ var MAIN = function (module, $, window, document) {
 
   module.components.documentReady.push(module.MAIN.documentReady);
   module.components.pageLoaded.push(module.MAIN.pageLoaded);
-  return function MAIN() {
+  return /*#__PURE__*/_createClass(function MAIN() {
     _classCallCheck(this, MAIN);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/accordion-img/js/index.js
+
 
 
 
@@ -5756,13 +5780,14 @@ var ACCORDION_BG = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.ACCORDION_BG.documentReady);
-  return function ACCORDION_BG() {
+  return /*#__PURE__*/_createClass(function ACCORDION_BG() {
     _classCallCheck(this, ACCORDION_BG);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/accordion/js/index.js
+
 
 
 
@@ -5842,13 +5867,14 @@ var ACCORDION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.ACCORDION.documentReady);
-  return function ACCORDION() {
+  return /*#__PURE__*/_createClass(function ACCORDION() {
     _classCallCheck(this, ACCORDION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/advanced-slider/js/basic.js
+
 
 
 
@@ -6578,11 +6604,11 @@ var ADVANCED_SLIDER = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.ADVANCED_SLIDER.pageLoaded);
-  return function ADVANCED_SLIDER() {
+  return /*#__PURE__*/_createClass(function ADVANCED_SLIDER() {
     _classCallCheck(this, ADVANCED_SLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/_third-party-plugins/GSAP/esm/TweenLite.js
 var esm_TweenLite = __webpack_require__(696);
@@ -7209,6 +7235,7 @@ PixiPlugin.registerPIXI = function (PIXI) {
 
 
 ;// CONCATENATED MODULE: ./src/components/advanced-slider/js/special.js
+
 
 
 
@@ -9143,13 +9170,14 @@ var ADVANCED_SLIDER_FILTER = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.ADVANCED_SLIDER_FILTER.pageLoaded);
-  return function ADVANCED_SLIDER_FILTER() {
+  return /*#__PURE__*/_createClass(function ADVANCED_SLIDER_FILTER() {
     _classCallCheck(this, ADVANCED_SLIDER_FILTER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/AJAX-push/js/index.js
+
 
 
 
@@ -9544,13 +9572,14 @@ var AJAX_PUSH_CONTENT = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.AJAX_PUSH_CONTENT.documentReady);
-  return function AJAX_PUSH_CONTENT() {
+  return /*#__PURE__*/_createClass(function AJAX_PUSH_CONTENT() {
     _classCallCheck(this, AJAX_PUSH_CONTENT);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/AJAX/js/index.js
+
 
 
 
@@ -10166,11 +10195,11 @@ var AJAX_PAGE_LOADER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.AJAX_PAGE_LOADER.documentReady);
-  return function AJAX_PAGE_LOADER() {
+  return /*#__PURE__*/_createClass(function AJAX_PAGE_LOADER() {
     _classCallCheck(this, AJAX_PAGE_LOADER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/GSAP/esm/ScrollToPlugin.js
 
@@ -10393,6 +10422,7 @@ ScrollToPlugin_p._kill = function (lookup) {
 ;// CONCATENATED MODULE: ./src/components/back-to-top/js/index.js
 
 
+
 /* 
  *************************************
  * <!-- Back to Top -->
@@ -10449,13 +10479,14 @@ var BACK_TO_TOP = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.BACK_TO_TOP.documentReady);
-  return function BACK_TO_TOP() {
+  return /*#__PURE__*/_createClass(function BACK_TO_TOP() {
     _classCallCheck(this, BACK_TO_TOP);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/circle-layout/js/index.js
+
 
 
 
@@ -10535,15 +10566,16 @@ var CIRCLE_LAYOUT = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.CIRCLE_LAYOUT.documentReady);
-  return function CIRCLE_LAYOUT() {
+  return /*#__PURE__*/_createClass(function CIRCLE_LAYOUT() {
     _classCallCheck(this, CIRCLE_LAYOUT);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/counter/js/fn/count-to.js
 var count_to = __webpack_require__(798);
 ;// CONCATENATED MODULE: ./src/components/counter/js/index.js
+
 
 
 
@@ -10591,13 +10623,14 @@ var COUNTER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.COUNTER.documentReady);
-  return function COUNTER() {
+  return /*#__PURE__*/_createClass(function COUNTER() {
     _classCallCheck(this, COUNTER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/dropdown-menu/js/index.js
+
 
 
 
@@ -10663,13 +10696,14 @@ var DROPDOWN_MENU = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.DROPDOWN_MENU.documentReady);
-  return function DROPDOWN_MENU() {
+  return /*#__PURE__*/_createClass(function DROPDOWN_MENU() {
     _classCallCheck(this, DROPDOWN_MENU);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/dropdown-menu2/js/index.js
+
 
 
 /* 
@@ -10737,13 +10771,14 @@ var DROPDOWN_MENU2 = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.DROPDOWN_MENU2.documentReady);
-  return function DROPDOWN_MENU2() {
+  return /*#__PURE__*/_createClass(function DROPDOWN_MENU2() {
     _classCallCheck(this, DROPDOWN_MENU2);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/cascading-dropdown-list/js/index.js
+
 
 
 
@@ -11104,11 +11139,11 @@ var CASCADING_DD_LIST = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.CASCADING_DD_LIST.documentReady);
-  return function CASCADING_DD_LIST() {
+  return /*#__PURE__*/_createClass(function CASCADING_DD_LIST() {
     _classCallCheck(this, CASCADING_DD_LIST);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/flexslider/js/third-party/jquery.flexslider.js
 
@@ -12554,6 +12589,7 @@ var CASCADING_DD_LIST = function (module, $, window, document) {
 
 
 
+
 /* 
  *************************************
  * <!-- Flexslider (Third-party plugin) -->
@@ -13394,13 +13430,14 @@ var FLEXSLIDER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.FLEXSLIDER.documentReady);
-  return function FLEXSLIDER() {
+  return /*#__PURE__*/_createClass(function FLEXSLIDER() {
     _classCallCheck(this, FLEXSLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/floating-side-element/js/index.js
+
 
 
 /* 
@@ -13466,11 +13503,11 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.FLOATING_SIDE_EL.documentReady);
-  return function FLOATING_SIDE_EL() {
+  return /*#__PURE__*/_createClass(function FLOATING_SIDE_EL() {
     _classCallCheck(this, FLOATING_SIDE_EL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/form-progress/js/fn/form-progress-to-next.js
 
@@ -13614,6 +13651,7 @@ var FLOATING_SIDE_EL = function (module, $, window, document) {
 
 
 
+
 /* 
  *************************************
  * <!-- Form Progress -->
@@ -13713,11 +13751,11 @@ var FORM_PROGRESS = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.FORM_PROGRESS.pageLoaded);
-  return function FORM_PROGRESS() {
+  return /*#__PURE__*/_createClass(function FORM_PROGRESS() {
     _classCallCheck(this, FORM_PROGRESS);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/form/js/fn/normal-radio.js
 
@@ -17570,6 +17608,7 @@ var controls_disable = __webpack_require__(260);
 ;// CONCATENATED MODULE: ./src/components/form/js/index.js
 
 
+
 /* 
  *************************************
  * <!-- Form -->
@@ -17659,13 +17698,14 @@ var FORM = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.FORM.documentReady);
-  return function FORM() {
+  return /*#__PURE__*/_createClass(function FORM() {
     _classCallCheck(this, FORM);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/gallery/js/index.js
+
 
 
 /* 
@@ -17784,13 +17824,14 @@ var GALLERY = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.GALLERY.documentReady);
-  return function GALLERY() {
+  return /*#__PURE__*/_createClass(function GALLERY() {
     _classCallCheck(this, GALLERY);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/hybrid-content-slider/js/index.js
+
 
 
 
@@ -18591,13 +18632,14 @@ var HYBRID_CONTENT_SLIDER = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.HYBRID_CONTENT_SLIDER.pageLoaded);
-  return function HYBRID_CONTENT_SLIDER() {
+  return /*#__PURE__*/_createClass(function HYBRID_CONTENT_SLIDER() {
     _classCallCheck(this, HYBRID_CONTENT_SLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/hover-delay-interaction/js/index.js
+
 
 
 /* 
@@ -18637,13 +18679,14 @@ var HOVER_DELAY_INTERACTION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.HOVER_DELAY_INTERACTION.documentReady);
-  return function HOVER_DELAY_INTERACTION() {
+  return /*#__PURE__*/_createClass(function HOVER_DELAY_INTERACTION() {
     _classCallCheck(this, HOVER_DELAY_INTERACTION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/image-shapes/js/index.js
+
 
 
 /* 
@@ -18734,13 +18777,14 @@ var IMAGE_SHAPES = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.IMAGE_SHAPES.documentReady);
-  return function IMAGE_SHAPES() {
+  return /*#__PURE__*/_createClass(function IMAGE_SHAPES() {
     _classCallCheck(this, IMAGE_SHAPES);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/infinite-scrolling-element/js/index.js
+
 
 
 
@@ -18842,13 +18886,14 @@ var INFINITE_SCROLLING_EL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.INFINITE_SCROLLING_EL.documentReady);
-  return function INFINITE_SCROLLING_EL() {
+  return /*#__PURE__*/_createClass(function INFINITE_SCROLLING_EL() {
     _classCallCheck(this, INFINITE_SCROLLING_EL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/lava-lamp-style-menu/js/index.js
+
 
 
 /* 
@@ -18906,15 +18951,16 @@ var LAVA_LAMP_STYLE_MENU = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.LAVA_LAMP_STYLE_MENU.documentReady);
-  return function LAVA_LAMP_STYLE_MENU() {
+  return /*#__PURE__*/_createClass(function LAVA_LAMP_STYLE_MENU() {
     _classCallCheck(this, LAVA_LAMP_STYLE_MENU);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/_third-party-plugins/Miscellaneous/scrollLock.js
 var scrollLock = __webpack_require__(111);
 ;// CONCATENATED MODULE: ./src/components/lightbox/js/index.js
+
 
 
 
@@ -18930,7 +18976,7 @@ var scrollLock = __webpack_require__(111);
 var LIGHTBOX = function (module, $, window, document) {
   if (window.LIGHTBOX === null) return false;
   module.LIGHTBOX = module.LIGHTBOX || {};
-  module.LIGHTBOX.version = '0.2.2';
+  module.LIGHTBOX.version = '0.2.3';
 
   module.LIGHTBOX.pageLoaded = function () {
     if ($('.uix-lightbox__container').length == 0) {
@@ -18941,7 +18987,7 @@ var LIGHTBOX = function (module, $, window, document) {
     $('template').each(function () {
       var _content = $(this).html(function (index, html) {
         return html.replace(/[\r\n]/g, '');
-      }).context.innerHTML,
+      }).html(),
           _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
 
 
@@ -19473,13 +19519,14 @@ var LIGHTBOX = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.LIGHTBOX.pageLoaded);
-  return function LIGHTBOX() {
+  return /*#__PURE__*/_createClass(function LIGHTBOX() {
     _classCallCheck(this, LIGHTBOX);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/list-bulleted/js/index.js
+
 
 
 /* 
@@ -19503,13 +19550,14 @@ var BULLETED_LIST = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.BULLETED_LIST.documentReady);
-  return function BULLETED_LIST() {
+  return /*#__PURE__*/_createClass(function BULLETED_LIST() {
     _classCallCheck(this, BULLETED_LIST);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/list-posts/js/index.js
+
 
 
 
@@ -19967,13 +20015,14 @@ var POST_LIST_AJAX = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.POST_LIST_AJAX.documentReady);
-  return function POST_LIST_AJAX() {
+  return /*#__PURE__*/_createClass(function POST_LIST_AJAX() {
     _classCallCheck(this, POST_LIST_AJAX);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/fullwidth-column-to-edge/js/index.js
+
 
 
 
@@ -20037,13 +20086,14 @@ var FULL_WIDTH_COLUMN_TO_EDGE = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.FULL_WIDTH_COLUMN_TO_EDGE.pageLoaded);
-  return function FULL_WIDTH_COLUMN_TO_EDGE() {
+  return /*#__PURE__*/_createClass(function FULL_WIDTH_COLUMN_TO_EDGE() {
     _classCallCheck(this, FULL_WIDTH_COLUMN_TO_EDGE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/login-templates/js/index.js
+
 
 
 /* 
@@ -20099,11 +20149,11 @@ var LOGIN_UI = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.LOGIN_UI.documentReady);
-  return function LOGIN_UI() {
+  return /*#__PURE__*/_createClass(function LOGIN_UI() {
     _classCallCheck(this, LOGIN_UI);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/modal-dialog/js/fn/fire-modal-dialog.js
 
@@ -20272,6 +20322,7 @@ var LOGIN_UI = function (module, $, window, document) {
 
 
 
+
 /* 
  *************************************
  * <!-- Modal Dialog -->
@@ -20284,7 +20335,7 @@ var LOGIN_UI = function (module, $, window, document) {
 var MODAL_DIALOG = function (module, $, window, document) {
   if (window.MODAL_DIALOG === null) return false;
   module.MODAL_DIALOG = module.MODAL_DIALOG || {};
-  module.MODAL_DIALOG.version = '0.1.8';
+  module.MODAL_DIALOG.version = '0.1.9';
 
   module.MODAL_DIALOG.documentReady = function ($) {
     //Delay Time when Full Screen Effect is fired.
@@ -20293,7 +20344,7 @@ var MODAL_DIALOG = function (module, $, window, document) {
     $('template').each(function () {
       var _content = $(this).html(function (index, html) {
         return html.replace(/[\r\n]/g, '');
-      }).context.innerHTML,
+      }).html(),
           _id = $(this).attr('id'); //If it is dialog, clone the contents of the <template> into the body
 
 
@@ -20370,13 +20421,14 @@ var MODAL_DIALOG = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.MODAL_DIALOG.documentReady);
-  return function MODAL_DIALOG() {
+  return /*#__PURE__*/_createClass(function MODAL_DIALOG() {
     _classCallCheck(this, MODAL_DIALOG);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/mousewheel-interaction/js/index.js
+
 
 
 /* 
@@ -20486,11 +20538,11 @@ var MOUSEWHEEL_INTERACTION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.MOUSEWHEEL_INTERACTION.documentReady);
-  return function MOUSEWHEEL_INTERACTION() {
+  return /*#__PURE__*/_createClass(function MOUSEWHEEL_INTERACTION() {
     _classCallCheck(this, MOUSEWHEEL_INTERACTION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/GSAP/esm/ModifiersPlugin.js
 
@@ -20687,6 +20739,7 @@ if (Number(ModifiersPlugin_p[0]) <= 1 && Number(ModifiersPlugin_p[1]) < 19 && es
 
 
 ;// CONCATENATED MODULE: ./src/components/multi-items-carousel/js/index.js
+
 
 
 
@@ -21116,13 +21169,14 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.MULTI_ITEMS_CAROUSEL.documentReady);
-  return function MULTI_ITEMS_CAROUSEL() {
+  return /*#__PURE__*/_createClass(function MULTI_ITEMS_CAROUSEL() {
     _classCallCheck(this, MULTI_ITEMS_CAROUSEL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/one-page/js/index.js
+
 
 
 /* 
@@ -21135,7 +21189,7 @@ var MULTI_ITEMS_CAROUSEL = function (module, $, window, document) {
 var ONEPAGE = function (module, $, window, document) {
   if (window.ONEPAGE === null) return false;
   module.ONEPAGE = module.ONEPAGE || {};
-  module.ONEPAGE.version = '0.1.0';
+  module.ONEPAGE.version = '0.1.1';
 
   module.ONEPAGE.documentReady = function ($) {
     var windowWidth = window.innerWidth,
@@ -21320,9 +21374,9 @@ var ONEPAGE = function (module, $, window, document) {
 
     function getRelatedNavigation(el, menuObj, echoIndex) {
       if (echoIndex) {
-        return menuObj.find('li > a[href=#' + $(el).attr('id') + ']').parent('li').index();
+        return menuObj.find('li > a[href="#' + $(el).attr('id') + '"]').parent('li').index();
       } else {
-        return menuObj.find('li > a[href=#' + $(el).attr('id') + ']').parent('li');
+        return menuObj.find('li > a[href="#' + $(el).attr('id') + '"]').parent('li');
       }
     }
     /*
@@ -21460,13 +21514,14 @@ var ONEPAGE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.ONEPAGE.documentReady);
-  return function ONEPAGE() {
+  return /*#__PURE__*/_createClass(function ONEPAGE() {
     _classCallCheck(this, ONEPAGE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/one-page2/js/index.js
+
 
 
 /* 
@@ -21803,13 +21858,14 @@ var ONEPAGE2 = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.ONEPAGE2.documentReady);
-  return function ONEPAGE2() {
+  return /*#__PURE__*/_createClass(function ONEPAGE2() {
     _classCallCheck(this, ONEPAGE2);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/parallax/js/index.js
+
 
 
 
@@ -22011,13 +22067,14 @@ var PARALLAX = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.PARALLAX.documentReady);
-  return function PARALLAX() {
+  return /*#__PURE__*/_createClass(function PARALLAX() {
     _classCallCheck(this, PARALLAX);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/periodical-scroll/js/index.js
+
 
 
 
@@ -22108,13 +22165,14 @@ var PERIODICAL_SCROLL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.PERIODICAL_SCROLL.documentReady);
-  return function PERIODICAL_SCROLL() {
+  return /*#__PURE__*/_createClass(function PERIODICAL_SCROLL() {
     _classCallCheck(this, PERIODICAL_SCROLL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/pricing/js/index.js
+
 
 
 /* 
@@ -22197,13 +22255,14 @@ var PRICING = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.PRICING.documentReady);
-  return function PRICING() {
+  return /*#__PURE__*/_createClass(function PRICING() {
     _classCallCheck(this, PRICING);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/progress-bar/js/index.js
+
 
 
 
@@ -22273,13 +22332,14 @@ var PROGRESS_BAR = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.PROGRESS_BAR.documentReady);
-  return function PROGRESS_BAR() {
+  return /*#__PURE__*/_createClass(function PROGRESS_BAR() {
     _classCallCheck(this, PROGRESS_BAR);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/progress-line/js/index.js
+
 
 
 /* 
@@ -22333,13 +22393,14 @@ var PROGRESS_LINE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.PROGRESS_LINE.documentReady);
-  return function PROGRESS_LINE() {
+  return /*#__PURE__*/_createClass(function PROGRESS_LINE() {
     _classCallCheck(this, PROGRESS_LINE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/retina/js/index.js
+
 
 
 /* 
@@ -22374,13 +22435,14 @@ var RETINA = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.RETINA.documentReady);
-  return function RETINA() {
+  return /*#__PURE__*/_createClass(function RETINA() {
     _classCallCheck(this, RETINA);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/rotating-elements/js/index.js
+
 
 
 
@@ -22443,13 +22505,14 @@ var ROTATING_EL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.ROTATING_EL.documentReady);
-  return function ROTATING_EL() {
+  return /*#__PURE__*/_createClass(function ROTATING_EL() {
     _classCallCheck(this, ROTATING_EL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/scroll-reveal/js/index.js
+
 
 
 
@@ -22621,13 +22684,14 @@ var SCROLL_REVEAL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SCROLL_REVEAL.documentReady);
-  return function SCROLL_REVEAL() {
+  return /*#__PURE__*/_createClass(function SCROLL_REVEAL() {
     _classCallCheck(this, SCROLL_REVEAL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/scrollspy-animate/js/index.js
+
 
 
 /* 
@@ -22755,13 +22819,14 @@ var SCROLLSPY_ANIM = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SCROLLSPY_ANIM.documentReady);
-  return function SCROLLSPY_ANIM() {
+  return /*#__PURE__*/_createClass(function SCROLLSPY_ANIM() {
     _classCallCheck(this, SCROLLSPY_ANIM);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/show-more-less/js/index.js
+
 
 
 /* 
@@ -22817,13 +22882,14 @@ var SHOW_MORELESS = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SHOW_MORELESS.documentReady);
-  return function SHOW_MORELESS() {
+  return /*#__PURE__*/_createClass(function SHOW_MORELESS() {
     _classCallCheck(this, SHOW_MORELESS);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/skew-on-scroll/js/index.js
+
 
 
 /* 
@@ -22858,13 +22924,14 @@ var SKEW_ON_SCROLL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SKEW_ON_SCROLL.documentReady);
-  return function SKEW_ON_SCROLL() {
+  return /*#__PURE__*/_createClass(function SKEW_ON_SCROLL() {
     _classCallCheck(this, SKEW_ON_SCROLL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/smooth-scrolling-anchor-link/js/index.js
+
 
 
 /* 
@@ -22966,13 +23033,14 @@ var SMOOTH_SCROLLING_ANCHORLINK = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SMOOTH_SCROLLING_ANCHORLINK.documentReady);
-  return function SMOOTH_SCROLLING_ANCHORLINK() {
+  return /*#__PURE__*/_createClass(function SMOOTH_SCROLLING_ANCHORLINK() {
     _classCallCheck(this, SMOOTH_SCROLLING_ANCHORLINK);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/smooth-scrolling-page/js/index.js
+
 
 
 /* 
@@ -23244,13 +23312,14 @@ var SMOOTH_SCROLLING_PAGE = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.SMOOTH_SCROLLING_PAGE.pageLoaded);
-  return function SMOOTH_SCROLLING_PAGE() {
+  return /*#__PURE__*/_createClass(function SMOOTH_SCROLLING_PAGE() {
     _classCallCheck(this, SMOOTH_SCROLLING_PAGE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/sticky-elements/js/index.js
+
 
 
 
@@ -23375,13 +23444,14 @@ var STICKY_EL = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.STICKY_EL.pageLoaded);
-  return function STICKY_EL() {
+  return /*#__PURE__*/_createClass(function STICKY_EL() {
     _classCallCheck(this, STICKY_EL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/svg-map/js/china.js
+
 
 
 /* 
@@ -23469,13 +23539,14 @@ var SVG_MAP_CHINA = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SVG_MAP_CHINA.documentReady);
-  return function SVG_MAP_CHINA() {
+  return /*#__PURE__*/_createClass(function SVG_MAP_CHINA() {
     _classCallCheck(this, SVG_MAP_CHINA);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/svg-map/js/world.js
+
 
 
 /* 
@@ -23560,13 +23631,14 @@ var SVG_MAP_WORLD = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SVG_MAP_WORLD.documentReady);
-  return function SVG_MAP_WORLD() {
+  return /*#__PURE__*/_createClass(function SVG_MAP_WORLD() {
     _classCallCheck(this, SVG_MAP_WORLD);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/svg-mask-slider/js/index.js
+
 
 
 
@@ -24213,11 +24285,11 @@ var SVG_MASK_SLIDER = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.SVG_MASK_SLIDER.pageLoaded);
-  return function SVG_MASK_SLIDER() {
+  return /*#__PURE__*/_createClass(function SVG_MASK_SLIDER() {
     _classCallCheck(this, SVG_MASK_SLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 function _defineProperty(obj, key, value) {
@@ -24233,22 +24305,6 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
-}
-;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
 }
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/ssr-window/package/ssr-window.esm.js
 
@@ -26521,9 +26577,9 @@ var supportsResizeObserver = function supportsResizeObserver() {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/modules/observer/observer.js
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -30359,9 +30415,9 @@ Swiper.use([resize_resize, observer]);
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/zoom/zoom.js
 
 
-function zoom_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function zoom_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function zoom_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { zoom_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { zoom_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function zoom_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? zoom_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : zoom_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -30963,9 +31019,9 @@ var Zoom = {
 
 
 
-function virtual_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function virtual_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function virtual_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { virtual_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { virtual_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function virtual_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? virtual_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : virtual_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -31238,9 +31294,9 @@ var Virtual = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/thumbs/thumbs.js
 
 
-function thumbs_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function thumbs_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function thumbs_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { thumbs_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { thumbs_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function thumbs_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? thumbs_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : thumbs_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -31445,9 +31501,9 @@ var Thumbs = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/scrollbar/scrollbar.js
 
 
-function scrollbar_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function scrollbar_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function scrollbar_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { scrollbar_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { scrollbar_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function scrollbar_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? scrollbar_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : scrollbar_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -31797,9 +31853,9 @@ var Scrollbar = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/parallax/parallax.js
 
 
-function parallax_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function parallax_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function parallax_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { parallax_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { parallax_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function parallax_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? parallax_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : parallax_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -31920,9 +31976,9 @@ var Parallax = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/pagination/pagination.js
 
 
-function pagination_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function pagination_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function pagination_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { pagination_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { pagination_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function pagination_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? pagination_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : pagination_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -32289,9 +32345,9 @@ var Pagination = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/navigation/navigation.js
 
 
-function navigation_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function navigation_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function navigation_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { navigation_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { navigation_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function navigation_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? navigation_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : navigation_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -32939,9 +32995,9 @@ var Mousewheel = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/lazy/lazy.js
 
 
-function lazy_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function lazy_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function lazy_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { lazy_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { lazy_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function lazy_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? lazy_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : lazy_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -33202,9 +33258,9 @@ var Lazy = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/keyboard/keyboard.js
 
 
-function keyboard_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function keyboard_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function keyboard_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { keyboard_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { keyboard_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function keyboard_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? keyboard_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : keyboard_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -33339,9 +33395,9 @@ var Keyboard = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/history/history.js
 
 
-function history_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function history_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function history_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { history_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { history_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function history_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? history_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : history_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -33503,9 +33559,9 @@ var History = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/hash-navigation/hash-navigation.js
 
 
-function hash_navigation_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function hash_navigation_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function hash_navigation_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { hash_navigation_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { hash_navigation_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function hash_navigation_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? hash_navigation_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : hash_navigation_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -33618,9 +33674,9 @@ var HashNavigation = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/effect-flip/effect-flip.js
 
 
-function effect_flip_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function effect_flip_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function effect_flip_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { effect_flip_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { effect_flip_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function effect_flip_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? effect_flip_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : effect_flip_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -33746,9 +33802,9 @@ var Flip = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/effect-fade/effect-fade.js
 
 
-function effect_fade_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function effect_fade_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function effect_fade_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { effect_fade_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { effect_fade_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function effect_fade_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? effect_fade_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : effect_fade_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 var Fade = {
@@ -33837,9 +33893,9 @@ var Fade = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/effect-cube/effect-cube.js
 
 
-function effect_cube_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function effect_cube_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function effect_cube_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { effect_cube_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { effect_cube_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function effect_cube_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? effect_cube_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : effect_cube_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -34036,9 +34092,9 @@ var Cube = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/effect-coverflow/effect-coverflow.js
 
 
-function effect_coverflow_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function effect_coverflow_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function effect_coverflow_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { effect_coverflow_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { effect_coverflow_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function effect_coverflow_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? effect_coverflow_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : effect_coverflow_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -34149,9 +34205,9 @@ var Coverflow = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/controller/controller.js
 
 
-function controller_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function controller_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function controller_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { controller_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { controller_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function controller_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? controller_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : controller_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 /* eslint no-bitwise: ["error", { "allow": [">>"] }] */
 
@@ -34351,9 +34407,9 @@ var Controller = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/autoplay/autoplay.js
 
 
-function autoplay_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function autoplay_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function autoplay_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { autoplay_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { autoplay_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function autoplay_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? autoplay_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : autoplay_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 /* eslint no-underscore-dangle: "off" */
 
@@ -34536,9 +34592,9 @@ var Autoplay = {
 ;// CONCATENATED MODULE: ./src/components/swiper/third-party/Swiper/src/components/a11y/a11y.js
 
 
-function a11y_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function a11y_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function a11y_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { a11y_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { a11y_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function a11y_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? a11y_ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : a11y_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 
 
@@ -34862,6 +34918,7 @@ core_class.use(components); //EXPORT
 
 /* harmony default export */ const swiper = (core_class);
 ;// CONCATENATED MODULE: ./src/components/swiper/js/index.js
+
 
 
 
@@ -35363,11 +35420,11 @@ var SWIPER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.SWIPER.documentReady);
-  return function SWIPER() {
+  return /*#__PURE__*/_createClass(function SWIPER() {
     _classCallCheck(this, SWIPER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/THREE/esm/extensions/ShaderRuntime.custom.js
 var defaultThreeUniforms = (/* unused pure expression or super */ null && (['normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal', 'modelViewMatrix', 'uv', 'uv2', 'modelMatrix']));
@@ -35699,6 +35756,7 @@ function omit(obj) {
 ;// CONCATENATED MODULE: ./src/components/simple-3D-background-three/js/index.js
 
 
+
 /* 
  *************************************
  * <!-- 3D Background 1 with three.js -->
@@ -35951,17 +36009,18 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_BACKGROUND_THREE.documentReady);
-  return function THREE_BACKGROUND_THREE() {
+  return /*#__PURE__*/_createClass(function THREE_BACKGROUND_THREE() {
     _classCallCheck(this, THREE_BACKGROUND_THREE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-background-three2/js/shader/fragment-custom.glsl
 /* harmony default export */ const fragment_custom = ("#define GLSLIFY 1\nuniform float time;\n\nuniform sampler2D texture;\n\nvarying vec2 vUv;\n\nvoid main( void ) {\n\n    vec2 position = - 1.0 + 2.0 * vUv;\n\n    float a = atan( position.y, position.x );\n    float r = sqrt( dot( position, position ) );\n\n    vec2 uv;\n    uv.x = cos( a ) / r;\n    uv.y = sin( a ) / r;\n    uv /= 10.0;\n    uv += time * 0.05;\n\n    vec3 color = texture2D( texture, uv ).rgb;\n\n    gl_FragColor = vec4( color * r * 1.5, 1.0 );\n\n}");
 ;// CONCATENATED MODULE: ./src/components/simple-3D-background-three2/js/shader/vertex-custom.glsl
 /* harmony default export */ const vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nvoid main()\n{\n    vUv = uv;\n    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n    gl_Position = projectionMatrix * mvPosition;\n}");
 ;// CONCATENATED MODULE: ./src/components/simple-3D-background-three2/js/index.js
+
 
 
 /* 
@@ -36119,13 +36178,14 @@ var THREE_BACKGROUND_THREE2 = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_BACKGROUND_THREE2.documentReady);
-  return function THREE_BACKGROUND_THREE2() {
+  return /*#__PURE__*/_createClass(function THREE_BACKGROUND_THREE2() {
     _classCallCheck(this, THREE_BACKGROUND_THREE2);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-background-three3/js/index.js
+
 
 
 /* 
@@ -36264,13 +36324,14 @@ var THREE_BACKGROUND_THREE3 = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_BACKGROUND_THREE3.documentReady);
-  return function THREE_BACKGROUND_THREE3() {
+  return /*#__PURE__*/_createClass(function THREE_BACKGROUND_THREE3() {
     _classCallCheck(this, THREE_BACKGROUND_THREE3);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-background/js/index.js
+
 
 
 
@@ -36418,13 +36479,14 @@ var THREE_BACKGROUND = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_BACKGROUND.documentReady);
-  return function THREE_BACKGROUND() {
+  return /*#__PURE__*/_createClass(function THREE_BACKGROUND() {
     _classCallCheck(this, THREE_BACKGROUND);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-carousel/js/index.js
+
 
 
 
@@ -36629,11 +36691,11 @@ var THREE_CAROUSEL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_CAROUSEL.documentReady);
-  return function THREE_CAROUSEL() {
+  return /*#__PURE__*/_createClass(function THREE_CAROUSEL() {
     _classCallCheck(this, THREE_CAROUSEL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/THREE/esm/controls/OrbitControls.js
 /**
@@ -37341,6 +37403,7 @@ Object.defineProperties(THREE.OrbitControls.prototype, {
 
 
 
+
 /* 
  *************************************
  * <!-- 3D Gallery with three.js -->
@@ -37587,17 +37650,18 @@ var THREE_GALLERY = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_GALLERY.documentReady);
-  return function THREE_GALLERY() {
+  return /*#__PURE__*/_createClass(function THREE_GALLERY() {
     _classCallCheck(this, THREE_GALLERY);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-image-transition/js/shader/fragment-custom.glsl
 /* harmony default export */ const shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
 ;// CONCATENATED MODULE: ./src/components/simple-3D-image-transition/js/shader/vertex-custom.glsl
 /* harmony default export */ const shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 ;// CONCATENATED MODULE: ./src/components/simple-3D-image-transition/js/index.js
+
 
 
 /* 
@@ -37797,11 +37861,11 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_IMAGE_TRANSITION.documentReady);
-  return function THREE_IMAGE_TRANSITION() {
+  return /*#__PURE__*/_createClass(function THREE_IMAGE_TRANSITION() {
     _classCallCheck(this, THREE_IMAGE_TRANSITION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/THREE/esm/loaders/GLTFLoader.js
 /**
@@ -40067,6 +40131,7 @@ THREE.GLTFLoader = function () {
 
 
 
+
 /* 
  *************************************
  * <!-- 3D Model -->
@@ -40312,11 +40377,11 @@ var THREE_MODEL = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_MODEL.documentReady);
-  return function THREE_MODEL() {
+  return /*#__PURE__*/_createClass(function THREE_MODEL() {
     _classCallCheck(this, THREE_MODEL);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/THREE/esm/renderers/CSS3DRenderer.js
 /**
@@ -40523,6 +40588,7 @@ THREE.CSS3DRenderer = function () {
 ;// CONCATENATED MODULE: ./src/components/simple-3D-pages/js/index.js
 
 
+
 /* 
  *************************************
  * <!-- 3D Pages -->
@@ -40669,13 +40735,14 @@ var THREE_PAGES = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_PAGES.documentReady);
-  return function THREE_PAGES() {
+  return /*#__PURE__*/_createClass(function THREE_PAGES() {
     _classCallCheck(this, THREE_PAGES);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-particle-effect/js/index.js
+
 
 
 
@@ -41165,13 +41232,14 @@ var THREE_PARTICLE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_PARTICLE.documentReady);
-  return function THREE_PARTICLE() {
+  return /*#__PURE__*/_createClass(function THREE_PARTICLE() {
     _classCallCheck(this, THREE_PARTICLE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-sphere-three/js/index.js
+
 
 
 /* 
@@ -41321,13 +41389,14 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_SPHERE_THREE.documentReady);
-  return function THREE_SPHERE_THREE() {
+  return /*#__PURE__*/_createClass(function THREE_SPHERE_THREE() {
     _classCallCheck(this, THREE_SPHERE_THREE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-obj-anim-interaction/js/index.js
+
 
 
 /* 
@@ -41528,13 +41597,14 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_OBJ_ANIM_INTERACTION.documentReady);
-  return function THREE_OBJ_ANIM_INTERACTION() {
+  return /*#__PURE__*/_createClass(function THREE_OBJ_ANIM_INTERACTION() {
     _classCallCheck(this, THREE_OBJ_ANIM_INTERACTION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-mouse-interaction/js/index.js
+
 
 
 /* 
@@ -41947,13 +42017,14 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_MOUSE_INTERACTION.documentReady);
-  return function THREE_MOUSE_INTERACTION() {
+  return /*#__PURE__*/_createClass(function THREE_MOUSE_INTERACTION() {
     _classCallCheck(this, THREE_MOUSE_INTERACTION);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-mouse-interaction2/js/index.js
+
 
 
 /* 
@@ -42406,11 +42477,11 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_MOUSE_INTERACTION2.documentReady);
-  return function THREE_MOUSE_INTERACTION2() {
+  return /*#__PURE__*/_createClass(function THREE_MOUSE_INTERACTION2() {
     _classCallCheck(this, THREE_MOUSE_INTERACTION2);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/THREE/esm/modifiers/ExplodeModifier.js
 /**
@@ -42446,6 +42517,7 @@ THREE.ExplodeModifier.prototype.modify = function (geometry) {
 
 /* harmony default export */ const ExplodeModifier = (THREE.ExplodeModifier);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-shatter-slider/js/index.js
+
 
 
 
@@ -43144,13 +43216,14 @@ var THREE_SHATTER_SLIDER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_SHATTER_SLIDER.documentReady);
-  return function THREE_SHATTER_SLIDER() {
+  return /*#__PURE__*/_createClass(function THREE_SHATTER_SLIDER() {
     _classCallCheck(this, THREE_SHATTER_SLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-explosive-particle-slider/js/index.js
+
 
 
 
@@ -43820,17 +43893,18 @@ var THREE_EXP_PARTICLE_SLIDER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_EXP_PARTICLE_SLIDER.documentReady);
-  return function THREE_EXP_PARTICLE_SLIDER() {
+  return /*#__PURE__*/_createClass(function THREE_EXP_PARTICLE_SLIDER() {
     _classCallCheck(this, THREE_EXP_PARTICLE_SLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/shader/fragment-custom.glsl
 /* harmony default export */ const js_shader_fragment_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\n\nuniform sampler2D texture;\nuniform sampler2D texture2;\nuniform sampler2D disp;\n\n// uniform float time;\n// uniform float _rot;\nuniform float dispFactor;\nuniform float effectFactor;\n\n// vec2 rotate(vec2 v, float a) {\n//  float s = sin(a);\n//  float c = cos(a);\n//  mat2 m = mat2(c, -s, s, c);\n//  return m * v;\n// }\n\nvoid main() {\n\n    vec2 uv = vUv;\n\n    // uv -= 0.5;\n    // vec2 rotUV = rotate(uv, _rot);\n    // uv += 0.5;\n\n    vec4 disp = texture2D(disp, uv);\n\n    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);\n    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);\n\n    vec4 _texture = texture2D(texture, distortedPosition);\n    vec4 _texture2 = texture2D(texture2, distortedPosition2);\n\n    vec4 finalTexture = mix(_texture, _texture2, dispFactor);\n\n    gl_FragColor = finalTexture;\n    // gl_FragColor = disp;\n}");
 ;// CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/shader/vertex-custom.glsl
 /* harmony default export */ const js_shader_vertex_custom = ("#define GLSLIFY 1\nvarying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}");
 ;// CONCATENATED MODULE: ./src/components/simple-3D-liquid-scrollspy-slider/js/index.js
+
 
 
 
@@ -44592,11 +44666,11 @@ var THREE_LIQUID_SCROLLSPY_SLIDER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady);
-  return function THREE_LIQUID_SCROLLSPY_SLIDER() {
+  return /*#__PURE__*/_createClass(function THREE_LIQUID_SCROLLSPY_SLIDER() {
     _classCallCheck(this, THREE_LIQUID_SCROLLSPY_SLIDER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_third-party-plugins/THREE/esm/postprocessing/EffectComposer.js
 /**
@@ -45255,6 +45329,7 @@ THREE.FilmShader = {
 ;// CONCATENATED MODULE: ./src/components/simple-3D-filmic-effects/js/index.js
 
 
+
 /* 
  *************************************
  * <!-- 3D Filmic Effects -->
@@ -45466,13 +45541,14 @@ var THREE_FILMIC_EFF = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_FILMIC_EFF.documentReady);
-  return function THREE_FILMIC_EFF() {
+  return /*#__PURE__*/_createClass(function THREE_FILMIC_EFF() {
     _classCallCheck(this, THREE_FILMIC_EFF);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/simple-3D-simulate-html-layout/js/index.js
+
 
 
 
@@ -45840,13 +45916,14 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.THREE_SIMULATE_HTML_LAYOUT.documentReady);
-  return function THREE_SIMULATE_HTML_LAYOUT() {
+  return /*#__PURE__*/_createClass(function THREE_SIMULATE_HTML_LAYOUT() {
     _classCallCheck(this, THREE_SIMULATE_HTML_LAYOUT);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/table/js/basic.js
+
 
 
 
@@ -45952,15 +46029,16 @@ var TABLE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.TABLE.documentReady);
-  return function TABLE() {
+  return /*#__PURE__*/_createClass(function TABLE() {
     _classCallCheck(this, TABLE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 // EXTERNAL MODULE: ./src/components/table/js/fn/sort-elements.js
 var sort_elements = __webpack_require__(782);
 ;// CONCATENATED MODULE: ./src/components/table/js/sorter.js
+
 
 
 /* 
@@ -46034,13 +46112,14 @@ var TABLE_SORTER = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.TABLE_SORTER.documentReady);
-  return function TABLE_SORTER() {
+  return /*#__PURE__*/_createClass(function TABLE_SORTER() {
     _classCallCheck(this, TABLE_SORTER);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/tabs/js/index.js
+
 
 
 
@@ -46232,13 +46311,14 @@ var TABS = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.TABS.documentReady);
-  return function TABS() {
+  return /*#__PURE__*/_createClass(function TABS() {
     _classCallCheck(this, TABS);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/team-focus/js/index.js
+
 
 
 
@@ -46391,11 +46471,11 @@ var TEAM_FOCUS = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.TEAM_FOCUS.documentReady);
-  return function TEAM_FOCUS() {
+  return /*#__PURE__*/_createClass(function TEAM_FOCUS() {
     _classCallCheck(this, TEAM_FOCUS);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/text-effect/js/fn/text-anime.js
 
@@ -46565,6 +46645,7 @@ var TEAM_FOCUS = function (module, $, window, document) {
 ;// CONCATENATED MODULE: ./src/components/text-effect/js/index.js
 
 
+
 /* 
  *************************************
  * <!-- Text effect -->
@@ -46602,13 +46683,14 @@ var TEXT_EFFECT = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.TEXT_EFFECT.pageLoaded);
-  return function TEXT_EFFECT() {
+  return /*#__PURE__*/_createClass(function TEXT_EFFECT() {
     _classCallCheck(this, TEXT_EFFECT);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/timeline/js/index.js
+
 
 
 
@@ -46779,13 +46861,14 @@ var TIMELINE = function (module, $, window, document) {
   };
 
   module.components.pageLoaded.push(module.TIMELINE.pageLoaded);
-  return function TIMELINE() {
+  return /*#__PURE__*/_createClass(function TIMELINE() {
     _classCallCheck(this, TIMELINE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/vertical-menu/js/index.js
+
 
 
 /* 
@@ -46937,13 +47020,14 @@ var VERTICAL_MENU = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.VERTICAL_MENU.documentReady);
-  return function VERTICAL_MENU() {
+  return /*#__PURE__*/_createClass(function VERTICAL_MENU() {
     _classCallCheck(this, VERTICAL_MENU);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/wordpress/js/index.js
+
 
 
 /* 
@@ -46987,11 +47071,11 @@ var WP_CORE = function (module, $, window, document) {
   };
 
   module.components.documentReady.push(module.WP_CORE.documentReady);
-  return function WP_CORE() {
+  return /*#__PURE__*/_createClass(function WP_CORE() {
     _classCallCheck(this, WP_CORE);
 
     this.module = module;
-  };
+  });
 }(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/_app-load.js
 /*

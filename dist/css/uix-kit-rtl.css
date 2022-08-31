@@ -4,11 +4,11 @@
  * Generated with "npm run build"
  *
  * ## Project Name        :  Uix Kit
- * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
+ * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.5
+ * ## Version             :  4.7.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 31, 2022
+ * ## Last Update         :  August 31, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -334,13 +334,14 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
   text-align: right;
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
   .uix-t-r--sm {
@@ -374,6 +375,15 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     text-align: left;
   }
   .uix-t-l--xl {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .uix-t-r--xxl {
+    text-align: left;
+  }
+  .uix-t-l--xxl {
     text-align: right;
   }
 }
@@ -1766,13 +1776,14 @@ table.uix-table td,
 
 table.uix-table thead th,
 .uix-table table thead th {
-  /* The breakpoint is the same as bootstrap 4 */
+  /* The breakpoint is the same as bootstrap 5 */
   /*
 			--breakpoint-xs:0;
 			--breakpoint-sm:576px;
 			--breakpoint-md:768px;
 			--breakpoint-lg:992px;
 			--breakpoint-xl:1200px;
+			--breakpoint-xxl:1400px;
 			*/
 }
 
@@ -1826,6 +1837,17 @@ table.uix-table thead th.uix-t-l,
   }
   table.uix-table thead th.uix-t-l--xl,
   .uix-table table thead th.uix-t-l--xl {
+    text-align: right;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  table.uix-table thead th.uix-t-r--xxl,
+  .uix-table table thead th.uix-t-r--xxl {
+    text-align: left;
+  }
+  table.uix-table thead th.uix-t-l--xxl,
+  .uix-table table thead th.uix-t-l--xxl {
     text-align: right;
   }
 }

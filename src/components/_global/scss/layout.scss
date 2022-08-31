@@ -2,7 +2,7 @@
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 /*
- * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
+ * 1. Bootstrap 5.x                              - Do not use prefix "uix-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
  * 4. Uix Grid (Core Grid)
@@ -13,10 +13,10 @@
 
 /* 
  ---------------------------
- 1. Bootstrap 4.x
+ 1. Bootstrap 5.x
  ---------------------------
  */ 
-/* New XL container for Bootstrap 4.x */
+/* New XL container for Bootstrap 5.x */
 .container {
 	width: auto;
 	max-width: 1140px;
@@ -430,18 +430,20 @@
 @include uixCoreGridGenerate( '.uix-core-grid', 15px );
 
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'sm', '576px' );	
 @include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'md', '768px' );	
 @include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'lg', '992px' );	
 @include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'xl', '1200px' );	
+@include uixCoreGridColumnBreakpoint( '.uix-core-grid', 15px, 'xxl', '1400px' );	
 
 
 

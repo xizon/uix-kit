@@ -4,7 +4,7 @@
   </a>
   <p align="center">Make over <strong>120+</strong> components to wear again and again!</p>
   <p align="center">
-      <a href="https://travis-ci.org/xizon/uix-kit/" title="Travis CI"><img src="https://img.shields.io/travis/xizon/uix-kit/master?style=for-the-badge"/></a>
+      <a href="https://app.travis-ci.com/github/xizon/uix-kit" title="Travis CI"><img src="https://img.shields.io/travis/com/xizon/uix-kit?style=for-the-badge"/></a>
       <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F" title="w3c"><img src="https://img.shields.io/w3c-validation/html?style=for-the-badge&targetUrl=https%3A%2F%2Fxizon.github.io%2Fuix-kit%2Fexamples%2F"/></a>
 	  <a href="https://www.npmjs.com/package/uix-kit" title="npm version"><img src="https://img.shields.io/npm/v/uix-kit?style=for-the-badge"/></a>
 	  <a href="https://github.com/xizon/uix-kit/blob/master/LICENSE" title="license"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge"/></a>
@@ -46,15 +46,16 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 
 ## Table of Contents
 
-
 * [Getting Started with Videos](#getting-started-with-videos)
 * [Why use it](#why-use-it)
-* [Installation And Test](#installation-and-test)
-* [How To Use？](#how-to-use)
+* [File Structures](#file-structures)
+* [Getting Started](#getting-started)
+* [HTML Template](#html-template)
 * [How to Create a Custom Module？ &#128293; ](#how-to-create-a-custom-module)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
 * [Browser Support](#browser-support)
+* [Supported development environment](#supported-development-environment)
 * [Licensing](#licensing)
 
 
@@ -64,6 +65,63 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 [https://www.youtube.com/watch?v=aRDY9Cr-1-E](https://www.youtube.com/watch?v=aRDY9Cr-1-E)
 
 
+
+## File Structures
+
+
+```sh
+
+uix-kit/
+├── README.md   --------------------------- # Main Documentation
+├── CHANGELOG.md   ------------------------ # Changelog
+├── CONTRIBUTING.md   --------------------- # External resource references
+├── LICENSE     --------------------------- # License
+├── webpack.config.js  -------------------- # Webpack scaffold configuration file
+├── server.js  ---------------------------- # Local server configuration
+├── package.json  ------------------------- # Project configuration file (site info can be modified here)
+├── package-lock.json
+├── dist/
+│   ├── css/
+│   │   ├── uix-kit.css  ------------------ # Main css file
+│   │   ├── uix-kit.css.map
+│   │   ├── uix-kit.min.css  -------------- # Main css file which is used for production
+│   │   ├── uix-kit.min.css.map
+│   │   ├── uix-kit-rtl.css   ------------- # Main RTL css file
+│   │   ├── uix-kit-rtl.css.map
+│   │   ├── uix-kit-rtl.min.css   --------- # Main RTL css file which is used for production
+│   │   └── uix-kit-rtl.min.css.map
+│   └── js/
+│   │   ├── uix-kit.js   ------------------ # Main js file
+│   │   ├── uix-kit.js.map
+│   │   ├── uix-kit.min.js  --------------- # Main js file which is used for production
+│   │   ├── uix-kit.min.js.map
+│   │   ├── uix-kit-rtl.js
+│   │   ├── uix-kit-rtl.js.map
+│   │   ├── uix-kit-rtl.min.js
+│   │   └── uix-kit-rtl.min.js.map
+├── misc/                
+│   ├── screenshots/  --------------------- # Screenshots
+│   └── grid/ ----------------------------- # PSD grid system
+├── src/
+│   ├── components/
+│   │   ├── _app-load.js  ------------- # Import your modules to be used
+│   │   ├── _app-load-rtl.js  --------- # Import your RTL modules to be used
+│   │   ├── _global/ ------------------ # Generic modules
+│   │   ├── _main/  ------------------- # Customization site file directory (for secondary or new website development)
+│   │   ├── _third-party-plugins/  ---- # Third-party plugins
+│   │   └── */  ----------------------- # Core functional modules
+├── examples/                                
+│   ├── *.html  --------------------------- # HTML templates
+│   └── assets/  -------------------------- # Static resource directory
+│   │       ├── css/
+│   │       ├── fonts/
+│   │       ├── images/
+│   │       ├── videos/
+│   │       ├── models/
+│   │       ├── json/
+│   │       └── js/
+└──
+```
 
 
 ## Why use it
@@ -78,7 +136,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * Automatically generate a table of contents for each module comment of the name
 * Each module consists of SASS / SCSS, JavaScript and HTML files
 * Make a foundation for the React architecture
-* Compatible with Bootstrap 4.x
+* Compatible with Bootstrap 5.x (You could also remove Bootstrap's stylesheets)
 * Provides a common web page components and layouts
 * Using ES6 to import or export multiple modules, the third-party plugins could adopt pure file merger method and do not import and export
 * The complete directory of examples in order to develop a responsive website independently without Node.js dev environment
@@ -87,7 +145,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * * *
 
 
-## Installation And Test
+## Getting Started
 
 ![quick overview 1](misc/screenshots/quick-overview-1.gif)
 
@@ -119,8 +177,13 @@ $ cd /{your_directory}/uix-kit
 **Step 3.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
+$ sudo npm install
+```
+or 
+```sh
 $ sudo npm install --only=dev --unsafe-perm --production
 ```
+
 
 
 **Step 4.** When you’re ready to deploy to production, create a minified bundle with:
@@ -128,11 +191,29 @@ $ sudo npm install --only=dev --unsafe-perm --production
 ```sh
 $ npm run build
 ```
+Using `Ctrl + C` to stop it.
 
-**Step 5.** When you have done, this will spin up a server that can be accessed at
+When you have done, this will spin up a server that can be accessed at `http://localhost:8080/examples/`
+
+
+**Step 5.** To preview the page without compiling and packaging, please run the following command:
 
 ```sh
-http://localhost:8080/examples/
+$ npm run preview
+```
+
+All pages can be previewed via `http://localhost:3000`. 
+
+<blockquote>
+But there is no way to run PHP or get AJAX request on the pages. You need to visit the link on your server, or build a server via MAMP. Then visit a similar URL: <strong>http://localhost:{port}/uix-kit/examples/</strong>
+</blockquote>
+
+
+
+**(Optional)** Debug application. It can be checked separately as TypeScript without compiling and packaging behavior.
+
+```sh
+$ npm run check
 ```
 
 
@@ -157,7 +238,7 @@ You can update the Placeholders in Templates by modifying the Site Info configur
   "projectName": "Uix Kit",
   "createdInfo": "UIUX Lab (https://uiux.cc)",
   "projectURL": "https://uiux.cc",
-  "description": "A free web kits for fast web design and development, compatible with Bootstrap v4.",
+  "description": "A free web kits for fast web design and development, compatible with Bootstrap v5.",
   ...
 }
 ```
@@ -193,9 +274,9 @@ $ sudo npm rebuild node-sass
 * * *
 
 
-## How To Use
+## HTML Template
 
-### 1\. HTML Structure
+### 1\. Static HTML code
 
 ```html
 <!DOCTYPE html>
@@ -214,7 +295,7 @@ $ sudo npm rebuild node-sass
 	============================================= -->
 
 	<!-- Basic  -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=4.2.1" media="all"/>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=5.0.2" media="all"/>
 	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
 
 
@@ -235,8 +316,7 @@ $ sudo npm rebuild node-sass
 	<!-- Core & Theme CSS  end -->
 	<!-- Vendor
 	============================================= -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.3.1"></script>
-	<script src="assets/js/wp-jquery/jquery.migrate.min.js?ver=1.4.1"></script>
+	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.6.1"></script>
     <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
 	<!-- Vendor  end -->
 
@@ -293,66 +373,7 @@ $ sudo npm rebuild node-sass
 
 ```
 
-
-### 2\. File Structures
-
-
-```sh
-
-uix-kit/
-├── README.md   --------------------------- # Main Documentation
-├── CHANGELOG.md   ------------------------ # Changelog
-├── CONTRIBUTING.md   --------------------- # External resource references
-├── LICENSE     --------------------------- # License
-├── webpack.config.js  -------------------- # Webpack scaffold configuration file
-├── package.json  ------------------------- # Project configuration file (site info can be modified here)
-├── package-lock.json
-├── dist/
-│   ├── css/
-│   │   ├── uix-kit.css  ------------------ # Main css file
-│   │   ├── uix-kit.css.map
-│   │   ├── uix-kit.min.css  -------------- # Main css file which is used for production
-│   │   ├── uix-kit.min.css.map
-│   │   ├── uix-kit-rtl.css   ------------- # Main RTL css file
-│   │   ├── uix-kit-rtl.css.map
-│   │   ├── uix-kit-rtl.min.css   --------- # Main RTL css file which is used for production
-│   │   └── uix-kit-rtl.min.css.map
-│   └── js/
-│   │   ├── uix-kit.js   ------------------ # Main js file
-│   │   ├── uix-kit.js.map
-│   │   ├── uix-kit.min.js  --------------- # Main js file which is used for production
-│   │   ├── uix-kit.min.js.map
-│   │   ├── uix-kit-rtl.js
-│   │   ├── uix-kit-rtl.js.map
-│   │   ├── uix-kit-rtl.min.js
-│   │   └── uix-kit-rtl.min.js.map
-├── misc/                
-│   ├── screenshots/  --------------------- # Screenshots
-│   └── grid/ ----------------------------- # PSD grid system
-├── src/
-│   ├── components/
-│   │   ├── _app-load.js  ------------- # Import your modules to be used
-│   │   ├── _app-load-rtl.js  --------- # Import your RTL modules to be used
-│   │   ├── _global/ ------------------ # Generic modules
-│   │   ├── _main/  ------------------- # Customization site file directory (for secondary or new website development)
-│   │   ├── _third-party-plugins/  ---- # Third-party plugins
-│   │   └── */  ----------------------- # Core functional modules
-├── examples/                                
-│   ├── *.html  --------------------------- # HTML templates
-│   └── assets/  -------------------------- # Static resource directory
-│   │       ├── css/
-│   │       ├── fonts/
-│   │       ├── images/
-│   │       ├── videos/
-│   │       ├── models/
-│   │       ├── json/
-│   │       └── js/
-└──
-```
-
-
-
-### 3\. PSD Grid Templates
+### 2\. PSD Grid Templates
 
 You can download the corresponding .PSD grid files.
 
@@ -607,11 +628,18 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 
 ## Browser Support
 
-![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | iOS  | Android
---- | --- | --- | --- | --- | --- | --- | --- |
-45+ ✔ | 38+ ✔ | 12+ ✔ | 9+ ✔ | 9.1+ ✔ | 30+ ✔ | 10+ ✔ | 4.4+ ✔ |
+| Chrome | Firefox | Edge | IE| Safari |Opera | iOS  | Android
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| >= 49 | >= 45 | >=14 | >=11 | >= 9 | >= 30 | >=10 | >=4.4 |
 
 
+## Supported development environment
+
+- React 17 +
+- TypeScript 4.x.x + 
+- Babel 7.x.x + 
+- Webpack 5.x.x
+- Express 4.x.x
 
 ## Licensing
 

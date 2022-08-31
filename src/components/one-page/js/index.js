@@ -23,7 +23,7 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
 	
 	
     module.ONEPAGE               = module.ONEPAGE || {};
-    module.ONEPAGE.version       = '0.1.0';
+    module.ONEPAGE.version       = '0.1.1';
     module.ONEPAGE.documentReady = function( $ ) {
 
 		let	windowWidth        = window.innerWidth,
@@ -257,9 +257,9 @@ export const ONEPAGE = ( ( module, $, window, document ) => {
         function getRelatedNavigation( el, menuObj, echoIndex ) {
 			
 			if ( echoIndex ) {
-				return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' ).index();
+				return menuObj.find( 'li > a[href="#' + $( el ).attr( 'id' ) + '"]' ).parent( 'li' ).index();
 			} else {
-			    return menuObj.find( 'li > a[href=#' + $( el ).attr( 'id' ) + ']' ).parent( 'li' );	
+			    return menuObj.find( 'li > a[href="#' + $( el ).attr( 'id' ) + '"]' ).parent( 'li' );	
 			}
             
         } 

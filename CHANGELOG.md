@@ -1,6 +1,23 @@
 # Changelog
 
 
+#### = 4.7.0 (August 31, 2022) =
+
+* New: Added command `npm run preview` to preview pages quickly.
+* Fix:  Fixed a bug of property reading for Modal Dialog and Lightbox.
+* Tweak: Migrating to Bootstrap v5.
+  1. change class `no-gutters` to `g-0`  
+  2. change class `embed-responsive` to `ratio`, and `embed-responsive-21by9` to `ratio-16x9`
+  3. add new style to avoid default scrollbar smooth effect `@media (prefers-reduced-motion: no-preference) {:root {scroll-behavior: inherit;}}`
+  4. add new global file `ratios.scss` to `./src/components/_global`
+
+* Remove: Removeed jQuery Migrate.
+* Tweak: Added TypeScript checks when packaging
+* Tweak: Modified the Development chapter of the documentation.
+* Tweak: Optimize webpack configuration.
+* Tweak: Upgrade Node dependencies.
+
+
 #### = 4.6.5 (January 30, 2022) =
 
 * Tweak: Optimized scaffolding to better support TypeScript and React.

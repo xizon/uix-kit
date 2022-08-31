@@ -18,9 +18,7 @@ import {
     UixThrottle
 } from '@uixkit/core/_global/js';
 
-
 import '../scss/_style.scss';
-
 
 export const MAIN = ( ( module, $, window, document ) => {
 	if ( window.MAIN === null ) return false;
@@ -38,9 +36,7 @@ export const MAIN = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */ 
 		//your code here...
-	
-		
-		
+
     };
 	
     module.MAIN.pageLoaded    = function() {

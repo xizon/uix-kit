@@ -381,7 +381,7 @@ $primary-bg-color      : transparent;
 
 
 	@if ( $classname != '' ) {
-		/* New XL container for Bootstrap 4.x */
+		/* New XL container for Bootstrap 5.x */
 		#{$classname} {
 			width: 1140px;
 			position: absolute;

@@ -54,7 +54,7 @@
 							<div class="row">
 								<div class="col-md-6 offset-md-3">
 
-									<h3 class="uix-typo--h5 uix-typo--style-normal" data-text-eff="letters-eff-flyInOut-001" data-text-eff-speed="800">Free Web Kits For Fast Web Design And Development, Compatible With Bootstrap 4</h3>
+									<h3 class="uix-typo--h5 uix-typo--style-normal" data-text-eff="letters-eff-flyInOut-001" data-text-eff-speed="800">Free Web Kits For Fast Web Design And Development, Compatible With Bootstrap 5</h3>
 
 									<div class="uix-btn__group uix-btn__margin--b">
 										<a href="https://github.com/xizon/uix-kit" target="_blank" class="uix-btn uix-btn__border--thin uix-btn__size--s uix-btn__bg--secondary is-pill">Download</a>
@@ -113,14 +113,23 @@
 								<pre class="uix-precode"><label>$</label><code>cd /{your_directory}/uix-kit</code></pre>
 
 								<p><strong>Step 3.</strong> Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.</p>
-								<pre class="uix-precode"><label>$</label><code>sudo npm install --only=dev --unsafe-perm --production</code></pre>
+								<pre class="uix-precode"><label>$</label><code>sudo npm install</code></pre>
 
 								<p><strong>Step 4.</strong> When you’re ready to deploy to production, create a minified bundle with:</p>
 								<pre class="uix-precode"><label>$</label><code>npm run build</code></pre>
 
-								<p><strong>Step 5.</strong> When you have done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+								<p>When you have done, this will spin up a server that can be accessed at <code>http://localhost:8080/examples/</code></p>
+
+								<p><strong>Step 5.</strong> To preview the page without compiling and packaging, please run the following command:</p>
+								<pre class="uix-precode"><label>$</label><code>npm run preview</code></pre>
                                 
-                                
+                                <p>All pages can be previewed via <code>http://localhost:3000</code> </p>
+								<blockquote>
+								But there is no way to run PHP or get AJAX request on the pages. You need to visit the link on your server, or build a server via MAMP. Then visit a similar URL: <strong>http://localhost:{port}/uix-kit/examples/</strong>
+								</blockquote>
+								
+
+
                              
 
 							</div>

@@ -29,7 +29,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
 	
 	
     module.LIGHTBOX               = module.LIGHTBOX || {};
-    module.LIGHTBOX.version       = '0.2.2';
+    module.LIGHTBOX.version       = '0.2.3';
     module.LIGHTBOX.pageLoaded    = function() {
 
 		if ( $( '.uix-lightbox__container' ).length == 0 ) {
@@ -43,7 +43,7 @@ export const LIGHTBOX = ( ( module, $, window, document ) => {
             
             const _content = $( this ).html( function( index,html ) {
                                         return html.replace(/[\r\n]/g, '' );
-                                    }).context.innerHTML,
+                                    }).html(),
                 _id = $( this ).attr( 'id' );
             
             //If it is dialog, clone the contents of the <template> into the body

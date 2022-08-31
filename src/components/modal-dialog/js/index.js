@@ -27,7 +27,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
 	
 	
     module.MODAL_DIALOG               = module.MODAL_DIALOG || {};
-    module.MODAL_DIALOG.version       = '0.1.8';
+    module.MODAL_DIALOG.version       = '0.1.9';
     module.MODAL_DIALOG.documentReady = function( $ ) {
 
 		
@@ -40,7 +40,7 @@ export const MODAL_DIALOG = ( ( module, $, window, document ) => {
             
             const _content = $( this ).html( function( index,html ) {
                                         return html.replace(/[\r\n]/g, '' );
-                                    }).context.innerHTML,
+                                    }).html(),
                 _id = $( this ).attr( 'id' );
             
             

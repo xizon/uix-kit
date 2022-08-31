@@ -4,11 +4,11 @@
  * Generated with "npm run build"
  *
  * ## Project Name        :  Uix Kit
- * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v4.
+ * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.6.5
+ * ## Version             :  4.7.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 31, 2022
+ * ## Last Update         :  August 31, 2022
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -33,100 +33,101 @@
     12.Navs
     13.Onepage Menu
     14.Pagination
-    15.Sidebar
-    16.Social Media Icons
-    17.Spacing
-    18.Tags
-    19.Typography
-    20.Video
-    21.Custom Core Scripts & Stylesheets
-    22.Accordion Background Images
-    23.Accordion
-    24.Advanced Slider (Basic)
-    25.Advanced Slider (Special Effects)
-    26.Ajax Page Loader (Loading A Page via Ajax Into Div)
-    27.Back to Top
-    28.Circle Layout
-    29.Dropdown Menu
-    30.Dropdown Menu 2 (Multi-level drop-down navigation)
-    31.Cascading DropDown List
-    32.Flexslider (Third-party plugin)
-    33.Floating Side Element
-    34.Form Progress
-    35.Form
-    36.Form ( Layout )-
-    37.Form  ( Material Design Theme )
-    38.Form ( 3rd Party Plugin )
-    39.Gallery
-    40.Hybrid Content Slider
-    41.Image Shapes
-    42.Infinite Scrolling Element
-    43.Lava-Lamp Style Menu
-    44.Cutom Light Box
-    45.Bulleted List
-    46.List of Posts
-    47.List of Split Posts
-    48.Full Width Column to Edge
-    49.Login Templates
-    50.Modal Dialog
-    51.Multiple Items Carousel
-    52.Parallax
-    53.Periodical Scroll
-    54.Pricing
-    55.Progress Bar
-    56.Progress Line
-    57.Show More Less
-    58.Sticky Elements
-    59.SVG Map
-    60.SVG Mask Slider
-    61.Swiper
-    62.3D Background
-    63.3D Carousel
-    64.3D Shatter Slider
-    65.3D Explosive Particle Slider
-    66.3D Liquid Scrollspy Slider
-    67.Table
-    68.Tabs
-    69.Team Focus
-    70.Text effect
-    71.Timeline
-    72.Vertical Menu
-    73.WordPress Core ( Do not use prefix "uix-" )
-    74.WordPress Blocks ( Do not use prefix "uix-" )
-    75.3rd Party Plugins
-    76.Badges
-    77.Blended Grid Layout
-    78.Breadcrumbs
-    79.Button
-    80.Cards
-    81.Badges
-    82.Coach Mark
-    83.Content Placeholder Animated
-    84.Dividing Line
-    85.Dotted Line
-    86.Equal-width Columns
-    87.Features
-    88.Footer Templates
-    89.Gallery Grid Layout
-    90.Heading
-    91.Image Animation
-    92.Brands List
-    93.Maintain Aspect Ratio List
-    94.Side by Side List
-    95.Side by Side List With Photo
-    96.Mouse Animation Scroll
-    97.Overlay
-    98.Ribbon
-    99.Separator of Rule With Text
-    100.Shape Animation
-    101.Comments ( Synchronize to WordPress's class name )
-    102.Editing Component
-    103.Striking
-    104.Team Fullwidth (Style using the Side by Side List With Photo module)
-    105.Team Gird
-    106.Testimonials Carousel
-    107.ToolTip
-    108.Wave Background
+    15.Ratios
+    16.Sidebar
+    17.Social Media Icons
+    18.Spacing
+    19.Tags
+    20.Typography
+    21.Video
+    22.Custom Core Scripts & Stylesheets
+    23.Accordion Background Images
+    24.Accordion
+    25.Advanced Slider (Basic)
+    26.Advanced Slider (Special Effects)
+    27.Ajax Page Loader (Loading A Page via Ajax Into Div)
+    28.Back to Top
+    29.Circle Layout
+    30.Dropdown Menu
+    31.Dropdown Menu 2 (Multi-level drop-down navigation)
+    32.Cascading DropDown List
+    33.Flexslider (Third-party plugin)
+    34.Floating Side Element
+    35.Form Progress
+    36.Form
+    37.Form ( Layout )-
+    38.Form  ( Material Design Theme )
+    39.Form ( 3rd Party Plugin )
+    40.Gallery
+    41.Hybrid Content Slider
+    42.Image Shapes
+    43.Infinite Scrolling Element
+    44.Lava-Lamp Style Menu
+    45.Cutom Light Box
+    46.Bulleted List
+    47.List of Posts
+    48.List of Split Posts
+    49.Full Width Column to Edge
+    50.Login Templates
+    51.Modal Dialog
+    52.Multiple Items Carousel
+    53.Parallax
+    54.Periodical Scroll
+    55.Pricing
+    56.Progress Bar
+    57.Progress Line
+    58.Show More Less
+    59.Sticky Elements
+    60.SVG Map
+    61.SVG Mask Slider
+    62.Swiper
+    63.3D Background
+    64.3D Carousel
+    65.3D Shatter Slider
+    66.3D Explosive Particle Slider
+    67.3D Liquid Scrollspy Slider
+    68.Table
+    69.Tabs
+    70.Team Focus
+    71.Text effect
+    72.Timeline
+    73.Vertical Menu
+    74.WordPress Core ( Do not use prefix "uix-" )
+    75.WordPress Blocks ( Do not use prefix "uix-" )
+    76.3rd Party Plugins
+    77.Badges
+    78.Blended Grid Layout
+    79.Breadcrumbs
+    80.Button
+    81.Cards
+    82.Badges
+    83.Coach Mark
+    84.Content Placeholder Animated
+    85.Dividing Line
+    86.Dotted Line
+    87.Equal-width Columns
+    88.Features
+    89.Footer Templates
+    90.Gallery Grid Layout
+    91.Heading
+    92.Image Animation
+    93.Brands List
+    94.Maintain Aspect Ratio List
+    95.Side by Side List
+    96.Side by Side List With Photo
+    97.Mouse Animation Scroll
+    98.Overlay
+    99.Ribbon
+    100.Separator of Rule With Text
+    101.Shape Animation
+    102.Comments ( Synchronize to WordPress's class name )
+    103.Editing Component
+    104.Striking
+    105.Team Fullwidth (Style using the Side by Side List With Photo module)
+    106.Team Gird
+    107.Testimonials Carousel
+    108.ToolTip
+    109.Wave Background
 
 
 */
@@ -148,6 +149,13 @@
 ::-webkit-selection {
   background: #1f1f1f;
   color: #fff;
+}
+
+/* Avoid default scrollbar smooth effect */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: inherit;
+  }
 }
 
 html,
@@ -1063,13 +1071,14 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   display: inline-flex !important;
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
   .uix-display-none--sm {
@@ -1151,6 +1160,27 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
     display: flex !important;
   }
   .uix-display-inline-flex--xl {
+    display: inline-flex !important;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .uix-display-none--xxl {
+    display: none !important;
+  }
+  .uix-display-inline--xxl {
+    display: inline !important;
+  }
+  .uix-display-inline-block--xxl {
+    display: inline-block !important;
+  }
+  .uix-display-block--xxl {
+    display: block !important;
+  }
+  .uix-display-flex--xxl {
+    display: flex !important;
+  }
+  .uix-display-inline-flex--xxl {
     display: inline-flex !important;
   }
 }
@@ -1247,13 +1277,14 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
   text-align: center;
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
   .uix-t-r--sm {
@@ -1299,6 +1330,18 @@ ul.uix-entry__meta:not(.uix-entry__meta--wrap) li:first-child::before {
     text-align: left;
   }
   .uix-t-c--xl {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .uix-t-r--xxl {
+    text-align: right;
+  }
+  .uix-t-l--xxl {
+    text-align: left;
+  }
+  .uix-t-c--xxl {
     text-align: center;
   }
 }
@@ -1680,7 +1723,7 @@ details.uix-details-reset > summary::-webkit-details-marker {
    <!-- Basic Layout Styles -->                                        
 /* ====================================================== */
 /*
- * 1. Bootstrap 4.x                              - Do not use prefix "uix-"
+ * 1. Bootstrap 5.x                              - Do not use prefix "uix-"
  * 2. Material Container                         
  * 3. Main Wrapper                               
  * 4. Uix Grid (Core Grid)
@@ -1688,10 +1731,10 @@ details.uix-details-reset > summary::-webkit-details-marker {
 */
 /* 
  ---------------------------
- 1. Bootstrap 4.x
+ 1. Bootstrap 5.x
  ---------------------------
  */
-/* New XL container for Bootstrap 4.x */
+/* New XL container for Bootstrap 5.x */
 .container {
   width: auto;
   max-width: 1140px;
@@ -1954,13 +1997,14 @@ details.uix-details-reset > summary::-webkit-details-marker {
   }
 }
 
-/* The breakpoint is the same as bootstrap 4 */
+/* The breakpoint is the same as bootstrap 5 */
 /*
 --breakpoint-xs:0;
 --breakpoint-sm:576px;
 --breakpoint-md:768px;
 --breakpoint-lg:992px;
 --breakpoint-xl:1200px;
+--breakpoint-xxl:1400px;
 */
 @media all and (max-width: 576px) {
   .uix-core-grid .uix-core-grid__col-3--sm,
@@ -2086,6 +2130,38 @@ details.uix-details-reset > summary::-webkit-details-marker {
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--xl:nth-child(4n+1),
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-4--xl:nth-child(3n+1),
   .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-6--xl:nth-child(2n+1) {
+    clear: both;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .uix-core-grid .uix-core-grid__col-3--xxl,
+  .uix-core-grid .uix-core-grid__col-4--xxl,
+  .uix-core-grid .uix-core-grid__col-6--xxl {
+    float: left !important;
+    padding-right: 15px !important;
+  }
+  .uix-core-grid .uix-core-grid__col-3--xxl {
+    width: 25% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-4--xxl {
+    width: 33.333333333333% !important;
+  }
+  .uix-core-grid .uix-core-grid__col-6--xxl {
+    width: 50% !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-3--xxl {
+    width: calc(25% - 3.75px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-4--xxl {
+    width: calc(33.333333333333% - 5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--no-gutters .uix-core-grid__col-6--xxl {
+    width: calc(50% - 7.5px) !important;
+  }
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-3--xxl:nth-child(4n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-4--xxl:nth-child(3n+1),
+  .uix-core-grid .uix-core-grid__row--loop .uix-core-grid__col-6--xxl:nth-child(2n+1) {
     clear: both;
   }
 }
@@ -3255,6 +3331,52 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span:nth-child(3) {
   padding: 0 0.2625rem;
   border: 1px solid #DDDDDD;
   border-radius: 2px;
+}
+
+/* ====================================================== 
+   <!-- Ratios -->      
+/* ====================================================== */
+.uix-ratio {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.uix-ratio::before {
+  display: block;
+  content: "";
+}
+
+.uix-ratio .uix-ratio-item,
+.uix-ratio iframe,
+.uix-ratio embed,
+.uix-ratio object,
+.uix-ratio video {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.uix-ratio-21x9::before {
+  padding-top: 42.857143%;
+}
+
+.uix-ratio-16x9::before {
+  padding-top: 56.25%;
+}
+
+.uix-ratio-3x4::before {
+  padding-top: 133.333333%;
+}
+
+.uix-ratio-1x1::before {
+  padding-top: 100%;
 }
 
 /* ====================================================== 
@@ -4746,7 +4868,7 @@ h6 {
   opacity: 0;
   /* Javascript will automatically get this value, please do not delete */
   transition: all 0.6s ease;
-  /* New XL container for Bootstrap 4.x */
+  /* New XL container for Bootstrap 5.x */
 }
 
 .uix-advanced-slider .uix-advanced-slider__inner .uix-advanced-slider__item .uix-advanced-slider__txt {
@@ -5104,7 +5226,7 @@ h6 {
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item {
   width: 100%;
   opacity: 0;
-  /* New XL container for Bootstrap 4.x */
+  /* New XL container for Bootstrap 5.x */
 }
 
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item .uix-advanced-slider-sp__txt {
@@ -13163,8 +13285,8 @@ a.uix-lightbox__original__link {
   top: 0;
   z-index: 1;
   width: 100%;
-  /* New XL container for Bootstrap 4.x */
-  /* New XL container for Bootstrap 4.x */
+  /* New XL container for Bootstrap 5.x */
+  /* New XL container for Bootstrap 5.x */
 }
 
 .uix-svgMask-slider .uix-svgMask-slider__inner .uix-svgMask-slider__item .uix-svgMask-slider__txt {
@@ -15097,13 +15219,14 @@ table.uix-table thead th,
 .uix-table table thead th {
   text-align: inherit;
   /* Required */
-  /* The breakpoint is the same as bootstrap 4 */
+  /* The breakpoint is the same as bootstrap 5 */
   /*
 			--breakpoint-xs:0;
 			--breakpoint-sm:576px;
 			--breakpoint-md:768px;
 			--breakpoint-lg:992px;
 			--breakpoint-xl:1200px;
+			--breakpoint-xxl:1400px;
 			*/
 }
 
@@ -15178,6 +15301,21 @@ table.uix-table thead th.uix-t-c,
   }
   table.uix-table thead th .uix-t-c--xl,
   .uix-table table thead th .uix-t-c--xl {
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  table.uix-table thead th.uix-t-r--xxl,
+  .uix-table table thead th.uix-t-r--xxl {
+    text-align: right;
+  }
+  table.uix-table thead th.uix-t-l--xxl,
+  .uix-table table thead th.uix-t-l--xxl {
+    text-align: left;
+  }
+  table.uix-table thead th .uix-t-c--xxl,
+  .uix-table table thead th .uix-t-c--xxl {
     text-align: center;
   }
 }

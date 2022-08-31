@@ -68,7 +68,7 @@ export const MEGA_MENU = ( ( module, $, window, document ) => {
 			    perDefaultW  = 270; //Default width of each column
 
 			
-			//New XL container for Bootstrap 4.x
+			//New XL container for Bootstrap 5.x
 			if ( w > 1430 ) maxWidth = 1278;
 			
 			//Full width container

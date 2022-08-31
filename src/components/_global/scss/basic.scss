@@ -13,6 +13,14 @@
 	color: #fff;
 }
 
+/* Avoid default scrollbar smooth effect */
+@media (prefers-reduced-motion: no-preference) {
+	:root {
+		scroll-behavior: inherit;
+	}
+}
+  
+
 html, 
 body {
 	width: 100%;
