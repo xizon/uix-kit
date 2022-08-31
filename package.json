@@ -17,7 +17,8 @@
     "build": "cross-env NODE_ENV=production tsc & webpack --progress --mode production",
     "check": "tsc",
     "prettier": "prettier \"./dist/css/uix-kit.css\"",
-    "prettier-rtl": "prettier \"./dist/css/uix-kit-rtl.css\""
+    "prettier-rtl": "prettier \"./dist/css/uix-kit-rtl.css\"",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
