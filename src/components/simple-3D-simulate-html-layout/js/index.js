@@ -367,7 +367,6 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 						new Promise(function(resolve, reject) {
 
 							const img = new Image();
-							img.crossOrigin = "anonymous";
 							img.src = sources[i].url;
 
 							img.onload = function(image) {

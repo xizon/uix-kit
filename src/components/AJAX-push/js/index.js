@@ -292,7 +292,6 @@ export const AJAX_PUSH_CONTENT = ( ( module, $, window, document ) => {
                                 new Promise(function(resolve, reject) {
 
                                     const img = document.createElement("img");
-                                    img.crossOrigin = "anonymous";
                                     img.src = sources[i].url;
 
                                     img.onload = function(image) {

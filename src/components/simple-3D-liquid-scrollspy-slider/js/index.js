@@ -452,7 +452,6 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                             new Promise(function(resolve, reject) {
                             
                                 const img = document.createElement("img");
-                                img.crossOrigin = "anonymous";
                                 img.src = sources[i].url;
 
                                 img.onload = function(image) {
