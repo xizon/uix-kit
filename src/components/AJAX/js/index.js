@@ -7,7 +7,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -833,9 +833,9 @@ export const AJAX_PAGE_LOADER = ( ( module, $, window, document ) => {
 		};
 		
 
-		window.addEventListener( 'wheel', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
-		window.addEventListener( 'touchstart', onTouchStart, browser.supportsPassive ? { passive: true } : false );
-		window.addEventListener( 'touchmove', onDeviceWheel, browser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'wheel', onDeviceWheel, UixBrowser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchstart', onTouchStart, UixBrowser.supportsPassive ? { passive: true } : false );
+		window.addEventListener( 'touchmove', onDeviceWheel, UixBrowser.supportsPassive ? { passive: true } : false );
 		
 		
     };

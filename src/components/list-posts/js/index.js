@@ -8,7 +8,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -18,6 +18,8 @@ import {
 } from '@uixkit/core/_global/js';
 import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 import '@uixkit/plugins/Miscellaneous/attrExt';
+
+import '@uixkit/core/list-posts/js/third-party/template7';
 
 import '../scss/_basic.scss';
 import '../scss/_split.scss';

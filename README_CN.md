@@ -16,8 +16,9 @@
 Uix Kit是一个偏视觉交互的开发工具包，帮助开发者快速完成一套完整的交互型网站。**它不是一个框架**，所有的模块脚本和样式，全部由你掌控！
 
 
-这是一个不依赖任何框架的Web开发构建工具/脚手架。 您可以导入任何外部库、框架或本机ES模块进行生产。 dist目录中生成的核心文件可以在任何网站中单独使用。
+这是一个不依赖任何框架的Web开发构建工具/脚手架。 您可以导入任何外部库、框架或本机ES模块进行生产。 dist目录中生成的核心文件可以在任何网站中单独使用。它常用于生成全静态网站（HTML模板或用于动态语言集成）。
 
+> *该演示依赖于 jQuery（如果需要，您可以完全重写脚本）。*
 
 ---
 
@@ -61,7 +62,7 @@ GitHub pages只提供静态内容访问，AJAX和PHP请求无法预览效果，�
 
 * 它不是可重用的组件结构
 * 它不是一个JavaScript框架
-* 它是一个基于Webpack的开发环境的工具箱
+* 用于生成全静态网站（HTML模板或用于动态语言集成）
 * 您可以用最喜欢的方式使用任意JavaScript库来构建样式和动画脚本
 * 适用于开发视觉交互类型的网站和WordPress模板
 * 遵循W3C标准和SEO优化
@@ -320,7 +321,7 @@ $ sudo npm rebuild node-sass
 	<!-- Core & Theme CSS  end -->
 	<!-- Vendor
 	============================================= -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.6.1"></script>
+	<script src="assets/js/min/jquery.min.js?ver=3.6.1"></script>
     <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
 	<!-- Vendor  end -->
 
@@ -339,13 +340,11 @@ $ sudo npm rebuild node-sass
     <script src="assets/js/min/axios.min.js?ver=0.19.2"></script>
 	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
 	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
-	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
 	<script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
 	<script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
 	<script src="assets/js/min/three.min.js?ver=r99"></script>
 	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
 	<script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-	<script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
 
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
@@ -460,7 +459,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,

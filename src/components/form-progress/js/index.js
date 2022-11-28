@@ -28,7 +28,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,

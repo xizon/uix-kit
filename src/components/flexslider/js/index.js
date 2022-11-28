@@ -8,7 +8,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -827,7 +827,7 @@ export const FLEXSLIDER = ( ( module, $, window, document ) => {
 				}, 60 );			
 				
 			
-			}, browser.supportsPassive ? { passive: true } : false );
+			}, UixBrowser.supportsPassive ? { passive: true } : false );
 
 			
 			

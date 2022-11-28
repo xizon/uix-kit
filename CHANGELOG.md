@@ -1,6 +1,20 @@
 # Changelog
 
 
+
+#### = 4.7.2 (November 27, 2022) =
+
+* New: Upgrade webpack 5.49.0 to 5.75.0. Compilation speed and performance are greatly improved.
+* Tweak: Optimized the `src/components/` directory, how to transition:
+  1. change `src/components/_global/js/index.js`
+  2. add new folder `src/components/_global/js/utils`
+  3. Modify the JavaScript variable `browser` to `UixBrowser` of `src/components/_global/js/index.js` to prevent naming conflicts.
+
+* Tweak: Update Node's dependency package to enhance security.
+* Remove: Remove the `muuri.min.js` and `template7.min.js` plugins from the template, it will be imported separately from the module.
+  
+
+
 #### = 4.7.0 (August 31, 2022) =
 
 * New: Added command `npm run preview` to preview pages quickly.

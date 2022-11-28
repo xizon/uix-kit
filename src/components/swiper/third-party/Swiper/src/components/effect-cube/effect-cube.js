@@ -12,7 +12,7 @@ const Cube = {
       height: swiperHeight,
       rtlTranslate: rtl,
       size: swiperSize,
-      browser,
+      UixBrowser,
     } = swiper;
     const params = swiper.params.cubeEffect;
     const isHorizontal = swiper.isHorizontal();

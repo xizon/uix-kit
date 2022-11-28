@@ -17,7 +17,9 @@
 
 Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript based. Definitely interesting, and if you're developing mostly web content and not applications this is particularly useful. It is a web dev build tool/scaffold that does not depend on any framework.  You can import any external libraries/frameworks or native ES Modules for production. 
 
-The generated core file in the dist directory can be used separately in any website. Support JS, HTML, and SASS component library automatically packaged. Automatically convert ES6 JS to ES5 using Babel in this scaffold. 
+The generated core file in the dist directory can be used separately in any website. Support JS, HTML, and SASS component library automatically packaged. It is used to develop the full-static website (HTML templates or for dynamic language integration). 
+
+> *The demo depends on jQuery (you can completely rewrite the script if needed).*
 
 **Uix Kit is now in Long Term Support (LTS) mode.**
 
@@ -128,7 +130,7 @@ uix-kit/
 
 * Not a reusable component structure
 * Not a JavaScript framework
-* Webpack-based dev environment which is an intuitive toolkit system
+* It is used to build the full-static website (HTML templates or for dynamic language integration)
 * Use any JavaScript libraries in your favorite way to build styles and animation scripts
 * Suitable for developing Visual Interaction websites and WordPress templates
 * W3C standard and SEO 
@@ -316,7 +318,7 @@ $ sudo npm rebuild node-sass
 	<!-- Core & Theme CSS  end -->
 	<!-- Vendor
 	============================================= -->
-	<script src="assets/js/wp-jquery/jquery.min.js?ver=3.6.1"></script>
+	<script src="assets/js/min/jquery.min.js?ver=3.6.1"></script>
     <script src="assets/js/min/modernizr.min.js?ver=3.5.0"></script>
 	<!-- Vendor  end -->
 
@@ -335,13 +337,11 @@ $ sudo npm rebuild node-sass
     <script src="assets/js/min/axios.min.js?ver=0.19.2"></script>
 	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
 	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
-	<script src="assets/js/min/template7.min.js?ver=1.2.5"></script>
 	<script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
 	<script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
 	<script src="assets/js/min/three.min.js?ver=r99"></script>
 	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
 	<script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
-	<script src="assets/js/min/muuri.min.js?ver=0.7.1"></script>
 
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
@@ -456,7 +456,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,

@@ -7,7 +7,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -689,7 +689,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 				window.addEventListener( 'resize', onWindowResize, false );
             
                 // Scrolling interaction with 3D scenes
-                window.addEventListener( 'wheel', onMouseWheel, browser.supportsPassive ? { passive: true } : false );
+                window.addEventListener( 'wheel', onMouseWheel, UixBrowser.supportsPassive ? { passive: true } : false );
 
 
 			}

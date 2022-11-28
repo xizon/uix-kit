@@ -15,7 +15,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -297,8 +297,8 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 				//----
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'touchstart', onDocumentTouchStart, browser.supportsPassive ? { passive: true } : false );
-				document.addEventListener( 'touchmove', onDocumentTouchMove, browser.supportsPassive ? { passive: true } : false );
+				document.addEventListener( 'touchstart', onDocumentTouchStart, UixBrowser.supportsPassive ? { passive: true } : false );
+				document.addEventListener( 'touchmove', onDocumentTouchMove, UixBrowser.supportsPassive ? { passive: true } : false );
 
 				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 				document.addEventListener( 'mouseup', onDocumentMouseUp, false );

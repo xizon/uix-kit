@@ -8,7 +8,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -92,7 +92,7 @@ export const VIDEOS = ( ( module, $, window, document ) => {
 				});
 				
 				//Prevent some devices from automatically playing video and trigger with buttons
-				if ( !dataAuto || browser.isAndroid ) {
+				if ( !dataAuto || UixBrowser.isAndroid ) {
 					$( '#' + coverPlayBtnID + ' .uix-video__cover__playbtn' ).show();
 				}
 

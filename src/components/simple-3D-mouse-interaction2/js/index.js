@@ -7,7 +7,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -369,9 +369,9 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 				this.init = function(domEl) {
 					this.domElem = domEl;
 					this.domElem.addEventListener('mousedown', this.onDocumentMouseDown, false);
-					this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, browser.supportsPassive ? { passive: true } : false);
-					this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, browser.supportsPassive ? { passive: true } : false);
-					this.domElem.addEventListener('wheel', this.onDocumentMousewheel, browser.supportsPassive ? { passive: true } : false);
+					this.domElem.addEventListener('touchstart', this.onDocumentTouchStart, UixBrowser.supportsPassive ? { passive: true } : false);
+					this.domElem.addEventListener('touchmove', this.onDocumentTouchMove, UixBrowser.supportsPassive ? { passive: true } : false);
+					this.domElem.addEventListener('wheel', this.onDocumentMousewheel, UixBrowser.supportsPassive ? { passive: true } : false);
 				};
 				this.onDocumentMouseDown = function(event) {
 					event.preventDefault();

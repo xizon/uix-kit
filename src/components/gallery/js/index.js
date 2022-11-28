@@ -8,7 +8,7 @@ import {
     templateUrl,
     homeUrl,
     ajaxUrl,
-    browser,
+    UixBrowser,
     UixModuleInstance,
     UixGUID,
     UixMath,
@@ -17,6 +17,8 @@ import {
     UixThrottle
 } from '@uixkit/core/_global/js';
 
+
+import '@uixkit/core/gallery/js/third-party/muuri';
 
 import '../scss/_style.scss';
 
