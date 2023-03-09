@@ -5,7 +5,7 @@
 
 
 @mixin circle-layout( $radius, $radius2, $dot-radius, $num, $js ) {
-	$deg: 360deg / $num;
+	$deg: calc(360deg / $num);
 	ul {
 		box-sizing: border-box;
 		position: relative;

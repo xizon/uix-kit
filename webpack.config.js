@@ -7,7 +7,7 @@ const path                       = require('path');
 const TerserPlugin               = require("terser-webpack-plugin");
 const MiniCssExtractPlugin       = require('mini-css-extract-plugin');
 const CssMinimizerPlugin         = require("css-minimizer-webpack-plugin");
-const CleanWebpackPlugin         = require('clean-webpack-plugin');
+const { CleanWebpackPlugin }     = require('clean-webpack-plugin');
 const glob                       = require('glob');
 const randomString               = require('random-string');
 const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
@@ -302,8 +302,8 @@ const webpackConfig = {
     performance: {
         hints: !devMode ? "warning" : false
     },
+    watch: true,
     mode: 'production',
-	watch: true,
     resolve: {
 		fallback: {
 			fs: false
@@ -430,12 +430,16 @@ const webpackConfig = {
 						}
 					},
 					{
-						loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
-						options: {
-							sourceMap: true,
-							/* (nested | expanded | compact | compressed) */
-							outputStyle: 'expanded',
-						}
+                        loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
+                        options: {
+                            implementation: require("sass"),
+                            sourceMap: true,
+                            /* (nested | expanded | compact | compressed) */
+                            sassOptions: {
+                                outputStyle: 'expanded',
+                            },
+
+                        }
 
 					},
 				]
@@ -455,10 +459,7 @@ const webpackConfig = {
 				]
 			},
 			
-			// Note:
-			// 1) Compatible with node-sass(4+) and sass-loader(7+)
-			// 2) The versions of node-sass (7+) and sass-loader (12+) 
-			//    are matched to extract files without `file-loader`
+			// Compatible with webpack 5.76.0+
 			{
 				test: /\.(png|jpe?g|gif|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
 			   loader: 'file-loader', 
@@ -552,11 +553,13 @@ const webpackConfig = {
 
 // Remove include files and extra CSS files
 webpackConfig.plugins.push(
-    new CleanWebpackPlugin([
-		globs.build + '/**/*.css',
-		globs.examples + '/*.html',
-		
-	])
+    new CleanWebpackPlugin({
+        // Removes files after every build (including watch mode) that match this pattern.
+        cleanAfterEveryBuildPatterns: [
+            globs.build + '/**/*.css',
+            globs.examples + '/*.html',
+        ],
+    })
 );
 
 // Adds a banner to the top of each generated chunk.
@@ -633,11 +636,13 @@ webpackConfig.plugins.push(
  * not serving the latest compiled code
  *************************************
  */
-const compiler = webpack( webpackConfig );
+const compiler = webpack( webpackConfig, () => {});
+//
 const app = express();
 const instance = webpackDevMiddleware( compiler );
 app.use( instance );
 app.use(express.static( './' ));
+
 
 
 //Watch for Files Changes in Node.js
@@ -653,9 +658,13 @@ targetAllWatchFilesName.map( ( event ) => {
 		
 		// After a short delay the configuration is changed and a banner plugin is added
 		// to the config
-		new CleanWebpackPlugin([
-			globs.build + '/**/*.css'
-		]).apply(compiler);
+        new CleanWebpackPlugin({
+            // Removes files after every build (including watch mode) that match this pattern.
+            cleanAfterEveryBuildPatterns: [
+                globs.build + '/**/*.css'
+            ],
+        }).apply(compiler);
+
 	
 		targetTempFilesName.map( ( event ) => {
 

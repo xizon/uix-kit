@@ -40,7 +40,7 @@ $bar-speed      : 0.8s;
 
 	.uix-progressbar__pie {
 		@include size(100%, 100%);
-		clip: rect(0, $bar-size, $bar-size, $bar-size / 2);
+		clip: rect(0, $bar-size, $bar-size, calc($bar-size / 2));
 		left: 0;
 		position: absolute;
 		top: 0;
@@ -50,7 +50,7 @@ $bar-speed      : 0.8s;
 			@include size(100%, 100%);
 			border: $bar-line-size solid;
 			border-radius: 50%;
-			clip: rect(0, $bar-size / 2, $bar-size, 0);
+			clip: rect(0, calc($bar-size / 2), $bar-size, 0);
 			left: 0;
 			position: absolute;
 			top: 0;

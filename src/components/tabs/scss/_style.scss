@@ -34,7 +34,7 @@
 
 			&::after {
 				position: absolute;
-				left: calc(50% - #{$maker-w/2});
+				left: calc(50% - #{calc($maker-w/2)});
 				top: 0;
 				display: block;
 				content: '';

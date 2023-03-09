@@ -179,12 +179,24 @@ $ cd /{your_directory}/uix-kit
 **Step 3.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ sudo npm install
+$ npm install
 ```
-or 
+
+<blockquote>
+The current test environment is `Node 18+`, `npm 9+`. If dependency installation fails ( Usually it is because you have upgraded your Nodejs version, currently tested to Node 18+ ), maybe the new version of npm will conflict with the old version of npm, please use following command to install dependencies:
+
 ```sh
-$ sudo npm install --only=dev --unsafe-perm --production
+$ npm install --legacy-peer-deps
 ```
+
+If the installation still fails, please use this method: remove **devDependencies** in `package.json`, and reinstall dependencies:
+
+```sh
+$ npm install --save-dev @babel/core @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime @babel/polyfill @babel/preset-env @babel/preset-flow @babel/preset-react @babel/preset-typescript babel-loader babel-plugin-module-resolver clean-webpack-plugin cross-env css-loader css-minimizer-webpack-plugin express file-loader glslify-loader html-loader include-file-webpack-plugin json-loader log-timestamp mini-css-extract-plugin moment sass postcss prettier prettier-loader random-string raw-loader react react-dom sass-loader style-loader tar terser-webpack-plugin webpack webpack-cli webpack-concat-files-plugin webpack-dev-middleware webpack-dev-server
+```
+</blockquote>
+
+
 
 
 

@@ -20,15 +20,13 @@ import {
 
 import '../scss/_style.scss';
 
+
 export const MAIN = ( ( module, $, window, document ) => {
 	if ( window.MAIN === null ) return false;
-	
-	
 	
     module.MAIN               = module.MAIN || {};
     module.MAIN.version       = '0.0.1';
     module.MAIN.documentReady = function( $ ) {
-		
 		
 		/* 
 		 ---------------------------
@@ -36,6 +34,7 @@ export const MAIN = ( ( module, $, window, document ) => {
 		 ---------------------------
 		 */ 
 		//your code here...
+
 
     };
 	

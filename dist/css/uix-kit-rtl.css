@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  4.7.2
+ * ## Version             :  5.0.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  November 28, 2022
+ * ## Last Update         :  March 9, 2023
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -17,8 +17,8 @@
 
 	TABLE OF CONTENTS
 	---------------------------
-	
-	
+
+
 	1.Basic
     2.Brand
     3.Bullet List
@@ -95,7 +95,6 @@ blockquote {
   border-left-color: #F8F8F8 !important;
   border-right-color: #CE3A3E !important;
 }
-
 .wp-block-quote::before,
 blockquote::before {
   margin-right: auto;
@@ -106,7 +105,6 @@ pre.uix-precode label {
   left: auto;
   right: -5px;
 }
-
 pre.uix-precode code {
   margin: 0 3rem 0 0;
   border-left: none;
@@ -153,13 +151,11 @@ ol.uix-list--numbered,
   margin-left: auto;
   margin-right: 1rem;
 }
-
 ol.uix-list--numbered > li,
 .uix-list--numbered ol > li {
   margin-left: auto;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
-
 ol.uix-list--numbered > li::before,
 .uix-list--numbered ol > li::before {
   left: auto;
@@ -180,7 +176,6 @@ ul.uix-list--circle,
   margin-left: auto;
   margin-right: 1rem;
 }
-
 ol.uix-list--circle > li,
 ul.uix-list--circle > li,
 .uix-list--circle ol > li,
@@ -188,7 +183,6 @@ ul.uix-list--circle > li,
   margin-left: auto;
   margin-right: 1rem;
 }
-
 ol.uix-list--circle > li::before,
 ul.uix-list--circle > li::before,
 .uix-list--circle ol > li::before,
@@ -209,7 +203,6 @@ ol.uix-list--numbered-large li,
   margin-left: auto;
   margin-right: 1.2rem;
 }
-
 ol.uix-list--numbered-large li::before,
 .uix-list--numbered-large ol li::before {
   margin-left: auto;
@@ -221,13 +214,11 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li,
   margin-right: 0;
   padding-right: 4.5rem;
 }
-
 ol.uix-list--numbered-large.uix-list--numbered-bg li p,
 .uix-list--numbered-large.uix-list--numbered-bg ol li p {
   padding-right: auto;
   padding-left: 2rem;
 }
-
 ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
 .uix-list--numbered-large.uix-list--numbered-bg ol li::before {
   margin-right: -4rem;
@@ -242,18 +233,15 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
   margin-left: auto;
   margin-right: 1rem;
 }
-
 .uix-list--numbered-step li {
   padding: 0 3.75rem 1.5rem 0;
   border-left: none;
   border-right: 2px solid #333;
 }
-
 .uix-list--numbered-step li::before {
   left: auto;
   right: -26px;
 }
-
 .uix-list--numbered-step li:last-child {
   border-right: none;
 }
@@ -263,7 +251,6 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
     padding-right: 2.5rem;
   }
 }
-
 /* ====================================================== 
    <!-- Entry -->      
 /* ====================================================== */
@@ -351,7 +338,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     text-align: right;
   }
 }
-
 @media all and (max-width: 768px) {
   .uix-t-r--md {
     text-align: left;
@@ -360,7 +346,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     text-align: right;
   }
 }
-
 @media all and (max-width: 992px) {
   .uix-t-r--lg {
     text-align: left;
@@ -369,7 +354,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     text-align: right;
   }
 }
-
 @media all and (max-width: 1200px) {
   .uix-t-r--xl {
     text-align: left;
@@ -378,7 +362,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     text-align: right;
   }
 }
-
 @media all and (max-width: 1400px) {
   .uix-t-r--xxl {
     text-align: left;
@@ -387,7 +370,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     text-align: right;
   }
 }
-
 /* 
  ---------------------------
  12. Tip Bubble
@@ -395,7 +377,7 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
  */
 .uix-bubble {
   margin-left: auto;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   right: auto;
   left: 2.3rem;
 }
@@ -406,7 +388,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
     left: 1rem;
   }
 }
-
 /* 
  ---------------------------
  14. Position
@@ -451,16 +432,15 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
  4. Uix Grid
  ---------------------------
  */
-[class*='uix-core-grid__col-'] {
+[class*=uix-core-grid__col-] {
   float: right;
 }
 
-.uix-core-grid [class*='uix-core-grid__col-'] {
+.uix-core-grid [class*=uix-core-grid__col-] {
   padding-right: auto;
   padding-left: 15px;
 }
-
-.uix-core-grid__row .uix-core-grid [class*='uix-core-grid__col-']:last-of-type {
+.uix-core-grid__row .uix-core-grid [class*=uix-core-grid__col-]:last-of-type {
   padding-left: 0;
 }
 
@@ -472,7 +452,6 @@ ul.uix-entry__meta.uix-entry__meta--wrap li strong {
   right: auto;
   left: 30px;
 }
-
 .uix-menu-mobile__toggle span {
   left: auto;
   right: 12px;
@@ -488,32 +467,26 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   right: 0;
   transform: translateX(300px);
 }
-
 .uix-menu__container.is-mobile li.multi-column span.multi-column-title,
 .uix-menu__container.is-mobile ul.uix-menu > li ul > li {
-  padding-right: .625rem !important;
+  padding-right: 0.625rem !important;
 }
-
 .uix-menu__container.is-mobile ul li ul li a, .uix-menu__container.is-mobile ul li ul li span {
   padding-left: auto;
   padding-right: 0;
 }
-
 .uix-menu__container.is-mobile li:not(.multi-column) ul ul {
   padding-left: auto;
-  padding-right: .825em;
+  padding-right: 0.825em;
 }
-
 .uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box {
   padding-left: auto;
-  padding-right: .5rem;
+  padding-right: 0.5rem;
 }
-
 .uix-menu__container.is-mobile > .uix-menu__inner > .uix-menu__right-box a {
   margin-right: auto;
-  margin-left: .3rem;
+  margin-left: 0.3rem;
 }
-
 .uix-menu__container.is-mobile .uix-menu__arrow-mobile {
   right: auto;
   left: 10px;
@@ -529,107 +502,90 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-menu__container:not(.is-mobile) {
   float: left;
   /* 
-	 ---------------------------
-	 1. Primary Menu
-	 ---------------------------
-	 */
+   ---------------------------
+   1. Primary Menu
+   ---------------------------
+   */
   /* 
-	 ---------------------------
-	 3. Mega/Dropdown Menu
-	 ---------------------------
-	 */
+   ---------------------------
+   3. Mega/Dropdown Menu
+   ---------------------------
+   */
   /* Multi-column */
   /* 
-	 ---------------------------
-	 4. Dropdown Arrow
-	 ---------------------------
-	 */
+   ---------------------------
+   4. Dropdown Arrow
+   ---------------------------
+   */
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu {
   float: right;
   /* 
-		 ---------------------------
-		 2. Sub Menu (Using WordPress default class name )
-		 ---------------------------
-		 */
+   ---------------------------
+   2. Sub Menu (Using WordPress default class name )
+   ---------------------------
+   */
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li {
   margin-right: auto;
   margin-left: 1.6875rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li .uix-bubble {
   right: auto;
   left: 1rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
   margin-left: auto;
   margin-right: -0.071875rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul ul {
   margin-right: 0;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li > ul::before {
   left: auto;
   right: 0;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li > ul::after {
   left: auto;
   right: 3.5rem;
   margin-left: auto;
   margin-right: -0.15625rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li li {
   padding-left: auto;
   padding-right: 0.875rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li ul li {
   padding-left: auto;
   padding-right: 2.034375rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu {
   left: auto;
   right: 0;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul {
   right: 1.784375rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu > li:not(.multi-column) > ul ul {
   left: auto;
   right: 100%;
 }
-
 .uix-menu__container:not(.is-mobile) li.multi-column span.multi-column-title {
   padding-left: auto;
   padding-right: 1.159375rem;
 }
-
 .uix-menu__container:not(.is-mobile) li.multi-column > ul li {
   padding-left: auto !important;
   padding-right: 1.159375rem !important;
 }
-
 .uix-menu__container:not(.is-mobile) li.multi-column > ul li .uix-bubble {
   right: auto;
   left: 1rem;
 }
-
 .uix-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu .uix-menu__arrow {
   right: auto;
   left: 1.159375rem;
 }
-
 .uix-menu__container:not(.is-mobile) .uix-menu__arrow {
   right: auto;
   left: 0.284375rem;
@@ -641,7 +597,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
     margin-left: 1.125rem;
   }
 }
-
 /* ====================================================== 
    <!-- Navs --> 
 /* ====================================================== */
@@ -651,25 +606,22 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 */
 .uix-nav {
   /* 
-	 ---------------------------
-	 1. Base Nav
-	 ---------------------------
-	 */
+   ---------------------------
+   1. Base Nav
+   ---------------------------
+   */
   /* 
-	 ---------------------------
-	 5. Dropdown	
-	 ---------------------------
-	 */
+   ---------------------------
+   5. Dropdown	
+   ---------------------------
+   */
 }
-
 .uix-nav.uix-t-r ul li {
   margin: 0 1rem 0 0;
 }
-
 .uix-nav ul li {
   /*-- Fold Out --*/
 }
-
 .uix-nav ul li ul {
   left: auto;
   right: 0;
@@ -700,7 +652,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
     padding-right: 0;
   }
 }
-
 /* 
  ---------------------------
  2. Calendar Widget
@@ -721,14 +672,12 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   margin-left: auto;
   margin-right: 1.25rem;
 }
-
 .widget_categories ul li a::before,
 .widget_nav_menu ul li a::before,
 .widget_pages ul li a::before {
   margin-right: auto;
   margin-left: 0.721875rem;
 }
-
 .widget_categories ul li > .cat-item-count,
 .widget_nav_menu ul li > .cat-item-count,
 .widget_pages ul li > .cat-item-count {
@@ -757,7 +706,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   margin-left: 0.875rem;
   text-align: right;
 }
-
 .uix-sidebar__posts-img li .uix-sidebar__posts-img__desc {
   float: right;
 }
@@ -777,7 +725,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   writing-mode: vertical-lr;
   transform: translateX(-0.5rem);
 }
-
 /* ======================================================
    <!-- Advanced Slider (Basic) -->
 /* ====================================================== */
@@ -815,13 +762,11 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   left: auto;
   right: 15px;
 }
-
 .uix-advanced-slider__arrows .uix-advanced-slider__arrows--next {
   right: auto;
   left: 15px;
   text-align: left;
 }
-
 /* ======================================================
    <!-- Advanced Slider (Special Effects) -->
 /* ====================================================== */
@@ -839,7 +784,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   left: auto;
   right: 0;
 }
-
 .uix-advanced-slider-sp .uix-advanced-slider-sp__inner .uix-advanced-slider-sp__item {
   left: auto;
   right: 0;
@@ -864,13 +808,11 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   left: auto;
   right: 15px;
 }
-
 .uix-advanced-slider-sp__arrows .uix-advanced-slider-sp__arrows--next {
   right: auto;
   left: 15px;
   text-align: left;
 }
-
 /* ======================================================
    <!-- Button -->
 /* ====================================================== */
@@ -888,48 +830,38 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   padding-left: auto;
   padding-right: 3.6rem;
 }
-
 .uix-btn__icon.uix-btn__icon--right {
   padding-left: 3.6rem;
   padding-right: 2.5rem;
 }
-
 .uix-btn__icon.uix-btn__icon--right > span {
   left: 0;
   right: auto;
 }
-
 .uix-btn__icon > span {
   left: auto;
   right: 0;
 }
-
 .uix-btn__icon.uix-btn__icon--left > span {
   right: 0;
 }
-
 .uix-btn__icon.is-transparent.uix-btn__icon--left > span {
   border-right: none;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .uix-btn__icon.is-transparent.uix-btn__icon--right > span {
   border-left: none;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .uix-btn__icon.is-pill.uix-btn__icon--left span {
   border-radius: 35px 35px 0 0;
 }
-
 .uix-btn__icon.is-pill.uix-btn__icon--right span {
   border-radius: 0 0 50px 50px;
 }
-
 .uix-btn__icon.is-rounded.uix-btn__icon--left span {
   border-radius: 4px 4px 0 0;
 }
-
 .uix-btn__icon.is-rounded.uix-btn__icon--right span {
   border-radius: 0 0 4px 4px;
 }
@@ -942,25 +874,20 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-btn__group > .uix-btn {
   float: right;
 }
-
 .uix-btn__group > .uix-btn.is-rounded:first-child {
   border-radius: 4px 4px 0 0;
 }
-
 .uix-btn__group > .uix-btn.is-rounded:last-child {
   border-radius: 0 0 4px 4px;
 }
-
 .uix-btn__group > .uix-btn.uix-btn__border--thin:not(:first-child) {
   margin-left: auto;
   margin-right: -1px;
 }
-
 .uix-btn__group > .uix-btn.uix-btn__border--medium:not(:first-child) {
   margin-left: auto;
   margin-right: -2px;
 }
-
 .uix-btn__group > .uix-btn.uix-btn__border--thick:not(:first-child) {
   margin-left: auto;
   margin-right: -3px;
@@ -980,24 +907,20 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   margin-right: auto;
   margin-left: 1rem;
 }
-
 /* ======================================================
     <!-- Cards -->
 /* ====================================================== */
-
 /* ======================================================
    <!-- Content Placeholder Animated -->
 /* ====================================================== */
 .uix-content-placeholder .uix-content-placeholder__thumbSlot {
   float: right;
 }
-
 .uix-content-placeholder .uix-content-placeholder__thumbSlot ~ .uix-content-placeholder__textSlot {
   margin-left: auto;
   margin-right: 20px;
   float: right;
 }
-
 /* ======================================================
    <!-- Dropdown Menu -->
 /* ====================================================== */
@@ -1006,12 +929,10 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   left: auto;
   right: 0;
 }
-
 .uix-dropdown-menu > ul::before {
   left: auto;
   right: 20px;
 }
-
 /* ======================================================
    <!-- Flexslider (Third-party plugin) -->
 /* ====================================================== */
@@ -1019,7 +940,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-flexslider {
   direction: ltr !important;
 }
-
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
@@ -1048,107 +968,87 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   /*-- Form With Icon --*/
   /*-- WordPress Style --*/
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__side {
   margin-left: auto;
-  margin-right: .2rem;
+  margin-right: 0.2rem;
 }
-
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-s input:not([type=checkbox]):not([type=radio]) {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-m input:not([type=checkbox]):not([type=radio]) {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__short-l input:not([type=checkbox]):not([type=radio]) {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) label {
   left: auto;
   right: 0.875rem;
   transform-origin: right top;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .uix-controls__arrow {
   right: auto;
   left: 0.875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-radio label {
   padding-left: auto !important;
   padding-right: 1.25rem !important;
   right: auto !important;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select {
   margin-right: auto;
   margin-left: 1.65rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).uix-controls__normal-select .uix-controls__arrow {
   left: -1rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic label {
   left: auto;
-  right: 2.54688rem;
+  right: 2.546875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i {
   left: auto;
   right: 1rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic i::after {
   left: auto;
   right: 1.2rem;
 }
-
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic input:not([type=checkbox]):not([type=radio]) {
   padding-left: auto;
-  padding-right: 2.54688rem;
+  padding-right: 2.546875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic textarea,
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic button:not(.uix-btn),
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic select {
   padding-left: auto;
-  padding-right: 2.54688rem;
+  padding-right: 2.546875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed label {
   left: auto;
-  right: 0.54688rem;
+  right: 0.546875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i {
   left: 1rem;
   right: auto;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed i::after {
   left: 1.2rem;
   right: auto;
 }
-
-.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
-  padding-right: 0.54688rem;
-  padding-left: 2.54688rem;
+.uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed input:not([type=checkbox]):not([type=radio]) {
+  padding-right: 0.546875rem;
+  padding-left: 2.546875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed textarea,
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed button:not(.uix-btn),
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select).is-iconic.is-reversed select {
-  padding-right: 0.54688rem;
-  padding-left: 2.54688rem;
+  padding-right: 0.546875rem;
+  padding-left: 2.546875rem;
 }
-
 .uix-controls:not(.uix-controls__toggle):not(.uix-controls__checkbox):not(.uix-controls__radio):not(.uix-controls__select) .req-icon {
   right: auto;
   left: 0.721875rem;
@@ -1161,10 +1061,9 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
  */
 .uix-controls__file-container .uix-controls__file-trigger i {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
-.uix-controls__file-container input[type="file"] {
+.uix-controls__file-container input[type=file] {
   left: auto;
   right: 0;
 }
@@ -1174,7 +1073,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   left: auto;
   right: 0;
 }
-
 .uix-controls__file-field-container .uix-controls__file-field-trigger > div input::before {
   left: auto;
   right: 0;
@@ -1188,50 +1086,40 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-controls__merge {
   /*-- Form With Icon --*/
 }
-
 .uix-controls__merge i {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
 .uix-controls__merge button {
   margin-left: auto;
   margin-right: -5px;
 }
-
 .uix-controls__merge.is-pill input {
   border-radius: 0 50px 50px 0;
 }
-
 .uix-controls__merge.is-pill button {
   border-radius: 50px 0 0 50px;
 }
-
 .uix-controls__merge.is-iconic input {
   padding-left: auto;
-  padding-right: 2.54688rem;
+  padding-right: 2.546875rem;
 }
-
 .uix-controls__merge.is-iconic i {
   left: auto;
   right: 1rem;
 }
-
 .uix-controls__merge.is-iconic i::after {
   left: auto;
   right: 1.2rem;
 }
-
 .uix-controls__merge.is-iconic.is-reversed input {
   padding-left: auto;
-  padding-right: calc(3rem - 0.54688rem);
+  padding-right: calc(3rem - 0.546875rem);
 }
-
 .uix-controls__merge.is-iconic.is-reversed i {
   right: auto;
   left: 1rem;
 }
-
 .uix-controls__merge.is-iconic.is-reversed i::after {
   right: auto;
   left: 1.2rem;
@@ -1244,60 +1132,49 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
  */
 .uix-controls__select {
   margin-right: auto;
-  margin-left: .3rem;
+  margin-left: 0.3rem;
 }
-
 .uix-controls__select.js-uix-new {
-  text-align: right;
-  /* Required */
+  text-align: right; /* Required */
 }
 
 .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled {
   /* Mask used to prohibit selection */
 }
-
 .uix-controls__select-wrapper:not(.uix-controls--line).is-disabled::before {
   left: auto;
   right: 0;
 }
-
 .uix-controls__select-wrapper .uix-controls__select-trigger {
-  padding: 0.54688rem 0.54688rem 0.54688rem 2.04688rem;
+  padding: 0.546875rem 0.546875rem 0.546875rem 2.046875rem;
 }
-
 .uix-controls__select-wrapper .uix-controls__select-trigger::after {
   border-left: 0;
   right: auto;
   left: 1rem;
 }
-
 .uix-controls__select-wrapper .uix-controls__select__option-container {
   left: auto;
   right: 0;
 }
-
 .uix-controls__select-wrapper .uix-controls__select__option-container::before {
   left: auto;
   right: 25px;
   border-left: 1px solid transparent;
   border-right: 1px solid #dce4e8;
 }
-
 .uix-controls__select-wrapper .uix-controls__select--top {
   /* Shown from above */
 }
-
 .uix-controls__select-wrapper .uix-controls__select--top .uix-controls__select__option-container::after {
   right: auto;
   left: 25px;
   border-left: 1px solid #dce4e8;
   border-right: 1px solid transparent;
 }
-
 .uix-controls__select-wrapper .uix-controls__select__option:first-of-type {
   border-radius: 0 0 2px 2px;
 }
-
 .uix-controls__select-wrapper .uix-controls__select__option:last-of-type {
   border-radius: 2px 2px 0 0;
 }
@@ -1310,16 +1187,13 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-controls__radio {
   text-align: right;
 }
-
 .uix-controls__radio label {
   right: auto;
 }
-
 .uix-controls__radio .uix-controls__radio-trigger {
   margin-right: auto;
   margin-left: 5px;
 }
-
 .uix-controls__radio .uix-controls__radio-trigger::before {
   left: auto;
   margin-left: auto;
@@ -1328,42 +1202,33 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 }
 
 .uix-controls__toggle label {
-  text-align: right;
-  /* Required */
+  text-align: right; /* Required */
 }
-
-.uix-controls__toggle input[type="checkbox"] {
+.uix-controls__toggle input[type=checkbox] {
   display: none;
 }
-
-.uix-controls__toggle input[type="checkbox"]:checked + .uix-controls__toggle-trigger {
+.uix-controls__toggle input[type=checkbox]:checked + .uix-controls__toggle-trigger {
   margin-left: auto;
   margin-right: 8px;
 }
-
 .uix-controls__toggle .uix-controls__toggle-trigger {
-  margin: 0.5rem 0 0.5rem .5rem;
+  margin: 0.5rem 0 0.5rem 0.5rem;
 }
-
 .uix-controls__toggle .uix-controls__toggle-trigger::before {
   left: auto;
   right: -50px;
 }
-
 .uix-controls__toggle .uix-controls__toggle-trigger::after {
   right: auto;
   left: -50px;
 }
 
 .uix-controls__checkbox label {
-  text-align: right;
-  /* Required */
+  text-align: right; /* Required */
 }
-
 .uix-controls__checkbox .uix-controls__checkbox-trigger {
-  margin: 0.54688rem 0 0.54688rem 0.5rem;
+  margin: 0.546875rem 0 0.546875rem 0.5rem;
 }
-
 .uix-controls__checkbox .uix-controls__checkbox-trigger::before, .uix-controls__checkbox .uix-controls__checkbox-trigger::after {
   left: auto;
   right: 4px;
@@ -1389,12 +1254,10 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-controls__multi-sel {
   float: right;
 }
-
 .uix-controls__multi-sel > span {
   margin-right: auto;
   margin-left: 1rem;
 }
-
 .uix-controls__multi-sel > span i {
   right: auto;
   left: -8px;
@@ -1408,7 +1271,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-controls__single-sel {
   float: right;
 }
-
 .uix-controls__single-sel > span {
   margin-right: auto;
   margin-left: 1rem;
@@ -1423,7 +1285,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   right: auto;
   left: 0.875rem;
 }
-
 /* ======================================================
     <!-- Form ( Layout )- -->
 /* ====================================================== */
@@ -1431,7 +1292,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   margin-right: auto;
   margin-left: 1.5rem;
 }
-
 .uix-controls-layout .uix-controls-layout__icon {
   margin-left: auto;
   margin-right: 1rem;
@@ -1442,7 +1302,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
     margin-left: 0;
   }
 }
-
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->
 /* ====================================================== */
@@ -1467,48 +1326,39 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   /*-- Form With Icon --*/
   /*-- Select --*/
 }
-
 .uix-controls.uix-controls--line label {
   left: auto !important;
   right: -0.25rem !important;
 }
-
 .uix-controls.uix-controls--line label.is-active {
   transform-origin: right top;
   transform: translateX(1.75rem) scale(0.875);
 }
-
 .uix-controls.uix-controls--line.is-iconic label {
   left: auto !important;
-  right: 2.54688rem !important;
+  right: 2.546875rem !important;
 }
-
 .uix-controls.uix-controls--line.is-iconic label.is-active {
   transform: translateX(4.09375rem) scale(0.875);
 }
-
-.uix-controls.uix-controls--line.is-iconic.is-reversed input:not([type="checkbox"]):not([type="radio"]) {
+.uix-controls.uix-controls--line.is-iconic.is-reversed input:not([type=checkbox]):not([type=radio]) {
   padding-right: 0 !important;
 }
-
 .uix-controls.uix-controls--line.is-iconic.is-reversed textarea,
 .uix-controls.uix-controls--line.is-iconic.is-reversed button:not(.uix-btn),
 .uix-controls.uix-controls--line.is-iconic.is-reversed select {
   padding-right: 0 !important;
 }
-
 .uix-controls.uix-controls--line.is-iconic.is-reversed label {
   left: auto !important;
   right: -0.25rem !important;
 }
-
 .uix-controls.uix-controls--line.is-iconic.is-reversed label.is-active {
   transform: translateX(1.75rem) scale(0.875);
 }
-
 .uix-controls.uix-controls--line.uix-controls__normal-select select {
   padding-right: 0 !important;
-  padding-left: 1.54688rem !important;
+  padding-left: 1.546875rem !important;
 }
 
 /*
@@ -1519,16 +1369,13 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-controls__select-wrapper.uix-controls--line.is-disabled {
   /* Mask used to prohibit selection */
 }
-
 .uix-controls__select-wrapper.uix-controls--line.is-disabled::before {
   left: auto;
   right: 0;
 }
-
 .uix-controls__select-wrapper .uix-controls--line .uix-controls__select-trigger {
   padding-right: 0;
 }
-
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
@@ -1544,7 +1391,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   right: auto;
   left: 1rem;
 }
-
 /* ======================================================
    <!-- Cutom Light Box -->
 /* ====================================================== */
@@ -1552,22 +1398,19 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
   right: auto;
   left: 15px;
 }
-
 /* ======================================================
    <!-- Brands List -->
 /* ====================================================== */
 .uix-list-brands li {
   float: right;
 }
-
 /* ======================================================
    <!-- Bulleted List -->
 /* ====================================================== */
 .uix-list-bullet i {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
 /* ======================================================
    <!-- Maintain Aspect Ratio List -->
 /* ====================================================== */
@@ -1580,7 +1423,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
     float: right;
   }
 }
-
 /* ======================================================
    <!-- Side by Side List -->
 /* ====================================================== */
@@ -1589,18 +1431,15 @@ dl.uix-list-abreast dt {
   clear: right;
   text-align: left;
 }
-
 dl.uix-list-abreast dd {
   float: right;
   text-align: right;
   padding-left: auto;
   padding-right: 1rem;
 }
-
 /* ======================================================
    <!-- Login Templates -->
 /* ====================================================== */
-
 /* ======================================================
     <!-- Modal Dialog -->
 /* ====================================================== */
@@ -1609,24 +1448,20 @@ dl.uix-list-abreast dd {
   right: 50%;
   /* Video container */
 }
-
 .uix-modal-box .uix-modal-box__video-waiting {
   left: auto;
   right: 50%;
   margin-left: auto;
   margin-right: -1rem;
 }
-
 .uix-modal-box .uix-modal-box__close {
   right: auto;
   left: 12px;
 }
-
 .uix-modal-box.is-fullscreen {
   left: auto;
   right: 0;
 }
-
 .uix-modal-box.is-fullscreen .uix-modal-box__close {
   right: auto;
   left: 26px;
@@ -1636,7 +1471,6 @@ dl.uix-list-abreast dd {
   left: auto;
   right: 0;
 }
-
 /* ======================================================
    <!-- Ribbon -->
 /* ====================================================== */
@@ -1644,12 +1478,10 @@ dl.uix-list-abreast dd {
   right: auto;
   left: 0;
 }
-
 .uix-ribbon--triangle.uix-ribbon--triangle--style-1 > div::after {
   left: auto;
   right: 0;
 }
-
 .uix-ribbon--triangle.uix-ribbon--triangle--style-2::after {
   border-left: inherit;
   border-right: 40px solid #CE3A3E;
@@ -1657,22 +1489,18 @@ dl.uix-list-abreast dd {
   right: 0.25rem;
   transform: rotate(-315deg);
 }
-
 .uix-ribbon--triangle.uix-ribbon--triangle--style-2 > div {
   padding: 0 0.5rem 0.25rem 0;
 }
-
 .uix-ribbon--triangle.uix-ribbon--triangle--left {
   right: 0;
   left: auto;
 }
-
 .uix-ribbon--triangle.uix-ribbon--triangle--left.uix-ribbon--triangle--style-2::after {
   transform: rotate(135deg);
   left: auto;
   right: -0.25rem;
 }
-
 /* ======================================================
    <!-- Comments -->
 /* ====================================================== */
@@ -1690,70 +1518,57 @@ dl.uix-list-abreast dd {
   margin: 0 0 0 1.3125rem;
   float: right;
 }
-
 .comment-meta .comment-text {
   float: right;
 }
 
 .comment-content {
   margin-left: auto;
-  margin-right: calc(2.8125rem + 1.3125rem);
+  margin-right: 4.125rem;
 }
-
 .comment-content a.respond {
   right: auto;
   left: 0;
 }
-
 /* ======================================================
    <!-- Striking -->
 /* ====================================================== */
 .uix-striking-msg i:first-child {
   margin-right: auto;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
-
 .uix-striking-msg i:first-child ~ span {
   padding-left: auto;
-  padding-right: .2rem;
+  padding-right: 0.2rem;
 }
-
 .uix-striking-msg.uix-striking-msg--hasarrow::before, .uix-striking-msg.uix-striking-msg--hasarrow::after {
   right: auto;
   left: 100%;
   border-right-color: transparent;
-  border-left-color: #fce8dc;
+  border-left-color: rgb(252, 232, 220);
 }
-
 .uix-striking-msg.uix-striking-msg--hasarrow::after {
   border-left-color: rgba(0, 0, 0, 0.02);
 }
-
 .uix-striking-msg.uix-striking-msg--hasarrow--reversed::before, .uix-striking-msg.uix-striking-msg--hasarrow--reversed::after {
   right: 100%;
   left: auto;
 }
-
 .uix-striking-msg.uix-striking-msg--default.uix-striking-msg--hasarrow::before {
-  border-left-color: #fce8dc;
+  border-left-color: rgb(252, 232, 220);
 }
-
 .uix-striking-msg.uix-striking-msg--success.uix-striking-msg--hasarrow::before {
-  border-left-color: #80cf4b;
+  border-left-color: rgb(128, 207, 75);
 }
-
 .uix-striking-msg.uix-striking-msg--alert.uix-striking-msg--hasarrow::before {
-  border-left-color: #f59256;
+  border-left-color: rgb(245, 146, 86);
 }
-
 .uix-striking-msg.uix-striking-msg--danger.uix-striking-msg--hasarrow::before {
-  border-left-color: #ec5e79;
+  border-left-color: rgb(236, 94, 121);
 }
-
 .uix-striking-msg.uix-striking-msg--info.uix-striking-msg--hasarrow::before {
-  border-left-color: #d8f5fe;
+  border-left-color: rgb(216, 245, 254);
 }
-
 /* ======================================================
    <!-- Table -->
 /* ====================================================== */
@@ -1773,30 +1588,26 @@ table.uix-table td,
   border-left: none;
   border-right: 1px solid #d6d5d5;
 }
-
 table.uix-table thead th,
 .uix-table table thead th {
   /* The breakpoint is the same as bootstrap 5 */
   /*
-			--breakpoint-xs:0;
-			--breakpoint-sm:576px;
-			--breakpoint-md:768px;
-			--breakpoint-lg:992px;
-			--breakpoint-xl:1200px;
-			--breakpoint-xxl:1400px;
-			*/
+  --breakpoint-xs:0;
+  --breakpoint-sm:576px;
+  --breakpoint-md:768px;
+  --breakpoint-lg:992px;
+  --breakpoint-xl:1200px;
+  --breakpoint-xxl:1400px;
+  */
 }
-
 table.uix-table thead th.uix-t-r,
 .uix-table table thead th.uix-t-r {
   text-align: left;
 }
-
 table.uix-table thead th.uix-t-l,
 .uix-table table thead th.uix-t-l {
   text-align: right;
 }
-
 @media all and (max-width: 576px) {
   table.uix-table thead th.uix-t-r--sm,
   .uix-table table thead th.uix-t-r--sm {
@@ -1807,7 +1618,6 @@ table.uix-table thead th.uix-t-l,
     text-align: right;
   }
 }
-
 @media all and (max-width: 768px) {
   table.uix-table thead th.uix-t-r--md,
   .uix-table table thead th.uix-t-r--md {
@@ -1818,7 +1628,6 @@ table.uix-table thead th.uix-t-l,
     text-align: right;
   }
 }
-
 @media all and (max-width: 992px) {
   table.uix-table thead th.uix-t-r--lg,
   .uix-table table thead th.uix-t-r--lg {
@@ -1829,7 +1638,6 @@ table.uix-table thead th.uix-t-l,
     text-align: right;
   }
 }
-
 @media all and (max-width: 1200px) {
   table.uix-table thead th.uix-t-r--xl,
   .uix-table table thead th.uix-t-r--xl {
@@ -1840,7 +1648,6 @@ table.uix-table thead th.uix-t-l,
     text-align: right;
   }
 }
-
 @media all and (max-width: 1400px) {
   table.uix-table thead th.uix-t-r--xxl,
   .uix-table table thead th.uix-t-r--xxl {
@@ -1877,7 +1684,6 @@ table.uix-table thead th.uix-t-l,
     border-left: 0;
   }
 }
-
 /*
  ---------------------------
  2. Table Sorter
@@ -1885,16 +1691,14 @@ table.uix-table thead th.uix-t-l,
  */
 .uix-table-sorter::after {
   margin-left: auto;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
-
 /* ======================================================
    <!-- ToolTip -->
 /* ====================================================== */
 .uix-tooltip > div {
   text-align: right;
 }
-
 /* ======================================================
    <!-- Vertical Menu (RTL) -->
 /* ====================================================== */
@@ -1910,123 +1714,101 @@ table.uix-table thead th.uix-t-l,
   right: 0;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   /*
-	 ---------------------------
-	 1. Primary Menu
-	 ---------------------------
-	 */
+   ---------------------------
+   1. Primary Menu
+   ---------------------------
+   */
   /*
-	 ---------------------------
-	 4. Dropdown Arrow
-	 ---------------------------
-	 */
+   ---------------------------
+   4. Dropdown Arrow
+   ---------------------------
+   */
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu {
   /*
-		 ---------------------------
-		 2. Sub Menu (Using WordPress default class name )
-		 ---------------------------
-		 */
+   ---------------------------
+   2. Sub Menu (Using WordPress default class name )
+   ---------------------------
+   */
   /*
-		 ---------------------------
-		 4. Mega/Dropdown Menu
-		 ---------------------------
-		 */
+   ---------------------------
+   4. Mega/Dropdown Menu
+   ---------------------------
+   */
   /* Multi-column */
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li {
   text-align: left;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li .uix-bubble {
   right: auto;
   left: 1rem;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu {
   border-left: none;
   border-right: 1px solid rgba(255, 255, 255, 0.13);
   left: auto;
   right: 250px;
   /*
-			 ---------------------------
-			 3. Multi-level Sub Menu Position
-			 ---------------------------
-			 */
+   ---------------------------
+   3. Multi-level Sub Menu Position
+   ---------------------------
+   */
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul {
   right: 450px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul {
   right: 650px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul {
   right: 850px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul {
   right: 1050px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul {
   right: 1250px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul {
   right: 1450px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul {
   right: 1650px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul ul {
   right: 1850px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul ul ul {
   right: 2050px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu ul.sub-menu ul ul ul ul ul ul ul ul ul ul {
   right: 2250px;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column span.multi-column-title {
   text-align: right;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul ul li {
   text-align: right;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul li ul {
   border-right: none;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li {
   border-left: none;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li:first-child {
   border-right: none;
 }
-
 .uix-v-menu__container:not(.is-mobile) ul.uix-menu li.multi-column > ul > li ul {
   left: auto;
   right: 0;
 }
-
 .uix-v-menu__container:not(.is-mobile) .uix-menu__arrow {
   right: auto;
-  left: .5rem;
+  left: 0.5rem;
 }
-
 /* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
@@ -2043,39 +1825,36 @@ table.uix-table thead th.uix-t-l,
  ---------------------------
  */
 .alignnone {
-  margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+  margin: 0.4375rem 0 1.2762499999rem 1.2762499999rem;
 }
 
 .alignright {
   float: left;
-  margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+  margin: 0.4375rem 1.2762499999rem 1.2762499999rem 0;
 }
 
 .alignleft {
   float: right;
-  margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+  margin: 0.4375rem 0 1.2762499999rem 1.2762499999rem;
 }
 
 a img.alignright {
   float: left;
-  margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+  margin: 0.4375rem 1.2762499999rem 1.2762499999rem 0;
 }
-
 a img.alignnone {
-  margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+  margin: 0.4375rem 0 1.2762499999rem 1.2762499999rem;
 }
-
 a img.alignleft {
   float: right;
-  margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+  margin: 0.4375rem 0 1.2762499999rem 1.2762499999rem;
 }
 
 .wp-caption.alignnone, .wp-caption.alignleft {
-  margin: 0.4375rem 0 1.27624999994rem 1.27624999994rem;
+  margin: 0.4375rem 0 1.2762499999rem 1.2762499999rem;
 }
-
 .wp-caption.alignright {
-  margin: 0.4375rem 1.27624999994rem 1.27624999994rem 0;
+  margin: 0.4375rem 1.2762499999rem 1.2762499999rem 0;
 }
 
 /* 
@@ -2124,7 +1903,6 @@ ul.wp-block-gallery .blocks-gallery-item figure {
     justify-content: flex-start;
   }
 }
-
 ul.wp-block-gallery .blocks-gallery-image img,
 ul.wp-block-gallery .blocks-gallery-item img {
   display: block;
@@ -2143,7 +1921,6 @@ ul.wp-block-gallery .blocks-gallery-item img {
     width: auto;
   }
 }
-
 ul.wp-block-gallery .blocks-gallery-image figcaption,
 ul.wp-block-gallery .blocks-gallery-item figcaption {
   position: absolute;
@@ -2181,7 +1958,6 @@ ul.wp-block-gallery.is-cropped .blocks-gallery-item img {
     object-fit: cover;
   }
 }
-
 ul.wp-block-gallery .blocks-gallery-image,
 ul.wp-block-gallery .blocks-gallery-item {
   width: calc((100% - 16px) / 2);
@@ -2201,32 +1977,32 @@ ul.wp-block-gallery.columns-1 .blocks-gallery-item {
 @media (min-width: 600px) {
   ul.wp-block-gallery.columns-3 .blocks-gallery-image,
   ul.wp-block-gallery.columns-3 .blocks-gallery-item {
-    width: calc((100% - 16px * 2) / 3);
+    width: calc((100% - 32px) / 3);
     margin-left: 16px;
   }
   ul.wp-block-gallery.columns-4 .blocks-gallery-image,
   ul.wp-block-gallery.columns-4 .blocks-gallery-item {
-    width: calc((100% - 16px * 3) / 4);
+    width: calc((100% - 48px) / 4);
     margin-left: 16px;
   }
   ul.wp-block-gallery.columns-5 .blocks-gallery-image,
   ul.wp-block-gallery.columns-5 .blocks-gallery-item {
-    width: calc((100% - 16px * 4) / 5);
+    width: calc((100% - 64px) / 5);
     margin-left: 16px;
   }
   ul.wp-block-gallery.columns-6 .blocks-gallery-image,
   ul.wp-block-gallery.columns-6 .blocks-gallery-item {
-    width: calc((100% - 16px * 5) / 6);
+    width: calc((100% - 80px) / 6);
     margin-left: 16px;
   }
   ul.wp-block-gallery.columns-7 .blocks-gallery-image,
   ul.wp-block-gallery.columns-7 .blocks-gallery-item {
-    width: calc((100% - 16px * 6) / 7);
+    width: calc((100% - 96px) / 7);
     margin-left: 16px;
   }
   ul.wp-block-gallery.columns-8 .blocks-gallery-image,
   ul.wp-block-gallery.columns-8 .blocks-gallery-item {
-    width: calc((100% - 16px * 7) / 8);
+    width: calc((100% - 112px) / 8);
     margin-left: 16px;
   }
   ul.wp-block-gallery.columns-1 .blocks-gallery-image:nth-of-type(1n),
@@ -2262,7 +2038,6 @@ ul.wp-block-gallery.columns-1 .blocks-gallery-item {
     margin-left: 0;
   }
 }
-
 ul.wp-block-gallery .blocks-gallery-image:last-child,
 ul.wp-block-gallery .blocks-gallery-item:last-child {
   margin-left: 0;
@@ -2298,7 +2073,6 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
     margin-left: 0;
   }
 }
-
 /* ====================================================== 
    <!-- WordPress Blocks ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
@@ -2306,10 +2080,10 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
 /*
 
     Used to style blocks in the Front-end pages.
-	
+
 	TABLE OF CONTENTS
 	---------------------------
-	
+
 	2. Cover 
     4. Latest Posts     
 */
@@ -2326,13 +2100,11 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
     margin-left: 0;
   }
 }
-
 /* ====================================================== 
    4. Latest Posts                                 
 /* ====================================================== */
 .wp-block-latest-posts.is-grid li {
   margin: 0 0 0 16px;
 }
-
 
 /*# sourceMappingURL=uix-kit-rtl.css.map*/

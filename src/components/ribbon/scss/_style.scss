@@ -23,8 +23,8 @@ $ribbon-tail: 10px;
 			text-align: center;
 
 			&::after {
-				border-left:  $ribbon-w/2 solid $ribbon-bg;
-				border-right:  $ribbon-w/2 solid $ribbon-bg;
+				border-left:  calc($ribbon-w/2) solid $ribbon-bg;
+				border-right:  calc($ribbon-w/2) solid $ribbon-bg;
 				border-bottom:  $ribbon-tail solid transparent;
 				bottom: 0;
 				content: '';

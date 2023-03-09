@@ -91,7 +91,7 @@ $features-icon-size: 1.5rem;
 
 
 			i {
-				font-size: #{$features-icon-size/1.2};
+				font-size: #{calc($features-icon-size/1.2)};
 				margin-right: 0;
 			}
 

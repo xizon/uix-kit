@@ -162,7 +162,7 @@ uix-kit/
 **Step 1.** 使用 NPM（找到您当前的项目目录，然后输入以下命令）, 或从 [Github]（https://github.com/xizon/uix-kit）下载最新版本。
 
 ```sh
-$ sudo npm install uix-kit
+$ npm install uix-kit
 ```
 
 Or clone the repo to get all source files including build scripts: 
@@ -179,14 +179,17 @@ $ cd /{your_directory}/uix-kit
 ```
 
 
-**Step 3.** 安装开发环境
+**Step 3.** 在进行所有开发工作之前，请确保您已安装 `Node 10+`（当前测试环境为 `Node 18+`、`npm 9+`）。 之后，在主目录中运行以下代码来安装节点模块依赖项。
 
 ```sh
-$ sudo npm install
+$ npm install
 ```
-or 
+
+
+如果依赖安装失败（一般是你升级了Nodejs版本，目前测试到Node 18+），可能是新版本的npm和旧版本的npm冲突，请使用如下命令安装依赖：
+
 ```sh
-$ sudo npm install --only=dev --unsafe-perm --production
+$ npm install --legacy-peer-deps
 ```
 
 
@@ -272,8 +275,8 @@ $ npm install node-sass@4.14.1
 **e) 如果升级Node版本，请执行以下代码:**
 
 ```sh
-$ sudo npm install
-$ sudo npm rebuild node-sass
+$ npm install
+$ npm rebuild node-sass
 ```
 
 

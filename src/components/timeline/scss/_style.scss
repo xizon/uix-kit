@@ -743,12 +743,12 @@ $horizontal-container-width: 1000px;
 
 			/* Whether to slide to the middle. */
 			&.uix-timeline--to-center {
-				transform: translateX(#{$horizontal-item-width + $horizontal-item-width/2});
+				transform: translateX(#{$horizontal-item-width + calc($horizontal-item-width/2)});
 
 				.uix-timeline__item {
 
 					.uix-timeline__item__info {
-						transform: translateX(-#{$horizontal-item-width/2});
+						transform: translateX(-#{calc($horizontal-item-width/2)});
 
 					}
 

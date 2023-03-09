@@ -37,8 +37,8 @@ $dot-size: 20px;
 			height: 0px;
 			width: 0px;
 			box-shadow: 0 0 0 2px $highlight-color1;
-			left: $dot-size/2;
-			top: $dot-size/2;
+			left: calc($dot-size/2);
+			top: calc($dot-size/2);
 			transform: translate(-50%, -50%);
 
 		}
@@ -58,8 +58,8 @@ $dot-size: 20px;
 				height: #{$dot-size + 10};
 				width: #{$dot-size + 10};
 				box-shadow: 0 0 0 2px $highlight-color1;
-				left: $dot-size/2;
-				top: $dot-size/2;
+				left: calc($dot-size/2);
+				top: calc($dot-size/2);
 				transform: translate(-50%, -50%);
 
 			}

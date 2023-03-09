@@ -119,9 +119,9 @@ $font-size-h6          : 0.75rem;
 $spacing-large          : 11.375rem;
 $spacing-medium         : 6.5625rem;
 $spacing-small          : 3rem;
-$spacing-large-mobile   : $spacing-large/2;
-$spacing-medium-mobile  : $spacing-medium/2;
-$spacing-small-mobile   : $spacing-small/2;
+$spacing-large-mobile   : calc($spacing-large/2);
+$spacing-medium-mobile  : calc($spacing-medium/2);
+$spacing-small-mobile   : calc($spacing-small/2);
 
 
 // COLOR PALETTE

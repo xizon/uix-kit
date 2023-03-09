@@ -51,7 +51,7 @@ $crumbs-size       : 27px;
 					height: 0;
 					border-top: #{$crumbs-size} solid transparent;
 					border-bottom: #{$crumbs-size} solid transparent;
-					border-left: #{$crumbs-size/$crumbs-line-deg} solid transparent;
+					border-left: #{calc($crumbs-size/$crumbs-line-deg)} solid transparent;
 					@include transition-default();
 				}
 
