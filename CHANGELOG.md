@@ -1,6 +1,6 @@
 # Changelog
 
-#### = 5.0.0 (March 9, 2023) =
+#### = 5.0.1 (March 9, 2023) =
 
 * New: Tested in Node 18+ & npm 9+ environment, fixed commands in documentation.
 * Fix: Upgrade webpack to solve its compatibility with `file-loader`.

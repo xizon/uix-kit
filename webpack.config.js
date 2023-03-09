@@ -412,6 +412,9 @@ const webpackConfig = {
 					/**
 					 * Note:
 					 * You can use `style-loader` to inject CSS into the DOM to generate a final js file
+                     * 
+                     * 	1) "file-loader" Compatible with node-sass(4+) and sass-loader(7+)
+                     *  2) The versions of node-sass (7+) and sass-loader (12+) are matched to extract files without `file-loader`
 					 */
 					{
 						loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )

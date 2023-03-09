@@ -193,7 +193,7 @@ $ npm install
 $ npm install --legacy-peer-deps
 ```
 
-如果仍然安装失败，请使用此方法：删除 `package.json` 中的 **devDependencies**，重新安装依赖：
+如果仍然安装失败，请使用此方法：删除 `package.json` 中的 **devDependencies**, 删除文件 `package-lock.json`，并重新安装依赖：
 
 ```sh
 $ npm install --save-dev @babel/core @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime @babel/polyfill @babel/preset-env @babel/preset-flow @babel/preset-react @babel/preset-typescript babel-loader babel-plugin-module-resolver clean-webpack-plugin cross-env css-loader css-minimizer-webpack-plugin express file-loader glslify-loader html-loader include-file-webpack-plugin json-loader log-timestamp mini-css-extract-plugin moment sass postcss prettier prettier-loader random-string raw-loader react react-dom sass-loader style-loader tar terser-webpack-plugin webpack webpack-cli webpack-concat-files-plugin webpack-dev-middleware webpack-dev-server
@@ -323,6 +323,32 @@ $ npm rebuild node-sass
 
 	<!-- Theme  -->
 	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=1.0.0"/>
+
+
+
+    <!-- Overwrite Font Files 
+        *
+        * The fonts extracted with `mini-css-extract-plugin` may not load correctly
+        * Font files in `dist/fonts/` are fetched automatically by `file-loader`, you can configure webpack.config.js to name them.
+    ============================================= --> 
+    <!--
+    <style>
+    @font-face {
+        font-family: '...';
+        font-style: normal;
+        font-weight: 900;
+        font-display: $fa-font-display;
+        src: url('../dist/fonts/....eot');
+        src: url('../dist/fonts/....eot?#iefix') format('embedded-opentype'),
+        url('../dist/fonts/....woff2') format('woff2'),
+        url('../dist/fonts/....woff') format('woff'),
+        url('../dist/fonts/....ttf') format('truetype'),
+        url('../dist/fonts/....svg#fontawesome') format('svg');
+    }
+    </style>
+    -->
+    <!-- Overwrite Font Files   end -->
+
 
 
 	<!--[if lt IE 10]>
