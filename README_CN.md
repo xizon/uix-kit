@@ -179,18 +179,27 @@ $ cd /{your_directory}/uix-kit
 ```
 
 
-**Step 3.** 在进行所有开发工作之前，请确保您已安装 `Node 10+`（当前测试环境为 `Node 18+`、`npm 9+`）。 之后，在主目录中运行以下代码来安装节点模块依赖项。
+**Step 3.** 在进行所有开发工作之前，请确保您已安装 `Node 10+`。 之后，在主目录中运行以下代码来安装节点模块依赖项。
 
 ```sh
 $ npm install
 ```
 
 
-如果依赖安装失败（一般是你升级了Nodejs版本，目前测试到Node 18+），可能是新版本的npm和旧版本的npm冲突，请使用如下命令安装依赖：
+<blockquote>
+目前测试环境为`Node 18+`、`npm 9+`。 如果依赖安装失败（一般是升级了Nodejs版本，目前测试到Node 18+），可能是新版本的npm和旧版本的npm冲突，请使用如下命令安装依赖：
 
 ```sh
 $ npm install --legacy-peer-deps
 ```
+
+如果仍然安装失败，请使用此方法：删除 `package.json` 中的 **devDependencies**，重新安装依赖：
+
+```sh
+$ npm install --save-dev @babel/core @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime @babel/polyfill @babel/preset-env @babel/preset-flow @babel/preset-react @babel/preset-typescript babel-loader babel-plugin-module-resolver clean-webpack-plugin cross-env css-loader css-minimizer-webpack-plugin express file-loader glslify-loader html-loader include-file-webpack-plugin json-loader log-timestamp mini-css-extract-plugin moment sass postcss prettier prettier-loader random-string raw-loader react react-dom sass-loader style-loader tar terser-webpack-plugin webpack webpack-cli webpack-concat-files-plugin webpack-dev-middleware webpack-dev-server
+```
+</blockquote>
+
 
 
 
