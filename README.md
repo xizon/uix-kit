@@ -19,7 +19,7 @@ Uix Kit isn't a reusable component structure, mostly custom CSS and JavaScript b
 
 The generated core file in the dist directory can be used separately in any website. Support JS, HTML, and SASS component library automatically packaged. It is used to develop the full-static website (HTML templates or for dynamic language integration). 
 
-> *The demo depends on jQuery (you can completely rewrite the script if needed).*
+> *The demo depends on jQuery (you can completely rewrite the script if needed). And `dist` DOES NOT bundle any third-party script and style library, all libraries are loaded externally in the HTML file.*
 
 **Uix Kit is now in Long Term Support (LTS) mode.**
 
@@ -128,10 +128,10 @@ uix-kit/
 
 ## Why use it
 
+* `dist` DOES NOT bundle any third-party script and style library, all libraries are loaded externally in the HTML file.
 * Not a reusable component structure
 * Not a JavaScript framework
 * It is used to build the full-static website (HTML templates or for dynamic language integration)
-* Use any JavaScript libraries in your favorite way to build styles and animation scripts
 * Suitable for developing Visual Interaction websites and WordPress templates
 * W3C standard and SEO 
 * Control scope with BEM naming, so the core Uix Kit project is not in conflict with the other projects
@@ -140,8 +140,9 @@ uix-kit/
 * Make a foundation for the React architecture
 * Compatible with Bootstrap 5.x (You could also remove Bootstrap's stylesheets)
 * Provides a common web page components and layouts
-* Using ES6 to import or export multiple modules, the third-party plugins could adopt pure file merger method and do not import and export
 * The complete directory of examples in order to develop a responsive website independently without Node.js dev environment
+* The demo depends on jQuery (you can completely rewrite the script if needed)
+
 
 
 * * *

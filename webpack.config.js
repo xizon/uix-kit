@@ -323,19 +323,28 @@ const webpackConfig = {
 		}
     },
 	
-	//Exclude react from bundle
-//    externals: {
-//      'react': 'React',
-//		'react-dom': 'ReactDOM',
-//	    'jquery': 'jQuery',
-//    },
-	
-	entry: {
-		'uix-kit': './'+globs.build+'/index.js',
-		'uix-kit.min': './'+globs.build+'/index.js',
-		'uix-kit-rtl': './'+globs.build+'/index-rtl.js',
-		'uix-kit-rtl.min': './'+globs.build+'/index-rtl.js',
-	},
+    //Exclude react from bundle
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'prefixfree': 'StyleFix',
+        'modernizr': 'Modernizr',
+        'jquery': 'jQuery',
+        'axios': 'axios',
+        'jquery.waitforimages': 'waitForImages',
+        'video.js': 'videojs',
+        'gsap': 'gsap',
+        'pixi.js': 'PIXI',
+        'three': 'THREE',
+        'animejs': 'anime',
+        'hammerjs': 'Hammer'
+    },
+    entry: {
+        'uix-kit': './' + globs.build + '/index.js',
+        'uix-kit.min': './' + globs.build + '/index.js',
+        'uix-kit-rtl': './' + globs.build + '/index-rtl.js',
+        'uix-kit-rtl.min': './' + globs.build + '/index-rtl.js',
+    },
     output: {
         path: path.resolve(__dirname, './' + globs.dist + '/js' ),
         filename: '[name].js'

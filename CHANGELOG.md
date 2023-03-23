@@ -1,5 +1,11 @@
 # Changelog
 
+
+#### = 5.0.2 (March 23, 2023) =
+
+* Tweak: Modify the externals configuration of webpack, modify README.
+
+
 #### = 5.0.1 (March 9, 2023) =
 
 * New: Tested in Node 18+ & npm 9+ environment, fixed commands in documentation.
