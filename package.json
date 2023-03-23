@@ -82,7 +82,6 @@
     "webpack-dev-middleware": "^6.0.1",
     "webpack-dev-server": "^4.11.1"
   },
-  "dependencies": {},
   "prettier": {
     "printWidth": 120,
     "tabWidth": 4,
