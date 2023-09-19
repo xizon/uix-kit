@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- List of Posts -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 .uix-list-topic {
 
@@ -124,7 +125,7 @@
 
 
 	    .uix-list-topic__item__more-bg {
-		    background: $highlight-color1;
+		    background: var(--uix-highlight-color1);
 		    position: absolute;
 		    right: -200px;
 		    bottom: 0;
@@ -160,7 +161,7 @@
 
 		    .uix-list-topic__item__addition a {
 			    /* Used when "uix-list uix-list--normal uix-table uix-table--bordered" style are used */
-			    color: $primary-link-color !important;
+			    color: var(--uix-primary-link-color) !important;
 
 			    &:hover {
 				  /* Used when "uix-list uix-list--normal uix-table uix-table--bordered" style are used */

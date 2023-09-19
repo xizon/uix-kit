@@ -24,7 +24,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND_THREE               = module.THREE_BACKGROUND_THREE || {};
-    module.THREE_BACKGROUND_THREE.version       = '0.0.5';
+    module.THREE_BACKGROUND_THREE.version       = '0.0.6';
     module.THREE_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -129,7 +129,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 				// Immediately use the texture for material creation
 				const defaultMaterial    = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
 
-				displacementSprite = new THREE.Mesh( generateGeometry( 'sphere', 200 ), defaultMaterial );
+				displacementSprite = generateGeometry( 'sphere', 200, defaultMaterial);
 				scene.add( displacementSprite );
 
 
@@ -250,13 +250,40 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 			 *
 			 * @param  {String} objectType     - String of geometry type identifier.
 			 * @param  {Number} numObjects       - The total number of generated objects.
+             * @param  {THREE.Material} customMaterial  - The Material.
 			 * @return {Void}
 			 */
-			function generateGeometry( objectType, numObjects ) {
+			function generateGeometry( objectType, numObjects, customMaterial ) {
 
-				const geometry = new THREE.Geometry();
+                const group = new THREE.Group();
 
 				const applyVertexColors = function(g, c) {
+
+                    /*
+
+                    for threejs-r134+:
+                    
+                    const faces = [];
+
+                    // This gets the array of all positions [x, y, z, x, y, z, x, y z,...]
+                    const positions = g.attributes.position.array; 
+
+                    // This gets # of vertices
+                    const vertexCount = g.attributes.position.count;
+
+               
+                    // Each loop counts up by 3
+                    for (let i3 = 0; i3 < vertexCount; i3 +=3) {
+                        const singleVertex = new THREE.Vector3();
+                        singleVertex.set(
+                            positions[i3 + 0],
+                            positions[i3 + 1],
+                            positions[i3 + 2]
+                        );
+                        faces.push(singleVertex);
+                    }
+                    */
+                    
 					g.faces.forEach(function(f) {
 						const n = (f instanceof THREE.Face3) ? 3 : 4;
 						for (let j = 0; j < n; j++) {
@@ -312,17 +339,17 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 					// give the geom's vertices a random color, to be displayed
 					applyVertexColors( geom, color );
 
-					const object = new THREE.Mesh( geom );
+					const object = new THREE.Mesh( geom, customMaterial );
 					object.position.copy( position );
 					object.rotation.copy( rotation );
 					object.scale.copy( scale );
-					object.updateMatrix();
+					object.updateMatrix(); // Updates the local transform.
 
-					geometry.merge( object.geometry, object.matrix );
+                    group.add( object );
 
 				}
 
-				return geometry;
+				return group;
 
 
 			}

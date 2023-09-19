@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Lava-Lamp Style Menu -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 .uix-lavalamp-menu__container {
 
@@ -44,7 +45,7 @@
 			display: block;
 			padding: 0;
 			margin: 0;
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			z-index: -1;
 			position: absolute;
 			top: 105%;

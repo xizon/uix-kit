@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Separator of Rule With Text -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 $separator-color: #ddd;
 .uix-separator-rwt {
     margin: 0;

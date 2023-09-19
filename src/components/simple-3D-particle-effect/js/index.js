@@ -29,7 +29,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 	if ( window.THREE_PARTICLE === null ) return false;
 	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};
-    module.THREE_PARTICLE.version       = '0.0.6';
+    module.THREE_PARTICLE.version       = '0.0.7';
     module.THREE_PARTICLE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -59,7 +59,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 				isMouseDown  = true,
 				lastMousePos = {x: 0, y: 0},
 				windowHalfX  = windowWidth / 2,
-				windowHalfY  = windowHeight / 2;
+				windowHalfY  = windowHeight / 2,
+                animStartStatus = false,
+                animCompleted = false;
 
 
 
@@ -203,47 +205,56 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 						// Get data from an image
 						imagedata = getImageData( texture.image );
 
-						// Immediately use the texture for material creation
-						const geometry = new THREE.Geometry();
-						const material = new THREE.PointsMaterial({
-							size: 3,
-							color: 0xffffff,
-							sizeAttenuation: false,
-                            fog : false //Excluding objects from fog
-						});
+                        // Immediately use the texture for material creation
+                        const geometry = new THREE.BufferGeometry();
+                        const vertices = [];
+                        const verticesDest = [];
 
-                 
-						for (let y = 0, y2 = imagedata.height; y < y2; y += 2) {
+                        for (let y = 0, y2 = imagedata.height; y < y2; y += 2) {
 
-							for (let x = 0, x2 = imagedata.width; x < x2; x += 2) {
+                            for (let x = 0, x2 = imagedata.width; x < x2; x += 2) {
 
-								if ( imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128 ) {
+                                if (imagedata.data[(x * 4 + y * 4 * imagedata.width) + 3] > 128) {
 
 
-									// The array of vertices holds the position of every vertex in the model.
-									const vertex = new THREE.Vector3();
+                                    // The array of vertices holds the position of every vertex in the model.
+                                    const vertex = new THREE.Vector3();
 
 
-									vertex.x = Math.random() * 1000 - 500;
-									vertex.y = Math.random() * 1000 - 500;
-									vertex.z = -Math.random() * 500;
+                                    vertex.x = Math.random() * 1000 - 500;
+                                    vertex.y = Math.random() * 1000 - 500;
+                                    vertex.z = -Math.random() * 500 + 1500;
 
-									vertex.destination = {
-										x: x - imagedata.width / 2,
-										y: -y + imagedata.height / 2,
-										z: 0
-									};
+                                    vertex.destination = {
+                                        x: x - imagedata.width / 2,
+                                        y: -y + imagedata.height / 2,
+                                        z: 0
+                                    };
 
-									vertex.speed = Math.random() / 200 + 0.015;
+                                    vertices.push(vertex.x, vertex.y, vertex.z);
+                                    verticesDest.push(vertex.destination.x, vertex.destination.y, vertex.destination.z);
 
-									geometry.vertices.push( vertex );
+                                }
+                            }
+                        }
+
+                        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+                        geometry.setAttribute('position_destination', new THREE.Float32BufferAttribute(verticesDest, 3));
+                        geometry.computeBoundingSphere();
 
 
-								}
-							}
-						}
-						particles = new THREE.Points( geometry, material );
-						scene.add( particles );
+
+                        //
+                        const material = new THREE.PointsMaterial({
+                            size: 3,
+                            color: 0xffffff,
+                            sizeAttenuation: false,
+                            vertexColors: false,
+                            fog: false //Excluding objects from fog
+                        });
+
+                        particles = new THREE.Points( geometry, material );
+                        scene.add( particles );
                         particles.scale.setScalar( 0.7 );
                         particles.position.y = 50;
                         particles.position.z = 70;
@@ -251,8 +262,6 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
                         // set castShadow to object
                         particles.castShadow = true;
-                        
-
 
 
 					},
@@ -311,6 +320,45 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 
 
+            function animStart() {
+                if (typeof particles === 'undefined') return;
+
+                animStartStatus = true;
+
+                const points = particles.geometry.attributes.position.array;
+                const targetPoints = particles.geometry.attributes.position_destination.array;
+                
+                // use target array as the tween object to store tween properties... HACKY I KNOW!
+                // targetPoints.repeat = -1;
+                // targetPoints.repeatDelay = 1;
+                targetPoints.ease = Power2.easeOut;
+                
+                TweenMax.to(points, 4, targetPoints);
+                
+                targetPoints.onUpdate = function() {
+                    particles.geometry.attributes.position.needsUpdate = true;
+                }
+                targetPoints.onComplete = function() {
+                    animCompleted = true;
+                }
+            
+                /*
+                gsap.to(particles.geometry.attributes.position.array, {
+                    endArray: particles.geometry.attributes.position_destination.array,
+                    duration: 2,
+                    ease: 'power3.out',
+                    // Make sure to tell it to update
+                    onUpdate: () => {
+                        particles.geometry.attributes.position.needsUpdate = true;
+                    },
+                    onComplete: () => {
+                        animCompleted = true;
+                    }
+                });
+                */
+
+            }
+
 
 
 			function render() {
@@ -326,55 +374,23 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 
 
                 //---
-                // 
-				//Need to add judgment to avoid Cannot read property 'geometry' of undefined
-				if ( typeof particles != typeof undefined ) {
+                //
+                // Animation start	
+                if (!animStartStatus) {
+                    animStart();
+                }
 
-                    let particle;
-                    
-					for (let i = 0, j = particles.geometry.vertices.length; i < j; i++) {
-						particle = particles.geometry.vertices[i];
-						particle.x += (particle.destination.x - particle.x) * particle.speed;
-						particle.y += (particle.destination.y - particle.y) * particle.speed;
-						particle.z += (particle.destination.z - particle.z) * particle.speed;
-					}
-
-
-					if ( delta - previousTime > thickness ) {
-						const index     = Math.floor(Math.random()*particles.geometry.vertices.length);
-						const particle1 = particles.geometry.vertices[index];
-						const particle2 = particles.geometry.vertices[particles.geometry.vertices.length-index];
-
-						TweenMax.to( particle, Math.random()*2+1, {
-										x:    particle2.x, 
-										y:    particle2.y, 
-										ease: Power2.easeInOut
-									});
-
-
-
-						TweenMax.to( particle2, Math.random()*2+1, {
-										x:    particle1.x, 
-										y:    particle1.y, 
-										ease: Power2.easeInOut
-									});
-
-						previousTime = delta;
-					}
-
-
-					particles.geometry.verticesNeedUpdate = true;	
-				}
-
-
+                //---
+                //
 				if( ! isMouseDown ) {
 					camera.position.x += (0-camera.position.x)*0.06;
 					camera.position.y += (0-camera.position.y)*0.06;
 				}
 
-
-				camera.position.x += ( mouseX - camera.position.x ) * 0.09;
-				camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
+                if ( animCompleted ) {
+                    camera.position.x += ( mouseX - camera.position.x ) * 0.09;
+                    camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
+                }
                 if ( camera.position.y < -60 ) camera.position.y = -60;
 				camera.lookAt( centerVector );
 

@@ -13,9 +13,9 @@
 
  //The data-text-eff attribute on the same page cannot be duplicated.
 
-<h3 data-text-eff="letters-eff-flyInOut1" data-text-eff-speed="800">Text Text</h3>
-<h3 data-text-eff="letters-eff-flyInOut2" data-text-eff-speed="800">Text Text</h3>
-<h3 data-text-eff="letters-eff-flyInOut3" data-text-eff-speed="800">Text Text</h3>
+<h3 data-text-eff="letters-eff-flyInOut-1" data-text-eff-speed="800">Text Text</h3>
+<h3 data-text-eff="letters-eff-flyInOut-2" data-text-eff-speed="800">Text Text</h3>
+<h3 data-text-eff="letters-eff-flyInOut-3" data-text-eff-speed="800">Text Text</h3>
  
  */
 

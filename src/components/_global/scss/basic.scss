@@ -2,7 +2,7 @@
     <!-- Basic -->
 /* ====================================================== */
 ::placeholder {
-	color: $placeholder-text-color;
+	color: var(--uix-placeholder-text-color);
 }
 
 
@@ -64,8 +64,8 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: $font-stack;
-	color: $primary-text-color;
-	background-color: $primary-bg-color;
+	color: var(--uix-primary-text-color);
+	background-color: var(--uix-primary-bg-color);
 }
 
 body.is-mobile {
@@ -88,14 +88,14 @@ select {
 blockquote {
 	background: #fff;
 	border: 1px solid #F8F8F8 !important;
-	border-left: 5px solid $highlight-color1 !important;
+	border-left: 5px solid var(--uix-highlight-color1) !important;
 	padding: 0 1.75rem 1.25rem !important;
 	margin-top: 1.421875rem !important;
 	line-height: 2;
 	font-size: $font-size-blockquote;
 	
 	&::before {
-		color: $highlight-color1;
+		color: var(--uix-highlight-color1);
 		content: open-quote;
 		font-size: 5.25rem;
 		line-height: 0.1;
@@ -113,7 +113,8 @@ strong {
 
 hr {
 	margin: 1.421875rem 0;
-	border-color: $dividing-line-color;
+	border-color: var(--uix-dividing-line-color);
+    background-color: var(--uix-dividing-line-color);
 	
 	&.black {
 		border-color: rgba(255,255,255,.1);
@@ -220,4 +221,35 @@ figure {
         font-size: 0.875rem;
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.3) 70%, transparent);   
     }
+}
+
+
+
+kbd {
+    --base-size-12: 0.75rem;
+    --base-size-16: 1rem;
+    --text-caption-size: 0.75rem;
+    --text-caption-lineHeight: calc(16/12);
+    --borderWidth-thin: max(1px, 0.0625rem);
+    --color-fg-subtle: #6e7781;
+    --borderRadius-small: 3px;
+    --borderRadius-medium: 6px;
+    --borderRadius-large: 12px;
+    --borderRadius-full: 100vh;
+
+
+    display: inline-grid;
+    width: auto;
+    height: var(--base-size-16, 16px);
+    padding: 0;
+    font-size: var(--text-caption-size, 12px);
+    line-height: var(--text-caption-lineHeight, 1.3333333333);
+    color: inherit;
+    vertical-align: baseline;
+    background: transparent;
+    border: var(--borderWidth-thin, 1px) solid var(--color-fg-subtle);
+    border-radius: var(--borderRadius-small, 3px);
+    box-shadow: none;
+    align-items: center;
+    justify-content: center; 
 }

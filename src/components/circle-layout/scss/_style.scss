@@ -1,8 +1,9 @@
 /* ======================================================
     <!-- Circle Layout -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 @mixin circle-layout( $radius, $radius2, $dot-radius, $num, $js ) {
 	$deg: calc(360deg / $num);
@@ -24,7 +25,7 @@
 			width: $radius2 * 2;
 			height: $radius2 * 2;
 			border-radius: 50%;
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			left: 50%;
 			top: 50%;
 			transform: translate(-50%,-50%) rotate(0) !important; /* Prevent scripts from modifying values */

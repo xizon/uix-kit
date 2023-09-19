@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Timeline -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Vertical
  * 2. Vertical  - Interaction
@@ -51,7 +52,7 @@
                 .uix-timeline__line {
                     height: calc( 100% + 5rem );
                     width: 1px;
-                    background: $highlight-color1;
+                    background: var(--uix-highlight-color1);
                     position: absolute;
                     top: 40px;
                     left: 20px;
@@ -235,7 +236,7 @@
                         opacity: 1;
                         
 						.uix-timeline__item__date {
-							color: $highlight-color1;
+							color: var(--uix-highlight-color1);
 						}
 					}
 
@@ -403,8 +404,8 @@ $horizontal-container-width: 1000px;
 			display: block;
 			position: absolute;
 			z-index: 0;
-			background-color: $highlight-color1;
-			background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
+			background-color: var(--uix-highlight-color1);
+			background-image: linear-gradient(to right, var(--uix-btn-gradient-color1) 0%, var(--uix-btn-gradient-color2) 20%, var(--uix-btn-gradient-color3) 100%);
 			width: 100%;
 			height: 1px;
 			top: 104px;
@@ -493,7 +494,7 @@ $horizontal-container-width: 1000px;
 
 					.uix-timeline__item__info {
 						.uix-timeline__item__date {
-							color: $highlight-color1;
+							color: var(--uix-highlight-color1);
 						}
 					}
 

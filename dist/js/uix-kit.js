@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  5.0.0
+ * ## Version             :  5.0.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 9, 2023
+ * ## Last Update         :  September 19, 2023
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -27757,7 +27757,7 @@ var ONEPAGE2 = function (module, $, window, document) {
 var PARALLAX = function (module, $, window, document) {
   if (window.PARALLAX === null) return false;
   module.PARALLAX = module.PARALLAX || {};
-  module.PARALLAX.version = '0.0.8';
+  module.PARALLAX.version = '0.0.9';
   module.PARALLAX.documentReady = function ($) {
     var windowWidth = window.innerWidth,
       windowHeight = window.innerHeight;
@@ -27865,6 +27865,9 @@ var PARALLAX = function (module, $, window, document) {
             if ($this.find('.uix-v-align--absolute').height() >= curImgH) {
               $this.find('.uix-v-align--absolute').addClass('uix-v-align--relative');
               $curImg.hide();
+              $this.css({
+                'height': 'auto'
+              });
             }
           }
 
@@ -40269,7 +40272,7 @@ function omit(obj) {
 var THREE_BACKGROUND_THREE = function (module, $, window, document) {
   if (window.THREE_BACKGROUND_THREE === null) return false;
   module.THREE_BACKGROUND_THREE = module.THREE_BACKGROUND_THREE || {};
-  module.THREE_BACKGROUND_THREE.version = '0.0.5';
+  module.THREE_BACKGROUND_THREE.version = '0.0.6';
   module.THREE_BACKGROUND_THREE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-background-three-canvas').length == 0 || !Modernizr.webgl) return false;
@@ -40346,7 +40349,7 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
           flatShading: true,
           vertexColors: THREE.VertexColors
         });
-        displacementSprite = new THREE.Mesh(generateGeometry('sphere', 200), defaultMaterial);
+        displacementSprite = generateGeometry('sphere', 200, defaultMaterial);
         scene.add(displacementSprite);
 
         // Fires when the window changes
@@ -40428,11 +40431,32 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
        *
        * @param  {String} objectType     - String of geometry type identifier.
        * @param  {Number} numObjects       - The total number of generated objects.
+                * @param  {THREE.Material} customMaterial  - The Material.
        * @return {Void}
        */
-      function generateGeometry(objectType, numObjects) {
-        var geometry = new THREE.Geometry();
+      function generateGeometry(objectType, numObjects, customMaterial) {
+        var group = new THREE.Group();
         var applyVertexColors = function applyVertexColors(g, c) {
+          /*
+           for threejs-r134+:
+          
+          const faces = [];
+           // This gets the array of all positions [x, y, z, x, y, z, x, y z,...]
+          const positions = g.attributes.position.array; 
+           // This gets # of vertices
+          const vertexCount = g.attributes.position.count;
+                           // Each loop counts up by 3
+          for (let i3 = 0; i3 < vertexCount; i3 +=3) {
+              const singleVertex = new THREE.Vector3();
+              singleVertex.set(
+                  positions[i3 + 0],
+                  positions[i3 + 1],
+                  positions[i3 + 2]
+              );
+              faces.push(singleVertex);
+          }
+          */
+
           g.faces.forEach(function (f) {
             var n = f instanceof THREE.Face3 ? 3 : 4;
             for (var j = 0; j < n; j++) {
@@ -40471,14 +40495,15 @@ var THREE_BACKGROUND_THREE = function (module, $, window, document) {
 
           // give the geom's vertices a random color, to be displayed
           applyVertexColors(geom, color);
-          var object = new THREE.Mesh(geom);
+          var object = new THREE.Mesh(geom, customMaterial);
           object.position.copy(position);
           object.rotation.copy(rotation);
           object.scale.copy(scale);
-          object.updateMatrix();
-          geometry.merge(object.geometry, object.matrix);
+          object.updateMatrix(); // Updates the local transform.
+
+          group.add(object);
         }
-        return geometry;
+        return group;
       }
 
       //Generate random number between two numbers
@@ -44953,7 +44978,6 @@ var THREE_PAGES = function (module, $, window, document) {
 ;// CONCATENATED MODULE: ./src/components/simple-3D-particle-effect/js/index.js
 
 
-
 /* 
  *************************************
  * <!-- 3D Particle Effect -->
@@ -44971,7 +44995,7 @@ var THREE_PAGES = function (module, $, window, document) {
 var THREE_PARTICLE = function (module, $, window, document) {
   if (window.THREE_PARTICLE === null) return false;
   module.THREE_PARTICLE = module.THREE_PARTICLE || {};
-  module.THREE_PARTICLE.version = '0.0.6';
+  module.THREE_PARTICLE.version = '0.0.7';
   module.THREE_PARTICLE.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-particle-effect-canvas').length == 0 || !Modernizr.webgl) return false;
@@ -44995,7 +45019,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
           y: 0
         },
         windowHalfX = windowWidth / 2,
-        windowHalfY = windowHeight / 2;
+        windowHalfY = windowHeight / 2,
+        animStartStatus = false,
+        animCompleted = false;
 
       //background
       var backgroundBg = 0xCE3A3E;
@@ -45116,14 +45142,9 @@ var THREE_PARTICLE = function (module, $, window, document) {
           imagedata = getImageData(texture.image);
 
           // Immediately use the texture for material creation
-          var geometry = new THREE.Geometry();
-          var material = new THREE.PointsMaterial({
-            size: 3,
-            color: 0xffffff,
-            sizeAttenuation: false,
-            fog: false //Excluding objects from fog
-          });
-
+          var geometry = new THREE.BufferGeometry();
+          var vertices = [];
+          var verticesDest = [];
           for (var y = 0, y2 = imagedata.height; y < y2; y += 2) {
             for (var x = 0, x2 = imagedata.width; x < x2; x += 2) {
               if (imagedata.data[x * 4 + y * 4 * imagedata.width + 3] > 128) {
@@ -45131,17 +45152,30 @@ var THREE_PARTICLE = function (module, $, window, document) {
                 var vertex = new THREE.Vector3();
                 vertex.x = Math.random() * 1000 - 500;
                 vertex.y = Math.random() * 1000 - 500;
-                vertex.z = -Math.random() * 500;
+                vertex.z = -Math.random() * 500 + 1500;
                 vertex.destination = {
                   x: x - imagedata.width / 2,
                   y: -y + imagedata.height / 2,
                   z: 0
                 };
-                vertex.speed = Math.random() / 200 + 0.015;
-                geometry.vertices.push(vertex);
+                vertices.push(vertex.x, vertex.y, vertex.z);
+                verticesDest.push(vertex.destination.x, vertex.destination.y, vertex.destination.z);
               }
             }
           }
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+          geometry.setAttribute('position_destination', new THREE.Float32BufferAttribute(verticesDest, 3));
+          geometry.computeBoundingSphere();
+
+          //
+          var material = new THREE.PointsMaterial({
+            size: 3,
+            color: 0xffffff,
+            sizeAttenuation: false,
+            vertexColors: false,
+            fog: false //Excluding objects from fog
+          });
+
           particles = new THREE.Points(geometry, material);
           scene.add(particles);
           particles.scale.setScalar(0.7);
@@ -45194,6 +45228,40 @@ var THREE_PARTICLE = function (module, $, window, document) {
         // Fires when the window changes
         window.addEventListener('resize', onWindowResize, false);
       }
+      function animStart() {
+        if (typeof particles === 'undefined') return;
+        animStartStatus = true;
+        var points = particles.geometry.attributes.position.array;
+        var targetPoints = particles.geometry.attributes.position_destination.array;
+
+        // use target array as the tween object to store tween properties... HACKY I KNOW!
+        // targetPoints.repeat = -1;
+        // targetPoints.repeatDelay = 1;
+        targetPoints.ease = Power2.easeOut;
+        TweenMax.to(points, 4, targetPoints);
+        targetPoints.onUpdate = function () {
+          particles.geometry.attributes.position.needsUpdate = true;
+        };
+        targetPoints.onComplete = function () {
+          animCompleted = true;
+        };
+
+        /*
+        gsap.to(particles.geometry.attributes.position.array, {
+            endArray: particles.geometry.attributes.position_destination.array,
+            duration: 2,
+            ease: 'power3.out',
+            // Make sure to tell it to update
+            onUpdate: () => {
+                particles.geometry.attributes.position.needsUpdate = true;
+            },
+            onComplete: () => {
+                animCompleted = true;
+            }
+        });
+        */
+      }
+
       function render() {
         requestAnimationFrame(render);
         var delta = clock.getDelta(),
@@ -45205,40 +45273,22 @@ var THREE_PARTICLE = function (module, $, window, document) {
         renderer.setClearColor(backgroundBg);
 
         //---
-        // 
-        //Need to add judgment to avoid Cannot read property 'geometry' of undefined
-        if ((0,esm_typeof/* default */.Z)(particles) != ( true ? "undefined" : 0)) {
-          var particle;
-          for (var i = 0, j = particles.geometry.vertices.length; i < j; i++) {
-            particle = particles.geometry.vertices[i];
-            particle.x += (particle.destination.x - particle.x) * particle.speed;
-            particle.y += (particle.destination.y - particle.y) * particle.speed;
-            particle.z += (particle.destination.z - particle.z) * particle.speed;
-          }
-          if (delta - previousTime > thickness) {
-            var index = Math.floor(Math.random() * particles.geometry.vertices.length);
-            var particle1 = particles.geometry.vertices[index];
-            var particle2 = particles.geometry.vertices[particles.geometry.vertices.length - index];
-            TweenMax.to(particle, Math.random() * 2 + 1, {
-              x: particle2.x,
-              y: particle2.y,
-              ease: Power2.easeInOut
-            });
-            TweenMax.to(particle2, Math.random() * 2 + 1, {
-              x: particle1.x,
-              y: particle1.y,
-              ease: Power2.easeInOut
-            });
-            previousTime = delta;
-          }
-          particles.geometry.verticesNeedUpdate = true;
+        //
+        // Animation start	
+        if (!animStartStatus) {
+          animStart();
         }
+
+        //---
+        //
         if (!isMouseDown) {
           camera.position.x += (0 - camera.position.x) * 0.06;
           camera.position.y += (0 - camera.position.y) * 0.06;
         }
-        camera.position.x += (mouseX - camera.position.x) * 0.09;
-        camera.position.y += (-mouseY - camera.position.y) * 0.09;
+        if (animCompleted) {
+          camera.position.x += (mouseX - camera.position.x) * 0.09;
+          camera.position.y += (-mouseY - camera.position.y) * 0.09;
+        }
         if (camera.position.y < -60) camera.position.y = -60;
         camera.lookAt(centerVector);
 
@@ -45260,8 +45310,8 @@ var THREE_PARTICLE = function (module, $, window, document) {
             }       
              sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
         */
-        for (var _i = 0; _i < sceneSubjects.length; _i++) {
-          sceneSubjects[_i].update(clock.getElapsedTime() * 1);
+        for (var i = 0; i < sceneSubjects.length; i++) {
+          sceneSubjects[i].update(clock.getElapsedTime() * 1);
         }
 
         //---
@@ -45618,7 +45668,7 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
 var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
   if (window.THREE_OBJ_ANIM_INTERACTION === null) return false;
   module.THREE_OBJ_ANIM_INTERACTION = module.THREE_OBJ_ANIM_INTERACTION || {};
-  module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.3';
+  module.THREE_OBJ_ANIM_INTERACTION.version = '0.0.4';
   module.THREE_OBJ_ANIM_INTERACTION.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-object-buttonevent-canvas').length == 0 || !Modernizr.webgl) return false;
@@ -45647,7 +45697,7 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
 
         //camera
         camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
-        camera.position.set(1, 1, 22);
+        camera.position.set(3, -1, 2);
 
         //controls
         controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -45684,34 +45734,33 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
         renderer.render(scene, camera);
       }
       function addObject() {
-        var geo = new THREE.Geometry();
-        segLength = Math.PI * 2 * radius / segments;
-        geo.vertices.push(new THREE.Vector3(0, height / 2, 0));
-        geo.vertices.push(new THREE.Vector3(0, -height / 2, 0));
-        for (var i = 0; i < Math.floor(segments / 2); i++) {
-          geo.vertices.push(new THREE.Vector3(0, height / 2, segLength * i));
-          geo.vertices.push(new THREE.Vector3(0, -height / 2, segLength * i));
-          geo.vertices.push(new THREE.Vector3(0, height / 2, -segLength * i));
-          geo.vertices.push(new THREE.Vector3(0, -height / 2, -segLength * i));
-        }
-        geo.faces.push(new THREE.Face3(0, 1, 2));
-        geo.faces.push(new THREE.Face3(1, 2, 3));
-        geo.faces.push(new THREE.Face3(0, 1, 4));
-        geo.faces.push(new THREE.Face3(1, 4, 5));
-        for (var _i = 1; _i < Math.floor(segments / 2); _i++) {
-          geo.faces.push(new THREE.Face3(2 + (_i - 1) * 4, 3 + (_i - 1) * 4, 6 + (_i - 1) * 4));
-          geo.faces.push(new THREE.Face3(3 + (_i - 1) * 4, 6 + (_i - 1) * 4, 7 + (_i - 1) * 4));
-          geo.faces.push(new THREE.Face3(4 + (_i - 1) * 4, 5 + (_i - 1) * 4, 8 + (_i - 1) * 4));
-          geo.faces.push(new THREE.Face3(5 + (_i - 1) * 4, 8 + (_i - 1) * 4, 9 + (_i - 1) * 4));
-        }
-        targetObj = new THREE.Mesh(geo, material);
+        var geometry = new THREE.BufferGeometry();
+        // create a simple square shape. We duplicate the top left and bottom right
+        // vertices because each vertex needs to appear once per triangle.
+        var vertices = new Float32Array([-1.0, -1.0, 1.0,
+        // bottom left
+        1.0, -1.0, 1.0,
+        // bottom right
+        1.0, 1.0, 1.0,
+        // top right
+
+        1.0, 1.0, 1.0,
+        // top right?
+        -1.0, 1.0, 1.0,
+        // top left?
+        -1.0, -1.0, 1.0 // bottom left?
+        ]);
+
+        // itemSize = 3 because there are 3 values (components) per vertex
+        geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+        targetObj = new THREE.Mesh(geometry, material);
         parent.add(targetObj);
       }
       function render() {
         requestAnimationFrame(render);
 
         //upodate object
-        targetObj.geometry.verticesNeedUpdate = true;
+        targetObj.geometry.attributes.position.needsUpdate = true;
 
         //update camera and controls
         controls.update();
@@ -45751,28 +45800,26 @@ var THREE_OBJ_ANIM_INTERACTION = function (module, $, window, document) {
       });
       $('#3D-object-button2').on('click', function (e) {
         e.preventDefault();
+        var points = targetObj.geometry.attributes.position.array;
+        var targetPoints = [-2.0, -1.0, 1.0,
+        // bottom left
+        1.0, -3.0, 1.0,
+        // bottom right
+        1.0, 2.0, -2.0,
+        // top right
 
-        //1. tween the first segment of each side
-        var w = targetObj.geometry.vertices;
-        w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin(0) * segLength;
-        w[2].z = w[3].z = Math.cos(0) * segLength;
-        w[4].z = w[5].z = -Math.cos(0) * segLength;
+        -1.0, -1.0, 1.0,
+        // top right?
+        -1.0, 1.0, 1.0,
+        // top left?
+        -1.0, -1.0, 1.0 // bottom left?
+        ];
 
-        //2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
-        for (var i = 6; i < w.length; i++) {
-          //which segment from the origin the vertex belongs to
-          var vIndex = i,
-            segIndex = Math.floor((vIndex + 2) / 4),
-            negate = vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4) ? -1 : 1;
-          var tx = w[vIndex - 4].x - Math.sin(vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-          var tz = w[vIndex - 4].z + Math.cos(vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-          TweenMax.to(w[vIndex], 1.5, {
-            x: tx,
-            z: tz,
-            ease: Power0.easeNone,
-            onUpdate: function onUpdate() {}
-          });
-        }
+        targetPoints.ease = Power2.easeOut;
+        TweenMax.to(points, 2, targetPoints);
+        targetPoints.onUpdate = function () {
+          targetObj.geometry.attributes.position.needsUpdate = true;
+        };
       });
       $('#3D-object-button3').on('click', function (e) {
         e.preventDefault();
@@ -46240,7 +46287,7 @@ var THREE_MOUSE_INTERACTION = function (module, $, window, document) {
 var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
   if (window.THREE_MOUSE_INTERACTION2 === null) return false;
   module.THREE_MOUSE_INTERACTION2 = module.THREE_MOUSE_INTERACTION2 || {};
-  module.THREE_MOUSE_INTERACTION2.version = '0.0.5';
+  module.THREE_MOUSE_INTERACTION2.version = '0.0.6';
   module.THREE_MOUSE_INTERACTION2.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#3D-mouseinteraction2-three-canvas').length == 0 || !Modernizr.webgl) return false;
@@ -46443,7 +46490,6 @@ var THREE_MOUSE_INTERACTION2 = function (module, $, window, document) {
        * @return {Void}
        */
       function generateGeometry(numObjects) {
-        var geometry = new THREE.Geometry();
         var applyVertexColors = function applyVertexColors(g, c) {
           g.faces.forEach(function (f) {
             var n = f instanceof THREE.Face3 ? 3 : 4;
@@ -50885,9 +50931,9 @@ var TEAM_FOCUS = function (module, $, window, document) {
 
  //The data-text-eff attribute on the same page cannot be duplicated.
 
-<h3 data-text-eff="letters-eff-flyInOut1" data-text-eff-speed="800">Text Text</h3>
-<h3 data-text-eff="letters-eff-flyInOut2" data-text-eff-speed="800">Text Text</h3>
-<h3 data-text-eff="letters-eff-flyInOut3" data-text-eff-speed="800">Text Text</h3>
+<h3 data-text-eff="letters-eff-flyInOut-1" data-text-eff-speed="800">Text Text</h3>
+<h3 data-text-eff="letters-eff-flyInOut-2" data-text-eff-speed="800">Text Text</h3>
+<h3 data-text-eff="letters-eff-flyInOut-3" data-text-eff-speed="800">Text Text</h3>
  
  */
 

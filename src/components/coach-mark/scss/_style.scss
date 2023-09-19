@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Coach Mark -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /*
  * 1. Ripple effect 1
@@ -16,7 +17,7 @@ $dot-size: 20px;
 .uix-coach-mark-indicator-ripple {
 	position: relative;
 	display: inline-block;
-	background: $highlight-color1;
+	background: var(--uix-highlight-color1);
 	height: $dot-size;
 	width: $dot-size;
 	border-radius: 100%;
@@ -36,7 +37,7 @@ $dot-size: 20px;
 			border-radius: inherit;
 			height: 0px;
 			width: 0px;
-			box-shadow: 0 0 0 2px $highlight-color1;
+			box-shadow: 0 0 0 2px var(--uix-highlight-color1);
 			left: calc($dot-size/2);
 			top: calc($dot-size/2);
 			transform: translate(-50%, -50%);
@@ -46,7 +47,7 @@ $dot-size: 20px;
 		&:after {
 			height: 7px;
 			width: 7px;
-			box-shadow: 0 0 0 2px $highlight-color2;
+			box-shadow: 0 0 0 2px var(--uix-highlight-color2);
 
 		}
 
@@ -57,7 +58,7 @@ $dot-size: 20px;
 				border-radius: inherit;
 				height: #{$dot-size + 10};
 				width: #{$dot-size + 10};
-				box-shadow: 0 0 0 2px $highlight-color1;
+				box-shadow: 0 0 0 2px var(--uix-highlight-color1);
 				left: calc($dot-size/2);
 				top: calc($dot-size/2);
 				transform: translate(-50%, -50%);
@@ -87,8 +88,8 @@ $dot-size: 20px;
 
 	&.uix-coach-mark-indicator-ripple--bg {
 
-		box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
-					0 0 0 10px rgba($highlight-color1, 0.1);
+		box-shadow: 0 0 0 5px rgba(var(--uix-highlight-color1), 0.4),
+					0 0 0 10px rgba(var(--uix-highlight-color1), 0.1);
 
 		&.is-animating {
 			animation: uix-cssAnim--dotRipple 2s linear infinite;
@@ -136,11 +137,11 @@ $dot-size: 20px;
 
 @keyframes uix-cssAnim--dotRipple {
     0% {
-		box-shadow: 0 0 0 5px rgba($highlight-color1, 0.4),
-					0 0 0 10px rgba($highlight-color1, 0.1);
+		box-shadow: 0 0 0 5px rgba(var(--uix-highlight-color1), 0.4),
+					0 0 0 10px rgba(var(--uix-highlight-color1), 0.1);
     }
     100% {
-		box-shadow: 0 0 0 25px rgba($highlight-color1, 0),
-					0 0 0 30px rgba($highlight-color1, 0);
+		box-shadow: 0 0 0 25px rgba(var(--uix-highlight-color1), 0),
+					0 0 0 30px rgba(var(--uix-highlight-color1), 0);
     }
 }

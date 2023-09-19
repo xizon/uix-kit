@@ -62,8 +62,8 @@
 			&.current-cat {
 
 				a {
-					border-color: $highlight-color1;
-					color: $highlight-color1;
+					border-color: var(--uix-highlight-color1);
+					color: var(--uix-highlight-color1);
 				}
 
 			}	
@@ -109,7 +109,7 @@
 				&.is-active,
 				/* compatible with WordPress */
 				&.current-cat {
-					box-shadow: 0px 3px 0px 0px $highlight-color1;
+					box-shadow: 0px 3px 0px 0px var(--uix-highlight-color1);
 				}	
 
 			}	

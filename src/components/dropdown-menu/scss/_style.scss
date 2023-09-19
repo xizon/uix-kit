@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Dropdown Menu -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 
 /* Do not use <a> tag */
@@ -43,7 +44,7 @@
 			position: relative;
 			background: #fff;
 			padding: 0 .75rem;
-			color: $sub-text-color;
+			color: var(--uix-sub-text-color);
             
             &:hover {
                 background: #FAFAFA;

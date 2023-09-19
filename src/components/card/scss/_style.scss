@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Cards -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /*
  * 1. Author Card
@@ -24,7 +25,7 @@ $card-radius: 8px;
 	margin: 0 auto;
 	border: 1px solid #eaeaea;
 	position: relative;
-	border-top: 8px solid $highlight-color1;
+	border-top: 8px solid var(--uix-highlight-color1);
 	border-radius: $card-radius;
 	@include outer-shadow( 'regular' );
 
@@ -387,8 +388,8 @@ $card-radius: 8px;
 
                 &.is-active,
                 &:hover {
-                    border-bottom: 3px solid $highlight-color1;
-                    color: $highlight-color1;
+                    border-bottom: 3px solid var(--uix-highlight-color1);
+                    color: var(--uix-highlight-color1);
                 }
             }  
         }

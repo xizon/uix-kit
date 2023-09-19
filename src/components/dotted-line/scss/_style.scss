@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Dotted Line -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 .uix-dotted-line {
 	display: inline-block;
@@ -14,14 +15,14 @@
 	&.uix-dotted-line--s {
 
 		width: 1px;
-		background: $primary-text-color;
-		background: linear-gradient(to bottom, $primary-text-color 10%, rgba(255, 255, 255, 0) 0%);
+		background: var(--uix-primary-text-color);
+		background: linear-gradient(to bottom, var(--uix-primary-text-color) 10%, rgba(255, 255, 255, 0) 0%);
 		background-position: left;
 		background-size: 1px 8px;
 		background-repeat: repeat-y;
 
 		&.is-horizontal {
-			background: linear-gradient(to right, $primary-text-color 10%, rgba(255, 255, 255, 0) 0%);
+			background: linear-gradient(to right, var(--uix-primary-text-color) 10%, rgba(255, 255, 255, 0) 0%);
 			background-position: top;
 			background-size: 8px 1px;
 			background-repeat: repeat-x;
@@ -30,7 +31,7 @@
 		}
 
 		&.is-circle {
-			background: radial-gradient(circle, $primary-text-color 1.5px, transparent 2px);
+			background: radial-gradient(circle, var(--uix-primary-text-color) 1.5px, transparent 2px);
 			background-position: top;
 			background-size: 12px 6px;
 		}
@@ -40,14 +41,14 @@
 	/* Medium Size */
 	&.uix-dotted-line--m {
 		width: 3px;
-		background: $primary-text-color;
-		background: linear-gradient(to bottom, $primary-text-color 20%, rgba(255, 255, 255, 0) 0%);
+		background: var(--uix-primary-text-color);
+		background: linear-gradient(to bottom, var(--uix-primary-text-color) 20%, rgba(255, 255, 255, 0) 0%);
 		background-position: left;
 		background-size: 3px 10px;
 		background-repeat: repeat-y;
 
 		&.is-horizontal {
-			background: linear-gradient(to right, $primary-text-color 20%, rgba(255, 255, 255, 0) 0%);
+			background: linear-gradient(to right, var(--uix-primary-text-color) 20%, rgba(255, 255, 255, 0) 0%);
 			background-position: top;
 			background-size: 10px 3px;
 			background-repeat: repeat-x;
@@ -56,7 +57,7 @@
 		}
 
 		&.is-circle {
-			background: radial-gradient(circle, $primary-text-color 1.5px, transparent 2px);
+			background: radial-gradient(circle, var(--uix-primary-text-color) 1.5px, transparent 2px);
 			background-position: top;
 			background-size: 12px 6px;
 		}
@@ -67,15 +68,15 @@
 	/* Large Size */
 	&.uix-dotted-line--l {
 		width: 6px;
-		background: $primary-text-color;
-		background: linear-gradient(to bottom, $primary-text-color 30%, rgba(255, 255, 255, 0) 0%);
+		background: var(--uix-primary-text-color);
+		background: linear-gradient(to bottom, var(--uix-primary-text-color) 30%, rgba(255, 255, 255, 0) 0%);
 		background-position: left;
 		background-size: 6px 12px;
 		background-repeat: repeat-y;
 
 
 		&.is-horizontal {
-			background: linear-gradient(to right, $primary-text-color 30%, rgba(255, 255, 255, 0) 0%);
+			background: linear-gradient(to right, var(--uix-primary-text-color) 30%, rgba(255, 255, 255, 0) 0%);
 			background-position: top;
 			background-size: 12px 6px;
 			background-repeat: repeat-x;
@@ -85,7 +86,7 @@
 
 
 		&.is-circle {
-			background: radial-gradient(circle, $primary-text-color 1.5px, transparent 2px);
+			background: radial-gradient(circle, var(--uix-primary-text-color) 1.5px, transparent 2px);
 			background-position: top;
 			background-size: 12px 6px;
 		}

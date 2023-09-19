@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Table -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Generic
  * 2. Table Sorter
@@ -161,11 +162,11 @@ table.uix-table,
 /*-- Table Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
 .uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
-    color: $highlight-color1;
+    color: var(--uix-highlight-color1);
 }
 
 .uix-table a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
-    color: $highlight-color2;
+    color: var(--uix-highlight-color2);
     text-decoration: underline;
 }
 
@@ -426,7 +427,7 @@ table.is-horizontal,
 		content: '';
 		font-family: 'Font Awesome 5 Free';
 		font-weight: 600;
-		color: $sub-text-color;
+		color: var(--uix-sub-text-color);
 		margin-left: .5rem;
 		font-size: 0.75rem;
 		content: "\f0dc";
@@ -487,7 +488,7 @@ table.is-horizontal,
             text-transform: uppercase;
             outline: 0;
             padding: .5rem 1rem;
-            color: $sub-text-color;
+            color: var(--uix-sub-text-color);
 
         }
  

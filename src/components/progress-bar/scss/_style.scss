@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Progress Bar -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Radial Progress Bar
  * 2. Rectangle Progress Bar
@@ -10,9 +11,9 @@
 
 $bar-size       : 100px;
 $bar-line-size  : 8px;
-$bar-bg         : $primary-text-color;
+$bar-bg         : var(--uix-primary-text-color);
 $bar-track-bg   : rgba(236,236,236,1.00);
-$bar-fill-color : $highlight-color1;
+$bar-fill-color : var(--uix-highlight-color1);
 $bar-speed      : 0.8s;
 
 /*
@@ -34,7 +35,7 @@ $bar-speed      : 0.8s;
 
 
 	.uix-progressbar__title {
-		color: $primary-text-color;
+		color: var(--uix-primary-text-color);
 		padding-top: 1rem;
 	}
 
@@ -79,7 +80,7 @@ $bar-speed      : 0.8s;
 		}
 
 		.uix-progressbar__unit {
-			color: $sub-text-color;
+			color: var(--uix-sub-text-color);
 			font-size: 0.875rem;
 			display: inline-block;
 			margin-left: .1rem;
@@ -91,7 +92,7 @@ $bar-speed      : 0.8s;
 	&.is-transparent {
 
 		.uix-progressbar__track {
-			color: $primary-text-color;
+			color: var(--uix-primary-text-color);
 			background: none;
 		}
 	}
@@ -160,7 +161,7 @@ $bar-speed      : 0.8s;
 	width: calc(100% - 2rem);
 
 	.uix-progressbar__title {
-		color: $primary-text-color;
+		color: var(--uix-primary-text-color);
 	}
 
 	.uix-progressbar__bar {
@@ -175,7 +176,7 @@ $bar-speed      : 0.8s;
 			font-weight: bold;
 
 			.uix-progressbar__unit {
-				color: $sub-text-color;
+				color: var(--uix-sub-text-color);
 				font-size: 0.875rem;
 				display: inline-block;
 				margin-left: .1rem;
@@ -189,7 +190,7 @@ $bar-speed      : 0.8s;
 			height: 100%;
 			width: 0;
 			background-color: $bar-fill-color;
-			color: $primary-text-color;
+			color: var(--uix-primary-text-color);
 		}
 
 	}

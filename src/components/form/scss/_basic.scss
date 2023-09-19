@@ -1,8 +1,9 @@
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-@import '_variable-and-mixin.scss';
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';@import '_variable-and-mixin.scss';
 
 /*
  * 1. Controls
@@ -53,6 +54,13 @@ input[type="date"].is-active::-webkit-datetime-edit,
 input[type="datetime-local"].is-active::-webkit-datetime-edit {
 	color: $control-text-color !important;
 }
+
+
+input::placeholder,
+textarea::placeholder {
+    color: $control-placeholder-color;
+}
+
 
 
 
@@ -510,7 +518,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 		position: absolute;
 		right: 0.721875rem;
 		top: 0.721875rem;
-		color: $highlight-color1;
+		color: var(--uix-highlight-color1);
 	}
 
 
@@ -600,7 +608,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 				font-weight: 600;
 				content: "\f093";
 				font-size: 2em;
-				color: $highlight-color1;
+				color: var(--uix-highlight-color1);
 				transform: translateY(50%);
 			}
 
@@ -627,7 +635,7 @@ input[type="datetime-local"].is-active::-webkit-datetime-edit {
 					opacity: 1;
 					visibility: visible;
 					font-size: 1.2rem;
-					border: 2px dashed $highlight-color1;
+					border: 2px dashed var(--uix-highlight-color1);
 					overflow: hidden;
 					display: flex;
 					flex-direction: column;
@@ -1430,8 +1438,8 @@ $controls-merge-button-width: 20%;
 			@extend :hover;
 
 			i {
-				background: $highlight-color1;
-				border-color: $highlight-color1;
+				background: var(--uix-highlight-color1);
+				border-color: var(--uix-highlight-color1);
 				color: #fff;
 			}
 		}
@@ -1493,8 +1501,8 @@ $controls-merge-button-width: 20%;
 
 		&.is-active {
 		    color: #fff;
-			border-color: $highlight-color1;
-			background: $highlight-color1;
+			border-color: var(--uix-highlight-color1);
+			background: var(--uix-highlight-color1);
 
 
 		}
@@ -1547,7 +1555,7 @@ $controls-merge-button-width: 20%;
 	.uix-search-box__field {
 		width: 100%;
 		background: #fff;
-		border: 1px solid $sub-text-color;
+		border: 1px solid var(--uix-sub-text-color);
 		box-sizing: border-box;
 		color: #555;
 		outline: none;
@@ -1574,7 +1582,7 @@ $controls-merge-button-width: 20%;
 		color: #CCC;
 
 		&:hover {
-			color: $primary-text-color;
+			color: var(--uix-primary-text-color);
 		}
 	}
 }

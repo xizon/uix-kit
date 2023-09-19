@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Equal-width Columns -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /**
  * Using only CSS, we can make a tabbed navigation whose tabs always
@@ -24,7 +25,7 @@
 		li {
 			font-size: 1rem;/*Fighting the Space Between Inline Block Elements*/
 			display: table-cell; /* [4] */
-			box-shadow: 1px 0px 0px 0px $sub-text-color;
+			box-shadow: 1px 0px 0px 0px var(--uix-sub-text-color);
 
 			&:last-child {
 				box-shadow: none;

@@ -25,7 +25,7 @@ export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_OBJ_ANIM_INTERACTION               = module.THREE_OBJ_ANIM_INTERACTION || {};
-    module.THREE_OBJ_ANIM_INTERACTION.version       = '0.0.3';
+    module.THREE_OBJ_ANIM_INTERACTION.version       = '0.0.4';
     module.THREE_OBJ_ANIM_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -74,7 +74,7 @@ export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
 
 				//camera
 				camera = new THREE.PerspectiveCamera(70, windowWidth / windowHeight, 1, 100);
-				camera.position.set(1, 1, 22);
+				camera.position.set(3, -1, 2);
 
 				//controls
 				controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -125,27 +125,25 @@ export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
 
 
 			function addObject() {
-				const geo = new THREE.Geometry();
-				segLength = Math.PI * 2 * radius / segments;
-				geo.vertices.push(new THREE.Vector3(0, height / 2, 0));
-				geo.vertices.push(new THREE.Vector3(0, -height / 2, 0));
-				for (let i = 0; i < Math.floor(segments / 2); i++) {
-					geo.vertices.push(new THREE.Vector3(0, height / 2, segLength * i));
-					geo.vertices.push(new THREE.Vector3(0, -height / 2, segLength * i));
-					geo.vertices.push(new THREE.Vector3(0, height / 2, -segLength * i));
-					geo.vertices.push(new THREE.Vector3(0, -height / 2, -segLength * i));
-				}
-				geo.faces.push(new THREE.Face3(0, 1, 2));
-				geo.faces.push(new THREE.Face3(1, 2, 3));
-				geo.faces.push(new THREE.Face3(0, 1, 4));
-				geo.faces.push(new THREE.Face3(1, 4, 5));
-				for (let i = 1; i < Math.floor(segments / 2); i++) {
-					geo.faces.push(new THREE.Face3(2 + (i - 1) * 4, 3 + (i - 1) * 4, 6 + (i - 1) * 4));
-					geo.faces.push(new THREE.Face3(3 + (i - 1) * 4, 6 + (i - 1) * 4, 7 + (i - 1) * 4));
-					geo.faces.push(new THREE.Face3(4 + (i - 1) * 4, 5 + (i - 1) * 4, 8 + (i - 1) * 4));
-					geo.faces.push(new THREE.Face3(5 + (i - 1) * 4, 8 + (i - 1) * 4, 9 + (i - 1) * 4));
-				}
-				targetObj = new THREE.Mesh(geo, material);
+
+
+                const geometry = new THREE.BufferGeometry();
+                // create a simple square shape. We duplicate the top left and bottom right
+                // vertices because each vertex needs to appear once per triangle.
+                const vertices = new Float32Array( [
+                    -1.0, -1.0,  1.0,  // bottom left
+                     1.0, -1.0,  1.0,  // bottom right
+                     1.0,  1.0,  1.0,  // top right
+                
+                     1.0,  1.0,  1.0,  // top right?
+                    -1.0,  1.0,  1.0,  // top left?
+                    -1.0, -1.0,  1.0   // bottom left?
+                ] );
+                
+                // itemSize = 3 because there are 3 values (components) per vertex
+                geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+
+				targetObj = new THREE.Mesh(geometry, material);
 
 				parent.add( targetObj );
 			}
@@ -158,7 +156,7 @@ export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
 
 
 				//upodate object
-				targetObj.geometry.verticesNeedUpdate = true;
+                targetObj.geometry.attributes.position.needsUpdate = true;
 
 
 				//update camera and controls
@@ -217,38 +215,24 @@ export const THREE_OBJ_ANIM_INTERACTION = ( ( module, $, window, document ) => {
 			$( '#3D-object-button2' ).on( 'click', function( e ) {
 				e.preventDefault();
 
-				//1. tween the first segment of each side
-				const w = targetObj.geometry.vertices;
-
-				w[2].x = w[3].x = w[4].x = w[5].x = -Math.sin( 0 ) * segLength;
-				w[2].z = w[3].z = Math.cos( 0 ) * segLength;
-				w[4].z = w[5].z = -Math.cos( 0 ) * segLength;
-
-				//2. rest of the vertex can now refer to the fourth previous vertex, their reference in the algorithm
-				for (let i = 6; i < w.length; i++) {
-
-					//which segment from the origin the vertex belongs to
-					const vIndex   = i,
-						  segIndex = Math.floor((vIndex + 2) / 4),
-						  negate   = (vIndex / 4 === Math.floor(vIndex / 4) || (vIndex - 1) / 4 === Math.floor((vIndex - 1) / 4)) ? -1 : 1;
+                const points = targetObj.geometry.attributes.position.array;
+                const targetPoints = [
+                    -2.0, -1.0,  1.0,  // bottom left
+                     1.0, -3.0,  1.0,  // bottom right
+                     1.0,  2.0,  -2.0,  // top right
+                
+                     -1.0,  -1.0,  1.0,  // top right?
+                    -1.0,  1.0,  1.0,  // top left?
+                    -1.0, -1.0,  1.0   // bottom left?
+                ];
 
 
-					const tx = w[vIndex - 4].x - Math.sin( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-					const tz = w[vIndex - 4].z + Math.cos( vIndex * (negate * (2 * segIndex - 1))) * segLength * negate;
-
-
-					TweenMax.to( w[vIndex], 1.5, {
-						x: tx,
-						z: tz,
-						ease: Power0.easeNone,
-						onUpdate: function(){
-
-
-						}
-					});
-
-				}
-
+                 targetPoints.ease = Power2.easeOut;
+                 TweenMax.to(points, 2, targetPoints);
+                 
+                 targetPoints.onUpdate = function() {
+                    targetObj.geometry.attributes.position.needsUpdate = true;
+                 }
 
 
 			});

@@ -66,11 +66,11 @@ ol.uix-list--normal,
 /*-- Noemal List Effect by Default --*/
 /* Compatible with  Uix Shortcodes (WordPress Plugin) and Block Button Link */
 .uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn) {
-    color: $highlight-color1;
+    color: var(--uix-highlight-color1);
 }
 
 .uix-list--normal a:not(.uix-sc-btn):not(.wp-block-button__link):not(.uix-btn):hover {
-    color: $highlight-color2;
+    color: var(--uix-highlight-color2);
     text-decoration: underline;
 }
 
@@ -105,7 +105,7 @@ ol.uix-list--numbered,
 		width: 22px;
 		height: 22px;
 		margin-right: 0.5em;
-		background-color: $highlight-color1;
+		background-color: var(--uix-highlight-color1);
 		border-radius: 50%;
 		color: #fff;
 		text-align: center;
@@ -138,7 +138,7 @@ ul.uix-list--circle,
 	> li {
 		position: relative;
 		margin-bottom: .5rem;
-		color: $primary-text-color;
+		color: var(--uix-primary-text-color);
 		margin-left: 1rem;
 	}
 
@@ -150,7 +150,7 @@ ul.uix-list--circle,
 		display: inline-block;
 		width: 10px;
 		height: 10px;
-		background-color: $highlight-color1;
+		background-color: var(--uix-highlight-color1);
 		color: #fff;
 		border-radius: 50%;
 		text-align: center;
@@ -195,7 +195,7 @@ ol.uix-list--numbered-large,
 			position: absolute;
 			margin-left: -3.5rem;
 			font-size: 3rem;
-			color: $sub-text-color;
+			color: var(--uix-sub-text-color);
 			line-height: 1;
 		}	
 	}	
@@ -224,7 +224,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg,
 		}
 		
 		&::before {
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			border-radius: 50%;
 			width: 50px;
 			height: 50px;
@@ -280,7 +280,7 @@ $step-line-color: #333;
 			line-height: 48px;
 			text-align: center;
 			color: #fff;
-			background-color: $highlight-color1;
+			background-color: var(--uix-highlight-color1);
 			border: 2px solid $step-line-color;
 			border-radius: 50%;
 			z-index: 2;

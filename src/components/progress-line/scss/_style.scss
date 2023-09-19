@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Progress Line -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 $line-bar-w: 45px;
 
@@ -41,7 +42,7 @@ $line-bar-w: 45px;
 			display: block;
 			width: $line-bar-w;
 			height: 100%;
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			transform: translateX(-100%);
 			@include transition-default();
 		}
@@ -85,7 +86,7 @@ $line-bar-w: 45px;
 		font-weight: bold;
 		display: block;
 		padding-top: 1.5rem;
-		color: $primary-text-color;
+		color: var(--uix-primary-text-color);
 		@include ellipsis();
 		@include transition-default();
 	}
@@ -116,12 +117,12 @@ $line-bar-w: 45px;
 		&.is-active {
 
 			opacity: 1;
-			border: 1px solid $highlight-color1;
+			border: 1px solid var(--uix-highlight-color1);
 			background: #fff;
 
 			.uix-progress-line__circle__label {
 				color: #fff;
-				background: $highlight-color1;
+				background: var(--uix-highlight-color1);
 				margin-top: 6px;
 			}
 

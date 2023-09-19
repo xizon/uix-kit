@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Comments ( Synchronize to WordPress's class name ) -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /*
  * 1. Comments Wrapper
@@ -113,7 +114,7 @@
 		}
 
 		&.respond {
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			color: #fff;
 			position: absolute;
 			bottom: 0;

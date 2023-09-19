@@ -267,7 +267,7 @@
 }
 
 .uix-outer-shadow--highlight {
-    @include outer-shadow( 'highlight', $highlight-color1 );
+    @include outer-shadow( 'highlight', var(--uix-highlight-color1) );
 }
 
 .uix-none-shadow {
@@ -587,7 +587,7 @@
 	text-transform: uppercase;
 	font-weight: 700;
 	line-height: 1.2;
-	background: $highlight-color1;
+	background: var(--uix-highlight-color1);
 	border-radius: 10px;
 	padding: .1rem .3rem !important;
 	margin-left: .5rem;

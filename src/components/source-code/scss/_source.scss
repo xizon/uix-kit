@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Source Code -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /* Source Code Button */
 #uix-view-source {
@@ -14,7 +15,7 @@
 	margin: auto;
 	text-decoration: none;
 	cursor: pointer;
-	border: 1px solid $highlight-color1;
+	border: 1px solid var(--uix-highlight-color1);
 	border-radius: 25px;
 	height: 2rem;
 	width: 2rem;
@@ -22,11 +23,11 @@
 	padding: 0;
 	outline: none;
 	overflow: hidden;
-	color: $highlight-color1;
+	color: var(--uix-highlight-color1);
 	transition: .1s ease-in-out;
 	text-align: center;
 	line-height: 250%;
-	box-shadow: 0 4px 15px 0 rgba($highlight-color1, 0.35);
+	box-shadow: 0 4px 15px 0 rgba(var(--uix-highlight-color1), 0.35);
 
 	i {
 	    font-size: 1rem;
@@ -51,10 +52,10 @@
 	}
 	&:hover {
 		color: #fff;
-		box-shadow: 0 4px 15px 0 rgba($highlight-color1, 0.75);
+		box-shadow: 0 4px 15px 0 rgba(var(--uix-highlight-color1), 0.75);
 
 		&::before {
-			box-shadow: inset 0 0 0 4rem $highlight-color1;
+			box-shadow: inset 0 0 0 4rem var(--uix-highlight-color1);
 		}
 	}
 }

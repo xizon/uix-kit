@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Features -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Features with Grid System
  * 2. Features with Dividing Line
@@ -36,7 +37,7 @@ $features-icon-size: 1.5rem;
 		}
 
 		&.is-bordered {
-			border: 1px $primary-text-color solid;
+			border: 1px var(--uix-primary-text-color) solid;
 
 
 			i {
@@ -45,8 +46,8 @@ $features-icon-size: 1.5rem;
 		}
 
 		&:hover {
-			background: $primary-text-color;
-			border-color: $primary-text-color;
+			background: var(--uix-primary-text-color);
+			border-color: var(--uix-primary-text-color);
 
 
 			i {
@@ -108,7 +109,7 @@ $features-icon-size: 1.5rem;
 				z-index: 0;
 				left: 0;
 				top: 0;
-				border: 1px $primary-text-color solid;
+				border: 1px var(--uix-primary-text-color) solid;
 				text-align: center;
 				margin-right: 1rem;
 

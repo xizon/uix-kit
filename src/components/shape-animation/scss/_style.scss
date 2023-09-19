@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Shape Animation -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 .uix-shape-anim {
 	position: relative;
@@ -17,7 +18,7 @@
 		position: absolute;
 		top: 0;
 		left: 0px;
-		background-color: $highlight-color1;
+		background-color: var(--uix-highlight-color1);
 		transform: skew(-20deg,0);
 		z-index: 0;
 	}

@@ -1,8 +1,9 @@
 /* ======================================================
         <!-- Gallery -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 .uix-gallery {
 
@@ -75,7 +76,7 @@
 				position: absolute;
 				bottom: 0.8125rem;
 				right: 0;
-				background: $highlight-color1;
+				background: var(--uix-highlight-color1);
 				border-radius: 25px;
 				padding: 0.0875rem 1.1375rem;
 				color: #fff;

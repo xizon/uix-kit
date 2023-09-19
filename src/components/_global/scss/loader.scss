@@ -44,7 +44,7 @@
 	    height: 65px;
 
 		path {
-			fill: $highlight-color1;
+			fill: var(--uix-highlight-color1);
 		}
 	}
 
@@ -62,7 +62,7 @@
 			stroke-dasharray: 1,150;
 			/* 1%, 101% circumference */
 			stroke-dashoffset: 0;
-			stroke: $highlight-color1;
+			stroke: var(--uix-highlight-color1);
 			stroke-linecap: round;
 			animation: uix-cssAnim--dash 1.5s ease-in-out infinite;
 		}

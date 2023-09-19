@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Gallery Grid Layout -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 @mixin galleryGridGenerate( $classname: '.uix-gallery-grid', $gap: 15px ) {
 	// @include galleryGridGenerate( '.uix-gallery-grid', 15px );

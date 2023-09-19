@@ -1,8 +1,9 @@
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-@import '_variable-and-mixin.scss';
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';@import '_variable-and-mixin.scss';
 
 /*
  * 1. Controls
@@ -29,7 +30,7 @@
         z-index: 1;
 		display: none;
         transform: translateX(0);
-        background: $primary-text-color;
+        background: var(--uix-primary-text-color);
         @include transition-default();
         
 		&.is-active {
@@ -447,7 +448,7 @@
 				color: $control-text-color !important;   
                 
                 .uix-controls__basic-bar {
-                    background: $highlight-color1 !important;
+                    background: var(--uix-highlight-color1) !important;
                 }      
                 
 			}

@@ -22,8 +22,9 @@
 /******/
 /******/
 /* must be placed in the first place */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /******/
 /******/

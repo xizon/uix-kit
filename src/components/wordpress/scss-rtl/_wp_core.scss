@@ -1,8 +1,9 @@
 /* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /* Note: Contains Gutenberg's block style correction. */
 
 /*

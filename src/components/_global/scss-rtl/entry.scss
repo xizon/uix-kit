@@ -17,7 +17,7 @@
 
     pre:not(.uix-precode) {
         border-left: 1px solid #d9d9d9;
-        border-right: 5px solid $highlight-color1;
+        border-right: 5px solid var(--uix-highlight-color1);
     }
 
 }

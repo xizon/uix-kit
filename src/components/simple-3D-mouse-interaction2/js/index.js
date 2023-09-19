@@ -23,7 +23,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION2               = module.THREE_MOUSE_INTERACTION2 || {};
-    module.THREE_MOUSE_INTERACTION2.version       = '0.0.5';
+    module.THREE_MOUSE_INTERACTION2.version       = '0.0.6';
     module.THREE_MOUSE_INTERACTION2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -287,8 +287,6 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 			 * @return {Void}
 			 */
 			function generateGeometry( numObjects ) {
-
-				const geometry = new THREE.Geometry();
 
 				const applyVertexColors = function(g, c) {
 					g.faces.forEach(function(f) {

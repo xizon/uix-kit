@@ -1,0 +1,195 @@
+//
+//   @description Used for all modules from ./src/components/[__]/scss
+// 
+//
+//
+//	  FONT SIZE HIERARCHY
+//	  ---------------------------
+//	
+//    Default font-size for HTML :    16px
+//    blockquote                 :    1rem
+//    body                       :    1rem
+//    form                       :    0.875rem
+
+//
+//
+//	  GLOBAL SPACING HIERARCHY WITH <section>
+//	  ---------------------------
+//	
+//    Large                      :    11.375rem
+//    Medium                     :    6.5625rem
+//    Small                      :    3rem
+//    Default (mobile)           :    4.265625rem
+//    Large (mobile)             :    4.265625rem
+//    Small (mobile)             :    1.5rem
+//
+//
+//
+//	  COLOR PALETTE
+//	  ---------------------------
+//
+//    Placeholder Text Color     :    #E6E6E8
+//	  Primary Background Color   :    transparent
+//	  Highlight Color            :    #CE3A3E, #DE510E
+//	  Primary Text Color         :    #212121, #474747
+//    Heading Text Color         :    #212121
+//	  Subordinate Text Color     :    #AEAEAE
+//	  Dividing Line Color        :    #F4F4F4
+//    Button Gradient Color      :    #CE3A3E, #C04645, #DE510E
+
+
+
+
+
+//	COMMON STYLE ATTRIBUTES IN THE MODULE
+//	---------------------------
+//  Note: Valid only on certain special modules
+//
+//    .is-active                --> Activate current element.
+//    .is-waiting               --> Waiting or loading process.
+//    .is-dragging              --> The element being dragged.
+//    .is-responsive            --> Let the current element use a responsive layout.
+//    .is-horizontal            --> Let the elements be laid out horizontally.
+//    .is-vertical              --> Let the elements be laid out vertically.
+//    .is-fixed                 --> Let it be in a fixed position.
+//    .is-mobile                --> Execute when using a mobile device.
+//    .is-mobile-still          --> Do not change any style properties on mobile devices.
+//    .is-fill-white            --> Fill a white background.
+//    .is-fullscreen            --> Display in full screen.
+//    .is-fullwidth             --> Display in full width.
+//    .is-video                 --> Determine if the element contains a video type.
+//    .is-pill                  --> Display elements using pill style.
+//    .is-rounded               --> Give the element "rounded corners".
+//    .is-circle                --> Display elements using circle style.
+//    .is-transparent           --> Make the background or other properties of the element transparent.
+//    .is-animating             --> Contains animation effects.
+//    .is-reversed              --> Change the layout direction of the elements to the opposite position.
+//    .is-loaded                --> Determine if the element has been loaded.
+//    .is-opened                --> Determine if the element has been opened.
+//    .is-bordered              --> Add a border to the element.
+//    .is-iconic                --> Elements and icons are used together.
+//    .is-success               --> Returns a style of success, often used in forms.
+//    .is-error                 --> Returns a style of error, often used in forms.
+//    .is-hide-IE               --> Hide this element in old IE (10-). Only IE is valid.
+//    .is-hide                  --> Hide this element.
+//    .is-disabled              --> Disable this element.
+//    .is-drop-target           --> Row Dropzone of Table.
+
+
+
+
+// FONTS
+// ---------------------------
+// @Files used: 
+// ./src/components/_global/scss/basic.scss
+// ./src/components/_global/scss/mobile-menu.scss
+// ./src/components/_global/scss/typography.scss
+// ./src/components/form/scss/_basic.scss
+//
+//Default font-size for HTML
+//English (compatible with Chinese)  --> 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+//Chinese  --> -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+
+$basic-font-size       : 16px;
+$font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+$font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;
+$font-code             : "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+$font-size-body        : 1rem;
+$font-size-blockquote  : 1rem;
+$font-size-form        : 0.875rem;
+
+
+// font calculation
+$font-size-base: $basic-font-size;
+$font-sizes: (
+    1: $font-size-base * 3.5,
+    2: $font-size-base * 2.5,
+    3: $font-size-base * 1.75,
+    4: $font-size-base * 1.5,
+    5: $font-size-base * 1.25,
+    6: $font-size-base
+    ) !default;
+
+
+$font-lh: (
+    1: 1.14285714286,
+    2: 1.2,
+    3: 1.25,
+    4: 1.33333333333,
+    5: 1.33333333333,
+    6: 1.5
+    ) !default; 
+
+
+
+// GLOBAL SPACING HIERARCHY WITH <section>
+// ---------------------------
+// @Files used: 
+// ./src/components/_global/scss/spacing.scss
+// ./src/components/_global/scss/footer.scss
+//
+$spacing-large          : 11.375rem;
+$spacing-medium         : 6.5625rem;
+$spacing-small          : 3rem;
+$spacing-large-mobile   : calc($spacing-large/2);
+$spacing-medium-mobile  : calc($spacing-medium/2);
+$spacing-small-mobile   : calc($spacing-small/2);
+
+
+// COLOR PALETTE
+// ---------------------------
+// @Files used: 
+// ./src/components/*
+//
+
+//Placeholder Text Color
+$placeholder-text-color: #E6E6E8;
+
+//Highlight Color
+$highlight-color1      : #CE3A3E; //rgba($highlight-color1, 1)
+$highlight-color2      : #DE510E; //rgba($highlight-color2, 1)
+
+//Primary Text Color
+$primary-text-color    : #212121;
+$primary-link-color    : #474747;
+$primary-link-hover-color : #212121;
+
+//Heading Text Color
+$heading-text-color    : #212121;
+
+//Subordinate Text Color
+$sub-text-color        : #AEAEAE;
+
+//Dividing Line Color
+$dividing-line-color   : #DCDCDC; //rgba($dividing-line-color, 1)
+
+//Button Gradient Color
+$btn-gradient-color1   : #CE3A3E;
+$btn-gradient-color2   : #C04645;
+$btn-gradient-color3   : #DE510E;
+
+
+//Primary Background Color
+$primary-bg-color      : transparent;
+
+
+
+
+:root {
+
+    /* COLOR PALETTE  */
+    --uix-placeholder-text-color: #{$placeholder-text-color};
+    --uix-highlight-color1: #{$highlight-color1};
+    --uix-highlight-color2: #{$highlight-color2};
+    --uix-primary-text-color: #{$primary-text-color};
+    --uix-primary-link-color: #{$primary-link-color};
+    --uix-primary-link-hover-color: #{$primary-link-hover-color};
+    --uix-heading-text-color: #{$heading-text-color};
+    --uix-sub-text-color: #{$sub-text-color};
+    --uix-dividing-line-color: #{$dividing-line-color};
+    --uix-btn-gradient-color1: #{$btn-gradient-color1};
+    --uix-btn-gradient-color2: #{$btn-gradient-color2};
+    --uix-btn-gradient-color3: #{$btn-gradient-color3};
+    --uix-primary-bg-color: #{$primary-bg-color};
+
+}

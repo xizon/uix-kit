@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  5.0.0
+ * ## Version             :  5.0.5
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 9, 2023
+ * ## Last Update         :  September 19, 2023
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -71,6 +71,23 @@
 /******/
 /******/
 /* must be placed in the first place */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /******/
 /******/
 /* base */
@@ -265,7 +282,7 @@ ol.uix-list--numbered-large.uix-list--numbered-bg li::before,
  */
 .uix-entry__content pre:not(.uix-precode) {
   border-left: 1px solid #d9d9d9;
-  border-right: 5px solid #CE3A3E;
+  border-right: 5px solid var(--uix-highlight-color1);
 }
 
 /* 
@@ -728,6 +745,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Advanced Slider (Basic) -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Initialize the slider style
  * 2. Pagination dots
@@ -770,6 +804,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Advanced Slider (Special Effects) -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Initialize the slider style
  * 2. Pagination dots
@@ -816,6 +867,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Button -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 4. Icons
  * 5. Group
@@ -910,9 +978,42 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
     <!-- Cards -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
 /* ======================================================
    <!-- Content Placeholder Animated -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-content-placeholder .uix-content-placeholder__thumbSlot {
   float: right;
 }
@@ -924,6 +1025,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Dropdown Menu -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /* Do not use <a> tag */
 .uix-dropdown-menu > ul {
   left: auto;
@@ -936,6 +1054,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Flexslider (Third-party plugin) -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .flexslider,
 .uix-flexslider {
   direction: ltr !important;
@@ -943,6 +1078,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Controls
  * 2. Upload
@@ -1288,6 +1440,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
     <!-- Form ( Layout )- -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-controls-layout .uix-controls-layout__content .uix-controls-layout__content__inner > div:first-child {
   margin-right: auto;
   margin-left: 1.5rem;
@@ -1305,6 +1474,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
     <!-- Form  ( Material Design Theme )-->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Controls
  * 4. Custom Select
@@ -1379,6 +1565,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
     <!-- Form -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Date Picker ( 3rd Party Plugin )
 */
@@ -1394,6 +1597,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Cutom Light Box -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-lightbox__close {
   right: auto;
   left: 15px;
@@ -1401,12 +1621,46 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Brands List -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-list-brands li {
   float: right;
 }
 /* ======================================================
    <!-- Bulleted List -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-list-bullet i {
   margin-right: auto;
   margin-left: 0.5rem;
@@ -1414,6 +1668,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Maintain Aspect Ratio List -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 @media all and (max-width: 768px) {
   .uix-list-aspect-ratio {
     padding-right: auto;
@@ -1426,6 +1697,23 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 /* ======================================================
    <!-- Side by Side List -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 dl.uix-list-abreast dt {
   float: right;
   clear: right;
@@ -1440,9 +1728,42 @@ dl.uix-list-abreast dd {
 /* ======================================================
    <!-- Login Templates -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
 /* ======================================================
     <!-- Modal Dialog -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-modal-box {
   left: auto;
   right: 50%;
@@ -1474,6 +1795,23 @@ dl.uix-list-abreast dd {
 /* ======================================================
    <!-- Ribbon -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-ribbon--triangle {
   right: auto;
   left: 0;
@@ -1484,7 +1822,7 @@ dl.uix-list-abreast dd {
 }
 .uix-ribbon--triangle.uix-ribbon--triangle--style-2::after {
   border-left: inherit;
-  border-right: 40px solid #CE3A3E;
+  border-right: 40px solid var(--uix-highlight-color1);
   left: auto;
   right: 0.25rem;
   transform: rotate(-315deg);
@@ -1504,6 +1842,23 @@ dl.uix-list-abreast dd {
 /* ======================================================
    <!-- Comments -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .comment-avatar {
   float: right;
   margin: 0 0 0 1.3125rem;
@@ -1533,6 +1888,23 @@ dl.uix-list-abreast dd {
 /* ======================================================
    <!-- Striking -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-striking-msg i:first-child {
   margin-right: auto;
   margin-left: 0.5rem;
@@ -1572,6 +1944,23 @@ dl.uix-list-abreast dd {
 /* ======================================================
    <!-- Table -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Generic
  * 2. Table Sorter
@@ -1696,12 +2085,46 @@ table.uix-table thead th.uix-t-l,
 /* ======================================================
    <!-- ToolTip -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 .uix-tooltip > div {
   text-align: right;
 }
 /* ======================================================
    <!-- Vertical Menu (RTL) -->
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /*
  * 1. Primary Menu
  * 2. Sub Menu (Using WordPress default class name )
@@ -1812,6 +2235,23 @@ table.uix-table thead th.uix-t-l,
 /* ====================================================== 
    <!-- WordPress Core ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /* Note: Contains Gutenberg's block style correction. */
 /*
  * 1. General
@@ -2076,6 +2516,23 @@ ul.wp-block-gallery.aligncenter .blocks-gallery-item figure {
 /* ====================================================== 
    <!-- WordPress Blocks ( Do not use prefix "uix-" ) -->              
 /* ====================================================== */
+:root {
+  /* COLOR PALETTE  */
+  --uix-placeholder-text-color: #E6E6E8;
+  --uix-highlight-color1: #CE3A3E;
+  --uix-highlight-color2: #DE510E;
+  --uix-primary-text-color: #212121;
+  --uix-primary-link-color: #474747;
+  --uix-primary-link-hover-color: #212121;
+  --uix-heading-text-color: #212121;
+  --uix-sub-text-color: #AEAEAE;
+  --uix-dividing-line-color: #DCDCDC;
+  --uix-btn-gradient-color1: #CE3A3E;
+  --uix-btn-gradient-color2: #C04645;
+  --uix-btn-gradient-color3: #DE510E;
+  --uix-primary-bg-color: transparent;
+}
+
 /* Note: Contains Gutenberg's block style correction. */
 /*
 

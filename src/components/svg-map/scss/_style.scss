@@ -1,8 +1,9 @@
 /* ====================================================== 
    <!-- SVG Map -->     
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. World Map
  * 2. China Map
@@ -21,7 +22,7 @@
 		height: 100%;
 	}
 	path {
-		fill: rgba($highlight-color1, .2);
+		fill: rgba(var(--uix-highlight-color1), .2);
 		stroke: #ffffff;
 		opacity: 1;
 		stroke-opacity: 1;
@@ -33,14 +34,14 @@
 		@include transition-default();
 		
 		&:hover {
-			fill: rgba($highlight-color1, .3);
+			fill: rgba(var(--uix-highlight-color1), .3);
 		}
 	}
 
 
 	text {
 		font-size: 3px;
-		fill: $primary-text-color;
+		fill: var(--uix-primary-text-color);
 		display: none;
 		@include transition-default();
 		text-anchor: middle;
@@ -87,19 +88,19 @@
 	}
 	polygon {
 		cursor: pointer;
-		fill: rgba($highlight-color1, .2);
+		fill: rgba(var(--uix-highlight-color1), .2);
 		stroke: #fff;
 		stroke-width: 1;
 		@include transition-default();
 		
 		&:hover {
-			fill: rgba($highlight-color1, .3);
+			fill: rgba(var(--uix-highlight-color1), .3);
 		}
 	}
 
 	text {
 		font-size: 5px;
-		fill: $primary-text-color;
+		fill: var(--uix-primary-text-color);
 		display: none;
 		@include transition-default();
 		text-anchor: middle;
@@ -118,8 +119,8 @@
 	}
 
 	circle {
-		fill: rgba($highlight-color2, 1);
-		stroke: rgba($highlight-color2, .2);
+		fill: rgba(var(--uix-highlight-color2), 1);
+		stroke: rgba(var(--uix-highlight-color2), .2);
 		stroke-width: 7;
 		r: 6;
 		animation: uix-cssAnim--map-dot ease 1s infinite;

@@ -1,12 +1,15 @@
 
 $control-text-color: #888;
+$control-placeholder-color: #a3a3a3;
 $control-sub-color: #dce4e8;
-$control-focus-color: $primary-text-color;
-$control-focus-bordercolor: $primary-text-color;
+$control-focus-color: var(--uix-primary-text-color);
+$control-focus-bordercolor: var(--uix-primary-text-color);
 $control-focus-bordercolor2: transparent;
 $control-padding-side: 0.546875rem;
 $control-padding-height: 0.546875rem;
 $control-icon-placeholder: 2rem;
+
+
 
 
 @mixin select-arrow( $top, $right ){

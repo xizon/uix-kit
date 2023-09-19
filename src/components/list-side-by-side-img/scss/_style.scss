@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Side by Side List With Photo -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 .uix-list-abreast-img {
 
 	.uix-list-abreast-img__item {
@@ -22,7 +23,7 @@
 			padding-left: 1.5rem;
 
 			em {
-				color: $sub-text-color;
+				color: var(--uix-sub-text-color);
 				display: inline-block;
 				margin-right: 1rem;
 			}

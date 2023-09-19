@@ -26,10 +26,10 @@
 	}
 	
 	&.uix-entry__box--mark a {
-		color: $highlight-color1;
+		color: var(--uix-highlight-color1);
 
 		&:hover {
-			color: $highlight-color2;
+			color: var(--uix-highlight-color2);
 		}
 	}
 	
@@ -87,7 +87,7 @@
     pre:not(.uix-precode) {
         background: #fff;
         border: 1px solid #d9d9d9;
-        border-left: 5px solid $highlight-color1;
+        border-left: 5px solid var(--uix-highlight-color1);
         padding: .3em .7em;   
 		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
     }
@@ -189,10 +189,10 @@ ul.uix-entry__meta {
 		}
 
 		a {
-			color: $highlight-color1;
+			color: var(--uix-highlight-color1);
 
 			&:hover {
-				color: $highlight-color2;
+				color: var(--uix-highlight-color2);
 			}
 		}
 

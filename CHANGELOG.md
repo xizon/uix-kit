@@ -1,5 +1,13 @@
 # Changelog
 
+#### = 5.0.5 (September 19, 2023) =
+
+* Tweak: Remove `THREE.Geometry()` example code.
+* Tweak: Optimizing SCSS files.
+* Tweak: The custom select control supports screen position adaptation.
+* Tweak: Parallax and 3D script upgrades.
+
+
 
 #### = 5.0.2 (March 23, 2023) =
 

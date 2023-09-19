@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Badges -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 
 /*
@@ -35,7 +36,7 @@
 		display: table;
 		margin: 0 auto;
 		margin-bottom: 3rem;
-		@include border-gradient( $btn-gradient-color1, $btn-gradient-color2, 15px, 'to bottom', #fff );
+		@include border-gradient( var(--uix-btn-gradient-color1), var(--uix-btn-gradient-color2), 15px, 'to bottom', #fff );
 		@include transition-default();
 
 
@@ -68,7 +69,7 @@
 			height: 20px;
 			line-height: 20px;
 			border-radius: 50%;
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			color: #fff;
 		}
 
@@ -96,11 +97,11 @@
 
 @keyframes uix-cssAnim--dotRippleTiny {
     0% {
-		box-shadow: 0 0 0 3px rgba($highlight-color1, 0.4),
-					0 0 0 5px rgba($highlight-color1, 0.1);
+		box-shadow: 0 0 0 3px rgba(var(--uix-highlight-color1), 0.4),
+					0 0 0 5px rgba(var(--uix-highlight-color1), 0.1);
     }
     100% {
-		box-shadow: 0 0 0 7px rgba($highlight-color1, 0),
-					0 0 0 12px rgba($highlight-color1, 0);
+		box-shadow: 0 0 0 7px rgba(var(--uix-highlight-color1), 0),
+					0 0 0 12px rgba(var(--uix-highlight-color1), 0);
     }
 }

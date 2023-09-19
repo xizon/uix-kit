@@ -1,8 +1,9 @@
 /* ======================================================
     <!-- Tabs -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Tab Normal Effect
  * 2. Tab Rotation Effect
@@ -38,7 +39,7 @@
 				top: 0;
 				display: block;
 				content: '';
-				background: $primary-text-color;
+				background: var(--uix-primary-text-color);
 				height: 100%;
 				width: $maker-w;
 				z-index: 1;
@@ -205,7 +206,7 @@
 					}
 
 					&.is-active > a {
-						background: $primary-text-color;
+						background: var(--uix-primary-text-color);
 						color: #fff;
 					}
 

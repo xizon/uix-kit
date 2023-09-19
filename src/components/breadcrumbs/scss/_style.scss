@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Breadcrumbs -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 $crumbs-back       : #fff;
 $crumbs-line-color : #EEEEEE;
@@ -34,7 +35,7 @@ $crumbs-size       : 27px;
 				padding: 0 #{$crumbs-size*1} 0 #{$crumbs-size*2};
 				position: relative;
 				text-decoration: none;
-				color: $primary-text-color;
+				color: var(--uix-primary-text-color);
 				height: #{$crumbs-size*2};
 				line-height: #{$crumbs-size*2};
 
@@ -103,11 +104,11 @@ $crumbs-size       : 27px;
 
 				a {
 
-					background: $highlight-color1;
+					background: var(--uix-highlight-color1);
 					color: #fff;
 
 					&::after {
-						border-left-color: $highlight-color1;
+						border-left-color: var(--uix-highlight-color1);
 					}
 				}
 			}

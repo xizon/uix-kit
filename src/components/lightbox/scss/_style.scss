@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Cutom Light Box -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Initialization module
  * 2. Click to enlarge image in light box
@@ -304,7 +305,7 @@ $lb-radius: 3px;
 
 				> div {
 					padding: 1.5rem;
-					color: $sub-text-color;
+					color: var(--uix-sub-text-color);
 					font-size: 0.75rem;
 
 					img {

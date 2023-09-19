@@ -1,8 +1,9 @@
 /* ======================================================
     <!-- Flexslider (Third-party plugin) -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /*
  * 1. Thumbnail ControlNav Pattern
@@ -50,12 +51,12 @@
 
 	&::-webkit-scrollbar {
 		height: 5px;
-		background-color: $highlight-color1;
+		background-color: var(--uix-highlight-color1);
 	}
 
 	&::-webkit-scrollbar-thumb {
 		border-radius: 0px;
-		background-color: $highlight-color1;
+		background-color: var(--uix-highlight-color1);
 	}
 
 	ul {
@@ -527,7 +528,7 @@ ol.uix-flexslider__control-paging {
 		display: block;
 		width: 0;
 		height: 100%;
-		background: $highlight-color1;
+		background: var(--uix-highlight-color1);
 		@include transition-default();
 	}
 

@@ -27,7 +27,7 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 	
 	
 	module.PARALLAX               = module.PARALLAX || {};
-    module.PARALLAX.version       = '0.0.8';
+    module.PARALLAX.version       = '0.0.9';
 	module.PARALLAX.documentReady = function( $ ) {
 
 		let	windowWidth        = window.innerWidth,
@@ -173,6 +173,10 @@ export const PARALLAX = ( ( module, $, window, document ) => {
 						if ( $this.find( '.uix-v-align--absolute' ).height() >= curImgH ) {
 							$this.find( '.uix-v-align--absolute' ).addClass( 'uix-v-align--relative' );
 							$curImg.hide();	
+
+                            $this.css( {
+                                'height': 'auto'
+                            } );	
 						}
 
 					}

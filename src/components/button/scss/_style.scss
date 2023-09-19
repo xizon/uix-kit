@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Button -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 /*
  * 1. Common button styles
  * 2. Borders
@@ -60,7 +61,7 @@ $button-class-margin-b: 1rem;
 		box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05) !important;
 		pointer-events: none !important;
 		user-select: none !important;
-		color: $primary-link-color !important;
+		color: var(--uix-primary-link-color) !important;
 	}
 
 
@@ -390,10 +391,10 @@ $button-class-margin-b: 1rem;
 /* Your Custom colors for buttons */
 
 .uix-btn__bg--primary {
-	border-color: $btn-gradient-color1;
-	background-color: $btn-gradient-color1;
-	background-image: linear-gradient(to right, $btn-gradient-color1 0%, $btn-gradient-color2 20%, $btn-gradient-color3 100%);
-	@include outer-shadow( 'highlight', $highlight-color1 );
+	border-color: var(--uix-btn-gradient-color1);
+	background-color: var(--uix-btn-gradient-color1);
+	background-image: linear-gradient(to right, var(--uix-btn-gradient-color1) 0%, var(--uix-btn-gradient-color2) 20%, var(--uix-btn-gradient-color3) 100%);
+	@include outer-shadow( 'highlight', var(--uix-highlight-color1) );
 	color: #fff;
 
 
@@ -402,13 +403,13 @@ $button-class-margin-b: 1rem;
 		border-color: #DADCDF;
 		background-color: transparent;
 		background-image: linear-gradient(to right, #fff 0%, #fff 0%, #fff 0%);
-		color: $btn-gradient-color1;
+		color: var(--uix-btn-gradient-color1);
 		box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
 
 		&:hover {
 			background-color: #F8F8F8;
             background-image: linear-gradient(to right, #F8F8F8 0%, #F8F8F8 20%, #F8F8F8 100%);
-            color: $btn-gradient-color1;
+            color: var(--uix-btn-gradient-color1);
 		}
 	}
 }
@@ -426,12 +427,12 @@ $button-class-margin-b: 1rem;
 	&.is-fill-white {
 		border-color: #DADCDF;
 		background-color: #fff;
-		color: $primary-link-color;
+		color: var(--uix-primary-link-color);
 	}
 
 	&:hover {
 		background-color: #F8F8F8;
-		color: $primary-link-color;
+		color: var(--uix-primary-link-color);
 	}
 
 
@@ -443,12 +444,12 @@ $button-class-margin-b: 1rem;
     border-color: transparent;
     background-color: transparent;
     box-shadow: none;
-    color: $btn-gradient-color1;
+    color: var(--uix-btn-gradient-color1);
 
 	
 	&:hover {
 		background-color: #F8F8F8;
-        color: $btn-gradient-color1;
+        color: var(--uix-btn-gradient-color1);
 	}
 }
 
@@ -456,12 +457,12 @@ $button-class-margin-b: 1rem;
     border-color: transparent;
     background-color: transparent;
     box-shadow: none;
-    color: $primary-link-color;
+    color: var(--uix-primary-link-color);
 
 	
 	&:hover {
 		background-color: #F8F8F8;
-        color: $primary-link-color;
+        color: var(--uix-primary-link-color);
 	}
 }
 

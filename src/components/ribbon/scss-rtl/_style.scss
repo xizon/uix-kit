@@ -1,10 +1,11 @@
 /* ======================================================
    <!-- Ribbon -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
-
-$ribbon-bg: $highlight-color1;
+$ribbon-bg: var(--uix-highlight-color1);
 $ribbon-w: 40px;
 
 

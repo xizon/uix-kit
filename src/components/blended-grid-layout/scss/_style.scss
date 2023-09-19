@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Blended Grid Layout -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 @mixin blendedGridGenerate( $classname: '.uix-blended-grid', $gap: 15px, $height: 100vh, $height-mobile: 40vh ) {
 	// @include blendedGridGenerate( '.uix-blended-grid', 15px, 100vh, 40vh );

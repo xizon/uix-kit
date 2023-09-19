@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Form Progress -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 $indicator-desc-w: 60px;
 
@@ -28,7 +29,7 @@ $indicator-desc-w: 60px;
 			width: 0;
 			height: 100%;
 			transition: all 0.5s ease-in-out;
-			background-color: $highlight-color1;
+			background-color: var(--uix-highlight-color1);
 		}
 	}
 
@@ -50,7 +51,7 @@ $indicator-desc-w: 60px;
 
 		> span {
 			font-size: 0.75rem;
-			color: $sub-text-color;
+			color: var(--uix-sub-text-color);
 			display: inline-block;
 			position: absolute;
 			background: #fff;
@@ -63,10 +64,10 @@ $indicator-desc-w: 60px;
 
 		&.is-active {
 			animation: uix-cssAnim--indicatorOK .5s forwards;
-			border-color: $highlight-color1;
+			border-color: var(--uix-highlight-color1);
 		}
 		&.current {
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 		}
 
 

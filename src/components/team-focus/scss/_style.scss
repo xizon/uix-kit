@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Team Focus -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 $team-info-width: 300px;
 
 .uix-team-focus__info {
@@ -37,7 +38,7 @@ $team-info-width: 300px;
 			display: block;
 			height: 3px;
 			width: 35px;
-			background: $highlight-color1;
+			background: var(--uix-highlight-color1);
 			margin: .5rem 0;
 		}
 	}
@@ -88,7 +89,7 @@ $team-info-width: 300px;
 
 			img {
 				transform: scale(1.3);
-				@include outer-shadow( 'highlight', $highlight-color1 );
+				@include outer-shadow( 'highlight', var(--uix-highlight-color1) );
 			}
 
 		}

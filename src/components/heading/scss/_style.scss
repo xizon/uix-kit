@@ -1,8 +1,9 @@
 /* ======================================================
    <!-- Heading -->
 /* ====================================================== */
-@import '@uixkit/core/_global/scss/_variable-and-mixin.scss';
-
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
 
 /*
  * 1. Header Pinlines
@@ -38,7 +39,7 @@
 			position: absolute;
 			top: 50%;
 			height: 1px;
-			background: $primary-text-color;
+			background: var(--uix-primary-text-color);
 			width: 99999px;
 		}
 
@@ -136,7 +137,7 @@
 
 		&::after {
 			content: attr(data-text);
-			color: $sub-text-color;
+			color: var(--uix-sub-text-color);
 			font-size: 0.35em; /* Don't use "REM" */
 			display: block;
 			font-weight: 900;
@@ -169,7 +170,7 @@
 				margin-left: 1rem;
 			}
 			box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1),
-				0 -4px 0px 0px $highlight-color1;
+				0 -4px 0px 0px var(--uix-highlight-color1);
 
 
 		}
@@ -187,7 +188,7 @@
  */
 .uix-heading--fill {
 	user-select: none;
-	color: $primary-text-color;  /* Fallback: assume this color ON TOP of image */
+	color: var(--uix-primary-text-color);  /* Fallback: assume this color ON TOP of image */
 	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) no-repeat;
 	background-size: cover;
 
@@ -251,7 +252,7 @@
 
     &::after {
         content: " ";
-        background: linear-gradient(to right, $highlight-color1 0%,$highlight-color2 100%);
+        background: linear-gradient(to right, var(--uix-highlight-color1) 0%,var(--uix-highlight-color2) 100%);
         height: 3px;
         position: relative;
         top: 0;
