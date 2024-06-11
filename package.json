@@ -94,5 +94,6 @@
     "arrowParens": "avoid",
     "requirePragma": false,
     "proseWrap": "preserve"
-  }
+  },
+  "dependencies": {}
 }
