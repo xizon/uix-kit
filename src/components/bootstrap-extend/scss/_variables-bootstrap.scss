@@ -1,0 +1,70 @@
+// ###############################################################################
+// ########################### Bootstrap 5  #######################################
+// ###############################################################################
+
+
+
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #171b1f !default;
+$black: #000 !default;
+
+
+$primary: #3162B2;
+$secondary: #3c424e;
+$success: #09ad95;
+$info: #1170e4;
+$warning: #f7b731;
+$danger: #e82646;
+$light: $gray-100 !default;
+$dark: $gray-900 !default;
+
+
+// Generate contextual modifier classes for colorizing the alert
+$theme-colors: ("primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark ) !default;
+
+    
+$theme-colors-dark: ("primary": shade-color($primary, 50%),
+    "secondary": shade-color($secondary, 50%),
+    "success": shade-color($success, 50%),
+    "info": shade-color($info, 50%),
+    "warning": shade-color($warning, 50%),
+    "danger": shade-color($danger, 50%),
+    "light": $gray-900,
+    "dark": mix($gray-900, $black) ) !default;
+
+
+
+$bg-opacity: (
+    10: .1,
+    25: .25,
+    50: .5,
+    75: .75,
+    100: 1
+);
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+    ) !default;
+
+$border-width:                1px !default;
+$border-color:                $gray-300 !default;

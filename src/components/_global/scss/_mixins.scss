@@ -286,3 +286,212 @@
     }
 }
   
+// ###############################################################################
+// ######################### Bootstrap 5 Extend ###################################
+// ###############################################################################
+
+// alert-variant-mixin
+///////////////////////////////////////////////////////////////// 
+@mixin alert-variant($background, $border, $color, $linkcolor) {
+    color: #{$color};
+    background-color: #{$background};
+    border-color: #{$border};
+
+    hr {
+        border-block-start-color: #{$color};
+        opacity: 0.2;
+    }
+
+    .alert-link {
+        color: #{$linkcolor};
+    }
+}
+
+// list group
+///////////////////////////////////////////////////////////////// 
+@mixin list-group-item-variant($background, $border, $color, $linkcolor) {
+    color: #{$color} !important;
+    background-color: #{$background};
+
+    &.list-group-item-action {
+
+        &:hover,
+        &:focus {
+            color: #{$color};
+            background-color: #{$linkcolor};
+        }
+
+        &.active {
+            color: #{$color};
+            background-color: #{$linkcolor};
+            border-color: #{$border};
+        }
+    }
+
+}
+
+
+// spacer
+///////////////////////////////////////////////////////////////// 
+@mixin generate-spacer($utility, $breakpoint-name: "") {
+    $values: map-get($utility, "values");
+    $properties: map-get($utility, "property");
+    $property-class: if(map-has-key($utility, class), map-get($utility, "class"), nth($properties, 1));
+
+    @each $key, $value in $values {
+
+        @if $breakpoint-name == "" {
+            .#{$property-class}-#{$key} {
+
+                @each $property in $properties {
+                    #{$property}: $value !important;
+                }
+
+            }
+        } @else {
+            .#{$property-class}-#{$breakpoint-name}-#{$key} {
+
+                @each $property in $properties {
+                    #{$property}: $value !important;
+                }
+
+            } 
+        }
+
+    }
+}
+
+
+// spacer (gap to margin)
+// Compatible with older versions of tablet or mobile browsers
+///////////////////////////////////////////////////////////////// 
+
+// Usage:
+
+// @each $key, $utility in $spacer-utilities {
+//     @if type-of($utility)=="map" {
+//         @include generate-spacer-degrade($utility);
+//     }
+// }
+
+// @each $bp-key, $bp-value in $grid-breakpoints {
+//     @media (min-width: #{$bp-value}) {
+//         @each $key, $utility in $spacer-utilities {
+//             @if type-of($utility)=="map" {
+//                 @include generate-spacer-degrade($utility, $bp-key);
+
+//             }
+//         }
+//     }
+// }
+
+
+@mixin generate-spacer-degrade($utility, $breakpoint-name: "") {
+    $values: map-get($utility, "values");
+    $properties: map-get($utility, "property");
+    $property-class: if(map-has-key($utility, class), map-get($utility, "class"), nth($properties, 1));
+
+    @each $key, $value in $values {
+
+        @if $breakpoint-name == "" {
+            @if (str-index($property-class, "gap") and str-index($property-class, "row-gap") == null and str-index($property-class, "column-gap") == null ) {
+                .#{$property-class}-#{$key} {
+
+                    @each $property in $properties {
+                        gap: 0 !important;
+
+                        > * {
+                            margin-right: $value !important;
+                            margin-bottom: $value !important;
+                        }
+                    }
+
+                }
+            }
+
+            @if (str-index($property-class, "row-gap")) {
+                .#{$property-class}-#{$key} {
+
+                    @each $property in $properties {
+                        row-gap: 0 !important;
+
+                        > * {
+                            margin-bottom: $value !important;
+                        }
+                    }
+
+                }
+            }
+
+            @if (str-index($property-class, "column-gap")) {
+                .#{$property-class}-#{$key} {
+
+                    @each $property in $properties {
+                        column-gap: 0 !important;
+
+                        > * {
+                            margin-right: $value !important;
+                        }
+                    }
+
+                }
+            }
+
+
+            
+
+            
+        } @else {
+            @if (str-index($property-class, "gap") and str-index($property-class, "row-gap") == null and str-index($property-class, "column-gap") == null) {
+                .#{$property-class}-#{$breakpoint-name}-#{$key} {
+
+                    @each $property in $properties {
+                        gap: 0 !important;
+
+                        > * {
+                            margin-right: $value !important;
+                            margin-bottom: $value !important;
+                        }
+                    }
+
+                } 
+            }
+
+            @if (str-index($property-class, "row-gap")) {
+                .#{$property-class}-#{$breakpoint-name}-#{$key} {
+
+                    @each $property in $properties {
+                        row-gap: 0 !important;
+
+                        > * {
+                            margin-bottom: $value !important;
+                        }
+                    }
+
+                } 
+            }
+
+            @if (str-index($property-class, "column-gap")) {
+                .#{$property-class}-#{$breakpoint-name}-#{$key} {
+
+                    @each $property in $properties {
+                        column-gap: 0 !important;
+
+                        > * {
+                            margin-right: $value !important;
+                        }
+                    }
+
+                } 
+            }
+
+
+
+        }
+    
+
+
+    }
+}
+
+

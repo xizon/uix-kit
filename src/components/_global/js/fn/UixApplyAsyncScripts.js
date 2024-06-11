@@ -37,8 +37,10 @@
  */
 import { UixModuleInstance } from '@uixkit/core/_global/js';
 
-( function ( $ ) {
-    'use strict';
+
+export const UixApplyAsyncScripts = ( ( $ ) => {
+	'use strict';
+
     $.fn.UixApplyAsyncScripts = function( options ) {
  
 		// This is the easiest way to have default options.
@@ -147,4 +149,5 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
  
     };
  
-}( jQuery ));
+})( jQuery );
+

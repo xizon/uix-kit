@@ -1,5 +1,17 @@
 # Changelog
 
+#### = 5.1.0 (June 11, 2024) =
+
+* New: Added Bootstrap 24-column grid extension (based on SASS).
+* New: Added a demo page `Bootstrap 24 Grid`.
+* New: Upgraded embedded verification strategy for TypeScript and React.
+* Tweak: Optimized SASS tools.
+* Tweak: Upgrade Nodejs-related libraries to the latest version.
+* Tweak: Modify the test command of TS for `package.json`.
+
+
+
+
 #### = 5.0.5 (September 19, 2023) =
 
 * Tweak: Remove `THREE.Geometry()` example code.

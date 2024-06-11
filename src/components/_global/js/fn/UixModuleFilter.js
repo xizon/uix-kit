@@ -43,9 +43,9 @@ window.MAIN = null;
 
 import { UixModuleInstance } from '@uixkit/core/_global/js';
 
-( function ( $ ) {
+export const UixModuleFilter = ( ( $ ) => {
 	'use strict';
-	
+
     $.fn.UixModuleFilter = function( options ) {
  
         // This is the easiest way to have default options.
@@ -141,10 +141,6 @@ import { UixModuleInstance } from '@uixkit/core/_global/js';
 		});
  
     };
- 
-}( jQuery ));
-
-
-
-
+	
+})( jQuery );
 

@@ -25,7 +25,7 @@ The generated core file in the dist directory can be used separately in any webs
 
 ---
 
-- [React Version](https://github.com/xizon/poemkit)
+- [React Version - Native scaffolding for reference](https://github.com/xizon/poemkit)
 
 
 ---
@@ -106,8 +106,8 @@ uix-kit/
 │   └── grid/ ----------------------------- # PSD grid system
 ├── src/
 │   ├── components/
-│   │   ├── _app-load.js  ------------- # Import your modules to be used
-│   │   ├── _app-load-rtl.js  --------- # Import your RTL modules to be used
+│   │   ├── _app-load.ts  ------------- # Import your modules to be used
+│   │   ├── _app-load-rtl.ts  --------- # Import your RTL modules to be used
 │   │   ├── _global/ ------------------ # Generic modules
 │   │   ├── _main/  ------------------- # Customization site file directory (for secondary or new website development)
 │   │   ├── _third-party-plugins/  ---- # Third-party plugins
@@ -137,7 +137,7 @@ uix-kit/
 * Control scope with BEM naming, so the core Uix Kit project is not in conflict with the other projects
 * Automatically generate a table of contents for each module comment of the name
 * Each module consists of SASS / SCSS, JavaScript and HTML files
-* Make a foundation for the React architecture
+* Embedded verification strategy for **TypeScript** and **React**. (Such scripts are embedded in the page, not the entire project)
 * Compatible with Bootstrap 5.x (You could also remove Bootstrap's stylesheets)
 * Provides a common web page components and layouts
 * The complete directory of examples in order to develop a responsive website independently without Node.js dev environment
@@ -225,19 +225,12 @@ But there is no way to run PHP or get AJAX request on the pages. You need to vis
 
 
 
-**(Optional)** Debug application. It can be checked separately as TypeScript without compiling and packaging behavior.
-
-```sh
-$ npm run check
-```
-
-
 ### Note:
  
 
 **a) How to use modules?**
 
-You could custom modules of what to import in `src/components/_app-load.js` and `src/components/_app-load-rtl.js`. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the `webpack.config.js` according to the imported modules you want.
+You could custom modules of what to import in `src/components/_app-load.ts` and `src/components/_app-load-rtl.ts`. Because the modules are imported too much, you need to wait at least 5.5 seconds (default value). You can set the compilation wait time in the `webpack.config.js` according to the imported modules you want.
 
 
 **b) Site Info Configuration**
@@ -437,12 +430,12 @@ Here’s a sample custom module directory structure, I’ve included some exampl
 uix-kit/
 ├── src/
 │   ├── components/
-│   │     ├── _app-load.js
-│   │     ├── _app-load-rtl.js
+│   │     ├── _app-load.ts
+│   │     ├── _app-load-rtl.ts
 │   │     └── demo-module/
 │   │              ├── scss/*.scss
 │   │              ├── scss-rtl/*.scss
-│   │              ├── js/*.js
+│   │              ├── js/*.(js|ts|tsx)
 │   │              └── *.html
 └──
 ```
@@ -551,7 +544,7 @@ export const DEMO_MODULE = ( ( module, $, window, document ) => {
 
 
 
-**Step 4.** So far, to dynamically import the module you just created in `src/components/_app-load.js`.  The simplest version directly imports the default:
+**Step 4.** So far, to dynamically import the module you just created in `src/components/_app-load.ts`.  The simplest version directly imports the default:
 
 
 ```sh
@@ -559,7 +552,7 @@ import DEMO_MODULE from '@uixkit/core/demo-module/js';
 ```
 
 
-**Step 4-2  (Optional).** If you need to support RTL, in `src/components/_app-load-rtl.js`.  like this:
+**Step 4-2  (Optional).** If you need to support RTL, in `src/components/_app-load-rtl.ts`.  like this:
 
 
 ```sh
@@ -674,7 +667,7 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 
 ## Supported development environment
 
-- React 17 +
+- React 18 +
 - TypeScript 4.x.x + 
 - Babel 7.x.x + 
 - Webpack 5.x.x

@@ -26,6 +26,8 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<any> {
   href?: string;
 };
 
+const defaultStr: string = 'Default Button';
+
 
 const styles: ButtonStylesConfig = {
   info: {
@@ -61,11 +63,11 @@ export default function Button(props: ButtonProps) {
 
 {href ? (
         <a style={styles[bgColor!] || {}} href={href} {...attributes}>
-          {btnName || 'Default'}
+          {btnName || defaultStr}
         </a>
       ) : (
         <button type="button" style={styles[bgColor!] || {}} {...attributes}>
-          {btnName || 'Default'}
+          {btnName || defaultStr}
         </button>
       )}
 

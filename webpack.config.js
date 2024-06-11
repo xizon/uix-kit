@@ -16,6 +16,9 @@ const json                       = JSON.parse(fs.readFileSync('./package.json'))
 const webpackDevMiddleware       = require('webpack-dev-middleware');
 const WebpackConcatPlugin        = require('webpack-concat-files-plugin');
 
+// typescript cheker
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 const colors = {
     Reset: "\x1b[0m",
     Bright: "\x1b[1m",
@@ -195,7 +198,7 @@ class ReplacePlaceholderForFile {
 		// Specify the event hook to attach to
 		compiler.hooks.done.tap('MyPluginCompiledFunction', (compilation) => {
 
-			const coreJSsFile = globs.pathCore + '/_app-load.js';
+			const coreJSsFile = globs.pathCore + '/_app-load.ts';
 			if ( fs.existsSync( coreJSsFile ) ) {
 				fs.readFile( coreJSsFile, 'utf8', function( err, content ) {
 					if ( err ) throw err;
@@ -340,10 +343,10 @@ const webpackConfig = {
         'hammerjs': 'Hammer'
     },
     entry: {
-        'uix-kit': './' + globs.build + '/index.js',
-        'uix-kit.min': './' + globs.build + '/index.js',
-        'uix-kit-rtl': './' + globs.build + '/index-rtl.js',
-        'uix-kit-rtl.min': './' + globs.build + '/index-rtl.js',
+        'uix-kit': './' + globs.build + '/index.ts',
+        'uix-kit.min': './' + globs.build + '/index.ts',
+        'uix-kit-rtl': './' + globs.build + '/index-rtl.ts',
+        'uix-kit-rtl.min': './' + globs.build + '/index-rtl.ts',
     },
     output: {
         path: path.resolve(__dirname, './' + globs.dist + '/js' ),
@@ -396,6 +399,7 @@ const webpackConfig = {
                 exclude: path.resolve(__dirname, './node_modules'),
                 loader: "json-loader"       
             },
+
             {
 				test: /\.(js|jsx|ts|tsx)$/,
                 loader: 'babel-loader',
@@ -614,6 +618,16 @@ webpackConfig.plugins.push(
 		filename: '../js/[file].map'
 	})
 );
+
+
+// typescript checker
+webpackConfig.plugins.push(
+	new ForkTsCheckerWebpackPlugin()
+);
+
+
+
+
 
 
 
