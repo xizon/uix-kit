@@ -112,8 +112,8 @@ export const THREE_IMAGE_TRANSITION = ( ( module, $, window, document ) => {
 				// Immediately use the texture for material creation
 				// Create a texture loader so we can load our image file
 				const imgs = [
-					'https://placekitten.com/1400/550',
-					'https://placekitten.com/1410/550'
+					'https://placehold.co/1400/550/000000/png',
+					'https://placehold.co/1410/550/000000/png'
 				];
 
 				const loader = new THREE.TextureLoader();

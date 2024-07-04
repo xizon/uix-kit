@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  5.1.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  June 11, 2024
+ * ## Last Update         :  July 4, 2024
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -41922,7 +41922,7 @@ var THREE_GALLERY = function (module, $, window, document) {
 
         // Immediately use the texture for material creation
         // Create a texture loader so we can load our image file
-        var imgs = ['https://placekitten.com/2100/2100', 'https://placekitten.com/2200/2200', 'https://placekitten.com/2300/2300', 'https://placekitten.com/2400/2400', 'https://placekitten.com/2500/2500', 'https://placekitten.com/2000/2000', 'https://placekitten.com/1600/1600', 'https://placekitten.com/1650/1650', 'https://placekitten.com/1670/1670', 'https://placekitten.com/1680/1680', 'https://placekitten.com/1700/1700'];
+        var imgs = ['https://placehold.co/2100/2100/000000/png', 'https://placehold.co/2200/2200/000000/png', 'https://placehold.co/2300/2300/000000/png', 'https://placehold.co/2400/2400/000000/png', 'https://placehold.co/2500/2500/000000/png', 'https://placehold.co/2000/2000/000000/png', 'https://placehold.co/1600/1600/000000/png', 'https://placehold.co/1650/1650/000000/png', 'https://placehold.co/1670/1670/000000/png', 'https://placehold.co/1680/1680/000000/png', 'https://placehold.co/1700/1700/000000/png'];
 
         //A loader for loading all images from array.
         var loader = new THREE.TextureLoader();
@@ -42186,7 +42186,7 @@ var THREE_IMAGE_TRANSITION = function (module, $, window, document) {
 
         // Immediately use the texture for material creation
         // Create a texture loader so we can load our image file
-        var imgs = ['https://placekitten.com/1400/550', 'https://placekitten.com/1410/550'];
+        var imgs = ['https://placehold.co/1400/550/000000/png', 'https://placehold.co/1410/550/000000/png'];
         var loader = new THREE.TextureLoader();
         loader.crossOrigin = 'anonymous';
         var texture1 = loader.load(imgs[0]),
@@ -45509,7 +45509,7 @@ var THREE_SPHERE_THREE = function (module, $, window, document) {
         // material, we create the material when the texture is loaded
         var loader = new THREE.TextureLoader();
         loader.crossOrigin = 'anonymous';
-        var texture = loader.load('https://placekitten.com/1650/1650'),
+        var texture = loader.load('https://placehold.co/1650/1650/FF6600/jpg'),
           material = new THREE.MeshBasicMaterial({
             map: texture
           });

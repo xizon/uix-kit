@@ -116,17 +116,17 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 				// Immediately use the texture for material creation
 				// Create a texture loader so we can load our image file
 				const imgs = [
-					'https://placekitten.com/2100/2100',
-					'https://placekitten.com/2200/2200',
-					'https://placekitten.com/2300/2300',
-					'https://placekitten.com/2400/2400',
-					'https://placekitten.com/2500/2500',
-					'https://placekitten.com/2000/2000',
-					'https://placekitten.com/1600/1600',
-					'https://placekitten.com/1650/1650',
-					'https://placekitten.com/1670/1670',
-					'https://placekitten.com/1680/1680',
-					'https://placekitten.com/1700/1700'
+					'https://placehold.co/2100/2100/000000/png',
+					'https://placehold.co/2200/2200/000000/png',
+					'https://placehold.co/2300/2300/000000/png',
+					'https://placehold.co/2400/2400/000000/png',
+					'https://placehold.co/2500/2500/000000/png',
+					'https://placehold.co/2000/2000/000000/png',
+					'https://placehold.co/1600/1600/000000/png',
+					'https://placehold.co/1650/1650/000000/png',
+					'https://placehold.co/1670/1670/000000/png',
+					'https://placehold.co/1680/1680/000000/png',
+					'https://placehold.co/1700/1700/000000/png'
 				];
 
 

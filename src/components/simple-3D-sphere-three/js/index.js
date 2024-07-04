@@ -102,7 +102,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
-				const texture = loader.load( 'https://placekitten.com/1650/1650' ),
+				const texture = loader.load( 'https://placehold.co/1650/1650/FF6600/jpg' ),
 					  material = new THREE.MeshBasicMaterial( { map: texture } );
 
 				// parent
