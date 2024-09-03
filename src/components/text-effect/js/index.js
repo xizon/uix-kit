@@ -22,16 +22,7 @@
 
 
 import {
-    templateUrl,
-    homeUrl,
-    ajaxUrl,
-    UixBrowser,
     UixModuleInstance,
-    UixGUID,
-    UixMath,
-    UixCssProperty,
-    UixDebounce,
-    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixTextEff from '@uixkit/core/text-effect/js/fn/text-anime';
 

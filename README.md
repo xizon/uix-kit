@@ -303,7 +303,7 @@ $ sudo npm rebuild node-sass
 	============================================= -->
 
 	<!-- Basic  -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=5.0.2" media="all"/>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=5.2.3" media="all"/>
 	<link rel="stylesheet" href="assets/css/video.min.css?ver=7.4.1" media="all"/>
 
 

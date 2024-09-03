@@ -1,0 +1,269 @@
+/* ======================================================
+   <!-- Toast -->
+/* ====================================================== */
+@import '@uixkit/core/_global/scss/mixins';
+@import '@uixkit/core/_global/scss/functions';
+@import '@uixkit/core/_global/scss/variables';
+
+.uix-toasts__wrapper {
+    --uix-toast-zindex: 90001;
+    --uix-toast-border-radius: 0.375rem;
+    --uix-toast-offset-top: 35px;
+    --uix-toast-offset-bottom: 15px;
+    --uix-toast-offset-bothsides: 15px;
+    --uix-toast-container-gap: 0.5rem;
+    --uix-toast-container-width: 350px;
+    --uix-toast-progress-height: 5px;
+    --uix-toast-progress-bg: rgba(255,255,255,.6);
+    
+    
+
+
+    width: var(--uix-toast-container-width);
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: var(--uix-toast-zindex);
+    pointer-events: none;
+    transition: .1s ease-in-out;
+
+    &--bottom-left {
+        left: var(--uix-toast-offset-bothsides);
+    }
+
+    &--bottom-right {
+        left: auto;
+        right: var(--uix-toast-offset-bothsides);
+    }
+
+    &--bottom-center {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--top-left {
+        left: var(--uix-toast-offset-bothsides);
+        bottom: auto;
+        top: var(--uix-toast-offset-top);
+    }
+
+    &--top-right {
+        left: auto;
+        right: var(--uix-toast-offset-bothsides);
+        top: var(--uix-toast-offset-top);
+    }
+
+    &--top-center {
+        left: 50%;
+        transform: translateX(-50%);
+        top: var(--uix-toast-offset-top);
+    }
+
+    &--vertical-center {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        margin-top: 5%;
+    }  
+
+    .uix-toasts {
+        position: relative;
+        width: 100%;
+        bottom: var(--uix-toast-offset-bottom);
+        display: flex;
+        flex-flow: column-reverse nowrap;
+
+
+        &::before {
+            content: '';
+            top: -80px;
+            bottom: 0;
+            left: -8px;
+            right: -8px;
+            position: absolute;
+            background-color: transparent;
+            pointer-events: none;
+        }
+
+    }
+
+    .toast-container {
+        margin-bottom: var(--uix-toast-container-gap);
+
+
+        &.auto-anim-switch--initfirst {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        
+        &.auto-anim-switch--first {
+            animation-name: uix-cssAnim--toast-show-first;
+            animation-duration: .3s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        
+
+        &.auto-anim-switch:not(.only-one) {
+            animation-name: uix-cssAnim--toast-hide;
+            animation-duration: .3s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+
+        &.only-one.auto-anim-switch {
+            animation-name: uix-cssAnim--toast-hide--onlyone;
+            animation-duration: .3s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }  
+
+        
+    }
+
+    /* cascading divs */
+    &.uix-toasts__wrapper--cascading {
+
+        .toast-container {
+            margin-bottom: 0;
+        }
+
+        .uix-toasts {
+            &:hover {
+                .toast-container {
+                    transform: perspective(100px) translateZ(0) !important;
+                }
+            }
+        }
+    }
+
+
+
+    /* progress */
+    .toast-progress {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        left: 0px;
+        height: var(--uix-toast-progress-height);
+        background: transparent;
+        border-radius: 0 0 var(--uix-toast-border-radius) var(--uix-toast-border-radius);
+        overflow: hidden;
+
+        .progress-bar {
+            background: var(--uix-toast-progress-bg);
+            width: 100%;
+            transition: all .1s;
+        }
+    }
+
+
+
+}
+  
+/* Bootstrap toast here */
+.toast-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    transition: all .25s;
+    pointer-events: auto;
+
+    [data-close] {
+        background: none;
+    }
+
+    [data-close]:focus {
+        box-shadow: none;
+    }
+
+    [data-close] svg {
+        vertical-align: top;
+
+        path {
+            transition: .3s ease-in-out;
+        }
+    }
+
+    [data-close]:hover svg path {
+        fill: #f00;
+    }
+
+    &.hide-start {
+        opacity: 0;
+    }
+    
+    &.hide-end {
+        display: none;
+    }
+
+
+}
+
+@keyframes uix-cssAnim--toast-initfirst {
+    0% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+}
+
+@keyframes uix-cssAnim--toast-show-first {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes uix-cssAnim--toast-hide {
+    0% {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(10px);
+        opacity: 0;
+
+        /* prevent auto-close's item */
+        display: block;
+       
+    }
+}
+
+
+@keyframes uix-cssAnim--toast-hide--onlyone {
+    0% {
+        transform: translateY(-100%);
+        opacity: 1;
+
+
+        /* prevent auto-close's item */
+        display: block;
+    }
+
+    100% {
+        transform: translateY(10px);
+        opacity: 0;
+
+        /* prevent auto-close's item */
+        display: block;
+       
+    }
+}

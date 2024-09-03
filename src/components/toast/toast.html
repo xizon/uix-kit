@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>Toast - @@{website_title}</title>	
+	@@include('./src/components/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/_global/include-brand.html')
+                        
+                        @@include('./src/components/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+        <div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+      
+      
+		<main id="uix-maincontent">
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Toast</h3>
+							<p>Toasts are lightweight notifications designed to mimic the push notifications that have been popularized by mobile and desktop operating systems.</p>
+
+                            <p>Use the following JavaScript code to fire it.</p>
+
+
+<pre class="uix-precode uix-t-l"><label>JS</label><code>( function( $ ) {
+"use strict";
+    $( function() {
+        setTimeout(() =&gt; {  // "setTimeout()" is to wait for "uix-kit.min.js" to be fully loaded
+            
+            const _data = [{ info: 'Test Notification', theme: 'success' }];
+            window.UixToast({
+                id: 'test-1',
+                cascading: false,
+                autoCloseTime: 7000,
+                direction: "top-center",
+                schemeBody: "align-items-center text-white border-0 p-2",
+                closeBtnColor: "#fff",
+                data: _data.map((v) =&gt; {
+                    return {
+                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
+                        title: false,
+                        note: false,
+                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
+                    };
+                }),
+                async: true,
+                alternateAnimForOne: true
+            }, (rootId) =&gt; {
+                console.log('toast: ', rootId)
+            });
+
+
+            //
+            const _data2 = [{ info: 'Test Notification 2' }, { info: 'Test Notification 3' }];
+            window.UixToast({
+                id: 'test-2',
+                cascading: false,
+                autoCloseTime: 15000,
+                direction: "bottom-center",
+                schemeBody: "align-items-center text-white border-0 p-2",
+                closeBtnColor: "#fff",
+                data: _data2.map((v) =&gt; {
+                    return {
+                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
+                        title: false,
+                        note: false,
+                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
+                    };
+                }),
+                async: true,
+                alternateAnimForOne: false
+            }, (rootId) =&gt; {
+                console.log('toast: ', rootId)
+            });
+
+            //
+            const _data3 = [{ title: "Title 4", info: 'Test Notification 4' }, { title: "Title 5", info: 'Test Notification 5' }, { title: "Title 6", info: 'Test Notification 6' }, { title: "Title 7", info: 'Test Notification 7' }];
+            window.UixToast({
+                id: 'test-3',
+                cascading: true,
+                autoCloseTime: 15000,
+                direction: "bottom-right",
+                schemeHeader: "text-white bg-primary",
+                schemeBody: "align-items-center bg-white text-dark border-0 p-2",
+                closeBtnColor: "#fff",
+                data: _data3.map((v) =&gt; {
+                    return {
+                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
+                        title: v.title,
+                        note: false,
+                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
+                    };
+                }),
+                async: true,
+                alternateAnimForOne: false
+            }, (rootId) =&gt; {
+                console.log('toast: ', rootId)
+            });
+
+
+
+            //
+            const _data4 = [{ info: 'Test Notification 8' }, { info: 'Test Notification 9' }];
+            window.UixToast({
+                id: 'test-4',
+                cascading: false,
+                autoCloseTime: false,
+                direction: "vertical-center",
+                schemeBody: "align-items-center text-white border-0 p-2",
+                closeBtnColor: "#fff",
+                data: _data4.map((v) =&gt; {
+                    return {
+                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'danger',
+                        title: false,
+                        note: false,
+                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
+                    };
+                }),
+                async: true,
+                alternateAnimForOne: true
+            }, (rootId) =&gt; {
+                console.log('toast: ', rootId)
+            });
+
+            //
+            const _data5 = [{ info: 'Test Notification 8' }];
+            window.UixToast({
+                id: 'test-5',
+                cascading: false,
+                autoCloseTime: 20000,
+                direction: "bottom-left",
+                schemeBody: "align-items-center text-white border-0 p-2",
+                closeBtnColor: "#fff",
+                data: _data5.map((v) =&gt; {
+                    return {
+                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'warning',
+                        title: false,
+                        note: false,
+                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
+                    };
+                }),
+                async: true,
+                alternateAnimForOne: true
+            }, (rootId) =&gt; {
+                console.log('toast: ', rootId)
+            });
+
+
+
+        }, 0);
+
+
+    } );
+} ) ( jQuery );</code>
+</pre>		
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+		</main>
+		
+		
+			
+        
+
+        
+        @@include('./src/components/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+
+       
+
+	<script>
+        ( function( $ ) {
+        "use strict";
+            $( function() {
+                setTimeout(() => {  // "setTimeout()" is to wait for "uix-kit.min.js" to be fully loaded
+                  
+                    const _data = [{ info: 'Test Notification', theme: 'success' }];
+                    window.UixToast({
+                        id: 'test-1',
+                        cascading: false,
+                        autoCloseTime: 7000,
+                        direction: "top-center",
+                        schemeBody: "align-items-center text-white border-0 p-2",
+                        closeBtnColor: "#fff",
+                        data: _data.map((v) => {
+                            return {
+                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
+                                title: false,
+                                note: false,
+                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
+                            };
+                        }),
+                        async: true,
+                        alternateAnimForOne: true
+                    }, (rootId) => {
+                        console.log('toast: ', rootId)
+                    });
+
+
+                    //
+                    const _data2 = [{ info: 'Test Notification 2' }, { info: 'Test Notification 3' }];
+                    window.UixToast({
+                        id: 'test-2',
+                        cascading: false,
+                        autoCloseTime: 15000,
+                        direction: "bottom-center",
+                        schemeBody: "align-items-center text-white border-0 p-2",
+                        closeBtnColor: "#fff",
+                        data: _data2.map((v) => {
+                            return {
+                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
+                                title: false,
+                                note: false,
+                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
+                            };
+                        }),
+                        async: true,
+                        alternateAnimForOne: false
+                    }, (rootId) => {
+                        console.log('toast: ', rootId)
+                    });
+
+                    //
+                    const _data3 = [{ title: "Title 4", info: 'Test Notification 4' }, { title: "Title 5", info: 'Test Notification 5' }, { title: "Title 6", info: 'Test Notification 6' }, { title: "Title 7", info: 'Test Notification 7' }];
+                    window.UixToast({
+                        id: 'test-3',
+                        cascading: true,
+                        autoCloseTime: 15000,
+                        direction: "bottom-right",
+                        schemeHeader: "text-white bg-primary",
+                        schemeBody: "align-items-center bg-white text-dark border-0 p-2",
+                        closeBtnColor: "#fff",
+                        data: _data3.map((v) => {
+                            return {
+                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
+                                title: v.title,
+                                note: false,
+                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
+                            };
+                        }),
+                        async: true,
+                        alternateAnimForOne: false
+                    }, (rootId) => {
+                        console.log('toast: ', rootId)
+                    });
+
+
+
+                    //
+                    const _data4 = [{ info: 'Test Notification 8' }, { info: 'Test Notification 9' }];
+                    window.UixToast({
+                        id: 'test-4',
+                        cascading: false,
+                        autoCloseTime: false,
+                        direction: "vertical-center",
+                        schemeBody: "align-items-center text-white border-0 p-2",
+                        closeBtnColor: "#fff",
+                        data: _data4.map((v) => {
+                            return {
+                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'danger',
+                                title: false,
+                                note: false,
+                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
+                            };
+                        }),
+                        async: true,
+                        alternateAnimForOne: true
+                    }, (rootId) => {
+                        console.log('toast: ', rootId)
+                    });
+
+                    //
+                    const _data5 = [{ info: 'Test Notification 8' }];
+                    window.UixToast({
+                        id: 'test-5',
+                        cascading: false,
+                        autoCloseTime: 20000,
+                        direction: "bottom-left",
+                        schemeBody: "align-items-center text-white border-0 p-2",
+                        closeBtnColor: "#fff",
+                        data: _data5.map((v) => {
+                            return {
+                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'warning',
+                                title: false,
+                                note: false,
+                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
+                            };
+                        }),
+                        async: true,
+                        alternateAnimForOne: true
+                    }, (rootId) => {
+                        console.log('toast: ', rootId)
+                    });
+
+
+
+                }, 0);
+
+    
+            } );
+        } ) ( jQuery );	
+    
+    </script> 
+    
+
+
+    @@include('./src/components/_global/include-footer.html')
+

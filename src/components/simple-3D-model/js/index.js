@@ -5,15 +5,7 @@
  */
 import {
     templateUrl,
-    homeUrl,
-    ajaxUrl,
-    UixBrowser,
     UixModuleInstance,
-    UixGUID,
-    UixMath,
-    UixCssProperty,
-    UixDebounce,
-    UixThrottle
 } from '@uixkit/core/_global/js';
 
 import GLTFLoader from '@uixkit/plugins/THREE/esm/loaders/GLTFLoader';

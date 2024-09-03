@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### = 5.2.0 (September 3, 2024) =
+
+* New: Added new component `Toast`.
+* New: Upgraded bootstrap css to `5.2.3`.
+* Tweak: Optimized JavaScripts.
+
+
+
 #### = 5.1.0 (June 11, 2024) =
 
 * New: Added Bootstrap 24-column grid extension (based on SASS).

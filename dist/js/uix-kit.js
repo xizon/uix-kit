@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  5.1.0
+ * ## Version             :  5.2.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  July 4, 2024
+ * ## Last Update         :  September 3, 2024
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -10483,8 +10483,12 @@ var UixThrottle = function UixThrottle(fn) {
     84.Team Focus
     85.Text effect
     86.Timeline
-    87.Vertical Menu
-    88.WordPress Core Scripts
+    87.Toast
+    88.Bootstrap toast
+    89.PROGRESS
+    90./PROGRESS
+    91.Vertical Menu
+    92.WordPress Core Scripts
 
 
 */
@@ -51061,6 +51065,290 @@ var TIMELINE = function (module, $, window, document) {
     this.module = module;
   });
 }(UixModuleInstance, jQuery, window, document);
+;// CONCATENATED MODULE: ./src/components/toast/js/index.js
+
+
+/* 
+ *************************************
+ * <!-- Toast -->
+ *************************************
+ */
+
+
+
+var TOAST = function (module, $, window, document) {
+  if (window.TOAST === null) return false;
+  module.TOAST = module.TOAST || {};
+  module.TOAST.version = '0.1.0';
+  module.TOAST.documentReady = function ($) {
+    var $$ToastItem = function $$ToastItem(_data, _depth, _lock, _schemeBody, _schemeHeader, _closeBtnColor, _closeDisabled, _cascading, _autoCloseTime) {
+      var lock = _lock,
+        cascading = _cascading,
+        schemeBody = _schemeBody,
+        schemeHeader = _schemeHeader,
+        closeBtnColor = _closeBtnColor,
+        closeDisabled = _closeDisabled,
+        autoCloseTime = _autoCloseTime;
+      var resItems = '';
+      var dataRes = _data;
+      dataRes.forEach(function (item, i) {
+        var props = {
+          onlyOne: dataRes.length === 1 ? true : false,
+          index: i,
+          title: item.title,
+          note: item.note,
+          theme: item.theme,
+          message: item.message,
+          itemDepth: _depth - i
+        };
+        var onlyOne = props.onlyOne,
+          index = props.index,
+          title = props.title,
+          note = props.note,
+          theme = props.theme,
+          message = props.message,
+          itemDepth = props.itemDepth;
+        var itemStyle = cascading ? "transform: perspective(100px) translateZ(-".concat(2 * index, "px) translateY(").concat(35 * index, "px);\n        z-index: ").concat(itemDepth, ";") : "z-index: ".concat(itemDepth);
+        var hideTitle = (title === '' || title === false) && (note === '' || note === false);
+        resItems += "<div\n                    class=\"".concat("toast-container ".concat(onlyOne ? 'only-one' : ''), "\"\n                    data-index=\"", index, "\"\n                    style=\"").concat(itemStyle, "\">\n        \n                    <!-- Bootstrap toast -->\n                    <div class=\"", "toast fade show ".concat(schemeBody ? schemeBody : '', " ").concat(theme ? "bg-".concat(theme) : ''), "\" role=\"alert\">\n                        \n                        ").concat(hideTitle ? '' : "<div class=\"".concat("toast-header ".concat(schemeHeader ? schemeHeader : ''), "\">\n                            <strong class=\"me-auto\">", title === '' || title === false ? '' : title, "</strong>\n                            <small class=\"text-muted\">").concat(note === '' || note === false ? '' : note, "</small>\n                            ").concat(!lock ? "".concat(!closeDisabled ? "<button data-close=\"1\" data-index=\"".concat(index, "\" tabindex=\"-1\" type=\"button\" class=\"btn-close\"><svg width=\"12px\" height=\"12px\" viewBox=\"0 0 16 16\"><path fill=\"", "".concat(closeBtnColor ? closeBtnColor : '#000000'), "\" d=\"M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z\" fill-rule=\"evenodd\"></path></svg></button>") : '') : '', "</div>"), "\n        \n                        <div class=\"toast-body\">\n                            ").concat(message, "\n        \n                            ").concat(hideTitle ? "".concat(!closeDisabled ? "<button data-close=\"1\" data-index=\"".concat(index, "\" tabindex=\"-1\" type=\"button\" class=\"btn-close position-absolute top-0 end-0 me-2 mt-2\"><svg width=\"12px\" height=\"12px\" viewBox=\"0 0 16 16\"><path fill=\"", "".concat(closeBtnColor ? closeBtnColor : '#000000'), "\" d=\"M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z\" fill-rule=\"evenodd\"></path></svg></button>") : '') : '', "\n        \n        \n                            <!-- PROGRESS -->\n                            <div data-progress-index=\"").concat(index, "\" class=\"", "progress active toast-progress ".concat(autoCloseTime === false ? 'd-none' : ''), "\" role=\"progressbar\">\n                                <div class=\"progress-bar\"></div>\n                            </div>\n                            <!-- /PROGRESS -->\n        \n        \n                        </div>\n                    </div>\n        \n                </div>");
+      });
+      return resItems;
+    };
+    var $$Toast = function $$Toast(props, callback) {
+      var async = props.async,
+        alternateAnimForOne = props.alternateAnimForOne,
+        direction = props.direction,
+        autoCloseTime = props.autoCloseTime,
+        lock = props.lock,
+        cascading = props.cascading,
+        data = props.data,
+        schemeBody = props.schemeBody,
+        schemeHeader = props.schemeHeader,
+        closeBtnColor = props.closeBtnColor,
+        closeDisabled = props.closeDisabled,
+        id = props.id,
+        onClose = props.onClose;
+      var sendData = data;
+      var DEFAULT_AUTO_CLOSE_TIME = 3000;
+      var uniqueID = 0;
+      var idRes = id || uniqueID;
+      var rootId = "uix-toasts__wrapper-js-".concat(idRes);
+      var depth = sendData.length + 1;
+      var cascadingEnabled = typeof cascading === 'undefined' ? true : cascading; // auto close
+
+      var AUTO_CLOSE_TIME = typeof autoCloseTime === 'undefined' || autoCloseTime === false ? false : autoCloseTime; // progress animation
+
+      var PROGRESS_TRANSITION_TIME = typeof autoCloseTime === 'undefined' || autoCloseTime === false ? DEFAULT_AUTO_CLOSE_TIME : autoCloseTime;
+      var progressPausedRef = sendData.map(function (v) {
+        return false;
+      });
+      var progressObjRef = [];
+      var progressIntervalRef = sendData.map(function (v) {
+        return null;
+      });
+      var rootRef = document.createElement('div');
+      rootRef.id = rootId;
+      rootRef.dataset.async = async ? "".concat(async) : "false";
+      rootRef.className = "uix-toasts__wrapper-js uix-toasts__wrapper uix-toasts__wrapper--".concat(direction ? direction : 'bottom-center', " ").concat(cascadingEnabled ? 'uix-toasts__wrapper--cascading' : '', " app-core-toast");
+      var rootRefContent = "\n            <div class=\"uix-toasts\">\n                ".concat($$ToastItem(sendData, depth, lock, schemeBody, schemeHeader, closeBtnColor, closeDisabled, cascadingEnabled, AUTO_CLOSE_TIME), "\n            </div>\n            ");
+      var startProgressTimer = function startProgressTimer(el, i) {
+        // init progress
+        var progressCurrentChunk = 100 / (PROGRESS_TRANSITION_TIME / 100);
+        var _bar = el.querySelector('.progress-bar');
+        _bar.style.width = 100 + '%';
+        _bar.ariaValueNow = 100; // animation
+
+        progressIntervalRef[i] = setInterval(function () {
+          // console.log('toast setInterval');
+
+          if (!progressPausedRef[i]) {
+            var progPercent = 100 - progressCurrentChunk; // console.log('interval');
+
+            _bar.style.width = progPercent + '%';
+            _bar.ariaValueNow = progPercent;
+            progressCurrentChunk++; //
+
+            if (progPercent === 0 || progPercent < 1) {
+              el.classList.add('complete'); //
+
+              // stop current animation
+              stopProgressTimer(i);
+              var currentItem = el.closest('.toast-container');
+              handleClose(i, currentItem);
+            }
+          }
+        }, PROGRESS_TRANSITION_TIME / 100);
+      };
+      var clearAllProgressTimer = function clearAllProgressTimer(arr) {
+        var curIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+        if (typeof curIndex === 'undefined') {
+          sendData.forEach(function (item, i) {
+            clearInterval(arr[i]);
+            arr[i] = null;
+          });
+        } else {
+          sendData.forEach(function (item, i) {
+            if (i === curIndex) {
+              clearInterval(arr[i]);
+              arr[i] = null;
+            }
+          });
+        }
+      };
+      var stopProgressTimer = function stopProgressTimer(index) {
+        clearInterval(progressIntervalRef[index]);
+        progressIntervalRef[index] = null;
+      };
+      function progressAnimBegin(progressObjs) {
+        sendData.forEach(function (item, i) {
+          var el = progressObjs[i];
+          if (el !== null && typeof el !== 'undefined') startProgressTimer(el, i);
+        });
+      }
+      function handleProgressPaused(e) {
+        var _currentIndex = e.target.dataset.index;
+        progressPausedRef[_currentIndex] = true;
+      }
+      function handleProgressStart(e) {
+        var _currentIndex = e.target.dataset.index;
+        progressPausedRef[_currentIndex] = false;
+      }
+      function checkProgressCompleted() {
+        var _progressObjs = [].slice.call(rootRef.querySelectorAll('.toast-container .toast-progress'));
+        _progressObjs.forEach(function (node) {
+          if (node.classList.contains('complete')) {
+            var _currentItem = node.closest('.toast-container');
+            _currentItem.classList.add('hide-end');
+          }
+        });
+      }
+      function init() {
+        // Check progress has completed
+        //------------------------------------------
+        checkProgressCompleted();
+
+        // Move HTML templates to tag end body </body>
+        // render() don't use "Fragment", in order to avoid error "Failed to execute 'insertBefore' on 'Node'"
+        // prevent "transform", "filter", "perspective" attribute destruction fixed viewport orientation
+        //------------------------------------------
+        if (document.body !== null) {
+          if (document.getElementById(rootId) === null) {
+            document.body.appendChild(rootRef);
+          }
+
+          //
+          document.getElementById(rootId).innerHTML = rootRefContent;
+          rootRef = document.getElementById(rootId);
+
+          //
+          [].slice.call(rootRef.querySelectorAll('[data-close]')).forEach(function (node) {
+            node.addEventListener('pointerdown', function (e) {
+              var index = node.dataset.index;
+              var currentItem = node.closest('.toast-container');
+              handleClose(index, currentItem);
+            });
+          });
+          [].slice.call(rootRef.querySelectorAll('.toast-container')).forEach(function (node) {
+            node.addEventListener('mouseenter', handleProgressPaused);
+            node.addEventListener('mouseleave', handleProgressStart);
+          }); // Automatically hide multiple items
+          // It creates a transition animation effect with multiple records and only one displayed.
+
+          progressObjRef = [].slice.call(document.getElementById(rootId).querySelectorAll('.toast-container .toast-progress'));
+          if (alternateAnimForOne) {
+            var _list = [].slice.call(rootRef.querySelectorAll('.toast-container'));
+            _list.forEach(function (node, i) {
+              if (i !== _list.length - 1) {
+                node.classList.add('auto-anim-switch');
+              } else {
+                node.classList.add('auto-anim-switch--initfirst', 'auto-anim-switch--initfirst-js');
+                node.classList.add('auto-anim-switch--first', 'auto-anim-switch--first-js');
+              }
+            });
+          }
+          autoClose(progressObjRef); // Remove the global list of events, especially as scroll and interval.
+
+          // callback
+          if (typeof callback === 'function') {
+            callback(rootId);
+          }
+        }
+
+        // Initialize data
+        //--------------
+        var $toast = document.querySelector("#".concat(rootRef.id));
+        if ($toast !== null) {
+          if ($toast.dataset.async == 'true') {
+            var _list2 = [].slice.call(rootRef.querySelectorAll('.toast-container'));
+            _list2.forEach(function (node, i) {
+              node.classList.remove('hide-end'); // rearrange
+
+              if (cascadingEnabled) node.style.transform = "perspective(100px) translateZ(-".concat(2 * i, "px) translateY(").concat(35 * i, "px)");
+            });
+          }
+        }
+      }
+      function autoClose(progressObjs) {
+        // Auto hide
+        //--------------
+        if (AUTO_CLOSE_TIME !== false) {
+          // start animation
+          progressAnimBegin(progressObjs);
+        }
+      }
+      function handleClose(index, currentItem) {
+        var curIndex = Number(index);
+        if (rootRef === null) return;
+        var _list = [].slice.call(rootRef.querySelectorAll('.toast-container'));
+        currentItem.classList.add('hide-start'); //Let the removed animation show
+
+        setTimeout(function () {
+          _list.forEach(function (node, i) {
+            node.classList.remove('hide-start');
+          }); // remove current
+
+          currentItem.classList.add('hide-end'); // rearrange
+
+          if (cascadingEnabled) {
+            _list.filter(function (node) {
+              return !node.classList.contains('hide-end');
+            }).forEach(function (node, k) {
+              node.style.transform = "perspective(100px) translateZ(-".concat(2 * k, "px) translateY(").concat(35 * k, "px)");
+            });
+          } //
+
+          // check progress has completed
+          [].slice.call(document.querySelectorAll('.uix-toasts__wrapper-js')).forEach(function (el) {
+            checkProgressCompleted(el);
+          });
+
+          // stop all animations or current animation
+          if (_list.length === 1) {
+            clearAllProgressTimer(progressIntervalRef);
+          } else {
+            clearAllProgressTimer(progressIntervalRef, curIndex);
+          }
+          if (typeof onClose === 'function') {
+            onClose(rootRef, curIndex, _list.filter(function (node) {
+              return !node.classList.contains('hide-end');
+            }));
+          }
+        }, 300);
+      }
+      init();
+    };
+
+    /* ------------- Global -------------- */
+    if (typeof window !== 'undefined') {
+      window.UixToast = $$Toast;
+    }
+  };
+  module.components.documentReady.push(module.TOAST.documentReady);
+  return /*#__PURE__*/_createClass(function TOAST() {
+    _classCallCheck(this, TOAST);
+    this.module = module;
+  });
+}(UixModuleInstance, jQuery, window, document);
 ;// CONCATENATED MODULE: ./src/components/vertical-menu/js/index.js
 
 
@@ -51371,12 +51659,14 @@ var WP_CORE = function (module, $, window, document) {
 
 
 
+
 // typescript test
 
 /******/
 /******/
 /* pages */
 /* Note: These modules do not contain JavaScript */
+
 
 
 

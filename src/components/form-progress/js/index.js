@@ -25,16 +25,7 @@
 
 
 import {
-    templateUrl,
-    homeUrl,
-    ajaxUrl,
-    UixBrowser,
     UixModuleInstance,
-    UixGUID,
-    UixMath,
-    UixCssProperty,
-    UixDebounce,
-    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixFormProgressToNext from '@uixkit/core/form-progress/js/fn/form-progress-to-next';
 import ScrollToPlugin from '@uixkit/plugins/GSAP/esm/ScrollToPlugin';

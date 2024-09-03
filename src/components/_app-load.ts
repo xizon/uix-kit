@@ -107,6 +107,7 @@ import '@uixkit/core/tabs/js';
 import '@uixkit/core/team-focus/js';
 import '@uixkit/core/text-effect/js';
 import '@uixkit/core/timeline/js';
+import '@uixkit/core/toast/js';
 import '@uixkit/core/vertical-menu/js';
 import '@uixkit/core/wordpress/js';
 
@@ -154,6 +155,7 @@ import '@uixkit/core/team-fullwidth/scss/_style.scss';
 import '@uixkit/core/team-grid/scss/_style.scss';
 import '@uixkit/core/testimonials/scss/_style.scss';
 import '@uixkit/core/tooltip/scss/_style.scss';
+import '@uixkit/core/toast/scss/_style.scss';
 import '@uixkit/core/wave-background/scss/_style.scss';
 
 

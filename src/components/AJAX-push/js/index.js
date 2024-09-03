@@ -4,16 +4,8 @@
  *************************************
  */
 import {
-    templateUrl,
-    homeUrl,
-    ajaxUrl,
-    UixBrowser,
     UixModuleInstance,
     UixGUID,
-    UixMath,
-    UixCssProperty,
-    UixDebounce,
-    UixThrottle
 } from '@uixkit/core/_global/js';
 import UixApplyAsyncScripts from '@uixkit/core/_global/js/fn/UixApplyAsyncScripts';
 
