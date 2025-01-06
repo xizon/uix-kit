@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  5.2.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  September 3, 2024
+ * ## Last Update         :  January 6, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -17377,6 +17377,24 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
 /* ---------- Responsive Border  ----------- */
 /* ---------- Responsive Border  ----------- */
 /* Ex. border-sm-end-0 border-md-end */
+.border-x {
+  border-left: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
+}
+
+.border-y {
+  border-top: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.border {
+  border: 1px solid #dee2e6 !important;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
 .border-top {
   border-top: 1px solid #dee2e6 !important;
 }
@@ -17409,31 +17427,21 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
   border-left: 0 !important;
 }
 
-.border-x {
-  border-left: 1px solid #dee2e6 !important;
-  border-right: 1px solid #dee2e6 !important;
-}
-
-.border-y {
-  border-top: 1px solid #dee2e6 !important;
-  border-bottom: 1px solid #dee2e6 !important;
-}
-
-.border {
-  border-top: 1px solid #dee2e6 !important;
-  border-bottom: 1px solid #dee2e6 !important;
-  border-left: 1px solid #dee2e6 !important;
-  border-right: 1px solid #dee2e6 !important;
-}
-
-.border-0 {
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-}
-
 @media (min-width: 576px) {
+  .border-sm-x {
+    border-left: 1px solid #dee2e6 !important;
+    border-right: 1px solid #dee2e6 !important;
+  }
+  .border-sm-y {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+  .border-sm {
+    border: 1px solid #dee2e6 !important;
+  }
+  .border-sm-0 {
+    border: 0 !important;
+  }
   .border-sm-top {
     border-top: 1px solid #dee2e6 !important;
   }
@@ -17458,28 +17466,22 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
   .border-sm-start-0 {
     border-left: 0 !important;
   }
-  .border-sm-x {
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-sm-y {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-  }
-  .border-sm {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-sm-0 {
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-  }
 }
 @media (min-width: 768px) {
+  .border-md-x {
+    border-left: 1px solid #dee2e6 !important;
+    border-right: 1px solid #dee2e6 !important;
+  }
+  .border-md-y {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+  .border-md {
+    border: 1px solid #dee2e6 !important;
+  }
+  .border-md-0 {
+    border: 0 !important;
+  }
   .border-md-top {
     border-top: 1px solid #dee2e6 !important;
   }
@@ -17504,28 +17506,22 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
   .border-md-start-0 {
     border-left: 0 !important;
   }
-  .border-md-x {
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-md-y {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-  }
-  .border-md {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-md-0 {
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-  }
 }
 @media (min-width: 992px) {
+  .border-lg-x {
+    border-left: 1px solid #dee2e6 !important;
+    border-right: 1px solid #dee2e6 !important;
+  }
+  .border-lg-y {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+  .border-lg {
+    border: 1px solid #dee2e6 !important;
+  }
+  .border-lg-0 {
+    border: 0 !important;
+  }
   .border-lg-top {
     border-top: 1px solid #dee2e6 !important;
   }
@@ -17550,28 +17546,22 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
   .border-lg-start-0 {
     border-left: 0 !important;
   }
-  .border-lg-x {
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-lg-y {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-  }
-  .border-lg {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-lg-0 {
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-  }
 }
 @media (min-width: 1200px) {
+  .border-xl-x {
+    border-left: 1px solid #dee2e6 !important;
+    border-right: 1px solid #dee2e6 !important;
+  }
+  .border-xl-y {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+  .border-xl {
+    border: 1px solid #dee2e6 !important;
+  }
+  .border-xl-0 {
+    border: 0 !important;
+  }
   .border-xl-top {
     border-top: 1px solid #dee2e6 !important;
   }
@@ -17596,28 +17586,22 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
   .border-xl-start-0 {
     border-left: 0 !important;
   }
-  .border-xl-x {
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-xl-y {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-  }
-  .border-xl {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-xl-0 {
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-  }
 }
 @media (min-width: 1400px) {
+  .border-xxl-x {
+    border-left: 1px solid #dee2e6 !important;
+    border-right: 1px solid #dee2e6 !important;
+  }
+  .border-xxl-y {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+  .border-xxl {
+    border: 1px solid #dee2e6 !important;
+  }
+  .border-xxl-0 {
+    border: 0 !important;
+  }
   .border-xxl-top {
     border-top: 1px solid #dee2e6 !important;
   }
@@ -17641,26 +17625,6 @@ ul.edd_bundled_product_files, ul.edd_purchase_receipt_files, ul.edd_bundled_prod
   }
   .border-xxl-start-0 {
     border-left: 0 !important;
-  }
-  .border-xxl-x {
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-xxl-y {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-  }
-  .border-xxl {
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
-  }
-  .border-xxl-0 {
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
   }
 }
 /* ---------- 24 Grid  ----------- */

@@ -252,9 +252,6 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                         particles.position.z = 70;
                         particles.rotation.y = getRadian( 180 );
 
-                        // set castShadow to object
-                        particles.castShadow = true;
-
 
 					},
 
