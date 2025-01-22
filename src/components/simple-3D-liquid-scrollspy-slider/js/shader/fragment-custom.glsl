@@ -1,39 +1,34 @@
-varying vec2 vUv;
+uniform float u_time;
+uniform float u_progress;
+uniform sampler2D u_texture1;
+uniform sampler2D u_texture2;
+uniform sampler2D u_textureDips;
+varying vec2 v_uv;
 
-uniform sampler2D texture;
-uniform sampler2D texture2;
-uniform sampler2D disp;
-
-// uniform float time;
-// uniform float _rot;
-uniform float dispFactor;
-uniform float effectFactor;
-
-// vec2 rotate(vec2 v, float a) {
-//  float s = sin(a);
-//  float c = cos(a);
-//  mat2 m = mat2(c, -s, s, c);
-//  return m * v;
-// }
+// Water ripple (adding u_progress-based intensity control)
+float ripple(vec2 uv, vec2 center, float time, float progress) {
+    float dist = distance(uv, center);
+    float strength = sin(10.0 * dist - time * 5.0) * 0.1; // strength 0.1
+    // Dynamically adjust ripple strength based on progress
+    return strength * (1.0 - abs(progress - 0.5) * 2.0);
+}
 
 void main() {
+    vec2 uv = v_uv;
 
-    vec2 uv = vUv;
+    float wave = ripple(uv, vec2(0.5, 0.5), u_time, u_progress);
 
-    // uv -= 0.5;
-    // vec2 rotUV = rotate(uv, _rot);
-    // uv += 0.5;
+    vec4 disp = texture2D(u_textureDips, uv);
 
-    vec4 disp = texture2D(disp, uv);
+    // Make sure the UV coordinates are within the range of [0, 1].
+    vec2 texCoord1 = uv + wave * (1.0 - u_progress);
+    vec2 texCoord2 = uv - wave * u_progress;
 
-    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);
-    vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);
+    // Sample the texture
+    vec4 tex1 = texture2D(u_texture1, texCoord1);
+    vec4 tex2 = texture2D(u_texture2, texCoord2);
 
-    vec4 _texture = texture2D(texture, distortedPosition);
-    vec4 _texture2 = texture2D(texture2, distortedPosition2);
+    vec4 finalColor = mix(tex1, tex2, u_progress);
 
-    vec4 finalTexture = mix(_texture, _texture2, dispFactor);
-
-    gl_FragColor = finalTexture;
-    // gl_FragColor = disp;
+    gl_FragColor = finalColor;
 }

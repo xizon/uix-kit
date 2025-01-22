@@ -15,7 +15,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION2               = module.THREE_MOUSE_INTERACTION2 || {};
-    module.THREE_MOUSE_INTERACTION2.version       = '0.0.6';
+    module.THREE_MOUSE_INTERACTION2.version       = '0.0.7';
     module.THREE_MOUSE_INTERACTION2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -280,14 +280,19 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 			 */
 			function generateGeometry( numObjects ) {
 
-				const applyVertexColors = function(g, c) {
-					g.faces.forEach(function(f) {
-						const n = (f instanceof THREE.Face3) ? 3 : 4;
-						for (let j = 0; j < n; j++) {
-							f.vertexColors[j] = c;
-						}
-					});
-				};
+                const applyVertexColors = function(geometry, color) {
+                    // Creates an array of vertex colors
+                    const positions = geometry.attributes.position;
+                    const colors = new Float32Array(positions.count * 3);
+            
+                    for (let i = 0; i < positions.count; i++) {
+                        colors[i * 3] = color.r;
+                        colors[i * 3 + 1] = color.g;
+                        colors[i * 3 + 2] = color.b;
+                    }
+            
+                    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                };
 
 				for ( let i = 0; i < numObjects; i ++ ) {
 
@@ -321,7 +326,7 @@ export const THREE_MOUSE_INTERACTION2 = ( ( module, $, window, document ) => {
 
 
 					// Immediately use the texture for material creation
-					const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+					const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true } );
 
 					displacementSprite = new THREE.Mesh( geom, defaultMaterial );
 					scene.add( displacementSprite );

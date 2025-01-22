@@ -7,28 +7,28 @@ import {
     UixModuleInstance,
 } from '@uixkit/core/_global/js';
 
-
 //filter basic
 //---------------------
-import EffectComposer from '@uixkit/plugins/THREE/esm/postprocessing/EffectComposer';
-import MaskPass from '@uixkit/plugins/THREE/esm/postprocessing/MaskPass';
-import TexturePass from '@uixkit/plugins/THREE/esm/postprocessing/TexturePass';
-import ShaderPass from '@uixkit/plugins/THREE/esm/postprocessing/ShaderPass';
-import RenderPass from '@uixkit/plugins/THREE/esm/postprocessing/RenderPass';
-import ClearPass from '@uixkit/plugins/THREE/esm/postprocessing/ClearPass';
-import CopyShader from '@uixkit/plugins/THREE/esm/shaders/CopyShader';
-import ConvolutionShader from '@uixkit/plugins/THREE/esm/shaders/ConvolutionShader';
+import { EffectComposer } from '@uixkit/plugins/THREE/esm/postprocessing/EffectComposer';
+import { MaskPass } from '@uixkit/plugins/THREE/esm/postprocessing/MaskPass';
+import { TexturePass } from '@uixkit/plugins/THREE/esm/postprocessing/TexturePass';
+import { ShaderPass } from '@uixkit/plugins/THREE/esm/postprocessing/ShaderPass';
+import { RenderPass } from '@uixkit/plugins/THREE/esm/postprocessing/RenderPass';
+import { ClearPass } from '@uixkit/plugins/THREE/esm/postprocessing/ClearPass';
+import { CopyShader } from '@uixkit/plugins/THREE/esm/shaders/CopyShader';
+import { ConvolutionShader } from '@uixkit/plugins/THREE/esm/shaders/ConvolutionShader';
 
 
 //Extra filter -- film
 //---------------------
-import BloomPass from '@uixkit/plugins/THREE/esm/postprocessing/BloomPass';
+import { BloomPass } from '@uixkit/plugins/THREE/esm/postprocessing/BloomPass';
 
 
 //Extra filter -- film
 //---------------------
-import FilmPass from '@uixkit/plugins/THREE/esm/postprocessing/FilmPass';
-import FilmShader from '@uixkit/plugins/THREE/esm/shaders/FilmShader';
+import { FilmPass } from '@uixkit/plugins/THREE/esm/postprocessing/FilmPass';
+import { FilmShader } from '@uixkit/plugins/THREE/esm/shaders/FilmShader';
+
 
 
 export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
@@ -37,7 +37,7 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_FILMIC_EFF               = module.THREE_FILMIC_EFF || {};
-    module.THREE_FILMIC_EFF.version       = '0.0.2';
+    module.THREE_FILMIC_EFF.version       = '0.0.3';
     module.THREE_FILMIC_EFF.documentReady = function( $ ) {
 
 		
@@ -117,7 +117,7 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 
                 //=================
                 //add bloom effect
-                bloomPass = new THREE.BloomPass(
+                bloomPass = new BloomPass(
                     1,    // strength
                     25,   // kernel size
                     4,    // sigma ?
@@ -126,7 +126,7 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 
 
                 //add film effect
-                filmPass = new THREE.FilmPass(
+                filmPass = new FilmPass(
                     0.35,   // noise intensity
                     0.025,  // scanline intensity
                     648,    // scanline count
@@ -136,12 +136,12 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 
 
                 //-----
-                const renderPass = new THREE.RenderPass(scene, camera);
-                const effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+                const renderPass = new RenderPass(scene, camera);
+                const effectCopy = new ShaderPass(CopyShader);
                 effectCopy.renderToScreen = true;
 
 
-                composer = new THREE.EffectComposer( renderer );
+                composer = new EffectComposer( renderer );
                 composer.addPass(renderPass);
                 composer.addPass(bloomPass);    
                 composer.addPass(filmPass);
@@ -259,10 +259,20 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
             const starsGeometry = new THREE.IcosahedronGeometry(terrainSize, 4);
 
             // geometry deformation
-            for (let i=0; i<starsGeometry.vertices.length; i+=1) {
-                const scalar = 1+ Math.random() + Math.random();
-                starsGeometry.vertices[i].multiplyScalar(scalar)
+            const positionAttribute = starsGeometry.getAttribute('position');
+
+            for (let i = 0; i < positionAttribute.count; i++) {
+                const scalar = 1 + Math.random() + Math.random();
+
+                const x = positionAttribute.getX(i);
+                const y = positionAttribute.getY(i);
+                const z = positionAttribute.getZ(i);
+                
+                positionAttribute.setXYZ(i, x * scalar, y * scalar, z * scalar);
             }
+            
+            // The geometry needs to be updated after deformation
+            starsGeometry.attributes.position.needsUpdate = true;
 
             const textureLoader = new THREE.TextureLoader();
             textureLoader.setCrossOrigin("anonymous");

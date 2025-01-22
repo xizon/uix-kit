@@ -8,7 +8,7 @@ import {
     UixModuleInstance,
 } from '@uixkit/core/_global/js';
 
-import GLTFLoader from '@uixkit/plugins/THREE/esm/loaders/GLTFLoader';
+import { GLTFLoader } from '@uixkit/plugins/THREE/esm/loaders/GLTFLoader';
 
 
 export const THREE_MODEL = ( ( module, $, window, document ) => {
@@ -17,7 +17,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};
-    module.THREE_MODEL.version       = '0.0.5';
+    module.THREE_MODEL.version       = '0.0.6';
     module.THREE_MODEL.documentReady = function( $ ) {
 
 		
@@ -71,8 +71,8 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 				//=================
 				//Lights
-				lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-				lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+				lights[ 0 ] = new THREE.PointLight( 0xffffff, 0.2, 0 );
+				lights[ 1 ] = new THREE.PointLight( 0xffffff, 0.2, 0 );
 				lights[ 2 ] = new THREE.DirectionalLight( 0xffffff );
 
 				lights[ 0 ].position.set( 0, 200, 0 );
@@ -121,7 +121,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 					onError       = function ( xhr ) { };
 
 
-				const loader        = new THREE.GLTFLoader( manager );
+				const loader        = new GLTFLoader( manager );
                 loader.crossOrigin = 'anonymous';
 				loader.load( objURL, function ( object ) {
 

@@ -42,8 +42,8 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 
 			const mouseVector  = new THREE.Vector2(),
 				  sphereTarget = new THREE.Euler(),
-				  xrad         = THREE.Math.degToRad(30),
-				  yrad         = THREE.Math.degToRad(10);
+				  xrad         = THREE.MathUtils.degToRad(30),
+				  yrad         = THREE.MathUtils.degToRad(10);
 
 
 			function init() {

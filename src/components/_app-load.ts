@@ -96,7 +96,6 @@ import '@uixkit/core/simple-3D-sphere-three/js';
 import '@uixkit/core/simple-3D-obj-anim-interaction/js';
 import '@uixkit/core/simple-3D-mouse-interaction/js';
 import '@uixkit/core/simple-3D-mouse-interaction2/js';
-import '@uixkit/core/simple-3D-shatter-slider/js';	
 import '@uixkit/core/simple-3D-explosive-particle-slider/js';
 import '@uixkit/core/simple-3D-liquid-scrollspy-slider/js';
 import '@uixkit/core/simple-3D-filmic-effects/js';

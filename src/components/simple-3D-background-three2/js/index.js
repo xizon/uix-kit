@@ -18,7 +18,7 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND_THREE2               = module.THREE_BACKGROUND_THREE2 || {};
-    module.THREE_BACKGROUND_THREE2.version       = '0.0.4';
+    module.THREE_BACKGROUND_THREE2.version       = '0.0.6';
     module.THREE_BACKGROUND_THREE2.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -75,20 +75,23 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 
 
 				// Immediately use the texture for material creation
+                const cloudTexture = new THREE.TextureLoader().load($( '#' + rendererCanvasID ).data( 'filter-texture' ));
+                cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
+
 				material = new THREE.ShaderMaterial({
 					uniforms: {
-						"time": { value: 1.0 },
-						"texture": { value: new THREE.TextureLoader().load( $( '#' + rendererCanvasID ).data( 'filter-texture' ) ) }
-					},
+                        uTime: { value: 0.0 },
+                        uTexture: { value: cloudTexture },
+                        uSpeed: { value: 0.1 },
+                        uDistortion: { value: 0.2 },
+                      },
 					fragmentShader: fragment,
-					vertexShader: vertex
+					vertexShader: vertex,
+                    transparent: true, // Clouds need to be transparent
 				});			
 
+                cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
 
-
-				//if use texture
-				material.uniforms.texture.value.wrapS = THREE.RepeatWrapping;
-				material.uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 
 
 				const geometry = new THREE.SphereGeometry(5, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
@@ -112,29 +115,8 @@ export const THREE_BACKGROUND_THREE2 = ( ( module, $, window, document ) => {
 				renderer.setClearColor( 0x000000 );	
 
 
-				material.uniforms.time.value += delta * 5;
+				material.uniforms.uTime.value = clock.getElapsedTime();
 
-
-				//displacementSprite.rotation.y += delta * 0.5 * 1;
-				//displacementSprite.rotation.x += delta * 0.5 * -1;
-
-
-                //push objects
-                /*
-                @Usage: 
-
-                    function CustomObj( scene ) {
-
-                        const elements = new THREE...;
-                        scene.add( elements );
-
-                        this.update = function( time ) {
-                            elements.rotation.y = time*0.003;
-                        }
-                    }       
-
-                    sceneSubjects.push( new CustomObj( MainStage.getScene() ) );  
-                */
                 for( let i = 0; i < sceneSubjects.length; i++ ) {
                     sceneSubjects[i].update( clock.getElapsedTime()*1 );  
                 }

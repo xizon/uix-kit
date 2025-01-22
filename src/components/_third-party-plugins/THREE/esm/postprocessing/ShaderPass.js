@@ -1,42 +1,44 @@
-/**
- * @author alteredq / http://alteredqualia.com/
- */
+const {
+	ShaderMaterial,
+	UniformsUtils
+} = THREE;
+import { Pass, FullScreenQuad } from './Pass.js';
 
-THREE.ShaderPass = function ( shader, textureID ) {
+class ShaderPass extends Pass {
 
-	THREE.Pass.call( this );
+	constructor( shader, textureID ) {
 
-	this.textureID = ( textureID !== undefined ) ? textureID : "tDiffuse";
+		super();
 
-	if ( shader instanceof THREE.ShaderMaterial ) {
+		this.textureID = ( textureID !== undefined ) ? textureID : 'tDiffuse';
 
-		this.uniforms = shader.uniforms;
+		if ( shader instanceof ShaderMaterial ) {
 
-		this.material = shader;
+			this.uniforms = shader.uniforms;
 
-	} else if ( shader ) {
+			this.material = shader;
 
-		this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+		} else if ( shader ) {
 
-		this.material = new THREE.ShaderMaterial( {
+			this.uniforms = UniformsUtils.clone( shader.uniforms );
 
-			defines: Object.assign( {}, shader.defines ),
-			uniforms: this.uniforms,
-			vertexShader: shader.vertexShader,
-			fragmentShader: shader.fragmentShader
+			this.material = new ShaderMaterial( {
 
-		} );
+				name: ( shader.name !== undefined ) ? shader.name : 'unspecified',
+				defines: Object.assign( {}, shader.defines ),
+				uniforms: this.uniforms,
+				vertexShader: shader.vertexShader,
+				fragmentShader: shader.fragmentShader
+
+			} );
+
+		}
+
+		this.fsQuad = new FullScreenQuad( this.material );
 
 	}
 
-	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
-};
-
-THREE.ShaderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
-
-	constructor: THREE.ShaderPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
+	render( renderer, writeBuffer, readBuffer /*, deltaTime, maskActive */ ) {
 
 		if ( this.uniforms[ this.textureID ] ) {
 
@@ -62,7 +64,14 @@ THREE.ShaderPass.prototype = Object.assign( Object.create( THREE.Pass.prototype 
 
 	}
 
-} );
+	dispose() {
 
+		this.material.dispose();
 
-export default THREE.ShaderPass;
+		this.fsQuad.dispose();
+
+	}
+
+}
+
+export { ShaderPass };

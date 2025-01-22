@@ -16,7 +16,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SIMULATE_HTML_LAYOUT               = module.THREE_SIMULATE_HTML_LAYOUT || {};
-    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.2';
+    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.3';
     module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function( $ ) {
 
 		

@@ -1,29 +1,25 @@
-/**
- * @author alteredq / http://alteredqualia.com/
- */
+import { Pass } from './Pass.js';
 
-THREE.MaskPass = function ( scene, camera ) {
+class MaskPass extends Pass {
 
-	THREE.Pass.call( this );
+	constructor( scene, camera ) {
 
-	this.scene = scene;
-	this.camera = camera;
+		super();
 
-	this.clear = true;
-	this.needsSwap = false;
+		this.scene = scene;
+		this.camera = camera;
 
-	this.inverse = false;
+		this.clear = true;
+		this.needsSwap = false;
 
-};
+		this.inverse = false;
 
-THREE.MaskPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+	}
 
-	constructor: THREE.MaskPass,
+	render( renderer, writeBuffer, readBuffer /*, deltaTime, maskActive */ ) {
 
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		var context = renderer.context;
-		var state = renderer.state;
+		const context = renderer.getContext();
+		const state = renderer.state;
 
 		// don't update color or depth
 
@@ -37,7 +33,7 @@ THREE.MaskPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ),
 
 		// set up stencil
 
-		var writeValue, clearValue;
+		let writeValue, clearValue;
 
 		if ( this.inverse ) {
 
@@ -55,6 +51,7 @@ THREE.MaskPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ),
 		state.buffers.stencil.setOp( context.REPLACE, context.REPLACE, context.REPLACE );
 		state.buffers.stencil.setFunc( context.ALWAYS, writeValue, 0xffffffff );
 		state.buffers.stencil.setClear( clearValue );
+		state.buffers.stencil.setLocked( true );
 
 		// draw into the stencil buffer
 
@@ -66,39 +63,42 @@ THREE.MaskPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ),
 		if ( this.clear ) renderer.clear();
 		renderer.render( this.scene, this.camera );
 
-		// unlock color and depth buffer for subsequent rendering
+		// unlock color and depth buffer and make them writable for subsequent rendering/clearing
 
 		state.buffers.color.setLocked( false );
 		state.buffers.depth.setLocked( false );
 
+		state.buffers.color.setMask( true );
+		state.buffers.depth.setMask( true );
+
 		// only render where stencil is set to 1
 
+		state.buffers.stencil.setLocked( false );
 		state.buffers.stencil.setFunc( context.EQUAL, 1, 0xffffffff ); // draw if == 1
 		state.buffers.stencil.setOp( context.KEEP, context.KEEP, context.KEEP );
+		state.buffers.stencil.setLocked( true );
 
 	}
 
-} );
+}
 
+class ClearMaskPass extends Pass {
 
-THREE.ClearMaskPass = function () {
+	constructor() {
 
-	THREE.Pass.call( this );
+		super();
 
-	this.needsSwap = false;
+		this.needsSwap = false;
 
-};
+	}
 
-THREE.ClearMaskPass.prototype = Object.create( THREE.Pass.prototype );
+	render( renderer /*, writeBuffer, readBuffer, deltaTime, maskActive */ ) {
 
-Object.assign( THREE.ClearMaskPass.prototype, {
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
+		renderer.state.buffers.stencil.setLocked( false );
 		renderer.state.buffers.stencil.setTest( false );
 
 	}
 
-} );
+}
 
-export default THREE.MaskPass;
+export { MaskPass, ClearMaskPass };

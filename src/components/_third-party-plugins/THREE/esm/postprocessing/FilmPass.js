@@ -1,43 +1,40 @@
-/**
- * @author alteredq / http://alteredqualia.com/
- */
+const {
+	ShaderMaterial,
+	UniformsUtils
+} = THREE;
+import { Pass, FullScreenQuad } from './Pass.js';
+import { FilmShader } from '../shaders/FilmShader.js';
 
-THREE.FilmPass = function ( noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale ) {
+class FilmPass extends Pass {
 
-	THREE.Pass.call( this );
+	constructor( intensity = 0.5, grayscale = false ) {
 
-	if ( THREE.FilmShader === undefined )
-		console.error( "THREE.FilmPass relies on THREE.FilmShader" );
+		super();
 
-	var shader = THREE.FilmShader;
+		const shader = FilmShader;
 
-	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+		this.uniforms = UniformsUtils.clone( shader.uniforms );
 
-	this.material = new THREE.ShaderMaterial( {
+		this.material = new ShaderMaterial( {
 
-		uniforms: this.uniforms,
-		vertexShader: shader.vertexShader,
-		fragmentShader: shader.fragmentShader
+			name: shader.name,
+			uniforms: this.uniforms,
+			vertexShader: shader.vertexShader,
+			fragmentShader: shader.fragmentShader
 
-	} );
+		} );
 
-	if ( grayscale !== undefined )	this.uniforms.grayscale.value = grayscale;
-	if ( noiseIntensity !== undefined ) this.uniforms.nIntensity.value = noiseIntensity;
-	if ( scanlinesIntensity !== undefined ) this.uniforms.sIntensity.value = scanlinesIntensity;
-	if ( scanlinesCount !== undefined ) this.uniforms.sCount.value = scanlinesCount;
+		this.uniforms.intensity.value = intensity; // (0 = no effect, 1 = full effect)
+		this.uniforms.grayscale.value = grayscale;
 
-	this.fsQuad = new THREE.Pass.FullScreenQuad( this.material );
+		this.fsQuad = new FullScreenQuad( this.material );
 
-};
+	}
 
-THREE.FilmPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ), {
+	render( renderer, writeBuffer, readBuffer, deltaTime /*, maskActive */ ) {
 
-	constructor: THREE.FilmPass,
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime /*, maskActive */ ) {
-
-		this.uniforms[ "tDiffuse" ].value = readBuffer.texture;
-		this.uniforms[ "time" ].value += deltaTime;
+		this.uniforms[ 'tDiffuse' ].value = readBuffer.texture;
+		this.uniforms[ 'time' ].value += deltaTime;
 
 		if ( this.renderToScreen ) {
 
@@ -54,7 +51,14 @@ THREE.FilmPass.prototype = Object.assign( Object.create( THREE.Pass.prototype ),
 
 	}
 
-} );
+	dispose() {
 
+		this.material.dispose();
 
-export default THREE.FilmPass;
+		this.fsQuad.dispose();
+
+	}
+
+}
+
+export { FilmPass };

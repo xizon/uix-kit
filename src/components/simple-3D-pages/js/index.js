@@ -14,8 +14,8 @@ import {
     UixModuleInstance,
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
-import CSS3DRenderer from '@uixkit/plugins/THREE/esm/renderers/CSS3DRenderer';
+import { OrbitControls } from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import { CSS3DObject, CSS3DRenderer } from '@uixkit/plugins/THREE/esm/renderers/CSS3DRenderer';
 
 
 export const THREE_PAGES = ( ( module, $, window, document ) => {
@@ -23,7 +23,7 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 	
 	
 	module.THREE_PAGES               = module.THREE_PAGES || {};
-    module.THREE_PAGES.version       = '0.0.2';
+    module.THREE_PAGES.version       = '0.0.5';
 	module.THREE_PAGES.documentReady = function( $ ) {
 
 
@@ -58,19 +58,6 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 				camera = new THREE.PerspectiveCamera( 45, windowWidth / windowHeight, 1, 10000 );
 				camera.position.set(0, 0, -1000);
 
-				//controls
-				controls = new THREE.OrbitControls( camera );
-				controls.rotateSpeed = 0.5;
-				controls.zoomSpeed = 1.2;
-				controls.panSpeed = 0.8;
-				controls.enableZoom = true;
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-				controls.dampingFactor = 0.25;
-				controls.screenSpacePanning = false;
-				controls.minDistance = 1000;
-				controls.maxDistance = 1500;
-				controls.maxPolarAngle = Math.PI / 2;
-
 				//Scene
 				scene = new THREE.Scene();
 
@@ -89,12 +76,13 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 				document.getElementById( viewRenderer ).appendChild( renderer.domElement );
 
 
+
 				//Add HTML elements to scene
 				const target  = $( '#html3D-view' ).clone(),
 					  pages   = target.find( '.html3D-view-content' );
 
 				pages.each( function() {
-					const el = new THREE.CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
+					const el = new CSS3DObject( $.parseHTML( $( this )[0].outerHTML )[0] );
 
 					el.position.x = $( this ).data( 'position-x' ) || 0;
 					el.position.y = $( this ).data( 'position-y' ) || 0;
@@ -110,11 +98,30 @@ export const THREE_PAGES = ( ( module, $, window, document ) => {
 
 
 				//CSS3D Renderer
-				renderer = new THREE.CSS3DRenderer();
+				renderer = new CSS3DRenderer();
 				renderer.setSize( windowWidth, windowHeight );
 				renderer.domElement.style.position = 'absolute';
 				renderer.domElement.style.top = 0;
 				document.getElementById( viewRenderer ).appendChild( renderer.domElement );
+
+
+                //
+
+
+				//controls
+				controls = new OrbitControls(camera, renderer.domElement);
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.05;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 1000;
+				controls.maxDistance = 1500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+                
 
 				// Fires when the window changes
 				window.addEventListener( 'resize', onWindowResize, false );

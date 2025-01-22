@@ -1,11 +1,11 @@
-uniform float time;
+uniform float uTime;
 
 varying vec2 vUv;
 
 void main(void) {
 
     vec2 p = - 1.0 + 2.0 * vUv;
-    float a = time * 40.0;
+    float a = uTime * 40.0;
     float d, e, f, g = 1.0 / 40.0 ,h ,i ,r ,q;
 
     e = 400.0 * ( p.x * 0.5 + 0.5 );

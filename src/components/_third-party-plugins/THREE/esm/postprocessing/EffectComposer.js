@@ -1,85 +1,94 @@
-/**
- * @author alteredq / http://alteredqualia.com/
- */
+const {
+	Clock,
+	HalfFloatType,
+	NoBlending,
+	Vector2,
+	WebGLRenderTarget
+} = THREE;
+import { CopyShader } from '../shaders/CopyShader.js';
+import { ShaderPass } from './ShaderPass.js';
+import { MaskPass } from './MaskPass.js';
+import { ClearMaskPass } from './MaskPass.js';
 
-THREE.EffectComposer = function ( renderer, renderTarget ) {
+class EffectComposer {
 
-	this.renderer = renderer;
+	constructor( renderer, renderTarget ) {
 
-	if ( renderTarget === undefined ) {
+		this.renderer = renderer;
 
-		var parameters = {
-			minFilter: THREE.LinearFilter,
-			magFilter: THREE.LinearFilter,
-			format: THREE.RGBAFormat,
-			stencilBuffer: false
-		};
+		this._pixelRatio = renderer.getPixelRatio();
 
-		var size = renderer.getDrawingBufferSize( new THREE.Vector2() );
-		renderTarget = new THREE.WebGLRenderTarget( size.width, size.height, parameters );
-		renderTarget.texture.name = 'EffectComposer.rt1';
+		if ( renderTarget === undefined ) {
+
+			const size = renderer.getSize( new Vector2() );
+			this._width = size.width;
+			this._height = size.height;
+
+			renderTarget = new WebGLRenderTarget( this._width * this._pixelRatio, this._height * this._pixelRatio, { type: HalfFloatType } );
+			renderTarget.texture.name = 'EffectComposer.rt1';
+
+		} else {
+
+			this._width = renderTarget.width;
+			this._height = renderTarget.height;
+
+		}
+
+		this.renderTarget1 = renderTarget;
+		this.renderTarget2 = renderTarget.clone();
+		this.renderTarget2.texture.name = 'EffectComposer.rt2';
+
+		this.writeBuffer = this.renderTarget1;
+		this.readBuffer = this.renderTarget2;
+
+		this.renderToScreen = true;
+
+		this.passes = [];
+
+		this.copyPass = new ShaderPass( CopyShader );
+		this.copyPass.material.blending = NoBlending;
+
+		this.clock = new Clock();
 
 	}
 
-	this.renderTarget1 = renderTarget;
-	this.renderTarget2 = renderTarget.clone();
-	this.renderTarget2.texture.name = 'EffectComposer.rt2';
+	swapBuffers() {
 
-	this.writeBuffer = this.renderTarget1;
-	this.readBuffer = this.renderTarget2;
-
-	this.renderToScreen = true;
-
-	this.passes = [];
-
-	// dependencies
-
-	if ( THREE.CopyShader === undefined ) {
-
-		console.error( 'THREE.EffectComposer relies on THREE.CopyShader' );
-
-	}
-
-	if ( THREE.ShaderPass === undefined ) {
-
-		console.error( 'THREE.EffectComposer relies on THREE.ShaderPass' );
-
-	}
-
-	this.copyPass = new THREE.ShaderPass( THREE.CopyShader );
-
-	this._previousFrameTime = Date.now();
-
-};
-
-Object.assign( THREE.EffectComposer.prototype, {
-
-	swapBuffers: function () {
-
-		var tmp = this.readBuffer;
+		const tmp = this.readBuffer;
 		this.readBuffer = this.writeBuffer;
 		this.writeBuffer = tmp;
 
-	},
+	}
 
-	addPass: function ( pass ) {
+	addPass( pass ) {
 
 		this.passes.push( pass );
+		pass.setSize( this._width * this._pixelRatio, this._height * this._pixelRatio );
 
-		var size = this.renderer.getDrawingBufferSize( new THREE.Vector2() );
-		pass.setSize( size.width, size.height );
+	}
 
-	},
-
-	insertPass: function ( pass, index ) {
+	insertPass( pass, index ) {
 
 		this.passes.splice( index, 0, pass );
+		pass.setSize( this._width * this._pixelRatio, this._height * this._pixelRatio );
 
-	},
+	}
 
-	isLastEnabledPass: function ( passIndex ) {
+	removePass( pass ) {
 
-		for ( var i = passIndex + 1; i < this.passes.length; i ++ ) {
+		const index = this.passes.indexOf( pass );
+
+		if ( index !== - 1 ) {
+
+			this.passes.splice( index, 1 );
+
+		}
+
+	}
+
+	isLastEnabledPass( passIndex ) {
+
+		for ( let i = passIndex + 1; i < this.passes.length; i ++ ) {
 
 			if ( this.passes[ i ].enabled ) {
 
@@ -91,29 +100,25 @@ Object.assign( THREE.EffectComposer.prototype, {
 
 		return true;
 
-	},
+	}
 
-	render: function ( deltaTime ) {
+	render( deltaTime ) {
 
 		// deltaTime value is in seconds
 
 		if ( deltaTime === undefined ) {
 
-			deltaTime = ( Date.now() - this._previousFrameTime ) * 0.001;
+			deltaTime = this.clock.getDelta();
 
 		}
 
-		this._previousFrameTime = Date.now();
+		const currentRenderTarget = this.renderer.getRenderTarget();
 
-		var currentRenderTarget = this.renderer.getRenderTarget();
+		let maskActive = false;
 
-		var maskActive = false;
+		for ( let i = 0, il = this.passes.length; i < il; i ++ ) {
 
-		var pass, i, il = this.passes.length;
-
-		for ( i = 0; i < il; i ++ ) {
-
-			pass = this.passes[ i ];
+			const pass = this.passes[ i ];
 
 			if ( pass.enabled === false ) continue;
 
@@ -124,13 +129,16 @@ Object.assign( THREE.EffectComposer.prototype, {
 
 				if ( maskActive ) {
 
-					var context = this.renderer.context;
+					const context = this.renderer.getContext();
+					const stencil = this.renderer.state.buffers.stencil;
 
-					context.stencilFunc( context.NOTEQUAL, 1, 0xffffffff );
+					//context.stencilFunc( context.NOTEQUAL, 1, 0xffffffff );
+					stencil.setFunc( context.NOTEQUAL, 1, 0xffffffff );
 
 					this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, deltaTime );
 
-					context.stencilFunc( context.EQUAL, 1, 0xffffffff );
+					//context.stencilFunc( context.EQUAL, 1, 0xffffffff );
+					stencil.setFunc( context.EQUAL, 1, 0xffffffff );
 
 				}
 
@@ -138,13 +146,13 @@ Object.assign( THREE.EffectComposer.prototype, {
 
 			}
 
-			if ( THREE.MaskPass !== undefined ) {
+			if ( MaskPass !== undefined ) {
 
-				if ( pass instanceof THREE.MaskPass ) {
+				if ( pass instanceof MaskPass ) {
 
 					maskActive = true;
 
-				} else if ( pass instanceof THREE.ClearMaskPass ) {
+				} else if ( pass instanceof ClearMaskPass ) {
 
 					maskActive = false;
 
@@ -156,16 +164,19 @@ Object.assign( THREE.EffectComposer.prototype, {
 
 		this.renderer.setRenderTarget( currentRenderTarget );
 
-	},
+	}
 
-	reset: function ( renderTarget ) {
+	reset( renderTarget ) {
 
 		if ( renderTarget === undefined ) {
 
-			var size = this.renderer.getDrawingBufferSize( new THREE.Vector2() );
+			const size = this.renderer.getSize( new Vector2() );
+			this._pixelRatio = this.renderer.getPixelRatio();
+			this._width = size.width;
+			this._height = size.height;
 
 			renderTarget = this.renderTarget1.clone();
-			renderTarget.setSize( size.width, size.height );
+			renderTarget.setSize( this._width * this._pixelRatio, this._height * this._pixelRatio );
 
 		}
 
@@ -177,94 +188,44 @@ Object.assign( THREE.EffectComposer.prototype, {
 		this.writeBuffer = this.renderTarget1;
 		this.readBuffer = this.renderTarget2;
 
-	},
+	}
 
-	setSize: function ( width, height ) {
+	setSize( width, height ) {
 
-		this.renderTarget1.setSize( width, height );
-		this.renderTarget2.setSize( width, height );
+		this._width = width;
+		this._height = height;
 
-		for ( var i = 0; i < this.passes.length; i ++ ) {
+		const effectiveWidth = this._width * this._pixelRatio;
+		const effectiveHeight = this._height * this._pixelRatio;
 
-			this.passes[ i ].setSize( width, height );
+		this.renderTarget1.setSize( effectiveWidth, effectiveHeight );
+		this.renderTarget2.setSize( effectiveWidth, effectiveHeight );
+
+		for ( let i = 0; i < this.passes.length; i ++ ) {
+
+			this.passes[ i ].setSize( effectiveWidth, effectiveHeight );
 
 		}
 
 	}
 
-} );
+	setPixelRatio( pixelRatio ) {
 
+		this._pixelRatio = pixelRatio;
 
-THREE.Pass = function () {
-
-	// if set to true, the pass is processed by the composer
-	this.enabled = true;
-
-	// if set to true, the pass indicates to swap read and write buffer after rendering
-	this.needsSwap = true;
-
-	// if set to true, the pass clears its buffer before rendering
-	this.clear = false;
-
-	// if set to true, the result of the pass is rendered to screen. This is set automatically by EffectComposer.
-	this.renderToScreen = false;
-
-};
-
-Object.assign( THREE.Pass.prototype, {
-
-	setSize: function ( width, height ) {},
-
-	render: function ( renderer, writeBuffer, readBuffer, deltaTime, maskActive ) {
-
-		console.error( 'THREE.Pass: .render() must be implemented in derived pass.' );
+		this.setSize( this._width, this._height );
 
 	}
 
-} );
+	dispose() {
 
-// Helper for passes that need to fill the viewport with a single quad.
-THREE.Pass.FullScreenQuad = ( function () {
+		this.renderTarget1.dispose();
+		this.renderTarget2.dispose();
 
-	var camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
-	var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+		this.copyPass.dispose();
 
-	var FullScreenQuad = function ( material ) {
+	}
 
-		this._mesh = new THREE.Mesh( geometry, material );
+}
 
-	};
-
-	Object.defineProperty( FullScreenQuad.prototype, 'material', {
-
-		get: function () {
-
-			return this._mesh.material;
-
-		},
-
-		set: function ( value ) {
-
-			this._mesh.material = value;
-
-		}
-
-	} );
-
-	Object.assign( FullScreenQuad.prototype, {
-
-		render: function ( renderer ) {
-
-			renderer.render( this._mesh, camera );
-
-		}
-
-	} );
-
-	return FullScreenQuad;
-
-} )();
-
-
-
-export default THREE.EffectComposer;
+export { EffectComposer };

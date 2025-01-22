@@ -4,6 +4,12 @@
  *************************************
  */
 
+ /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ After threejs 151+, the spot light effect will be different, please refer to the documentation.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
 /**
  * module.THREE_PARTICLE
  * 
@@ -21,8 +27,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 	if ( window.THREE_PARTICLE === null ) return false;
 	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};
-    module.THREE_PARTICLE.version       = '0.0.7';
+    module.THREE_PARTICLE.version       = '1.0.0';
     module.THREE_PARTICLE.documentReady = function( $ ) {
+
 
 		//Prevent this module from loading in other pages
 		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
@@ -58,8 +65,8 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 
             //background
-            const backgroundBg = 0xCE3A3E;
-            const backgroundPlane = 0xDE510E;
+            const backgroundBg = new THREE.Color('#CE3A3E');
+            const backgroundPlane = new THREE.Color('#DE510E');;
             
             
             // Light from scene ready
@@ -104,7 +111,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 
                 // Fit plane to screen
                 dist = 1000;
-                vFOV = THREE.Math.degToRad( camera.fov );              // convert vertical fov to radians
+                vFOV = THREE.MathUtils.degToRad( camera.fov );              // convert vertical fov to radians
                 visibleHeight   = 2 * Math.tan( vFOV / 2 ) * dist;     // visible height
                 visibleWidth    = visibleHeight * camera.aspect;       // visible width   
                 

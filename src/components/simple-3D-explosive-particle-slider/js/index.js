@@ -8,7 +8,7 @@ import {
     UixGUID,
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import { OrbitControls } from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 import '../scss/_style.scss';
 
@@ -18,7 +18,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_EXP_PARTICLE_SLIDER               = module.THREE_EXP_PARTICLE_SLIDER || {};
-    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.1.0';
+    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.1.2';
     module.THREE_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		
@@ -429,7 +429,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				//controls
-				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls = new OrbitControls( camera, renderer.domElement );
 				controls.autoRotate = false;
 				controls.autoRotateSpeed = 0.5;
 				controls.rotateSpeed = 0.5;
@@ -483,7 +483,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 						const texture = new THREE.VideoTexture( document.getElementById( element.id ) );
 						texture.minFilter = THREE.LinearFilter;
 						texture.magFilter = THREE.LinearFilter;
-						texture.format = THREE.RGBFormat;
+						texture.format = THREE.RGBAFormat;
 
 						// pause the video
 						texture.image.autoplay = true;

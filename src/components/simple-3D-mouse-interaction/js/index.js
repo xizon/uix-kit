@@ -7,7 +7,7 @@ import {
     UixModuleInstance,
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import { OrbitControls } from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 	if ( window.THREE_MOUSE_INTERACTION === null ) return false;
@@ -15,7 +15,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MOUSE_INTERACTION               = module.THREE_MOUSE_INTERACTION || {};
-    module.THREE_MOUSE_INTERACTION.version       = '0.0.4';
+    module.THREE_MOUSE_INTERACTION.version       = '0.0.8';
     module.THREE_MOUSE_INTERACTION.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -63,28 +63,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 				camera = new THREE.PerspectiveCamera( 75, windowWidth / windowHeight, 1, 10000 );
 				camera.position.set(0, 0, 1300);
 
-				
-				
-
-				//=================
-				//controls
-				controls = new THREE.OrbitControls( camera );
-				controls.autoRotate = false;
-				controls.autoRotateSpeed = 0.5;
-				controls.rotateSpeed = 0.5;
-				controls.zoomSpeed = 1.2;
-				controls.panSpeed = 0.8;
-				controls.enableZoom = true;
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-				controls.dampingFactor = 0.25;
-				controls.screenSpacePanning = false;
-				controls.minDistance = 100;
-				controls.maxDistance = 500;
-				controls.maxPolarAngle = Math.PI / 2;
-
-				controls.target.set( 30, 167, 81 );
-				controls.update();			
-
+		
 
 
 				//=================
@@ -111,6 +90,29 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 									} );
 				renderer.setSize( windowWidth, windowHeight );
 
+                		
+				
+
+				//=================
+				//controls
+				controls = new OrbitControls( camera, renderer.domElement);
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = true;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+                
 
 				//=================
 				// Immediately use the texture for material creation
@@ -318,14 +320,19 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 
 
 				//set color
-				const applyVertexColors = function( g, c ) {
-					g.faces.forEach( function( f ) {
-						const n = ( f instanceof THREE.Face3 ) ? 3 : 4;
-						for ( let j = 0; j < n; j ++ ) {
-							f.vertexColors[ j ] = c;
-						}
-					} );
-				};
+                const applyVertexColors = function(geometry, color) {
+                    // Creates an array of vertex colors
+                    const positions = geometry.attributes.position;
+                    const colors = new Float32Array(positions.count * 3);
+            
+                    for (let i = 0; i < positions.count; i++) {
+                        colors[i * 3] = color.r;
+                        colors[i * 3 + 1] = color.g;
+                        colors[i * 3 + 2] = color.b;
+                    }
+            
+                    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                };
 
 				for ( let i = 0; i < numObjects; i ++ ) {
 
@@ -365,7 +372,7 @@ export const THREE_MOUSE_INTERACTION = ( ( module, $, window, document ) => {
 
 
 					// Immediately use the texture for material creation
-					const defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+					const defaultMaterial     = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true } );
 
 					displacementSprite  = new THREE.Mesh( geometry, defaultMaterial );
 					displacementSprite.name = 'nucleus-' + i;

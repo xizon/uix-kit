@@ -9,7 +9,7 @@ import {
     UixThrottle
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import { OrbitControls } from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 export const THREE_GALLERY = ( ( module, $, window, document ) => {
 	if ( window.THREE_GALLERY === null ) return false;
@@ -17,7 +17,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_GALLERY               = module.THREE_GALLERY || {};
-    module.THREE_GALLERY.version       = '0.0.5';
+    module.THREE_GALLERY.version       = '0.0.7';
     module.THREE_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -64,26 +64,6 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
 
 
-				//controls
-				controls = new THREE.OrbitControls( camera );
-				controls.autoRotate = false;
-				controls.autoRotateSpeed = 0.5;
-				controls.rotateSpeed = 0.5;
-				controls.zoomSpeed = 1.2;
-				controls.panSpeed = 0.8;
-				controls.enableZoom = false;
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-				controls.dampingFactor = 0.25;
-				controls.screenSpacePanning = false;
-				controls.minDistance = 100;
-				controls.maxDistance = 500;
-				controls.maxPolarAngle = Math.PI / 2;
-
-				controls.target.set( 30, 167, 81 );
-				controls.update();			
-
-
-
 				//Scene
 				scene = new THREE.Scene();
 
@@ -106,20 +86,42 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 				renderer.setSize( windowWidth, windowHeight );
 
 
+
+
+				//controls
+				controls = new OrbitControls( camera, renderer.domElement);
+				controls.autoRotate = false;
+				controls.autoRotateSpeed = 0.5;
+				controls.rotateSpeed = 0.5;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.enableZoom = false;
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = false;
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+				controls.maxPolarAngle = Math.PI / 2;
+
+				controls.target.set( 30, 167, 81 );
+				controls.update();			
+
+
+                
 				// Immediately use the texture for material creation
 				// Create a texture loader so we can load our image file
 				const imgs = [
-					'https://placehold.co/2100/2100/000000/png',
-					'https://placehold.co/2200/2200/000000/png',
-					'https://placehold.co/2300/2300/000000/png',
-					'https://placehold.co/2400/2400/000000/png',
-					'https://placehold.co/2500/2500/000000/png',
-					'https://placehold.co/2000/2000/000000/png',
-					'https://placehold.co/1600/1600/000000/png',
-					'https://placehold.co/1650/1650/000000/png',
-					'https://placehold.co/1670/1670/000000/png',
-					'https://placehold.co/1680/1680/000000/png',
-					'https://placehold.co/1700/1700/000000/png'
+                    'https://placehold.co/500x550/blue/white',
+                    'https://placehold.co/700x800/orange/white',
+                    'https://placehold.co/650x550/green/white',
+                    'https://placehold.co/400x300/red/white',
+                    'https://placehold.co/500x550/blue/white',
+                    'https://placehold.co/500x550/orange/white',
+                    'https://placehold.co/500x550/green/white',
+                    'https://placehold.co/500x550/gray/white',
+                    'https://placehold.co/500x550/blue/white',
+                    'https://placehold.co/500x550/orange/white',
+                    'https://placehold.co/500x550/green/white'
 				];
 
 

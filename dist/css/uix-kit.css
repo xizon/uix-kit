@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  5.2.0
+ * ## Version             :  5.3.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 6, 2025
+ * ## Last Update         :  January 22, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -84,52 +84,51 @@
     62.Swiper
     63.3D Background
     64.3D Carousel
-    65.3D Shatter Slider
-    66.3D Explosive Particle Slider
-    67.3D Liquid Scrollspy Slider
-    68.Table
-    69.Tabs
-    70.Team Focus
-    71.Text effect
-    72.Timeline
-    73.Toast
-    74.Vertical Menu
-    75.WordPress Core ( Do not use prefix "uix-" )
-    76.WordPress Blocks ( Do not use prefix "uix-" )
-    77.3rd Party Plugins
-    78.Badges
-    79.Blended Grid Layout
-    80.Breadcrumbs
-    81.Button
-    82.Cards
-    83.Badges
-    84.Coach Mark
-    85.Content Placeholder Animated
-    86.Dividing Line
-    87.Dotted Line
-    88.Equal-width Columns
-    89.Features
-    90.Footer Templates
-    91.Gallery Grid Layout
-    92.Heading
-    93.Image Animation
-    94.Brands List
-    95.Maintain Aspect Ratio List
-    96.Side by Side List
-    97.Side by Side List With Photo
-    98.Mouse Animation Scroll
-    99.Overlay
-    100.Ribbon
-    101.Separator of Rule With Text
-    102.Shape Animation
-    103.Comments ( Synchronize to WordPress's class name )
-    104.Editing Component
-    105.Striking
-    106.Team Fullwidth (Style using the Side by Side List With Photo module)
-    107.Team Gird
-    108.Testimonials Carousel
-    109.ToolTip
-    110.Wave Background
+    65.3D Explosive Particle Slider
+    66.3D Liquid Scrollspy Slider
+    67.Table
+    68.Tabs
+    69.Team Focus
+    70.Text effect
+    71.Timeline
+    72.Toast
+    73.Vertical Menu
+    74.WordPress Core ( Do not use prefix "uix-" )
+    75.WordPress Blocks ( Do not use prefix "uix-" )
+    76.3rd Party Plugins
+    77.Badges
+    78.Blended Grid Layout
+    79.Breadcrumbs
+    80.Button
+    81.Cards
+    82.Badges
+    83.Coach Mark
+    84.Content Placeholder Animated
+    85.Dividing Line
+    86.Dotted Line
+    87.Equal-width Columns
+    88.Features
+    89.Footer Templates
+    90.Gallery Grid Layout
+    91.Heading
+    92.Image Animation
+    93.Brands List
+    94.Maintain Aspect Ratio List
+    95.Side by Side List
+    96.Side by Side List With Photo
+    97.Mouse Animation Scroll
+    98.Overlay
+    99.Ribbon
+    100.Separator of Rule With Text
+    101.Shape Animation
+    102.Comments ( Synchronize to WordPress's class name )
+    103.Editing Component
+    104.Striking
+    105.Team Fullwidth (Style using the Side by Side List With Photo module)
+    106.Team Gird
+    107.Testimonials Carousel
+    108.ToolTip
+    109.Wave Background
 
 
 */
@@ -13780,170 +13779,6 @@ button.swiper-pagination-bullet {
   .uix-3d-carousel ul .uix-3d-carousel__item.uix-3d-carousel__item--right-pos {
     margin-left: 110px;
   }
-}
-/* ======================================================
-   <!-- 3D Shatter Slider -->
-/* ====================================================== */
-:root {
-  /* COLOR PALETTE  */
-  --uix-placeholder-text-color: #E6E6E8;
-  --uix-highlight-color1: #CE3A3E;
-  --uix-highlight-color2: #DE510E;
-  --uix-primary-text-color: #212121;
-  --uix-primary-link-color: #474747;
-  --uix-primary-link-hover-color: #212121;
-  --uix-heading-text-color: #212121;
-  --uix-sub-text-color: #AEAEAE;
-  --uix-dividing-line-color: #DCDCDC;
-  --uix-btn-gradient-color1: #CE3A3E;
-  --uix-btn-gradient-color2: #C04645;
-  --uix-btn-gradient-color3: #DE510E;
-  --uix-primary-bg-color: transparent;
-}
-
-/*
- * 1. Initialize the slider style
- * 2. Pagination dots
- * 3. Next/Prev buttons
-*/
-/*
- ---------------------------
- 1. Initialize the slider style
- ---------------------------
- */
-.uix-3d-slider--shatter__wrapper {
-  position: relative;
-}
-
-/* Prevent content overflow */
-.uix-3d-slider--shatter__wrapper,
-.uix-3d-slider--shatter__inner,
-.uix-3d-slider--shatter__canvas-container {
-  overflow: hidden;
-}
-
-.uix-3d-slider--shatter__canvas-container {
-  position: relative;
-  z-index: 2;
-  display: block;
-  height: 100%; /* Required, It will make the canvas fill up */
-}
-
-.uix-3d-slider--shatter {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  z-index: 1;
-  background-color: transparent;
-}
-.uix-3d-slider--shatter canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-}
-.uix-3d-slider--shatter .uix-3d-slider--shatter__inner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 3;
-  height: 100%; /* Required */
-  display: none;
-}
-.uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item {
-  width: 100%;
-  opacity: 0;
-}
-.uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item img {
-  width: 100%;
-  visibility: hidden;
-}
-.uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item video {
-  display: none;
-}
-.uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item.leave {
-  opacity: 0;
-}
-.uix-3d-slider--shatter .uix-3d-slider--shatter__inner .uix-3d-slider--shatter__item.is-active {
-  opacity: 1;
-}
-
-/*
- ---------------------------
- 2. Pagination dots
- ---------------------------
- */
-.uix-3d-slider--shatter__pagination {
-  position: relative;
-  transform: translateY(-40px);
-  z-index: 2;
-}
-.uix-3d-slider--shatter__pagination ul {
-  list-style: none;
-  left: 0;
-  bottom: 0;
-  font-size: 0; /*Fighting the Space Between Inline Block Elements*/
-  display: block;
-  width: 100%;
-  text-align: center; /*require*/
-  position: relative;
-  transform: translateY(0.5rem);
-}
-.uix-3d-slider--shatter__pagination ul li {
-  font-size: 1rem; /*Fighting the Space Between Inline Block Elements*/
-  display: inline-block; /*require*/
-  margin: 0 0.2rem;
-}
-.uix-3d-slider--shatter__pagination ul li a {
-  width: 12px;
-  height: 12px;
-  display: block;
-  box-shadow: 0px 3px 22px 0px rgba(0, 0, 0, 0.45);
-  background: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  text-indent: -9999px;
-  border-radius: 20px;
-}
-.uix-3d-slider--shatter__pagination ul li:hover a, .uix-3d-slider--shatter__pagination ul li.is-active a {
-  background: rgb(255, 255, 255);
-  width: 25px;
-}
-
-/*
- ---------------------------
- 3. Next/Prev buttons
- ---------------------------
- */
-.uix-3d-slider--shatter__arrows {
-  position: relative;
-  transform: translateY(-65px);
-  z-index: 3;
-}
-.uix-3d-slider--shatter__arrows a {
-  box-shadow: 0px 10px 54px 0px rgba(19, 32, 62, 0.21);
-  border-radius: 100%;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  transition: 0.3s ease-in-out;
-  line-height: 50px;
-  text-align: center;
-  background: #fff;
-}
-.uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev {
-  left: 15px;
-}
-.uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--prev.is-disabled {
-  visibility: hidden;
-}
-.uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next {
-  right: 15px;
-}
-.uix-3d-slider--shatter__arrows .uix-3d-slider--shatter__arrows--next.is-disabled {
-  visibility: hidden;
 }
 /* ======================================================
    <!-- 3D Explosive Particle Slider -->

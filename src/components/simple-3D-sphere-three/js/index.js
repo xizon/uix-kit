@@ -15,7 +15,7 @@ import {
     UixModuleInstance,
 } from '@uixkit/core/_global/js';
 
-import OrbitControls from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
+import { OrbitControls } from '@uixkit/plugins/THREE/esm/controls/OrbitControls';
 
 export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 	if ( window.THREE_SPHERE_THREE === null ) return false;
@@ -23,7 +23,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SPHERE_THREE               = module.THREE_SPHERE_THREE || {};
-    module.THREE_SPHERE_THREE.version       = '0.0.2';
+    module.THREE_SPHERE_THREE.version       = '0.0.4';
     module.THREE_SPHERE_THREE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -57,10 +57,6 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
 				camera.position.set( 0, -46, 18 );
 
-				// controls
-				controls = new THREE.OrbitControls( camera );
-				controls.minDistance = 10;
-				controls.maxDistance = 50;
 
 				//Scene
 				scene = new THREE.Scene();
@@ -83,6 +79,11 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 				renderer.setSize( windowWidth, windowHeight );
 
 
+				// controls
+				controls = new OrbitControls( camera, renderer.domElement);
+				controls.minDistance = 10;
+				controls.maxDistance = 50;
+                
 				// axes
 				//scene.add( new THREE.AxisHelper( 20 ) );
 
@@ -93,7 +94,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 				const loader = new THREE.TextureLoader();
 				loader.crossOrigin = 'anonymous';
 
-				const texture = loader.load( 'https://placehold.co/1650/1650/FF6600/jpg' ),
+				const texture = loader.load( 'https://placehold.co/500x550/orange/white' ),
 					  material = new THREE.MeshBasicMaterial( { map: texture } );
 
 				// parent

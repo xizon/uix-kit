@@ -1,5 +1,12 @@
 # Changelog
 
+#### = 5.3.0 (January 22, 2025) =
+
+* New: Migrate the threejs version to 151. (The next version will be migrated to 172)
+* Tweak: ThreeJS plugin update.
+* Tweak: Replace the shader of the `3D Liquid Scrollspy Slider` module with a water flow ripple.
+* Remove: Remove `3D Shatter Slider` module.
+
 
 #### = 5.2.0 (September 3, 2024) =
 
