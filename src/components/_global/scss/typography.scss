@@ -119,13 +119,10 @@ h6,
 
 @media all and (max-width: 768px) {
     @each $key,$value in $font-sizes {
-        @if $key >= 5 {
 
-            h#{$key},
-            .uix-typo--h#{$key} {
-                font-size: rfs-fluid-value($value);
-            }
-
+        h#{$key},
+        .uix-typo--h#{$key} {
+            font-size: rfs-fluid-value($value*2);
         }
 
     }

@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  5.3.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  January 22, 2025
+ * ## Last Update         :  March 19, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -4099,13 +4099,29 @@ h6 {
   }
 }
 @media all and (max-width: 768px) {
+  h1,
+  .uix-typo--h1 {
+    font-size: calc(0.7703125rem + 8.30625vw);
+  }
+  h2,
+  .uix-typo--h2 {
+    font-size: calc(0.5703125rem + 5.90625vw);
+  }
+  h3,
+  .uix-typo--h3 {
+    font-size: calc(0.4203125rem + 4.10625vw);
+  }
+  h4,
+  .uix-typo--h4 {
+    font-size: calc(0.3703125rem + 3.50625vw);
+  }
   h5,
   .uix-typo--h5 {
-    font-size: calc(0.1953125rem + 1.40625vw);
+    font-size: calc(0.3203125rem + 2.90625vw);
   }
   h6,
   .uix-typo--h6 {
-    font-size: calc(0.1703125rem + 1.10625vw);
+    font-size: calc(0.2703125rem + 2.30625vw);
   }
 }
 /* 
