@@ -25,12 +25,15 @@ const mobileKeywords = [
     'tablet'
 ];
 
+const _isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent);
+const _isMobile = mobileKeywords.some(keyword => userAgent.includes(keyword));
+const _isAndroid = ['android'].some(keyword => userAgent.includes(keyword));
 
 export const UixBrowser = {
-    isTablet        : /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent),
-    isMobile        : mobileKeywords.some(keyword => userAgent.includes(keyword)),
-    isAndroid       : /(android)/i.test(navigator.userAgent),
-    isPC            : !navigator.userAgent.match(/(iPhone|iPod|Android|ios|Mobile)/i),
+    isTablet        : _isTablet,
+    isMobile        : _isMobile,
+    isAndroid       : _isAndroid,
+    isPC            : !_isTablet && !_isMobile,
     isSafari        : !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/), /*Test to 9, 10. */
     isIE            : !!window.ActiveXObject || "ActiveXObject" in window,     /*Test to 6 ~ 11 (not edge) */
     supportsPassive : supportsPassive
