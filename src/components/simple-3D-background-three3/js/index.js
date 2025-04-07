@@ -15,7 +15,7 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND_THREE3               = module.THREE_BACKGROUND_THREE3 || {};
-    module.THREE_BACKGROUND_THREE3.version       = '0.0.2';
+    module.THREE_BACKGROUND_THREE3.version       = '0.0.3';
     module.THREE_BACKGROUND_THREE3.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -67,7 +67,7 @@ export const THREE_BACKGROUND_THREE3 = ( ( module, $, window, document ) => {
 
 
 				// Immediately use the texture for material creation
-				const sphereGeo = new THREE.SphereBufferGeometry( 2, 12, 12 );
+				const sphereGeo = new THREE.SphereGeometry( 2, 12, 12 );
 				const sphereMat = new THREE.MeshBasicMaterial({
 					color: 0x494949,
 					wireframe: true

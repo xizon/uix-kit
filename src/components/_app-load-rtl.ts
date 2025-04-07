@@ -22,7 +22,6 @@ import '@uixkit/core/button/scss-rtl/_style.scss';
 import '@uixkit/core/card/scss-rtl/_style.scss';
 import '@uixkit/core/content-placeholder-animated/scss-rtl/_style.scss';
 import '@uixkit/core/dropdown-menu/scss-rtl/_style.scss';
-import '@uixkit/core/flexslider/scss-rtl/_style.scss';
 import '@uixkit/core/form/scss-rtl/_basic.scss';
 import '@uixkit/core/form/scss-rtl/_layout.scss';
 import '@uixkit/core/form/scss-rtl/_theme_material.scss';

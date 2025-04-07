@@ -1,5 +1,15 @@
 # Changelog
 
+#### = 5.4.0 (April 7, 2025) =
+
+* New: The swiper example adds a video embedding effect.
+* New: Migrate the threejs version to 175.
+* New: The new tool project `tools/threejs-dist-builder` can be used to generate threejs resource files.
+* Tweak: ThreeJS plugin update.
+* Remove: Remove "flexslider" plugin.
+
+
+
 #### = 5.3.0 (January 22, 2025) =
 
 * New: Migrate the threejs version to 151. (The next version will be migrated to 172)

@@ -16,7 +16,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SIMULATE_HTML_LAYOUT               = module.THREE_SIMULATE_HTML_LAYOUT || {};
-    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.3';
+    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.4';
     module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function( $ ) {
 
 		
@@ -149,7 +149,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 						const _offsetLeft = offsetLeft/wrapperWidth * ratio;
 
 
-						window['geometry' + i] = new THREE.BoxBufferGeometry(item.visibleWidth / wrapperHeight, item.visibleHeight / wrapperHeight, 40 / wrapperHeight);
+						window['geometry' + i] = new THREE.BoxGeometry(item.visibleWidth / wrapperHeight, item.visibleHeight / wrapperHeight, 40 / wrapperHeight);
 						window['tex' + i].wrapS = window['tex' + i].wrapT = THREE.RepeatWrapping;
 						window['materiel' + i] = new THREE.MeshBasicMaterial({
 							map: window['tex' + i]

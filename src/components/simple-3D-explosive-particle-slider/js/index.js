@@ -13,12 +13,18 @@ import { OrbitControls } from '@uixkit/plugins/THREE/esm/controls/OrbitControls'
 import '../scss/_style.scss';
 
 
+// !!!Important
+// If you use "MeshBasicMaterial" (not affected by light, the color of the image is white or light, 
+// use shader to load the original color)
+import fragment from "./shader/fragment-custom.glsl";
+import vertex from "./shader/vertex-custom.glsl";
+
 export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 	if ( window.THREE_EXP_PARTICLE_SLIDER === null ) return false;
 	
 	
     module.THREE_EXP_PARTICLE_SLIDER               = module.THREE_EXP_PARTICLE_SLIDER || {};
-    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.1.2';
+    module.THREE_EXP_PARTICLE_SLIDER.version       = '0.1.5';
     module.THREE_EXP_PARTICLE_SLIDER.documentReady = function( $ ) {
 
 		
@@ -414,6 +420,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 				light = new THREE.SpotLight( 0xffffff, 1.5 );
 				light.position.set( 0, 0, 2000 );
+                light.decay = 0; // !!!Important
 				scene.add( light );
 
 
@@ -484,6 +491,7 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 						texture.minFilter = THREE.LinearFilter;
 						texture.magFilter = THREE.LinearFilter;
 						texture.format = THREE.RGBAFormat;
+
 
 						// pause the video
 						texture.image.autoplay = true;
@@ -658,12 +666,25 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 					for ( j = 0; j < ygrid; j ++ ) {
 						ox = i;
 						oy = j;
-						geometry = new THREE.BoxBufferGeometry( xsize, ysize, xsize );
+						geometry = new THREE.BoxGeometry( xsize, ysize, xsize );
 						changeUVS( geometry, ux, uy, ox, oy );
-						materials[ cube_count ] = new THREE.MeshBasicMaterial( {
-							map: texture
-						 } );
+
+
+                        // Create a material
+                        const uniforms = {
+                            tex: { value: texture }
+                        };
+
+                        // !!!Important
+                        // If you use "MeshBasicMaterial" (not affected by light, the color of the image is white or light, 
+                        // use shader to load the original color)
+                        materials[cube_count] = new THREE.ShaderMaterial({
+                            uniforms,
+                            vertexShader: vertex,
+                            fragmentShader: fragment,
+                        });
 						material = materials[ cube_count ];
+                        
 						displacementSprite = new THREE.Mesh( geometry, material );
 						displacementSprite.position.x = ( i - xgrid / 2 ) * xsize;
 						displacementSprite.position.y = ( j - ygrid / 2 ) * ysize;
@@ -727,8 +748,11 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 			function changeUVS( geometry, unitx, unity, offsetx, offsety ) {
 				const uvs = geometry.attributes.uv.array;
 				for ( let i = 0; i < uvs.length; i += 2 ) {
+
+                    // Modify the UV mapping calculation to ensure that each small square is correctly mapped to the corresponding part of the original image
 					uvs[ i ] = ( uvs[ i ] + offsetx ) * unitx;
 					uvs[ i + 1 ] = ( uvs[ i + 1 ] + offsety ) * unity;
+
 				}
 			}	
 			

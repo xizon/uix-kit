@@ -130,8 +130,11 @@ uix-kit/
 │   │       ├── models/
 │   │       ├── json/
 │   │       └── js/
+├── tools/
+│   └── threejs-dist-builder/   ------------ # three.js 和 three.min.js 静态资源文件生成器 (兼容 174+ 版本)
 └──
 ```
+
 
 
 ## 开发者基本操作

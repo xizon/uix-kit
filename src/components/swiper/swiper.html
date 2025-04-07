@@ -125,7 +125,7 @@
 												<div class="container">
 													<div class="row">
 														<div class="col-12">
-															<h3>Parallax Effect</h3>
+															<h3>Parallax Effect + Video</h3>
 															<p>Custom slides transform effect and custom buttons..</p>
 															<hr>
 
@@ -145,9 +145,25 @@
 											====================================================== -->
 											<div role="slider" class="swiper-container" id="app-slider3" style="margin-top: 30px;">
 												<div class="swiper-wrapper">
-													<div class="swiper-slide"><span>Slide Three 1</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-1.jpg)"></div></div>
-													<div class="swiper-slide"><span>Slide Three 2</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-2.jpg)"></div></div>
-													<div class="swiper-slide"><span>Slide Three 3</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-3.jpg)"></div></div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <span>Slide Three 1</span>
+                                                        <div class="slide-inner" style="background-image:url(assets/images/demo/slide-1.jpg)"></div>
+                                                    </div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <span>Slide Three 2</span>
+                                                        <div class="slide-inner" style="background-image:url(assets/images/demo/slide-2.jpg)"></div>
+                                                    </div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <span>Slide Three 3</span>
+                                                        <div class="slide-inner" style="background-image:url(assets/images/demo/slide-3.jpg)"></div>
+                                                    </div>
+                                                    
 												</div>
 												<!-- Add Pagination -->
 												<div class="swiper-pagination"></div>
@@ -164,6 +180,81 @@
 
 
 
+											<!-- Title
+											====================================================== -->
+											<section class="uix-spacing--s">
+												<div class="container">
+													<div class="row">
+														<div class="col-12">
+															<h3>Video</h3>
+															<p>Embed the video player.</p>
+															<hr>
+
+
+														</div>
+													</div>
+													<!-- .row end -->
+
+												</div>
+												<!-- .container end -->
+
+											</section>
+
+
+
+										   <!-- Slideshow
+											====================================================== -->
+											<div role="slider" class="swiper-container" id="app-slider3_2" style="margin-top: 30px;">
+												<div class="swiper-wrapper">
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <img src="assets/images/demo/slide-1.jpg" alt="null">
+                                                    </div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <img src="assets/images/demo/slide-2.jpg" alt="null">
+                                                    </div>
+
+                                                    <!-- Video -->
+                                                    <div class="swiper-slide">
+                                                        <div 
+                                                            class="slide-inner__video-container ratio ratio-16x9" 
+                                                            data-embed-video-width="auto" 
+                                                            data-embed-video-height="auto"
+                                                            data-embed-video-controls="false" 
+                                                            data-embed-video-autoplay="true" 
+                                                            data-embed-video-loop="false"
+                                                        >
+                                                            <video 
+                                                                poster="assets/videos/480x270/demo.jpg"
+                                                                autoPlay
+                                                                muted
+                                                                loop
+                                                                playsInline
+                                                                preload="auto"
+                                                                webkit-playsinline
+                                                            >
+                                                                <source src="assets/videos/480x270/demo.mp4" type="video/mp4">
+                                                                <source src="assets/videos/480x270/demo.webm" type="video/webm">
+                                                            </video>
+                                                        </div>
+                                                    </div>
+                                                    
+												</div>
+												<!-- Add Pagination -->
+												<div class="swiper-pagination"></div>
+												<!-- Add Arrows -->
+												<div class="swiper-button-prev">
+
+													<svg viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+												</div>
+												<div class="swiper-button-next">
+													<svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+												</div>
+											</div>	
+											<!-- /.swiper-container -->				
 
 
 											<!-- Title

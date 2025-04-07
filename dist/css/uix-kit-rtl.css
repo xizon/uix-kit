@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  5.3.0
+ * ## Version             :  5.4.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 19, 2025
+ * ## Last Update         :  April 7, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -37,26 +37,25 @@
     16.Cards
     17.Content Placeholder Animated
     18.Dropdown Menu
-    19.Flexslider (Third-party plugin)
-    20.Form
-    21.Form ( Layout )-
-    22.Form  ( Material Design Theme )
-    23.Form
-    24.Cutom Light Box
-    25.Brands List
-    26.Bulleted List
-    27.Maintain Aspect Ratio List
-    28.Side by Side List
-    29.Login Templates
-    30.Modal Dialog
-    31.Ribbon
-    32.Comments
-    33.Striking
-    34.Table
-    35.ToolTip
-    36.Vertical Menu (RTL)
-    37.WordPress Core ( Do not use prefix "uix-" )
-    38.WordPress Blocks ( Do not use prefix "uix-" )
+    19.Form
+    20.Form ( Layout )-
+    21.Form  ( Material Design Theme )
+    22.Form
+    23.Cutom Light Box
+    24.Brands List
+    25.Bulleted List
+    26.Maintain Aspect Ratio List
+    27.Side by Side List
+    28.Login Templates
+    29.Modal Dialog
+    30.Ribbon
+    31.Comments
+    32.Striking
+    33.Table
+    34.ToolTip
+    35.Vertical Menu (RTL)
+    36.WordPress Core ( Do not use prefix "uix-" )
+    37.WordPress Blocks ( Do not use prefix "uix-" )
 
 
 */
@@ -1050,30 +1049,6 @@ body.js-uix-menu-opened .uix-menu-mobile__toggle span {
 .uix-dropdown-menu > ul::before {
   left: auto;
   right: 20px;
-}
-/* ======================================================
-   <!-- Flexslider (Third-party plugin) -->
-/* ====================================================== */
-:root {
-  /* COLOR PALETTE  */
-  --uix-placeholder-text-color: #E6E6E8;
-  --uix-highlight-color1: #CE3A3E;
-  --uix-highlight-color2: #DE510E;
-  --uix-primary-text-color: #212121;
-  --uix-primary-link-color: #474747;
-  --uix-primary-link-hover-color: #212121;
-  --uix-heading-text-color: #212121;
-  --uix-sub-text-color: #AEAEAE;
-  --uix-dividing-line-color: #DCDCDC;
-  --uix-btn-gradient-color1: #CE3A3E;
-  --uix-btn-gradient-color2: #C04645;
-  --uix-btn-gradient-color3: #DE510E;
-  --uix-primary-bg-color: transparent;
-}
-
-.flexslider,
-.uix-flexslider {
-  direction: ltr !important;
 }
 /* ======================================================
     <!-- Form -->

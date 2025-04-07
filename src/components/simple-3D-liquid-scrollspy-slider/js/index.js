@@ -21,7 +21,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
 	
 	
     module.THREE_LIQUID_SCROLLSPY_SLIDER               = module.THREE_LIQUID_SCROLLSPY_SLIDER || {};
-    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.1.6';
+    module.THREE_LIQUID_SCROLLSPY_SLIDER.version       = '0.1.7';
     module.THREE_LIQUID_SCROLLSPY_SLIDER.documentReady = function( $ ) {
 
 	
@@ -594,6 +594,7 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
     
                 light = new THREE.SpotLight( 0xffffff, 1.5 );
                 light.position.set( 0, 0, 2000 );
+                light.decay = 0; // !!!Important
                 scene.add( light );
     
     

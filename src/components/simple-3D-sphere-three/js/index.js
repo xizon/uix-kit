@@ -23,7 +23,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SPHERE_THREE               = module.THREE_SPHERE_THREE || {};
-    module.THREE_SPHERE_THREE.version       = '0.0.4';
+    module.THREE_SPHERE_THREE.version       = '0.0.5';
     module.THREE_SPHERE_THREE.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -66,6 +66,7 @@ export const THREE_SPHERE_THREE = ( ( module, $, window, document ) => {
 
 				light = new THREE.SpotLight( 0xffffff, 1.5 );
 				light.position.set( 0, 500, 2000 );
+                light.decay = 0; // !!!Important
 				scene.add( light );
 
 

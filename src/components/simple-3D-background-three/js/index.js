@@ -15,7 +15,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_BACKGROUND_THREE               = module.THREE_BACKGROUND_THREE || {};
-    module.THREE_BACKGROUND_THREE.version       = '0.0.8'; // via threejs 151
+    module.THREE_BACKGROUND_THREE.version       = '0.0.9'; // via threejs 151
     module.THREE_BACKGROUND_THREE.documentReady = function( $ ) {
 
 		
@@ -96,6 +96,7 @@ export const THREE_BACKGROUND_THREE = ( ( module, $, window, document ) => {
 
 				light = new THREE.SpotLight( 0xffffff, 1.5 );
 				light.position.set( 0, 500, 2000 );
+                light.decay = 0; // !!!Important
 				scene.add( light );
 
 

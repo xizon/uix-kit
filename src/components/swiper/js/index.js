@@ -39,8 +39,69 @@ export const SWIPER = ( ( module, $, window, document ) => {
 	
 	
     module.SWIPER               = module.SWIPER || {};
-    module.SWIPER.version       = '0.0.6';
+    module.SWIPER.version       = '0.0.8';
     module.SWIPER.documentReady = function( $ ) {
+
+		/*
+		 * Initialize embedded local video.
+		 *
+		 * @param  {Element} wrapper          - The outermost video container, which can contain multiple videos
+		 * @return {Void}
+		 */
+        const videoEmbedInit = (wrapper) => {
+            const videoContainers = wrapper.querySelectorAll('.slide-inner__video-container');
+            
+            videoContainers.forEach(container => {
+                const video = container.querySelector('video');
+                if (!video) return;
+        
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                
+                const videoWrapperW = container.parentElement.clientWidth;
+                const width = container.dataset.embedVideoWidth || 'auto';
+                const height = container.dataset.embedVideoHeight || 'auto';
+                const controls = container.dataset.embedVideoControls === 'true';
+                const autoplay = container.dataset.embedVideoAutoplay === 'true';
+                const loop = container.dataset.embedVideoLoop === 'true';
+                
+                //
+                if ( width !== 'auto' ) {
+                    video.style.width = width + 'px';
+                }	
+
+                if ( height !== 'auto' ) {
+                    video.style.height = height + 'px';
+                }
+            
+                
+                video.controls = controls;
+                video.autoplay = autoplay;
+                video.loop = loop;
+                video.preload = 'auto';
+                
+                // Performance optimization: Play video only when it's visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (autoplay) {
+                                const playPromise = video.play();
+                                if (playPromise !== undefined) {
+                                    playPromise.catch(error => {
+                                        console.log("Auto-play was prevented");
+                                    });
+                                }
+                            }
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(container);
+            });
+        };
+        
 		
 		$( '.uix-swiper' ).each( function()  {
 			
@@ -111,6 +172,7 @@ export const SWIPER = ( ( module, $, window, document ) => {
 				//------------------------------------------
 				
 				if ( $el.find( '#app-slider3' ).length > 0 ) {
+          
 					const interleaveOffset = 0.5;
 					const swiper3 = new Swiper('#app-slider3', {
 						slidesPerView: 1,
@@ -168,11 +230,82 @@ export const SWIPER = ( ( module, $, window, document ) => {
 
 					//AutoPlay
 					swiper3.autoplay.start();
-					//swiper3.autoplay.stop();			
-				}
-				
+					//swiper3.autoplay.stop();	
 
+                    
+				}
+	
 				
+				//Swiper custom slides (Video)
+				//------------------------------------------
+				
+				if ( $el.find( '#app-slider3_2' ).length > 0 ) {
+          
+                    // Store all video elements
+                    const videos = $el.find( '#app-slider3' )[0].querySelectorAll('.slide-inner__video-container video');
+  
+
+					const swiper3_2 = new Swiper('#app-slider3_2', {
+						spaceBetween: 0,
+						speed: 1000,
+                        loop: true,
+                        autoHeight: true,
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true,
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '">' + (index + 1) + '</span>';
+							},	
+						},
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						},
+						on: {
+                            init: function() {
+                                // init video
+                                videoEmbedInit($el.find( '#app-slider3_2' )[0]);
+                            },
+                            slideChangeTransitionStart: function() {
+                                // Pause all videos
+                                videos.forEach(video => {
+                                    video.pause();
+                                });
+                            },
+                            slideChangeTransitionEnd: function() {
+                                // Get the video in the current slideshow
+                                const currentVideo = this.slides[this.activeIndex].querySelector('video');
+                                if (currentVideo) {
+                                    currentVideo.currentTime = 0;
+
+                                    // play
+                                    const playPromise = currentVideo.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.catch(error => {
+                                            console.log("Auto-play was prevented");
+                                        });
+                                    }
+                                }
+                            }
+						}
+
+					});
+
+
+					//AutoPlay
+					swiper3_2.autoplay.start();
+					//swiper3.autoplay.stop();	
+
+                    // Switch to the next slide at the end of the video
+                    videos.forEach(video => {
+                        video.addEventListener('ended', () => {
+                            swiper3_2.slideNext();
+                        });
+                    });
+
+                    
+				}
+	
 				
 				//Swiper custom slides transform effect (Scale Effect without left/right swipe)
 				//------------------------------------------

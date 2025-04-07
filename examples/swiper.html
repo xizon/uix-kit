@@ -30,11 +30,11 @@
 
 
 	<!-- Theme  -->
-	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=OE6GdOtwCBL6FcHDuU9g"/>
+	<link rel="stylesheet" href="../dist/css/uix-kit.min.css?ver=uh5PimsX5pCOzKKL4Rrv"/>
 
 
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" href="assets/css/IE.css?ver=OE6GdOtwCBL6FcHDuU9g" />
+	<link rel="stylesheet" href="assets/css/IE.css?ver=uh5PimsX5pCOzKKL4Rrv" />
 	<![endif]-->
 
 
@@ -223,7 +223,6 @@
 														<li><a href="image-shapes.html">Image Shapes</a></li>
 														<li><a href="rotating-elements.html">Rotating Elements</a></li>
 														<li><a href="dotted-line.html">Dotted Line</a></li>
-														<li><a href="flexslider.html">Flexslider<small style="font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;">Third-party plugin</small></a></li>
 														<li><a href="swiper.html">Swiper<small style="font-size: 10px;background: #51B801; color:#fff; border-radius: 5px;padding: 2px 3px;display: inline-block;margin-left: 3px;">Third-party plugin</small></a></li>
 														<li><a href="advanced-slider.html">Advanced Slider (Basic)</a></li>
 														<li><a href="advanced-slider-brightness.html">Advanced Slider Brightness</a></li>
@@ -507,7 +506,7 @@
 												<div class="container">
 													<div class="row">
 														<div class="col-12">
-															<h3>Parallax Effect</h3>
+															<h3>Parallax Effect + Video</h3>
 															<p>Custom slides transform effect and custom buttons..</p>
 															<hr>
 
@@ -527,9 +526,25 @@
 											====================================================== -->
 											<div role="slider" class="swiper-container" id="app-slider3" style="margin-top: 30px;">
 												<div class="swiper-wrapper">
-													<div class="swiper-slide"><span>Slide Three 1</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-1.jpg)"></div></div>
-													<div class="swiper-slide"><span>Slide Three 2</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-2.jpg)"></div></div>
-													<div class="swiper-slide"><span>Slide Three 3</span><div class="slide-inner" style="background-image:url(assets/images/demo/slide-3.jpg)"></div></div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <span>Slide Three 1</span>
+                                                        <div class="slide-inner" style="background-image:url(assets/images/demo/slide-1.jpg)"></div>
+                                                    </div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <span>Slide Three 2</span>
+                                                        <div class="slide-inner" style="background-image:url(assets/images/demo/slide-2.jpg)"></div>
+                                                    </div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <span>Slide Three 3</span>
+                                                        <div class="slide-inner" style="background-image:url(assets/images/demo/slide-3.jpg)"></div>
+                                                    </div>
+                                                    
 												</div>
 												<!-- Add Pagination -->
 												<div class="swiper-pagination"></div>
@@ -546,6 +561,81 @@
 
 
 
+											<!-- Title
+											====================================================== -->
+											<section class="uix-spacing--s">
+												<div class="container">
+													<div class="row">
+														<div class="col-12">
+															<h3>Video</h3>
+															<p>Embed the video player.</p>
+															<hr>
+
+
+														</div>
+													</div>
+													<!-- .row end -->
+
+												</div>
+												<!-- .container end -->
+
+											</section>
+
+
+
+										   <!-- Slideshow
+											====================================================== -->
+											<div role="slider" class="swiper-container" id="app-slider3_2" style="margin-top: 30px;">
+												<div class="swiper-wrapper">
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <img src="assets/images/demo/slide-1.jpg" alt="null">
+                                                    </div>
+
+                                                    <!-- Image -->
+                                                    <div class="swiper-slide">
+                                                        <img src="assets/images/demo/slide-2.jpg" alt="null">
+                                                    </div>
+
+                                                    <!-- Video -->
+                                                    <div class="swiper-slide">
+                                                        <div 
+                                                            class="slide-inner__video-container ratio ratio-16x9" 
+                                                            data-embed-video-width="auto" 
+                                                            data-embed-video-height="auto"
+                                                            data-embed-video-controls="false" 
+                                                            data-embed-video-autoplay="true" 
+                                                            data-embed-video-loop="false"
+                                                        >
+                                                            <video 
+                                                                poster="assets/videos/480x270/demo.jpg"
+                                                                autoPlay
+                                                                muted
+                                                                loop
+                                                                playsInline
+                                                                preload="auto"
+                                                                webkit-playsinline
+                                                            >
+                                                                <source src="assets/videos/480x270/demo.mp4" type="video/mp4">
+                                                                <source src="assets/videos/480x270/demo.webm" type="video/webm">
+                                                            </video>
+                                                        </div>
+                                                    </div>
+                                                    
+												</div>
+												<!-- Add Pagination -->
+												<div class="swiper-pagination"></div>
+												<!-- Add Arrows -->
+												<div class="swiper-button-prev">
+
+													<svg viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+												</div>
+												<div class="swiper-button-next">
+													<svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+												</div>
+											</div>	
+											<!-- /.swiper-container -->				
 
 
 											<!-- Title
@@ -978,7 +1068,7 @@
     <script defer src="assets/js/min/video.min.js?ver=7.5.3"></script>
     <script defer src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
     <script defer src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
-    <script defer src="assets/js/min/three.min.js?ver=r151"></script>
+    <script defer src="assets/js/min/three.min.js?ver=r175"></script>
     <script defer src="assets/js/min/anime.min.js?ver=3.1"></script>
     <script defer src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
 
@@ -993,7 +1083,7 @@
         * These variables are being used in `uix-kit.min.js`.
         *    
         */ 
-		var REVISION     = "5.3.0",
+		var REVISION     = "5.4.0",
 			APP_ROOTPATH = {
 				"templateUrl" : "", //If the file is in the root directory, you can leave it empty. If in another directory, you can write: "/blog"
 				"homeUrl"     : "",  //Eg. https://uiux.cc
@@ -1007,7 +1097,7 @@
         */
         window.$ = window.jQuery;
     </script>  
-    <script defer src="../dist/js/uix-kit.min.js?ver=OE6GdOtwCBL6FcHDuU9g"></script>
+    <script defer src="../dist/js/uix-kit.min.js?ver=uh5PimsX5pCOzKKL4Rrv"></script>
 	<!-- Your Plugins & Theme Scripts  end -->
     
 

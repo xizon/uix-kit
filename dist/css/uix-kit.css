@@ -6,9 +6,9 @@
  * ## Project Name        :  Uix Kit
  * ## Project Description :  A free web kits for fast web design and development, compatible with Bootstrap v5.
  * ## Project URL         :  https://uiux.cc
- * ## Version             :  5.3.0
+ * ## Version             :  5.4.0
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  March 19, 2025
+ * ## Last Update         :  April 7, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -52,83 +52,82 @@
     30.Dropdown Menu
     31.Dropdown Menu 2 (Multi-level drop-down navigation)
     32.Cascading DropDown List
-    33.Flexslider (Third-party plugin)
-    34.Floating Side Element
-    35.Form Progress
-    36.Form
-    37.Form ( Layout )-
-    38.Form  ( Material Design Theme )
-    39.Form ( 3rd Party Plugin )
-    40.Gallery
-    41.Hybrid Content Slider
-    42.Image Shapes
-    43.Infinite Scrolling Element
-    44.Lava-Lamp Style Menu
-    45.Cutom Light Box
-    46.Bulleted List
-    47.List of Posts
-    48.List of Split Posts
-    49.Full Width Column to Edge
-    50.Login Templates
-    51.Modal Dialog
-    52.Multiple Items Carousel
-    53.Parallax
-    54.Periodical Scroll
-    55.Pricing
-    56.Progress Bar
-    57.Progress Line
-    58.Show More Less
-    59.Sticky Elements
-    60.SVG Map
-    61.SVG Mask Slider
-    62.Swiper
-    63.3D Background
-    64.3D Carousel
-    65.3D Explosive Particle Slider
-    66.3D Liquid Scrollspy Slider
-    67.Table
-    68.Tabs
-    69.Team Focus
-    70.Text effect
-    71.Timeline
-    72.Toast
-    73.Vertical Menu
-    74.WordPress Core ( Do not use prefix "uix-" )
-    75.WordPress Blocks ( Do not use prefix "uix-" )
-    76.3rd Party Plugins
-    77.Badges
-    78.Blended Grid Layout
-    79.Breadcrumbs
-    80.Button
-    81.Cards
-    82.Badges
-    83.Coach Mark
-    84.Content Placeholder Animated
-    85.Dividing Line
-    86.Dotted Line
-    87.Equal-width Columns
-    88.Features
-    89.Footer Templates
-    90.Gallery Grid Layout
-    91.Heading
-    92.Image Animation
-    93.Brands List
-    94.Maintain Aspect Ratio List
-    95.Side by Side List
-    96.Side by Side List With Photo
-    97.Mouse Animation Scroll
-    98.Overlay
-    99.Ribbon
-    100.Separator of Rule With Text
-    101.Shape Animation
-    102.Comments ( Synchronize to WordPress's class name )
-    103.Editing Component
-    104.Striking
-    105.Team Fullwidth (Style using the Side by Side List With Photo module)
-    106.Team Gird
-    107.Testimonials Carousel
-    108.ToolTip
-    109.Wave Background
+    33.Floating Side Element
+    34.Form Progress
+    35.Form
+    36.Form ( Layout )-
+    37.Form  ( Material Design Theme )
+    38.Form ( 3rd Party Plugin )
+    39.Gallery
+    40.Hybrid Content Slider
+    41.Image Shapes
+    42.Infinite Scrolling Element
+    43.Lava-Lamp Style Menu
+    44.Cutom Light Box
+    45.Bulleted List
+    46.List of Posts
+    47.List of Split Posts
+    48.Full Width Column to Edge
+    49.Login Templates
+    50.Modal Dialog
+    51.Multiple Items Carousel
+    52.Parallax
+    53.Periodical Scroll
+    54.Pricing
+    55.Progress Bar
+    56.Progress Line
+    57.Show More Less
+    58.Sticky Elements
+    59.SVG Map
+    60.SVG Mask Slider
+    61.Swiper
+    62.3D Background
+    63.3D Carousel
+    64.3D Explosive Particle Slider
+    65.3D Liquid Scrollspy Slider
+    66.Table
+    67.Tabs
+    68.Team Focus
+    69.Text effect
+    70.Timeline
+    71.Toast
+    72.Vertical Menu
+    73.WordPress Core ( Do not use prefix "uix-" )
+    74.WordPress Blocks ( Do not use prefix "uix-" )
+    75.3rd Party Plugins
+    76.Badges
+    77.Blended Grid Layout
+    78.Breadcrumbs
+    79.Button
+    80.Cards
+    81.Badges
+    82.Coach Mark
+    83.Content Placeholder Animated
+    84.Dividing Line
+    85.Dotted Line
+    86.Equal-width Columns
+    87.Features
+    88.Footer Templates
+    89.Gallery Grid Layout
+    90.Heading
+    91.Image Animation
+    92.Brands List
+    93.Maintain Aspect Ratio List
+    94.Side by Side List
+    95.Side by Side List With Photo
+    96.Mouse Animation Scroll
+    97.Overlay
+    98.Ribbon
+    99.Separator of Rule With Text
+    100.Shape Animation
+    101.Comments ( Synchronize to WordPress's class name )
+    102.Editing Component
+    103.Striking
+    104.Team Fullwidth (Style using the Side by Side List With Photo module)
+    105.Team Gird
+    106.Testimonials Carousel
+    107.ToolTip
+    108.Wave Background
 
 
 */
@@ -5819,598 +5818,6 @@ h6 {
 }
 .uix-cascading-dropdown-list .uix-cascading-dropdown-list__opt.is-active {
   background: #f7f7f7;
-}
-/* ======================================================
-    <!-- Flexslider (Third-party plugin) -->
-/* ====================================================== */
-:root {
-  /* COLOR PALETTE  */
-  --uix-placeholder-text-color: #E6E6E8;
-  --uix-highlight-color1: #CE3A3E;
-  --uix-highlight-color2: #DE510E;
-  --uix-primary-text-color: #212121;
-  --uix-primary-link-color: #474747;
-  --uix-primary-link-hover-color: #212121;
-  --uix-heading-text-color: #212121;
-  --uix-sub-text-color: #AEAEAE;
-  --uix-dividing-line-color: #DCDCDC;
-  --uix-btn-gradient-color1: #CE3A3E;
-  --uix-btn-gradient-color2: #C04645;
-  --uix-btn-gradient-color3: #DE510E;
-  --uix-primary-bg-color: transparent;
-}
-
-/*
- * 1. Thumbnail ControlNav Pattern
- * 2. Default Slideshow & Default  Controls
- *    2.1. Prevent content overflow
- *    2.2. Left and right arrows by default
- *    2.3. Pagination Dot by default
- *    2.4. Thumbnail
-
- * 3. Custom Controls
- *    3.1. Left and right arrows by Custom Controls
- *    3.2. Pagination by Custom Controls
- *    3.3. Custom Next/Prev and Pagination Styles
- *    3.4. Next/Prev Image Thumbnail In Navigation
- *    3.5. Timeline Indicator
-
- * 4. Primary Slideshow  (with dynamic min/max ranges )
- * 5. Primary Slideshow
- * 6. Parallax Slideshow
-*/
-/*
- ---------------------------
- 1. Thumbnail ControlNav Pattern
- ---------------------------
- */
-.uix-flexslider__thumbs {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: 100%;
-  overflow: hidden;
-  overflow-x: auto;
-  white-space: nowrap;
-  margin-top: 1.5rem;
-}
-.uix-flexslider__thumbs::-webkit-scrollbar-track {
-  border-radius: 0px;
-  background-color: #E6E3E3;
-}
-.uix-flexslider__thumbs::-webkit-scrollbar {
-  height: 5px;
-  background-color: var(--uix-highlight-color1);
-}
-.uix-flexslider__thumbs::-webkit-scrollbar-thumb {
-  border-radius: 0px;
-  background-color: var(--uix-highlight-color1);
-}
-.uix-flexslider__thumbs ul {
-  margin: 0;
-  padding: 0;
-}
-.uix-flexslider__thumbs ul li {
-  width: 100px;
-  max-height: 100px;
-  display: inline-block;
-  cursor: pointer;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  padding: 0;
-  transform: scale(0.9);
-}
-.uix-flexslider__thumbs ul li.is-active {
-  transform: scale(1);
-}
-.uix-flexslider__thumbs ul li img {
-  box-shadow: 0px 6px 11px 1px rgba(0, 0, 0, 0.15);
-}
-
-/*
- ---------------------------
- 2. Default Slideshow & Default  Controls
- ---------------------------
- */
-/*---- 2.1. Prevent content overflow ----*/
-.uix-flexslider,
-.uix-flexslider .uix-flexslider__inner,
-.uix-flexslider .uix-flexslider__inner > .uix-flexslider__item {
-  max-height: 100vh;
-}
-
-.uix-flexslider,
-.uix-flexslider__viewport {
-  transition: 0.1s ease;
-}
-
-.uix-flexslider {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  zoom: 1;
-  width: 100%;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.uix-flexslider__viewport {
-  max-height: 200vh;
-}
-
-.uix-flexslider .uix-flexslider__inner {
-  height: 100%; /* Required */
-}
-.uix-flexslider .uix-flexslider__inner > .uix-flexslider__item {
-  display: none;
-  -webkit-backface-visibility: hidden;
-  position: relative;
-}
-.uix-flexslider .uix-flexslider__inner img {
-  max-width: 100%;
-  display: block;
-  border: none;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-}
-
-html[xmlns] .uix-flexslider .uix-flexslider__inner {
-  display: block;
-}
-
-* html .uix-flexslider .uix-flexslider__inner {
-  height: 1%;
-}
-
-.no-js .uix-flexslider .uix-flexslider__inner > .uix-flexslider__item:first-child {
-  display: block;
-}
-
-.uix-flexslider .uix-flexslider__inner {
-  zoom: 1;
-}
-.uix-flexslider .uix-flexslider__inner img {
-  height: auto;
-  width: 100%;
-}
-
-/*---- 2.2. Left and right arrows by default ----*/
-ul.uix-flexslider__direction-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  background: none;
-}
-ul.uix-flexslider__direction-nav li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: relative;
-}
-ul.uix-flexslider__direction-nav li a {
-  display: block;
-  z-index: 9;
-  position: absolute;
-  top: 50%;
-  height: 40px;
-  margin-top: -20px;
-  line-height: 40px;
-  width: 50px;
-  text-align: center;
-  opacity: 0.8;
-  color: #fff;
-  font-size: 1.3125rem;
-  opacity: 0.66;
-}
-ul.uix-flexslider__direction-nav li a:hover {
-  opacity: 1;
-  color: #fff;
-  text-decoration: none;
-}
-ul.uix-flexslider__direction-nav li a.uix-flexslider__prev {
-  left: -100px;
-}
-ul.uix-flexslider__direction-nav li a.uix-flexslider__prev.uix-flexslider__disabled {
-  visibility: hidden;
-  pointer-events: none;
-}
-ul.uix-flexslider__direction-nav li a.uix-flexslider__next {
-  right: -100px;
-  text-align: right;
-}
-ul.uix-flexslider__direction-nav li a.uix-flexslider__next.uix-flexslider__disabled {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.uix-flexslider:hover a.uix-flexslider__prev {
-  left: 0;
-}
-.uix-flexslider:hover a.uix-flexslider__next {
-  right: 20px;
-}
-
-/*----- 2.3. Pagination Dot by default -----*/
-ol.uix-flexslider__control-paging {
-  list-style: none;
-  left: 0;
-  bottom: 0;
-  font-size: 0; /*Fighting the Space Between Inline Block Elements*/
-  display: block;
-  width: 100%;
-  text-align: center; /*require*/
-  position: absolute;
-}
-ol.uix-flexslider__control-paging li {
-  font-size: 1rem; /*Fighting the Space Between Inline Block Elements*/
-  display: inline-block; /*require*/
-  margin: 0 0.2rem;
-}
-ol.uix-flexslider__control-paging li a {
-  width: 12px;
-  height: 12px;
-  display: block;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  text-indent: -9999px;
-  border-radius: 20px;
-  box-shadow: 0px 6px 23px -2px rgba(0, 0, 0, 0.36);
-}
-ol.uix-flexslider__control-paging li a:hover, ol.uix-flexslider__control-paging li a.uix-flexslider__active {
-  background: rgb(255, 255, 255);
-  width: 25px;
-}
-
-/*----- 2.4. Thumbnail -----*/
-.uix-flexslider__control-thumbs {
-  margin: 5px 0 0;
-  position: static;
-  overflow: hidden;
-}
-.uix-flexslider__control-thumbs li {
-  width: 25%;
-  float: left;
-  margin: 0;
-}
-.uix-flexslider__control-thumbs img {
-  width: 100%;
-  height: auto;
-  display: block;
-  opacity: 0.7;
-  cursor: pointer;
-  transition: 0.1s ease;
-}
-.uix-flexslider__control-thumbs img:hover {
-  opacity: 1;
-}
-.uix-flexslider__control-thumbs .uix-flexslider__active {
-  opacity: 1;
-  cursor: default;
-}
-
-/*
- ---------------------------
- 3. Custom Controls
- ---------------------------
- */
-.uix-flexslider__mycontrols {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-  margin-top: 1.75rem;
-  /*----- 3.1. Left and right arrows by Custom Controls -----*/
-  /*----- 3.2. Pagination by Custom Controls  -----*/
-}
-.uix-flexslider__mycontrols > a {
-  position: relative;
-  display: table-cell;
-  color: rgb(233, 47, 22);
-  opacity: 0.7;
-  width: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-.uix-flexslider__mycontrols > a::after {
-  content: "";
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgb(233, 47, 22);
-  position: absolute;
-  display: block;
-  top: 0;
-  border-radius: 50%;
-}
-.uix-flexslider__mycontrols > a:hover {
-  opacity: 1;
-}
-.uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__prev::after {
-  left: 0;
-}
-.uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__prev.uix-flexslider__disabled {
-  visibility: hidden;
-  pointer-events: none;
-}
-.uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__next::after {
-  right: 0;
-}
-.uix-flexslider__mycontrols > a.uix-flexslider__mycontrols__next.uix-flexslider__disabled {
-  visibility: hidden;
-  pointer-events: none;
-}
-.uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol {
-  position: relative;
-  transform: translateY(0.5rem);
-}
-.uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li {
-  margin: 0 0.5rem;
-}
-.uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li a {
-  background: rgba(233, 47, 22, 0.5);
-  position: relative;
-}
-.uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li a::after {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid rgb(233, 47, 22);
-  border-radius: 100%;
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  transform: scale(0);
-  transition: all 0.3s ease;
-}
-.uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li a:hover, .uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li a.uix-flexslider__active {
-  background: rgb(233, 47, 22);
-  width: 12px;
-}
-.uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li a:hover::after, .uix-flexslider__mycontrols .uix-flexslider__mycontrols__control-paging > ol li a.uix-flexslider__active::after {
-  transform: scale(1);
-}
-
-/*---- 3.3. Custom Next/Prev and Pagination Styles ----*/
-/*----- 3.4. Next/Prev Image Thumbnail In Navigation -----*/
-.uix-flexslider__mycontrols--thumb {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-  margin-top: 1.75rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(100% - 30px);
-}
-.uix-flexslider__mycontrols--thumb a > span {
-  transition: all 0.3s ease;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: inline-block;
-  overflow: hidden;
-  transform: scale(0.7);
-  opacity: 0.5;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 5px 15px 0px, rgba(50, 50, 93, 0.1) 0px 15px 35px 0px;
-}
-.uix-flexslider__mycontrols--thumb a > span img {
-  width: 100%;
-  height: 100%;
-}
-.uix-flexslider__mycontrols--thumb > * {
-  display: table-cell;
-}
-.uix-flexslider__mycontrols--thumb > a {
-  width: 50px;
-}
-.uix-flexslider__mycontrols--thumb > a:hover > span {
-  transform: scale(1);
-  opacity: 1;
-}
-.uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__prev.is-disabled {
-  display: none;
-}
-.uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__next {
-  text-align: right;
-}
-.uix-flexslider__mycontrols--thumb .uix-flexslider__mycontrols--thumb__next.is-disabled {
-  display: none;
-}
-
-/*----- 3.5. Timeline Indicator -----*/
-.uix-flexslider__timeline-nav {
-  height: 3px;
-  position: relative;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-}
-.uix-flexslider__timeline-nav > span {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--uix-highlight-color1);
-  transition: all 0.3s ease;
-}
-
-/*
- ---------------------------
- 4. Primary Slideshow  (with dynamic min/max ranges )
- ---------------------------
- */
-.uix-flexslider.uix-flexslider--itemgrid .uix-flexslider__item {
-  transition: 0.1s ease;
-  opacity: 0.2;
-}
-.uix-flexslider.uix-flexslider--itemgrid .uix-flexslider__item.uix-flexslider__item--active {
-  opacity: 1;
-}
-
-@media all and (max-width: 768px) {
-  .uix-flexslider.uix-flexslider--itemgrid .uix-flexslider__item {
-    opacity: 1;
-  }
-}
-/*
- ---------------------------
- 5. Primary Slideshow
- ---------------------------
- */
-.uix-flexslider.uix-flexslider--primary {
-  overflow: hidden;
-  /* Full Screen Slider
-   * You need add an attribute "data-slider-bg" to ".uix-flexslider__item"
-  */
-}
-.uix-flexslider.uix-flexslider--primary.is-fullscreen {
-  min-height: 100vh;
-}
-.uix-flexslider.uix-flexslider--primary.is-fullscreen img {
-  height: 100vh;
-  visibility: hidden;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  width: 100%;
-  /* Vertical Center */
-  top: 50%;
-  transform: translateY(-50%);
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level {
-  animation-delay: 0.5s;
-  animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-name: uix-cssAnim--fadeOutLeft;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level-1,
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-flexslider__el-level-2 {
-  color: #fff;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level {
-  animation-delay: 0.4s;
-  animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-name: uix-cssAnim--fadeInLeft;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level-1 {
-  animation-delay: 0.4s;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level-2 {
-  animation-delay: 0.5s;
-}
-.uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__active-slide .uix-flexslider__desc .uix-flexslider__el-level-3 {
-  animation-delay: 0.6s;
-}
-
-@media all and (max-width: 768px) {
-  .uix-flexslider.uix-flexslider--primary.is-fullscreen {
-    min-height: inherit;
-  }
-  .uix-flexslider.uix-flexslider--primary.is-fullscreen img {
-    height: auto;
-  }
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc h2,
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc h3 {
-    font-size: 1rem;
-  }
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc p {
-    font-size: 0.875rem;
-  }
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc h2,
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc h3,
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc p {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    line-height: 1.2;
-  }
-  .uix-flexslider.uix-flexslider--primary .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__desc .uix-btn {
-    margin-top: 0.3rem;
-    padding: 0.3rem 1rem;
-    font-size: 0.75rem;
-  }
-}
-@keyframes uix-cssAnim--fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes uix-cssAnim--fadeOutLeft {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-/*
- ---------------------------
- 6. Parallax Slideshow
- ---------------------------
- */
-.uix-flexslider.uix-flexslider--parallax {
-  max-height: 100vh;
-  overflow: hidden;
-}
-.uix-flexslider.uix-flexslider--parallax img {
-  max-height: 100vh;
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item img {
-  max-height: calc(100% - 2rem);
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__el-level {
-  position: absolute;
-  transition: all 1.5s ease; /* Note: The duration can not be less than 1.5 */
-  width: auto;
-  box-shadow: 0px 0px 34px -6px rgba(0, 0, 0, 0.55);
-  transform: translateY(-50%);
-  top: 50%;
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__el-level-1 {
-  left: 55%;
-  z-index: 3;
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item .uix-flexslider__el-level-2 {
-  left: 30%;
-  z-index: 2;
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__item--left .uix-flexslider__el-level-1 {
-  transform: translate(-300px, -50%);
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__item--left .uix-flexslider__el-level-2 {
-  transform: translate(-50px, -50%);
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__item--right .uix-flexslider__el-level-1 {
-  transform: translate(300px, -50%);
-}
-.uix-flexslider.uix-flexslider--parallax .uix-flexslider__inner > .uix-flexslider__item.uix-flexslider__item--right .uix-flexslider__el-level-2 {
-  transform: translate(50px, -50%);
 }
 /* ======================================================
    <!-- Floating Side Element -->
@@ -13552,6 +12959,19 @@ button.swiper-pagination-bullet {
   color: #fff;
   font-size: 20px;
   padding: 0.5rem 1rem;
+}
+
+/*
+ ---------------------------
+ 3_2. Swiper video
+ ---------------------------
+ */
+#app-slider3_2 {
+  height: auto;
+}
+#app-slider3_2 video,
+#app-slider3_2 img {
+  width: 100%;
 }
 
 /*

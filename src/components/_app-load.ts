@@ -44,7 +44,6 @@ import '@uixkit/core/counter/js';
 import '@uixkit/core/dropdown-menu/js';
 import '@uixkit/core/dropdown-menu2/js';
 import '@uixkit/core/cascading-dropdown-list/js';
-import '@uixkit/core/flexslider/js';
 import '@uixkit/core/floating-side-element/js';
 import '@uixkit/core/form-progress/js';
 import '@uixkit/core/form/js';

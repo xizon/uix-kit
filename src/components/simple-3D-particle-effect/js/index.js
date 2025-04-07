@@ -26,17 +26,20 @@ import {
 export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 	if ( window.THREE_PARTICLE === null ) return false;
 	
+    // Make THREE available globally
+    window.THREE = THREE;
+	
     module.THREE_PARTICLE               = module.THREE_PARTICLE || {};
-    module.THREE_PARTICLE.version       = '1.0.0';
+    module.THREE_PARTICLE.version       = '1.1.0';
     module.THREE_PARTICLE.documentReady = function( $ ) {
 
 
-		//Prevent this module from loading in other pages
-		if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
-		
-		
-		let sceneSubjects = []; // Import objects and animations dynamically
-		const MainStage = function() {
+        //Prevent this module from loading in other pages
+        if ( $( '#3D-particle-effect-canvas' ).length == 0 || ! Modernizr.webgl ) return false;
+        
+        
+        let sceneSubjects = []; // Import objects and animations dynamically
+        const MainStage = function() {
 
 
 
@@ -46,19 +49,19 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
             const rendererCanvasID = '3D-particle-effect-canvas';
 
-			let renderer, 
-				texture, 
-				scene, 
-				camera,
-				particles,
-				imagedata,
-				clock        = new THREE.Clock(),
-				mouseX       = 0, 
-				mouseY       = 0,
-				isMouseDown  = true,
-				lastMousePos = {x: 0, y: 0},
-				windowHalfX  = windowWidth / 2,
-				windowHalfY  = windowHeight / 2,
+            let renderer, 
+                texture, 
+                scene, 
+                camera,
+                particles,
+                imagedata,
+                clock        = new THREE.Clock(),
+                mouseX       = 0, 
+                mouseY       = 0,
+                isMouseDown  = true,
+                lastMousePos = {x: 0, y: 0},
+                windowHalfX  = windowWidth / 2,
+                windowHalfY  = windowHeight / 2,
                 animStartStatus = false,
                 animCompleted = false;
 
@@ -67,6 +70,7 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
             //background
             const backgroundBg = new THREE.Color('#CE3A3E');
             const backgroundPlane = new THREE.Color('#DE510E');;
+            const backgroundPlaneDecay = new THREE.Color('#FFF7BA');;
             
             
             // Light from scene ready
@@ -79,26 +83,26 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
             const maxTargetZ = 200;
             
             
-			//particle rotation
-			let particleRotation;
+            //particle rotation
+            let particleRotation;
 
-			const centerVector = new THREE.Vector3(0, 0, 0);
-			let previousTime = 0;
+            const centerVector = new THREE.Vector3(0, 0, 0);
+            let previousTime = 0;
 
 
 
-			function init() {
+            function init() {
 
-				//==================================
                 //==================================
-				//camera
+                //==================================
+                //camera
                 fieldOfView = 60;
                 aspectRatio = windowWidth / windowHeight;
                 nearPlane = 1; // the camera won't "see" any object placed in front of this plane
                 farPlane = 10000; // the camera wont't see any object placed further than this plane 
-				camera = new THREE.PerspectiveCamera( fieldOfView, aspectRatio, nearPlane, farPlane );
-				camera.position.set(0, 65, -500);
-				camera.lookAt( centerVector );
+                camera = new THREE.PerspectiveCamera( fieldOfView, aspectRatio, nearPlane, farPlane );
+                camera.position.set(0, 65, -500);
+                camera.lookAt( centerVector );
                 
                 
                 // convert the field of view to radians
@@ -119,44 +123,66 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 
                 
                 
-				
-				//==================================
+                
                 //==================================
-				//Scene
-				scene = new THREE.Scene();
+                //==================================
+                //Scene
+                scene = new THREE.Scene();
                 scene.fog = new THREE.Fog(backgroundBg, 0.0025, 650); // Used to cover the light plane
   
+                /*
+                const axesHelper = new THREE.AxesHelper(1000);
+                scene.add(axesHelper);
+                */
         
-        
-				//==================================
                 //==================================
-				//Light from scene ready
+                //==================================
+                //Light from scene ready
                 
                 // Light plane  
-                sceneForLightPlane = new THREE.Mesh(new THREE.CircleGeometry(1000, 32), new THREE.MeshPhongMaterial({emissive: backgroundPlane, side: THREE.DoubleSide, }));
-                sceneForLightPlane.receiveShadow = true;
+                sceneForLightPlane = new THREE.Mesh(new THREE.CircleGeometry(1000, 32), new THREE.MeshPhongMaterial({
+                    color: backgroundPlaneDecay,  // Add a base color
+                    emissive: backgroundPlane,   // Maintain the glowing color
+                    emissiveIntensity: 1,        // Add luminous intensity
+                    side: THREE.DoubleSide, 
+                }));
+                sceneForLightPlane.receiveShadow = true; // !!!Important
                 sceneForLightPlane.position.set(0, -101, 5);
                 sceneForLightPlane.rotation.x = getRadian( -95 );
                 scene.add(sceneForLightPlane);
                 
+                /*
+                const boxHelper = new THREE.BoxHelper(sceneForLightPlane, 0xffff00);
+                scene.add(boxHelper);
+
+                const spotLightHelper = new THREE.SpotLightHelper(sceneForSpotLight, 0xffffff);
+                scene.add(spotLightHelper);
+
+                const gridHelper = new THREE.GridHelper(2000, 20, 0x888888, 0x444444);
+                scene.add(gridHelper);
+                */
+
 
                 // Spot Light
                 const spotLightColor = 0xffffff,
-                      spotLightIntensity = 2,
+                      spotLightIntensity = 8, // !!!Important
                       spotLightDistance = 1200,
-                      spotLightAngle = getRadian( 50 ),
-                      spotLightPenumbra = 1,
-                      spotLightDecay = 1;
+                      spotLightAngle = getRadian( 45 ),
+                      spotLightPenumbra = 0.6, // Reduce soft edges appropriately
+                      spotLightDecay = 0.002; // !!!Important
                 
                 sceneForSpotLight = new THREE.SpotLight(spotLightColor, spotLightIntensity, spotLightDistance, spotLightAngle, spotLightPenumbra, spotLightDecay);
                 sceneForSpotLight.position.set(5, 320, 5); // Setting the y-axis bond angle is critical
                 
                 
-                sceneForSpotLight.castShadow = true;
+                sceneForSpotLight.castShadow = true; // !!!Important
                 sceneForSpotLight.shadow.mapSize.width = 1024;
                 sceneForSpotLight.shadow.mapSize.height = 1024;
                 sceneForSpotLight.shadow.camera.near = 0.5;
                 sceneForSpotLight.shadow.camera.far = 31;
+
+                sceneForSpotLight.shadow.bias = -0.001;  // Reduces shadow blemishes
+                sceneForSpotLight.shadow.normalBias = 0.1;  // Improved shadow quality
                 scene.add(sceneForSpotLight);
                 
                 //console.log( sceneForSpotLight );
@@ -176,33 +202,33 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 
                 
                 
-				//==================================
                 //==================================
-				//WebGL Renderer		
-				renderer = new THREE.WebGLRenderer( { 
-										canvas   : document.getElementById( rendererCanvasID ), //canvas
-										alpha    : true, 
-										antialias: true 
-									} );
-				renderer.setSize( windowWidth, windowHeight );
+                //==================================
+                //WebGL Renderer		
+                renderer = new THREE.WebGLRenderer( { 
+                                        canvas   : document.getElementById( rendererCanvasID ), //canvas
+                                        alpha    : true, 
+                                        antialias: true 
+                                    } );
+                renderer.setSize( windowWidth, windowHeight );
                 renderer.shadowMap.enabled = true;
                 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
                 
 
 
-				// instantiate a loader
-				const loader = new THREE.TextureLoader();
+                // instantiate a loader
+                const loader = new THREE.TextureLoader();
 
-				// load a resource
-				loader.load(
-					// resource URL
-					$( '#' + rendererCanvasID ).data( 'img-src' ),
+                // load a resource
+                loader.load(
+                    // resource URL
+                    $( '#' + rendererCanvasID ).data( 'img-src' ),
 
-					// onLoad callback
-					function ( texture ) {
-						// in this example we create the material when the texture is loaded
-						// Get data from an image
-						imagedata = getImageData( texture.image );
+                    // onLoad callback
+                    function ( texture ) {
+                        // in this example we create the material when the texture is loaded
+                        // Get data from an image
+                        imagedata = getImageData( texture.image );
 
                         // Immediately use the texture for material creation
                         const geometry = new THREE.BufferGeometry();
@@ -260,59 +286,59 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                         particles.rotation.y = getRadian( 180 );
 
 
-					},
+                    },
 
-					// onProgress callback currently not supported
-					undefined,
+                    // onProgress callback currently not supported
+                    undefined,
 
-					// onError callback
-					function ( err ) {
-						console.error( 'An error happened.' );
-					}
-				);
+                    // onError callback
+                    function ( err ) {
+                        console.error( 'An error happened.' );
+                    }
+                );
 
 
 
-				// add particle rotation
-				particleRotation = new THREE.Object3D();
-				scene.add( particleRotation );
+                // add particle rotation
+                particleRotation = new THREE.Object3D();
+                scene.add( particleRotation );
                 
 
 
-				const geometryPR = new THREE.TetrahedronGeometry(2, 0),
-					materialPR = new THREE.MeshPhongMaterial({
-					color: 0xffffff,
+                const geometryPR = new THREE.TetrahedronGeometry(2, 0),
+                    materialPR = new THREE.MeshPhongMaterial({
+                    color: 0xffffff,
                     emissive: 0xffffff,
                     shininess: 80,
-					flatShading: true,
-				});
+                    flatShading: true,
+                });
               
-				for (let i = 0; i < 750; i++) {
-					const mesh = new THREE.Mesh( geometryPR, materialPR );
-					mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-					mesh.position.multiplyScalar(90 + (Math.random() * 700));
-					mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
-					particleRotation.add(mesh);
+                for (let i = 0; i < 750; i++) {
+                    const mesh = new THREE.Mesh( geometryPR, materialPR );
+                    mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+                    mesh.position.multiplyScalar(90 + (Math.random() * 700));
+                    mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+                    particleRotation.add(mesh);
                     
                     // set castShadow to object
                     mesh.castShadow = true;  
                     
-				}
+                }
              
 
-				//----
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'touchstart', onDocumentTouchStart, UixBrowser.supportsPassive ? { passive: true } : false );
-				document.addEventListener( 'touchmove', onDocumentTouchMove, UixBrowser.supportsPassive ? { passive: true } : false );
+                //----
+                document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.addEventListener( 'touchstart', onDocumentTouchStart, UixBrowser.supportsPassive ? { passive: true } : false );
+                document.addEventListener( 'touchmove', onDocumentTouchMove, UixBrowser.supportsPassive ? { passive: true } : false );
 
-				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+                document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 
 
 
-				// Fires when the window changes
-				window.addEventListener( 'resize', onWindowResize, false );	
-			}
+                // Fires when the window changes
+                window.addEventListener( 'resize', onWindowResize, false );	
+            }
 
 
 
@@ -357,16 +383,16 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
 
 
-			function render() {
-				requestAnimationFrame( render );
+            function render() {
+                requestAnimationFrame( render );
 
-				const delta      = clock.getDelta(),
-					  thickness = 40;
+                const delta      = clock.getDelta(),
+                      thickness = 40;
 
                 //---
                 // 
-				// To set a background color.
-				renderer.setClearColor( backgroundBg );	
+                // To set a background color.
+                renderer.setClearColor( backgroundBg );	
                 
 
                 //---
@@ -378,22 +404,22 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
 
                 //---
                 //
-				if( ! isMouseDown ) {
-					camera.position.x += (0-camera.position.x)*0.06;
-					camera.position.y += (0-camera.position.y)*0.06;
-				}
+                if( ! isMouseDown ) {
+                    camera.position.x += (0-camera.position.x)*0.06;
+                    camera.position.y += (0-camera.position.y)*0.06;
+                }
 
                 if ( animCompleted ) {
                     camera.position.x += ( mouseX - camera.position.x ) * 0.09;
                     camera.position.y += ( - mouseY - camera.position.y ) * 0.09;
                 }
                 if ( camera.position.y < -60 ) camera.position.y = -60;
-				camera.lookAt( centerVector );
+                camera.lookAt( centerVector );
 
 
-				//particle rotation
-				particleRotation.rotation.x += 0.0000;
-				particleRotation.rotation.y -= 0.0040;
+                //particle rotation
+                particleRotation.rotation.x += 0.0000;
+                particleRotation.rotation.y -= 0.0040;
 
                 
                 
@@ -424,89 +450,89 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                 //---
                 // 
                 //render the scene to display our scene through the camera's eye.
-				renderer.render( scene, camera );
+                renderer.render( scene, camera );
 
-			}
-
-
-
-			function onWindowResize() {
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize( window.innerWidth, window.innerHeight );
-			}
-
-
-			function onDocumentMouseMove( event ) {
-
-				mouseX = event.clientX - windowHalfX;
-				mouseY = event.clientY - windowHalfY;
-
-				if( isMouseDown ) {
-					camera.position.x += (event.clientX-lastMousePos.x)/100;
-					camera.position.y -= (event.clientY-lastMousePos.y)/100;
-					camera.lookAt( centerVector );
-					lastMousePos = {x: event.clientX, y: event.clientY};
-				}
-
-
-			}
-
-
-			function onDocumentTouchStart( event ) {
-
-				if ( event.touches.length == 1 ) {
-
-					event.preventDefault();
-
-					mouseX = event.touches[ 0 ].pageX - windowHalfX;
-					mouseY = event.touches[ 0 ].pageY - windowHalfY;
-				}
-			}
-
-			function onDocumentTouchMove( event ) {
-
-				if ( event.touches.length == 1 ) {
-
-					event.preventDefault();
-
-					mouseX = event.touches[ 0 ].pageX - windowHalfX;
-					mouseY = event.touches[ 0 ].pageY - windowHalfY;
-
-				}
-			}
-
-
-			function onDocumentMouseUp() {
-				isMouseDown = false;
-			}
-
-			function onDocumentMouseDown( event ) {
-				isMouseDown = true;
-				lastMousePos = {x: event.clientX, y: event.clientY};
-
-
-			}
+            }
 
 
 
-			/*
-			 * Get Image Data when Draw Image To Canvas
-			 *
-			 * @param  {!Element} image         - Overridden with a record type holding data, width and height.
-			 * @return {Object}                 - The image data via JSON.
-			 */
-			function getImageData( image ) {
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+            }
 
-				const canvas = document.createElement( 'canvas' );
-				canvas.width = image.width;
-				canvas.height = image.height;
 
-				const ctx = canvas.getContext( '2d' );
-				ctx.drawImage(image, 0, 0);
+            function onDocumentMouseMove( event ) {
 
-				return ctx.getImageData(0, 0, image.width, image.height);
-			}
+                mouseX = event.clientX - windowHalfX;
+                mouseY = event.clientY - windowHalfY;
+
+                if( isMouseDown ) {
+                    camera.position.x += (event.clientX-lastMousePos.x)/100;
+                    camera.position.y -= (event.clientY-lastMousePos.y)/100;
+                    camera.lookAt( centerVector );
+                    lastMousePos = {x: event.clientX, y: event.clientY};
+                }
+
+
+            }
+
+
+            function onDocumentTouchStart( event ) {
+
+                if ( event.touches.length == 1 ) {
+
+                    event.preventDefault();
+
+                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                    mouseY = event.touches[ 0 ].pageY - windowHalfY;
+                }
+            }
+
+            function onDocumentTouchMove( event ) {
+
+                if ( event.touches.length == 1 ) {
+
+                    event.preventDefault();
+
+                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                    mouseY = event.touches[ 0 ].pageY - windowHalfY;
+
+                }
+            }
+
+
+            function onDocumentMouseUp() {
+                isMouseDown = false;
+            }
+
+            function onDocumentMouseDown( event ) {
+                isMouseDown = true;
+                lastMousePos = {x: event.clientX, y: event.clientY};
+
+
+            }
+
+
+
+            /*
+             * Get Image Data when Draw Image To Canvas
+             *
+             * @param  {!Element} image         - Overridden with a record type holding data, width and height.
+             * @return {Object}                 - The image data via JSON.
+             */
+            function getImageData( image ) {
+
+                const canvas = document.createElement( 'canvas' );
+                canvas.width = image.width;
+                canvas.height = image.height;
+
+                const ctx = canvas.getContext( '2d' );
+                ctx.drawImage(image, 0, 0);
+
+                return ctx.getImageData(0, 0, image.width, image.height);
+            }
 
             
             
@@ -515,17 +541,17 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
              * Get Object Coordinate, Width and Height From Screen
              * Note: No data may be acquired without delay !!
              *
-			 * @param  {THREE.Mesh} obj                           - Mesh object.
+             * @param  {THREE.Mesh} obj                           - Mesh object.
              * @param  {THREE.PerspectiveCamera} camera           - Mesh object.
-			 * @param  {Number} rendererWidth                     - Width of renderer.
+             * @param  {Number} rendererWidth                     - Width of renderer.
              * @param  {Number} rendererHeight                    - Height of renderer.
              * @param  {String} type                              - Build type.
              * @return {JSON}
              */
-			/* @usage: 
-			   const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
-			  */
-			function nestedObjectToScreenXYZAndWH( obj, camera, rendererWidth, rendererHeight ) {
+            /* @usage: 
+               const screenPos = nestedObjectToScreenXYZAndWH( displacementSprite , camera, renderer.domElement.width, renderer.domElement.height );
+              */
+            function nestedObjectToScreenXYZAndWH( obj, camera, rendererWidth, rendererHeight ) {
                 
                 const vector = new THREE.Vector3();
                 vector.setFromMatrixPosition( obj.matrixWorld );
@@ -549,9 +575,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
                     width: ( boxInfo.x * ratioFixedNum * aspect ).toFixed( 2 ),
                     height: ( boxInfo.y * ratioFixedNum * aspect ).toFixed( 2 )
                 };  
-			}
-			
-			
+            }
+            
+            
             
            
             
@@ -560,9 +586,9 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
              *
              * @return {Number}
              */
-			function getRandomFloat(min, max) {
-				return Math.random() * (max - min) + min;
-			}
+            function getRandomFloat(min, max) {
+                return Math.random() * (max - min) + min;
+            }
 
             
             /*
@@ -614,28 +640,29 @@ export const THREE_PARTICLE = ( ( module, $, window, document ) => {
             
             
 
-			// 
-			//-------------------------------------	
-			return {
-				init                : init,
-				render              : render,
-				getRendererCanvasID : function () { return rendererCanvasID; },
-				getScene            : function () { return scene; },
-				getCamera           : function () { return camera; } 
-			};
+            // 
+            //-------------------------------------	
+            return {
+                init                : init,
+                render              : render,
+                getRendererCanvasID : function () { return rendererCanvasID; },
+                getScene            : function () { return scene; },
+                getCamera           : function () { return camera; } 
+            };
 
 
 
-		}();
+        }();
 
-		MainStage.init();
-		MainStage.render();
-		
-		
+        MainStage.init();
+        MainStage.render();
+        
+        
 
-		
-		
+        
+        
     };
+
 
     module.components.documentReady.push( module.THREE_PARTICLE.documentReady );
 

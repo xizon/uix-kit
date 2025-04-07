@@ -42,7 +42,6 @@ Default Vendor:
 Plugins(Optional):
 
 - [Swiper](https://swiperjs.com/)
-- [FlexSlider](http://flexslider.woothemes.com/)
 
 
 

@@ -17,7 +17,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_GALLERY               = module.THREE_GALLERY || {};
-    module.THREE_GALLERY.version       = '0.0.7';
+    module.THREE_GALLERY.version       = '0.0.8';
     module.THREE_GALLERY.documentReady = function( $ ) {
 
 		//Prevent this module from loading in other pages
@@ -73,6 +73,7 @@ export const THREE_GALLERY = ( ( module, $, window, document ) => {
 
 				light = new THREE.SpotLight( 0xffffff, 1.5 );
 				light.position.set( 0, 500, 2000 );
+                light.decay = 0; // !!!Important
 				scene.add( light );
 
 
