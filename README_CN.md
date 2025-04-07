@@ -369,14 +369,14 @@ $ npm rebuild node-sass
 	
 	
 	<!-- Vendor -->
-    <script src="assets/js/min/axios.min.js?ver=0.19.2"></script>
-	<script src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
-	<script src="assets/js/min/video.min.js?ver=7.4.1"></script>
-	<script src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
-	<script src="assets/js/min/pixi.min.js?ver=4.8.4"></script>
-	<script src="assets/js/min/three.min.js?ver=r99"></script>
-	<script src="assets/js/min/anime.min.js?ver=2.2.0"></script>
-	<script src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
+	<script defer src="assets/js/min/axios.min.js?ver=0.19.2"></script>
+    <script defer src="assets/js/min/jquery.waitforimages.min.js?ver=1.0"></script>
+    <script defer src="assets/js/min/video.min.js?ver=7.5.3"></script>
+    <script defer src="assets/js/min/TweenMax.min.js?ver=2.0.2"></script>
+    <script defer src="assets/js/min/pixi.min.js?ver=5.2.0"></script>
+    <script defer src="assets/js/min/three.min.js?ver=r175"></script>
+    <script defer src="assets/js/min/anime.min.js?ver=3.1"></script>
+    <script defer src="assets/js/min/hammer.min.js?ver=2.0.8"></script>
 
 	<!-- Your Plugins & Theme Scripts
 	============================================= -->
@@ -400,7 +400,7 @@ $ npm rebuild node-sass
         */
         window.$ = window.jQuery;
 	</script>
-	<script src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
+	<script defer src="../dist/js/uix-kit.min.js?ver=1.0.0"></script>
 	
 </body>
 
