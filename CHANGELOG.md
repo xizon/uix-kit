@@ -1,5 +1,11 @@
 # Changelog
 
+#### = 5.4.2 (April 18, 2025) =
+
+* Refactor: Refactor Toast and use useToast and ToastProvider to optimize the experience
+
+
+
 #### = 5.4.0 (April 7, 2025) =
 
 * New: The swiper example adds a video embedding effect.

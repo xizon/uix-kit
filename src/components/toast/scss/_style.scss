@@ -8,18 +8,18 @@
 .uix-toasts__wrapper {
     --uix-toast-zindex: 90001;
     --uix-toast-border-radius: 0.375rem;
-    --uix-toast-offset-top: 35px;
-    --uix-toast-offset-bottom: 15px;
-    --uix-toast-offset-bothsides: 15px;
-    --uix-toast-container-gap: 0.5rem;
-    --uix-toast-container-width: 350px;
-    --uix-toast-progress-height: 5px;
-    --uix-toast-progress-bg: rgba(255,255,255,.6);
+
+    --uix-toasts-offset-top: 35px;
+    --uix-toasts-offset-bottom: 15px;
+    --uix-toasts-offset-bothsides: 15px;
+    --uix-toasts-container-gap: 0.5rem;
+    --uix-toasts-container-width: 350px;
+    --uix-toasts-progress-height: 3px;
+    --uix-toasts-progress-bg: rgba(228, 228, 228, 0.6);
     
     
 
-
-    width: var(--uix-toast-container-width);
+    width: var(--uix-toasts-container-width);
     position: fixed;
     left: 50%;
     bottom: 0;
@@ -28,12 +28,12 @@
     transition: .1s ease-in-out;
 
     &--bottom-left {
-        left: var(--uix-toast-offset-bothsides);
+        left: var(--uix-toasts-offset-bothsides);
     }
 
     &--bottom-right {
         left: auto;
-        right: var(--uix-toast-offset-bothsides);
+        right: var(--uix-toasts-offset-bothsides);
     }
 
     &--bottom-center {
@@ -42,21 +42,21 @@
     }
 
     &--top-left {
-        left: var(--uix-toast-offset-bothsides);
+        left: var(--uix-toasts-offset-bothsides);
         bottom: auto;
-        top: var(--uix-toast-offset-top);
+        top: var(--uix-toasts-offset-top);
     }
 
     &--top-right {
         left: auto;
-        right: var(--uix-toast-offset-bothsides);
-        top: var(--uix-toast-offset-top);
+        right: var(--uix-toasts-offset-bothsides);
+        top: var(--uix-toasts-offset-top);
     }
 
     &--top-center {
         left: 50%;
         transform: translateX(-50%);
-        top: var(--uix-toast-offset-top);
+        top: var(--uix-toasts-offset-top);
     }
 
     &--vertical-center {
@@ -69,7 +69,7 @@
     .uix-toasts {
         position: relative;
         width: 100%;
-        bottom: var(--uix-toast-offset-bottom);
+        bottom: var(--uix-toasts-offset-bottom);
         display: flex;
         flex-flow: column-reverse nowrap;
 
@@ -88,44 +88,35 @@
     }
 
     .toast-container {
-        margin-bottom: var(--uix-toast-container-gap);
+        margin-bottom: var(--uix-toasts-container-gap);
 
+        /* Use clip-path instead of opacity to achieve a fade effect, avoiding the problem of transparency overlay */
+        clip-path: inset(0 0 0 0);
+        transform: translateY(0);
 
-        &.auto-anim-switch--initfirst {
-            transform: translateY(-20px);
-            opacity: 0;
-        }
+        /* Rendering of 3D transformations */
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
         
-        &.auto-anim-switch--first {
-            animation-name: uix-cssAnim--toast-show-first;
-            animation-duration: .3s;
-            animation-timing-function: linear;
-            animation-delay: 0;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
-        }
-        
-
-        &.auto-anim-switch:not(.only-one) {
-            animation-name: uix-cssAnim--toast-hide;
-            animation-duration: .3s;
-            animation-timing-function: linear;
-            animation-delay: 0;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
+        /* init animation */
+        &.animate-ready {
+            pointer-events: none;
+            clip-path: inset(0 0 100% 0);
+            transform: translateY(10px);
         }
 
+        /* enter animation */
+        &.animate-in {
+            clip-path: inset(0 0 0 0);
+            transform: translateY(0);
+        }
 
-        &.only-one.auto-anim-switch {
-            animation-name: uix-cssAnim--toast-hide--onlyone;
-            animation-duration: .3s;
-            animation-timing-function: linear;
-            animation-delay: 0;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
-        }  
+        /* exit animation */
+        &.hide-start {
+            clip-path: inset(0 0 100% 0);
+            transform: translateY(-10px);
+        }
 
-        
     }
 
     /* cascading divs */
@@ -152,14 +143,15 @@
         width: 100%;
         bottom: 0px;
         left: 0px;
-        height: var(--uix-toast-progress-height);
+        height: var(--uix-toasts-progress-height);
         background: transparent;
         border-radius: 0 0 var(--uix-toast-border-radius) var(--uix-toast-border-radius);
         overflow: hidden;
 
         .progress-bar {
-            background: var(--uix-toast-progress-bg);
+            background: var(--uix-toasts-progress-bg);
             width: 100%;
+            height: 100%;
             transition: all .1s;
         }
     }
@@ -205,65 +197,4 @@
     }
 
 
-}
-
-@keyframes uix-cssAnim--toast-initfirst {
-    0% {
-        transform: translateY(-20px);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-}
-
-@keyframes uix-cssAnim--toast-show-first {
-    0% {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes uix-cssAnim--toast-hide {
-    0% {
-        transform: translateY(-100%);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(10px);
-        opacity: 0;
-
-        /* prevent auto-close's item */
-        display: block;
-       
-    }
-}
-
-
-@keyframes uix-cssAnim--toast-hide--onlyone {
-    0% {
-        transform: translateY(-100%);
-        opacity: 1;
-
-
-        /* prevent auto-close's item */
-        display: block;
-    }
-
-    100% {
-        transform: translateY(10px);
-        opacity: 0;
-
-        /* prevent auto-close's item */
-        display: block;
-       
-    }
 }

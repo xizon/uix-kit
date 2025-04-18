@@ -55,140 +55,121 @@
 							<h3>Toast</h3>
 							<p>Toasts are lightweight notifications designed to mimic the push notifications that have been popularized by mobile and desktop operating systems.</p>
 
-                            <p>Use the following JavaScript code to fire it.</p>
+
+                            <button class="btn btn-sm btn-outline-primary mb-2" onclick="showCustomToast1()">Custom Toast 1 (Only one is shown)</button><br />
+                            <button class="btn btn-sm btn-outline-primary mb-2" onclick="showCustomToast2()">Custom Toast 2</button><br />
+                            <button class="btn btn-sm btn-outline-primary mb-2" onclick="showCustomToast3()">Custom Toast 3</button><br />
+                            <button class="btn btn-sm btn-outline-primary mb-2" onclick="showCustomToast4()">Custom Toast 4</button><br />
+                            <button class="btn btn-sm btn-outline-primary mb-2" onclick="showCustomToast5()">Custom Toast 5</button><br />
+                            <button class="btn btn-sm btn-outline-primary mb-2" onclick="showCustomToast6()">Custom Toast 6</button><br />
 
 
-<pre class="uix-precode uix-t-l"><label>JS</label><code>( function( $ ) {
-"use strict";
-    $( function() {
-        setTimeout(() =&gt; {  // "setTimeout()" is to wait for "uix-kit.min.js" to be fully loaded
-            
-            const _data = [{ info: 'Test Notification', theme: 'success' }];
-            window.UixToast({
-                id: 'test-1',
-                cascading: false,
-                autoCloseTime: 7000,
-                direction: "top-center",
-                schemeBody: "align-items-center text-white border-0 p-2",
-                closeBtnColor: "#fff",
-                data: _data.map((v) =&gt; {
-                    return {
-                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
-                        title: false,
-                        note: false,
-                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
-                    };
-                }),
-                async: true,
-                alternateAnimForOne: true
-            }, (rootId) =&gt; {
-                console.log('toast: ', rootId)
-            });
+                            <p class="mt-3"><strong>Use the following JavaScript code to fire it.</strong></p>
 
 
-            //
-            const _data2 = [{ info: 'Test Notification 2' }, { info: 'Test Notification 3' }];
-            window.UixToast({
-                id: 'test-2',
-                cascading: false,
-                autoCloseTime: 15000,
-                direction: "bottom-center",
-                schemeBody: "align-items-center text-white border-0 p-2",
-                closeBtnColor: "#fff",
-                data: _data2.map((v) =&gt; {
-                    return {
-                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
-                        title: false,
-                        note: false,
-                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
-                    };
-                }),
-                async: true,
-                alternateAnimForOne: false
-            }, (rootId) =&gt; {
-                console.log('toast: ', rootId)
-            });
+<pre class="uix-precode uix-t-l"><label>JS</label><code>const showCustomToast1 = () => {
 
-            //
-            const _data3 = [{ title: "Title 4", info: 'Test Notification 4' }, { title: "Title 5", info: 'Test Notification 5' }, { title: "Title 6", info: 'Test Notification 6' }, { title: "Title 7", info: 'Test Notification 7' }];
-            window.UixToast({
-                id: 'test-3',
-                cascading: true,
-                autoCloseTime: 15000,
-                direction: "bottom-right",
-                schemeHeader: "text-white bg-primary",
-                schemeBody: "align-items-center bg-white text-dark border-0 p-2",
-                closeBtnColor: "#fff",
-                data: _data3.map((v) =&gt; {
-                    return {
-                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
-                        title: v.title,
-                        note: false,
-                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
-                    };
-                }),
-                async: true,
-                alternateAnimForOne: false
-            }, (rootId) =&gt; {
-                console.log('toast: ', rootId)
-            });
+    window.UixToast({
+        actionId: 'test-1',
+        title: "Custom Toast 1",
+        message: `<div>Text here (${Math.random()})</div>`,
+        autoCloseTime: 1000,
+        theme: 'warning',
+        schemeHeader: 'bg-transparent text-light',
+        onlyShowOne: true
+    });
+};
 
 
+const showCustomToast2 = () => {
+    window.UixToast({
+        actionId: 'test-2',
+        title: "Custom Toast 2",
+        message: `<div style="color:orange">Text here (${Math.random()})</div>`,
+        theme: "dark",
+        autoCloseTime: 5000,
+        direction: 'bottom-center',
+        schemeBody: 'align-items-center text-white border-0 p-2',
+        closeBtnColor: '#333',
+        hint: 'There are some warnings that need your attention',
+        hintAutoShow: false,
+        onClose: (currentElement, currentToastId) => {
+            console.log(currentElement, currentToastId);
+        }
 
-            //
-            const _data4 = [{ info: 'Test Notification 8' }, { info: 'Test Notification 9' }];
-            window.UixToast({
-                id: 'test-4',
-                cascading: false,
-                autoCloseTime: false,
-                direction: "vertical-center",
-                schemeBody: "align-items-center text-white border-0 p-2",
-                closeBtnColor: "#fff",
-                data: _data4.map((v) =&gt; {
-                    return {
-                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'danger',
-                        title: false,
-                        note: false,
-                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
-                    };
-                }),
-                async: true,
-                alternateAnimForOne: true
-            }, (rootId) =&gt; {
-                console.log('toast: ', rootId)
-            });
+    });
 
-            //
-            const _data5 = [{ info: 'Test Notification 8' }];
-            window.UixToast({
-                id: 'test-5',
-                cascading: false,
-                autoCloseTime: 20000,
-                direction: "bottom-left",
-                schemeBody: "align-items-center text-white border-0 p-2",
-                closeBtnColor: "#fff",
-                data: _data5.map((v) =&gt; {
-                    return {
-                        theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'warning',
-                        title: false,
-                        note: false,
-                        message: `&lt;div&gt;&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt; ${v.info}&lt;/div&gt;`
-                    };
-                }),
-                async: true,
-                alternateAnimForOne: true
-            }, (rootId) =&gt; {
-                console.log('toast: ', rootId)
-            });
+};
 
+const showCustomToast3 = () => {
+    window.UixToast({
+        actionId: 'test-3',
+        note: "11 mins ago", 
+        message: `<div style="color:orange">Text here (${Math.random()})</div>`,
+        autoCloseTime: 5000,
+        cascading: true,
+        direction: 'bottom-right',
+        closeBtnColor: '#333',
+        reverseDisplay: true
 
+    });
+};
 
-        }, 0);
+const showCustomToast4 = () => {
+    window.UixToast({
+        actionId: 'test-4',
+        title: "Note",
+        message: `<div>Text here (${Math.random()})</div>`,
+        autoCloseTime: 5000,
+        direction: 'vertical-center',
+        theme: 'light',
+        schemeBody: '',
+        closeBtnColor: '#333'
+
+    });
+};
 
 
-    } );
-} ) ( jQuery );</code>
+const showCustomToast5 = () => {
+    window.UixToast({
+        actionId: 'test-5',
+        closeDisabled: true,
+        message: `<div style="color:orange">Text here (${Math.random()})</div>`,
+        autoCloseTime: 5000,
+        direction: 'bottom-left',
+        schemeHeader: 'p-0',
+        schemeBody: 'align-items-center text-white bg-dark border-0'
+
+    });
+};
+
+const showCustomToast6 = () => {
+    window.UixToast({
+        actionId: 'test-6',
+        direction: 'top-right',
+        title: "Custom Toast 1",
+        message: `<div>Text here (${Math.random()})</div>`,
+        theme: 'success',
+        schemeHeader: 'bg-transparent text-light',
+        autoCloseTime: 3000,
+    }, () => {
+        console.log('The presentation is complete');
+    });
+};</code>
 </pre>		
+
+<p>HTML:</p>
+<pre class="uix-precode uix-t-l"><label>HTML</label><code>    &lt;button onclick="showCustomToast1()"&gt;Custom Toast 1 (Only one is shown)&lt;/button&gt;
+    &lt;button onclick="showCustomToast2()"&gt;Custom Toast 2&lt;/button&gt;
+    &lt;button onclick="showCustomToast3()"&gt;Custom Toast 3&lt;/button&gt;
+    &lt;button onclick="showCustomToast4()"&gt;Custom Toast 4&lt;/button&gt;
+    &lt;button onclick="showCustomToast5()"&gt;Custom Toast 5&lt;/button&gt;
+    &lt;button onclick="showCustomToast6()"&gt;Custom Toast 6&lt;/button&gt;
+ </code>
+</pre>		
+    
+
+
 							<hr>
 							
 							
@@ -214,143 +195,97 @@
     </div>
     <!-- .uix-wrapper end -->
        
-       
+<script>
+const showCustomToast1 = () => {
 
-       
-
-	<script>
-        ( function( $ ) {
-        "use strict";
-            $( function() {
-                setTimeout(() => {  // "setTimeout()" is to wait for "uix-kit.min.js" to be fully loaded
-                  
-                    const _data = [{ info: 'Test Notification', theme: 'success' }];
-                    window.UixToast({
-                        id: 'test-1',
-                        cascading: false,
-                        autoCloseTime: 7000,
-                        direction: "top-center",
-                        schemeBody: "align-items-center text-white border-0 p-2",
-                        closeBtnColor: "#fff",
-                        data: _data.map((v) => {
-                            return {
-                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
-                                title: false,
-                                note: false,
-                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
-                            };
-                        }),
-                        async: true,
-                        alternateAnimForOne: true
-                    }, (rootId) => {
-                        console.log('toast: ', rootId)
-                    });
+    window.UixToast({
+        actionId: 'test-1',
+        title: "Custom Toast 1",
+        message: `<div>Text here (${Math.random()})</div>`,
+        autoCloseTime: 1000,
+        theme: 'warning',
+        schemeHeader: 'bg-transparent text-light',
+        onlyShowOne: true
+    });
+};
 
 
-                    //
-                    const _data2 = [{ info: 'Test Notification 2' }, { info: 'Test Notification 3' }];
-                    window.UixToast({
-                        id: 'test-2',
-                        cascading: false,
-                        autoCloseTime: 15000,
-                        direction: "bottom-center",
-                        schemeBody: "align-items-center text-white border-0 p-2",
-                        closeBtnColor: "#fff",
-                        data: _data2.map((v) => {
-                            return {
-                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
-                                title: false,
-                                note: false,
-                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
-                            };
-                        }),
-                        async: true,
-                        alternateAnimForOne: false
-                    }, (rootId) => {
-                        console.log('toast: ', rootId)
-                    });
+const showCustomToast2 = () => {
+    window.UixToast({
+        actionId: 'test-2',
+        title: "Custom Toast 2",
+        message: `<div style="color:orange">Text here (${Math.random()})</div>`,
+        theme: "dark",
+        autoCloseTime: 5000,
+        direction: 'bottom-center',
+        schemeBody: 'align-items-center text-white border-0 p-2',
+        closeBtnColor: '#333',
+        hint: 'There are some warnings that need your attention',
+        hintAutoShow: false,
+        onClose: (currentElement, currentToastId) => {
+            console.log(currentElement, currentToastId);
+        }
 
-                    //
-                    const _data3 = [{ title: "Title 4", info: 'Test Notification 4' }, { title: "Title 5", info: 'Test Notification 5' }, { title: "Title 6", info: 'Test Notification 6' }, { title: "Title 7", info: 'Test Notification 7' }];
-                    window.UixToast({
-                        id: 'test-3',
-                        cascading: true,
-                        autoCloseTime: 15000,
-                        direction: "bottom-right",
-                        schemeHeader: "text-white bg-primary",
-                        schemeBody: "align-items-center bg-white text-dark border-0 p-2",
-                        closeBtnColor: "#fff",
-                        data: _data3.map((v) => {
-                            return {
-                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'dark',
-                                title: v.title,
-                                note: false,
-                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
-                            };
-                        }),
-                        async: true,
-                        alternateAnimForOne: false
-                    }, (rootId) => {
-                        console.log('toast: ', rootId)
-                    });
+    });
 
+};
 
+const showCustomToast3 = () => {
+    window.UixToast({
+        actionId: 'test-3',
+        note: "11 mins ago", 
+        message: `<div style="color:orange">Text here (${Math.random()})</div>`,
+        autoCloseTime: 5000,
+        cascading: true,
+        direction: 'bottom-right',
+        closeBtnColor: '#333',
+        reverseDisplay: true
 
-                    //
-                    const _data4 = [{ info: 'Test Notification 8' }, { info: 'Test Notification 9' }];
-                    window.UixToast({
-                        id: 'test-4',
-                        cascading: false,
-                        autoCloseTime: false,
-                        direction: "vertical-center",
-                        schemeBody: "align-items-center text-white border-0 p-2",
-                        closeBtnColor: "#fff",
-                        data: _data4.map((v) => {
-                            return {
-                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'danger',
-                                title: false,
-                                note: false,
-                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
-                            };
-                        }),
-                        async: true,
-                        alternateAnimForOne: true
-                    }, (rootId) => {
-                        console.log('toast: ', rootId)
-                    });
+    });
+};
 
-                    //
-                    const _data5 = [{ info: 'Test Notification 8' }];
-                    window.UixToast({
-                        id: 'test-5',
-                        cascading: false,
-                        autoCloseTime: 20000,
-                        direction: "bottom-left",
-                        schemeBody: "align-items-center text-white border-0 p-2",
-                        closeBtnColor: "#fff",
-                        data: _data5.map((v) => {
-                            return {
-                                theme: typeof v.theme !== 'undefined' ? `${v.theme}` : 'warning',
-                                title: false,
-                                note: false,
-                                message: `<div><i class="fa-solid fa-circle-info"></i> ${v.info}</div>`
-                            };
-                        }),
-                        async: true,
-                        alternateAnimForOne: true
-                    }, (rootId) => {
-                        console.log('toast: ', rootId)
-                    });
+const showCustomToast4 = () => {
+    window.UixToast({
+        actionId: 'test-4',
+        title: "Note",
+        message: `<div>Text here (${Math.random()})</div>`,
+        autoCloseTime: 5000,
+        direction: 'vertical-center',
+        theme: 'light',
+        schemeBody: '',
+        closeBtnColor: '#333'
+
+    });
+};
 
 
+const showCustomToast5 = () => {
+    window.UixToast({
+        actionId: 'test-5',
+        closeDisabled: true,
+        message: `<div style="color:orange">Text here (${Math.random()})</div>`,
+        autoCloseTime: 5000,
+        direction: 'bottom-left',
+        schemeHeader: 'p-0',
+        schemeBody: 'align-items-center text-white bg-dark border-0'
 
-                }, 0);
+    });
+};
 
-    
-            } );
-        } ) ( jQuery );	
-    
-    </script> 
+const showCustomToast6 = () => {
+    window.UixToast({
+        actionId: 'test-6',
+        direction: 'top-right',
+        title: "Custom Toast 1",
+        message: `<div>Text here (${Math.random()})</div>`,
+        theme: 'success',
+        schemeHeader: 'bg-transparent text-light',
+        autoCloseTime: 3000,
+    }, () => {
+        console.log('The presentation is complete');
+    });
+};
+</script> 
     
 
 
