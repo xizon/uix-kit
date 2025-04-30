@@ -81,6 +81,7 @@ import '@uixkit/core/svg-map/js/china';
 import '@uixkit/core/svg-map/js/world';
 import '@uixkit/core/svg-mask-slider/js';
 import '@uixkit/core/swiper/js';
+import '@uixkit/core/simple-3D-specular/js';
 import '@uixkit/core/simple-3D-background-three/js';
 import '@uixkit/core/simple-3D-background-three2/js';
 import '@uixkit/core/simple-3D-background-three3/js';

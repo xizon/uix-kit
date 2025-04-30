@@ -420,7 +420,8 @@ export const THREE_EXP_PARTICLE_SLIDER = ( ( module, $, window, document ) => {
 
 				light = new THREE.SpotLight( 0xffffff, 1.5 );
 				light.position.set( 0, 0, 2000 );
-                light.decay = 0; // !!!Important
+                light.decay = 0; // !!!Important (default: 1)
+                light.penumbra = 0;  // The degree of blurriness at the edge of the light spot
 				scene.add( light );
 
 

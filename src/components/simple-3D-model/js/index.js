@@ -17,7 +17,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_MODEL               = module.THREE_MODEL || {};
-    module.THREE_MODEL.version       = '0.0.6';
+    module.THREE_MODEL.version       = '0.0.7';
     module.THREE_MODEL.documentReady = function( $ ) {
 
 		
@@ -71,7 +71,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 
 				//=================
 				//Lights
-				lights[ 0 ] = new THREE.PointLight( 0xffffff, 0.2, 0 );
+				lights[ 0 ] = new THREE.PointLight( 0xffffff, 3, 0 );
 				lights[ 1 ] = new THREE.PointLight( 0xffffff, 0.2, 0 );
 				lights[ 2 ] = new THREE.DirectionalLight( 0xffffff );
 
@@ -79,6 +79,11 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 				lights[ 1 ].position.set( 100, 200, 100 );
 				lights[ 2 ].position.set( 120, 200, 0 );
 				lights[ 2 ].intensity = 0.6;
+
+
+                lights[ 0 ].decay = 0; // !!!Important
+                lights[ 1 ].decay = 0; // !!!Important
+                lights[ 2 ].decay = 0; // !!!Important
 
 				scene.add( lights[ 0 ] );
 				scene.add( lights[ 1 ] );
@@ -142,8 +147,8 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 						    child.material.fog = false; // -> fog
 						   
 	
-							// set castShadow to object
-							child.castShadow = true;
+							// Objects can cast shadows  // !!!Important
+							child.castShadow = true; 
 
 						}
 					});
@@ -168,7 +173,7 @@ export const THREE_MODEL = ( ( module, $, window, document ) => {
 												fog : false //Excluding objects from fog
 											} );
 
-							// set castShadow to object
+							// Objects can cast shadows  // !!!Important
 							child.castShadow = true;
 
 						}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="@@{website_lang}" dir="@@{website_dirLTR}">
+<head>
+	<meta charset="@@{website_charset}" />
+	<title>3D Specular by three.js - @@{website_title}</title>	
+	@@include('./src/components/_global/include-header.html')
+</head>  
+
+     
+  <body class="page">
+  
+  
+          
+    @@include('./src/components/_global/include-loader.html')
+    @@include('./src/components/_global/include-toggle-trigger.html')
+    
+    
+
+  
+  
+    <div class="uix-wrapper">
+    
+        <!-- Header Area
+        ============================================= -->      
+        <header class="uix-header__container">
+            
+             <div class="uix-header">
+                 <div class="container">
+                 
+                        @@include('./src/components/_global/include-brand.html')
+                        
+                        @@include('./src/components/_global/include-menu.html')
+                        
+                        
+                        
+                        
+                  </div>
+                  <!-- .container end -->
+                  
+                  <div class="uix-clearfix"></div>
+             </div>
+        
+        </header>
+		<div class="uix-header__placeholder js-uix-header__placeholder-autoheight"></div>
+		
+	
+		
+		<main id="uix-maincontent">
+			
+			
+			
+			<!-- Content 
+			====================================================== -->
+			<section class="uix-spacing--s uix-spacing--no-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>3D Specular</h3>
+							<p>Explore additional specular highlights or specular reflection images.</p>
+							<hr>
+							
+							
+						</div>
+					</div>
+					<!-- .row end -->
+
+				</div>
+				<!-- .container end -->
+
+			</section>
+
+
+			
+
+		   <!-- Content 
+			====================================================== -->
+			<div class="container uix-t-c" style="margin-top: -5rem;">
+				<div style="width: 100%; height: 650px;">
+                    <canvas 
+                        id="3D-specular-three-canvas" 
+                        data-bg-texture="assets/images/demo/landscape-2.jpg" 
+                        data-environment-maps-texture='[
+                        "assets/images/environment-maps/landscape-2/px.png",
+                        "assets/images/environment-maps/landscape-2/nx.png",
+                        "assets/images/environment-maps/landscape-2/py.png",
+                        "assets/images/environment-maps/landscape-2/ny.png",
+                        "assets/images/environment-maps/landscape-2/pz.png",
+                        "assets/images/environment-maps/landscape-2/nz.png"
+                        ]' 
+                        data-filter-texture1="assets/images/dmaps/displacement-default/normal.jpg"
+                        data-filter-texture2="assets/images/dmaps/displacement-default/specular.jpg"
+                    ></canvas>
+                </div>
+			</div>
+			<!-- .container end -->
+
+	
+			
+		</main>
+		
+		
+
+        @@include('./src/components/_global/include-copyright.html')
+        
+        
+    </div>
+    <!-- .uix-wrapper end -->
+       
+       
+    @@include('./src/components/_global/include-footer.html')
+

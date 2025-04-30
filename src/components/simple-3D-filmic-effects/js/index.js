@@ -37,7 +37,7 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_FILMIC_EFF               = module.THREE_FILMIC_EFF || {};
-    module.THREE_FILMIC_EFF.version       = '0.0.3';
+    module.THREE_FILMIC_EFF.version       = '0.0.4';
     module.THREE_FILMIC_EFF.documentReady = function( $ ) {
 
 		
@@ -98,9 +98,14 @@ export const THREE_FILMIC_EFF = ( ( module, $, window, document ) => {
 				lights[ 2 ].position.set( 120, 200, 0 );
 				lights[ 2 ].intensity = 0.6;
 
+                lights[ 0 ].decay = 0; // !!!Important
+                lights[ 1 ].decay = 0; // !!!Important
+                lights[ 2 ].decay = 0; // !!!Important
+
 				scene.add( lights[ 0 ] );
 				scene.add( lights[ 1 ] );
 				scene.add( lights[ 2 ] );
+
 				
 
 

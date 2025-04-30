@@ -1,5 +1,12 @@
 # Changelog
 
+
+#### = 5.4.3 (April 30, 2025) =
+
+* New: Add a new module "3D Specular" with threejs.
+* Tweak: Optimize the threejs demo.
+
+
 #### = 5.4.2 (April 18, 2025) =
 
 * Refactor: Refactor Toast and use useToast and ToastProvider to optimize the experience

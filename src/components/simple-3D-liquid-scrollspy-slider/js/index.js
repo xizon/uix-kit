@@ -594,7 +594,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
     
                 light = new THREE.SpotLight( 0xffffff, 1.5 );
                 light.position.set( 0, 0, 2000 );
-                light.decay = 0; // !!!Important
+                light.decay = 0; // !!!Important (default: 1)
+                light.penumbra = 0;  // The degree of blurriness at the edge of the light spot
                 scene.add( light );
     
     
@@ -614,7 +615,8 @@ export const THREE_LIQUID_SCROLLSPY_SLIDER = ( ( module, $, window, document ) =
                 // shader filter displacement
                 const disp = loader.load( dispImage );
                 disp.wrapS = disp.wrapT = THREE.RepeatWrapping;
-    
+                disp.encoding = THREE.sRGBEncoding;
+                disp.colorSpace = THREE.SRGBColorSpace; // !!!Important
     
                 // Immediately use the texture for material creation
                 // Create a texture loader so we can load our image file
