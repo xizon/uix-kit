@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  5.4.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 30, 2025
+ * ## Last Update         :  May 1, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -22215,13 +22215,20 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
   /* Required */
   overflow: hidden;
 }
+.uix-testimonials .swiper-slide {
+  background: transparent;
+}
+.uix-testimonials .swiper-pagination .swiper-pagination-bullet {
+  width: 7px;
+  height: 7px;
+  font-size: 0;
+}
 .uix-testimonials .uix-testimonials__content {
   position: relative;
   margin: 0 auto;
   max-width: calc(100% - 176px);
   box-shadow: 0 22px 40px 0 #eef4fc;
   border-radius: 10px;
-  margin-bottom: 100px;
   padding: 1rem 44px;
 }
 .uix-testimonials .uix-testimonials__signature {
@@ -22254,7 +22261,6 @@ dl.uix-list-abreast.uix-list-abreast--icon dd {
 @media all and (max-width: 768px) {
   .uix-testimonials .uix-testimonials__content {
     max-width: 100%;
-    margin-bottom: 50px;
     padding: 1rem 0;
   }
 }

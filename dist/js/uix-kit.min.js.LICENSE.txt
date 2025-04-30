@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  5.4.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 30, 2025
+ * ## Last Update         :  May 1, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *

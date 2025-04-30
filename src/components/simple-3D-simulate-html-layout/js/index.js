@@ -16,7 +16,7 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 	
 	
     module.THREE_SIMULATE_HTML_LAYOUT               = module.THREE_SIMULATE_HTML_LAYOUT || {};
-    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.4';
+    module.THREE_SIMULATE_HTML_LAYOUT.version       = '0.0.5';
     module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function( $ ) {
 
 		
@@ -441,8 +441,8 @@ export const THREE_SIMULATE_HTML_LAYOUT = ( ( module, $, window, document ) => {
 				$innerCanvas.css({
 					'position': 'absolute',
 					'z-index': '-1',
-					'left': 0,
-					'top': canvasPosOffsetY
+					'left': '-0.75rem',
+					'top': canvasPosOffsetY - $('.uix-header__container').height()
 
 				});
 				if ( $innerCanvas.length > 0 ) {

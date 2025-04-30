@@ -16,6 +16,15 @@
 	/* Required */
 	overflow: hidden;
 
+    .swiper-slide {
+        background: transparent;
+    }
+
+    .swiper-pagination .swiper-pagination-bullet {
+        width: 7px;
+        height: 7px;
+        font-size: 0;
+    }
 
 	.uix-testimonials__content {
 		position: relative;
@@ -23,7 +32,6 @@
 		max-width: calc(100% - 176px );
 		box-shadow: 0 22px 40px 0 #eef4fc;
 		border-radius: 10px;
-		margin-bottom: 100px;
 		padding: 1rem 44px;
 	}
 
@@ -63,7 +71,6 @@
 	.uix-testimonials {
 		.uix-testimonials__content {
 			max-width: 100%;
-			margin-bottom: 50px;
 			padding: 1rem 0;
 		}
 	}

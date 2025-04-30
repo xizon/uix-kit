@@ -8,7 +8,7 @@
  * ## Project URL         :  https://uiux.cc
  * ## Version             :  5.4.3
  * ## Based on            :  Uix Kit (https://github.com/xizon/uix-kit)
- * ## Last Update         :  April 30, 2025
+ * ## Last Update         :  May 1, 2025
  * ## Created by          :  UIUX Lab (https://uiux.cc) (uiuxlab@gmail.com)
  * ## Released under the MIT license.
  *
@@ -37350,7 +37350,7 @@ core_class.use(components);
 var SWIPER = function (module, $, window, document) {
   if (window.SWIPER === null) return false;
   module.SWIPER = module.SWIPER || {};
-  module.SWIPER.version = '0.0.8';
+  module.SWIPER.version = '0.0.9';
   module.SWIPER.documentReady = function ($) {
     /*
      * Initialize embedded local video.
@@ -50041,7 +50041,7 @@ function js_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.lengt
 var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
   if (window.THREE_SIMULATE_HTML_LAYOUT === null) return false;
   module.THREE_SIMULATE_HTML_LAYOUT = module.THREE_SIMULATE_HTML_LAYOUT || {};
-  module.THREE_SIMULATE_HTML_LAYOUT.version = '0.0.4';
+  module.THREE_SIMULATE_HTML_LAYOUT.version = '0.0.5';
   module.THREE_SIMULATE_HTML_LAYOUT.documentReady = function ($) {
     //Prevent this module from loading in other pages
     if ($('#app-3D-page-container').length == 0 || !Modernizr.webgl) return false;
@@ -50387,8 +50387,8 @@ var THREE_SIMULATE_HTML_LAYOUT = function (module, $, window, document) {
         $innerCanvas.css({
           'position': 'absolute',
           'z-index': '-1',
-          'left': 0,
-          'top': canvasPosOffsetY
+          'left': '-0.75rem',
+          'top': canvasPosOffsetY - $('.uix-header__container').height()
         });
         if ($innerCanvas.length > 0) {
           SubStageInit($innerCanvas, $('#app-3D-page-container').find('.app-work-detail__wrapper').outerHeight(true), $('#app-3D-page-container').find('.app-work-detail__wrapper').outerWidth(true), $('#app-3D-page-container').find('.app-work-detail__wrapper').offset().left - canvasPosOffsetX);

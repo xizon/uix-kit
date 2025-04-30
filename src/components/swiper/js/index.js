@@ -39,7 +39,7 @@ export const SWIPER = ( ( module, $, window, document ) => {
 	
 	
     module.SWIPER               = module.SWIPER || {};
-    module.SWIPER.version       = '0.0.8';
+    module.SWIPER.version       = '0.0.9';
     module.SWIPER.documentReady = function( $ ) {
 
 		/*
