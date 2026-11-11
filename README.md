@@ -58,6 +58,7 @@ GitHub pages can only serve static content, and there is no way to run PHP or ge
 * [Changelog](#changelog)
 * [Browser Support](#browser-support)
 * [Supported development environment](#supported-development-environment)
+* [Tools](#tools)
 * [Licensing](#licensing)
 
 
@@ -122,8 +123,6 @@ uix-kit/
 │   │       ├── models/
 │   │       ├── json/
 │   │       └── js/
-├── tools/
-│   └── threejs-dist-builder/   ------------ # three.js & three.min.js Generator (Compatible with 174+ versions)
 └──
 ```
 
@@ -674,6 +673,15 @@ Finding bugs, sending pull requests or improving our docs - any contribution is 
 - Babel 7.x.x + 
 - Webpack 5.x.x
 - Express 4.x.x
+
+## Tools
+
+Build a classic three.min.js from modern Three.js (r174+). It exposes a global THREE, so you can use it in a plain <script> tag with no bundler or import map.
+
+[Three.js Dist Builder](https://github.com/xizon/threejs-dist-builder)
+
+
+
 
 ## Licensing
 

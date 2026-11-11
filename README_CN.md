@@ -52,6 +52,7 @@ GitHub pages只提供静态内容访问，AJAX和PHP请求无法预览效果，�
 * [如何创建一个新的自定义模块? &#128293;](#如何创建一个新的自定义模块)
 * [兼容性](#兼容性)
 * [支持的开发环境](#支持的开发环境)
+* [附加工具](#附加工具)
 * [许可证](#许可证)
 
 
@@ -130,8 +131,6 @@ uix-kit/
 │   │       ├── models/
 │   │       ├── json/
 │   │       └── js/
-├── tools/
-│   └── threejs-dist-builder/   ------------ # three.js 和 three.min.js 静态资源文件生成器 (兼容 174+ 版本)
 └──
 ```
 
@@ -662,6 +661,12 @@ if ( UixModuleInstance.DEMO_MODULE ) UixModuleInstance.DEMO_MODULE.documentReady
 - Babel 7.x.x + 
 - Webpack 5.x.x
 - Express 4.x.x
+
+## 附加工具
+
+基于现代版 Three.js (r174+) 构建经典的 `three.min.js`。它会向全局作用域暴露 `THREE` 对象，因此你无需使用打包工具或导入映射（import map），即可直接在普通的 `<script>` 标签中使用它。
+
+[Three.js Dist Builder](https://github.com/xizon/threejs-dist-builder)
 
 
 ## 许可证
