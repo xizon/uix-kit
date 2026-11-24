@@ -25,7 +25,7 @@ The generated core file in the dist directory can be used separately in any webs
 
 ---
 
-- [React Version - Native scaffolding for reference](https://github.com/xizon/poemkit)
+- [⭐️ Makelier (A brand-new, high-performance HTML template system)](https://github.com/xizon/Makelier)
 
 
 ---
